@@ -14,9 +14,9 @@ Toda fonte nova está em `fontes/registro.json`, com uma nota em `fontes/extraco
 | 4 | Objetos API de Flow, Path, FlexiPage, QuickAction, CustomTab | **resolvido** | 6 objetos Tooling completos, 5 correspondências e 7 referências |
 | 5 | Exposição Tooling de objetos padrão | **resolvido** no nível de exposição | 6 confirmadas, 1 não exposta, 1 indeterminada |
 | 6 | Caminhos de Setup | quase resolvido | 0 → 12 de 14 funcionalidades |
-| 7 | Licenças e edições | parcial | edições para 9 funcionalidades; licença add-on do Data 360 |
+| 7 | Licenças e edições | parcial | edições para 9 funcionalidades; licença add-on do Data 360; licenças de Agentforce Sales e Service (lote 3a) |
 | 8 | Contexto técnico do Data 360 | **resolvido** | `bloqueado` → `verificado` |
-| 9 | Funcionalidades de Sales e Service Cloud | não iniciado | volume; ver sugestão |
+| 9 | Funcionalidades de Sales e Service Cloud | **iniciado** (lote 3a) | nuvens verificadas; 3 funcionalidades próprias (Leads, Oportunidades, Casos) |
 | 10 | Classificação Core dos 981 tipos | não iniciado | volume; ver sugestão |
 | 11 | WSDL | **reclassificado** | não é bloqueio; a documentação foi usada como fonte alternativa |
 | 12 | Rede do shell | **contornado** | leitura pelo endpoint versionado; limites de tamanho descobertos |
@@ -105,7 +105,9 @@ Os rótulos estão em inglês, como na Ajuda. A tradução da interface em pt-BR
 
 As páginas da Ajuda trazem as edições e permissões necessárias. Elas foram registradas em `pre_requisitos` de 9 funcionalidades. Para o Data 360, foi registrada a licença add-on de data spaces.
 
-**O que falta:** licenças de Core, Sales Cloud e Service Cloud.
+**Lote 3a:** registradas a licença de usuário Salesforce (CRM padrão; a licença Salesforce Platform não dá direito a leads, oportunidades, campanhas e previsões) e a feature license Service Cloud User (Service Console).
+
+**O que falta:** licenças de Core e matriz completa de licenças e edições das nuvens.
 
 ### 8. Contexto técnico do Data 360 (resolvido)
 
@@ -114,9 +116,22 @@ O que dizem as páginas oficiais de arquitetura e de introdução ao desenvolvim
 - **Dados:** ficam em lakehouse; os DLO são mapeados para DMO do modelo C360.
 - **Desenvolvimento:** empacotamento e autorização diferem dos da plataforma; a API principal é a Data 360 Connect REST API.
 
-### 9 e 10. Sales e Service Cloud; classificação Core (não iniciados)
+### 9. Sales e Service Cloud (iniciado no lote 3a)
 
-São resolvíveis com documentação, mas exigem centenas de leituras. Ficam como lotes próprios (ver sugestões).
+Como você observou, a verificação de recursos por nuvem é feita na documentação Salesforce. O que foi feito:
+
+- **Nomes atuais.** A Ajuda usa "Agentforce Sales (formerly Sales Cloud)" e "Agentforce Service (formerly Service Cloud)". O catálogo registra o nome atual como `nome_oficial` e o antigo como alias. Os ids `nuv:sales-cloud` e `nuv:service-cloud` foram mantidos.
+- **Contexto técnico** (`verificado`): Lead, Opportunity e Case são objetos padrão da API padrão, na Object Reference da plataforma. Isso vale para os objetos verificados e não se generaliza para todo recurso da nuvem.
+- **Funcionalidades próprias:** `func:leads`, `func:oportunidades` e `func:casos`, com objetos API, 4 relacionamentos e ausência de metadata type declarada como `desconhecido`.
+- **Compartilhada:** `func:path` foi associada a vendas porque a Ajuda de vendas cita Path. Ela continua sendo da plataforma.
+
+**Limite encontrado:** o endpoint serve Opportunity e Case truncados (cerca de 54 e 53 mil caracteres). A Field Reference completou nomes e tipos, mas não traz propriedades de API. Os campos customizados de exemplo da Field Reference (`Issue__c`, `Resolution__c`, `Summary__c`) foram excluídos.
+
+**O que falta:** contas, contatos, campanhas, produtos, cotações, previsões, territórios, Omni-Channel, Knowledge, entitlements e regras de atribuição e escalonamento. Todos são citados pela Ajuda, mas ainda não foram catalogados.
+
+### 10. Classificação Core (não iniciado)
+
+É resolvível com documentação, mas exige centenas de leituras. Fica como lote próprio (ver sugestões).
 
 ### 11. WSDL (reclassificado)
 
@@ -150,4 +165,5 @@ Continua sem org. As consultas permanecem com `validacao: "documental"`.
 2. **Fornecer os PDFs versionados** (`api_meta.pdf`, `object_reference.pdf` e `api_tooling.pdf` da 68.0) **e o `metadata.wsdl`.** Eles cobrem as páginas que o endpoint corta (subtipos de Profile e campos do User).
 3. **Uma org Developer Edition com usuário somente leitura,** para `describe` e execução das consultas de exemplo. Isso permitiria passar parte das validações de "documental" para "org", registrando o contexto sem dados reais.
 4. **Revalidar as páginas da Ajuda a cada release.** Elas não têm número de versão; a data de verificação está registrada.
-5. **Classificação Core em lotes por família de nome.** Começar pelos tipos que já aparecem nas subclassificações (Settings, SharingRules, Role, Group, Queue, GlobalValueSet…), sempre com a página do tipo como evidência. Nunca classificar por semelhança de nome.
+5. **Tipo de licença `licenca_recurso` no schema de nuvem (implementado no lote 3a).** A feature license Service Cloud User não é licença de usuário, de permission set, edição nem add-on.
+6. **Classificação Core em lotes por família de nome.** Começar pelos tipos que já aparecem nas subclassificações (Settings, SharingRules, Role, Group, Queue, GlobalValueSet…), sempre com a página do tipo como evidência. Nunca classificar por semelhança de nome.

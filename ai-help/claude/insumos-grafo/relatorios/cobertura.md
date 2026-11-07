@@ -33,11 +33,12 @@ Gerado por `ferramentas/sftutor.py cobertura`. Cobertura estrutural, explicativa
 
 ## Objetos consultáveis via API
 
-- Catalogados: 19. Campos listados: 389; explicados: 220.
+- Catalogados: 22. Campos listados: 577; explicados: 257.
 - Universo: Universo de objetos da plataforma não enumerado.
 
 | Objeto | Estrutural | Esperados | Presentes | Explicados | APIs verificadas |
 |---|---|---|---|---|---|
+| obj:Case | parcial | n/d | 56 | 12 | padrao |
 | obj:CustomField | parcial | n/d | 6 | 6 | tooling |
 | obj:CustomObject | parcial | n/d | 10 | 10 | tooling |
 | obj:CustomTab | completa | 13 | 13 | 13 | tooling |
@@ -46,7 +47,9 @@ Gerado por `ferramentas/sftutor.py cobertura`. Cobertura estrutural, explicativa
 | obj:FlexiPage | completa | 11 | 11 | 11 | tooling |
 | obj:Flow | completa | 15 | 15 | 15 | tooling |
 | obj:FlowDefinition | completa | 11 | 11 | 11 | tooling |
+| obj:Lead | parcial | n/d | 74 | 14 | padrao |
 | obj:LoginHistory | parcial | n/d | 24 | 24 | padrao |
+| obj:Opportunity | parcial | n/d | 58 | 11 | padrao |
 | obj:PathAssistant | completa | 13 | 13 | 13 | tooling |
 | obj:PermissionSet | parcial | n/d | 12 | 11 | padrao, tooling |
 | obj:PermissionSetAssignment | parcial | n/d | 8 | 8 | padrao, tooling |
@@ -60,10 +63,10 @@ Gerado por `ferramentas/sftutor.py cobertura`. Cobertura estrutural, explicativa
 
 ## Relacionamentos
 
-- Total: 33; verificados: 30.
-- Por tipo: correspondencia_xml_api: 11, referencia_campo: 18, representacao_comum: 4
+- Total: 37; verificados: 34.
+- Por tipo: correspondencia_xml_api: 11, referencia_campo: 22, representacao_comum: 4
 
 ## Taxonomia e funcionalidades
 
-- Classificações: 14; subclassificações: 92 (com funcionalidades: 19).
-- Funcionalidades cadastradas: 14 (universo de funcionalidades não definido).
+- Classificações: 14; subclassificações: 92 (com funcionalidades: 21).
+- Funcionalidades cadastradas: 17 (universo de funcionalidades não definido).

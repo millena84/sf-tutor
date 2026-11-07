@@ -1,6 +1,6 @@
 # Ponto de retomada
 
-Situação em 2026-11-07, após o lote 2 (resolução de bloqueios). Os números vivos estão em `relatorios/cobertura.md`; o detalhe do que foi resolvido está em `relatorios/resolucao-bloqueios.md`.
+Situação em 2026-11-07, após o lote 3a (nuvens Agentforce Sales e Service). Os números vivos estão em `relatorios/cobertura.md`; o detalhe do que foi resolvido está em `relatorios/resolucao-bloqueios.md`.
 
 ## O que está pronto
 
@@ -9,14 +9,15 @@ Situação em 2026-11-07, após o lote 2 (resolução de bloqueios). Os números
 - **Universo de metadata types:** 993 tipos da v68, a partir de snapshots oficiais com hash.
 - **Taxonomia proposta:** 14 classificações e 92 subclassificações, ainda sem cruzamento com a documentação oficial.
 - **Catálogo do piloto:**
-  - 14 funcionalidades, todas com objetos API;
+  - 17 funcionalidades, todas com objetos API;
   - 12 metadata types e 40 estruturas;
-  - 19 objetos API;
-  - 33 relacionamentos.
+  - 22 objetos API;
+  - 37 relacionamentos.
 - **Caminhos de Setup:** verificados em 12 das 14 funcionalidades.
 - **Data 360:** contexto técnico verificado.
+- **Agentforce Sales e Agentforce Service** (antes Sales Cloud e Service Cloud): nome, contexto técnico e licenças verificados. Funcionalidades próprias: Leads, Oportunidades e Casos. Path está associado a vendas como capacidade compartilhada.
 
-Os JSONs de `catalogo/` são a fonte da verdade. Os lotes 1 e 2 foram aplicados por scripts de carga mantidos fora do repositório; edições futuras devem ser feitas nos JSONs ou por ferramentas criadas em `ferramentas/`.
+Os JSONs de `catalogo/` são a fonte da verdade. Os lotes 1, 2 e 3a foram aplicados por scripts de carga mantidos fora do repositório; edições futuras devem ser feitas nos JSONs ou por ferramentas criadas em `ferramentas/`.
 
 ## Lacunas por item
 
@@ -34,7 +35,11 @@ Os JSONs de `catalogo/` são a fonte da verdade. Os lotes 1 e 2 foram aplicados 
 | obj:UserLogin (Tooling) | indeterminado | Fora do trecho servido do índice |
 | obj:EntityDefinition, FieldDefinition | parcial | Recortes de 13 de 64 e de 12 de 56 campos |
 | Setup de Perfis e de Tipos de registro | desconhecido | Página oficial não localizada nesta rodada |
-| Licenças de Core, Sales e Service | desconhecido | Não registradas |
+| Licenças de Core | desconhecido | Não registradas |
+| Licenças de Sales e Service | parcial | Licença de usuário e feature license registradas; matriz completa de edições pendente |
+| obj:Lead | parcial | 74 nomes lidos; tipos e propriedades só de 14 campos |
+| obj:Opportunity, obj:Case | parcial | Object Reference truncada; propriedades de API faltam para campos vindos só da Field Reference |
+| Inventário de Sales e Service | parcial | Contas, contatos, campanhas, produtos, cotações, previsões, territórios, Omni-Channel, Knowledge, entitlements e regras de atribuição e escalonamento não catalogados |
 
 ## Bloqueios reais
 
@@ -56,8 +61,8 @@ O WSDL **não** é bloqueio: a documentação de cada tipo é a fonte alternativ
 3. **Lotes 5+ — uma classificação por vez.** Ordem: Acesso, Dados, Automação, Interface, Desenvolvimento, Organização (família Settings).
 4. **Revisões transversais:**
    - cruzar a taxonomia com a documentação oficial;
-   - licenças das nuvens;
-   - funcionalidades de Sales Cloud e Service Cloud.
+   - continuar Agentforce Sales e Service pela lista de lacunas acima;
+   - matriz de licenças e edições.
 
 ## Prompt de retomada
 
