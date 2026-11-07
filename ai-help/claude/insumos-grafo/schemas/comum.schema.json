@@ -1,0 +1,597 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "comum.schema.json",
+  "title": "Definições comuns",
+  "$defs": {
+    "estado": {
+      "enum": [
+        "verificado",
+        "desconhecido",
+        "nao_aplicavel",
+        "nao_exposto",
+        "bloqueado"
+      ]
+    },
+    "evidencia": {
+      "type": "object",
+      "required": [
+        "fonte"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "fonte": {
+          "type": "string",
+          "pattern": "^src:"
+        },
+        "secao": {
+          "type": "string"
+        },
+        "nota": {
+          "type": "string"
+        }
+      }
+    },
+    "evidencias": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/evidencia"
+      }
+    },
+    "afirmacao": {
+      "type": "object",
+      "required": [
+        "estado"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "estado": {
+          "$ref": "#/$defs/estado"
+        },
+        "valor": {},
+        "nota": {
+          "type": "string"
+        },
+        "evidencias": {
+          "$ref": "#/$defs/evidencias"
+        }
+      },
+      "if": {
+        "properties": {
+          "estado": {
+            "const": "verificado"
+          }
+        }
+      },
+      "then": {
+        "required": [
+          "evidencias"
+        ],
+        "properties": {
+          "evidencias": {
+            "minItems": 1
+          }
+        }
+      }
+    },
+    "obrigatoriedade": {
+      "type": "object",
+      "required": [
+        "valor",
+        "estado"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "valor": {
+          "enum": [
+            "sim",
+            "nao",
+            "condicional",
+            "desconhecida",
+            "nao_aplicavel"
+          ]
+        },
+        "condicao": {
+          "type": "string"
+        },
+        "estado": {
+          "$ref": "#/$defs/estado"
+        },
+        "evidencias": {
+          "$ref": "#/$defs/evidencias"
+        }
+      }
+    },
+    "default": {
+      "type": "object",
+      "required": [
+        "forma",
+        "estado"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "forma": {
+          "enum": [
+            "valor",
+            "ausente_no_xml",
+            "null",
+            "false",
+            "string_vazia",
+            "nao_declarado_na_fonte",
+            "desconhecido",
+            "nao_aplicavel"
+          ]
+        },
+        "valor": {},
+        "nota": {
+          "type": "string"
+        },
+        "estado": {
+          "$ref": "#/$defs/estado"
+        },
+        "evidencias": {
+          "$ref": "#/$defs/evidencias"
+        }
+      }
+    },
+    "dominio": {
+      "type": "object",
+      "required": [
+        "natureza",
+        "estado"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "natureza": {
+          "enum": [
+            "enum_fechado",
+            "lista_dinamica",
+            "texto_livre",
+            "booleano",
+            "numerico",
+            "data_hora",
+            "identificador",
+            "referencia",
+            "tipo_composto",
+            "desconhecida",
+            "nao_aplicavel"
+          ]
+        },
+        "valores": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": [
+              "valor"
+            ],
+            "additionalProperties": false,
+            "properties": {
+              "valor": {
+                "type": "string"
+              },
+              "significado": {
+                "type": "string"
+              },
+              "desde_versao": {
+                "type": "string"
+              }
+            }
+          }
+        },
+        "lista_completa": {
+          "enum": [
+            "sim",
+            "nao",
+            "desconhecido"
+          ]
+        },
+        "contexto": {
+          "type": "string"
+        },
+        "estado": {
+          "$ref": "#/$defs/estado"
+        },
+        "evidencias": {
+          "$ref": "#/$defs/evidencias"
+        }
+      }
+    },
+    "disponibilidade": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "desde_versao": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "ate_versao": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "nota": {
+          "type": "string"
+        },
+        "estado": {
+          "$ref": "#/$defs/estado"
+        }
+      }
+    },
+    "recomendacao": {
+      "type": "object",
+      "required": [
+        "texto",
+        "natureza"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "texto": {
+          "type": "string"
+        },
+        "natureza": {
+          "enum": [
+            "orientacao_oficial",
+            "inferencia_tecnica",
+            "preferencia_projeto"
+          ]
+        },
+        "evidencias": {
+          "$ref": "#/$defs/evidencias"
+        }
+      }
+    },
+    "cobertura_item": {
+      "type": "object",
+      "required": [
+        "estado"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "estado": {
+          "enum": [
+            "completa",
+            "parcial",
+            "nao_iniciada",
+            "bloqueada"
+          ]
+        },
+        "esperado": {
+          "type": [
+            "integer",
+            "null"
+          ]
+        },
+        "presente": {
+          "type": [
+            "integer",
+            "null"
+          ]
+        },
+        "nota": {
+          "type": "string"
+        }
+      }
+    },
+    "cobertura": {
+      "type": "object",
+      "required": [
+        "estrutural",
+        "explicativa",
+        "mapeamento"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "estrutural": {
+          "$ref": "#/$defs/cobertura_item"
+        },
+        "explicativa": {
+          "$ref": "#/$defs/cobertura_item"
+        },
+        "mapeamento": {
+          "$ref": "#/$defs/cobertura_item"
+        }
+      }
+    },
+    "texto": {
+      "type": "string",
+      "minLength": 1
+    },
+    "propriedade": {
+      "type": "object",
+      "required": [
+        "id",
+        "nome",
+        "tipo_tecnico",
+        "o_que_e",
+        "origem",
+        "obrigatoriedade",
+        "default",
+        "dominio",
+        "disponibilidade",
+        "explicacao",
+        "estado",
+        "evidencias"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "id": {
+          "type": "string",
+          "pattern": "^(mdt|mdx):[A-Za-z0-9_]+\\.[A-Za-z0-9_<>]+$"
+        },
+        "nome": {
+          "type": "string"
+        },
+        "label_oficial": {
+          "$ref": "#/$defs/afirmacao"
+        },
+        "rotulo_didatico": {
+          "type": "string"
+        },
+        "tipo_tecnico": {
+          "type": "string"
+        },
+        "tipo_explicado": {
+          "type": "string"
+        },
+        "cardinalidade": {
+          "type": "string"
+        },
+        "estrutura_ref": {
+          "type": "string",
+          "pattern": "^mdx:"
+        },
+        "herdada_de": {
+          "type": "string"
+        },
+        "o_que_e": {
+          "type": "string"
+        },
+        "finalidade": {
+          "type": "string"
+        },
+        "efeito": {
+          "type": "string"
+        },
+        "origem": {
+          "$ref": "#/$defs/afirmacao"
+        },
+        "obrigatoriedade": {
+          "$ref": "#/$defs/obrigatoriedade"
+        },
+        "default": {
+          "$ref": "#/$defs/default"
+        },
+        "dominio": {
+          "$ref": "#/$defs/dominio"
+        },
+        "restricoes": {
+          "$ref": "#/$defs/afirmacao"
+        },
+        "exemplo": {
+          "type": "string"
+        },
+        "disponibilidade": {
+          "$ref": "#/$defs/disponibilidade"
+        },
+        "explicacao": {
+          "enum": [
+            "explicada",
+            "pendente"
+          ]
+        },
+        "estado": {
+          "$ref": "#/$defs/estado"
+        },
+        "evidencias": {
+          "$ref": "#/$defs/evidencias"
+        },
+        "notas": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "campo_api": {
+      "type": "object",
+      "required": [
+        "id",
+        "nome",
+        "tipo_tecnico",
+        "o_que_e",
+        "apis",
+        "propriedades_api",
+        "origem",
+        "obrigatoriedade",
+        "default",
+        "dominio",
+        "disponibilidade",
+        "explicacao",
+        "estado",
+        "evidencias"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "id": {
+          "type": "string",
+          "pattern": "^obj:[A-Za-z0-9_]+\\.[A-Za-z0-9_]+$"
+        },
+        "nome": {
+          "type": "string"
+        },
+        "label_oficial": {
+          "$ref": "#/$defs/afirmacao"
+        },
+        "rotulo_didatico": {
+          "type": "string"
+        },
+        "tipo_tecnico": {
+          "type": "string"
+        },
+        "tipo_explicado": {
+          "type": "string"
+        },
+        "o_que_e": {
+          "type": "string"
+        },
+        "finalidade": {
+          "type": "string"
+        },
+        "apis": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "enum": [
+              "padrao",
+              "tooling"
+            ]
+          }
+        },
+        "propriedades_api": {
+          "type": "object",
+          "required": [
+            "estado"
+          ],
+          "additionalProperties": false,
+          "properties": {
+            "estado": {
+              "$ref": "#/$defs/estado"
+            },
+            "create": {
+              "type": [
+                "boolean",
+                "null"
+              ]
+            },
+            "update": {
+              "type": [
+                "boolean",
+                "null"
+              ]
+            },
+            "filter": {
+              "type": [
+                "boolean",
+                "null"
+              ]
+            },
+            "group": {
+              "type": [
+                "boolean",
+                "null"
+              ]
+            },
+            "sort": {
+              "type": [
+                "boolean",
+                "null"
+              ]
+            },
+            "nillable": {
+              "type": [
+                "boolean",
+                "null"
+              ]
+            },
+            "defaulted_on_create": {
+              "type": [
+                "boolean",
+                "null"
+              ]
+            },
+            "restricted_picklist": {
+              "type": [
+                "boolean",
+                "null"
+              ]
+            },
+            "id_lookup": {
+              "type": [
+                "boolean",
+                "null"
+              ]
+            },
+            "calculado": {
+              "type": [
+                "boolean",
+                "null"
+              ]
+            },
+            "evidencias": {
+              "$ref": "#/$defs/evidencias"
+            }
+          }
+        },
+        "somente_leitura": {
+          "type": [
+            "boolean",
+            "null"
+          ]
+        },
+        "referencia": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "alvos"
+          ],
+          "properties": {
+            "alvos": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            },
+            "nome_relacionamento": {
+              "type": [
+                "string",
+                "null"
+              ]
+            }
+          }
+        },
+        "origem": {
+          "$ref": "#/$defs/afirmacao"
+        },
+        "obrigatoriedade": {
+          "$ref": "#/$defs/obrigatoriedade"
+        },
+        "default": {
+          "$ref": "#/$defs/default"
+        },
+        "dominio": {
+          "$ref": "#/$defs/dominio"
+        },
+        "restricoes": {
+          "$ref": "#/$defs/afirmacao"
+        },
+        "exemplo": {
+          "type": "string"
+        },
+        "disponibilidade": {
+          "$ref": "#/$defs/disponibilidade"
+        },
+        "explicacao": {
+          "enum": [
+            "explicada",
+            "pendente"
+          ]
+        },
+        "estado": {
+          "$ref": "#/$defs/estado"
+        },
+        "evidencias": {
+          "$ref": "#/$defs/evidencias"
+        },
+        "notas": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    }
+  }
+}

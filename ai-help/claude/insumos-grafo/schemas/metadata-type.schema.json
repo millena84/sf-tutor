@@ -1,0 +1,136 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "metadata-type.schema.json",
+  "title": "metadata-type",
+  "type": "object",
+  "required": [
+    "id",
+    "nome",
+    "o_que_e",
+    "finalidade",
+    "estende",
+    "arquivos",
+    "disponibilidade",
+    "suporte_cli",
+    "setup",
+    "propriedades",
+    "cobertura",
+    "estado",
+    "evidencias"
+  ],
+  "additionalProperties": false,
+  "properties": {
+    "id": {
+      "type": "string",
+      "pattern": "^mdt:[A-Za-z0-9_]+$"
+    },
+    "nome": {
+      "type": "string"
+    },
+    "o_que_e": {
+      "type": "string"
+    },
+    "finalidade": {
+      "type": "string"
+    },
+    "estende": {
+      "type": "string"
+    },
+    "componente_filho_de": {
+      "type": "string",
+      "pattern": "^mdt:"
+    },
+    "arquivos": {
+      "type": "object",
+      "required": [
+        "source_format",
+        "metadata_api_format"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "source_format": {
+          "$ref": "comum.schema.json#/$defs/afirmacao"
+        },
+        "metadata_api_format": {
+          "$ref": "comum.schema.json#/$defs/afirmacao"
+        },
+        "decomposicao": {
+          "$ref": "comum.schema.json#/$defs/afirmacao"
+        },
+        "curinga_package_xml": {
+          "$ref": "comum.schema.json#/$defs/afirmacao"
+        }
+      }
+    },
+    "disponibilidade": {
+      "$ref": "comum.schema.json#/$defs/disponibilidade"
+    },
+    "suporte_cli": {
+      "$ref": "comum.schema.json#/$defs/afirmacao"
+    },
+    "setup": {
+      "$ref": "comum.schema.json#/$defs/afirmacao"
+    },
+    "exemplo_xml": {
+      "type": "object",
+      "required": [
+        "xml",
+        "natureza"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "xml": {
+          "type": "string"
+        },
+        "natureza": {
+          "enum": [
+            "didatico_projeto",
+            "oficial"
+          ]
+        },
+        "nota": {
+          "type": "string"
+        }
+      }
+    },
+    "propriedades": {
+      "type": "array",
+      "items": {
+        "$ref": "comum.schema.json#/$defs/propriedade"
+      }
+    },
+    "estruturas": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "cobertura": {
+      "$ref": "comum.schema.json#/$defs/cobertura"
+    },
+    "recomendacoes": {
+      "type": "array",
+      "items": {
+        "$ref": "comum.schema.json#/$defs/recomendacao"
+      }
+    },
+    "alertas": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "divergencias_documentais": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "estado": {
+      "$ref": "comum.schema.json#/$defs/estado"
+    },
+    "evidencias": {
+      "$ref": "comum.schema.json#/$defs/evidencias"
+    }
+  }
+}

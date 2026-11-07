@@ -1,0 +1,53 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "estrutura.schema.json",
+  "title": "estrutura",
+  "type": "object",
+  "required": [
+    "id",
+    "nome",
+    "natureza",
+    "usada_por",
+    "propriedades",
+    "cobertura",
+    "estado",
+    "evidencias"
+  ],
+  "additionalProperties": false,
+  "properties": {
+    "id": {
+      "type": "string",
+      "pattern": "^mdx:[A-Za-z0-9_]+$"
+    },
+    "nome": {
+      "type": "string"
+    },
+    "natureza": {
+      "const": "estrutura_auxiliar"
+    },
+    "o_que_e": {
+      "type": "string"
+    },
+    "usada_por": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "propriedades": {
+      "type": "array",
+      "items": {
+        "$ref": "comum.schema.json#/$defs/propriedade"
+      }
+    },
+    "cobertura": {
+      "$ref": "comum.schema.json#/$defs/cobertura"
+    },
+    "estado": {
+      "$ref": "comum.schema.json#/$defs/estado"
+    },
+    "evidencias": {
+      "$ref": "comum.schema.json#/$defs/evidencias"
+    }
+  }
+}

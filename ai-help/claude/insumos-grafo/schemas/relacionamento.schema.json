@@ -1,0 +1,83 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "relacionamento.schema.json",
+  "title": "relacionamento",
+  "type": "object",
+  "required": [
+    "id",
+    "tipo",
+    "origem",
+    "destino",
+    "explicacao",
+    "estado",
+    "evidencias"
+  ],
+  "additionalProperties": false,
+  "properties": {
+    "id": {
+      "type": "string",
+      "pattern": "^rel:[a-z0-9-]+$"
+    },
+    "tipo": {
+      "enum": [
+        "referencia_campo",
+        "correspondencia_xml_api",
+        "representacao_comum"
+      ]
+    },
+    "origem": {
+      "type": "object",
+      "required": [
+        "entidade"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "entidade": {
+          "type": "string"
+        },
+        "campo": {
+          "type": "string"
+        }
+      }
+    },
+    "destino": {
+      "type": "object",
+      "required": [
+        "entidade"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "entidade": {
+          "type": "string"
+        },
+        "campo": {
+          "type": "string"
+        }
+      }
+    },
+    "natureza_correspondencia": {
+      "enum": [
+        "direta",
+        "parcial",
+        "transformada",
+        "nenhuma",
+        "desconhecida"
+      ]
+    },
+    "cardinalidade_registros": {
+      "$ref": "comum.schema.json#/$defs/afirmacao"
+    },
+    "condicao": {
+      "type": "string"
+    },
+    "explicacao": {
+      "type": "string"
+    },
+    "estado": {
+      "$ref": "comum.schema.json#/$defs/estado"
+    },
+    "evidencias": {
+      "$ref": "comum.schema.json#/$defs/evidencias"
+    }
+  }
+}

@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Fixture SINTÉTICA para testar o importador; não é conteúdo da Salesforce. -->
+<definitions xmlns="http://schemas.xmlsoap.org/wsdl/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:tns="urn:teste">
+  <types>
+    <xsd:schema targetNamespace="urn:teste">
+      <xsd:complexType name="Metadata">
+        <xsd:sequence><xsd:element name="fullName" type="xsd:string" minOccurs="0"/></xsd:sequence>
+      </xsd:complexType>
+      <xsd:complexType name="TipoA">
+        <xsd:complexContent><xsd:extension base="tns:Metadata">
+          <xsd:sequence>
+            <xsd:element name="itens" type="tns:EstruturaB" minOccurs="0" maxOccurs="unbounded"/>
+            <xsd:element name="modo" type="tns:EnumC"/>
+          </xsd:sequence>
+        </xsd:extension></xsd:complexContent>
+      </xsd:complexType>
+      <xsd:complexType name="EstruturaB">
+        <xsd:sequence><xsd:element name="valor" type="xsd:string"/><xsd:element name="filho" type="tns:EstruturaB" minOccurs="0"/></xsd:sequence>
+      </xsd:complexType>
+      <xsd:complexType name="CicloX"><xsd:complexContent><xsd:extension base="tns:CicloY"><xsd:sequence/></xsd:extension></xsd:complexContent></xsd:complexType>
+      <xsd:complexType name="CicloY"><xsd:complexContent><xsd:extension base="tns:CicloX"><xsd:sequence/></xsd:extension></xsd:complexContent></xsd:complexType>
+      <xsd:simpleType name="EnumC"><xsd:restriction base="xsd:string"><xsd:enumeration value="Um"/><xsd:enumeration value="Dois"/></xsd:restriction></xsd:simpleType>
+    </xsd:schema>
+  </types>
+</definitions>

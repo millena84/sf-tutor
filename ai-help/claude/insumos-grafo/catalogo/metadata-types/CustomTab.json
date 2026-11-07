@@ -1,0 +1,962 @@
+{
+  "id": "mdt:CustomTab",
+  "nome": "CustomTab",
+  "o_que_e": "Definição de uma tab: entrada de navegação para um objeto, página, componente ou URL.",
+  "finalidade": "Dar acesso pela navegação a objetos, páginas e componentes.",
+  "estende": "Metadata",
+  "arquivos": {
+    "source_format": {
+      "estado": "verificado",
+      "valor": {
+        "pasta": "tabs/",
+        "arquivo": "<Nome>.tab-meta.xml"
+      },
+      "nota": "Pasta e sufixo do registro do Salesforce CLI; sufixo '-meta.xml' segue a convenção do source format.",
+      "evidencias": [
+        {
+          "fonte": "src:sdr-registry",
+          "nota": "types.customtab"
+        }
+      ]
+    },
+    "metadata_api_format": {
+      "estado": "verificado",
+      "valor": {
+        "pasta": "tabs/",
+        "arquivo": "<Nome>.tab"
+      },
+      "evidencias": [
+        {
+          "fonte": "src:sdr-registry",
+          "nota": "types.customtab"
+        }
+      ]
+    }
+  },
+  "disponibilidade": {
+    "desde_versao": "10.0",
+    "ate_versao": null,
+    "estado": "verificado"
+  },
+  "suporte_cli": {
+    "estado": "verificado",
+    "valor": {
+      "status": "suportado",
+      "nota_fonte": null
+    },
+    "nota": "Suporte do Salesforce CLI (source-deploy-retrieve), não do Metadata API em geral.",
+    "evidencias": [
+      {
+        "fonte": "src:sdr-metadata-support"
+      }
+    ]
+  },
+  "setup": {
+    "estado": "desconhecido",
+    "nota": "Caminho no Setup não validado nesta sessão."
+  },
+  "propriedades": [
+    {
+      "id": "mdt:CustomTab.actionOverrides",
+      "nome": "actionOverrides",
+      "tipo_tecnico": "ActionOverride[]",
+      "o_que_e": "Substituições de ação da tab, uma por formFactor.",
+      "origem": {
+        "estado": "verificado",
+        "valor": "padrao_plataforma",
+        "nota": "Propriedade definida pelo schema da Metadata API.",
+        "evidencias": [
+          {
+            "fonte": "src:mdapi-customtab"
+          }
+        ]
+      },
+      "obrigatoriedade": {
+        "valor": "nao",
+        "estado": "desconhecido",
+        "condicao": "A documentação 68.0 não marca o campo como obrigatório; ausência de marcação não comprova opcionalidade (confirmar no WSDL)."
+      },
+      "default": {
+        "forma": "nao_declarado_na_fonte",
+        "estado": "desconhecido"
+      },
+      "dominio": {
+        "natureza": "tipo_composto",
+        "estado": "verificado",
+        "evidencias": [
+          {
+            "fonte": "src:mdapi-customtab"
+          }
+        ]
+      },
+      "disponibilidade": {
+        "desde_versao": "37.0",
+        "ate_versao": null,
+        "estado": "verificado"
+      },
+      "explicacao": "explicada",
+      "estado": "verificado",
+      "evidencias": [
+        {
+          "fonte": "src:mdapi-customtab"
+        }
+      ],
+      "cardinalidade": "0..n"
+    },
+    {
+      "id": "mdt:CustomTab.auraComponent",
+      "nome": "auraComponent",
+      "tipo_tecnico": "string",
+      "o_que_e": "Componente Aura exibido.",
+      "origem": {
+        "estado": "verificado",
+        "valor": "padrao_plataforma",
+        "nota": "Propriedade definida pelo schema da Metadata API.",
+        "evidencias": [
+          {
+            "fonte": "src:mdapi-customtab"
+          }
+        ]
+      },
+      "obrigatoriedade": {
+        "valor": "condicional",
+        "condicao": "Apenas um entre auraComponent, customObject, flexiPage, lwcComponent, page, scontrol e url pode ser definido.",
+        "estado": "verificado",
+        "evidencias": [
+          {
+            "fonte": "src:mdapi-customtab"
+          }
+        ]
+      },
+      "default": {
+        "forma": "nao_declarado_na_fonte",
+        "estado": "desconhecido"
+      },
+      "dominio": {
+        "natureza": "texto_livre",
+        "estado": "verificado",
+        "evidencias": [
+          {
+            "fonte": "src:mdapi-customtab"
+          }
+        ],
+        "contexto": "A fonte tipa como string sem lista de valores; não inventar valores."
+      },
+      "disponibilidade": {
+        "desde_versao": null,
+        "ate_versao": null,
+        "estado": "desconhecido"
+      },
+      "explicacao": "explicada",
+      "estado": "verificado",
+      "evidencias": [
+        {
+          "fonte": "src:mdapi-customtab"
+        }
+      ]
+    },
+    {
+      "id": "mdt:CustomTab.customObject",
+      "nome": "customObject",
+      "tipo_tecnico": "boolean",
+      "o_que_e": "Verdadeiro se a tab representa um objeto customizado.",
+      "origem": {
+        "estado": "verificado",
+        "valor": "padrao_plataforma",
+        "nota": "Propriedade definida pelo schema da Metadata API.",
+        "evidencias": [
+          {
+            "fonte": "src:mdapi-customtab"
+          }
+        ]
+      },
+      "obrigatoriedade": {
+        "valor": "condicional",
+        "condicao": "Apenas um entre auraComponent, customObject, flexiPage, lwcComponent, page, scontrol e url pode ser definido.",
+        "estado": "verificado",
+        "evidencias": [
+          {
+            "fonte": "src:mdapi-customtab"
+          }
+        ]
+      },
+      "default": {
+        "forma": "nao_declarado_na_fonte",
+        "estado": "desconhecido"
+      },
+      "dominio": {
+        "natureza": "booleano",
+        "valores": [
+          {
+            "valor": "true"
+          },
+          {
+            "valor": "false"
+          }
+        ],
+        "lista_completa": "sim",
+        "estado": "verificado",
+        "evidencias": [
+          {
+            "fonte": "src:mdapi-customtab"
+          }
+        ]
+      },
+      "disponibilidade": {
+        "desde_versao": null,
+        "ate_versao": null,
+        "estado": "desconhecido"
+      },
+      "explicacao": "explicada",
+      "estado": "verificado",
+      "evidencias": [
+        {
+          "fonte": "src:mdapi-customtab"
+        }
+      ]
+    },
+    {
+      "id": "mdt:CustomTab.description",
+      "nome": "description",
+      "tipo_tecnico": "string",
+      "o_que_e": "Descrição.",
+      "origem": {
+        "estado": "verificado",
+        "valor": "padrao_plataforma",
+        "nota": "Propriedade definida pelo schema da Metadata API.",
+        "evidencias": [
+          {
+            "fonte": "src:mdapi-customtab"
+          }
+        ]
+      },
+      "obrigatoriedade": {
+        "valor": "nao",
+        "estado": "desconhecido",
+        "condicao": "A documentação 68.0 não marca o campo como obrigatório; ausência de marcação não comprova opcionalidade (confirmar no WSDL)."
+      },
+      "default": {
+        "forma": "nao_declarado_na_fonte",
+        "estado": "desconhecido"
+      },
+      "dominio": {
+        "natureza": "texto_livre",
+        "estado": "verificado",
+        "evidencias": [
+          {
+            "fonte": "src:mdapi-customtab"
+          }
+        ],
+        "contexto": "A fonte tipa como string sem lista de valores; não inventar valores."
+      },
+      "disponibilidade": {
+        "desde_versao": null,
+        "ate_versao": null,
+        "estado": "desconhecido"
+      },
+      "explicacao": "explicada",
+      "estado": "verificado",
+      "evidencias": [
+        {
+          "fonte": "src:mdapi-customtab"
+        }
+      ]
+    },
+    {
+      "id": "mdt:CustomTab.flexiPage",
+      "nome": "flexiPage",
+      "tipo_tecnico": "string",
+      "o_que_e": "Lightning page exibida.",
+      "origem": {
+        "estado": "verificado",
+        "valor": "padrao_plataforma",
+        "nota": "Propriedade definida pelo schema da Metadata API.",
+        "evidencias": [
+          {
+            "fonte": "src:mdapi-customtab"
+          }
+        ]
+      },
+      "obrigatoriedade": {
+        "valor": "condicional",
+        "condicao": "Apenas um entre auraComponent, customObject, flexiPage, lwcComponent, page, scontrol e url pode ser definido.",
+        "estado": "verificado",
+        "evidencias": [
+          {
+            "fonte": "src:mdapi-customtab"
+          }
+        ]
+      },
+      "default": {
+        "forma": "nao_declarado_na_fonte",
+        "estado": "desconhecido"
+      },
+      "dominio": {
+        "natureza": "texto_livre",
+        "estado": "verificado",
+        "evidencias": [
+          {
+            "fonte": "src:mdapi-customtab"
+          }
+        ],
+        "contexto": "A fonte tipa como string sem lista de valores; não inventar valores."
+      },
+      "disponibilidade": {
+        "desde_versao": null,
+        "ate_versao": null,
+        "estado": "desconhecido"
+      },
+      "explicacao": "explicada",
+      "estado": "verificado",
+      "evidencias": [
+        {
+          "fonte": "src:mdapi-customtab"
+        }
+      ]
+    },
+    {
+      "id": "mdt:CustomTab.frameHeight",
+      "nome": "frameHeight",
+      "tipo_tecnico": "int",
+      "o_que_e": "Altura do frame, em pixels.",
+      "origem": {
+        "estado": "verificado",
+        "valor": "padrao_plataforma",
+        "nota": "Propriedade definida pelo schema da Metadata API.",
+        "evidencias": [
+          {
+            "fonte": "src:mdapi-customtab"
+          }
+        ]
+      },
+      "obrigatoriedade": {
+        "valor": "condicional",
+        "condicao": "Necessário para tabs de s-control e de página.",
+        "estado": "verificado",
+        "evidencias": [
+          {
+            "fonte": "src:mdapi-customtab"
+          }
+        ]
+      },
+      "default": {
+        "forma": "nao_declarado_na_fonte",
+        "estado": "desconhecido"
+      },
+      "dominio": {
+        "natureza": "numerico",
+        "estado": "verificado",
+        "evidencias": [
+          {
+            "fonte": "src:mdapi-customtab"
+          }
+        ]
+      },
+      "disponibilidade": {
+        "desde_versao": null,
+        "ate_versao": null,
+        "estado": "desconhecido"
+      },
+      "explicacao": "explicada",
+      "estado": "verificado",
+      "evidencias": [
+        {
+          "fonte": "src:mdapi-customtab"
+        }
+      ]
+    },
+    {
+      "id": "mdt:CustomTab.fullName",
+      "nome": "fullName",
+      "tipo_tecnico": "string",
+      "o_que_e": "Nome da tab: nome API do objeto ou nome de desenvolvedor da web tab.",
+      "origem": {
+        "estado": "verificado",
+        "valor": "padrao_plataforma",
+        "nota": "Propriedade definida pelo schema da Metadata API.",
+        "evidencias": [
+          {
+            "fonte": "src:mdapi-customtab"
+          }
+        ]
+      },
+      "obrigatoriedade": {
+        "valor": "desconhecida",
+        "estado": "desconhecido"
+      },
+      "default": {
+        "forma": "nao_declarado_na_fonte",
+        "estado": "desconhecido"
+      },
+      "dominio": {
+        "natureza": "texto_livre",
+        "estado": "verificado",
+        "evidencias": [
+          {
+            "fonte": "src:mdapi-customtab"
+          }
+        ],
+        "contexto": "A fonte tipa como string sem lista de valores; não inventar valores."
+      },
+      "disponibilidade": {
+        "desde_versao": null,
+        "ate_versao": null,
+        "estado": "desconhecido"
+      },
+      "explicacao": "explicada",
+      "estado": "verificado",
+      "evidencias": [
+        {
+          "fonte": "src:mdapi-customtab"
+        }
+      ],
+      "herdada_de": "Metadata"
+    },
+    {
+      "id": "mdt:CustomTab.hasSidebar",
+      "nome": "hasSidebar",
+      "tipo_tecnico": "boolean",
+      "o_que_e": "Se a barra lateral aparece.",
+      "origem": {
+        "estado": "verificado",
+        "valor": "padrao_plataforma",
+        "nota": "Propriedade definida pelo schema da Metadata API.",
+        "evidencias": [
+          {
+            "fonte": "src:mdapi-customtab"
+          }
+        ]
+      },
+      "obrigatoriedade": {
+        "valor": "nao",
+        "estado": "desconhecido",
+        "condicao": "A documentação 68.0 não marca o campo como obrigatório; ausência de marcação não comprova opcionalidade (confirmar no WSDL)."
+      },
+      "default": {
+        "forma": "nao_declarado_na_fonte",
+        "estado": "desconhecido"
+      },
+      "dominio": {
+        "natureza": "booleano",
+        "valores": [
+          {
+            "valor": "true"
+          },
+          {
+            "valor": "false"
+          }
+        ],
+        "lista_completa": "sim",
+        "estado": "verificado",
+        "evidencias": [
+          {
+            "fonte": "src:mdapi-customtab"
+          }
+        ]
+      },
+      "disponibilidade": {
+        "desde_versao": null,
+        "ate_versao": null,
+        "estado": "desconhecido"
+      },
+      "explicacao": "explicada",
+      "estado": "verificado",
+      "evidencias": [
+        {
+          "fonte": "src:mdapi-customtab"
+        }
+      ]
+    },
+    {
+      "id": "mdt:CustomTab.icon",
+      "nome": "icon",
+      "tipo_tecnico": "string",
+      "o_que_e": "Imagem usada quando não se usa um estilo padrão.",
+      "origem": {
+        "estado": "verificado",
+        "valor": "padrao_plataforma",
+        "nota": "Propriedade definida pelo schema da Metadata API.",
+        "evidencias": [
+          {
+            "fonte": "src:mdapi-customtab"
+          }
+        ]
+      },
+      "obrigatoriedade": {
+        "valor": "nao",
+        "estado": "desconhecido",
+        "condicao": "A documentação 68.0 não marca o campo como obrigatório; ausência de marcação não comprova opcionalidade (confirmar no WSDL)."
+      },
+      "default": {
+        "forma": "nao_declarado_na_fonte",
+        "estado": "desconhecido"
+      },
+      "dominio": {
+        "natureza": "texto_livre",
+        "estado": "verificado",
+        "evidencias": [
+          {
+            "fonte": "src:mdapi-customtab"
+          }
+        ],
+        "contexto": "A fonte tipa como string sem lista de valores; não inventar valores."
+      },
+      "disponibilidade": {
+        "desde_versao": "14.0",
+        "ate_versao": null,
+        "estado": "verificado"
+      },
+      "explicacao": "explicada",
+      "estado": "verificado",
+      "evidencias": [
+        {
+          "fonte": "src:mdapi-customtab"
+        }
+      ]
+    },
+    {
+      "id": "mdt:CustomTab.label",
+      "nome": "label",
+      "tipo_tecnico": "string",
+      "o_que_e": "Rótulo (somente web tabs).",
+      "origem": {
+        "estado": "verificado",
+        "valor": "padrao_plataforma",
+        "nota": "Propriedade definida pelo schema da Metadata API.",
+        "evidencias": [
+          {
+            "fonte": "src:mdapi-customtab"
+          }
+        ]
+      },
+      "obrigatoriedade": {
+        "valor": "nao",
+        "estado": "desconhecido",
+        "condicao": "A documentação 68.0 não marca o campo como obrigatório; ausência de marcação não comprova opcionalidade (confirmar no WSDL)."
+      },
+      "default": {
+        "forma": "nao_declarado_na_fonte",
+        "estado": "desconhecido"
+      },
+      "dominio": {
+        "natureza": "texto_livre",
+        "estado": "verificado",
+        "evidencias": [
+          {
+            "fonte": "src:mdapi-customtab"
+          }
+        ],
+        "contexto": "A fonte tipa como string sem lista de valores; não inventar valores."
+      },
+      "disponibilidade": {
+        "desde_versao": null,
+        "ate_versao": null,
+        "estado": "desconhecido"
+      },
+      "explicacao": "explicada",
+      "estado": "verificado",
+      "evidencias": [
+        {
+          "fonte": "src:mdapi-customtab"
+        }
+      ]
+    },
+    {
+      "id": "mdt:CustomTab.lwcComponent",
+      "nome": "lwcComponent",
+      "tipo_tecnico": "string",
+      "o_que_e": "Lightning web component exibido.",
+      "origem": {
+        "estado": "verificado",
+        "valor": "padrao_plataforma",
+        "nota": "Propriedade definida pelo schema da Metadata API.",
+        "evidencias": [
+          {
+            "fonte": "src:mdapi-customtab"
+          }
+        ]
+      },
+      "obrigatoriedade": {
+        "valor": "condicional",
+        "condicao": "Apenas um entre auraComponent, customObject, flexiPage, lwcComponent, page, scontrol e url pode ser definido.",
+        "estado": "verificado",
+        "evidencias": [
+          {
+            "fonte": "src:mdapi-customtab"
+          }
+        ]
+      },
+      "default": {
+        "forma": "nao_declarado_na_fonte",
+        "estado": "desconhecido"
+      },
+      "dominio": {
+        "natureza": "texto_livre",
+        "estado": "verificado",
+        "evidencias": [
+          {
+            "fonte": "src:mdapi-customtab"
+          }
+        ],
+        "contexto": "A fonte tipa como string sem lista de valores; não inventar valores."
+      },
+      "disponibilidade": {
+        "desde_versao": null,
+        "ate_versao": null,
+        "estado": "desconhecido"
+      },
+      "explicacao": "explicada",
+      "estado": "verificado",
+      "evidencias": [
+        {
+          "fonte": "src:mdapi-customtab"
+        }
+      ]
+    },
+    {
+      "id": "mdt:CustomTab.motif",
+      "nome": "motif",
+      "tipo_tecnico": "string",
+      "o_que_e": "Estilo (cor e ícone) da tab.",
+      "origem": {
+        "estado": "verificado",
+        "valor": "padrao_plataforma",
+        "nota": "Propriedade definida pelo schema da Metadata API.",
+        "evidencias": [
+          {
+            "fonte": "src:mdapi-customtab"
+          }
+        ]
+      },
+      "obrigatoriedade": {
+        "valor": "sim",
+        "estado": "verificado",
+        "evidencias": [
+          {
+            "fonte": "src:mdapi-customtab"
+          }
+        ]
+      },
+      "default": {
+        "forma": "nao_declarado_na_fonte",
+        "estado": "desconhecido"
+      },
+      "dominio": {
+        "natureza": "enum_fechado",
+        "lista_completa": "desconhecido",
+        "estado": "verificado",
+        "evidencias": [
+          {
+            "fonte": "src:mdapi-customtab"
+          }
+        ],
+        "contexto": "A página lista estilos Custom1 a Custom100 com nomes de ícone; lista não transcrita aqui."
+      },
+      "disponibilidade": {
+        "desde_versao": null,
+        "ate_versao": null,
+        "estado": "desconhecido"
+      },
+      "explicacao": "explicada",
+      "estado": "verificado",
+      "evidencias": [
+        {
+          "fonte": "src:mdapi-customtab"
+        }
+      ]
+    },
+    {
+      "id": "mdt:CustomTab.page",
+      "nome": "page",
+      "tipo_tecnico": "string",
+      "o_que_e": "Página Visualforce exibida.",
+      "origem": {
+        "estado": "verificado",
+        "valor": "padrao_plataforma",
+        "nota": "Propriedade definida pelo schema da Metadata API.",
+        "evidencias": [
+          {
+            "fonte": "src:mdapi-customtab"
+          }
+        ]
+      },
+      "obrigatoriedade": {
+        "valor": "condicional",
+        "condicao": "Apenas um entre auraComponent, customObject, flexiPage, lwcComponent, page, scontrol e url pode ser definido.",
+        "estado": "verificado",
+        "evidencias": [
+          {
+            "fonte": "src:mdapi-customtab"
+          }
+        ]
+      },
+      "default": {
+        "forma": "nao_declarado_na_fonte",
+        "estado": "desconhecido"
+      },
+      "dominio": {
+        "natureza": "texto_livre",
+        "estado": "verificado",
+        "evidencias": [
+          {
+            "fonte": "src:mdapi-customtab"
+          }
+        ],
+        "contexto": "A fonte tipa como string sem lista de valores; não inventar valores."
+      },
+      "disponibilidade": {
+        "desde_versao": null,
+        "ate_versao": null,
+        "estado": "desconhecido"
+      },
+      "explicacao": "explicada",
+      "estado": "verificado",
+      "evidencias": [
+        {
+          "fonte": "src:mdapi-customtab"
+        }
+      ]
+    },
+    {
+      "id": "mdt:CustomTab.scontrol",
+      "nome": "scontrol",
+      "tipo_tecnico": "string",
+      "o_que_e": "S-control exibido.",
+      "origem": {
+        "estado": "verificado",
+        "valor": "padrao_plataforma",
+        "nota": "Propriedade definida pelo schema da Metadata API.",
+        "evidencias": [
+          {
+            "fonte": "src:mdapi-customtab"
+          }
+        ]
+      },
+      "obrigatoriedade": {
+        "valor": "condicional",
+        "condicao": "Apenas um entre auraComponent, customObject, flexiPage, lwcComponent, page, scontrol e url pode ser definido.",
+        "estado": "verificado",
+        "evidencias": [
+          {
+            "fonte": "src:mdapi-customtab"
+          }
+        ]
+      },
+      "default": {
+        "forma": "nao_declarado_na_fonte",
+        "estado": "desconhecido"
+      },
+      "dominio": {
+        "natureza": "texto_livre",
+        "estado": "verificado",
+        "evidencias": [
+          {
+            "fonte": "src:mdapi-customtab"
+          }
+        ],
+        "contexto": "A fonte tipa como string sem lista de valores; não inventar valores."
+      },
+      "disponibilidade": {
+        "desde_versao": null,
+        "ate_versao": null,
+        "estado": "desconhecido"
+      },
+      "explicacao": "explicada",
+      "estado": "verificado",
+      "evidencias": [
+        {
+          "fonte": "src:mdapi-customtab"
+        }
+      ]
+    },
+    {
+      "id": "mdt:CustomTab.splashPageLink",
+      "nome": "splashPageLink",
+      "tipo_tecnico": "string",
+      "o_que_e": "Link personalizado usado como página de abertura.",
+      "origem": {
+        "estado": "verificado",
+        "valor": "padrao_plataforma",
+        "nota": "Propriedade definida pelo schema da Metadata API.",
+        "evidencias": [
+          {
+            "fonte": "src:mdapi-customtab"
+          }
+        ]
+      },
+      "obrigatoriedade": {
+        "valor": "nao",
+        "estado": "desconhecido",
+        "condicao": "A documentação 68.0 não marca o campo como obrigatório; ausência de marcação não comprova opcionalidade (confirmar no WSDL)."
+      },
+      "default": {
+        "forma": "nao_declarado_na_fonte",
+        "estado": "desconhecido"
+      },
+      "dominio": {
+        "natureza": "texto_livre",
+        "estado": "verificado",
+        "evidencias": [
+          {
+            "fonte": "src:mdapi-customtab"
+          }
+        ],
+        "contexto": "A fonte tipa como string sem lista de valores; não inventar valores."
+      },
+      "disponibilidade": {
+        "desde_versao": null,
+        "ate_versao": null,
+        "estado": "desconhecido"
+      },
+      "explicacao": "explicada",
+      "estado": "verificado",
+      "evidencias": [
+        {
+          "fonte": "src:mdapi-customtab"
+        }
+      ]
+    },
+    {
+      "id": "mdt:CustomTab.url",
+      "nome": "url",
+      "tipo_tecnico": "string",
+      "o_que_e": "Página web externa incorporada.",
+      "origem": {
+        "estado": "verificado",
+        "valor": "padrao_plataforma",
+        "nota": "Propriedade definida pelo schema da Metadata API.",
+        "evidencias": [
+          {
+            "fonte": "src:mdapi-customtab"
+          }
+        ]
+      },
+      "obrigatoriedade": {
+        "valor": "condicional",
+        "condicao": "Apenas um entre auraComponent, customObject, flexiPage, lwcComponent, page, scontrol e url pode ser definido.",
+        "estado": "verificado",
+        "evidencias": [
+          {
+            "fonte": "src:mdapi-customtab"
+          }
+        ]
+      },
+      "default": {
+        "forma": "nao_declarado_na_fonte",
+        "estado": "desconhecido"
+      },
+      "dominio": {
+        "natureza": "texto_livre",
+        "estado": "verificado",
+        "evidencias": [
+          {
+            "fonte": "src:mdapi-customtab"
+          }
+        ],
+        "contexto": "A fonte tipa como string sem lista de valores; não inventar valores."
+      },
+      "disponibilidade": {
+        "desde_versao": null,
+        "ate_versao": null,
+        "estado": "desconhecido"
+      },
+      "explicacao": "explicada",
+      "estado": "verificado",
+      "evidencias": [
+        {
+          "fonte": "src:mdapi-customtab"
+        }
+      ]
+    },
+    {
+      "id": "mdt:CustomTab.urlEncodingKey",
+      "nome": "urlEncodingKey",
+      "tipo_tecnico": "Encoding",
+      "o_que_e": "Codificação de caracteres para tabs de URL.",
+      "origem": {
+        "estado": "verificado",
+        "valor": "padrao_plataforma",
+        "nota": "Propriedade definida pelo schema da Metadata API.",
+        "evidencias": [
+          {
+            "fonte": "src:mdapi-customtab"
+          }
+        ]
+      },
+      "obrigatoriedade": {
+        "valor": "nao",
+        "estado": "desconhecido",
+        "condicao": "A documentação 68.0 não marca o campo como obrigatório; ausência de marcação não comprova opcionalidade (confirmar no WSDL)."
+      },
+      "default": {
+        "forma": "valor",
+        "estado": "verificado",
+        "evidencias": [
+          {
+            "fonte": "src:mdapi-customtab"
+          }
+        ],
+        "valor": "UTF-8",
+        "nota": "A página declara UTF-8 como default."
+      },
+      "dominio": {
+        "natureza": "enum_fechado",
+        "lista_completa": "desconhecido",
+        "estado": "desconhecido",
+        "contexto": "Outros valores não listados na página."
+      },
+      "disponibilidade": {
+        "desde_versao": null,
+        "ate_versao": null,
+        "estado": "desconhecido"
+      },
+      "explicacao": "explicada",
+      "estado": "verificado",
+      "evidencias": [
+        {
+          "fonte": "src:mdapi-customtab"
+        }
+      ]
+    }
+  ],
+  "estruturas": [],
+  "cobertura": {
+    "estrutural": {
+      "estado": "parcial",
+      "esperado": 17,
+      "presente": 17,
+      "nota": "Universo esperado = tabela Fields da página oficial 68.0 (mais fullName herdado quando declarado). Primeiro nível completo; 1 propriedade(s) de tipo composto ainda sem estrutura detalhada: actionOverrides."
+    },
+    "explicativa": {
+      "estado": "completa",
+      "esperado": 17,
+      "presente": 17
+    },
+    "mapeamento": {
+      "estado": "parcial",
+      "nota": "Correspondências registradas apenas onde há evidência; demais pendentes."
+    }
+  },
+  "recomendacoes": [],
+  "alertas": [],
+  "divergencias_documentais": [
+    "O valor de motif no exemplo segue o formato 'CustomN: Nome' visto na documentação, mas o número exato de cada ícone não foi transcrito; conferir antes de usar."
+  ],
+  "estado": "verificado",
+  "evidencias": [
+    {
+      "fonte": "src:mdapi-customtab"
+    },
+    {
+      "fonte": "src:sdr-registry"
+    },
+    {
+      "fonte": "src:sdr-metadata-support"
+    }
+  ],
+  "exemplo_xml": {
+    "xml": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<CustomTab xmlns=\"http://soap.sforce.com/2006/04/metadata\">\n    <customObject>true</customObject>\n    <description>Tab do objeto Contrato de Serviço.</description>\n    <motif>Custom20: Airplane</motif>\n</CustomTab>",
+    "natureza": "didatico_projeto",
+    "nota": "Exemplo escrito pelo projeto apenas com elementos documentados; sem dados reais."
+  }
+}

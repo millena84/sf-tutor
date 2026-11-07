@@ -1,0 +1,2174 @@
+{
+  "funcionalidade": {
+    "alertas": [
+      "Não existe um item 'IpLogin': restrições de IP por perfil estão em Profile.loginIpRanges; o IP de cada tentativa está em LoginHistory.SourceIp.",
+      "A tela de Setup mostra até 20.000 registros dos últimos 6 meses; o download cobre os últimos 6 meses (Ajuda). Retenção do objeto LoginHistory na API não confirmada."
+    ],
+    "aliases": [
+      "login history",
+      "histórico de login",
+      "iplogin",
+      "ip de login",
+      "usuário congelado"
+    ],
+    "classificacao_principal": {
+      "classificacao": "cls:acesso-identidade-e-seguranca",
+      "subclassificacao": "sub:sessoes-e-politicas-de-login"
+    },
+    "classificacoes_secundarias": [
+      {
+        "classificacao": "cls:observabilidade-auditoria-e-operacao",
+        "motivo": "O histórico de tentativas é usado em auditoria e operação.",
+        "subclassificacao": "sub:historico-de-login"
+      }
+    ],
+    "estado": "verificado",
+    "evidencias": [
+      {
+        "fonte": "src:objref-userlogin"
+      },
+      {
+        "fonte": "src:objref-loginhistory"
+      },
+      {
+        "fonte": "src:help-login-history"
+      }
+    ],
+    "exemplo": "Verificar de qual IP veio uma tentativa de login que falhou ontem.",
+    "finalidade": "Investigar acessos, bloqueios e a origem das tentativas de login.",
+    "id": "func:estado-e-historico-de-login",
+    "limitacoes": [],
+    "nome": "Estado e histórico de login",
+    "nome_tecnico": "User login state and history",
+    "o_que_e": "Mostra o estado atual de login de cada usuário (congelado, bloqueado) e o histórico de tentativas.",
+    "pre_requisitos": [
+      "Edições (Ajuda): Contact Manager, Group, Professional, Enterprise, Performance, Unlimited e Developer.",
+      "Monitor Login History ou Manage Users."
+    ],
+    "recomendacoes": [],
+    "representacoes": {
+      "ausencias": [
+        {
+          "estado": "verificado",
+          "evidencias": [
+            {
+              "fonte": "src:sdr-metadata-support"
+            }
+          ],
+          "motivo": "UserLogin e LoginHistory não estão entre os metadata types da v68; são objetos de dados.",
+          "tipo": "metadata_type"
+        }
+      ],
+      "metadata_types": [],
+      "objetos_api": [
+        {
+          "papel": "Estado atual de login.",
+          "ref": "obj:UserLogin"
+        },
+        {
+          "papel": "Histórico de tentativas.",
+          "ref": "obj:LoginHistory"
+        }
+      ]
+    },
+    "setup": {
+      "estado": "verificado",
+      "evidencias": [
+        {
+          "fonte": "src:help-login-history"
+        }
+      ],
+      "nota": "Tela de histórico. Rótulos em inglês, como na Ajuda; a tradução da interface em pt-BR não foi verificada.",
+      "valor": "Setup > Quick Find: Login History"
+    },
+    "termos_busca": [
+      "estado e histórico de login",
+      "histórico de login",
+      "ip de login",
+      "iplogin",
+      "login history",
+      "user login state and history",
+      "usuário congelado"
+    ]
+  },
+  "metadata_types": [],
+  "nota": "Gerado deterministicamente a partir de catalogo/. Não editar à mão.",
+  "objetos_api": [
+    {
+      "objeto": {
+        "alertas": [],
+        "apex": {
+          "consulta_soql_direta": {
+            "estado": "verificado",
+            "evidencias": [
+              {
+                "fonte": "src:objref-userlogin"
+              }
+            ],
+            "nota": "Objeto da API padrão: consultável por SOQL em Apex, sujeito a permissões.",
+            "valor": true
+          },
+          "nota": "Exemplo Apex não fornecido nesta fase."
+        },
+        "campos": [
+          {
+            "apis": [
+              "padrao"
+            ],
+            "default": {
+              "estado": "desconhecido",
+              "forma": "desconhecido",
+              "nota": "A API marca o campo como 'defaulted on create', mas o valor não foi declarado na extração."
+            },
+            "disponibilidade": {
+              "ate_versao": null,
+              "desde_versao": "29.0",
+              "estado": "verificado"
+            },
+            "dominio": {
+              "estado": "verificado",
+              "evidencias": [
+                {
+                  "fonte": "src:objref-userlogin"
+                }
+              ],
+              "lista_completa": "sim",
+              "natureza": "booleano",
+              "valores": [
+                {
+                  "valor": "true"
+                },
+                {
+                  "valor": "false"
+                }
+              ]
+            },
+            "estado": "verificado",
+            "evidencias": [
+              {
+                "fonte": "src:objref-userlogin"
+              }
+            ],
+            "explicacao": "explicada",
+            "id": "obj:UserLogin.IsFrozen",
+            "nome": "IsFrozen",
+            "o_que_e": "Informa se a conta está congelada: login bloqueado sem desativar o usuário.",
+            "obrigatoriedade": {
+              "estado": "desconhecido",
+              "valor": "desconhecida"
+            },
+            "origem": {
+              "estado": "verificado",
+              "evidencias": [
+                {
+                  "fonte": "src:objref-userlogin"
+                }
+              ],
+              "nota": "Campo padrão do objeto documentado.",
+              "valor": "padrao_plataforma"
+            },
+            "propriedades_api": {
+              "create": false,
+              "defaulted_on_create": true,
+              "estado": "verificado",
+              "evidencias": [
+                {
+                  "fonte": "src:objref-userlogin"
+                }
+              ],
+              "filter": true,
+              "group": true,
+              "id_lookup": false,
+              "nillable": false,
+              "restricted_picklist": false,
+              "sort": true,
+              "update": true
+            },
+            "somente_leitura": false,
+            "tipo_tecnico": "boolean"
+          },
+          {
+            "apis": [
+              "padrao"
+            ],
+            "default": {
+              "estado": "desconhecido",
+              "forma": "desconhecido",
+              "nota": "A API marca o campo como 'defaulted on create', mas o valor não foi declarado na extração."
+            },
+            "disponibilidade": {
+              "ate_versao": null,
+              "desde_versao": "29.0",
+              "estado": "verificado"
+            },
+            "dominio": {
+              "estado": "verificado",
+              "evidencias": [
+                {
+                  "fonte": "src:objref-userlogin"
+                }
+              ],
+              "lista_completa": "sim",
+              "natureza": "booleano",
+              "valores": [
+                {
+                  "valor": "true"
+                },
+                {
+                  "valor": "false"
+                }
+              ]
+            },
+            "estado": "verificado",
+            "evidencias": [
+              {
+                "fonte": "src:objref-userlogin"
+              }
+            ],
+            "explicacao": "explicada",
+            "id": "obj:UserLogin.IsPasswordLocked",
+            "nome": "IsPasswordLocked",
+            "o_que_e": "Informa bloqueio por excesso de tentativas; a API pode limpar, mas não definir.",
+            "obrigatoriedade": {
+              "estado": "desconhecido",
+              "valor": "desconhecida"
+            },
+            "origem": {
+              "estado": "verificado",
+              "evidencias": [
+                {
+                  "fonte": "src:objref-userlogin"
+                }
+              ],
+              "nota": "Campo padrão do objeto documentado.",
+              "valor": "padrao_plataforma"
+            },
+            "propriedades_api": {
+              "create": false,
+              "defaulted_on_create": true,
+              "estado": "verificado",
+              "evidencias": [
+                {
+                  "fonte": "src:objref-userlogin"
+                }
+              ],
+              "filter": true,
+              "group": true,
+              "id_lookup": false,
+              "nillable": false,
+              "restricted_picklist": false,
+              "sort": true,
+              "update": true
+            },
+            "somente_leitura": false,
+            "tipo_tecnico": "boolean"
+          },
+          {
+            "apis": [
+              "padrao"
+            ],
+            "default": {
+              "estado": "desconhecido",
+              "forma": "nao_declarado_na_fonte"
+            },
+            "disponibilidade": {
+              "ate_versao": null,
+              "desde_versao": "29.0",
+              "estado": "verificado"
+            },
+            "dominio": {
+              "contexto": "Id de registro do(s) objeto(s) referenciado(s).",
+              "estado": "verificado",
+              "evidencias": [
+                {
+                  "fonte": "src:objref-userlogin"
+                }
+              ],
+              "natureza": "referencia"
+            },
+            "estado": "verificado",
+            "evidencias": [
+              {
+                "fonte": "src:objref-userlogin"
+              }
+            ],
+            "explicacao": "explicada",
+            "id": "obj:UserLogin.UserId",
+            "nome": "UserId",
+            "o_que_e": "Usuário a que este estado pertence; não pode ser alterado.",
+            "obrigatoriedade": {
+              "estado": "desconhecido",
+              "valor": "desconhecida"
+            },
+            "origem": {
+              "estado": "verificado",
+              "evidencias": [
+                {
+                  "fonte": "src:objref-userlogin"
+                }
+              ],
+              "nota": "Campo padrão do objeto documentado.",
+              "valor": "padrao_plataforma"
+            },
+            "propriedades_api": {
+              "create": false,
+              "defaulted_on_create": false,
+              "estado": "verificado",
+              "evidencias": [
+                {
+                  "fonte": "src:objref-userlogin"
+                }
+              ],
+              "filter": true,
+              "group": true,
+              "id_lookup": false,
+              "nillable": true,
+              "restricted_picklist": false,
+              "sort": true,
+              "update": false
+            },
+            "referencia": {
+              "alvos": [
+                "obj:User"
+              ],
+              "nome_relacionamento": null
+            },
+            "somente_leitura": true,
+            "tipo_tecnico": "reference"
+          }
+        ],
+        "cobertura": {
+          "estrutural": {
+            "esperado": null,
+            "estado": "parcial",
+            "nota": "Campos da tabela extraída; Id e campos de sistema não constam.",
+            "presente": 3
+          },
+          "explicativa": {
+            "esperado": 3,
+            "estado": "completa",
+            "presente": 3
+          },
+          "mapeamento": {
+            "estado": "parcial",
+            "nota": "Ver relacionamentos registrados."
+          }
+        },
+        "consultas": [
+          {
+            "api": "padrao",
+            "contexto": "API padrão.",
+            "soql": "SELECT UserId, IsFrozen, IsPasswordLocked FROM UserLogin WHERE IsFrozen = true",
+            "validacao": "documental"
+          }
+        ],
+        "estado": "verificado",
+        "evidencias": [
+          {
+            "fonte": "src:objref-userlogin"
+          }
+        ],
+        "exposicoes": [
+          {
+            "acesso_especial": "Manage Users.",
+            "api": "padrao",
+            "chamadas": [
+              "describeSObjects()",
+              "query()",
+              "retrieve()",
+              "update()"
+            ],
+            "desde_versao": "29.0",
+            "estado": "verificado",
+            "evidencias": [
+              {
+                "fonte": "src:objref-userlogin"
+              }
+            ]
+          },
+          {
+            "api": "tooling",
+            "desde_versao": null,
+            "estado": "desconhecido",
+            "nota": "Não investigado."
+          }
+        ],
+        "id": "obj:UserLogin",
+        "juncao": false,
+        "nome": "UserLogin",
+        "o_que_e": "Representa o estado atual de login de um usuário, como congelado ou bloqueado.",
+        "papel": "Estado atual; não é histórico.",
+        "setup": {
+          "estado": "nao_aplicavel",
+          "nota": "Objeto consultável via API; não é tela do Setup."
+        }
+      },
+      "papel": "Estado atual de login.",
+      "relacionamentos": [
+        {
+          "cardinalidade_registros": {
+            "estado": "desconhecido"
+          },
+          "destino": {
+            "entidade": "obj:User"
+          },
+          "estado": "verificado",
+          "evidencias": [
+            {
+              "fonte": "src:objref-userlogin"
+            }
+          ],
+          "explicacao": "O estado de login pertence a um usuário.",
+          "id": "rel:userlogin-user",
+          "origem": {
+            "campo": "UserId",
+            "entidade": "obj:UserLogin"
+          },
+          "tipo": "referencia_campo"
+        }
+      ]
+    },
+    {
+      "objeto": {
+        "alertas": [
+          "Somente campos marcados como filtráveis (e Id) podem ser usados em filtros."
+        ],
+        "apex": {
+          "consulta_soql_direta": {
+            "estado": "verificado",
+            "evidencias": [
+              {
+                "fonte": "src:objref-loginhistory"
+              }
+            ],
+            "nota": "Objeto da API padrão: consultável por SOQL em Apex, sujeito a permissões.",
+            "valor": true
+          },
+          "nota": "Exemplo Apex não fornecido nesta fase."
+        },
+        "campos": [
+          {
+            "apis": [
+              "padrao"
+            ],
+            "default": {
+              "estado": "desconhecido",
+              "forma": "nao_declarado_na_fonte"
+            },
+            "disponibilidade": {
+              "ate_versao": null,
+              "desde_versao": null,
+              "estado": "desconhecido"
+            },
+            "dominio": {
+              "estado": "verificado",
+              "evidencias": [
+                {
+                  "fonte": "src:objref-loginhistory"
+                }
+              ],
+              "natureza": "texto_livre"
+            },
+            "estado": "verificado",
+            "evidencias": [
+              {
+                "fonte": "src:objref-loginhistory"
+              }
+            ],
+            "explicacao": "explicada",
+            "id": "obj:LoginHistory.ApiType",
+            "nome": "ApiType",
+            "o_que_e": "Tipo de API usado pelo cliente.",
+            "obrigatoriedade": {
+              "estado": "desconhecido",
+              "valor": "desconhecida"
+            },
+            "origem": {
+              "estado": "verificado",
+              "evidencias": [
+                {
+                  "fonte": "src:objref-loginhistory"
+                }
+              ],
+              "nota": "Campo padrão do objeto documentado.",
+              "valor": "padrao_plataforma"
+            },
+            "propriedades_api": {
+              "create": false,
+              "defaulted_on_create": false,
+              "estado": "verificado",
+              "evidencias": [
+                {
+                  "fonte": "src:objref-loginhistory"
+                }
+              ],
+              "filter": false,
+              "group": true,
+              "id_lookup": false,
+              "nillable": true,
+              "restricted_picklist": false,
+              "sort": true,
+              "update": false
+            },
+            "somente_leitura": true,
+            "tipo_tecnico": "string"
+          },
+          {
+            "apis": [
+              "padrao"
+            ],
+            "default": {
+              "estado": "desconhecido",
+              "forma": "nao_declarado_na_fonte"
+            },
+            "disponibilidade": {
+              "ate_versao": null,
+              "desde_versao": null,
+              "estado": "desconhecido"
+            },
+            "dominio": {
+              "estado": "verificado",
+              "evidencias": [
+                {
+                  "fonte": "src:objref-loginhistory"
+                }
+              ],
+              "natureza": "texto_livre"
+            },
+            "estado": "verificado",
+            "evidencias": [
+              {
+                "fonte": "src:objref-loginhistory"
+              }
+            ],
+            "explicacao": "explicada",
+            "id": "obj:LoginHistory.ApiVersion",
+            "nome": "ApiVersion",
+            "o_que_e": "Versão de API usada.",
+            "obrigatoriedade": {
+              "estado": "desconhecido",
+              "valor": "desconhecida"
+            },
+            "origem": {
+              "estado": "verificado",
+              "evidencias": [
+                {
+                  "fonte": "src:objref-loginhistory"
+                }
+              ],
+              "nota": "Campo padrão do objeto documentado.",
+              "valor": "padrao_plataforma"
+            },
+            "propriedades_api": {
+              "create": false,
+              "defaulted_on_create": false,
+              "estado": "verificado",
+              "evidencias": [
+                {
+                  "fonte": "src:objref-loginhistory"
+                }
+              ],
+              "filter": false,
+              "group": true,
+              "id_lookup": false,
+              "nillable": true,
+              "restricted_picklist": false,
+              "sort": true,
+              "update": false
+            },
+            "somente_leitura": true,
+            "tipo_tecnico": "string"
+          },
+          {
+            "apis": [
+              "padrao"
+            ],
+            "default": {
+              "estado": "desconhecido",
+              "forma": "nao_declarado_na_fonte"
+            },
+            "disponibilidade": {
+              "ate_versao": null,
+              "desde_versao": null,
+              "estado": "desconhecido"
+            },
+            "dominio": {
+              "estado": "verificado",
+              "evidencias": [
+                {
+                  "fonte": "src:objref-loginhistory"
+                }
+              ],
+              "natureza": "texto_livre"
+            },
+            "estado": "verificado",
+            "evidencias": [
+              {
+                "fonte": "src:objref-loginhistory"
+              }
+            ],
+            "explicacao": "explicada",
+            "id": "obj:LoginHistory.Application",
+            "nome": "Application",
+            "o_que_e": "Aplicação usada no acesso.",
+            "obrigatoriedade": {
+              "estado": "desconhecido",
+              "valor": "desconhecida"
+            },
+            "origem": {
+              "estado": "verificado",
+              "evidencias": [
+                {
+                  "fonte": "src:objref-loginhistory"
+                }
+              ],
+              "nota": "Campo padrão do objeto documentado.",
+              "valor": "padrao_plataforma"
+            },
+            "propriedades_api": {
+              "create": false,
+              "defaulted_on_create": false,
+              "estado": "verificado",
+              "evidencias": [
+                {
+                  "fonte": "src:objref-loginhistory"
+                }
+              ],
+              "filter": false,
+              "group": true,
+              "id_lookup": false,
+              "nillable": true,
+              "restricted_picklist": false,
+              "sort": true,
+              "update": false
+            },
+            "somente_leitura": true,
+            "tipo_tecnico": "string"
+          },
+          {
+            "apis": [
+              "padrao"
+            ],
+            "default": {
+              "estado": "desconhecido",
+              "forma": "nao_declarado_na_fonte"
+            },
+            "disponibilidade": {
+              "ate_versao": null,
+              "desde_versao": "67.0",
+              "estado": "verificado"
+            },
+            "dominio": {
+              "estado": "verificado",
+              "evidencias": [
+                {
+                  "fonte": "src:objref-loginhistory"
+                }
+              ],
+              "natureza": "texto_livre"
+            },
+            "estado": "verificado",
+            "evidencias": [
+              {
+                "fonte": "src:objref-loginhistory"
+              }
+            ],
+            "explicacao": "explicada",
+            "id": "obj:LoginHistory.AuthContextClassRef",
+            "nome": "AuthContextClassRef",
+            "o_que_e": "Método de autenticação informado pelo provedor externo (claim ACR).",
+            "obrigatoriedade": {
+              "estado": "desconhecido",
+              "valor": "desconhecida"
+            },
+            "origem": {
+              "estado": "verificado",
+              "evidencias": [
+                {
+                  "fonte": "src:objref-loginhistory"
+                }
+              ],
+              "nota": "Campo padrão do objeto documentado.",
+              "valor": "padrao_plataforma"
+            },
+            "propriedades_api": {
+              "create": false,
+              "defaulted_on_create": false,
+              "estado": "verificado",
+              "evidencias": [
+                {
+                  "fonte": "src:objref-loginhistory"
+                }
+              ],
+              "filter": true,
+              "group": true,
+              "id_lookup": false,
+              "nillable": true,
+              "restricted_picklist": false,
+              "sort": true,
+              "update": false
+            },
+            "somente_leitura": true,
+            "tipo_tecnico": "string"
+          },
+          {
+            "apis": [
+              "padrao"
+            ],
+            "default": {
+              "estado": "desconhecido",
+              "forma": "nao_declarado_na_fonte"
+            },
+            "disponibilidade": {
+              "ate_versao": null,
+              "desde_versao": "51.0",
+              "estado": "verificado"
+            },
+            "dominio": {
+              "estado": "verificado",
+              "evidencias": [
+                {
+                  "fonte": "src:objref-loginhistory"
+                }
+              ],
+              "natureza": "texto_livre"
+            },
+            "estado": "verificado",
+            "evidencias": [
+              {
+                "fonte": "src:objref-loginhistory"
+              }
+            ],
+            "explicacao": "explicada",
+            "id": "obj:LoginHistory.AuthMethodReference",
+            "nome": "AuthMethodReference",
+            "o_que_e": "Método de autenticação de provedor OIDC.",
+            "obrigatoriedade": {
+              "estado": "desconhecido",
+              "valor": "desconhecida"
+            },
+            "origem": {
+              "estado": "verificado",
+              "evidencias": [
+                {
+                  "fonte": "src:objref-loginhistory"
+                }
+              ],
+              "nota": "Campo padrão do objeto documentado.",
+              "valor": "padrao_plataforma"
+            },
+            "propriedades_api": {
+              "create": false,
+              "defaulted_on_create": false,
+              "estado": "verificado",
+              "evidencias": [
+                {
+                  "fonte": "src:objref-loginhistory"
+                }
+              ],
+              "filter": true,
+              "group": true,
+              "id_lookup": false,
+              "nillable": true,
+              "restricted_picklist": false,
+              "sort": true,
+              "update": false
+            },
+            "somente_leitura": true,
+            "tipo_tecnico": "string"
+          },
+          {
+            "apis": [
+              "padrao"
+            ],
+            "default": {
+              "estado": "desconhecido",
+              "forma": "nao_declarado_na_fonte"
+            },
+            "disponibilidade": {
+              "ate_versao": null,
+              "desde_versao": "34.0",
+              "estado": "verificado"
+            },
+            "dominio": {
+              "contexto": "Id de registro do(s) objeto(s) referenciado(s).",
+              "estado": "verificado",
+              "evidencias": [
+                {
+                  "fonte": "src:objref-loginhistory"
+                }
+              ],
+              "natureza": "referencia"
+            },
+            "estado": "verificado",
+            "evidencias": [
+              {
+                "fonte": "src:objref-loginhistory"
+              }
+            ],
+            "explicacao": "explicada",
+            "id": "obj:LoginHistory.AuthenticationServiceId",
+            "nome": "AuthenticationServiceId",
+            "o_que_e": "Configuração de SAML ou provedor de autenticação usada.",
+            "obrigatoriedade": {
+              "estado": "desconhecido",
+              "valor": "desconhecida"
+            },
+            "origem": {
+              "estado": "verificado",
+              "evidencias": [
+                {
+                  "fonte": "src:objref-loginhistory"
+                }
+              ],
+              "nota": "Campo padrão do objeto documentado.",
+              "valor": "padrao_plataforma"
+            },
+            "propriedades_api": {
+              "create": false,
+              "defaulted_on_create": false,
+              "estado": "verificado",
+              "evidencias": [
+                {
+                  "fonte": "src:objref-loginhistory"
+                }
+              ],
+              "filter": true,
+              "group": true,
+              "id_lookup": false,
+              "nillable": true,
+              "restricted_picklist": false,
+              "sort": true,
+              "update": false
+            },
+            "referencia": {
+              "alvos": [
+                "AuthProvider",
+                "SamlSsoConfig"
+              ],
+              "nome_relacionamento": null
+            },
+            "somente_leitura": true,
+            "tipo_tecnico": "reference"
+          },
+          {
+            "apis": [
+              "padrao"
+            ],
+            "default": {
+              "estado": "desconhecido",
+              "forma": "nao_declarado_na_fonte"
+            },
+            "disponibilidade": {
+              "ate_versao": null,
+              "desde_versao": null,
+              "estado": "desconhecido"
+            },
+            "dominio": {
+              "estado": "verificado",
+              "evidencias": [
+                {
+                  "fonte": "src:objref-loginhistory"
+                }
+              ],
+              "natureza": "texto_livre"
+            },
+            "estado": "verificado",
+            "evidencias": [
+              {
+                "fonte": "src:objref-loginhistory"
+              }
+            ],
+            "explicacao": "explicada",
+            "id": "obj:LoginHistory.Browser",
+            "nome": "Browser",
+            "o_que_e": "Navegador usado.",
+            "obrigatoriedade": {
+              "estado": "desconhecido",
+              "valor": "desconhecida"
+            },
+            "origem": {
+              "estado": "verificado",
+              "evidencias": [
+                {
+                  "fonte": "src:objref-loginhistory"
+                }
+              ],
+              "nota": "Campo padrão do objeto documentado.",
+              "valor": "padrao_plataforma"
+            },
+            "propriedades_api": {
+              "create": false,
+              "defaulted_on_create": false,
+              "estado": "verificado",
+              "evidencias": [
+                {
+                  "fonte": "src:objref-loginhistory"
+                }
+              ],
+              "filter": false,
+              "group": true,
+              "id_lookup": false,
+              "nillable": true,
+              "restricted_picklist": false,
+              "sort": true,
+              "update": false
+            },
+            "somente_leitura": true,
+            "tipo_tecnico": "string"
+          },
+          {
+            "apis": [
+              "padrao"
+            ],
+            "default": {
+              "estado": "desconhecido",
+              "forma": "nao_declarado_na_fonte"
+            },
+            "disponibilidade": {
+              "ate_versao": null,
+              "desde_versao": "37.0",
+              "estado": "verificado"
+            },
+            "dominio": {
+              "contexto": "Valores não extraídos; podem depender de org, idioma ou recurso.",
+              "estado": "desconhecido",
+              "natureza": "lista_dinamica"
+            },
+            "estado": "verificado",
+            "evidencias": [
+              {
+                "fonte": "src:objref-loginhistory"
+              }
+            ],
+            "explicacao": "explicada",
+            "id": "obj:LoginHistory.CipherSuite",
+            "nome": "CipherSuite",
+            "o_que_e": "Conjunto de cifras TLS do login.",
+            "obrigatoriedade": {
+              "estado": "desconhecido",
+              "valor": "desconhecida"
+            },
+            "origem": {
+              "estado": "verificado",
+              "evidencias": [
+                {
+                  "fonte": "src:objref-loginhistory"
+                }
+              ],
+              "nota": "Campo padrão do objeto documentado.",
+              "valor": "padrao_plataforma"
+            },
+            "propriedades_api": {
+              "create": false,
+              "defaulted_on_create": false,
+              "estado": "verificado",
+              "evidencias": [
+                {
+                  "fonte": "src:objref-loginhistory"
+                }
+              ],
+              "filter": true,
+              "group": true,
+              "id_lookup": false,
+              "nillable": true,
+              "restricted_picklist": true,
+              "sort": true,
+              "update": false
+            },
+            "somente_leitura": true,
+            "tipo_tecnico": "picklist"
+          },
+          {
+            "apis": [
+              "padrao"
+            ],
+            "default": {
+              "estado": "desconhecido",
+              "forma": "nao_declarado_na_fonte"
+            },
+            "disponibilidade": {
+              "ate_versao": null,
+              "desde_versao": null,
+              "estado": "desconhecido"
+            },
+            "dominio": {
+              "estado": "verificado",
+              "evidencias": [
+                {
+                  "fonte": "src:objref-loginhistory"
+                }
+              ],
+              "natureza": "texto_livre"
+            },
+            "estado": "verificado",
+            "evidencias": [
+              {
+                "fonte": "src:objref-loginhistory"
+              }
+            ],
+            "explicacao": "explicada",
+            "id": "obj:LoginHistory.ClientVersion",
+            "nome": "ClientVersion",
+            "o_que_e": "Versão do cliente da API.",
+            "obrigatoriedade": {
+              "estado": "desconhecido",
+              "valor": "desconhecida"
+            },
+            "origem": {
+              "estado": "verificado",
+              "evidencias": [
+                {
+                  "fonte": "src:objref-loginhistory"
+                }
+              ],
+              "nota": "Campo padrão do objeto documentado.",
+              "valor": "padrao_plataforma"
+            },
+            "propriedades_api": {
+              "create": false,
+              "defaulted_on_create": false,
+              "estado": "verificado",
+              "evidencias": [
+                {
+                  "fonte": "src:objref-loginhistory"
+                }
+              ],
+              "filter": false,
+              "group": true,
+              "id_lookup": false,
+              "nillable": true,
+              "restricted_picklist": false,
+              "sort": true,
+              "update": false
+            },
+            "somente_leitura": true,
+            "tipo_tecnico": "string"
+          },
+          {
+            "apis": [
+              "padrao"
+            ],
+            "default": {
+              "estado": "desconhecido",
+              "forma": "nao_declarado_na_fonte"
+            },
+            "disponibilidade": {
+              "ate_versao": null,
+              "desde_versao": "37.0",
+              "estado": "verificado"
+            },
+            "dominio": {
+              "estado": "verificado",
+              "evidencias": [
+                {
+                  "fonte": "src:objref-loginhistory"
+                }
+              ],
+              "natureza": "texto_livre"
+            },
+            "estado": "verificado",
+            "evidencias": [
+              {
+                "fonte": "src:objref-loginhistory"
+              }
+            ],
+            "explicacao": "explicada",
+            "id": "obj:LoginHistory.CountryIso",
+            "nome": "CountryIso",
+            "o_que_e": "País do IP, em código ISO 3166.",
+            "obrigatoriedade": {
+              "estado": "desconhecido",
+              "valor": "desconhecida"
+            },
+            "origem": {
+              "estado": "verificado",
+              "evidencias": [
+                {
+                  "fonte": "src:objref-loginhistory"
+                }
+              ],
+              "nota": "Campo padrão do objeto documentado.",
+              "valor": "padrao_plataforma"
+            },
+            "propriedades_api": {
+              "create": false,
+              "defaulted_on_create": false,
+              "estado": "verificado",
+              "evidencias": [
+                {
+                  "fonte": "src:objref-loginhistory"
+                }
+              ],
+              "filter": true,
+              "group": true,
+              "id_lookup": false,
+              "nillable": true,
+              "restricted_picklist": false,
+              "sort": true,
+              "update": false
+            },
+            "somente_leitura": true,
+            "tipo_tecnico": "string"
+          },
+          {
+            "apis": [
+              "padrao"
+            ],
+            "default": {
+              "estado": "desconhecido",
+              "forma": "nao_declarado_na_fonte"
+            },
+            "disponibilidade": {
+              "ate_versao": null,
+              "desde_versao": "61.0",
+              "estado": "verificado"
+            },
+            "dominio": {
+              "estado": "verificado",
+              "evidencias": [
+                {
+                  "fonte": "src:objref-loginhistory"
+                }
+              ],
+              "natureza": "texto_livre"
+            },
+            "estado": "verificado",
+            "evidencias": [
+              {
+                "fonte": "src:objref-loginhistory"
+              }
+            ],
+            "explicacao": "explicada",
+            "id": "obj:LoginHistory.ForwardedForIp",
+            "nome": "ForwardedForIp",
+            "o_que_e": "Valor X-Forwarded-For enviado pelo cliente.",
+            "obrigatoriedade": {
+              "estado": "desconhecido",
+              "valor": "desconhecida"
+            },
+            "origem": {
+              "estado": "verificado",
+              "evidencias": [
+                {
+                  "fonte": "src:objref-loginhistory"
+                }
+              ],
+              "nota": "Campo padrão do objeto documentado.",
+              "valor": "padrao_plataforma"
+            },
+            "propriedades_api": {
+              "create": false,
+              "defaulted_on_create": false,
+              "estado": "verificado",
+              "evidencias": [
+                {
+                  "fonte": "src:objref-loginhistory"
+                }
+              ],
+              "filter": true,
+              "group": true,
+              "id_lookup": false,
+              "nillable": true,
+              "restricted_picklist": false,
+              "sort": true,
+              "update": false
+            },
+            "somente_leitura": true,
+            "tipo_tecnico": "string"
+          },
+          {
+            "apis": [
+              "padrao"
+            ],
+            "default": {
+              "estado": "desconhecido",
+              "forma": "nao_declarado_na_fonte"
+            },
+            "disponibilidade": {
+              "ate_versao": null,
+              "desde_versao": "34.0",
+              "estado": "verificado"
+            },
+            "dominio": {
+              "contexto": "Id de registro do(s) objeto(s) referenciado(s).",
+              "estado": "verificado",
+              "evidencias": [
+                {
+                  "fonte": "src:objref-loginhistory"
+                }
+              ],
+              "natureza": "referencia"
+            },
+            "estado": "verificado",
+            "evidencias": [
+              {
+                "fonte": "src:objref-loginhistory"
+              }
+            ],
+            "explicacao": "explicada",
+            "id": "obj:LoginHistory.LoginGeoId",
+            "nome": "LoginGeoId",
+            "o_que_e": "Registro de geolocalização do login.",
+            "obrigatoriedade": {
+              "estado": "desconhecido",
+              "valor": "desconhecida"
+            },
+            "origem": {
+              "estado": "verificado",
+              "evidencias": [
+                {
+                  "fonte": "src:objref-loginhistory"
+                }
+              ],
+              "nota": "Campo padrão do objeto documentado.",
+              "valor": "padrao_plataforma"
+            },
+            "propriedades_api": {
+              "create": false,
+              "defaulted_on_create": false,
+              "estado": "verificado",
+              "evidencias": [
+                {
+                  "fonte": "src:objref-loginhistory"
+                }
+              ],
+              "filter": true,
+              "group": true,
+              "id_lookup": false,
+              "nillable": true,
+              "restricted_picklist": false,
+              "sort": true,
+              "update": false
+            },
+            "referencia": {
+              "alvos": [
+                "LoginGeo"
+              ],
+              "nome_relacionamento": null
+            },
+            "somente_leitura": true,
+            "tipo_tecnico": "reference"
+          },
+          {
+            "apis": [
+              "padrao"
+            ],
+            "default": {
+              "estado": "desconhecido",
+              "forma": "nao_declarado_na_fonte"
+            },
+            "disponibilidade": {
+              "ate_versao": null,
+              "desde_versao": null,
+              "estado": "desconhecido"
+            },
+            "dominio": {
+              "contexto": "Valores não extraídos; podem depender de org, idioma ou recurso.",
+              "estado": "desconhecido",
+              "natureza": "lista_dinamica"
+            },
+            "estado": "verificado",
+            "evidencias": [
+              {
+                "fonte": "src:objref-loginhistory"
+              }
+            ],
+            "explicacao": "explicada",
+            "id": "obj:LoginHistory.LoginSubType",
+            "nome": "LoginSubType",
+            "o_que_e": "Subtipo do fluxo de login.",
+            "obrigatoriedade": {
+              "estado": "desconhecido",
+              "valor": "desconhecida"
+            },
+            "origem": {
+              "estado": "verificado",
+              "evidencias": [
+                {
+                  "fonte": "src:objref-loginhistory"
+                }
+              ],
+              "nota": "Campo padrão do objeto documentado.",
+              "valor": "padrao_plataforma"
+            },
+            "propriedades_api": {
+              "create": false,
+              "defaulted_on_create": false,
+              "estado": "verificado",
+              "evidencias": [
+                {
+                  "fonte": "src:objref-loginhistory"
+                }
+              ],
+              "filter": true,
+              "group": true,
+              "id_lookup": false,
+              "nillable": true,
+              "restricted_picklist": true,
+              "sort": true,
+              "update": false
+            },
+            "somente_leitura": true,
+            "tipo_tecnico": "picklist"
+          },
+          {
+            "apis": [
+              "padrao"
+            ],
+            "default": {
+              "estado": "desconhecido",
+              "forma": "nao_declarado_na_fonte"
+            },
+            "disponibilidade": {
+              "ate_versao": null,
+              "desde_versao": null,
+              "estado": "desconhecido"
+            },
+            "dominio": {
+              "estado": "verificado",
+              "evidencias": [
+                {
+                  "fonte": "src:objref-loginhistory"
+                }
+              ],
+              "natureza": "data_hora"
+            },
+            "estado": "verificado",
+            "evidencias": [
+              {
+                "fonte": "src:objref-loginhistory"
+              }
+            ],
+            "explicacao": "explicada",
+            "id": "obj:LoginHistory.LoginTime",
+            "nome": "LoginTime",
+            "o_que_e": "Data e hora do login (GMT).",
+            "obrigatoriedade": {
+              "estado": "desconhecido",
+              "valor": "desconhecida"
+            },
+            "origem": {
+              "estado": "verificado",
+              "evidencias": [
+                {
+                  "fonte": "src:objref-loginhistory"
+                }
+              ],
+              "nota": "Campo padrão do objeto documentado.",
+              "valor": "padrao_plataforma"
+            },
+            "propriedades_api": {
+              "create": false,
+              "defaulted_on_create": false,
+              "estado": "verificado",
+              "evidencias": [
+                {
+                  "fonte": "src:objref-loginhistory"
+                }
+              ],
+              "filter": true,
+              "group": false,
+              "id_lookup": false,
+              "nillable": false,
+              "restricted_picklist": false,
+              "sort": true,
+              "update": false
+            },
+            "somente_leitura": true,
+            "tipo_tecnico": "dateTime"
+          },
+          {
+            "apis": [
+              "padrao"
+            ],
+            "default": {
+              "estado": "desconhecido",
+              "forma": "nao_declarado_na_fonte"
+            },
+            "disponibilidade": {
+              "ate_versao": null,
+              "desde_versao": null,
+              "estado": "desconhecido"
+            },
+            "dominio": {
+              "contexto": "Valores não extraídos; podem depender de org, idioma ou recurso.",
+              "estado": "desconhecido",
+              "natureza": "lista_dinamica"
+            },
+            "estado": "verificado",
+            "evidencias": [
+              {
+                "fonte": "src:objref-loginhistory"
+              }
+            ],
+            "explicacao": "explicada",
+            "id": "obj:LoginHistory.LoginType",
+            "nome": "LoginType",
+            "o_que_e": "Método de login.",
+            "obrigatoriedade": {
+              "estado": "desconhecido",
+              "valor": "desconhecida"
+            },
+            "origem": {
+              "estado": "verificado",
+              "evidencias": [
+                {
+                  "fonte": "src:objref-loginhistory"
+                }
+              ],
+              "nota": "Campo padrão do objeto documentado.",
+              "valor": "padrao_plataforma"
+            },
+            "propriedades_api": {
+              "create": false,
+              "defaulted_on_create": false,
+              "estado": "verificado",
+              "evidencias": [
+                {
+                  "fonte": "src:objref-loginhistory"
+                }
+              ],
+              "filter": true,
+              "group": true,
+              "id_lookup": false,
+              "nillable": false,
+              "restricted_picklist": true,
+              "sort": true,
+              "update": false
+            },
+            "somente_leitura": true,
+            "tipo_tecnico": "picklist"
+          },
+          {
+            "apis": [
+              "padrao"
+            ],
+            "default": {
+              "estado": "desconhecido",
+              "forma": "nao_declarado_na_fonte"
+            },
+            "disponibilidade": {
+              "ate_versao": null,
+              "desde_versao": null,
+              "estado": "desconhecido"
+            },
+            "dominio": {
+              "estado": "verificado",
+              "evidencias": [
+                {
+                  "fonte": "src:objref-loginhistory"
+                }
+              ],
+              "natureza": "texto_livre"
+            },
+            "estado": "verificado",
+            "evidencias": [
+              {
+                "fonte": "src:objref-loginhistory"
+              }
+            ],
+            "explicacao": "explicada",
+            "id": "obj:LoginHistory.LoginUrl",
+            "nome": "LoginUrl",
+            "o_que_e": "URL de onde veio o pedido de login.",
+            "obrigatoriedade": {
+              "estado": "desconhecido",
+              "valor": "desconhecida"
+            },
+            "origem": {
+              "estado": "verificado",
+              "evidencias": [
+                {
+                  "fonte": "src:objref-loginhistory"
+                }
+              ],
+              "nota": "Campo padrão do objeto documentado.",
+              "valor": "padrao_plataforma"
+            },
+            "propriedades_api": {
+              "create": false,
+              "defaulted_on_create": false,
+              "estado": "verificado",
+              "evidencias": [
+                {
+                  "fonte": "src:objref-loginhistory"
+                }
+              ],
+              "filter": true,
+              "group": true,
+              "id_lookup": false,
+              "nillable": true,
+              "restricted_picklist": false,
+              "sort": true,
+              "update": false
+            },
+            "somente_leitura": true,
+            "tipo_tecnico": "string"
+          },
+          {
+            "apis": [
+              "padrao"
+            ],
+            "default": {
+              "estado": "desconhecido",
+              "forma": "nao_declarado_na_fonte"
+            },
+            "disponibilidade": {
+              "ate_versao": null,
+              "desde_versao": "31.0",
+              "estado": "verificado"
+            },
+            "dominio": {
+              "contexto": "Id de registro do(s) objeto(s) referenciado(s).",
+              "estado": "verificado",
+              "evidencias": [
+                {
+                  "fonte": "src:objref-loginhistory"
+                }
+              ],
+              "natureza": "referencia"
+            },
+            "estado": "verificado",
+            "evidencias": [
+              {
+                "fonte": "src:objref-loginhistory"
+              }
+            ],
+            "explicacao": "explicada",
+            "id": "obj:LoginHistory.NetworkId",
+            "nome": "NetworkId",
+            "o_que_e": "Site do Experience Cloud acessado.",
+            "obrigatoriedade": {
+              "estado": "desconhecido",
+              "valor": "desconhecida"
+            },
+            "origem": {
+              "estado": "verificado",
+              "evidencias": [
+                {
+                  "fonte": "src:objref-loginhistory"
+                }
+              ],
+              "nota": "Campo padrão do objeto documentado.",
+              "valor": "padrao_plataforma"
+            },
+            "propriedades_api": {
+              "create": false,
+              "defaulted_on_create": false,
+              "estado": "verificado",
+              "evidencias": [
+                {
+                  "fonte": "src:objref-loginhistory"
+                }
+              ],
+              "filter": true,
+              "group": true,
+              "id_lookup": false,
+              "nillable": true,
+              "restricted_picklist": false,
+              "sort": true,
+              "update": false
+            },
+            "referencia": {
+              "alvos": [
+                "Network"
+              ],
+              "nome_relacionamento": null
+            },
+            "somente_leitura": true,
+            "tipo_tecnico": "reference"
+          },
+          {
+            "apis": [
+              "padrao"
+            ],
+            "default": {
+              "estado": "desconhecido",
+              "forma": "nao_declarado_na_fonte"
+            },
+            "disponibilidade": {
+              "ate_versao": null,
+              "desde_versao": null,
+              "estado": "desconhecido"
+            },
+            "dominio": {
+              "estado": "verificado",
+              "evidencias": [
+                {
+                  "fonte": "src:objref-loginhistory"
+                }
+              ],
+              "lista_completa": "sim",
+              "natureza": "booleano",
+              "valores": [
+                {
+                  "valor": "true"
+                },
+                {
+                  "valor": "false"
+                }
+              ]
+            },
+            "estado": "verificado",
+            "evidencias": [
+              {
+                "fonte": "src:objref-loginhistory"
+              }
+            ],
+            "explicacao": "explicada",
+            "id": "obj:LoginHistory.OptionsIsGet",
+            "nome": "OptionsIsGet",
+            "o_que_e": "Se o login usou HTTP GET.",
+            "obrigatoriedade": {
+              "estado": "desconhecido",
+              "valor": "desconhecida"
+            },
+            "origem": {
+              "estado": "verificado",
+              "evidencias": [
+                {
+                  "fonte": "src:objref-loginhistory"
+                }
+              ],
+              "nota": "Campo padrão do objeto documentado.",
+              "valor": "padrao_plataforma"
+            },
+            "propriedades_api": {
+              "create": false,
+              "defaulted_on_create": false,
+              "estado": "verificado",
+              "evidencias": [
+                {
+                  "fonte": "src:objref-loginhistory"
+                }
+              ],
+              "filter": true,
+              "group": false,
+              "id_lookup": false,
+              "nillable": false,
+              "restricted_picklist": false,
+              "sort": false,
+              "update": false
+            },
+            "somente_leitura": true,
+            "tipo_tecnico": "boolean"
+          },
+          {
+            "apis": [
+              "padrao"
+            ],
+            "default": {
+              "estado": "desconhecido",
+              "forma": "nao_declarado_na_fonte"
+            },
+            "disponibilidade": {
+              "ate_versao": null,
+              "desde_versao": null,
+              "estado": "desconhecido"
+            },
+            "dominio": {
+              "estado": "verificado",
+              "evidencias": [
+                {
+                  "fonte": "src:objref-loginhistory"
+                }
+              ],
+              "lista_completa": "sim",
+              "natureza": "booleano",
+              "valores": [
+                {
+                  "valor": "true"
+                },
+                {
+                  "valor": "false"
+                }
+              ]
+            },
+            "estado": "verificado",
+            "evidencias": [
+              {
+                "fonte": "src:objref-loginhistory"
+              }
+            ],
+            "explicacao": "explicada",
+            "id": "obj:LoginHistory.OptionsIsPost",
+            "nome": "OptionsIsPost",
+            "o_que_e": "Se o login usou HTTP POST.",
+            "obrigatoriedade": {
+              "estado": "desconhecido",
+              "valor": "desconhecida"
+            },
+            "origem": {
+              "estado": "verificado",
+              "evidencias": [
+                {
+                  "fonte": "src:objref-loginhistory"
+                }
+              ],
+              "nota": "Campo padrão do objeto documentado.",
+              "valor": "padrao_plataforma"
+            },
+            "propriedades_api": {
+              "create": false,
+              "defaulted_on_create": false,
+              "estado": "verificado",
+              "evidencias": [
+                {
+                  "fonte": "src:objref-loginhistory"
+                }
+              ],
+              "filter": true,
+              "group": false,
+              "id_lookup": false,
+              "nillable": false,
+              "restricted_picklist": false,
+              "sort": false,
+              "update": false
+            },
+            "somente_leitura": true,
+            "tipo_tecnico": "boolean"
+          },
+          {
+            "apis": [
+              "padrao"
+            ],
+            "default": {
+              "estado": "desconhecido",
+              "forma": "nao_declarado_na_fonte"
+            },
+            "disponibilidade": {
+              "ate_versao": null,
+              "desde_versao": null,
+              "estado": "desconhecido"
+            },
+            "dominio": {
+              "estado": "verificado",
+              "evidencias": [
+                {
+                  "fonte": "src:objref-loginhistory"
+                }
+              ],
+              "natureza": "texto_livre"
+            },
+            "estado": "verificado",
+            "evidencias": [
+              {
+                "fonte": "src:objref-loginhistory"
+              }
+            ],
+            "explicacao": "explicada",
+            "id": "obj:LoginHistory.Platform",
+            "nome": "Platform",
+            "o_que_e": "Sistema operacional usado.",
+            "obrigatoriedade": {
+              "estado": "desconhecido",
+              "valor": "desconhecida"
+            },
+            "origem": {
+              "estado": "verificado",
+              "evidencias": [
+                {
+                  "fonte": "src:objref-loginhistory"
+                }
+              ],
+              "nota": "Campo padrão do objeto documentado.",
+              "valor": "padrao_plataforma"
+            },
+            "propriedades_api": {
+              "create": false,
+              "defaulted_on_create": false,
+              "estado": "verificado",
+              "evidencias": [
+                {
+                  "fonte": "src:objref-loginhistory"
+                }
+              ],
+              "filter": false,
+              "group": true,
+              "id_lookup": false,
+              "nillable": true,
+              "restricted_picklist": false,
+              "sort": true,
+              "update": false
+            },
+            "somente_leitura": true,
+            "tipo_tecnico": "string"
+          },
+          {
+            "apis": [
+              "padrao"
+            ],
+            "default": {
+              "estado": "desconhecido",
+              "forma": "nao_declarado_na_fonte"
+            },
+            "disponibilidade": {
+              "ate_versao": null,
+              "desde_versao": null,
+              "estado": "desconhecido"
+            },
+            "dominio": {
+              "estado": "verificado",
+              "evidencias": [
+                {
+                  "fonte": "src:objref-loginhistory"
+                }
+              ],
+              "natureza": "texto_livre"
+            },
+            "estado": "verificado",
+            "evidencias": [
+              {
+                "fonte": "src:objref-loginhistory"
+              }
+            ],
+            "explicacao": "explicada",
+            "id": "obj:LoginHistory.SourceIp",
+            "nome": "SourceIp",
+            "notas": [
+              "Não aceita o operador LIKE."
+            ],
+            "o_que_e": "IP da primeira requisição que chegou à Salesforce.",
+            "obrigatoriedade": {
+              "estado": "desconhecido",
+              "valor": "desconhecida"
+            },
+            "origem": {
+              "estado": "verificado",
+              "evidencias": [
+                {
+                  "fonte": "src:objref-loginhistory"
+                }
+              ],
+              "nota": "Campo padrão do objeto documentado.",
+              "valor": "padrao_plataforma"
+            },
+            "propriedades_api": {
+              "create": false,
+              "defaulted_on_create": false,
+              "estado": "verificado",
+              "evidencias": [
+                {
+                  "fonte": "src:objref-loginhistory"
+                }
+              ],
+              "filter": true,
+              "group": true,
+              "id_lookup": false,
+              "nillable": true,
+              "restricted_picklist": false,
+              "sort": true,
+              "update": false
+            },
+            "rotulo_didatico": "IP de origem",
+            "somente_leitura": true,
+            "tipo_tecnico": "string"
+          },
+          {
+            "apis": [
+              "padrao"
+            ],
+            "default": {
+              "estado": "desconhecido",
+              "forma": "nao_declarado_na_fonte"
+            },
+            "disponibilidade": {
+              "ate_versao": null,
+              "desde_versao": null,
+              "estado": "desconhecido"
+            },
+            "dominio": {
+              "estado": "verificado",
+              "evidencias": [
+                {
+                  "fonte": "src:objref-loginhistory"
+                }
+              ],
+              "natureza": "texto_livre"
+            },
+            "estado": "verificado",
+            "evidencias": [
+              {
+                "fonte": "src:objref-loginhistory"
+              }
+            ],
+            "explicacao": "explicada",
+            "id": "obj:LoginHistory.Status",
+            "nome": "Status",
+            "o_que_e": "Resultado do login: sucesso ou motivo da falha.",
+            "obrigatoriedade": {
+              "estado": "desconhecido",
+              "valor": "desconhecida"
+            },
+            "origem": {
+              "estado": "verificado",
+              "evidencias": [
+                {
+                  "fonte": "src:objref-loginhistory"
+                }
+              ],
+              "nota": "Campo padrão do objeto documentado.",
+              "valor": "padrao_plataforma"
+            },
+            "propriedades_api": {
+              "create": false,
+              "defaulted_on_create": false,
+              "estado": "verificado",
+              "evidencias": [
+                {
+                  "fonte": "src:objref-loginhistory"
+                }
+              ],
+              "filter": false,
+              "group": true,
+              "id_lookup": false,
+              "nillable": true,
+              "restricted_picklist": false,
+              "sort": true,
+              "update": false
+            },
+            "somente_leitura": true,
+            "tipo_tecnico": "string"
+          },
+          {
+            "apis": [
+              "padrao"
+            ],
+            "default": {
+              "estado": "desconhecido",
+              "forma": "nao_declarado_na_fonte"
+            },
+            "disponibilidade": {
+              "ate_versao": null,
+              "desde_versao": "37.0",
+              "estado": "verificado"
+            },
+            "dominio": {
+              "contexto": "Valores não extraídos; podem depender de org, idioma ou recurso.",
+              "estado": "desconhecido",
+              "natureza": "lista_dinamica"
+            },
+            "estado": "verificado",
+            "evidencias": [
+              {
+                "fonte": "src:objref-loginhistory"
+              }
+            ],
+            "explicacao": "explicada",
+            "id": "obj:LoginHistory.TlsProtocol",
+            "nome": "TlsProtocol",
+            "o_que_e": "Versão de TLS usada.",
+            "obrigatoriedade": {
+              "estado": "desconhecido",
+              "valor": "desconhecida"
+            },
+            "origem": {
+              "estado": "verificado",
+              "evidencias": [
+                {
+                  "fonte": "src:objref-loginhistory"
+                }
+              ],
+              "nota": "Campo padrão do objeto documentado.",
+              "valor": "padrao_plataforma"
+            },
+            "propriedades_api": {
+              "create": false,
+              "defaulted_on_create": false,
+              "estado": "verificado",
+              "evidencias": [
+                {
+                  "fonte": "src:objref-loginhistory"
+                }
+              ],
+              "filter": true,
+              "group": true,
+              "id_lookup": false,
+              "nillable": true,
+              "restricted_picklist": true,
+              "sort": true,
+              "update": false
+            },
+            "somente_leitura": true,
+            "tipo_tecnico": "picklist"
+          },
+          {
+            "apis": [
+              "padrao"
+            ],
+            "default": {
+              "estado": "desconhecido",
+              "forma": "nao_declarado_na_fonte"
+            },
+            "disponibilidade": {
+              "ate_versao": null,
+              "desde_versao": null,
+              "estado": "desconhecido"
+            },
+            "dominio": {
+              "contexto": "Id de registro do(s) objeto(s) referenciado(s).",
+              "estado": "verificado",
+              "evidencias": [
+                {
+                  "fonte": "src:objref-loginhistory"
+                }
+              ],
+              "natureza": "referencia"
+            },
+            "estado": "verificado",
+            "evidencias": [
+              {
+                "fonte": "src:objref-loginhistory"
+              }
+            ],
+            "explicacao": "explicada",
+            "id": "obj:LoginHistory.UserId",
+            "nome": "UserId",
+            "o_que_e": "Usuário que tentou entrar.",
+            "obrigatoriedade": {
+              "estado": "desconhecido",
+              "valor": "desconhecida"
+            },
+            "origem": {
+              "estado": "verificado",
+              "evidencias": [
+                {
+                  "fonte": "src:objref-loginhistory"
+                }
+              ],
+              "nota": "Campo padrão do objeto documentado.",
+              "valor": "padrao_plataforma"
+            },
+            "propriedades_api": {
+              "create": false,
+              "defaulted_on_create": false,
+              "estado": "verificado",
+              "evidencias": [
+                {
+                  "fonte": "src:objref-loginhistory"
+                }
+              ],
+              "filter": true,
+              "group": true,
+              "id_lookup": false,
+              "nillable": true,
+              "restricted_picklist": false,
+              "sort": true,
+              "update": false
+            },
+            "referencia": {
+              "alvos": [
+                "obj:User"
+              ],
+              "nome_relacionamento": null
+            },
+            "somente_leitura": true,
+            "tipo_tecnico": "reference"
+          }
+        ],
+        "cobertura": {
+          "estrutural": {
+            "esperado": null,
+            "estado": "parcial",
+            "nota": "Campos da tabela extraída; Id não consta. Retenção não declarada na página.",
+            "presente": 24
+          },
+          "explicativa": {
+            "esperado": 24,
+            "estado": "completa",
+            "presente": 24
+          },
+          "mapeamento": {
+            "estado": "parcial",
+            "nota": "Ver relacionamentos registrados."
+          }
+        },
+        "consultas": [
+          {
+            "api": "padrao",
+            "contexto": "API padrão.",
+            "soql": "SELECT UserId, LoginTime, SourceIp, Status FROM LoginHistory ORDER BY LoginTime DESC LIMIT 20",
+            "validacao": "documental"
+          }
+        ],
+        "estado": "verificado",
+        "evidencias": [
+          {
+            "fonte": "src:objref-loginhistory"
+          }
+        ],
+        "exposicoes": [
+          {
+            "acesso_especial": "Manage Users ou Monitor Login History; desde a 37.0 cada usuário lê os próprios registros.",
+            "api": "padrao",
+            "chamadas": [
+              "describeSObjects()",
+              "query()",
+              "retrieve()",
+              "delete() (habilitável a partir da 42.0)"
+            ],
+            "desde_versao": "21.0",
+            "estado": "verificado",
+            "evidencias": [
+              {
+                "fonte": "src:objref-loginhistory"
+              }
+            ]
+          },
+          {
+            "api": "tooling",
+            "desde_versao": null,
+            "estado": "nao_exposto",
+            "evidencias": [
+              {
+                "fonte": "src:tooling-objects-list"
+              }
+            ],
+            "nota": "Não consta do índice de objetos da Tooling API 68.0."
+          }
+        ],
+        "id": "obj:LoginHistory",
+        "juncao": false,
+        "nome": "LoginHistory",
+        "o_que_e": "Representa cada tentativa de login, bem-sucedida ou não, na org e em portais habilitados.",
+        "papel": "Histórico de tentativas; complementa o estado atual de UserLogin.",
+        "setup": {
+          "estado": "nao_aplicavel",
+          "nota": "Objeto consultável via API; não é tela do Setup."
+        }
+      },
+      "papel": "Histórico de tentativas.",
+      "relacionamentos": [
+        {
+          "cardinalidade_registros": {
+            "estado": "desconhecido",
+            "valor": "N:1"
+          },
+          "destino": {
+            "entidade": "obj:User"
+          },
+          "estado": "verificado",
+          "evidencias": [
+            {
+              "fonte": "src:objref-loginhistory"
+            }
+          ],
+          "explicacao": "Cada tentativa de login é de um usuário.",
+          "id": "rel:loginhistory-user",
+          "origem": {
+            "campo": "UserId",
+            "entidade": "obj:LoginHistory"
+          },
+          "tipo": "referencia_campo"
+        }
+      ]
+    }
+  ],
+  "versao_base": {
+    "api_version": "68.0",
+    "data_referencia": "2026-11-07",
+    "escopo": "config/escopo.json",
+    "release": "Winter '27"
+  }
+}

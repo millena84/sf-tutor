@@ -1,0 +1,49 @@
+fonte: src:mdapi-permissionset | URL: https://developer.salesforce.com/docs/atlas.en-us.264.0.api_meta.meta/api_meta/meta_permissionset.htm
+obtido via: https://developer.salesforce.com/docs/get_document_content/api_meta/meta_permissionset.htm/en-us/264.0 (Winter '27, API 68.0) em 2026-11-07
+metodo: extracao documental assistida por IA (WebFetch); nomes, tipos, obrigatoriedade e versao conforme tabela da pagina; descricoes parafraseadas
+tipo: PermissionSet | sufixo .permissionset | pasta permissionsets | desde API 22.0 | estende Metadata (fullName herdado)
+campos (nome | tipo | obrigatorio | versao minima):
+agentAccesses | PermissionSetAgentAccess[] | nao | 63.0
+applicationVisibilities | PermissionSetApplicationVisibility[] | nao | 29.0 (apps padrao 30.0+)
+classAccesses | PermissionSetApexClassAccess[] | nao | 23.0
+customMetadataTypeAccesses | PermissionSetCustomMetadataTypeAccess[] | nao | 47.0
+customPermissions | PermissionSetCustomPermissions[] | nao | 31.0
+customSettingAccesses | PermissionSetCustomSettingAccesses[] | nao | 47.0
+description | string | nao | - | max 255 caracteres
+emailRoutingAddressAccesses | PermissionSetEmailRoutingAddressAccess[] | nao | 62.0
+externalCredentialPrincipalAccesses | PermissionSetExternalCredentialPrincipalAccess[] | nao | 59.0
+externalDataSourceAccesses | PermissionSetExternalDataSourceAccess[] | nao | 27.0
+fieldPermissions | PermissionSetFieldPermissions[] | nao | 23.0
+flowAccesses | PermissionSetFlowAccess[] | nao | 47.0
+genComputingSummaryDefAccesses | PermissionSetGenComputingSummaryDefAccess[] | nao | 66.0
+hasActivationRequired | boolean | nao | 37.0
+label | string | sim | - | max 80 caracteres
+license | string | nao | 38.0
+objectPermissions | PermissionSetObjectPermissions[] | nao | 23.0
+pageAccesses | PermissionSetApexPageAccess[] | nao | 23.0
+recordTypeVisibilities | PermissionSetRecordTypeVisibility[] | nao | 29.0
+ServicePresenceStatusAccesses | PermissionSetServicePresenceStatusAccess[] | nao | 64.0 | (grafia com S maiusculo conforme a pagina; confirmar no WSDL)
+tabSettings | PermissionSetTabSetting[] (pagina exibe PermissionSetTabVisibility no tipo; confirmar no WSDL) | nao | 26.0
+userLicense | string | nao | ate 37.0 (obsoleto; substituido por license)
+userPermissions | PermissionSetUserPermission[] | nao | 29.0 (40.0+: ausente = desabilitado)
+subtipos:
+PermissionSetAgentAccess: agentName string sim; enabled boolean sim
+PermissionSetGenComputingSummaryDefAccess: configName string sim; enabled boolean sim
+PermissionSetApplicationVisibility: application string sim; visible boolean sim
+PermissionSetApexClassAccess: apexClass string sim; enabled boolean sim
+PermissionSetCustomMetadataTypeAccess: enabled boolean sim; name string sim
+PermissionSetCustomPermissions: enabled boolean sim; name string sim
+PermissionSetCustomSettingAccesses: enabled boolean sim; name string sim
+PermissionSetEmailRoutingAddressAccess: enabled boolean sim; name string sim
+PermissionSetExternalCredentialPrincipalAccess: enabled boolean sim; externalCredentialPrincipal string sim
+PermissionSetExternalDataSourceAccess: enabled boolean sim; externalDataSource string nao
+PermissionSetFieldPermissions: editable boolean sim; field string sim; readable boolean nao
+PermissionSetFlowAccess: enabled boolean sim (default false); flow string sim
+PermissionSetObjectPermissions: allowCreate, allowDelete, allowEdit, allowRead, modifyAllRecords boolean sim; object string sim; viewAllFields (tipo exibido string; 63.0) nao; viewAllRecords boolean sim
+PermissionSetApexPageAccess: apexPage string sim; enabled boolean sim
+PermissionSetRecordTypeVisibility: recordType string sim; visible boolean sim
+PermissionSetTabSetting: tab string sim; visibility PermissionSetTabVisibility (enum) sim
+PermissionSetUserPermission: enabled boolean sim; name string sim
+PermissionSetServicePresenceStatusAccess: servicePresenceStatus string sim; enabled boolean sim
+enum PermissionSetTabVisibility: Available | None | Visible
+limites: extracao 1 (pagina renderizada) omitiu nomes; extracao 2 (get_document_content) trouxe os nomes. Divergencias de tipo marcadas acima.

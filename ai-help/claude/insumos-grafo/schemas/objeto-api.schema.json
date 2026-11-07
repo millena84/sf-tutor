@@ -1,0 +1,197 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "objeto-api.schema.json",
+  "title": "objeto-api",
+  "type": "object",
+  "required": [
+    "id",
+    "nome",
+    "o_que_e",
+    "papel",
+    "exposicoes",
+    "campos",
+    "consultas",
+    "apex",
+    "juncao",
+    "setup",
+    "cobertura",
+    "estado",
+    "evidencias"
+  ],
+  "additionalProperties": false,
+  "properties": {
+    "id": {
+      "type": "string",
+      "pattern": "^obj:[A-Za-z0-9_]+$"
+    },
+    "nome": {
+      "type": "string"
+    },
+    "label_oficial": {
+      "$ref": "comum.schema.json#/$defs/afirmacao"
+    },
+    "o_que_e": {
+      "type": "string"
+    },
+    "papel": {
+      "type": "string"
+    },
+    "exposicoes": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "api",
+          "estado"
+        ],
+        "additionalProperties": false,
+        "properties": {
+          "api": {
+            "enum": [
+              "padrao",
+              "tooling"
+            ]
+          },
+          "estado": {
+            "$ref": "comum.schema.json#/$defs/estado"
+          },
+          "chamadas": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "metodos_rest": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "desde_versao": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "acesso_especial": {
+            "type": "string"
+          },
+          "restricoes_consulta": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "nota": {
+            "type": "string"
+          },
+          "evidencias": {
+            "$ref": "comum.schema.json#/$defs/evidencias"
+          }
+        }
+      }
+    },
+    "campos": {
+      "type": "array",
+      "items": {
+        "$ref": "comum.schema.json#/$defs/campo_api"
+      }
+    },
+    "dominio_dinamico_de_campos": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "padrao_nome",
+        "descricao",
+        "estado"
+      ],
+      "properties": {
+        "padrao_nome": {
+          "type": "string"
+        },
+        "descricao": {
+          "type": "string"
+        },
+        "estado": {
+          "$ref": "comum.schema.json#/$defs/estado"
+        },
+        "evidencias": {
+          "$ref": "comum.schema.json#/$defs/evidencias"
+        }
+      }
+    },
+    "consultas": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "api",
+          "soql",
+          "validacao"
+        ],
+        "additionalProperties": false,
+        "properties": {
+          "api": {
+            "enum": [
+              "padrao",
+              "tooling"
+            ]
+          },
+          "soql": {
+            "type": "string"
+          },
+          "endpoint": {
+            "type": "string"
+          },
+          "contexto": {
+            "type": "string"
+          },
+          "validacao": {
+            "enum": [
+              "documental",
+              "schema",
+              "org"
+            ]
+          }
+        }
+      }
+    },
+    "apex": {
+      "type": "object",
+      "required": [
+        "consulta_soql_direta",
+        "nota"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "consulta_soql_direta": {
+          "$ref": "comum.schema.json#/$defs/afirmacao"
+        },
+        "nota": {
+          "type": "string"
+        }
+      }
+    },
+    "juncao": {
+      "type": "boolean"
+    },
+    "setup": {
+      "$ref": "comum.schema.json#/$defs/afirmacao"
+    },
+    "cobertura": {
+      "$ref": "comum.schema.json#/$defs/cobertura"
+    },
+    "alertas": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "estado": {
+      "$ref": "comum.schema.json#/$defs/estado"
+    },
+    "evidencias": {
+      "$ref": "comum.schema.json#/$defs/evidencias"
+    }
+  }
+}

@@ -1,0 +1,979 @@
+{
+  "id": "obj:PermissionSet",
+  "nome": "PermissionSet",
+  "o_que_e": "Representa cada permission set como registro consultável, inclusive os permission sets internos de perfis.",
+  "papel": "Permite consultar quais permission sets existem e seus atributos; o XML PermissionSet é a forma implantável.",
+  "exposicoes": [
+    {
+      "api": "padrao",
+      "estado": "verificado",
+      "chamadas": [
+        "create()",
+        "delete()",
+        "describeSObjects()",
+        "query()",
+        "retrieve()",
+        "search()",
+        "update()",
+        "upsert()"
+      ],
+      "acesso_especial": "Desde Summer '20: View Setup and Configuration, Manage Session Permission Set Activations, Assign Permission Sets ou Manage Profiles and Permission Sets.",
+      "desde_versao": null,
+      "evidencias": [
+        {
+          "fonte": "src:objref-permissionset"
+        }
+      ]
+    },
+    {
+      "api": "tooling",
+      "estado": "verificado",
+      "nota": "Listado no índice de objetos da Tooling API 68.0. Campos e operações dessa exposição não levantados; não presumir que sejam iguais aos da API padrão.",
+      "desde_versao": null,
+      "evidencias": [
+        {
+          "fonte": "src:tooling-objects-list"
+        }
+      ]
+    }
+  ],
+  "campos": [
+    {
+      "id": "obj:PermissionSet.Description",
+      "nome": "Description",
+      "tipo_tecnico": "string",
+      "o_que_e": "Descrição do permission set.",
+      "apis": [
+        "padrao"
+      ],
+      "propriedades_api": {
+        "estado": "verificado",
+        "create": true,
+        "defaulted_on_create": false,
+        "filter": true,
+        "group": true,
+        "nillable": true,
+        "restricted_picklist": false,
+        "sort": true,
+        "update": true,
+        "id_lookup": false,
+        "evidencias": [
+          {
+            "fonte": "src:objref-permissionset"
+          }
+        ]
+      },
+      "somente_leitura": false,
+      "origem": {
+        "estado": "verificado",
+        "valor": "padrao_plataforma",
+        "nota": "Campo padrão do objeto documentado.",
+        "evidencias": [
+          {
+            "fonte": "src:objref-permissionset"
+          }
+        ]
+      },
+      "obrigatoriedade": {
+        "valor": "desconhecida",
+        "estado": "desconhecido"
+      },
+      "default": {
+        "forma": "nao_declarado_na_fonte",
+        "estado": "desconhecido"
+      },
+      "dominio": {
+        "natureza": "texto_livre",
+        "estado": "verificado",
+        "evidencias": [
+          {
+            "fonte": "src:objref-permissionset"
+          }
+        ]
+      },
+      "disponibilidade": {
+        "desde_versao": null,
+        "ate_versao": null,
+        "estado": "desconhecido"
+      },
+      "explicacao": "explicada",
+      "estado": "verificado",
+      "evidencias": [
+        {
+          "fonte": "src:objref-permissionset"
+        }
+      ],
+      "restricoes": {
+        "estado": "verificado",
+        "valor": "Até 255 caracteres.",
+        "evidencias": [
+          {
+            "fonte": "src:objref-permissionset"
+          }
+        ]
+      }
+    },
+    {
+      "id": "obj:PermissionSet.HasActivationRequired",
+      "nome": "HasActivationRequired",
+      "tipo_tecnico": "boolean",
+      "o_que_e": "Se o permission set exige sessão ativa.",
+      "apis": [
+        "padrao"
+      ],
+      "propriedades_api": {
+        "estado": "verificado",
+        "create": true,
+        "defaulted_on_create": true,
+        "filter": true,
+        "group": true,
+        "nillable": false,
+        "restricted_picklist": false,
+        "sort": true,
+        "update": true,
+        "id_lookup": false,
+        "evidencias": [
+          {
+            "fonte": "src:objref-permissionset"
+          }
+        ]
+      },
+      "somente_leitura": false,
+      "origem": {
+        "estado": "verificado",
+        "valor": "padrao_plataforma",
+        "nota": "Campo padrão do objeto documentado.",
+        "evidencias": [
+          {
+            "fonte": "src:objref-permissionset"
+          }
+        ]
+      },
+      "obrigatoriedade": {
+        "valor": "desconhecida",
+        "estado": "desconhecido"
+      },
+      "default": {
+        "forma": "desconhecido",
+        "estado": "desconhecido",
+        "nota": "A API marca o campo como 'defaulted on create', mas o valor não foi declarado na extração."
+      },
+      "dominio": {
+        "natureza": "booleano",
+        "valores": [
+          {
+            "valor": "true"
+          },
+          {
+            "valor": "false"
+          }
+        ],
+        "lista_completa": "sim",
+        "estado": "verificado",
+        "evidencias": [
+          {
+            "fonte": "src:objref-permissionset"
+          }
+        ]
+      },
+      "disponibilidade": {
+        "desde_versao": null,
+        "ate_versao": null,
+        "estado": "desconhecido"
+      },
+      "explicacao": "explicada",
+      "estado": "verificado",
+      "evidencias": [
+        {
+          "fonte": "src:objref-permissionset"
+        }
+      ]
+    },
+    {
+      "id": "obj:PermissionSet.IsCustom",
+      "nome": "IsCustom",
+      "tipo_tecnico": "boolean",
+      "o_que_e": "Verdadeiro se criado por um administrador; falso se padrão e ligado a uma licença.",
+      "apis": [
+        "padrao"
+      ],
+      "propriedades_api": {
+        "estado": "verificado",
+        "create": false,
+        "defaulted_on_create": true,
+        "filter": true,
+        "group": true,
+        "nillable": false,
+        "restricted_picklist": false,
+        "sort": true,
+        "update": false,
+        "id_lookup": false,
+        "evidencias": [
+          {
+            "fonte": "src:objref-permissionset"
+          }
+        ]
+      },
+      "somente_leitura": true,
+      "origem": {
+        "estado": "verificado",
+        "valor": "padrao_plataforma",
+        "nota": "Campo padrão do objeto documentado.",
+        "evidencias": [
+          {
+            "fonte": "src:objref-permissionset"
+          }
+        ]
+      },
+      "obrigatoriedade": {
+        "valor": "desconhecida",
+        "estado": "desconhecido"
+      },
+      "default": {
+        "forma": "desconhecido",
+        "estado": "desconhecido",
+        "nota": "A API marca o campo como 'defaulted on create', mas o valor não foi declarado na extração."
+      },
+      "dominio": {
+        "natureza": "booleano",
+        "valores": [
+          {
+            "valor": "true"
+          },
+          {
+            "valor": "false"
+          }
+        ],
+        "lista_completa": "sim",
+        "estado": "verificado",
+        "evidencias": [
+          {
+            "fonte": "src:objref-permissionset"
+          }
+        ]
+      },
+      "disponibilidade": {
+        "desde_versao": null,
+        "ate_versao": null,
+        "estado": "desconhecido"
+      },
+      "explicacao": "explicada",
+      "estado": "verificado",
+      "evidencias": [
+        {
+          "fonte": "src:objref-permissionset"
+        }
+      ]
+    },
+    {
+      "id": "obj:PermissionSet.IsOwnedByProfile",
+      "nome": "IsOwnedByProfile",
+      "tipo_tecnico": "boolean",
+      "o_que_e": "Informa se o permission set pertence a um perfil.",
+      "apis": [
+        "padrao"
+      ],
+      "propriedades_api": {
+        "estado": "verificado",
+        "create": false,
+        "defaulted_on_create": true,
+        "filter": true,
+        "group": true,
+        "nillable": false,
+        "restricted_picklist": false,
+        "sort": true,
+        "update": false,
+        "id_lookup": false,
+        "evidencias": [
+          {
+            "fonte": "src:objref-permissionset"
+          }
+        ]
+      },
+      "somente_leitura": true,
+      "origem": {
+        "estado": "verificado",
+        "valor": "padrao_plataforma",
+        "nota": "Campo padrão do objeto documentado.",
+        "evidencias": [
+          {
+            "fonte": "src:objref-permissionset"
+          }
+        ]
+      },
+      "obrigatoriedade": {
+        "valor": "desconhecida",
+        "estado": "desconhecido"
+      },
+      "default": {
+        "forma": "desconhecido",
+        "estado": "desconhecido",
+        "nota": "A API marca o campo como 'defaulted on create', mas o valor não foi declarado na extração."
+      },
+      "dominio": {
+        "natureza": "booleano",
+        "valores": [
+          {
+            "valor": "true"
+          },
+          {
+            "valor": "false"
+          }
+        ],
+        "lista_completa": "sim",
+        "estado": "verificado",
+        "evidencias": [
+          {
+            "fonte": "src:objref-permissionset"
+          }
+        ]
+      },
+      "disponibilidade": {
+        "desde_versao": "25.0",
+        "ate_versao": null,
+        "estado": "verificado"
+      },
+      "explicacao": "explicada",
+      "estado": "verificado",
+      "evidencias": [
+        {
+          "fonte": "src:objref-permissionset"
+        }
+      ]
+    },
+    {
+      "id": "obj:PermissionSet.Label",
+      "nome": "Label",
+      "tipo_tecnico": "string",
+      "o_que_e": "Rótulo do permission set na interface.",
+      "apis": [
+        "padrao"
+      ],
+      "propriedades_api": {
+        "estado": "verificado",
+        "create": true,
+        "defaulted_on_create": false,
+        "filter": true,
+        "group": true,
+        "nillable": false,
+        "restricted_picklist": false,
+        "sort": true,
+        "update": true,
+        "id_lookup": false,
+        "evidencias": [
+          {
+            "fonte": "src:objref-permissionset"
+          }
+        ]
+      },
+      "somente_leitura": false,
+      "origem": {
+        "estado": "verificado",
+        "valor": "padrao_plataforma",
+        "nota": "Campo padrão do objeto documentado.",
+        "evidencias": [
+          {
+            "fonte": "src:objref-permissionset"
+          }
+        ]
+      },
+      "obrigatoriedade": {
+        "valor": "desconhecida",
+        "estado": "desconhecido"
+      },
+      "default": {
+        "forma": "nao_declarado_na_fonte",
+        "estado": "desconhecido"
+      },
+      "dominio": {
+        "natureza": "texto_livre",
+        "estado": "verificado",
+        "evidencias": [
+          {
+            "fonte": "src:objref-permissionset"
+          }
+        ]
+      },
+      "disponibilidade": {
+        "desde_versao": null,
+        "ate_versao": null,
+        "estado": "desconhecido"
+      },
+      "explicacao": "explicada",
+      "estado": "verificado",
+      "evidencias": [
+        {
+          "fonte": "src:objref-permissionset"
+        }
+      ],
+      "restricoes": {
+        "estado": "verificado",
+        "valor": "Até 80 caracteres.",
+        "evidencias": [
+          {
+            "fonte": "src:objref-permissionset"
+          }
+        ]
+      }
+    },
+    {
+      "id": "obj:PermissionSet.LicenseId",
+      "nome": "LicenseId",
+      "tipo_tecnico": "reference",
+      "o_que_e": "Licença de permission set ou de usuário associada; substitui UserLicenseId.",
+      "apis": [
+        "padrao"
+      ],
+      "propriedades_api": {
+        "estado": "verificado",
+        "create": true,
+        "defaulted_on_create": false,
+        "filter": true,
+        "group": true,
+        "nillable": true,
+        "restricted_picklist": false,
+        "sort": true,
+        "update": false,
+        "id_lookup": false,
+        "evidencias": [
+          {
+            "fonte": "src:objref-permissionset"
+          }
+        ]
+      },
+      "somente_leitura": false,
+      "origem": {
+        "estado": "verificado",
+        "valor": "padrao_plataforma",
+        "nota": "Campo padrão do objeto documentado.",
+        "evidencias": [
+          {
+            "fonte": "src:objref-permissionset"
+          }
+        ]
+      },
+      "obrigatoriedade": {
+        "valor": "desconhecida",
+        "estado": "desconhecido"
+      },
+      "default": {
+        "forma": "nao_declarado_na_fonte",
+        "estado": "desconhecido"
+      },
+      "dominio": {
+        "natureza": "referencia",
+        "estado": "verificado",
+        "evidencias": [
+          {
+            "fonte": "src:objref-permissionset"
+          }
+        ],
+        "contexto": "Id de registro do(s) objeto(s) referenciado(s)."
+      },
+      "disponibilidade": {
+        "desde_versao": "38.0",
+        "ate_versao": null,
+        "estado": "verificado"
+      },
+      "explicacao": "explicada",
+      "estado": "verificado",
+      "evidencias": [
+        {
+          "fonte": "src:objref-permissionset"
+        }
+      ],
+      "referencia": {
+        "alvos": [
+          "PermissionSetLicense",
+          "UserLicense"
+        ],
+        "nome_relacionamento": null
+      }
+    },
+    {
+      "id": "obj:PermissionSet.Name",
+      "nome": "Name",
+      "tipo_tecnico": "string",
+      "o_que_e": "Nome API único do permission set.",
+      "apis": [
+        "padrao"
+      ],
+      "propriedades_api": {
+        "estado": "verificado",
+        "create": true,
+        "defaulted_on_create": false,
+        "filter": true,
+        "group": true,
+        "nillable": false,
+        "restricted_picklist": false,
+        "sort": true,
+        "update": true,
+        "id_lookup": false,
+        "evidencias": [
+          {
+            "fonte": "src:objref-permissionset"
+          }
+        ]
+      },
+      "somente_leitura": false,
+      "origem": {
+        "estado": "verificado",
+        "valor": "padrao_plataforma",
+        "nota": "Campo padrão do objeto documentado.",
+        "evidencias": [
+          {
+            "fonte": "src:objref-permissionset"
+          }
+        ]
+      },
+      "obrigatoriedade": {
+        "valor": "desconhecida",
+        "estado": "desconhecido"
+      },
+      "default": {
+        "forma": "nao_declarado_na_fonte",
+        "estado": "desconhecido"
+      },
+      "dominio": {
+        "natureza": "texto_livre",
+        "estado": "verificado",
+        "evidencias": [
+          {
+            "fonte": "src:objref-permissionset"
+          }
+        ]
+      },
+      "disponibilidade": {
+        "desde_versao": null,
+        "ate_versao": null,
+        "estado": "desconhecido"
+      },
+      "explicacao": "explicada",
+      "estado": "verificado",
+      "evidencias": [
+        {
+          "fonte": "src:objref-permissionset"
+        }
+      ],
+      "restricoes": {
+        "estado": "verificado",
+        "valor": "Até 80 caracteres.",
+        "evidencias": [
+          {
+            "fonte": "src:objref-permissionset"
+          }
+        ]
+      }
+    },
+    {
+      "id": "obj:PermissionSet.NamespacePrefix",
+      "nome": "NamespacePrefix",
+      "tipo_tecnico": "string",
+      "o_que_e": "Namespace do pacote, quando o permission set vem de um pacote.",
+      "apis": [
+        "padrao"
+      ],
+      "propriedades_api": {
+        "estado": "verificado",
+        "create": false,
+        "defaulted_on_create": false,
+        "filter": true,
+        "group": true,
+        "nillable": true,
+        "restricted_picklist": false,
+        "sort": true,
+        "update": false,
+        "id_lookup": false,
+        "evidencias": [
+          {
+            "fonte": "src:objref-permissionset"
+          }
+        ]
+      },
+      "somente_leitura": true,
+      "origem": {
+        "estado": "verificado",
+        "valor": "padrao_plataforma",
+        "nota": "Campo padrão do objeto documentado.",
+        "evidencias": [
+          {
+            "fonte": "src:objref-permissionset"
+          }
+        ]
+      },
+      "obrigatoriedade": {
+        "valor": "desconhecida",
+        "estado": "desconhecido"
+      },
+      "default": {
+        "forma": "nao_declarado_na_fonte",
+        "estado": "desconhecido"
+      },
+      "dominio": {
+        "natureza": "texto_livre",
+        "estado": "verificado",
+        "evidencias": [
+          {
+            "fonte": "src:objref-permissionset"
+          }
+        ]
+      },
+      "disponibilidade": {
+        "desde_versao": "23.0",
+        "ate_versao": null,
+        "estado": "verificado"
+      },
+      "explicacao": "explicada",
+      "estado": "verificado",
+      "evidencias": [
+        {
+          "fonte": "src:objref-permissionset"
+        }
+      ]
+    },
+    {
+      "id": "obj:PermissionSet.PermissionSetGroupId",
+      "nome": "PermissionSetGroupId",
+      "tipo_tecnico": "reference",
+      "o_que_e": "Grupo de permission sets dono deste registro, ou nulo.",
+      "apis": [
+        "padrao"
+      ],
+      "propriedades_api": {
+        "estado": "verificado",
+        "create": false,
+        "defaulted_on_create": false,
+        "filter": true,
+        "group": true,
+        "nillable": true,
+        "restricted_picklist": false,
+        "sort": true,
+        "update": false,
+        "id_lookup": false,
+        "evidencias": [
+          {
+            "fonte": "src:objref-permissionset"
+          }
+        ]
+      },
+      "somente_leitura": true,
+      "origem": {
+        "estado": "verificado",
+        "valor": "padrao_plataforma",
+        "nota": "Campo padrão do objeto documentado.",
+        "evidencias": [
+          {
+            "fonte": "src:objref-permissionset"
+          }
+        ]
+      },
+      "obrigatoriedade": {
+        "valor": "desconhecida",
+        "estado": "desconhecido"
+      },
+      "default": {
+        "forma": "nao_declarado_na_fonte",
+        "estado": "desconhecido"
+      },
+      "dominio": {
+        "natureza": "referencia",
+        "estado": "verificado",
+        "evidencias": [
+          {
+            "fonte": "src:objref-permissionset"
+          }
+        ],
+        "contexto": "Id de registro do(s) objeto(s) referenciado(s)."
+      },
+      "disponibilidade": {
+        "desde_versao": "45.0",
+        "ate_versao": null,
+        "estado": "verificado"
+      },
+      "explicacao": "explicada",
+      "estado": "verificado",
+      "evidencias": [
+        {
+          "fonte": "src:objref-permissionset"
+        }
+      ],
+      "referencia": {
+        "alvos": [
+          "obj:PermissionSetGroup"
+        ],
+        "nome_relacionamento": null
+      }
+    },
+    {
+      "id": "obj:PermissionSet.ProfileId",
+      "nome": "ProfileId",
+      "tipo_tecnico": "reference",
+      "o_que_e": "Perfil dono deste registro, ou nulo.",
+      "apis": [
+        "padrao"
+      ],
+      "propriedades_api": {
+        "estado": "verificado",
+        "create": false,
+        "defaulted_on_create": false,
+        "filter": true,
+        "group": true,
+        "nillable": true,
+        "restricted_picklist": false,
+        "sort": true,
+        "update": false,
+        "id_lookup": false,
+        "evidencias": [
+          {
+            "fonte": "src:objref-permissionset"
+          }
+        ]
+      },
+      "somente_leitura": true,
+      "origem": {
+        "estado": "verificado",
+        "valor": "padrao_plataforma",
+        "nota": "Campo padrão do objeto documentado.",
+        "evidencias": [
+          {
+            "fonte": "src:objref-permissionset"
+          }
+        ]
+      },
+      "obrigatoriedade": {
+        "valor": "desconhecida",
+        "estado": "desconhecido"
+      },
+      "default": {
+        "forma": "nao_declarado_na_fonte",
+        "estado": "desconhecido"
+      },
+      "dominio": {
+        "natureza": "referencia",
+        "estado": "verificado",
+        "evidencias": [
+          {
+            "fonte": "src:objref-permissionset"
+          }
+        ],
+        "contexto": "Id de registro do(s) objeto(s) referenciado(s)."
+      },
+      "disponibilidade": {
+        "desde_versao": "25.0",
+        "ate_versao": null,
+        "estado": "verificado"
+      },
+      "explicacao": "explicada",
+      "estado": "verificado",
+      "evidencias": [
+        {
+          "fonte": "src:objref-permissionset"
+        }
+      ],
+      "referencia": {
+        "alvos": [
+          "obj:Profile"
+        ],
+        "nome_relacionamento": null
+      }
+    },
+    {
+      "id": "obj:PermissionSet.Type",
+      "nome": "Type",
+      "tipo_tecnico": "reference",
+      "o_que_e": "Explicação pendente: campo listado a partir da fonte, ainda sem texto didático.",
+      "apis": [
+        "padrao"
+      ],
+      "propriedades_api": {
+        "estado": "verificado",
+        "create": false,
+        "defaulted_on_create": false,
+        "filter": true,
+        "group": true,
+        "nillable": true,
+        "restricted_picklist": false,
+        "sort": true,
+        "update": false,
+        "id_lookup": false,
+        "evidencias": [
+          {
+            "fonte": "src:objref-permissionset"
+          }
+        ]
+      },
+      "somente_leitura": true,
+      "origem": {
+        "estado": "verificado",
+        "valor": "padrao_plataforma",
+        "nota": "Campo padrão do objeto documentado.",
+        "evidencias": [
+          {
+            "fonte": "src:objref-permissionset"
+          }
+        ]
+      },
+      "obrigatoriedade": {
+        "valor": "desconhecida",
+        "estado": "desconhecido"
+      },
+      "default": {
+        "forma": "nao_declarado_na_fonte",
+        "estado": "desconhecido"
+      },
+      "dominio": {
+        "natureza": "referencia",
+        "estado": "desconhecido",
+        "contexto": "Id de registro do(s) objeto(s) referenciado(s)."
+      },
+      "disponibilidade": {
+        "desde_versao": "46.0",
+        "ate_versao": null,
+        "estado": "verificado"
+      },
+      "explicacao": "pendente",
+      "estado": "verificado",
+      "evidencias": [
+        {
+          "fonte": "src:objref-permissionset"
+        }
+      ],
+      "notas": [
+        "A página não descreve o campo além da versão; tipo transcrito como reference, conferir."
+      ]
+    },
+    {
+      "id": "obj:PermissionSet.UserLicenseId",
+      "nome": "UserLicenseId",
+      "tipo_tecnico": "reference",
+      "o_que_e": "Licença de usuário (obsoleto após a 37.0; usar LicenseId).",
+      "apis": [
+        "padrao"
+      ],
+      "propriedades_api": {
+        "estado": "verificado",
+        "create": true,
+        "defaulted_on_create": false,
+        "filter": true,
+        "group": true,
+        "nillable": true,
+        "restricted_picklist": false,
+        "sort": true,
+        "update": false,
+        "id_lookup": false,
+        "evidencias": [
+          {
+            "fonte": "src:objref-permissionset"
+          }
+        ]
+      },
+      "somente_leitura": false,
+      "origem": {
+        "estado": "verificado",
+        "valor": "padrao_plataforma",
+        "nota": "Campo padrão do objeto documentado.",
+        "evidencias": [
+          {
+            "fonte": "src:objref-permissionset"
+          }
+        ]
+      },
+      "obrigatoriedade": {
+        "valor": "desconhecida",
+        "estado": "desconhecido"
+      },
+      "default": {
+        "forma": "nao_declarado_na_fonte",
+        "estado": "desconhecido"
+      },
+      "dominio": {
+        "natureza": "referencia",
+        "estado": "verificado",
+        "evidencias": [
+          {
+            "fonte": "src:objref-permissionset"
+          }
+        ],
+        "contexto": "Id de registro do(s) objeto(s) referenciado(s)."
+      },
+      "disponibilidade": {
+        "desde_versao": "26.0",
+        "ate_versao": "37.0",
+        "estado": "verificado"
+      },
+      "explicacao": "explicada",
+      "estado": "verificado",
+      "evidencias": [
+        {
+          "fonte": "src:objref-permissionset"
+        }
+      ],
+      "referencia": {
+        "alvos": [
+          "UserLicense"
+        ],
+        "nome_relacionamento": null
+      }
+    }
+  ],
+  "consultas": [
+    {
+      "api": "padrao",
+      "soql": "SELECT Id, Name, Label, IsOwnedByProfile FROM PermissionSet WHERE IsOwnedByProfile = false",
+      "contexto": "API padrão; o filtro exclui permission sets internos de perfis.",
+      "validacao": "documental"
+    }
+  ],
+  "apex": {
+    "consulta_soql_direta": {
+      "estado": "verificado",
+      "valor": true,
+      "nota": "Objeto da API padrão: consultável por SOQL em Apex, sujeito a permissões.",
+      "evidencias": [
+        {
+          "fonte": "src:objref-permissionset"
+        }
+      ]
+    },
+    "nota": "Exemplo Apex não fornecido nesta fase."
+  },
+  "juncao": false,
+  "setup": {
+    "estado": "nao_aplicavel",
+    "nota": "Objeto consultável via API; não é tela do Setup."
+  },
+  "cobertura": {
+    "estrutural": {
+      "estado": "parcial",
+      "esperado": null,
+      "presente": 12,
+      "nota": "Campos não-Permissions listados; Id e campos de sistema não constam da extração; Permissions* são dinâmicos."
+    },
+    "explicativa": {
+      "estado": "parcial",
+      "esperado": 12,
+      "presente": 11
+    },
+    "mapeamento": {
+      "estado": "parcial",
+      "nota": "Ver relacionamentos registrados."
+    }
+  },
+  "alertas": [],
+  "estado": "verificado",
+  "evidencias": [
+    {
+      "fonte": "src:objref-permissionset"
+    }
+  ],
+  "dominio_dinamico_de_campos": {
+    "padrao_nome": "Permissions*",
+    "descricao": "Um campo booleano por permissão (Create, Filter, Update); conjunto varia por org e licença; obter com describeSObjects().",
+    "estado": "verificado",
+    "evidencias": [
+      {
+        "fonte": "src:objref-permissionset"
+      }
+    ]
+  }
+}

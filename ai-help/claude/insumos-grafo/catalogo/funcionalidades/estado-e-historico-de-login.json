@@ -1,0 +1,92 @@
+{
+  "id": "func:estado-e-historico-de-login",
+  "nome": "Estado e histórico de login",
+  "nome_tecnico": "User login state and history",
+  "aliases": [
+    "login history",
+    "histórico de login",
+    "iplogin",
+    "ip de login",
+    "usuário congelado"
+  ],
+  "termos_busca": [
+    "estado e histórico de login",
+    "histórico de login",
+    "ip de login",
+    "iplogin",
+    "login history",
+    "user login state and history",
+    "usuário congelado"
+  ],
+  "o_que_e": "Mostra o estado atual de login de cada usuário (congelado, bloqueado) e o histórico de tentativas.",
+  "finalidade": "Investigar acessos, bloqueios e a origem das tentativas de login.",
+  "exemplo": "Verificar de qual IP veio uma tentativa de login que falhou ontem.",
+  "classificacao_principal": {
+    "classificacao": "cls:acesso-identidade-e-seguranca",
+    "subclassificacao": "sub:sessoes-e-politicas-de-login"
+  },
+  "classificacoes_secundarias": [
+    {
+      "classificacao": "cls:observabilidade-auditoria-e-operacao",
+      "subclassificacao": "sub:historico-de-login",
+      "motivo": "O histórico de tentativas é usado em auditoria e operação."
+    }
+  ],
+  "representacoes": {
+    "metadata_types": [],
+    "objetos_api": [
+      {
+        "ref": "obj:UserLogin",
+        "papel": "Estado atual de login."
+      },
+      {
+        "ref": "obj:LoginHistory",
+        "papel": "Histórico de tentativas."
+      }
+    ],
+    "ausencias": [
+      {
+        "tipo": "metadata_type",
+        "estado": "verificado",
+        "motivo": "UserLogin e LoginHistory não estão entre os metadata types da v68; são objetos de dados.",
+        "evidencias": [
+          {
+            "fonte": "src:sdr-metadata-support"
+          }
+        ]
+      }
+    ]
+  },
+  "setup": {
+    "estado": "verificado",
+    "valor": "Setup > Quick Find: Login History",
+    "nota": "Tela de histórico. Rótulos em inglês, como na Ajuda; a tradução da interface em pt-BR não foi verificada.",
+    "evidencias": [
+      {
+        "fonte": "src:help-login-history"
+      }
+    ]
+  },
+  "recomendacoes": [],
+  "alertas": [
+    "Não existe um item 'IpLogin': restrições de IP por perfil estão em Profile.loginIpRanges; o IP de cada tentativa está em LoginHistory.SourceIp.",
+    "A tela de Setup mostra até 20.000 registros dos últimos 6 meses; o download cobre os últimos 6 meses (Ajuda). Retenção do objeto LoginHistory na API não confirmada."
+  ],
+  "limitacoes": [],
+  "estado": "verificado",
+  "evidencias": [
+    {
+      "fonte": "src:objref-userlogin"
+    },
+    {
+      "fonte": "src:objref-loginhistory"
+    },
+    {
+      "fonte": "src:help-login-history"
+    }
+  ],
+  "pre_requisitos": [
+    "Edições (Ajuda): Contact Manager, Group, Professional, Enterprise, Performance, Unlimited e Developer.",
+    "Monitor Login History ou Manage Users."
+  ]
+}
