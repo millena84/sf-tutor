@@ -638,6 +638,8 @@ def gerar(base=BASE, destino=None):
         for p in e["propriedades"]:
             no(p["id"], "propriedade_xml", p["nome"], tipo_tecnico=p["tipo_tecnico"], estado=p["estado"], explicacao=p["explicacao"])
             ar(e["id"], p["id"], "propriedade")
+            # estruturas aninhadas também precisam da ligação de tipo composto (antes só saía de mdt:)
+            if p.get("estrutura_ref"): ar(p["id"], p["estrutura_ref"], "tipo_composto")
     for o in C["objetos-api"].values():
         no(o["id"], "objeto_api_juncao" if o["juncao"] else "objeto_api", o["nome"], estado=o["estado"], resumo=o["o_que_e"],
            apis=sorted(e["api"] for e in o["exposicoes"] if e["estado"] == "verificado"))
@@ -676,8 +678,84 @@ def gerar(base=BASE, destino=None):
             textos |= set(funcs[n["id"]].get("aliases", [])) | set(funcs[n["id"]].get("termos_busca", []))
         busca.append({"id": n["id"], "tipo": n["tipo"], "textos": sorted(textos)})
     gravar(os.path.join(out, "grafo", "busca.json"), busca)
-    gravar(os.path.join(out, "cobertura.json"), cobertura(C, base))
+    cob = cobertura(C, base)
+    gravar(os.path.join(out, "cobertura.json"), cob)
+    gerar_site(C, base, out, nos, arestas, {"por_funcionalidade": pf, "por_nuvem": pn}, cob)
     return out
+
+
+# --------------------------------------------------------------------------- projeção para o site (contrato versionado)
+CONTRATO_SITE = {"nome": "sf-tutor-site", "versao": "1.0.0"}
+TIPOS_FOLHA = {"campo_api", "propriedade_xml"}          # vivem dentro da entidade-mãe
+TIPOS_ARESTA_FOLHA = {"campo", "propriedade"}           # deriváveis da entidade-mãe
+
+
+def caminho_entidade(i):
+    """id canônico -> caminho relativo do arquivo da entidade em gerado/site/entidades/."""
+    if i == "salesforce":
+        return "entidades/salesforce.json"
+    prefixo, nome = i.split(":", 1)
+    return f"entidades/{prefixo}/{nome}.json"
+
+
+def gerar_site(C, base, out, nos, arestas, visoes, cob):
+    """Projeção determinística consumida pelo tutorial (apps/sf-tutor). Não é segunda fonte:
+    as entidades são cópias dos cadastros de catalogo/, e o grafo-base é o recorte de grafo/ sem as folhas."""
+    site = os.path.join(out, "site")
+    pai_de = {}
+    for a in arestas:
+        if a["tipo"] in TIPOS_ARESTA_FOLHA:
+            pai_de[a["destino"]] = a["origem"]
+    textos = {}
+    for b in json.load(open(os.path.join(out, "grafo", "busca.json"), encoding="utf-8")):
+        textos[b["id"]] = b["textos"]
+    descr = {}
+    for f in C["funcionalidades"].values(): descr[f["id"]] = f["o_que_e"]
+    for m in C["metadata-types"].values():
+        descr[m["id"]] = m["o_que_e"]
+        for p in m["propriedades"]: descr[p["id"]] = p.get("o_que_e")
+    for e in C["estruturas"].values():
+        descr[e["id"]] = e.get("o_que_e")
+        for p in e["propriedades"]: descr[p["id"]] = p.get("o_que_e")
+    for o in C["objetos-api"].values():
+        descr[o["id"]] = o["o_que_e"]
+        for c in o["campos"]: descr[c["id"]] = c.get("o_que_e")
+    busca = []
+    for n in nos:
+        item = {"id": n["id"], "tipo": n["tipo"], "rotulo": n["rotulo"], "textos": textos.get(n["id"], [n["rotulo"]])}
+        if n["id"] in pai_de: item["pai"] = pai_de[n["id"]]
+        if descr.get(n["id"]): item["descricao"] = descr[n["id"]]
+        busca.append(item)
+    base_nos = [n for n in nos if n["tipo"] not in TIPOS_FOLHA]
+    base_arestas = [a for a in arestas if a["tipo"] not in TIPOS_ARESTA_FOLHA]
+    gravar(os.path.join(site, "grafo-base.json"), {"nos": base_nos, "arestas": base_arestas})
+    gravar(os.path.join(site, "visoes.json"), visoes)
+    gravar(os.path.join(site, "busca.json"), busca)
+    gravar(os.path.join(site, "cobertura.json"), cob)
+    entidades = {"salesforce": C["salesforce"]}
+    for chave in ("nuvens", "classificacoes", "subclassificacoes", "funcionalidades", "metadata-types", "estruturas", "objetos-api", "relacionamentos"):
+        for e in C[chave].values():
+            entidades[e["id"]] = e
+    for i, e in sorted(entidades.items()):
+        gravar(os.path.join(site, caminho_entidade(i)), e)
+    reg = json.load(open(os.path.join(base, "fontes", "registro.json"), encoding="utf-8"))
+    fontes = {f["id"]: {k: f.get(k) for k in ("titulo", "url", "tipo", "versao", "data_verificacao", "metodo")} for f in reg["fontes"]}
+    gravar(os.path.join(site, "fontes.json"), fontes)
+    contagem = {}
+    for n in nos:
+        contagem[n["tipo"]] = contagem.get(n["tipo"], 0) + 1
+    gravar(os.path.join(site, "manifest.json"), {
+        "contrato": CONTRATO_SITE,
+        "versao_base": C["salesforce"]["versao_base"],
+        "arquivos": {"grafo_base": "grafo-base.json", "visoes": "visoes.json", "busca": "busca.json", "cobertura": "cobertura.json",
+                     "fontes": "fontes.json", "entidades": "entidades/<prefixo>/<nome>.json (salesforce: entidades/salesforce.json)"},
+        "contagens": {"nos_por_tipo": dict(sorted(contagem.items())), "entidades": len(entidades), "fontes": len(fontes),
+                      "arestas": len(arestas), "arestas_base": len(base_arestas)},
+        "regras": ["Campos (campo_api) e propriedades (propriedade_xml) vivem dentro do arquivo da entidade-mãe; o grafo-base não os traz.",
+                   "busca.json cobre todos os nós, inclusive folhas, com o id da entidade-mãe em 'pai'.",
+                   "Ids canônicos são estáveis; uma ocorrência visual em outro caminho aponta para o mesmo id.",
+                   "Mudança incompatível neste formato sobe a versão maior do contrato."],
+        "nota": "Gerado deterministicamente por ferramentas/sftutor.py a partir de catalogo/ e fontes/. Não editar à mão."})
 
 
 # --------------------------------------------------------------------------- cobertura

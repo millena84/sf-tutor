@@ -1,0 +1,92 @@
+{
+  "alertas": [
+    "Não existe um item 'IpLogin': restrições de IP por perfil estão em Profile.loginIpRanges; o IP de cada tentativa está em LoginHistory.SourceIp.",
+    "A tela de Setup mostra até 20.000 registros dos últimos 6 meses; o download cobre os últimos 6 meses (Ajuda). Retenção do objeto LoginHistory na API não confirmada."
+  ],
+  "aliases": [
+    "login history",
+    "histórico de login",
+    "iplogin",
+    "ip de login",
+    "usuário congelado"
+  ],
+  "classificacao_principal": {
+    "classificacao": "cls:acesso-identidade-e-seguranca",
+    "subclassificacao": "sub:sessoes-e-politicas-de-login"
+  },
+  "classificacoes_secundarias": [
+    {
+      "classificacao": "cls:observabilidade-auditoria-e-operacao",
+      "motivo": "O histórico de tentativas é usado em auditoria e operação.",
+      "subclassificacao": "sub:historico-de-login"
+    }
+  ],
+  "estado": "verificado",
+  "evidencias": [
+    {
+      "fonte": "src:objref-userlogin"
+    },
+    {
+      "fonte": "src:objref-loginhistory"
+    },
+    {
+      "fonte": "src:help-login-history"
+    }
+  ],
+  "exemplo": "Verificar de qual IP veio uma tentativa de login que falhou ontem.",
+  "finalidade": "Investigar acessos, bloqueios e a origem das tentativas de login.",
+  "id": "func:estado-e-historico-de-login",
+  "limitacoes": [],
+  "nome": "Estado e histórico de login",
+  "nome_tecnico": "User login state and history",
+  "o_que_e": "Mostra o estado atual de login de cada usuário (congelado, bloqueado) e o histórico de tentativas.",
+  "pre_requisitos": [
+    "Edições (Ajuda): Contact Manager, Group, Professional, Enterprise, Performance, Unlimited e Developer.",
+    "Monitor Login History ou Manage Users."
+  ],
+  "recomendacoes": [],
+  "representacoes": {
+    "ausencias": [
+      {
+        "estado": "verificado",
+        "evidencias": [
+          {
+            "fonte": "src:sdr-metadata-support"
+          }
+        ],
+        "motivo": "UserLogin e LoginHistory não estão entre os metadata types da v68; são objetos de dados.",
+        "tipo": "metadata_type"
+      }
+    ],
+    "metadata_types": [],
+    "objetos_api": [
+      {
+        "papel": "Estado atual de login.",
+        "ref": "obj:UserLogin"
+      },
+      {
+        "papel": "Histórico de tentativas.",
+        "ref": "obj:LoginHistory"
+      }
+    ]
+  },
+  "setup": {
+    "estado": "verificado",
+    "evidencias": [
+      {
+        "fonte": "src:help-login-history"
+      }
+    ],
+    "nota": "Tela de histórico. Rótulos em inglês, como na Ajuda; a tradução da interface em pt-BR não foi verificada.",
+    "valor": "Setup > Quick Find: Login History"
+  },
+  "termos_busca": [
+    "estado e histórico de login",
+    "histórico de login",
+    "ip de login",
+    "iplogin",
+    "login history",
+    "user login state and history",
+    "usuário congelado"
+  ]
+}

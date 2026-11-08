@@ -209,5 +209,46 @@ class TestWsdl(unittest.TestCase):
             shutil.rmtree(tmp)
 
 
+class TestContratoSite(unittest.TestCase):
+    """Contrato de gerado/site/ (issue #6): manifesto válido e arquivos coerentes com o catálogo."""
+    @classmethod
+    def setUpClass(cls):
+        cls.tmp = tempfile.mkdtemp()
+        for d in ("catalogo", "schemas", "config", "fontes", "inventarios"):
+            shutil.copytree(os.path.join(BASE, d), os.path.join(cls.tmp, d))
+        cls.site = os.path.join(T.gerar(cls.tmp), "site")
+
+    @classmethod
+    def tearDownClass(cls):
+        shutil.rmtree(cls.tmp)
+
+    def test_manifesto_valida_no_schema(self):
+        import jsonschema
+        schema = ler(os.path.join(BASE, "schemas", "site-manifest.schema.json"))
+        jsonschema.validate(ler(os.path.join(self.site, "manifest.json")), schema)
+
+    def test_arquivos_e_entidades(self):
+        man = ler(os.path.join(self.site, "manifest.json"))
+        for k in ("grafo_base", "visoes", "busca", "cobertura", "fontes"):
+            self.assertTrue(os.path.exists(os.path.join(self.site, man["arquivos"][k])), k)
+        base = ler(os.path.join(self.site, "grafo-base.json"))
+        ids = {n["id"] for n in base["nos"]}
+        self.assertFalse(any(n["tipo"] in ("campo_api", "propriedade_xml") for n in base["nos"]))
+        for i in ids:
+            self.assertTrue(os.path.exists(os.path.join(self.site, T.caminho_entidade(i))), i)
+        busca = ler(os.path.join(self.site, "busca.json"))
+        self.assertEqual(len(busca), sum(man["contagens"]["nos_por_tipo"].values()))
+        for b in busca:
+            if b["tipo"] in ("campo_api", "propriedade_xml"):
+                self.assertIn(b.get("pai"), ids, b["id"])
+
+    def test_estruturas_aninhadas_alcancaveis(self):
+        base = ler(os.path.join(self.site, "grafo-base.json"))
+        alvos = {a["destino"] for a in base["arestas"] if a["tipo"] == "tipo_composto"}
+        for n in base["nos"]:
+            if n["tipo"] == "estrutura_auxiliar":
+                self.assertIn(n["id"], alvos, n["id"])
+
+
 if __name__ == "__main__":
     unittest.main()

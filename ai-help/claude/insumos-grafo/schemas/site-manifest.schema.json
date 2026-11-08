@@ -1,0 +1,38 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "site-manifest.schema.json",
+  "title": "Manifesto da projeção para o site (gerado/site/manifest.json)",
+  "description": "Contrato versionado entre os insumos e o tutorial (apps/sf-tutor). Mudança incompatível sobe a versão maior.",
+  "type": "object",
+  "required": ["contrato", "versao_base", "arquivos", "contagens", "regras", "nota"],
+  "properties": {
+    "contrato": {
+      "type": "object",
+      "required": ["nome", "versao"],
+      "properties": {
+        "nome": {"const": "sf-tutor-site"},
+        "versao": {"type": "string", "pattern": "^[0-9]+\\.[0-9]+\\.[0-9]+$"}
+      }
+    },
+    "versao_base": {"type": "object"},
+    "arquivos": {
+      "type": "object",
+      "required": ["grafo_base", "visoes", "busca", "cobertura", "fontes", "entidades"],
+      "additionalProperties": {"type": "string"}
+    },
+    "contagens": {
+      "type": "object",
+      "required": ["nos_por_tipo", "entidades", "fontes", "arestas", "arestas_base"],
+      "properties": {
+        "nos_por_tipo": {"type": "object", "additionalProperties": {"type": "integer", "minimum": 0}},
+        "entidades": {"type": "integer", "minimum": 1},
+        "fontes": {"type": "integer", "minimum": 0},
+        "arestas": {"type": "integer", "minimum": 0},
+        "arestas_base": {"type": "integer", "minimum": 0}
+      }
+    },
+    "regras": {"type": "array", "items": {"type": "string"}},
+    "nota": {"type": "string"}
+  },
+  "additionalProperties": false
+}
