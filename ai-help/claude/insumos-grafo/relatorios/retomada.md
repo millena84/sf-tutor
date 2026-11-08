@@ -1,6 +1,6 @@
 # Ponto de retomada
 
-Situação em 2026-11-08, após o lote 3d (pendências de Agentforce Sales e Service fechadas). Os números vivos estão em `relatorios/cobertura.md`; o detalhe do que foi resolvido está em `relatorios/resolucao-bloqueios.md`.
+Situação em 2026-11-08, após o lote 3d (pendências de Agentforce Sales e Service fechadas) e a projeção do site (`gerado/site/`, contrato 1.0.0). Os números vivos estão em `relatorios/cobertura.md`; o detalhe do que foi resolvido está em `relatorios/resolucao-bloqueios.md`.
 
 ## O que está pronto
 
@@ -13,11 +13,26 @@ Situação em 2026-11-08, após o lote 3d (pendências de Agentforce Sales e Ser
   - 36 metadata types e 64 estruturas;
   - 60 objetos API;
   - 90 relacionamentos.
-- **Caminhos de Setup:** verificados em 12 das 14 funcionalidades.
+- **Caminhos de Setup:** verificados em 20 das 31 funcionalidades (lista das 11 restantes na tabela de lacunas).
 - **Data 360:** contexto técnico verificado.
 - **Agentforce Sales e Agentforce Service** (antes Sales Cloud e Service Cloud): nome, contexto técnico e licenças verificados. Vendas tem 10 funcionalidades próprias e atendimento, 3; Knowledge, regras de atribuição, horário comercial, apps de console e Path entram como capacidades compartilhadas. O relatório de pesquisa usado como mapa está em `fontes/pesquisas/`.
 
 Os JSONs de `catalogo/` são a fonte da verdade. Os lotes 1, 2 e 3a a 3d foram aplicados por scripts de carga mantidos fora do repositório; edições futuras devem ser feitas nos JSONs ou por ferramentas criadas em `ferramentas/`.
+
+## Acompanhamento no GitHub
+
+Os lotes e o site são acompanhados por issues em millena84/sf-tutor (milestones "MVP do site" e "v2"). Este arquivo continua sendo a fonte do detalhe técnico; cada issue aponta para a seção correspondente. O site é publicado em millena84/tutorial-sf-grafo (GitHub Pages), só com autorização.
+
+## Projeção para o site
+
+`gerado/site/` é gerada por `sftutor.py gerar` com contrato versionado (`manifest.json`, schema em `schemas/site-manifest.schema.json`, testes em `testes/test_insumos.py`). O app em `apps/sf-tutor/` copia essa pasta no build; a cópia é gerada, nunca editada.
+
+**Estado do app (2026-11-08):** MVP local pronto para revisão, ainda sem commit e sem publicação.
+- Comandos e arquitetura: `apps/sf-tutor/NOTA-ARQUITETURA.md`.
+- `npm run verificar` passa: build com validação da base, lint, 28 testes unitários, 25 E2E (desktop e 360px) e performance (dados reais e fixture sintética).
+- Pendências visuais: logo oficial (hoje placeholder identificado) e inspeção da referência flavinho.pages.dev (bloqueada para acesso automatizado).
+- Publicação: PR #1 em millena84/tutorial-sf-grafo com o build em `docs/`. Depois do merge, ative o Pages manualmente (Settings → Pages → Deploy from a branch → `main` / `/docs`); a API de Pages não é acessível nas sessões do Claude.
+- Evolução: issues #13 a #20 (logo, referência visual, publicação automática, CI, rótulos, arraste, acessibilidade, avisos do validador).
 
 ## Lacunas por item
 
@@ -34,7 +49,7 @@ Os JSONs de `catalogo/` são a fonte da verdade. Os lotes 1, 2 e 3a a 3d foram a
 | Exposições Tooling de Profile, PermissionSet, PSG, PSA, User, RecordType | exposição verificada | Campos e operações da exposição Tooling |
 | obj:UserLogin (Tooling) | indeterminado | Fora do trecho servido do índice |
 | obj:EntityDefinition, FieldDefinition | parcial | Recortes de 13 de 64 e de 12 de 56 campos |
-| Setup de Perfis e de Tipos de registro | desconhecido | Página oficial não localizada nesta rodada |
+| Setup de 11 funcionalidades | desconhecido | Perfis, tipos de registro, contas, contatos, leads, oportunidades, casos, campanhas, produtos e catálogos de preço, previsões colaborativas, equipes de conta e de oportunidade |
 | Licenças de Core | desconhecido | Não registradas |
 | Licenças de Sales e Service | parcial | Licença de usuário e feature license registradas; matriz completa de edições pendente |
 | obj:Lead | parcial | 74 nomes lidos; tipos e propriedades só de 14 campos |
@@ -43,7 +58,7 @@ Os JSONs de `catalogo/` são a fonte da verdade. Os lotes 1, 2 e 3a a 3d foram a
 | Objetos parciais de Sales e Service | parcial | Contact, Campaign, Product2, Quote, AgentWork, KnowledgeArticleVersion (páginas truncadas); QueueRoutingConfig e Entitlement (linha sem nome); Knowledge__kav sem página própria |
 | mdt:KnowledgeSettings, ForecastingSettings | parcial | Subtipos lidos (nota de extração), ainda não cadastrados como estruturas |
 | mdt:PresenceUserConfig | parcial | Tabela com uma linha vazia |
-| mdt:EntitlementProcess, Territory2Model | parcial | WorkflowActionReference e FieldValue sem estrutura detalhada |
+| mdt:EntitlementProcess | parcial | WorkflowActionReference sem estrutura detalhada |
 
 ## Bloqueios reais
 
@@ -89,5 +104,8 @@ Execute o próximo lote pendente de relatorios/retomada.md (comece pelo Lote 3):
 - ao terminar, rode `tudo` e os testes, atualize esta retomada e informe o que foi
   feito, validado, pendente e o próximo passo.
 Se o usuário fornecer metadata.wsdl ou PDFs versionados, use-os antes para fechar as
-lacunas de páginas truncadas. Não faça commit, push ou publicação sem autorização.
+lacunas de páginas truncadas.
+Publicação: só com autorização. Fluxo autorizado: branch nova a partir da main
+atualizada (confira antes se o PR anterior já foi mergeado), PR com "Closes #n" da
+issue correspondente. Nunca push direto na main.
 ```
