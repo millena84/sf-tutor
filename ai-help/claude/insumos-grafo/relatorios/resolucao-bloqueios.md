@@ -16,7 +16,7 @@ Toda fonte nova está em `fontes/registro.json`, com uma nota em `fontes/extraco
 | 6 | Caminhos de Setup | quase resolvido | 0 → 12 de 14 funcionalidades |
 | 7 | Licenças e edições | parcial | edições para 9 funcionalidades; licença add-on do Data 360; licenças de Agentforce Sales e Service (lote 3a) |
 | 8 | Contexto técnico do Data 360 | **resolvido** | `bloqueado` → `verificado` |
-| 9 | Funcionalidades de Sales e Service Cloud | **iniciado** (lote 3a) | nuvens verificadas; 3 funcionalidades próprias (Leads, Oportunidades, Casos) |
+| 9 | Funcionalidades de Sales e Service Cloud | **mapeado** (lotes 3a e 3b) | 17 funcionalidades nas duas nuvens; 7 objetos, 3 metadata types e 14 relacionamentos novos no 3b |
 | 10 | Classificação Core dos 981 tipos | não iniciado | volume; ver sugestão |
 | 11 | WSDL | **reclassificado** | não é bloqueio; a documentação foi usada como fonte alternativa |
 | 12 | Rede do shell | **contornado** | leitura pelo endpoint versionado; limites de tamanho descobertos |
@@ -129,6 +129,36 @@ Como você observou, a verificação de recursos por nuvem é feita na documenta
 
 **O que falta:** contas, contatos, campanhas, produtos, cotações, previsões, territórios, Omni-Channel, Knowledge, entitlements e regras de atribuição e escalonamento. Todos são citados pela Ajuda, mas ainda não foram catalogados.
 
+### 9b. Restante de Sales e Service (lote 3b)
+
+**Ponto de partida:** relatório de pesquisa assistida de 2026-11-08, guardado em `fontes/pesquisas/2026-11-08-agentforce-sales-service.md`. Ele serviu para descobrir o que ler, não como fonte: cada fato catalogado foi relido na página oficial.
+
+**O que entrou:**
+- **14 funcionalidades:**
+  - vendas: contas, contatos, campanhas, produtos e catálogos de preço, cotações, previsões colaborativas, territórios de vendas, equipes de conta e de oportunidade;
+  - atendimento: Omni-Channel, Lightning Knowledge, entitlements e milestones (SLA Management), regras de atribuição e escalonamento, horário comercial, apps de console.
+- **7 objetos:**
+  - estrutura completa: AccountTeamMember (11 campos), OpportunityTeamMember (8), LeadStatus (5), CaseMilestone (20), BusinessHours (20);
+  - estrutura parcial: Account (tabela de conta pessoal truncada) e Contact (tabela truncada).
+- **3 metadata types:** EntitlementProcess (com 2 subtipos), Territory2Model e ServicePresenceStatus (com 1 subtipo).
+- **14 relacionamentos novos**, incluindo os alvos Account e Contact que antes não estavam catalogados.
+- **Caminhos de Setup confirmados na Ajuda:** 8 funcionalidades.
+- **Licenças:** Knowledge User (feature license) e licenças do Omni-Channel.
+- **Alertas registrados:**
+  - aposentadoria do Standard Omni-Channel (Summer '26);
+  - novos nomes Sales Territories e SLA Management/SLA Policies.
+
+**Divergências que a releitura evitou:**
+- O relatório citou cinco propriedades que não existem nas páginas 68.0: `entitlementRules`, `isRecordTypeApplied` e `recordType` em EntitlementProcess; `recordVisibility` e `userRecordAccess` em Territory2Model.
+- Elas ficaram fora do catálogo e estão registradas em `divergencias_documentais`.
+
+**O que falta:**
+- objetos de campanhas, produtos, cotações, previsões, territórios, Omni-Channel, Knowledge e Entitlement (exceto CaseMilestone);
+- os tipos *Settings, AssignmentRules e EscalationRules;
+- o caminho de Escalation Rules.
+
+Todos estão declarados como ausência `desconhecido`, com os nomes candidatos.
+
 ### 10. Classificação Core (não iniciado)
 
 É resolvível com documentação, mas exige centenas de leituras. Fica como lote próprio (ver sugestões).
@@ -166,4 +196,5 @@ Continua sem org. As consultas permanecem com `validacao: "documental"`.
 3. **Uma org Developer Edition com usuário somente leitura,** para `describe` e execução das consultas de exemplo. Isso permitiria passar parte das validações de "documental" para "org", registrando o contexto sem dados reais.
 4. **Revalidar as páginas da Ajuda a cada release.** Elas não têm número de versão; a data de verificação está registrada.
 5. **Tipo de licença `licenca_recurso` no schema de nuvem (implementado no lote 3a).** A feature license Service Cloud User não é licença de usuário, de permission set, edição nem add-on.
-6. **Classificação Core em lotes por família de nome.** Começar pelos tipos que já aparecem nas subclassificações (Settings, SharingRules, Role, Group, Queue, GlobalValueSet…), sempre com a página do tipo como evidência. Nunca classificar por semelhança de nome.
+6. **Relatórios de pesquisa assistida como mapa, não como fonte.** No lote 3b, a releitura encontrou 5 propriedades inexistentes no relatório. Manter a regra: relatório em `fontes/pesquisas/`, fato só com releitura registrada.
+7. **Classificação Core em lotes por família de nome.** Começar pelos tipos que já aparecem nas subclassificações (Settings, SharingRules, Role, Group, Queue, GlobalValueSet…), sempre com a página do tipo como evidência. Nunca classificar por semelhança de nome.

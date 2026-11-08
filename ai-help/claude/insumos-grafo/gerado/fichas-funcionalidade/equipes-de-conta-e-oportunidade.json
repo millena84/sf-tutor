@@ -1,0 +1,1775 @@
+{
+  "funcionalidade": {
+    "alertas": [],
+    "aliases": [
+      "equipe de conta",
+      "account team",
+      "opportunity team",
+      "team selling"
+    ],
+    "classificacao_principal": {
+      "classificacao": "cls:processos-de-negocio-especificos-de-produto",
+      "subclassificacao": "sub:vendas"
+    },
+    "classificacoes_secundarias": [
+      {
+        "classificacao": "cls:acesso-identidade-e-seguranca",
+        "motivo": "AccountTeamMember define níveis de acesso a conta, oportunidades, casos e contatos.",
+        "subclassificacao": "sub:acesso-a-registros-e-hierarquias"
+      }
+    ],
+    "estado": "verificado",
+    "evidencias": [
+      {
+        "fonte": "src:objref-accountteammember"
+      },
+      {
+        "fonte": "src:objref-opportunityteammember"
+      },
+      {
+        "fonte": "src:help-sales-basics"
+      }
+    ],
+    "exemplo": "Na conta ACME, o executivo de contas é dono e o engenheiro de pré-venda entra na equipe com acesso de leitura.",
+    "finalidade": "Dar acesso e responsabilidade compartilhada sem mudar o dono do registro.",
+    "id": "func:equipes-de-conta-e-oportunidade",
+    "limitacoes": [],
+    "nome": "Equipes de conta e de oportunidade",
+    "nome_tecnico": "Account Teams and Opportunity Teams",
+    "o_que_e": "Grupo de usuários que trabalha junto numa conta ou oportunidade, cada um com um papel.",
+    "pre_requisitos": [
+      "Equipes de conta: Enterprise, Unlimited e Performance, com o recurso habilitado.",
+      "Equipes de oportunidade: team selling habilitado."
+    ],
+    "recomendacoes": [],
+    "representacoes": {
+      "ausencias": [
+        {
+          "estado": "desconhecido",
+          "motivo": "Não investigado. Candidato(s) no inventário v68, ainda não lidos: AccountSettings, OpportunitySettings.",
+          "tipo": "metadata_type"
+        }
+      ],
+      "metadata_types": [],
+      "objetos_api": [
+        {
+          "papel": "Membro da equipe de conta (junção conta–usuário).",
+          "ref": "obj:AccountTeamMember"
+        },
+        {
+          "papel": "Membro da equipe de oportunidade (junção oportunidade–usuário).",
+          "ref": "obj:OpportunityTeamMember"
+        }
+      ]
+    },
+    "setup": {
+      "estado": "desconhecido",
+      "nota": "Caminho de configuração não levantado nesta rodada."
+    },
+    "termos_busca": [
+      "account team",
+      "account teams and opportunity teams",
+      "equipe de conta",
+      "equipes de conta e de oportunidade",
+      "opportunity team",
+      "team selling"
+    ]
+  },
+  "metadata_types": [],
+  "nota": "Gerado deterministicamente a partir de catalogo/. Não editar à mão.",
+  "objetos_api": [
+    {
+      "objeto": {
+        "alertas": [
+          "Registros excluídos diretamente não vão para a lixeira (exceto em exclusão em cascata com a conta)."
+        ],
+        "apex": {
+          "consulta_soql_direta": {
+            "estado": "verificado",
+            "evidencias": [
+              {
+                "fonte": "src:objref-accountteammember"
+              }
+            ],
+            "nota": "Objeto da API padrão: consultável por SOQL em Apex, sujeito a permissões.",
+            "valor": true
+          },
+          "nota": "Exemplo Apex não fornecido nesta fase."
+        },
+        "campos": [
+          {
+            "apis": [
+              "padrao"
+            ],
+            "default": {
+              "estado": "desconhecido",
+              "forma": "nao_declarado_na_fonte"
+            },
+            "disponibilidade": {
+              "ate_versao": null,
+              "desde_versao": null,
+              "estado": "desconhecido"
+            },
+            "dominio": {
+              "contexto": "Valores conforme a página; não se declara lista completa.",
+              "estado": "verificado",
+              "evidencias": [
+                {
+                  "fonte": "src:objref-accountteammember"
+                }
+              ],
+              "lista_completa": "desconhecido",
+              "natureza": "enum_fechado",
+              "valores": [
+                {
+                  "valor": "Read"
+                },
+                {
+                  "valor": "Edit"
+                },
+                {
+                  "valor": "All"
+                }
+              ]
+            },
+            "estado": "verificado",
+            "evidencias": [
+              {
+                "fonte": "src:objref-accountteammember"
+              }
+            ],
+            "explicacao": "explicada",
+            "id": "obj:AccountTeamMember.AccountAccessLevel",
+            "nome": "AccountAccessLevel",
+            "o_que_e": "Nível de acesso do membro à conta.",
+            "obrigatoriedade": {
+              "estado": "desconhecido",
+              "valor": "desconhecida"
+            },
+            "origem": {
+              "estado": "verificado",
+              "evidencias": [
+                {
+                  "fonte": "src:objref-accountteammember"
+                }
+              ],
+              "nota": "Campo padrão do objeto documentado.",
+              "valor": "padrao_plataforma"
+            },
+            "propriedades_api": {
+              "create": true,
+              "defaulted_on_create": false,
+              "estado": "verificado",
+              "evidencias": [
+                {
+                  "fonte": "src:objref-accountteammember"
+                }
+              ],
+              "filter": true,
+              "group": true,
+              "id_lookup": false,
+              "nillable": true,
+              "restricted_picklist": false,
+              "sort": true,
+              "update": true
+            },
+            "somente_leitura": false,
+            "tipo_tecnico": "picklist"
+          },
+          {
+            "apis": [
+              "padrao"
+            ],
+            "default": {
+              "estado": "desconhecido",
+              "forma": "nao_declarado_na_fonte"
+            },
+            "disponibilidade": {
+              "ate_versao": null,
+              "desde_versao": null,
+              "estado": "desconhecido"
+            },
+            "dominio": {
+              "contexto": "Id de registro do(s) objeto(s) referenciado(s).",
+              "estado": "verificado",
+              "evidencias": [
+                {
+                  "fonte": "src:objref-accountteammember"
+                }
+              ],
+              "natureza": "referencia"
+            },
+            "estado": "verificado",
+            "evidencias": [
+              {
+                "fonte": "src:objref-accountteammember"
+              }
+            ],
+            "explicacao": "explicada",
+            "id": "obj:AccountTeamMember.AccountId",
+            "nome": "AccountId",
+            "o_que_e": "Conta da equipe.",
+            "obrigatoriedade": {
+              "estado": "verificado",
+              "evidencias": [
+                {
+                  "fonte": "src:objref-accountteammember"
+                }
+              ],
+              "valor": "sim"
+            },
+            "origem": {
+              "estado": "verificado",
+              "evidencias": [
+                {
+                  "fonte": "src:objref-accountteammember"
+                }
+              ],
+              "nota": "Campo padrão do objeto documentado.",
+              "valor": "padrao_plataforma"
+            },
+            "propriedades_api": {
+              "create": true,
+              "defaulted_on_create": false,
+              "estado": "verificado",
+              "evidencias": [
+                {
+                  "fonte": "src:objref-accountteammember"
+                }
+              ],
+              "filter": true,
+              "group": true,
+              "id_lookup": false,
+              "nillable": false,
+              "restricted_picklist": false,
+              "sort": true,
+              "update": false
+            },
+            "referencia": {
+              "alvos": [
+                "obj:Account"
+              ],
+              "nome_relacionamento": null
+            },
+            "somente_leitura": false,
+            "tipo_tecnico": "reference"
+          },
+          {
+            "apis": [
+              "padrao"
+            ],
+            "default": {
+              "estado": "desconhecido",
+              "forma": "nao_declarado_na_fonte"
+            },
+            "disponibilidade": {
+              "ate_versao": null,
+              "desde_versao": "37.0",
+              "estado": "verificado"
+            },
+            "dominio": {
+              "contexto": "Valores conforme a página; não se declara lista completa.",
+              "estado": "verificado",
+              "evidencias": [
+                {
+                  "fonte": "src:objref-accountteammember"
+                }
+              ],
+              "lista_completa": "desconhecido",
+              "natureza": "enum_fechado",
+              "valores": [
+                {
+                  "valor": "None"
+                },
+                {
+                  "valor": "Read"
+                },
+                {
+                  "valor": "Edit"
+                }
+              ]
+            },
+            "estado": "verificado",
+            "evidencias": [
+              {
+                "fonte": "src:objref-accountteammember"
+              }
+            ],
+            "explicacao": "explicada",
+            "id": "obj:AccountTeamMember.CaseAccessLevel",
+            "nome": "CaseAccessLevel",
+            "o_que_e": "Nível de acesso aos casos da conta.",
+            "obrigatoriedade": {
+              "estado": "desconhecido",
+              "valor": "desconhecida"
+            },
+            "origem": {
+              "estado": "verificado",
+              "evidencias": [
+                {
+                  "fonte": "src:objref-accountteammember"
+                }
+              ],
+              "nota": "Campo padrão do objeto documentado.",
+              "valor": "padrao_plataforma"
+            },
+            "propriedades_api": {
+              "create": true,
+              "defaulted_on_create": false,
+              "estado": "verificado",
+              "evidencias": [
+                {
+                  "fonte": "src:objref-accountteammember"
+                }
+              ],
+              "filter": true,
+              "group": true,
+              "id_lookup": false,
+              "nillable": true,
+              "restricted_picklist": false,
+              "sort": true,
+              "update": true
+            },
+            "somente_leitura": false,
+            "tipo_tecnico": "picklist"
+          },
+          {
+            "apis": [
+              "padrao"
+            ],
+            "default": {
+              "estado": "desconhecido",
+              "forma": "nao_declarado_na_fonte"
+            },
+            "disponibilidade": {
+              "ate_versao": null,
+              "desde_versao": "37.0",
+              "estado": "verificado"
+            },
+            "dominio": {
+              "contexto": "Valores conforme a página; não se declara lista completa.",
+              "estado": "verificado",
+              "evidencias": [
+                {
+                  "fonte": "src:objref-accountteammember"
+                }
+              ],
+              "lista_completa": "desconhecido",
+              "natureza": "enum_fechado",
+              "valores": [
+                {
+                  "valor": "None"
+                },
+                {
+                  "valor": "Read"
+                },
+                {
+                  "valor": "Edit"
+                },
+                {
+                  "valor": "Controlled By Parent"
+                }
+              ]
+            },
+            "estado": "verificado",
+            "evidencias": [
+              {
+                "fonte": "src:objref-accountteammember"
+              }
+            ],
+            "explicacao": "explicada",
+            "id": "obj:AccountTeamMember.ContactAccessLevel",
+            "nome": "ContactAccessLevel",
+            "o_que_e": "Nível de acesso aos contatos da conta.",
+            "obrigatoriedade": {
+              "estado": "desconhecido",
+              "valor": "desconhecida"
+            },
+            "origem": {
+              "estado": "verificado",
+              "evidencias": [
+                {
+                  "fonte": "src:objref-accountteammember"
+                }
+              ],
+              "nota": "Campo padrão do objeto documentado.",
+              "valor": "padrao_plataforma"
+            },
+            "propriedades_api": {
+              "create": true,
+              "defaulted_on_create": false,
+              "estado": "verificado",
+              "evidencias": [
+                {
+                  "fonte": "src:objref-accountteammember"
+                }
+              ],
+              "filter": true,
+              "group": true,
+              "id_lookup": false,
+              "nillable": true,
+              "restricted_picklist": false,
+              "sort": true,
+              "update": true
+            },
+            "somente_leitura": false,
+            "tipo_tecnico": "picklist"
+          },
+          {
+            "apis": [
+              "padrao"
+            ],
+            "default": {
+              "estado": "desconhecido",
+              "forma": "nao_declarado_na_fonte"
+            },
+            "disponibilidade": {
+              "ate_versao": null,
+              "desde_versao": null,
+              "estado": "desconhecido"
+            },
+            "dominio": {
+              "contexto": "Valores não extraídos; podem depender de org, idioma ou recurso.",
+              "estado": "desconhecido",
+              "natureza": "lista_dinamica"
+            },
+            "estado": "verificado",
+            "evidencias": [
+              {
+                "fonte": "src:objref-accountteammember"
+              }
+            ],
+            "explicacao": "explicada",
+            "id": "obj:AccountTeamMember.CurrencyIsoCode",
+            "nome": "CurrencyIsoCode",
+            "o_que_e": "Moeda do registro (códigos permitidos na org).",
+            "obrigatoriedade": {
+              "estado": "desconhecido",
+              "valor": "desconhecida"
+            },
+            "origem": {
+              "estado": "verificado",
+              "evidencias": [
+                {
+                  "fonte": "src:objref-accountteammember"
+                }
+              ],
+              "nota": "Campo padrão do objeto documentado.",
+              "valor": "padrao_plataforma"
+            },
+            "propriedades_api": {
+              "create": false,
+              "defaulted_on_create": false,
+              "estado": "verificado",
+              "evidencias": [
+                {
+                  "fonte": "src:objref-accountteammember"
+                }
+              ],
+              "filter": true,
+              "group": false,
+              "id_lookup": false,
+              "nillable": false,
+              "restricted_picklist": true,
+              "sort": false,
+              "update": false
+            },
+            "somente_leitura": true,
+            "tipo_tecnico": "picklist"
+          },
+          {
+            "apis": [
+              "padrao"
+            ],
+            "default": {
+              "estado": "desconhecido",
+              "forma": "desconhecido",
+              "nota": "A API marca o campo como 'defaulted on create', mas o valor não foi declarado na extração."
+            },
+            "disponibilidade": {
+              "ate_versao": null,
+              "desde_versao": null,
+              "estado": "desconhecido"
+            },
+            "dominio": {
+              "estado": "verificado",
+              "evidencias": [
+                {
+                  "fonte": "src:objref-accountteammember"
+                }
+              ],
+              "lista_completa": "sim",
+              "natureza": "booleano",
+              "valores": [
+                {
+                  "valor": "true"
+                },
+                {
+                  "valor": "false"
+                }
+              ]
+            },
+            "estado": "verificado",
+            "evidencias": [
+              {
+                "fonte": "src:objref-accountteammember"
+              }
+            ],
+            "explicacao": "explicada",
+            "id": "obj:AccountTeamMember.IsDeleted",
+            "nome": "IsDeleted",
+            "o_que_e": "Indica se o registro foi excluído.",
+            "obrigatoriedade": {
+              "estado": "desconhecido",
+              "valor": "desconhecida"
+            },
+            "origem": {
+              "estado": "verificado",
+              "evidencias": [
+                {
+                  "fonte": "src:objref-accountteammember"
+                }
+              ],
+              "nota": "Campo padrão do objeto documentado.",
+              "valor": "padrao_plataforma"
+            },
+            "propriedades_api": {
+              "create": false,
+              "defaulted_on_create": true,
+              "estado": "verificado",
+              "evidencias": [
+                {
+                  "fonte": "src:objref-accountteammember"
+                }
+              ],
+              "filter": true,
+              "group": false,
+              "id_lookup": false,
+              "nillable": false,
+              "restricted_picklist": false,
+              "sort": false,
+              "update": false
+            },
+            "somente_leitura": true,
+            "tipo_tecnico": "boolean"
+          },
+          {
+            "apis": [
+              "padrao"
+            ],
+            "default": {
+              "estado": "desconhecido",
+              "forma": "nao_declarado_na_fonte"
+            },
+            "disponibilidade": {
+              "ate_versao": null,
+              "desde_versao": "37.0",
+              "estado": "verificado"
+            },
+            "dominio": {
+              "contexto": "Valores conforme a página; não se declara lista completa.",
+              "estado": "verificado",
+              "evidencias": [
+                {
+                  "fonte": "src:objref-accountteammember"
+                }
+              ],
+              "lista_completa": "desconhecido",
+              "natureza": "enum_fechado",
+              "valores": [
+                {
+                  "valor": "None"
+                },
+                {
+                  "valor": "Read"
+                },
+                {
+                  "valor": "Edit"
+                }
+              ]
+            },
+            "estado": "verificado",
+            "evidencias": [
+              {
+                "fonte": "src:objref-accountteammember"
+              }
+            ],
+            "explicacao": "explicada",
+            "id": "obj:AccountTeamMember.OpportunityAccessLevel",
+            "nome": "OpportunityAccessLevel",
+            "o_que_e": "Nível de acesso às oportunidades da conta.",
+            "obrigatoriedade": {
+              "estado": "desconhecido",
+              "valor": "desconhecida"
+            },
+            "origem": {
+              "estado": "verificado",
+              "evidencias": [
+                {
+                  "fonte": "src:objref-accountteammember"
+                }
+              ],
+              "nota": "Campo padrão do objeto documentado.",
+              "valor": "padrao_plataforma"
+            },
+            "propriedades_api": {
+              "create": true,
+              "defaulted_on_create": false,
+              "estado": "verificado",
+              "evidencias": [
+                {
+                  "fonte": "src:objref-accountteammember"
+                }
+              ],
+              "filter": true,
+              "group": true,
+              "id_lookup": false,
+              "nillable": true,
+              "restricted_picklist": false,
+              "sort": true,
+              "update": true
+            },
+            "somente_leitura": false,
+            "tipo_tecnico": "picklist"
+          },
+          {
+            "apis": [
+              "padrao"
+            ],
+            "default": {
+              "estado": "desconhecido",
+              "forma": "nao_declarado_na_fonte"
+            },
+            "disponibilidade": {
+              "ate_versao": null,
+              "desde_versao": "37.0",
+              "estado": "verificado"
+            },
+            "dominio": {
+              "estado": "verificado",
+              "evidencias": [
+                {
+                  "fonte": "src:objref-accountteammember"
+                }
+              ],
+              "natureza": "texto_livre"
+            },
+            "estado": "verificado",
+            "evidencias": [
+              {
+                "fonte": "src:objref-accountteammember"
+              }
+            ],
+            "explicacao": "explicada",
+            "id": "obj:AccountTeamMember.PhotoURL",
+            "nome": "PhotoURL",
+            "o_que_e": "Foto do usuário (somente leitura).",
+            "obrigatoriedade": {
+              "estado": "desconhecido",
+              "valor": "desconhecida"
+            },
+            "origem": {
+              "estado": "verificado",
+              "evidencias": [
+                {
+                  "fonte": "src:objref-accountteammember"
+                }
+              ],
+              "nota": "Campo padrão do objeto documentado.",
+              "valor": "padrao_plataforma"
+            },
+            "propriedades_api": {
+              "create": false,
+              "defaulted_on_create": false,
+              "estado": "verificado",
+              "evidencias": [
+                {
+                  "fonte": "src:objref-accountteammember"
+                }
+              ],
+              "filter": true,
+              "group": true,
+              "id_lookup": false,
+              "nillable": true,
+              "restricted_picklist": false,
+              "sort": true,
+              "update": false
+            },
+            "somente_leitura": true,
+            "tipo_tecnico": "url"
+          },
+          {
+            "apis": [
+              "padrao"
+            ],
+            "default": {
+              "estado": "desconhecido",
+              "forma": "nao_declarado_na_fonte"
+            },
+            "disponibilidade": {
+              "ate_versao": null,
+              "desde_versao": null,
+              "estado": "desconhecido"
+            },
+            "dominio": {
+              "contexto": "Valores não extraídos; podem depender de org, idioma ou recurso.",
+              "estado": "desconhecido",
+              "natureza": "lista_dinamica"
+            },
+            "estado": "verificado",
+            "evidencias": [
+              {
+                "fonte": "src:objref-accountteammember"
+              }
+            ],
+            "explicacao": "explicada",
+            "id": "obj:AccountTeamMember.TeamMemberRole",
+            "nome": "TeamMemberRole",
+            "o_que_e": "Papel do membro na equipe (valores definidos pela org).",
+            "obrigatoriedade": {
+              "estado": "desconhecido",
+              "valor": "desconhecida"
+            },
+            "origem": {
+              "estado": "verificado",
+              "evidencias": [
+                {
+                  "fonte": "src:objref-accountteammember"
+                }
+              ],
+              "nota": "Campo padrão do objeto documentado.",
+              "valor": "padrao_plataforma"
+            },
+            "propriedades_api": {
+              "create": true,
+              "defaulted_on_create": false,
+              "estado": "verificado",
+              "evidencias": [
+                {
+                  "fonte": "src:objref-accountteammember"
+                }
+              ],
+              "filter": true,
+              "group": false,
+              "id_lookup": false,
+              "nillable": true,
+              "restricted_picklist": false,
+              "sort": false,
+              "update": true
+            },
+            "somente_leitura": false,
+            "tipo_tecnico": "picklist"
+          },
+          {
+            "apis": [
+              "padrao"
+            ],
+            "default": {
+              "estado": "desconhecido",
+              "forma": "nao_declarado_na_fonte"
+            },
+            "disponibilidade": {
+              "ate_versao": null,
+              "desde_versao": "37.0",
+              "estado": "verificado"
+            },
+            "dominio": {
+              "estado": "verificado",
+              "evidencias": [
+                {
+                  "fonte": "src:objref-accountteammember"
+                }
+              ],
+              "natureza": "texto_livre"
+            },
+            "estado": "verificado",
+            "evidencias": [
+              {
+                "fonte": "src:objref-accountteammember"
+              }
+            ],
+            "explicacao": "explicada",
+            "id": "obj:AccountTeamMember.Title",
+            "nome": "Title",
+            "o_que_e": "Cargo do usuário (somente leitura).",
+            "obrigatoriedade": {
+              "estado": "desconhecido",
+              "valor": "desconhecida"
+            },
+            "origem": {
+              "estado": "verificado",
+              "evidencias": [
+                {
+                  "fonte": "src:objref-accountteammember"
+                }
+              ],
+              "nota": "Campo padrão do objeto documentado.",
+              "valor": "padrao_plataforma"
+            },
+            "propriedades_api": {
+              "create": false,
+              "defaulted_on_create": false,
+              "estado": "verificado",
+              "evidencias": [
+                {
+                  "fonte": "src:objref-accountteammember"
+                }
+              ],
+              "filter": true,
+              "group": true,
+              "id_lookup": false,
+              "nillable": true,
+              "restricted_picklist": false,
+              "sort": true,
+              "update": false
+            },
+            "somente_leitura": true,
+            "tipo_tecnico": "string"
+          },
+          {
+            "apis": [
+              "padrao"
+            ],
+            "default": {
+              "estado": "desconhecido",
+              "forma": "nao_declarado_na_fonte"
+            },
+            "disponibilidade": {
+              "ate_versao": null,
+              "desde_versao": null,
+              "estado": "desconhecido"
+            },
+            "dominio": {
+              "contexto": "Id de registro do(s) objeto(s) referenciado(s).",
+              "estado": "verificado",
+              "evidencias": [
+                {
+                  "fonte": "src:objref-accountteammember"
+                }
+              ],
+              "natureza": "referencia"
+            },
+            "estado": "verificado",
+            "evidencias": [
+              {
+                "fonte": "src:objref-accountteammember"
+              }
+            ],
+            "explicacao": "explicada",
+            "id": "obj:AccountTeamMember.UserId",
+            "nome": "UserId",
+            "o_que_e": "Usuário membro da equipe.",
+            "obrigatoriedade": {
+              "estado": "verificado",
+              "evidencias": [
+                {
+                  "fonte": "src:objref-accountteammember"
+                }
+              ],
+              "valor": "sim"
+            },
+            "origem": {
+              "estado": "verificado",
+              "evidencias": [
+                {
+                  "fonte": "src:objref-accountteammember"
+                }
+              ],
+              "nota": "Campo padrão do objeto documentado.",
+              "valor": "padrao_plataforma"
+            },
+            "propriedades_api": {
+              "create": true,
+              "defaulted_on_create": false,
+              "estado": "verificado",
+              "evidencias": [
+                {
+                  "fonte": "src:objref-accountteammember"
+                }
+              ],
+              "filter": true,
+              "group": false,
+              "id_lookup": false,
+              "nillable": false,
+              "restricted_picklist": false,
+              "sort": false,
+              "update": false
+            },
+            "referencia": {
+              "alvos": [
+                "obj:User"
+              ],
+              "nome_relacionamento": null
+            },
+            "somente_leitura": false,
+            "tipo_tecnico": "reference"
+          }
+        ],
+        "cobertura": {
+          "estrutural": {
+            "esperado": 11,
+            "estado": "completa",
+            "nota": "Tabela de campos lida completa (11).",
+            "presente": 11
+          },
+          "explicativa": {
+            "esperado": 11,
+            "estado": "completa",
+            "presente": 11
+          },
+          "mapeamento": {
+            "estado": "parcial",
+            "nota": "Ver relacionamentos registrados."
+          }
+        },
+        "consultas": [
+          {
+            "api": "padrao",
+            "contexto": "API padrão.",
+            "soql": "SELECT AccountId, UserId, TeamMemberRole, AccountAccessLevel FROM AccountTeamMember LIMIT 20",
+            "validacao": "documental"
+          }
+        ],
+        "estado": "verificado",
+        "evidencias": [
+          {
+            "fonte": "src:objref-accountteammember"
+          }
+        ],
+        "exposicoes": [
+          {
+            "acesso_especial": "Disponível só em Enterprise, Unlimited e Performance com equipes de conta habilitadas; usuários de Customer Portal não acessam.",
+            "api": "padrao",
+            "chamadas": [
+              "create()",
+              "delete()",
+              "describeLayout()",
+              "describeSObjects()",
+              "getDeleted()",
+              "getUpdated()",
+              "query()",
+              "retrieve()",
+              "update()",
+              "upsert()"
+            ],
+            "desde_versao": null,
+            "estado": "verificado",
+            "evidencias": [
+              {
+                "fonte": "src:objref-accountteammember"
+              }
+            ]
+          },
+          {
+            "api": "tooling",
+            "desde_versao": null,
+            "estado": "desconhecido",
+            "nota": "Exposição na Tooling API não verificada."
+          }
+        ],
+        "id": "obj:AccountTeamMember",
+        "juncao": true,
+        "nome": "AccountTeamMember",
+        "o_que_e": "Representa um usuário na equipe de uma conta.",
+        "papel": "Liga usuários a contas, com papel e níveis de acesso.",
+        "setup": {
+          "estado": "nao_aplicavel",
+          "nota": "Objeto consultável via API; não é tela do Setup."
+        }
+      },
+      "papel": "Membro da equipe de conta (junção conta–usuário).",
+      "relacionamentos": [
+        {
+          "cardinalidade_registros": {
+            "estado": "desconhecido",
+            "nota": "Estrutura de lookup indica N:1; não comprovado nesta sessão.",
+            "valor": "N:1"
+          },
+          "destino": {
+            "entidade": "obj:Account"
+          },
+          "estado": "verificado",
+          "evidencias": [
+            {
+              "fonte": "src:objref-accountteammember"
+            }
+          ],
+          "explicacao": "Cada membro de equipe pertence a uma conta.",
+          "id": "rel:atm-account",
+          "origem": {
+            "campo": "AccountId",
+            "entidade": "obj:AccountTeamMember"
+          },
+          "tipo": "referencia_campo"
+        },
+        {
+          "cardinalidade_registros": {
+            "estado": "desconhecido",
+            "nota": "Estrutura de lookup indica N:1; não comprovado nesta sessão.",
+            "valor": "N:1"
+          },
+          "destino": {
+            "entidade": "obj:User"
+          },
+          "estado": "verificado",
+          "evidencias": [
+            {
+              "fonte": "src:objref-accountteammember"
+            }
+          ],
+          "explicacao": "O membro da equipe é um usuário.",
+          "id": "rel:atm-user",
+          "origem": {
+            "campo": "UserId",
+            "entidade": "obj:AccountTeamMember"
+          },
+          "tipo": "referencia_campo"
+        }
+      ]
+    },
+    {
+      "objeto": {
+        "alertas": [
+          "Criar um registro com OpportunityId e UserId já existentes atualiza o registro existente.",
+          "Para detectar exclusões, usar getDeleted() em vez de IsDeleted em SOQL."
+        ],
+        "apex": {
+          "consulta_soql_direta": {
+            "estado": "verificado",
+            "evidencias": [
+              {
+                "fonte": "src:objref-opportunityteammember"
+              }
+            ],
+            "nota": "Objeto da API padrão: consultável por SOQL em Apex, sujeito a permissões.",
+            "valor": true
+          },
+          "nota": "Exemplo Apex não fornecido nesta fase."
+        },
+        "campos": [
+          {
+            "apis": [
+              "padrao"
+            ],
+            "default": {
+              "estado": "desconhecido",
+              "forma": "desconhecido",
+              "nota": "A API marca o campo como 'defaulted on create', mas o valor não foi declarado na extração."
+            },
+            "disponibilidade": {
+              "ate_versao": null,
+              "desde_versao": null,
+              "estado": "desconhecido"
+            },
+            "dominio": {
+              "estado": "verificado",
+              "evidencias": [
+                {
+                  "fonte": "src:objref-opportunityteammember"
+                }
+              ],
+              "lista_completa": "sim",
+              "natureza": "booleano",
+              "valores": [
+                {
+                  "valor": "true"
+                },
+                {
+                  "valor": "false"
+                }
+              ]
+            },
+            "estado": "verificado",
+            "evidencias": [
+              {
+                "fonte": "src:objref-opportunityteammember"
+              }
+            ],
+            "explicacao": "explicada",
+            "id": "obj:OpportunityTeamMember.IsDeleted",
+            "nome": "IsDeleted",
+            "notas": [
+              "A página lista as propriedades por nome; as letras foram mapeadas na extração."
+            ],
+            "o_que_e": "Indica se o registro foi excluído.",
+            "obrigatoriedade": {
+              "estado": "desconhecido",
+              "valor": "desconhecida"
+            },
+            "origem": {
+              "estado": "verificado",
+              "evidencias": [
+                {
+                  "fonte": "src:objref-opportunityteammember"
+                }
+              ],
+              "nota": "Campo padrão do objeto documentado.",
+              "valor": "padrao_plataforma"
+            },
+            "propriedades_api": {
+              "create": false,
+              "defaulted_on_create": true,
+              "estado": "verificado",
+              "evidencias": [
+                {
+                  "fonte": "src:objref-opportunityteammember"
+                }
+              ],
+              "filter": true,
+              "group": false,
+              "id_lookup": false,
+              "nillable": false,
+              "restricted_picklist": false,
+              "sort": false,
+              "update": false
+            },
+            "somente_leitura": true,
+            "tipo_tecnico": "boolean"
+          },
+          {
+            "apis": [
+              "padrao"
+            ],
+            "default": {
+              "estado": "desconhecido",
+              "forma": "nao_declarado_na_fonte"
+            },
+            "disponibilidade": {
+              "ate_versao": null,
+              "desde_versao": null,
+              "estado": "desconhecido"
+            },
+            "dominio": {
+              "estado": "verificado",
+              "evidencias": [
+                {
+                  "fonte": "src:objref-opportunityteammember"
+                }
+              ],
+              "natureza": "texto_livre"
+            },
+            "estado": "verificado",
+            "evidencias": [
+              {
+                "fonte": "src:objref-opportunityteammember"
+              }
+            ],
+            "explicacao": "explicada",
+            "id": "obj:OpportunityTeamMember.Name",
+            "nome": "Name",
+            "notas": [
+              "A página lista as propriedades por nome; as letras foram mapeadas na extração."
+            ],
+            "o_que_e": "Nome do membro.",
+            "obrigatoriedade": {
+              "estado": "desconhecido",
+              "valor": "desconhecida"
+            },
+            "origem": {
+              "estado": "verificado",
+              "evidencias": [
+                {
+                  "fonte": "src:objref-opportunityteammember"
+                }
+              ],
+              "nota": "Campo padrão do objeto documentado.",
+              "valor": "padrao_plataforma"
+            },
+            "propriedades_api": {
+              "create": false,
+              "defaulted_on_create": false,
+              "estado": "verificado",
+              "evidencias": [
+                {
+                  "fonte": "src:objref-opportunityteammember"
+                }
+              ],
+              "filter": true,
+              "group": false,
+              "id_lookup": false,
+              "nillable": true,
+              "restricted_picklist": false,
+              "sort": true,
+              "update": false
+            },
+            "somente_leitura": true,
+            "tipo_tecnico": "string"
+          },
+          {
+            "apis": [
+              "padrao"
+            ],
+            "default": {
+              "estado": "desconhecido",
+              "forma": "nao_declarado_na_fonte"
+            },
+            "disponibilidade": {
+              "ate_versao": null,
+              "desde_versao": null,
+              "estado": "desconhecido"
+            },
+            "dominio": {
+              "contexto": "Valores conforme a página; não se declara lista completa.",
+              "estado": "verificado",
+              "evidencias": [
+                {
+                  "fonte": "src:objref-opportunityteammember"
+                }
+              ],
+              "lista_completa": "desconhecido",
+              "natureza": "enum_fechado",
+              "valores": [
+                {
+                  "valor": "Read"
+                },
+                {
+                  "valor": "Edit"
+                },
+                {
+                  "valor": "All"
+                }
+              ]
+            },
+            "estado": "verificado",
+            "evidencias": [
+              {
+                "fonte": "src:objref-opportunityteammember"
+              }
+            ],
+            "explicacao": "explicada",
+            "id": "obj:OpportunityTeamMember.OpportunityAccessLevel",
+            "nome": "OpportunityAccessLevel",
+            "notas": [
+              "A página lista as propriedades por nome; as letras foram mapeadas na extração."
+            ],
+            "o_que_e": "Nível de acesso do membro à oportunidade.",
+            "obrigatoriedade": {
+              "estado": "desconhecido",
+              "valor": "desconhecida"
+            },
+            "origem": {
+              "estado": "verificado",
+              "evidencias": [
+                {
+                  "fonte": "src:objref-opportunityteammember"
+                }
+              ],
+              "nota": "Campo padrão do objeto documentado.",
+              "valor": "padrao_plataforma"
+            },
+            "propriedades_api": {
+              "create": false,
+              "defaulted_on_create": false,
+              "estado": "verificado",
+              "evidencias": [
+                {
+                  "fonte": "src:objref-opportunityteammember"
+                }
+              ],
+              "filter": true,
+              "group": false,
+              "id_lookup": false,
+              "nillable": true,
+              "restricted_picklist": true,
+              "sort": false,
+              "update": false
+            },
+            "somente_leitura": true,
+            "tipo_tecnico": "picklist"
+          },
+          {
+            "apis": [
+              "padrao"
+            ],
+            "default": {
+              "estado": "desconhecido",
+              "forma": "nao_declarado_na_fonte"
+            },
+            "disponibilidade": {
+              "ate_versao": null,
+              "desde_versao": null,
+              "estado": "desconhecido"
+            },
+            "dominio": {
+              "contexto": "Id de registro do(s) objeto(s) referenciado(s).",
+              "estado": "verificado",
+              "evidencias": [
+                {
+                  "fonte": "src:objref-opportunityteammember"
+                }
+              ],
+              "natureza": "referencia"
+            },
+            "estado": "verificado",
+            "evidencias": [
+              {
+                "fonte": "src:objref-opportunityteammember"
+              }
+            ],
+            "explicacao": "explicada",
+            "id": "obj:OpportunityTeamMember.OpportunityId",
+            "nome": "OpportunityId",
+            "notas": [
+              "A página lista as propriedades por nome; as letras foram mapeadas na extração."
+            ],
+            "o_que_e": "Oportunidade da equipe.",
+            "obrigatoriedade": {
+              "estado": "verificado",
+              "evidencias": [
+                {
+                  "fonte": "src:objref-opportunityteammember"
+                }
+              ],
+              "valor": "sim"
+            },
+            "origem": {
+              "estado": "verificado",
+              "evidencias": [
+                {
+                  "fonte": "src:objref-opportunityteammember"
+                }
+              ],
+              "nota": "Campo padrão do objeto documentado.",
+              "valor": "padrao_plataforma"
+            },
+            "propriedades_api": {
+              "create": true,
+              "defaulted_on_create": false,
+              "estado": "verificado",
+              "evidencias": [
+                {
+                  "fonte": "src:objref-opportunityteammember"
+                }
+              ],
+              "filter": true,
+              "group": false,
+              "id_lookup": false,
+              "nillable": false,
+              "restricted_picklist": false,
+              "sort": false,
+              "update": false
+            },
+            "referencia": {
+              "alvos": [
+                "obj:Opportunity"
+              ],
+              "nome_relacionamento": null
+            },
+            "somente_leitura": false,
+            "tipo_tecnico": "reference"
+          },
+          {
+            "apis": [
+              "padrao"
+            ],
+            "default": {
+              "estado": "desconhecido",
+              "forma": "nao_declarado_na_fonte"
+            },
+            "disponibilidade": {
+              "ate_versao": null,
+              "desde_versao": null,
+              "estado": "desconhecido"
+            },
+            "dominio": {
+              "estado": "verificado",
+              "evidencias": [
+                {
+                  "fonte": "src:objref-opportunityteammember"
+                }
+              ],
+              "natureza": "texto_livre"
+            },
+            "estado": "verificado",
+            "evidencias": [
+              {
+                "fonte": "src:objref-opportunityteammember"
+              }
+            ],
+            "explicacao": "explicada",
+            "id": "obj:OpportunityTeamMember.PhotoURL",
+            "nome": "PhotoURL",
+            "notas": [
+              "A página lista as propriedades por nome; as letras foram mapeadas na extração."
+            ],
+            "o_que_e": "Foto do usuário.",
+            "obrigatoriedade": {
+              "estado": "desconhecido",
+              "valor": "desconhecida"
+            },
+            "origem": {
+              "estado": "verificado",
+              "evidencias": [
+                {
+                  "fonte": "src:objref-opportunityteammember"
+                }
+              ],
+              "nota": "Campo padrão do objeto documentado.",
+              "valor": "padrao_plataforma"
+            },
+            "propriedades_api": {
+              "create": false,
+              "defaulted_on_create": false,
+              "estado": "verificado",
+              "evidencias": [
+                {
+                  "fonte": "src:objref-opportunityteammember"
+                }
+              ],
+              "filter": true,
+              "group": true,
+              "id_lookup": false,
+              "nillable": true,
+              "restricted_picklist": false,
+              "sort": true,
+              "update": false
+            },
+            "somente_leitura": true,
+            "tipo_tecnico": "url"
+          },
+          {
+            "apis": [
+              "padrao"
+            ],
+            "default": {
+              "estado": "desconhecido",
+              "forma": "nao_declarado_na_fonte"
+            },
+            "disponibilidade": {
+              "ate_versao": null,
+              "desde_versao": null,
+              "estado": "desconhecido"
+            },
+            "dominio": {
+              "contexto": "Valores não extraídos; podem depender de org, idioma ou recurso.",
+              "estado": "desconhecido",
+              "natureza": "lista_dinamica"
+            },
+            "estado": "verificado",
+            "evidencias": [
+              {
+                "fonte": "src:objref-opportunityteammember"
+              }
+            ],
+            "explicacao": "explicada",
+            "id": "obj:OpportunityTeamMember.TeamMemberRole",
+            "nome": "TeamMemberRole",
+            "notas": [
+              "A página lista as propriedades por nome; as letras foram mapeadas na extração."
+            ],
+            "o_que_e": "Papel do membro (picklist Opportunity Team Roles da org).",
+            "obrigatoriedade": {
+              "estado": "desconhecido",
+              "valor": "desconhecida"
+            },
+            "origem": {
+              "estado": "verificado",
+              "evidencias": [
+                {
+                  "fonte": "src:objref-opportunityteammember"
+                }
+              ],
+              "nota": "Campo padrão do objeto documentado.",
+              "valor": "padrao_plataforma"
+            },
+            "propriedades_api": {
+              "create": true,
+              "defaulted_on_create": false,
+              "estado": "verificado",
+              "evidencias": [
+                {
+                  "fonte": "src:objref-opportunityteammember"
+                }
+              ],
+              "filter": true,
+              "group": false,
+              "id_lookup": false,
+              "nillable": true,
+              "restricted_picklist": false,
+              "sort": false,
+              "update": true
+            },
+            "somente_leitura": false,
+            "tipo_tecnico": "picklist"
+          },
+          {
+            "apis": [
+              "padrao"
+            ],
+            "default": {
+              "estado": "desconhecido",
+              "forma": "nao_declarado_na_fonte"
+            },
+            "disponibilidade": {
+              "ate_versao": null,
+              "desde_versao": null,
+              "estado": "desconhecido"
+            },
+            "dominio": {
+              "estado": "verificado",
+              "evidencias": [
+                {
+                  "fonte": "src:objref-opportunityteammember"
+                }
+              ],
+              "natureza": "texto_livre"
+            },
+            "estado": "verificado",
+            "evidencias": [
+              {
+                "fonte": "src:objref-opportunityteammember"
+              }
+            ],
+            "explicacao": "explicada",
+            "id": "obj:OpportunityTeamMember.Title",
+            "nome": "Title",
+            "notas": [
+              "A página lista as propriedades por nome; as letras foram mapeadas na extração."
+            ],
+            "o_que_e": "Cargo do usuário.",
+            "obrigatoriedade": {
+              "estado": "desconhecido",
+              "valor": "desconhecida"
+            },
+            "origem": {
+              "estado": "verificado",
+              "evidencias": [
+                {
+                  "fonte": "src:objref-opportunityteammember"
+                }
+              ],
+              "nota": "Campo padrão do objeto documentado.",
+              "valor": "padrao_plataforma"
+            },
+            "propriedades_api": {
+              "create": false,
+              "defaulted_on_create": false,
+              "estado": "verificado",
+              "evidencias": [
+                {
+                  "fonte": "src:objref-opportunityteammember"
+                }
+              ],
+              "filter": true,
+              "group": true,
+              "id_lookup": false,
+              "nillable": true,
+              "restricted_picklist": false,
+              "sort": true,
+              "update": false
+            },
+            "somente_leitura": true,
+            "tipo_tecnico": "string"
+          },
+          {
+            "apis": [
+              "padrao"
+            ],
+            "default": {
+              "estado": "desconhecido",
+              "forma": "nao_declarado_na_fonte"
+            },
+            "disponibilidade": {
+              "ate_versao": null,
+              "desde_versao": null,
+              "estado": "desconhecido"
+            },
+            "dominio": {
+              "contexto": "Id de registro do(s) objeto(s) referenciado(s).",
+              "estado": "verificado",
+              "evidencias": [
+                {
+                  "fonte": "src:objref-opportunityteammember"
+                }
+              ],
+              "natureza": "referencia"
+            },
+            "estado": "verificado",
+            "evidencias": [
+              {
+                "fonte": "src:objref-opportunityteammember"
+              }
+            ],
+            "explicacao": "explicada",
+            "id": "obj:OpportunityTeamMember.UserId",
+            "nome": "UserId",
+            "notas": [
+              "A página lista as propriedades por nome; as letras foram mapeadas na extração."
+            ],
+            "o_que_e": "Usuário membro da equipe.",
+            "obrigatoriedade": {
+              "estado": "verificado",
+              "evidencias": [
+                {
+                  "fonte": "src:objref-opportunityteammember"
+                }
+              ],
+              "valor": "sim"
+            },
+            "origem": {
+              "estado": "verificado",
+              "evidencias": [
+                {
+                  "fonte": "src:objref-opportunityteammember"
+                }
+              ],
+              "nota": "Campo padrão do objeto documentado.",
+              "valor": "padrao_plataforma"
+            },
+            "propriedades_api": {
+              "create": true,
+              "defaulted_on_create": false,
+              "estado": "verificado",
+              "evidencias": [
+                {
+                  "fonte": "src:objref-opportunityteammember"
+                }
+              ],
+              "filter": true,
+              "group": false,
+              "id_lookup": false,
+              "nillable": false,
+              "restricted_picklist": false,
+              "sort": false,
+              "update": false
+            },
+            "referencia": {
+              "alvos": [
+                "obj:User"
+              ],
+              "nome_relacionamento": null
+            },
+            "somente_leitura": false,
+            "tipo_tecnico": "reference"
+          }
+        ],
+        "cobertura": {
+          "estrutural": {
+            "esperado": 8,
+            "estado": "completa",
+            "nota": "Tabela de campos lida completa (8).",
+            "presente": 8
+          },
+          "explicativa": {
+            "esperado": 8,
+            "estado": "completa",
+            "presente": 8
+          },
+          "mapeamento": {
+            "estado": "parcial",
+            "nota": "Ver relacionamentos registrados."
+          }
+        },
+        "consultas": [
+          {
+            "api": "padrao",
+            "contexto": "API padrão.",
+            "soql": "SELECT OpportunityId, UserId, TeamMemberRole FROM OpportunityTeamMember LIMIT 20",
+            "validacao": "documental"
+          }
+        ],
+        "estado": "verificado",
+        "evidencias": [
+          {
+            "fonte": "src:objref-opportunityteammember"
+          }
+        ],
+        "exposicoes": [
+          {
+            "acesso_especial": "Disponível só em orgs com team selling habilitado.",
+            "api": "padrao",
+            "chamadas": [
+              "create()",
+              "delete()",
+              "describeLayout()",
+              "describeSObjects()",
+              "getDeleted()",
+              "getUpdated()",
+              "query()",
+              "retrieve()",
+              "update()",
+              "upsert()"
+            ],
+            "desde_versao": null,
+            "estado": "verificado",
+            "evidencias": [
+              {
+                "fonte": "src:objref-opportunityteammember"
+              }
+            ]
+          },
+          {
+            "api": "tooling",
+            "desde_versao": null,
+            "estado": "desconhecido",
+            "nota": "Exposição na Tooling API não verificada."
+          }
+        ],
+        "id": "obj:OpportunityTeamMember",
+        "juncao": true,
+        "nome": "OpportunityTeamMember",
+        "o_que_e": "Representa um usuário na equipe de uma oportunidade.",
+        "papel": "Liga usuários a oportunidades (team selling).",
+        "setup": {
+          "estado": "nao_aplicavel",
+          "nota": "Objeto consultável via API; não é tela do Setup."
+        }
+      },
+      "papel": "Membro da equipe de oportunidade (junção oportunidade–usuário).",
+      "relacionamentos": [
+        {
+          "cardinalidade_registros": {
+            "estado": "desconhecido",
+            "nota": "Estrutura de lookup indica N:1; não comprovado nesta sessão.",
+            "valor": "N:1"
+          },
+          "destino": {
+            "entidade": "obj:Opportunity"
+          },
+          "estado": "verificado",
+          "evidencias": [
+            {
+              "fonte": "src:objref-opportunityteammember"
+            }
+          ],
+          "explicacao": "Cada membro de equipe pertence a uma oportunidade.",
+          "id": "rel:otm-opportunity",
+          "origem": {
+            "campo": "OpportunityId",
+            "entidade": "obj:OpportunityTeamMember"
+          },
+          "tipo": "referencia_campo"
+        },
+        {
+          "cardinalidade_registros": {
+            "estado": "desconhecido",
+            "nota": "Estrutura de lookup indica N:1; não comprovado nesta sessão.",
+            "valor": "N:1"
+          },
+          "destino": {
+            "entidade": "obj:User"
+          },
+          "estado": "verificado",
+          "evidencias": [
+            {
+              "fonte": "src:objref-opportunityteammember"
+            }
+          ],
+          "explicacao": "O membro da equipe é um usuário.",
+          "id": "rel:otm-user",
+          "origem": {
+            "campo": "UserId",
+            "entidade": "obj:OpportunityTeamMember"
+          },
+          "tipo": "referencia_campo"
+        }
+      ]
+    }
+  ],
+  "versao_base": {
+    "api_version": "68.0",
+    "data_referencia": "2026-11-07",
+    "escopo": "config/escopo.json",
+    "release": "Winter '27"
+  }
+}
