@@ -1,6 +1,6 @@
 # Ponto de retomada
 
-Situação em 2026-11-08, após o lote 3b (restante de Agentforce Sales e Service). Os números vivos estão em `relatorios/cobertura.md`; o detalhe do que foi resolvido está em `relatorios/resolucao-bloqueios.md`.
+Situação em 2026-11-08, após o lote 3c (releitura dos itens pendentes de Agentforce Sales e Service). Os números vivos estão em `relatorios/cobertura.md`; o detalhe do que foi resolvido está em `relatorios/resolucao-bloqueios.md`.
 
 ## O que está pronto
 
@@ -10,14 +10,14 @@ Situação em 2026-11-08, após o lote 3b (restante de Agentforce Sales e Servic
 - **Taxonomia proposta:** 14 classificações e 92 subclassificações, ainda sem cruzamento com a documentação oficial.
 - **Catálogo do piloto:**
   - 31 funcionalidades (as sem objeto ou metadata type lido declaram a ausência como `desconhecido`);
-  - 15 metadata types e 43 estruturas;
-  - 29 objetos API;
-  - 51 relacionamentos.
+  - 19 metadata types e 50 estruturas;
+  - 51 objetos API;
+  - 81 relacionamentos.
 - **Caminhos de Setup:** verificados em 12 das 14 funcionalidades.
 - **Data 360:** contexto técnico verificado.
 - **Agentforce Sales e Agentforce Service** (antes Sales Cloud e Service Cloud): nome, contexto técnico e licenças verificados. Vendas tem 10 funcionalidades próprias e atendimento, 3; Knowledge, regras de atribuição, horário comercial, apps de console e Path entram como capacidades compartilhadas. O relatório de pesquisa usado como mapa está em `fontes/pesquisas/`.
 
-Os JSONs de `catalogo/` são a fonte da verdade. Os lotes 1, 2, 3a e 3b foram aplicados por scripts de carga mantidos fora do repositório; edições futuras devem ser feitas nos JSONs ou por ferramentas criadas em `ferramentas/`.
+Os JSONs de `catalogo/` são a fonte da verdade. Os lotes 1, 2, 3a, 3b e 3c foram aplicados por scripts de carga mantidos fora do repositório; edições futuras devem ser feitas nos JSONs ou por ferramentas criadas em `ferramentas/`.
 
 ## Lacunas por item
 
@@ -40,8 +40,9 @@ Os JSONs de `catalogo/` são a fonte da verdade. Os lotes 1, 2, 3a e 3b foram ap
 | obj:Lead | parcial | 74 nomes lidos; tipos e propriedades só de 14 campos |
 | obj:Opportunity, obj:Case | parcial | Object Reference truncada; propriedades de API faltam para campos vindos só da Field Reference |
 | obj:Account, obj:Contact | parcial | Tabela de conta pessoal (Account) e tabela de Contact servidas truncadas |
-| Objetos não relidos de Sales e Service | desconhecido | Campaign, CampaignMember, Product2, Pricebook2, PricebookEntry, OpportunityLineItem, Quote, QuoteLineItem, Forecasting*, Territory2 e associações, AgentWork, ServiceChannel, QueueRoutingConfig, Entitlement, SlaProcess, ServiceContract, Knowledge__kav |
-| Metadata types de Sales e Service não lidos | desconhecido | *Settings (Account, Campaign, Quote, Forecasting, LeadConvert, Entitlement, Knowledge, BusinessHours, OmniChannel), AssignmentRules, EscalationRules, ServiceChannel, QueueRoutingConfig |
+| Objetos de Sales e Service ainda não relidos | desconhecido | ForecastingAdjustment, ForecastingOwnerAdjustment, ForecastingType, ForecastingFact, ForecastingQuota, PendingServiceRouting, ServicePresenceStatus (objeto), PresenceUserConfig, Knowledge__kav, KnowledgeArticle |
+| Objetos parciais de Sales e Service | parcial | Campaign, Product2, Quote, AgentWork, KnowledgeArticleVersion (páginas truncadas); QueueRoutingConfig e Entitlement (linha sem nome) |
+| Metadata types de Sales e Service não lidos | desconhecido | *Settings (Account, Campaign, Quote, Forecasting, LeadConvert, Entitlement, Knowledge, BusinessHours, OmniChannel, Territory2), Territory2, Territory2Rule, Territory2Type, MilestoneType, EntitlementTemplate, PresenceUserConfig |
 | mdt:EntitlementProcess, Territory2Model | parcial | WorkflowActionReference e FieldValue sem estrutura detalhada |
 
 ## Bloqueios reais
