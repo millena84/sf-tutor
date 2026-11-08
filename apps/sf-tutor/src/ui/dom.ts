@@ -11,6 +11,9 @@ export function h<K extends keyof HTMLElementTagNameMap>(tag: K, attrs?: Attrs |
       if (v === undefined || v === null || v === false) continue;
       if (k === 'on' && typeof v === 'object') {
         for (const [ev, fn] of Object.entries(v as Record<string, EventListener>)) el.addEventListener(ev, fn);
+      } else if (k === 'src') {
+        const s = String(v);
+        if (/^https:\/\//i.test(s) || s.startsWith('./') || s.startsWith('/')) el.setAttribute('src', s);
       } else if (k === 'href') {
         const s = String(v);
         if (/^https?:\/\//i.test(s) || s.startsWith('?') || s.startsWith('#')) el.setAttribute('href', s);

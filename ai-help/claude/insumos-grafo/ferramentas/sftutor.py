@@ -56,6 +56,8 @@ def carregar(base=BASE):
     C["fontes"] = {f["id"]: f for f in ler(os.path.join(base, "fontes", "registro.json"))["fontes"]}
     C["escopo"] = ler(os.path.join(base, "config", "escopo.json"))
     C["versoes"] = ler(os.path.join(base, "config", "versoes.json"))
+    marcas = os.path.join(base, "config", "marcas.json")
+    C["marcas"] = ler(marcas) if os.path.exists(marcas) else None
     inv = os.path.join(base, "inventarios", "metadata-types-v68.json")
     C["inventario"] = ler(inv) if os.path.exists(inv) else None
     return C
@@ -181,6 +183,8 @@ def validar_schemas(C, R, base=BASE):
         for err in sorted(v.iter_errors(doc), key=lambda x: list(x.absolute_path)):
             R.e(f"schema[{rotulo}] {'/'.join(map(str, err.absolute_path))}: {err.message[:200]}")
     chk("salesforce", C["salesforce"], "salesforce")
+    if C.get("marcas"):
+        chk("marcas", C["marcas"], "config/marcas")
     for pasta, sch in PASTAS.items():
         for i, d in C[pasta].items():
             chk(sch, d, i)
@@ -282,6 +286,27 @@ def validar_referencias(C, R):
 def _evs_ok(x):
     return bool(x.get("evidencias"))
 
+
+def validar_marcas(C, R):
+    """Logos por referência: alvo existente (centro ou nuvem), um logo por alvo, só domínios permitidos."""
+    M = C.get("marcas")
+    if not M:
+        return
+    from urllib.parse import urlparse
+    alvos_validos = {"salesforce"} | set(C["nuvens"])
+    vistos = set()
+    for it in M["itens"]:
+        a = it.get("alvo")
+        host = urlparse(it["url"]).hostname
+        if host not in M["dominios_permitidos"]:
+            R.e(f"marcas: domínio não permitido em {it['url']}")
+        if a is None:
+            continue
+        if a not in alvos_validos:
+            R.e(f"marcas: alvo {a} não existe (só o centro e nuvens catalogadas recebem logo)")
+        if a in vistos:
+            R.e(f"marcas: mais de um logo para {a}")
+        vistos.add(a)
 
 def validar_regras(C, R):
     inv_nomes = {i["nome"] for i in C["inventario"]["itens"]} if C["inventario"] else None
@@ -540,6 +565,7 @@ def validar(base=BASE, checar_gerado=True):
     validar_schemas(C, R, base)
     validar_referencias(C, R)
     validar_regras(C, R)
+    validar_marcas(C, R)
     validar_fontes(C, R, base)
     if checar_gerado:
         validar_gerado(R, base)
@@ -685,7 +711,7 @@ def gerar(base=BASE, destino=None):
 
 
 # --------------------------------------------------------------------------- projeção para o site (contrato versionado)
-CONTRATO_SITE = {"nome": "sf-tutor-site", "versao": "1.0.0"}
+CONTRATO_SITE = {"nome": "sf-tutor-site", "versao": "1.1.0"}
 TIPOS_FOLHA = {"campo_api", "propriedade_xml"}          # vivem dentro da entidade-mãe
 TIPOS_ARESTA_FOLHA = {"campo", "propriedade"}           # deriváveis da entidade-mãe
 
@@ -726,7 +752,16 @@ def gerar_site(C, base, out, nos, arestas, visoes, cob):
         if n["id"] in pai_de: item["pai"] = pai_de[n["id"]]
         if descr.get(n["id"]): item["descricao"] = descr[n["id"]]
         busca.append(item)
-    base_nos = [n for n in nos if n["tipo"] not in TIPOS_FOLHA]
+    # logos por referência (config/marcas.json): só no centro e nas nuvens catalogadas
+    logos = {it["alvo"]: it for it in (C.get("marcas") or {}).get("itens", []) if it.get("alvo")}
+    base_nos = []
+    for n in nos:
+        if n["tipo"] in TIPOS_FOLHA:
+            continue
+        if n["id"] in logos:
+            it = logos[n["id"]]
+            n = {**n, "logo": {"url": it["url"], "formato": it["formato"], "marca": it["marca"]}}
+        base_nos.append(n)
     base_arestas = [a for a in arestas if a["tipo"] not in TIPOS_ARESTA_FOLHA]
     gravar(os.path.join(site, "grafo-base.json"), {"nos": base_nos, "arestas": base_arestas})
     gravar(os.path.join(site, "visoes.json"), visoes)
@@ -737,6 +772,8 @@ def gerar_site(C, base, out, nos, arestas, visoes, cob):
         for e in C[chave].values():
             entidades[e["id"]] = e
     for i, e in sorted(entidades.items()):
+        if i in logos:
+            e = {**e, "logo_marca": {k: logos[i][k] for k in ("marca", "url", "formato", "fornecido_por", "pagina_origem", "verificacao")}}
         gravar(os.path.join(site, caminho_entidade(i)), e)
     reg = json.load(open(os.path.join(base, "fontes", "registro.json"), encoding="utf-8"))
     fontes = {f["id"]: {k: f.get(k) for k in ("titulo", "url", "tipo", "versao", "data_verificacao", "metodo")} for f in reg["fontes"]}
@@ -754,6 +791,7 @@ def gerar_site(C, base, out, nos, arestas, visoes, cob):
         "regras": ["Campos (campo_api) e propriedades (propriedade_xml) vivem dentro do arquivo da entidade-mãe; o grafo-base não os traz.",
                    "busca.json cobre todos os nós, inclusive folhas, com o id da entidade-mãe em 'pai'.",
                    "Ids canônicos são estáveis; uma ocorrência visual em outro caminho aponta para o mesmo id.",
+                   "Nós do centro e das nuvens podem ter 'logo' (url, formato, marca): imagem exibida por referência ao endereço oficial registrado em config/marcas.json; se não carregar, o site usa um substituto.",
                    "Mudança incompatível neste formato sobe a versão maior do contrato."],
         "nota": "Gerado deterministicamente por ferramentas/sftutor.py a partir de catalogo/ e fontes/. Não editar à mão."})
 

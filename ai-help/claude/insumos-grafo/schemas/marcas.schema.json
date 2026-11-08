@@ -1,0 +1,83 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "marcas.schema.json",
+  "title": "Registro de logos de marcas (por referência)",
+  "type": "object",
+  "required": [
+    "id",
+    "data_registro",
+    "nota",
+    "dominios_permitidos",
+    "itens"
+  ],
+  "additionalProperties": false,
+  "properties": {
+    "id": {
+      "const": "marcas"
+    },
+    "data_registro": {
+      "type": "string",
+      "format": "date"
+    },
+    "nota": {
+      "type": "string"
+    },
+    "dominios_permitidos": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "minItems": 1
+    },
+    "itens": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "alvo",
+          "marca",
+          "url",
+          "formato",
+          "fornecido_por",
+          "pagina_origem",
+          "verificacao"
+        ],
+        "properties": {
+          "alvo": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "pattern": "^(salesforce|nuv:[a-z0-9-]+)$"
+          },
+          "marca": {
+            "type": "string"
+          },
+          "url": {
+            "type": "string",
+            "pattern": "^https://"
+          },
+          "formato": {
+            "enum": [
+              "svg",
+              "png"
+            ]
+          },
+          "fornecido_por": {
+            "type": "string"
+          },
+          "pagina_origem": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "verificacao": {
+            "type": "string"
+          }
+        }
+      }
+    }
+  }
+}
