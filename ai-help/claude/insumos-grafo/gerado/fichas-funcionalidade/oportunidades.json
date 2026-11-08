@@ -1,0 +1,3243 @@
+{
+  "funcionalidade": {
+    "alertas": [
+      "IsClosed e IsWon não são gravados diretamente: refletem a etapa.",
+      "Usuários com licença Salesforce Platform não têm direito a oportunidades (Ajuda)."
+    ],
+    "aliases": [
+      "oportunidade",
+      "opportunity",
+      "pipeline",
+      "negócio"
+    ],
+    "classificacao_principal": {
+      "classificacao": "cls:processos-de-negocio-especificos-de-produto",
+      "subclassificacao": "sub:vendas"
+    },
+    "classificacoes_secundarias": [],
+    "estado": "verificado",
+    "evidencias": [
+      {
+        "fonte": "src:objref-opportunity"
+      },
+      {
+        "fonte": "src:fieldref-opportunity"
+      },
+      {
+        "fonte": "src:help-sales-features"
+      },
+      {
+        "fonte": "src:help-user-licenses"
+      },
+      {
+        "fonte": "src:objref-recordtype"
+      }
+    ],
+    "exemplo": "Uma proposta de renovação para um cliente, em negociação, com fechamento previsto para o fim do trimestre.",
+    "finalidade": "Acompanhar o pipeline de vendas até o ganho ou a perda.",
+    "id": "func:oportunidades",
+    "limitacoes": [
+      "Produtos, cotações, previsões (forecasting) e equipes de venda não catalogados.",
+      "Tipos de registro de Opportunity exigem processo de vendas (BusinessProcessId em RecordType); BusinessProcess não catalogado."
+    ],
+    "nome": "Oportunidades",
+    "nome_tecnico": "Opportunities (Opportunity)",
+    "o_que_e": "Oportunidade é um negócio em andamento, com valor estimado, etapa e data prevista de fechamento.",
+    "recomendacoes": [],
+    "representacoes": {
+      "ausencias": [
+        {
+          "estado": "desconhecido",
+          "motivo": "Não investigado: cada oportunidade é um registro, não um componente implantável; configurações relacionadas podem ter metadata types próprios, ainda não levantados.",
+          "tipo": "metadata_type"
+        }
+      ],
+      "metadata_types": [],
+      "objetos_api": [
+        {
+          "papel": "Registro de cada oportunidade.",
+          "ref": "obj:Opportunity"
+        }
+      ]
+    },
+    "setup": {
+      "estado": "desconhecido",
+      "nota": "Caminho de configuração não levantado nesta rodada."
+    },
+    "termos_busca": [
+      "negócio",
+      "oportunidade",
+      "oportunidades",
+      "opportunities (opportunity)",
+      "opportunity",
+      "pipeline"
+    ]
+  },
+  "metadata_types": [],
+  "nota": "Gerado deterministicamente a partir de catalogo/. Não editar à mão.",
+  "objetos_api": [
+    {
+      "objeto": {
+        "alertas": [
+          "IsClosed e IsWon não aceitam create/update pela API: refletem a etapa."
+        ],
+        "apex": {
+          "consulta_soql_direta": {
+            "estado": "verificado",
+            "evidencias": [
+              {
+                "fonte": "src:objref-opportunity"
+              }
+            ],
+            "nota": "Objeto da API padrão: consultável por SOQL em Apex, sujeito a permissões.",
+            "valor": true
+          },
+          "nota": "Exemplo Apex não fornecido nesta fase."
+        },
+        "campos": [
+          {
+            "apis": [
+              "padrao"
+            ],
+            "default": {
+              "estado": "desconhecido",
+              "forma": "nao_declarado_na_fonte"
+            },
+            "disponibilidade": {
+              "ate_versao": null,
+              "desde_versao": null,
+              "estado": "desconhecido"
+            },
+            "dominio": {
+              "contexto": "Id de registro do(s) objeto(s) referenciado(s).",
+              "estado": "verificado",
+              "evidencias": [
+                {
+                  "fonte": "src:objref-opportunity"
+                }
+              ],
+              "natureza": "referencia"
+            },
+            "estado": "verificado",
+            "evidencias": [
+              {
+                "fonte": "src:objref-opportunity"
+              }
+            ],
+            "explicacao": "explicada",
+            "id": "obj:Opportunity.AccountId",
+            "nome": "AccountId",
+            "o_que_e": "Conta à qual a oportunidade pertence.",
+            "obrigatoriedade": {
+              "estado": "desconhecido",
+              "valor": "desconhecida"
+            },
+            "origem": {
+              "estado": "verificado",
+              "evidencias": [
+                {
+                  "fonte": "src:objref-opportunity"
+                }
+              ],
+              "nota": "Campo padrão do objeto documentado.",
+              "valor": "padrao_plataforma"
+            },
+            "propriedades_api": {
+              "create": true,
+              "defaulted_on_create": false,
+              "estado": "verificado",
+              "evidencias": [
+                {
+                  "fonte": "src:objref-opportunity"
+                }
+              ],
+              "filter": true,
+              "group": true,
+              "id_lookup": false,
+              "nillable": true,
+              "restricted_picklist": false,
+              "sort": true,
+              "update": true
+            },
+            "referencia": {
+              "alvos": [
+                "Account"
+              ],
+              "nome_relacionamento": null
+            },
+            "somente_leitura": false,
+            "tipo_tecnico": "reference"
+          },
+          {
+            "apis": [
+              "padrao"
+            ],
+            "default": {
+              "estado": "desconhecido",
+              "forma": "nao_declarado_na_fonte"
+            },
+            "disponibilidade": {
+              "ate_versao": null,
+              "desde_versao": null,
+              "estado": "desconhecido"
+            },
+            "dominio": {
+              "estado": "desconhecido",
+              "natureza": "desconhecida"
+            },
+            "estado": "verificado",
+            "evidencias": [
+              {
+                "fonte": "src:objref-opportunity"
+              }
+            ],
+            "explicacao": "pendente",
+            "id": "obj:Opportunity.ActivityMetricId",
+            "nome": "ActivityMetricId",
+            "notas": [
+              "Nome listado na Object Reference; tipo e propriedades não extraídos nesta rodada."
+            ],
+            "o_que_e": "Explicação pendente: campo listado a partir da fonte, ainda sem texto didático.",
+            "obrigatoriedade": {
+              "estado": "desconhecido",
+              "valor": "desconhecida"
+            },
+            "origem": {
+              "estado": "verificado",
+              "evidencias": [
+                {
+                  "fonte": "src:objref-opportunity"
+                }
+              ],
+              "nota": "Campo padrão do objeto documentado.",
+              "valor": "padrao_plataforma"
+            },
+            "propriedades_api": {
+              "estado": "desconhecido"
+            },
+            "somente_leitura": null,
+            "tipo_tecnico": "(a extrair)"
+          },
+          {
+            "apis": [
+              "padrao"
+            ],
+            "default": {
+              "estado": "desconhecido",
+              "forma": "nao_declarado_na_fonte"
+            },
+            "disponibilidade": {
+              "ate_versao": null,
+              "desde_versao": null,
+              "estado": "desconhecido"
+            },
+            "dominio": {
+              "estado": "desconhecido",
+              "natureza": "desconhecida"
+            },
+            "estado": "verificado",
+            "evidencias": [
+              {
+                "fonte": "src:objref-opportunity"
+              }
+            ],
+            "explicacao": "pendente",
+            "id": "obj:Opportunity.ActivityMetricRollupId",
+            "nome": "ActivityMetricRollupId",
+            "notas": [
+              "Nome listado na Object Reference; tipo e propriedades não extraídos nesta rodada."
+            ],
+            "o_que_e": "Explicação pendente: campo listado a partir da fonte, ainda sem texto didático.",
+            "obrigatoriedade": {
+              "estado": "desconhecido",
+              "valor": "desconhecida"
+            },
+            "origem": {
+              "estado": "verificado",
+              "evidencias": [
+                {
+                  "fonte": "src:objref-opportunity"
+                }
+              ],
+              "nota": "Campo padrão do objeto documentado.",
+              "valor": "padrao_plataforma"
+            },
+            "propriedades_api": {
+              "estado": "desconhecido"
+            },
+            "somente_leitura": null,
+            "tipo_tecnico": "(a extrair)"
+          },
+          {
+            "apis": [
+              "padrao"
+            ],
+            "default": {
+              "estado": "desconhecido",
+              "forma": "nao_declarado_na_fonte"
+            },
+            "disponibilidade": {
+              "ate_versao": null,
+              "desde_versao": null,
+              "estado": "desconhecido"
+            },
+            "dominio": {
+              "estado": "desconhecido",
+              "natureza": "desconhecida"
+            },
+            "estado": "verificado",
+            "evidencias": [
+              {
+                "fonte": "src:objref-opportunity"
+              }
+            ],
+            "explicacao": "pendente",
+            "id": "obj:Opportunity.AgeInDays",
+            "nome": "AgeInDays",
+            "notas": [
+              "Nome listado na Object Reference; tipo e propriedades não extraídos nesta rodada."
+            ],
+            "o_que_e": "Explicação pendente: campo listado a partir da fonte, ainda sem texto didático.",
+            "obrigatoriedade": {
+              "estado": "desconhecido",
+              "valor": "desconhecida"
+            },
+            "origem": {
+              "estado": "verificado",
+              "evidencias": [
+                {
+                  "fonte": "src:objref-opportunity"
+                }
+              ],
+              "nota": "Campo padrão do objeto documentado.",
+              "valor": "padrao_plataforma"
+            },
+            "propriedades_api": {
+              "estado": "desconhecido"
+            },
+            "somente_leitura": null,
+            "tipo_tecnico": "(a extrair)"
+          },
+          {
+            "apis": [
+              "padrao"
+            ],
+            "default": {
+              "estado": "desconhecido",
+              "forma": "nao_declarado_na_fonte"
+            },
+            "disponibilidade": {
+              "ate_versao": null,
+              "desde_versao": null,
+              "estado": "desconhecido"
+            },
+            "dominio": {
+              "estado": "verificado",
+              "evidencias": [
+                {
+                  "fonte": "src:objref-opportunity"
+                }
+              ],
+              "natureza": "numerico"
+            },
+            "estado": "verificado",
+            "evidencias": [
+              {
+                "fonte": "src:objref-opportunity"
+              }
+            ],
+            "explicacao": "explicada",
+            "id": "obj:Opportunity.Amount",
+            "nome": "Amount",
+            "o_que_e": "Valor estimado do negócio; quando há produtos, é calculado a partir deles.",
+            "obrigatoriedade": {
+              "estado": "desconhecido",
+              "valor": "desconhecida"
+            },
+            "origem": {
+              "estado": "verificado",
+              "evidencias": [
+                {
+                  "fonte": "src:objref-opportunity"
+                }
+              ],
+              "nota": "Campo padrão do objeto documentado.",
+              "valor": "padrao_plataforma"
+            },
+            "propriedades_api": {
+              "create": true,
+              "defaulted_on_create": false,
+              "estado": "verificado",
+              "evidencias": [
+                {
+                  "fonte": "src:objref-opportunity"
+                }
+              ],
+              "filter": true,
+              "group": false,
+              "id_lookup": false,
+              "nillable": true,
+              "restricted_picklist": false,
+              "sort": true,
+              "update": true
+            },
+            "somente_leitura": false,
+            "tipo_tecnico": "currency"
+          },
+          {
+            "apis": [
+              "padrao"
+            ],
+            "default": {
+              "estado": "desconhecido",
+              "forma": "nao_declarado_na_fonte"
+            },
+            "disponibilidade": {
+              "ate_versao": null,
+              "desde_versao": null,
+              "estado": "desconhecido"
+            },
+            "dominio": {
+              "estado": "desconhecido",
+              "natureza": "desconhecida"
+            },
+            "estado": "verificado",
+            "evidencias": [
+              {
+                "fonte": "src:objref-opportunity"
+              }
+            ],
+            "explicacao": "pendente",
+            "id": "obj:Opportunity.CampaignId",
+            "nome": "CampaignId",
+            "notas": [
+              "Nome listado na Object Reference; tipo e propriedades não extraídos nesta rodada."
+            ],
+            "o_que_e": "Explicação pendente: campo listado a partir da fonte, ainda sem texto didático.",
+            "obrigatoriedade": {
+              "estado": "desconhecido",
+              "valor": "desconhecida"
+            },
+            "origem": {
+              "estado": "verificado",
+              "evidencias": [
+                {
+                  "fonte": "src:objref-opportunity"
+                }
+              ],
+              "nota": "Campo padrão do objeto documentado.",
+              "valor": "padrao_plataforma"
+            },
+            "propriedades_api": {
+              "estado": "desconhecido"
+            },
+            "somente_leitura": null,
+            "tipo_tecnico": "(a extrair)"
+          },
+          {
+            "apis": [
+              "padrao"
+            ],
+            "default": {
+              "estado": "desconhecido",
+              "forma": "nao_declarado_na_fonte"
+            },
+            "disponibilidade": {
+              "ate_versao": null,
+              "desde_versao": null,
+              "estado": "desconhecido"
+            },
+            "dominio": {
+              "estado": "verificado",
+              "evidencias": [
+                {
+                  "fonte": "src:objref-opportunity"
+                }
+              ],
+              "natureza": "data_hora"
+            },
+            "estado": "verificado",
+            "evidencias": [
+              {
+                "fonte": "src:objref-opportunity"
+              }
+            ],
+            "explicacao": "explicada",
+            "id": "obj:Opportunity.CloseDate",
+            "nome": "CloseDate",
+            "o_que_e": "Data prevista de fechamento do negócio.",
+            "obrigatoriedade": {
+              "estado": "verificado",
+              "evidencias": [
+                {
+                  "fonte": "src:objref-opportunity"
+                }
+              ],
+              "valor": "sim"
+            },
+            "origem": {
+              "estado": "verificado",
+              "evidencias": [
+                {
+                  "fonte": "src:objref-opportunity"
+                }
+              ],
+              "nota": "Campo padrão do objeto documentado.",
+              "valor": "padrao_plataforma"
+            },
+            "propriedades_api": {
+              "create": true,
+              "defaulted_on_create": false,
+              "estado": "verificado",
+              "evidencias": [
+                {
+                  "fonte": "src:objref-opportunity"
+                }
+              ],
+              "filter": true,
+              "group": true,
+              "id_lookup": false,
+              "nillable": false,
+              "restricted_picklist": false,
+              "sort": true,
+              "update": true
+            },
+            "somente_leitura": false,
+            "tipo_tecnico": "date"
+          },
+          {
+            "apis": [
+              "padrao"
+            ],
+            "default": {
+              "estado": "desconhecido",
+              "forma": "nao_declarado_na_fonte"
+            },
+            "disponibilidade": {
+              "ate_versao": null,
+              "desde_versao": null,
+              "estado": "desconhecido"
+            },
+            "dominio": {
+              "estado": "desconhecido",
+              "natureza": "desconhecida"
+            },
+            "estado": "verificado",
+            "evidencias": [
+              {
+                "fonte": "src:objref-opportunity"
+              }
+            ],
+            "explicacao": "pendente",
+            "id": "obj:Opportunity.ConnectionReceivedId",
+            "nome": "ConnectionReceivedId",
+            "notas": [
+              "Nome listado na Object Reference; tipo e propriedades não extraídos nesta rodada."
+            ],
+            "o_que_e": "Explicação pendente: campo listado a partir da fonte, ainda sem texto didático.",
+            "obrigatoriedade": {
+              "estado": "desconhecido",
+              "valor": "desconhecida"
+            },
+            "origem": {
+              "estado": "verificado",
+              "evidencias": [
+                {
+                  "fonte": "src:objref-opportunity"
+                }
+              ],
+              "nota": "Campo padrão do objeto documentado.",
+              "valor": "padrao_plataforma"
+            },
+            "propriedades_api": {
+              "estado": "desconhecido"
+            },
+            "somente_leitura": null,
+            "tipo_tecnico": "(a extrair)"
+          },
+          {
+            "apis": [
+              "padrao"
+            ],
+            "default": {
+              "estado": "desconhecido",
+              "forma": "nao_declarado_na_fonte"
+            },
+            "disponibilidade": {
+              "ate_versao": null,
+              "desde_versao": null,
+              "estado": "desconhecido"
+            },
+            "dominio": {
+              "estado": "desconhecido",
+              "natureza": "desconhecida"
+            },
+            "estado": "verificado",
+            "evidencias": [
+              {
+                "fonte": "src:objref-opportunity"
+              }
+            ],
+            "explicacao": "pendente",
+            "id": "obj:Opportunity.ConnectionSentId",
+            "nome": "ConnectionSentId",
+            "notas": [
+              "Nome listado na Object Reference; tipo e propriedades não extraídos nesta rodada."
+            ],
+            "o_que_e": "Explicação pendente: campo listado a partir da fonte, ainda sem texto didático.",
+            "obrigatoriedade": {
+              "estado": "desconhecido",
+              "valor": "desconhecida"
+            },
+            "origem": {
+              "estado": "verificado",
+              "evidencias": [
+                {
+                  "fonte": "src:objref-opportunity"
+                }
+              ],
+              "nota": "Campo padrão do objeto documentado.",
+              "valor": "padrao_plataforma"
+            },
+            "propriedades_api": {
+              "estado": "desconhecido"
+            },
+            "somente_leitura": null,
+            "tipo_tecnico": "(a extrair)"
+          },
+          {
+            "apis": [
+              "padrao"
+            ],
+            "default": {
+              "estado": "desconhecido",
+              "forma": "nao_declarado_na_fonte"
+            },
+            "disponibilidade": {
+              "ate_versao": null,
+              "desde_versao": null,
+              "estado": "desconhecido"
+            },
+            "dominio": {
+              "estado": "desconhecido",
+              "natureza": "desconhecida"
+            },
+            "estado": "verificado",
+            "evidencias": [
+              {
+                "fonte": "src:objref-opportunity"
+              }
+            ],
+            "explicacao": "pendente",
+            "id": "obj:Opportunity.ContactId",
+            "nome": "ContactId",
+            "notas": [
+              "Nome listado na Object Reference; tipo e propriedades não extraídos nesta rodada."
+            ],
+            "o_que_e": "Explicação pendente: campo listado a partir da fonte, ainda sem texto didático.",
+            "obrigatoriedade": {
+              "estado": "desconhecido",
+              "valor": "desconhecida"
+            },
+            "origem": {
+              "estado": "verificado",
+              "evidencias": [
+                {
+                  "fonte": "src:objref-opportunity"
+                }
+              ],
+              "nota": "Campo padrão do objeto documentado.",
+              "valor": "padrao_plataforma"
+            },
+            "propriedades_api": {
+              "estado": "desconhecido"
+            },
+            "somente_leitura": null,
+            "tipo_tecnico": "(a extrair)"
+          },
+          {
+            "apis": [
+              "padrao"
+            ],
+            "default": {
+              "estado": "desconhecido",
+              "forma": "nao_declarado_na_fonte"
+            },
+            "disponibilidade": {
+              "ate_versao": null,
+              "desde_versao": null,
+              "estado": "desconhecido"
+            },
+            "dominio": {
+              "estado": "desconhecido",
+              "natureza": "desconhecida"
+            },
+            "estado": "verificado",
+            "evidencias": [
+              {
+                "fonte": "src:objref-opportunity"
+              }
+            ],
+            "explicacao": "pendente",
+            "id": "obj:Opportunity.ContractId",
+            "nome": "ContractId",
+            "notas": [
+              "Nome listado na Object Reference; tipo e propriedades não extraídos nesta rodada."
+            ],
+            "o_que_e": "Explicação pendente: campo listado a partir da fonte, ainda sem texto didático.",
+            "obrigatoriedade": {
+              "estado": "desconhecido",
+              "valor": "desconhecida"
+            },
+            "origem": {
+              "estado": "verificado",
+              "evidencias": [
+                {
+                  "fonte": "src:objref-opportunity"
+                }
+              ],
+              "nota": "Campo padrão do objeto documentado.",
+              "valor": "padrao_plataforma"
+            },
+            "propriedades_api": {
+              "estado": "desconhecido"
+            },
+            "somente_leitura": null,
+            "tipo_tecnico": "(a extrair)"
+          },
+          {
+            "apis": [
+              "padrao"
+            ],
+            "default": {
+              "estado": "desconhecido",
+              "forma": "nao_declarado_na_fonte"
+            },
+            "disponibilidade": {
+              "ate_versao": null,
+              "desde_versao": null,
+              "estado": "desconhecido"
+            },
+            "dominio": {
+              "estado": "desconhecido",
+              "natureza": "desconhecida"
+            },
+            "estado": "verificado",
+            "evidencias": [
+              {
+                "fonte": "src:objref-opportunity"
+              }
+            ],
+            "explicacao": "pendente",
+            "id": "obj:Opportunity.CurrencyIsoCode",
+            "nome": "CurrencyIsoCode",
+            "notas": [
+              "Nome listado na Object Reference; tipo e propriedades não extraídos nesta rodada."
+            ],
+            "o_que_e": "Explicação pendente: campo listado a partir da fonte, ainda sem texto didático.",
+            "obrigatoriedade": {
+              "estado": "desconhecido",
+              "valor": "desconhecida"
+            },
+            "origem": {
+              "estado": "verificado",
+              "evidencias": [
+                {
+                  "fonte": "src:objref-opportunity"
+                }
+              ],
+              "nota": "Campo padrão do objeto documentado.",
+              "valor": "padrao_plataforma"
+            },
+            "propriedades_api": {
+              "estado": "desconhecido"
+            },
+            "somente_leitura": null,
+            "tipo_tecnico": "(a extrair)"
+          },
+          {
+            "apis": [
+              "padrao"
+            ],
+            "default": {
+              "estado": "desconhecido",
+              "forma": "nao_declarado_na_fonte"
+            },
+            "disponibilidade": {
+              "ate_versao": null,
+              "desde_versao": null,
+              "estado": "desconhecido"
+            },
+            "dominio": {
+              "estado": "desconhecido",
+              "natureza": "desconhecida"
+            },
+            "estado": "verificado",
+            "evidencias": [
+              {
+                "fonte": "src:objref-opportunity"
+              }
+            ],
+            "explicacao": "pendente",
+            "id": "obj:Opportunity.Description",
+            "nome": "Description",
+            "notas": [
+              "Nome listado na Object Reference; tipo e propriedades não extraídos nesta rodada."
+            ],
+            "o_que_e": "Explicação pendente: campo listado a partir da fonte, ainda sem texto didático.",
+            "obrigatoriedade": {
+              "estado": "desconhecido",
+              "valor": "desconhecida"
+            },
+            "origem": {
+              "estado": "verificado",
+              "evidencias": [
+                {
+                  "fonte": "src:objref-opportunity"
+                }
+              ],
+              "nota": "Campo padrão do objeto documentado.",
+              "valor": "padrao_plataforma"
+            },
+            "propriedades_api": {
+              "estado": "desconhecido"
+            },
+            "somente_leitura": null,
+            "tipo_tecnico": "(a extrair)"
+          },
+          {
+            "apis": [
+              "padrao"
+            ],
+            "default": {
+              "estado": "desconhecido",
+              "forma": "nao_declarado_na_fonte"
+            },
+            "disponibilidade": {
+              "ate_versao": null,
+              "desde_versao": null,
+              "estado": "desconhecido"
+            },
+            "dominio": {
+              "estado": "desconhecido",
+              "natureza": "desconhecida"
+            },
+            "estado": "verificado",
+            "evidencias": [
+              {
+                "fonte": "src:objref-opportunity"
+              }
+            ],
+            "explicacao": "pendente",
+            "id": "obj:Opportunity.ExpectedRevenue",
+            "nome": "ExpectedRevenue",
+            "notas": [
+              "Nome listado na Object Reference; tipo e propriedades não extraídos nesta rodada."
+            ],
+            "o_que_e": "Explicação pendente: campo listado a partir da fonte, ainda sem texto didático.",
+            "obrigatoriedade": {
+              "estado": "desconhecido",
+              "valor": "desconhecida"
+            },
+            "origem": {
+              "estado": "verificado",
+              "evidencias": [
+                {
+                  "fonte": "src:objref-opportunity"
+                }
+              ],
+              "nota": "Campo padrão do objeto documentado.",
+              "valor": "padrao_plataforma"
+            },
+            "propriedades_api": {
+              "estado": "desconhecido"
+            },
+            "somente_leitura": null,
+            "tipo_tecnico": "(a extrair)"
+          },
+          {
+            "apis": [
+              "padrao"
+            ],
+            "default": {
+              "estado": "desconhecido",
+              "forma": "nao_declarado_na_fonte"
+            },
+            "disponibilidade": {
+              "ate_versao": null,
+              "desde_versao": null,
+              "estado": "desconhecido"
+            },
+            "dominio": {
+              "estado": "desconhecido",
+              "natureza": "desconhecida"
+            },
+            "estado": "verificado",
+            "evidencias": [
+              {
+                "fonte": "src:objref-opportunity"
+              }
+            ],
+            "explicacao": "pendente",
+            "id": "obj:Opportunity.ExportStatus",
+            "nome": "ExportStatus",
+            "notas": [
+              "Nome listado na Object Reference; tipo e propriedades não extraídos nesta rodada."
+            ],
+            "o_que_e": "Explicação pendente: campo listado a partir da fonte, ainda sem texto didático.",
+            "obrigatoriedade": {
+              "estado": "desconhecido",
+              "valor": "desconhecida"
+            },
+            "origem": {
+              "estado": "verificado",
+              "evidencias": [
+                {
+                  "fonte": "src:objref-opportunity"
+                }
+              ],
+              "nota": "Campo padrão do objeto documentado.",
+              "valor": "padrao_plataforma"
+            },
+            "propriedades_api": {
+              "estado": "desconhecido"
+            },
+            "somente_leitura": null,
+            "tipo_tecnico": "(a extrair)"
+          },
+          {
+            "apis": [
+              "padrao"
+            ],
+            "default": {
+              "estado": "desconhecido",
+              "forma": "nao_declarado_na_fonte"
+            },
+            "disponibilidade": {
+              "ate_versao": null,
+              "desde_versao": null,
+              "estado": "desconhecido"
+            },
+            "dominio": {
+              "estado": "desconhecido",
+              "natureza": "desconhecida"
+            },
+            "estado": "verificado",
+            "evidencias": [
+              {
+                "fonte": "src:objref-opportunity"
+              }
+            ],
+            "explicacao": "pendente",
+            "id": "obj:Opportunity.Fiscal",
+            "nome": "Fiscal",
+            "notas": [
+              "Nome listado na Object Reference; tipo e propriedades não extraídos nesta rodada."
+            ],
+            "o_que_e": "Explicação pendente: campo listado a partir da fonte, ainda sem texto didático.",
+            "obrigatoriedade": {
+              "estado": "desconhecido",
+              "valor": "desconhecida"
+            },
+            "origem": {
+              "estado": "verificado",
+              "evidencias": [
+                {
+                  "fonte": "src:objref-opportunity"
+                }
+              ],
+              "nota": "Campo padrão do objeto documentado.",
+              "valor": "padrao_plataforma"
+            },
+            "propriedades_api": {
+              "estado": "desconhecido"
+            },
+            "somente_leitura": null,
+            "tipo_tecnico": "(a extrair)"
+          },
+          {
+            "apis": [
+              "padrao"
+            ],
+            "default": {
+              "estado": "desconhecido",
+              "forma": "nao_declarado_na_fonte"
+            },
+            "disponibilidade": {
+              "ate_versao": null,
+              "desde_versao": null,
+              "estado": "desconhecido"
+            },
+            "dominio": {
+              "estado": "desconhecido",
+              "natureza": "desconhecida"
+            },
+            "estado": "verificado",
+            "evidencias": [
+              {
+                "fonte": "src:objref-opportunity"
+              }
+            ],
+            "explicacao": "pendente",
+            "id": "obj:Opportunity.FiscalQuarter",
+            "nome": "FiscalQuarter",
+            "notas": [
+              "Nome listado na Object Reference; tipo e propriedades não extraídos nesta rodada."
+            ],
+            "o_que_e": "Explicação pendente: campo listado a partir da fonte, ainda sem texto didático.",
+            "obrigatoriedade": {
+              "estado": "desconhecido",
+              "valor": "desconhecida"
+            },
+            "origem": {
+              "estado": "verificado",
+              "evidencias": [
+                {
+                  "fonte": "src:objref-opportunity"
+                }
+              ],
+              "nota": "Campo padrão do objeto documentado.",
+              "valor": "padrao_plataforma"
+            },
+            "propriedades_api": {
+              "estado": "desconhecido"
+            },
+            "somente_leitura": null,
+            "tipo_tecnico": "(a extrair)"
+          },
+          {
+            "apis": [
+              "padrao"
+            ],
+            "default": {
+              "estado": "desconhecido",
+              "forma": "nao_declarado_na_fonte"
+            },
+            "disponibilidade": {
+              "ate_versao": null,
+              "desde_versao": null,
+              "estado": "desconhecido"
+            },
+            "dominio": {
+              "estado": "desconhecido",
+              "natureza": "desconhecida"
+            },
+            "estado": "verificado",
+            "evidencias": [
+              {
+                "fonte": "src:objref-opportunity"
+              }
+            ],
+            "explicacao": "pendente",
+            "id": "obj:Opportunity.FiscalYear",
+            "nome": "FiscalYear",
+            "notas": [
+              "Nome listado na Object Reference; tipo e propriedades não extraídos nesta rodada."
+            ],
+            "o_que_e": "Explicação pendente: campo listado a partir da fonte, ainda sem texto didático.",
+            "obrigatoriedade": {
+              "estado": "desconhecido",
+              "valor": "desconhecida"
+            },
+            "origem": {
+              "estado": "verificado",
+              "evidencias": [
+                {
+                  "fonte": "src:objref-opportunity"
+                }
+              ],
+              "nota": "Campo padrão do objeto documentado.",
+              "valor": "padrao_plataforma"
+            },
+            "propriedades_api": {
+              "estado": "desconhecido"
+            },
+            "somente_leitura": null,
+            "tipo_tecnico": "(a extrair)"
+          },
+          {
+            "apis": [
+              "padrao"
+            ],
+            "default": {
+              "estado": "desconhecido",
+              "forma": "nao_declarado_na_fonte"
+            },
+            "disponibilidade": {
+              "ate_versao": null,
+              "desde_versao": null,
+              "estado": "desconhecido"
+            },
+            "dominio": {
+              "estado": "desconhecido",
+              "natureza": "desconhecida"
+            },
+            "estado": "verificado",
+            "evidencias": [
+              {
+                "fonte": "src:objref-opportunity"
+              }
+            ],
+            "explicacao": "pendente",
+            "id": "obj:Opportunity.ForecastCategory",
+            "nome": "ForecastCategory",
+            "notas": [
+              "Nome listado na Object Reference; tipo e propriedades não extraídos nesta rodada."
+            ],
+            "o_que_e": "Explicação pendente: campo listado a partir da fonte, ainda sem texto didático.",
+            "obrigatoriedade": {
+              "estado": "desconhecido",
+              "valor": "desconhecida"
+            },
+            "origem": {
+              "estado": "verificado",
+              "evidencias": [
+                {
+                  "fonte": "src:objref-opportunity"
+                }
+              ],
+              "nota": "Campo padrão do objeto documentado.",
+              "valor": "padrao_plataforma"
+            },
+            "propriedades_api": {
+              "estado": "desconhecido"
+            },
+            "somente_leitura": null,
+            "tipo_tecnico": "(a extrair)"
+          },
+          {
+            "apis": [
+              "padrao"
+            ],
+            "default": {
+              "estado": "desconhecido",
+              "forma": "desconhecido",
+              "nota": "A API marca o campo como 'defaulted on create', mas o valor não foi declarado na extração."
+            },
+            "disponibilidade": {
+              "ate_versao": null,
+              "desde_versao": null,
+              "estado": "desconhecido"
+            },
+            "dominio": {
+              "contexto": "Valores não extraídos; podem depender de org, idioma ou recurso.",
+              "estado": "desconhecido",
+              "natureza": "lista_dinamica"
+            },
+            "estado": "verificado",
+            "evidencias": [
+              {
+                "fonte": "src:objref-opportunity"
+              }
+            ],
+            "explicacao": "explicada",
+            "id": "obj:Opportunity.ForecastCategoryName",
+            "nome": "ForecastCategoryName",
+            "o_que_e": "Categoria de previsão; normalmente acompanha a etapa.",
+            "obrigatoriedade": {
+              "estado": "desconhecido",
+              "valor": "desconhecida"
+            },
+            "origem": {
+              "estado": "verificado",
+              "evidencias": [
+                {
+                  "fonte": "src:objref-opportunity"
+                }
+              ],
+              "nota": "Campo padrão do objeto documentado.",
+              "valor": "padrao_plataforma"
+            },
+            "propriedades_api": {
+              "create": true,
+              "defaulted_on_create": true,
+              "estado": "verificado",
+              "evidencias": [
+                {
+                  "fonte": "src:objref-opportunity"
+                }
+              ],
+              "filter": true,
+              "group": true,
+              "id_lookup": false,
+              "nillable": true,
+              "restricted_picklist": true,
+              "sort": true,
+              "update": true
+            },
+            "somente_leitura": false,
+            "tipo_tecnico": "picklist"
+          },
+          {
+            "apis": [
+              "padrao"
+            ],
+            "default": {
+              "estado": "desconhecido",
+              "forma": "nao_declarado_na_fonte"
+            },
+            "disponibilidade": {
+              "ate_versao": null,
+              "desde_versao": null,
+              "estado": "desconhecido"
+            },
+            "dominio": {
+              "estado": "desconhecido",
+              "natureza": "desconhecida"
+            },
+            "estado": "verificado",
+            "evidencias": [
+              {
+                "fonte": "src:objref-opportunity"
+              }
+            ],
+            "explicacao": "pendente",
+            "id": "obj:Opportunity.HasOpenActivity",
+            "nome": "HasOpenActivity",
+            "notas": [
+              "Nome listado na Object Reference; tipo e propriedades não extraídos nesta rodada."
+            ],
+            "o_que_e": "Explicação pendente: campo listado a partir da fonte, ainda sem texto didático.",
+            "obrigatoriedade": {
+              "estado": "desconhecido",
+              "valor": "desconhecida"
+            },
+            "origem": {
+              "estado": "verificado",
+              "evidencias": [
+                {
+                  "fonte": "src:objref-opportunity"
+                }
+              ],
+              "nota": "Campo padrão do objeto documentado.",
+              "valor": "padrao_plataforma"
+            },
+            "propriedades_api": {
+              "estado": "desconhecido"
+            },
+            "somente_leitura": null,
+            "tipo_tecnico": "(a extrair)"
+          },
+          {
+            "apis": [
+              "padrao"
+            ],
+            "default": {
+              "estado": "desconhecido",
+              "forma": "nao_declarado_na_fonte"
+            },
+            "disponibilidade": {
+              "ate_versao": null,
+              "desde_versao": null,
+              "estado": "desconhecido"
+            },
+            "dominio": {
+              "estado": "desconhecido",
+              "natureza": "desconhecida"
+            },
+            "estado": "verificado",
+            "evidencias": [
+              {
+                "fonte": "src:objref-opportunity"
+              }
+            ],
+            "explicacao": "pendente",
+            "id": "obj:Opportunity.HasOpportunityLineItem",
+            "nome": "HasOpportunityLineItem",
+            "notas": [
+              "Nome listado na Object Reference; tipo e propriedades não extraídos nesta rodada."
+            ],
+            "o_que_e": "Explicação pendente: campo listado a partir da fonte, ainda sem texto didático.",
+            "obrigatoriedade": {
+              "estado": "desconhecido",
+              "valor": "desconhecida"
+            },
+            "origem": {
+              "estado": "verificado",
+              "evidencias": [
+                {
+                  "fonte": "src:objref-opportunity"
+                }
+              ],
+              "nota": "Campo padrão do objeto documentado.",
+              "valor": "padrao_plataforma"
+            },
+            "propriedades_api": {
+              "estado": "desconhecido"
+            },
+            "somente_leitura": null,
+            "tipo_tecnico": "(a extrair)"
+          },
+          {
+            "apis": [
+              "padrao"
+            ],
+            "default": {
+              "estado": "desconhecido",
+              "forma": "nao_declarado_na_fonte"
+            },
+            "disponibilidade": {
+              "ate_versao": null,
+              "desde_versao": null,
+              "estado": "desconhecido"
+            },
+            "dominio": {
+              "estado": "desconhecido",
+              "natureza": "desconhecida"
+            },
+            "estado": "verificado",
+            "evidencias": [
+              {
+                "fonte": "src:objref-opportunity"
+              }
+            ],
+            "explicacao": "pendente",
+            "id": "obj:Opportunity.HasOverdueTask",
+            "nome": "HasOverdueTask",
+            "notas": [
+              "Nome listado na Object Reference; tipo e propriedades não extraídos nesta rodada."
+            ],
+            "o_que_e": "Explicação pendente: campo listado a partir da fonte, ainda sem texto didático.",
+            "obrigatoriedade": {
+              "estado": "desconhecido",
+              "valor": "desconhecida"
+            },
+            "origem": {
+              "estado": "verificado",
+              "evidencias": [
+                {
+                  "fonte": "src:objref-opportunity"
+                }
+              ],
+              "nota": "Campo padrão do objeto documentado.",
+              "valor": "padrao_plataforma"
+            },
+            "propriedades_api": {
+              "estado": "desconhecido"
+            },
+            "somente_leitura": null,
+            "tipo_tecnico": "(a extrair)"
+          },
+          {
+            "apis": [
+              "padrao"
+            ],
+            "default": {
+              "estado": "desconhecido",
+              "forma": "nao_declarado_na_fonte"
+            },
+            "disponibilidade": {
+              "ate_versao": null,
+              "desde_versao": null,
+              "estado": "desconhecido"
+            },
+            "dominio": {
+              "estado": "desconhecido",
+              "natureza": "desconhecida"
+            },
+            "estado": "verificado",
+            "evidencias": [
+              {
+                "fonte": "src:objref-opportunity"
+              }
+            ],
+            "explicacao": "pendente",
+            "id": "obj:Opportunity.IqScore",
+            "nome": "IqScore",
+            "notas": [
+              "Nome listado na Object Reference; tipo e propriedades não extraídos nesta rodada."
+            ],
+            "o_que_e": "Explicação pendente: campo listado a partir da fonte, ainda sem texto didático.",
+            "obrigatoriedade": {
+              "estado": "desconhecido",
+              "valor": "desconhecida"
+            },
+            "origem": {
+              "estado": "verificado",
+              "evidencias": [
+                {
+                  "fonte": "src:objref-opportunity"
+                }
+              ],
+              "nota": "Campo padrão do objeto documentado.",
+              "valor": "padrao_plataforma"
+            },
+            "propriedades_api": {
+              "estado": "desconhecido"
+            },
+            "somente_leitura": null,
+            "tipo_tecnico": "(a extrair)"
+          },
+          {
+            "apis": [
+              "padrao"
+            ],
+            "default": {
+              "estado": "desconhecido",
+              "forma": "desconhecido",
+              "nota": "A API marca o campo como 'defaulted on create', mas o valor não foi declarado na extração."
+            },
+            "disponibilidade": {
+              "ate_versao": null,
+              "desde_versao": null,
+              "estado": "desconhecido"
+            },
+            "dominio": {
+              "estado": "verificado",
+              "evidencias": [
+                {
+                  "fonte": "src:objref-opportunity"
+                }
+              ],
+              "lista_completa": "sim",
+              "natureza": "booleano",
+              "valores": [
+                {
+                  "valor": "true"
+                },
+                {
+                  "valor": "false"
+                }
+              ]
+            },
+            "estado": "verificado",
+            "evidencias": [
+              {
+                "fonte": "src:objref-opportunity"
+              }
+            ],
+            "explicacao": "explicada",
+            "id": "obj:Opportunity.IsClosed",
+            "nome": "IsClosed",
+            "o_que_e": "Indica se a oportunidade chegou a uma etapa fechada.",
+            "obrigatoriedade": {
+              "estado": "desconhecido",
+              "valor": "desconhecida"
+            },
+            "origem": {
+              "estado": "verificado",
+              "evidencias": [
+                {
+                  "fonte": "src:objref-opportunity"
+                }
+              ],
+              "nota": "Campo padrão do objeto documentado.",
+              "valor": "padrao_plataforma"
+            },
+            "propriedades_api": {
+              "create": false,
+              "defaulted_on_create": true,
+              "estado": "verificado",
+              "evidencias": [
+                {
+                  "fonte": "src:objref-opportunity"
+                }
+              ],
+              "filter": true,
+              "group": true,
+              "id_lookup": false,
+              "nillable": false,
+              "restricted_picklist": false,
+              "sort": true,
+              "update": false
+            },
+            "somente_leitura": true,
+            "tipo_tecnico": "boolean"
+          },
+          {
+            "apis": [
+              "padrao"
+            ],
+            "default": {
+              "estado": "desconhecido",
+              "forma": "nao_declarado_na_fonte"
+            },
+            "disponibilidade": {
+              "ate_versao": null,
+              "desde_versao": null,
+              "estado": "desconhecido"
+            },
+            "dominio": {
+              "estado": "desconhecido",
+              "natureza": "desconhecida"
+            },
+            "estado": "verificado",
+            "evidencias": [
+              {
+                "fonte": "src:objref-opportunity"
+              }
+            ],
+            "explicacao": "pendente",
+            "id": "obj:Opportunity.IsDeleted",
+            "nome": "IsDeleted",
+            "notas": [
+              "Nome listado na Object Reference; tipo e propriedades não extraídos nesta rodada."
+            ],
+            "o_que_e": "Explicação pendente: campo listado a partir da fonte, ainda sem texto didático.",
+            "obrigatoriedade": {
+              "estado": "desconhecido",
+              "valor": "desconhecida"
+            },
+            "origem": {
+              "estado": "verificado",
+              "evidencias": [
+                {
+                  "fonte": "src:objref-opportunity"
+                }
+              ],
+              "nota": "Campo padrão do objeto documentado.",
+              "valor": "padrao_plataforma"
+            },
+            "propriedades_api": {
+              "estado": "desconhecido"
+            },
+            "somente_leitura": null,
+            "tipo_tecnico": "(a extrair)"
+          },
+          {
+            "apis": [
+              "padrao"
+            ],
+            "default": {
+              "estado": "desconhecido",
+              "forma": "nao_declarado_na_fonte"
+            },
+            "disponibilidade": {
+              "ate_versao": null,
+              "desde_versao": null,
+              "estado": "desconhecido"
+            },
+            "dominio": {
+              "estado": "desconhecido",
+              "natureza": "desconhecida"
+            },
+            "estado": "verificado",
+            "evidencias": [
+              {
+                "fonte": "src:objref-opportunity"
+              }
+            ],
+            "explicacao": "pendente",
+            "id": "obj:Opportunity.IsExcludedFromTerritory2Filter",
+            "nome": "IsExcludedFromTerritory2Filter",
+            "notas": [
+              "Nome listado na Object Reference; tipo e propriedades não extraídos nesta rodada."
+            ],
+            "o_que_e": "Explicação pendente: campo listado a partir da fonte, ainda sem texto didático.",
+            "obrigatoriedade": {
+              "estado": "desconhecido",
+              "valor": "desconhecida"
+            },
+            "origem": {
+              "estado": "verificado",
+              "evidencias": [
+                {
+                  "fonte": "src:objref-opportunity"
+                }
+              ],
+              "nota": "Campo padrão do objeto documentado.",
+              "valor": "padrao_plataforma"
+            },
+            "propriedades_api": {
+              "estado": "desconhecido"
+            },
+            "somente_leitura": null,
+            "tipo_tecnico": "(a extrair)"
+          },
+          {
+            "apis": [
+              "padrao"
+            ],
+            "default": {
+              "estado": "desconhecido",
+              "forma": "nao_declarado_na_fonte"
+            },
+            "disponibilidade": {
+              "ate_versao": null,
+              "desde_versao": null,
+              "estado": "desconhecido"
+            },
+            "dominio": {
+              "estado": "desconhecido",
+              "natureza": "desconhecida"
+            },
+            "estado": "verificado",
+            "evidencias": [
+              {
+                "fonte": "src:objref-opportunity"
+              }
+            ],
+            "explicacao": "pendente",
+            "id": "obj:Opportunity.IsPriorityRecord",
+            "nome": "IsPriorityRecord",
+            "notas": [
+              "Nome listado na Object Reference; tipo e propriedades não extraídos nesta rodada."
+            ],
+            "o_que_e": "Explicação pendente: campo listado a partir da fonte, ainda sem texto didático.",
+            "obrigatoriedade": {
+              "estado": "desconhecido",
+              "valor": "desconhecida"
+            },
+            "origem": {
+              "estado": "verificado",
+              "evidencias": [
+                {
+                  "fonte": "src:objref-opportunity"
+                }
+              ],
+              "nota": "Campo padrão do objeto documentado.",
+              "valor": "padrao_plataforma"
+            },
+            "propriedades_api": {
+              "estado": "desconhecido"
+            },
+            "somente_leitura": null,
+            "tipo_tecnico": "(a extrair)"
+          },
+          {
+            "apis": [
+              "padrao"
+            ],
+            "default": {
+              "estado": "desconhecido",
+              "forma": "nao_declarado_na_fonte"
+            },
+            "disponibilidade": {
+              "ate_versao": null,
+              "desde_versao": null,
+              "estado": "desconhecido"
+            },
+            "dominio": {
+              "estado": "desconhecido",
+              "natureza": "desconhecida"
+            },
+            "estado": "verificado",
+            "evidencias": [
+              {
+                "fonte": "src:objref-opportunity"
+              }
+            ],
+            "explicacao": "pendente",
+            "id": "obj:Opportunity.IsPrivate",
+            "nome": "IsPrivate",
+            "notas": [
+              "Nome listado na Object Reference; tipo e propriedades não extraídos nesta rodada."
+            ],
+            "o_que_e": "Explicação pendente: campo listado a partir da fonte, ainda sem texto didático.",
+            "obrigatoriedade": {
+              "estado": "desconhecido",
+              "valor": "desconhecida"
+            },
+            "origem": {
+              "estado": "verificado",
+              "evidencias": [
+                {
+                  "fonte": "src:objref-opportunity"
+                }
+              ],
+              "nota": "Campo padrão do objeto documentado.",
+              "valor": "padrao_plataforma"
+            },
+            "propriedades_api": {
+              "estado": "desconhecido"
+            },
+            "somente_leitura": null,
+            "tipo_tecnico": "(a extrair)"
+          },
+          {
+            "apis": [
+              "padrao"
+            ],
+            "default": {
+              "estado": "desconhecido",
+              "forma": "nao_declarado_na_fonte"
+            },
+            "disponibilidade": {
+              "ate_versao": null,
+              "desde_versao": null,
+              "estado": "desconhecido"
+            },
+            "dominio": {
+              "estado": "desconhecido",
+              "natureza": "desconhecida"
+            },
+            "estado": "verificado",
+            "evidencias": [
+              {
+                "fonte": "src:objref-opportunity"
+              }
+            ],
+            "explicacao": "pendente",
+            "id": "obj:Opportunity.IsSplit",
+            "nome": "IsSplit",
+            "notas": [
+              "Nome listado na Object Reference; tipo e propriedades não extraídos nesta rodada."
+            ],
+            "o_que_e": "Explicação pendente: campo listado a partir da fonte, ainda sem texto didático.",
+            "obrigatoriedade": {
+              "estado": "desconhecido",
+              "valor": "desconhecida"
+            },
+            "origem": {
+              "estado": "verificado",
+              "evidencias": [
+                {
+                  "fonte": "src:objref-opportunity"
+                }
+              ],
+              "nota": "Campo padrão do objeto documentado.",
+              "valor": "padrao_plataforma"
+            },
+            "propriedades_api": {
+              "estado": "desconhecido"
+            },
+            "somente_leitura": null,
+            "tipo_tecnico": "(a extrair)"
+          },
+          {
+            "apis": [
+              "padrao"
+            ],
+            "default": {
+              "estado": "desconhecido",
+              "forma": "desconhecido",
+              "nota": "A API marca o campo como 'defaulted on create', mas o valor não foi declarado na extração."
+            },
+            "disponibilidade": {
+              "ate_versao": null,
+              "desde_versao": null,
+              "estado": "desconhecido"
+            },
+            "dominio": {
+              "estado": "verificado",
+              "evidencias": [
+                {
+                  "fonte": "src:objref-opportunity"
+                }
+              ],
+              "lista_completa": "sim",
+              "natureza": "booleano",
+              "valores": [
+                {
+                  "valor": "true"
+                },
+                {
+                  "valor": "false"
+                }
+              ]
+            },
+            "estado": "verificado",
+            "evidencias": [
+              {
+                "fonte": "src:objref-opportunity"
+              }
+            ],
+            "explicacao": "explicada",
+            "id": "obj:Opportunity.IsWon",
+            "nome": "IsWon",
+            "o_que_e": "Indica se a oportunidade foi ganha.",
+            "obrigatoriedade": {
+              "estado": "desconhecido",
+              "valor": "desconhecida"
+            },
+            "origem": {
+              "estado": "verificado",
+              "evidencias": [
+                {
+                  "fonte": "src:objref-opportunity"
+                }
+              ],
+              "nota": "Campo padrão do objeto documentado.",
+              "valor": "padrao_plataforma"
+            },
+            "propriedades_api": {
+              "create": false,
+              "defaulted_on_create": true,
+              "estado": "verificado",
+              "evidencias": [
+                {
+                  "fonte": "src:objref-opportunity"
+                }
+              ],
+              "filter": true,
+              "group": true,
+              "id_lookup": false,
+              "nillable": false,
+              "restricted_picklist": false,
+              "sort": true,
+              "update": false
+            },
+            "somente_leitura": true,
+            "tipo_tecnico": "boolean"
+          },
+          {
+            "apis": [
+              "padrao"
+            ],
+            "default": {
+              "estado": "desconhecido",
+              "forma": "nao_declarado_na_fonte"
+            },
+            "disponibilidade": {
+              "ate_versao": null,
+              "desde_versao": null,
+              "estado": "desconhecido"
+            },
+            "dominio": {
+              "estado": "desconhecido",
+              "natureza": "desconhecida"
+            },
+            "estado": "verificado",
+            "evidencias": [
+              {
+                "fonte": "src:objref-opportunity"
+              }
+            ],
+            "explicacao": "pendente",
+            "id": "obj:Opportunity.LastActivityDate",
+            "nome": "LastActivityDate",
+            "notas": [
+              "Nome listado na Object Reference; tipo e propriedades não extraídos nesta rodada."
+            ],
+            "o_que_e": "Explicação pendente: campo listado a partir da fonte, ainda sem texto didático.",
+            "obrigatoriedade": {
+              "estado": "desconhecido",
+              "valor": "desconhecida"
+            },
+            "origem": {
+              "estado": "verificado",
+              "evidencias": [
+                {
+                  "fonte": "src:objref-opportunity"
+                }
+              ],
+              "nota": "Campo padrão do objeto documentado.",
+              "valor": "padrao_plataforma"
+            },
+            "propriedades_api": {
+              "estado": "desconhecido"
+            },
+            "somente_leitura": null,
+            "tipo_tecnico": "(a extrair)"
+          },
+          {
+            "apis": [
+              "padrao"
+            ],
+            "default": {
+              "estado": "desconhecido",
+              "forma": "nao_declarado_na_fonte"
+            },
+            "disponibilidade": {
+              "ate_versao": null,
+              "desde_versao": null,
+              "estado": "desconhecido"
+            },
+            "dominio": {
+              "estado": "desconhecido",
+              "natureza": "desconhecida"
+            },
+            "estado": "verificado",
+            "evidencias": [
+              {
+                "fonte": "src:objref-opportunity"
+              }
+            ],
+            "explicacao": "pendente",
+            "id": "obj:Opportunity.LastActivityInDays",
+            "nome": "LastActivityInDays",
+            "notas": [
+              "Nome listado na Object Reference; tipo e propriedades não extraídos nesta rodada."
+            ],
+            "o_que_e": "Explicação pendente: campo listado a partir da fonte, ainda sem texto didático.",
+            "obrigatoriedade": {
+              "estado": "desconhecido",
+              "valor": "desconhecida"
+            },
+            "origem": {
+              "estado": "verificado",
+              "evidencias": [
+                {
+                  "fonte": "src:objref-opportunity"
+                }
+              ],
+              "nota": "Campo padrão do objeto documentado.",
+              "valor": "padrao_plataforma"
+            },
+            "propriedades_api": {
+              "estado": "desconhecido"
+            },
+            "somente_leitura": null,
+            "tipo_tecnico": "(a extrair)"
+          },
+          {
+            "apis": [
+              "padrao"
+            ],
+            "default": {
+              "estado": "desconhecido",
+              "forma": "nao_declarado_na_fonte"
+            },
+            "disponibilidade": {
+              "ate_versao": null,
+              "desde_versao": null,
+              "estado": "desconhecido"
+            },
+            "dominio": {
+              "estado": "desconhecido",
+              "natureza": "desconhecida"
+            },
+            "estado": "verificado",
+            "evidencias": [
+              {
+                "fonte": "src:objref-opportunity"
+              }
+            ],
+            "explicacao": "pendente",
+            "id": "obj:Opportunity.LastAmountChangedHistoryId",
+            "nome": "LastAmountChangedHistoryId",
+            "notas": [
+              "Nome listado na Object Reference; tipo e propriedades não extraídos nesta rodada."
+            ],
+            "o_que_e": "Explicação pendente: campo listado a partir da fonte, ainda sem texto didático.",
+            "obrigatoriedade": {
+              "estado": "desconhecido",
+              "valor": "desconhecida"
+            },
+            "origem": {
+              "estado": "verificado",
+              "evidencias": [
+                {
+                  "fonte": "src:objref-opportunity"
+                }
+              ],
+              "nota": "Campo padrão do objeto documentado.",
+              "valor": "padrao_plataforma"
+            },
+            "propriedades_api": {
+              "estado": "desconhecido"
+            },
+            "somente_leitura": null,
+            "tipo_tecnico": "(a extrair)"
+          },
+          {
+            "apis": [
+              "padrao"
+            ],
+            "default": {
+              "estado": "desconhecido",
+              "forma": "nao_declarado_na_fonte"
+            },
+            "disponibilidade": {
+              "ate_versao": null,
+              "desde_versao": null,
+              "estado": "desconhecido"
+            },
+            "dominio": {
+              "estado": "desconhecido",
+              "natureza": "desconhecida"
+            },
+            "estado": "verificado",
+            "evidencias": [
+              {
+                "fonte": "src:objref-opportunity"
+              }
+            ],
+            "explicacao": "pendente",
+            "id": "obj:Opportunity.LastCloseDateChangedHistoryId",
+            "nome": "LastCloseDateChangedHistoryId",
+            "notas": [
+              "Nome listado na Object Reference; tipo e propriedades não extraídos nesta rodada."
+            ],
+            "o_que_e": "Explicação pendente: campo listado a partir da fonte, ainda sem texto didático.",
+            "obrigatoriedade": {
+              "estado": "desconhecido",
+              "valor": "desconhecida"
+            },
+            "origem": {
+              "estado": "verificado",
+              "evidencias": [
+                {
+                  "fonte": "src:objref-opportunity"
+                }
+              ],
+              "nota": "Campo padrão do objeto documentado.",
+              "valor": "padrao_plataforma"
+            },
+            "propriedades_api": {
+              "estado": "desconhecido"
+            },
+            "somente_leitura": null,
+            "tipo_tecnico": "(a extrair)"
+          },
+          {
+            "apis": [
+              "padrao"
+            ],
+            "default": {
+              "estado": "desconhecido",
+              "forma": "nao_declarado_na_fonte"
+            },
+            "disponibilidade": {
+              "ate_versao": null,
+              "desde_versao": null,
+              "estado": "desconhecido"
+            },
+            "dominio": {
+              "estado": "desconhecido",
+              "natureza": "desconhecida"
+            },
+            "estado": "verificado",
+            "evidencias": [
+              {
+                "fonte": "src:objref-opportunity"
+              }
+            ],
+            "explicacao": "pendente",
+            "id": "obj:Opportunity.LastReferencedDate",
+            "nome": "LastReferencedDate",
+            "notas": [
+              "Nome listado na Object Reference; tipo e propriedades não extraídos nesta rodada."
+            ],
+            "o_que_e": "Explicação pendente: campo listado a partir da fonte, ainda sem texto didático.",
+            "obrigatoriedade": {
+              "estado": "desconhecido",
+              "valor": "desconhecida"
+            },
+            "origem": {
+              "estado": "verificado",
+              "evidencias": [
+                {
+                  "fonte": "src:objref-opportunity"
+                }
+              ],
+              "nota": "Campo padrão do objeto documentado.",
+              "valor": "padrao_plataforma"
+            },
+            "propriedades_api": {
+              "estado": "desconhecido"
+            },
+            "somente_leitura": null,
+            "tipo_tecnico": "(a extrair)"
+          },
+          {
+            "apis": [
+              "padrao"
+            ],
+            "default": {
+              "estado": "desconhecido",
+              "forma": "nao_declarado_na_fonte"
+            },
+            "disponibilidade": {
+              "ate_versao": null,
+              "desde_versao": null,
+              "estado": "desconhecido"
+            },
+            "dominio": {
+              "estado": "desconhecido",
+              "natureza": "desconhecida"
+            },
+            "estado": "verificado",
+            "evidencias": [
+              {
+                "fonte": "src:objref-opportunity"
+              }
+            ],
+            "explicacao": "pendente",
+            "id": "obj:Opportunity.LastStageChangeDate",
+            "nome": "LastStageChangeDate",
+            "notas": [
+              "Nome listado na Object Reference; tipo e propriedades não extraídos nesta rodada."
+            ],
+            "o_que_e": "Explicação pendente: campo listado a partir da fonte, ainda sem texto didático.",
+            "obrigatoriedade": {
+              "estado": "desconhecido",
+              "valor": "desconhecida"
+            },
+            "origem": {
+              "estado": "verificado",
+              "evidencias": [
+                {
+                  "fonte": "src:objref-opportunity"
+                }
+              ],
+              "nota": "Campo padrão do objeto documentado.",
+              "valor": "padrao_plataforma"
+            },
+            "propriedades_api": {
+              "estado": "desconhecido"
+            },
+            "somente_leitura": null,
+            "tipo_tecnico": "(a extrair)"
+          },
+          {
+            "apis": [
+              "padrao"
+            ],
+            "default": {
+              "estado": "desconhecido",
+              "forma": "nao_declarado_na_fonte"
+            },
+            "disponibilidade": {
+              "ate_versao": null,
+              "desde_versao": null,
+              "estado": "desconhecido"
+            },
+            "dominio": {
+              "estado": "desconhecido",
+              "natureza": "desconhecida"
+            },
+            "estado": "verificado",
+            "evidencias": [
+              {
+                "fonte": "src:fieldref-opportunity"
+              }
+            ],
+            "explicacao": "pendente",
+            "id": "obj:Opportunity.CreatedById",
+            "nome": "CreatedById",
+            "notas": [
+              "Nome listado na Field Reference; tipo e propriedades não extraídos nesta rodada."
+            ],
+            "o_que_e": "Explicação pendente: campo listado a partir da fonte, ainda sem texto didático.",
+            "obrigatoriedade": {
+              "estado": "desconhecido",
+              "valor": "desconhecida"
+            },
+            "origem": {
+              "estado": "verificado",
+              "evidencias": [
+                {
+                  "fonte": "src:fieldref-opportunity"
+                }
+              ],
+              "nota": "Campo padrão do objeto documentado.",
+              "valor": "padrao_plataforma"
+            },
+            "propriedades_api": {
+              "estado": "desconhecido"
+            },
+            "somente_leitura": null,
+            "tipo_tecnico": "(a extrair)"
+          },
+          {
+            "apis": [
+              "padrao"
+            ],
+            "default": {
+              "estado": "desconhecido",
+              "forma": "nao_declarado_na_fonte"
+            },
+            "disponibilidade": {
+              "ate_versao": null,
+              "desde_versao": null,
+              "estado": "desconhecido"
+            },
+            "dominio": {
+              "estado": "desconhecido",
+              "natureza": "desconhecida"
+            },
+            "estado": "verificado",
+            "evidencias": [
+              {
+                "fonte": "src:fieldref-opportunity"
+              }
+            ],
+            "explicacao": "pendente",
+            "id": "obj:Opportunity.CreatedDate",
+            "nome": "CreatedDate",
+            "notas": [
+              "Nome listado na Field Reference; tipo e propriedades não extraídos nesta rodada."
+            ],
+            "o_que_e": "Explicação pendente: campo listado a partir da fonte, ainda sem texto didático.",
+            "obrigatoriedade": {
+              "estado": "desconhecido",
+              "valor": "desconhecida"
+            },
+            "origem": {
+              "estado": "verificado",
+              "evidencias": [
+                {
+                  "fonte": "src:fieldref-opportunity"
+                }
+              ],
+              "nota": "Campo padrão do objeto documentado.",
+              "valor": "padrao_plataforma"
+            },
+            "propriedades_api": {
+              "estado": "desconhecido"
+            },
+            "somente_leitura": null,
+            "tipo_tecnico": "(a extrair)"
+          },
+          {
+            "apis": [
+              "padrao"
+            ],
+            "default": {
+              "estado": "desconhecido",
+              "forma": "nao_declarado_na_fonte"
+            },
+            "disponibilidade": {
+              "ate_versao": null,
+              "desde_versao": null,
+              "estado": "desconhecido"
+            },
+            "dominio": {
+              "estado": "desconhecido",
+              "natureza": "desconhecida"
+            },
+            "estado": "verificado",
+            "evidencias": [
+              {
+                "fonte": "src:fieldref-opportunity"
+              }
+            ],
+            "explicacao": "pendente",
+            "id": "obj:Opportunity.Id",
+            "nome": "Id",
+            "notas": [
+              "Nome listado na Field Reference; tipo e propriedades não extraídos nesta rodada."
+            ],
+            "o_que_e": "Explicação pendente: campo listado a partir da fonte, ainda sem texto didático.",
+            "obrigatoriedade": {
+              "estado": "desconhecido",
+              "valor": "desconhecida"
+            },
+            "origem": {
+              "estado": "verificado",
+              "evidencias": [
+                {
+                  "fonte": "src:fieldref-opportunity"
+                }
+              ],
+              "nota": "Campo padrão do objeto documentado.",
+              "valor": "padrao_plataforma"
+            },
+            "propriedades_api": {
+              "estado": "desconhecido"
+            },
+            "somente_leitura": null,
+            "tipo_tecnico": "(a extrair)"
+          },
+          {
+            "apis": [
+              "padrao"
+            ],
+            "default": {
+              "estado": "desconhecido",
+              "forma": "nao_declarado_na_fonte"
+            },
+            "disponibilidade": {
+              "ate_versao": null,
+              "desde_versao": null,
+              "estado": "desconhecido"
+            },
+            "dominio": {
+              "estado": "desconhecido",
+              "natureza": "desconhecida"
+            },
+            "estado": "verificado",
+            "evidencias": [
+              {
+                "fonte": "src:fieldref-opportunity"
+              }
+            ],
+            "explicacao": "pendente",
+            "id": "obj:Opportunity.LastModifiedById",
+            "nome": "LastModifiedById",
+            "notas": [
+              "Nome listado na Field Reference; tipo e propriedades não extraídos nesta rodada."
+            ],
+            "o_que_e": "Explicação pendente: campo listado a partir da fonte, ainda sem texto didático.",
+            "obrigatoriedade": {
+              "estado": "desconhecido",
+              "valor": "desconhecida"
+            },
+            "origem": {
+              "estado": "verificado",
+              "evidencias": [
+                {
+                  "fonte": "src:fieldref-opportunity"
+                }
+              ],
+              "nota": "Campo padrão do objeto documentado.",
+              "valor": "padrao_plataforma"
+            },
+            "propriedades_api": {
+              "estado": "desconhecido"
+            },
+            "somente_leitura": null,
+            "tipo_tecnico": "(a extrair)"
+          },
+          {
+            "apis": [
+              "padrao"
+            ],
+            "default": {
+              "estado": "desconhecido",
+              "forma": "nao_declarado_na_fonte"
+            },
+            "disponibilidade": {
+              "ate_versao": null,
+              "desde_versao": null,
+              "estado": "desconhecido"
+            },
+            "dominio": {
+              "estado": "desconhecido",
+              "natureza": "desconhecida"
+            },
+            "estado": "verificado",
+            "evidencias": [
+              {
+                "fonte": "src:fieldref-opportunity"
+              }
+            ],
+            "explicacao": "pendente",
+            "id": "obj:Opportunity.LastModifiedDate",
+            "nome": "LastModifiedDate",
+            "notas": [
+              "Nome listado na Field Reference; tipo e propriedades não extraídos nesta rodada."
+            ],
+            "o_que_e": "Explicação pendente: campo listado a partir da fonte, ainda sem texto didático.",
+            "obrigatoriedade": {
+              "estado": "desconhecido",
+              "valor": "desconhecida"
+            },
+            "origem": {
+              "estado": "verificado",
+              "evidencias": [
+                {
+                  "fonte": "src:fieldref-opportunity"
+                }
+              ],
+              "nota": "Campo padrão do objeto documentado.",
+              "valor": "padrao_plataforma"
+            },
+            "propriedades_api": {
+              "estado": "desconhecido"
+            },
+            "somente_leitura": null,
+            "tipo_tecnico": "(a extrair)"
+          },
+          {
+            "apis": [
+              "padrao"
+            ],
+            "default": {
+              "estado": "desconhecido",
+              "forma": "nao_declarado_na_fonte"
+            },
+            "disponibilidade": {
+              "ate_versao": null,
+              "desde_versao": null,
+              "estado": "desconhecido"
+            },
+            "dominio": {
+              "estado": "desconhecido",
+              "natureza": "desconhecida"
+            },
+            "estado": "verificado",
+            "evidencias": [
+              {
+                "fonte": "src:fieldref-opportunity"
+              }
+            ],
+            "explicacao": "pendente",
+            "id": "obj:Opportunity.LastStageChangeInDays",
+            "nome": "LastStageChangeInDays",
+            "notas": [
+              "Nome listado na Field Reference; tipo e propriedades não extraídos nesta rodada."
+            ],
+            "o_que_e": "Explicação pendente: campo listado a partir da fonte, ainda sem texto didático.",
+            "obrigatoriedade": {
+              "estado": "desconhecido",
+              "valor": "desconhecida"
+            },
+            "origem": {
+              "estado": "verificado",
+              "evidencias": [
+                {
+                  "fonte": "src:fieldref-opportunity"
+                }
+              ],
+              "nota": "Campo padrão do objeto documentado.",
+              "valor": "padrao_plataforma"
+            },
+            "propriedades_api": {
+              "estado": "desconhecido"
+            },
+            "somente_leitura": null,
+            "tipo_tecnico": "(a extrair)"
+          },
+          {
+            "apis": [
+              "padrao"
+            ],
+            "default": {
+              "estado": "desconhecido",
+              "forma": "nao_declarado_na_fonte"
+            },
+            "disponibilidade": {
+              "ate_versao": null,
+              "desde_versao": null,
+              "estado": "desconhecido"
+            },
+            "dominio": {
+              "estado": "desconhecido",
+              "natureza": "desconhecida"
+            },
+            "estado": "verificado",
+            "evidencias": [
+              {
+                "fonte": "src:fieldref-opportunity"
+              }
+            ],
+            "explicacao": "pendente",
+            "id": "obj:Opportunity.LastSyncTime",
+            "nome": "LastSyncTime",
+            "notas": [
+              "Nome listado na Field Reference; tipo e propriedades não extraídos nesta rodada."
+            ],
+            "o_que_e": "Explicação pendente: campo listado a partir da fonte, ainda sem texto didático.",
+            "obrigatoriedade": {
+              "estado": "desconhecido",
+              "valor": "desconhecida"
+            },
+            "origem": {
+              "estado": "verificado",
+              "evidencias": [
+                {
+                  "fonte": "src:fieldref-opportunity"
+                }
+              ],
+              "nota": "Campo padrão do objeto documentado.",
+              "valor": "padrao_plataforma"
+            },
+            "propriedades_api": {
+              "estado": "desconhecido"
+            },
+            "somente_leitura": null,
+            "tipo_tecnico": "(a extrair)"
+          },
+          {
+            "apis": [
+              "padrao"
+            ],
+            "default": {
+              "estado": "desconhecido",
+              "forma": "nao_declarado_na_fonte"
+            },
+            "disponibilidade": {
+              "ate_versao": null,
+              "desde_versao": null,
+              "estado": "desconhecido"
+            },
+            "dominio": {
+              "estado": "desconhecido",
+              "natureza": "desconhecida"
+            },
+            "estado": "verificado",
+            "evidencias": [
+              {
+                "fonte": "src:fieldref-opportunity"
+              }
+            ],
+            "explicacao": "pendente",
+            "id": "obj:Opportunity.LastViewedDate",
+            "nome": "LastViewedDate",
+            "notas": [
+              "Nome listado na Field Reference; tipo e propriedades não extraídos nesta rodada."
+            ],
+            "o_que_e": "Explicação pendente: campo listado a partir da fonte, ainda sem texto didático.",
+            "obrigatoriedade": {
+              "estado": "desconhecido",
+              "valor": "desconhecida"
+            },
+            "origem": {
+              "estado": "verificado",
+              "evidencias": [
+                {
+                  "fonte": "src:fieldref-opportunity"
+                }
+              ],
+              "nota": "Campo padrão do objeto documentado.",
+              "valor": "padrao_plataforma"
+            },
+            "propriedades_api": {
+              "estado": "desconhecido"
+            },
+            "somente_leitura": null,
+            "tipo_tecnico": "(a extrair)"
+          },
+          {
+            "apis": [
+              "padrao"
+            ],
+            "default": {
+              "estado": "desconhecido",
+              "forma": "nao_declarado_na_fonte"
+            },
+            "disponibilidade": {
+              "ate_versao": null,
+              "desde_versao": null,
+              "estado": "desconhecido"
+            },
+            "dominio": {
+              "estado": "desconhecido",
+              "natureza": "desconhecida"
+            },
+            "estado": "verificado",
+            "evidencias": [
+              {
+                "fonte": "src:fieldref-opportunity"
+              }
+            ],
+            "explicacao": "pendente",
+            "id": "obj:Opportunity.LeadSource",
+            "nome": "LeadSource",
+            "notas": [
+              "Nome listado na Field Reference; tipo e propriedades não extraídos nesta rodada."
+            ],
+            "o_que_e": "Explicação pendente: campo listado a partir da fonte, ainda sem texto didático.",
+            "obrigatoriedade": {
+              "estado": "desconhecido",
+              "valor": "desconhecida"
+            },
+            "origem": {
+              "estado": "verificado",
+              "evidencias": [
+                {
+                  "fonte": "src:fieldref-opportunity"
+                }
+              ],
+              "nota": "Campo padrão do objeto documentado.",
+              "valor": "padrao_plataforma"
+            },
+            "propriedades_api": {
+              "estado": "desconhecido"
+            },
+            "somente_leitura": null,
+            "tipo_tecnico": "(a extrair)"
+          },
+          {
+            "apis": [
+              "padrao"
+            ],
+            "default": {
+              "estado": "desconhecido",
+              "forma": "nao_declarado_na_fonte"
+            },
+            "disponibilidade": {
+              "ate_versao": null,
+              "desde_versao": null,
+              "estado": "desconhecido"
+            },
+            "dominio": {
+              "estado": "verificado",
+              "evidencias": [
+                {
+                  "fonte": "src:fieldref-opportunity"
+                }
+              ],
+              "natureza": "texto_livre"
+            },
+            "estado": "verificado",
+            "evidencias": [
+              {
+                "fonte": "src:fieldref-opportunity"
+              }
+            ],
+            "explicacao": "explicada",
+            "id": "obj:Opportunity.Name",
+            "nome": "Name",
+            "notas": [
+              "Tipo pela Field Reference; propriedades de API, obrigatoriedade e alvo de referência não constam dessa fonte (a Object Reference é servida truncada antes deste campo)."
+            ],
+            "o_que_e": "Nome da oportunidade (até 120 caracteres).",
+            "obrigatoriedade": {
+              "estado": "desconhecido",
+              "valor": "desconhecida"
+            },
+            "origem": {
+              "estado": "verificado",
+              "evidencias": [
+                {
+                  "fonte": "src:fieldref-opportunity"
+                }
+              ],
+              "nota": "Campo padrão do objeto documentado.",
+              "valor": "padrao_plataforma"
+            },
+            "propriedades_api": {
+              "estado": "desconhecido"
+            },
+            "somente_leitura": null,
+            "tipo_tecnico": "string"
+          },
+          {
+            "apis": [
+              "padrao"
+            ],
+            "default": {
+              "estado": "desconhecido",
+              "forma": "nao_declarado_na_fonte"
+            },
+            "disponibilidade": {
+              "ate_versao": null,
+              "desde_versao": null,
+              "estado": "desconhecido"
+            },
+            "dominio": {
+              "estado": "desconhecido",
+              "natureza": "desconhecida"
+            },
+            "estado": "verificado",
+            "evidencias": [
+              {
+                "fonte": "src:fieldref-opportunity"
+              }
+            ],
+            "explicacao": "pendente",
+            "id": "obj:Opportunity.NextStep",
+            "nome": "NextStep",
+            "notas": [
+              "Nome listado na Field Reference; tipo e propriedades não extraídos nesta rodada."
+            ],
+            "o_que_e": "Explicação pendente: campo listado a partir da fonte, ainda sem texto didático.",
+            "obrigatoriedade": {
+              "estado": "desconhecido",
+              "valor": "desconhecida"
+            },
+            "origem": {
+              "estado": "verificado",
+              "evidencias": [
+                {
+                  "fonte": "src:fieldref-opportunity"
+                }
+              ],
+              "nota": "Campo padrão do objeto documentado.",
+              "valor": "padrao_plataforma"
+            },
+            "propriedades_api": {
+              "estado": "desconhecido"
+            },
+            "somente_leitura": null,
+            "tipo_tecnico": "(a extrair)"
+          },
+          {
+            "apis": [
+              "padrao"
+            ],
+            "default": {
+              "estado": "desconhecido",
+              "forma": "nao_declarado_na_fonte"
+            },
+            "disponibilidade": {
+              "ate_versao": null,
+              "desde_versao": null,
+              "estado": "desconhecido"
+            },
+            "dominio": {
+              "estado": "desconhecido",
+              "natureza": "desconhecida"
+            },
+            "estado": "verificado",
+            "evidencias": [
+              {
+                "fonte": "src:fieldref-opportunity"
+              }
+            ],
+            "explicacao": "pendente",
+            "id": "obj:Opportunity.OpportunityScoreId",
+            "nome": "OpportunityScoreId",
+            "notas": [
+              "Nome listado na Field Reference; tipo e propriedades não extraídos nesta rodada."
+            ],
+            "o_que_e": "Explicação pendente: campo listado a partir da fonte, ainda sem texto didático.",
+            "obrigatoriedade": {
+              "estado": "desconhecido",
+              "valor": "desconhecida"
+            },
+            "origem": {
+              "estado": "verificado",
+              "evidencias": [
+                {
+                  "fonte": "src:fieldref-opportunity"
+                }
+              ],
+              "nota": "Campo padrão do objeto documentado.",
+              "valor": "padrao_plataforma"
+            },
+            "propriedades_api": {
+              "estado": "desconhecido"
+            },
+            "somente_leitura": null,
+            "tipo_tecnico": "(a extrair)"
+          },
+          {
+            "apis": [
+              "padrao"
+            ],
+            "default": {
+              "estado": "desconhecido",
+              "forma": "nao_declarado_na_fonte"
+            },
+            "disponibilidade": {
+              "ate_versao": null,
+              "desde_versao": null,
+              "estado": "desconhecido"
+            },
+            "dominio": {
+              "contexto": "Id de registro do(s) objeto(s) referenciado(s).",
+              "estado": "desconhecido",
+              "natureza": "referencia"
+            },
+            "estado": "verificado",
+            "evidencias": [
+              {
+                "fonte": "src:fieldref-opportunity"
+              }
+            ],
+            "explicacao": "explicada",
+            "id": "obj:Opportunity.OwnerId",
+            "nome": "OwnerId",
+            "notas": [
+              "Tipo pela Field Reference; propriedades de API, obrigatoriedade e alvo de referência não constam dessa fonte (a Object Reference é servida truncada antes deste campo)."
+            ],
+            "o_que_e": "Dono da oportunidade.",
+            "obrigatoriedade": {
+              "estado": "desconhecido",
+              "valor": "desconhecida"
+            },
+            "origem": {
+              "estado": "verificado",
+              "evidencias": [
+                {
+                  "fonte": "src:fieldref-opportunity"
+                }
+              ],
+              "nota": "Campo padrão do objeto documentado.",
+              "valor": "padrao_plataforma"
+            },
+            "propriedades_api": {
+              "estado": "desconhecido"
+            },
+            "somente_leitura": null,
+            "tipo_tecnico": "reference"
+          },
+          {
+            "apis": [
+              "padrao"
+            ],
+            "default": {
+              "estado": "desconhecido",
+              "forma": "nao_declarado_na_fonte"
+            },
+            "disponibilidade": {
+              "ate_versao": null,
+              "desde_versao": null,
+              "estado": "desconhecido"
+            },
+            "dominio": {
+              "estado": "desconhecido",
+              "natureza": "desconhecida"
+            },
+            "estado": "verificado",
+            "evidencias": [
+              {
+                "fonte": "src:fieldref-opportunity"
+              }
+            ],
+            "explicacao": "pendente",
+            "id": "obj:Opportunity.Pricebook2Id",
+            "nome": "Pricebook2Id",
+            "notas": [
+              "Nome listado na Field Reference; tipo e propriedades não extraídos nesta rodada."
+            ],
+            "o_que_e": "Explicação pendente: campo listado a partir da fonte, ainda sem texto didático.",
+            "obrigatoriedade": {
+              "estado": "desconhecido",
+              "valor": "desconhecida"
+            },
+            "origem": {
+              "estado": "verificado",
+              "evidencias": [
+                {
+                  "fonte": "src:fieldref-opportunity"
+                }
+              ],
+              "nota": "Campo padrão do objeto documentado.",
+              "valor": "padrao_plataforma"
+            },
+            "propriedades_api": {
+              "estado": "desconhecido"
+            },
+            "somente_leitura": null,
+            "tipo_tecnico": "(a extrair)"
+          },
+          {
+            "apis": [
+              "padrao"
+            ],
+            "default": {
+              "estado": "desconhecido",
+              "forma": "nao_declarado_na_fonte"
+            },
+            "disponibilidade": {
+              "ate_versao": null,
+              "desde_versao": null,
+              "estado": "desconhecido"
+            },
+            "dominio": {
+              "estado": "desconhecido",
+              "natureza": "desconhecida"
+            },
+            "estado": "verificado",
+            "evidencias": [
+              {
+                "fonte": "src:fieldref-opportunity"
+              }
+            ],
+            "explicacao": "explicada",
+            "id": "obj:Opportunity.Probability",
+            "nome": "Probability",
+            "notas": [
+              "Tipo pela Field Reference; propriedades de API, obrigatoriedade e alvo de referência não constam dessa fonte (a Object Reference é servida truncada antes deste campo)."
+            ],
+            "o_que_e": "Probabilidade de fechamento, em percentual.",
+            "obrigatoriedade": {
+              "estado": "desconhecido",
+              "valor": "desconhecida"
+            },
+            "origem": {
+              "estado": "verificado",
+              "evidencias": [
+                {
+                  "fonte": "src:fieldref-opportunity"
+                }
+              ],
+              "nota": "Campo padrão do objeto documentado.",
+              "valor": "padrao_plataforma"
+            },
+            "propriedades_api": {
+              "estado": "desconhecido"
+            },
+            "somente_leitura": null,
+            "tipo_tecnico": "percent"
+          },
+          {
+            "apis": [
+              "padrao"
+            ],
+            "default": {
+              "estado": "desconhecido",
+              "forma": "nao_declarado_na_fonte"
+            },
+            "disponibilidade": {
+              "ate_versao": null,
+              "desde_versao": null,
+              "estado": "desconhecido"
+            },
+            "dominio": {
+              "estado": "desconhecido",
+              "natureza": "desconhecida"
+            },
+            "estado": "verificado",
+            "evidencias": [
+              {
+                "fonte": "src:fieldref-opportunity"
+              }
+            ],
+            "explicacao": "pendente",
+            "id": "obj:Opportunity.PushCount",
+            "nome": "PushCount",
+            "notas": [
+              "Nome listado na Field Reference; tipo e propriedades não extraídos nesta rodada."
+            ],
+            "o_que_e": "Explicação pendente: campo listado a partir da fonte, ainda sem texto didático.",
+            "obrigatoriedade": {
+              "estado": "desconhecido",
+              "valor": "desconhecida"
+            },
+            "origem": {
+              "estado": "verificado",
+              "evidencias": [
+                {
+                  "fonte": "src:fieldref-opportunity"
+                }
+              ],
+              "nota": "Campo padrão do objeto documentado.",
+              "valor": "padrao_plataforma"
+            },
+            "propriedades_api": {
+              "estado": "desconhecido"
+            },
+            "somente_leitura": null,
+            "tipo_tecnico": "(a extrair)"
+          },
+          {
+            "apis": [
+              "padrao"
+            ],
+            "default": {
+              "estado": "desconhecido",
+              "forma": "nao_declarado_na_fonte"
+            },
+            "disponibilidade": {
+              "ate_versao": null,
+              "desde_versao": null,
+              "estado": "desconhecido"
+            },
+            "dominio": {
+              "estado": "desconhecido",
+              "natureza": "desconhecida"
+            },
+            "estado": "verificado",
+            "evidencias": [
+              {
+                "fonte": "src:fieldref-opportunity"
+              }
+            ],
+            "explicacao": "pendente",
+            "id": "obj:Opportunity.ReferralCode",
+            "nome": "ReferralCode",
+            "notas": [
+              "Nome listado na Field Reference; tipo e propriedades não extraídos nesta rodada."
+            ],
+            "o_que_e": "Explicação pendente: campo listado a partir da fonte, ainda sem texto didático.",
+            "obrigatoriedade": {
+              "estado": "desconhecido",
+              "valor": "desconhecida"
+            },
+            "origem": {
+              "estado": "verificado",
+              "evidencias": [
+                {
+                  "fonte": "src:fieldref-opportunity"
+                }
+              ],
+              "nota": "Campo padrão do objeto documentado.",
+              "valor": "padrao_plataforma"
+            },
+            "propriedades_api": {
+              "estado": "desconhecido"
+            },
+            "somente_leitura": null,
+            "tipo_tecnico": "(a extrair)"
+          },
+          {
+            "apis": [
+              "padrao"
+            ],
+            "default": {
+              "estado": "desconhecido",
+              "forma": "nao_declarado_na_fonte"
+            },
+            "disponibilidade": {
+              "ate_versao": null,
+              "desde_versao": null,
+              "estado": "desconhecido"
+            },
+            "dominio": {
+              "contexto": "Valores não extraídos; podem depender de org, idioma ou recurso.",
+              "estado": "desconhecido",
+              "natureza": "lista_dinamica"
+            },
+            "estado": "verificado",
+            "evidencias": [
+              {
+                "fonte": "src:fieldref-opportunity"
+              }
+            ],
+            "explicacao": "explicada",
+            "id": "obj:Opportunity.StageName",
+            "nome": "StageName",
+            "notas": [
+              "Tipo pela Field Reference; propriedades de API, obrigatoriedade e alvo de referência não constam dessa fonte (a Object Reference é servida truncada antes deste campo)."
+            ],
+            "o_que_e": "Etapa atual da oportunidade no processo de venda.",
+            "obrigatoriedade": {
+              "estado": "desconhecido",
+              "valor": "desconhecida"
+            },
+            "origem": {
+              "estado": "verificado",
+              "evidencias": [
+                {
+                  "fonte": "src:fieldref-opportunity"
+                }
+              ],
+              "nota": "Campo padrão do objeto documentado.",
+              "valor": "padrao_plataforma"
+            },
+            "propriedades_api": {
+              "estado": "desconhecido"
+            },
+            "somente_leitura": null,
+            "tipo_tecnico": "picklist"
+          },
+          {
+            "apis": [
+              "padrao"
+            ],
+            "default": {
+              "estado": "desconhecido",
+              "forma": "nao_declarado_na_fonte"
+            },
+            "disponibilidade": {
+              "ate_versao": null,
+              "desde_versao": null,
+              "estado": "desconhecido"
+            },
+            "dominio": {
+              "estado": "desconhecido",
+              "natureza": "desconhecida"
+            },
+            "estado": "verificado",
+            "evidencias": [
+              {
+                "fonte": "src:fieldref-opportunity"
+              }
+            ],
+            "explicacao": "pendente",
+            "id": "obj:Opportunity.SyncedQuoteId",
+            "nome": "SyncedQuoteId",
+            "notas": [
+              "Nome listado na Field Reference; tipo e propriedades não extraídos nesta rodada."
+            ],
+            "o_que_e": "Explicação pendente: campo listado a partir da fonte, ainda sem texto didático.",
+            "obrigatoriedade": {
+              "estado": "desconhecido",
+              "valor": "desconhecida"
+            },
+            "origem": {
+              "estado": "verificado",
+              "evidencias": [
+                {
+                  "fonte": "src:fieldref-opportunity"
+                }
+              ],
+              "nota": "Campo padrão do objeto documentado.",
+              "valor": "padrao_plataforma"
+            },
+            "propriedades_api": {
+              "estado": "desconhecido"
+            },
+            "somente_leitura": null,
+            "tipo_tecnico": "(a extrair)"
+          },
+          {
+            "apis": [
+              "padrao"
+            ],
+            "default": {
+              "estado": "desconhecido",
+              "forma": "nao_declarado_na_fonte"
+            },
+            "disponibilidade": {
+              "ate_versao": null,
+              "desde_versao": null,
+              "estado": "desconhecido"
+            },
+            "dominio": {
+              "estado": "desconhecido",
+              "natureza": "desconhecida"
+            },
+            "estado": "verificado",
+            "evidencias": [
+              {
+                "fonte": "src:fieldref-opportunity"
+              }
+            ],
+            "explicacao": "pendente",
+            "id": "obj:Opportunity.SystemModstamp",
+            "nome": "SystemModstamp",
+            "notas": [
+              "Nome listado na Field Reference; tipo e propriedades não extraídos nesta rodada."
+            ],
+            "o_que_e": "Explicação pendente: campo listado a partir da fonte, ainda sem texto didático.",
+            "obrigatoriedade": {
+              "estado": "desconhecido",
+              "valor": "desconhecida"
+            },
+            "origem": {
+              "estado": "verificado",
+              "evidencias": [
+                {
+                  "fonte": "src:fieldref-opportunity"
+                }
+              ],
+              "nota": "Campo padrão do objeto documentado.",
+              "valor": "padrao_plataforma"
+            },
+            "propriedades_api": {
+              "estado": "desconhecido"
+            },
+            "somente_leitura": null,
+            "tipo_tecnico": "(a extrair)"
+          },
+          {
+            "apis": [
+              "padrao"
+            ],
+            "default": {
+              "estado": "desconhecido",
+              "forma": "nao_declarado_na_fonte"
+            },
+            "disponibilidade": {
+              "ate_versao": null,
+              "desde_versao": null,
+              "estado": "desconhecido"
+            },
+            "dominio": {
+              "contexto": "Valores não extraídos; podem depender de org, idioma ou recurso.",
+              "estado": "desconhecido",
+              "natureza": "lista_dinamica"
+            },
+            "estado": "verificado",
+            "evidencias": [
+              {
+                "fonte": "src:fieldref-opportunity"
+              }
+            ],
+            "explicacao": "explicada",
+            "id": "obj:Opportunity.Type",
+            "nome": "Type",
+            "notas": [
+              "Tipo pela Field Reference; propriedades de API, obrigatoriedade e alvo de referência não constam dessa fonte (a Object Reference é servida truncada antes deste campo)."
+            ],
+            "o_que_e": "Tipo da oportunidade.",
+            "obrigatoriedade": {
+              "estado": "desconhecido",
+              "valor": "desconhecida"
+            },
+            "origem": {
+              "estado": "verificado",
+              "evidencias": [
+                {
+                  "fonte": "src:fieldref-opportunity"
+                }
+              ],
+              "nota": "Campo padrão do objeto documentado.",
+              "valor": "padrao_plataforma"
+            },
+            "propriedades_api": {
+              "estado": "desconhecido"
+            },
+            "somente_leitura": null,
+            "tipo_tecnico": "picklist"
+          }
+        ],
+        "cobertura": {
+          "estrutural": {
+            "esperado": null,
+            "estado": "parcial",
+            "nota": "Object Reference servida truncada (~54 mil caracteres, tabela termina em LastStageChangeDate): 37 nomes. Field Reference acrescenta 21 nomes; ela cobre o objeto e tabelas relacionadas (OpportunityFeed, OpportunityShare) e também é servida truncada. Campos das tabelas relacionadas não foram incluídos. Total esperado não comprovado.",
+            "presente": 58
+          },
+          "explicativa": {
+            "esperado": 58,
+            "estado": "parcial",
+            "presente": 11
+          },
+          "mapeamento": {
+            "estado": "parcial",
+            "nota": "Ver relacionamentos registrados."
+          }
+        },
+        "consultas": [
+          {
+            "api": "padrao",
+            "contexto": "API padrão (REST /query ou SOAP query()).",
+            "soql": "SELECT Name, StageName, CloseDate, Amount FROM Opportunity WHERE IsClosed = false LIMIT 20",
+            "validacao": "documental"
+          }
+        ],
+        "estado": "verificado",
+        "evidencias": [
+          {
+            "fonte": "src:objref-opportunity"
+          },
+          {
+            "fonte": "src:fieldref-opportunity"
+          }
+        ],
+        "exposicoes": [
+          {
+            "api": "padrao",
+            "chamadas": [
+              "create()",
+              "delete()",
+              "describeLayout()",
+              "describeSObjects()",
+              "getDeleted()",
+              "getUpdated()",
+              "query()",
+              "retrieve()",
+              "search()",
+              "undelete()",
+              "update()",
+              "upsert()"
+            ],
+            "desde_versao": null,
+            "estado": "verificado",
+            "evidencias": [
+              {
+                "fonte": "src:objref-opportunity"
+              }
+            ]
+          },
+          {
+            "api": "tooling",
+            "desde_versao": null,
+            "estado": "desconhecido",
+            "nota": "Não consta da extração do índice de objetos da Tooling API (índice servido truncado); não verificado."
+          }
+        ],
+        "id": "obj:Opportunity",
+        "juncao": false,
+        "nome": "Opportunity",
+        "o_que_e": "Representa um negócio em andamento, com valor, etapa e data prevista de fechamento.",
+        "papel": "Registro do pipeline de vendas.",
+        "setup": {
+          "estado": "nao_aplicavel",
+          "nota": "Objeto consultável via API; não é tela do Setup."
+        }
+      },
+      "papel": "Registro de cada oportunidade.",
+      "relacionamentos": [
+        {
+          "cardinalidade_registros": {
+            "estado": "desconhecido",
+            "nota": "Estrutura de lookup indica N:1; não comprovado nesta sessão.",
+            "valor": "N:1"
+          },
+          "condicao": "Preenchido só em leads convertidos que geraram oportunidade.",
+          "destino": {
+            "entidade": "obj:Opportunity"
+          },
+          "estado": "verificado",
+          "evidencias": [
+            {
+              "fonte": "src:objref-lead"
+            }
+          ],
+          "explicacao": "Depois da conversão, o lead guarda o Id da oportunidade gerada.",
+          "id": "rel:lead-converted-opportunity",
+          "origem": {
+            "campo": "ConvertedOpportunityId",
+            "entidade": "obj:Lead"
+          },
+          "tipo": "referencia_campo"
+        }
+      ]
+    }
+  ],
+  "versao_base": {
+    "api_version": "68.0",
+    "data_referencia": "2026-11-07",
+    "escopo": "config/escopo.json",
+    "release": "Winter '27"
+  }
+}

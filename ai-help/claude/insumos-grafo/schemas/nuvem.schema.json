@@ -1,0 +1,158 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "nuvem.schema.json",
+  "title": "nuvem",
+  "type": "object",
+  "required": [
+    "id",
+    "nome_oficial",
+    "resumo",
+    "contexto_tecnico",
+    "licencas",
+    "classificacoes_aplicaveis",
+    "cobertura_inventario",
+    "estado",
+    "evidencias"
+  ],
+  "additionalProperties": false,
+  "properties": {
+    "id": {
+      "type": "string",
+      "pattern": "^nuv:[a-z0-9-]+$"
+    },
+    "nome_oficial": {
+      "type": "string"
+    },
+    "aliases": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "sigla": {
+      "type": "string"
+    },
+    "resumo": {
+      "type": "string"
+    },
+    "o_que_e": {
+      "type": "string"
+    },
+    "casos_de_uso": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "contexto_tecnico": {
+      "$ref": "comum.schema.json#/$defs/afirmacao"
+    },
+    "licencas": {
+      "type": "object",
+      "required": [
+        "estado"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "estado": {
+          "$ref": "comum.schema.json#/$defs/estado"
+        },
+        "nota": {
+          "type": "string"
+        },
+        "itens": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "nome": {
+                "type": "string"
+              },
+              "tipo": {
+                "enum": [
+                  "licenca_usuario",
+                  "licenca_permission_set",
+                  "edicao",
+                  "add_on",
+                  "licenca_recurso"
+                ]
+              },
+              "evidencias": {
+                "$ref": "comum.schema.json#/$defs/evidencias"
+              }
+            },
+            "required": [
+              "nome",
+              "tipo"
+            ],
+            "additionalProperties": false
+          }
+        }
+      }
+    },
+    "classificacoes_aplicaveis": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "classificacao",
+          "subclassificacoes"
+        ],
+        "additionalProperties": false,
+        "properties": {
+          "classificacao": {
+            "type": "string"
+          },
+          "subclassificacoes": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "required": [
+                "subclassificacao",
+                "funcionalidades"
+              ],
+              "additionalProperties": false,
+              "properties": {
+                "subclassificacao": {
+                  "type": "string"
+                },
+                "funcionalidades": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "dependencias": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "limites": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "cobertura_inventario": {
+      "enum": [
+        "completa",
+        "parcial",
+        "nao_iniciada",
+        "bloqueada"
+      ]
+    },
+    "estado": {
+      "$ref": "comum.schema.json#/$defs/estado"
+    },
+    "evidencias": {
+      "$ref": "comum.schema.json#/$defs/evidencias"
+    }
+  }
+}

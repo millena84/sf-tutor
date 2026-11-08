@@ -1,0 +1,37 @@
+{
+  "id": "escopo",
+  "versao_api": "68.0",
+  "definicao_core": "Neste projeto, 'Salesforce Platform/Core' é a plataforma compartilhada que roda na mesma org e expõe as mesmas APIs (Metadata API, API padrão REST/SOAP, Tooling API) para várias nuvens: modelagem de dados, segurança e acesso, automação, interface, desenvolvimento e operação. É um recorte do projeto, não uma classificação oficial da Salesforce.",
+  "criterios_inclusao": [
+    {"id": "C1", "texto": "O tipo ou objeto aparece em fonte oficial da versão 68.0 (documentação ou cobertura de metadados)."},
+    {"id": "C2", "texto": "A funcionalidade não exige licença de produto específico além das edições comuns da plataforma, segundo fonte oficial; quando a fonte não esclarece, o item fica pendente."},
+    {"id": "C3", "texto": "O item é usado por mais de uma nuvem ou pela plataforma em si (modelo de dados, segurança, automação, UI, desenvolvimento, operação)."}
+  ],
+  "criterios_exclusao": [
+    {"id": "X1", "texto": "Produtos com org, runtime ou API próprios (ex.: Marketing Cloud Engagement, B2C Commerce, MuleSoft, Tableau, Slack) ficam fora do recorte e não são tratados como metadata types da Metadata API."},
+    {"id": "X2", "texto": "Tipos que dependem de licença de produto ou setor (Industries, Revenue, Field Service, Data 360 etc.) ficam fora do primeiro inventário completo até haver classificação com fonte."}
+  ],
+  "produtos_fora_do_recorte": ["Marketing Cloud Engagement", "B2C Commerce", "MuleSoft", "Tableau", "Slack"],
+  "produtos_no_mapa_sem_inventario_completo": ["nuv:sales-cloud", "nuv:service-cloud", "nuv:data-360"],
+  "universo_esperado": {
+    "metadata_types": {
+      "fonte": "src:sdr-metadata-support",
+      "descricao": "Lista de 993 metadata types da versão 68 derivada do Metadata Coverage Report, publicada em METADATA_SUPPORT.md (forcedotcom/source-deploy-retrieve, commit d09d2cc). É o denominador do inventário; a pertença ao recorte Core é classificada item a item.",
+      "limites": "Lista mantida pela equipe do CLI a partir do relatório de cobertura; não substitui o WSDL nem a documentação de cada tipo."
+    },
+    "propriedades": {
+      "fonte": "documentação oficial de cada tipo (68.0); WSDL quando fornecido",
+      "descricao": "O universo esperado de propriedades de um tipo é a tabela 'Fields' da página oficial do tipo mais as estruturas compostas documentadas na mesma página. Herança (Metadata.fullName) é registrada explicitamente."
+    },
+    "objetos_api": {
+      "fonte": "Object Reference e Tooling API Developer Guide (68.0)",
+      "descricao": "Objetos entram no inventário quando uma funcionalidade ou metadata type do recorte os referencia com evidência. O conjunto completo de objetos da plataforma ainda não foi enumerado."
+    }
+  },
+  "classificacao_core_por_item": {
+    "regra_padrao": "pendente",
+    "incluidos": ["CustomObject", "CustomField", "Profile", "PermissionSet", "PermissionSetGroup", "RecordType", "ValidationRule", "Flow", "PathAssistant", "FlexiPage", "QuickAction", "CustomTab"],
+    "excluidos": [],
+    "justificativa_incluidos": "Tipos do piloto obrigatório; todos atendem C1 e C3 segundo as páginas oficiais consultadas."
+  }
+}

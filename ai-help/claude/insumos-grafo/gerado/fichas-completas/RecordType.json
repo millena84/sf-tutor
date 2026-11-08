@@ -1,0 +1,1345 @@
+{
+  "funcionalidades": [
+    {
+      "id": "func:tipos-de-registro",
+      "nome": "Tipos de registro"
+    }
+  ],
+  "metadata_type": {
+    "alertas": [],
+    "arquivos": {
+      "metadata_api_format": {
+        "estado": "verificado",
+        "evidencias": [
+          {
+            "fonte": "src:sdr-registry",
+            "nota": "types.customobject"
+          }
+        ],
+        "valor": {
+          "arquivo": "<Objeto>.object",
+          "elemento": "definido dentro do arquivo do tipo pai",
+          "pasta": "objects/"
+        }
+      },
+      "source_format": {
+        "estado": "verificado",
+        "evidencias": [
+          {
+            "fonte": "src:sdr-registry",
+            "nota": "types.customobject.children.types.recordtype"
+          }
+        ],
+        "nota": "Componente filho decomposto pelo Salesforce CLI (estratégia folderPerType do tipo pai). Sufixo '-meta.xml' segue a convenção do source format.",
+        "valor": {
+          "arquivo": "<Nome>.recordType-meta.xml",
+          "pasta": "objects/<Objeto>/recordTypes/"
+        }
+      }
+    },
+    "cobertura": {
+      "estrutural": {
+        "esperado": 7,
+        "estado": "parcial",
+        "nota": "Universo esperado = tabela Fields da página oficial 68.0 (mais fullName herdado quando declarado). Estruturas usadas ainda parciais: mdx:RecordTypePicklistValue.",
+        "presente": 7
+      },
+      "explicativa": {
+        "esperado": 7,
+        "estado": "completa",
+        "presente": 7
+      },
+      "mapeamento": {
+        "estado": "parcial",
+        "nota": "Correspondências registradas apenas onde há evidência; demais pendentes."
+      }
+    },
+    "componente_filho_de": "mdt:CustomObject",
+    "disponibilidade": {
+      "ate_versao": null,
+      "desde_versao": "12.0",
+      "estado": "verificado"
+    },
+    "divergencias_documentais": [],
+    "estado": "verificado",
+    "estende": "Metadata",
+    "estruturas": [
+      "mdx:RecordTypePicklistValue"
+    ],
+    "evidencias": [
+      {
+        "fonte": "src:mdapi-recordtype"
+      },
+      {
+        "fonte": "src:sdr-registry"
+      },
+      {
+        "fonte": "src:sdr-metadata-support"
+      }
+    ],
+    "exemplo_xml": {
+      "natureza": "didatico_projeto",
+      "nota": "Exemplo escrito pelo projeto apenas com elementos documentados; sem dados reais.",
+      "xml": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<RecordType xmlns=\"http://soap.sforce.com/2006/04/metadata\">\n    <fullName>Manutencao</fullName>\n    <active>true</active>\n    <description>Contratos de manutenção.</description>\n    <label>Manutenção</label>\n</RecordType>"
+    },
+    "finalidade": "Oferecer processos, valores de picklist e layouts diferentes para o mesmo objeto.",
+    "id": "mdt:RecordType",
+    "nome": "RecordType",
+    "o_que_e": "Definição de um tipo de registro. É componente filho de CustomObject.",
+    "propriedades": [
+      {
+        "default": {
+          "estado": "desconhecido",
+          "forma": "nao_declarado_na_fonte"
+        },
+        "disponibilidade": {
+          "ate_versao": null,
+          "desde_versao": null,
+          "estado": "desconhecido"
+        },
+        "dominio": {
+          "estado": "verificado",
+          "evidencias": [
+            {
+              "fonte": "src:mdapi-recordtype"
+            }
+          ],
+          "lista_completa": "sim",
+          "natureza": "booleano",
+          "valores": [
+            {
+              "valor": "true"
+            },
+            {
+              "valor": "false"
+            }
+          ]
+        },
+        "estado": "verificado",
+        "evidencias": [
+          {
+            "fonte": "src:mdapi-recordtype"
+          }
+        ],
+        "explicacao": "explicada",
+        "id": "mdt:RecordType.active",
+        "nome": "active",
+        "o_que_e": "Se o tipo de registro está ativo.",
+        "obrigatoriedade": {
+          "estado": "verificado",
+          "evidencias": [
+            {
+              "fonte": "src:mdapi-recordtype"
+            }
+          ],
+          "valor": "sim"
+        },
+        "origem": {
+          "estado": "verificado",
+          "evidencias": [
+            {
+              "fonte": "src:mdapi-recordtype"
+            }
+          ],
+          "nota": "Propriedade definida pelo schema da Metadata API.",
+          "valor": "padrao_plataforma"
+        },
+        "tipo_tecnico": "boolean"
+      },
+      {
+        "default": {
+          "estado": "desconhecido",
+          "forma": "nao_declarado_na_fonte"
+        },
+        "disponibilidade": {
+          "ate_versao": null,
+          "desde_versao": "17.0",
+          "estado": "verificado"
+        },
+        "dominio": {
+          "contexto": "A fonte tipa como string sem lista de valores; não inventar valores.",
+          "estado": "verificado",
+          "evidencias": [
+            {
+              "fonte": "src:mdapi-recordtype"
+            }
+          ],
+          "natureza": "texto_livre"
+        },
+        "estado": "verificado",
+        "evidencias": [
+          {
+            "fonte": "src:mdapi-recordtype"
+          }
+        ],
+        "explicacao": "explicada",
+        "id": "mdt:RecordType.businessProcess",
+        "nome": "businessProcess",
+        "o_que_e": "Nome do processo de negócio associado.",
+        "obrigatoriedade": {
+          "condicao": "Obrigatório para Lead, Opportunity, Solution e Case; não permitido nos demais objetos.",
+          "estado": "verificado",
+          "evidencias": [
+            {
+              "fonte": "src:mdapi-recordtype"
+            }
+          ],
+          "valor": "condicional"
+        },
+        "origem": {
+          "estado": "verificado",
+          "evidencias": [
+            {
+              "fonte": "src:mdapi-recordtype"
+            }
+          ],
+          "nota": "Propriedade definida pelo schema da Metadata API.",
+          "valor": "padrao_plataforma"
+        },
+        "tipo_tecnico": "string"
+      },
+      {
+        "default": {
+          "estado": "desconhecido",
+          "forma": "nao_declarado_na_fonte"
+        },
+        "disponibilidade": {
+          "ate_versao": null,
+          "desde_versao": "29.0",
+          "estado": "verificado"
+        },
+        "dominio": {
+          "contexto": "A fonte tipa como string sem lista de valores; não inventar valores.",
+          "estado": "verificado",
+          "evidencias": [
+            {
+              "fonte": "src:mdapi-recordtype"
+            }
+          ],
+          "natureza": "texto_livre"
+        },
+        "estado": "verificado",
+        "evidencias": [
+          {
+            "fonte": "src:mdapi-recordtype"
+          }
+        ],
+        "explicacao": "explicada",
+        "id": "mdt:RecordType.compactLayoutAssignment",
+        "nome": "compactLayoutAssignment",
+        "o_que_e": "Layout compacto atribuído ao tipo de registro.",
+        "obrigatoriedade": {
+          "condicao": "A documentação 68.0 não marca o campo como obrigatório; ausência de marcação não comprova opcionalidade (confirmar no WSDL).",
+          "estado": "desconhecido",
+          "valor": "nao"
+        },
+        "origem": {
+          "estado": "verificado",
+          "evidencias": [
+            {
+              "fonte": "src:mdapi-recordtype"
+            }
+          ],
+          "nota": "Propriedade definida pelo schema da Metadata API.",
+          "valor": "padrao_plataforma"
+        },
+        "tipo_tecnico": "string"
+      },
+      {
+        "default": {
+          "estado": "desconhecido",
+          "forma": "nao_declarado_na_fonte"
+        },
+        "disponibilidade": {
+          "ate_versao": null,
+          "desde_versao": null,
+          "estado": "desconhecido"
+        },
+        "dominio": {
+          "contexto": "A fonte tipa como string sem lista de valores; não inventar valores.",
+          "estado": "verificado",
+          "evidencias": [
+            {
+              "fonte": "src:mdapi-recordtype"
+            }
+          ],
+          "natureza": "texto_livre"
+        },
+        "estado": "verificado",
+        "evidencias": [
+          {
+            "fonte": "src:mdapi-recordtype"
+          }
+        ],
+        "explicacao": "explicada",
+        "id": "mdt:RecordType.description",
+        "nome": "description",
+        "o_que_e": "Descrição.",
+        "obrigatoriedade": {
+          "condicao": "A documentação 68.0 não marca o campo como obrigatório; ausência de marcação não comprova opcionalidade (confirmar no WSDL).",
+          "estado": "desconhecido",
+          "valor": "nao"
+        },
+        "origem": {
+          "estado": "verificado",
+          "evidencias": [
+            {
+              "fonte": "src:mdapi-recordtype"
+            }
+          ],
+          "nota": "Propriedade definida pelo schema da Metadata API.",
+          "valor": "padrao_plataforma"
+        },
+        "restricoes": {
+          "estado": "verificado",
+          "evidencias": [
+            {
+              "fonte": "src:mdapi-recordtype"
+            }
+          ],
+          "valor": "Até 255 caracteres."
+        },
+        "tipo_tecnico": "string"
+      },
+      {
+        "default": {
+          "estado": "desconhecido",
+          "forma": "nao_declarado_na_fonte"
+        },
+        "disponibilidade": {
+          "ate_versao": null,
+          "desde_versao": null,
+          "estado": "desconhecido"
+        },
+        "dominio": {
+          "contexto": "A fonte tipa como string sem lista de valores; não inventar valores.",
+          "estado": "verificado",
+          "evidencias": [
+            {
+              "fonte": "src:mdapi-recordtype"
+            }
+          ],
+          "natureza": "texto_livre"
+        },
+        "estado": "verificado",
+        "evidencias": [
+          {
+            "fonte": "src:mdapi-recordtype"
+          }
+        ],
+        "explicacao": "explicada",
+        "herdada_de": "Metadata",
+        "id": "mdt:RecordType.fullName",
+        "nome": "fullName",
+        "o_que_e": "Nome único com letras, dígitos e sublinhados, começando por letra.",
+        "obrigatoriedade": {
+          "estado": "verificado",
+          "evidencias": [
+            {
+              "fonte": "src:mdapi-recordtype"
+            }
+          ],
+          "valor": "sim"
+        },
+        "origem": {
+          "estado": "verificado",
+          "evidencias": [
+            {
+              "fonte": "src:mdapi-recordtype"
+            }
+          ],
+          "nota": "Propriedade definida pelo schema da Metadata API.",
+          "valor": "padrao_plataforma"
+        },
+        "tipo_tecnico": "string"
+      },
+      {
+        "default": {
+          "estado": "desconhecido",
+          "forma": "nao_declarado_na_fonte"
+        },
+        "disponibilidade": {
+          "ate_versao": null,
+          "desde_versao": null,
+          "estado": "desconhecido"
+        },
+        "dominio": {
+          "contexto": "A fonte tipa como string sem lista de valores; não inventar valores.",
+          "estado": "verificado",
+          "evidencias": [
+            {
+              "fonte": "src:mdapi-recordtype"
+            }
+          ],
+          "natureza": "texto_livre"
+        },
+        "estado": "verificado",
+        "evidencias": [
+          {
+            "fonte": "src:mdapi-recordtype"
+          }
+        ],
+        "explicacao": "explicada",
+        "id": "mdt:RecordType.label",
+        "nome": "label",
+        "o_que_e": "Rótulo do tipo de registro.",
+        "obrigatoriedade": {
+          "estado": "verificado",
+          "evidencias": [
+            {
+              "fonte": "src:mdapi-recordtype"
+            }
+          ],
+          "valor": "sim"
+        },
+        "origem": {
+          "estado": "verificado",
+          "evidencias": [
+            {
+              "fonte": "src:mdapi-recordtype"
+            }
+          ],
+          "nota": "Propriedade definida pelo schema da Metadata API.",
+          "valor": "padrao_plataforma"
+        },
+        "tipo_tecnico": "string"
+      },
+      {
+        "cardinalidade": "0..n",
+        "default": {
+          "estado": "desconhecido",
+          "forma": "nao_declarado_na_fonte"
+        },
+        "disponibilidade": {
+          "ate_versao": null,
+          "desde_versao": null,
+          "estado": "desconhecido"
+        },
+        "dominio": {
+          "estado": "verificado",
+          "evidencias": [
+            {
+              "fonte": "src:mdapi-recordtype"
+            }
+          ],
+          "natureza": "tipo_composto"
+        },
+        "estado": "verificado",
+        "estrutura_expandida": {
+          "id": "mdx:RecordTypePicklistValue",
+          "nome": "RecordTypePicklistValue",
+          "propriedades": [
+            {
+              "default": {
+                "estado": "desconhecido",
+                "forma": "nao_declarado_na_fonte"
+              },
+              "disponibilidade": {
+                "ate_versao": null,
+                "desde_versao": null,
+                "estado": "desconhecido"
+              },
+              "dominio": {
+                "contexto": "A fonte tipa como string sem lista de valores; não inventar valores.",
+                "estado": "verificado",
+                "evidencias": [
+                  {
+                    "fonte": "src:mdapi-recordtype"
+                  }
+                ],
+                "natureza": "texto_livre"
+              },
+              "estado": "verificado",
+              "evidencias": [
+                {
+                  "fonte": "src:mdapi-recordtype"
+                }
+              ],
+              "explicacao": "explicada",
+              "id": "mdx:RecordTypePicklistValue.picklist",
+              "nome": "picklist",
+              "o_que_e": "Nome do campo picklist.",
+              "obrigatoriedade": {
+                "estado": "verificado",
+                "evidencias": [
+                  {
+                    "fonte": "src:mdapi-recordtype"
+                  }
+                ],
+                "valor": "sim"
+              },
+              "origem": {
+                "estado": "verificado",
+                "evidencias": [
+                  {
+                    "fonte": "src:mdapi-recordtype"
+                  }
+                ],
+                "nota": "Propriedade definida pelo schema da Metadata API.",
+                "valor": "padrao_plataforma"
+              },
+              "tipo_tecnico": "string"
+            },
+            {
+              "default": {
+                "estado": "desconhecido",
+                "forma": "nao_declarado_na_fonte"
+              },
+              "disponibilidade": {
+                "ate_versao": null,
+                "desde_versao": null,
+                "estado": "desconhecido"
+              },
+              "dominio": {
+                "estado": "verificado",
+                "evidencias": [
+                  {
+                    "fonte": "src:mdapi-recordtype"
+                  }
+                ],
+                "natureza": "tipo_composto"
+              },
+              "estado": "verificado",
+              "evidencias": [
+                {
+                  "fonte": "src:mdapi-recordtype"
+                }
+              ],
+              "explicacao": "explicada",
+              "id": "mdx:RecordTypePicklistValue.values",
+              "nome": "values",
+              "o_que_e": "Valores permitidos neste tipo de registro.",
+              "obrigatoriedade": {
+                "condicao": "A documentação 68.0 não marca o campo como obrigatório; ausência de marcação não comprova opcionalidade (confirmar no WSDL).",
+                "estado": "desconhecido",
+                "valor": "nao"
+              },
+              "origem": {
+                "estado": "verificado",
+                "evidencias": [
+                  {
+                    "fonte": "src:mdapi-recordtype"
+                  }
+                ],
+                "nota": "Propriedade definida pelo schema da Metadata API.",
+                "valor": "padrao_plataforma"
+              },
+              "tipo_tecnico": "PicklistValue"
+            }
+          ]
+        },
+        "estrutura_ref": "mdx:RecordTypePicklistValue",
+        "evidencias": [
+          {
+            "fonte": "src:mdapi-recordtype"
+          }
+        ],
+        "explicacao": "explicada",
+        "id": "mdt:RecordType.picklistValues",
+        "nome": "picklistValues",
+        "o_que_e": "Valores de picklist disponíveis neste tipo de registro.",
+        "obrigatoriedade": {
+          "condicao": "A documentação 68.0 não marca o campo como obrigatório; ausência de marcação não comprova opcionalidade (confirmar no WSDL).",
+          "estado": "desconhecido",
+          "valor": "nao"
+        },
+        "origem": {
+          "estado": "verificado",
+          "evidencias": [
+            {
+              "fonte": "src:mdapi-recordtype"
+            }
+          ],
+          "nota": "Propriedade definida pelo schema da Metadata API.",
+          "valor": "padrao_plataforma"
+        },
+        "tipo_tecnico": "RecordTypePicklistValue[]"
+      }
+    ],
+    "recomendacoes": [],
+    "setup": {
+      "estado": "desconhecido",
+      "nota": "Caminho no Setup não validado nesta sessão."
+    },
+    "suporte_cli": {
+      "estado": "verificado",
+      "evidencias": [
+        {
+          "fonte": "src:sdr-metadata-support"
+        }
+      ],
+      "nota": "Suporte do Salesforce CLI (source-deploy-retrieve), não do Metadata API em geral.",
+      "valor": {
+        "nota_fonte": null,
+        "status": "suportado"
+      }
+    }
+  },
+  "nota": "Gerado deterministicamente a partir de catalogo/. Não editar à mão.",
+  "objetos_relacionados": [
+    {
+      "base_da_relacao": [
+        "rel:rep-recordtype",
+        "representacao_comum_em:func:tipos-de-registro"
+      ],
+      "objeto": {
+        "alertas": [],
+        "apex": {
+          "consulta_soql_direta": {
+            "estado": "verificado",
+            "evidencias": [
+              {
+                "fonte": "src:objref-recordtype"
+              }
+            ],
+            "nota": "Objeto da API padrão: consultável por SOQL em Apex, sujeito a permissões.",
+            "valor": true
+          },
+          "nota": "Exemplo Apex não fornecido nesta fase."
+        },
+        "campos": [
+          {
+            "apis": [
+              "padrao"
+            ],
+            "default": {
+              "estado": "desconhecido",
+              "forma": "nao_declarado_na_fonte"
+            },
+            "disponibilidade": {
+              "ate_versao": null,
+              "desde_versao": "17.0",
+              "estado": "verificado"
+            },
+            "dominio": {
+              "contexto": "Id de registro do(s) objeto(s) referenciado(s).",
+              "estado": "verificado",
+              "evidencias": [
+                {
+                  "fonte": "src:objref-recordtype"
+                }
+              ],
+              "natureza": "referencia"
+            },
+            "estado": "verificado",
+            "evidencias": [
+              {
+                "fonte": "src:objref-recordtype"
+              }
+            ],
+            "explicacao": "explicada",
+            "id": "obj:RecordType.BusinessProcessId",
+            "nome": "BusinessProcessId",
+            "o_que_e": "Processo de negócio associado; exigido para tipos de Opportunity e Lead.",
+            "obrigatoriedade": {
+              "estado": "desconhecido",
+              "valor": "desconhecida"
+            },
+            "origem": {
+              "estado": "verificado",
+              "evidencias": [
+                {
+                  "fonte": "src:objref-recordtype"
+                }
+              ],
+              "nota": "Campo padrão do objeto documentado.",
+              "valor": "padrao_plataforma"
+            },
+            "propriedades_api": {
+              "create": true,
+              "defaulted_on_create": false,
+              "estado": "verificado",
+              "evidencias": [
+                {
+                  "fonte": "src:objref-recordtype"
+                }
+              ],
+              "filter": true,
+              "group": true,
+              "id_lookup": false,
+              "nillable": true,
+              "restricted_picklist": false,
+              "sort": true,
+              "update": true
+            },
+            "referencia": {
+              "alvos": [
+                "BusinessProcess"
+              ],
+              "nome_relacionamento": null
+            },
+            "somente_leitura": false,
+            "tipo_tecnico": "reference"
+          },
+          {
+            "apis": [
+              "padrao"
+            ],
+            "default": {
+              "estado": "desconhecido",
+              "forma": "nao_declarado_na_fonte"
+            },
+            "disponibilidade": {
+              "ate_versao": null,
+              "desde_versao": null,
+              "estado": "desconhecido"
+            },
+            "dominio": {
+              "estado": "verificado",
+              "evidencias": [
+                {
+                  "fonte": "src:objref-recordtype"
+                }
+              ],
+              "natureza": "texto_livre"
+            },
+            "estado": "verificado",
+            "evidencias": [
+              {
+                "fonte": "src:objref-recordtype"
+              }
+            ],
+            "explicacao": "explicada",
+            "id": "obj:RecordType.Description",
+            "nome": "Description",
+            "o_que_e": "Descrição.",
+            "obrigatoriedade": {
+              "estado": "desconhecido",
+              "valor": "desconhecida"
+            },
+            "origem": {
+              "estado": "verificado",
+              "evidencias": [
+                {
+                  "fonte": "src:objref-recordtype"
+                }
+              ],
+              "nota": "Campo padrão do objeto documentado.",
+              "valor": "padrao_plataforma"
+            },
+            "propriedades_api": {
+              "create": true,
+              "defaulted_on_create": false,
+              "estado": "verificado",
+              "evidencias": [
+                {
+                  "fonte": "src:objref-recordtype"
+                }
+              ],
+              "filter": true,
+              "group": true,
+              "id_lookup": false,
+              "nillable": true,
+              "restricted_picklist": false,
+              "sort": true,
+              "update": true
+            },
+            "restricoes": {
+              "estado": "verificado",
+              "evidencias": [
+                {
+                  "fonte": "src:objref-recordtype"
+                }
+              ],
+              "valor": "Até 255 caracteres."
+            },
+            "somente_leitura": false,
+            "tipo_tecnico": "string"
+          },
+          {
+            "apis": [
+              "padrao"
+            ],
+            "default": {
+              "estado": "desconhecido",
+              "forma": "nao_declarado_na_fonte"
+            },
+            "disponibilidade": {
+              "ate_versao": null,
+              "desde_versao": null,
+              "estado": "desconhecido"
+            },
+            "dominio": {
+              "estado": "verificado",
+              "evidencias": [
+                {
+                  "fonte": "src:objref-recordtype"
+                }
+              ],
+              "natureza": "texto_livre"
+            },
+            "estado": "verificado",
+            "evidencias": [
+              {
+                "fonte": "src:objref-recordtype"
+              }
+            ],
+            "explicacao": "explicada",
+            "id": "obj:RecordType.DeveloperName",
+            "nome": "DeveloperName",
+            "o_que_e": "Nome API único do tipo de registro.",
+            "obrigatoriedade": {
+              "estado": "desconhecido",
+              "valor": "desconhecida"
+            },
+            "origem": {
+              "estado": "verificado",
+              "evidencias": [
+                {
+                  "fonte": "src:objref-recordtype"
+                }
+              ],
+              "nota": "Campo padrão do objeto documentado.",
+              "valor": "padrao_plataforma"
+            },
+            "propriedades_api": {
+              "create": true,
+              "defaulted_on_create": false,
+              "estado": "verificado",
+              "evidencias": [
+                {
+                  "fonte": "src:objref-recordtype"
+                }
+              ],
+              "filter": true,
+              "group": true,
+              "id_lookup": false,
+              "nillable": false,
+              "restricted_picklist": false,
+              "sort": true,
+              "update": true
+            },
+            "somente_leitura": false,
+            "tipo_tecnico": "string"
+          },
+          {
+            "apis": [
+              "padrao"
+            ],
+            "default": {
+              "estado": "desconhecido",
+              "forma": "desconhecido",
+              "nota": "A API marca o campo como 'defaulted on create', mas o valor não foi declarado na extração."
+            },
+            "disponibilidade": {
+              "ate_versao": null,
+              "desde_versao": null,
+              "estado": "desconhecido"
+            },
+            "dominio": {
+              "estado": "verificado",
+              "evidencias": [
+                {
+                  "fonte": "src:objref-recordtype"
+                }
+              ],
+              "lista_completa": "sim",
+              "natureza": "booleano",
+              "valores": [
+                {
+                  "valor": "true"
+                },
+                {
+                  "valor": "false"
+                }
+              ]
+            },
+            "estado": "verificado",
+            "evidencias": [
+              {
+                "fonte": "src:objref-recordtype"
+              }
+            ],
+            "explicacao": "explicada",
+            "id": "obj:RecordType.IsActive",
+            "nome": "IsActive",
+            "o_que_e": "Se o tipo está ativo; só tipos ativos se aplicam a registros.",
+            "obrigatoriedade": {
+              "estado": "desconhecido",
+              "valor": "desconhecida"
+            },
+            "origem": {
+              "estado": "verificado",
+              "evidencias": [
+                {
+                  "fonte": "src:objref-recordtype"
+                }
+              ],
+              "nota": "Campo padrão do objeto documentado.",
+              "valor": "padrao_plataforma"
+            },
+            "propriedades_api": {
+              "create": false,
+              "defaulted_on_create": true,
+              "estado": "verificado",
+              "evidencias": [
+                {
+                  "fonte": "src:objref-recordtype"
+                }
+              ],
+              "filter": true,
+              "group": true,
+              "id_lookup": false,
+              "nillable": false,
+              "restricted_picklist": false,
+              "sort": true,
+              "update": true
+            },
+            "somente_leitura": false,
+            "tipo_tecnico": "boolean"
+          },
+          {
+            "apis": [
+              "padrao"
+            ],
+            "default": {
+              "estado": "desconhecido",
+              "forma": "desconhecido",
+              "nota": "A API marca o campo como 'defaulted on create', mas o valor não foi declarado na extração."
+            },
+            "disponibilidade": {
+              "ate_versao": null,
+              "desde_versao": null,
+              "estado": "desconhecido"
+            },
+            "dominio": {
+              "estado": "verificado",
+              "evidencias": [
+                {
+                  "fonte": "src:objref-recordtype"
+                }
+              ],
+              "lista_completa": "sim",
+              "natureza": "booleano",
+              "valores": [
+                {
+                  "valor": "true"
+                },
+                {
+                  "valor": "false"
+                }
+              ]
+            },
+            "estado": "verificado",
+            "evidencias": [
+              {
+                "fonte": "src:objref-recordtype"
+              }
+            ],
+            "explicacao": "explicada",
+            "id": "obj:RecordType.IsPersonType",
+            "nome": "IsPersonType",
+            "o_que_e": "Marca tipo de conta pessoal (com contas pessoais habilitadas).",
+            "obrigatoriedade": {
+              "estado": "desconhecido",
+              "valor": "desconhecida"
+            },
+            "origem": {
+              "estado": "verificado",
+              "evidencias": [
+                {
+                  "fonte": "src:objref-recordtype"
+                }
+              ],
+              "nota": "Campo padrão do objeto documentado.",
+              "valor": "padrao_plataforma"
+            },
+            "propriedades_api": {
+              "create": false,
+              "defaulted_on_create": true,
+              "estado": "verificado",
+              "evidencias": [
+                {
+                  "fonte": "src:objref-recordtype"
+                }
+              ],
+              "filter": true,
+              "group": true,
+              "id_lookup": false,
+              "nillable": false,
+              "restricted_picklist": false,
+              "sort": true,
+              "update": false
+            },
+            "somente_leitura": true,
+            "tipo_tecnico": "boolean"
+          },
+          {
+            "apis": [
+              "padrao"
+            ],
+            "default": {
+              "estado": "desconhecido",
+              "forma": "nao_declarado_na_fonte"
+            },
+            "disponibilidade": {
+              "ate_versao": null,
+              "desde_versao": null,
+              "estado": "desconhecido"
+            },
+            "dominio": {
+              "estado": "verificado",
+              "evidencias": [
+                {
+                  "fonte": "src:objref-recordtype"
+                }
+              ],
+              "natureza": "texto_livre"
+            },
+            "estado": "verificado",
+            "evidencias": [
+              {
+                "fonte": "src:objref-recordtype"
+              }
+            ],
+            "explicacao": "explicada",
+            "id": "obj:RecordType.Name",
+            "nome": "Name",
+            "o_que_e": "Rótulo do tipo de registro.",
+            "obrigatoriedade": {
+              "estado": "desconhecido",
+              "valor": "desconhecida"
+            },
+            "origem": {
+              "estado": "verificado",
+              "evidencias": [
+                {
+                  "fonte": "src:objref-recordtype"
+                }
+              ],
+              "nota": "Campo padrão do objeto documentado.",
+              "valor": "padrao_plataforma"
+            },
+            "propriedades_api": {
+              "create": true,
+              "defaulted_on_create": false,
+              "estado": "verificado",
+              "evidencias": [
+                {
+                  "fonte": "src:objref-recordtype"
+                }
+              ],
+              "filter": true,
+              "group": true,
+              "id_lookup": false,
+              "nillable": false,
+              "restricted_picklist": false,
+              "sort": true,
+              "update": true
+            },
+            "restricoes": {
+              "estado": "verificado",
+              "evidencias": [
+                {
+                  "fonte": "src:objref-recordtype"
+                }
+              ],
+              "valor": "Até 80 caracteres."
+            },
+            "somente_leitura": false,
+            "tipo_tecnico": "string"
+          },
+          {
+            "apis": [
+              "padrao"
+            ],
+            "default": {
+              "estado": "desconhecido",
+              "forma": "nao_declarado_na_fonte"
+            },
+            "disponibilidade": {
+              "ate_versao": null,
+              "desde_versao": null,
+              "estado": "desconhecido"
+            },
+            "dominio": {
+              "estado": "verificado",
+              "evidencias": [
+                {
+                  "fonte": "src:objref-recordtype"
+                }
+              ],
+              "natureza": "texto_livre"
+            },
+            "estado": "verificado",
+            "evidencias": [
+              {
+                "fonte": "src:objref-recordtype"
+              }
+            ],
+            "explicacao": "explicada",
+            "id": "obj:RecordType.NamespacePrefix",
+            "nome": "NamespacePrefix",
+            "o_que_e": "Namespace do pacote gerenciado.",
+            "obrigatoriedade": {
+              "estado": "desconhecido",
+              "valor": "desconhecida"
+            },
+            "origem": {
+              "estado": "verificado",
+              "evidencias": [
+                {
+                  "fonte": "src:objref-recordtype"
+                }
+              ],
+              "nota": "Campo padrão do objeto documentado.",
+              "valor": "padrao_plataforma"
+            },
+            "propriedades_api": {
+              "create": false,
+              "defaulted_on_create": false,
+              "estado": "verificado",
+              "evidencias": [
+                {
+                  "fonte": "src:objref-recordtype"
+                }
+              ],
+              "filter": true,
+              "group": true,
+              "id_lookup": false,
+              "nillable": true,
+              "restricted_picklist": false,
+              "sort": true,
+              "update": false
+            },
+            "somente_leitura": true,
+            "tipo_tecnico": "string"
+          },
+          {
+            "apis": [
+              "padrao"
+            ],
+            "default": {
+              "estado": "desconhecido",
+              "forma": "nao_declarado_na_fonte"
+            },
+            "disponibilidade": {
+              "ate_versao": null,
+              "desde_versao": null,
+              "estado": "desconhecido"
+            },
+            "dominio": {
+              "contexto": "Objetos da org que suportam tipos de registro, inclusive customizados.",
+              "estado": "verificado",
+              "evidencias": [
+                {
+                  "fonte": "src:objref-recordtype"
+                }
+              ],
+              "natureza": "lista_dinamica"
+            },
+            "estado": "verificado",
+            "evidencias": [
+              {
+                "fonte": "src:objref-recordtype"
+              }
+            ],
+            "explicacao": "explicada",
+            "id": "obj:RecordType.SobjectType",
+            "nome": "SobjectType",
+            "o_que_e": "Objeto ao qual o tipo de registro se aplica.",
+            "obrigatoriedade": {
+              "estado": "desconhecido",
+              "valor": "desconhecida"
+            },
+            "origem": {
+              "estado": "verificado",
+              "evidencias": [
+                {
+                  "fonte": "src:objref-recordtype"
+                }
+              ],
+              "nota": "Campo padrão do objeto documentado.",
+              "valor": "padrao_plataforma"
+            },
+            "propriedades_api": {
+              "create": true,
+              "defaulted_on_create": false,
+              "estado": "verificado",
+              "evidencias": [
+                {
+                  "fonte": "src:objref-recordtype"
+                }
+              ],
+              "filter": true,
+              "group": true,
+              "id_lookup": false,
+              "nillable": false,
+              "restricted_picklist": true,
+              "sort": true,
+              "update": false
+            },
+            "somente_leitura": false,
+            "tipo_tecnico": "picklist"
+          }
+        ],
+        "cobertura": {
+          "estrutural": {
+            "esperado": null,
+            "estado": "parcial",
+            "nota": "Campos da tabela extraída; Id e campos de sistema não constam.",
+            "presente": 8
+          },
+          "explicativa": {
+            "esperado": 8,
+            "estado": "completa",
+            "presente": 8
+          },
+          "mapeamento": {
+            "estado": "parcial",
+            "nota": "Ver relacionamentos registrados."
+          }
+        },
+        "consultas": [
+          {
+            "api": "padrao",
+            "contexto": "API padrão.",
+            "soql": "SELECT Id, DeveloperName, SobjectType, IsActive FROM RecordType WHERE SobjectType = 'Account'",
+            "validacao": "documental"
+          }
+        ],
+        "estado": "verificado",
+        "evidencias": [
+          {
+            "fonte": "src:objref-recordtype"
+          }
+        ],
+        "exposicoes": [
+          {
+            "acesso_especial": "Tipos de registro não são controle de acesso; quem acessa o objeto lê as informações de tipo.",
+            "api": "padrao",
+            "chamadas": [
+              "create()",
+              "describeSObjects()",
+              "getDeleted()",
+              "getUpdated()",
+              "query()",
+              "retrieve()",
+              "update()",
+              "upsert()"
+            ],
+            "desde_versao": null,
+            "estado": "verificado",
+            "evidencias": [
+              {
+                "fonte": "src:objref-recordtype"
+              }
+            ]
+          },
+          {
+            "api": "tooling",
+            "desde_versao": null,
+            "estado": "verificado",
+            "evidencias": [
+              {
+                "fonte": "src:tooling-objects-list"
+              }
+            ],
+            "nota": "Listado no índice de objetos da Tooling API 68.0. Campos e operações dessa exposição não levantados; não presumir que sejam iguais aos da API padrão."
+          }
+        ],
+        "id": "obj:RecordType",
+        "juncao": false,
+        "nome": "RecordType",
+        "o_que_e": "Representa cada tipo de registro como registro consultável.",
+        "papel": "Consulta dos tipos de registro e de seus Ids, usados em RecordTypeId dos registros.",
+        "setup": {
+          "estado": "nao_aplicavel",
+          "nota": "Objeto consultável via API; não é tela do Setup."
+        }
+      },
+      "relacionamentos_do_objeto": [
+        {
+          "cardinalidade_registros": {
+            "estado": "desconhecido"
+          },
+          "destino": {
+            "entidade": "obj:RecordType"
+          },
+          "estado": "verificado",
+          "evidencias": [
+            {
+              "fonte": "src:tooling-pathassistant"
+            }
+          ],
+          "explicacao": "Cada Path vale para um tipo de registro.",
+          "id": "rel:pathassistant-recordtype",
+          "origem": {
+            "campo": "RecordTypeId",
+            "entidade": "obj:PathAssistant"
+          },
+          "tipo": "referencia_campo"
+        },
+        {
+          "cardinalidade_registros": {
+            "estado": "desconhecido"
+          },
+          "destino": {
+            "entidade": "obj:RecordType"
+          },
+          "estado": "verificado",
+          "evidencias": [
+            {
+              "fonte": "src:tooling-quickactiondefinition"
+            }
+          ],
+          "explicacao": "Tipo de registro do registro criado pela ação.",
+          "id": "rel:quickaction-recordtype",
+          "origem": {
+            "campo": "TargetRecordTypeId",
+            "entidade": "obj:QuickActionDefinition"
+          },
+          "tipo": "referencia_campo"
+        },
+        {
+          "destino": {
+            "entidade": "obj:RecordType"
+          },
+          "estado": "verificado",
+          "evidencias": [
+            {
+              "fonte": "src:mdapi-recordtype"
+            },
+            {
+              "fonte": "src:objref-recordtype"
+            }
+          ],
+          "explicacao": "Metadata type e objeto API descrevem tipos de registro por caminhos diferentes: definição implantável versus registro consultável. A correspondência campo a campo não foi comprovada.",
+          "id": "rel:rep-recordtype",
+          "origem": {
+            "entidade": "mdt:RecordType"
+          },
+          "tipo": "representacao_comum"
+        }
+      ]
+    }
+  ],
+  "relacionamentos": [
+    {
+      "destino": {
+        "entidade": "obj:RecordType"
+      },
+      "estado": "verificado",
+      "evidencias": [
+        {
+          "fonte": "src:mdapi-recordtype"
+        },
+        {
+          "fonte": "src:objref-recordtype"
+        }
+      ],
+      "explicacao": "Metadata type e objeto API descrevem tipos de registro por caminhos diferentes: definição implantável versus registro consultável. A correspondência campo a campo não foi comprovada.",
+      "id": "rel:rep-recordtype",
+      "origem": {
+        "entidade": "mdt:RecordType"
+      },
+      "tipo": "representacao_comum"
+    }
+  ],
+  "versao_base": {
+    "api_version": "68.0",
+    "data_referencia": "2026-11-07",
+    "escopo": "config/escopo.json",
+    "release": "Winter '27"
+  }
+}

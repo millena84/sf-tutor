@@ -1,0 +1,219 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "funcionalidade.schema.json",
+  "title": "funcionalidade",
+  "type": "object",
+  "required": [
+    "id",
+    "nome",
+    "nome_tecnico",
+    "o_que_e",
+    "finalidade",
+    "exemplo",
+    "classificacao_principal",
+    "classificacoes_secundarias",
+    "representacoes",
+    "setup",
+    "estado",
+    "evidencias"
+  ],
+  "additionalProperties": false,
+  "properties": {
+    "id": {
+      "type": "string",
+      "pattern": "^func:[a-z0-9-]+$"
+    },
+    "nome": {
+      "type": "string"
+    },
+    "nome_tecnico": {
+      "type": "string"
+    },
+    "aliases": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "termos_busca": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "o_que_e": {
+      "type": "string"
+    },
+    "finalidade": {
+      "type": "string"
+    },
+    "exemplo": {
+      "type": "string"
+    },
+    "pre_requisitos": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "classificacao_principal": {
+      "type": "object",
+      "required": [
+        "classificacao",
+        "subclassificacao"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "classificacao": {
+          "type": "string"
+        },
+        "subclassificacao": {
+          "type": "string"
+        }
+      }
+    },
+    "classificacoes_secundarias": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "classificacao",
+          "subclassificacao",
+          "motivo"
+        ],
+        "additionalProperties": false,
+        "properties": {
+          "classificacao": {
+            "type": "string"
+          },
+          "subclassificacao": {
+            "type": "string"
+          },
+          "motivo": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "representacoes": {
+      "type": "object",
+      "required": [
+        "metadata_types",
+        "objetos_api",
+        "ausencias"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "metadata_types": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": [
+              "ref",
+              "papel"
+            ],
+            "additionalProperties": false,
+            "properties": {
+              "ref": {
+                "type": "string",
+                "pattern": "^mdt:"
+              },
+              "papel": {
+                "type": "string"
+              }
+            }
+          }
+        },
+        "objetos_api": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": [
+              "ref",
+              "papel"
+            ],
+            "additionalProperties": false,
+            "properties": {
+              "ref": {
+                "type": "string",
+                "pattern": "^obj:"
+              },
+              "papel": {
+                "type": "string"
+              }
+            }
+          }
+        },
+        "codigo": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "interface": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "ausencias": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": [
+              "tipo",
+              "estado",
+              "motivo"
+            ],
+            "additionalProperties": false,
+            "properties": {
+              "tipo": {
+                "enum": [
+                  "metadata_type",
+                  "objeto_api",
+                  "setup"
+                ]
+              },
+              "estado": {
+                "$ref": "comum.schema.json#/$defs/estado"
+              },
+              "motivo": {
+                "type": "string"
+              },
+              "evidencias": {
+                "$ref": "comum.schema.json#/$defs/evidencias"
+              }
+            }
+          }
+        }
+      }
+    },
+    "setup": {
+      "$ref": "comum.schema.json#/$defs/afirmacao"
+    },
+    "recomendacoes": {
+      "type": "array",
+      "items": {
+        "$ref": "comum.schema.json#/$defs/recomendacao"
+      }
+    },
+    "alertas": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "limitacoes": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "estado": {
+      "$ref": "comum.schema.json#/$defs/estado"
+    },
+    "evidencias": {
+      "$ref": "comum.schema.json#/$defs/evidencias"
+    }
+  }
+}

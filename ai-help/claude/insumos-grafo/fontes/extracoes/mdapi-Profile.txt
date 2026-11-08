@@ -1,0 +1,25 @@
+fonte: src:mdapi-profile | URL: https://developer.salesforce.com/docs/atlas.en-us.264.0.api_meta.meta/api_meta/meta_profile.htm (API 68.0) em 2026-11-07
+metodo: extracao assistida via get_document_content (100k de 112k caracteres; subtipos apos ProfileObjectPermissions nao lidos)
+tipo: Profile | .profile | profiles | desde 10.0 | estende Metadata
+campos: agentAccesses ProfileAgentAccess[] 63.0 | applicationVisibilities ProfileApplicationVisibility[] | categoryGroupVisibilities ProfileCategoryGroupVisibility[] 41.0 | classAccesses ProfileApexClassAccess[] | custom boolean 30.0 | customMetadataTypeAccesses ProfileCustomMetadataTypeAccess[] 47.0 | customPermissions ProfileCustomPermissions[] 31.0 | customSettingAccesses ProfileCustomSettingAccesses[] 47.0 | description string 30.0 | externalDataSourceAccesses ProfileExternalDataSourceAccess[] 27.0 | fieldLevelSecurities ProfileFieldLevelSecurity[] ate 22.0 | fieldPermissions ProfileFieldLevelSecurity[] 23.0 | flowAccesses ProfileFlowAccess[] 47.0 | genComputingSummaryDefAccesses ProfileGenComputingSummaryDefAccess[] 66.0 | fullName string sim | layoutAssignments ProfileLayoutAssignments[] | loginFlows LoginFlow[] | loginHours ProfileLoginHours[] 25.0 | loginIpRanges ProfileLoginIpRange[] 17.0 | objectPermissions ProfileObjectPermissions[] | pageAccesses ProfileApexPageAccess[] | profileActionOverrides ProfileActionOverride[] 37.0-44.0 | recordTypeVisibilities ProfileRecordTypeVisibility[] | ServicePresenceStatusAccesses ProfileServicePresenceStatusAccess[] 64.0 | tabVisibilities ProfileTabVisibility[] | userLicense string 17.0 | userPermissions ProfileUserPermission[] 29.0
+subtipo ProfileLoginIpRange: description string; endAddress string sim; startAddress string sim
+subtipo ProfileLoginHours: <diaDaSemana>Start string; <diaDaSemana>End string
+
+--- complemento (lote 2) ---
+fonte: src:mdapi-profile | subtipos via get_document_content 264.0 (offsets 40000 e 60000; conteudo servido termina no meio de ProfileTabVisibility, ~112k); obtido em 2026-11-07; metodo: extracao documental assistida por IA (WebFetch); descricoes parafraseadas
+ProfileApplicationVisibility: application string obrig; default boolean obrig; visible boolean obrig
+ProfileCategoryGroupVisibility: dataCategories string[] obrig; dataCategoryGroup string obrig; visibility CategoryGroupVisibility obrig (ALL, NONE, CUSTOM)
+ProfileApexClassAccess: apexClass string obrig; enabled boolean obrig
+ProfileCustomMetadataTypeAccess: enabled boolean obrig; name string obrig
+ProfileCustomPermissions: enabled boolean obrig; name string obrig
+ProfileCustomSettingAccesses: enabled boolean obrig; name string obrig
+ProfileExternalDataSourceAccess: enabled boolean obrig; externalDataSource string nao
+ProfileFieldLevelSecurity: editable boolean obrig; field string obrig; hidden boolean nao (ate 22.0); readable boolean nao
+ProfileFlowAccess: enabled boolean obrig; flow string obrig
+ProfileGenComputingSummaryDefAccess: configName string obrig; enabled boolean obrig
+ProfileLayoutAssignments: layout string obrig; recordType string nao
+ProfileObjectPermissions: allowCreate, allowDelete, allowEdit, allowRead boolean nao; modifyAllRecords boolean nao; object string obrig; viewAllFields boolean nao (63.0); viewAllRecords boolean nao; revokeCreate/revokeDelete/revokeEdit/revokeRead boolean (obsoletos; ate 26.0)
+ProfileApexPageAccess: apexPage string obrig; enabled boolean obrig
+ProfileRecordTypeVisibility: default boolean obrig; personAccountDefault boolean nao; recordType string obrig; visible boolean obrig
+ProfileTabVisibility: tab string obrig; visibility TabVisibility obrig (valores lidos: DefaultOff, DefaultOn, Hidden; lista truncada)
+NAO LIDOS (alem do limite servido): ProfileUserPermission, ProfileServicePresenceStatusAccess, LoginFlow, ProfileAgentAccess, ProfileActionOverride, ProfileLoginHours (detalhe). A pagina renderizada exige JavaScript.

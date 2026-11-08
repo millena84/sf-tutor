@@ -1,0 +1,21 @@
+fonte: src:objref-lead | URL: https://developer.salesforce.com/docs/atlas.en-us.264.0.object_reference.meta/object_reference/sforce_api_objects_lead.htm
+obtido em 2026-11-07 via get_document_content 264.0 (Winter '27, API 68.0), lido em duas partes (offset 0 e 100000; pagina com 131118 caracteres); metodo: extracao documental assistida por IA (WebFetch); descricoes parafraseadas
+chamadas: create(), delete(), describeLayout(), describeSObjects(), getDeleted(), getUpdated(), merge(), query(), retrieve(), search(), undelete(), update(), upsert()
+campos (74 nomes, ordem da pagina): ActionCadenceAssigneeId, ActionCadenceId, ActionCadenceState, ActiveTrackerCount, ActivityMetricId, ActivityMetricRollupId, Address, AnnualRevenue, City, CleanStatus, Company, CompanyDunsNumber, ConvertedAccountId, ConvertedContactId, ConvertedDate, ConvertedOpportunityId, ConnectionReceivedId, ConnectionSentId, Country, CountryCode, CurrencyIsoCode, DandBCompanyId, Description, Division, Email, EmailBouncedDate, EmailBouncedReason, ExportStatus, Fax, FirstCallDateTime, FirstEmailDateTime, FirstName, GeocodeAccuracy, GenderIdentity, HasOptedOutOfEmail, HasOptedOutOfFax, IndividualId, Industry, IsConverted, IsDeleted, IsPriorityRecord, IsUnreadByOwner, Jigsaw, JigsawContactId, LastActivityDate, LastName, LastReferencedDate, LastViewedDate, Latitude, LeadSource, Longitude, MasterRecordId, MiddleName, MobilePhone, Name, NumberOfEmployees, OwnerId, PartnerAccountId, Phone, PhotoUrl, PostalCode, Pronouns, Rating, RecordTypeId, Salutation, ScheduledResumeDateTime, ScoreIntelligenceId, State, StateCode, Status, Street, Suffix, Title, Website
+observacao: PartnerAccountId ficou na fronteira entre as duas leituras (nome na 1a parte, descricao na 2a)
+detalhes (Nome | tipo | propriedades C D F G N R S U):
+Company | string | CFGNSU | se vazio e contas pessoais habilitadas, converte em conta pessoal
+LastName | string | CFGSU | obrigatorio; ate 80 caracteres
+IsConverted | boolean | CDFGS
+ConvertedAccountId | reference | CFGNS | Account
+ConvertedContactId | reference | CFGNS | Contact
+ConvertedOpportunityId | reference | CFGNS | Opportunity
+OwnerId | reference | CDFGSU | Group, User (usuario ou fila)
+LeadSource | picklist | CFGNSU
+Status | picklist | CDFGSU | valores da configuracao de Status, expostos pelo objeto LeadStatus
+Rating | picklist | CFGNSU
+Title | string | CFGNSU | ate 128; conversao em conta pessoal falha acima de 80
+Phone | phone | CFGNSU
+Website | url | CFGNSU
+RecordTypeId | reference | CFNU | alvo nao declarado no trecho
+uso: leads convertidos ficam somente leitura e continuam consultaveis; atualizar convertidos exige View and Edit Converted Leads; conversao via convertLead() ou interface; definir Status convertido pela API nao converte; atualizar/converter exige Edit em leads

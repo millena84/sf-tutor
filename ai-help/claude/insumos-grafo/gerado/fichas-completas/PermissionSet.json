@@ -1,0 +1,5764 @@
+{
+  "funcionalidades": [
+    {
+      "id": "func:permission-sets",
+      "nome": "Permission sets"
+    }
+  ],
+  "metadata_type": {
+    "alertas": [
+      "A atribuição a usuários é registro do objeto PermissionSetAssignment, não parte do XML."
+    ],
+    "arquivos": {
+      "metadata_api_format": {
+        "estado": "verificado",
+        "evidencias": [
+          {
+            "fonte": "src:sdr-registry",
+            "nota": "types.permissionset"
+          }
+        ],
+        "valor": {
+          "arquivo": "<Nome>.permissionset",
+          "pasta": "permissionsets/"
+        }
+      },
+      "source_format": {
+        "estado": "verificado",
+        "evidencias": [
+          {
+            "fonte": "src:sdr-registry",
+            "nota": "types.permissionset"
+          }
+        ],
+        "nota": "Pasta e sufixo do registro do Salesforce CLI; sufixo '-meta.xml' segue a convenção do source format.",
+        "valor": {
+          "arquivo": "<Nome>.permissionset-meta.xml",
+          "pasta": "permissionsets/"
+        }
+      }
+    },
+    "cobertura": {
+      "estrutural": {
+        "esperado": 24,
+        "estado": "completa",
+        "nota": "Universo esperado = tabela Fields da página oficial 68.0 (mais fullName herdado quando declarado).",
+        "presente": 24
+      },
+      "explicativa": {
+        "esperado": 24,
+        "estado": "completa",
+        "presente": 24
+      },
+      "mapeamento": {
+        "estado": "parcial",
+        "nota": "Correspondências registradas apenas onde há evidência; demais pendentes."
+      }
+    },
+    "disponibilidade": {
+      "ate_versao": null,
+      "desde_versao": "22.0",
+      "estado": "verificado"
+    },
+    "divergencias_documentais": [
+      "Tipo de tabSettings e de viewAllFields exibidos de forma inconsistente na página; conferir no WSDL."
+    ],
+    "estado": "verificado",
+    "estende": "Metadata",
+    "estruturas": [
+      "mdx:PermissionSetAgentAccess",
+      "mdx:PermissionSetApexClassAccess",
+      "mdx:PermissionSetApexPageAccess",
+      "mdx:PermissionSetApplicationVisibility",
+      "mdx:PermissionSetCustomMetadataTypeAccess",
+      "mdx:PermissionSetCustomPermissions",
+      "mdx:PermissionSetCustomSettingAccesses",
+      "mdx:PermissionSetEmailRoutingAddressAccess",
+      "mdx:PermissionSetExternalCredentialPrincipalAccess",
+      "mdx:PermissionSetExternalDataSourceAccess",
+      "mdx:PermissionSetFieldPermissions",
+      "mdx:PermissionSetFlowAccess",
+      "mdx:PermissionSetGenComputingSummaryDefAccess",
+      "mdx:PermissionSetObjectPermissions",
+      "mdx:PermissionSetRecordTypeVisibility",
+      "mdx:PermissionSetServicePresenceStatusAccess",
+      "mdx:PermissionSetTabSetting",
+      "mdx:PermissionSetUserPermission"
+    ],
+    "evidencias": [
+      {
+        "fonte": "src:mdapi-permissionset"
+      },
+      {
+        "fonte": "src:sdr-registry"
+      },
+      {
+        "fonte": "src:sdr-metadata-support"
+      }
+    ],
+    "exemplo_xml": {
+      "natureza": "didatico_projeto",
+      "nota": "Exemplo escrito pelo projeto apenas com elementos documentados; sem dados reais.",
+      "xml": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<PermissionSet xmlns=\"http://soap.sforce.com/2006/04/metadata\">\n    <description>Permite ler e editar contratos.</description>\n    <hasActivationRequired>false</hasActivationRequired>\n    <label>Gestão de Contratos</label>\n    <objectPermissions>\n        <allowCreate>false</allowCreate>\n        <allowDelete>false</allowDelete>\n        <allowEdit>true</allowEdit>\n        <allowRead>true</allowRead>\n        <modifyAllRecords>false</modifyAllRecords>\n        <object>Contract</object>\n        <viewAllRecords>false</viewAllRecords>\n    </objectPermissions>\n</PermissionSet>"
+    },
+    "finalidade": "Versionar e implantar entre orgs as permissões de um permission set. A atribuição a usuários não faz parte deste XML.",
+    "id": "mdt:PermissionSet",
+    "nome": "PermissionSet",
+    "o_que_e": "Definição implantável de um permission set: o conjunto de permissões que pode ser somado ao perfil de um usuário.",
+    "propriedades": [
+      {
+        "default": {
+          "estado": "desconhecido",
+          "forma": "nao_declarado_na_fonte"
+        },
+        "disponibilidade": {
+          "ate_versao": null,
+          "desde_versao": null,
+          "estado": "desconhecido"
+        },
+        "dominio": {
+          "contexto": "A fonte tipa como string sem lista de valores; não inventar valores.",
+          "estado": "verificado",
+          "evidencias": [
+            {
+              "fonte": "src:mdapi-permissionset"
+            }
+          ],
+          "natureza": "texto_livre"
+        },
+        "estado": "verificado",
+        "evidencias": [
+          {
+            "fonte": "src:mdapi-permissionset"
+          }
+        ],
+        "explicacao": "explicada",
+        "herdada_de": "Metadata",
+        "id": "mdt:PermissionSet.fullName",
+        "nome": "fullName",
+        "o_que_e": "Nome completo (API name) do componente; herdado do tipo Metadata.",
+        "obrigatoriedade": {
+          "estado": "desconhecido",
+          "valor": "desconhecida"
+        },
+        "origem": {
+          "estado": "verificado",
+          "evidencias": [
+            {
+              "fonte": "src:mdapi-permissionset"
+            }
+          ],
+          "nota": "Propriedade definida pelo schema da Metadata API.",
+          "valor": "padrao_plataforma"
+        },
+        "tipo_tecnico": "string"
+      },
+      {
+        "cardinalidade": "0..n",
+        "default": {
+          "estado": "desconhecido",
+          "forma": "nao_declarado_na_fonte"
+        },
+        "disponibilidade": {
+          "ate_versao": null,
+          "desde_versao": "63.0",
+          "estado": "verificado"
+        },
+        "dominio": {
+          "estado": "verificado",
+          "evidencias": [
+            {
+              "fonte": "src:mdapi-permissionset"
+            }
+          ],
+          "natureza": "tipo_composto"
+        },
+        "estado": "verificado",
+        "estrutura_expandida": {
+          "id": "mdx:PermissionSetAgentAccess",
+          "nome": "PermissionSetAgentAccess",
+          "propriedades": [
+            {
+              "default": {
+                "estado": "desconhecido",
+                "forma": "nao_declarado_na_fonte"
+              },
+              "disponibilidade": {
+                "ate_versao": null,
+                "desde_versao": null,
+                "estado": "desconhecido"
+              },
+              "dominio": {
+                "contexto": "A fonte tipa como string sem lista de valores; não inventar valores.",
+                "estado": "verificado",
+                "evidencias": [
+                  {
+                    "fonte": "src:mdapi-permissionset"
+                  }
+                ],
+                "natureza": "texto_livre"
+              },
+              "estado": "verificado",
+              "evidencias": [
+                {
+                  "fonte": "src:mdapi-permissionset"
+                }
+              ],
+              "explicacao": "explicada",
+              "id": "mdx:PermissionSetAgentAccess.agentName",
+              "nome": "agentName",
+              "o_que_e": "Nome do agente de funcionário.",
+              "obrigatoriedade": {
+                "estado": "verificado",
+                "evidencias": [
+                  {
+                    "fonte": "src:mdapi-permissionset"
+                  }
+                ],
+                "valor": "sim"
+              },
+              "origem": {
+                "estado": "verificado",
+                "evidencias": [
+                  {
+                    "fonte": "src:mdapi-permissionset"
+                  }
+                ],
+                "nota": "Propriedade definida pelo schema da Metadata API.",
+                "valor": "padrao_plataforma"
+              },
+              "tipo_tecnico": "string"
+            },
+            {
+              "default": {
+                "estado": "desconhecido",
+                "forma": "nao_declarado_na_fonte"
+              },
+              "disponibilidade": {
+                "ate_versao": null,
+                "desde_versao": null,
+                "estado": "desconhecido"
+              },
+              "dominio": {
+                "estado": "verificado",
+                "evidencias": [
+                  {
+                    "fonte": "src:mdapi-permissionset"
+                  }
+                ],
+                "lista_completa": "sim",
+                "natureza": "booleano",
+                "valores": [
+                  {
+                    "valor": "true"
+                  },
+                  {
+                    "valor": "false"
+                  }
+                ]
+              },
+              "estado": "verificado",
+              "evidencias": [
+                {
+                  "fonte": "src:mdapi-permissionset"
+                }
+              ],
+              "explicacao": "explicada",
+              "id": "mdx:PermissionSetAgentAccess.enabled",
+              "nome": "enabled",
+              "o_que_e": "Se os usuários atribuídos podem usar o agente.",
+              "obrigatoriedade": {
+                "estado": "verificado",
+                "evidencias": [
+                  {
+                    "fonte": "src:mdapi-permissionset"
+                  }
+                ],
+                "valor": "sim"
+              },
+              "origem": {
+                "estado": "verificado",
+                "evidencias": [
+                  {
+                    "fonte": "src:mdapi-permissionset"
+                  }
+                ],
+                "nota": "Propriedade definida pelo schema da Metadata API.",
+                "valor": "padrao_plataforma"
+              },
+              "tipo_tecnico": "boolean"
+            }
+          ]
+        },
+        "estrutura_ref": "mdx:PermissionSetAgentAccess",
+        "evidencias": [
+          {
+            "fonte": "src:mdapi-permissionset"
+          }
+        ],
+        "explicacao": "explicada",
+        "id": "mdt:PermissionSet.agentAccesses",
+        "nome": "agentAccesses",
+        "o_que_e": "Agentes visíveis para usuários com este permission set.",
+        "obrigatoriedade": {
+          "condicao": "A documentação 68.0 não marca o campo como obrigatório; ausência de marcação não comprova opcionalidade (confirmar no WSDL).",
+          "estado": "desconhecido",
+          "valor": "nao"
+        },
+        "origem": {
+          "estado": "verificado",
+          "evidencias": [
+            {
+              "fonte": "src:mdapi-permissionset"
+            }
+          ],
+          "nota": "Propriedade definida pelo schema da Metadata API.",
+          "valor": "padrao_plataforma"
+        },
+        "tipo_tecnico": "PermissionSetAgentAccess[]"
+      },
+      {
+        "cardinalidade": "0..n",
+        "default": {
+          "estado": "desconhecido",
+          "forma": "nao_declarado_na_fonte"
+        },
+        "disponibilidade": {
+          "ate_versao": null,
+          "desde_versao": "29.0",
+          "estado": "verificado",
+          "nota": "Apps padrão a partir da 30.0."
+        },
+        "dominio": {
+          "estado": "verificado",
+          "evidencias": [
+            {
+              "fonte": "src:mdapi-permissionset"
+            }
+          ],
+          "natureza": "tipo_composto"
+        },
+        "estado": "verificado",
+        "estrutura_expandida": {
+          "id": "mdx:PermissionSetApplicationVisibility",
+          "nome": "PermissionSetApplicationVisibility",
+          "propriedades": [
+            {
+              "default": {
+                "estado": "desconhecido",
+                "forma": "nao_declarado_na_fonte"
+              },
+              "disponibilidade": {
+                "ate_versao": null,
+                "desde_versao": null,
+                "estado": "desconhecido"
+              },
+              "dominio": {
+                "contexto": "A fonte tipa como string sem lista de valores; não inventar valores.",
+                "estado": "verificado",
+                "evidencias": [
+                  {
+                    "fonte": "src:mdapi-permissionset"
+                  }
+                ],
+                "natureza": "texto_livre"
+              },
+              "estado": "verificado",
+              "evidencias": [
+                {
+                  "fonte": "src:mdapi-permissionset"
+                }
+              ],
+              "explicacao": "explicada",
+              "id": "mdx:PermissionSetApplicationVisibility.application",
+              "nome": "application",
+              "o_que_e": "Nome do app.",
+              "obrigatoriedade": {
+                "estado": "verificado",
+                "evidencias": [
+                  {
+                    "fonte": "src:mdapi-permissionset"
+                  }
+                ],
+                "valor": "sim"
+              },
+              "origem": {
+                "estado": "verificado",
+                "evidencias": [
+                  {
+                    "fonte": "src:mdapi-permissionset"
+                  }
+                ],
+                "nota": "Propriedade definida pelo schema da Metadata API.",
+                "valor": "padrao_plataforma"
+              },
+              "tipo_tecnico": "string"
+            },
+            {
+              "default": {
+                "estado": "desconhecido",
+                "forma": "nao_declarado_na_fonte"
+              },
+              "disponibilidade": {
+                "ate_versao": null,
+                "desde_versao": null,
+                "estado": "desconhecido"
+              },
+              "dominio": {
+                "estado": "verificado",
+                "evidencias": [
+                  {
+                    "fonte": "src:mdapi-permissionset"
+                  }
+                ],
+                "lista_completa": "sim",
+                "natureza": "booleano",
+                "valores": [
+                  {
+                    "valor": "true"
+                  },
+                  {
+                    "valor": "false"
+                  }
+                ]
+              },
+              "estado": "verificado",
+              "evidencias": [
+                {
+                  "fonte": "src:mdapi-permissionset"
+                }
+              ],
+              "explicacao": "explicada",
+              "id": "mdx:PermissionSetApplicationVisibility.visible",
+              "nome": "visible",
+              "o_que_e": "Se o app fica visível para os usuários atribuídos.",
+              "obrigatoriedade": {
+                "estado": "verificado",
+                "evidencias": [
+                  {
+                    "fonte": "src:mdapi-permissionset"
+                  }
+                ],
+                "valor": "sim"
+              },
+              "origem": {
+                "estado": "verificado",
+                "evidencias": [
+                  {
+                    "fonte": "src:mdapi-permissionset"
+                  }
+                ],
+                "nota": "Propriedade definida pelo schema da Metadata API.",
+                "valor": "padrao_plataforma"
+              },
+              "tipo_tecnico": "boolean"
+            }
+          ]
+        },
+        "estrutura_ref": "mdx:PermissionSetApplicationVisibility",
+        "evidencias": [
+          {
+            "fonte": "src:mdapi-permissionset"
+          }
+        ],
+        "explicacao": "explicada",
+        "id": "mdt:PermissionSet.applicationVisibilities",
+        "nome": "applicationVisibilities",
+        "o_que_e": "Apps visíveis para os usuários atribuídos.",
+        "obrigatoriedade": {
+          "condicao": "A documentação 68.0 não marca o campo como obrigatório; ausência de marcação não comprova opcionalidade (confirmar no WSDL).",
+          "estado": "desconhecido",
+          "valor": "nao"
+        },
+        "origem": {
+          "estado": "verificado",
+          "evidencias": [
+            {
+              "fonte": "src:mdapi-permissionset"
+            }
+          ],
+          "nota": "Propriedade definida pelo schema da Metadata API.",
+          "valor": "padrao_plataforma"
+        },
+        "tipo_tecnico": "PermissionSetApplicationVisibility[]"
+      },
+      {
+        "cardinalidade": "0..n",
+        "default": {
+          "estado": "desconhecido",
+          "forma": "nao_declarado_na_fonte"
+        },
+        "disponibilidade": {
+          "ate_versao": null,
+          "desde_versao": "23.0",
+          "estado": "verificado"
+        },
+        "dominio": {
+          "estado": "verificado",
+          "evidencias": [
+            {
+              "fonte": "src:mdapi-permissionset"
+            }
+          ],
+          "natureza": "tipo_composto"
+        },
+        "estado": "verificado",
+        "estrutura_expandida": {
+          "id": "mdx:PermissionSetApexClassAccess",
+          "nome": "PermissionSetApexClassAccess",
+          "propriedades": [
+            {
+              "default": {
+                "estado": "desconhecido",
+                "forma": "nao_declarado_na_fonte"
+              },
+              "disponibilidade": {
+                "ate_versao": null,
+                "desde_versao": null,
+                "estado": "desconhecido"
+              },
+              "dominio": {
+                "contexto": "A fonte tipa como string sem lista de valores; não inventar valores.",
+                "estado": "verificado",
+                "evidencias": [
+                  {
+                    "fonte": "src:mdapi-permissionset"
+                  }
+                ],
+                "natureza": "texto_livre"
+              },
+              "estado": "verificado",
+              "evidencias": [
+                {
+                  "fonte": "src:mdapi-permissionset"
+                }
+              ],
+              "explicacao": "explicada",
+              "id": "mdx:PermissionSetApexClassAccess.apexClass",
+              "nome": "apexClass",
+              "o_que_e": "Nome da classe Apex.",
+              "obrigatoriedade": {
+                "estado": "verificado",
+                "evidencias": [
+                  {
+                    "fonte": "src:mdapi-permissionset"
+                  }
+                ],
+                "valor": "sim"
+              },
+              "origem": {
+                "estado": "verificado",
+                "evidencias": [
+                  {
+                    "fonte": "src:mdapi-permissionset"
+                  }
+                ],
+                "nota": "Propriedade definida pelo schema da Metadata API.",
+                "valor": "padrao_plataforma"
+              },
+              "tipo_tecnico": "string"
+            },
+            {
+              "default": {
+                "estado": "desconhecido",
+                "forma": "nao_declarado_na_fonte"
+              },
+              "disponibilidade": {
+                "ate_versao": null,
+                "desde_versao": null,
+                "estado": "desconhecido"
+              },
+              "dominio": {
+                "estado": "verificado",
+                "evidencias": [
+                  {
+                    "fonte": "src:mdapi-permissionset"
+                  }
+                ],
+                "lista_completa": "sim",
+                "natureza": "booleano",
+                "valores": [
+                  {
+                    "valor": "true"
+                  },
+                  {
+                    "valor": "false"
+                  }
+                ]
+              },
+              "estado": "verificado",
+              "evidencias": [
+                {
+                  "fonte": "src:mdapi-permissionset"
+                }
+              ],
+              "explicacao": "explicada",
+              "id": "mdx:PermissionSetApexClassAccess.enabled",
+              "nome": "enabled",
+              "o_que_e": "Se os usuários podem executar os métodos da classe de nível superior.",
+              "obrigatoriedade": {
+                "estado": "verificado",
+                "evidencias": [
+                  {
+                    "fonte": "src:mdapi-permissionset"
+                  }
+                ],
+                "valor": "sim"
+              },
+              "origem": {
+                "estado": "verificado",
+                "evidencias": [
+                  {
+                    "fonte": "src:mdapi-permissionset"
+                  }
+                ],
+                "nota": "Propriedade definida pelo schema da Metadata API.",
+                "valor": "padrao_plataforma"
+              },
+              "tipo_tecnico": "boolean"
+            }
+          ]
+        },
+        "estrutura_ref": "mdx:PermissionSetApexClassAccess",
+        "evidencias": [
+          {
+            "fonte": "src:mdapi-permissionset"
+          }
+        ],
+        "explicacao": "explicada",
+        "id": "mdt:PermissionSet.classAccesses",
+        "nome": "classAccesses",
+        "o_que_e": "Classes Apex cujos métodos os usuários podem executar.",
+        "obrigatoriedade": {
+          "condicao": "A documentação 68.0 não marca o campo como obrigatório; ausência de marcação não comprova opcionalidade (confirmar no WSDL).",
+          "estado": "desconhecido",
+          "valor": "nao"
+        },
+        "origem": {
+          "estado": "verificado",
+          "evidencias": [
+            {
+              "fonte": "src:mdapi-permissionset"
+            }
+          ],
+          "nota": "Propriedade definida pelo schema da Metadata API.",
+          "valor": "padrao_plataforma"
+        },
+        "tipo_tecnico": "PermissionSetApexClassAccess[]"
+      },
+      {
+        "cardinalidade": "0..n",
+        "default": {
+          "estado": "desconhecido",
+          "forma": "nao_declarado_na_fonte"
+        },
+        "disponibilidade": {
+          "ate_versao": null,
+          "desde_versao": "47.0",
+          "estado": "verificado"
+        },
+        "dominio": {
+          "estado": "verificado",
+          "evidencias": [
+            {
+              "fonte": "src:mdapi-permissionset"
+            }
+          ],
+          "natureza": "tipo_composto"
+        },
+        "estado": "verificado",
+        "estrutura_expandida": {
+          "id": "mdx:PermissionSetCustomMetadataTypeAccess",
+          "nome": "PermissionSetCustomMetadataTypeAccess",
+          "propriedades": [
+            {
+              "default": {
+                "estado": "desconhecido",
+                "forma": "nao_declarado_na_fonte"
+              },
+              "disponibilidade": {
+                "ate_versao": null,
+                "desde_versao": null,
+                "estado": "desconhecido"
+              },
+              "dominio": {
+                "estado": "verificado",
+                "evidencias": [
+                  {
+                    "fonte": "src:mdapi-permissionset"
+                  }
+                ],
+                "lista_completa": "sim",
+                "natureza": "booleano",
+                "valores": [
+                  {
+                    "valor": "true"
+                  },
+                  {
+                    "valor": "false"
+                  }
+                ]
+              },
+              "estado": "verificado",
+              "evidencias": [
+                {
+                  "fonte": "src:mdapi-permissionset"
+                }
+              ],
+              "explicacao": "explicada",
+              "id": "mdx:PermissionSetCustomMetadataTypeAccess.enabled",
+              "nome": "enabled",
+              "o_que_e": "Se os registros do custom metadata type podem ser lidos.",
+              "obrigatoriedade": {
+                "estado": "verificado",
+                "evidencias": [
+                  {
+                    "fonte": "src:mdapi-permissionset"
+                  }
+                ],
+                "valor": "sim"
+              },
+              "origem": {
+                "estado": "verificado",
+                "evidencias": [
+                  {
+                    "fonte": "src:mdapi-permissionset"
+                  }
+                ],
+                "nota": "Propriedade definida pelo schema da Metadata API.",
+                "valor": "padrao_plataforma"
+              },
+              "tipo_tecnico": "boolean"
+            },
+            {
+              "default": {
+                "estado": "desconhecido",
+                "forma": "nao_declarado_na_fonte"
+              },
+              "disponibilidade": {
+                "ate_versao": null,
+                "desde_versao": null,
+                "estado": "desconhecido"
+              },
+              "dominio": {
+                "contexto": "A fonte tipa como string sem lista de valores; não inventar valores.",
+                "estado": "verificado",
+                "evidencias": [
+                  {
+                    "fonte": "src:mdapi-permissionset"
+                  }
+                ],
+                "natureza": "texto_livre"
+              },
+              "estado": "verificado",
+              "evidencias": [
+                {
+                  "fonte": "src:mdapi-permissionset"
+                }
+              ],
+              "explicacao": "explicada",
+              "id": "mdx:PermissionSetCustomMetadataTypeAccess.name",
+              "nome": "name",
+              "o_que_e": "Nome do custom metadata type.",
+              "obrigatoriedade": {
+                "estado": "verificado",
+                "evidencias": [
+                  {
+                    "fonte": "src:mdapi-permissionset"
+                  }
+                ],
+                "valor": "sim"
+              },
+              "origem": {
+                "estado": "verificado",
+                "evidencias": [
+                  {
+                    "fonte": "src:mdapi-permissionset"
+                  }
+                ],
+                "nota": "Propriedade definida pelo schema da Metadata API.",
+                "valor": "padrao_plataforma"
+              },
+              "tipo_tecnico": "string"
+            }
+          ]
+        },
+        "estrutura_ref": "mdx:PermissionSetCustomMetadataTypeAccess",
+        "evidencias": [
+          {
+            "fonte": "src:mdapi-permissionset"
+          }
+        ],
+        "explicacao": "explicada",
+        "id": "mdt:PermissionSet.customMetadataTypeAccesses",
+        "nome": "customMetadataTypeAccesses",
+        "o_que_e": "Custom metadata types cujos registros os usuários podem ler.",
+        "obrigatoriedade": {
+          "condicao": "A documentação 68.0 não marca o campo como obrigatório; ausência de marcação não comprova opcionalidade (confirmar no WSDL).",
+          "estado": "desconhecido",
+          "valor": "nao"
+        },
+        "origem": {
+          "estado": "verificado",
+          "evidencias": [
+            {
+              "fonte": "src:mdapi-permissionset"
+            }
+          ],
+          "nota": "Propriedade definida pelo schema da Metadata API.",
+          "valor": "padrao_plataforma"
+        },
+        "tipo_tecnico": "PermissionSetCustomMetadataTypeAccess[]"
+      },
+      {
+        "cardinalidade": "0..n",
+        "default": {
+          "estado": "desconhecido",
+          "forma": "nao_declarado_na_fonte"
+        },
+        "disponibilidade": {
+          "ate_versao": null,
+          "desde_versao": "31.0",
+          "estado": "verificado"
+        },
+        "dominio": {
+          "estado": "verificado",
+          "evidencias": [
+            {
+              "fonte": "src:mdapi-permissionset"
+            }
+          ],
+          "natureza": "tipo_composto"
+        },
+        "estado": "verificado",
+        "estrutura_expandida": {
+          "id": "mdx:PermissionSetCustomPermissions",
+          "nome": "PermissionSetCustomPermissions",
+          "propriedades": [
+            {
+              "default": {
+                "estado": "desconhecido",
+                "forma": "nao_declarado_na_fonte"
+              },
+              "disponibilidade": {
+                "ate_versao": null,
+                "desde_versao": null,
+                "estado": "desconhecido"
+              },
+              "dominio": {
+                "estado": "verificado",
+                "evidencias": [
+                  {
+                    "fonte": "src:mdapi-permissionset"
+                  }
+                ],
+                "lista_completa": "sim",
+                "natureza": "booleano",
+                "valores": [
+                  {
+                    "valor": "true"
+                  },
+                  {
+                    "valor": "false"
+                  }
+                ]
+              },
+              "estado": "verificado",
+              "evidencias": [
+                {
+                  "fonte": "src:mdapi-permissionset"
+                }
+              ],
+              "explicacao": "explicada",
+              "id": "mdx:PermissionSetCustomPermissions.enabled",
+              "nome": "enabled",
+              "o_que_e": "Se a permissão personalizada está habilitada.",
+              "obrigatoriedade": {
+                "estado": "verificado",
+                "evidencias": [
+                  {
+                    "fonte": "src:mdapi-permissionset"
+                  }
+                ],
+                "valor": "sim"
+              },
+              "origem": {
+                "estado": "verificado",
+                "evidencias": [
+                  {
+                    "fonte": "src:mdapi-permissionset"
+                  }
+                ],
+                "nota": "Propriedade definida pelo schema da Metadata API.",
+                "valor": "padrao_plataforma"
+              },
+              "tipo_tecnico": "boolean"
+            },
+            {
+              "default": {
+                "estado": "desconhecido",
+                "forma": "nao_declarado_na_fonte"
+              },
+              "disponibilidade": {
+                "ate_versao": null,
+                "desde_versao": null,
+                "estado": "desconhecido"
+              },
+              "dominio": {
+                "contexto": "A fonte tipa como string sem lista de valores; não inventar valores.",
+                "estado": "verificado",
+                "evidencias": [
+                  {
+                    "fonte": "src:mdapi-permissionset"
+                  }
+                ],
+                "natureza": "texto_livre"
+              },
+              "estado": "verificado",
+              "evidencias": [
+                {
+                  "fonte": "src:mdapi-permissionset"
+                }
+              ],
+              "explicacao": "explicada",
+              "id": "mdx:PermissionSetCustomPermissions.name",
+              "nome": "name",
+              "o_que_e": "Nome da permissão personalizada.",
+              "obrigatoriedade": {
+                "estado": "verificado",
+                "evidencias": [
+                  {
+                    "fonte": "src:mdapi-permissionset"
+                  }
+                ],
+                "valor": "sim"
+              },
+              "origem": {
+                "estado": "verificado",
+                "evidencias": [
+                  {
+                    "fonte": "src:mdapi-permissionset"
+                  }
+                ],
+                "nota": "Propriedade definida pelo schema da Metadata API.",
+                "valor": "padrao_plataforma"
+              },
+              "tipo_tecnico": "string"
+            }
+          ]
+        },
+        "estrutura_ref": "mdx:PermissionSetCustomPermissions",
+        "evidencias": [
+          {
+            "fonte": "src:mdapi-permissionset"
+          }
+        ],
+        "explicacao": "explicada",
+        "id": "mdt:PermissionSet.customPermissions",
+        "nome": "customPermissions",
+        "o_que_e": "Permissões personalizadas habilitadas.",
+        "obrigatoriedade": {
+          "condicao": "A documentação 68.0 não marca o campo como obrigatório; ausência de marcação não comprova opcionalidade (confirmar no WSDL).",
+          "estado": "desconhecido",
+          "valor": "nao"
+        },
+        "origem": {
+          "estado": "verificado",
+          "evidencias": [
+            {
+              "fonte": "src:mdapi-permissionset"
+            }
+          ],
+          "nota": "Propriedade definida pelo schema da Metadata API.",
+          "valor": "padrao_plataforma"
+        },
+        "tipo_tecnico": "PermissionSetCustomPermissions[]"
+      },
+      {
+        "cardinalidade": "0..n",
+        "default": {
+          "estado": "desconhecido",
+          "forma": "nao_declarado_na_fonte"
+        },
+        "disponibilidade": {
+          "ate_versao": null,
+          "desde_versao": "47.0",
+          "estado": "verificado"
+        },
+        "dominio": {
+          "estado": "verificado",
+          "evidencias": [
+            {
+              "fonte": "src:mdapi-permissionset"
+            }
+          ],
+          "natureza": "tipo_composto"
+        },
+        "estado": "verificado",
+        "estrutura_expandida": {
+          "id": "mdx:PermissionSetCustomSettingAccesses",
+          "nome": "PermissionSetCustomSettingAccesses",
+          "propriedades": [
+            {
+              "default": {
+                "estado": "desconhecido",
+                "forma": "nao_declarado_na_fonte"
+              },
+              "disponibilidade": {
+                "ate_versao": null,
+                "desde_versao": null,
+                "estado": "desconhecido"
+              },
+              "dominio": {
+                "estado": "verificado",
+                "evidencias": [
+                  {
+                    "fonte": "src:mdapi-permissionset"
+                  }
+                ],
+                "lista_completa": "sim",
+                "natureza": "booleano",
+                "valores": [
+                  {
+                    "valor": "true"
+                  },
+                  {
+                    "valor": "false"
+                  }
+                ]
+              },
+              "estado": "verificado",
+              "evidencias": [
+                {
+                  "fonte": "src:mdapi-permissionset"
+                }
+              ],
+              "explicacao": "explicada",
+              "id": "mdx:PermissionSetCustomSettingAccesses.enabled",
+              "nome": "enabled",
+              "o_que_e": "Se os registros da configuração personalizada podem ser lidos.",
+              "obrigatoriedade": {
+                "estado": "verificado",
+                "evidencias": [
+                  {
+                    "fonte": "src:mdapi-permissionset"
+                  }
+                ],
+                "valor": "sim"
+              },
+              "origem": {
+                "estado": "verificado",
+                "evidencias": [
+                  {
+                    "fonte": "src:mdapi-permissionset"
+                  }
+                ],
+                "nota": "Propriedade definida pelo schema da Metadata API.",
+                "valor": "padrao_plataforma"
+              },
+              "tipo_tecnico": "boolean"
+            },
+            {
+              "default": {
+                "estado": "desconhecido",
+                "forma": "nao_declarado_na_fonte"
+              },
+              "disponibilidade": {
+                "ate_versao": null,
+                "desde_versao": null,
+                "estado": "desconhecido"
+              },
+              "dominio": {
+                "contexto": "A fonte tipa como string sem lista de valores; não inventar valores.",
+                "estado": "verificado",
+                "evidencias": [
+                  {
+                    "fonte": "src:mdapi-permissionset"
+                  }
+                ],
+                "natureza": "texto_livre"
+              },
+              "estado": "verificado",
+              "evidencias": [
+                {
+                  "fonte": "src:mdapi-permissionset"
+                }
+              ],
+              "explicacao": "explicada",
+              "id": "mdx:PermissionSetCustomSettingAccesses.name",
+              "nome": "name",
+              "o_que_e": "Nome da configuração personalizada.",
+              "obrigatoriedade": {
+                "estado": "verificado",
+                "evidencias": [
+                  {
+                    "fonte": "src:mdapi-permissionset"
+                  }
+                ],
+                "valor": "sim"
+              },
+              "origem": {
+                "estado": "verificado",
+                "evidencias": [
+                  {
+                    "fonte": "src:mdapi-permissionset"
+                  }
+                ],
+                "nota": "Propriedade definida pelo schema da Metadata API.",
+                "valor": "padrao_plataforma"
+              },
+              "tipo_tecnico": "string"
+            }
+          ]
+        },
+        "estrutura_ref": "mdx:PermissionSetCustomSettingAccesses",
+        "evidencias": [
+          {
+            "fonte": "src:mdapi-permissionset"
+          }
+        ],
+        "explicacao": "explicada",
+        "id": "mdt:PermissionSet.customSettingAccesses",
+        "nome": "customSettingAccesses",
+        "o_que_e": "Configurações personalizadas cujos registros os usuários podem ler.",
+        "obrigatoriedade": {
+          "condicao": "A documentação 68.0 não marca o campo como obrigatório; ausência de marcação não comprova opcionalidade (confirmar no WSDL).",
+          "estado": "desconhecido",
+          "valor": "nao"
+        },
+        "origem": {
+          "estado": "verificado",
+          "evidencias": [
+            {
+              "fonte": "src:mdapi-permissionset"
+            }
+          ],
+          "nota": "Propriedade definida pelo schema da Metadata API.",
+          "valor": "padrao_plataforma"
+        },
+        "tipo_tecnico": "PermissionSetCustomSettingAccesses[]"
+      },
+      {
+        "default": {
+          "estado": "desconhecido",
+          "forma": "nao_declarado_na_fonte"
+        },
+        "disponibilidade": {
+          "ate_versao": null,
+          "desde_versao": null,
+          "estado": "desconhecido"
+        },
+        "dominio": {
+          "contexto": "A fonte tipa como string sem lista de valores; não inventar valores.",
+          "estado": "verificado",
+          "evidencias": [
+            {
+              "fonte": "src:mdapi-permissionset"
+            }
+          ],
+          "natureza": "texto_livre"
+        },
+        "estado": "verificado",
+        "evidencias": [
+          {
+            "fonte": "src:mdapi-permissionset"
+          }
+        ],
+        "explicacao": "explicada",
+        "id": "mdt:PermissionSet.description",
+        "nome": "description",
+        "o_que_e": "Descrição do permission set.",
+        "obrigatoriedade": {
+          "condicao": "A documentação 68.0 não marca o campo como obrigatório; ausência de marcação não comprova opcionalidade (confirmar no WSDL).",
+          "estado": "desconhecido",
+          "valor": "nao"
+        },
+        "origem": {
+          "estado": "verificado",
+          "evidencias": [
+            {
+              "fonte": "src:mdapi-permissionset"
+            }
+          ],
+          "nota": "Propriedade definida pelo schema da Metadata API.",
+          "valor": "padrao_plataforma"
+        },
+        "restricoes": {
+          "estado": "verificado",
+          "evidencias": [
+            {
+              "fonte": "src:mdapi-permissionset"
+            }
+          ],
+          "valor": "Até 255 caracteres."
+        },
+        "tipo_tecnico": "string"
+      },
+      {
+        "cardinalidade": "0..n",
+        "default": {
+          "estado": "desconhecido",
+          "forma": "nao_declarado_na_fonte"
+        },
+        "disponibilidade": {
+          "ate_versao": null,
+          "desde_versao": "62.0",
+          "estado": "verificado"
+        },
+        "dominio": {
+          "estado": "verificado",
+          "evidencias": [
+            {
+              "fonte": "src:mdapi-permissionset"
+            }
+          ],
+          "natureza": "tipo_composto"
+        },
+        "estado": "verificado",
+        "estrutura_expandida": {
+          "id": "mdx:PermissionSetEmailRoutingAddressAccess",
+          "nome": "PermissionSetEmailRoutingAddressAccess",
+          "propriedades": [
+            {
+              "default": {
+                "estado": "desconhecido",
+                "forma": "nao_declarado_na_fonte"
+              },
+              "disponibilidade": {
+                "ate_versao": null,
+                "desde_versao": null,
+                "estado": "desconhecido"
+              },
+              "dominio": {
+                "estado": "verificado",
+                "evidencias": [
+                  {
+                    "fonte": "src:mdapi-permissionset"
+                  }
+                ],
+                "lista_completa": "sim",
+                "natureza": "booleano",
+                "valores": [
+                  {
+                    "valor": "true"
+                  },
+                  {
+                    "valor": "false"
+                  }
+                ]
+              },
+              "estado": "verificado",
+              "evidencias": [
+                {
+                  "fonte": "src:mdapi-permissionset"
+                }
+              ],
+              "explicacao": "explicada",
+              "id": "mdx:PermissionSetEmailRoutingAddressAccess.enabled",
+              "nome": "enabled",
+              "o_que_e": "Se o endereço de roteamento de e-mail está habilitado.",
+              "obrigatoriedade": {
+                "estado": "verificado",
+                "evidencias": [
+                  {
+                    "fonte": "src:mdapi-permissionset"
+                  }
+                ],
+                "valor": "sim"
+              },
+              "origem": {
+                "estado": "verificado",
+                "evidencias": [
+                  {
+                    "fonte": "src:mdapi-permissionset"
+                  }
+                ],
+                "nota": "Propriedade definida pelo schema da Metadata API.",
+                "valor": "padrao_plataforma"
+              },
+              "tipo_tecnico": "boolean"
+            },
+            {
+              "default": {
+                "estado": "desconhecido",
+                "forma": "nao_declarado_na_fonte"
+              },
+              "disponibilidade": {
+                "ate_versao": null,
+                "desde_versao": null,
+                "estado": "desconhecido"
+              },
+              "dominio": {
+                "contexto": "A fonte tipa como string sem lista de valores; não inventar valores.",
+                "estado": "verificado",
+                "evidencias": [
+                  {
+                    "fonte": "src:mdapi-permissionset"
+                  }
+                ],
+                "natureza": "texto_livre"
+              },
+              "estado": "verificado",
+              "evidencias": [
+                {
+                  "fonte": "src:mdapi-permissionset"
+                }
+              ],
+              "explicacao": "explicada",
+              "id": "mdx:PermissionSetEmailRoutingAddressAccess.name",
+              "nome": "name",
+              "o_que_e": "Nome do endereço de roteamento.",
+              "obrigatoriedade": {
+                "estado": "verificado",
+                "evidencias": [
+                  {
+                    "fonte": "src:mdapi-permissionset"
+                  }
+                ],
+                "valor": "sim"
+              },
+              "origem": {
+                "estado": "verificado",
+                "evidencias": [
+                  {
+                    "fonte": "src:mdapi-permissionset"
+                  }
+                ],
+                "nota": "Propriedade definida pelo schema da Metadata API.",
+                "valor": "padrao_plataforma"
+              },
+              "tipo_tecnico": "string"
+            }
+          ]
+        },
+        "estrutura_ref": "mdx:PermissionSetEmailRoutingAddressAccess",
+        "evidencias": [
+          {
+            "fonte": "src:mdapi-permissionset"
+          }
+        ],
+        "explicacao": "explicada",
+        "id": "mdt:PermissionSet.emailRoutingAddressAccesses",
+        "nome": "emailRoutingAddressAccesses",
+        "o_que_e": "Permissões de endereços de roteamento de e-mail.",
+        "obrigatoriedade": {
+          "condicao": "A documentação 68.0 não marca o campo como obrigatório; ausência de marcação não comprova opcionalidade (confirmar no WSDL).",
+          "estado": "desconhecido",
+          "valor": "nao"
+        },
+        "origem": {
+          "estado": "verificado",
+          "evidencias": [
+            {
+              "fonte": "src:mdapi-permissionset"
+            }
+          ],
+          "nota": "Propriedade definida pelo schema da Metadata API.",
+          "valor": "padrao_plataforma"
+        },
+        "tipo_tecnico": "PermissionSetEmailRoutingAddressAccess[]"
+      },
+      {
+        "cardinalidade": "0..n",
+        "default": {
+          "estado": "desconhecido",
+          "forma": "nao_declarado_na_fonte"
+        },
+        "disponibilidade": {
+          "ate_versao": null,
+          "desde_versao": "59.0",
+          "estado": "verificado"
+        },
+        "dominio": {
+          "estado": "verificado",
+          "evidencias": [
+            {
+              "fonte": "src:mdapi-permissionset"
+            }
+          ],
+          "natureza": "tipo_composto"
+        },
+        "estado": "verificado",
+        "estrutura_expandida": {
+          "id": "mdx:PermissionSetExternalCredentialPrincipalAccess",
+          "nome": "PermissionSetExternalCredentialPrincipalAccess",
+          "propriedades": [
+            {
+              "default": {
+                "estado": "desconhecido",
+                "forma": "nao_declarado_na_fonte"
+              },
+              "disponibilidade": {
+                "ate_versao": null,
+                "desde_versao": null,
+                "estado": "desconhecido"
+              },
+              "dominio": {
+                "estado": "verificado",
+                "evidencias": [
+                  {
+                    "fonte": "src:mdapi-permissionset"
+                  }
+                ],
+                "lista_completa": "sim",
+                "natureza": "booleano",
+                "valores": [
+                  {
+                    "valor": "true"
+                  },
+                  {
+                    "valor": "false"
+                  }
+                ]
+              },
+              "estado": "verificado",
+              "evidencias": [
+                {
+                  "fonte": "src:mdapi-permissionset"
+                }
+              ],
+              "explicacao": "explicada",
+              "id": "mdx:PermissionSetExternalCredentialPrincipalAccess.enabled",
+              "nome": "enabled",
+              "o_que_e": "Se o acesso ao principal da credencial externa está habilitado.",
+              "obrigatoriedade": {
+                "estado": "verificado",
+                "evidencias": [
+                  {
+                    "fonte": "src:mdapi-permissionset"
+                  }
+                ],
+                "valor": "sim"
+              },
+              "origem": {
+                "estado": "verificado",
+                "evidencias": [
+                  {
+                    "fonte": "src:mdapi-permissionset"
+                  }
+                ],
+                "nota": "Propriedade definida pelo schema da Metadata API.",
+                "valor": "padrao_plataforma"
+              },
+              "tipo_tecnico": "boolean"
+            },
+            {
+              "default": {
+                "estado": "desconhecido",
+                "forma": "nao_declarado_na_fonte"
+              },
+              "disponibilidade": {
+                "ate_versao": null,
+                "desde_versao": null,
+                "estado": "desconhecido"
+              },
+              "dominio": {
+                "contexto": "A fonte tipa como string sem lista de valores; não inventar valores.",
+                "estado": "verificado",
+                "evidencias": [
+                  {
+                    "fonte": "src:mdapi-permissionset"
+                  }
+                ],
+                "natureza": "texto_livre"
+              },
+              "estado": "verificado",
+              "evidencias": [
+                {
+                  "fonte": "src:mdapi-permissionset"
+                }
+              ],
+              "explicacao": "explicada",
+              "id": "mdx:PermissionSetExternalCredentialPrincipalAccess.externalCredentialPrincipal",
+              "nome": "externalCredentialPrincipal",
+              "o_que_e": "Credencial externa e principal, unidos por hífen.",
+              "obrigatoriedade": {
+                "estado": "verificado",
+                "evidencias": [
+                  {
+                    "fonte": "src:mdapi-permissionset"
+                  }
+                ],
+                "valor": "sim"
+              },
+              "origem": {
+                "estado": "verificado",
+                "evidencias": [
+                  {
+                    "fonte": "src:mdapi-permissionset"
+                  }
+                ],
+                "nota": "Propriedade definida pelo schema da Metadata API.",
+                "valor": "padrao_plataforma"
+              },
+              "tipo_tecnico": "string"
+            }
+          ]
+        },
+        "estrutura_ref": "mdx:PermissionSetExternalCredentialPrincipalAccess",
+        "evidencias": [
+          {
+            "fonte": "src:mdapi-permissionset"
+          }
+        ],
+        "explicacao": "explicada",
+        "id": "mdt:PermissionSet.externalCredentialPrincipalAccesses",
+        "nome": "externalCredentialPrincipalAccesses",
+        "o_que_e": "Principais de credenciais externas que os usuários podem usar em chamadas externas.",
+        "obrigatoriedade": {
+          "condicao": "A documentação 68.0 não marca o campo como obrigatório; ausência de marcação não comprova opcionalidade (confirmar no WSDL).",
+          "estado": "desconhecido",
+          "valor": "nao"
+        },
+        "origem": {
+          "estado": "verificado",
+          "evidencias": [
+            {
+              "fonte": "src:mdapi-permissionset"
+            }
+          ],
+          "nota": "Propriedade definida pelo schema da Metadata API.",
+          "valor": "padrao_plataforma"
+        },
+        "tipo_tecnico": "PermissionSetExternalCredentialPrincipalAccess[]"
+      },
+      {
+        "cardinalidade": "0..n",
+        "default": {
+          "estado": "desconhecido",
+          "forma": "nao_declarado_na_fonte"
+        },
+        "disponibilidade": {
+          "ate_versao": null,
+          "desde_versao": "27.0",
+          "estado": "verificado"
+        },
+        "dominio": {
+          "estado": "verificado",
+          "evidencias": [
+            {
+              "fonte": "src:mdapi-permissionset"
+            }
+          ],
+          "natureza": "tipo_composto"
+        },
+        "estado": "verificado",
+        "estrutura_expandida": {
+          "id": "mdx:PermissionSetExternalDataSourceAccess",
+          "nome": "PermissionSetExternalDataSourceAccess",
+          "propriedades": [
+            {
+              "default": {
+                "estado": "desconhecido",
+                "forma": "nao_declarado_na_fonte"
+              },
+              "disponibilidade": {
+                "ate_versao": null,
+                "desde_versao": null,
+                "estado": "desconhecido"
+              },
+              "dominio": {
+                "estado": "verificado",
+                "evidencias": [
+                  {
+                    "fonte": "src:mdapi-permissionset"
+                  }
+                ],
+                "lista_completa": "sim",
+                "natureza": "booleano",
+                "valores": [
+                  {
+                    "valor": "true"
+                  },
+                  {
+                    "valor": "false"
+                  }
+                ]
+              },
+              "estado": "verificado",
+              "evidencias": [
+                {
+                  "fonte": "src:mdapi-permissionset"
+                }
+              ],
+              "explicacao": "explicada",
+              "id": "mdx:PermissionSetExternalDataSourceAccess.enabled",
+              "nome": "enabled",
+              "o_que_e": "Se a fonte de dados externa está habilitada.",
+              "obrigatoriedade": {
+                "estado": "verificado",
+                "evidencias": [
+                  {
+                    "fonte": "src:mdapi-permissionset"
+                  }
+                ],
+                "valor": "sim"
+              },
+              "origem": {
+                "estado": "verificado",
+                "evidencias": [
+                  {
+                    "fonte": "src:mdapi-permissionset"
+                  }
+                ],
+                "nota": "Propriedade definida pelo schema da Metadata API.",
+                "valor": "padrao_plataforma"
+              },
+              "tipo_tecnico": "boolean"
+            },
+            {
+              "default": {
+                "estado": "desconhecido",
+                "forma": "nao_declarado_na_fonte"
+              },
+              "disponibilidade": {
+                "ate_versao": null,
+                "desde_versao": null,
+                "estado": "desconhecido"
+              },
+              "dominio": {
+                "contexto": "A fonte tipa como string sem lista de valores; não inventar valores.",
+                "estado": "verificado",
+                "evidencias": [
+                  {
+                    "fonte": "src:mdapi-permissionset"
+                  }
+                ],
+                "natureza": "texto_livre"
+              },
+              "estado": "verificado",
+              "evidencias": [
+                {
+                  "fonte": "src:mdapi-permissionset"
+                }
+              ],
+              "explicacao": "explicada",
+              "id": "mdx:PermissionSetExternalDataSourceAccess.externalDataSource",
+              "nome": "externalDataSource",
+              "o_que_e": "Nome da fonte de dados externa.",
+              "obrigatoriedade": {
+                "condicao": "A documentação 68.0 não marca o campo como obrigatório; ausência de marcação não comprova opcionalidade (confirmar no WSDL).",
+                "estado": "desconhecido",
+                "valor": "nao"
+              },
+              "origem": {
+                "estado": "verificado",
+                "evidencias": [
+                  {
+                    "fonte": "src:mdapi-permissionset"
+                  }
+                ],
+                "nota": "Propriedade definida pelo schema da Metadata API.",
+                "valor": "padrao_plataforma"
+              },
+              "tipo_tecnico": "string"
+            }
+          ]
+        },
+        "estrutura_ref": "mdx:PermissionSetExternalDataSourceAccess",
+        "evidencias": [
+          {
+            "fonte": "src:mdapi-permissionset"
+          }
+        ],
+        "explicacao": "explicada",
+        "id": "mdt:PermissionSet.externalDataSourceAccesses",
+        "nome": "externalDataSourceAccesses",
+        "o_que_e": "Fontes de dados externas com identidade por usuário.",
+        "obrigatoriedade": {
+          "condicao": "A documentação 68.0 não marca o campo como obrigatório; ausência de marcação não comprova opcionalidade (confirmar no WSDL).",
+          "estado": "desconhecido",
+          "valor": "nao"
+        },
+        "origem": {
+          "estado": "verificado",
+          "evidencias": [
+            {
+              "fonte": "src:mdapi-permissionset"
+            }
+          ],
+          "nota": "Propriedade definida pelo schema da Metadata API.",
+          "valor": "padrao_plataforma"
+        },
+        "tipo_tecnico": "PermissionSetExternalDataSourceAccess[]"
+      },
+      {
+        "cardinalidade": "0..n",
+        "default": {
+          "estado": "desconhecido",
+          "forma": "nao_declarado_na_fonte"
+        },
+        "disponibilidade": {
+          "ate_versao": null,
+          "desde_versao": "23.0",
+          "estado": "verificado"
+        },
+        "dominio": {
+          "estado": "verificado",
+          "evidencias": [
+            {
+              "fonte": "src:mdapi-permissionset"
+            }
+          ],
+          "natureza": "tipo_composto"
+        },
+        "estado": "verificado",
+        "estrutura_expandida": {
+          "id": "mdx:PermissionSetFieldPermissions",
+          "nome": "PermissionSetFieldPermissions",
+          "propriedades": [
+            {
+              "default": {
+                "estado": "desconhecido",
+                "forma": "nao_declarado_na_fonte"
+              },
+              "disponibilidade": {
+                "ate_versao": null,
+                "desde_versao": null,
+                "estado": "desconhecido"
+              },
+              "dominio": {
+                "estado": "verificado",
+                "evidencias": [
+                  {
+                    "fonte": "src:mdapi-permissionset"
+                  }
+                ],
+                "lista_completa": "sim",
+                "natureza": "booleano",
+                "valores": [
+                  {
+                    "valor": "true"
+                  },
+                  {
+                    "valor": "false"
+                  }
+                ]
+              },
+              "estado": "verificado",
+              "evidencias": [
+                {
+                  "fonte": "src:mdapi-permissionset"
+                }
+              ],
+              "explicacao": "explicada",
+              "id": "mdx:PermissionSetFieldPermissions.editable",
+              "nome": "editable",
+              "o_que_e": "Se os usuários podem editar o campo.",
+              "obrigatoriedade": {
+                "estado": "verificado",
+                "evidencias": [
+                  {
+                    "fonte": "src:mdapi-permissionset"
+                  }
+                ],
+                "valor": "sim"
+              },
+              "origem": {
+                "estado": "verificado",
+                "evidencias": [
+                  {
+                    "fonte": "src:mdapi-permissionset"
+                  }
+                ],
+                "nota": "Propriedade definida pelo schema da Metadata API.",
+                "valor": "padrao_plataforma"
+              },
+              "tipo_tecnico": "boolean"
+            },
+            {
+              "default": {
+                "estado": "desconhecido",
+                "forma": "nao_declarado_na_fonte"
+              },
+              "disponibilidade": {
+                "ate_versao": null,
+                "desde_versao": null,
+                "estado": "desconhecido"
+              },
+              "dominio": {
+                "contexto": "A fonte tipa como string sem lista de valores; não inventar valores.",
+                "estado": "verificado",
+                "evidencias": [
+                  {
+                    "fonte": "src:mdapi-permissionset"
+                  }
+                ],
+                "natureza": "texto_livre"
+              },
+              "estado": "verificado",
+              "evidencias": [
+                {
+                  "fonte": "src:mdapi-permissionset"
+                }
+              ],
+              "explicacao": "explicada",
+              "id": "mdx:PermissionSetFieldPermissions.field",
+              "nome": "field",
+              "o_que_e": "Nome API do campo, no formato Objeto.Campo.",
+              "obrigatoriedade": {
+                "estado": "verificado",
+                "evidencias": [
+                  {
+                    "fonte": "src:mdapi-permissionset"
+                  }
+                ],
+                "valor": "sim"
+              },
+              "origem": {
+                "estado": "verificado",
+                "evidencias": [
+                  {
+                    "fonte": "src:mdapi-permissionset"
+                  }
+                ],
+                "nota": "Propriedade definida pelo schema da Metadata API.",
+                "valor": "padrao_plataforma"
+              },
+              "tipo_tecnico": "string"
+            },
+            {
+              "default": {
+                "estado": "desconhecido",
+                "forma": "nao_declarado_na_fonte"
+              },
+              "disponibilidade": {
+                "ate_versao": null,
+                "desde_versao": null,
+                "estado": "desconhecido"
+              },
+              "dominio": {
+                "estado": "verificado",
+                "evidencias": [
+                  {
+                    "fonte": "src:mdapi-permissionset"
+                  }
+                ],
+                "lista_completa": "sim",
+                "natureza": "booleano",
+                "valores": [
+                  {
+                    "valor": "true"
+                  },
+                  {
+                    "valor": "false"
+                  }
+                ]
+              },
+              "estado": "verificado",
+              "evidencias": [
+                {
+                  "fonte": "src:mdapi-permissionset"
+                }
+              ],
+              "explicacao": "explicada",
+              "id": "mdx:PermissionSetFieldPermissions.readable",
+              "nome": "readable",
+              "o_que_e": "Se os usuários podem ler o campo.",
+              "obrigatoriedade": {
+                "condicao": "A documentação 68.0 não marca o campo como obrigatório; ausência de marcação não comprova opcionalidade (confirmar no WSDL).",
+                "estado": "desconhecido",
+                "valor": "nao"
+              },
+              "origem": {
+                "estado": "verificado",
+                "evidencias": [
+                  {
+                    "fonte": "src:mdapi-permissionset"
+                  }
+                ],
+                "nota": "Propriedade definida pelo schema da Metadata API.",
+                "valor": "padrao_plataforma"
+              },
+              "tipo_tecnico": "boolean"
+            }
+          ]
+        },
+        "estrutura_ref": "mdx:PermissionSetFieldPermissions",
+        "evidencias": [
+          {
+            "fonte": "src:mdapi-permissionset"
+          }
+        ],
+        "explicacao": "explicada",
+        "id": "mdt:PermissionSet.fieldPermissions",
+        "nome": "fieldPermissions",
+        "o_que_e": "Campos que os usuários podem ler ou editar.",
+        "obrigatoriedade": {
+          "condicao": "A documentação 68.0 não marca o campo como obrigatório; ausência de marcação não comprova opcionalidade (confirmar no WSDL).",
+          "estado": "desconhecido",
+          "valor": "nao"
+        },
+        "origem": {
+          "estado": "verificado",
+          "evidencias": [
+            {
+              "fonte": "src:mdapi-permissionset"
+            }
+          ],
+          "nota": "Propriedade definida pelo schema da Metadata API.",
+          "valor": "padrao_plataforma"
+        },
+        "tipo_tecnico": "PermissionSetFieldPermissions[]"
+      },
+      {
+        "cardinalidade": "0..n",
+        "default": {
+          "estado": "desconhecido",
+          "forma": "nao_declarado_na_fonte"
+        },
+        "disponibilidade": {
+          "ate_versao": null,
+          "desde_versao": "47.0",
+          "estado": "verificado"
+        },
+        "dominio": {
+          "estado": "verificado",
+          "evidencias": [
+            {
+              "fonte": "src:mdapi-permissionset"
+            }
+          ],
+          "natureza": "tipo_composto"
+        },
+        "estado": "verificado",
+        "estrutura_expandida": {
+          "id": "mdx:PermissionSetFlowAccess",
+          "nome": "PermissionSetFlowAccess",
+          "propriedades": [
+            {
+              "default": {
+                "estado": "verificado",
+                "evidencias": [
+                  {
+                    "fonte": "src:mdapi-permissionset"
+                  }
+                ],
+                "forma": "false",
+                "nota": "A página declara default false.",
+                "valor": false
+              },
+              "disponibilidade": {
+                "ate_versao": null,
+                "desde_versao": null,
+                "estado": "desconhecido"
+              },
+              "dominio": {
+                "estado": "verificado",
+                "evidencias": [
+                  {
+                    "fonte": "src:mdapi-permissionset"
+                  }
+                ],
+                "lista_completa": "sim",
+                "natureza": "booleano",
+                "valores": [
+                  {
+                    "valor": "true"
+                  },
+                  {
+                    "valor": "false"
+                  }
+                ]
+              },
+              "estado": "verificado",
+              "evidencias": [
+                {
+                  "fonte": "src:mdapi-permissionset"
+                }
+              ],
+              "explicacao": "explicada",
+              "id": "mdx:PermissionSetFlowAccess.enabled",
+              "nome": "enabled",
+              "o_que_e": "Se os usuários podem acessar o flow.",
+              "obrigatoriedade": {
+                "estado": "verificado",
+                "evidencias": [
+                  {
+                    "fonte": "src:mdapi-permissionset"
+                  }
+                ],
+                "valor": "sim"
+              },
+              "origem": {
+                "estado": "verificado",
+                "evidencias": [
+                  {
+                    "fonte": "src:mdapi-permissionset"
+                  }
+                ],
+                "nota": "Propriedade definida pelo schema da Metadata API.",
+                "valor": "padrao_plataforma"
+              },
+              "tipo_tecnico": "boolean"
+            },
+            {
+              "default": {
+                "estado": "desconhecido",
+                "forma": "nao_declarado_na_fonte"
+              },
+              "disponibilidade": {
+                "ate_versao": null,
+                "desde_versao": null,
+                "estado": "desconhecido"
+              },
+              "dominio": {
+                "contexto": "A fonte tipa como string sem lista de valores; não inventar valores.",
+                "estado": "verificado",
+                "evidencias": [
+                  {
+                    "fonte": "src:mdapi-permissionset"
+                  }
+                ],
+                "natureza": "texto_livre"
+              },
+              "estado": "verificado",
+              "evidencias": [
+                {
+                  "fonte": "src:mdapi-permissionset"
+                }
+              ],
+              "explicacao": "explicada",
+              "id": "mdx:PermissionSetFlowAccess.flow",
+              "nome": "flow",
+              "o_que_e": "Nome do flow.",
+              "obrigatoriedade": {
+                "estado": "verificado",
+                "evidencias": [
+                  {
+                    "fonte": "src:mdapi-permissionset"
+                  }
+                ],
+                "valor": "sim"
+              },
+              "origem": {
+                "estado": "verificado",
+                "evidencias": [
+                  {
+                    "fonte": "src:mdapi-permissionset"
+                  }
+                ],
+                "nota": "Propriedade definida pelo schema da Metadata API.",
+                "valor": "padrao_plataforma"
+              },
+              "tipo_tecnico": "string"
+            }
+          ]
+        },
+        "estrutura_ref": "mdx:PermissionSetFlowAccess",
+        "evidencias": [
+          {
+            "fonte": "src:mdapi-permissionset"
+          }
+        ],
+        "explicacao": "explicada",
+        "id": "mdt:PermissionSet.flowAccesses",
+        "nome": "flowAccesses",
+        "o_que_e": "Flows que os usuários podem acessar.",
+        "obrigatoriedade": {
+          "condicao": "A documentação 68.0 não marca o campo como obrigatório; ausência de marcação não comprova opcionalidade (confirmar no WSDL).",
+          "estado": "desconhecido",
+          "valor": "nao"
+        },
+        "origem": {
+          "estado": "verificado",
+          "evidencias": [
+            {
+              "fonte": "src:mdapi-permissionset"
+            }
+          ],
+          "nota": "Propriedade definida pelo schema da Metadata API.",
+          "valor": "padrao_plataforma"
+        },
+        "tipo_tecnico": "PermissionSetFlowAccess[]"
+      },
+      {
+        "cardinalidade": "0..n",
+        "default": {
+          "estado": "desconhecido",
+          "forma": "nao_declarado_na_fonte"
+        },
+        "disponibilidade": {
+          "ate_versao": null,
+          "desde_versao": "66.0",
+          "estado": "verificado"
+        },
+        "dominio": {
+          "estado": "verificado",
+          "evidencias": [
+            {
+              "fonte": "src:mdapi-permissionset"
+            }
+          ],
+          "natureza": "tipo_composto"
+        },
+        "estado": "verificado",
+        "estrutura_expandida": {
+          "id": "mdx:PermissionSetGenComputingSummaryDefAccess",
+          "nome": "PermissionSetGenComputingSummaryDefAccess",
+          "propriedades": [
+            {
+              "default": {
+                "estado": "desconhecido",
+                "forma": "nao_declarado_na_fonte"
+              },
+              "disponibilidade": {
+                "ate_versao": null,
+                "desde_versao": null,
+                "estado": "desconhecido"
+              },
+              "dominio": {
+                "contexto": "A fonte tipa como string sem lista de valores; não inventar valores.",
+                "estado": "verificado",
+                "evidencias": [
+                  {
+                    "fonte": "src:mdapi-permissionset"
+                  }
+                ],
+                "natureza": "texto_livre"
+              },
+              "estado": "verificado",
+              "evidencias": [
+                {
+                  "fonte": "src:mdapi-permissionset"
+                }
+              ],
+              "explicacao": "explicada",
+              "id": "mdx:PermissionSetGenComputingSummaryDefAccess.configName",
+              "nome": "configName",
+              "o_que_e": "Nome da configuração de resumo aprimorado.",
+              "obrigatoriedade": {
+                "estado": "verificado",
+                "evidencias": [
+                  {
+                    "fonte": "src:mdapi-permissionset"
+                  }
+                ],
+                "valor": "sim"
+              },
+              "origem": {
+                "estado": "verificado",
+                "evidencias": [
+                  {
+                    "fonte": "src:mdapi-permissionset"
+                  }
+                ],
+                "nota": "Propriedade definida pelo schema da Metadata API.",
+                "valor": "padrao_plataforma"
+              },
+              "tipo_tecnico": "string"
+            },
+            {
+              "default": {
+                "estado": "desconhecido",
+                "forma": "nao_declarado_na_fonte"
+              },
+              "disponibilidade": {
+                "ate_versao": null,
+                "desde_versao": null,
+                "estado": "desconhecido"
+              },
+              "dominio": {
+                "estado": "verificado",
+                "evidencias": [
+                  {
+                    "fonte": "src:mdapi-permissionset"
+                  }
+                ],
+                "lista_completa": "sim",
+                "natureza": "booleano",
+                "valores": [
+                  {
+                    "valor": "true"
+                  },
+                  {
+                    "valor": "false"
+                  }
+                ]
+              },
+              "estado": "verificado",
+              "evidencias": [
+                {
+                  "fonte": "src:mdapi-permissionset"
+                }
+              ],
+              "explicacao": "explicada",
+              "id": "mdx:PermissionSetGenComputingSummaryDefAccess.enabled",
+              "nome": "enabled",
+              "o_que_e": "Se o acesso à configuração está habilitado.",
+              "obrigatoriedade": {
+                "estado": "verificado",
+                "evidencias": [
+                  {
+                    "fonte": "src:mdapi-permissionset"
+                  }
+                ],
+                "valor": "sim"
+              },
+              "origem": {
+                "estado": "verificado",
+                "evidencias": [
+                  {
+                    "fonte": "src:mdapi-permissionset"
+                  }
+                ],
+                "nota": "Propriedade definida pelo schema da Metadata API.",
+                "valor": "padrao_plataforma"
+              },
+              "tipo_tecnico": "boolean"
+            }
+          ]
+        },
+        "estrutura_ref": "mdx:PermissionSetGenComputingSummaryDefAccess",
+        "evidencias": [
+          {
+            "fonte": "src:mdapi-permissionset"
+          }
+        ],
+        "explicacao": "explicada",
+        "id": "mdt:PermissionSet.genComputingSummaryDefAccesses",
+        "nome": "genComputingSummaryDefAccesses",
+        "o_que_e": "Acesso a configurações de resumo aprimorado.",
+        "obrigatoriedade": {
+          "condicao": "A documentação 68.0 não marca o campo como obrigatório; ausência de marcação não comprova opcionalidade (confirmar no WSDL).",
+          "estado": "desconhecido",
+          "valor": "nao"
+        },
+        "origem": {
+          "estado": "verificado",
+          "evidencias": [
+            {
+              "fonte": "src:mdapi-permissionset"
+            }
+          ],
+          "nota": "Propriedade definida pelo schema da Metadata API.",
+          "valor": "padrao_plataforma"
+        },
+        "tipo_tecnico": "PermissionSetGenComputingSummaryDefAccess[]"
+      },
+      {
+        "default": {
+          "estado": "desconhecido",
+          "forma": "nao_declarado_na_fonte"
+        },
+        "disponibilidade": {
+          "ate_versao": null,
+          "desde_versao": "37.0",
+          "estado": "verificado"
+        },
+        "dominio": {
+          "estado": "verificado",
+          "evidencias": [
+            {
+              "fonte": "src:mdapi-permissionset"
+            }
+          ],
+          "lista_completa": "sim",
+          "natureza": "booleano",
+          "valores": [
+            {
+              "valor": "true"
+            },
+            {
+              "valor": "false"
+            }
+          ]
+        },
+        "estado": "verificado",
+        "evidencias": [
+          {
+            "fonte": "src:mdapi-permissionset"
+          }
+        ],
+        "explicacao": "explicada",
+        "id": "mdt:PermissionSet.hasActivationRequired",
+        "nome": "hasActivationRequired",
+        "o_que_e": "Indica se o permission set só vale com uma sessão ativa associada.",
+        "obrigatoriedade": {
+          "condicao": "A documentação 68.0 não marca o campo como obrigatório; ausência de marcação não comprova opcionalidade (confirmar no WSDL).",
+          "estado": "desconhecido",
+          "valor": "nao"
+        },
+        "origem": {
+          "estado": "verificado",
+          "evidencias": [
+            {
+              "fonte": "src:mdapi-permissionset"
+            }
+          ],
+          "nota": "Propriedade definida pelo schema da Metadata API.",
+          "valor": "padrao_plataforma"
+        },
+        "rotulo_didatico": "Exige ativação de sessão",
+        "tipo_tecnico": "boolean"
+      },
+      {
+        "default": {
+          "estado": "desconhecido",
+          "forma": "nao_declarado_na_fonte"
+        },
+        "disponibilidade": {
+          "ate_versao": null,
+          "desde_versao": null,
+          "estado": "desconhecido"
+        },
+        "dominio": {
+          "contexto": "A fonte tipa como string sem lista de valores; não inventar valores.",
+          "estado": "verificado",
+          "evidencias": [
+            {
+              "fonte": "src:mdapi-permissionset"
+            }
+          ],
+          "natureza": "texto_livre"
+        },
+        "estado": "verificado",
+        "evidencias": [
+          {
+            "fonte": "src:mdapi-permissionset"
+          }
+        ],
+        "exemplo": "<label>Gestão de Contratos</label>",
+        "explicacao": "explicada",
+        "id": "mdt:PermissionSet.label",
+        "nome": "label",
+        "o_que_e": "Nome visível do permission set.",
+        "obrigatoriedade": {
+          "estado": "verificado",
+          "evidencias": [
+            {
+              "fonte": "src:mdapi-permissionset"
+            }
+          ],
+          "valor": "sim"
+        },
+        "origem": {
+          "estado": "verificado",
+          "evidencias": [
+            {
+              "fonte": "src:mdapi-permissionset"
+            }
+          ],
+          "nota": "Propriedade definida pelo schema da Metadata API.",
+          "valor": "padrao_plataforma"
+        },
+        "restricoes": {
+          "estado": "verificado",
+          "evidencias": [
+            {
+              "fonte": "src:mdapi-permissionset"
+            }
+          ],
+          "valor": "Até 80 caracteres."
+        },
+        "rotulo_didatico": "Nome visível",
+        "tipo_tecnico": "string"
+      },
+      {
+        "default": {
+          "estado": "desconhecido",
+          "forma": "nao_declarado_na_fonte"
+        },
+        "disponibilidade": {
+          "ate_versao": null,
+          "desde_versao": "38.0",
+          "estado": "verificado"
+        },
+        "dominio": {
+          "contexto": "A fonte tipa como string sem lista de valores; não inventar valores.",
+          "estado": "verificado",
+          "evidencias": [
+            {
+              "fonte": "src:mdapi-permissionset"
+            }
+          ],
+          "natureza": "texto_livre"
+        },
+        "estado": "verificado",
+        "evidencias": [
+          {
+            "fonte": "src:mdapi-permissionset"
+          }
+        ],
+        "explicacao": "explicada",
+        "id": "mdt:PermissionSet.license",
+        "nome": "license",
+        "o_que_e": "Licença de permission set ou de usuário associada; substitui userLicense.",
+        "obrigatoriedade": {
+          "condicao": "A documentação 68.0 não marca o campo como obrigatório; ausência de marcação não comprova opcionalidade (confirmar no WSDL).",
+          "estado": "desconhecido",
+          "valor": "nao"
+        },
+        "origem": {
+          "estado": "verificado",
+          "evidencias": [
+            {
+              "fonte": "src:mdapi-permissionset"
+            }
+          ],
+          "nota": "Propriedade definida pelo schema da Metadata API.",
+          "valor": "padrao_plataforma"
+        },
+        "tipo_tecnico": "string"
+      },
+      {
+        "cardinalidade": "0..n",
+        "default": {
+          "estado": "desconhecido",
+          "forma": "nao_declarado_na_fonte"
+        },
+        "disponibilidade": {
+          "ate_versao": null,
+          "desde_versao": "23.0",
+          "estado": "verificado"
+        },
+        "dominio": {
+          "estado": "verificado",
+          "evidencias": [
+            {
+              "fonte": "src:mdapi-permissionset"
+            }
+          ],
+          "natureza": "tipo_composto"
+        },
+        "estado": "verificado",
+        "estrutura_expandida": {
+          "id": "mdx:PermissionSetObjectPermissions",
+          "nome": "PermissionSetObjectPermissions",
+          "propriedades": [
+            {
+              "default": {
+                "estado": "desconhecido",
+                "forma": "nao_declarado_na_fonte"
+              },
+              "disponibilidade": {
+                "ate_versao": null,
+                "desde_versao": null,
+                "estado": "desconhecido"
+              },
+              "dominio": {
+                "estado": "verificado",
+                "evidencias": [
+                  {
+                    "fonte": "src:mdapi-permissionset"
+                  }
+                ],
+                "lista_completa": "sim",
+                "natureza": "booleano",
+                "valores": [
+                  {
+                    "valor": "true"
+                  },
+                  {
+                    "valor": "false"
+                  }
+                ]
+              },
+              "estado": "verificado",
+              "evidencias": [
+                {
+                  "fonte": "src:mdapi-permissionset"
+                }
+              ],
+              "explicacao": "explicada",
+              "id": "mdx:PermissionSetObjectPermissions.allowCreate",
+              "nome": "allowCreate",
+              "o_que_e": "Permite criar registros do objeto.",
+              "obrigatoriedade": {
+                "estado": "verificado",
+                "evidencias": [
+                  {
+                    "fonte": "src:mdapi-permissionset"
+                  }
+                ],
+                "valor": "sim"
+              },
+              "origem": {
+                "estado": "verificado",
+                "evidencias": [
+                  {
+                    "fonte": "src:mdapi-permissionset"
+                  }
+                ],
+                "nota": "Propriedade definida pelo schema da Metadata API.",
+                "valor": "padrao_plataforma"
+              },
+              "tipo_tecnico": "boolean"
+            },
+            {
+              "default": {
+                "estado": "desconhecido",
+                "forma": "nao_declarado_na_fonte"
+              },
+              "disponibilidade": {
+                "ate_versao": null,
+                "desde_versao": null,
+                "estado": "desconhecido"
+              },
+              "dominio": {
+                "estado": "verificado",
+                "evidencias": [
+                  {
+                    "fonte": "src:mdapi-permissionset"
+                  }
+                ],
+                "lista_completa": "sim",
+                "natureza": "booleano",
+                "valores": [
+                  {
+                    "valor": "true"
+                  },
+                  {
+                    "valor": "false"
+                  }
+                ]
+              },
+              "estado": "verificado",
+              "evidencias": [
+                {
+                  "fonte": "src:mdapi-permissionset"
+                }
+              ],
+              "explicacao": "explicada",
+              "id": "mdx:PermissionSetObjectPermissions.allowDelete",
+              "nome": "allowDelete",
+              "o_que_e": "Permite excluir registros do objeto.",
+              "obrigatoriedade": {
+                "estado": "verificado",
+                "evidencias": [
+                  {
+                    "fonte": "src:mdapi-permissionset"
+                  }
+                ],
+                "valor": "sim"
+              },
+              "origem": {
+                "estado": "verificado",
+                "evidencias": [
+                  {
+                    "fonte": "src:mdapi-permissionset"
+                  }
+                ],
+                "nota": "Propriedade definida pelo schema da Metadata API.",
+                "valor": "padrao_plataforma"
+              },
+              "tipo_tecnico": "boolean"
+            },
+            {
+              "default": {
+                "estado": "desconhecido",
+                "forma": "nao_declarado_na_fonte"
+              },
+              "disponibilidade": {
+                "ate_versao": null,
+                "desde_versao": null,
+                "estado": "desconhecido"
+              },
+              "dominio": {
+                "estado": "verificado",
+                "evidencias": [
+                  {
+                    "fonte": "src:mdapi-permissionset"
+                  }
+                ],
+                "lista_completa": "sim",
+                "natureza": "booleano",
+                "valores": [
+                  {
+                    "valor": "true"
+                  },
+                  {
+                    "valor": "false"
+                  }
+                ]
+              },
+              "estado": "verificado",
+              "evidencias": [
+                {
+                  "fonte": "src:mdapi-permissionset"
+                }
+              ],
+              "explicacao": "explicada",
+              "id": "mdx:PermissionSetObjectPermissions.allowEdit",
+              "nome": "allowEdit",
+              "o_que_e": "Permite editar registros do objeto.",
+              "obrigatoriedade": {
+                "estado": "verificado",
+                "evidencias": [
+                  {
+                    "fonte": "src:mdapi-permissionset"
+                  }
+                ],
+                "valor": "sim"
+              },
+              "origem": {
+                "estado": "verificado",
+                "evidencias": [
+                  {
+                    "fonte": "src:mdapi-permissionset"
+                  }
+                ],
+                "nota": "Propriedade definida pelo schema da Metadata API.",
+                "valor": "padrao_plataforma"
+              },
+              "tipo_tecnico": "boolean"
+            },
+            {
+              "default": {
+                "estado": "desconhecido",
+                "forma": "nao_declarado_na_fonte"
+              },
+              "disponibilidade": {
+                "ate_versao": null,
+                "desde_versao": null,
+                "estado": "desconhecido"
+              },
+              "dominio": {
+                "estado": "verificado",
+                "evidencias": [
+                  {
+                    "fonte": "src:mdapi-permissionset"
+                  }
+                ],
+                "lista_completa": "sim",
+                "natureza": "booleano",
+                "valores": [
+                  {
+                    "valor": "true"
+                  },
+                  {
+                    "valor": "false"
+                  }
+                ]
+              },
+              "estado": "verificado",
+              "evidencias": [
+                {
+                  "fonte": "src:mdapi-permissionset"
+                }
+              ],
+              "explicacao": "explicada",
+              "id": "mdx:PermissionSetObjectPermissions.allowRead",
+              "nome": "allowRead",
+              "o_que_e": "Permite ver registros do objeto.",
+              "obrigatoriedade": {
+                "estado": "verificado",
+                "evidencias": [
+                  {
+                    "fonte": "src:mdapi-permissionset"
+                  }
+                ],
+                "valor": "sim"
+              },
+              "origem": {
+                "estado": "verificado",
+                "evidencias": [
+                  {
+                    "fonte": "src:mdapi-permissionset"
+                  }
+                ],
+                "nota": "Propriedade definida pelo schema da Metadata API.",
+                "valor": "padrao_plataforma"
+              },
+              "tipo_tecnico": "boolean"
+            },
+            {
+              "default": {
+                "estado": "desconhecido",
+                "forma": "nao_declarado_na_fonte"
+              },
+              "disponibilidade": {
+                "ate_versao": null,
+                "desde_versao": null,
+                "estado": "desconhecido"
+              },
+              "dominio": {
+                "estado": "verificado",
+                "evidencias": [
+                  {
+                    "fonte": "src:mdapi-permissionset"
+                  }
+                ],
+                "lista_completa": "sim",
+                "natureza": "booleano",
+                "valores": [
+                  {
+                    "valor": "true"
+                  },
+                  {
+                    "valor": "false"
+                  }
+                ]
+              },
+              "estado": "verificado",
+              "evidencias": [
+                {
+                  "fonte": "src:mdapi-permissionset"
+                }
+              ],
+              "explicacao": "explicada",
+              "id": "mdx:PermissionSetObjectPermissions.modifyAllRecords",
+              "nome": "modifyAllRecords",
+              "o_que_e": "Permite ver, editar e excluir todos os registros, ignorando o compartilhamento.",
+              "obrigatoriedade": {
+                "estado": "verificado",
+                "evidencias": [
+                  {
+                    "fonte": "src:mdapi-permissionset"
+                  }
+                ],
+                "valor": "sim"
+              },
+              "origem": {
+                "estado": "verificado",
+                "evidencias": [
+                  {
+                    "fonte": "src:mdapi-permissionset"
+                  }
+                ],
+                "nota": "Propriedade definida pelo schema da Metadata API.",
+                "valor": "padrao_plataforma"
+              },
+              "tipo_tecnico": "boolean"
+            },
+            {
+              "default": {
+                "estado": "desconhecido",
+                "forma": "nao_declarado_na_fonte"
+              },
+              "disponibilidade": {
+                "ate_versao": null,
+                "desde_versao": null,
+                "estado": "desconhecido"
+              },
+              "dominio": {
+                "contexto": "A fonte tipa como string sem lista de valores; não inventar valores.",
+                "estado": "verificado",
+                "evidencias": [
+                  {
+                    "fonte": "src:mdapi-permissionset"
+                  }
+                ],
+                "natureza": "texto_livre"
+              },
+              "estado": "verificado",
+              "evidencias": [
+                {
+                  "fonte": "src:mdapi-permissionset"
+                }
+              ],
+              "explicacao": "explicada",
+              "id": "mdx:PermissionSetObjectPermissions.object",
+              "nome": "object",
+              "o_que_e": "Nome API do objeto.",
+              "obrigatoriedade": {
+                "estado": "verificado",
+                "evidencias": [
+                  {
+                    "fonte": "src:mdapi-permissionset"
+                  }
+                ],
+                "valor": "sim"
+              },
+              "origem": {
+                "estado": "verificado",
+                "evidencias": [
+                  {
+                    "fonte": "src:mdapi-permissionset"
+                  }
+                ],
+                "nota": "Propriedade definida pelo schema da Metadata API.",
+                "valor": "padrao_plataforma"
+              },
+              "tipo_tecnico": "string"
+            },
+            {
+              "default": {
+                "estado": "desconhecido",
+                "forma": "nao_declarado_na_fonte"
+              },
+              "disponibilidade": {
+                "ate_versao": null,
+                "desde_versao": "63.0",
+                "estado": "verificado"
+              },
+              "dominio": {
+                "contexto": "A fonte tipa como string sem lista de valores; não inventar valores.",
+                "estado": "verificado",
+                "evidencias": [
+                  {
+                    "fonte": "src:mdapi-permissionset"
+                  }
+                ],
+                "natureza": "texto_livre"
+              },
+              "estado": "verificado",
+              "evidencias": [
+                {
+                  "fonte": "src:mdapi-permissionset"
+                }
+              ],
+              "explicacao": "explicada",
+              "id": "mdx:PermissionSetObjectPermissions.viewAllFields",
+              "nome": "viewAllFields",
+              "notas": [
+                "A página exibe o tipo como string; conferir no WSDL."
+              ],
+              "o_que_e": "Permite ver todos os campos do objeto.",
+              "obrigatoriedade": {
+                "condicao": "A documentação 68.0 não marca o campo como obrigatório; ausência de marcação não comprova opcionalidade (confirmar no WSDL).",
+                "estado": "desconhecido",
+                "valor": "nao"
+              },
+              "origem": {
+                "estado": "verificado",
+                "evidencias": [
+                  {
+                    "fonte": "src:mdapi-permissionset"
+                  }
+                ],
+                "nota": "Propriedade definida pelo schema da Metadata API.",
+                "valor": "padrao_plataforma"
+              },
+              "tipo_tecnico": "string"
+            },
+            {
+              "default": {
+                "estado": "desconhecido",
+                "forma": "nao_declarado_na_fonte"
+              },
+              "disponibilidade": {
+                "ate_versao": null,
+                "desde_versao": null,
+                "estado": "desconhecido"
+              },
+              "dominio": {
+                "estado": "verificado",
+                "evidencias": [
+                  {
+                    "fonte": "src:mdapi-permissionset"
+                  }
+                ],
+                "lista_completa": "sim",
+                "natureza": "booleano",
+                "valores": [
+                  {
+                    "valor": "true"
+                  },
+                  {
+                    "valor": "false"
+                  }
+                ]
+              },
+              "estado": "verificado",
+              "evidencias": [
+                {
+                  "fonte": "src:mdapi-permissionset"
+                }
+              ],
+              "explicacao": "explicada",
+              "id": "mdx:PermissionSetObjectPermissions.viewAllRecords",
+              "nome": "viewAllRecords",
+              "o_que_e": "Permite ver todos os registros, ignorando o compartilhamento.",
+              "obrigatoriedade": {
+                "estado": "verificado",
+                "evidencias": [
+                  {
+                    "fonte": "src:mdapi-permissionset"
+                  }
+                ],
+                "valor": "sim"
+              },
+              "origem": {
+                "estado": "verificado",
+                "evidencias": [
+                  {
+                    "fonte": "src:mdapi-permissionset"
+                  }
+                ],
+                "nota": "Propriedade definida pelo schema da Metadata API.",
+                "valor": "padrao_plataforma"
+              },
+              "tipo_tecnico": "boolean"
+            }
+          ]
+        },
+        "estrutura_ref": "mdx:PermissionSetObjectPermissions",
+        "evidencias": [
+          {
+            "fonte": "src:mdapi-permissionset"
+          }
+        ],
+        "explicacao": "explicada",
+        "id": "mdt:PermissionSet.objectPermissions",
+        "nome": "objectPermissions",
+        "o_que_e": "Permissões de criar, ler, editar e excluir por objeto.",
+        "obrigatoriedade": {
+          "condicao": "A documentação 68.0 não marca o campo como obrigatório; ausência de marcação não comprova opcionalidade (confirmar no WSDL).",
+          "estado": "desconhecido",
+          "valor": "nao"
+        },
+        "origem": {
+          "estado": "verificado",
+          "evidencias": [
+            {
+              "fonte": "src:mdapi-permissionset"
+            }
+          ],
+          "nota": "Propriedade definida pelo schema da Metadata API.",
+          "valor": "padrao_plataforma"
+        },
+        "tipo_tecnico": "PermissionSetObjectPermissions[]"
+      },
+      {
+        "cardinalidade": "0..n",
+        "default": {
+          "estado": "desconhecido",
+          "forma": "nao_declarado_na_fonte"
+        },
+        "disponibilidade": {
+          "ate_versao": null,
+          "desde_versao": "23.0",
+          "estado": "verificado"
+        },
+        "dominio": {
+          "estado": "verificado",
+          "evidencias": [
+            {
+              "fonte": "src:mdapi-permissionset"
+            }
+          ],
+          "natureza": "tipo_composto"
+        },
+        "estado": "verificado",
+        "estrutura_expandida": {
+          "id": "mdx:PermissionSetApexPageAccess",
+          "nome": "PermissionSetApexPageAccess",
+          "propriedades": [
+            {
+              "default": {
+                "estado": "desconhecido",
+                "forma": "nao_declarado_na_fonte"
+              },
+              "disponibilidade": {
+                "ate_versao": null,
+                "desde_versao": null,
+                "estado": "desconhecido"
+              },
+              "dominio": {
+                "contexto": "A fonte tipa como string sem lista de valores; não inventar valores.",
+                "estado": "verificado",
+                "evidencias": [
+                  {
+                    "fonte": "src:mdapi-permissionset"
+                  }
+                ],
+                "natureza": "texto_livre"
+              },
+              "estado": "verificado",
+              "evidencias": [
+                {
+                  "fonte": "src:mdapi-permissionset"
+                }
+              ],
+              "explicacao": "explicada",
+              "id": "mdx:PermissionSetApexPageAccess.apexPage",
+              "nome": "apexPage",
+              "o_que_e": "Nome da página Visualforce.",
+              "obrigatoriedade": {
+                "estado": "verificado",
+                "evidencias": [
+                  {
+                    "fonte": "src:mdapi-permissionset"
+                  }
+                ],
+                "valor": "sim"
+              },
+              "origem": {
+                "estado": "verificado",
+                "evidencias": [
+                  {
+                    "fonte": "src:mdapi-permissionset"
+                  }
+                ],
+                "nota": "Propriedade definida pelo schema da Metadata API.",
+                "valor": "padrao_plataforma"
+              },
+              "tipo_tecnico": "string"
+            },
+            {
+              "default": {
+                "estado": "desconhecido",
+                "forma": "nao_declarado_na_fonte"
+              },
+              "disponibilidade": {
+                "ate_versao": null,
+                "desde_versao": null,
+                "estado": "desconhecido"
+              },
+              "dominio": {
+                "estado": "verificado",
+                "evidencias": [
+                  {
+                    "fonte": "src:mdapi-permissionset"
+                  }
+                ],
+                "lista_completa": "sim",
+                "natureza": "booleano",
+                "valores": [
+                  {
+                    "valor": "true"
+                  },
+                  {
+                    "valor": "false"
+                  }
+                ]
+              },
+              "estado": "verificado",
+              "evidencias": [
+                {
+                  "fonte": "src:mdapi-permissionset"
+                }
+              ],
+              "explicacao": "explicada",
+              "id": "mdx:PermissionSetApexPageAccess.enabled",
+              "nome": "enabled",
+              "o_que_e": "Se os usuários podem executar a página.",
+              "obrigatoriedade": {
+                "estado": "verificado",
+                "evidencias": [
+                  {
+                    "fonte": "src:mdapi-permissionset"
+                  }
+                ],
+                "valor": "sim"
+              },
+              "origem": {
+                "estado": "verificado",
+                "evidencias": [
+                  {
+                    "fonte": "src:mdapi-permissionset"
+                  }
+                ],
+                "nota": "Propriedade definida pelo schema da Metadata API.",
+                "valor": "padrao_plataforma"
+              },
+              "tipo_tecnico": "boolean"
+            }
+          ]
+        },
+        "estrutura_ref": "mdx:PermissionSetApexPageAccess",
+        "evidencias": [
+          {
+            "fonte": "src:mdapi-permissionset"
+          }
+        ],
+        "explicacao": "explicada",
+        "id": "mdt:PermissionSet.pageAccesses",
+        "nome": "pageAccesses",
+        "o_que_e": "Páginas Visualforce que os usuários podem executar.",
+        "obrigatoriedade": {
+          "condicao": "A documentação 68.0 não marca o campo como obrigatório; ausência de marcação não comprova opcionalidade (confirmar no WSDL).",
+          "estado": "desconhecido",
+          "valor": "nao"
+        },
+        "origem": {
+          "estado": "verificado",
+          "evidencias": [
+            {
+              "fonte": "src:mdapi-permissionset"
+            }
+          ],
+          "nota": "Propriedade definida pelo schema da Metadata API.",
+          "valor": "padrao_plataforma"
+        },
+        "tipo_tecnico": "PermissionSetApexPageAccess[]"
+      },
+      {
+        "cardinalidade": "0..n",
+        "default": {
+          "estado": "desconhecido",
+          "forma": "nao_declarado_na_fonte"
+        },
+        "disponibilidade": {
+          "ate_versao": null,
+          "desde_versao": "29.0",
+          "estado": "verificado"
+        },
+        "dominio": {
+          "estado": "verificado",
+          "evidencias": [
+            {
+              "fonte": "src:mdapi-permissionset"
+            }
+          ],
+          "natureza": "tipo_composto"
+        },
+        "estado": "verificado",
+        "estrutura_expandida": {
+          "id": "mdx:PermissionSetRecordTypeVisibility",
+          "nome": "PermissionSetRecordTypeVisibility",
+          "propriedades": [
+            {
+              "default": {
+                "estado": "desconhecido",
+                "forma": "nao_declarado_na_fonte"
+              },
+              "disponibilidade": {
+                "ate_versao": null,
+                "desde_versao": null,
+                "estado": "desconhecido"
+              },
+              "dominio": {
+                "contexto": "A fonte tipa como string sem lista de valores; não inventar valores.",
+                "estado": "verificado",
+                "evidencias": [
+                  {
+                    "fonte": "src:mdapi-permissionset"
+                  }
+                ],
+                "natureza": "texto_livre"
+              },
+              "estado": "verificado",
+              "evidencias": [
+                {
+                  "fonte": "src:mdapi-permissionset"
+                }
+              ],
+              "explicacao": "explicada",
+              "id": "mdx:PermissionSetRecordTypeVisibility.recordType",
+              "nome": "recordType",
+              "o_que_e": "Nome do tipo de registro, no formato Objeto.Tipo.",
+              "obrigatoriedade": {
+                "estado": "verificado",
+                "evidencias": [
+                  {
+                    "fonte": "src:mdapi-permissionset"
+                  }
+                ],
+                "valor": "sim"
+              },
+              "origem": {
+                "estado": "verificado",
+                "evidencias": [
+                  {
+                    "fonte": "src:mdapi-permissionset"
+                  }
+                ],
+                "nota": "Propriedade definida pelo schema da Metadata API.",
+                "valor": "padrao_plataforma"
+              },
+              "tipo_tecnico": "string"
+            },
+            {
+              "default": {
+                "estado": "desconhecido",
+                "forma": "nao_declarado_na_fonte"
+              },
+              "disponibilidade": {
+                "ate_versao": null,
+                "desde_versao": null,
+                "estado": "desconhecido"
+              },
+              "dominio": {
+                "estado": "verificado",
+                "evidencias": [
+                  {
+                    "fonte": "src:mdapi-permissionset"
+                  }
+                ],
+                "lista_completa": "sim",
+                "natureza": "booleano",
+                "valores": [
+                  {
+                    "valor": "true"
+                  },
+                  {
+                    "valor": "false"
+                  }
+                ]
+              },
+              "estado": "verificado",
+              "evidencias": [
+                {
+                  "fonte": "src:mdapi-permissionset"
+                }
+              ],
+              "explicacao": "explicada",
+              "id": "mdx:PermissionSetRecordTypeVisibility.visible",
+              "nome": "visible",
+              "o_que_e": "Se o tipo de registro fica visível.",
+              "obrigatoriedade": {
+                "estado": "verificado",
+                "evidencias": [
+                  {
+                    "fonte": "src:mdapi-permissionset"
+                  }
+                ],
+                "valor": "sim"
+              },
+              "origem": {
+                "estado": "verificado",
+                "evidencias": [
+                  {
+                    "fonte": "src:mdapi-permissionset"
+                  }
+                ],
+                "nota": "Propriedade definida pelo schema da Metadata API.",
+                "valor": "padrao_plataforma"
+              },
+              "tipo_tecnico": "boolean"
+            }
+          ]
+        },
+        "estrutura_ref": "mdx:PermissionSetRecordTypeVisibility",
+        "evidencias": [
+          {
+            "fonte": "src:mdapi-permissionset"
+          }
+        ],
+        "explicacao": "explicada",
+        "id": "mdt:PermissionSet.recordTypeVisibilities",
+        "nome": "recordTypeVisibilities",
+        "o_que_e": "Tipos de registro visíveis; inativos não são retornados.",
+        "obrigatoriedade": {
+          "condicao": "A documentação 68.0 não marca o campo como obrigatório; ausência de marcação não comprova opcionalidade (confirmar no WSDL).",
+          "estado": "desconhecido",
+          "valor": "nao"
+        },
+        "origem": {
+          "estado": "verificado",
+          "evidencias": [
+            {
+              "fonte": "src:mdapi-permissionset"
+            }
+          ],
+          "nota": "Propriedade definida pelo schema da Metadata API.",
+          "valor": "padrao_plataforma"
+        },
+        "tipo_tecnico": "PermissionSetRecordTypeVisibility[]"
+      },
+      {
+        "cardinalidade": "0..n",
+        "default": {
+          "estado": "desconhecido",
+          "forma": "nao_declarado_na_fonte"
+        },
+        "disponibilidade": {
+          "ate_versao": null,
+          "desde_versao": "64.0",
+          "estado": "verificado"
+        },
+        "dominio": {
+          "estado": "verificado",
+          "evidencias": [
+            {
+              "fonte": "src:mdapi-permissionset"
+            }
+          ],
+          "natureza": "tipo_composto"
+        },
+        "estado": "verificado",
+        "estrutura_expandida": {
+          "id": "mdx:PermissionSetServicePresenceStatusAccess",
+          "nome": "PermissionSetServicePresenceStatusAccess",
+          "propriedades": [
+            {
+              "default": {
+                "estado": "desconhecido",
+                "forma": "nao_declarado_na_fonte"
+              },
+              "disponibilidade": {
+                "ate_versao": null,
+                "desde_versao": null,
+                "estado": "desconhecido"
+              },
+              "dominio": {
+                "contexto": "A fonte tipa como string sem lista de valores; não inventar valores.",
+                "estado": "verificado",
+                "evidencias": [
+                  {
+                    "fonte": "src:mdapi-permissionset"
+                  }
+                ],
+                "natureza": "texto_livre"
+              },
+              "estado": "verificado",
+              "evidencias": [
+                {
+                  "fonte": "src:mdapi-permissionset"
+                }
+              ],
+              "explicacao": "explicada",
+              "id": "mdx:PermissionSetServicePresenceStatusAccess.servicePresenceStatus",
+              "nome": "servicePresenceStatus",
+              "o_que_e": "Nome do status de presença de serviço.",
+              "obrigatoriedade": {
+                "estado": "verificado",
+                "evidencias": [
+                  {
+                    "fonte": "src:mdapi-permissionset"
+                  }
+                ],
+                "valor": "sim"
+              },
+              "origem": {
+                "estado": "verificado",
+                "evidencias": [
+                  {
+                    "fonte": "src:mdapi-permissionset"
+                  }
+                ],
+                "nota": "Propriedade definida pelo schema da Metadata API.",
+                "valor": "padrao_plataforma"
+              },
+              "tipo_tecnico": "string"
+            },
+            {
+              "default": {
+                "estado": "desconhecido",
+                "forma": "nao_declarado_na_fonte"
+              },
+              "disponibilidade": {
+                "ate_versao": null,
+                "desde_versao": null,
+                "estado": "desconhecido"
+              },
+              "dominio": {
+                "estado": "verificado",
+                "evidencias": [
+                  {
+                    "fonte": "src:mdapi-permissionset"
+                  }
+                ],
+                "lista_completa": "sim",
+                "natureza": "booleano",
+                "valores": [
+                  {
+                    "valor": "true"
+                  },
+                  {
+                    "valor": "false"
+                  }
+                ]
+              },
+              "estado": "verificado",
+              "evidencias": [
+                {
+                  "fonte": "src:mdapi-permissionset"
+                }
+              ],
+              "explicacao": "explicada",
+              "id": "mdx:PermissionSetServicePresenceStatusAccess.enabled",
+              "nome": "enabled",
+              "o_que_e": "Se o status pode ser usado.",
+              "obrigatoriedade": {
+                "estado": "verificado",
+                "evidencias": [
+                  {
+                    "fonte": "src:mdapi-permissionset"
+                  }
+                ],
+                "valor": "sim"
+              },
+              "origem": {
+                "estado": "verificado",
+                "evidencias": [
+                  {
+                    "fonte": "src:mdapi-permissionset"
+                  }
+                ],
+                "nota": "Propriedade definida pelo schema da Metadata API.",
+                "valor": "padrao_plataforma"
+              },
+              "tipo_tecnico": "boolean"
+            }
+          ]
+        },
+        "estrutura_ref": "mdx:PermissionSetServicePresenceStatusAccess",
+        "evidencias": [
+          {
+            "fonte": "src:mdapi-permissionset"
+          }
+        ],
+        "explicacao": "explicada",
+        "id": "mdt:PermissionSet.ServicePresenceStatusAccesses",
+        "nome": "ServicePresenceStatusAccesses",
+        "notas": [
+          "Grafia com S maiúsculo conforme a página; confirmar no WSDL."
+        ],
+        "o_que_e": "Status de presença de serviço que os usuários podem usar.",
+        "obrigatoriedade": {
+          "condicao": "A documentação 68.0 não marca o campo como obrigatório; ausência de marcação não comprova opcionalidade (confirmar no WSDL).",
+          "estado": "desconhecido",
+          "valor": "nao"
+        },
+        "origem": {
+          "estado": "verificado",
+          "evidencias": [
+            {
+              "fonte": "src:mdapi-permissionset"
+            }
+          ],
+          "nota": "Propriedade definida pelo schema da Metadata API.",
+          "valor": "padrao_plataforma"
+        },
+        "tipo_tecnico": "PermissionSetServicePresenceStatusAccess[]"
+      },
+      {
+        "cardinalidade": "0..n",
+        "default": {
+          "estado": "desconhecido",
+          "forma": "nao_declarado_na_fonte"
+        },
+        "disponibilidade": {
+          "ate_versao": null,
+          "desde_versao": "26.0",
+          "estado": "verificado"
+        },
+        "dominio": {
+          "estado": "verificado",
+          "evidencias": [
+            {
+              "fonte": "src:mdapi-permissionset"
+            }
+          ],
+          "natureza": "tipo_composto"
+        },
+        "estado": "verificado",
+        "estrutura_expandida": {
+          "id": "mdx:PermissionSetTabSetting",
+          "nome": "PermissionSetTabSetting",
+          "propriedades": [
+            {
+              "default": {
+                "estado": "desconhecido",
+                "forma": "nao_declarado_na_fonte"
+              },
+              "disponibilidade": {
+                "ate_versao": null,
+                "desde_versao": null,
+                "estado": "desconhecido"
+              },
+              "dominio": {
+                "contexto": "A fonte tipa como string sem lista de valores; não inventar valores.",
+                "estado": "verificado",
+                "evidencias": [
+                  {
+                    "fonte": "src:mdapi-permissionset"
+                  }
+                ],
+                "natureza": "texto_livre"
+              },
+              "estado": "verificado",
+              "evidencias": [
+                {
+                  "fonte": "src:mdapi-permissionset"
+                }
+              ],
+              "explicacao": "explicada",
+              "id": "mdx:PermissionSetTabSetting.tab",
+              "nome": "tab",
+              "o_que_e": "Nome da tab.",
+              "obrigatoriedade": {
+                "estado": "verificado",
+                "evidencias": [
+                  {
+                    "fonte": "src:mdapi-permissionset"
+                  }
+                ],
+                "valor": "sim"
+              },
+              "origem": {
+                "estado": "verificado",
+                "evidencias": [
+                  {
+                    "fonte": "src:mdapi-permissionset"
+                  }
+                ],
+                "nota": "Propriedade definida pelo schema da Metadata API.",
+                "valor": "padrao_plataforma"
+              },
+              "tipo_tecnico": "string"
+            },
+            {
+              "default": {
+                "estado": "desconhecido",
+                "forma": "nao_declarado_na_fonte"
+              },
+              "disponibilidade": {
+                "ate_versao": null,
+                "desde_versao": null,
+                "estado": "desconhecido"
+              },
+              "dominio": {
+                "estado": "verificado",
+                "evidencias": [
+                  {
+                    "fonte": "src:mdapi-permissionset"
+                  }
+                ],
+                "lista_completa": "sim",
+                "natureza": "enum_fechado",
+                "valores": [
+                  {
+                    "significado": "A tab aparece em Todas as tabs e pode ser exibida em qualquer app.",
+                    "valor": "Available"
+                  },
+                  {
+                    "significado": "A tab não aparece em Todas as tabs nem em apps.",
+                    "valor": "None"
+                  },
+                  {
+                    "significado": "A tab aparece em Todas as tabs e entre as tabs visíveis do app.",
+                    "valor": "Visible"
+                  }
+                ]
+              },
+              "estado": "verificado",
+              "evidencias": [
+                {
+                  "fonte": "src:mdapi-permissionset"
+                }
+              ],
+              "explicacao": "explicada",
+              "id": "mdx:PermissionSetTabSetting.visibility",
+              "nome": "visibility",
+              "o_que_e": "Visibilidade da tab.",
+              "obrigatoriedade": {
+                "estado": "verificado",
+                "evidencias": [
+                  {
+                    "fonte": "src:mdapi-permissionset"
+                  }
+                ],
+                "valor": "sim"
+              },
+              "origem": {
+                "estado": "verificado",
+                "evidencias": [
+                  {
+                    "fonte": "src:mdapi-permissionset"
+                  }
+                ],
+                "nota": "Propriedade definida pelo schema da Metadata API.",
+                "valor": "padrao_plataforma"
+              },
+              "tipo_tecnico": "PermissionSetTabVisibility"
+            }
+          ]
+        },
+        "estrutura_ref": "mdx:PermissionSetTabSetting",
+        "evidencias": [
+          {
+            "fonte": "src:mdapi-permissionset"
+          }
+        ],
+        "explicacao": "explicada",
+        "id": "mdt:PermissionSet.tabSettings",
+        "nome": "tabSettings",
+        "notas": [
+          "A página exibe o tipo como PermissionSetTabVisibility e a seção como PermissionSetTabSetting; conferir no WSDL."
+        ],
+        "o_que_e": "Configurações de visibilidade de tabs.",
+        "obrigatoriedade": {
+          "condicao": "A documentação 68.0 não marca o campo como obrigatório; ausência de marcação não comprova opcionalidade (confirmar no WSDL).",
+          "estado": "desconhecido",
+          "valor": "nao"
+        },
+        "origem": {
+          "estado": "verificado",
+          "evidencias": [
+            {
+              "fonte": "src:mdapi-permissionset"
+            }
+          ],
+          "nota": "Propriedade definida pelo schema da Metadata API.",
+          "valor": "padrao_plataforma"
+        },
+        "tipo_tecnico": "PermissionSetTabSetting[]"
+      },
+      {
+        "default": {
+          "estado": "desconhecido",
+          "forma": "nao_declarado_na_fonte"
+        },
+        "disponibilidade": {
+          "ate_versao": "37.0",
+          "desde_versao": null,
+          "estado": "verificado"
+        },
+        "dominio": {
+          "contexto": "A fonte tipa como string sem lista de valores; não inventar valores.",
+          "estado": "verificado",
+          "evidencias": [
+            {
+              "fonte": "src:mdapi-permissionset"
+            }
+          ],
+          "natureza": "texto_livre"
+        },
+        "estado": "verificado",
+        "evidencias": [
+          {
+            "fonte": "src:mdapi-permissionset"
+          }
+        ],
+        "explicacao": "explicada",
+        "id": "mdt:PermissionSet.userLicense",
+        "nome": "userLicense",
+        "o_que_e": "Licença de usuário (obsoleto; substituído por license).",
+        "obrigatoriedade": {
+          "condicao": "A documentação 68.0 não marca o campo como obrigatório; ausência de marcação não comprova opcionalidade (confirmar no WSDL).",
+          "estado": "desconhecido",
+          "valor": "nao"
+        },
+        "origem": {
+          "estado": "verificado",
+          "evidencias": [
+            {
+              "fonte": "src:mdapi-permissionset"
+            }
+          ],
+          "nota": "Propriedade definida pelo schema da Metadata API.",
+          "valor": "padrao_plataforma"
+        },
+        "tipo_tecnico": "string"
+      },
+      {
+        "cardinalidade": "0..n",
+        "default": {
+          "estado": "desconhecido",
+          "forma": "nao_declarado_na_fonte"
+        },
+        "disponibilidade": {
+          "ate_versao": null,
+          "desde_versao": "29.0",
+          "estado": "verificado"
+        },
+        "dominio": {
+          "estado": "verificado",
+          "evidencias": [
+            {
+              "fonte": "src:mdapi-permissionset"
+            }
+          ],
+          "natureza": "tipo_composto"
+        },
+        "estado": "verificado",
+        "estrutura_expandida": {
+          "id": "mdx:PermissionSetUserPermission",
+          "nome": "PermissionSetUserPermission",
+          "propriedades": [
+            {
+              "default": {
+                "estado": "desconhecido",
+                "forma": "nao_declarado_na_fonte"
+              },
+              "disponibilidade": {
+                "ate_versao": null,
+                "desde_versao": null,
+                "estado": "desconhecido"
+              },
+              "dominio": {
+                "estado": "verificado",
+                "evidencias": [
+                  {
+                    "fonte": "src:mdapi-permissionset"
+                  }
+                ],
+                "lista_completa": "sim",
+                "natureza": "booleano",
+                "valores": [
+                  {
+                    "valor": "true"
+                  },
+                  {
+                    "valor": "false"
+                  }
+                ]
+              },
+              "estado": "verificado",
+              "evidencias": [
+                {
+                  "fonte": "src:mdapi-permissionset"
+                }
+              ],
+              "explicacao": "explicada",
+              "id": "mdx:PermissionSetUserPermission.enabled",
+              "nome": "enabled",
+              "o_que_e": "Se a permissão está habilitada.",
+              "obrigatoriedade": {
+                "estado": "verificado",
+                "evidencias": [
+                  {
+                    "fonte": "src:mdapi-permissionset"
+                  }
+                ],
+                "valor": "sim"
+              },
+              "origem": {
+                "estado": "verificado",
+                "evidencias": [
+                  {
+                    "fonte": "src:mdapi-permissionset"
+                  }
+                ],
+                "nota": "Propriedade definida pelo schema da Metadata API.",
+                "valor": "padrao_plataforma"
+              },
+              "tipo_tecnico": "boolean"
+            },
+            {
+              "default": {
+                "estado": "desconhecido",
+                "forma": "nao_declarado_na_fonte"
+              },
+              "disponibilidade": {
+                "ate_versao": null,
+                "desde_versao": null,
+                "estado": "desconhecido"
+              },
+              "dominio": {
+                "contexto": "A fonte tipa como string sem lista de valores; não inventar valores.",
+                "estado": "verificado",
+                "evidencias": [
+                  {
+                    "fonte": "src:mdapi-permissionset"
+                  }
+                ],
+                "natureza": "texto_livre"
+              },
+              "estado": "verificado",
+              "evidencias": [
+                {
+                  "fonte": "src:mdapi-permissionset"
+                }
+              ],
+              "explicacao": "explicada",
+              "id": "mdx:PermissionSetUserPermission.name",
+              "nome": "name",
+              "o_que_e": "Nome da permissão de usuário.",
+              "obrigatoriedade": {
+                "estado": "verificado",
+                "evidencias": [
+                  {
+                    "fonte": "src:mdapi-permissionset"
+                  }
+                ],
+                "valor": "sim"
+              },
+              "origem": {
+                "estado": "verificado",
+                "evidencias": [
+                  {
+                    "fonte": "src:mdapi-permissionset"
+                  }
+                ],
+                "nota": "Propriedade definida pelo schema da Metadata API.",
+                "valor": "padrao_plataforma"
+              },
+              "tipo_tecnico": "string"
+            }
+          ]
+        },
+        "estrutura_ref": "mdx:PermissionSetUserPermission",
+        "evidencias": [
+          {
+            "fonte": "src:mdapi-permissionset"
+          }
+        ],
+        "explicacao": "explicada",
+        "id": "mdt:PermissionSet.userPermissions",
+        "nome": "userPermissions",
+        "notas": [
+          "Desde a 40.0, permissão não informada equivale a desabilitada, segundo a página."
+        ],
+        "o_que_e": "Permissões de app ou de sistema e se estão habilitadas.",
+        "obrigatoriedade": {
+          "condicao": "A documentação 68.0 não marca o campo como obrigatório; ausência de marcação não comprova opcionalidade (confirmar no WSDL).",
+          "estado": "desconhecido",
+          "valor": "nao"
+        },
+        "origem": {
+          "estado": "verificado",
+          "evidencias": [
+            {
+              "fonte": "src:mdapi-permissionset"
+            }
+          ],
+          "nota": "Propriedade definida pelo schema da Metadata API.",
+          "valor": "padrao_plataforma"
+        },
+        "tipo_tecnico": "PermissionSetUserPermission[]"
+      }
+    ],
+    "recomendacoes": [],
+    "setup": {
+      "estado": "desconhecido",
+      "nota": "Caminho no Setup não validado nesta sessão."
+    },
+    "suporte_cli": {
+      "estado": "verificado",
+      "evidencias": [
+        {
+          "fonte": "src:sdr-metadata-support"
+        }
+      ],
+      "nota": "Suporte do Salesforce CLI (source-deploy-retrieve), não do Metadata API em geral.",
+      "valor": {
+        "nota_fonte": null,
+        "status": "suportado"
+      }
+    }
+  },
+  "nota": "Gerado deterministicamente a partir de catalogo/. Não editar à mão.",
+  "objetos_relacionados": [
+    {
+      "base_da_relacao": [
+        "rel:cor-permissionset-label",
+        "rel:rep-permissionset",
+        "representacao_comum_em:func:permission-sets"
+      ],
+      "objeto": {
+        "alertas": [],
+        "apex": {
+          "consulta_soql_direta": {
+            "estado": "verificado",
+            "evidencias": [
+              {
+                "fonte": "src:objref-permissionset"
+              }
+            ],
+            "nota": "Objeto da API padrão: consultável por SOQL em Apex, sujeito a permissões.",
+            "valor": true
+          },
+          "nota": "Exemplo Apex não fornecido nesta fase."
+        },
+        "campos": [
+          {
+            "apis": [
+              "padrao"
+            ],
+            "default": {
+              "estado": "desconhecido",
+              "forma": "nao_declarado_na_fonte"
+            },
+            "disponibilidade": {
+              "ate_versao": null,
+              "desde_versao": null,
+              "estado": "desconhecido"
+            },
+            "dominio": {
+              "estado": "verificado",
+              "evidencias": [
+                {
+                  "fonte": "src:objref-permissionset"
+                }
+              ],
+              "natureza": "texto_livre"
+            },
+            "estado": "verificado",
+            "evidencias": [
+              {
+                "fonte": "src:objref-permissionset"
+              }
+            ],
+            "explicacao": "explicada",
+            "id": "obj:PermissionSet.Description",
+            "nome": "Description",
+            "o_que_e": "Descrição do permission set.",
+            "obrigatoriedade": {
+              "estado": "desconhecido",
+              "valor": "desconhecida"
+            },
+            "origem": {
+              "estado": "verificado",
+              "evidencias": [
+                {
+                  "fonte": "src:objref-permissionset"
+                }
+              ],
+              "nota": "Campo padrão do objeto documentado.",
+              "valor": "padrao_plataforma"
+            },
+            "propriedades_api": {
+              "create": true,
+              "defaulted_on_create": false,
+              "estado": "verificado",
+              "evidencias": [
+                {
+                  "fonte": "src:objref-permissionset"
+                }
+              ],
+              "filter": true,
+              "group": true,
+              "id_lookup": false,
+              "nillable": true,
+              "restricted_picklist": false,
+              "sort": true,
+              "update": true
+            },
+            "restricoes": {
+              "estado": "verificado",
+              "evidencias": [
+                {
+                  "fonte": "src:objref-permissionset"
+                }
+              ],
+              "valor": "Até 255 caracteres."
+            },
+            "somente_leitura": false,
+            "tipo_tecnico": "string"
+          },
+          {
+            "apis": [
+              "padrao"
+            ],
+            "default": {
+              "estado": "desconhecido",
+              "forma": "desconhecido",
+              "nota": "A API marca o campo como 'defaulted on create', mas o valor não foi declarado na extração."
+            },
+            "disponibilidade": {
+              "ate_versao": null,
+              "desde_versao": null,
+              "estado": "desconhecido"
+            },
+            "dominio": {
+              "estado": "verificado",
+              "evidencias": [
+                {
+                  "fonte": "src:objref-permissionset"
+                }
+              ],
+              "lista_completa": "sim",
+              "natureza": "booleano",
+              "valores": [
+                {
+                  "valor": "true"
+                },
+                {
+                  "valor": "false"
+                }
+              ]
+            },
+            "estado": "verificado",
+            "evidencias": [
+              {
+                "fonte": "src:objref-permissionset"
+              }
+            ],
+            "explicacao": "explicada",
+            "id": "obj:PermissionSet.HasActivationRequired",
+            "nome": "HasActivationRequired",
+            "o_que_e": "Se o permission set exige sessão ativa.",
+            "obrigatoriedade": {
+              "estado": "desconhecido",
+              "valor": "desconhecida"
+            },
+            "origem": {
+              "estado": "verificado",
+              "evidencias": [
+                {
+                  "fonte": "src:objref-permissionset"
+                }
+              ],
+              "nota": "Campo padrão do objeto documentado.",
+              "valor": "padrao_plataforma"
+            },
+            "propriedades_api": {
+              "create": true,
+              "defaulted_on_create": true,
+              "estado": "verificado",
+              "evidencias": [
+                {
+                  "fonte": "src:objref-permissionset"
+                }
+              ],
+              "filter": true,
+              "group": true,
+              "id_lookup": false,
+              "nillable": false,
+              "restricted_picklist": false,
+              "sort": true,
+              "update": true
+            },
+            "somente_leitura": false,
+            "tipo_tecnico": "boolean"
+          },
+          {
+            "apis": [
+              "padrao"
+            ],
+            "default": {
+              "estado": "desconhecido",
+              "forma": "desconhecido",
+              "nota": "A API marca o campo como 'defaulted on create', mas o valor não foi declarado na extração."
+            },
+            "disponibilidade": {
+              "ate_versao": null,
+              "desde_versao": null,
+              "estado": "desconhecido"
+            },
+            "dominio": {
+              "estado": "verificado",
+              "evidencias": [
+                {
+                  "fonte": "src:objref-permissionset"
+                }
+              ],
+              "lista_completa": "sim",
+              "natureza": "booleano",
+              "valores": [
+                {
+                  "valor": "true"
+                },
+                {
+                  "valor": "false"
+                }
+              ]
+            },
+            "estado": "verificado",
+            "evidencias": [
+              {
+                "fonte": "src:objref-permissionset"
+              }
+            ],
+            "explicacao": "explicada",
+            "id": "obj:PermissionSet.IsCustom",
+            "nome": "IsCustom",
+            "o_que_e": "Verdadeiro se criado por um administrador; falso se padrão e ligado a uma licença.",
+            "obrigatoriedade": {
+              "estado": "desconhecido",
+              "valor": "desconhecida"
+            },
+            "origem": {
+              "estado": "verificado",
+              "evidencias": [
+                {
+                  "fonte": "src:objref-permissionset"
+                }
+              ],
+              "nota": "Campo padrão do objeto documentado.",
+              "valor": "padrao_plataforma"
+            },
+            "propriedades_api": {
+              "create": false,
+              "defaulted_on_create": true,
+              "estado": "verificado",
+              "evidencias": [
+                {
+                  "fonte": "src:objref-permissionset"
+                }
+              ],
+              "filter": true,
+              "group": true,
+              "id_lookup": false,
+              "nillable": false,
+              "restricted_picklist": false,
+              "sort": true,
+              "update": false
+            },
+            "somente_leitura": true,
+            "tipo_tecnico": "boolean"
+          },
+          {
+            "apis": [
+              "padrao"
+            ],
+            "default": {
+              "estado": "desconhecido",
+              "forma": "desconhecido",
+              "nota": "A API marca o campo como 'defaulted on create', mas o valor não foi declarado na extração."
+            },
+            "disponibilidade": {
+              "ate_versao": null,
+              "desde_versao": "25.0",
+              "estado": "verificado"
+            },
+            "dominio": {
+              "estado": "verificado",
+              "evidencias": [
+                {
+                  "fonte": "src:objref-permissionset"
+                }
+              ],
+              "lista_completa": "sim",
+              "natureza": "booleano",
+              "valores": [
+                {
+                  "valor": "true"
+                },
+                {
+                  "valor": "false"
+                }
+              ]
+            },
+            "estado": "verificado",
+            "evidencias": [
+              {
+                "fonte": "src:objref-permissionset"
+              }
+            ],
+            "explicacao": "explicada",
+            "id": "obj:PermissionSet.IsOwnedByProfile",
+            "nome": "IsOwnedByProfile",
+            "o_que_e": "Informa se o permission set pertence a um perfil.",
+            "obrigatoriedade": {
+              "estado": "desconhecido",
+              "valor": "desconhecida"
+            },
+            "origem": {
+              "estado": "verificado",
+              "evidencias": [
+                {
+                  "fonte": "src:objref-permissionset"
+                }
+              ],
+              "nota": "Campo padrão do objeto documentado.",
+              "valor": "padrao_plataforma"
+            },
+            "propriedades_api": {
+              "create": false,
+              "defaulted_on_create": true,
+              "estado": "verificado",
+              "evidencias": [
+                {
+                  "fonte": "src:objref-permissionset"
+                }
+              ],
+              "filter": true,
+              "group": true,
+              "id_lookup": false,
+              "nillable": false,
+              "restricted_picklist": false,
+              "sort": true,
+              "update": false
+            },
+            "somente_leitura": true,
+            "tipo_tecnico": "boolean"
+          },
+          {
+            "apis": [
+              "padrao"
+            ],
+            "default": {
+              "estado": "desconhecido",
+              "forma": "nao_declarado_na_fonte"
+            },
+            "disponibilidade": {
+              "ate_versao": null,
+              "desde_versao": null,
+              "estado": "desconhecido"
+            },
+            "dominio": {
+              "estado": "verificado",
+              "evidencias": [
+                {
+                  "fonte": "src:objref-permissionset"
+                }
+              ],
+              "natureza": "texto_livre"
+            },
+            "estado": "verificado",
+            "evidencias": [
+              {
+                "fonte": "src:objref-permissionset"
+              }
+            ],
+            "explicacao": "explicada",
+            "id": "obj:PermissionSet.Label",
+            "nome": "Label",
+            "o_que_e": "Rótulo do permission set na interface.",
+            "obrigatoriedade": {
+              "estado": "desconhecido",
+              "valor": "desconhecida"
+            },
+            "origem": {
+              "estado": "verificado",
+              "evidencias": [
+                {
+                  "fonte": "src:objref-permissionset"
+                }
+              ],
+              "nota": "Campo padrão do objeto documentado.",
+              "valor": "padrao_plataforma"
+            },
+            "propriedades_api": {
+              "create": true,
+              "defaulted_on_create": false,
+              "estado": "verificado",
+              "evidencias": [
+                {
+                  "fonte": "src:objref-permissionset"
+                }
+              ],
+              "filter": true,
+              "group": true,
+              "id_lookup": false,
+              "nillable": false,
+              "restricted_picklist": false,
+              "sort": true,
+              "update": true
+            },
+            "restricoes": {
+              "estado": "verificado",
+              "evidencias": [
+                {
+                  "fonte": "src:objref-permissionset"
+                }
+              ],
+              "valor": "Até 80 caracteres."
+            },
+            "somente_leitura": false,
+            "tipo_tecnico": "string"
+          },
+          {
+            "apis": [
+              "padrao"
+            ],
+            "default": {
+              "estado": "desconhecido",
+              "forma": "nao_declarado_na_fonte"
+            },
+            "disponibilidade": {
+              "ate_versao": null,
+              "desde_versao": "38.0",
+              "estado": "verificado"
+            },
+            "dominio": {
+              "contexto": "Id de registro do(s) objeto(s) referenciado(s).",
+              "estado": "verificado",
+              "evidencias": [
+                {
+                  "fonte": "src:objref-permissionset"
+                }
+              ],
+              "natureza": "referencia"
+            },
+            "estado": "verificado",
+            "evidencias": [
+              {
+                "fonte": "src:objref-permissionset"
+              }
+            ],
+            "explicacao": "explicada",
+            "id": "obj:PermissionSet.LicenseId",
+            "nome": "LicenseId",
+            "o_que_e": "Licença de permission set ou de usuário associada; substitui UserLicenseId.",
+            "obrigatoriedade": {
+              "estado": "desconhecido",
+              "valor": "desconhecida"
+            },
+            "origem": {
+              "estado": "verificado",
+              "evidencias": [
+                {
+                  "fonte": "src:objref-permissionset"
+                }
+              ],
+              "nota": "Campo padrão do objeto documentado.",
+              "valor": "padrao_plataforma"
+            },
+            "propriedades_api": {
+              "create": true,
+              "defaulted_on_create": false,
+              "estado": "verificado",
+              "evidencias": [
+                {
+                  "fonte": "src:objref-permissionset"
+                }
+              ],
+              "filter": true,
+              "group": true,
+              "id_lookup": false,
+              "nillable": true,
+              "restricted_picklist": false,
+              "sort": true,
+              "update": false
+            },
+            "referencia": {
+              "alvos": [
+                "PermissionSetLicense",
+                "UserLicense"
+              ],
+              "nome_relacionamento": null
+            },
+            "somente_leitura": false,
+            "tipo_tecnico": "reference"
+          },
+          {
+            "apis": [
+              "padrao"
+            ],
+            "default": {
+              "estado": "desconhecido",
+              "forma": "nao_declarado_na_fonte"
+            },
+            "disponibilidade": {
+              "ate_versao": null,
+              "desde_versao": null,
+              "estado": "desconhecido"
+            },
+            "dominio": {
+              "estado": "verificado",
+              "evidencias": [
+                {
+                  "fonte": "src:objref-permissionset"
+                }
+              ],
+              "natureza": "texto_livre"
+            },
+            "estado": "verificado",
+            "evidencias": [
+              {
+                "fonte": "src:objref-permissionset"
+              }
+            ],
+            "explicacao": "explicada",
+            "id": "obj:PermissionSet.Name",
+            "nome": "Name",
+            "o_que_e": "Nome API único do permission set.",
+            "obrigatoriedade": {
+              "estado": "desconhecido",
+              "valor": "desconhecida"
+            },
+            "origem": {
+              "estado": "verificado",
+              "evidencias": [
+                {
+                  "fonte": "src:objref-permissionset"
+                }
+              ],
+              "nota": "Campo padrão do objeto documentado.",
+              "valor": "padrao_plataforma"
+            },
+            "propriedades_api": {
+              "create": true,
+              "defaulted_on_create": false,
+              "estado": "verificado",
+              "evidencias": [
+                {
+                  "fonte": "src:objref-permissionset"
+                }
+              ],
+              "filter": true,
+              "group": true,
+              "id_lookup": false,
+              "nillable": false,
+              "restricted_picklist": false,
+              "sort": true,
+              "update": true
+            },
+            "restricoes": {
+              "estado": "verificado",
+              "evidencias": [
+                {
+                  "fonte": "src:objref-permissionset"
+                }
+              ],
+              "valor": "Até 80 caracteres."
+            },
+            "somente_leitura": false,
+            "tipo_tecnico": "string"
+          },
+          {
+            "apis": [
+              "padrao"
+            ],
+            "default": {
+              "estado": "desconhecido",
+              "forma": "nao_declarado_na_fonte"
+            },
+            "disponibilidade": {
+              "ate_versao": null,
+              "desde_versao": "23.0",
+              "estado": "verificado"
+            },
+            "dominio": {
+              "estado": "verificado",
+              "evidencias": [
+                {
+                  "fonte": "src:objref-permissionset"
+                }
+              ],
+              "natureza": "texto_livre"
+            },
+            "estado": "verificado",
+            "evidencias": [
+              {
+                "fonte": "src:objref-permissionset"
+              }
+            ],
+            "explicacao": "explicada",
+            "id": "obj:PermissionSet.NamespacePrefix",
+            "nome": "NamespacePrefix",
+            "o_que_e": "Namespace do pacote, quando o permission set vem de um pacote.",
+            "obrigatoriedade": {
+              "estado": "desconhecido",
+              "valor": "desconhecida"
+            },
+            "origem": {
+              "estado": "verificado",
+              "evidencias": [
+                {
+                  "fonte": "src:objref-permissionset"
+                }
+              ],
+              "nota": "Campo padrão do objeto documentado.",
+              "valor": "padrao_plataforma"
+            },
+            "propriedades_api": {
+              "create": false,
+              "defaulted_on_create": false,
+              "estado": "verificado",
+              "evidencias": [
+                {
+                  "fonte": "src:objref-permissionset"
+                }
+              ],
+              "filter": true,
+              "group": true,
+              "id_lookup": false,
+              "nillable": true,
+              "restricted_picklist": false,
+              "sort": true,
+              "update": false
+            },
+            "somente_leitura": true,
+            "tipo_tecnico": "string"
+          },
+          {
+            "apis": [
+              "padrao"
+            ],
+            "default": {
+              "estado": "desconhecido",
+              "forma": "nao_declarado_na_fonte"
+            },
+            "disponibilidade": {
+              "ate_versao": null,
+              "desde_versao": "45.0",
+              "estado": "verificado"
+            },
+            "dominio": {
+              "contexto": "Id de registro do(s) objeto(s) referenciado(s).",
+              "estado": "verificado",
+              "evidencias": [
+                {
+                  "fonte": "src:objref-permissionset"
+                }
+              ],
+              "natureza": "referencia"
+            },
+            "estado": "verificado",
+            "evidencias": [
+              {
+                "fonte": "src:objref-permissionset"
+              }
+            ],
+            "explicacao": "explicada",
+            "id": "obj:PermissionSet.PermissionSetGroupId",
+            "nome": "PermissionSetGroupId",
+            "o_que_e": "Grupo de permission sets dono deste registro, ou nulo.",
+            "obrigatoriedade": {
+              "estado": "desconhecido",
+              "valor": "desconhecida"
+            },
+            "origem": {
+              "estado": "verificado",
+              "evidencias": [
+                {
+                  "fonte": "src:objref-permissionset"
+                }
+              ],
+              "nota": "Campo padrão do objeto documentado.",
+              "valor": "padrao_plataforma"
+            },
+            "propriedades_api": {
+              "create": false,
+              "defaulted_on_create": false,
+              "estado": "verificado",
+              "evidencias": [
+                {
+                  "fonte": "src:objref-permissionset"
+                }
+              ],
+              "filter": true,
+              "group": true,
+              "id_lookup": false,
+              "nillable": true,
+              "restricted_picklist": false,
+              "sort": true,
+              "update": false
+            },
+            "referencia": {
+              "alvos": [
+                "obj:PermissionSetGroup"
+              ],
+              "nome_relacionamento": null
+            },
+            "somente_leitura": true,
+            "tipo_tecnico": "reference"
+          },
+          {
+            "apis": [
+              "padrao"
+            ],
+            "default": {
+              "estado": "desconhecido",
+              "forma": "nao_declarado_na_fonte"
+            },
+            "disponibilidade": {
+              "ate_versao": null,
+              "desde_versao": "25.0",
+              "estado": "verificado"
+            },
+            "dominio": {
+              "contexto": "Id de registro do(s) objeto(s) referenciado(s).",
+              "estado": "verificado",
+              "evidencias": [
+                {
+                  "fonte": "src:objref-permissionset"
+                }
+              ],
+              "natureza": "referencia"
+            },
+            "estado": "verificado",
+            "evidencias": [
+              {
+                "fonte": "src:objref-permissionset"
+              }
+            ],
+            "explicacao": "explicada",
+            "id": "obj:PermissionSet.ProfileId",
+            "nome": "ProfileId",
+            "o_que_e": "Perfil dono deste registro, ou nulo.",
+            "obrigatoriedade": {
+              "estado": "desconhecido",
+              "valor": "desconhecida"
+            },
+            "origem": {
+              "estado": "verificado",
+              "evidencias": [
+                {
+                  "fonte": "src:objref-permissionset"
+                }
+              ],
+              "nota": "Campo padrão do objeto documentado.",
+              "valor": "padrao_plataforma"
+            },
+            "propriedades_api": {
+              "create": false,
+              "defaulted_on_create": false,
+              "estado": "verificado",
+              "evidencias": [
+                {
+                  "fonte": "src:objref-permissionset"
+                }
+              ],
+              "filter": true,
+              "group": true,
+              "id_lookup": false,
+              "nillable": true,
+              "restricted_picklist": false,
+              "sort": true,
+              "update": false
+            },
+            "referencia": {
+              "alvos": [
+                "obj:Profile"
+              ],
+              "nome_relacionamento": null
+            },
+            "somente_leitura": true,
+            "tipo_tecnico": "reference"
+          },
+          {
+            "apis": [
+              "padrao"
+            ],
+            "default": {
+              "estado": "desconhecido",
+              "forma": "nao_declarado_na_fonte"
+            },
+            "disponibilidade": {
+              "ate_versao": null,
+              "desde_versao": "46.0",
+              "estado": "verificado"
+            },
+            "dominio": {
+              "contexto": "Id de registro do(s) objeto(s) referenciado(s).",
+              "estado": "desconhecido",
+              "natureza": "referencia"
+            },
+            "estado": "verificado",
+            "evidencias": [
+              {
+                "fonte": "src:objref-permissionset"
+              }
+            ],
+            "explicacao": "pendente",
+            "id": "obj:PermissionSet.Type",
+            "nome": "Type",
+            "notas": [
+              "A página não descreve o campo além da versão; tipo transcrito como reference, conferir."
+            ],
+            "o_que_e": "Explicação pendente: campo listado a partir da fonte, ainda sem texto didático.",
+            "obrigatoriedade": {
+              "estado": "desconhecido",
+              "valor": "desconhecida"
+            },
+            "origem": {
+              "estado": "verificado",
+              "evidencias": [
+                {
+                  "fonte": "src:objref-permissionset"
+                }
+              ],
+              "nota": "Campo padrão do objeto documentado.",
+              "valor": "padrao_plataforma"
+            },
+            "propriedades_api": {
+              "create": false,
+              "defaulted_on_create": false,
+              "estado": "verificado",
+              "evidencias": [
+                {
+                  "fonte": "src:objref-permissionset"
+                }
+              ],
+              "filter": true,
+              "group": true,
+              "id_lookup": false,
+              "nillable": true,
+              "restricted_picklist": false,
+              "sort": true,
+              "update": false
+            },
+            "somente_leitura": true,
+            "tipo_tecnico": "reference"
+          },
+          {
+            "apis": [
+              "padrao"
+            ],
+            "default": {
+              "estado": "desconhecido",
+              "forma": "nao_declarado_na_fonte"
+            },
+            "disponibilidade": {
+              "ate_versao": "37.0",
+              "desde_versao": "26.0",
+              "estado": "verificado"
+            },
+            "dominio": {
+              "contexto": "Id de registro do(s) objeto(s) referenciado(s).",
+              "estado": "verificado",
+              "evidencias": [
+                {
+                  "fonte": "src:objref-permissionset"
+                }
+              ],
+              "natureza": "referencia"
+            },
+            "estado": "verificado",
+            "evidencias": [
+              {
+                "fonte": "src:objref-permissionset"
+              }
+            ],
+            "explicacao": "explicada",
+            "id": "obj:PermissionSet.UserLicenseId",
+            "nome": "UserLicenseId",
+            "o_que_e": "Licença de usuário (obsoleto após a 37.0; usar LicenseId).",
+            "obrigatoriedade": {
+              "estado": "desconhecido",
+              "valor": "desconhecida"
+            },
+            "origem": {
+              "estado": "verificado",
+              "evidencias": [
+                {
+                  "fonte": "src:objref-permissionset"
+                }
+              ],
+              "nota": "Campo padrão do objeto documentado.",
+              "valor": "padrao_plataforma"
+            },
+            "propriedades_api": {
+              "create": true,
+              "defaulted_on_create": false,
+              "estado": "verificado",
+              "evidencias": [
+                {
+                  "fonte": "src:objref-permissionset"
+                }
+              ],
+              "filter": true,
+              "group": true,
+              "id_lookup": false,
+              "nillable": true,
+              "restricted_picklist": false,
+              "sort": true,
+              "update": false
+            },
+            "referencia": {
+              "alvos": [
+                "UserLicense"
+              ],
+              "nome_relacionamento": null
+            },
+            "somente_leitura": false,
+            "tipo_tecnico": "reference"
+          }
+        ],
+        "cobertura": {
+          "estrutural": {
+            "esperado": null,
+            "estado": "parcial",
+            "nota": "Campos não-Permissions listados; Id e campos de sistema não constam da extração; Permissions* são dinâmicos.",
+            "presente": 12
+          },
+          "explicativa": {
+            "esperado": 12,
+            "estado": "parcial",
+            "presente": 11
+          },
+          "mapeamento": {
+            "estado": "parcial",
+            "nota": "Ver relacionamentos registrados."
+          }
+        },
+        "consultas": [
+          {
+            "api": "padrao",
+            "contexto": "API padrão; o filtro exclui permission sets internos de perfis.",
+            "soql": "SELECT Id, Name, Label, IsOwnedByProfile FROM PermissionSet WHERE IsOwnedByProfile = false",
+            "validacao": "documental"
+          }
+        ],
+        "dominio_dinamico_de_campos": {
+          "descricao": "Um campo booleano por permissão (Create, Filter, Update); conjunto varia por org e licença; obter com describeSObjects().",
+          "estado": "verificado",
+          "evidencias": [
+            {
+              "fonte": "src:objref-permissionset"
+            }
+          ],
+          "padrao_nome": "Permissions*"
+        },
+        "estado": "verificado",
+        "evidencias": [
+          {
+            "fonte": "src:objref-permissionset"
+          }
+        ],
+        "exposicoes": [
+          {
+            "acesso_especial": "Desde Summer '20: View Setup and Configuration, Manage Session Permission Set Activations, Assign Permission Sets ou Manage Profiles and Permission Sets.",
+            "api": "padrao",
+            "chamadas": [
+              "create()",
+              "delete()",
+              "describeSObjects()",
+              "query()",
+              "retrieve()",
+              "search()",
+              "update()",
+              "upsert()"
+            ],
+            "desde_versao": null,
+            "estado": "verificado",
+            "evidencias": [
+              {
+                "fonte": "src:objref-permissionset"
+              }
+            ]
+          },
+          {
+            "api": "tooling",
+            "desde_versao": null,
+            "estado": "verificado",
+            "evidencias": [
+              {
+                "fonte": "src:tooling-objects-list"
+              }
+            ],
+            "nota": "Listado no índice de objetos da Tooling API 68.0. Campos e operações dessa exposição não levantados; não presumir que sejam iguais aos da API padrão."
+          }
+        ],
+        "id": "obj:PermissionSet",
+        "juncao": false,
+        "nome": "PermissionSet",
+        "o_que_e": "Representa cada permission set como registro consultável, inclusive os permission sets internos de perfis.",
+        "papel": "Permite consultar quais permission sets existem e seus atributos; o XML PermissionSet é a forma implantável.",
+        "setup": {
+          "estado": "nao_aplicavel",
+          "nota": "Objeto consultável via API; não é tela do Setup."
+        }
+      },
+      "relacionamentos_do_objeto": [
+        {
+          "destino": {
+            "campo": "Label",
+            "entidade": "obj:PermissionSet"
+          },
+          "estado": "desconhecido",
+          "evidencias": [
+            {
+              "fonte": "src:mdapi-permissionset"
+            },
+            {
+              "fonte": "src:objref-permissionset"
+            }
+          ],
+          "explicacao": "Candidata: ambos descrevem o rótulo do permission set com limite de 80 caracteres. Semelhança de nome e descrição não comprova equivalência.",
+          "id": "rel:cor-permissionset-label",
+          "natureza_correspondencia": "desconhecida",
+          "origem": {
+            "campo": "label",
+            "entidade": "mdt:PermissionSet"
+          },
+          "tipo": "correspondencia_xml_api"
+        },
+        {
+          "cardinalidade_registros": {
+            "estado": "desconhecido"
+          },
+          "destino": {
+            "entidade": "obj:PermissionSetGroup"
+          },
+          "estado": "verificado",
+          "evidencias": [
+            {
+              "fonte": "src:objref-permissionset"
+            }
+          ],
+          "explicacao": "Registro de permission set pertencente a um grupo (dono), quando houver.",
+          "id": "rel:permissionset-permissionsetgroup",
+          "origem": {
+            "campo": "PermissionSetGroupId",
+            "entidade": "obj:PermissionSet"
+          },
+          "tipo": "referencia_campo"
+        },
+        {
+          "cardinalidade_registros": {
+            "estado": "desconhecido",
+            "nota": "Relação 1:1 entre perfil e seu permission set interno não comprovada nesta sessão."
+          },
+          "destino": {
+            "entidade": "obj:Profile"
+          },
+          "estado": "verificado",
+          "evidencias": [
+            {
+              "fonte": "src:objref-permissionset"
+            }
+          ],
+          "explicacao": "Permission sets internos de perfil apontam para o perfil dono (IsOwnedByProfile = true).",
+          "id": "rel:permissionset-profile",
+          "origem": {
+            "campo": "ProfileId",
+            "entidade": "obj:PermissionSet"
+          },
+          "tipo": "referencia_campo"
+        },
+        {
+          "cardinalidade_registros": {
+            "estado": "verificado",
+            "evidencias": [
+              {
+                "fonte": "src:objref-permissionsetassignment"
+              }
+            ],
+            "nota": "Campo anulável: nem toda atribuição precisa preenchê-lo.",
+            "valor": "N:1"
+          },
+          "condicao": "Preenchido quando a atribuição é de um permission set.",
+          "destino": {
+            "entidade": "obj:PermissionSet"
+          },
+          "estado": "verificado",
+          "evidencias": [
+            {
+              "fonte": "src:objref-permissionsetassignment"
+            }
+          ],
+          "explicacao": "Indica qual permission set foi concedido.",
+          "id": "rel:psa-permissionset",
+          "origem": {
+            "campo": "PermissionSetId",
+            "entidade": "obj:PermissionSetAssignment"
+          },
+          "tipo": "referencia_campo"
+        },
+        {
+          "destino": {
+            "entidade": "obj:PermissionSet"
+          },
+          "estado": "verificado",
+          "evidencias": [
+            {
+              "fonte": "src:mdapi-permissionset"
+            },
+            {
+              "fonte": "src:objref-permissionset"
+            }
+          ],
+          "explicacao": "Metadata type e objeto API descrevem permission sets por caminhos diferentes: definição implantável versus registro consultável. A correspondência campo a campo não foi comprovada.",
+          "id": "rel:rep-permissionset",
+          "origem": {
+            "entidade": "mdt:PermissionSet"
+          },
+          "tipo": "representacao_comum"
+        }
+      ]
+    },
+    {
+      "base_da_relacao": [
+        "representacao_comum_em:func:permission-sets"
+      ],
+      "objeto": {
+        "alertas": [
+          "Para alterar uma atribuição, a página orienta excluir o registro antigo e inserir outro.",
+          "A licença do permission set precisa ser compatível com a licença do perfil do usuário.",
+          "Não supor que PermissionSetId e PermissionSetGroupId estejam preenchidos em toda atribuição (ambos anuláveis)."
+        ],
+        "apex": {
+          "consulta_soql_direta": {
+            "estado": "verificado",
+            "evidencias": [
+              {
+                "fonte": "src:objref-permissionsetassignment"
+              }
+            ],
+            "nota": "Objeto da API padrão: consultável por SOQL em Apex, sujeito a permissões.",
+            "valor": true
+          },
+          "nota": "Exemplo Apex não fornecido nesta fase."
+        },
+        "campos": [
+          {
+            "apis": [
+              "padrao"
+            ],
+            "default": {
+              "estado": "desconhecido",
+              "forma": "nao_declarado_na_fonte"
+            },
+            "disponibilidade": {
+              "ate_versao": null,
+              "desde_versao": null,
+              "estado": "desconhecido"
+            },
+            "dominio": {
+              "contexto": "Id de registro do(s) objeto(s) referenciado(s).",
+              "estado": "verificado",
+              "evidencias": [
+                {
+                  "fonte": "src:objref-permissionsetassignment"
+                }
+              ],
+              "natureza": "referencia"
+            },
+            "estado": "verificado",
+            "evidencias": [
+              {
+                "fonte": "src:objref-permissionsetassignment"
+              }
+            ],
+            "explicacao": "explicada",
+            "id": "obj:PermissionSetAssignment.AssigneeId",
+            "nome": "AssigneeId",
+            "o_que_e": "Informa qual usuário recebeu a atribuição.",
+            "obrigatoriedade": {
+              "estado": "desconhecido",
+              "valor": "desconhecida"
+            },
+            "origem": {
+              "estado": "verificado",
+              "evidencias": [
+                {
+                  "fonte": "src:objref-permissionsetassignment"
+                }
+              ],
+              "nota": "Campo padrão do objeto documentado.",
+              "valor": "padrao_plataforma"
+            },
+            "propriedades_api": {
+              "create": true,
+              "defaulted_on_create": false,
+              "estado": "verificado",
+              "evidencias": [
+                {
+                  "fonte": "src:objref-permissionsetassignment"
+                }
+              ],
+              "filter": true,
+              "group": true,
+              "id_lookup": false,
+              "nillable": false,
+              "restricted_picklist": false,
+              "sort": true,
+              "update": false
+            },
+            "referencia": {
+              "alvos": [
+                "obj:User"
+              ],
+              "nome_relacionamento": "Assignee"
+            },
+            "rotulo_didatico": "Quem recebe",
+            "somente_leitura": false,
+            "tipo_tecnico": "reference"
+          },
+          {
+            "apis": [
+              "padrao"
+            ],
+            "default": {
+              "estado": "desconhecido",
+              "forma": "nao_declarado_na_fonte"
+            },
+            "disponibilidade": {
+              "ate_versao": null,
+              "desde_versao": "52.0",
+              "estado": "verificado"
+            },
+            "dominio": {
+              "estado": "verificado",
+              "evidencias": [
+                {
+                  "fonte": "src:objref-permissionsetassignment"
+                }
+              ],
+              "natureza": "data_hora"
+            },
+            "estado": "verificado",
+            "evidencias": [
+              {
+                "fonte": "src:objref-permissionsetassignment"
+              }
+            ],
+            "explicacao": "explicada",
+            "id": "obj:PermissionSetAssignment.ExpirationDate",
+            "nome": "ExpirationDate",
+            "o_que_e": "Data em que a atribuição deixa de valer para o usuário.",
+            "obrigatoriedade": {
+              "estado": "desconhecido",
+              "valor": "desconhecida"
+            },
+            "origem": {
+              "estado": "verificado",
+              "evidencias": [
+                {
+                  "fonte": "src:objref-permissionsetassignment"
+                }
+              ],
+              "nota": "Campo padrão do objeto documentado.",
+              "valor": "padrao_plataforma"
+            },
+            "propriedades_api": {
+              "create": true,
+              "defaulted_on_create": false,
+              "estado": "verificado",
+              "evidencias": [
+                {
+                  "fonte": "src:objref-permissionsetassignment"
+                }
+              ],
+              "filter": true,
+              "group": false,
+              "id_lookup": false,
+              "nillable": true,
+              "restricted_picklist": false,
+              "sort": true,
+              "update": true
+            },
+            "somente_leitura": false,
+            "tipo_tecnico": "datetime"
+          },
+          {
+            "apis": [
+              "padrao"
+            ],
+            "default": {
+              "estado": "verificado",
+              "evidencias": [
+                {
+                  "fonte": "src:objref-permissionsetassignment"
+                }
+              ],
+              "forma": "false",
+              "nota": "A página declara default false.",
+              "valor": false
+            },
+            "disponibilidade": {
+              "ate_versao": null,
+              "desde_versao": "52.0",
+              "estado": "verificado"
+            },
+            "dominio": {
+              "estado": "verificado",
+              "evidencias": [
+                {
+                  "fonte": "src:objref-permissionsetassignment"
+                }
+              ],
+              "lista_completa": "sim",
+              "natureza": "booleano",
+              "valores": [
+                {
+                  "valor": "true"
+                },
+                {
+                  "valor": "false"
+                }
+              ]
+            },
+            "estado": "verificado",
+            "evidencias": [
+              {
+                "fonte": "src:objref-permissionsetassignment"
+              }
+            ],
+            "explicacao": "explicada",
+            "id": "obj:PermissionSetAssignment.IsActive",
+            "nome": "IsActive",
+            "o_que_e": "Informa se a atribuição está ativa.",
+            "obrigatoriedade": {
+              "estado": "desconhecido",
+              "valor": "desconhecida"
+            },
+            "origem": {
+              "estado": "verificado",
+              "evidencias": [
+                {
+                  "fonte": "src:objref-permissionsetassignment"
+                }
+              ],
+              "nota": "Campo padrão do objeto documentado.",
+              "valor": "padrao_plataforma"
+            },
+            "propriedades_api": {
+              "create": false,
+              "defaulted_on_create": true,
+              "estado": "verificado",
+              "evidencias": [
+                {
+                  "fonte": "src:objref-permissionsetassignment"
+                }
+              ],
+              "filter": true,
+              "group": true,
+              "id_lookup": false,
+              "nillable": false,
+              "restricted_picklist": false,
+              "sort": true,
+              "update": false
+            },
+            "somente_leitura": true,
+            "tipo_tecnico": "boolean"
+          },
+          {
+            "apis": [
+              "padrao"
+            ],
+            "default": {
+              "estado": "verificado",
+              "evidencias": [
+                {
+                  "fonte": "src:objref-permissionsetassignment"
+                }
+              ],
+              "forma": "false",
+              "nota": "A página declara default false.",
+              "valor": false
+            },
+            "disponibilidade": {
+              "ate_versao": null,
+              "desde_versao": "57.0",
+              "estado": "verificado"
+            },
+            "dominio": {
+              "estado": "verificado",
+              "evidencias": [
+                {
+                  "fonte": "src:objref-permissionsetassignment"
+                }
+              ],
+              "lista_completa": "sim",
+              "natureza": "booleano",
+              "valores": [
+                {
+                  "valor": "true"
+                },
+                {
+                  "valor": "false"
+                }
+              ]
+            },
+            "estado": "verificado",
+            "evidencias": [
+              {
+                "fonte": "src:objref-permissionsetassignment"
+              }
+            ],
+            "explicacao": "explicada",
+            "id": "obj:PermissionSetAssignment.IsRevoked",
+            "nome": "IsRevoked",
+            "notas": [
+              "Disponível só com user access policies habilitadas."
+            ],
+            "o_que_e": "Informa se a atribuição foi revogada por uma política de acesso; o registro é mantido.",
+            "obrigatoriedade": {
+              "estado": "desconhecido",
+              "valor": "desconhecida"
+            },
+            "origem": {
+              "estado": "verificado",
+              "evidencias": [
+                {
+                  "fonte": "src:objref-permissionsetassignment"
+                }
+              ],
+              "nota": "Campo padrão do objeto documentado.",
+              "valor": "padrao_plataforma"
+            },
+            "propriedades_api": {
+              "create": false,
+              "defaulted_on_create": true,
+              "estado": "verificado",
+              "evidencias": [
+                {
+                  "fonte": "src:objref-permissionsetassignment"
+                }
+              ],
+              "filter": true,
+              "group": true,
+              "id_lookup": false,
+              "nillable": false,
+              "restricted_picklist": false,
+              "sort": true,
+              "update": true
+            },
+            "somente_leitura": false,
+            "tipo_tecnico": "boolean"
+          },
+          {
+            "apis": [
+              "padrao"
+            ],
+            "default": {
+              "estado": "desconhecido",
+              "forma": "nao_declarado_na_fonte"
+            },
+            "disponibilidade": {
+              "ate_versao": null,
+              "desde_versao": "57.0",
+              "estado": "verificado"
+            },
+            "dominio": {
+              "contexto": "Id de registro do(s) objeto(s) referenciado(s).",
+              "estado": "verificado",
+              "evidencias": [
+                {
+                  "fonte": "src:objref-permissionsetassignment"
+                }
+              ],
+              "natureza": "referencia"
+            },
+            "estado": "desconhecido",
+            "evidencias": [
+              {
+                "fonte": "src:objref-permissionsetassignment"
+              }
+            ],
+            "explicacao": "explicada",
+            "id": "obj:PermissionSetAssignment.LastCreatedByChangeId",
+            "nome": "LastCreatedByChangeId",
+            "notas": [
+              "Nome do campo inferido do nome de relacionamento; confirmar no describe."
+            ],
+            "o_que_e": "Registro de mudança de acesso que criou a atribuição.",
+            "obrigatoriedade": {
+              "estado": "desconhecido",
+              "valor": "desconhecida"
+            },
+            "origem": {
+              "estado": "verificado",
+              "evidencias": [
+                {
+                  "fonte": "src:objref-permissionsetassignment"
+                }
+              ],
+              "nota": "Campo padrão do objeto documentado.",
+              "valor": "padrao_plataforma"
+            },
+            "propriedades_api": {
+              "create": false,
+              "defaulted_on_create": false,
+              "estado": "verificado",
+              "evidencias": [
+                {
+                  "fonte": "src:objref-permissionsetassignment"
+                }
+              ],
+              "filter": true,
+              "group": true,
+              "id_lookup": false,
+              "nillable": true,
+              "restricted_picklist": false,
+              "sort": true,
+              "update": false
+            },
+            "referencia": {
+              "alvos": [
+                "UserAccessChange"
+              ],
+              "nome_relacionamento": "LastCreatedByChange"
+            },
+            "somente_leitura": true,
+            "tipo_tecnico": "reference"
+          },
+          {
+            "apis": [
+              "padrao"
+            ],
+            "default": {
+              "estado": "desconhecido",
+              "forma": "nao_declarado_na_fonte"
+            },
+            "disponibilidade": {
+              "ate_versao": null,
+              "desde_versao": "57.0",
+              "estado": "verificado"
+            },
+            "dominio": {
+              "contexto": "Id de registro do(s) objeto(s) referenciado(s).",
+              "estado": "verificado",
+              "evidencias": [
+                {
+                  "fonte": "src:objref-permissionsetassignment"
+                }
+              ],
+              "natureza": "referencia"
+            },
+            "estado": "desconhecido",
+            "evidencias": [
+              {
+                "fonte": "src:objref-permissionsetassignment"
+              }
+            ],
+            "explicacao": "explicada",
+            "id": "obj:PermissionSetAssignment.LastDeletedByChangeId",
+            "nome": "LastDeletedByChangeId",
+            "notas": [
+              "Nome do campo inferido do nome de relacionamento; confirmar no describe."
+            ],
+            "o_que_e": "Registro de mudança de acesso ligado à revogação.",
+            "obrigatoriedade": {
+              "estado": "desconhecido",
+              "valor": "desconhecida"
+            },
+            "origem": {
+              "estado": "verificado",
+              "evidencias": [
+                {
+                  "fonte": "src:objref-permissionsetassignment"
+                }
+              ],
+              "nota": "Campo padrão do objeto documentado.",
+              "valor": "padrao_plataforma"
+            },
+            "propriedades_api": {
+              "create": false,
+              "defaulted_on_create": false,
+              "estado": "verificado",
+              "evidencias": [
+                {
+                  "fonte": "src:objref-permissionsetassignment"
+                }
+              ],
+              "filter": true,
+              "group": true,
+              "id_lookup": false,
+              "nillable": true,
+              "restricted_picklist": false,
+              "sort": true,
+              "update": false
+            },
+            "referencia": {
+              "alvos": [
+                "UserAccessChange"
+              ],
+              "nome_relacionamento": "LastDeletedByChange"
+            },
+            "somente_leitura": true,
+            "tipo_tecnico": "reference"
+          },
+          {
+            "apis": [
+              "padrao"
+            ],
+            "default": {
+              "estado": "desconhecido",
+              "forma": "nao_declarado_na_fonte"
+            },
+            "disponibilidade": {
+              "ate_versao": null,
+              "desde_versao": "41.0",
+              "estado": "verificado"
+            },
+            "dominio": {
+              "contexto": "Id de registro do(s) objeto(s) referenciado(s).",
+              "estado": "verificado",
+              "evidencias": [
+                {
+                  "fonte": "src:objref-permissionsetassignment"
+                }
+              ],
+              "natureza": "referencia"
+            },
+            "estado": "verificado",
+            "evidencias": [
+              {
+                "fonte": "src:objref-permissionsetassignment"
+              }
+            ],
+            "explicacao": "explicada",
+            "id": "obj:PermissionSetAssignment.PermissionSetGroupId",
+            "nome": "PermissionSetGroupId",
+            "o_que_e": "Informa o grupo de permission sets atribuído, quando a atribuição é de um grupo.",
+            "obrigatoriedade": {
+              "estado": "desconhecido",
+              "valor": "desconhecida"
+            },
+            "origem": {
+              "estado": "verificado",
+              "evidencias": [
+                {
+                  "fonte": "src:objref-permissionsetassignment"
+                }
+              ],
+              "nota": "Campo padrão do objeto documentado.",
+              "valor": "padrao_plataforma"
+            },
+            "propriedades_api": {
+              "create": true,
+              "defaulted_on_create": false,
+              "estado": "verificado",
+              "evidencias": [
+                {
+                  "fonte": "src:objref-permissionsetassignment"
+                }
+              ],
+              "filter": true,
+              "group": true,
+              "id_lookup": false,
+              "nillable": true,
+              "restricted_picklist": false,
+              "sort": true,
+              "update": false
+            },
+            "referencia": {
+              "alvos": [
+                "obj:PermissionSetGroup"
+              ],
+              "nome_relacionamento": "PermissionSetGroup"
+            },
+            "somente_leitura": false,
+            "tipo_tecnico": "reference"
+          },
+          {
+            "apis": [
+              "padrao"
+            ],
+            "default": {
+              "estado": "desconhecido",
+              "forma": "nao_declarado_na_fonte"
+            },
+            "disponibilidade": {
+              "ate_versao": null,
+              "desde_versao": null,
+              "estado": "desconhecido"
+            },
+            "dominio": {
+              "contexto": "Id de registro do(s) objeto(s) referenciado(s).",
+              "estado": "verificado",
+              "evidencias": [
+                {
+                  "fonte": "src:objref-permissionsetassignment"
+                }
+              ],
+              "natureza": "referencia"
+            },
+            "estado": "verificado",
+            "evidencias": [
+              {
+                "fonte": "src:objref-permissionsetassignment"
+              }
+            ],
+            "explicacao": "explicada",
+            "id": "obj:PermissionSetAssignment.PermissionSetId",
+            "nome": "PermissionSetId",
+            "o_que_e": "Informa qual permission set foi atribuído.",
+            "obrigatoriedade": {
+              "estado": "desconhecido",
+              "valor": "desconhecida"
+            },
+            "origem": {
+              "estado": "verificado",
+              "evidencias": [
+                {
+                  "fonte": "src:objref-permissionsetassignment"
+                }
+              ],
+              "nota": "Campo padrão do objeto documentado.",
+              "valor": "padrao_plataforma"
+            },
+            "propriedades_api": {
+              "create": true,
+              "defaulted_on_create": false,
+              "estado": "verificado",
+              "evidencias": [
+                {
+                  "fonte": "src:objref-permissionsetassignment"
+                }
+              ],
+              "filter": true,
+              "group": true,
+              "id_lookup": false,
+              "nillable": true,
+              "restricted_picklist": false,
+              "sort": true,
+              "update": false
+            },
+            "referencia": {
+              "alvos": [
+                "obj:PermissionSet"
+              ],
+              "nome_relacionamento": "PermissionSet"
+            },
+            "somente_leitura": false,
+            "tipo_tecnico": "reference"
+          }
+        ],
+        "cobertura": {
+          "estrutural": {
+            "esperado": null,
+            "estado": "parcial",
+            "nota": "Campos da tabela extraída; Id e campos de sistema não constam.",
+            "presente": 8
+          },
+          "explicativa": {
+            "esperado": 8,
+            "estado": "completa",
+            "presente": 8
+          },
+          "mapeamento": {
+            "estado": "parcial",
+            "nota": "Ver relacionamentos registrados."
+          }
+        },
+        "consultas": [
+          {
+            "api": "padrao",
+            "contexto": "API padrão; substitua o marcador por um Id de usuário.",
+            "soql": "SELECT Id, Assignee.Username, PermissionSet.Name, PermissionSetGroupId FROM PermissionSetAssignment WHERE AssigneeId = '<Id do usuário>'",
+            "validacao": "documental"
+          }
+        ],
+        "estado": "verificado",
+        "evidencias": [
+          {
+            "fonte": "src:objref-permissionsetassignment"
+          }
+        ],
+        "exposicoes": [
+          {
+            "acesso_especial": "Desde Summer '20: View Setup and Configuration, Assign Permission Sets ou Manage User.",
+            "api": "padrao",
+            "chamadas": [
+              "create()",
+              "delete()",
+              "describeSObjects()",
+              "query()",
+              "retrieve()",
+              "update()"
+            ],
+            "desde_versao": "22.0",
+            "estado": "verificado",
+            "evidencias": [
+              {
+                "fonte": "src:objref-permissionsetassignment"
+              }
+            ]
+          },
+          {
+            "api": "tooling",
+            "desde_versao": null,
+            "estado": "verificado",
+            "evidencias": [
+              {
+                "fonte": "src:tooling-objects-list"
+              }
+            ],
+            "nota": "Listado no índice de objetos da Tooling API 68.0. Campos e operações dessa exposição não levantados; não presumir que sejam iguais aos da API padrão."
+          }
+        ],
+        "id": "obj:PermissionSetAssignment",
+        "juncao": true,
+        "nome": "PermissionSetAssignment",
+        "o_que_e": "Objeto de junção: cada registro liga um usuário a um permission set ou a um grupo de permission sets.",
+        "papel": "É onde a atribuição de permission sets e grupos fica gravada.",
+        "setup": {
+          "estado": "nao_aplicavel",
+          "nota": "Objeto consultável via API; não é tela do Setup."
+        }
+      },
+      "relacionamentos_do_objeto": [
+        {
+          "cardinalidade_registros": {
+            "estado": "verificado",
+            "evidencias": [
+              {
+                "fonte": "src:objref-permissionsetassignment"
+              }
+            ],
+            "nota": "Cada atribuição referencia um usuário; um usuário pode ter várias atribuições (a página orienta consultar por usuário).",
+            "valor": "N:1"
+          },
+          "destino": {
+            "entidade": "obj:User"
+          },
+          "estado": "verificado",
+          "evidencias": [
+            {
+              "fonte": "src:objref-permissionsetassignment"
+            }
+          ],
+          "explicacao": "A atribuição precisa dizer quem recebe o acesso; AssigneeId guarda o Id do usuário.",
+          "id": "rel:psa-assignee-user",
+          "origem": {
+            "campo": "AssigneeId",
+            "entidade": "obj:PermissionSetAssignment"
+          },
+          "tipo": "referencia_campo"
+        },
+        {
+          "cardinalidade_registros": {
+            "estado": "verificado",
+            "evidencias": [
+              {
+                "fonte": "src:objref-permissionsetassignment"
+              }
+            ],
+            "nota": "Campo anulável: nem toda atribuição precisa preenchê-lo.",
+            "valor": "N:1"
+          },
+          "condicao": "Preenchido quando a atribuição é de um permission set.",
+          "destino": {
+            "entidade": "obj:PermissionSet"
+          },
+          "estado": "verificado",
+          "evidencias": [
+            {
+              "fonte": "src:objref-permissionsetassignment"
+            }
+          ],
+          "explicacao": "Indica qual permission set foi concedido.",
+          "id": "rel:psa-permissionset",
+          "origem": {
+            "campo": "PermissionSetId",
+            "entidade": "obj:PermissionSetAssignment"
+          },
+          "tipo": "referencia_campo"
+        },
+        {
+          "cardinalidade_registros": {
+            "estado": "verificado",
+            "evidencias": [
+              {
+                "fonte": "src:objref-permissionsetassignment"
+              }
+            ],
+            "nota": "Campo anulável.",
+            "valor": "N:1"
+          },
+          "condicao": "Preenchido quando a atribuição é de um grupo de permission sets.",
+          "destino": {
+            "entidade": "obj:PermissionSetGroup"
+          },
+          "estado": "verificado",
+          "evidencias": [
+            {
+              "fonte": "src:objref-permissionsetassignment"
+            }
+          ],
+          "explicacao": "Quando a atribuição é de um grupo, indica qual grupo.",
+          "id": "rel:psa-permissionsetgroup",
+          "origem": {
+            "campo": "PermissionSetGroupId",
+            "entidade": "obj:PermissionSetAssignment"
+          },
+          "tipo": "referencia_campo"
+        }
+      ]
+    }
+  ],
+  "relacionamentos": [
+    {
+      "destino": {
+        "campo": "Label",
+        "entidade": "obj:PermissionSet"
+      },
+      "estado": "desconhecido",
+      "evidencias": [
+        {
+          "fonte": "src:mdapi-permissionset"
+        },
+        {
+          "fonte": "src:objref-permissionset"
+        }
+      ],
+      "explicacao": "Candidata: ambos descrevem o rótulo do permission set com limite de 80 caracteres. Semelhança de nome e descrição não comprova equivalência.",
+      "id": "rel:cor-permissionset-label",
+      "natureza_correspondencia": "desconhecida",
+      "origem": {
+        "campo": "label",
+        "entidade": "mdt:PermissionSet"
+      },
+      "tipo": "correspondencia_xml_api"
+    },
+    {
+      "destino": {
+        "entidade": "obj:PermissionSet"
+      },
+      "estado": "verificado",
+      "evidencias": [
+        {
+          "fonte": "src:mdapi-permissionset"
+        },
+        {
+          "fonte": "src:objref-permissionset"
+        }
+      ],
+      "explicacao": "Metadata type e objeto API descrevem permission sets por caminhos diferentes: definição implantável versus registro consultável. A correspondência campo a campo não foi comprovada.",
+      "id": "rel:rep-permissionset",
+      "origem": {
+        "entidade": "mdt:PermissionSet"
+      },
+      "tipo": "representacao_comum"
+    }
+  ],
+  "versao_base": {
+    "api_version": "68.0",
+    "data_referencia": "2026-11-07",
+    "escopo": "config/escopo.json",
+    "release": "Winter '27"
+  }
+}

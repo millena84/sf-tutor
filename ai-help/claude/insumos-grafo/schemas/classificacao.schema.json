@@ -1,0 +1,68 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "classificacao.schema.json",
+  "title": "classificacao",
+  "type": "object",
+  "required": [
+    "id",
+    "nome",
+    "nome_curto",
+    "sigla",
+    "natureza",
+    "descricao",
+    "subclassificacoes",
+    "estado"
+  ],
+  "additionalProperties": false,
+  "properties": {
+    "id": {
+      "type": "string",
+      "pattern": "^cls:[a-z0-9-]+$"
+    },
+    "nome": {
+      "type": "string"
+    },
+    "nome_curto": {
+      "type": "string"
+    },
+    "sigla": {
+      "type": "string"
+    },
+    "natureza": {
+      "enum": [
+        "curadoria_didatica",
+        "agrupamento_documental_oficial"
+      ]
+    },
+    "descricao": {
+      "type": "string"
+    },
+    "escopo": {
+      "type": "string"
+    },
+    "fora_do_escopo": {
+      "type": "string"
+    },
+    "prerequisitos": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "subclassificacoes": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "referencias_oficiais": {
+      "$ref": "comum.schema.json#/$defs/evidencias"
+    },
+    "estado": {
+      "$ref": "comum.schema.json#/$defs/estado"
+    },
+    "nota_estado": {
+      "type": "string"
+    }
+  }
+}

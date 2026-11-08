@@ -1,0 +1,1310 @@
+{
+  "id": "mdt:PermissionSet",
+  "nome": "PermissionSet",
+  "o_que_e": "Definição implantável de um permission set: o conjunto de permissões que pode ser somado ao perfil de um usuário.",
+  "finalidade": "Versionar e implantar entre orgs as permissões de um permission set. A atribuição a usuários não faz parte deste XML.",
+  "estende": "Metadata",
+  "arquivos": {
+    "source_format": {
+      "estado": "verificado",
+      "valor": {
+        "pasta": "permissionsets/",
+        "arquivo": "<Nome>.permissionset-meta.xml"
+      },
+      "nota": "Pasta e sufixo do registro do Salesforce CLI; sufixo '-meta.xml' segue a convenção do source format.",
+      "evidencias": [
+        {
+          "fonte": "src:sdr-registry",
+          "nota": "types.permissionset"
+        }
+      ]
+    },
+    "metadata_api_format": {
+      "estado": "verificado",
+      "valor": {
+        "pasta": "permissionsets/",
+        "arquivo": "<Nome>.permissionset"
+      },
+      "evidencias": [
+        {
+          "fonte": "src:sdr-registry",
+          "nota": "types.permissionset"
+        }
+      ]
+    }
+  },
+  "disponibilidade": {
+    "desde_versao": "22.0",
+    "ate_versao": null,
+    "estado": "verificado"
+  },
+  "suporte_cli": {
+    "estado": "verificado",
+    "valor": {
+      "status": "suportado",
+      "nota_fonte": null
+    },
+    "nota": "Suporte do Salesforce CLI (source-deploy-retrieve), não do Metadata API em geral.",
+    "evidencias": [
+      {
+        "fonte": "src:sdr-metadata-support"
+      }
+    ]
+  },
+  "setup": {
+    "estado": "desconhecido",
+    "nota": "Caminho no Setup não validado nesta sessão."
+  },
+  "propriedades": [
+    {
+      "id": "mdt:PermissionSet.fullName",
+      "nome": "fullName",
+      "tipo_tecnico": "string",
+      "o_que_e": "Nome completo (API name) do componente; herdado do tipo Metadata.",
+      "origem": {
+        "estado": "verificado",
+        "valor": "padrao_plataforma",
+        "nota": "Propriedade definida pelo schema da Metadata API.",
+        "evidencias": [
+          {
+            "fonte": "src:mdapi-permissionset"
+          }
+        ]
+      },
+      "obrigatoriedade": {
+        "valor": "desconhecida",
+        "estado": "desconhecido"
+      },
+      "default": {
+        "forma": "nao_declarado_na_fonte",
+        "estado": "desconhecido"
+      },
+      "dominio": {
+        "natureza": "texto_livre",
+        "estado": "verificado",
+        "evidencias": [
+          {
+            "fonte": "src:mdapi-permissionset"
+          }
+        ],
+        "contexto": "A fonte tipa como string sem lista de valores; não inventar valores."
+      },
+      "disponibilidade": {
+        "desde_versao": null,
+        "ate_versao": null,
+        "estado": "desconhecido"
+      },
+      "explicacao": "explicada",
+      "estado": "verificado",
+      "evidencias": [
+        {
+          "fonte": "src:mdapi-permissionset"
+        }
+      ],
+      "herdada_de": "Metadata"
+    },
+    {
+      "id": "mdt:PermissionSet.agentAccesses",
+      "nome": "agentAccesses",
+      "tipo_tecnico": "PermissionSetAgentAccess[]",
+      "o_que_e": "Agentes visíveis para usuários com este permission set.",
+      "origem": {
+        "estado": "verificado",
+        "valor": "padrao_plataforma",
+        "nota": "Propriedade definida pelo schema da Metadata API.",
+        "evidencias": [
+          {
+            "fonte": "src:mdapi-permissionset"
+          }
+        ]
+      },
+      "obrigatoriedade": {
+        "valor": "nao",
+        "estado": "desconhecido",
+        "condicao": "A documentação 68.0 não marca o campo como obrigatório; ausência de marcação não comprova opcionalidade (confirmar no WSDL)."
+      },
+      "default": {
+        "forma": "nao_declarado_na_fonte",
+        "estado": "desconhecido"
+      },
+      "dominio": {
+        "natureza": "tipo_composto",
+        "estado": "verificado",
+        "evidencias": [
+          {
+            "fonte": "src:mdapi-permissionset"
+          }
+        ]
+      },
+      "disponibilidade": {
+        "desde_versao": "63.0",
+        "ate_versao": null,
+        "estado": "verificado"
+      },
+      "explicacao": "explicada",
+      "estado": "verificado",
+      "evidencias": [
+        {
+          "fonte": "src:mdapi-permissionset"
+        }
+      ],
+      "cardinalidade": "0..n",
+      "estrutura_ref": "mdx:PermissionSetAgentAccess"
+    },
+    {
+      "id": "mdt:PermissionSet.applicationVisibilities",
+      "nome": "applicationVisibilities",
+      "tipo_tecnico": "PermissionSetApplicationVisibility[]",
+      "o_que_e": "Apps visíveis para os usuários atribuídos.",
+      "origem": {
+        "estado": "verificado",
+        "valor": "padrao_plataforma",
+        "nota": "Propriedade definida pelo schema da Metadata API.",
+        "evidencias": [
+          {
+            "fonte": "src:mdapi-permissionset"
+          }
+        ]
+      },
+      "obrigatoriedade": {
+        "valor": "nao",
+        "estado": "desconhecido",
+        "condicao": "A documentação 68.0 não marca o campo como obrigatório; ausência de marcação não comprova opcionalidade (confirmar no WSDL)."
+      },
+      "default": {
+        "forma": "nao_declarado_na_fonte",
+        "estado": "desconhecido"
+      },
+      "dominio": {
+        "natureza": "tipo_composto",
+        "estado": "verificado",
+        "evidencias": [
+          {
+            "fonte": "src:mdapi-permissionset"
+          }
+        ]
+      },
+      "disponibilidade": {
+        "desde_versao": "29.0",
+        "ate_versao": null,
+        "estado": "verificado",
+        "nota": "Apps padrão a partir da 30.0."
+      },
+      "explicacao": "explicada",
+      "estado": "verificado",
+      "evidencias": [
+        {
+          "fonte": "src:mdapi-permissionset"
+        }
+      ],
+      "cardinalidade": "0..n",
+      "estrutura_ref": "mdx:PermissionSetApplicationVisibility"
+    },
+    {
+      "id": "mdt:PermissionSet.classAccesses",
+      "nome": "classAccesses",
+      "tipo_tecnico": "PermissionSetApexClassAccess[]",
+      "o_que_e": "Classes Apex cujos métodos os usuários podem executar.",
+      "origem": {
+        "estado": "verificado",
+        "valor": "padrao_plataforma",
+        "nota": "Propriedade definida pelo schema da Metadata API.",
+        "evidencias": [
+          {
+            "fonte": "src:mdapi-permissionset"
+          }
+        ]
+      },
+      "obrigatoriedade": {
+        "valor": "nao",
+        "estado": "desconhecido",
+        "condicao": "A documentação 68.0 não marca o campo como obrigatório; ausência de marcação não comprova opcionalidade (confirmar no WSDL)."
+      },
+      "default": {
+        "forma": "nao_declarado_na_fonte",
+        "estado": "desconhecido"
+      },
+      "dominio": {
+        "natureza": "tipo_composto",
+        "estado": "verificado",
+        "evidencias": [
+          {
+            "fonte": "src:mdapi-permissionset"
+          }
+        ]
+      },
+      "disponibilidade": {
+        "desde_versao": "23.0",
+        "ate_versao": null,
+        "estado": "verificado"
+      },
+      "explicacao": "explicada",
+      "estado": "verificado",
+      "evidencias": [
+        {
+          "fonte": "src:mdapi-permissionset"
+        }
+      ],
+      "cardinalidade": "0..n",
+      "estrutura_ref": "mdx:PermissionSetApexClassAccess"
+    },
+    {
+      "id": "mdt:PermissionSet.customMetadataTypeAccesses",
+      "nome": "customMetadataTypeAccesses",
+      "tipo_tecnico": "PermissionSetCustomMetadataTypeAccess[]",
+      "o_que_e": "Custom metadata types cujos registros os usuários podem ler.",
+      "origem": {
+        "estado": "verificado",
+        "valor": "padrao_plataforma",
+        "nota": "Propriedade definida pelo schema da Metadata API.",
+        "evidencias": [
+          {
+            "fonte": "src:mdapi-permissionset"
+          }
+        ]
+      },
+      "obrigatoriedade": {
+        "valor": "nao",
+        "estado": "desconhecido",
+        "condicao": "A documentação 68.0 não marca o campo como obrigatório; ausência de marcação não comprova opcionalidade (confirmar no WSDL)."
+      },
+      "default": {
+        "forma": "nao_declarado_na_fonte",
+        "estado": "desconhecido"
+      },
+      "dominio": {
+        "natureza": "tipo_composto",
+        "estado": "verificado",
+        "evidencias": [
+          {
+            "fonte": "src:mdapi-permissionset"
+          }
+        ]
+      },
+      "disponibilidade": {
+        "desde_versao": "47.0",
+        "ate_versao": null,
+        "estado": "verificado"
+      },
+      "explicacao": "explicada",
+      "estado": "verificado",
+      "evidencias": [
+        {
+          "fonte": "src:mdapi-permissionset"
+        }
+      ],
+      "cardinalidade": "0..n",
+      "estrutura_ref": "mdx:PermissionSetCustomMetadataTypeAccess"
+    },
+    {
+      "id": "mdt:PermissionSet.customPermissions",
+      "nome": "customPermissions",
+      "tipo_tecnico": "PermissionSetCustomPermissions[]",
+      "o_que_e": "Permissões personalizadas habilitadas.",
+      "origem": {
+        "estado": "verificado",
+        "valor": "padrao_plataforma",
+        "nota": "Propriedade definida pelo schema da Metadata API.",
+        "evidencias": [
+          {
+            "fonte": "src:mdapi-permissionset"
+          }
+        ]
+      },
+      "obrigatoriedade": {
+        "valor": "nao",
+        "estado": "desconhecido",
+        "condicao": "A documentação 68.0 não marca o campo como obrigatório; ausência de marcação não comprova opcionalidade (confirmar no WSDL)."
+      },
+      "default": {
+        "forma": "nao_declarado_na_fonte",
+        "estado": "desconhecido"
+      },
+      "dominio": {
+        "natureza": "tipo_composto",
+        "estado": "verificado",
+        "evidencias": [
+          {
+            "fonte": "src:mdapi-permissionset"
+          }
+        ]
+      },
+      "disponibilidade": {
+        "desde_versao": "31.0",
+        "ate_versao": null,
+        "estado": "verificado"
+      },
+      "explicacao": "explicada",
+      "estado": "verificado",
+      "evidencias": [
+        {
+          "fonte": "src:mdapi-permissionset"
+        }
+      ],
+      "cardinalidade": "0..n",
+      "estrutura_ref": "mdx:PermissionSetCustomPermissions"
+    },
+    {
+      "id": "mdt:PermissionSet.customSettingAccesses",
+      "nome": "customSettingAccesses",
+      "tipo_tecnico": "PermissionSetCustomSettingAccesses[]",
+      "o_que_e": "Configurações personalizadas cujos registros os usuários podem ler.",
+      "origem": {
+        "estado": "verificado",
+        "valor": "padrao_plataforma",
+        "nota": "Propriedade definida pelo schema da Metadata API.",
+        "evidencias": [
+          {
+            "fonte": "src:mdapi-permissionset"
+          }
+        ]
+      },
+      "obrigatoriedade": {
+        "valor": "nao",
+        "estado": "desconhecido",
+        "condicao": "A documentação 68.0 não marca o campo como obrigatório; ausência de marcação não comprova opcionalidade (confirmar no WSDL)."
+      },
+      "default": {
+        "forma": "nao_declarado_na_fonte",
+        "estado": "desconhecido"
+      },
+      "dominio": {
+        "natureza": "tipo_composto",
+        "estado": "verificado",
+        "evidencias": [
+          {
+            "fonte": "src:mdapi-permissionset"
+          }
+        ]
+      },
+      "disponibilidade": {
+        "desde_versao": "47.0",
+        "ate_versao": null,
+        "estado": "verificado"
+      },
+      "explicacao": "explicada",
+      "estado": "verificado",
+      "evidencias": [
+        {
+          "fonte": "src:mdapi-permissionset"
+        }
+      ],
+      "cardinalidade": "0..n",
+      "estrutura_ref": "mdx:PermissionSetCustomSettingAccesses"
+    },
+    {
+      "id": "mdt:PermissionSet.description",
+      "nome": "description",
+      "tipo_tecnico": "string",
+      "o_que_e": "Descrição do permission set.",
+      "origem": {
+        "estado": "verificado",
+        "valor": "padrao_plataforma",
+        "nota": "Propriedade definida pelo schema da Metadata API.",
+        "evidencias": [
+          {
+            "fonte": "src:mdapi-permissionset"
+          }
+        ]
+      },
+      "obrigatoriedade": {
+        "valor": "nao",
+        "estado": "desconhecido",
+        "condicao": "A documentação 68.0 não marca o campo como obrigatório; ausência de marcação não comprova opcionalidade (confirmar no WSDL)."
+      },
+      "default": {
+        "forma": "nao_declarado_na_fonte",
+        "estado": "desconhecido"
+      },
+      "dominio": {
+        "natureza": "texto_livre",
+        "estado": "verificado",
+        "evidencias": [
+          {
+            "fonte": "src:mdapi-permissionset"
+          }
+        ],
+        "contexto": "A fonte tipa como string sem lista de valores; não inventar valores."
+      },
+      "disponibilidade": {
+        "desde_versao": null,
+        "ate_versao": null,
+        "estado": "desconhecido"
+      },
+      "explicacao": "explicada",
+      "estado": "verificado",
+      "evidencias": [
+        {
+          "fonte": "src:mdapi-permissionset"
+        }
+      ],
+      "restricoes": {
+        "estado": "verificado",
+        "valor": "Até 255 caracteres.",
+        "evidencias": [
+          {
+            "fonte": "src:mdapi-permissionset"
+          }
+        ]
+      }
+    },
+    {
+      "id": "mdt:PermissionSet.emailRoutingAddressAccesses",
+      "nome": "emailRoutingAddressAccesses",
+      "tipo_tecnico": "PermissionSetEmailRoutingAddressAccess[]",
+      "o_que_e": "Permissões de endereços de roteamento de e-mail.",
+      "origem": {
+        "estado": "verificado",
+        "valor": "padrao_plataforma",
+        "nota": "Propriedade definida pelo schema da Metadata API.",
+        "evidencias": [
+          {
+            "fonte": "src:mdapi-permissionset"
+          }
+        ]
+      },
+      "obrigatoriedade": {
+        "valor": "nao",
+        "estado": "desconhecido",
+        "condicao": "A documentação 68.0 não marca o campo como obrigatório; ausência de marcação não comprova opcionalidade (confirmar no WSDL)."
+      },
+      "default": {
+        "forma": "nao_declarado_na_fonte",
+        "estado": "desconhecido"
+      },
+      "dominio": {
+        "natureza": "tipo_composto",
+        "estado": "verificado",
+        "evidencias": [
+          {
+            "fonte": "src:mdapi-permissionset"
+          }
+        ]
+      },
+      "disponibilidade": {
+        "desde_versao": "62.0",
+        "ate_versao": null,
+        "estado": "verificado"
+      },
+      "explicacao": "explicada",
+      "estado": "verificado",
+      "evidencias": [
+        {
+          "fonte": "src:mdapi-permissionset"
+        }
+      ],
+      "cardinalidade": "0..n",
+      "estrutura_ref": "mdx:PermissionSetEmailRoutingAddressAccess"
+    },
+    {
+      "id": "mdt:PermissionSet.externalCredentialPrincipalAccesses",
+      "nome": "externalCredentialPrincipalAccesses",
+      "tipo_tecnico": "PermissionSetExternalCredentialPrincipalAccess[]",
+      "o_que_e": "Principais de credenciais externas que os usuários podem usar em chamadas externas.",
+      "origem": {
+        "estado": "verificado",
+        "valor": "padrao_plataforma",
+        "nota": "Propriedade definida pelo schema da Metadata API.",
+        "evidencias": [
+          {
+            "fonte": "src:mdapi-permissionset"
+          }
+        ]
+      },
+      "obrigatoriedade": {
+        "valor": "nao",
+        "estado": "desconhecido",
+        "condicao": "A documentação 68.0 não marca o campo como obrigatório; ausência de marcação não comprova opcionalidade (confirmar no WSDL)."
+      },
+      "default": {
+        "forma": "nao_declarado_na_fonte",
+        "estado": "desconhecido"
+      },
+      "dominio": {
+        "natureza": "tipo_composto",
+        "estado": "verificado",
+        "evidencias": [
+          {
+            "fonte": "src:mdapi-permissionset"
+          }
+        ]
+      },
+      "disponibilidade": {
+        "desde_versao": "59.0",
+        "ate_versao": null,
+        "estado": "verificado"
+      },
+      "explicacao": "explicada",
+      "estado": "verificado",
+      "evidencias": [
+        {
+          "fonte": "src:mdapi-permissionset"
+        }
+      ],
+      "cardinalidade": "0..n",
+      "estrutura_ref": "mdx:PermissionSetExternalCredentialPrincipalAccess"
+    },
+    {
+      "id": "mdt:PermissionSet.externalDataSourceAccesses",
+      "nome": "externalDataSourceAccesses",
+      "tipo_tecnico": "PermissionSetExternalDataSourceAccess[]",
+      "o_que_e": "Fontes de dados externas com identidade por usuário.",
+      "origem": {
+        "estado": "verificado",
+        "valor": "padrao_plataforma",
+        "nota": "Propriedade definida pelo schema da Metadata API.",
+        "evidencias": [
+          {
+            "fonte": "src:mdapi-permissionset"
+          }
+        ]
+      },
+      "obrigatoriedade": {
+        "valor": "nao",
+        "estado": "desconhecido",
+        "condicao": "A documentação 68.0 não marca o campo como obrigatório; ausência de marcação não comprova opcionalidade (confirmar no WSDL)."
+      },
+      "default": {
+        "forma": "nao_declarado_na_fonte",
+        "estado": "desconhecido"
+      },
+      "dominio": {
+        "natureza": "tipo_composto",
+        "estado": "verificado",
+        "evidencias": [
+          {
+            "fonte": "src:mdapi-permissionset"
+          }
+        ]
+      },
+      "disponibilidade": {
+        "desde_versao": "27.0",
+        "ate_versao": null,
+        "estado": "verificado"
+      },
+      "explicacao": "explicada",
+      "estado": "verificado",
+      "evidencias": [
+        {
+          "fonte": "src:mdapi-permissionset"
+        }
+      ],
+      "cardinalidade": "0..n",
+      "estrutura_ref": "mdx:PermissionSetExternalDataSourceAccess"
+    },
+    {
+      "id": "mdt:PermissionSet.fieldPermissions",
+      "nome": "fieldPermissions",
+      "tipo_tecnico": "PermissionSetFieldPermissions[]",
+      "o_que_e": "Campos que os usuários podem ler ou editar.",
+      "origem": {
+        "estado": "verificado",
+        "valor": "padrao_plataforma",
+        "nota": "Propriedade definida pelo schema da Metadata API.",
+        "evidencias": [
+          {
+            "fonte": "src:mdapi-permissionset"
+          }
+        ]
+      },
+      "obrigatoriedade": {
+        "valor": "nao",
+        "estado": "desconhecido",
+        "condicao": "A documentação 68.0 não marca o campo como obrigatório; ausência de marcação não comprova opcionalidade (confirmar no WSDL)."
+      },
+      "default": {
+        "forma": "nao_declarado_na_fonte",
+        "estado": "desconhecido"
+      },
+      "dominio": {
+        "natureza": "tipo_composto",
+        "estado": "verificado",
+        "evidencias": [
+          {
+            "fonte": "src:mdapi-permissionset"
+          }
+        ]
+      },
+      "disponibilidade": {
+        "desde_versao": "23.0",
+        "ate_versao": null,
+        "estado": "verificado"
+      },
+      "explicacao": "explicada",
+      "estado": "verificado",
+      "evidencias": [
+        {
+          "fonte": "src:mdapi-permissionset"
+        }
+      ],
+      "cardinalidade": "0..n",
+      "estrutura_ref": "mdx:PermissionSetFieldPermissions"
+    },
+    {
+      "id": "mdt:PermissionSet.flowAccesses",
+      "nome": "flowAccesses",
+      "tipo_tecnico": "PermissionSetFlowAccess[]",
+      "o_que_e": "Flows que os usuários podem acessar.",
+      "origem": {
+        "estado": "verificado",
+        "valor": "padrao_plataforma",
+        "nota": "Propriedade definida pelo schema da Metadata API.",
+        "evidencias": [
+          {
+            "fonte": "src:mdapi-permissionset"
+          }
+        ]
+      },
+      "obrigatoriedade": {
+        "valor": "nao",
+        "estado": "desconhecido",
+        "condicao": "A documentação 68.0 não marca o campo como obrigatório; ausência de marcação não comprova opcionalidade (confirmar no WSDL)."
+      },
+      "default": {
+        "forma": "nao_declarado_na_fonte",
+        "estado": "desconhecido"
+      },
+      "dominio": {
+        "natureza": "tipo_composto",
+        "estado": "verificado",
+        "evidencias": [
+          {
+            "fonte": "src:mdapi-permissionset"
+          }
+        ]
+      },
+      "disponibilidade": {
+        "desde_versao": "47.0",
+        "ate_versao": null,
+        "estado": "verificado"
+      },
+      "explicacao": "explicada",
+      "estado": "verificado",
+      "evidencias": [
+        {
+          "fonte": "src:mdapi-permissionset"
+        }
+      ],
+      "cardinalidade": "0..n",
+      "estrutura_ref": "mdx:PermissionSetFlowAccess"
+    },
+    {
+      "id": "mdt:PermissionSet.genComputingSummaryDefAccesses",
+      "nome": "genComputingSummaryDefAccesses",
+      "tipo_tecnico": "PermissionSetGenComputingSummaryDefAccess[]",
+      "o_que_e": "Acesso a configurações de resumo aprimorado.",
+      "origem": {
+        "estado": "verificado",
+        "valor": "padrao_plataforma",
+        "nota": "Propriedade definida pelo schema da Metadata API.",
+        "evidencias": [
+          {
+            "fonte": "src:mdapi-permissionset"
+          }
+        ]
+      },
+      "obrigatoriedade": {
+        "valor": "nao",
+        "estado": "desconhecido",
+        "condicao": "A documentação 68.0 não marca o campo como obrigatório; ausência de marcação não comprova opcionalidade (confirmar no WSDL)."
+      },
+      "default": {
+        "forma": "nao_declarado_na_fonte",
+        "estado": "desconhecido"
+      },
+      "dominio": {
+        "natureza": "tipo_composto",
+        "estado": "verificado",
+        "evidencias": [
+          {
+            "fonte": "src:mdapi-permissionset"
+          }
+        ]
+      },
+      "disponibilidade": {
+        "desde_versao": "66.0",
+        "ate_versao": null,
+        "estado": "verificado"
+      },
+      "explicacao": "explicada",
+      "estado": "verificado",
+      "evidencias": [
+        {
+          "fonte": "src:mdapi-permissionset"
+        }
+      ],
+      "cardinalidade": "0..n",
+      "estrutura_ref": "mdx:PermissionSetGenComputingSummaryDefAccess"
+    },
+    {
+      "id": "mdt:PermissionSet.hasActivationRequired",
+      "nome": "hasActivationRequired",
+      "tipo_tecnico": "boolean",
+      "o_que_e": "Indica se o permission set só vale com uma sessão ativa associada.",
+      "origem": {
+        "estado": "verificado",
+        "valor": "padrao_plataforma",
+        "nota": "Propriedade definida pelo schema da Metadata API.",
+        "evidencias": [
+          {
+            "fonte": "src:mdapi-permissionset"
+          }
+        ]
+      },
+      "obrigatoriedade": {
+        "valor": "nao",
+        "estado": "desconhecido",
+        "condicao": "A documentação 68.0 não marca o campo como obrigatório; ausência de marcação não comprova opcionalidade (confirmar no WSDL)."
+      },
+      "default": {
+        "forma": "nao_declarado_na_fonte",
+        "estado": "desconhecido"
+      },
+      "dominio": {
+        "natureza": "booleano",
+        "valores": [
+          {
+            "valor": "true"
+          },
+          {
+            "valor": "false"
+          }
+        ],
+        "lista_completa": "sim",
+        "estado": "verificado",
+        "evidencias": [
+          {
+            "fonte": "src:mdapi-permissionset"
+          }
+        ]
+      },
+      "disponibilidade": {
+        "desde_versao": "37.0",
+        "ate_versao": null,
+        "estado": "verificado"
+      },
+      "explicacao": "explicada",
+      "estado": "verificado",
+      "evidencias": [
+        {
+          "fonte": "src:mdapi-permissionset"
+        }
+      ],
+      "rotulo_didatico": "Exige ativação de sessão"
+    },
+    {
+      "id": "mdt:PermissionSet.label",
+      "nome": "label",
+      "tipo_tecnico": "string",
+      "o_que_e": "Nome visível do permission set.",
+      "origem": {
+        "estado": "verificado",
+        "valor": "padrao_plataforma",
+        "nota": "Propriedade definida pelo schema da Metadata API.",
+        "evidencias": [
+          {
+            "fonte": "src:mdapi-permissionset"
+          }
+        ]
+      },
+      "obrigatoriedade": {
+        "valor": "sim",
+        "estado": "verificado",
+        "evidencias": [
+          {
+            "fonte": "src:mdapi-permissionset"
+          }
+        ]
+      },
+      "default": {
+        "forma": "nao_declarado_na_fonte",
+        "estado": "desconhecido"
+      },
+      "dominio": {
+        "natureza": "texto_livre",
+        "estado": "verificado",
+        "evidencias": [
+          {
+            "fonte": "src:mdapi-permissionset"
+          }
+        ],
+        "contexto": "A fonte tipa como string sem lista de valores; não inventar valores."
+      },
+      "disponibilidade": {
+        "desde_versao": null,
+        "ate_versao": null,
+        "estado": "desconhecido"
+      },
+      "explicacao": "explicada",
+      "estado": "verificado",
+      "evidencias": [
+        {
+          "fonte": "src:mdapi-permissionset"
+        }
+      ],
+      "rotulo_didatico": "Nome visível",
+      "restricoes": {
+        "estado": "verificado",
+        "valor": "Até 80 caracteres.",
+        "evidencias": [
+          {
+            "fonte": "src:mdapi-permissionset"
+          }
+        ]
+      },
+      "exemplo": "<label>Gestão de Contratos</label>"
+    },
+    {
+      "id": "mdt:PermissionSet.license",
+      "nome": "license",
+      "tipo_tecnico": "string",
+      "o_que_e": "Licença de permission set ou de usuário associada; substitui userLicense.",
+      "origem": {
+        "estado": "verificado",
+        "valor": "padrao_plataforma",
+        "nota": "Propriedade definida pelo schema da Metadata API.",
+        "evidencias": [
+          {
+            "fonte": "src:mdapi-permissionset"
+          }
+        ]
+      },
+      "obrigatoriedade": {
+        "valor": "nao",
+        "estado": "desconhecido",
+        "condicao": "A documentação 68.0 não marca o campo como obrigatório; ausência de marcação não comprova opcionalidade (confirmar no WSDL)."
+      },
+      "default": {
+        "forma": "nao_declarado_na_fonte",
+        "estado": "desconhecido"
+      },
+      "dominio": {
+        "natureza": "texto_livre",
+        "estado": "verificado",
+        "evidencias": [
+          {
+            "fonte": "src:mdapi-permissionset"
+          }
+        ],
+        "contexto": "A fonte tipa como string sem lista de valores; não inventar valores."
+      },
+      "disponibilidade": {
+        "desde_versao": "38.0",
+        "ate_versao": null,
+        "estado": "verificado"
+      },
+      "explicacao": "explicada",
+      "estado": "verificado",
+      "evidencias": [
+        {
+          "fonte": "src:mdapi-permissionset"
+        }
+      ]
+    },
+    {
+      "id": "mdt:PermissionSet.objectPermissions",
+      "nome": "objectPermissions",
+      "tipo_tecnico": "PermissionSetObjectPermissions[]",
+      "o_que_e": "Permissões de criar, ler, editar e excluir por objeto.",
+      "origem": {
+        "estado": "verificado",
+        "valor": "padrao_plataforma",
+        "nota": "Propriedade definida pelo schema da Metadata API.",
+        "evidencias": [
+          {
+            "fonte": "src:mdapi-permissionset"
+          }
+        ]
+      },
+      "obrigatoriedade": {
+        "valor": "nao",
+        "estado": "desconhecido",
+        "condicao": "A documentação 68.0 não marca o campo como obrigatório; ausência de marcação não comprova opcionalidade (confirmar no WSDL)."
+      },
+      "default": {
+        "forma": "nao_declarado_na_fonte",
+        "estado": "desconhecido"
+      },
+      "dominio": {
+        "natureza": "tipo_composto",
+        "estado": "verificado",
+        "evidencias": [
+          {
+            "fonte": "src:mdapi-permissionset"
+          }
+        ]
+      },
+      "disponibilidade": {
+        "desde_versao": "23.0",
+        "ate_versao": null,
+        "estado": "verificado"
+      },
+      "explicacao": "explicada",
+      "estado": "verificado",
+      "evidencias": [
+        {
+          "fonte": "src:mdapi-permissionset"
+        }
+      ],
+      "cardinalidade": "0..n",
+      "estrutura_ref": "mdx:PermissionSetObjectPermissions"
+    },
+    {
+      "id": "mdt:PermissionSet.pageAccesses",
+      "nome": "pageAccesses",
+      "tipo_tecnico": "PermissionSetApexPageAccess[]",
+      "o_que_e": "Páginas Visualforce que os usuários podem executar.",
+      "origem": {
+        "estado": "verificado",
+        "valor": "padrao_plataforma",
+        "nota": "Propriedade definida pelo schema da Metadata API.",
+        "evidencias": [
+          {
+            "fonte": "src:mdapi-permissionset"
+          }
+        ]
+      },
+      "obrigatoriedade": {
+        "valor": "nao",
+        "estado": "desconhecido",
+        "condicao": "A documentação 68.0 não marca o campo como obrigatório; ausência de marcação não comprova opcionalidade (confirmar no WSDL)."
+      },
+      "default": {
+        "forma": "nao_declarado_na_fonte",
+        "estado": "desconhecido"
+      },
+      "dominio": {
+        "natureza": "tipo_composto",
+        "estado": "verificado",
+        "evidencias": [
+          {
+            "fonte": "src:mdapi-permissionset"
+          }
+        ]
+      },
+      "disponibilidade": {
+        "desde_versao": "23.0",
+        "ate_versao": null,
+        "estado": "verificado"
+      },
+      "explicacao": "explicada",
+      "estado": "verificado",
+      "evidencias": [
+        {
+          "fonte": "src:mdapi-permissionset"
+        }
+      ],
+      "cardinalidade": "0..n",
+      "estrutura_ref": "mdx:PermissionSetApexPageAccess"
+    },
+    {
+      "id": "mdt:PermissionSet.recordTypeVisibilities",
+      "nome": "recordTypeVisibilities",
+      "tipo_tecnico": "PermissionSetRecordTypeVisibility[]",
+      "o_que_e": "Tipos de registro visíveis; inativos não são retornados.",
+      "origem": {
+        "estado": "verificado",
+        "valor": "padrao_plataforma",
+        "nota": "Propriedade definida pelo schema da Metadata API.",
+        "evidencias": [
+          {
+            "fonte": "src:mdapi-permissionset"
+          }
+        ]
+      },
+      "obrigatoriedade": {
+        "valor": "nao",
+        "estado": "desconhecido",
+        "condicao": "A documentação 68.0 não marca o campo como obrigatório; ausência de marcação não comprova opcionalidade (confirmar no WSDL)."
+      },
+      "default": {
+        "forma": "nao_declarado_na_fonte",
+        "estado": "desconhecido"
+      },
+      "dominio": {
+        "natureza": "tipo_composto",
+        "estado": "verificado",
+        "evidencias": [
+          {
+            "fonte": "src:mdapi-permissionset"
+          }
+        ]
+      },
+      "disponibilidade": {
+        "desde_versao": "29.0",
+        "ate_versao": null,
+        "estado": "verificado"
+      },
+      "explicacao": "explicada",
+      "estado": "verificado",
+      "evidencias": [
+        {
+          "fonte": "src:mdapi-permissionset"
+        }
+      ],
+      "cardinalidade": "0..n",
+      "estrutura_ref": "mdx:PermissionSetRecordTypeVisibility"
+    },
+    {
+      "id": "mdt:PermissionSet.ServicePresenceStatusAccesses",
+      "nome": "ServicePresenceStatusAccesses",
+      "tipo_tecnico": "PermissionSetServicePresenceStatusAccess[]",
+      "o_que_e": "Status de presença de serviço que os usuários podem usar.",
+      "origem": {
+        "estado": "verificado",
+        "valor": "padrao_plataforma",
+        "nota": "Propriedade definida pelo schema da Metadata API.",
+        "evidencias": [
+          {
+            "fonte": "src:mdapi-permissionset"
+          }
+        ]
+      },
+      "obrigatoriedade": {
+        "valor": "nao",
+        "estado": "desconhecido",
+        "condicao": "A documentação 68.0 não marca o campo como obrigatório; ausência de marcação não comprova opcionalidade (confirmar no WSDL)."
+      },
+      "default": {
+        "forma": "nao_declarado_na_fonte",
+        "estado": "desconhecido"
+      },
+      "dominio": {
+        "natureza": "tipo_composto",
+        "estado": "verificado",
+        "evidencias": [
+          {
+            "fonte": "src:mdapi-permissionset"
+          }
+        ]
+      },
+      "disponibilidade": {
+        "desde_versao": "64.0",
+        "ate_versao": null,
+        "estado": "verificado"
+      },
+      "explicacao": "explicada",
+      "estado": "verificado",
+      "evidencias": [
+        {
+          "fonte": "src:mdapi-permissionset"
+        }
+      ],
+      "cardinalidade": "0..n",
+      "notas": [
+        "Grafia com S maiúsculo conforme a página; confirmar no WSDL."
+      ],
+      "estrutura_ref": "mdx:PermissionSetServicePresenceStatusAccess"
+    },
+    {
+      "id": "mdt:PermissionSet.tabSettings",
+      "nome": "tabSettings",
+      "tipo_tecnico": "PermissionSetTabSetting[]",
+      "o_que_e": "Configurações de visibilidade de tabs.",
+      "origem": {
+        "estado": "verificado",
+        "valor": "padrao_plataforma",
+        "nota": "Propriedade definida pelo schema da Metadata API.",
+        "evidencias": [
+          {
+            "fonte": "src:mdapi-permissionset"
+          }
+        ]
+      },
+      "obrigatoriedade": {
+        "valor": "nao",
+        "estado": "desconhecido",
+        "condicao": "A documentação 68.0 não marca o campo como obrigatório; ausência de marcação não comprova opcionalidade (confirmar no WSDL)."
+      },
+      "default": {
+        "forma": "nao_declarado_na_fonte",
+        "estado": "desconhecido"
+      },
+      "dominio": {
+        "natureza": "tipo_composto",
+        "estado": "verificado",
+        "evidencias": [
+          {
+            "fonte": "src:mdapi-permissionset"
+          }
+        ]
+      },
+      "disponibilidade": {
+        "desde_versao": "26.0",
+        "ate_versao": null,
+        "estado": "verificado"
+      },
+      "explicacao": "explicada",
+      "estado": "verificado",
+      "evidencias": [
+        {
+          "fonte": "src:mdapi-permissionset"
+        }
+      ],
+      "cardinalidade": "0..n",
+      "notas": [
+        "A página exibe o tipo como PermissionSetTabVisibility e a seção como PermissionSetTabSetting; conferir no WSDL."
+      ],
+      "estrutura_ref": "mdx:PermissionSetTabSetting"
+    },
+    {
+      "id": "mdt:PermissionSet.userLicense",
+      "nome": "userLicense",
+      "tipo_tecnico": "string",
+      "o_que_e": "Licença de usuário (obsoleto; substituído por license).",
+      "origem": {
+        "estado": "verificado",
+        "valor": "padrao_plataforma",
+        "nota": "Propriedade definida pelo schema da Metadata API.",
+        "evidencias": [
+          {
+            "fonte": "src:mdapi-permissionset"
+          }
+        ]
+      },
+      "obrigatoriedade": {
+        "valor": "nao",
+        "estado": "desconhecido",
+        "condicao": "A documentação 68.0 não marca o campo como obrigatório; ausência de marcação não comprova opcionalidade (confirmar no WSDL)."
+      },
+      "default": {
+        "forma": "nao_declarado_na_fonte",
+        "estado": "desconhecido"
+      },
+      "dominio": {
+        "natureza": "texto_livre",
+        "estado": "verificado",
+        "evidencias": [
+          {
+            "fonte": "src:mdapi-permissionset"
+          }
+        ],
+        "contexto": "A fonte tipa como string sem lista de valores; não inventar valores."
+      },
+      "disponibilidade": {
+        "desde_versao": null,
+        "ate_versao": "37.0",
+        "estado": "verificado"
+      },
+      "explicacao": "explicada",
+      "estado": "verificado",
+      "evidencias": [
+        {
+          "fonte": "src:mdapi-permissionset"
+        }
+      ]
+    },
+    {
+      "id": "mdt:PermissionSet.userPermissions",
+      "nome": "userPermissions",
+      "tipo_tecnico": "PermissionSetUserPermission[]",
+      "o_que_e": "Permissões de app ou de sistema e se estão habilitadas.",
+      "origem": {
+        "estado": "verificado",
+        "valor": "padrao_plataforma",
+        "nota": "Propriedade definida pelo schema da Metadata API.",
+        "evidencias": [
+          {
+            "fonte": "src:mdapi-permissionset"
+          }
+        ]
+      },
+      "obrigatoriedade": {
+        "valor": "nao",
+        "estado": "desconhecido",
+        "condicao": "A documentação 68.0 não marca o campo como obrigatório; ausência de marcação não comprova opcionalidade (confirmar no WSDL)."
+      },
+      "default": {
+        "forma": "nao_declarado_na_fonte",
+        "estado": "desconhecido"
+      },
+      "dominio": {
+        "natureza": "tipo_composto",
+        "estado": "verificado",
+        "evidencias": [
+          {
+            "fonte": "src:mdapi-permissionset"
+          }
+        ]
+      },
+      "disponibilidade": {
+        "desde_versao": "29.0",
+        "ate_versao": null,
+        "estado": "verificado"
+      },
+      "explicacao": "explicada",
+      "estado": "verificado",
+      "evidencias": [
+        {
+          "fonte": "src:mdapi-permissionset"
+        }
+      ],
+      "cardinalidade": "0..n",
+      "notas": [
+        "Desde a 40.0, permissão não informada equivale a desabilitada, segundo a página."
+      ],
+      "estrutura_ref": "mdx:PermissionSetUserPermission"
+    }
+  ],
+  "estruturas": [
+    "mdx:PermissionSetAgentAccess",
+    "mdx:PermissionSetApexClassAccess",
+    "mdx:PermissionSetApexPageAccess",
+    "mdx:PermissionSetApplicationVisibility",
+    "mdx:PermissionSetCustomMetadataTypeAccess",
+    "mdx:PermissionSetCustomPermissions",
+    "mdx:PermissionSetCustomSettingAccesses",
+    "mdx:PermissionSetEmailRoutingAddressAccess",
+    "mdx:PermissionSetExternalCredentialPrincipalAccess",
+    "mdx:PermissionSetExternalDataSourceAccess",
+    "mdx:PermissionSetFieldPermissions",
+    "mdx:PermissionSetFlowAccess",
+    "mdx:PermissionSetGenComputingSummaryDefAccess",
+    "mdx:PermissionSetObjectPermissions",
+    "mdx:PermissionSetRecordTypeVisibility",
+    "mdx:PermissionSetServicePresenceStatusAccess",
+    "mdx:PermissionSetTabSetting",
+    "mdx:PermissionSetUserPermission"
+  ],
+  "cobertura": {
+    "estrutural": {
+      "estado": "completa",
+      "esperado": 24,
+      "presente": 24,
+      "nota": "Universo esperado = tabela Fields da página oficial 68.0 (mais fullName herdado quando declarado)."
+    },
+    "explicativa": {
+      "estado": "completa",
+      "esperado": 24,
+      "presente": 24
+    },
+    "mapeamento": {
+      "estado": "parcial",
+      "nota": "Correspondências registradas apenas onde há evidência; demais pendentes."
+    }
+  },
+  "recomendacoes": [],
+  "alertas": [
+    "A atribuição a usuários é registro do objeto PermissionSetAssignment, não parte do XML."
+  ],
+  "divergencias_documentais": [
+    "Tipo de tabSettings e de viewAllFields exibidos de forma inconsistente na página; conferir no WSDL."
+  ],
+  "estado": "verificado",
+  "evidencias": [
+    {
+      "fonte": "src:mdapi-permissionset"
+    },
+    {
+      "fonte": "src:sdr-registry"
+    },
+    {
+      "fonte": "src:sdr-metadata-support"
+    }
+  ],
+  "exemplo_xml": {
+    "xml": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<PermissionSet xmlns=\"http://soap.sforce.com/2006/04/metadata\">\n    <description>Permite ler e editar contratos.</description>\n    <hasActivationRequired>false</hasActivationRequired>\n    <label>Gestão de Contratos</label>\n    <objectPermissions>\n        <allowCreate>false</allowCreate>\n        <allowDelete>false</allowDelete>\n        <allowEdit>true</allowEdit>\n        <allowRead>true</allowRead>\n        <modifyAllRecords>false</modifyAllRecords>\n        <object>Contract</object>\n        <viewAllRecords>false</viewAllRecords>\n    </objectPermissions>\n</PermissionSet>",
+    "natureza": "didatico_projeto",
+    "nota": "Exemplo escrito pelo projeto apenas com elementos documentados; sem dados reais."
+  }
+}
