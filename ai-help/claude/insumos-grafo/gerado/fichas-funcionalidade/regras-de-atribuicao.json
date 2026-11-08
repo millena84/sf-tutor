@@ -36,31 +36,45 @@
       },
       {
         "fonte": "src:help-kb-case-management"
+      },
+      {
+        "fonte": "src:objref-assignmentrule"
+      },
+      {
+        "fonte": "src:mdapi-assignmentrules"
+      },
+      {
+        "fonte": "src:mdapi-escalationrules"
       }
     ],
     "exemplo": "Casos com prioridade alta vão para a fila de nível 1; leads do site vão para a equipe de inbound.",
     "finalidade": "Distribuir leads e casos sem trabalho manual.",
     "id": "func:regras-de-atribuicao",
-    "limitacoes": [],
+    "limitacoes": [
+      "Caminho de Escalation Rules no Setup não verificado."
+    ],
     "nome": "Regras de atribuição e escalonamento",
     "nome_tecnico": "Assignment Rules and Escalation Rules",
     "o_que_e": "Regras que definem automaticamente o dono de leads e casos, e quando casos são escalonados.",
     "recomendacoes": [],
     "representacoes": {
-      "ausencias": [
+      "ausencias": [],
+      "metadata_types": [
         {
-          "estado": "desconhecido",
-          "motivo": "Objetos citados no relatório de pesquisa de 2026-11-08 e ainda não relidos: AssignmentRule.",
-          "tipo": "objeto_api"
+          "papel": "Regras de atribuição implantáveis, por objeto.",
+          "ref": "mdt:AssignmentRules"
         },
         {
-          "estado": "desconhecido",
-          "motivo": "Não investigado. Candidato(s) no inventário v68, ainda não lidos: AssignmentRules, EscalationRules.",
-          "tipo": "metadata_type"
+          "papel": "Regras de escalonamento implantáveis.",
+          "ref": "mdt:EscalationRules"
         }
       ],
-      "metadata_types": [],
-      "objetos_api": []
+      "objetos_api": [
+        {
+          "papel": "Regra de atribuição consultável (Id para o AssignmentRuleHeader).",
+          "ref": "obj:AssignmentRule"
+        }
+      ]
     },
     "setup": {
       "estado": "verificado",
@@ -84,9 +98,336 @@
       "regras de atribuição e escalonamento"
     ]
   },
-  "metadata_types": [],
+  "metadata_types": [
+    {
+      "ficha_completa": "gerado/fichas-completas/AssignmentRules.json",
+      "id": "mdt:AssignmentRules",
+      "nome": "AssignmentRules",
+      "papel": "Regras de atribuição implantáveis, por objeto."
+    },
+    {
+      "ficha_completa": "gerado/fichas-completas/EscalationRules.json",
+      "id": "mdt:EscalationRules",
+      "nome": "EscalationRules",
+      "papel": "Regras de escalonamento implantáveis."
+    }
+  ],
   "nota": "Gerado deterministicamente a partir de catalogo/. Não editar à mão.",
-  "objetos_api": [],
+  "objetos_api": [
+    {
+      "objeto": {
+        "alertas": [
+          "Consulte a regra pelo nome e informe o Id em AssignmentRuleHeader ao criar ou atualizar Case ou Lead (SOAP, REST ou Bulk API)."
+        ],
+        "apex": {
+          "consulta_soql_direta": {
+            "estado": "verificado",
+            "evidencias": [
+              {
+                "fonte": "src:objref-assignmentrule"
+              }
+            ],
+            "nota": "Objeto da API padrão: consultável por SOQL em Apex, sujeito a permissões.",
+            "valor": true
+          },
+          "nota": "Exemplo Apex não fornecido nesta fase."
+        },
+        "campos": [
+          {
+            "apis": [
+              "padrao"
+            ],
+            "default": {
+              "estado": "desconhecido",
+              "forma": "desconhecido",
+              "nota": "A API marca o campo como 'defaulted on create', mas o valor não foi declarado na extração."
+            },
+            "disponibilidade": {
+              "ate_versao": null,
+              "desde_versao": null,
+              "estado": "desconhecido"
+            },
+            "dominio": {
+              "estado": "verificado",
+              "evidencias": [
+                {
+                  "fonte": "src:objref-assignmentrule"
+                }
+              ],
+              "lista_completa": "sim",
+              "natureza": "booleano",
+              "valores": [
+                {
+                  "valor": "true"
+                },
+                {
+                  "valor": "false"
+                }
+              ]
+            },
+            "estado": "verificado",
+            "evidencias": [
+              {
+                "fonte": "src:objref-assignmentrule"
+              }
+            ],
+            "explicacao": "explicada",
+            "id": "obj:AssignmentRule.Active",
+            "nome": "Active",
+            "o_que_e": "Indica se a regra está ativa.",
+            "obrigatoriedade": {
+              "estado": "desconhecido",
+              "valor": "desconhecida"
+            },
+            "origem": {
+              "estado": "verificado",
+              "evidencias": [
+                {
+                  "fonte": "src:objref-assignmentrule"
+                }
+              ],
+              "nota": "Campo padrão do objeto documentado.",
+              "valor": "padrao_plataforma"
+            },
+            "propriedades_api": {
+              "create": false,
+              "defaulted_on_create": true,
+              "estado": "verificado",
+              "evidencias": [
+                {
+                  "fonte": "src:objref-assignmentrule"
+                }
+              ],
+              "filter": true,
+              "group": true,
+              "id_lookup": false,
+              "nillable": false,
+              "restricted_picklist": false,
+              "sort": true,
+              "update": false
+            },
+            "somente_leitura": true,
+            "tipo_tecnico": "boolean"
+          },
+          {
+            "apis": [
+              "padrao"
+            ],
+            "default": {
+              "estado": "desconhecido",
+              "forma": "nao_declarado_na_fonte"
+            },
+            "disponibilidade": {
+              "ate_versao": null,
+              "desde_versao": null,
+              "estado": "desconhecido"
+            },
+            "dominio": {
+              "estado": "verificado",
+              "evidencias": [
+                {
+                  "fonte": "src:objref-assignmentrule"
+                }
+              ],
+              "natureza": "texto_livre"
+            },
+            "estado": "verificado",
+            "evidencias": [
+              {
+                "fonte": "src:objref-assignmentrule"
+              }
+            ],
+            "explicacao": "explicada",
+            "id": "obj:AssignmentRule.Name",
+            "nome": "Name",
+            "o_que_e": "Nome da regra.",
+            "obrigatoriedade": {
+              "estado": "desconhecido",
+              "valor": "desconhecida"
+            },
+            "origem": {
+              "estado": "verificado",
+              "evidencias": [
+                {
+                  "fonte": "src:objref-assignmentrule"
+                }
+              ],
+              "nota": "Campo padrão do objeto documentado.",
+              "valor": "padrao_plataforma"
+            },
+            "propriedades_api": {
+              "create": false,
+              "defaulted_on_create": false,
+              "estado": "verificado",
+              "evidencias": [
+                {
+                  "fonte": "src:objref-assignmentrule"
+                }
+              ],
+              "filter": true,
+              "group": true,
+              "id_lookup": false,
+              "nillable": true,
+              "restricted_picklist": false,
+              "sort": true,
+              "update": false
+            },
+            "somente_leitura": true,
+            "tipo_tecnico": "string"
+          },
+          {
+            "apis": [
+              "padrao"
+            ],
+            "default": {
+              "estado": "desconhecido",
+              "forma": "nao_declarado_na_fonte"
+            },
+            "disponibilidade": {
+              "ate_versao": null,
+              "desde_versao": null,
+              "estado": "desconhecido"
+            },
+            "dominio": {
+              "contexto": "Valores não extraídos; podem depender de org, idioma ou recurso.",
+              "estado": "desconhecido",
+              "natureza": "lista_dinamica"
+            },
+            "estado": "verificado",
+            "evidencias": [
+              {
+                "fonte": "src:objref-assignmentrule"
+              }
+            ],
+            "explicacao": "explicada",
+            "id": "obj:AssignmentRule.SobjectType",
+            "nome": "SobjectType",
+            "o_que_e": "Objeto da regra (caso ou lead).",
+            "obrigatoriedade": {
+              "estado": "desconhecido",
+              "valor": "desconhecida"
+            },
+            "origem": {
+              "estado": "verificado",
+              "evidencias": [
+                {
+                  "fonte": "src:objref-assignmentrule"
+                }
+              ],
+              "nota": "Campo padrão do objeto documentado.",
+              "valor": "padrao_plataforma"
+            },
+            "propriedades_api": {
+              "create": false,
+              "defaulted_on_create": false,
+              "estado": "verificado",
+              "evidencias": [
+                {
+                  "fonte": "src:objref-assignmentrule"
+                }
+              ],
+              "filter": true,
+              "group": true,
+              "id_lookup": false,
+              "nillable": true,
+              "restricted_picklist": true,
+              "sort": true,
+              "update": false
+            },
+            "somente_leitura": true,
+            "tipo_tecnico": "picklist"
+          }
+        ],
+        "cobertura": {
+          "estrutural": {
+            "esperado": 3,
+            "estado": "completa",
+            "nota": "Tabela de campos lida completa (3).",
+            "presente": 3
+          },
+          "explicativa": {
+            "esperado": 3,
+            "estado": "completa",
+            "presente": 3
+          },
+          "mapeamento": {
+            "estado": "parcial",
+            "nota": "Ver relacionamentos registrados."
+          }
+        },
+        "consultas": [
+          {
+            "api": "padrao",
+            "contexto": "API padrão.",
+            "soql": "SELECT Name, SobjectType, Active FROM AssignmentRule WHERE Active = true",
+            "validacao": "documental"
+          }
+        ],
+        "estado": "verificado",
+        "evidencias": [
+          {
+            "fonte": "src:objref-assignmentrule"
+          }
+        ],
+        "exposicoes": [
+          {
+            "api": "padrao",
+            "chamadas": [
+              "describeSObjects()",
+              "query()",
+              "retrieve()",
+              "search()"
+            ],
+            "desde_versao": null,
+            "estado": "verificado",
+            "evidencias": [
+              {
+                "fonte": "src:objref-assignmentrule"
+              }
+            ]
+          },
+          {
+            "api": "tooling",
+            "desde_versao": null,
+            "estado": "desconhecido",
+            "nota": "Exposição na Tooling API não verificada."
+          }
+        ],
+        "id": "obj:AssignmentRule",
+        "juncao": false,
+        "nome": "AssignmentRule",
+        "o_que_e": "Representa uma regra de atribuição de casos ou leads.",
+        "papel": "Obter o Id da regra para usá-la no AssignmentRuleHeader.",
+        "setup": {
+          "estado": "nao_aplicavel",
+          "nota": "Objeto consultável via API; não é tela do Setup."
+        }
+      },
+      "papel": "Regra de atribuição consultável (Id para o AssignmentRuleHeader).",
+      "relacionamentos": [
+        {
+          "destino": {
+            "entidade": "obj:AssignmentRule"
+          },
+          "estado": "verificado",
+          "evidencias": [
+            {
+              "fonte": "src:mdapi-assignmentrules"
+            },
+            {
+              "fonte": "src:objref-assignmentrule"
+            }
+          ],
+          "explicacao": "Metadata type e objeto API descrevem regras de atribuição por caminhos diferentes: definição implantável versus registro consultável. A correspondência campo a campo não foi comprovada.",
+          "id": "rel:rep-assignmentrules",
+          "origem": {
+            "entidade": "mdt:AssignmentRules"
+          },
+          "tipo": "representacao_comum"
+        }
+      ]
+    }
+  ],
   "versao_base": {
     "api_version": "68.0",
     "data_referencia": "2026-11-07",

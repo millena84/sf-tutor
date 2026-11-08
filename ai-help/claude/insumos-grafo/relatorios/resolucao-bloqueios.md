@@ -16,7 +16,7 @@ Toda fonte nova está em `fontes/registro.json`, com uma nota em `fontes/extraco
 | 6 | Caminhos de Setup | quase resolvido | 0 → 12 de 14 funcionalidades |
 | 7 | Licenças e edições | parcial | edições para 9 funcionalidades; licença add-on do Data 360; licenças de Agentforce Sales e Service (lote 3a) |
 | 8 | Contexto técnico do Data 360 | **resolvido** | `bloqueado` → `verificado` |
-| 9 | Funcionalidades de Sales e Service Cloud | **mapeado** (lotes 3a e 3b) | 17 funcionalidades nas duas nuvens; 7 objetos, 3 metadata types e 14 relacionamentos novos no 3b |
+| 9 | Funcionalidades de Sales e Service Cloud | **mapeado** (lotes 3a, 3b e 3c) | 17 funcionalidades nas duas nuvens; no 3c, 22 objetos, 4 metadata types e 30 relacionamentos relidos |
 | 10 | Classificação Core dos 981 tipos | não iniciado | volume; ver sugestão |
 | 11 | WSDL | **reclassificado** | não é bloqueio; a documentação foi usada como fonte alternativa |
 | 12 | Rede do shell | **contornado** | leitura pelo endpoint versionado; limites de tamanho descobertos |
@@ -158,6 +158,34 @@ Como você observou, a verificação de recursos por nuvem é feita na documenta
 - o caminho de Escalation Rules.
 
 Todos estão declarados como ausência `desconhecido`, com os nomes candidatos.
+
+### 9c. Releitura dos itens pendentes (lote 3c)
+
+**O que foi relido** na documentação 68.0:
+- **22 objetos:**
+  - estrutura completa: CampaignMember, Pricebook2, PricebookEntry, OpportunityLineItem, QuoteLineItem, ForecastingItem, Territory2, Territory2Type, UserTerritory2Association, ObjectTerritory2Association, ServiceChannel, SlaProcess, ServiceContract, MilestoneType, AssignmentRule;
+  - estrutura parcial: Campaign, Product2, Quote, AgentWork e KnowledgeArticleVersion (páginas truncadas); QueueRoutingConfig e Entitlement (uma linha sem nome de campo).
+- **4 metadata types:**
+  - AssignmentRules (com 2 subtipos) e EscalationRules (com 3);
+  - ServiceChannel (com 1 subtipo) e QueueRoutingConfig (com 1).
+- **26 relacionamentos de campo e 4 representações comuns** entre metadata type e objeto, entre elas EntitlementProcess ↔ SlaProcess.
+
+**Achados registrados como alerta ou divergência, sem correção por suposição:**
+- A página de Campaign não lista create(), update() nem delete(); confirmado em segunda leitura.
+- A página de Entitlement não lista describeSObjects().
+- QueueRoutingConfig (metadata) cita ServicePresenceStatus na seção de sufixo, o que parece erro de cópia.
+- EscalationRules grafa a propriedade herdada como `fullname`.
+- AgentWork declara a versão 32.0; o relatório de pesquisa havia apontado um conflito 30.0 x 32.0.
+- A página de AssignmentRules só responde pelo nome singular, `meta_assignmentrule.htm`.
+
+**Decisão de modelagem:** AssignmentRules e EscalationRules têm subtipos diferentes com o mesmo nome, `RuleEntry`.
+- Os ids ficaram `mdx:AssignmentRules_RuleEntry` e `mdx:EscalationRules_RuleEntry`, com nome `RuleEntry`.
+- Essa diferenciação dos ids é do projeto; não é nomenclatura oficial.
+
+**O que falta:**
+- metadata types *Settings, Territory2, Territory2Rule e Territory2Type, MilestoneType, PresenceUserConfig;
+- objetos ForecastingAdjustment, ForecastingType, ForecastingQuota, PendingServiceRouting, Knowledge__kav e KnowledgeArticle;
+- o caminho de Escalation Rules no Setup.
 
 ### 10. Classificação Core (não iniciado)
 

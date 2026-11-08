@@ -25,6 +25,21 @@
       },
       {
         "fonte": "src:help-omni-upgrade"
+      },
+      {
+        "fonte": "src:objref-agentwork"
+      },
+      {
+        "fonte": "src:objref-servicechannel"
+      },
+      {
+        "fonte": "src:objref-queueroutingconfig"
+      },
+      {
+        "fonte": "src:mdapi-servicechannel"
+      },
+      {
+        "fonte": "src:mdapi-queueroutingconfig"
       }
     ],
     "exemplo": "Um caso novo vai automaticamente para um atendente disponível no canal de casos.",
@@ -42,12 +57,12 @@
       "ausencias": [
         {
           "estado": "desconhecido",
-          "motivo": "Objetos citados no relatório de pesquisa de 2026-11-08 e ainda não relidos: AgentWork, ServiceChannel, ServicePresenceStatus, QueueRoutingConfig, PresenceUserConfig.",
+          "motivo": "Ainda não relidos: ServicePresenceStatus (objeto), PresenceUserConfig, PendingServiceRouting.",
           "tipo": "objeto_api"
         },
         {
           "estado": "desconhecido",
-          "motivo": "Não investigado. Candidato(s) no inventário v68, ainda não lidos: ServiceChannel, QueueRoutingConfig, PresenceUserConfig, OmniChannelSettings.",
+          "motivo": "Não investigado. Candidatos no inventário v68, ainda não lidos: PresenceUserConfig, OmniChannelSettings.",
           "tipo": "metadata_type"
         }
       ],
@@ -55,9 +70,30 @@
         {
           "papel": "Status de presença implantável.",
           "ref": "mdt:ServicePresenceStatus"
+        },
+        {
+          "papel": "Canal de serviço implantável.",
+          "ref": "mdt:ServiceChannel"
+        },
+        {
+          "papel": "Configuração de roteamento implantável.",
+          "ref": "mdt:QueueRoutingConfig"
         }
       ],
-      "objetos_api": []
+      "objetos_api": [
+        {
+          "papel": "Trabalho atribuído a um atendente.",
+          "ref": "obj:AgentWork"
+        },
+        {
+          "papel": "Canal de serviço consultável.",
+          "ref": "obj:ServiceChannel"
+        },
+        {
+          "papel": "Configuração de roteamento consultável.",
+          "ref": "obj:QueueRoutingConfig"
+        }
+      ]
     },
     "setup": {
       "estado": "verificado",
@@ -83,10 +119,4811 @@
       "id": "mdt:ServicePresenceStatus",
       "nome": "ServicePresenceStatus",
       "papel": "Status de presença implantável."
+    },
+    {
+      "ficha_completa": "gerado/fichas-completas/ServiceChannel.json",
+      "id": "mdt:ServiceChannel",
+      "nome": "ServiceChannel",
+      "papel": "Canal de serviço implantável."
+    },
+    {
+      "ficha_completa": "gerado/fichas-completas/QueueRoutingConfig.json",
+      "id": "mdt:QueueRoutingConfig",
+      "nome": "QueueRoutingConfig",
+      "papel": "Configuração de roteamento implantável."
     }
   ],
   "nota": "Gerado deterministicamente a partir de catalogo/. Não editar à mão.",
-  "objetos_api": [],
+  "objetos_api": [
+    {
+      "objeto": {
+        "alertas": [
+          "Transferir o trabalho cria um novo AgentWork.",
+          "O relatório de pesquisa indicou conflito 30.0 x 32.0; a página relida declara 32.0."
+        ],
+        "apex": {
+          "consulta_soql_direta": {
+            "estado": "verificado",
+            "evidencias": [
+              {
+                "fonte": "src:objref-agentwork"
+              }
+            ],
+            "nota": "Objeto da API padrão: consultável por SOQL em Apex, sujeito a permissões.",
+            "valor": true
+          },
+          "nota": "Exemplo Apex não fornecido nesta fase."
+        },
+        "campos": [
+          {
+            "apis": [
+              "padrao"
+            ],
+            "default": {
+              "estado": "desconhecido",
+              "forma": "nao_declarado_na_fonte"
+            },
+            "disponibilidade": {
+              "ate_versao": null,
+              "desde_versao": null,
+              "estado": "desconhecido"
+            },
+            "dominio": {
+              "estado": "desconhecido",
+              "natureza": "desconhecida"
+            },
+            "estado": "verificado",
+            "evidencias": [
+              {
+                "fonte": "src:objref-agentwork"
+              }
+            ],
+            "explicacao": "pendente",
+            "id": "obj:AgentWork.AbandonedDateTime",
+            "nome": "AbandonedDateTime",
+            "notas": [
+              "Nome listado na Object Reference; tipo e propriedades não extraídos nesta rodada."
+            ],
+            "o_que_e": "Explicação pendente: campo listado a partir da fonte, ainda sem texto didático.",
+            "obrigatoriedade": {
+              "estado": "desconhecido",
+              "valor": "desconhecida"
+            },
+            "origem": {
+              "estado": "verificado",
+              "evidencias": [
+                {
+                  "fonte": "src:objref-agentwork"
+                }
+              ],
+              "nota": "Campo padrão do objeto documentado.",
+              "valor": "padrao_plataforma"
+            },
+            "propriedades_api": {
+              "estado": "desconhecido"
+            },
+            "somente_leitura": null,
+            "tipo_tecnico": "(a extrair)"
+          },
+          {
+            "apis": [
+              "padrao"
+            ],
+            "default": {
+              "estado": "desconhecido",
+              "forma": "nao_declarado_na_fonte"
+            },
+            "disponibilidade": {
+              "ate_versao": null,
+              "desde_versao": null,
+              "estado": "desconhecido"
+            },
+            "dominio": {
+              "estado": "desconhecido",
+              "natureza": "desconhecida"
+            },
+            "estado": "verificado",
+            "evidencias": [
+              {
+                "fonte": "src:objref-agentwork"
+              }
+            ],
+            "explicacao": "pendente",
+            "id": "obj:AgentWork.AcceptDateTime",
+            "nome": "AcceptDateTime",
+            "notas": [
+              "Nome listado na Object Reference; tipo e propriedades não extraídos nesta rodada."
+            ],
+            "o_que_e": "Explicação pendente: campo listado a partir da fonte, ainda sem texto didático.",
+            "obrigatoriedade": {
+              "estado": "desconhecido",
+              "valor": "desconhecida"
+            },
+            "origem": {
+              "estado": "verificado",
+              "evidencias": [
+                {
+                  "fonte": "src:objref-agentwork"
+                }
+              ],
+              "nota": "Campo padrão do objeto documentado.",
+              "valor": "padrao_plataforma"
+            },
+            "propriedades_api": {
+              "estado": "desconhecido"
+            },
+            "somente_leitura": null,
+            "tipo_tecnico": "(a extrair)"
+          },
+          {
+            "apis": [
+              "padrao"
+            ],
+            "default": {
+              "estado": "desconhecido",
+              "forma": "nao_declarado_na_fonte"
+            },
+            "disponibilidade": {
+              "ate_versao": null,
+              "desde_versao": null,
+              "estado": "desconhecido"
+            },
+            "dominio": {
+              "estado": "desconhecido",
+              "natureza": "desconhecida"
+            },
+            "estado": "verificado",
+            "evidencias": [
+              {
+                "fonte": "src:objref-agentwork"
+              }
+            ],
+            "explicacao": "pendente",
+            "id": "obj:AgentWork.ActiveTime",
+            "nome": "ActiveTime",
+            "notas": [
+              "Nome listado na Object Reference; tipo e propriedades não extraídos nesta rodada."
+            ],
+            "o_que_e": "Explicação pendente: campo listado a partir da fonte, ainda sem texto didático.",
+            "obrigatoriedade": {
+              "estado": "desconhecido",
+              "valor": "desconhecida"
+            },
+            "origem": {
+              "estado": "verificado",
+              "evidencias": [
+                {
+                  "fonte": "src:objref-agentwork"
+                }
+              ],
+              "nota": "Campo padrão do objeto documentado.",
+              "valor": "padrao_plataforma"
+            },
+            "propriedades_api": {
+              "estado": "desconhecido"
+            },
+            "somente_leitura": null,
+            "tipo_tecnico": "(a extrair)"
+          },
+          {
+            "apis": [
+              "padrao"
+            ],
+            "default": {
+              "estado": "desconhecido",
+              "forma": "nao_declarado_na_fonte"
+            },
+            "disponibilidade": {
+              "ate_versao": null,
+              "desde_versao": null,
+              "estado": "desconhecido"
+            },
+            "dominio": {
+              "estado": "desconhecido",
+              "natureza": "desconhecida"
+            },
+            "estado": "verificado",
+            "evidencias": [
+              {
+                "fonte": "src:objref-agentwork"
+              }
+            ],
+            "explicacao": "pendente",
+            "id": "obj:AgentWork.AcwExtensionCount",
+            "nome": "AcwExtensionCount",
+            "notas": [
+              "Nome listado na Object Reference; tipo e propriedades não extraídos nesta rodada."
+            ],
+            "o_que_e": "Explicação pendente: campo listado a partir da fonte, ainda sem texto didático.",
+            "obrigatoriedade": {
+              "estado": "desconhecido",
+              "valor": "desconhecida"
+            },
+            "origem": {
+              "estado": "verificado",
+              "evidencias": [
+                {
+                  "fonte": "src:objref-agentwork"
+                }
+              ],
+              "nota": "Campo padrão do objeto documentado.",
+              "valor": "padrao_plataforma"
+            },
+            "propriedades_api": {
+              "estado": "desconhecido"
+            },
+            "somente_leitura": null,
+            "tipo_tecnico": "(a extrair)"
+          },
+          {
+            "apis": [
+              "padrao"
+            ],
+            "default": {
+              "estado": "desconhecido",
+              "forma": "nao_declarado_na_fonte"
+            },
+            "disponibilidade": {
+              "ate_versao": null,
+              "desde_versao": null,
+              "estado": "desconhecido"
+            },
+            "dominio": {
+              "estado": "desconhecido",
+              "natureza": "desconhecida"
+            },
+            "estado": "verificado",
+            "evidencias": [
+              {
+                "fonte": "src:objref-agentwork"
+              }
+            ],
+            "explicacao": "pendente",
+            "id": "obj:AgentWork.AcwExtensionDuration",
+            "nome": "AcwExtensionDuration",
+            "notas": [
+              "Nome listado na Object Reference; tipo e propriedades não extraídos nesta rodada."
+            ],
+            "o_que_e": "Explicação pendente: campo listado a partir da fonte, ainda sem texto didático.",
+            "obrigatoriedade": {
+              "estado": "desconhecido",
+              "valor": "desconhecida"
+            },
+            "origem": {
+              "estado": "verificado",
+              "evidencias": [
+                {
+                  "fonte": "src:objref-agentwork"
+                }
+              ],
+              "nota": "Campo padrão do objeto documentado.",
+              "valor": "padrao_plataforma"
+            },
+            "propriedades_api": {
+              "estado": "desconhecido"
+            },
+            "somente_leitura": null,
+            "tipo_tecnico": "(a extrair)"
+          },
+          {
+            "apis": [
+              "padrao"
+            ],
+            "default": {
+              "estado": "desconhecido",
+              "forma": "nao_declarado_na_fonte"
+            },
+            "disponibilidade": {
+              "ate_versao": null,
+              "desde_versao": null,
+              "estado": "desconhecido"
+            },
+            "dominio": {
+              "estado": "desconhecido",
+              "natureza": "desconhecida"
+            },
+            "estado": "verificado",
+            "evidencias": [
+              {
+                "fonte": "src:objref-agentwork"
+              }
+            ],
+            "explicacao": "pendente",
+            "id": "obj:AgentWork.AfterConversationActualTime",
+            "nome": "AfterConversationActualTime",
+            "notas": [
+              "Nome listado na Object Reference; tipo e propriedades não extraídos nesta rodada."
+            ],
+            "o_que_e": "Explicação pendente: campo listado a partir da fonte, ainda sem texto didático.",
+            "obrigatoriedade": {
+              "estado": "desconhecido",
+              "valor": "desconhecida"
+            },
+            "origem": {
+              "estado": "verificado",
+              "evidencias": [
+                {
+                  "fonte": "src:objref-agentwork"
+                }
+              ],
+              "nota": "Campo padrão do objeto documentado.",
+              "valor": "padrao_plataforma"
+            },
+            "propriedades_api": {
+              "estado": "desconhecido"
+            },
+            "somente_leitura": null,
+            "tipo_tecnico": "(a extrair)"
+          },
+          {
+            "apis": [
+              "padrao"
+            ],
+            "default": {
+              "estado": "desconhecido",
+              "forma": "nao_declarado_na_fonte"
+            },
+            "disponibilidade": {
+              "ate_versao": null,
+              "desde_versao": null,
+              "estado": "desconhecido"
+            },
+            "dominio": {
+              "estado": "desconhecido",
+              "natureza": "desconhecida"
+            },
+            "estado": "verificado",
+            "evidencias": [
+              {
+                "fonte": "src:objref-agentwork"
+              }
+            ],
+            "explicacao": "pendente",
+            "id": "obj:AgentWork.AgentCapacityWhenDeclined",
+            "nome": "AgentCapacityWhenDeclined",
+            "notas": [
+              "Nome listado na Object Reference; tipo e propriedades não extraídos nesta rodada."
+            ],
+            "o_que_e": "Explicação pendente: campo listado a partir da fonte, ainda sem texto didático.",
+            "obrigatoriedade": {
+              "estado": "desconhecido",
+              "valor": "desconhecida"
+            },
+            "origem": {
+              "estado": "verificado",
+              "evidencias": [
+                {
+                  "fonte": "src:objref-agentwork"
+                }
+              ],
+              "nota": "Campo padrão do objeto documentado.",
+              "valor": "padrao_plataforma"
+            },
+            "propriedades_api": {
+              "estado": "desconhecido"
+            },
+            "somente_leitura": null,
+            "tipo_tecnico": "(a extrair)"
+          },
+          {
+            "apis": [
+              "padrao"
+            ],
+            "default": {
+              "estado": "desconhecido",
+              "forma": "nao_declarado_na_fonte"
+            },
+            "disponibilidade": {
+              "ate_versao": null,
+              "desde_versao": null,
+              "estado": "desconhecido"
+            },
+            "dominio": {
+              "estado": "desconhecido",
+              "natureza": "desconhecida"
+            },
+            "estado": "verificado",
+            "evidencias": [
+              {
+                "fonte": "src:objref-agentwork"
+              }
+            ],
+            "explicacao": "pendente",
+            "id": "obj:AgentWork.AssignedDateTime",
+            "nome": "AssignedDateTime",
+            "notas": [
+              "Nome listado na Object Reference; tipo e propriedades não extraídos nesta rodada."
+            ],
+            "o_que_e": "Explicação pendente: campo listado a partir da fonte, ainda sem texto didático.",
+            "obrigatoriedade": {
+              "estado": "desconhecido",
+              "valor": "desconhecida"
+            },
+            "origem": {
+              "estado": "verificado",
+              "evidencias": [
+                {
+                  "fonte": "src:objref-agentwork"
+                }
+              ],
+              "nota": "Campo padrão do objeto documentado.",
+              "valor": "padrao_plataforma"
+            },
+            "propriedades_api": {
+              "estado": "desconhecido"
+            },
+            "somente_leitura": null,
+            "tipo_tecnico": "(a extrair)"
+          },
+          {
+            "apis": [
+              "padrao"
+            ],
+            "default": {
+              "estado": "desconhecido",
+              "forma": "nao_declarado_na_fonte"
+            },
+            "disponibilidade": {
+              "ate_versao": null,
+              "desde_versao": null,
+              "estado": "desconhecido"
+            },
+            "dominio": {
+              "estado": "desconhecido",
+              "natureza": "desconhecida"
+            },
+            "estado": "verificado",
+            "evidencias": [
+              {
+                "fonte": "src:objref-agentwork"
+              }
+            ],
+            "explicacao": "pendente",
+            "id": "obj:AgentWork.BotId",
+            "nome": "BotId",
+            "notas": [
+              "Nome listado na Object Reference; tipo e propriedades não extraídos nesta rodada."
+            ],
+            "o_que_e": "Explicação pendente: campo listado a partir da fonte, ainda sem texto didático.",
+            "obrigatoriedade": {
+              "estado": "desconhecido",
+              "valor": "desconhecida"
+            },
+            "origem": {
+              "estado": "verificado",
+              "evidencias": [
+                {
+                  "fonte": "src:objref-agentwork"
+                }
+              ],
+              "nota": "Campo padrão do objeto documentado.",
+              "valor": "padrao_plataforma"
+            },
+            "propriedades_api": {
+              "estado": "desconhecido"
+            },
+            "somente_leitura": null,
+            "tipo_tecnico": "(a extrair)"
+          },
+          {
+            "apis": [
+              "padrao"
+            ],
+            "default": {
+              "estado": "desconhecido",
+              "forma": "nao_declarado_na_fonte"
+            },
+            "disponibilidade": {
+              "ate_versao": null,
+              "desde_versao": null,
+              "estado": "desconhecido"
+            },
+            "dominio": {
+              "estado": "desconhecido",
+              "natureza": "desconhecida"
+            },
+            "estado": "verificado",
+            "evidencias": [
+              {
+                "fonte": "src:objref-agentwork"
+              }
+            ],
+            "explicacao": "pendente",
+            "id": "obj:AgentWork.BotType",
+            "nome": "BotType",
+            "notas": [
+              "Nome listado na Object Reference; tipo e propriedades não extraídos nesta rodada."
+            ],
+            "o_que_e": "Explicação pendente: campo listado a partir da fonte, ainda sem texto didático.",
+            "obrigatoriedade": {
+              "estado": "desconhecido",
+              "valor": "desconhecida"
+            },
+            "origem": {
+              "estado": "verificado",
+              "evidencias": [
+                {
+                  "fonte": "src:objref-agentwork"
+                }
+              ],
+              "nota": "Campo padrão do objeto documentado.",
+              "valor": "padrao_plataforma"
+            },
+            "propriedades_api": {
+              "estado": "desconhecido"
+            },
+            "somente_leitura": null,
+            "tipo_tecnico": "(a extrair)"
+          },
+          {
+            "apis": [
+              "padrao"
+            ],
+            "default": {
+              "estado": "desconhecido",
+              "forma": "nao_declarado_na_fonte"
+            },
+            "disponibilidade": {
+              "ate_versao": null,
+              "desde_versao": null,
+              "estado": "desconhecido"
+            },
+            "dominio": {
+              "estado": "desconhecido",
+              "natureza": "desconhecida"
+            },
+            "estado": "verificado",
+            "evidencias": [
+              {
+                "fonte": "src:objref-agentwork"
+              }
+            ],
+            "explicacao": "pendente",
+            "id": "obj:AgentWork.CancelDateTime",
+            "nome": "CancelDateTime",
+            "notas": [
+              "Nome listado na Object Reference; tipo e propriedades não extraídos nesta rodada."
+            ],
+            "o_que_e": "Explicação pendente: campo listado a partir da fonte, ainda sem texto didático.",
+            "obrigatoriedade": {
+              "estado": "desconhecido",
+              "valor": "desconhecida"
+            },
+            "origem": {
+              "estado": "verificado",
+              "evidencias": [
+                {
+                  "fonte": "src:objref-agentwork"
+                }
+              ],
+              "nota": "Campo padrão do objeto documentado.",
+              "valor": "padrao_plataforma"
+            },
+            "propriedades_api": {
+              "estado": "desconhecido"
+            },
+            "somente_leitura": null,
+            "tipo_tecnico": "(a extrair)"
+          },
+          {
+            "apis": [
+              "padrao"
+            ],
+            "default": {
+              "estado": "desconhecido",
+              "forma": "nao_declarado_na_fonte"
+            },
+            "disponibilidade": {
+              "ate_versao": null,
+              "desde_versao": null,
+              "estado": "desconhecido"
+            },
+            "dominio": {
+              "estado": "desconhecido",
+              "natureza": "desconhecida"
+            },
+            "estado": "verificado",
+            "evidencias": [
+              {
+                "fonte": "src:objref-agentwork"
+              }
+            ],
+            "explicacao": "pendente",
+            "id": "obj:AgentWork.CapacityModel",
+            "nome": "CapacityModel",
+            "notas": [
+              "Nome listado na Object Reference; tipo e propriedades não extraídos nesta rodada."
+            ],
+            "o_que_e": "Explicação pendente: campo listado a partir da fonte, ainda sem texto didático.",
+            "obrigatoriedade": {
+              "estado": "desconhecido",
+              "valor": "desconhecida"
+            },
+            "origem": {
+              "estado": "verificado",
+              "evidencias": [
+                {
+                  "fonte": "src:objref-agentwork"
+                }
+              ],
+              "nota": "Campo padrão do objeto documentado.",
+              "valor": "padrao_plataforma"
+            },
+            "propriedades_api": {
+              "estado": "desconhecido"
+            },
+            "somente_leitura": null,
+            "tipo_tecnico": "(a extrair)"
+          },
+          {
+            "apis": [
+              "padrao"
+            ],
+            "default": {
+              "estado": "desconhecido",
+              "forma": "nao_declarado_na_fonte"
+            },
+            "disponibilidade": {
+              "ate_versao": null,
+              "desde_versao": null,
+              "estado": "desconhecido"
+            },
+            "dominio": {
+              "estado": "desconhecido",
+              "natureza": "desconhecida"
+            },
+            "estado": "verificado",
+            "evidencias": [
+              {
+                "fonte": "src:objref-agentwork"
+              }
+            ],
+            "explicacao": "pendente",
+            "id": "obj:AgentWork.CapacityPercentage",
+            "nome": "CapacityPercentage",
+            "notas": [
+              "Nome listado na Object Reference; tipo e propriedades não extraídos nesta rodada."
+            ],
+            "o_que_e": "Explicação pendente: campo listado a partir da fonte, ainda sem texto didático.",
+            "obrigatoriedade": {
+              "estado": "desconhecido",
+              "valor": "desconhecida"
+            },
+            "origem": {
+              "estado": "verificado",
+              "evidencias": [
+                {
+                  "fonte": "src:objref-agentwork"
+                }
+              ],
+              "nota": "Campo padrão do objeto documentado.",
+              "valor": "padrao_plataforma"
+            },
+            "propriedades_api": {
+              "estado": "desconhecido"
+            },
+            "somente_leitura": null,
+            "tipo_tecnico": "(a extrair)"
+          },
+          {
+            "apis": [
+              "padrao"
+            ],
+            "default": {
+              "estado": "desconhecido",
+              "forma": "nao_declarado_na_fonte"
+            },
+            "disponibilidade": {
+              "ate_versao": null,
+              "desde_versao": null,
+              "estado": "desconhecido"
+            },
+            "dominio": {
+              "estado": "verificado",
+              "evidencias": [
+                {
+                  "fonte": "src:objref-agentwork"
+                }
+              ],
+              "natureza": "numerico"
+            },
+            "estado": "verificado",
+            "evidencias": [
+              {
+                "fonte": "src:objref-agentwork"
+              }
+            ],
+            "explicacao": "explicada",
+            "id": "obj:AgentWork.CapacityWeight",
+            "nome": "CapacityWeight",
+            "o_que_e": "Unidades de capacidade consumidas.",
+            "obrigatoriedade": {
+              "estado": "desconhecido",
+              "valor": "desconhecida"
+            },
+            "origem": {
+              "estado": "verificado",
+              "evidencias": [
+                {
+                  "fonte": "src:objref-agentwork"
+                }
+              ],
+              "nota": "Campo padrão do objeto documentado.",
+              "valor": "padrao_plataforma"
+            },
+            "propriedades_api": {
+              "create": true,
+              "defaulted_on_create": false,
+              "estado": "verificado",
+              "evidencias": [
+                {
+                  "fonte": "src:objref-agentwork"
+                }
+              ],
+              "filter": true,
+              "group": false,
+              "id_lookup": false,
+              "nillable": true,
+              "restricted_picklist": false,
+              "sort": true,
+              "update": false
+            },
+            "somente_leitura": false,
+            "tipo_tecnico": "double"
+          },
+          {
+            "apis": [
+              "padrao"
+            ],
+            "default": {
+              "estado": "desconhecido",
+              "forma": "nao_declarado_na_fonte"
+            },
+            "disponibilidade": {
+              "ate_versao": null,
+              "desde_versao": null,
+              "estado": "desconhecido"
+            },
+            "dominio": {
+              "estado": "desconhecido",
+              "natureza": "desconhecida"
+            },
+            "estado": "verificado",
+            "evidencias": [
+              {
+                "fonte": "src:objref-agentwork"
+              }
+            ],
+            "explicacao": "pendente",
+            "id": "obj:AgentWork.CloseDateTime",
+            "nome": "CloseDateTime",
+            "notas": [
+              "Nome listado na Object Reference; tipo e propriedades não extraídos nesta rodada."
+            ],
+            "o_que_e": "Explicação pendente: campo listado a partir da fonte, ainda sem texto didático.",
+            "obrigatoriedade": {
+              "estado": "desconhecido",
+              "valor": "desconhecida"
+            },
+            "origem": {
+              "estado": "verificado",
+              "evidencias": [
+                {
+                  "fonte": "src:objref-agentwork"
+                }
+              ],
+              "nota": "Campo padrão do objeto documentado.",
+              "valor": "padrao_plataforma"
+            },
+            "propriedades_api": {
+              "estado": "desconhecido"
+            },
+            "somente_leitura": null,
+            "tipo_tecnico": "(a extrair)"
+          },
+          {
+            "apis": [
+              "padrao"
+            ],
+            "default": {
+              "estado": "desconhecido",
+              "forma": "nao_declarado_na_fonte"
+            },
+            "disponibilidade": {
+              "ate_versao": null,
+              "desde_versao": null,
+              "estado": "desconhecido"
+            },
+            "dominio": {
+              "estado": "desconhecido",
+              "natureza": "desconhecida"
+            },
+            "estado": "verificado",
+            "evidencias": [
+              {
+                "fonte": "src:objref-agentwork"
+              }
+            ],
+            "explicacao": "pendente",
+            "id": "obj:AgentWork.DeclineDateTime",
+            "nome": "DeclineDateTime",
+            "notas": [
+              "Nome listado na Object Reference; tipo e propriedades não extraídos nesta rodada."
+            ],
+            "o_que_e": "Explicação pendente: campo listado a partir da fonte, ainda sem texto didático.",
+            "obrigatoriedade": {
+              "estado": "desconhecido",
+              "valor": "desconhecida"
+            },
+            "origem": {
+              "estado": "verificado",
+              "evidencias": [
+                {
+                  "fonte": "src:objref-agentwork"
+                }
+              ],
+              "nota": "Campo padrão do objeto documentado.",
+              "valor": "padrao_plataforma"
+            },
+            "propriedades_api": {
+              "estado": "desconhecido"
+            },
+            "somente_leitura": null,
+            "tipo_tecnico": "(a extrair)"
+          },
+          {
+            "apis": [
+              "padrao"
+            ],
+            "default": {
+              "estado": "desconhecido",
+              "forma": "nao_declarado_na_fonte"
+            },
+            "disponibilidade": {
+              "ate_versao": null,
+              "desde_versao": null,
+              "estado": "desconhecido"
+            },
+            "dominio": {
+              "estado": "desconhecido",
+              "natureza": "desconhecida"
+            },
+            "estado": "verificado",
+            "evidencias": [
+              {
+                "fonte": "src:objref-agentwork"
+              }
+            ],
+            "explicacao": "pendente",
+            "id": "obj:AgentWork.DeclineReason",
+            "nome": "DeclineReason",
+            "notas": [
+              "Nome listado na Object Reference; tipo e propriedades não extraídos nesta rodada."
+            ],
+            "o_que_e": "Explicação pendente: campo listado a partir da fonte, ainda sem texto didático.",
+            "obrigatoriedade": {
+              "estado": "desconhecido",
+              "valor": "desconhecida"
+            },
+            "origem": {
+              "estado": "verificado",
+              "evidencias": [
+                {
+                  "fonte": "src:objref-agentwork"
+                }
+              ],
+              "nota": "Campo padrão do objeto documentado.",
+              "valor": "padrao_plataforma"
+            },
+            "propriedades_api": {
+              "estado": "desconhecido"
+            },
+            "somente_leitura": null,
+            "tipo_tecnico": "(a extrair)"
+          },
+          {
+            "apis": [
+              "padrao"
+            ],
+            "default": {
+              "estado": "desconhecido",
+              "forma": "nao_declarado_na_fonte"
+            },
+            "disponibilidade": {
+              "ate_versao": null,
+              "desde_versao": null,
+              "estado": "desconhecido"
+            },
+            "dominio": {
+              "estado": "desconhecido",
+              "natureza": "desconhecida"
+            },
+            "estado": "verificado",
+            "evidencias": [
+              {
+                "fonte": "src:objref-agentwork"
+              }
+            ],
+            "explicacao": "pendente",
+            "id": "obj:AgentWork.ExternalBotId",
+            "nome": "ExternalBotId",
+            "notas": [
+              "Nome listado na Object Reference; tipo e propriedades não extraídos nesta rodada."
+            ],
+            "o_que_e": "Explicação pendente: campo listado a partir da fonte, ainda sem texto didático.",
+            "obrigatoriedade": {
+              "estado": "desconhecido",
+              "valor": "desconhecida"
+            },
+            "origem": {
+              "estado": "verificado",
+              "evidencias": [
+                {
+                  "fonte": "src:objref-agentwork"
+                }
+              ],
+              "nota": "Campo padrão do objeto documentado.",
+              "valor": "padrao_plataforma"
+            },
+            "propriedades_api": {
+              "estado": "desconhecido"
+            },
+            "somente_leitura": null,
+            "tipo_tecnico": "(a extrair)"
+          },
+          {
+            "apis": [
+              "padrao"
+            ],
+            "default": {
+              "estado": "desconhecido",
+              "forma": "nao_declarado_na_fonte"
+            },
+            "disponibilidade": {
+              "ate_versao": null,
+              "desde_versao": null,
+              "estado": "desconhecido"
+            },
+            "dominio": {
+              "estado": "desconhecido",
+              "natureza": "desconhecida"
+            },
+            "estado": "verificado",
+            "evidencias": [
+              {
+                "fonte": "src:objref-agentwork"
+              }
+            ],
+            "explicacao": "pendente",
+            "id": "obj:AgentWork.HandleTime",
+            "nome": "HandleTime",
+            "notas": [
+              "Nome listado na Object Reference; tipo e propriedades não extraídos nesta rodada."
+            ],
+            "o_que_e": "Explicação pendente: campo listado a partir da fonte, ainda sem texto didático.",
+            "obrigatoriedade": {
+              "estado": "desconhecido",
+              "valor": "desconhecida"
+            },
+            "origem": {
+              "estado": "verificado",
+              "evidencias": [
+                {
+                  "fonte": "src:objref-agentwork"
+                }
+              ],
+              "nota": "Campo padrão do objeto documentado.",
+              "valor": "padrao_plataforma"
+            },
+            "propriedades_api": {
+              "estado": "desconhecido"
+            },
+            "somente_leitura": null,
+            "tipo_tecnico": "(a extrair)"
+          },
+          {
+            "apis": [
+              "padrao"
+            ],
+            "default": {
+              "estado": "desconhecido",
+              "forma": "nao_declarado_na_fonte"
+            },
+            "disponibilidade": {
+              "ate_versao": null,
+              "desde_versao": null,
+              "estado": "desconhecido"
+            },
+            "dominio": {
+              "estado": "desconhecido",
+              "natureza": "desconhecida"
+            },
+            "estado": "verificado",
+            "evidencias": [
+              {
+                "fonte": "src:objref-agentwork"
+              }
+            ],
+            "explicacao": "pendente",
+            "id": "obj:AgentWork.IsConference",
+            "nome": "IsConference",
+            "notas": [
+              "Nome listado na Object Reference; tipo e propriedades não extraídos nesta rodada."
+            ],
+            "o_que_e": "Explicação pendente: campo listado a partir da fonte, ainda sem texto didático.",
+            "obrigatoriedade": {
+              "estado": "desconhecido",
+              "valor": "desconhecida"
+            },
+            "origem": {
+              "estado": "verificado",
+              "evidencias": [
+                {
+                  "fonte": "src:objref-agentwork"
+                }
+              ],
+              "nota": "Campo padrão do objeto documentado.",
+              "valor": "padrao_plataforma"
+            },
+            "propriedades_api": {
+              "estado": "desconhecido"
+            },
+            "somente_leitura": null,
+            "tipo_tecnico": "(a extrair)"
+          },
+          {
+            "apis": [
+              "padrao"
+            ],
+            "default": {
+              "estado": "desconhecido",
+              "forma": "nao_declarado_na_fonte"
+            },
+            "disponibilidade": {
+              "ate_versao": null,
+              "desde_versao": null,
+              "estado": "desconhecido"
+            },
+            "dominio": {
+              "estado": "desconhecido",
+              "natureza": "desconhecida"
+            },
+            "estado": "verificado",
+            "evidencias": [
+              {
+                "fonte": "src:objref-agentwork"
+              }
+            ],
+            "explicacao": "pendente",
+            "id": "obj:AgentWork.IsInterruptible",
+            "nome": "IsInterruptible",
+            "notas": [
+              "Nome listado na Object Reference; tipo e propriedades não extraídos nesta rodada."
+            ],
+            "o_que_e": "Explicação pendente: campo listado a partir da fonte, ainda sem texto didático.",
+            "obrigatoriedade": {
+              "estado": "desconhecido",
+              "valor": "desconhecida"
+            },
+            "origem": {
+              "estado": "verificado",
+              "evidencias": [
+                {
+                  "fonte": "src:objref-agentwork"
+                }
+              ],
+              "nota": "Campo padrão do objeto documentado.",
+              "valor": "padrao_plataforma"
+            },
+            "propriedades_api": {
+              "estado": "desconhecido"
+            },
+            "somente_leitura": null,
+            "tipo_tecnico": "(a extrair)"
+          },
+          {
+            "apis": [
+              "padrao"
+            ],
+            "default": {
+              "estado": "desconhecido",
+              "forma": "nao_declarado_na_fonte"
+            },
+            "disponibilidade": {
+              "ate_versao": null,
+              "desde_versao": null,
+              "estado": "desconhecido"
+            },
+            "dominio": {
+              "estado": "desconhecido",
+              "natureza": "desconhecida"
+            },
+            "estado": "verificado",
+            "evidencias": [
+              {
+                "fonte": "src:objref-agentwork"
+              }
+            ],
+            "explicacao": "pendente",
+            "id": "obj:AgentWork.IsOwnerChangeInitiated",
+            "nome": "IsOwnerChangeInitiated",
+            "notas": [
+              "Nome listado na Object Reference; tipo e propriedades não extraídos nesta rodada."
+            ],
+            "o_que_e": "Explicação pendente: campo listado a partir da fonte, ainda sem texto didático.",
+            "obrigatoriedade": {
+              "estado": "desconhecido",
+              "valor": "desconhecida"
+            },
+            "origem": {
+              "estado": "verificado",
+              "evidencias": [
+                {
+                  "fonte": "src:objref-agentwork"
+                }
+              ],
+              "nota": "Campo padrão do objeto documentado.",
+              "valor": "padrao_plataforma"
+            },
+            "propriedades_api": {
+              "estado": "desconhecido"
+            },
+            "somente_leitura": null,
+            "tipo_tecnico": "(a extrair)"
+          },
+          {
+            "apis": [
+              "padrao"
+            ],
+            "default": {
+              "estado": "desconhecido",
+              "forma": "nao_declarado_na_fonte"
+            },
+            "disponibilidade": {
+              "ate_versao": null,
+              "desde_versao": null,
+              "estado": "desconhecido"
+            },
+            "dominio": {
+              "estado": "desconhecido",
+              "natureza": "desconhecida"
+            },
+            "estado": "verificado",
+            "evidencias": [
+              {
+                "fonte": "src:objref-agentwork"
+              }
+            ],
+            "explicacao": "pendente",
+            "id": "obj:AgentWork.IsPreferredUserRequired",
+            "nome": "IsPreferredUserRequired",
+            "notas": [
+              "Nome listado na Object Reference; tipo e propriedades não extraídos nesta rodada."
+            ],
+            "o_que_e": "Explicação pendente: campo listado a partir da fonte, ainda sem texto didático.",
+            "obrigatoriedade": {
+              "estado": "desconhecido",
+              "valor": "desconhecida"
+            },
+            "origem": {
+              "estado": "verificado",
+              "evidencias": [
+                {
+                  "fonte": "src:objref-agentwork"
+                }
+              ],
+              "nota": "Campo padrão do objeto documentado.",
+              "valor": "padrao_plataforma"
+            },
+            "propriedades_api": {
+              "estado": "desconhecido"
+            },
+            "somente_leitura": null,
+            "tipo_tecnico": "(a extrair)"
+          },
+          {
+            "apis": [
+              "padrao"
+            ],
+            "default": {
+              "estado": "desconhecido",
+              "forma": "nao_declarado_na_fonte"
+            },
+            "disponibilidade": {
+              "ate_versao": null,
+              "desde_versao": null,
+              "estado": "desconhecido"
+            },
+            "dominio": {
+              "estado": "desconhecido",
+              "natureza": "desconhecida"
+            },
+            "estado": "verificado",
+            "evidencias": [
+              {
+                "fonte": "src:objref-agentwork"
+              }
+            ],
+            "explicacao": "pendente",
+            "id": "obj:AgentWork.IsStatusChangeInitiated",
+            "nome": "IsStatusChangeInitiated",
+            "notas": [
+              "Nome listado na Object Reference; tipo e propriedades não extraídos nesta rodada."
+            ],
+            "o_que_e": "Explicação pendente: campo listado a partir da fonte, ainda sem texto didático.",
+            "obrigatoriedade": {
+              "estado": "desconhecido",
+              "valor": "desconhecida"
+            },
+            "origem": {
+              "estado": "verificado",
+              "evidencias": [
+                {
+                  "fonte": "src:objref-agentwork"
+                }
+              ],
+              "nota": "Campo padrão do objeto documentado.",
+              "valor": "padrao_plataforma"
+            },
+            "propriedades_api": {
+              "estado": "desconhecido"
+            },
+            "somente_leitura": null,
+            "tipo_tecnico": "(a extrair)"
+          },
+          {
+            "apis": [
+              "padrao"
+            ],
+            "default": {
+              "estado": "desconhecido",
+              "forma": "nao_declarado_na_fonte"
+            },
+            "disponibilidade": {
+              "ate_versao": null,
+              "desde_versao": null,
+              "estado": "desconhecido"
+            },
+            "dominio": {
+              "estado": "desconhecido",
+              "natureza": "desconhecida"
+            },
+            "estado": "verificado",
+            "evidencias": [
+              {
+                "fonte": "src:objref-agentwork"
+              }
+            ],
+            "explicacao": "pendente",
+            "id": "obj:AgentWork.IsTransfer",
+            "nome": "IsTransfer",
+            "notas": [
+              "Nome listado na Object Reference; tipo e propriedades não extraídos nesta rodada."
+            ],
+            "o_que_e": "Explicação pendente: campo listado a partir da fonte, ainda sem texto didático.",
+            "obrigatoriedade": {
+              "estado": "desconhecido",
+              "valor": "desconhecida"
+            },
+            "origem": {
+              "estado": "verificado",
+              "evidencias": [
+                {
+                  "fonte": "src:objref-agentwork"
+                }
+              ],
+              "nota": "Campo padrão do objeto documentado.",
+              "valor": "padrao_plataforma"
+            },
+            "propriedades_api": {
+              "estado": "desconhecido"
+            },
+            "somente_leitura": null,
+            "tipo_tecnico": "(a extrair)"
+          },
+          {
+            "apis": [
+              "padrao"
+            ],
+            "default": {
+              "estado": "desconhecido",
+              "forma": "nao_declarado_na_fonte"
+            },
+            "disponibilidade": {
+              "ate_versao": null,
+              "desde_versao": null,
+              "estado": "desconhecido"
+            },
+            "dominio": {
+              "estado": "desconhecido",
+              "natureza": "desconhecida"
+            },
+            "estado": "verificado",
+            "evidencias": [
+              {
+                "fonte": "src:objref-agentwork"
+              }
+            ],
+            "explicacao": "pendente",
+            "id": "obj:AgentWork.Name",
+            "nome": "Name",
+            "notas": [
+              "Nome listado na Object Reference; tipo e propriedades não extraídos nesta rodada."
+            ],
+            "o_que_e": "Explicação pendente: campo listado a partir da fonte, ainda sem texto didático.",
+            "obrigatoriedade": {
+              "estado": "desconhecido",
+              "valor": "desconhecida"
+            },
+            "origem": {
+              "estado": "verificado",
+              "evidencias": [
+                {
+                  "fonte": "src:objref-agentwork"
+                }
+              ],
+              "nota": "Campo padrão do objeto documentado.",
+              "valor": "padrao_plataforma"
+            },
+            "propriedades_api": {
+              "estado": "desconhecido"
+            },
+            "somente_leitura": null,
+            "tipo_tecnico": "(a extrair)"
+          },
+          {
+            "apis": [
+              "padrao"
+            ],
+            "default": {
+              "estado": "desconhecido",
+              "forma": "nao_declarado_na_fonte"
+            },
+            "disponibilidade": {
+              "ate_versao": null,
+              "desde_versao": null,
+              "estado": "desconhecido"
+            },
+            "dominio": {
+              "estado": "desconhecido",
+              "natureza": "desconhecida"
+            },
+            "estado": "verificado",
+            "evidencias": [
+              {
+                "fonte": "src:objref-agentwork"
+              }
+            ],
+            "explicacao": "pendente",
+            "id": "obj:AgentWork.OriginalGroupId",
+            "nome": "OriginalGroupId",
+            "notas": [
+              "Nome listado na Object Reference; tipo e propriedades não extraídos nesta rodada."
+            ],
+            "o_que_e": "Explicação pendente: campo listado a partir da fonte, ainda sem texto didático.",
+            "obrigatoriedade": {
+              "estado": "desconhecido",
+              "valor": "desconhecida"
+            },
+            "origem": {
+              "estado": "verificado",
+              "evidencias": [
+                {
+                  "fonte": "src:objref-agentwork"
+                }
+              ],
+              "nota": "Campo padrão do objeto documentado.",
+              "valor": "padrao_plataforma"
+            },
+            "propriedades_api": {
+              "estado": "desconhecido"
+            },
+            "somente_leitura": null,
+            "tipo_tecnico": "(a extrair)"
+          },
+          {
+            "apis": [
+              "padrao"
+            ],
+            "default": {
+              "estado": "desconhecido",
+              "forma": "nao_declarado_na_fonte"
+            },
+            "disponibilidade": {
+              "ate_versao": null,
+              "desde_versao": null,
+              "estado": "desconhecido"
+            },
+            "dominio": {
+              "estado": "desconhecido",
+              "natureza": "desconhecida"
+            },
+            "estado": "verificado",
+            "evidencias": [
+              {
+                "fonte": "src:objref-agentwork"
+              }
+            ],
+            "explicacao": "pendente",
+            "id": "obj:AgentWork.OriginalQueueId",
+            "nome": "OriginalQueueId",
+            "notas": [
+              "Nome listado na Object Reference; tipo e propriedades não extraídos nesta rodada."
+            ],
+            "o_que_e": "Explicação pendente: campo listado a partir da fonte, ainda sem texto didático.",
+            "obrigatoriedade": {
+              "estado": "desconhecido",
+              "valor": "desconhecida"
+            },
+            "origem": {
+              "estado": "verificado",
+              "evidencias": [
+                {
+                  "fonte": "src:objref-agentwork"
+                }
+              ],
+              "nota": "Campo padrão do objeto documentado.",
+              "valor": "padrao_plataforma"
+            },
+            "propriedades_api": {
+              "estado": "desconhecido"
+            },
+            "somente_leitura": null,
+            "tipo_tecnico": "(a extrair)"
+          },
+          {
+            "apis": [
+              "padrao"
+            ],
+            "default": {
+              "estado": "desconhecido",
+              "forma": "nao_declarado_na_fonte"
+            },
+            "disponibilidade": {
+              "ate_versao": null,
+              "desde_versao": null,
+              "estado": "desconhecido"
+            },
+            "dominio": {
+              "estado": "desconhecido",
+              "natureza": "desconhecida"
+            },
+            "estado": "verificado",
+            "evidencias": [
+              {
+                "fonte": "src:objref-agentwork"
+              }
+            ],
+            "explicacao": "pendente",
+            "id": "obj:AgentWork.OwnerId",
+            "nome": "OwnerId",
+            "notas": [
+              "Nome listado na Object Reference; tipo e propriedades não extraídos nesta rodada."
+            ],
+            "o_que_e": "Explicação pendente: campo listado a partir da fonte, ainda sem texto didático.",
+            "obrigatoriedade": {
+              "estado": "desconhecido",
+              "valor": "desconhecida"
+            },
+            "origem": {
+              "estado": "verificado",
+              "evidencias": [
+                {
+                  "fonte": "src:objref-agentwork"
+                }
+              ],
+              "nota": "Campo padrão do objeto documentado.",
+              "valor": "padrao_plataforma"
+            },
+            "propriedades_api": {
+              "estado": "desconhecido"
+            },
+            "somente_leitura": null,
+            "tipo_tecnico": "(a extrair)"
+          },
+          {
+            "apis": [
+              "padrao"
+            ],
+            "default": {
+              "estado": "desconhecido",
+              "forma": "nao_declarado_na_fonte"
+            },
+            "disponibilidade": {
+              "ate_versao": null,
+              "desde_versao": null,
+              "estado": "desconhecido"
+            },
+            "dominio": {
+              "estado": "desconhecido",
+              "natureza": "desconhecida"
+            },
+            "estado": "verificado",
+            "evidencias": [
+              {
+                "fonte": "src:objref-agentwork"
+              }
+            ],
+            "explicacao": "pendente",
+            "id": "obj:AgentWork.PausedCapacityPercentage",
+            "nome": "PausedCapacityPercentage",
+            "notas": [
+              "Nome listado na Object Reference; tipo e propriedades não extraídos nesta rodada."
+            ],
+            "o_que_e": "Explicação pendente: campo listado a partir da fonte, ainda sem texto didático.",
+            "obrigatoriedade": {
+              "estado": "desconhecido",
+              "valor": "desconhecida"
+            },
+            "origem": {
+              "estado": "verificado",
+              "evidencias": [
+                {
+                  "fonte": "src:objref-agentwork"
+                }
+              ],
+              "nota": "Campo padrão do objeto documentado.",
+              "valor": "padrao_plataforma"
+            },
+            "propriedades_api": {
+              "estado": "desconhecido"
+            },
+            "somente_leitura": null,
+            "tipo_tecnico": "(a extrair)"
+          },
+          {
+            "apis": [
+              "padrao"
+            ],
+            "default": {
+              "estado": "desconhecido",
+              "forma": "nao_declarado_na_fonte"
+            },
+            "disponibilidade": {
+              "ate_versao": null,
+              "desde_versao": null,
+              "estado": "desconhecido"
+            },
+            "dominio": {
+              "estado": "desconhecido",
+              "natureza": "desconhecida"
+            },
+            "estado": "verificado",
+            "evidencias": [
+              {
+                "fonte": "src:objref-agentwork"
+              }
+            ],
+            "explicacao": "pendente",
+            "id": "obj:AgentWork.PausedCapacityWeight",
+            "nome": "PausedCapacityWeight",
+            "notas": [
+              "Nome listado na Object Reference; tipo e propriedades não extraídos nesta rodada."
+            ],
+            "o_que_e": "Explicação pendente: campo listado a partir da fonte, ainda sem texto didático.",
+            "obrigatoriedade": {
+              "estado": "desconhecido",
+              "valor": "desconhecida"
+            },
+            "origem": {
+              "estado": "verificado",
+              "evidencias": [
+                {
+                  "fonte": "src:objref-agentwork"
+                }
+              ],
+              "nota": "Campo padrão do objeto documentado.",
+              "valor": "padrao_plataforma"
+            },
+            "propriedades_api": {
+              "estado": "desconhecido"
+            },
+            "somente_leitura": null,
+            "tipo_tecnico": "(a extrair)"
+          },
+          {
+            "apis": [
+              "padrao"
+            ],
+            "default": {
+              "estado": "desconhecido",
+              "forma": "nao_declarado_na_fonte"
+            },
+            "disponibilidade": {
+              "ate_versao": null,
+              "desde_versao": null,
+              "estado": "desconhecido"
+            },
+            "dominio": {
+              "contexto": "Id de registro do(s) objeto(s) referenciado(s).",
+              "estado": "verificado",
+              "evidencias": [
+                {
+                  "fonte": "src:objref-agentwork"
+                }
+              ],
+              "natureza": "referencia"
+            },
+            "estado": "verificado",
+            "evidencias": [
+              {
+                "fonte": "src:objref-agentwork"
+              }
+            ],
+            "explicacao": "explicada",
+            "id": "obj:AgentWork.PendingServiceRoutingId",
+            "nome": "PendingServiceRoutingId",
+            "o_que_e": "Roteamento pendente que originou o trabalho.",
+            "obrigatoriedade": {
+              "estado": "desconhecido",
+              "valor": "desconhecida"
+            },
+            "origem": {
+              "estado": "verificado",
+              "evidencias": [
+                {
+                  "fonte": "src:objref-agentwork"
+                }
+              ],
+              "nota": "Campo padrão do objeto documentado.",
+              "valor": "padrao_plataforma"
+            },
+            "propriedades_api": {
+              "create": true,
+              "defaulted_on_create": false,
+              "estado": "verificado",
+              "evidencias": [
+                {
+                  "fonte": "src:objref-agentwork"
+                }
+              ],
+              "filter": true,
+              "group": true,
+              "id_lookup": false,
+              "nillable": true,
+              "restricted_picklist": false,
+              "sort": true,
+              "update": false
+            },
+            "referencia": {
+              "alvos": [
+                "PendingServiceRouting"
+              ],
+              "nome_relacionamento": null
+            },
+            "somente_leitura": false,
+            "tipo_tecnico": "reference"
+          },
+          {
+            "apis": [
+              "padrao"
+            ],
+            "default": {
+              "estado": "desconhecido",
+              "forma": "nao_declarado_na_fonte"
+            },
+            "disponibilidade": {
+              "ate_versao": null,
+              "desde_versao": null,
+              "estado": "desconhecido"
+            },
+            "dominio": {
+              "estado": "desconhecido",
+              "natureza": "desconhecida"
+            },
+            "estado": "verificado",
+            "evidencias": [
+              {
+                "fonte": "src:objref-agentwork"
+              }
+            ],
+            "explicacao": "pendente",
+            "id": "obj:AgentWork.PreferredUserId",
+            "nome": "PreferredUserId",
+            "notas": [
+              "Nome listado na Object Reference; tipo e propriedades não extraídos nesta rodada."
+            ],
+            "o_que_e": "Explicação pendente: campo listado a partir da fonte, ainda sem texto didático.",
+            "obrigatoriedade": {
+              "estado": "desconhecido",
+              "valor": "desconhecida"
+            },
+            "origem": {
+              "estado": "verificado",
+              "evidencias": [
+                {
+                  "fonte": "src:objref-agentwork"
+                }
+              ],
+              "nota": "Campo padrão do objeto documentado.",
+              "valor": "padrao_plataforma"
+            },
+            "propriedades_api": {
+              "estado": "desconhecido"
+            },
+            "somente_leitura": null,
+            "tipo_tecnico": "(a extrair)"
+          },
+          {
+            "apis": [
+              "padrao"
+            ],
+            "default": {
+              "estado": "desconhecido",
+              "forma": "nao_declarado_na_fonte"
+            },
+            "disponibilidade": {
+              "ate_versao": null,
+              "desde_versao": null,
+              "estado": "desconhecido"
+            },
+            "dominio": {
+              "estado": "desconhecido",
+              "natureza": "desconhecida"
+            },
+            "estado": "verificado",
+            "evidencias": [
+              {
+                "fonte": "src:objref-agentwork"
+              }
+            ],
+            "explicacao": "pendente",
+            "id": "obj:AgentWork.PushTimeout",
+            "nome": "PushTimeout",
+            "notas": [
+              "Nome listado na Object Reference; tipo e propriedades não extraídos nesta rodada."
+            ],
+            "o_que_e": "Explicação pendente: campo listado a partir da fonte, ainda sem texto didático.",
+            "obrigatoriedade": {
+              "estado": "desconhecido",
+              "valor": "desconhecida"
+            },
+            "origem": {
+              "estado": "verificado",
+              "evidencias": [
+                {
+                  "fonte": "src:objref-agentwork"
+                }
+              ],
+              "nota": "Campo padrão do objeto documentado.",
+              "valor": "padrao_plataforma"
+            },
+            "propriedades_api": {
+              "estado": "desconhecido"
+            },
+            "somente_leitura": null,
+            "tipo_tecnico": "(a extrair)"
+          },
+          {
+            "apis": [
+              "padrao"
+            ],
+            "default": {
+              "estado": "desconhecido",
+              "forma": "nao_declarado_na_fonte"
+            },
+            "disponibilidade": {
+              "ate_versao": null,
+              "desde_versao": null,
+              "estado": "desconhecido"
+            },
+            "dominio": {
+              "estado": "desconhecido",
+              "natureza": "desconhecida"
+            },
+            "estado": "verificado",
+            "evidencias": [
+              {
+                "fonte": "src:objref-agentwork"
+              }
+            ],
+            "explicacao": "pendente",
+            "id": "obj:AgentWork.PushTimeoutDateTime",
+            "nome": "PushTimeoutDateTime",
+            "notas": [
+              "Nome listado na Object Reference; tipo e propriedades não extraídos nesta rodada."
+            ],
+            "o_que_e": "Explicação pendente: campo listado a partir da fonte, ainda sem texto didático.",
+            "obrigatoriedade": {
+              "estado": "desconhecido",
+              "valor": "desconhecida"
+            },
+            "origem": {
+              "estado": "verificado",
+              "evidencias": [
+                {
+                  "fonte": "src:objref-agentwork"
+                }
+              ],
+              "nota": "Campo padrão do objeto documentado.",
+              "valor": "padrao_plataforma"
+            },
+            "propriedades_api": {
+              "estado": "desconhecido"
+            },
+            "somente_leitura": null,
+            "tipo_tecnico": "(a extrair)"
+          },
+          {
+            "apis": [
+              "padrao"
+            ],
+            "default": {
+              "estado": "desconhecido",
+              "forma": "nao_declarado_na_fonte"
+            },
+            "disponibilidade": {
+              "ate_versao": null,
+              "desde_versao": null,
+              "estado": "desconhecido"
+            },
+            "dominio": {
+              "estado": "desconhecido",
+              "natureza": "desconhecida"
+            },
+            "estado": "verificado",
+            "evidencias": [
+              {
+                "fonte": "src:objref-agentwork"
+              }
+            ],
+            "explicacao": "pendente",
+            "id": "obj:AgentWork.RequestDateTime",
+            "nome": "RequestDateTime",
+            "notas": [
+              "Nome listado na Object Reference; tipo e propriedades não extraídos nesta rodada."
+            ],
+            "o_que_e": "Explicação pendente: campo listado a partir da fonte, ainda sem texto didático.",
+            "obrigatoriedade": {
+              "estado": "desconhecido",
+              "valor": "desconhecida"
+            },
+            "origem": {
+              "estado": "verificado",
+              "evidencias": [
+                {
+                  "fonte": "src:objref-agentwork"
+                }
+              ],
+              "nota": "Campo padrão do objeto documentado.",
+              "valor": "padrao_plataforma"
+            },
+            "propriedades_api": {
+              "estado": "desconhecido"
+            },
+            "somente_leitura": null,
+            "tipo_tecnico": "(a extrair)"
+          },
+          {
+            "apis": [
+              "padrao"
+            ],
+            "default": {
+              "estado": "desconhecido",
+              "forma": "nao_declarado_na_fonte"
+            },
+            "disponibilidade": {
+              "ate_versao": null,
+              "desde_versao": null,
+              "estado": "desconhecido"
+            },
+            "dominio": {
+              "estado": "desconhecido",
+              "natureza": "desconhecida"
+            },
+            "estado": "verificado",
+            "evidencias": [
+              {
+                "fonte": "src:objref-agentwork"
+              }
+            ],
+            "explicacao": "pendente",
+            "id": "obj:AgentWork.RoutingModel",
+            "nome": "RoutingModel",
+            "notas": [
+              "Nome listado na Object Reference; tipo e propriedades não extraídos nesta rodada."
+            ],
+            "o_que_e": "Explicação pendente: campo listado a partir da fonte, ainda sem texto didático.",
+            "obrigatoriedade": {
+              "estado": "desconhecido",
+              "valor": "desconhecida"
+            },
+            "origem": {
+              "estado": "verificado",
+              "evidencias": [
+                {
+                  "fonte": "src:objref-agentwork"
+                }
+              ],
+              "nota": "Campo padrão do objeto documentado.",
+              "valor": "padrao_plataforma"
+            },
+            "propriedades_api": {
+              "estado": "desconhecido"
+            },
+            "somente_leitura": null,
+            "tipo_tecnico": "(a extrair)"
+          },
+          {
+            "apis": [
+              "padrao"
+            ],
+            "default": {
+              "estado": "desconhecido",
+              "forma": "nao_declarado_na_fonte"
+            },
+            "disponibilidade": {
+              "ate_versao": null,
+              "desde_versao": null,
+              "estado": "desconhecido"
+            },
+            "dominio": {
+              "estado": "desconhecido",
+              "natureza": "desconhecida"
+            },
+            "estado": "verificado",
+            "evidencias": [
+              {
+                "fonte": "src:objref-agentwork"
+              }
+            ],
+            "explicacao": "pendente",
+            "id": "obj:AgentWork.RoutingPriority",
+            "nome": "RoutingPriority",
+            "notas": [
+              "Nome listado na Object Reference; tipo e propriedades não extraídos nesta rodada."
+            ],
+            "o_que_e": "Explicação pendente: campo listado a partir da fonte, ainda sem texto didático.",
+            "obrigatoriedade": {
+              "estado": "desconhecido",
+              "valor": "desconhecida"
+            },
+            "origem": {
+              "estado": "verificado",
+              "evidencias": [
+                {
+                  "fonte": "src:objref-agentwork"
+                }
+              ],
+              "nota": "Campo padrão do objeto documentado.",
+              "valor": "padrao_plataforma"
+            },
+            "propriedades_api": {
+              "estado": "desconhecido"
+            },
+            "somente_leitura": null,
+            "tipo_tecnico": "(a extrair)"
+          },
+          {
+            "apis": [
+              "padrao"
+            ],
+            "default": {
+              "estado": "desconhecido",
+              "forma": "nao_declarado_na_fonte"
+            },
+            "disponibilidade": {
+              "ate_versao": null,
+              "desde_versao": null,
+              "estado": "desconhecido"
+            },
+            "dominio": {
+              "estado": "desconhecido",
+              "natureza": "desconhecida"
+            },
+            "estado": "verificado",
+            "evidencias": [
+              {
+                "fonte": "src:objref-agentwork"
+              }
+            ],
+            "explicacao": "pendente",
+            "id": "obj:AgentWork.RoutingType",
+            "nome": "RoutingType",
+            "notas": [
+              "Nome listado na Object Reference; tipo e propriedades não extraídos nesta rodada."
+            ],
+            "o_que_e": "Explicação pendente: campo listado a partir da fonte, ainda sem texto didático.",
+            "obrigatoriedade": {
+              "estado": "desconhecido",
+              "valor": "desconhecida"
+            },
+            "origem": {
+              "estado": "verificado",
+              "evidencias": [
+                {
+                  "fonte": "src:objref-agentwork"
+                }
+              ],
+              "nota": "Campo padrão do objeto documentado.",
+              "valor": "padrao_plataforma"
+            },
+            "propriedades_api": {
+              "estado": "desconhecido"
+            },
+            "somente_leitura": null,
+            "tipo_tecnico": "(a extrair)"
+          },
+          {
+            "apis": [
+              "padrao"
+            ],
+            "default": {
+              "estado": "desconhecido",
+              "forma": "nao_declarado_na_fonte"
+            },
+            "disponibilidade": {
+              "ate_versao": null,
+              "desde_versao": null,
+              "estado": "desconhecido"
+            },
+            "dominio": {
+              "estado": "desconhecido",
+              "natureza": "desconhecida"
+            },
+            "estado": "verificado",
+            "evidencias": [
+              {
+                "fonte": "src:objref-agentwork"
+              }
+            ],
+            "explicacao": "pendente",
+            "id": "obj:AgentWork.SecondaryRoutingPriority",
+            "nome": "SecondaryRoutingPriority",
+            "notas": [
+              "Nome listado na Object Reference; tipo e propriedades não extraídos nesta rodada."
+            ],
+            "o_que_e": "Explicação pendente: campo listado a partir da fonte, ainda sem texto didático.",
+            "obrigatoriedade": {
+              "estado": "desconhecido",
+              "valor": "desconhecida"
+            },
+            "origem": {
+              "estado": "verificado",
+              "evidencias": [
+                {
+                  "fonte": "src:objref-agentwork"
+                }
+              ],
+              "nota": "Campo padrão do objeto documentado.",
+              "valor": "padrao_plataforma"
+            },
+            "propriedades_api": {
+              "estado": "desconhecido"
+            },
+            "somente_leitura": null,
+            "tipo_tecnico": "(a extrair)"
+          },
+          {
+            "apis": [
+              "padrao"
+            ],
+            "default": {
+              "estado": "desconhecido",
+              "forma": "nao_declarado_na_fonte"
+            },
+            "disponibilidade": {
+              "ate_versao": null,
+              "desde_versao": null,
+              "estado": "desconhecido"
+            },
+            "dominio": {
+              "contexto": "Id de registro do(s) objeto(s) referenciado(s).",
+              "estado": "desconhecido",
+              "natureza": "referencia"
+            },
+            "estado": "verificado",
+            "evidencias": [
+              {
+                "fonte": "src:objref-agentwork"
+              }
+            ],
+            "explicacao": "explicada",
+            "id": "obj:AgentWork.ServiceChannelId",
+            "nome": "ServiceChannelId",
+            "notas": [
+              "Alvo cortado na página servida."
+            ],
+            "o_que_e": "Canal de serviço do trabalho.",
+            "obrigatoriedade": {
+              "estado": "desconhecido",
+              "valor": "desconhecida"
+            },
+            "origem": {
+              "estado": "verificado",
+              "evidencias": [
+                {
+                  "fonte": "src:objref-agentwork"
+                }
+              ],
+              "nota": "Campo padrão do objeto documentado.",
+              "valor": "padrao_plataforma"
+            },
+            "propriedades_api": {
+              "create": true,
+              "defaulted_on_create": false,
+              "estado": "verificado",
+              "evidencias": [
+                {
+                  "fonte": "src:objref-agentwork"
+                }
+              ],
+              "filter": true,
+              "group": true,
+              "id_lookup": false,
+              "nillable": false,
+              "restricted_picklist": false,
+              "sort": true,
+              "update": false
+            },
+            "somente_leitura": false,
+            "tipo_tecnico": "reference"
+          }
+        ],
+        "cobertura": {
+          "estrutural": {
+            "esperado": null,
+            "estado": "parcial",
+            "nota": "Object Reference servida truncada em ServiceChannelId (41 nomes); WorkItemId, UserId e Status não foram servidos.",
+            "presente": 41
+          },
+          "explicativa": {
+            "esperado": 41,
+            "estado": "parcial",
+            "presente": 3
+          },
+          "mapeamento": {
+            "estado": "parcial",
+            "nota": "Ver relacionamentos registrados."
+          }
+        },
+        "consultas": [
+          {
+            "api": "padrao",
+            "contexto": "API padrão.",
+            "soql": "SELECT Name, ServiceChannelId, CapacityWeight, AcceptDateTime FROM AgentWork LIMIT 20",
+            "validacao": "documental"
+          }
+        ],
+        "estado": "verificado",
+        "evidencias": [
+          {
+            "fonte": "src:objref-agentwork"
+          }
+        ],
+        "exposicoes": [
+          {
+            "acesso_especial": "Requer Omni-Channel habilitado.",
+            "api": "padrao",
+            "chamadas": [
+              "create()",
+              "delete()",
+              "describeSObjects()",
+              "getDeleted()",
+              "getUpdated()",
+              "query()",
+              "retrieve()",
+              "undelete()",
+              "update()",
+              "upsert()"
+            ],
+            "desde_versao": "32.0",
+            "estado": "verificado",
+            "evidencias": [
+              {
+                "fonte": "src:objref-agentwork"
+              }
+            ]
+          },
+          {
+            "api": "tooling",
+            "desde_versao": null,
+            "estado": "desconhecido",
+            "nota": "Exposição na Tooling API não verificada."
+          }
+        ],
+        "id": "obj:AgentWork",
+        "juncao": false,
+        "nome": "AgentWork",
+        "o_que_e": "Representa um trabalho atribuído a um atendente pelo Omni-Channel.",
+        "papel": "Acompanhar atribuição, aceite e capacidade consumida.",
+        "setup": {
+          "estado": "nao_aplicavel",
+          "nota": "Objeto consultável via API; não é tela do Setup."
+        }
+      },
+      "papel": "Trabalho atribuído a um atendente.",
+      "relacionamentos": []
+    },
+    {
+      "objeto": {
+        "alertas": [],
+        "apex": {
+          "consulta_soql_direta": {
+            "estado": "verificado",
+            "evidencias": [
+              {
+                "fonte": "src:objref-servicechannel"
+              }
+            ],
+            "nota": "Objeto da API padrão: consultável por SOQL em Apex, sujeito a permissões.",
+            "valor": true
+          },
+          "nota": "Exemplo Apex não fornecido nesta fase."
+        },
+        "campos": [
+          {
+            "apis": [
+              "padrao"
+            ],
+            "default": {
+              "estado": "desconhecido",
+              "forma": "nao_declarado_na_fonte"
+            },
+            "disponibilidade": {
+              "ate_versao": null,
+              "desde_versao": null,
+              "estado": "desconhecido"
+            },
+            "dominio": {
+              "estado": "verificado",
+              "evidencias": [
+                {
+                  "fonte": "src:objref-servicechannel"
+                }
+              ],
+              "natureza": "numerico"
+            },
+            "estado": "verificado",
+            "evidencias": [
+              {
+                "fonte": "src:objref-servicechannel"
+              }
+            ],
+            "explicacao": "explicada",
+            "id": "obj:ServiceChannel.AcwExtensionDuration",
+            "nome": "AcwExtensionDuration",
+            "o_que_e": "Duração de cada extensão do trabalho pós-conversa.",
+            "obrigatoriedade": {
+              "condicao": "Obrigatório quando HasAcwExtensionEnabled é true.",
+              "estado": "verificado",
+              "evidencias": [
+                {
+                  "fonte": "src:objref-servicechannel"
+                }
+              ],
+              "valor": "condicional"
+            },
+            "origem": {
+              "estado": "verificado",
+              "evidencias": [
+                {
+                  "fonte": "src:objref-servicechannel"
+                }
+              ],
+              "nota": "Campo padrão do objeto documentado.",
+              "valor": "padrao_plataforma"
+            },
+            "propriedades_api": {
+              "create": true,
+              "defaulted_on_create": false,
+              "estado": "verificado",
+              "evidencias": [
+                {
+                  "fonte": "src:objref-servicechannel"
+                }
+              ],
+              "filter": true,
+              "group": true,
+              "id_lookup": false,
+              "nillable": true,
+              "restricted_picklist": false,
+              "sort": true,
+              "update": true
+            },
+            "somente_leitura": false,
+            "tipo_tecnico": "int"
+          },
+          {
+            "apis": [
+              "padrao"
+            ],
+            "default": {
+              "estado": "desconhecido",
+              "forma": "nao_declarado_na_fonte"
+            },
+            "disponibilidade": {
+              "ate_versao": null,
+              "desde_versao": null,
+              "estado": "desconhecido"
+            },
+            "dominio": {
+              "estado": "verificado",
+              "evidencias": [
+                {
+                  "fonte": "src:objref-servicechannel"
+                }
+              ],
+              "natureza": "numerico"
+            },
+            "estado": "verificado",
+            "evidencias": [
+              {
+                "fonte": "src:objref-servicechannel"
+              }
+            ],
+            "explicacao": "explicada",
+            "id": "obj:ServiceChannel.AfterConvoWorkMaxTime",
+            "nome": "AfterConvoWorkMaxTime",
+            "o_que_e": "Tempo máximo do trabalho pós-conversa.",
+            "obrigatoriedade": {
+              "condicao": "Obrigatório quando HasAfterConvoWorkTimer é true.",
+              "estado": "verificado",
+              "evidencias": [
+                {
+                  "fonte": "src:objref-servicechannel"
+                }
+              ],
+              "valor": "condicional"
+            },
+            "origem": {
+              "estado": "verificado",
+              "evidencias": [
+                {
+                  "fonte": "src:objref-servicechannel"
+                }
+              ],
+              "nota": "Campo padrão do objeto documentado.",
+              "valor": "padrao_plataforma"
+            },
+            "propriedades_api": {
+              "create": true,
+              "defaulted_on_create": false,
+              "estado": "verificado",
+              "evidencias": [
+                {
+                  "fonte": "src:objref-servicechannel"
+                }
+              ],
+              "filter": true,
+              "group": true,
+              "id_lookup": false,
+              "nillable": true,
+              "restricted_picklist": false,
+              "sort": true,
+              "update": true
+            },
+            "somente_leitura": false,
+            "tipo_tecnico": "int"
+          },
+          {
+            "apis": [
+              "padrao"
+            ],
+            "default": {
+              "estado": "desconhecido",
+              "forma": "nao_declarado_na_fonte"
+            },
+            "disponibilidade": {
+              "ate_versao": null,
+              "desde_versao": null,
+              "estado": "desconhecido"
+            },
+            "dominio": {
+              "contexto": "Valores não extraídos; podem depender de org, idioma ou recurso.",
+              "estado": "desconhecido",
+              "natureza": "lista_dinamica"
+            },
+            "estado": "verificado",
+            "evidencias": [
+              {
+                "fonte": "src:objref-servicechannel"
+              }
+            ],
+            "explicacao": "explicada",
+            "id": "obj:ServiceChannel.CapacityModel",
+            "nome": "CapacityModel",
+            "o_que_e": "Modelo de capacidade.",
+            "obrigatoriedade": {
+              "estado": "desconhecido",
+              "valor": "desconhecida"
+            },
+            "origem": {
+              "estado": "verificado",
+              "evidencias": [
+                {
+                  "fonte": "src:objref-servicechannel"
+                }
+              ],
+              "nota": "Campo padrão do objeto documentado.",
+              "valor": "padrao_plataforma"
+            },
+            "propriedades_api": {
+              "create": true,
+              "defaulted_on_create": false,
+              "estado": "verificado",
+              "evidencias": [
+                {
+                  "fonte": "src:objref-servicechannel"
+                }
+              ],
+              "filter": true,
+              "group": true,
+              "id_lookup": false,
+              "nillable": true,
+              "restricted_picklist": true,
+              "sort": true,
+              "update": true
+            },
+            "somente_leitura": false,
+            "tipo_tecnico": "picklist"
+          },
+          {
+            "apis": [
+              "padrao"
+            ],
+            "default": {
+              "estado": "desconhecido",
+              "forma": "nao_declarado_na_fonte"
+            },
+            "disponibilidade": {
+              "ate_versao": null,
+              "desde_versao": null,
+              "estado": "desconhecido"
+            },
+            "dominio": {
+              "contexto": "Id de registro do(s) objeto(s) referenciado(s).",
+              "estado": "verificado",
+              "evidencias": [
+                {
+                  "fonte": "src:objref-servicechannel"
+                }
+              ],
+              "natureza": "referencia"
+            },
+            "estado": "verificado",
+            "evidencias": [
+              {
+                "fonte": "src:objref-servicechannel"
+              }
+            ],
+            "explicacao": "explicada",
+            "id": "obj:ServiceChannel.CustomSoundId",
+            "nome": "CustomSoundId",
+            "o_que_e": "Som customizado.",
+            "obrigatoriedade": {
+              "estado": "desconhecido",
+              "valor": "desconhecida"
+            },
+            "origem": {
+              "estado": "verificado",
+              "evidencias": [
+                {
+                  "fonte": "src:objref-servicechannel"
+                }
+              ],
+              "nota": "Campo padrão do objeto documentado.",
+              "valor": "padrao_plataforma"
+            },
+            "propriedades_api": {
+              "create": true,
+              "defaulted_on_create": false,
+              "estado": "verificado",
+              "evidencias": [
+                {
+                  "fonte": "src:objref-servicechannel"
+                }
+              ],
+              "filter": true,
+              "group": true,
+              "id_lookup": false,
+              "nillable": true,
+              "restricted_picklist": false,
+              "sort": true,
+              "update": true
+            },
+            "referencia": {
+              "alvos": [
+                "StaticResource"
+              ],
+              "nome_relacionamento": "CustomSound"
+            },
+            "somente_leitura": false,
+            "tipo_tecnico": "reference"
+          },
+          {
+            "apis": [
+              "padrao"
+            ],
+            "default": {
+              "estado": "desconhecido",
+              "forma": "nao_declarado_na_fonte"
+            },
+            "disponibilidade": {
+              "ate_versao": null,
+              "desde_versao": null,
+              "estado": "desconhecido"
+            },
+            "dominio": {
+              "estado": "verificado",
+              "evidencias": [
+                {
+                  "fonte": "src:objref-servicechannel"
+                }
+              ],
+              "natureza": "texto_livre"
+            },
+            "estado": "verificado",
+            "evidencias": [
+              {
+                "fonte": "src:objref-servicechannel"
+              }
+            ],
+            "explicacao": "explicada",
+            "id": "obj:ServiceChannel.DeveloperName",
+            "nome": "DeveloperName",
+            "o_que_e": "Nome único na API.",
+            "obrigatoriedade": {
+              "estado": "desconhecido",
+              "valor": "desconhecida"
+            },
+            "origem": {
+              "estado": "verificado",
+              "evidencias": [
+                {
+                  "fonte": "src:objref-servicechannel"
+                }
+              ],
+              "nota": "Campo padrão do objeto documentado.",
+              "valor": "padrao_plataforma"
+            },
+            "propriedades_api": {
+              "create": true,
+              "defaulted_on_create": false,
+              "estado": "verificado",
+              "evidencias": [
+                {
+                  "fonte": "src:objref-servicechannel"
+                }
+              ],
+              "filter": true,
+              "group": true,
+              "id_lookup": false,
+              "nillable": false,
+              "restricted_picklist": false,
+              "sort": true,
+              "update": true
+            },
+            "somente_leitura": false,
+            "tipo_tecnico": "string"
+          },
+          {
+            "apis": [
+              "padrao"
+            ],
+            "default": {
+              "estado": "desconhecido",
+              "forma": "desconhecido",
+              "nota": "A API marca o campo como 'defaulted on create', mas o valor não foi declarado na extração."
+            },
+            "disponibilidade": {
+              "ate_versao": null,
+              "desde_versao": null,
+              "estado": "desconhecido"
+            },
+            "dominio": {
+              "estado": "verificado",
+              "evidencias": [
+                {
+                  "fonte": "src:objref-servicechannel"
+                }
+              ],
+              "lista_completa": "sim",
+              "natureza": "booleano",
+              "valores": [
+                {
+                  "valor": "true"
+                },
+                {
+                  "valor": "false"
+                }
+              ]
+            },
+            "estado": "verificado",
+            "evidencias": [
+              {
+                "fonte": "src:objref-servicechannel"
+              }
+            ],
+            "explicacao": "explicada",
+            "id": "obj:ServiceChannel.DoesCheckCapOnOwnerChange",
+            "nome": "DoesCheckCapOnOwnerChange",
+            "o_que_e": "Verifica capacidade na troca de dono.",
+            "obrigatoriedade": {
+              "estado": "desconhecido",
+              "valor": "desconhecida"
+            },
+            "origem": {
+              "estado": "verificado",
+              "evidencias": [
+                {
+                  "fonte": "src:objref-servicechannel"
+                }
+              ],
+              "nota": "Campo padrão do objeto documentado.",
+              "valor": "padrao_plataforma"
+            },
+            "propriedades_api": {
+              "create": true,
+              "defaulted_on_create": true,
+              "estado": "verificado",
+              "evidencias": [
+                {
+                  "fonte": "src:objref-servicechannel"
+                }
+              ],
+              "filter": true,
+              "group": true,
+              "id_lookup": false,
+              "nillable": false,
+              "restricted_picklist": false,
+              "sort": true,
+              "update": true
+            },
+            "somente_leitura": false,
+            "tipo_tecnico": "boolean"
+          },
+          {
+            "apis": [
+              "padrao"
+            ],
+            "default": {
+              "estado": "desconhecido",
+              "forma": "desconhecido",
+              "nota": "A API marca o campo como 'defaulted on create', mas o valor não foi declarado na extração."
+            },
+            "disponibilidade": {
+              "ate_versao": null,
+              "desde_versao": null,
+              "estado": "desconhecido"
+            },
+            "dominio": {
+              "estado": "verificado",
+              "evidencias": [
+                {
+                  "fonte": "src:objref-servicechannel"
+                }
+              ],
+              "lista_completa": "sim",
+              "natureza": "booleano",
+              "valores": [
+                {
+                  "valor": "true"
+                },
+                {
+                  "valor": "false"
+                }
+              ]
+            },
+            "estado": "verificado",
+            "evidencias": [
+              {
+                "fonte": "src:objref-servicechannel"
+              }
+            ],
+            "explicacao": "explicada",
+            "id": "obj:ServiceChannel.DoesCheckCapOnStatusChange",
+            "nome": "DoesCheckCapOnStatusChange",
+            "o_que_e": "Verifica capacidade na troca de status.",
+            "obrigatoriedade": {
+              "estado": "desconhecido",
+              "valor": "desconhecida"
+            },
+            "origem": {
+              "estado": "verificado",
+              "evidencias": [
+                {
+                  "fonte": "src:objref-servicechannel"
+                }
+              ],
+              "nota": "Campo padrão do objeto documentado.",
+              "valor": "padrao_plataforma"
+            },
+            "propriedades_api": {
+              "create": true,
+              "defaulted_on_create": true,
+              "estado": "verificado",
+              "evidencias": [
+                {
+                  "fonte": "src:objref-servicechannel"
+                }
+              ],
+              "filter": true,
+              "group": true,
+              "id_lookup": false,
+              "nillable": false,
+              "restricted_picklist": false,
+              "sort": true,
+              "update": true
+            },
+            "somente_leitura": false,
+            "tipo_tecnico": "boolean"
+          },
+          {
+            "apis": [
+              "padrao"
+            ],
+            "default": {
+              "estado": "desconhecido",
+              "forma": "desconhecido",
+              "nota": "A API marca o campo como 'defaulted on create', mas o valor não foi declarado na extração."
+            },
+            "disponibilidade": {
+              "ate_versao": null,
+              "desde_versao": null,
+              "estado": "desconhecido"
+            },
+            "dominio": {
+              "estado": "verificado",
+              "evidencias": [
+                {
+                  "fonte": "src:objref-servicechannel"
+                }
+              ],
+              "lista_completa": "sim",
+              "natureza": "booleano",
+              "valores": [
+                {
+                  "valor": "true"
+                },
+                {
+                  "valor": "false"
+                }
+              ]
+            },
+            "estado": "verificado",
+            "evidencias": [
+              {
+                "fonte": "src:objref-servicechannel"
+              }
+            ],
+            "explicacao": "explicada",
+            "id": "obj:ServiceChannel.DoesMinimizeWidgetOnAccept",
+            "nome": "DoesMinimizeWidgetOnAccept",
+            "o_que_e": "Minimiza o widget ao aceitar.",
+            "obrigatoriedade": {
+              "estado": "desconhecido",
+              "valor": "desconhecida"
+            },
+            "origem": {
+              "estado": "verificado",
+              "evidencias": [
+                {
+                  "fonte": "src:objref-servicechannel"
+                }
+              ],
+              "nota": "Campo padrão do objeto documentado.",
+              "valor": "padrao_plataforma"
+            },
+            "propriedades_api": {
+              "create": true,
+              "defaulted_on_create": true,
+              "estado": "verificado",
+              "evidencias": [
+                {
+                  "fonte": "src:objref-servicechannel"
+                }
+              ],
+              "filter": true,
+              "group": true,
+              "id_lookup": false,
+              "nillable": false,
+              "restricted_picklist": false,
+              "sort": true,
+              "update": true
+            },
+            "somente_leitura": false,
+            "tipo_tecnico": "boolean"
+          },
+          {
+            "apis": [
+              "padrao"
+            ],
+            "default": {
+              "estado": "desconhecido",
+              "forma": "desconhecido",
+              "nota": "A API marca o campo como 'defaulted on create', mas o valor não foi declarado na extração."
+            },
+            "disponibilidade": {
+              "ate_versao": null,
+              "desde_versao": null,
+              "estado": "desconhecido"
+            },
+            "dominio": {
+              "estado": "verificado",
+              "evidencias": [
+                {
+                  "fonte": "src:objref-servicechannel"
+                }
+              ],
+              "lista_completa": "sim",
+              "natureza": "booleano",
+              "valores": [
+                {
+                  "valor": "true"
+                },
+                {
+                  "valor": "false"
+                }
+              ]
+            },
+            "estado": "verificado",
+            "evidencias": [
+              {
+                "fonte": "src:objref-servicechannel"
+              }
+            ],
+            "explicacao": "explicada",
+            "id": "obj:ServiceChannel.DoesOverridePresenceAudio",
+            "nome": "DoesOverridePresenceAudio",
+            "o_que_e": "Substitui o áudio de presença.",
+            "obrigatoriedade": {
+              "estado": "desconhecido",
+              "valor": "desconhecida"
+            },
+            "origem": {
+              "estado": "verificado",
+              "evidencias": [
+                {
+                  "fonte": "src:objref-servicechannel"
+                }
+              ],
+              "nota": "Campo padrão do objeto documentado.",
+              "valor": "padrao_plataforma"
+            },
+            "propriedades_api": {
+              "create": true,
+              "defaulted_on_create": true,
+              "estado": "verificado",
+              "evidencias": [
+                {
+                  "fonte": "src:objref-servicechannel"
+                }
+              ],
+              "filter": true,
+              "group": true,
+              "id_lookup": false,
+              "nillable": false,
+              "restricted_picklist": false,
+              "sort": true,
+              "update": true
+            },
+            "somente_leitura": false,
+            "tipo_tecnico": "boolean"
+          },
+          {
+            "apis": [
+              "padrao"
+            ],
+            "default": {
+              "estado": "desconhecido",
+              "forma": "desconhecido",
+              "nota": "A API marca o campo como 'defaulted on create', mas o valor não foi declarado na extração."
+            },
+            "disponibilidade": {
+              "ate_versao": null,
+              "desde_versao": null,
+              "estado": "desconhecido"
+            },
+            "dominio": {
+              "estado": "verificado",
+              "evidencias": [
+                {
+                  "fonte": "src:objref-servicechannel"
+                }
+              ],
+              "lista_completa": "sim",
+              "natureza": "booleano",
+              "valores": [
+                {
+                  "valor": "true"
+                },
+                {
+                  "valor": "false"
+                }
+              ]
+            },
+            "estado": "verificado",
+            "evidencias": [
+              {
+                "fonte": "src:objref-servicechannel"
+              }
+            ],
+            "explicacao": "explicada",
+            "id": "obj:ServiceChannel.HasAcwExtensionEnabled",
+            "nome": "HasAcwExtensionEnabled",
+            "o_que_e": "Permite estender o trabalho pós-conversa.",
+            "obrigatoriedade": {
+              "estado": "desconhecido",
+              "valor": "desconhecida"
+            },
+            "origem": {
+              "estado": "verificado",
+              "evidencias": [
+                {
+                  "fonte": "src:objref-servicechannel"
+                }
+              ],
+              "nota": "Campo padrão do objeto documentado.",
+              "valor": "padrao_plataforma"
+            },
+            "propriedades_api": {
+              "create": true,
+              "defaulted_on_create": true,
+              "estado": "verificado",
+              "evidencias": [
+                {
+                  "fonte": "src:objref-servicechannel"
+                }
+              ],
+              "filter": true,
+              "group": true,
+              "id_lookup": false,
+              "nillable": false,
+              "restricted_picklist": false,
+              "sort": true,
+              "update": true
+            },
+            "somente_leitura": false,
+            "tipo_tecnico": "boolean"
+          },
+          {
+            "apis": [
+              "padrao"
+            ],
+            "default": {
+              "estado": "desconhecido",
+              "forma": "desconhecido",
+              "nota": "A API marca o campo como 'defaulted on create', mas o valor não foi declarado na extração."
+            },
+            "disponibilidade": {
+              "ate_versao": null,
+              "desde_versao": null,
+              "estado": "desconhecido"
+            },
+            "dominio": {
+              "estado": "verificado",
+              "evidencias": [
+                {
+                  "fonte": "src:objref-servicechannel"
+                }
+              ],
+              "lista_completa": "sim",
+              "natureza": "booleano",
+              "valores": [
+                {
+                  "valor": "true"
+                },
+                {
+                  "valor": "false"
+                }
+              ]
+            },
+            "estado": "verificado",
+            "evidencias": [
+              {
+                "fonte": "src:objref-servicechannel"
+              }
+            ],
+            "explicacao": "explicada",
+            "id": "obj:ServiceChannel.HasAfterConvoWorkTimer",
+            "nome": "HasAfterConvoWorkTimer",
+            "o_que_e": "Ativa o temporizador pós-conversa.",
+            "obrigatoriedade": {
+              "estado": "desconhecido",
+              "valor": "desconhecida"
+            },
+            "origem": {
+              "estado": "verificado",
+              "evidencias": [
+                {
+                  "fonte": "src:objref-servicechannel"
+                }
+              ],
+              "nota": "Campo padrão do objeto documentado.",
+              "valor": "padrao_plataforma"
+            },
+            "propriedades_api": {
+              "create": true,
+              "defaulted_on_create": true,
+              "estado": "verificado",
+              "evidencias": [
+                {
+                  "fonte": "src:objref-servicechannel"
+                }
+              ],
+              "filter": true,
+              "group": true,
+              "id_lookup": false,
+              "nillable": false,
+              "restricted_picklist": false,
+              "sort": true,
+              "update": true
+            },
+            "somente_leitura": false,
+            "tipo_tecnico": "boolean"
+          },
+          {
+            "apis": [
+              "padrao"
+            ],
+            "default": {
+              "estado": "desconhecido",
+              "forma": "desconhecido",
+              "nota": "A API marca o campo como 'defaulted on create', mas o valor não foi declarado na extração."
+            },
+            "disponibilidade": {
+              "ate_versao": null,
+              "desde_versao": null,
+              "estado": "desconhecido"
+            },
+            "dominio": {
+              "estado": "verificado",
+              "evidencias": [
+                {
+                  "fonte": "src:objref-servicechannel"
+                }
+              ],
+              "lista_completa": "sim",
+              "natureza": "booleano",
+              "valores": [
+                {
+                  "valor": "true"
+                },
+                {
+                  "valor": "false"
+                }
+              ]
+            },
+            "estado": "verificado",
+            "evidencias": [
+              {
+                "fonte": "src:objref-servicechannel"
+              }
+            ],
+            "explicacao": "explicada",
+            "id": "obj:ServiceChannel.HasAutoAcceptEnabled",
+            "nome": "HasAutoAcceptEnabled",
+            "o_que_e": "Aceita o trabalho automaticamente.",
+            "obrigatoriedade": {
+              "estado": "desconhecido",
+              "valor": "desconhecida"
+            },
+            "origem": {
+              "estado": "verificado",
+              "evidencias": [
+                {
+                  "fonte": "src:objref-servicechannel"
+                }
+              ],
+              "nota": "Campo padrão do objeto documentado.",
+              "valor": "padrao_plataforma"
+            },
+            "propriedades_api": {
+              "create": true,
+              "defaulted_on_create": true,
+              "estado": "verificado",
+              "evidencias": [
+                {
+                  "fonte": "src:objref-servicechannel"
+                }
+              ],
+              "filter": true,
+              "group": true,
+              "id_lookup": false,
+              "nillable": false,
+              "restricted_picklist": false,
+              "sort": true,
+              "update": true
+            },
+            "somente_leitura": false,
+            "tipo_tecnico": "boolean"
+          },
+          {
+            "apis": [
+              "padrao"
+            ],
+            "default": {
+              "estado": "desconhecido",
+              "forma": "desconhecido",
+              "nota": "A API marca o campo como 'defaulted on create', mas o valor não foi declarado na extração."
+            },
+            "disponibilidade": {
+              "ate_versao": null,
+              "desde_versao": null,
+              "estado": "desconhecido"
+            },
+            "dominio": {
+              "contexto": "Valores não extraídos; podem depender de org, idioma ou recurso.",
+              "estado": "desconhecido",
+              "natureza": "lista_dinamica"
+            },
+            "estado": "verificado",
+            "evidencias": [
+              {
+                "fonte": "src:objref-servicechannel"
+              }
+            ],
+            "explicacao": "explicada",
+            "id": "obj:ServiceChannel.Language",
+            "nome": "Language",
+            "o_que_e": "Idioma.",
+            "obrigatoriedade": {
+              "estado": "desconhecido",
+              "valor": "desconhecida"
+            },
+            "origem": {
+              "estado": "verificado",
+              "evidencias": [
+                {
+                  "fonte": "src:objref-servicechannel"
+                }
+              ],
+              "nota": "Campo padrão do objeto documentado.",
+              "valor": "padrao_plataforma"
+            },
+            "propriedades_api": {
+              "create": true,
+              "defaulted_on_create": true,
+              "estado": "verificado",
+              "evidencias": [
+                {
+                  "fonte": "src:objref-servicechannel"
+                }
+              ],
+              "filter": true,
+              "group": true,
+              "id_lookup": false,
+              "nillable": true,
+              "restricted_picklist": true,
+              "sort": true,
+              "update": true
+            },
+            "somente_leitura": false,
+            "tipo_tecnico": "picklist"
+          },
+          {
+            "apis": [
+              "padrao"
+            ],
+            "default": {
+              "estado": "desconhecido",
+              "forma": "nao_declarado_na_fonte"
+            },
+            "disponibilidade": {
+              "ate_versao": null,
+              "desde_versao": null,
+              "estado": "desconhecido"
+            },
+            "dominio": {
+              "estado": "verificado",
+              "evidencias": [
+                {
+                  "fonte": "src:objref-servicechannel"
+                }
+              ],
+              "natureza": "texto_livre"
+            },
+            "estado": "verificado",
+            "evidencias": [
+              {
+                "fonte": "src:objref-servicechannel"
+              }
+            ],
+            "explicacao": "explicada",
+            "id": "obj:ServiceChannel.MasterLabel",
+            "nome": "MasterLabel",
+            "o_que_e": "Rótulo.",
+            "obrigatoriedade": {
+              "estado": "desconhecido",
+              "valor": "desconhecida"
+            },
+            "origem": {
+              "estado": "verificado",
+              "evidencias": [
+                {
+                  "fonte": "src:objref-servicechannel"
+                }
+              ],
+              "nota": "Campo padrão do objeto documentado.",
+              "valor": "padrao_plataforma"
+            },
+            "propriedades_api": {
+              "create": true,
+              "defaulted_on_create": false,
+              "estado": "verificado",
+              "evidencias": [
+                {
+                  "fonte": "src:objref-servicechannel"
+                }
+              ],
+              "filter": true,
+              "group": true,
+              "id_lookup": false,
+              "nillable": false,
+              "restricted_picklist": false,
+              "sort": true,
+              "update": true
+            },
+            "somente_leitura": false,
+            "tipo_tecnico": "string"
+          },
+          {
+            "apis": [
+              "padrao"
+            ],
+            "default": {
+              "estado": "desconhecido",
+              "forma": "nao_declarado_na_fonte"
+            },
+            "disponibilidade": {
+              "ate_versao": null,
+              "desde_versao": null,
+              "estado": "desconhecido"
+            },
+            "dominio": {
+              "contexto": "Valores não extraídos; podem depender de org, idioma ou recurso.",
+              "estado": "desconhecido",
+              "natureza": "lista_dinamica"
+            },
+            "estado": "verificado",
+            "evidencias": [
+              {
+                "fonte": "src:objref-servicechannel"
+              }
+            ],
+            "explicacao": "explicada",
+            "id": "obj:ServiceChannel.MaxExtensions",
+            "nome": "MaxExtensions",
+            "o_que_e": "Número máximo de extensões.",
+            "obrigatoriedade": {
+              "condicao": "Obrigatório quando HasAcwExtensionEnabled é true.",
+              "estado": "verificado",
+              "evidencias": [
+                {
+                  "fonte": "src:objref-servicechannel"
+                }
+              ],
+              "valor": "condicional"
+            },
+            "origem": {
+              "estado": "verificado",
+              "evidencias": [
+                {
+                  "fonte": "src:objref-servicechannel"
+                }
+              ],
+              "nota": "Campo padrão do objeto documentado.",
+              "valor": "padrao_plataforma"
+            },
+            "propriedades_api": {
+              "create": true,
+              "defaulted_on_create": false,
+              "estado": "verificado",
+              "evidencias": [
+                {
+                  "fonte": "src:objref-servicechannel"
+                }
+              ],
+              "filter": true,
+              "group": true,
+              "id_lookup": false,
+              "nillable": true,
+              "restricted_picklist": true,
+              "sort": true,
+              "update": true
+            },
+            "somente_leitura": false,
+            "tipo_tecnico": "picklist"
+          },
+          {
+            "apis": [
+              "padrao"
+            ],
+            "default": {
+              "estado": "desconhecido",
+              "forma": "nao_declarado_na_fonte"
+            },
+            "disponibilidade": {
+              "ate_versao": null,
+              "desde_versao": null,
+              "estado": "desconhecido"
+            },
+            "dominio": {
+              "contexto": "Valores não extraídos; podem depender de org, idioma ou recurso.",
+              "estado": "desconhecido",
+              "natureza": "lista_dinamica"
+            },
+            "estado": "verificado",
+            "evidencias": [
+              {
+                "fonte": "src:objref-servicechannel"
+              }
+            ],
+            "explicacao": "explicada",
+            "id": "obj:ServiceChannel.RelatedEntity",
+            "nome": "RelatedEntity",
+            "o_que_e": "Objeto roteado pelo canal.",
+            "obrigatoriedade": {
+              "estado": "desconhecido",
+              "valor": "desconhecida"
+            },
+            "origem": {
+              "estado": "verificado",
+              "evidencias": [
+                {
+                  "fonte": "src:objref-servicechannel"
+                }
+              ],
+              "nota": "Campo padrão do objeto documentado.",
+              "valor": "padrao_plataforma"
+            },
+            "propriedades_api": {
+              "create": true,
+              "defaulted_on_create": false,
+              "estado": "verificado",
+              "evidencias": [
+                {
+                  "fonte": "src:objref-servicechannel"
+                }
+              ],
+              "filter": true,
+              "group": true,
+              "id_lookup": false,
+              "nillable": false,
+              "restricted_picklist": true,
+              "sort": true,
+              "update": true
+            },
+            "somente_leitura": false,
+            "tipo_tecnico": "picklist"
+          },
+          {
+            "apis": [
+              "padrao"
+            ],
+            "default": {
+              "estado": "desconhecido",
+              "forma": "nao_declarado_na_fonte"
+            },
+            "disponibilidade": {
+              "ate_versao": null,
+              "desde_versao": null,
+              "estado": "desconhecido"
+            },
+            "dominio": {
+              "contexto": "Id de registro do(s) objeto(s) referenciado(s).",
+              "estado": "verificado",
+              "evidencias": [
+                {
+                  "fonte": "src:objref-servicechannel"
+                }
+              ],
+              "natureza": "referencia"
+            },
+            "estado": "verificado",
+            "evidencias": [
+              {
+                "fonte": "src:objref-servicechannel"
+              }
+            ],
+            "explicacao": "explicada",
+            "id": "obj:ServiceChannel.RoutingConfigurationId",
+            "nome": "RoutingConfigurationId",
+            "o_que_e": "Configuração de roteamento.",
+            "obrigatoriedade": {
+              "estado": "desconhecido",
+              "valor": "desconhecida"
+            },
+            "origem": {
+              "estado": "verificado",
+              "evidencias": [
+                {
+                  "fonte": "src:objref-servicechannel"
+                }
+              ],
+              "nota": "Campo padrão do objeto documentado.",
+              "valor": "padrao_plataforma"
+            },
+            "propriedades_api": {
+              "create": true,
+              "defaulted_on_create": false,
+              "estado": "verificado",
+              "evidencias": [
+                {
+                  "fonte": "src:objref-servicechannel"
+                }
+              ],
+              "filter": true,
+              "group": true,
+              "id_lookup": false,
+              "nillable": true,
+              "restricted_picklist": false,
+              "sort": true,
+              "update": true
+            },
+            "referencia": {
+              "alvos": [
+                "obj:QueueRoutingConfig"
+              ],
+              "nome_relacionamento": "RoutingConfiguration"
+            },
+            "somente_leitura": false,
+            "tipo_tecnico": "reference"
+          },
+          {
+            "apis": [
+              "padrao"
+            ],
+            "default": {
+              "estado": "desconhecido",
+              "forma": "nao_declarado_na_fonte"
+            },
+            "disponibilidade": {
+              "ate_versao": null,
+              "desde_versao": null,
+              "estado": "desconhecido"
+            },
+            "dominio": {
+              "contexto": "Valores não extraídos; podem depender de org, idioma ou recurso.",
+              "estado": "desconhecido",
+              "natureza": "lista_dinamica"
+            },
+            "estado": "verificado",
+            "evidencias": [
+              {
+                "fonte": "src:objref-servicechannel"
+              }
+            ],
+            "explicacao": "explicada",
+            "id": "obj:ServiceChannel.SecRoutingPriorityField",
+            "nome": "SecRoutingPriorityField",
+            "o_que_e": "Campo de prioridade secundária.",
+            "obrigatoriedade": {
+              "estado": "desconhecido",
+              "valor": "desconhecida"
+            },
+            "origem": {
+              "estado": "verificado",
+              "evidencias": [
+                {
+                  "fonte": "src:objref-servicechannel"
+                }
+              ],
+              "nota": "Campo padrão do objeto documentado.",
+              "valor": "padrao_plataforma"
+            },
+            "propriedades_api": {
+              "create": true,
+              "defaulted_on_create": false,
+              "estado": "verificado",
+              "evidencias": [
+                {
+                  "fonte": "src:objref-servicechannel"
+                }
+              ],
+              "filter": true,
+              "group": true,
+              "id_lookup": false,
+              "nillable": true,
+              "restricted_picklist": true,
+              "sort": true,
+              "update": true
+            },
+            "somente_leitura": false,
+            "tipo_tecnico": "picklist"
+          },
+          {
+            "apis": [
+              "padrao"
+            ],
+            "default": {
+              "estado": "desconhecido",
+              "forma": "nao_declarado_na_fonte"
+            },
+            "disponibilidade": {
+              "ate_versao": null,
+              "desde_versao": null,
+              "estado": "desconhecido"
+            },
+            "dominio": {
+              "estado": "verificado",
+              "evidencias": [
+                {
+                  "fonte": "src:objref-servicechannel"
+                }
+              ],
+              "natureza": "numerico"
+            },
+            "estado": "verificado",
+            "evidencias": [
+              {
+                "fonte": "src:objref-servicechannel"
+              }
+            ],
+            "explicacao": "explicada",
+            "id": "obj:ServiceChannel.SoundLength",
+            "nome": "SoundLength",
+            "o_que_e": "Duração do som.",
+            "obrigatoriedade": {
+              "estado": "desconhecido",
+              "valor": "desconhecida"
+            },
+            "origem": {
+              "estado": "verificado",
+              "evidencias": [
+                {
+                  "fonte": "src:objref-servicechannel"
+                }
+              ],
+              "nota": "Campo padrão do objeto documentado.",
+              "valor": "padrao_plataforma"
+            },
+            "propriedades_api": {
+              "create": true,
+              "defaulted_on_create": false,
+              "estado": "verificado",
+              "evidencias": [
+                {
+                  "fonte": "src:objref-servicechannel"
+                }
+              ],
+              "filter": true,
+              "group": true,
+              "id_lookup": false,
+              "nillable": true,
+              "restricted_picklist": false,
+              "sort": true,
+              "update": true
+            },
+            "somente_leitura": false,
+            "tipo_tecnico": "int"
+          },
+          {
+            "apis": [
+              "padrao"
+            ],
+            "default": {
+              "estado": "desconhecido",
+              "forma": "nao_declarado_na_fonte"
+            },
+            "disponibilidade": {
+              "ate_versao": null,
+              "desde_versao": null,
+              "estado": "desconhecido"
+            },
+            "dominio": {
+              "contexto": "Valores não extraídos; podem depender de org, idioma ou recurso.",
+              "estado": "desconhecido",
+              "natureza": "lista_dinamica"
+            },
+            "estado": "verificado",
+            "evidencias": [
+              {
+                "fonte": "src:objref-servicechannel"
+              }
+            ],
+            "explicacao": "explicada",
+            "id": "obj:ServiceChannel.StatusField",
+            "nome": "StatusField",
+            "o_que_e": "Campo de status do trabalho.",
+            "obrigatoriedade": {
+              "estado": "desconhecido",
+              "valor": "desconhecida"
+            },
+            "origem": {
+              "estado": "verificado",
+              "evidencias": [
+                {
+                  "fonte": "src:objref-servicechannel"
+                }
+              ],
+              "nota": "Campo padrão do objeto documentado.",
+              "valor": "padrao_plataforma"
+            },
+            "propriedades_api": {
+              "create": true,
+              "defaulted_on_create": false,
+              "estado": "verificado",
+              "evidencias": [
+                {
+                  "fonte": "src:objref-servicechannel"
+                }
+              ],
+              "filter": true,
+              "group": true,
+              "id_lookup": false,
+              "nillable": true,
+              "restricted_picklist": true,
+              "sort": true,
+              "update": true
+            },
+            "somente_leitura": false,
+            "tipo_tecnico": "picklist"
+          }
+        ],
+        "cobertura": {
+          "estrutural": {
+            "esperado": 20,
+            "estado": "completa",
+            "nota": "Tabela de campos lida completa (20).",
+            "presente": 20
+          },
+          "explicativa": {
+            "esperado": 20,
+            "estado": "completa",
+            "presente": 20
+          },
+          "mapeamento": {
+            "estado": "parcial",
+            "nota": "Ver relacionamentos registrados."
+          }
+        },
+        "consultas": [
+          {
+            "api": "padrao",
+            "contexto": "API padrão.",
+            "soql": "SELECT MasterLabel, DeveloperName, RelatedEntity FROM ServiceChannel",
+            "validacao": "documental"
+          }
+        ],
+        "estado": "verificado",
+        "evidencias": [
+          {
+            "fonte": "src:objref-servicechannel"
+          }
+        ],
+        "exposicoes": [
+          {
+            "api": "padrao",
+            "chamadas": [
+              "create()",
+              "delete()",
+              "describeSObjects()",
+              "query()",
+              "retrieve()",
+              "update()",
+              "upsert()"
+            ],
+            "desde_versao": "32.0",
+            "estado": "verificado",
+            "evidencias": [
+              {
+                "fonte": "src:objref-servicechannel"
+              }
+            ]
+          },
+          {
+            "api": "tooling",
+            "desde_versao": null,
+            "estado": "desconhecido",
+            "nota": "Exposição na Tooling API não verificada."
+          }
+        ],
+        "id": "obj:ServiceChannel",
+        "juncao": false,
+        "nome": "ServiceChannel",
+        "o_que_e": "Representa um canal de serviço do Omni-Channel (casos, mensagens, chamadas).",
+        "papel": "Dizer ao Omni-Channel que tipo de registro rotear e como.",
+        "setup": {
+          "estado": "nao_aplicavel",
+          "nota": "Objeto consultável via API; não é tela do Setup."
+        }
+      },
+      "papel": "Canal de serviço consultável.",
+      "relacionamentos": [
+        {
+          "destino": {
+            "entidade": "obj:ServiceChannel"
+          },
+          "estado": "verificado",
+          "evidencias": [
+            {
+              "fonte": "src:mdapi-servicechannel"
+            },
+            {
+              "fonte": "src:objref-servicechannel"
+            }
+          ],
+          "explicacao": "Metadata type e objeto API descrevem canais de serviço por caminhos diferentes: definição implantável versus registro consultável. A correspondência campo a campo não foi comprovada.",
+          "id": "rel:rep-servicechannel",
+          "origem": {
+            "entidade": "mdt:ServiceChannel"
+          },
+          "tipo": "representacao_comum"
+        },
+        {
+          "cardinalidade_registros": {
+            "estado": "desconhecido",
+            "nota": "Estrutura de lookup indica N:1; não comprovado nesta sessão.",
+            "valor": "N:1"
+          },
+          "destino": {
+            "entidade": "obj:QueueRoutingConfig"
+          },
+          "estado": "verificado",
+          "evidencias": [
+            {
+              "fonte": "src:objref-servicechannel"
+            }
+          ],
+          "explicacao": "O canal pode usar uma configuração de roteamento.",
+          "id": "rel:servicechannel-queueroutingconfig",
+          "origem": {
+            "campo": "RoutingConfigurationId",
+            "entidade": "obj:ServiceChannel"
+          },
+          "tipo": "referencia_campo"
+        }
+      ]
+    },
+    {
+      "objeto": {
+        "alertas": [],
+        "apex": {
+          "consulta_soql_direta": {
+            "estado": "verificado",
+            "evidencias": [
+              {
+                "fonte": "src:objref-queueroutingconfig"
+              }
+            ],
+            "nota": "Objeto da API padrão: consultável por SOQL em Apex, sujeito a permissões.",
+            "valor": true
+          },
+          "nota": "Exemplo Apex não fornecido nesta fase."
+        },
+        "campos": [
+          {
+            "apis": [
+              "padrao"
+            ],
+            "default": {
+              "estado": "desconhecido",
+              "forma": "nao_declarado_na_fonte"
+            },
+            "disponibilidade": {
+              "ate_versao": null,
+              "desde_versao": "33.0",
+              "estado": "verificado"
+            },
+            "dominio": {
+              "estado": "desconhecido",
+              "natureza": "desconhecida"
+            },
+            "estado": "verificado",
+            "evidencias": [
+              {
+                "fonte": "src:objref-queueroutingconfig"
+              }
+            ],
+            "explicacao": "explicada",
+            "id": "obj:QueueRoutingConfig.CapacityPercentage",
+            "nome": "CapacityPercentage",
+            "o_que_e": "Percentual de capacidade consumido.",
+            "obrigatoriedade": {
+              "estado": "desconhecido",
+              "valor": "desconhecida"
+            },
+            "origem": {
+              "estado": "verificado",
+              "evidencias": [
+                {
+                  "fonte": "src:objref-queueroutingconfig"
+                }
+              ],
+              "nota": "Campo padrão do objeto documentado.",
+              "valor": "padrao_plataforma"
+            },
+            "propriedades_api": {
+              "create": true,
+              "defaulted_on_create": false,
+              "estado": "verificado",
+              "evidencias": [
+                {
+                  "fonte": "src:objref-queueroutingconfig"
+                }
+              ],
+              "filter": true,
+              "group": false,
+              "id_lookup": false,
+              "nillable": true,
+              "restricted_picklist": false,
+              "sort": true,
+              "update": true
+            },
+            "somente_leitura": false,
+            "tipo_tecnico": "percent"
+          },
+          {
+            "apis": [
+              "padrao"
+            ],
+            "default": {
+              "estado": "desconhecido",
+              "forma": "nao_declarado_na_fonte"
+            },
+            "disponibilidade": {
+              "ate_versao": null,
+              "desde_versao": "33.0",
+              "estado": "verificado"
+            },
+            "dominio": {
+              "estado": "verificado",
+              "evidencias": [
+                {
+                  "fonte": "src:objref-queueroutingconfig"
+                }
+              ],
+              "natureza": "numerico"
+            },
+            "estado": "verificado",
+            "evidencias": [
+              {
+                "fonte": "src:objref-queueroutingconfig"
+              }
+            ],
+            "explicacao": "explicada",
+            "id": "obj:QueueRoutingConfig.CapacityWeight",
+            "nome": "CapacityWeight",
+            "o_que_e": "Unidades de capacidade consumidas.",
+            "obrigatoriedade": {
+              "estado": "desconhecido",
+              "valor": "desconhecida"
+            },
+            "origem": {
+              "estado": "verificado",
+              "evidencias": [
+                {
+                  "fonte": "src:objref-queueroutingconfig"
+                }
+              ],
+              "nota": "Campo padrão do objeto documentado.",
+              "valor": "padrao_plataforma"
+            },
+            "propriedades_api": {
+              "create": true,
+              "defaulted_on_create": false,
+              "estado": "verificado",
+              "evidencias": [
+                {
+                  "fonte": "src:objref-queueroutingconfig"
+                }
+              ],
+              "filter": true,
+              "group": false,
+              "id_lookup": false,
+              "nillable": true,
+              "restricted_picklist": false,
+              "sort": true,
+              "update": true
+            },
+            "somente_leitura": false,
+            "tipo_tecnico": "double"
+          },
+          {
+            "apis": [
+              "padrao"
+            ],
+            "default": {
+              "estado": "desconhecido",
+              "forma": "nao_declarado_na_fonte"
+            },
+            "disponibilidade": {
+              "ate_versao": null,
+              "desde_versao": null,
+              "estado": "desconhecido"
+            },
+            "dominio": {
+              "estado": "verificado",
+              "evidencias": [
+                {
+                  "fonte": "src:objref-queueroutingconfig"
+                }
+              ],
+              "natureza": "texto_livre"
+            },
+            "estado": "verificado",
+            "evidencias": [
+              {
+                "fonte": "src:objref-queueroutingconfig"
+              }
+            ],
+            "explicacao": "explicada",
+            "id": "obj:QueueRoutingConfig.DeveloperName",
+            "nome": "DeveloperName",
+            "o_que_e": "Nome único na API.",
+            "obrigatoriedade": {
+              "estado": "desconhecido",
+              "valor": "desconhecida"
+            },
+            "origem": {
+              "estado": "verificado",
+              "evidencias": [
+                {
+                  "fonte": "src:objref-queueroutingconfig"
+                }
+              ],
+              "nota": "Campo padrão do objeto documentado.",
+              "valor": "padrao_plataforma"
+            },
+            "propriedades_api": {
+              "create": true,
+              "defaulted_on_create": false,
+              "estado": "verificado",
+              "evidencias": [
+                {
+                  "fonte": "src:objref-queueroutingconfig"
+                }
+              ],
+              "filter": true,
+              "group": true,
+              "id_lookup": false,
+              "nillable": false,
+              "restricted_picklist": false,
+              "sort": true,
+              "update": true
+            },
+            "somente_leitura": false,
+            "tipo_tecnico": "string"
+          },
+          {
+            "apis": [
+              "padrao"
+            ],
+            "default": {
+              "estado": "desconhecido",
+              "forma": "nao_declarado_na_fonte"
+            },
+            "disponibilidade": {
+              "ate_versao": null,
+              "desde_versao": null,
+              "estado": "desconhecido"
+            },
+            "dominio": {
+              "estado": "verificado",
+              "evidencias": [
+                {
+                  "fonte": "src:objref-queueroutingconfig"
+                }
+              ],
+              "natureza": "numerico"
+            },
+            "estado": "verificado",
+            "evidencias": [
+              {
+                "fonte": "src:objref-queueroutingconfig"
+              }
+            ],
+            "explicacao": "explicada",
+            "id": "obj:QueueRoutingConfig.DropAdditionalSkillsTimeout",
+            "nome": "DropAdditionalSkillsTimeout",
+            "o_que_e": "Tempo até descartar habilidades adicionais.",
+            "obrigatoriedade": {
+              "estado": "desconhecido",
+              "valor": "desconhecida"
+            },
+            "origem": {
+              "estado": "verificado",
+              "evidencias": [
+                {
+                  "fonte": "src:objref-queueroutingconfig"
+                }
+              ],
+              "nota": "Campo padrão do objeto documentado.",
+              "valor": "padrao_plataforma"
+            },
+            "propriedades_api": {
+              "create": true,
+              "defaulted_on_create": false,
+              "estado": "verificado",
+              "evidencias": [
+                {
+                  "fonte": "src:objref-queueroutingconfig"
+                }
+              ],
+              "filter": true,
+              "group": true,
+              "id_lookup": false,
+              "nillable": true,
+              "restricted_picklist": false,
+              "sort": true,
+              "update": true
+            },
+            "somente_leitura": false,
+            "tipo_tecnico": "int"
+          },
+          {
+            "apis": [
+              "padrao"
+            ],
+            "default": {
+              "estado": "desconhecido",
+              "forma": "desconhecido",
+              "nota": "A API marca o campo como 'defaulted on create', mas o valor não foi declarado na extração."
+            },
+            "disponibilidade": {
+              "ate_versao": null,
+              "desde_versao": "45.0",
+              "estado": "verificado"
+            },
+            "dominio": {
+              "estado": "verificado",
+              "evidencias": [
+                {
+                  "fonte": "src:objref-queueroutingconfig"
+                }
+              ],
+              "lista_completa": "sim",
+              "natureza": "booleano",
+              "valores": [
+                {
+                  "valor": "true"
+                },
+                {
+                  "valor": "false"
+                }
+              ]
+            },
+            "estado": "verificado",
+            "evidencias": [
+              {
+                "fonte": "src:objref-queueroutingconfig"
+              }
+            ],
+            "explicacao": "explicada",
+            "id": "obj:QueueRoutingConfig.IsAttributeBased",
+            "nome": "IsAttributeBased",
+            "o_que_e": "Usa regras de roteamento por habilidades.",
+            "obrigatoriedade": {
+              "estado": "desconhecido",
+              "valor": "desconhecida"
+            },
+            "origem": {
+              "estado": "verificado",
+              "evidencias": [
+                {
+                  "fonte": "src:objref-queueroutingconfig"
+                }
+              ],
+              "nota": "Campo padrão do objeto documentado.",
+              "valor": "padrao_plataforma"
+            },
+            "propriedades_api": {
+              "create": true,
+              "defaulted_on_create": true,
+              "estado": "verificado",
+              "evidencias": [
+                {
+                  "fonte": "src:objref-queueroutingconfig"
+                }
+              ],
+              "filter": true,
+              "group": true,
+              "id_lookup": false,
+              "nillable": false,
+              "restricted_picklist": false,
+              "sort": true,
+              "update": true
+            },
+            "somente_leitura": false,
+            "tipo_tecnico": "boolean"
+          },
+          {
+            "apis": [
+              "padrao"
+            ],
+            "default": {
+              "estado": "desconhecido",
+              "forma": "nao_declarado_na_fonte"
+            },
+            "disponibilidade": {
+              "ate_versao": null,
+              "desde_versao": null,
+              "estado": "desconhecido"
+            },
+            "dominio": {
+              "contexto": "Valores não extraídos; podem depender de org, idioma ou recurso.",
+              "estado": "desconhecido",
+              "natureza": "lista_dinamica"
+            },
+            "estado": "verificado",
+            "evidencias": [
+              {
+                "fonte": "src:objref-queueroutingconfig"
+              }
+            ],
+            "explicacao": "explicada",
+            "id": "obj:QueueRoutingConfig.Language",
+            "nome": "Language",
+            "o_que_e": "Idioma.",
+            "obrigatoriedade": {
+              "estado": "desconhecido",
+              "valor": "desconhecida"
+            },
+            "origem": {
+              "estado": "verificado",
+              "evidencias": [
+                {
+                  "fonte": "src:objref-queueroutingconfig"
+                }
+              ],
+              "nota": "Campo padrão do objeto documentado.",
+              "valor": "padrao_plataforma"
+            },
+            "propriedades_api": {
+              "create": true,
+              "defaulted_on_create": false,
+              "estado": "verificado",
+              "evidencias": [
+                {
+                  "fonte": "src:objref-queueroutingconfig"
+                }
+              ],
+              "filter": true,
+              "group": true,
+              "id_lookup": false,
+              "nillable": true,
+              "restricted_picklist": true,
+              "sort": true,
+              "update": true
+            },
+            "somente_leitura": false,
+            "tipo_tecnico": "picklist"
+          },
+          {
+            "apis": [
+              "padrao"
+            ],
+            "default": {
+              "estado": "desconhecido",
+              "forma": "nao_declarado_na_fonte"
+            },
+            "disponibilidade": {
+              "ate_versao": null,
+              "desde_versao": null,
+              "estado": "desconhecido"
+            },
+            "dominio": {
+              "estado": "verificado",
+              "evidencias": [
+                {
+                  "fonte": "src:objref-queueroutingconfig"
+                }
+              ],
+              "natureza": "texto_livre"
+            },
+            "estado": "verificado",
+            "evidencias": [
+              {
+                "fonte": "src:objref-queueroutingconfig"
+              }
+            ],
+            "explicacao": "explicada",
+            "id": "obj:QueueRoutingConfig.MasterLabel",
+            "nome": "MasterLabel",
+            "o_que_e": "Rótulo.",
+            "obrigatoriedade": {
+              "estado": "desconhecido",
+              "valor": "desconhecida"
+            },
+            "origem": {
+              "estado": "verificado",
+              "evidencias": [
+                {
+                  "fonte": "src:objref-queueroutingconfig"
+                }
+              ],
+              "nota": "Campo padrão do objeto documentado.",
+              "valor": "padrao_plataforma"
+            },
+            "propriedades_api": {
+              "create": true,
+              "defaulted_on_create": false,
+              "estado": "verificado",
+              "evidencias": [
+                {
+                  "fonte": "src:objref-queueroutingconfig"
+                }
+              ],
+              "filter": true,
+              "group": true,
+              "id_lookup": false,
+              "nillable": false,
+              "restricted_picklist": false,
+              "sort": true,
+              "update": true
+            },
+            "somente_leitura": false,
+            "tipo_tecnico": "string"
+          },
+          {
+            "apis": [
+              "padrao"
+            ],
+            "default": {
+              "estado": "desconhecido",
+              "forma": "nao_declarado_na_fonte"
+            },
+            "disponibilidade": {
+              "ate_versao": null,
+              "desde_versao": null,
+              "estado": "desconhecido"
+            },
+            "dominio": {
+              "contexto": "Id de registro do(s) objeto(s) referenciado(s).",
+              "estado": "desconhecido",
+              "natureza": "referencia"
+            },
+            "estado": "verificado",
+            "evidencias": [
+              {
+                "fonte": "src:objref-queueroutingconfig"
+              }
+            ],
+            "explicacao": "explicada",
+            "id": "obj:QueueRoutingConfig.OverflowAssigneeId",
+            "nome": "OverflowAssigneeId",
+            "o_que_e": "Usuário ou fila de transbordo.",
+            "obrigatoriedade": {
+              "estado": "desconhecido",
+              "valor": "desconhecida"
+            },
+            "origem": {
+              "estado": "verificado",
+              "evidencias": [
+                {
+                  "fonte": "src:objref-queueroutingconfig"
+                }
+              ],
+              "nota": "Campo padrão do objeto documentado.",
+              "valor": "padrao_plataforma"
+            },
+            "propriedades_api": {
+              "create": true,
+              "defaulted_on_create": false,
+              "estado": "verificado",
+              "evidencias": [
+                {
+                  "fonte": "src:objref-queueroutingconfig"
+                }
+              ],
+              "filter": true,
+              "group": true,
+              "id_lookup": false,
+              "nillable": true,
+              "restricted_picklist": false,
+              "sort": true,
+              "update": true
+            },
+            "somente_leitura": false,
+            "tipo_tecnico": "reference"
+          },
+          {
+            "apis": [
+              "padrao"
+            ],
+            "default": {
+              "estado": "desconhecido",
+              "forma": "nao_declarado_na_fonte"
+            },
+            "disponibilidade": {
+              "ate_versao": null,
+              "desde_versao": null,
+              "estado": "desconhecido"
+            },
+            "dominio": {
+              "estado": "desconhecido",
+              "natureza": "desconhecida"
+            },
+            "estado": "verificado",
+            "evidencias": [
+              {
+                "fonte": "src:objref-queueroutingconfig"
+              }
+            ],
+            "explicacao": "explicada",
+            "id": "obj:QueueRoutingConfig.PausedCapacityPercentage",
+            "nome": "PausedCapacityPercentage",
+            "o_que_e": "Capacidade consumida em pausa (status-based e Enhanced).",
+            "obrigatoriedade": {
+              "estado": "desconhecido",
+              "valor": "desconhecida"
+            },
+            "origem": {
+              "estado": "verificado",
+              "evidencias": [
+                {
+                  "fonte": "src:objref-queueroutingconfig"
+                }
+              ],
+              "nota": "Campo padrão do objeto documentado.",
+              "valor": "padrao_plataforma"
+            },
+            "propriedades_api": {
+              "create": true,
+              "defaulted_on_create": false,
+              "estado": "verificado",
+              "evidencias": [
+                {
+                  "fonte": "src:objref-queueroutingconfig"
+                }
+              ],
+              "filter": true,
+              "group": false,
+              "id_lookup": false,
+              "nillable": true,
+              "restricted_picklist": false,
+              "sort": true,
+              "update": true
+            },
+            "somente_leitura": false,
+            "tipo_tecnico": "percent"
+          },
+          {
+            "apis": [
+              "padrao"
+            ],
+            "default": {
+              "estado": "desconhecido",
+              "forma": "nao_declarado_na_fonte"
+            },
+            "disponibilidade": {
+              "ate_versao": null,
+              "desde_versao": null,
+              "estado": "desconhecido"
+            },
+            "dominio": {
+              "estado": "verificado",
+              "evidencias": [
+                {
+                  "fonte": "src:objref-queueroutingconfig"
+                }
+              ],
+              "natureza": "numerico"
+            },
+            "estado": "verificado",
+            "evidencias": [
+              {
+                "fonte": "src:objref-queueroutingconfig"
+              }
+            ],
+            "explicacao": "explicada",
+            "id": "obj:QueueRoutingConfig.PausedCapacityWeight",
+            "nome": "PausedCapacityWeight",
+            "o_que_e": "Unidades consumidas em pausa (status-based e Enhanced).",
+            "obrigatoriedade": {
+              "estado": "desconhecido",
+              "valor": "desconhecida"
+            },
+            "origem": {
+              "estado": "verificado",
+              "evidencias": [
+                {
+                  "fonte": "src:objref-queueroutingconfig"
+                }
+              ],
+              "nota": "Campo padrão do objeto documentado.",
+              "valor": "padrao_plataforma"
+            },
+            "propriedades_api": {
+              "create": true,
+              "defaulted_on_create": false,
+              "estado": "verificado",
+              "evidencias": [
+                {
+                  "fonte": "src:objref-queueroutingconfig"
+                }
+              ],
+              "filter": true,
+              "group": false,
+              "id_lookup": false,
+              "nillable": true,
+              "restricted_picklist": false,
+              "sort": true,
+              "update": true
+            },
+            "somente_leitura": false,
+            "tipo_tecnico": "double"
+          },
+          {
+            "apis": [
+              "padrao"
+            ],
+            "default": {
+              "estado": "desconhecido",
+              "forma": "nao_declarado_na_fonte"
+            },
+            "disponibilidade": {
+              "ate_versao": null,
+              "desde_versao": "36.0",
+              "estado": "verificado"
+            },
+            "dominio": {
+              "estado": "verificado",
+              "evidencias": [
+                {
+                  "fonte": "src:objref-queueroutingconfig"
+                }
+              ],
+              "natureza": "numerico"
+            },
+            "estado": "verificado",
+            "evidencias": [
+              {
+                "fonte": "src:objref-queueroutingconfig"
+              }
+            ],
+            "explicacao": "explicada",
+            "id": "obj:QueueRoutingConfig.PushTimeout",
+            "nome": "PushTimeout",
+            "o_que_e": "Tempo limite de envio; 0 quando desativado.",
+            "obrigatoriedade": {
+              "estado": "desconhecido",
+              "valor": "desconhecida"
+            },
+            "origem": {
+              "estado": "verificado",
+              "evidencias": [
+                {
+                  "fonte": "src:objref-queueroutingconfig"
+                }
+              ],
+              "nota": "Campo padrão do objeto documentado.",
+              "valor": "padrao_plataforma"
+            },
+            "propriedades_api": {
+              "create": true,
+              "defaulted_on_create": false,
+              "estado": "verificado",
+              "evidencias": [
+                {
+                  "fonte": "src:objref-queueroutingconfig"
+                }
+              ],
+              "filter": true,
+              "group": true,
+              "id_lookup": false,
+              "nillable": true,
+              "restricted_picklist": false,
+              "sort": true,
+              "update": true
+            },
+            "somente_leitura": false,
+            "tipo_tecnico": "int"
+          },
+          {
+            "apis": [
+              "padrao"
+            ],
+            "default": {
+              "estado": "desconhecido",
+              "forma": "nao_declarado_na_fonte"
+            },
+            "disponibilidade": {
+              "ate_versao": null,
+              "desde_versao": null,
+              "estado": "desconhecido"
+            },
+            "dominio": {
+              "contexto": "Valores conforme a página; não se declara lista completa.",
+              "estado": "verificado",
+              "evidencias": [
+                {
+                  "fonte": "src:objref-queueroutingconfig"
+                }
+              ],
+              "lista_completa": "desconhecido",
+              "natureza": "enum_fechado",
+              "valores": [
+                {
+                  "valor": "Least Active"
+                },
+                {
+                  "valor": "Most Available"
+                }
+              ]
+            },
+            "estado": "verificado",
+            "evidencias": [
+              {
+                "fonte": "src:objref-queueroutingconfig"
+              }
+            ],
+            "explicacao": "explicada",
+            "id": "obj:QueueRoutingConfig.RoutingModel",
+            "nome": "RoutingModel",
+            "o_que_e": "Modelo de roteamento.",
+            "obrigatoriedade": {
+              "estado": "desconhecido",
+              "valor": "desconhecida"
+            },
+            "origem": {
+              "estado": "verificado",
+              "evidencias": [
+                {
+                  "fonte": "src:objref-queueroutingconfig"
+                }
+              ],
+              "nota": "Campo padrão do objeto documentado.",
+              "valor": "padrao_plataforma"
+            },
+            "propriedades_api": {
+              "create": true,
+              "defaulted_on_create": false,
+              "estado": "verificado",
+              "evidencias": [
+                {
+                  "fonte": "src:objref-queueroutingconfig"
+                }
+              ],
+              "filter": true,
+              "group": true,
+              "id_lookup": false,
+              "nillable": false,
+              "restricted_picklist": true,
+              "sort": true,
+              "update": true
+            },
+            "somente_leitura": false,
+            "tipo_tecnico": "picklist"
+          },
+          {
+            "apis": [
+              "padrao"
+            ],
+            "default": {
+              "estado": "desconhecido",
+              "forma": "nao_declarado_na_fonte"
+            },
+            "disponibilidade": {
+              "ate_versao": null,
+              "desde_versao": null,
+              "estado": "desconhecido"
+            },
+            "dominio": {
+              "estado": "verificado",
+              "evidencias": [
+                {
+                  "fonte": "src:objref-queueroutingconfig"
+                }
+              ],
+              "natureza": "numerico"
+            },
+            "estado": "verificado",
+            "evidencias": [
+              {
+                "fonte": "src:objref-queueroutingconfig"
+              }
+            ],
+            "explicacao": "explicada",
+            "id": "obj:QueueRoutingConfig.RoutingPriority",
+            "nome": "RoutingPriority",
+            "o_que_e": "Prioridade de roteamento.",
+            "obrigatoriedade": {
+              "estado": "desconhecido",
+              "valor": "desconhecida"
+            },
+            "origem": {
+              "estado": "verificado",
+              "evidencias": [
+                {
+                  "fonte": "src:objref-queueroutingconfig"
+                }
+              ],
+              "nota": "Campo padrão do objeto documentado.",
+              "valor": "padrao_plataforma"
+            },
+            "propriedades_api": {
+              "create": true,
+              "defaulted_on_create": false,
+              "estado": "verificado",
+              "evidencias": [
+                {
+                  "fonte": "src:objref-queueroutingconfig"
+                }
+              ],
+              "filter": true,
+              "group": true,
+              "id_lookup": false,
+              "nillable": false,
+              "restricted_picklist": false,
+              "sort": true,
+              "update": true
+            },
+            "somente_leitura": false,
+            "tipo_tecnico": "int"
+          },
+          {
+            "apis": [
+              "padrao"
+            ],
+            "default": {
+              "estado": "desconhecido",
+              "forma": "nao_declarado_na_fonte"
+            },
+            "disponibilidade": {
+              "ate_versao": null,
+              "desde_versao": null,
+              "estado": "desconhecido"
+            },
+            "dominio": {
+              "contexto": "Id de registro do(s) objeto(s) referenciado(s).",
+              "estado": "desconhecido",
+              "natureza": "referencia"
+            },
+            "estado": "verificado",
+            "evidencias": [
+              {
+                "fonte": "src:objref-queueroutingconfig"
+              }
+            ],
+            "explicacao": "explicada",
+            "id": "obj:QueueRoutingConfig.ServiceChannelId",
+            "nome": "ServiceChannelId",
+            "notas": [
+              "A página diz 'available in API 32.0 and earlier', o que parece erro de texto; revalidar."
+            ],
+            "o_que_e": "Canal de serviço.",
+            "obrigatoriedade": {
+              "estado": "desconhecido",
+              "valor": "desconhecida"
+            },
+            "origem": {
+              "estado": "verificado",
+              "evidencias": [
+                {
+                  "fonte": "src:objref-queueroutingconfig"
+                }
+              ],
+              "nota": "Campo padrão do objeto documentado.",
+              "valor": "padrao_plataforma"
+            },
+            "propriedades_api": {
+              "create": true,
+              "defaulted_on_create": false,
+              "estado": "verificado",
+              "evidencias": [
+                {
+                  "fonte": "src:objref-queueroutingconfig"
+                }
+              ],
+              "filter": true,
+              "group": true,
+              "id_lookup": false,
+              "nillable": true,
+              "restricted_picklist": false,
+              "sort": true,
+              "update": true
+            },
+            "somente_leitura": false,
+            "tipo_tecnico": "reference"
+          }
+        ],
+        "cobertura": {
+          "estrutural": {
+            "esperado": 15,
+            "estado": "parcial",
+            "nota": "A tabela tem 15 linhas, mas uma veio sem nome de campo; 14 catalogadas.",
+            "presente": 14
+          },
+          "explicativa": {
+            "esperado": 14,
+            "estado": "completa",
+            "presente": 14
+          },
+          "mapeamento": {
+            "estado": "parcial",
+            "nota": "Ver relacionamentos registrados."
+          }
+        },
+        "consultas": [
+          {
+            "api": "padrao",
+            "contexto": "API padrão.",
+            "soql": "SELECT MasterLabel, RoutingModel, RoutingPriority FROM QueueRoutingConfig",
+            "validacao": "documental"
+          }
+        ],
+        "estado": "verificado",
+        "evidencias": [
+          {
+            "fonte": "src:objref-queueroutingconfig"
+          }
+        ],
+        "exposicoes": [
+          {
+            "api": "padrao",
+            "chamadas": [
+              "create()",
+              "delete()",
+              "query()",
+              "retrieve()",
+              "update()"
+            ],
+            "desde_versao": "32.0",
+            "estado": "verificado",
+            "evidencias": [
+              {
+                "fonte": "src:objref-queueroutingconfig"
+              }
+            ]
+          },
+          {
+            "api": "tooling",
+            "desde_versao": null,
+            "estado": "desconhecido",
+            "nota": "Exposição na Tooling API não verificada."
+          }
+        ],
+        "id": "obj:QueueRoutingConfig",
+        "juncao": false,
+        "nome": "QueueRoutingConfig",
+        "o_que_e": "Configuração de roteamento de uma fila do Omni-Channel.",
+        "papel": "Definir prioridade, modelo de roteamento e capacidade do trabalho da fila.",
+        "setup": {
+          "estado": "nao_aplicavel",
+          "nota": "Objeto consultável via API; não é tela do Setup."
+        }
+      },
+      "papel": "Configuração de roteamento consultável.",
+      "relacionamentos": [
+        {
+          "destino": {
+            "entidade": "obj:QueueRoutingConfig"
+          },
+          "estado": "verificado",
+          "evidencias": [
+            {
+              "fonte": "src:mdapi-queueroutingconfig"
+            },
+            {
+              "fonte": "src:objref-queueroutingconfig"
+            }
+          ],
+          "explicacao": "Metadata type e objeto API descrevem configurações de roteamento por caminhos diferentes: definição implantável versus registro consultável. A correspondência campo a campo não foi comprovada.",
+          "id": "rel:rep-queueroutingconfig",
+          "origem": {
+            "entidade": "mdt:QueueRoutingConfig"
+          },
+          "tipo": "representacao_comum"
+        },
+        {
+          "cardinalidade_registros": {
+            "estado": "desconhecido",
+            "nota": "Estrutura de lookup indica N:1; não comprovado nesta sessão.",
+            "valor": "N:1"
+          },
+          "destino": {
+            "entidade": "obj:QueueRoutingConfig"
+          },
+          "estado": "verificado",
+          "evidencias": [
+            {
+              "fonte": "src:objref-servicechannel"
+            }
+          ],
+          "explicacao": "O canal pode usar uma configuração de roteamento.",
+          "id": "rel:servicechannel-queueroutingconfig",
+          "origem": {
+            "campo": "RoutingConfigurationId",
+            "entidade": "obj:ServiceChannel"
+          },
+          "tipo": "referencia_campo"
+        }
+      ]
+    }
+  ],
   "versao_base": {
     "api_version": "68.0",
     "data_referencia": "2026-11-07",
