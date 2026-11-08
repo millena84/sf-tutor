@@ -48,7 +48,7 @@ export function conteudoMetodo(d: DadosBase, salesforce: Record<string, unknown>
     h('p', null, 'A coleta, a agregação e a redação dos insumos foram feitas com o Claude (Anthropic), a partir das fontes citadas, com revisão humana do projeto. Esta página não usa IA em tempo de execução: nada é gerado no navegador, e lacunas ficam visíveis como lacunas.'),
     h('h3', null, 'Marca e afiliação'),
     h('p', null, 'O sf-tutor é um projeto do canal Desbugando (tecnologia sem mistério); o logo do cabeçalho é a marca Desbugando.'),
-    h('p', null, 'Salesforce e os nomes de produtos são marcas da Salesforce, Inc. Este projeto é independente e não é afiliado nem endossado pela Salesforce. O centro do mapa usa um placeholder identificado até que o asset oficial do logo, sua origem e seus termos de uso sejam registrados.'),
+    h('p', null, 'Salesforce e os nomes de produtos são marcas da Salesforce, Inc. Este projeto é independente e não é afiliado nem endossado pela Salesforce. Os logos do centro e das nuvens são exibidos por referência aos endereços oficiais registrados nos insumos (config/marcas.json): ao abrir o tutorial, seu navegador também acessa esses servidores da Salesforce. Se a imagem não carregar, aparece um substituto identificado.'),
     h('h3', null, 'Segurança'),
     h('p', null, 'A página não pede nem guarda credenciais Salesforce e não se conecta a nenhuma org. Exemplos de SOQL e XML são apenas texto copiável; nada é executado ao clicar.'),
   );

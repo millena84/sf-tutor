@@ -15,6 +15,8 @@ export interface NoVisual {
   totalFilhos: number;
   expandido: boolean;
   acessivel: string; // nome acessível (anunciado ao selecionar)
+  logo?: boolean; // icone é a URL de um logo oficial (por referência)
+  logoTam?: [string, string]; // largura e altura da imagem no nó (%), mantendo a proporção do logo
 }
 
 export interface ArestaClicada {
@@ -98,7 +100,7 @@ export class Mapa {
       const data = {
         id: o.chave, rotulo: v.rotulo, tipo: v.tipo, icone: v.icone, cor: v.cor, oculto: v.oculto ? 1 : 0,
         filhos: v.totalFilhos, expandido: v.expandido ? 1 : 0, tamanho: TAMANHO[v.tipo] ?? 36,
-        marca: v.totalFilhos > 0 ? (v.expandido ? '−' : '+') : '',
+        marca: v.totalFilhos > 0 ? (v.expandido ? '−' : '+') : '', logo: v.logo ? 1 : 0, lw: v.logoTam?.[0] ?? '70%', lh: v.logoTam?.[1] ?? '70%',
       };
       const el = this.cy.getElementById(o.chave);
       if (el.nonempty()) el.data(data);
@@ -266,6 +268,9 @@ function estilo(): unknown[] {
     { selector: 'node[tipo = "objeto_api"]', style: { 'border-width': 3, 'border-color': '#1e3a8a' } },
     { selector: 'node[tipo = "objeto_api_juncao"]', style: { 'border-width': 5, 'border-style': 'double', 'border-color': '#1e3a8a' } },
     { selector: 'node[tipo = "campo_api"], node[tipo = "propriedade_xml"]', style: { 'font-size': 9, 'text-max-width': '90px', 'border-width': 1 } },
+    // logo oficial carregado por referência: fundo branco, imagem contida, sem exigir CORS do servidor de origem
+    { selector: 'node[logo = 1]', style: { 'background-color': '#ffffff', 'background-fit': 'none', 'background-width': 'data(lw)', 'background-height': 'data(lh)', 'background-image-crossorigin': 'null', 'background-clip': 'node' } as unknown as cytoscape.Css.Node },
+    { selector: 'node[tipo = "salesforce"][logo = 1]', style: { 'border-style': 'solid' } },
     { selector: 'node[tipo = "pagina"]', style: { 'background-image': 'none', shape: 'round-rectangle', width: 64, height: 26, label: 'data(rotulo)', 'text-valign': 'center', 'text-margin-y': 0, 'background-color': '#e2e8f0', 'border-style': 'dashed', 'font-size': 10, 'text-background-opacity': 0 } },
     { selector: 'node[filhos > 0][expandido = 0]', style: { 'border-color': '#0f172a', 'border-opacity': 1 } },
     { selector: 'node[oculto = 1]', style: { opacity: 0.22, 'border-style': 'dotted' } },

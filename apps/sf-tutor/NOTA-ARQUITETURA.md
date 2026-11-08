@@ -62,7 +62,12 @@ apps/sf-tutor/dist/                (site publicável)
 
 ## Limitações conhecidas
 
-- **Logo do site:** marca Desbugando, a lâmpada-bug (decisão de 2026-11-08). Os arquivos estão em `public/marca/` e o ícone da aba é `public/favicon.svg`. O nó "Salesforce" no centro do mapa é outra coisa: representa a Salesforce e segue com placeholder identificado até haver asset oficial com termos de uso (#13).
+- **Logo do site:** marca Desbugando (lâmpada-bug), em `public/marca/`; ícone da aba em `public/favicon.svg`.
+- **Logos da Salesforce e das nuvens:**
+  - São exibidos **por referência** aos endereços oficiais registrados em `ai-help/claude/insumos-grafo/config/marcas.json`. O arquivo não é copiado para o projeto.
+  - O app pré-carrega cada imagem e só troca o ícone do nó quando ela carrega; se falhar, fica o substituto.
+  - Logos SVG sem largura/altura declaradas podem sair cortados no canvas. É preciso conferir no site publicado.
+  - Os testes simulam os servidores, carregando e falhando, sem depender da rede.
 - **Referência visual (flavinho.pages.dev):** não pôde ser inspecionada (bloqueada para acesso automatizado). A paleta e o layout seguem a especificação do prompt e as diretrizes do projeto, não essa referência.
 - **Arraste de nós:** a posição arrastada não é preservada quando a cena é reconstruída.
 - **Rótulos no mapa:** em ramos muito densos podem se sobrepor quando o zoom está afastado. O painel e o modo lista mostram o texto completo.

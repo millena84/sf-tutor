@@ -73,7 +73,10 @@ function cabecalho(ctx: CtxPainel, caminho: readonly string[]): HTMLElement {
   const oculto = ctx.motivoOculto(id);
   const btnLink = h('button', { type: 'button', class: 'btn' }, 'Copiar link');
   btnLink.addEventListener('click', () => copiar(new URL(ctx.link(id, caminho), location.href).toString(), btnLink));
+  const logo = no.logo ? h('img', { class: 'logo-marca', src: no.logo.url, alt: `Logo ${no.logo.marca}`, referrerpolicy: 'no-referrer', width: 56, height: 56 }) : null;
+  logo?.addEventListener('error', () => logo.remove());
   return h('header', { class: 'cab-painel' },
+    logo,
     h('p', { class: 'tipo-no' }, h('span', { class: `ico ico-${no.tipo}`, 'aria-hidden': 'true' }, ICONE_TIPO[no.tipo] || (no.sigla ?? '•')), NOME_TIPO[no.tipo]),
     h('h2', { id: 'titulo-painel', tabindex: -1 }, no.rotulo),
     no.rotulo_tecnico && no.rotulo_tecnico !== no.rotulo ? h('p', { class: 'nome-tecnico' }, no.rotulo_tecnico) : null,
@@ -123,7 +126,8 @@ function painelSalesforce(ctx: CtxPainel, e: Entidade): (Node | null)[] {
   const conceitos = arr<Record<string, string>>(e.conceitos);
   return [
     texto('O que é', e.o_que_e, { didatico: true }),
-    h('div', { class: 'aviso aviso-logo' }, h('strong', null, 'Logo: '), 'o centro usa um placeholder identificado. ', String(e.nota_logo ?? 'Este projeto não é afiliado à Salesforce.')),
+    h('div', { class: 'aviso aviso-logo' }, h('strong', null, 'Logo: '), String(e.nota_logo ?? 'Este projeto não é afiliado à Salesforce.')),
+    infoLogo(e),
     secao('Conceitos fundamentais', true, h('dl', { class: 'conceitos' }, conceitos.flatMap((c) => [
       h('dt', null, c.termo),
       h('dd', null, c.definicao, c.analogia ? h('p', { class: 'analogia' }, h('strong', null, 'Analogia: '), c.analogia, c.limite_analogia ? h('span', null, ` Limite: ${c.limite_analogia}`) : null) : null),
@@ -144,11 +148,23 @@ function painelSalesforce(ctx: CtxPainel, e: Entidade): (Node | null)[] {
     secao('Nuvens e classificações', false,
       listaLinks(ctx, 'Nuvens / produtos', arr<string>(e.nuvens)), listaLinks(ctx, 'Classificações funcionais', arr<string>(e.classificacoes))),
     secao('Fontes', false, fontesEl(ctx, arr(e.evidencias))),
-    restantes(e, ['id', 'nome', 'nota_logo', 'o_que_e', 'conceitos', 'organizacao_do_mapa', 'relacoes_entre_produtos', 'como_navegar', 'nuvens', 'classificacoes', 'versao_base', 'estado', 'evidencias']),
+    restantes(e, ['id', 'nome', 'nota_logo', 'logo_marca', 'o_que_e', 'conceitos', 'organizacao_do_mapa', 'relacoes_entre_produtos', 'como_navegar', 'nuvens', 'classificacoes', 'versao_base', 'estado', 'evidencias']),
   ];
 }
 
 // ------------------------------------------------------------------ Nuvem
+
+/** De onde vem o logo exibido (registro em config/marcas.json, por referência). */
+function infoLogo(e: Entidade): HTMLElement | null {
+  const l = e.logo_marca as { marca?: string; url?: string; fornecido_por?: string; pagina_origem?: string | null; verificacao?: string } | undefined;
+  if (!l?.url) return null;
+  return secao('Logo', false, h('dl', { class: 'kv' },
+    h('dt', null, 'Marca'), h('dd', null, String(l.marca ?? '')),
+    h('dt', null, 'Endereço'), h('dd', null, h('a', { href: l.url, target: '_blank', rel: 'noopener noreferrer' }, l.url)),
+    h('dt', null, 'Fornecido por'), h('dd', null, String(l.fornecido_por ?? '')),
+    h('dt', null, 'Verificação'), h('dd', null, String(l.verificacao ?? ''))),
+    h('p', { class: 'nota' }, 'A imagem é carregada direto do endereço oficial (não é copiada para o projeto). Se não carregar, o mapa mostra um substituto. Salesforce e os nomes de produtos são marcas da Salesforce, Inc.; este projeto não é afiliado nem endossado pela Salesforce.'));
+}
 
 function painelNuvem(ctx: CtxPainel, e: Entidade, caminho: readonly string[]): (Node | null)[] {
   const lic = ent<Afirmacao & { itens?: Record<string, unknown>[] }>(e, 'licencas');
@@ -181,7 +197,8 @@ function painelNuvem(ctx: CtxPainel, e: Entidade, caminho: readonly string[]): (
     listaTexto('Limites e pontos de atenção', arr(e.limites)),
     texto('Cobertura do inventário desta nuvem', e.cobertura_inventario),
     secao('Fontes', false, fontesEl(ctx, arr(e.evidencias))),
-    restantes(e, ['id', 'nome_oficial', 'aliases', 'sigla', 'resumo', 'o_que_e', 'casos_de_uso', 'contexto_tecnico', 'licencas', 'classificacoes_aplicaveis', 'dependencias', 'limites', 'cobertura_inventario', 'estado', 'evidencias']),
+    infoLogo(e),
+    restantes(e, ['id', 'nome_oficial', 'logo_marca', 'aliases', 'sigla', 'resumo', 'o_que_e', 'casos_de_uso', 'contexto_tecnico', 'licencas', 'classificacoes_aplicaveis', 'dependencias', 'limites', 'cobertura_inventario', 'estado', 'evidencias']),
   ];
 }
 
