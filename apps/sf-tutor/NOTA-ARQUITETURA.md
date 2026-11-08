@@ -62,7 +62,7 @@ apps/sf-tutor/dist/                (site publicável)
 
 ## Limitações conhecidas
 
-- **Logo:** placeholder identificado ("logo pendente"). Não há asset oficial registrado nos insumos e o placeholder não imita a marca. Não é entrega visual final.
+- **Logo do site:** marca Desbugando, a lâmpada-bug (decisão de 2026-11-08). Os arquivos estão em `public/marca/` e o ícone da aba é `public/favicon.svg`. O nó "Salesforce" no centro do mapa é outra coisa: representa a Salesforce e segue com placeholder identificado até haver asset oficial com termos de uso (#13).
 - **Referência visual (flavinho.pages.dev):** não pôde ser inspecionada (bloqueada para acesso automatizado). A paleta e o layout seguem a especificação do prompt e as diretrizes do projeto, não essa referência.
 - **Arraste de nós:** a posição arrastada não é preservada quando a cena é reconstruída.
 - **Rótulos no mapa:** em ramos muito densos podem se sobrepor quando o zoom está afastado. O painel e o modo lista mostram o texto completo.
