@@ -1,0 +1,223 @@
+{
+  "id": "mdt:QuoteSettings",
+  "nome": "QuoteSettings",
+  "o_que_e": "Configurações de cotações da org.",
+  "finalidade": "Ligar cotações e cotações sem oportunidade.",
+  "estende": "Metadata",
+  "arquivos": {
+    "source_format": {
+      "estado": "verificado",
+      "valor": {
+        "pasta": "settings/",
+        "arquivo": "Quote.settings-meta.xml"
+      },
+      "nota": "Pasta e sufixo do tipo genérico Settings no registro do Salesforce CLI; o nome-base do arquivo vem da página do tipo.",
+      "evidencias": [
+        {
+          "fonte": "src:sdr-registry",
+          "nota": "types.settings"
+        },
+        {
+          "fonte": "src:mdapi-quotesettings"
+        }
+      ]
+    },
+    "metadata_api_format": {
+      "estado": "verificado",
+      "valor": {
+        "pasta": "settings/",
+        "arquivo": "Quote.settings"
+      },
+      "nota": "Um único arquivo por tipo de configuração; no package.xml, o tipo é Settings e o membro é o nome-base.",
+      "evidencias": [
+        {
+          "fonte": "src:mdapi-quotesettings"
+        }
+      ]
+    },
+    "curinga_package_xml": {
+      "estado": "verificado",
+      "valor": false,
+      "evidencias": [
+        {
+          "fonte": "src:mdapi-quotesettings"
+        }
+      ]
+    }
+  },
+  "disponibilidade": {
+    "desde_versao": "28.0",
+    "ate_versao": null,
+    "estado": "verificado"
+  },
+  "suporte_cli": {
+    "estado": "verificado",
+    "valor": {
+      "status": "suportado",
+      "nota_fonte": null
+    },
+    "nota": "Suporte do Salesforce CLI (source-deploy-retrieve), não do Metadata API em geral.",
+    "evidencias": [
+      {
+        "fonte": "src:sdr-metadata-support"
+      }
+    ]
+  },
+  "setup": {
+    "estado": "desconhecido",
+    "nota": "Caminho no Setup não validado nesta sessão."
+  },
+  "propriedades": [
+    {
+      "id": "mdt:QuoteSettings.enableQuote",
+      "nome": "enableQuote",
+      "tipo_tecnico": "boolean",
+      "o_que_e": "Libera cotações aos usuários.",
+      "origem": {
+        "estado": "verificado",
+        "valor": "padrao_plataforma",
+        "nota": "Propriedade definida pelo schema da Metadata API.",
+        "evidencias": [
+          {
+            "fonte": "src:mdapi-quotesettings"
+          }
+        ]
+      },
+      "obrigatoriedade": {
+        "valor": "nao",
+        "estado": "desconhecido",
+        "condicao": "A documentação 68.0 não marca o campo como obrigatório; ausência de marcação não comprova opcionalidade (confirmar no WSDL)."
+      },
+      "default": {
+        "forma": "nao_declarado_na_fonte",
+        "estado": "desconhecido"
+      },
+      "dominio": {
+        "natureza": "booleano",
+        "valores": [
+          {
+            "valor": "true"
+          },
+          {
+            "valor": "false"
+          }
+        ],
+        "lista_completa": "sim",
+        "estado": "verificado",
+        "evidencias": [
+          {
+            "fonte": "src:mdapi-quotesettings"
+          }
+        ]
+      },
+      "disponibilidade": {
+        "desde_versao": null,
+        "ate_versao": null,
+        "estado": "desconhecido"
+      },
+      "explicacao": "explicada",
+      "estado": "verificado",
+      "evidencias": [
+        {
+          "fonte": "src:mdapi-quotesettings"
+        }
+      ]
+    },
+    {
+      "id": "mdt:QuoteSettings.enableQuotesWithoutOppEnabled",
+      "nome": "enableQuotesWithoutOppEnabled",
+      "tipo_tecnico": "boolean",
+      "o_que_e": "Permite cotações sem oportunidade; antes de desligar, exclua as cotações sem oportunidade.",
+      "origem": {
+        "estado": "verificado",
+        "valor": "padrao_plataforma",
+        "nota": "Propriedade definida pelo schema da Metadata API.",
+        "evidencias": [
+          {
+            "fonte": "src:mdapi-quotesettings"
+          }
+        ]
+      },
+      "obrigatoriedade": {
+        "valor": "nao",
+        "estado": "desconhecido",
+        "condicao": "A documentação 68.0 não marca o campo como obrigatório; ausência de marcação não comprova opcionalidade (confirmar no WSDL)."
+      },
+      "default": {
+        "forma": "false",
+        "estado": "verificado",
+        "evidencias": [
+          {
+            "fonte": "src:mdapi-quotesettings"
+          }
+        ]
+      },
+      "dominio": {
+        "natureza": "booleano",
+        "valores": [
+          {
+            "valor": "true"
+          },
+          {
+            "valor": "false"
+          }
+        ],
+        "lista_completa": "sim",
+        "estado": "verificado",
+        "evidencias": [
+          {
+            "fonte": "src:mdapi-quotesettings"
+          }
+        ]
+      },
+      "disponibilidade": {
+        "desde_versao": "47.0",
+        "ate_versao": null,
+        "estado": "verificado"
+      },
+      "explicacao": "explicada",
+      "estado": "verificado",
+      "evidencias": [
+        {
+          "fonte": "src:mdapi-quotesettings"
+        }
+      ]
+    }
+  ],
+  "estruturas": [],
+  "cobertura": {
+    "estrutural": {
+      "estado": "completa",
+      "esperado": 2,
+      "presente": 2,
+      "nota": "Universo esperado = tabela Fields da página oficial 68.0 (mais fullName herdado quando declarado)."
+    },
+    "explicativa": {
+      "estado": "completa",
+      "esperado": 2,
+      "presente": 2
+    },
+    "mapeamento": {
+      "estado": "parcial",
+      "nota": "Correspondências registradas apenas onde há evidência; demais pendentes."
+    }
+  },
+  "recomendacoes": [],
+  "alertas": [
+    "No package.xml, use o tipo Settings com o nome-base do arquivo como membro; o curinga só vale para recuperar todas as configurações.",
+    "A página na documentação se chama meta_quotessettings.htm (com 's' a mais)."
+  ],
+  "divergencias_documentais": [],
+  "estado": "verificado",
+  "evidencias": [
+    {
+      "fonte": "src:mdapi-quotesettings"
+    },
+    {
+      "fonte": "src:sdr-registry"
+    },
+    {
+      "fonte": "src:sdr-metadata-support"
+    }
+  ]
+}

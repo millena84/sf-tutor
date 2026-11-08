@@ -1,0 +1,607 @@
+{
+  "id": "mdt:ForecastingSettings",
+  "nome": "ForecastingSettings",
+  "o_que_e": "Configurações de previsões colaborativas da org.",
+  "finalidade": "Ligar previsões e definir tipos, categorias, ajustes, períodos e cotas.",
+  "estende": "Metadata",
+  "arquivos": {
+    "source_format": {
+      "estado": "verificado",
+      "valor": {
+        "pasta": "settings/",
+        "arquivo": "Forecasting.settings-meta.xml"
+      },
+      "nota": "Pasta e sufixo do tipo genérico Settings no registro do Salesforce CLI; o nome-base do arquivo vem da página do tipo.",
+      "evidencias": [
+        {
+          "fonte": "src:sdr-registry",
+          "nota": "types.settings"
+        },
+        {
+          "fonte": "src:mdapi-forecastingsettings"
+        }
+      ]
+    },
+    "metadata_api_format": {
+      "estado": "verificado",
+      "valor": {
+        "pasta": "settings/",
+        "arquivo": "Forecasting.settings"
+      },
+      "nota": "Um único arquivo por tipo de configuração; no package.xml, o tipo é Settings e o membro é o nome-base.",
+      "evidencias": [
+        {
+          "fonte": "src:mdapi-forecastingsettings"
+        }
+      ]
+    },
+    "curinga_package_xml": {
+      "estado": "verificado",
+      "valor": false,
+      "evidencias": [
+        {
+          "fonte": "src:mdapi-forecastingsettings"
+        }
+      ]
+    }
+  },
+  "disponibilidade": {
+    "desde_versao": "28.0",
+    "ate_versao": null,
+    "estado": "verificado"
+  },
+  "suporte_cli": {
+    "estado": "verificado",
+    "valor": {
+      "status": "suportado",
+      "nota_fonte": null
+    },
+    "nota": "Suporte do Salesforce CLI (source-deploy-retrieve), não do Metadata API em geral.",
+    "evidencias": [
+      {
+        "fonte": "src:sdr-metadata-support"
+      }
+    ]
+  },
+  "setup": {
+    "estado": "desconhecido",
+    "nota": "Caminho no Setup não validado nesta sessão."
+  },
+  "propriedades": [
+    {
+      "id": "mdt:ForecastingSettings.displayCurrency",
+      "nome": "displayCurrency",
+      "tipo_tecnico": "DisplayCurrency",
+      "o_que_e": "Moeda de exibição (removido; use defaultToPersonalCurrency a partir da 47.0).",
+      "origem": {
+        "estado": "verificado",
+        "valor": "padrao_plataforma",
+        "nota": "Propriedade definida pelo schema da Metadata API.",
+        "evidencias": [
+          {
+            "fonte": "src:mdapi-forecastingsettings"
+          }
+        ]
+      },
+      "obrigatoriedade": {
+        "valor": "nao",
+        "estado": "desconhecido",
+        "condicao": "A documentação 68.0 não marca o campo como obrigatório; ausência de marcação não comprova opcionalidade (confirmar no WSDL)."
+      },
+      "default": {
+        "forma": "nao_declarado_na_fonte",
+        "estado": "desconhecido"
+      },
+      "dominio": {
+        "natureza": "enum_fechado",
+        "valores": [
+          {
+            "valor": "CORPORATE"
+          },
+          {
+            "valor": "PERSONAL"
+          }
+        ],
+        "lista_completa": "sim",
+        "estado": "verificado",
+        "evidencias": [
+          {
+            "fonte": "src:mdapi-forecastingsettings"
+          }
+        ]
+      },
+      "disponibilidade": {
+        "desde_versao": "28.0",
+        "ate_versao": "46.0",
+        "estado": "verificado"
+      },
+      "explicacao": "explicada",
+      "estado": "verificado",
+      "evidencias": [
+        {
+          "fonte": "src:mdapi-forecastingsettings"
+        }
+      ]
+    },
+    {
+      "id": "mdt:ForecastingSettings.defaultToPersonalCurrency",
+      "nome": "defaultToPersonalCurrency",
+      "tipo_tecnico": "boolean",
+      "o_que_e": "Usa a moeda pessoal nas previsões com multimoeda.",
+      "origem": {
+        "estado": "verificado",
+        "valor": "padrao_plataforma",
+        "nota": "Propriedade definida pelo schema da Metadata API.",
+        "evidencias": [
+          {
+            "fonte": "src:mdapi-forecastingsettings"
+          }
+        ]
+      },
+      "obrigatoriedade": {
+        "valor": "nao",
+        "estado": "desconhecido",
+        "condicao": "A documentação 68.0 não marca o campo como obrigatório; ausência de marcação não comprova opcionalidade (confirmar no WSDL)."
+      },
+      "default": {
+        "forma": "valor",
+        "estado": "verificado",
+        "evidencias": [
+          {
+            "fonte": "src:mdapi-forecastingsettings"
+          }
+        ],
+        "valor": "true"
+      },
+      "dominio": {
+        "natureza": "booleano",
+        "valores": [
+          {
+            "valor": "true"
+          },
+          {
+            "valor": "false"
+          }
+        ],
+        "lista_completa": "sim",
+        "estado": "verificado",
+        "evidencias": [
+          {
+            "fonte": "src:mdapi-forecastingsettings"
+          }
+        ]
+      },
+      "disponibilidade": {
+        "desde_versao": "47.0",
+        "ate_versao": null,
+        "estado": "verificado"
+      },
+      "explicacao": "explicada",
+      "estado": "verificado",
+      "evidencias": [
+        {
+          "fonte": "src:mdapi-forecastingsettings"
+        }
+      ]
+    },
+    {
+      "id": "mdt:ForecastingSettings.enableForecasts",
+      "nome": "enableForecasts",
+      "tipo_tecnico": "boolean",
+      "o_que_e": "Liga ou desliga previsões; desligar pode apagar dados.",
+      "origem": {
+        "estado": "verificado",
+        "valor": "padrao_plataforma",
+        "nota": "Propriedade definida pelo schema da Metadata API.",
+        "evidencias": [
+          {
+            "fonte": "src:mdapi-forecastingsettings"
+          }
+        ]
+      },
+      "obrigatoriedade": {
+        "valor": "nao",
+        "estado": "desconhecido",
+        "condicao": "A documentação 68.0 não marca o campo como obrigatório; ausência de marcação não comprova opcionalidade (confirmar no WSDL)."
+      },
+      "default": {
+        "forma": "nao_declarado_na_fonte",
+        "estado": "desconhecido"
+      },
+      "dominio": {
+        "natureza": "booleano",
+        "valores": [
+          {
+            "valor": "true"
+          },
+          {
+            "valor": "false"
+          }
+        ],
+        "lista_completa": "sim",
+        "estado": "verificado",
+        "evidencias": [
+          {
+            "fonte": "src:mdapi-forecastingsettings"
+          }
+        ]
+      },
+      "disponibilidade": {
+        "desde_versao": null,
+        "ate_versao": null,
+        "estado": "desconhecido"
+      },
+      "explicacao": "explicada",
+      "estado": "verificado",
+      "evidencias": [
+        {
+          "fonte": "src:mdapi-forecastingsettings"
+        }
+      ]
+    },
+    {
+      "id": "mdt:ForecastingSettings.forecastingCategoryMappings",
+      "nome": "forecastingCategoryMappings",
+      "tipo_tecnico": "ForecastingCategoryMapping[]",
+      "o_que_e": "Mapeia tipos de previsão para categorias acumuladas.",
+      "origem": {
+        "estado": "verificado",
+        "valor": "padrao_plataforma",
+        "nota": "Propriedade definida pelo schema da Metadata API.",
+        "evidencias": [
+          {
+            "fonte": "src:mdapi-forecastingsettings"
+          }
+        ]
+      },
+      "obrigatoriedade": {
+        "valor": "nao",
+        "estado": "desconhecido",
+        "condicao": "A documentação 68.0 não marca o campo como obrigatório; ausência de marcação não comprova opcionalidade (confirmar no WSDL)."
+      },
+      "default": {
+        "forma": "nao_declarado_na_fonte",
+        "estado": "desconhecido"
+      },
+      "dominio": {
+        "natureza": "tipo_composto",
+        "estado": "verificado",
+        "evidencias": [
+          {
+            "fonte": "src:mdapi-forecastingsettings"
+          }
+        ]
+      },
+      "disponibilidade": {
+        "desde_versao": null,
+        "ate_versao": null,
+        "estado": "desconhecido"
+      },
+      "explicacao": "explicada",
+      "estado": "verificado",
+      "evidencias": [
+        {
+          "fonte": "src:mdapi-forecastingsettings"
+        }
+      ],
+      "cardinalidade": "0..n"
+    },
+    {
+      "id": "mdt:ForecastingSettings.forecastingDisplayedFamilySettings",
+      "nome": "forecastingDisplayedFamilySettings",
+      "tipo_tecnico": "ForecastingDisplayedFamilySettings[]",
+      "o_que_e": "Famílias de produto previstas no Lightning.",
+      "origem": {
+        "estado": "verificado",
+        "valor": "padrao_plataforma",
+        "nota": "Propriedade definida pelo schema da Metadata API.",
+        "evidencias": [
+          {
+            "fonte": "src:mdapi-forecastingsettings"
+          }
+        ]
+      },
+      "obrigatoriedade": {
+        "valor": "nao",
+        "estado": "desconhecido",
+        "condicao": "A documentação 68.0 não marca o campo como obrigatório; ausência de marcação não comprova opcionalidade (confirmar no WSDL)."
+      },
+      "default": {
+        "forma": "nao_declarado_na_fonte",
+        "estado": "desconhecido"
+      },
+      "dominio": {
+        "natureza": "tipo_composto",
+        "estado": "verificado",
+        "evidencias": [
+          {
+            "fonte": "src:mdapi-forecastingsettings"
+          }
+        ]
+      },
+      "disponibilidade": {
+        "desde_versao": "40.0",
+        "ate_versao": null,
+        "estado": "verificado"
+      },
+      "explicacao": "explicada",
+      "estado": "verificado",
+      "evidencias": [
+        {
+          "fonte": "src:mdapi-forecastingsettings"
+        }
+      ],
+      "cardinalidade": "0..n"
+    },
+    {
+      "id": "mdt:ForecastingSettings.forecastingSubmissionSettings",
+      "nome": "forecastingSubmissionSettings",
+      "tipo_tecnico": "ForecastingSubmissionSettings",
+      "o_que_e": "Opções de submissão de previsões.",
+      "origem": {
+        "estado": "verificado",
+        "valor": "padrao_plataforma",
+        "nota": "Propriedade definida pelo schema da Metadata API.",
+        "evidencias": [
+          {
+            "fonte": "src:mdapi-forecastingsettings"
+          }
+        ]
+      },
+      "obrigatoriedade": {
+        "valor": "nao",
+        "estado": "desconhecido",
+        "condicao": "A documentação 68.0 não marca o campo como obrigatório; ausência de marcação não comprova opcionalidade (confirmar no WSDL)."
+      },
+      "default": {
+        "forma": "nao_declarado_na_fonte",
+        "estado": "desconhecido"
+      },
+      "dominio": {
+        "natureza": "tipo_composto",
+        "estado": "verificado",
+        "evidencias": [
+          {
+            "fonte": "src:mdapi-forecastingsettings"
+          }
+        ]
+      },
+      "disponibilidade": {
+        "desde_versao": "62.0",
+        "ate_versao": null,
+        "estado": "verificado"
+      },
+      "explicacao": "explicada",
+      "estado": "verificado",
+      "evidencias": [
+        {
+          "fonte": "src:mdapi-forecastingsettings"
+        }
+      ]
+    },
+    {
+      "id": "mdt:ForecastingSettings.forecastingTypeSettings",
+      "nome": "forecastingTypeSettings",
+      "tipo_tecnico": "ForecastingTypeSettings[]",
+      "o_que_e": "Tipos de previsão (máximo de quatro).",
+      "origem": {
+        "estado": "verificado",
+        "valor": "padrao_plataforma",
+        "nota": "Propriedade definida pelo schema da Metadata API.",
+        "evidencias": [
+          {
+            "fonte": "src:mdapi-forecastingsettings"
+          }
+        ]
+      },
+      "obrigatoriedade": {
+        "valor": "nao",
+        "estado": "desconhecido",
+        "condicao": "A documentação 68.0 não marca o campo como obrigatório; ausência de marcação não comprova opcionalidade (confirmar no WSDL)."
+      },
+      "default": {
+        "forma": "nao_declarado_na_fonte",
+        "estado": "desconhecido"
+      },
+      "dominio": {
+        "natureza": "tipo_composto",
+        "estado": "verificado",
+        "evidencias": [
+          {
+            "fonte": "src:mdapi-forecastingsettings"
+          }
+        ]
+      },
+      "disponibilidade": {
+        "desde_versao": null,
+        "ate_versao": null,
+        "estado": "desconhecido"
+      },
+      "explicacao": "explicada",
+      "estado": "verificado",
+      "evidencias": [
+        {
+          "fonte": "src:mdapi-forecastingsettings"
+        }
+      ],
+      "cardinalidade": "0..n"
+    },
+    {
+      "id": "mdt:ForecastingSettings.globalAdjustmentsSettings",
+      "nome": "globalAdjustmentsSettings",
+      "tipo_tecnico": "AdjustmentsSettings[]",
+      "o_que_e": "Opções de ajuste.",
+      "origem": {
+        "estado": "verificado",
+        "valor": "padrao_plataforma",
+        "nota": "Propriedade definida pelo schema da Metadata API.",
+        "evidencias": [
+          {
+            "fonte": "src:mdapi-forecastingsettings"
+          }
+        ]
+      },
+      "obrigatoriedade": {
+        "valor": "nao",
+        "estado": "desconhecido",
+        "condicao": "A documentação 68.0 não marca o campo como obrigatório; ausência de marcação não comprova opcionalidade (confirmar no WSDL)."
+      },
+      "default": {
+        "forma": "nao_declarado_na_fonte",
+        "estado": "desconhecido"
+      },
+      "dominio": {
+        "natureza": "tipo_composto",
+        "estado": "verificado",
+        "evidencias": [
+          {
+            "fonte": "src:mdapi-forecastingsettings"
+          }
+        ]
+      },
+      "disponibilidade": {
+        "desde_versao": "53.0",
+        "ate_versao": null,
+        "estado": "verificado"
+      },
+      "explicacao": "explicada",
+      "estado": "verificado",
+      "evidencias": [
+        {
+          "fonte": "src:mdapi-forecastingsettings"
+        }
+      ],
+      "cardinalidade": "0..n"
+    },
+    {
+      "id": "mdt:ForecastingSettings.globalForecastRangeSettings",
+      "nome": "globalForecastRangeSettings",
+      "tipo_tecnico": "ForecastRangeSettings[]",
+      "o_que_e": "Períodos e intervalo padrão.",
+      "origem": {
+        "estado": "verificado",
+        "valor": "padrao_plataforma",
+        "nota": "Propriedade definida pelo schema da Metadata API.",
+        "evidencias": [
+          {
+            "fonte": "src:mdapi-forecastingsettings"
+          }
+        ]
+      },
+      "obrigatoriedade": {
+        "valor": "nao",
+        "estado": "desconhecido",
+        "condicao": "A documentação 68.0 não marca o campo como obrigatório; ausência de marcação não comprova opcionalidade (confirmar no WSDL)."
+      },
+      "default": {
+        "forma": "nao_declarado_na_fonte",
+        "estado": "desconhecido"
+      },
+      "dominio": {
+        "natureza": "tipo_composto",
+        "estado": "verificado",
+        "evidencias": [
+          {
+            "fonte": "src:mdapi-forecastingsettings"
+          }
+        ]
+      },
+      "disponibilidade": {
+        "desde_versao": "53.0",
+        "ate_versao": null,
+        "estado": "verificado"
+      },
+      "explicacao": "explicada",
+      "estado": "verificado",
+      "evidencias": [
+        {
+          "fonte": "src:mdapi-forecastingsettings"
+        }
+      ],
+      "cardinalidade": "0..n"
+    },
+    {
+      "id": "mdt:ForecastingSettings.globalQuotasSettings",
+      "nome": "globalQuotasSettings",
+      "tipo_tecnico": "QuotasSettings[]",
+      "o_que_e": "Liga ou desliga cotas.",
+      "origem": {
+        "estado": "verificado",
+        "valor": "padrao_plataforma",
+        "nota": "Propriedade definida pelo schema da Metadata API.",
+        "evidencias": [
+          {
+            "fonte": "src:mdapi-forecastingsettings"
+          }
+        ]
+      },
+      "obrigatoriedade": {
+        "valor": "nao",
+        "estado": "desconhecido",
+        "condicao": "A documentação 68.0 não marca o campo como obrigatório; ausência de marcação não comprova opcionalidade (confirmar no WSDL)."
+      },
+      "default": {
+        "forma": "nao_declarado_na_fonte",
+        "estado": "desconhecido"
+      },
+      "dominio": {
+        "natureza": "tipo_composto",
+        "estado": "verificado",
+        "evidencias": [
+          {
+            "fonte": "src:mdapi-forecastingsettings"
+          }
+        ]
+      },
+      "disponibilidade": {
+        "desde_versao": "53.0",
+        "ate_versao": null,
+        "estado": "verificado"
+      },
+      "explicacao": "explicada",
+      "estado": "verificado",
+      "evidencias": [
+        {
+          "fonte": "src:mdapi-forecastingsettings"
+        }
+      ],
+      "cardinalidade": "0..n"
+    }
+  ],
+  "estruturas": [],
+  "cobertura": {
+    "estrutural": {
+      "estado": "parcial",
+      "esperado": 10,
+      "presente": 10,
+      "nota": "Nível principal completo (10 linhas). Os 13 subtipos (44 linhas) foram lidos e estão na nota de extração, mas não foram cadastrados como estruturas nesta rodada. Primeiro nível completo; 7 propriedade(s) de tipo composto ainda sem estrutura detalhada: forecastingCategoryMappings, forecastingDisplayedFamilySettings, forecastingSubmissionSettings, forecastingTypeSettings, globalAdjustmentsSettings, globalForecastRangeSettings, globalQuotasSettings."
+    },
+    "explicativa": {
+      "estado": "completa",
+      "esperado": 10,
+      "presente": 10
+    },
+    "mapeamento": {
+      "estado": "parcial",
+      "nota": "Correspondências registradas apenas onde há evidência; demais pendentes."
+    }
+  },
+  "recomendacoes": [],
+  "alertas": [
+    "No package.xml, use o tipo Settings com o nome-base do arquivo como membro; o curinga só vale para recuperar todas as configurações.",
+    "A estrutura do tipo mudou bastante nas versões 30.0 e 53.0."
+  ],
+  "divergencias_documentais": [],
+  "estado": "verificado",
+  "evidencias": [
+    {
+      "fonte": "src:mdapi-forecastingsettings"
+    },
+    {
+      "fonte": "src:sdr-registry"
+    },
+    {
+      "fonte": "src:sdr-metadata-support"
+    }
+  ]
+}

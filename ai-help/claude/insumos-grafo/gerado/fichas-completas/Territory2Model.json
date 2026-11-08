@@ -53,8 +53,8 @@
     "cobertura": {
       "estrutural": {
         "esperado": 3,
-        "estado": "parcial",
-        "nota": "Universo esperado = tabela Fields da página oficial 68.0 (mais fullName herdado quando declarado). Primeiro nível completo; 1 propriedade(s) de tipo composto ainda sem estrutura detalhada: customFields.",
+        "estado": "completa",
+        "nota": "Universo esperado = tabela Fields da página oficial 68.0 (3 propriedades). FieldValue detalhado a partir da página de Territory2.",
         "presente": 3
       },
       "explicativa": {
@@ -78,7 +78,9 @@
     ],
     "estado": "verificado",
     "estende": "Metadata",
-    "estruturas": [],
+    "estruturas": [
+      "mdx:FieldValue"
+    ],
     "evidencias": [
       {
         "fonte": "src:mdapi-territory2model"
@@ -88,6 +90,9 @@
       },
       {
         "fonte": "src:sdr-metadata-support"
+      },
+      {
+        "fonte": "src:mdapi-territory2"
       }
     ],
     "finalidade": "Versionar e implantar a estrutura de territórios entre orgs.",
@@ -115,6 +120,105 @@
           "natureza": "tipo_composto"
         },
         "estado": "verificado",
+        "estrutura_expandida": {
+          "id": "mdx:FieldValue",
+          "nome": "FieldValue",
+          "propriedades": [
+            {
+              "default": {
+                "estado": "desconhecido",
+                "forma": "nao_declarado_na_fonte"
+              },
+              "disponibilidade": {
+                "ate_versao": null,
+                "desde_versao": null,
+                "estado": "desconhecido"
+              },
+              "dominio": {
+                "contexto": "A fonte tipa como string sem lista de valores; não inventar valores.",
+                "estado": "verificado",
+                "evidencias": [
+                  {
+                    "fonte": "src:mdapi-territory2"
+                  }
+                ],
+                "natureza": "texto_livre"
+              },
+              "estado": "verificado",
+              "evidencias": [
+                {
+                  "fonte": "src:mdapi-territory2"
+                }
+              ],
+              "explicacao": "explicada",
+              "id": "mdx:FieldValue.name",
+              "nome": "name",
+              "o_que_e": "Nome do campo customizado (a página descreve como rótulo do território).",
+              "obrigatoriedade": {
+                "estado": "verificado",
+                "evidencias": [
+                  {
+                    "fonte": "src:mdapi-territory2"
+                  }
+                ],
+                "valor": "sim"
+              },
+              "origem": {
+                "estado": "verificado",
+                "evidencias": [
+                  {
+                    "fonte": "src:mdapi-territory2"
+                  }
+                ],
+                "nota": "Propriedade definida pelo schema da Metadata API.",
+                "valor": "padrao_plataforma"
+              },
+              "tipo_tecnico": "string"
+            },
+            {
+              "default": {
+                "estado": "desconhecido",
+                "forma": "nao_declarado_na_fonte"
+              },
+              "disponibilidade": {
+                "ate_versao": null,
+                "desde_versao": null,
+                "estado": "desconhecido"
+              },
+              "dominio": {
+                "estado": "desconhecido",
+                "natureza": "desconhecida"
+              },
+              "estado": "verificado",
+              "evidencias": [
+                {
+                  "fonte": "src:mdapi-territory2"
+                }
+              ],
+              "explicacao": "explicada",
+              "id": "mdx:FieldValue.value",
+              "nome": "value",
+              "o_que_e": "Valor do campo; pode ser nulo; o tipo vai declarado no XML.",
+              "obrigatoriedade": {
+                "condicao": "A documentação 68.0 não marca o campo como obrigatório; ausência de marcação não comprova opcionalidade (confirmar no WSDL).",
+                "estado": "desconhecido",
+                "valor": "nao"
+              },
+              "origem": {
+                "estado": "verificado",
+                "evidencias": [
+                  {
+                    "fonte": "src:mdapi-territory2"
+                  }
+                ],
+                "nota": "Propriedade definida pelo schema da Metadata API.",
+                "valor": "padrao_plataforma"
+              },
+              "tipo_tecnico": "anyType"
+            }
+          ]
+        },
+        "estrutura_ref": "mdx:FieldValue",
         "evidencias": [
           {
             "fonte": "src:mdapi-territory2model"
@@ -1520,6 +1624,26 @@
             "entidade": "obj:ObjectTerritory2Association"
           },
           "tipo": "referencia_campo"
+        },
+        {
+          "destino": {
+            "entidade": "obj:Territory2"
+          },
+          "estado": "verificado",
+          "evidencias": [
+            {
+              "fonte": "src:mdapi-territory2"
+            },
+            {
+              "fonte": "src:objref-territory2"
+            }
+          ],
+          "explicacao": "Metadata type e objeto API descrevem territórios por caminhos diferentes: definição implantável versus registro consultável. A correspondência campo a campo não foi comprovada.",
+          "id": "rel:rep-territory2",
+          "origem": {
+            "entidade": "mdt:Territory2"
+          },
+          "tipo": "representacao_comum"
         }
       ]
     },
@@ -1957,7 +2081,28 @@
           "nota": "Objeto consultável via API; não é tela do Setup."
         }
       },
-      "relacionamentos_do_objeto": []
+      "relacionamentos_do_objeto": [
+        {
+          "destino": {
+            "entidade": "obj:Territory2Type"
+          },
+          "estado": "verificado",
+          "evidencias": [
+            {
+              "fonte": "src:mdapi-territory2type"
+            },
+            {
+              "fonte": "src:objref-territory2type"
+            }
+          ],
+          "explicacao": "Metadata type e objeto API descrevem tipos de território por caminhos diferentes: definição implantável versus registro consultável. A correspondência campo a campo não foi comprovada.",
+          "id": "rel:rep-territory2type",
+          "origem": {
+            "entidade": "mdt:Territory2Type"
+          },
+          "tipo": "representacao_comum"
+        }
+      ]
     },
     {
       "base_da_relacao": [
