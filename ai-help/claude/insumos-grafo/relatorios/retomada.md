@@ -31,6 +31,8 @@ Os lotes e o site são acompanhados por issues em millena84/sf-tutor (milestones
 - Comandos e arquitetura: `apps/sf-tutor/NOTA-ARQUITETURA.md`.
 - `npm run verificar` passa: build com validação da base, lint, 28 testes unitários, 25 E2E (desktop e 360px) e performance (dados reais e fixture sintética).
 - Pendências visuais: logo oficial (hoje placeholder identificado) e inspeção da referência flavinho.pages.dev (bloqueada para acesso automatizado).
+- Publicação: PR #1 em millena84/tutorial-sf-grafo com o build em `docs/`. Depois do merge, ative o Pages manualmente (Settings → Pages → Deploy from a branch → `main` / `/docs`); a API de Pages não é acessível nas sessões do Claude.
+- Evolução: issues #13 a #20 (logo, referência visual, publicação automática, CI, rótulos, arraste, acessibilidade, avisos do validador).
 
 ## Lacunas por item
 
