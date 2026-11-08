@@ -16,7 +16,7 @@ Toda fonte nova está em `fontes/registro.json`, com uma nota em `fontes/extraco
 | 6 | Caminhos de Setup | quase resolvido | 0 → 12 de 14 funcionalidades |
 | 7 | Licenças e edições | parcial | edições para 9 funcionalidades; licença add-on do Data 360; licenças de Agentforce Sales e Service (lote 3a) |
 | 8 | Contexto técnico do Data 360 | **resolvido** | `bloqueado` → `verificado` |
-| 9 | Funcionalidades de Sales e Service Cloud | **mapeado** (lotes 3a, 3b e 3c) | 17 funcionalidades nas duas nuvens; no 3c, 22 objetos, 4 metadata types e 30 relacionamentos relidos |
+| 9 | Funcionalidades de Sales e Service Cloud | **mapeado** (lotes 3a a 3d) | 17 funcionalidades; nenhuma ausência `desconhecido` de objeto ou metadata type restante, exceto Knowledge__kav |
 | 10 | Classificação Core dos 981 tipos | não iniciado | volume; ver sugestão |
 | 11 | WSDL | **reclassificado** | não é bloqueio; a documentação foi usada como fonte alternativa |
 | 12 | Rede do shell | **contornado** | leitura pelo endpoint versionado; limites de tamanho descobertos |
@@ -186,6 +186,29 @@ Todos estão declarados como ausência `desconhecido`, com os nomes candidatos.
 - metadata types *Settings, Territory2, Territory2Rule e Territory2Type, MilestoneType, PresenceUserConfig;
 - objetos ForecastingAdjustment, ForecastingType, ForecastingQuota, PendingServiceRouting, Knowledge__kav e KnowledgeArticle;
 - o caminho de Escalation Rules no Setup.
+
+### 9d. Pendências fechadas (lote 3d)
+
+**O que foi relido** na documentação 68.0:
+- **17 metadata types:**
+  - Territory2, Territory2Rule, Territory2Type, MilestoneType, EntitlementTemplate, PresenceUserConfig e LeadConvertSettings;
+  - 10 tipos de configuração: Entitlement, Account, Opportunity, Quote, BusinessHours, OmniChannel, Campaign, Territory2, Knowledge e Forecasting (Settings).
+- **14 estruturas novas.** Uma delas é FieldValue, que também completou a estrutura de Territory2Model.
+- **9 objetos:** ForecastingAdjustment, ForecastingOwnerAdjustment, ForecastingType, ForecastingFact, ForecastingQuota, PendingServiceRouting, ServicePresenceStatus, PresenceUserConfig e KnowledgeArticle. Todos com estrutura completa.
+- **9 relacionamentos novos:** 4 de campo e 5 representações comuns.
+- **Caminho de Escalation Rules** confirmado na Ajuda.
+
+**Decisões e achados:**
+- **Tipos `*Settings`:** o registro do Salesforce CLI trata todos pelo tipo genérico Settings (pasta `settings`, sufixo `settings`). O nome-base do arquivo vem da página de cada tipo, por exemplo `Entitlements.settings`. A ferramenta de carga monta o caminho com as duas evidências.
+- **Páginas com nome irregular** na documentação: `meta_opportunityssettings.htm` e `meta_quotessettings.htm`. A de AssignmentRules (lote 3c) é `meta_assignmentrule.htm`.
+- **Mais uma divergência do relatório de pesquisa:** EntitlementSettings tem 13 propriedades na 68.0, não 19. Ao todo, a releitura barrou 11 propriedades inexistentes.
+- **KnowledgeSettings (56 linhas) e ForecastingSettings (54):** nível principal cadastrado; subtipos lidos e guardados na nota de extração. A cobertura estrutural fica parcial até virarem estruturas.
+- **PresenceUserConfig (metadata):** a tabela tem uma linha vazia; a cobertura fica parcial.
+
+**O que falta em Sales e Service:**
+- estruturas dos subtipos de KnowledgeSettings e ForecastingSettings;
+- Knowledge__kav (sem página própria lida);
+- tabelas truncadas de Contact, Campaign, Product2, Quote, AgentWork e KnowledgeArticleVersion.
 
 ### 10. Classificação Core (não iniciado)
 

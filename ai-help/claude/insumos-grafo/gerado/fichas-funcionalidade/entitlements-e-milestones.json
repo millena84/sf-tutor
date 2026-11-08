@@ -47,6 +47,15 @@
       },
       {
         "fonte": "src:objref-milestonetype"
+      },
+      {
+        "fonte": "src:mdapi-entitlementsettings"
+      },
+      {
+        "fonte": "src:mdapi-entitlementtemplate"
+      },
+      {
+        "fonte": "src:mdapi-milestonetype"
       }
     ],
     "exemplo": "Clientes Ouro têm primeira resposta em 1 hora; o caso mostra o milestone e o tempo restante.",
@@ -62,17 +71,23 @@
     ],
     "recomendacoes": [],
     "representacoes": {
-      "ausencias": [
-        {
-          "estado": "desconhecido",
-          "motivo": "Não investigado. Candidatos no inventário v68, ainda não lidos: EntitlementSettings, EntitlementTemplate, MilestoneType.",
-          "tipo": "metadata_type"
-        }
-      ],
+      "ausencias": [],
       "metadata_types": [
         {
           "papel": "Processo de entitlement implantável (SLA Policy).",
           "ref": "mdt:EntitlementProcess"
+        },
+        {
+          "papel": "Configurações da org (Settings).",
+          "ref": "mdt:EntitlementSettings"
+        },
+        {
+          "papel": "Modelo de entitlement implantável.",
+          "ref": "mdt:EntitlementTemplate"
+        },
+        {
+          "papel": "Tipo de milestone implantável.",
+          "ref": "mdt:MilestoneType"
         }
       ],
       "objetos_api": [
@@ -127,6 +142,24 @@
       "id": "mdt:EntitlementProcess",
       "nome": "EntitlementProcess",
       "papel": "Processo de entitlement implantável (SLA Policy)."
+    },
+    {
+      "ficha_completa": "gerado/fichas-completas/EntitlementSettings.json",
+      "id": "mdt:EntitlementSettings",
+      "nome": "EntitlementSettings",
+      "papel": "Configurações da org (Settings)."
+    },
+    {
+      "ficha_completa": "gerado/fichas-completas/EntitlementTemplate.json",
+      "id": "mdt:EntitlementTemplate",
+      "nome": "EntitlementTemplate",
+      "papel": "Modelo de entitlement implantável."
+    },
+    {
+      "ficha_completa": "gerado/fichas-completas/MilestoneType.json",
+      "id": "mdt:MilestoneType",
+      "nome": "MilestoneType",
+      "papel": "Tipo de milestone implantável."
     }
   ],
   "nota": "Gerado deterministicamente a partir de catalogo/. Não editar à mão.",
@@ -6971,7 +7004,28 @@
         }
       },
       "papel": "Tipo de milestone.",
-      "relacionamentos": []
+      "relacionamentos": [
+        {
+          "destino": {
+            "entidade": "obj:MilestoneType"
+          },
+          "estado": "verificado",
+          "evidencias": [
+            {
+              "fonte": "src:mdapi-milestonetype"
+            },
+            {
+              "fonte": "src:objref-milestonetype"
+            }
+          ],
+          "explicacao": "Metadata type e objeto API descrevem tipos de milestone por caminhos diferentes: definição implantável versus registro consultável. A correspondência campo a campo não foi comprovada.",
+          "id": "rel:rep-milestonetype",
+          "origem": {
+            "entidade": "mdt:MilestoneType"
+          },
+          "tipo": "representacao_comum"
+        }
+      ]
     }
   ],
   "versao_base": {
