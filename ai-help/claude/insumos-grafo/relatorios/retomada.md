@@ -158,7 +158,8 @@ O WSDL **não** é bloqueio: a documentação de cada tipo é a fonte alternativ
   - valores documentados, ou textos entre colchetes dizendo o que preencher.
   - Natureza `didatico_projeto`, com nota de que não é arquivo pronto para implantação.
 - **Fontes sem uso removidas do registro:** `src:mdapi-types-list` (índice de tipos, sem afirmação que dependa dele) e `src:rest-sobject-describe` (nunca relida). As duas continuam citadas em `tarefas/00-especificacao-grafo.md`.
-- **Avisos restantes, justificados:** AssignmentRules, BusinessHoursSettings e EscalationRules. As únicas propriedades são de tipo composto ainda sem estrutura detalhada (por exemplo, `assignmentRule`). O esqueleto sairia vazio. O exemplo depende de detalhar essas estruturas primeiro.
+- **AssignmentRules, BusinessHoursSettings e EscalationRules:** as estruturas já estavam catalogadas; o gerador é que não tratava tipos sem propriedade obrigatória e só com estruturas. Os três ganharam exemplos escritos à mão (`ferramentas/carga/lotes/exemplos_regras_e_horarios.py`), com regra, entrada, critério e ação. **O validador termina com 0 avisos.**
+- O gerador também foi corrigido: `fullName` dentro de estruturas é elemento real (o nome de cada regra), e, sem obrigatórios, a amostra mostra a primeira estrutura. A opção `--regerar` refaz só esqueletos gerados por ele.
 
 ## Próximos lotes
 
