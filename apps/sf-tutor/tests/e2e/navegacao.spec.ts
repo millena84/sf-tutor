@@ -99,7 +99,7 @@ test('painéis de cada tipo de nó abrem sem erro', async ({ page }) => {
 
 test('Método e legenda acessíveis; logo marcado como placeholder', async ({ page }) => {
   await abrir(page);
-  await expect(painel(page).locator('.aviso-logo')).toContainText('placeholder');
+  await expect(painel(page).locator('.aviso-logo')).toContainText('não é afiliado');
   await page.getByRole('button', { name: 'Método', exact: true }).click();
   await expect(page.getByRole('dialog')).toContainText('não é afiliado');
   await page.getByRole('dialog').getByRole('button', { name: 'Fechar' }).click();
@@ -117,4 +117,45 @@ test('capturas de tela desktop', async ({ page }) => {
   await abrir(page, '?v=nuvem&n=func:apps-de-console');
   await page.waitForTimeout(800);
   await page.screenshot({ path: 'tests/resultados/desktop-nuvem.png' });
+});
+
+type WLogo = { __sfTutor: { logo(id: string): string | null } };
+const SFDC = /sfdcstatic\.com|sfdcdigital\.com/;
+
+test('logos oficiais carregam por referência (servidores simulados)', async ({ page }) => {
+  const svg = '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 10 10"><circle cx="5" cy="5" r="5" fill="#00a1e0"/></svg>';
+  await page.route(SFDC, (r) => r.fulfill({ status: 200, contentType: 'image/svg+xml', body: svg }));
+  await abrir(page, '?n=nuv:sales-cloud');
+  await expect.poll(() => page.evaluate(() => (window as unknown as WLogo).__sfTutor.logo('salesforce'))).toBe('ok');
+  await expect.poll(() => page.evaluate(() => (window as unknown as WLogo).__sfTutor.logo('nuv:sales-cloud'))).toBe('ok');
+  await expect(painel(page).locator('img.logo-marca')).toBeVisible();
+  await expect(painel(page).locator('details.secao', { hasText: 'Fornecido por' })).toHaveCount(1);
+});
+
+test('logo SVG sem largura/altura declaradas cabe dentro do nó central', async ({ page }) => {
+  // caso real relatado: a nuvem da Salesforce saía maior que o nó
+  const svg = '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 92 64"><ellipse cx="46" cy="32" rx="46" ry="32" fill="#00a1e0"/></svg>';
+  await page.route(SFDC, (r) => r.fulfill({ status: 200, contentType: 'image/svg+xml', body: svg }));
+  await abrir(page);
+  await expect.poll(() => page.evaluate(() => (window as unknown as WLogo).__sfTutor.logo('salesforce'))).toBe('ok');
+  type Caixas = { no: DOMRect; img: DOMRect } | null;
+  const caixas = async () => page.evaluate(() => (window as unknown as { __sfTutor: { caixasLogo(id: string): Caixas } }).__sfTutor.caixasLogo('salesforce'));
+  await expect.poll(async () => (await caixas()) !== null).toBe(true);
+  for (const z of ['inicio', 'zoom']) {
+    if (z === 'zoom') { await page.getByRole('button', { name: 'Aproximar' }).click(); await page.waitForTimeout(500); }
+    const c = (await caixas())!;
+    expect(c.img.width, z).toBeLessThan(c.no.width);
+    expect(c.img.left, z).toBeGreaterThanOrEqual(c.no.left - 1);
+    expect(c.img.right, z).toBeLessThanOrEqual(c.no.right + 1);
+    expect(c.img.top, z).toBeGreaterThanOrEqual(c.no.top - 1);
+    expect(c.img.bottom, z).toBeLessThanOrEqual(c.no.bottom + 1);
+  }
+  await page.screenshot({ path: 'tests/resultados/logo-central.png' });
+});
+
+test('sem acesso aos servidores dos logos, o mapa usa o substituto sem erro', async ({ page }) => {
+  await page.route(SFDC, (r) => r.abort());
+  await abrir(page, '?n=salesforce');
+  await expect.poll(() => page.evaluate(() => (window as unknown as WLogo).__sfTutor.logo('salesforce'))).toBe('falhou');
+  await expect(painel(page).locator('img.logo-marca')).toHaveCount(0);
 });

@@ -15,6 +15,8 @@ export interface NoVisual {
   totalFilhos: number;
   expandido: boolean;
   acessivel: string; // nome acessível (anunciado ao selecionar)
+  /** URL de um logo oficial já carregado (por referência): desenhado como <img> sobre o nó, não no canvas */
+  logoUrl?: string;
 }
 
 export interface ArestaClicada {
@@ -81,6 +83,49 @@ export class Mapa {
       const n = e.target as NodeSingular;
       this.posicoes.set(n.id(), { ...n.position() });
     });
+    // Logos oficiais: o canvas erra o tamanho de SVG sem largura/altura declaradas. Por isso o logo é um <img>
+    // comum (object-fit: contain) posicionado sobre o nó e reposicionado a cada quadro desenhado (zoom, pan, arraste).
+    this.camadaLogos = document.createElement('div');
+    this.camadaLogos.className = 'camada-logos';
+    this.camadaLogos.setAttribute('aria-hidden', 'true');
+    container.append(this.camadaLogos);
+    this.cy.on('render', () => this.agendarLogos());
+  }
+
+  private camadaLogos: HTMLDivElement;
+  private imgsLogo = new Map<string, HTMLImageElement>();
+  private quadroLogos = 0;
+
+  private agendarLogos(): void {
+    if (this.quadroLogos) return;
+    this.quadroLogos = requestAnimationFrame(() => { this.quadroLogos = 0; this.posicionarLogos(); });
+  }
+
+  private posicionarLogos(): void {
+    const vistos = new Set<string>();
+    this.cy.nodes('[logo = 1]').forEach((n) => {
+      const id = n.id();
+      vistos.add(id);
+      let img = this.imgsLogo.get(id);
+      if (!img) {
+        img = document.createElement('img');
+        img.alt = '';
+        img.referrerPolicy = 'no-referrer';
+        img.className = 'logo-no';
+        this.camadaLogos.append(img);
+        this.imgsLogo.set(id, img);
+      }
+      const url = String(n.data('logoUrl'));
+      if (img.getAttribute('src') !== url) img.src = url;
+      const p = n.renderedPosition();
+      const lado = Math.max(4, n.renderedWidth() * 0.64);
+      img.style.width = img.style.height = `${lado}px`;
+      img.style.transform = `translate(${p.x - lado / 2}px, ${p.y - lado / 2}px)`;
+      img.style.opacity = String(n.effectiveOpacity());
+    });
+    for (const [id, img] of this.imgsLogo) {
+      if (!vistos.has(id)) { img.remove(); this.imgsLogo.delete(id); }
+    }
   }
 
   setReduzirMovimento(v: boolean): void {
@@ -98,7 +143,7 @@ export class Mapa {
       const data = {
         id: o.chave, rotulo: v.rotulo, tipo: v.tipo, icone: v.icone, cor: v.cor, oculto: v.oculto ? 1 : 0,
         filhos: v.totalFilhos, expandido: v.expandido ? 1 : 0, tamanho: TAMANHO[v.tipo] ?? 36,
-        marca: v.totalFilhos > 0 ? (v.expandido ? '−' : '+') : '',
+        marca: v.totalFilhos > 0 ? (v.expandido ? '−' : '+') : '', logo: v.logoUrl ? 1 : 0, logoUrl: v.logoUrl ?? '',
       };
       const el = this.cy.getElementById(o.chave);
       if (el.nonempty()) el.data(data);
@@ -141,6 +186,18 @@ export class Mapa {
       this.primeira = false;
       this.enquadrar(false);
     }
+    this.agendarLogos();
+  }
+
+  /** Caixa (coordenadas da página) de um nó e da imagem de logo sobre ele; usada pelos testes. */
+  caixasLogo(chave: string): { no: DOMRect; img: DOMRect } | null {
+    const img = this.imgsLogo.get(chave);
+    const n = this.cy.getElementById(chave);
+    if (!img || n.empty()) return null;
+    const r = this.cy.container()!.getBoundingClientRect();
+    const p = n.renderedPosition();
+    const w = n.renderedWidth();
+    return { no: new DOMRect(r.left + p.x - w / 2, r.top + p.y - w / 2, w, w), img: img.getBoundingClientRect() };
   }
 
   destacar(chave: string | null, arestaId?: string): void {
@@ -266,6 +323,9 @@ function estilo(): unknown[] {
     { selector: 'node[tipo = "objeto_api"]', style: { 'border-width': 3, 'border-color': '#1e3a8a' } },
     { selector: 'node[tipo = "objeto_api_juncao"]', style: { 'border-width': 5, 'border-style': 'double', 'border-color': '#1e3a8a' } },
     { selector: 'node[tipo = "campo_api"], node[tipo = "propriedade_xml"]', style: { 'font-size': 9, 'text-max-width': '90px', 'border-width': 1 } },
+    // logo oficial carregado por referência: fundo branco, imagem contida, sem exigir CORS do servidor de origem
+    { selector: 'node[logo = 1]', style: { 'background-color': '#ffffff', 'background-image': 'none' } },
+    { selector: 'node[tipo = "salesforce"][logo = 1]', style: { 'border-style': 'solid' } },
     { selector: 'node[tipo = "pagina"]', style: { 'background-image': 'none', shape: 'round-rectangle', width: 64, height: 26, label: 'data(rotulo)', 'text-valign': 'center', 'text-margin-y': 0, 'background-color': '#e2e8f0', 'border-style': 'dashed', 'font-size': 10, 'text-background-opacity': 0 } },
     { selector: 'node[filhos > 0][expandido = 0]', style: { 'border-color': '#0f172a', 'border-opacity': 1 } },
     { selector: 'node[oculto = 1]', style: { opacity: 0.22, 'border-style': 'dotted' } },

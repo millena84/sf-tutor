@@ -93,6 +93,8 @@ async function iniciar(): Promise<void> {
       default: return misturar(base, '#ffffff', 0.8);
     }
   };
+  // logos oficiais por referência: pré-carregados; só substituem o ícone quando a imagem carregou
+  const logos = new Map<string, 'carregando' | 'ok' | 'falhou'>();
   const iconeDe = (id: string, tipo: string, cor: string): string => {
     const n = ind.no(id)!;
     if (tipo === 'salesforce') return iconeSvg('Salesforce', cor, { placeholder: true });
@@ -116,6 +118,7 @@ async function iniciar(): Promise<void> {
       vis.set(o.chave, {
         chave: o.chave, rotulo: n.tipo === 'salesforce' ? 'Salesforce' : n.rotulo, tipo: n.tipo, icone: iconeDe(o.id, n.tipo, cor), cor,
         oculto: !!oc, totalFilhos: o.totalFilhos, expandido: exp().expandidos.has(o.chave), acessivel: `${NOME_TIPO[n.tipo]}: ${n.rotulo}`,
+        logoUrl: n.logo && logos.get(o.id) === 'ok' ? n.logo.url : undefined,
       });
     }
     const pags = new Map(cena.paginacoes.map((p) => [p.chave, `+${p.restantes} mais`]));
@@ -373,6 +376,16 @@ async function iniciar(): Promise<void> {
   new ResizeObserver(medirTopo).observe(topo);
   window.addEventListener('resize', () => { medirTopo(); mapa.redimensionar(); });
 
+  for (const n of ind.nos.values()) {
+    if (!n.logo) continue;
+    logos.set(n.id, 'carregando');
+    const img = new Image();
+    img.referrerPolicy = 'no-referrer';
+    img.onload = () => { logos.set(n.id, 'ok'); atualizar(); };
+    img.onerror = () => { logos.set(n.id, 'falhou'); };
+    img.src = n.logo.url;
+  }
+
   $('carregando').hidden = true;
   $('app').hidden = false;
   trocarModo(st.modo);
@@ -387,6 +400,8 @@ async function iniciar(): Promise<void> {
     selecao: () => (st.sel?.tipo === 'no' ? st.sel.caminho.join(SEP) : null),
     visao: () => st.visao,
     totalCatalogo: ind.nos.size,
+    logo: (id: string) => logos.get(id) ?? null,
+    caixasLogo: (id: string) => { const c = st.cena?.ocorrencias.find((o) => o.id === id)?.chave; return c ? mapa.caixasLogo(c) : null; },
     pronto: true,
     folha: (id: string) => TIPOS_FOLHA.has(ind.no(id)?.tipo as never),
   };

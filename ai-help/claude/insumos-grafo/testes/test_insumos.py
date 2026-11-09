@@ -252,3 +252,29 @@ class TestContratoSite(unittest.TestCase):
 
 if __name__ == "__main__":
     unittest.main()
+
+
+class TestMarcas(BaseTemp):
+    """config/marcas.json: logos exibidos por referência ao endereço oficial."""
+    def marcas(self):
+        return os.path.join(self.tmp, "config", "marcas.json")
+
+    def test_dominio_nao_permitido(self):
+        d = ler(self.marcas()); d["itens"][0]["url"] = "https://exemplo.invalid/logo.svg"; gravar(self.marcas(), d)
+        self.assertErro("marcas: domínio não permitido")
+
+    def test_alvo_inexistente(self):
+        d = ler(self.marcas()); d["itens"][1]["alvo"] = "nuv:nao-existe"; gravar(self.marcas(), d)
+        self.assertErro("marcas: alvo nuv:nao-existe não existe")
+
+    def test_dois_logos_no_mesmo_alvo(self):
+        d = ler(self.marcas()); d["itens"][1]["alvo"] = "salesforce"; gravar(self.marcas(), d)
+        self.assertErro("marcas: mais de um logo para salesforce")
+
+    def test_projecao_leva_logo_ao_centro_e_nuvens(self):
+        site = os.path.join(T.gerar(self.tmp), "site")
+        g = ler(os.path.join(site, "grafo-base.json"))
+        com_logo = {n["id"] for n in g["nos"] if "logo" in n}
+        self.assertIn("salesforce", com_logo)
+        self.assertTrue(all(i == "salesforce" or i.startswith("nuv:") for i in com_logo))
+        self.assertEqual(ler(os.path.join(site, "entidades", "salesforce.json"))["logo_marca"]["formato"], "svg")
