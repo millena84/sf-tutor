@@ -1,0 +1,34 @@
+Lote 5f (issue #24) — APIs de dados e metadados como funcionalidades. Extração documental assistida em 2026-11-09.
+Conteúdo lido via developer.salesforce.com/docs/get_document_content/<doc>/<pagina>.htm/en-us/264.0 (documentação v68.0). Notas em português; nomes técnicos no original.
+
+[src:rest-intro] Introduction to REST API (api_rest/intro_rest.htm)
+  Acesso programático aos dados da Salesforce, baseado em princípios REST: cada recurso tem uma URI acessada por HTTP. Indicada para integrar aplicações e operações em grande escala.
+  Exige app cliente autorizado por external client app ou connected app com fluxo OAuth 2.0; org com acesso à API e usuário com acesso à API habilitado.
+
+[src:rest-resources] REST Resources (api_rest/intro_rest_resources.htm)
+  Recurso: registro, coleção de registros, resultado de consulta, metadados ou informação da API. URI https://MyDomainName.my.salesforce.com/services/data/vXX.X/recurso/; alias latest.
+  Corpo e resposta em JSON ou XML (Content-Type e Accept); sem Accept válido, JSON. IDs diferenciam maiúsculas; nomes de objeto e campo não.
+  Exemplos: versões, limites, metadados de objeto, criar/ler/atualizar/excluir registros, consulta e busca.
+
+[src:rest-composite] Composite (api_rest/resources_composite_composite.htm)
+  POST executa uma série de requisições REST em uma só chamada; a saída de uma pode alimentar a seguinte; as respostas voltam juntas.
+  A série inteira conta como uma chamada para os limites de API. GET lista os demais recursos compostos.
+  Número máximo de subrequisições e allOrNone não constam desta página.
+
+[src:soap-intro] Introduction to SOAP API (api/sforce_api_quickstart_intro.htm)
+  Acesso programático às informações da org, voltado a objetos; segue SOAP 1.1, WSDL 1.1 e WS-I Basic Profile 1.1.
+  Enterprise WSDL: fortemente tipado, para a própria org; precisa ser regerado quando campos ou objetos customizados mudam. Partner WSDL: fracamente tipado, para apps que funcionam em várias orgs.
+  Edições: Enterprise, Performance, Unlimited ou Developer; permissão API Enabled no usuário. Recomenda construir e testar em Developer Edition, sandbox ou scratch org.
+
+[src:mdapi-intro] Understanding Metadata API (api_meta/meta_intro.htm)
+  Move metadados (esquema, processos, apresentação, autorização, configuração) entre orgs durante o desenvolvimento; trabalha com metadata types e componentes.
+  Implanta, recupera, cria, atualiza e exclui customizações; não trata dados de negócio (para registros: SOAP API ou REST API).
+  deploy() e retrieve() movem o modelo completo (fases finais, como produção); comandos de source push e pull movem só o que mudou, com source tracking (fases intermediárias).
+  A página não menciona package.xml nem limites.
+
+[src:tooling-intro] Introduction to Tooling API (api_tooling/intro_api_tooling.htm)
+  Interface para criar ferramentas e apps de desenvolvimento; expõe metadados usados em ferramentas de desenvolvimento, por REST ou SOAP (REST recomendado para linguagens não fortemente tipadas, como JavaScript).
+  Casos de uso: estender ferramentas, embutir módulos de desenvolvimento em ferramentas de integração, criar ferramentas especializadas.
+  SOQL sobre muitos metadata types permite buscar pedaços menores, com melhor desempenho para aplicações interativas; para acesso granular aos metadados.
+
+Não obtidos: limites da Metadata API (api_meta/meta_limits.htm devolveu binário) e página geral de recursos compostos (resources_composite.htm devolveu binário).
