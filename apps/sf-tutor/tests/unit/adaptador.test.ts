@@ -228,3 +228,18 @@ describe('certificados e plugins de external client app (lote 5g)', () => {
     }
   });
 });
+
+describe('ConnectedApp e __e/__x (lote 5h)', () => {
+  it('estruturas de ConnectedApp antes truncadas agora têm campos', () => {
+    for (const id of ['mdx:ConnectedAppSamlConfig.samlSubjectType', 'mdx:ConnectedAppOauthPolicy.refreshTokenPolicy', 'mdx:ConnectedAppSessionPolicy.policyAction', 'mdx:ConnectedAppOauthIdToken.idTokenValidity']) {
+      expect(ind.caminhoPreferido(id, 'funcionalidade'), id).toBeTruthy();
+    }
+  });
+  it('CustomObject.externalDataSource referencia ExternalDataSource', () => {
+    const e = exp0();
+    revelarCaminho(ind, 'funcionalidade', e, ind.caminhoPreferido('mdt:CustomObject.externalDataSource', 'funcionalidade')!);
+    revelarCaminho(ind, 'funcionalidade', e, ind.caminhoPreferido('mdt:ExternalDataSource', 'funcionalidade')!);
+    const t = montarCena(ind, 'funcionalidade', e).arestas.find((a) => a.tecnica && a.aresta?.rel_id === 'rel:customobject-externaldatasource');
+    expect(t?.destino.endsWith('mdt:ExternalDataSource')).toBe(true);
+  });
+});

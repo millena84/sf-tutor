@@ -7,7 +7,7 @@ Gerado por `ferramentas/sftutor.py cobertura`. Cobertura estrutural, explicativa
 
 - Universo v68 (METADATA_SUPPORT.md): **993** tipos.
 - Classificados como incluídos no recorte Core: 12; pendentes de classificação: 981.
-- Cadastrados: **78** de 993. Estruturalmente completos (contra a página oficial): 65. Completos nas três dimensões: 0.
+- Cadastrados: **78** de 993. Estruturalmente completos (contra a página oficial): 66. Completos nas três dimensões: 0.
 - Porcentagem do recorte Core: não calculada, porque o denominador do recorte ainda não está definido (classificação item a item pendente).
 
 | Tipo | Estrutural | Esperadas | Presentes | Explicadas | Estruturas | Mapeamento | Completo |
@@ -18,7 +18,7 @@ Gerado por `ferramentas/sftutor.py cobertura`. Cobertura estrutural, explicativa
 | mdt:BusinessHoursSettings | completa | 3 | 3 | 3 | 2 | parcial | não |
 | mdt:CampaignSettings | completa | 11 | 11 | 11 | 0 | parcial | não |
 | mdt:Certificate | completa | 8 | 8 | 8 | 0 | parcial | não |
-| mdt:ConnectedApp | parcial | 21 | 21 | 21 | 4 | parcial | não |
+| mdt:ConnectedApp | completa | 21 | 21 | 21 | 7 | parcial | não |
 | mdt:ConnectedAppSettings | completa | 3 | 3 | 3 | 0 | parcial | não |
 | mdt:CorsWhitelistOrigin | completa | 2 | 2 | 2 | 0 | parcial | não |
 | mdt:CspTrustedSite | completa | 14 | 14 | 14 | 0 | parcial | não |
@@ -94,7 +94,7 @@ Gerado por `ferramentas/sftutor.py cobertura`. Cobertura estrutural, explicativa
 ## Propriedades XML
 
 - Em metadata types: 961 listadas, 924 explicadas.
-- Em estruturas auxiliares: 340 listadas, 340 explicadas.
+- Em estruturas auxiliares: 363 listadas, 363 explicadas.
 - Universo total: Sem WSDL não há denominador confiável do total de propriedades do recorte.
 
 ## Objetos consultáveis via API
@@ -169,8 +169,8 @@ Gerado por `ferramentas/sftutor.py cobertura`. Cobertura estrutural, explicativa
 
 ## Relacionamentos
 
-- Total: 117; verificados: 114.
-- Por tipo: correspondencia_xml_api: 11, referencia_campo: 93, representacao_comum: 13
+- Total: 119; verificados: 116.
+- Por tipo: correspondencia_xml_api: 11, referencia_campo: 95, representacao_comum: 13
 
 ## Taxonomia e funcionalidades
 

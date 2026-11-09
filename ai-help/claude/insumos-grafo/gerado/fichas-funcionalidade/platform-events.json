@@ -40,13 +40,19 @@
       },
       {
         "fonte": "src:rest-limits"
+      },
+      {
+        "fonte": "src:mdapi-customobject"
+      },
+      {
+        "fonte": "src:objref-eventbussubscriber"
       }
     ],
     "exemplo": "Um ERP publica PedidoFaturado__e; um trigger Apex assina o evento e atualiza a oportunidade.",
     "finalidade": "Desacoplar sistemas: quem publica não precisa saber quem consome.",
     "id": "func:platform-events",
     "limitacoes": [
-      "A definição do evento em si (objeto __e) não foi lida nesta sessão.",
+      "A definição do evento usa CustomObject (eventType, publishBehavior). O sufixo __e vem das páginas de eventos, não da página de CustomObject.",
       "Objetos API do tema não investigados."
     ],
     "nome": "Eventos de plataforma",
@@ -77,6 +83,10 @@
         {
           "papel": "Configurações da org (métricas de uso).",
           "ref": "mdt:PlatformEventSettings"
+        },
+        {
+          "papel": "Definição do evento: um objeto com sufixo __e, com eventType e publishBehavior.",
+          "ref": "mdt:CustomObject"
         }
       ],
       "objetos_api": []
@@ -119,6 +129,12 @@
       "id": "mdt:PlatformEventSettings",
       "nome": "PlatformEventSettings",
       "papel": "Configurações da org (métricas de uso)."
+    },
+    {
+      "ficha_completa": "gerado/fichas-completas/CustomObject.json",
+      "id": "mdt:CustomObject",
+      "nome": "CustomObject",
+      "papel": "Definição do evento: um objeto com sufixo __e, com eventType e publishBehavior."
     }
   ],
   "nota": "Gerado deterministicamente a partir de catalogo/. Não editar à mão.",
