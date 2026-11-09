@@ -68,6 +68,19 @@ test('fixture sintética', async ({ page }) => {
   await page.waitForFunction(() => (window as unknown as W).__sfTutor.nosRenderizados() > 40);
   m.expandir_3000_campos_1a_pagina_ms = Date.now() - t0;
   m.nos_desenhados_apos_expandir = await page.evaluate(() => (window as unknown as W).__sfTutor.nosRenderizados());
+  // carrega mais 4 páginas tocando no nó "+N mais" (chave = caminho do objeto + '>#mais'), para o arraste mover mais de 100 nós
+  const chaveObj = await page.evaluate(() => (window as unknown as W).__sfTutor.selecao());
+  for (let i = 0; i < 4 && chaveObj; i++) {
+    const pm = await page.evaluate((c) => (window as unknown as { __sfTutor: { ponto(a: { no?: string }): { x: number; y: number } | null } }).__sfTutor.ponto({ no: c }), `${chaveObj}>#mais`);
+    if (!pm) break;
+    await page.locator('#btn-enquadrar').click();
+    await page.waitForTimeout(350);
+    const pm2 = await page.evaluate((c) => (window as unknown as { __sfTutor: { ponto(a: { no?: string }): { x: number; y: number } | null } }).__sfTutor.ponto({ no: c }), `${chaveObj}>#mais`);
+    if (!pm2) break;
+    await page.mouse.click(pm2.x, pm2.y);
+    await page.waitForTimeout(150);
+  }
+  m.nos_desenhados_apos_paginar = await page.evaluate(() => (window as unknown as W).__sfTutor.nosRenderizados());
   // campo profundo, fora das páginas carregadas
   await medir(page, m, 'busca_e_revelar_campo_2999', async () => {
     await page.locator('#busca').fill('Campo2999__c');
@@ -78,6 +91,18 @@ test('fixture sintética', async ({ page }) => {
   await expect(page.locator('#resultados [role=option]').first()).toContainText('SintType1199');
   m.busca_em_todo_catalogo_ms = Date.now() - t0;
   m.nos_desenhados_fim = await page.evaluate(() => (window as unknown as W).__sfTutor.nosRenderizados());
+  // #42: arrastar o centro move todos os nós desenhados (todos são descendentes); 12 passos de mouse
+  await page.keyboard.press('Escape');
+  const centro = await page.evaluate(() => (window as unknown as { __sfTutor: { ponto(a: { no?: string }): { x: number; y: number } | null } }).__sfTutor.ponto({ no: 'salesforce' }));
+  if (centro) {
+    const t2 = Date.now();
+    await page.mouse.move(centro.x, centro.y);
+    await page.mouse.down();
+    for (let i = 1; i <= 12; i++) await page.mouse.move(centro.x + i * 8, centro.y + i * 5);
+    await page.mouse.up();
+    m.arrastar_centro_12_passos_ms = Date.now() - t2;
+    m.nos_movidos_no_arraste = (m.nos_desenhados_fim as number) - 1;
+  }
   gravar('sintetico', m);
   expect(m.carga_ate_interativo_ms as number).toBeLessThan(20_000);
   expect(m.nos_desenhados_fim as number).toBeLessThan(400); // expansão progressiva: nunca desenha o catálogo inteiro

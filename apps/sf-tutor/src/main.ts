@@ -122,7 +122,7 @@ async function iniciar(): Promise<void> {
       });
     }
     const pags = new Map(cena.paginacoes.map((p) => [p.chave, `+${p.restantes} mais`]));
-    if (st.modo === 'mapa') mapa.desenhar(cena, vis, pags);
+    if (st.modo === 'mapa') { mapa.usarVisao(st.visao); mapa.desenhar(cena, vis, pags); }
     else renderizarLista(containerLista, cena, ctxLista, st.sel?.tipo === 'no' ? chaveDe(st.sel.caminho) : null);
     destacarSelecao();
     $('status').textContent = `${cena.ocorrencias.length} itens visíveis de ${ind.nos.size} no catálogo${ocultosNaCena ? ` · ${ocultosNaCena} esmaecidos por filtros` : ''}`;
@@ -344,6 +344,7 @@ async function iniciar(): Promise<void> {
   $('btn-zoom-mais').addEventListener('click', () => mapa.zoom(1.25));
   $('btn-zoom-menos').addEventListener('click', () => mapa.zoom(0.8));
   $('btn-enquadrar').addEventListener('click', () => mapa.enquadrar());
+  $('btn-reorganizar').addEventListener('click', () => { mapa.reorganizar(); anunciar('Mapa reorganizado: posições arrastadas desfeitas nesta visão.'); });
   $('btn-centro').addEventListener('click', () => selecionarCaminho(['salesforce']));
   $('btn-caminho').addEventListener('click', () => {
     if (st.sel?.tipo === 'no') { destacarSelecao(); mapa.focar(chaveDe(st.sel.caminho), 1); anunciar('De volta ao caminho selecionado.'); }
@@ -445,6 +446,7 @@ async function iniciar(): Promise<void> {
     logo: (id: string) => logos.get(id) ?? null,
     caixasLogo: (id: string) => { const c = st.cena?.ocorrencias.find((o) => o.id === id)?.chave; return c ? mapa.caixasLogo(c) : null; },
     gaveta: () => estadoGaveta(),
+    posicao: (id: string) => { const c = st.cena?.ocorrencias.find((o) => o.id === id)?.chave; return c ? mapa.posicaoDe(c) : null; },
     classes: (id: string) => { const c = st.cena?.ocorrencias.find((o) => o.id === id)?.chave; return c ? mapa.classesDe(c) : null; },
     pronto: true,
     folha: (id: string) => TIPOS_FOLHA.has(ind.no(id)?.tipo as never),
