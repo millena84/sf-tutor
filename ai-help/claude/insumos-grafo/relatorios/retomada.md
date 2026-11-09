@@ -111,9 +111,14 @@ O WSDL **não** é bloqueio: a documentação de cada tipo é a fonte alternativ
   - Metadata API e Tooling API também aparecem em desenvolvimento, testes e entrega, como classificação secundária.
   - Não obtidos: os limites da Metadata API e a página geral de recursos compostos (as URLs devolveram binário).
   - Extração: `fontes/extracoes/lote5f-apis.txt`.
-- **Falta (lote 5g em diante):**
-  - Sub-estruturas pendentes de ConnectedApp e plugins de external client app: mobile, push, canvas, notificação, attest, SAML e ExtlClntAppOauthSecuritySettings.
-  - Outros certificados: PublicKeyCertificate, PublicKeyCertificateSet, UserAuthCertificate e InboundCertificate.
+- **Lote 5g (2026-11-09):** 12 metadata types, 6 estruturas e 8 referências por nome.
+  - Certificados: PublicKeyCertificate, PublicKeyCertificateSet, UserAuthCertificate e InboundCertificate.
+  - Rede: InboundNetworkConnection; conexões de rede privadas passam a cobrir entrada e saída.
+  - Plugins de external client app: mobile (configurações e políticas), push (configurações e políticas), canvas, notificação e políticas SAML.
+  - Não obtidos (as URLs devolveram binário): ExtlClntAppAttestSettings, ExtlClntAppAttestConfigurablePolicies e ExtlClntAppOauthSecuritySettings.
+  - Extração: `fontes/extracoes/mdapi-lote5g.txt`.
+- **Falta (lote 5h em diante):**
+  - Sub-estruturas pendentes de ConnectedApp; attest de external client app e ExtlClntAppOauthSecuritySettings (sem página legível).
   - McpServerDefinition e ApiNamedQuery, quando houver fonte.
   - Conectores de dados.
   - Os **objetos API** do tema.

@@ -527,6 +527,30 @@
       "tipo": "representacao_xml"
     },
     {
+      "destino": "mdt:InboundCertificate",
+      "origem": "func:certificados",
+      "papel": "Certificado de autenticação mútua importado.",
+      "tipo": "representacao_xml"
+    },
+    {
+      "destino": "mdt:PublicKeyCertificate",
+      "origem": "func:certificados",
+      "papel": "Certificado público ou JWK para validar JWTs de clientes.",
+      "tipo": "representacao_xml"
+    },
+    {
+      "destino": "mdt:PublicKeyCertificateSet",
+      "origem": "func:certificados",
+      "papel": "Conjunto de chaves públicas (lista ou endpoint JWKS).",
+      "tipo": "representacao_xml"
+    },
+    {
+      "destino": "mdt:UserAuthCertificate",
+      "origem": "func:certificados",
+      "papel": "Certificado de usuário para autenticação.",
+      "tipo": "representacao_xml"
+    },
+    {
       "destino": "mdt:ManagedEventSubscription",
       "origem": "func:change-data-capture",
       "papel": "Assinatura gerenciada de eventos de alteração (/data/...).",
@@ -542,6 +566,12 @@
       "destino": "mdt:PlatformEventChannelMember",
       "origem": "func:change-data-capture",
       "papel": "Seleciona a entidade (e filtros e campos extras) num canal.",
+      "tipo": "representacao_xml"
+    },
+    {
+      "destino": "mdt:InboundNetworkConnection",
+      "origem": "func:conexoes-de-rede-privadas",
+      "papel": "Conexão privada de entrada (chamadas de serviços na AWS para a org).",
       "tipo": "representacao_xml"
     },
     {
@@ -719,6 +749,12 @@
       "tipo": "representacao_xml"
     },
     {
+      "destino": "mdt:ExtlClntAppCanvasSettings",
+      "origem": "func:external-client-apps",
+      "papel": "Plugin: configuração de canvas.",
+      "tipo": "representacao_xml"
+    },
+    {
       "destino": "mdt:ExtlClntAppConfigurablePolicies",
       "origem": "func:external-client-apps",
       "papel": "Chaves dos plugins.",
@@ -731,6 +767,24 @@
       "tipo": "representacao_xml"
     },
     {
+      "destino": "mdt:ExtlClntAppMobileConfigurablePolicies",
+      "origem": "func:external-client-apps",
+      "papel": "Plugin: políticas móveis.",
+      "tipo": "representacao_xml"
+    },
+    {
+      "destino": "mdt:ExtlClntAppMobileSettings",
+      "origem": "func:external-client-apps",
+      "papel": "Plugin: configurações móveis.",
+      "tipo": "representacao_xml"
+    },
+    {
+      "destino": "mdt:ExtlClntAppNotificationSettings",
+      "origem": "func:external-client-apps",
+      "papel": "Plugin: assinaturas de notificação.",
+      "tipo": "representacao_xml"
+    },
+    {
       "destino": "mdt:ExtlClntAppOauthConfigurablePolicies",
       "origem": "func:external-client-apps",
       "papel": "Políticas OAuth do administrador.",
@@ -740,6 +794,24 @@
       "destino": "mdt:ExtlClntAppOauthSettings",
       "origem": "func:external-client-apps",
       "papel": "Configurações OAuth do desenvolvedor.",
+      "tipo": "representacao_xml"
+    },
+    {
+      "destino": "mdt:ExtlClntAppPushConfigurablePolicies",
+      "origem": "func:external-client-apps",
+      "papel": "Plugin: políticas de push.",
+      "tipo": "representacao_xml"
+    },
+    {
+      "destino": "mdt:ExtlClntAppPushSettings",
+      "origem": "func:external-client-apps",
+      "papel": "Plugin: configuração de push.",
+      "tipo": "representacao_xml"
+    },
+    {
+      "destino": "mdt:ExtlClntAppSamlConfigurablePolicies",
+      "origem": "func:external-client-apps",
+      "papel": "Plugin: políticas SAML (Salesforce como provedor de identidade).",
       "tipo": "representacao_xml"
     },
     {
@@ -1478,6 +1550,13 @@
     {
       "destino": "mdt:ExternalClientApplication",
       "estado": "verificado",
+      "origem": "mdt:ExtlClntAppCanvasSettings.externalClientApplication",
+      "rel_id": "rel:extlclntappcanvassettings-eca",
+      "tipo": "referencia_campo"
+    },
+    {
+      "destino": "mdt:ExternalClientApplication",
+      "estado": "verificado",
       "origem": "mdt:ExtlClntAppConfigurablePolicies.externalClientApplication",
       "rel_id": "rel:extlclntappconfigurablepolicies-eca",
       "tipo": "referencia_campo"
@@ -1492,6 +1571,32 @@
     {
       "destino": "mdx:ExternalAppIdTokenConfig",
       "origem": "mdt:ExtlClntAppGlobalOauthSettings.idTokenConfig",
+      "tipo": "tipo_composto"
+    },
+    {
+      "destino": "mdt:ExternalClientApplication",
+      "estado": "verificado",
+      "origem": "mdt:ExtlClntAppMobileConfigurablePolicies.externalClientApplication",
+      "rel_id": "rel:extlclntappmobileconfigurablepolicies-eca",
+      "tipo": "referencia_campo"
+    },
+    {
+      "destino": "mdt:ExternalClientApplication",
+      "estado": "verificado",
+      "origem": "mdt:ExtlClntAppMobileSettings.externalClientApplication",
+      "rel_id": "rel:extlclntappmobilesettings-eca",
+      "tipo": "referencia_campo"
+    },
+    {
+      "destino": "mdt:ExternalClientApplication",
+      "estado": "verificado",
+      "origem": "mdt:ExtlClntAppNotificationSettings.externalClientApplication",
+      "rel_id": "rel:extlclntappnotificationsettings-eca",
+      "tipo": "referencia_campo"
+    },
+    {
+      "destino": "mdx:ExtlClntAppNotificationType",
+      "origem": "mdt:ExtlClntAppNotificationSettings.notificationTypes",
       "tipo": "tipo_composto"
     },
     {
@@ -1524,6 +1629,42 @@
       "tipo": "tipo_composto"
     },
     {
+      "destino": "mdt:ExternalClientApplication",
+      "estado": "verificado",
+      "origem": "mdt:ExtlClntAppPushConfigurablePolicies.externalClientApplication",
+      "rel_id": "rel:extlclntapppushconfigurablepolicies-eca",
+      "tipo": "referencia_campo"
+    },
+    {
+      "destino": "mdx:ExtlClntAppAndroidPushConfig",
+      "origem": "mdt:ExtlClntAppPushSettings.androidPushConfig",
+      "tipo": "tipo_composto"
+    },
+    {
+      "destino": "mdx:ExtlClntAppApplePushConfig",
+      "origem": "mdt:ExtlClntAppPushSettings.applePushConfig",
+      "tipo": "tipo_composto"
+    },
+    {
+      "destino": "mdt:ExternalClientApplication",
+      "estado": "verificado",
+      "origem": "mdt:ExtlClntAppPushSettings.externalClientApplication",
+      "rel_id": "rel:extlclntapppushsettings-eca",
+      "tipo": "referencia_campo"
+    },
+    {
+      "destino": "mdx:ExtlClntAppSamlConfigurablePoliciesAttribute",
+      "origem": "mdt:ExtlClntAppSamlConfigurablePolicies.customAttributes",
+      "tipo": "tipo_composto"
+    },
+    {
+      "destino": "mdt:ExternalClientApplication",
+      "estado": "verificado",
+      "origem": "mdt:ExtlClntAppSamlConfigurablePolicies.externalClientApplication",
+      "rel_id": "rel:extlclntappsamlconfigurablepolicies-eca",
+      "tipo": "referencia_campo"
+    },
+    {
       "destino": "obj:FlexiPage.Metadata",
       "estado": "verificado",
       "natureza": "transformada",
@@ -1538,6 +1679,11 @@
       "origem": "mdt:Flow",
       "rel_id": "rel:cor-flow-tooling",
       "tipo": "correspondencia_xml_api"
+    },
+    {
+      "destino": "mdx:InboundNetworkConnProperty",
+      "origem": "mdt:InboundNetworkConnection.inboundNetworkConnProperties",
+      "tipo": "tipo_composto"
     },
     {
       "destino": "mdx:ObjectMapping",
@@ -1825,6 +1971,11 @@
       "tipo": "tipo_composto"
     },
     {
+      "destino": "mdx:PublicKeyCertificateSetKey",
+      "origem": "mdt:PublicKeyCertificateSet.publicKeyCertificateSetKeys",
+      "tipo": "tipo_composto"
+    },
+    {
       "destino": "obj:QueueRoutingConfig",
       "estado": "verificado",
       "origem": "mdt:QueueRoutingConfig",
@@ -2043,6 +2194,13 @@
       "destino": "mdx:PresenceConfigUserAssignments",
       "origem": "mdx:PresenceConfigAssignments.users",
       "tipo": "tipo_composto"
+    },
+    {
+      "destino": "mdt:PublicKeyCertificate",
+      "estado": "verificado",
+      "origem": "mdx:PublicKeyCertificateSetKey.publicKeyCertificate",
+      "rel_id": "rel:pkcsetkey-pkc",
+      "tipo": "referencia_campo"
     },
     {
       "destino": "mdx:ValueSetValuesDefinition",
@@ -3851,7 +4009,7 @@
       "estado": "verificado",
       "grupo_cor": "cls:integracao-apis-e-eventos",
       "id": "func:conexoes-de-rede-privadas",
-      "resumo": "Conexão privada entre a org e a AWS, usada por named credentials do tipo PrivateEndpoint.",
+      "resumo": "Conexões privadas entre a org e a AWS, nos dois sentidos: de saída (usadas por named credentials do tipo PrivateEndpoint) e de entrada (chamadas de serviços na AWS para a org).",
       "rotulo": "Conexões de rede privadas de saída",
       "rotulo_tecnico": "Outbound Network Connections",
       "tipo": "funcionalidade"
@@ -4458,6 +4616,13 @@
     },
     {
       "estado": "verificado",
+      "id": "mdt:ExtlClntAppCanvasSettings",
+      "resumo": "Configurações de app canvas de um external client app: um app de terceiros exibido dentro da Salesforce.",
+      "rotulo": "ExtlClntAppCanvasSettings",
+      "tipo": "metadata_type"
+    },
+    {
+      "estado": "verificado",
       "id": "mdt:ExtlClntAppConfigurablePolicies",
       "resumo": "Liga ou desliga os plugins (OAuth, SAML, canvas, mobile, push, notificação) de um external client app.",
       "rotulo": "ExtlClntAppConfigurablePolicies",
@@ -4472,6 +4637,27 @@
     },
     {
       "estado": "verificado",
+      "id": "mdt:ExtlClntAppMobileConfigurablePolicies",
+      "resumo": "Políticas móveis de um external client app.",
+      "rotulo": "ExtlClntAppMobileConfigurablePolicies",
+      "tipo": "metadata_type"
+    },
+    {
+      "estado": "verificado",
+      "id": "mdt:ExtlClntAppMobileSettings",
+      "resumo": "Configurações de app móvel de um external client app, como o bloqueio de tela.",
+      "rotulo": "ExtlClntAppMobileSettings",
+      "tipo": "metadata_type"
+    },
+    {
+      "estado": "verificado",
+      "id": "mdt:ExtlClntAppNotificationSettings",
+      "resumo": "Assinaturas de notificação para mobile de um external client app.",
+      "rotulo": "ExtlClntAppNotificationSettings",
+      "tipo": "metadata_type"
+    },
+    {
+      "estado": "verificado",
       "id": "mdt:ExtlClntAppOauthConfigurablePolicies",
       "resumo": "Políticas OAuth de um external client app definidas pelo administrador.",
       "rotulo": "ExtlClntAppOauthConfigurablePolicies",
@@ -4482,6 +4668,27 @@
       "id": "mdt:ExtlClntAppOauthSettings",
       "resumo": "Configurações OAuth de um external client app definidas pelo desenvolvedor.",
       "rotulo": "ExtlClntAppOauthSettings",
+      "tipo": "metadata_type"
+    },
+    {
+      "estado": "verificado",
+      "id": "mdt:ExtlClntAppPushConfigurablePolicies",
+      "resumo": "Políticas de notificação push de um external client app.",
+      "rotulo": "ExtlClntAppPushConfigurablePolicies",
+      "tipo": "metadata_type"
+    },
+    {
+      "estado": "verificado",
+      "id": "mdt:ExtlClntAppPushSettings",
+      "resumo": "Configuração de notificações push (Apple ou Android) de um external client app.",
+      "rotulo": "ExtlClntAppPushSettings",
+      "tipo": "metadata_type"
+    },
+    {
+      "estado": "verificado",
+      "id": "mdt:ExtlClntAppSamlConfigurablePolicies",
+      "resumo": "Políticas SAML de um external client app: a Salesforce atua como provedor de identidade para um provedor de serviço.",
+      "rotulo": "ExtlClntAppSamlConfigurablePolicies",
       "tipo": "metadata_type"
     },
     {
@@ -4503,6 +4710,20 @@
       "id": "mdt:ForecastingSettings",
       "resumo": "Configurações de previsões colaborativas da org.",
       "rotulo": "ForecastingSettings",
+      "tipo": "metadata_type"
+    },
+    {
+      "estado": "verificado",
+      "id": "mdt:InboundCertificate",
+      "resumo": "Certificado de autenticação mútua (mTLS) importado para a org.",
+      "rotulo": "InboundCertificate",
+      "tipo": "metadata_type"
+    },
+    {
+      "estado": "verificado",
+      "id": "mdt:InboundNetworkConnection",
+      "resumo": "Conexão privada de entrada (AWS PrivateLink): chamadas de um serviço de terceiros para a org.",
+      "rotulo": "InboundNetworkConnection",
       "tipo": "metadata_type"
     },
     {
@@ -4647,6 +4868,20 @@
     },
     {
       "estado": "verificado",
+      "id": "mdt:PublicKeyCertificate",
+      "resumo": "Certificado público ou JSON web key (JWK) guardado na org.",
+      "rotulo": "PublicKeyCertificate",
+      "tipo": "metadata_type"
+    },
+    {
+      "estado": "verificado",
+      "id": "mdt:PublicKeyCertificateSet",
+      "resumo": "Conjunto de chaves públicas (certificados ou JWKs), informadas uma a uma ou buscadas de um endpoint JWKS.",
+      "rotulo": "PublicKeyCertificateSet",
+      "tipo": "metadata_type"
+    },
+    {
+      "estado": "verificado",
       "id": "mdt:QueueRoutingConfig",
       "resumo": "Define uma configuração de roteamento de fila do Omni-Channel.",
       "rotulo": "QueueRoutingConfig",
@@ -4741,6 +4976,13 @@
       "id": "mdt:Territory2Type",
       "resumo": "Define um tipo de território.",
       "rotulo": "Territory2Type",
+      "tipo": "metadata_type"
+    },
+    {
+      "estado": "verificado",
+      "id": "mdt:UserAuthCertificate",
+      "resumo": "Certificado de usuário em PEM, enviado de fora e associado a um usuário.",
+      "rotulo": "UserAuthCertificate",
       "tipo": "metadata_type"
     },
     {
@@ -4878,6 +5120,24 @@
     },
     {
       "estado": "verificado",
+      "id": "mdx:ExtlClntAppAndroidPushConfig",
+      "rotulo": "ExtlClntAppAndroidPushConfig",
+      "tipo": "estrutura_auxiliar"
+    },
+    {
+      "estado": "verificado",
+      "id": "mdx:ExtlClntAppApplePushConfig",
+      "rotulo": "ExtlClntAppApplePushConfig",
+      "tipo": "estrutura_auxiliar"
+    },
+    {
+      "estado": "verificado",
+      "id": "mdx:ExtlClntAppNotificationType",
+      "rotulo": "ExtlClntAppNotificationType",
+      "tipo": "estrutura_auxiliar"
+    },
+    {
+      "estado": "verificado",
       "id": "mdx:ExtlClntAppOauthIpRange",
       "rotulo": "ExtlClntAppOauthIpRange",
       "tipo": "estrutura_auxiliar"
@@ -4892,6 +5152,12 @@
       "estado": "verificado",
       "id": "mdx:ExtlClntAppOauthSettingsAttribute",
       "rotulo": "ExtlClntAppOauthSettingsAttribute",
+      "tipo": "estrutura_auxiliar"
+    },
+    {
+      "estado": "verificado",
+      "id": "mdx:ExtlClntAppSamlConfigurablePoliciesAttribute",
+      "rotulo": "ExtlClntAppSamlConfigurablePoliciesAttribute",
       "tipo": "estrutura_auxiliar"
     },
     {
@@ -4916,6 +5182,12 @@
       "estado": "verificado",
       "id": "mdx:Holidays",
       "rotulo": "Holidays",
+      "tipo": "estrutura_auxiliar"
+    },
+    {
+      "estado": "verificado",
+      "id": "mdx:InboundNetworkConnProperty",
+      "rotulo": "InboundNetworkConnProperty",
       "tipo": "estrutura_auxiliar"
     },
     {
@@ -5186,6 +5458,12 @@
       "estado": "verificado",
       "id": "mdx:ProfileTabVisibility",
       "rotulo": "ProfileTabVisibility",
+      "tipo": "estrutura_auxiliar"
+    },
+    {
+      "estado": "verificado",
+      "id": "mdx:PublicKeyCertificateSetKey",
+      "rotulo": "PublicKeyCertificateSetKey",
       "tipo": "estrutura_auxiliar"
     },
     {
