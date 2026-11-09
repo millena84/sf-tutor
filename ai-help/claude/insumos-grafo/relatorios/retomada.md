@@ -91,7 +91,15 @@ O WSDL **não** é bloqueio: a documentação de cada tipo é a fonte alternativ
   - Extração: `fontes/extracoes/mdapi-lote5c.txt`.
   - **Não ligados de propósito:** campos `certificate`/`decryptionCertificate` e o legado NamedCredential.outboundNetworkConnection. As notas extraídas não dizem que o valor é o nome de um componente Certificate; ficam para conferência.
   - **McpServerDefinition e ApiNamedQuery:** sem página de referência da Metadata API (as URLs devolveram binário). Não catalogados.
-- **Falta (lote 5d em diante):**
+- **Lote 5d (2026-11-09): contratos, limites e tratamento de falhas (INT-07).** A sub-classificação estava vazia; agora tem 3 funcionalidades próprias e 3 secundárias.
+  - Funcionalidades: limites de API e alocações, versões de API e ciclo de vida, reprocessamento e monitoramento de eventos.
+  - Objetos API (completos): EventBusSubscriber (12 campos) e PlatformEventUsageMetric (10 campos).
+  - Secundárias em INT-07: External Services, Event Relay e eventos de plataforma.
+  - Limites e versões **não têm metadata type**: ficam com ausência registrada, recurso REST em `representacoes.codigo` e, no caso dos limites, caminho de Setup verificado.
+  - O nome Private Connect foi confirmado no recurso /limits e entrou como alias de conexões de rede privadas.
+  - O painel do site passou a mostrar `representacoes.codigo` e `representacoes.interface`.
+  - Extração: `fontes/extracoes/lote5d-contratos-limites.txt`.
+- **Falta (lote 5e em diante):**
   - Sub-estruturas pendentes de ConnectedApp e plugins de external client app: mobile, push, canvas, notificação, attest, SAML e ExtlClntAppOauthSecuritySettings.
   - Outros certificados: PublicKeyCertificate, PublicKeyCertificateSet, UserAuthCertificate e InboundCertificate.
   - McpServerDefinition e ApiNamedQuery, quando houver fonte.

@@ -1,0 +1,101 @@
+{
+  "alertas": [
+    "Um trigger roda no máximo 10 vezes (a inicial + 9 retentativas); depois disso vai para o estado Error e eventos enviados nesse período não são reenviados.",
+    "A retentativa reenvia o lote inteiro e desfaz o DML feito antes dela.",
+    "Asserções e exceções não tratadas não levam o assinante ao estado Error."
+  ],
+  "aliases": [
+    "retryableexception",
+    "retentativa",
+    "retry",
+    "assinante de evento",
+    "eventbussubscriber",
+    "uso de eventos",
+    "platformeventusagemetric"
+  ],
+  "classificacao_principal": {
+    "classificacao": "cls:integracao-apis-e-eventos",
+    "subclassificacao": "sub:contratos-limites-e-tratamento-de-falhas"
+  },
+  "classificacoes_secundarias": [
+    {
+      "classificacao": "cls:integracao-apis-e-eventos",
+      "motivo": "Complementa eventos de plataforma e Change Data Capture com retentativa e monitoramento.",
+      "subclassificacao": "sub:eventos-e-mensageria"
+    }
+  ],
+  "estado": "verificado",
+  "evidencias": [
+    {
+      "fonte": "src:pe-retry-apex"
+    },
+    {
+      "fonte": "src:objref-eventbussubscriber"
+    },
+    {
+      "fonte": "src:objref-platformeventusagemetric"
+    }
+  ],
+  "exemplo": "Um trigger de Pedido__e lança RetryableException enquanto o ERP está fora; depois de algumas tentativas, avisa um usuário em vez de esgotar as retentativas.",
+  "finalidade": "Evitar perda de eventos em falhas passageiras e detectar assinantes parados ou consumo perto do limite.",
+  "id": "func:reprocessamento-e-monitoramento-de-eventos",
+  "limitacoes": [
+    "EventBusSubscriber não inclui clientes CometD nem Pub/Sub API; PlatformEventUsageMetric não cobre triggers, flows nem processos."
+  ],
+  "nome": "Reprocessamento e monitoramento de eventos",
+  "nome_tecnico": "Event Trigger Retries and Usage Monitoring",
+  "o_que_e": "Como um trigger de evento tenta de novo quando algo externo falha, e como acompanhar assinantes e o uso das alocações de eventos.",
+  "recomendacoes": [
+    {
+      "evidencias": [
+        {
+          "fonte": "src:pe-retry-apex"
+        }
+      ],
+      "natureza": "orientacao_oficial",
+      "texto": "Limite as retentativas a menos de nove e tenha uma ação alternativa quando o limite chegar."
+    }
+  ],
+  "representacoes": {
+    "ausencias": [],
+    "codigo": [
+      "Apex: throw new EventBus.RetryableException(...) em trigger de evento",
+      "Apex: EventBus.TriggerContext.currentContext().retries"
+    ],
+    "metadata_types": [
+      {
+        "papel": "Configuração do trigger assinante.",
+        "ref": "mdt:PlatformEventSubscriberConfig"
+      },
+      {
+        "papel": "Liga as métricas detalhadas de uso.",
+        "ref": "mdt:PlatformEventSettings"
+      }
+    ],
+    "objetos_api": [
+      {
+        "papel": "Situação, posição e retentativas de cada assinante interno.",
+        "ref": "obj:EventBusSubscriber"
+      },
+      {
+        "papel": "Uso de publicação e entrega de eventos.",
+        "ref": "obj:PlatformEventUsageMetric"
+      }
+    ]
+  },
+  "setup": {
+    "estado": "desconhecido",
+    "nota": "Caminho no Setup não verificado nesta sessão."
+  },
+  "termos_busca": [
+    "assinante de evento",
+    "event trigger retries and usage monitoring",
+    "eventbussubscriber",
+    "platformeventusagemetric",
+    "reprocessamento e monitoramento de eventos",
+    "retentativa",
+    "retry",
+    "retryableexception",
+    "uso de eventos"
+  ]
+}

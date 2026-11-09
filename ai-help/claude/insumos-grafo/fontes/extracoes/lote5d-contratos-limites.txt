@@ -1,0 +1,68 @@
+Lote 5d (issue #24) — contratos, limites e tratamento de falhas. Extração documental assistida em 2026-11-09.
+Conteúdo lido via developer.salesforce.com/docs/get_document_content/<doc>/<pagina>.htm/en-us/264.0 (documentação v68.0).
+Notas em português; nomes técnicos no original.
+
+[src:objref-eventbussubscriber] EventBusSubscriber (Object Reference)
+  Representa trigger, processo ou flow assinante de evento de plataforma ou de evento de alteração; não inclui assinantes CometD nem Pub/Sub API.
+  Chamadas: describeSObjects(), query(). Somente leitura; desde Summer '20 só usuários internos da org acessam.
+  Versão do objeto: não declarada na página.
+  Campos (12): ExternalId | string | Filter Group Nillable Sort (Id do assinante, ex.: Id do trigger);
+    IsPartitioned | boolean | Defaulted on create Filter Group Sort | 62.0 (trigger com assinaturas paralelas; default false);
+    LastError | string | Filter Group Nillable Sort | 43.0 (mensagem da última EventBus.RetryableException; só triggers Apex);
+    LastProcessed | string | Filter Group Nillable Sort | 66.0 (replay ID do último evento processado; substitui Position);
+    LastPublished | string | Filter Group Nillable Sort | 66.0 (replay ID do último evento publicado; substitui Tip; -1 em eventos de alto volume e de alteração);
+    Name | string | Filter Group Nillable Sort (nome do assinante; "Process" = ao menos um elemento Pause de flow);
+    Position | int | Filter Group Nillable Sort (obsoleto a partir da 66.0; usar LastProcessed);
+    Retries | int | Filter Group Nillable Sort | 43.0 (quantas vezes o trigger foi repetido por RetryableException; só triggers Apex);
+    Status | picklist | Filter Group Nillable Restricted picklist Sort (Error, Repartitioning, Running, Suspended);
+      Error: desconectado, em geral após exceder o máximo de retentativas; asserções e exceções não tratadas não causam esse estado; recomenda-se menos de nove retentativas; corrigir e salvar o trigger retoma a partir de eventos novos.
+      Suspended: suspenso por um admin ou erro interno; retomável pela página de detalhe da assinatura.
+    Tip | int | Filter Group Nillable Sort (obsoleto a partir da 66.0; usar LastPublished; -1 em eventos de alto volume e de alteração);
+    Topic | string | Filter Group Nillable Sort (canal: nome do evento com __e ou nome do evento de alteração, ex.: AccountChangeEvent);
+    Type | string | Filter Group Nillable Sort (tipo do assinante, ex.: ApexTrigger; vazio para processo ou elemento Pause).
+  Exemplo da página: SELECT ExternalId, Name, Position, Status, Tip, Type FROM EventBusSubscriber WHERE Topic='Low_Ink__e' (usa campos obsoletos na 66.0+).
+
+[src:objref-platformeventusagemetric] PlatformEventUsageMetric (Object Reference)
+  Uso de publicação e entrega de eventos para clientes CometD e Pub/Sub API, componentes empApi e event relays; eventos de plataforma e de alteração separados.
+  Sem Enhanced Usage Metrics: últimas 24 horas e uso diário histórico. Enhanced Usage Metrics (58.0+): por evento e cliente, em intervalos menores.
+  Chamadas: describeSObjects(), query(). Disponível desde 50.0.
+  Campos (10): Client | string | Filter Group Nillable Sort (só com Enhanced Usage Metrics; valores: Id de sessão CometD, PUB_SUB_API, EVENT_RELAY, SYSTEM, REST_API, FLOW, SOAP_API, BULK_API, APEX, Id do trigger Apex 01q...);
+    EndDate | dateTime | Filter Nillable Sort (fim da janela, UTC, granularidade horária);
+    EventName | string | Filter Group Nillable Sort (só Enhanced; nome API do evento ou evento de alteração; exige UsageType);
+    EventType | picklist | Filter Group Nillable Restricted picklist Sort (só Enhanced; CHANGE_EVENT, CUSTOM_PLATFORM_EVENT);
+    ExternalId | string | Filter Group Nillable Sort (não usado);
+    Name | picklist | Filter Group Restricted picklist Sort (CHANGE_EVENTS_DELIVERED, CHANGE_EVENTS_PUBLISHED, PLATFORM_EVENTS_DELIVERED, PLATFORM_EVENTS_PUBLISHED);
+    StartDate | dateTime | Filter Nillable Sort (início da janela, UTC; com Enhanced, faixa máxima de 60 dias e compatível com TimeSegment);
+    TimeSegment | picklist | Filter Group Nillable Restricted picklist Sort (só Enhanced; Daily, Hourly, FifteenMinutes);
+    UsageType | picklist | Filter Group Nillable Restricted picklist Sort (só Enhanced; PUBLISH, DELIVERY);
+    Value | long | Filter Group Nillable Sort (valor de uso para a métrica e o período).
+
+[src:rest-limits] Limits (REST API Developer Guide)
+  Lista os limites da org com alocação máxima e restante; valores com precisão de até cinco minutos; evitar requisições concorrentes ou rápidas quando precisar de resultados consistentes.
+  URI /services/data/vXX.X/limits/; GET; desde 29.0; exige View Setup and Configuration; JSON e XML.
+  Grupos de limites na resposta incluem: Lightning Platform REST and Bulk APIs (DailyApiRequests, DailyBulkApiBatches/DailyBulkApiRequests etc.), Metadata API, Platform Events (HourlyPublishedPlatformEvents etc.), Platform Events and Change Data Capture (DailyDeliveredPlatformEvents, MonthlyPlatformEventsUsageEntitlement 48.0+),
+    Private Connect (PrivateConnectOutboundCalloutHourlyLimitMB), Salesforce Connect (HourlyODataCallout etc.), External Services (ExternalServicesRegistrations, ExternalServicesOperations etc.), Storage (DataStorageMB, FileStorageMB), Streaming API.
+  Notas: alguns limites dependem da versão; DataStorageMB e FileStorageMB exigem Manage Users; limites de eventos valem para CometD, Pub/Sub API, empApi e event relays, não para triggers, flows e processos.
+
+[src:rest-versions] Versions (REST API Developer Guide)
+  Lista as versões disponíveis: versão, rótulo e URL da raiz. URI /services/data/; GET; não exige autenticação. Alias latest leva à versão mais recente.
+
+[src:rest-api-eol] API End-of-Life Policy (REST API Developer Guide)
+  Cada versão é suportada por pelo menos três anos após o lançamento; aviso de pelo menos um ano antes da descontinuação.
+  41.0 a 67.0: suportadas. 31.0 a 40.0: em descontinuação (sem suporte a partir do Summer '27; aposentadas no Summer '28). 21.0 a 30.0: aposentadas desde o Summer '25. 7.0 a 20.0: aposentadas desde o Summer '22.
+  Descontinuada = ainda funciona até a data; aposentada = indisponível, requisições retornam 410:GONE.
+  Para achar requisições em versões antigas: tipo de evento API Total Usage.
+
+[src:limits-api-requests] API Request Limits and Allocations (Salesforce Developer Limits and Allocations Quick Reference)
+  Limite diário (24 horas) para Enterprise, Professional com API, Unlimited e Performance: 100.000 + licenças × chamadas por tipo de licença + add-ons comprados.
+  Developer Edition: 15.000; sandbox Full sem template: 5.000.000. Total de todas as chamadas da org, não por usuário; pacotes gerenciados contam.
+  Orgs pagas ativas podem exceder um pouco, com teto rígido; trial, Developer Edition e sandbox não.
+  Requisições longas (20 s ou mais) simultâneas: 25 em produção e sandbox, 5 em Developer Edition e trial; excedente retorna REQUEST_LIMIT_EXCEEDED.
+  REST e SOAP expiram após 10 minutos: REQUEST_RUNNING_TOO_LONG (SOAP) ou QUERY_TIMEOUT (REST).
+  Monitorar: Setup > System Overview (API Usage; API Requests, Last 24 Hours); Setup > Company Information (API Request Limit per Month); Setup > API Usage Notifications (via Quick Find); cabeçalho Sforce-Limit-Info (REST); recurso /limits.
+
+[src:pe-retry-apex] Retry Event Triggers with EventBus.RetryableException (Platform Events Developer Guide)
+  Lançar EventBus.RetryableException dá ao trigger nova chance; use quando a condição for externa aos eventos e provavelmente passageira.
+  Reenvia o lote inteiro, na ordem original de replay ID (os lotes podem mudar de tamanho); DML feito antes da retentativa é desfeito.
+  Máximo: 10 execuções (a inicial + 9 retentativas). Depois da nona, o trigger vai para o estado de erro e para de processar; eventos enviados nesse período não são reenviados; corrigir e salvar o trigger retoma.
+  Recomendações: limitar a menos de 9 retentativas; consultar EventBus.TriggerContext.currentContext().retries ou EventBusSubscriber.Retries (43.0+).

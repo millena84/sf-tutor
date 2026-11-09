@@ -1151,6 +1151,30 @@
       "tipo": "representacao_xml"
     },
     {
+      "destino": "mdt:PlatformEventSettings",
+      "origem": "func:reprocessamento-e-monitoramento-de-eventos",
+      "papel": "Liga as métricas detalhadas de uso.",
+      "tipo": "representacao_xml"
+    },
+    {
+      "destino": "mdt:PlatformEventSubscriberConfig",
+      "origem": "func:reprocessamento-e-monitoramento-de-eventos",
+      "papel": "Configuração do trigger assinante.",
+      "tipo": "representacao_xml"
+    },
+    {
+      "destino": "obj:EventBusSubscriber",
+      "origem": "func:reprocessamento-e-monitoramento-de-eventos",
+      "papel": "Situação, posição e retentativas de cada assinante interno.",
+      "tipo": "representacao_objeto_api"
+    },
+    {
+      "destino": "obj:PlatformEventUsageMetric",
+      "origem": "func:reprocessamento-e-monitoramento-de-eventos",
+      "papel": "Uso de publicação e entrega de eventos.",
+      "tipo": "representacao_objeto_api"
+    },
+    {
       "destino": "mdt:RegisteredExternalService",
       "origem": "func:servicos-externos-registrados-commerce",
       "papel": "Registro do provedor.",
@@ -2158,6 +2182,15 @@
       ]
     },
     {
+      "destino": "func:limites-de-api-e-alocacoes",
+      "origem": "nuv:platform-core",
+      "tipo": "nuvem_funcionalidade",
+      "via": [
+        "cls:integracao-apis-e-eventos",
+        "sub:contratos-limites-e-tratamento-de-falhas"
+      ]
+    },
+    {
       "destino": "func:named-credentials",
       "origem": "nuv:platform-core",
       "tipo": "nuvem_funcionalidade",
@@ -2248,6 +2281,15 @@
       ]
     },
     {
+      "destino": "func:reprocessamento-e-monitoramento-de-eventos",
+      "origem": "nuv:platform-core",
+      "tipo": "nuvem_funcionalidade",
+      "via": [
+        "cls:integracao-apis-e-eventos",
+        "sub:contratos-limites-e-tratamento-de-falhas"
+      ]
+    },
+    {
       "destino": "func:servicos-externos-registrados-commerce",
       "origem": "nuv:platform-core",
       "tipo": "nuvem_funcionalidade",
@@ -2290,6 +2332,15 @@
       "via": [
         "cls:acesso-identidade-e-seguranca",
         "sub:usuarios-e-provisionamento"
+      ]
+    },
+    {
+      "destino": "func:versoes-de-api",
+      "origem": "nuv:platform-core",
+      "tipo": "nuvem_funcionalidade",
+      "via": [
+        "cls:integracao-apis-e-eventos",
+        "sub:contratos-limites-e-tratamento-de-falhas"
       ]
     },
     {
@@ -3198,6 +3249,39 @@
       "tipo": "classificacao_principal"
     },
     {
+      "destino": "func:event-relay",
+      "motivo": "relayOption define de onde o relay retoma depois de um erro.",
+      "origem": "sub:contratos-limites-e-tratamento-de-falhas",
+      "tipo": "classificacao_secundaria"
+    },
+    {
+      "destino": "func:external-services",
+      "motivo": "Registros e operações de External Services têm alocações próprias, listadas no recurso /limits.",
+      "origem": "sub:contratos-limites-e-tratamento-de-falhas",
+      "tipo": "classificacao_secundaria"
+    },
+    {
+      "destino": "func:limites-de-api-e-alocacoes",
+      "origem": "sub:contratos-limites-e-tratamento-de-falhas",
+      "tipo": "classificacao_principal"
+    },
+    {
+      "destino": "func:platform-events",
+      "motivo": "Publicação e entrega de eventos têm alocações próprias, listadas no recurso /limits.",
+      "origem": "sub:contratos-limites-e-tratamento-de-falhas",
+      "tipo": "classificacao_secundaria"
+    },
+    {
+      "destino": "func:reprocessamento-e-monitoramento-de-eventos",
+      "origem": "sub:contratos-limites-e-tratamento-de-falhas",
+      "tipo": "classificacao_principal"
+    },
+    {
+      "destino": "func:versoes-de-api",
+      "origem": "sub:contratos-limites-e-tratamento-de-falhas",
+      "tipo": "classificacao_principal"
+    },
+    {
       "destino": "func:named-credentials",
       "origem": "sub:credenciais",
       "tipo": "classificacao_principal"
@@ -3227,6 +3311,12 @@
       "destino": "func:platform-events",
       "origem": "sub:eventos-e-mensageria",
       "tipo": "classificacao_principal"
+    },
+    {
+      "destino": "func:reprocessamento-e-monitoramento-de-eventos",
+      "motivo": "Complementa eventos de plataforma e Change Data Capture com retentativa e monitoramento.",
+      "origem": "sub:eventos-e-mensageria",
+      "tipo": "classificacao_secundaria"
     },
     {
       "destino": "func:flow",
@@ -3782,6 +3872,15 @@
     {
       "estado": "verificado",
       "grupo_cor": "cls:integracao-apis-e-eventos",
+      "id": "func:limites-de-api-e-alocacoes",
+      "resumo": "Quantas chamadas e recursos a org pode consumir, e quanto ainda resta. As alocações vêm da edição, das licenças e de add-ons comprados.",
+      "rotulo": "Limites de API e alocações",
+      "rotulo_tecnico": "API Request Limits and Allocations",
+      "tipo": "funcionalidade"
+    },
+    {
+      "estado": "verificado",
+      "grupo_cor": "cls:integracao-apis-e-eventos",
       "id": "func:named-credentials",
       "resumo": "Guardam o endereço de um sistema externo e a forma de se autenticar nele, fora do código.",
       "rotulo": "Named credentials e credenciais externas",
@@ -3917,6 +4016,15 @@
     {
       "estado": "verificado",
       "grupo_cor": "cls:integracao-apis-e-eventos",
+      "id": "func:reprocessamento-e-monitoramento-de-eventos",
+      "resumo": "Como um trigger de evento tenta de novo quando algo externo falha, e como acompanhar assinantes e o uso das alocações de eventos.",
+      "rotulo": "Reprocessamento e monitoramento de eventos",
+      "rotulo_tecnico": "Event Trigger Retries and Usage Monitoring",
+      "tipo": "funcionalidade"
+    },
+    {
+      "estado": "verificado",
+      "grupo_cor": "cls:integracao-apis-e-eventos",
       "id": "func:servicos-externos-registrados-commerce",
       "resumo": "Registra classes Apex como provedores de preço, estoque, frete, impostos, promoções ou pontos de extensão do Commerce.",
       "rotulo": "Serviços externos registrados (Commerce)",
@@ -3966,6 +4074,15 @@
       "resumo": "Cada pessoa ou integração que acessa a org é um usuário, registrado no objeto User.",
       "rotulo": "Usuários",
       "rotulo_tecnico": "Users",
+      "tipo": "funcionalidade"
+    },
+    {
+      "estado": "verificado",
+      "grupo_cor": "cls:integracao-apis-e-eventos",
+      "id": "func:versoes-de-api",
+      "resumo": "Cada chamada e cada componente usam uma versão de API. A Salesforce mantém as versões por um tempo e depois as descontinua e aposenta.",
+      "rotulo": "Versões de API e ciclo de vida",
+      "rotulo_tecnico": "API Versions and End-of-Life Policy",
       "tipo": "funcionalidade"
     },
     {
@@ -5138,6 +5255,16 @@
     },
     {
       "apis": [
+        "padrao"
+      ],
+      "estado": "verificado",
+      "id": "obj:EventBusSubscriber",
+      "resumo": "Representa cada trigger, processo ou flow assinante de um evento de plataforma ou de alteração.",
+      "rotulo": "EventBusSubscriber",
+      "tipo": "objeto_api"
+    },
+    {
+      "apis": [
         "tooling"
       ],
       "estado": "verificado",
@@ -5387,6 +5514,16 @@
       "id": "obj:PermissionSetGroup",
       "resumo": "Representa cada grupo de permission sets como registro consultável.",
       "rotulo": "PermissionSetGroup",
+      "tipo": "objeto_api"
+    },
+    {
+      "apis": [
+        "padrao"
+      ],
+      "estado": "verificado",
+      "id": "obj:PlatformEventUsageMetric",
+      "resumo": "Guarda o uso de publicação e de entrega de eventos de plataforma e de alteração.",
+      "rotulo": "PlatformEventUsageMetric",
       "tipo": "objeto_api"
     },
     {

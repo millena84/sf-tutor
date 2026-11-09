@@ -253,7 +253,7 @@ function painelSub(ctx: CtxPainel, e: Entidade, caminho: readonly string[]): (No
 // ------------------------------------------------------------------ Funcionalidade
 
 function painelFunc(ctx: CtxPainel, e: Entidade, caminho: readonly string[]): (Node | null)[] {
-  const rep = ent<{ metadata_types: { ref: string; papel: string }[]; objetos_api: { ref: string; papel: string }[]; ausencias: Record<string, unknown>[] }>(e, 'representacoes');
+  const rep = ent<{ metadata_types: { ref: string; papel: string }[]; objetos_api: { ref: string; papel: string }[]; codigo?: string[]; interface?: string[]; ausencias: Record<string, unknown>[] }>(e, 'representacoes');
   const cp = ent<{ classificacao: string; subclassificacao: string }>(e, 'classificacao_principal');
   const cs = arr<{ classificacao: string; subclassificacao: string; motivo?: string }>(e.classificacoes_secundarias);
   const nuvens = ctx.ind.nuvensDaFunc.get(e.id) ?? [];
@@ -265,6 +265,8 @@ function painelFunc(ctx: CtxPainel, e: Entidade, caminho: readonly string[]): (N
     secao('Representações técnicas', true,
       repLista(ctx, 'Metadata types (XML)', rep?.metadata_types ?? [], caminho),
       repLista(ctx, 'Objetos consultáveis via API', rep?.objetos_api ?? [], caminho),
+      listaTexto('Código e recursos de API', arr<string>(rep?.codigo)),
+      listaTexto('Interface', arr<string>(rep?.interface)),
       ...(rep?.ausencias ?? []).map((a) => h('div', { class: `afirmacao estado-${String(a.estado)}` },
         h('h4', null, `Sem ${a.tipo === 'metadata_type' ? 'metadata type (XML)' : a.tipo === 'objeto_api' ? 'objeto API' : String(a.tipo)}`, ' ', selo(String(a.estado))),
         h('p', null, String(a.motivo ?? '')), fontesEl(ctx, arr(a.evidencias))))),

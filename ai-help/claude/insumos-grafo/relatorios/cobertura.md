@@ -87,7 +87,7 @@ Gerado por `ferramentas/sftutor.py cobertura`. Cobertura estrutural, explicativa
 
 ## Objetos consultáveis via API
 
-- Catalogados: 60. Campos listados: 1436; explicados: 626.
+- Catalogados: 62. Campos listados: 1458; explicados: 648.
 - Universo: Universo de objetos da plataforma não enumerado.
 
 | Objeto | Estrutural | Esperados | Presentes | Explicados | APIs verificadas |
@@ -107,6 +107,7 @@ Gerado por `ferramentas/sftutor.py cobertura`. Cobertura estrutural, explicativa
 | obj:CustomTab | completa | 13 | 13 | 13 | tooling |
 | obj:Entitlement | parcial | 23 | 22 | 9 | padrao |
 | obj:EntityDefinition | parcial | n/d | 13 | 6 | tooling |
+| obj:EventBusSubscriber | completa | 12 | 12 | 12 | padrao |
 | obj:FieldDefinition | parcial | n/d | 12 | 11 | tooling |
 | obj:FlexiPage | completa | 11 | 11 | 11 | tooling |
 | obj:Flow | completa | 15 | 15 | 15 | tooling |
@@ -132,6 +133,7 @@ Gerado por `ferramentas/sftutor.py cobertura`. Cobertura estrutural, explicativa
 | obj:PermissionSet | parcial | n/d | 12 | 11 | padrao, tooling |
 | obj:PermissionSetAssignment | parcial | n/d | 8 | 8 | padrao, tooling |
 | obj:PermissionSetGroup | parcial | n/d | 7 | 7 | padrao, tooling |
+| obj:PlatformEventUsageMetric | completa | 10 | 10 | 10 | padrao |
 | obj:PresenceUserConfig | completa | 21 | 21 | 21 | padrao |
 | obj:Pricebook2 | completa | 10 | 10 | 10 | padrao |
 | obj:PricebookEntry | completa | 11 | 11 | 11 | padrao |
@@ -160,5 +162,5 @@ Gerado por `ferramentas/sftutor.py cobertura`. Cobertura estrutural, explicativa
 
 ## Taxonomia e funcionalidades
 
-- Classificações: 14; subclassificações: 92 (com funcionalidades: 33).
-- Funcionalidades cadastradas: 48 (universo de funcionalidades não definido).
+- Classificações: 14; subclassificações: 92 (com funcionalidades: 34).
+- Funcionalidades cadastradas: 51 (universo de funcionalidades não definido).

@@ -1,0 +1,918 @@
+{
+  "id": "obj:EventBusSubscriber",
+  "nome": "EventBusSubscriber",
+  "o_que_e": "Representa cada trigger, processo ou flow assinante de um evento de plataforma ou de alteração.",
+  "papel": "Ver a situação, a posição e as retentativas dos assinantes internos; não inclui clientes CometD nem Pub/Sub API.",
+  "exposicoes": [
+    {
+      "api": "padrao",
+      "estado": "verificado",
+      "chamadas": [
+        "describeSObjects()",
+        "query()"
+      ],
+      "acesso_especial": "Somente leitura; desde o Summer '20, só usuários internos da org.",
+      "desde_versao": null,
+      "evidencias": [
+        {
+          "fonte": "src:objref-eventbussubscriber"
+        }
+      ]
+    },
+    {
+      "api": "tooling",
+      "estado": "desconhecido",
+      "nota": "Exposição na Tooling API não verificada.",
+      "desde_versao": null
+    }
+  ],
+  "campos": [
+    {
+      "id": "obj:EventBusSubscriber.ExternalId",
+      "nome": "ExternalId",
+      "tipo_tecnico": "string",
+      "o_que_e": "Id do assinante, por exemplo o Id do trigger.",
+      "apis": [
+        "padrao"
+      ],
+      "propriedades_api": {
+        "estado": "verificado",
+        "create": false,
+        "defaulted_on_create": false,
+        "filter": true,
+        "group": true,
+        "nillable": true,
+        "restricted_picklist": false,
+        "sort": true,
+        "update": false,
+        "id_lookup": false,
+        "evidencias": [
+          {
+            "fonte": "src:objref-eventbussubscriber"
+          }
+        ]
+      },
+      "somente_leitura": true,
+      "origem": {
+        "estado": "verificado",
+        "valor": "padrao_plataforma",
+        "nota": "Campo padrão do objeto documentado.",
+        "evidencias": [
+          {
+            "fonte": "src:objref-eventbussubscriber"
+          }
+        ]
+      },
+      "obrigatoriedade": {
+        "valor": "desconhecida",
+        "estado": "desconhecido"
+      },
+      "default": {
+        "forma": "nao_declarado_na_fonte",
+        "estado": "desconhecido"
+      },
+      "dominio": {
+        "natureza": "texto_livre",
+        "estado": "verificado",
+        "evidencias": [
+          {
+            "fonte": "src:objref-eventbussubscriber"
+          }
+        ]
+      },
+      "disponibilidade": {
+        "desde_versao": null,
+        "ate_versao": null,
+        "estado": "desconhecido"
+      },
+      "explicacao": "explicada",
+      "estado": "verificado",
+      "evidencias": [
+        {
+          "fonte": "src:objref-eventbussubscriber"
+        }
+      ]
+    },
+    {
+      "id": "obj:EventBusSubscriber.IsPartitioned",
+      "nome": "IsPartitioned",
+      "tipo_tecnico": "boolean",
+      "o_que_e": "Se o trigger usa assinaturas paralelas.",
+      "apis": [
+        "padrao"
+      ],
+      "propriedades_api": {
+        "estado": "verificado",
+        "create": false,
+        "defaulted_on_create": true,
+        "filter": true,
+        "group": true,
+        "nillable": false,
+        "restricted_picklist": false,
+        "sort": true,
+        "update": false,
+        "id_lookup": false,
+        "evidencias": [
+          {
+            "fonte": "src:objref-eventbussubscriber"
+          }
+        ]
+      },
+      "somente_leitura": true,
+      "origem": {
+        "estado": "verificado",
+        "valor": "padrao_plataforma",
+        "nota": "Campo padrão do objeto documentado.",
+        "evidencias": [
+          {
+            "fonte": "src:objref-eventbussubscriber"
+          }
+        ]
+      },
+      "obrigatoriedade": {
+        "valor": "desconhecida",
+        "estado": "desconhecido"
+      },
+      "default": {
+        "forma": "valor",
+        "estado": "verificado",
+        "evidencias": [
+          {
+            "fonte": "src:objref-eventbussubscriber"
+          }
+        ],
+        "valor": "false"
+      },
+      "dominio": {
+        "natureza": "booleano",
+        "valores": [
+          {
+            "valor": "true"
+          },
+          {
+            "valor": "false"
+          }
+        ],
+        "lista_completa": "sim",
+        "estado": "verificado",
+        "evidencias": [
+          {
+            "fonte": "src:objref-eventbussubscriber"
+          }
+        ]
+      },
+      "disponibilidade": {
+        "desde_versao": "62.0",
+        "ate_versao": null,
+        "estado": "verificado"
+      },
+      "explicacao": "explicada",
+      "estado": "verificado",
+      "evidencias": [
+        {
+          "fonte": "src:objref-eventbussubscriber"
+        }
+      ]
+    },
+    {
+      "id": "obj:EventBusSubscriber.LastError",
+      "nome": "LastError",
+      "tipo_tecnico": "string",
+      "o_que_e": "Mensagem da última EventBus.RetryableException (só triggers Apex).",
+      "apis": [
+        "padrao"
+      ],
+      "propriedades_api": {
+        "estado": "verificado",
+        "create": false,
+        "defaulted_on_create": false,
+        "filter": true,
+        "group": true,
+        "nillable": true,
+        "restricted_picklist": false,
+        "sort": true,
+        "update": false,
+        "id_lookup": false,
+        "evidencias": [
+          {
+            "fonte": "src:objref-eventbussubscriber"
+          }
+        ]
+      },
+      "somente_leitura": true,
+      "origem": {
+        "estado": "verificado",
+        "valor": "padrao_plataforma",
+        "nota": "Campo padrão do objeto documentado.",
+        "evidencias": [
+          {
+            "fonte": "src:objref-eventbussubscriber"
+          }
+        ]
+      },
+      "obrigatoriedade": {
+        "valor": "desconhecida",
+        "estado": "desconhecido"
+      },
+      "default": {
+        "forma": "nao_declarado_na_fonte",
+        "estado": "desconhecido"
+      },
+      "dominio": {
+        "natureza": "texto_livre",
+        "estado": "verificado",
+        "evidencias": [
+          {
+            "fonte": "src:objref-eventbussubscriber"
+          }
+        ]
+      },
+      "disponibilidade": {
+        "desde_versao": "43.0",
+        "ate_versao": null,
+        "estado": "verificado"
+      },
+      "explicacao": "explicada",
+      "estado": "verificado",
+      "evidencias": [
+        {
+          "fonte": "src:objref-eventbussubscriber"
+        }
+      ]
+    },
+    {
+      "id": "obj:EventBusSubscriber.LastProcessed",
+      "nome": "LastProcessed",
+      "tipo_tecnico": "string",
+      "o_que_e": "Replay ID do último evento processado pelo assinante; substitui Position.",
+      "apis": [
+        "padrao"
+      ],
+      "propriedades_api": {
+        "estado": "verificado",
+        "create": false,
+        "defaulted_on_create": false,
+        "filter": true,
+        "group": true,
+        "nillable": true,
+        "restricted_picklist": false,
+        "sort": true,
+        "update": false,
+        "id_lookup": false,
+        "evidencias": [
+          {
+            "fonte": "src:objref-eventbussubscriber"
+          }
+        ]
+      },
+      "somente_leitura": true,
+      "origem": {
+        "estado": "verificado",
+        "valor": "padrao_plataforma",
+        "nota": "Campo padrão do objeto documentado.",
+        "evidencias": [
+          {
+            "fonte": "src:objref-eventbussubscriber"
+          }
+        ]
+      },
+      "obrigatoriedade": {
+        "valor": "desconhecida",
+        "estado": "desconhecido"
+      },
+      "default": {
+        "forma": "nao_declarado_na_fonte",
+        "estado": "desconhecido"
+      },
+      "dominio": {
+        "natureza": "texto_livre",
+        "estado": "verificado",
+        "evidencias": [
+          {
+            "fonte": "src:objref-eventbussubscriber"
+          }
+        ]
+      },
+      "disponibilidade": {
+        "desde_versao": "66.0",
+        "ate_versao": null,
+        "estado": "verificado"
+      },
+      "explicacao": "explicada",
+      "estado": "verificado",
+      "evidencias": [
+        {
+          "fonte": "src:objref-eventbussubscriber"
+        }
+      ]
+    },
+    {
+      "id": "obj:EventBusSubscriber.LastPublished",
+      "nome": "LastPublished",
+      "tipo_tecnico": "string",
+      "o_que_e": "Replay ID do último evento publicado; substitui Tip.",
+      "apis": [
+        "padrao"
+      ],
+      "propriedades_api": {
+        "estado": "verificado",
+        "create": false,
+        "defaulted_on_create": false,
+        "filter": true,
+        "group": true,
+        "nillable": true,
+        "restricted_picklist": false,
+        "sort": true,
+        "update": false,
+        "id_lookup": false,
+        "evidencias": [
+          {
+            "fonte": "src:objref-eventbussubscriber"
+          }
+        ]
+      },
+      "somente_leitura": true,
+      "origem": {
+        "estado": "verificado",
+        "valor": "padrao_plataforma",
+        "nota": "Campo padrão do objeto documentado.",
+        "evidencias": [
+          {
+            "fonte": "src:objref-eventbussubscriber"
+          }
+        ]
+      },
+      "obrigatoriedade": {
+        "valor": "desconhecida",
+        "estado": "desconhecido"
+      },
+      "default": {
+        "forma": "nao_declarado_na_fonte",
+        "estado": "desconhecido"
+      },
+      "dominio": {
+        "natureza": "texto_livre",
+        "estado": "verificado",
+        "evidencias": [
+          {
+            "fonte": "src:objref-eventbussubscriber"
+          }
+        ]
+      },
+      "disponibilidade": {
+        "desde_versao": "66.0",
+        "ate_versao": null,
+        "estado": "verificado"
+      },
+      "explicacao": "explicada",
+      "estado": "verificado",
+      "evidencias": [
+        {
+          "fonte": "src:objref-eventbussubscriber"
+        }
+      ],
+      "notas": [
+        "Em eventos de alto volume e de alteração, o valor não existe e vem sempre -1."
+      ]
+    },
+    {
+      "id": "obj:EventBusSubscriber.Name",
+      "nome": "Name",
+      "tipo_tecnico": "string",
+      "o_que_e": "Nome do assinante (trigger ou processo); 'Process' indica ao menos um elemento Pause de flow.",
+      "apis": [
+        "padrao"
+      ],
+      "propriedades_api": {
+        "estado": "verificado",
+        "create": false,
+        "defaulted_on_create": false,
+        "filter": true,
+        "group": true,
+        "nillable": true,
+        "restricted_picklist": false,
+        "sort": true,
+        "update": false,
+        "id_lookup": false,
+        "evidencias": [
+          {
+            "fonte": "src:objref-eventbussubscriber"
+          }
+        ]
+      },
+      "somente_leitura": true,
+      "origem": {
+        "estado": "verificado",
+        "valor": "padrao_plataforma",
+        "nota": "Campo padrão do objeto documentado.",
+        "evidencias": [
+          {
+            "fonte": "src:objref-eventbussubscriber"
+          }
+        ]
+      },
+      "obrigatoriedade": {
+        "valor": "desconhecida",
+        "estado": "desconhecido"
+      },
+      "default": {
+        "forma": "nao_declarado_na_fonte",
+        "estado": "desconhecido"
+      },
+      "dominio": {
+        "natureza": "texto_livre",
+        "estado": "verificado",
+        "evidencias": [
+          {
+            "fonte": "src:objref-eventbussubscriber"
+          }
+        ]
+      },
+      "disponibilidade": {
+        "desde_versao": null,
+        "ate_versao": null,
+        "estado": "desconhecido"
+      },
+      "explicacao": "explicada",
+      "estado": "verificado",
+      "evidencias": [
+        {
+          "fonte": "src:objref-eventbussubscriber"
+        }
+      ]
+    },
+    {
+      "id": "obj:EventBusSubscriber.Position",
+      "nome": "Position",
+      "tipo_tecnico": "int",
+      "o_que_e": "Replay ID do último evento processado.",
+      "apis": [
+        "padrao"
+      ],
+      "propriedades_api": {
+        "estado": "verificado",
+        "create": false,
+        "defaulted_on_create": false,
+        "filter": true,
+        "group": true,
+        "nillable": true,
+        "restricted_picklist": false,
+        "sort": true,
+        "update": false,
+        "id_lookup": false,
+        "evidencias": [
+          {
+            "fonte": "src:objref-eventbussubscriber"
+          }
+        ]
+      },
+      "somente_leitura": true,
+      "origem": {
+        "estado": "verificado",
+        "valor": "padrao_plataforma",
+        "nota": "Campo padrão do objeto documentado.",
+        "evidencias": [
+          {
+            "fonte": "src:objref-eventbussubscriber"
+          }
+        ]
+      },
+      "obrigatoriedade": {
+        "valor": "desconhecida",
+        "estado": "desconhecido"
+      },
+      "default": {
+        "forma": "nao_declarado_na_fonte",
+        "estado": "desconhecido"
+      },
+      "dominio": {
+        "natureza": "numerico",
+        "estado": "verificado",
+        "evidencias": [
+          {
+            "fonte": "src:objref-eventbussubscriber"
+          }
+        ]
+      },
+      "disponibilidade": {
+        "desde_versao": null,
+        "ate_versao": null,
+        "estado": "desconhecido"
+      },
+      "explicacao": "explicada",
+      "estado": "verificado",
+      "evidencias": [
+        {
+          "fonte": "src:objref-eventbussubscriber"
+        }
+      ],
+      "notas": [
+        "Obsoleto a partir da 66.0; use LastProcessed.",
+        "Pode vir incorreto se passar do maior inteiro suportado."
+      ]
+    },
+    {
+      "id": "obj:EventBusSubscriber.Retries",
+      "nome": "Retries",
+      "tipo_tecnico": "int",
+      "o_que_e": "Quantas vezes o trigger foi repetido por EventBus.RetryableException (só triggers Apex).",
+      "apis": [
+        "padrao"
+      ],
+      "propriedades_api": {
+        "estado": "verificado",
+        "create": false,
+        "defaulted_on_create": false,
+        "filter": true,
+        "group": true,
+        "nillable": true,
+        "restricted_picklist": false,
+        "sort": true,
+        "update": false,
+        "id_lookup": false,
+        "evidencias": [
+          {
+            "fonte": "src:objref-eventbussubscriber"
+          }
+        ]
+      },
+      "somente_leitura": true,
+      "origem": {
+        "estado": "verificado",
+        "valor": "padrao_plataforma",
+        "nota": "Campo padrão do objeto documentado.",
+        "evidencias": [
+          {
+            "fonte": "src:objref-eventbussubscriber"
+          }
+        ]
+      },
+      "obrigatoriedade": {
+        "valor": "desconhecida",
+        "estado": "desconhecido"
+      },
+      "default": {
+        "forma": "nao_declarado_na_fonte",
+        "estado": "desconhecido"
+      },
+      "dominio": {
+        "natureza": "numerico",
+        "estado": "verificado",
+        "evidencias": [
+          {
+            "fonte": "src:objref-eventbussubscriber"
+          }
+        ]
+      },
+      "disponibilidade": {
+        "desde_versao": "43.0",
+        "ate_versao": null,
+        "estado": "verificado"
+      },
+      "explicacao": "explicada",
+      "estado": "verificado",
+      "evidencias": [
+        {
+          "fonte": "src:objref-eventbussubscriber"
+        }
+      ]
+    },
+    {
+      "id": "obj:EventBusSubscriber.Status",
+      "nome": "Status",
+      "tipo_tecnico": "picklist",
+      "o_que_e": "Situação do assinante.",
+      "apis": [
+        "padrao"
+      ],
+      "propriedades_api": {
+        "estado": "verificado",
+        "create": false,
+        "defaulted_on_create": false,
+        "filter": true,
+        "group": true,
+        "nillable": true,
+        "restricted_picklist": true,
+        "sort": true,
+        "update": false,
+        "id_lookup": false,
+        "evidencias": [
+          {
+            "fonte": "src:objref-eventbussubscriber"
+          }
+        ]
+      },
+      "somente_leitura": true,
+      "origem": {
+        "estado": "verificado",
+        "valor": "padrao_plataforma",
+        "nota": "Campo padrão do objeto documentado.",
+        "evidencias": [
+          {
+            "fonte": "src:objref-eventbussubscriber"
+          }
+        ]
+      },
+      "obrigatoriedade": {
+        "valor": "desconhecida",
+        "estado": "desconhecido"
+      },
+      "default": {
+        "forma": "nao_declarado_na_fonte",
+        "estado": "desconhecido"
+      },
+      "dominio": {
+        "natureza": "enum_fechado",
+        "valores": [
+          {
+            "valor": "Error"
+          },
+          {
+            "valor": "Repartitioning"
+          },
+          {
+            "valor": "Running"
+          },
+          {
+            "valor": "Suspended"
+          }
+        ],
+        "lista_completa": "sim",
+        "estado": "verificado",
+        "evidencias": [
+          {
+            "fonte": "src:objref-eventbussubscriber"
+          }
+        ],
+        "contexto": "Error: desconectado, em geral após passar do máximo de retentativas. Suspended: suspenso por um admin ou erro interno. Repartitioning: mudando a configuração de assinaturas paralelas. Running: escutando."
+      },
+      "disponibilidade": {
+        "desde_versao": null,
+        "ate_versao": null,
+        "estado": "desconhecido"
+      },
+      "explicacao": "explicada",
+      "estado": "verificado",
+      "evidencias": [
+        {
+          "fonte": "src:objref-eventbussubscriber"
+        }
+      ]
+    },
+    {
+      "id": "obj:EventBusSubscriber.Tip",
+      "nome": "Tip",
+      "tipo_tecnico": "int",
+      "o_que_e": "Replay ID do último evento publicado.",
+      "apis": [
+        "padrao"
+      ],
+      "propriedades_api": {
+        "estado": "verificado",
+        "create": false,
+        "defaulted_on_create": false,
+        "filter": true,
+        "group": true,
+        "nillable": true,
+        "restricted_picklist": false,
+        "sort": true,
+        "update": false,
+        "id_lookup": false,
+        "evidencias": [
+          {
+            "fonte": "src:objref-eventbussubscriber"
+          }
+        ]
+      },
+      "somente_leitura": true,
+      "origem": {
+        "estado": "verificado",
+        "valor": "padrao_plataforma",
+        "nota": "Campo padrão do objeto documentado.",
+        "evidencias": [
+          {
+            "fonte": "src:objref-eventbussubscriber"
+          }
+        ]
+      },
+      "obrigatoriedade": {
+        "valor": "desconhecida",
+        "estado": "desconhecido"
+      },
+      "default": {
+        "forma": "nao_declarado_na_fonte",
+        "estado": "desconhecido"
+      },
+      "dominio": {
+        "natureza": "numerico",
+        "estado": "verificado",
+        "evidencias": [
+          {
+            "fonte": "src:objref-eventbussubscriber"
+          }
+        ]
+      },
+      "disponibilidade": {
+        "desde_versao": null,
+        "ate_versao": null,
+        "estado": "desconhecido"
+      },
+      "explicacao": "explicada",
+      "estado": "verificado",
+      "evidencias": [
+        {
+          "fonte": "src:objref-eventbussubscriber"
+        }
+      ],
+      "notas": [
+        "Obsoleto a partir da 66.0; use LastPublished.",
+        "Pode vir incorreto se passar do maior inteiro suportado.",
+        "Em eventos de alto volume e de alteração, vem sempre -1."
+      ]
+    },
+    {
+      "id": "obj:EventBusSubscriber.Topic",
+      "nome": "Topic",
+      "tipo_tecnico": "string",
+      "o_que_e": "Canal assinado: nome do evento com __e ou nome do evento de alteração (ex.: AccountChangeEvent).",
+      "apis": [
+        "padrao"
+      ],
+      "propriedades_api": {
+        "estado": "verificado",
+        "create": false,
+        "defaulted_on_create": false,
+        "filter": true,
+        "group": true,
+        "nillable": true,
+        "restricted_picklist": false,
+        "sort": true,
+        "update": false,
+        "id_lookup": false,
+        "evidencias": [
+          {
+            "fonte": "src:objref-eventbussubscriber"
+          }
+        ]
+      },
+      "somente_leitura": true,
+      "origem": {
+        "estado": "verificado",
+        "valor": "padrao_plataforma",
+        "nota": "Campo padrão do objeto documentado.",
+        "evidencias": [
+          {
+            "fonte": "src:objref-eventbussubscriber"
+          }
+        ]
+      },
+      "obrigatoriedade": {
+        "valor": "desconhecida",
+        "estado": "desconhecido"
+      },
+      "default": {
+        "forma": "nao_declarado_na_fonte",
+        "estado": "desconhecido"
+      },
+      "dominio": {
+        "natureza": "texto_livre",
+        "estado": "verificado",
+        "evidencias": [
+          {
+            "fonte": "src:objref-eventbussubscriber"
+          }
+        ]
+      },
+      "disponibilidade": {
+        "desde_versao": null,
+        "ate_versao": null,
+        "estado": "desconhecido"
+      },
+      "explicacao": "explicada",
+      "estado": "verificado",
+      "evidencias": [
+        {
+          "fonte": "src:objref-eventbussubscriber"
+        }
+      ]
+    },
+    {
+      "id": "obj:EventBusSubscriber.Type",
+      "nome": "Type",
+      "tipo_tecnico": "string",
+      "o_que_e": "Tipo do assinante, por exemplo ApexTrigger; vazio para processo ou elemento Pause.",
+      "apis": [
+        "padrao"
+      ],
+      "propriedades_api": {
+        "estado": "verificado",
+        "create": false,
+        "defaulted_on_create": false,
+        "filter": true,
+        "group": true,
+        "nillable": true,
+        "restricted_picklist": false,
+        "sort": true,
+        "update": false,
+        "id_lookup": false,
+        "evidencias": [
+          {
+            "fonte": "src:objref-eventbussubscriber"
+          }
+        ]
+      },
+      "somente_leitura": true,
+      "origem": {
+        "estado": "verificado",
+        "valor": "padrao_plataforma",
+        "nota": "Campo padrão do objeto documentado.",
+        "evidencias": [
+          {
+            "fonte": "src:objref-eventbussubscriber"
+          }
+        ]
+      },
+      "obrigatoriedade": {
+        "valor": "desconhecida",
+        "estado": "desconhecido"
+      },
+      "default": {
+        "forma": "nao_declarado_na_fonte",
+        "estado": "desconhecido"
+      },
+      "dominio": {
+        "natureza": "texto_livre",
+        "estado": "verificado",
+        "evidencias": [
+          {
+            "fonte": "src:objref-eventbussubscriber"
+          }
+        ]
+      },
+      "disponibilidade": {
+        "desde_versao": null,
+        "ate_versao": null,
+        "estado": "desconhecido"
+      },
+      "explicacao": "explicada",
+      "estado": "verificado",
+      "evidencias": [
+        {
+          "fonte": "src:objref-eventbussubscriber"
+        }
+      ]
+    }
+  ],
+  "consultas": [
+    {
+      "api": "padrao",
+      "soql": "SELECT Name, Type, Status, Retries, LastError, LastProcessed, LastPublished FROM EventBusSubscriber WHERE Topic = 'Pedido__e'",
+      "contexto": "API padrão, versão 66.0 ou posterior (LastProcessed e LastPublished). Pedido__e é um nome ilustrativo.",
+      "validacao": "documental"
+    }
+  ],
+  "apex": {
+    "consulta_soql_direta": {
+      "estado": "verificado",
+      "valor": true,
+      "nota": "Objeto da API padrão: consultável por SOQL em Apex, sujeito a permissões.",
+      "evidencias": [
+        {
+          "fonte": "src:objref-eventbussubscriber"
+        }
+      ]
+    },
+    "nota": "Exemplo Apex não fornecido nesta fase."
+  },
+  "juncao": false,
+  "setup": {
+    "estado": "nao_aplicavel",
+    "nota": "Objeto consultável via API; não é tela do Setup."
+  },
+  "cobertura": {
+    "estrutural": {
+      "estado": "completa",
+      "esperado": 12,
+      "presente": 12,
+      "nota": "Tabela de campos lida completa (12); Id não consta."
+    },
+    "explicativa": {
+      "estado": "completa",
+      "esperado": 12,
+      "presente": 12
+    },
+    "mapeamento": {
+      "estado": "parcial",
+      "nota": "Ver relacionamentos registrados."
+    }
+  },
+  "alertas": [
+    "O exemplo da página usa Position e Tip, obsoletos a partir da 66.0."
+  ],
+  "estado": "verificado",
+  "evidencias": [
+    {
+      "fonte": "src:objref-eventbussubscriber"
+    }
+  ]
+}
