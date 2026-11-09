@@ -278,3 +278,14 @@ class TestMarcas(BaseTemp):
         self.assertIn("salesforce", com_logo)
         self.assertTrue(all(i == "salesforce" or i.startswith("nuv:") for i in com_logo))
         self.assertEqual(ler(os.path.join(site, "entidades", "salesforce.json"))["logo_marca"]["formato"], "svg")
+
+
+class TestConvencaoCorrespondencia(unittest.TestCase):
+    """Correspondência XML↔API 'direta' ou 'transformada' exige evidência de campo (ex.: o campo Metadata tipado);
+    'mesma coisa por caminhos diferentes' sem prova campo a campo é representacao_comum."""
+
+    def test_correspondencia_forte_aponta_campo(self):
+        for p in glob.glob(os.path.join(BASE, "catalogo", "relacionamentos", "*.json")):
+            r = ler(p)
+            if r["tipo"] == "correspondencia_xml_api" and r.get("natureza_correspondencia") in ("direta", "transformada"):
+                self.assertTrue(r["destino"].get("campo") or r["origem"].get("campo"), f"{r['id']} sem campo comprovado")
