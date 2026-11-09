@@ -129,15 +129,18 @@ O WSDL **não** é bloqueio: a documentação de cada tipo é a fonte alternativ
   - Parciais, com nota: conexões privadas (só a saída), escopos OAuth (só a atribuição) e Bulk API (tela de acompanhamento, não de configuração).
 - **Lote 5j (2026-11-09): objetos API de integração.** 6 objetos com tabela de campos completa (contagem conferida em segunda leitura): NamedCredential (16), ConnectedApplication (15), AuthProvider (30), OauthToken (9), ExternalDataSource (13) e CspTrustedSite (16).
   - Lookups: NamedCredential e ExternalDataSource → AuthProvider; ExternalDataSource → NamedCredential; OauthToken → User.
-  - Correspondências XML↔API: NamedCredential, ConnectedApp↔ConnectedApplication, AuthProvider, ExternalDataSource e CspTrustedSite.
+  - Representações comuns XML↔API: NamedCredential, ConnectedApp↔ConnectedApplication, AuthProvider, ExternalDataSource e CspTrustedSite. Entraram como "correspondência transformada" e foram corrigidas no lote 5k.
   - A exposição na Tooling API ficou `desconhecido`: a lista da Tooling lida na sessão de 2026-11-07 não chega a esses nomes.
   - Extração: `fontes/extracoes/lote5j-objetos-integracao.txt`.
-- **Falta (lote 5k em diante):**
+- **Lote 5k (2026-11-09): versão de API e correção do 5j.**
+  - Correção: os 5 pares XML↔API do lote 5j viraram `representacao_comum`. "Correspondência transformada" exige prova de campo (como o campo Metadata tipado), e ela não existia. Novo teste em `test_insumos.py` protege a convenção.
+  - Versão de API: a única propriedade `apiVersion` do catálogo é mdt:Flow.apiVersion. Ganhou nota apontando o ciclo de vida das versões. O schema não tem relação entre funcionalidade e propriedade, então a ligação ficou só no texto, registrada como limitação.
+- **Falta (depois da série 5):**
   - ConnectedAppMobileDetailConfig (sem tabela na página); attest de external client app e ExtlClntAppOauthSecuritySettings (sem página legível).
   - McpServerDefinition e ApiNamedQuery, quando houver fonte.
   - Conectores de dados (DataConnector*, DataStream*, ExternalDataConnector etc.). Pelos nomes, parecem ser do Data 360: antes de catalogar, decidir se entram na visão Platform/Core ou numa nuvem própria.
   - Outros objetos API do tema (por exemplo, external credentials, configuração SAML, event relay e assinantes), se houver página na Object Reference.
-  - Limites da Metadata API; relação entre a versão de API e os componentes (`apiVersion`).
+  - Limites da Metadata API (página não legível). Relação funcionalidade↔propriedade: exigiria estender o schema; está como decisão pendente.
   - Exemplos XML.
   - Caminhos de Setup restantes: criação de escopo OAuth customizado e de handler de troca de token; conexão de entrada do Private Connect.
 

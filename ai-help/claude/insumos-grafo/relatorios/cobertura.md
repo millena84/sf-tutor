@@ -176,7 +176,7 @@ Gerado por `ferramentas/sftutor.py cobertura`. Cobertura estrutural, explicativa
 ## Relacionamentos
 
 - Total: 126; verificados: 123.
-- Por tipo: correspondencia_xml_api: 16, referencia_campo: 97, representacao_comum: 13
+- Por tipo: correspondencia_xml_api: 11, referencia_campo: 97, representacao_comum: 18
 
 ## Taxonomia e funcionalidades
 
