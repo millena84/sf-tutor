@@ -1,0 +1,56 @@
+Lote 5j (issue #24) — objetos API de integração. Extração documental assistida em 2026-11-09.
+Conteúdo lido via developer.salesforce.com/docs/get_document_content/object_reference/sforce_api_objects_<objeto>.htm/en-us/264.0 (v68.0); contagem de campos conferida em segunda leitura. Notas em português; nomes técnicos no original.
+Propriedades: C create, D defaulted on create, F filter, G group, I idLookup, N nillable, R restricted picklist, S sort, U update.
+
+[src:objref-namedcredential] NamedCredential — representa uma named credential (URL de callout e autenticação). Desde 33.0. Chamadas: describeSObjects(), query(), retrieve(). Desde o Spring '20 exige View Setup and Configuration. 16 campos:
+  AuthProviderId | reference (AuthProvider) | FGNS | 39.0, obsoleto 56.0, legado; só com Customize Application e Manage AuthProviders
+  AuthTokenEndpointUrl | textarea | N | 46.0, obsoleto 56.0, legado
+  CalloutOptionsAllowMergeFieldsInBody | boolean | F | 35.0
+  CalloutOptionsAllowMergeFieldsInHeader | boolean | F | 35.0
+  CalloutOptionsGenerateAuthorizationHeader | boolean | F | 35.0
+  DeveloperName | string | FGS | visível com View DeveloperName ou View Setup and Configuration
+  Endpoint | textarea | N | obsoleto 56.0, legado
+  JwtAudience | textarea | N | 46.0, obsoleto 56.0, legado
+  JwtFormulaSubject | string | FGNS | 46.0, obsoleto 56.0, legado
+  JwtIssuer | string | FGNS | 46.0, obsoleto 56.0, legado
+  JwtTextSubject | string | FGNS | 46.0, obsoleto 56.0, legado
+  JwtValidityPeriodSeconds | int | FGNS | 46.0, obsoleto 56.0, legado
+  Language | picklist | FGRS (valores não listados)
+  MasterLabel | string | FGS
+  NamespacePrefix | string | FGNS
+  PrincipalType | picklist | FGRS | obsoleto 56.0, legado (descrição cita Anonymous e Named Principal)
+[src:objref-connectedapplication] ConnectedApplication — representa um connected app; todos os campos são somente leitura. Versão do objeto não declarada. Chamadas: describeSObjects(), query(), retrieve(). 15 campos:
+  MobileSessionTimeout | picklist | DFGNRS (valores não listados); MobileStartUrl | url | FNS; Name | string | FGIS;
+  NamedUserUvidTimeout | picklist | FGNRS | 59.0 (1, 5, 10, 15, 30; desde 65.0 também 60, 90, 120, 240, 480, 720 minutos);
+  OptionsAllowAdminApprovedUsersOnly | boolean | F; OptionsCodeCredentialGuestEnabled (reservado); OptionsFullContentPushNotifications (interno);
+  OptionsHasSessionLevelPolicy | boolean | F; OptionsIsInternal (interno); OptionsRefreshTokenValidityMetric | boolean | F; OptionsTokenExchangeManageBitEnabled | boolean | F;
+  PinLength | picklist | FGNRS (4, 5, 6, 7, 8); RefreshTokenValidityPeriod | int | FGNS; StartUrl | url | FNS;
+  UvidTimeout | picklist | FGNRS | 59.0 (mesmos valores de NamedUserUvidTimeout).
+[src:objref-authprovider] AuthProvider — provedor de autenticação para login via serviço externo. Desde 27.0. Chamadas: create, delete, describeSObjects, query, retrieve, update, upsert. Exige Customize Application e Manage AuthProviders. 30 campos:
+  AppleTeam | string | CFGNSU | 48.0; AuthorizeUrl | url | CFNSU | 29.0; ConsumerKey | string | CFNSU; ConsumerSecret | string | CN (definido na criação, não muda);
+  CustomMetadataTypeRecord | string | CFGNSU | 36.0; DefaultScopes | string | CFNSU | 29.0; DeveloperName | string | CFGSU (obrigatório); EcKey | string | CFGNSU | 48.0;
+  ErrorUrl | string | CFNSU; ExecutionUserId | reference | CFGNSU | 27.0 (alvo implícito); FlowDefaultAccountId | reference | CFGNSU | 64.0; FlowDefaultProfileId | reference | CFGNSU | 64.0;
+  FriendlyName | string | CFGISU (obrigatório); IconUrl | url | CFNSU | 32.0; IdTokenIssuer | string | CFNSU | 30.0; LinkKickoffUrl | url | N | 43.0 (só leitura);
+  LogoutUrl | url | CFNSU | 33.0; OauthKickoffUrl | url | N | 43.0 (só leitura); OptionsIncludeOrgIdInId | boolean | CFU | 32.0 (não pode ser desligado);
+  OptionsIsPkceEnabled | boolean | CFU | 59.0; OptionsRequireMfa | boolean | F; OptionsSendAccessTokenInHeader | boolean | CFU | 30.0;
+  OptionsSendClientCredentialsInHeader | boolean | CFU | 30.0; OptionsSendSecretInApis | boolean | CFU | 47.0 (ligado por padrão);
+  PluginId | reference | CFGNSU | 39.0 (classe Apex que estende Auth.AuthProviderPluginClass); ProviderType | picklist | CFGRSU (obrigatório);
+  RegistrationHandlerId | reference | CFGNSU (classe Apex que implementa Auth.RegistrationHandler); SsoKickoffUrl | url | N | 43.0 (só leitura);
+  TokenUrl | url | CFNSU | 29.0; UserInfoUrl | url | CFNSU | 29.0.
+  ProviderType: Apple (48.0), Bitbucket (61.0), CommerceCloudAccountManager (67.0), Confluence3LO (67.0), Custom (36.0), Facebook, GitHub (35.0), Google, Janrain, LinkedIn (32.0), Microsoft (55.0), MicrosoftACS (31.0), MuleSoftAnypointPlatform (67.0), OpenIdConnect (29.0), Salesforce, Slack (54.0), Twitter (32.0).
+[src:objref-oauthtoken] OauthToken — token de acesso OAuth de autenticação de connected app. Desde 32.0. Chamadas: describeSObjects(), query(). Customize Application vê todos; os demais, só os próprios. DML e consulta no mesmo call geram UncommittedWork. 9 campos:
+  AccessToken | string | FGNS (a página descreve como o refresh token); AppMenuItemId | reference (AppMenuItem) | FGNS; AppName | string | FGNS; DeleteToken | string | FGNS;
+  Id | ID | DFGIS (reservado; sempre nulo); LastUsedDate | dateTime | FNS; RequestToken | string | FGNS; UseCount | int | FGNS; UserId | reference (User) | FGNS.
+  query() devolve até 500 linhas; queryMore até 2.500 no total; OFFSET máximo 2.000.
+[src:objref-externaldatasource] ExternalDataSource — detalhes de conexão com dados e conteúdo fora da org. Desde 27.0. Chamadas: describeSObjects(), query(), retrieve(). Desde 48.0 só usuários internos e externos autenticados. 13 campos:
+  AuthProviderId | reference (AuthProvider) | FGNS | 39.0; CustomConfiguration | textarea | N; DeveloperName | string | FGS; Endpoint | textarea | N (URL ou callout:);
+  isWritable | boolean | DFGS | 35.0 (só Salesforce Connect); Language | picklist | FGRS; MasterLabel | string | FGS;
+  NamedCredentialId | reference (NamedCredential) | FGNS | 58.0 (obrigatório para DynamoDB, Athena, GraphQL e OData 4.01); NamespacePrefix | string | FGNS;
+  PrincipalType | picklist | FGRS (NamedUser, PerUser, Anonymous); Protocol | picklist | FGRS (OAuth, senha ou nenhum; mais AwsSv4, Basic, Custom, Jwt, JwtExchange para algumas fontes);
+  Repository | string | FGNS (SharePoint Online); Type | picklist | FGRS (valores não listados).
+[src:objref-csptrustedsite] CspTrustedSite — trusted URL, com diretivas CSP e de Permissions-Policy. Desde 39.0. Chamadas: create, delete, describeSObjects, query, retrieve, update, upsert. Até a 58.0 a tela se chamava CSP Trusted Sites. 16 campos:
+  CanAccessCamera | boolean | CDFGSU | 59.0 (default false); CanAccessMicrophone | boolean | CDFGSU | 59.0 (default false); Context | picklist | CFGRSU | 44.0 (All, Communities, FieldServiceMobileExtension, LEX, LightningOut 64.0 reservado, VisualForce 55.0);
+  Description | textarea | CFGNSU (até 255); DeveloperName | string | CFGSU; EndpointUrl | string | CFGSU; IsActive | boolean | CDFGSU;
+  IsApplicableToConnectSrc | boolean | CDFGSU; IsApplicableToFontSrc | boolean | CDFGSU; IsApplicableToFrameSrc | boolean | CDFGSU; IsApplicableToImgSrc | boolean | CDFGSU;
+  IsApplicableToMediaSrc | boolean | CDFGSU; IsApplicableToStyleSrc | boolean | CDFGSU; Language | picklist | CDFGNRSU; MasterLabel | string | CFGSU; NamespacePrefix | string | FGNS.
+  Pelo menos um campo grantAccess* ou isApplicableTo* precisa ser true.

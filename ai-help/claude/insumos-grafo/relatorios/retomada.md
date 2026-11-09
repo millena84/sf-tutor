@@ -127,11 +127,16 @@ O WSDL **não** é bloqueio: a documentação de cada tipo é a fonte alternativ
 - **Lote 5i (2026-11-09): caminhos de Setup da integração.** 19 das 20 funcionalidades que estavam `desconhecido` agora têm caminho verificado na Ajuda ou nos guias oficiais (21 fontes novas, extração em `help-setup-integracao.txt`).
   - Segue `desconhecido`: serviços externos registrados (Commerce). A fonte descreve o registro só por API.
   - Parciais, com nota: conexões privadas (só a saída), escopos OAuth (só a atribuição) e Bulk API (tela de acompanhamento, não de configuração).
-- **Falta (lote 5j em diante):**
+- **Lote 5j (2026-11-09): objetos API de integração.** 6 objetos com tabela de campos completa (contagem conferida em segunda leitura): NamedCredential (16), ConnectedApplication (15), AuthProvider (30), OauthToken (9), ExternalDataSource (13) e CspTrustedSite (16).
+  - Lookups: NamedCredential e ExternalDataSource → AuthProvider; ExternalDataSource → NamedCredential; OauthToken → User.
+  - Correspondências XML↔API: NamedCredential, ConnectedApp↔ConnectedApplication, AuthProvider, ExternalDataSource e CspTrustedSite.
+  - A exposição na Tooling API ficou `desconhecido`: a lista da Tooling lida na sessão de 2026-11-07 não chega a esses nomes.
+  - Extração: `fontes/extracoes/lote5j-objetos-integracao.txt`.
+- **Falta (lote 5k em diante):**
   - ConnectedAppMobileDetailConfig (sem tabela na página); attest de external client app e ExtlClntAppOauthSecuritySettings (sem página legível).
   - McpServerDefinition e ApiNamedQuery, quando houver fonte.
   - Conectores de dados (DataConnector*, DataStream*, ExternalDataConnector etc.). Pelos nomes, parecem ser do Data 360: antes de catalogar, decidir se entram na visão Platform/Core ou numa nuvem própria.
-  - Os **objetos API** do tema.
+  - Outros objetos API do tema (por exemplo, external credentials, configuração SAML, event relay e assinantes), se houver página na Object Reference.
   - Limites da Metadata API; relação entre a versão de API e os componentes (`apiVersion`).
   - Exemplos XML.
   - Caminhos de Setup restantes: criação de escopo OAuth customizado e de handler de troca de token; conexão de entrada do Private Connect.

@@ -243,3 +243,18 @@ describe('ConnectedApp e __e/__x (lote 5h)', () => {
     expect(t?.destino.endsWith('mdt:ExternalDataSource')).toBe(true);
   });
 });
+
+describe('objetos API de integração (lote 5j)', () => {
+  it('objetos ficam sob as funcionalidades de integração', () => {
+    expect(ind.caminhoPreferido('obj:NamedCredential', 'funcionalidade')).toContain('func:named-credentials');
+    expect(ind.caminhoPreferido('obj:OauthToken.UserId', 'funcionalidade')).toContain('func:connected-apps');
+    expect(ind.caminhoPreferido('obj:CspTrustedSite', 'funcionalidade')).toContain('func:csp-trusted-sites');
+  });
+  it('ExternalDataSource.NamedCredentialId liga a fonte à named credential', () => {
+    const e = exp0();
+    revelarCaminho(ind, 'funcionalidade', e, ind.caminhoPreferido('obj:ExternalDataSource.NamedCredentialId', 'funcionalidade')!);
+    revelarCaminho(ind, 'funcionalidade', e, ind.caminhoPreferido('obj:NamedCredential', 'funcionalidade')!);
+    const t = montarCena(ind, 'funcionalidade', e).arestas.find((a) => a.tecnica && a.aresta?.rel_id === 'rel:externaldatasource-namedcredential');
+    expect(t?.destino.endsWith('obj:NamedCredential')).toBe(true);
+  });
+});

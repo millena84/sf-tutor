@@ -478,6 +478,12 @@
     "tipo": "representacao_xml"
   },
   {
+    "destino": "obj:AuthProvider",
+    "origem": "func:auth-providers",
+    "papel": "Provedor exposto por API, com criação e edição.",
+    "tipo": "representacao_objeto_api"
+  },
+  {
     "destino": "mdt:CampaignSettings",
     "origem": "func:campanhas",
     "papel": "Configurações da org (Settings).",
@@ -592,6 +598,18 @@
     "tipo": "representacao_xml"
   },
   {
+    "destino": "obj:ConnectedApplication",
+    "origem": "func:connected-apps",
+    "papel": "Consulta das políticas do app, só leitura.",
+    "tipo": "representacao_objeto_api"
+  },
+  {
+    "destino": "obj:OauthToken",
+    "origem": "func:connected-apps",
+    "papel": "Tokens emitidos por usuário; gestão e revogação.",
+    "tipo": "representacao_objeto_api"
+  },
+  {
     "destino": "mdt:AccountSettings",
     "origem": "func:contas",
     "papel": "Configurações da org (Settings).",
@@ -638,6 +656,12 @@
     "origem": "func:csp-trusted-sites",
     "papel": "Registro do site confiável e das diretivas liberadas.",
     "tipo": "representacao_xml"
+  },
+  {
+    "destino": "obj:CspTrustedSite",
+    "origem": "func:csp-trusted-sites",
+    "papel": "Trusted URL exposta por API, com criação e edição.",
+    "tipo": "representacao_objeto_api"
   },
   {
     "destino": "mdt:EntitlementProcess",
@@ -826,6 +850,12 @@
     "tipo": "representacao_xml"
   },
   {
+    "destino": "obj:ExternalDataSource",
+    "origem": "func:external-objects",
+    "papel": "Fonte de dados externa exposta para consulta.",
+    "tipo": "representacao_objeto_api"
+  },
+  {
     "destino": "mdt:ExternalServiceRegistration",
     "origem": "func:external-services",
     "papel": "Registro da especificação e das operações.",
@@ -926,6 +956,12 @@
     "origem": "func:named-credentials",
     "papel": "Endpoint e parâmetros da chamada.",
     "tipo": "representacao_xml"
+  },
+  {
+    "destino": "obj:NamedCredential",
+    "origem": "func:named-credentials",
+    "papel": "Consulta das named credentials (muitos campos são do modelo legado).",
+    "tipo": "representacao_objeto_api"
   },
   {
     "destino": "mdt:OauthCustomScope",
@@ -1598,6 +1634,14 @@
     "tipo": "propriedade"
   },
   {
+    "destino": "obj:AuthProvider",
+    "estado": "verificado",
+    "natureza": "transformada",
+    "origem": "mdt:AuthProvider",
+    "rel_id": "rel:cor-authprovider",
+    "tipo": "correspondencia_xml_api"
+  },
+  {
     "destino": "mdx:AuthProvParamFwdAllowlist",
     "origem": "mdt:AuthProvider.paramForwardAllowlist",
     "tipo": "tipo_composto"
@@ -1828,6 +1872,14 @@
     "tipo": "propriedade"
   },
   {
+    "destino": "obj:ConnectedApplication",
+    "estado": "verificado",
+    "natureza": "transformada",
+    "origem": "mdt:ConnectedApp",
+    "rel_id": "rel:cor-connectedapp",
+    "tipo": "correspondencia_xml_api"
+  },
+  {
     "destino": "mdx:ConnectedAppAttribute",
     "origem": "mdt:ConnectedApp.attributes",
     "tipo": "tipo_composto"
@@ -1970,6 +2022,14 @@
     "destino": "mdt:CspTrustedSite.mobileExtension",
     "origem": "mdt:CspTrustedSite",
     "tipo": "propriedade"
+  },
+  {
+    "destino": "obj:CspTrustedSite",
+    "estado": "verificado",
+    "natureza": "transformada",
+    "origem": "mdt:CspTrustedSite",
+    "rel_id": "rel:cor-csptrustedsite",
+    "tipo": "correspondencia_xml_api"
   },
   {
     "destino": "mdt:CustomField.businessOwnerGroup",
@@ -3175,11 +3235,12 @@
     "tipo": "propriedade"
   },
   {
-    "destino": "mdt:AuthProvider",
+    "destino": "obj:ExternalDataSource",
     "estado": "verificado",
-    "origem": "mdt:ExternalDataSource.authProvider",
-    "rel_id": "rel:externaldatasource-authprovider",
-    "tipo": "referencia_campo"
+    "natureza": "transformada",
+    "origem": "mdt:ExternalDataSource",
+    "rel_id": "rel:cor-externaldatasource",
+    "tipo": "correspondencia_xml_api"
   },
   {
     "destino": "mdx:CustomHttpHeaders",
@@ -3190,13 +3251,6 @@
     "destino": "mdx:ExternalDataSrcDescriptors",
     "origem": "mdt:ExternalDataSource.externalDataSrcDescriptors",
     "tipo": "tipo_composto"
-  },
-  {
-    "destino": "mdt:NamedCredential",
-    "estado": "verificado",
-    "origem": "mdt:ExternalDataSource.namedCredential",
-    "rel_id": "rel:externaldatasource-namedcredential",
-    "tipo": "referencia_campo"
   },
   {
     "destino": "mdt:ExternalServiceRegistration.catalogedApiVersion",
@@ -4849,6 +4903,14 @@
     "destino": "mdt:NamedCredential.username",
     "origem": "mdt:NamedCredential",
     "tipo": "propriedade"
+  },
+  {
+    "destino": "obj:NamedCredential",
+    "estado": "verificado",
+    "natureza": "transformada",
+    "origem": "mdt:NamedCredential",
+    "rel_id": "rel:cor-namedcredential",
+    "tipo": "correspondencia_xml_api"
   },
   {
     "destino": "mdx:NamedCredentialParameter",
@@ -10112,6 +10174,156 @@
     "tipo": "campo"
   },
   {
+    "destino": "obj:AuthProvider.AppleTeam",
+    "origem": "obj:AuthProvider",
+    "tipo": "campo"
+  },
+  {
+    "destino": "obj:AuthProvider.AuthorizeUrl",
+    "origem": "obj:AuthProvider",
+    "tipo": "campo"
+  },
+  {
+    "destino": "obj:AuthProvider.ConsumerKey",
+    "origem": "obj:AuthProvider",
+    "tipo": "campo"
+  },
+  {
+    "destino": "obj:AuthProvider.ConsumerSecret",
+    "origem": "obj:AuthProvider",
+    "tipo": "campo"
+  },
+  {
+    "destino": "obj:AuthProvider.CustomMetadataTypeRecord",
+    "origem": "obj:AuthProvider",
+    "tipo": "campo"
+  },
+  {
+    "destino": "obj:AuthProvider.DefaultScopes",
+    "origem": "obj:AuthProvider",
+    "tipo": "campo"
+  },
+  {
+    "destino": "obj:AuthProvider.DeveloperName",
+    "origem": "obj:AuthProvider",
+    "tipo": "campo"
+  },
+  {
+    "destino": "obj:AuthProvider.EcKey",
+    "origem": "obj:AuthProvider",
+    "tipo": "campo"
+  },
+  {
+    "destino": "obj:AuthProvider.ErrorUrl",
+    "origem": "obj:AuthProvider",
+    "tipo": "campo"
+  },
+  {
+    "destino": "obj:AuthProvider.ExecutionUserId",
+    "origem": "obj:AuthProvider",
+    "tipo": "campo"
+  },
+  {
+    "destino": "obj:AuthProvider.FlowDefaultAccountId",
+    "origem": "obj:AuthProvider",
+    "tipo": "campo"
+  },
+  {
+    "destino": "obj:AuthProvider.FlowDefaultProfileId",
+    "origem": "obj:AuthProvider",
+    "tipo": "campo"
+  },
+  {
+    "destino": "obj:AuthProvider.FriendlyName",
+    "origem": "obj:AuthProvider",
+    "tipo": "campo"
+  },
+  {
+    "destino": "obj:AuthProvider.IconUrl",
+    "origem": "obj:AuthProvider",
+    "tipo": "campo"
+  },
+  {
+    "destino": "obj:AuthProvider.IdTokenIssuer",
+    "origem": "obj:AuthProvider",
+    "tipo": "campo"
+  },
+  {
+    "destino": "obj:AuthProvider.LinkKickoffUrl",
+    "origem": "obj:AuthProvider",
+    "tipo": "campo"
+  },
+  {
+    "destino": "obj:AuthProvider.LogoutUrl",
+    "origem": "obj:AuthProvider",
+    "tipo": "campo"
+  },
+  {
+    "destino": "obj:AuthProvider.OauthKickoffUrl",
+    "origem": "obj:AuthProvider",
+    "tipo": "campo"
+  },
+  {
+    "destino": "obj:AuthProvider.OptionsIncludeOrgIdInId",
+    "origem": "obj:AuthProvider",
+    "tipo": "campo"
+  },
+  {
+    "destino": "obj:AuthProvider.OptionsIsPkceEnabled",
+    "origem": "obj:AuthProvider",
+    "tipo": "campo"
+  },
+  {
+    "destino": "obj:AuthProvider.OptionsRequireMfa",
+    "origem": "obj:AuthProvider",
+    "tipo": "campo"
+  },
+  {
+    "destino": "obj:AuthProvider.OptionsSendAccessTokenInHeader",
+    "origem": "obj:AuthProvider",
+    "tipo": "campo"
+  },
+  {
+    "destino": "obj:AuthProvider.OptionsSendClientCredentialsInHeader",
+    "origem": "obj:AuthProvider",
+    "tipo": "campo"
+  },
+  {
+    "destino": "obj:AuthProvider.OptionsSendSecretInApis",
+    "origem": "obj:AuthProvider",
+    "tipo": "campo"
+  },
+  {
+    "destino": "obj:AuthProvider.PluginId",
+    "origem": "obj:AuthProvider",
+    "tipo": "campo"
+  },
+  {
+    "destino": "obj:AuthProvider.ProviderType",
+    "origem": "obj:AuthProvider",
+    "tipo": "campo"
+  },
+  {
+    "destino": "obj:AuthProvider.RegistrationHandlerId",
+    "origem": "obj:AuthProvider",
+    "tipo": "campo"
+  },
+  {
+    "destino": "obj:AuthProvider.SsoKickoffUrl",
+    "origem": "obj:AuthProvider",
+    "tipo": "campo"
+  },
+  {
+    "destino": "obj:AuthProvider.TokenUrl",
+    "origem": "obj:AuthProvider",
+    "tipo": "campo"
+  },
+  {
+    "destino": "obj:AuthProvider.UserInfoUrl",
+    "origem": "obj:AuthProvider",
+    "tipo": "campo"
+  },
+  {
     "destino": "obj:BusinessHours.BusinessHoursId",
     "origem": "obj:BusinessHours",
     "tipo": "campo"
@@ -11054,6 +11266,81 @@
     "tipo": "referencia_campo"
   },
   {
+    "destino": "obj:ConnectedApplication.MobileSessionTimeout",
+    "origem": "obj:ConnectedApplication",
+    "tipo": "campo"
+  },
+  {
+    "destino": "obj:ConnectedApplication.MobileStartUrl",
+    "origem": "obj:ConnectedApplication",
+    "tipo": "campo"
+  },
+  {
+    "destino": "obj:ConnectedApplication.Name",
+    "origem": "obj:ConnectedApplication",
+    "tipo": "campo"
+  },
+  {
+    "destino": "obj:ConnectedApplication.NamedUserUvidTimeout",
+    "origem": "obj:ConnectedApplication",
+    "tipo": "campo"
+  },
+  {
+    "destino": "obj:ConnectedApplication.OptionsAllowAdminApprovedUsersOnly",
+    "origem": "obj:ConnectedApplication",
+    "tipo": "campo"
+  },
+  {
+    "destino": "obj:ConnectedApplication.OptionsCodeCredentialGuestEnabled",
+    "origem": "obj:ConnectedApplication",
+    "tipo": "campo"
+  },
+  {
+    "destino": "obj:ConnectedApplication.OptionsFullContentPushNotifications",
+    "origem": "obj:ConnectedApplication",
+    "tipo": "campo"
+  },
+  {
+    "destino": "obj:ConnectedApplication.OptionsHasSessionLevelPolicy",
+    "origem": "obj:ConnectedApplication",
+    "tipo": "campo"
+  },
+  {
+    "destino": "obj:ConnectedApplication.OptionsIsInternal",
+    "origem": "obj:ConnectedApplication",
+    "tipo": "campo"
+  },
+  {
+    "destino": "obj:ConnectedApplication.OptionsRefreshTokenValidityMetric",
+    "origem": "obj:ConnectedApplication",
+    "tipo": "campo"
+  },
+  {
+    "destino": "obj:ConnectedApplication.OptionsTokenExchangeManageBitEnabled",
+    "origem": "obj:ConnectedApplication",
+    "tipo": "campo"
+  },
+  {
+    "destino": "obj:ConnectedApplication.PinLength",
+    "origem": "obj:ConnectedApplication",
+    "tipo": "campo"
+  },
+  {
+    "destino": "obj:ConnectedApplication.RefreshTokenValidityPeriod",
+    "origem": "obj:ConnectedApplication",
+    "tipo": "campo"
+  },
+  {
+    "destino": "obj:ConnectedApplication.StartUrl",
+    "origem": "obj:ConnectedApplication",
+    "tipo": "campo"
+  },
+  {
+    "destino": "obj:ConnectedApplication.UvidTimeout",
+    "origem": "obj:ConnectedApplication",
+    "tipo": "campo"
+  },
+  {
     "destino": "obj:Contact.AccountId",
     "origem": "obj:Contact",
     "tipo": "campo"
@@ -11244,6 +11531,86 @@
     "origem": "obj:Contact.AccountId",
     "rel_id": "rel:contact-account",
     "tipo": "referencia_campo"
+  },
+  {
+    "destino": "obj:CspTrustedSite.CanAccessCamera",
+    "origem": "obj:CspTrustedSite",
+    "tipo": "campo"
+  },
+  {
+    "destino": "obj:CspTrustedSite.CanAccessMicrophone",
+    "origem": "obj:CspTrustedSite",
+    "tipo": "campo"
+  },
+  {
+    "destino": "obj:CspTrustedSite.Context",
+    "origem": "obj:CspTrustedSite",
+    "tipo": "campo"
+  },
+  {
+    "destino": "obj:CspTrustedSite.Description",
+    "origem": "obj:CspTrustedSite",
+    "tipo": "campo"
+  },
+  {
+    "destino": "obj:CspTrustedSite.DeveloperName",
+    "origem": "obj:CspTrustedSite",
+    "tipo": "campo"
+  },
+  {
+    "destino": "obj:CspTrustedSite.EndpointUrl",
+    "origem": "obj:CspTrustedSite",
+    "tipo": "campo"
+  },
+  {
+    "destino": "obj:CspTrustedSite.IsActive",
+    "origem": "obj:CspTrustedSite",
+    "tipo": "campo"
+  },
+  {
+    "destino": "obj:CspTrustedSite.IsApplicableToConnectSrc",
+    "origem": "obj:CspTrustedSite",
+    "tipo": "campo"
+  },
+  {
+    "destino": "obj:CspTrustedSite.IsApplicableToFontSrc",
+    "origem": "obj:CspTrustedSite",
+    "tipo": "campo"
+  },
+  {
+    "destino": "obj:CspTrustedSite.IsApplicableToFrameSrc",
+    "origem": "obj:CspTrustedSite",
+    "tipo": "campo"
+  },
+  {
+    "destino": "obj:CspTrustedSite.IsApplicableToImgSrc",
+    "origem": "obj:CspTrustedSite",
+    "tipo": "campo"
+  },
+  {
+    "destino": "obj:CspTrustedSite.IsApplicableToMediaSrc",
+    "origem": "obj:CspTrustedSite",
+    "tipo": "campo"
+  },
+  {
+    "destino": "obj:CspTrustedSite.IsApplicableToStyleSrc",
+    "origem": "obj:CspTrustedSite",
+    "tipo": "campo"
+  },
+  {
+    "destino": "obj:CspTrustedSite.Language",
+    "origem": "obj:CspTrustedSite",
+    "tipo": "campo"
+  },
+  {
+    "destino": "obj:CspTrustedSite.MasterLabel",
+    "origem": "obj:CspTrustedSite",
+    "tipo": "campo"
+  },
+  {
+    "destino": "obj:CspTrustedSite.NamespacePrefix",
+    "origem": "obj:CspTrustedSite",
+    "tipo": "campo"
   },
   {
     "destino": "obj:CustomField.DeveloperName",
@@ -11652,6 +12019,85 @@
     "destino": "obj:EventBusSubscriber.Type",
     "origem": "obj:EventBusSubscriber",
     "tipo": "campo"
+  },
+  {
+    "destino": "obj:ExternalDataSource.AuthProviderId",
+    "origem": "obj:ExternalDataSource",
+    "tipo": "campo"
+  },
+  {
+    "destino": "obj:ExternalDataSource.CustomConfiguration",
+    "origem": "obj:ExternalDataSource",
+    "tipo": "campo"
+  },
+  {
+    "destino": "obj:ExternalDataSource.DeveloperName",
+    "origem": "obj:ExternalDataSource",
+    "tipo": "campo"
+  },
+  {
+    "destino": "obj:ExternalDataSource.Endpoint",
+    "origem": "obj:ExternalDataSource",
+    "tipo": "campo"
+  },
+  {
+    "destino": "obj:ExternalDataSource.Language",
+    "origem": "obj:ExternalDataSource",
+    "tipo": "campo"
+  },
+  {
+    "destino": "obj:ExternalDataSource.MasterLabel",
+    "origem": "obj:ExternalDataSource",
+    "tipo": "campo"
+  },
+  {
+    "destino": "obj:ExternalDataSource.NamedCredentialId",
+    "origem": "obj:ExternalDataSource",
+    "tipo": "campo"
+  },
+  {
+    "destino": "obj:ExternalDataSource.NamespacePrefix",
+    "origem": "obj:ExternalDataSource",
+    "tipo": "campo"
+  },
+  {
+    "destino": "obj:ExternalDataSource.PrincipalType",
+    "origem": "obj:ExternalDataSource",
+    "tipo": "campo"
+  },
+  {
+    "destino": "obj:ExternalDataSource.Protocol",
+    "origem": "obj:ExternalDataSource",
+    "tipo": "campo"
+  },
+  {
+    "destino": "obj:ExternalDataSource.Repository",
+    "origem": "obj:ExternalDataSource",
+    "tipo": "campo"
+  },
+  {
+    "destino": "obj:ExternalDataSource.Type",
+    "origem": "obj:ExternalDataSource",
+    "tipo": "campo"
+  },
+  {
+    "destino": "obj:ExternalDataSource.isWritable",
+    "origem": "obj:ExternalDataSource",
+    "tipo": "campo"
+  },
+  {
+    "destino": "obj:AuthProvider",
+    "estado": "verificado",
+    "origem": "obj:ExternalDataSource.AuthProviderId",
+    "rel_id": "rel:externaldatasource-authprovider",
+    "tipo": "referencia_campo"
+  },
+  {
+    "destino": "obj:NamedCredential",
+    "estado": "verificado",
+    "origem": "obj:ExternalDataSource.NamedCredentialId",
+    "rel_id": "rel:externaldatasource-namedcredential",
+    "tipo": "referencia_campo"
   },
   {
     "destino": "obj:FieldDefinition.DataType",
@@ -13261,6 +13707,145 @@
     "destino": "obj:MilestoneType.RecurrenceType",
     "origem": "obj:MilestoneType",
     "tipo": "campo"
+  },
+  {
+    "destino": "obj:NamedCredential.AuthProviderId",
+    "origem": "obj:NamedCredential",
+    "tipo": "campo"
+  },
+  {
+    "destino": "obj:NamedCredential.AuthTokenEndpointUrl",
+    "origem": "obj:NamedCredential",
+    "tipo": "campo"
+  },
+  {
+    "destino": "obj:NamedCredential.CalloutOptionsAllowMergeFieldsInBody",
+    "origem": "obj:NamedCredential",
+    "tipo": "campo"
+  },
+  {
+    "destino": "obj:NamedCredential.CalloutOptionsAllowMergeFieldsInHeader",
+    "origem": "obj:NamedCredential",
+    "tipo": "campo"
+  },
+  {
+    "destino": "obj:NamedCredential.CalloutOptionsGenerateAuthorizationHeader",
+    "origem": "obj:NamedCredential",
+    "tipo": "campo"
+  },
+  {
+    "destino": "obj:NamedCredential.DeveloperName",
+    "origem": "obj:NamedCredential",
+    "tipo": "campo"
+  },
+  {
+    "destino": "obj:NamedCredential.Endpoint",
+    "origem": "obj:NamedCredential",
+    "tipo": "campo"
+  },
+  {
+    "destino": "obj:NamedCredential.JwtAudience",
+    "origem": "obj:NamedCredential",
+    "tipo": "campo"
+  },
+  {
+    "destino": "obj:NamedCredential.JwtFormulaSubject",
+    "origem": "obj:NamedCredential",
+    "tipo": "campo"
+  },
+  {
+    "destino": "obj:NamedCredential.JwtIssuer",
+    "origem": "obj:NamedCredential",
+    "tipo": "campo"
+  },
+  {
+    "destino": "obj:NamedCredential.JwtTextSubject",
+    "origem": "obj:NamedCredential",
+    "tipo": "campo"
+  },
+  {
+    "destino": "obj:NamedCredential.JwtValidityPeriodSeconds",
+    "origem": "obj:NamedCredential",
+    "tipo": "campo"
+  },
+  {
+    "destino": "obj:NamedCredential.Language",
+    "origem": "obj:NamedCredential",
+    "tipo": "campo"
+  },
+  {
+    "destino": "obj:NamedCredential.MasterLabel",
+    "origem": "obj:NamedCredential",
+    "tipo": "campo"
+  },
+  {
+    "destino": "obj:NamedCredential.NamespacePrefix",
+    "origem": "obj:NamedCredential",
+    "tipo": "campo"
+  },
+  {
+    "destino": "obj:NamedCredential.PrincipalType",
+    "origem": "obj:NamedCredential",
+    "tipo": "campo"
+  },
+  {
+    "destino": "obj:AuthProvider",
+    "estado": "verificado",
+    "origem": "obj:NamedCredential.AuthProviderId",
+    "rel_id": "rel:namedcredential-authprovider",
+    "tipo": "referencia_campo"
+  },
+  {
+    "destino": "obj:OauthToken.AccessToken",
+    "origem": "obj:OauthToken",
+    "tipo": "campo"
+  },
+  {
+    "destino": "obj:OauthToken.AppMenuItemId",
+    "origem": "obj:OauthToken",
+    "tipo": "campo"
+  },
+  {
+    "destino": "obj:OauthToken.AppName",
+    "origem": "obj:OauthToken",
+    "tipo": "campo"
+  },
+  {
+    "destino": "obj:OauthToken.DeleteToken",
+    "origem": "obj:OauthToken",
+    "tipo": "campo"
+  },
+  {
+    "destino": "obj:OauthToken.Id",
+    "origem": "obj:OauthToken",
+    "tipo": "campo"
+  },
+  {
+    "destino": "obj:OauthToken.LastUsedDate",
+    "origem": "obj:OauthToken",
+    "tipo": "campo"
+  },
+  {
+    "destino": "obj:OauthToken.RequestToken",
+    "origem": "obj:OauthToken",
+    "tipo": "campo"
+  },
+  {
+    "destino": "obj:OauthToken.UseCount",
+    "origem": "obj:OauthToken",
+    "tipo": "campo"
+  },
+  {
+    "destino": "obj:OauthToken.UserId",
+    "origem": "obj:OauthToken",
+    "tipo": "campo"
+  },
+  {
+    "destino": "obj:User",
+    "estado": "verificado",
+    "origem": "obj:OauthToken.UserId",
+    "rel_id": "rel:oauthtoken-user",
+    "tipo": "referencia_campo"
   },
   {
     "destino": "obj:ObjectTerritory2Association.AssociationCause",
