@@ -1,8 +1,16 @@
 {
   "funcionalidades": [
     {
+      "id": "func:external-objects",
+      "nome": "Objetos externos (Salesforce Connect)"
+    },
+    {
       "id": "func:objetos-customizados",
       "nome": "Objetos customizados"
+    },
+    {
+      "id": "func:platform-events",
+      "nome": "Eventos de plataforma"
     }
   ],
   "metadata_type": {
@@ -1544,6 +1552,12 @@
           ],
           "nota": "Propriedade definida pelo schema da Metadata API.",
           "valor": "padrao_plataforma"
+        },
+        "referencia": {
+          "alvos": [
+            "mdt:ExternalDataSource"
+          ],
+          "nota": "Referência pelo nome do componente no XML."
         },
         "tipo_tecnico": "string"
       },
@@ -4954,6 +4968,24 @@
         "entidade": "mdt:CustomObject"
       },
       "tipo": "correspondencia_xml_api"
+    },
+    {
+      "destino": {
+        "entidade": "mdt:ExternalDataSource"
+      },
+      "estado": "verificado",
+      "evidencias": [
+        {
+          "fonte": "src:mdapi-customobject"
+        }
+      ],
+      "explicacao": "Um objeto externo (__x) aponta a fonte de dados externa que guarda os seus dados. A referência é pelo nome do componente, no XML (não é um lookup entre registros).",
+      "id": "rel:customobject-externaldatasource",
+      "origem": {
+        "campo": "externalDataSource",
+        "entidade": "mdt:CustomObject"
+      },
+      "tipo": "referencia_campo"
     }
   ],
   "versao_base": {

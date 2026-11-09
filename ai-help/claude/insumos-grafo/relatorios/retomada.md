@@ -117,13 +117,19 @@ O WSDL **não** é bloqueio: a documentação de cada tipo é a fonte alternativ
   - Plugins de external client app: mobile (configurações e políticas), push (configurações e políticas), canvas, notificação e políticas SAML.
   - Não obtidos (as URLs devolveram binário): ExtlClntAppAttestSettings, ExtlClntAppAttestConfigurablePolicies e ExtlClntAppOauthSecuritySettings.
   - Extração: `fontes/extracoes/mdapi-lote5g.txt`.
-- **Falta (lote 5h em diante):**
-  - Sub-estruturas pendentes de ConnectedApp; attest de external client app e ExtlClntAppOauthSecuritySettings (sem página legível).
+- **Lote 5h (2026-11-09): ConnectedApp completo e definição de __e/__x.**
+  - Lendo a página de ConnectedApp em partes, saíram 4 estruturas: ConnectedAppOauthIdToken, ConnectedAppOauthPolicy, ConnectedAppSamlConfig e ConnectedAppSessionPolicy. Com isso, ConnectedApp e ConnectedAppOauthConfig ficaram com cobertura estrutural completa.
+  - A atualização da extração foi anexada a `mdapi-lote5b.txt`. O `lote5b.py` foi atualizado e roda de novo antes do `lote5g.py`.
+  - ConnectedAppMobileDetailConfig não tem tabela na página (só o elemento `mobileAppConfig` no exemplo XML): continua fora do catálogo.
+  - Referências novas: ConnectedAppSamlConfig.encryptionCertificate → Certificate e CustomObject.externalDataSource → ExternalDataSource. A página diz "nome" nos dois casos.
+  - Eventos de plataforma e objetos externos passam a apontar CustomObject como a definição do `__e` e do `__x`.
+  - Attest de external client app e ExtlClntAppOauthSecuritySettings seguem sem página legível (o atlas também falhou).
+- **Falta (lote 5i em diante):**
+  - ConnectedAppMobileDetailConfig (sem tabela na página); attest de external client app e ExtlClntAppOauthSecuritySettings (sem página legível).
   - McpServerDefinition e ApiNamedQuery, quando houver fonte.
-  - Conectores de dados.
+  - Conectores de dados (DataConnector*, DataStream*, ExternalDataConnector etc.). Pelos nomes, parecem ser do Data 360: antes de catalogar, decidir se entram na visão Platform/Core ou numa nuvem própria.
   - Os **objetos API** do tema.
   - Limites da Metadata API; relação entre a versão de API e os componentes (`apiVersion`).
-  - A definição do evento (`__e`) e do objeto externo (`__x`), ambos via CustomObject.
   - Exemplos XML.
   - Caminhos de Setup, ainda `desconhecido`.
 
