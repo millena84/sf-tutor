@@ -99,12 +99,20 @@ O WSDL **não** é bloqueio: a documentação de cada tipo é a fonte alternativ
   - O nome Private Connect foi confirmado no recurso /limits e entrou como alias de conexões de rede privadas.
   - O painel do site passou a mostrar `representacoes.codigo` e `representacoes.interface`.
   - Extração: `fontes/extracoes/lote5d-contratos-limites.txt`.
-- **Falta (lote 5e em diante):**
+- **Lote 5e (2026-11-09): INT-07, segunda parte.** 3 funcionalidades novas.
+  - Limites e falhas de callouts (principal INT-07): 100 por transação, timeouts e operações pendentes.
+  - Bulk API 2.0 e Bulk API (principal APIs de dados e metadados; secundária INT-07): a primeira API catalogada como funcionalidade nessa sub-classificação.
+  - Pub/Sub API (principal eventos e mensageria; secundária INT-07): ligada a ManagedEventSubscription e PlatformEventUsageMetric.
+  - As páginas da Pub/Sub API não têm versão; o registro diz isso.
+  - Extração: `fontes/extracoes/lote5e-int07.txt`.
+  - Ainda fora: relação geral entre a versão de API e os componentes (`apiVersion`).
+- **Falta (lote 5f em diante):**
   - Sub-estruturas pendentes de ConnectedApp e plugins de external client app: mobile, push, canvas, notificação, attest, SAML e ExtlClntAppOauthSecuritySettings.
   - Outros certificados: PublicKeyCertificate, PublicKeyCertificateSet, UserAuthCertificate e InboundCertificate.
   - McpServerDefinition e ApiNamedQuery, quando houver fonte.
   - Conectores de dados.
   - Os **objetos API** do tema.
+  - As demais APIs como funcionalidades (REST, SOAP, Metadata, Tooling, Composite); só Bulk API e Pub/Sub API estão cadastradas.
   - A definição do evento (`__e`) e do objeto externo (`__x`), ambos via CustomObject.
   - Exemplos XML.
   - Caminhos de Setup, ainda `desconhecido`.

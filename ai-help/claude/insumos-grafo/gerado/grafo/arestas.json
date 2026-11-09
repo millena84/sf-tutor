@@ -1114,6 +1114,18 @@
     "tipo": "representacao_objeto_api"
   },
   {
+    "destino": "mdt:ManagedEventSubscription",
+    "origem": "func:pub-sub-api",
+    "papel": "Assinatura gerenciada, consumida pelo ManagedSubscribe.",
+    "tipo": "representacao_xml"
+  },
+  {
+    "destino": "obj:PlatformEventUsageMetric",
+    "origem": "func:pub-sub-api",
+    "papel": "Uso de publicação e entrega; o cliente aparece como PUB_SUB_API.",
+    "tipo": "representacao_objeto_api"
+  },
+  {
     "destino": "mdt:AssignmentRules",
     "origem": "func:regras-de-atribuicao",
     "papel": "Regras de atribuição implantáveis, por objeto.",
@@ -8080,6 +8092,15 @@
     ]
   },
   {
+    "destino": "func:bulk-api",
+    "origem": "nuv:platform-core",
+    "tipo": "nuvem_funcionalidade",
+    "via": [
+      "cls:integracao-apis-e-eventos",
+      "sub:apis-de-dados-e-metadados"
+    ]
+  },
+  {
     "destino": "func:campos-customizados",
     "origem": "nuv:platform-core",
     "tipo": "nuvem_funcionalidade",
@@ -8215,6 +8236,15 @@
     ]
   },
   {
+    "destino": "func:limites-e-falhas-de-callouts",
+    "origem": "nuv:platform-core",
+    "tipo": "nuvem_funcionalidade",
+    "via": [
+      "cls:integracao-apis-e-eventos",
+      "sub:contratos-limites-e-tratamento-de-falhas"
+    ]
+  },
+  {
     "destino": "func:named-credentials",
     "origem": "nuv:platform-core",
     "tipo": "nuvem_funcionalidade",
@@ -8279,6 +8309,15 @@
   },
   {
     "destino": "func:platform-events",
+    "origem": "nuv:platform-core",
+    "tipo": "nuvem_funcionalidade",
+    "via": [
+      "cls:integracao-apis-e-eventos",
+      "sub:eventos-e-mensageria"
+    ]
+  },
+  {
+    "destino": "func:pub-sub-api",
     "origem": "nuv:platform-core",
     "tipo": "nuvem_funcionalidade",
     "via": [
@@ -16418,6 +16457,11 @@
     "tipo": "classificacao_principal"
   },
   {
+    "destino": "func:bulk-api",
+    "origem": "sub:apis-de-dados-e-metadados",
+    "tipo": "classificacao_principal"
+  },
+  {
     "destino": "func:cors",
     "origem": "sub:apis-de-dados-e-metadados",
     "tipo": "classificacao_principal"
@@ -16548,6 +16592,12 @@
     "tipo": "classificacao_principal"
   },
   {
+    "destino": "func:limites-e-falhas-de-callouts",
+    "motivo": "Restringe as chamadas a endpoints externos feitas em Apex.",
+    "origem": "sub:chamadas-externas-e-endpoints",
+    "tipo": "classificacao_secundaria"
+  },
+  {
     "destino": "func:remote-site-settings",
     "origem": "sub:chamadas-externas-e-endpoints",
     "tipo": "classificacao_principal"
@@ -16561,6 +16611,12 @@
     "destino": "func:external-objects",
     "origem": "sub:conectividade-e-virtualizacao-de-dados",
     "tipo": "classificacao_principal"
+  },
+  {
+    "destino": "func:bulk-api",
+    "motivo": "Tem alocações próprias de lotes, jobs, arquivos e consultas, e regras de retentativa.",
+    "origem": "sub:contratos-limites-e-tratamento-de-falhas",
+    "tipo": "classificacao_secundaria"
   },
   {
     "destino": "func:event-relay",
@@ -16580,8 +16636,19 @@
     "tipo": "classificacao_principal"
   },
   {
+    "destino": "func:limites-e-falhas-de-callouts",
+    "origem": "sub:contratos-limites-e-tratamento-de-falhas",
+    "tipo": "classificacao_principal"
+  },
+  {
     "destino": "func:platform-events",
     "motivo": "Publicação e entrega de eventos têm alocações próprias, listadas no recurso /limits.",
+    "origem": "sub:contratos-limites-e-tratamento-de-falhas",
+    "tipo": "classificacao_secundaria"
+  },
+  {
+    "destino": "func:pub-sub-api",
+    "motivo": "Tem alocações próprias de publicação, assinatura e conexões.",
     "origem": "sub:contratos-limites-e-tratamento-de-falhas",
     "tipo": "classificacao_secundaria"
   },
@@ -16623,6 +16690,11 @@
   },
   {
     "destino": "func:platform-events",
+    "origem": "sub:eventos-e-mensageria",
+    "tipo": "classificacao_principal"
+  },
+  {
+    "destino": "func:pub-sub-api",
     "origem": "sub:eventos-e-mensageria",
     "tipo": "classificacao_principal"
   },

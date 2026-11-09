@@ -1,0 +1,38 @@
+Lote 5e (issue #24) — contratos, limites e tratamento de falhas, segunda parte. Extração documental assistida em 2026-11-09.
+Conteúdo lido via developer.salesforce.com (documentação v68.0 quando versionada). Notas em português; nomes técnicos no original.
+
+[src:apex-callout-limits] Callout Limits and Limitations (Apex Developer Guide), get_document_content/apexcode/apex_callouts_timeouts.htm/en-us/264.0
+  Até 100 callouts (HTTP ou chamada de API) por transação.
+  Developer Edition: até 20 callouts simultâneos para fora do domínio da org; não vale para outras edições.
+  Timeout padrão: 10 segundos. Cada callout pode definir de 1 ms a 120.000 ms (120 s). Soma dos timeouts na transação: no máximo 120 s.
+  Requisições com mais de 5 s de execução contam para o limite de requisições longas, mas o tempo do callout não conta (o relógio pausa).
+  Não é possível fazer callout depois de operações pendentes na mesma transação (DML, Apex assíncrono como future e batch, Apex agendado, envio de e-mail); antes delas, pode.
+  Em testes, operações pendentes podem vir antes de callouts simulados (mock).
+  Cabeçalho Expect: 100-Continue sem resposta "HTTP/1.1 100 Continue" do servidor gera timeout.
+  Modo somente leitura: callouts executam, gravações são bloqueadas; recomenda-se pular callouts; checar com System.getApplicationReadWriteMode() (READ_ONLY ou DEFAULT).
+  Definir timeout (ms): web services, stub.timeout_x; HTTP, HttpRequest.setTimeout(ms).
+  A página não lista limites de tamanho nem nomeia exceção da plataforma.
+
+[src:limits-bulk-api] Bulk API and Bulk API 2.0 Limits and Allocations (Developer Limits Quick Reference), get_document_content/salesforce_app_limits_cheatsheet/salesforce_app_limits_platform_bulkapi.htm/en-us/264.0
+  Use Bulk API 2.0 acima de 2.000 registros; abaixo, chamadas síncronas "bulkified" (REST Composite ou SOAP).
+  Lotes por 24 horas móveis: até 15.000, compartilhados entre 1.0 e 2.0 (na 2.0, só jobs de ingestão consomem). Job fica aberto no máximo 24 horas.
+  Jobs terminados há mais de 7 dias são apagados. Resultados disponíveis por 7 dias.
+  Ingestão: 150.000.000 registros por 24 horas. 1.0: 10.000 registros e 10.000.000 caracteres por lote, 10 MB por lote; 2.0: 150 MB de CSV em base64 por job (subir cerca de 100 MB).
+  Retentativas: 1.0 repete o lote após 5 minutos; 2.0 trata sozinha (mais de 20 retentativas: usar arquivo menor).
+  Registro: até 131.072 caracteres por campo, 5.000 campos e 400.000 caracteres.
+  Consulta: 1.0, 30 tentativas e QUERY_TIMEOUT após 2 minutos; 2.0, mais de 15 retentativas pede filtros. Arquivo de resultado até 1 GB; 2.0 pagina com locator e maxRecords.
+  2.0: 10.000 jobs de consulta por 24 horas (DailyBulkV2QueryJobs em /limits) e 1 TB de resultados (DailyBulkV2QueryFileStorageMB).
+
+[src:bulk-api-intro] Introduction to Bulk API 2.0 and Bulk API, get_document_content/api_asynch/asynch_api_intro.htm/en-us/264.0
+  APIs baseadas em REST para grandes volumes: o pedido é processado em segundo plano e o resultado é buscado depois; inserir, atualizar, fazer upsert ou excluir muitos registros.
+  Sem SLA garantido para nenhuma das duas. Bulk API (1.0) é a antecessora, ainda disponível; 2.0 é a recomendada.
+
+[src:pubsub-overview] Pub/Sub API overview, https://developer.salesforce.com/docs/platform/pub-sub-api/overview (página sem versão)
+  Interface única para publicar e assinar eventos de plataforma, eventos de monitoramento em tempo real e eventos de alteração.
+  Baseada em gRPC e HTTP/2; mensagens binárias em Avro. Assinatura por pull: o cliente define quantos eventos recebe por chamada.
+
+[src:pubsub-allocations] Pub/Sub API and Event Allocations, https://developer.salesforce.com/docs/platform/pub-sub-api/guide/allocations.html (página sem versão)
+  Publish e PublishStream: PublishRequest abaixo de cerca de 3 MB (recomendação; limite gRPC de 4 MB, acima disso status UNAVAILABLE e o servidor fecha o stream); evento até 1 MB (erro só no PublishResult daquele evento); recomendado até 200 eventos por requisição.
+  Subscribe e ManagedSubscribe (Beta na página): no máximo 100 eventos pedidos no total (num_requested); até 200 assinaturas gerenciadas únicas por org.
+  Até 1.000 streams simultâneos por canal gRPC (conexão HTTP/2).
+  Valem também as alocações de entrega de eventos de plataforma, Change Data Capture e Real-Time Event Monitoring.

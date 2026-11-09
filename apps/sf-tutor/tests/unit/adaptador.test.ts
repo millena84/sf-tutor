@@ -197,3 +197,11 @@ describe('contratos, limites e falhas (lote 5d)', () => {
     expect(c[c.length - 1]).toBe('obj:EventBusSubscriber.Retries');
   });
 });
+
+describe('INT-07, segunda parte (lote 5e)', () => {
+  it('callouts em INT-07; Bulk API em APIs de dados; Pub/Sub API em eventos', () => {
+    expect(ind.caminhoPreferido('func:limites-e-falhas-de-callouts', 'funcionalidade')![2]).toBe('sub:contratos-limites-e-tratamento-de-falhas');
+    expect(ind.caminhoPreferido('func:bulk-api', 'funcionalidade')![2]).toBe('sub:apis-de-dados-e-metadados');
+    expect(ind.caminhoPreferido('func:pub-sub-api', 'funcionalidade')![2]).toBe('sub:eventos-e-mensageria');
+  });
+});
