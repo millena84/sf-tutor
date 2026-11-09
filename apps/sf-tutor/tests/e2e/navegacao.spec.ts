@@ -1,5 +1,5 @@
 import { expect, test } from '@playwright/test';
-import { abrir, painel, selecao, semErroNoPainel, titulo } from './ajuda';
+import { abrir, painel, secao, selecao, semErroNoPainel, titulo } from './ajuda';
 import { errosDaPagina } from './ajuda';
 test.afterEach(async ({ page }) => {
   expect(errosDaPagina(page), 'erros de JavaScript durante o teste').toEqual([]);
@@ -158,4 +158,13 @@ test('sem acesso aos servidores dos logos, o mapa usa o substituto sem erro', as
   await abrir(page, '?n=salesforce');
   await expect.poll(() => page.evaluate(() => (window as unknown as WLogo).__sfTutor.logo('salesforce'))).toBe('falhou');
   await expect(painel(page).locator('img.logo-marca')).toHaveCount(0);
+});
+
+test('funcionalidade sem metadata type mostra código e recursos de API', async ({ page }) => {
+  await abrir(page, '?n=func:limites-de-api-e-alocacoes');
+  await expect(titulo(page)).toHaveText('Limites de API e alocações');
+  const rep = await secao(page, /Representações técnicas/);
+  await expect(rep.getByRole('heading', { name: 'Código e recursos de API' })).toBeVisible();
+  await expect(rep.getByText(/\/services\/data\/vXX\.X\/limits\//)).toBeVisible();
+  await expect(rep.getByRole('heading', { name: /Sem metadata type \(XML\)/ })).toBeVisible();
 });

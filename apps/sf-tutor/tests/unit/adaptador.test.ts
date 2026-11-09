@@ -184,3 +184,16 @@ describe('integração (lote 5c)', () => {
     expect(t?.destino.endsWith('mdt:PlatformEventChannel')).toBe(true);
   });
 });
+
+describe('contratos, limites e falhas (lote 5d)', () => {
+  it('limites, versões e reprocessamento ficam em INT-07', () => {
+    for (const id of ['func:limites-de-api-e-alocacoes', 'func:versoes-de-api', 'func:reprocessamento-e-monitoramento-de-eventos']) {
+      expect(ind.caminhoPreferido(id, 'funcionalidade')![2], id).toBe('sub:contratos-limites-e-tratamento-de-falhas');
+    }
+  });
+  it('EventBusSubscriber.Retries é alcançável pela funcionalidade de reprocessamento', () => {
+    const c = ind.caminhoPreferido('obj:EventBusSubscriber.Retries', 'funcionalidade')!;
+    expect(c).toContain('func:reprocessamento-e-monitoramento-de-eventos');
+    expect(c[c.length - 1]).toBe('obj:EventBusSubscriber.Retries');
+  });
+});

@@ -275,7 +275,8 @@
       "conexão privada",
       "conexões de rede privadas de saída",
       "outbound network connection",
-      "outbound network connections"
+      "outbound network connections",
+      "private connect"
     ],
     "tipo": "funcionalidade"
   },
@@ -553,6 +554,25 @@
     "tipo": "funcionalidade"
   },
   {
+    "descricao": "Quantas chamadas e recursos a org pode consumir, e quanto ainda resta. As alocações vêm da edição, das licenças e de add-ons comprados.",
+    "id": "func:limites-de-api-e-alocacoes",
+    "rotulo": "Limites de API e alocações",
+    "textos": [
+      "API Request Limits and Allocations",
+      "Limites de API e alocações",
+      "alocações",
+      "api limits",
+      "api request limits and allocations",
+      "governor",
+      "limites de api",
+      "limites de api e alocações",
+      "request_limit_exceeded",
+      "requisições por dia",
+      "sforce-limit-info"
+    ],
+    "tipo": "funcionalidade"
+  },
+  {
     "descricao": "Guardam o endereço de um sistema externo e a forma de se autenticar nele, fora do código.",
     "id": "func:named-credentials",
     "rotulo": "Named credentials e credenciais externas",
@@ -783,6 +803,25 @@
     "tipo": "funcionalidade"
   },
   {
+    "descricao": "Como um trigger de evento tenta de novo quando algo externo falha, e como acompanhar assinantes e o uso das alocações de eventos.",
+    "id": "func:reprocessamento-e-monitoramento-de-eventos",
+    "rotulo": "Reprocessamento e monitoramento de eventos",
+    "textos": [
+      "Event Trigger Retries and Usage Monitoring",
+      "Reprocessamento e monitoramento de eventos",
+      "assinante de evento",
+      "event trigger retries and usage monitoring",
+      "eventbussubscriber",
+      "platformeventusagemetric",
+      "reprocessamento e monitoramento de eventos",
+      "retentativa",
+      "retry",
+      "retryableexception",
+      "uso de eventos"
+    ],
+    "tipo": "funcionalidade"
+  },
+  {
     "descricao": "Registra classes Apex como provedores de preço, estoque, frete, impostos, promoções ou pontos de extensão do Commerce.",
     "id": "func:servicos-externos-registrados-commerce",
     "rotulo": "Serviços externos registrados (Commerce)",
@@ -874,6 +913,26 @@
       "users",
       "usuário",
       "usuários"
+    ],
+    "tipo": "funcionalidade"
+  },
+  {
+    "descricao": "Cada chamada e cada componente usam uma versão de API. A Salesforce mantém as versões por um tempo e depois as descontinua e aposenta.",
+    "id": "func:versoes-de-api",
+    "rotulo": "Versões de API e ciclo de vida",
+    "textos": [
+      "410 gone",
+      "API Versions and End-of-Life Policy",
+      "Versões de API e ciclo de vida",
+      "api version",
+      "api versions and end-of-life policy",
+      "apiVersion",
+      "apiversion",
+      "aposentadoria de versão",
+      "descontinuação",
+      "end-of-life",
+      "versão de api",
+      "versões de api e ciclo de vida"
     ],
     "tipo": "funcionalidade"
   },
@@ -18499,6 +18558,135 @@
     "tipo": "campo_api"
   },
   {
+    "descricao": "Representa cada trigger, processo ou flow assinante de um evento de plataforma ou de alteração.",
+    "id": "obj:EventBusSubscriber",
+    "rotulo": "EventBusSubscriber",
+    "textos": [
+      "EventBusSubscriber"
+    ],
+    "tipo": "objeto_api"
+  },
+  {
+    "descricao": "Id do assinante, por exemplo o Id do trigger.",
+    "id": "obj:EventBusSubscriber.ExternalId",
+    "pai": "obj:EventBusSubscriber",
+    "rotulo": "ExternalId",
+    "textos": [
+      "ExternalId"
+    ],
+    "tipo": "campo_api"
+  },
+  {
+    "descricao": "Se o trigger usa assinaturas paralelas.",
+    "id": "obj:EventBusSubscriber.IsPartitioned",
+    "pai": "obj:EventBusSubscriber",
+    "rotulo": "IsPartitioned",
+    "textos": [
+      "IsPartitioned"
+    ],
+    "tipo": "campo_api"
+  },
+  {
+    "descricao": "Mensagem da última EventBus.RetryableException (só triggers Apex).",
+    "id": "obj:EventBusSubscriber.LastError",
+    "pai": "obj:EventBusSubscriber",
+    "rotulo": "LastError",
+    "textos": [
+      "LastError"
+    ],
+    "tipo": "campo_api"
+  },
+  {
+    "descricao": "Replay ID do último evento processado pelo assinante; substitui Position.",
+    "id": "obj:EventBusSubscriber.LastProcessed",
+    "pai": "obj:EventBusSubscriber",
+    "rotulo": "LastProcessed",
+    "textos": [
+      "LastProcessed"
+    ],
+    "tipo": "campo_api"
+  },
+  {
+    "descricao": "Replay ID do último evento publicado; substitui Tip.",
+    "id": "obj:EventBusSubscriber.LastPublished",
+    "pai": "obj:EventBusSubscriber",
+    "rotulo": "LastPublished",
+    "textos": [
+      "LastPublished"
+    ],
+    "tipo": "campo_api"
+  },
+  {
+    "descricao": "Nome do assinante (trigger ou processo); 'Process' indica ao menos um elemento Pause de flow.",
+    "id": "obj:EventBusSubscriber.Name",
+    "pai": "obj:EventBusSubscriber",
+    "rotulo": "Name",
+    "textos": [
+      "Name"
+    ],
+    "tipo": "campo_api"
+  },
+  {
+    "descricao": "Replay ID do último evento processado.",
+    "id": "obj:EventBusSubscriber.Position",
+    "pai": "obj:EventBusSubscriber",
+    "rotulo": "Position",
+    "textos": [
+      "Position"
+    ],
+    "tipo": "campo_api"
+  },
+  {
+    "descricao": "Quantas vezes o trigger foi repetido por EventBus.RetryableException (só triggers Apex).",
+    "id": "obj:EventBusSubscriber.Retries",
+    "pai": "obj:EventBusSubscriber",
+    "rotulo": "Retries",
+    "textos": [
+      "Retries"
+    ],
+    "tipo": "campo_api"
+  },
+  {
+    "descricao": "Situação do assinante.",
+    "id": "obj:EventBusSubscriber.Status",
+    "pai": "obj:EventBusSubscriber",
+    "rotulo": "Status",
+    "textos": [
+      "Status"
+    ],
+    "tipo": "campo_api"
+  },
+  {
+    "descricao": "Replay ID do último evento publicado.",
+    "id": "obj:EventBusSubscriber.Tip",
+    "pai": "obj:EventBusSubscriber",
+    "rotulo": "Tip",
+    "textos": [
+      "Tip"
+    ],
+    "tipo": "campo_api"
+  },
+  {
+    "descricao": "Canal assinado: nome do evento com __e ou nome do evento de alteração (ex.: AccountChangeEvent).",
+    "id": "obj:EventBusSubscriber.Topic",
+    "pai": "obj:EventBusSubscriber",
+    "rotulo": "Topic",
+    "textos": [
+      "Topic"
+    ],
+    "tipo": "campo_api"
+  },
+  {
+    "descricao": "Tipo do assinante, por exemplo ApexTrigger; vazio para processo ou elemento Pause.",
+    "id": "obj:EventBusSubscriber.Type",
+    "pai": "obj:EventBusSubscriber",
+    "rotulo": "Type",
+    "textos": [
+      "Type"
+    ],
+    "tipo": "campo_api"
+  },
+  {
     "descricao": "Expõe a definição de campos de objetos para consulta.",
     "id": "obj:FieldDefinition",
     "rotulo": "FieldDefinition",
@@ -23470,6 +23658,115 @@
     "rotulo": "Status",
     "textos": [
       "Status"
+    ],
+    "tipo": "campo_api"
+  },
+  {
+    "descricao": "Guarda o uso de publicação e de entrega de eventos de plataforma e de alteração.",
+    "id": "obj:PlatformEventUsageMetric",
+    "rotulo": "PlatformEventUsageMetric",
+    "textos": [
+      "PlatformEventUsageMetric"
+    ],
+    "tipo": "objeto_api"
+  },
+  {
+    "descricao": "Cliente que publicou ou recebeu (sessão CometD, PUB_SUB_API, EVENT_RELAY, APEX, Id de trigger etc.).",
+    "id": "obj:PlatformEventUsageMetric.Client",
+    "pai": "obj:PlatformEventUsageMetric",
+    "rotulo": "Client",
+    "textos": [
+      "Client"
+    ],
+    "tipo": "campo_api"
+  },
+  {
+    "descricao": "Fim da janela consultada, em UTC e com granularidade de hora.",
+    "id": "obj:PlatformEventUsageMetric.EndDate",
+    "pai": "obj:PlatformEventUsageMetric",
+    "rotulo": "EndDate",
+    "textos": [
+      "EndDate"
+    ],
+    "tipo": "campo_api"
+  },
+  {
+    "descricao": "Nome API do evento ou do evento de alteração; exige UsageType na consulta.",
+    "id": "obj:PlatformEventUsageMetric.EventName",
+    "pai": "obj:PlatformEventUsageMetric",
+    "rotulo": "EventName",
+    "textos": [
+      "EventName"
+    ],
+    "tipo": "campo_api"
+  },
+  {
+    "descricao": "Tipo de evento consultado; exige UsageType na consulta.",
+    "id": "obj:PlatformEventUsageMetric.EventType",
+    "pai": "obj:PlatformEventUsageMetric",
+    "rotulo": "EventType",
+    "textos": [
+      "EventType"
+    ],
+    "tipo": "campo_api"
+  },
+  {
+    "descricao": "Não usado.",
+    "id": "obj:PlatformEventUsageMetric.ExternalId",
+    "pai": "obj:PlatformEventUsageMetric",
+    "rotulo": "ExternalId",
+    "textos": [
+      "ExternalId"
+    ],
+    "tipo": "campo_api"
+  },
+  {
+    "descricao": "Métrica consultada: eventos publicados ou entregues, de plataforma ou de alteração.",
+    "id": "obj:PlatformEventUsageMetric.Name",
+    "pai": "obj:PlatformEventUsageMetric",
+    "rotulo": "Name",
+    "textos": [
+      "Name"
+    ],
+    "tipo": "campo_api"
+  },
+  {
+    "descricao": "Início da janela consultada, em UTC; com métricas detalhadas, até 60 dias e compatível com TimeSegment.",
+    "id": "obj:PlatformEventUsageMetric.StartDate",
+    "pai": "obj:PlatformEventUsageMetric",
+    "rotulo": "StartDate",
+    "textos": [
+      "StartDate"
+    ],
+    "tipo": "campo_api"
+  },
+  {
+    "descricao": "Intervalo de agregação, conforme o tamanho da janela.",
+    "id": "obj:PlatformEventUsageMetric.TimeSegment",
+    "pai": "obj:PlatformEventUsageMetric",
+    "rotulo": "TimeSegment",
+    "textos": [
+      "TimeSegment"
+    ],
+    "tipo": "campo_api"
+  },
+  {
+    "descricao": "Publicação ou entrega; usado com EventName ou EventType.",
+    "id": "obj:PlatformEventUsageMetric.UsageType",
+    "pai": "obj:PlatformEventUsageMetric",
+    "rotulo": "UsageType",
+    "textos": [
+      "UsageType"
+    ],
+    "tipo": "campo_api"
+  },
+  {
+    "descricao": "Valor de uso da métrica no período.",
+    "id": "obj:PlatformEventUsageMetric.Value",
+    "pai": "obj:PlatformEventUsageMetric",
+    "rotulo": "Value",
+    "textos": [
+      "Value"
     ],
     "tipo": "campo_api"
   },
