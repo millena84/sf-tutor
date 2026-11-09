@@ -44,7 +44,7 @@ export const LIGACAO: Record<string, { rotulo: string; grupo: 'hierarquia' | 're
   propriedade: { rotulo: 'Propriedade', grupo: 'estrutura', explicacao: 'Propriedade documentada do metadata type ou da estrutura.' },
   campo: { rotulo: 'Campo', grupo: 'estrutura', explicacao: 'Campo documentado do objeto.' },
   tipo_composto: { rotulo: 'Tipo composto', grupo: 'estrutura', explicacao: 'A propriedade usa uma estrutura auxiliar do XML (tipo composto), detalhada como nó próprio.' },
-  referencia_campo: { rotulo: 'Referência de campo', grupo: 'referencia', explicacao: 'O campo guarda o Id de um registro do objeto de destino (lookup).' },
+  referencia_campo: { rotulo: 'Referência', grupo: 'referencia', explicacao: 'Um campo guarda o Id de um registro do objeto de destino (lookup), ou uma propriedade do XML cita outro componente pelo nome.' },
   correspondencia_xml_api: { rotulo: 'Correspondência XML ↔ API', grupo: 'correspondencia', explicacao: 'Correspondência documentada entre o metadata type e o objeto/campo API, com a natureza indicada.' },
   representacao_comum: { rotulo: 'Mesmo conceito XML ↔ API', grupo: 'correspondencia', explicacao: 'Metadata type e objeto API descrevem o mesmo conceito por caminhos diferentes; correspondência campo a campo não comprovada.' },
 };

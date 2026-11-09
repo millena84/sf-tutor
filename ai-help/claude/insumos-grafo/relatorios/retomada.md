@@ -71,7 +71,23 @@ Os lotes e o site são acompanhados por issues em millena84/sf-tutor (milestones
 O WSDL **não** é bloqueio: a documentação de cada tipo é a fonte alternativa prevista no prompt.
 3. **Logos da Salesforce e das nuvens:** os termos de uso exigem permissão escrita, e o ambiente não baixa do portal de marca. Detalhes e caminhos em `relatorios/logos-salesforce-2026-11-08.md`.
 
-**Lacuna grande conhecida:** integração, APIs e eventos ainda não tem nenhuma funcionalidade nem metadata type cadastrado. Ver `relatorios/auditoria-integracao-2026-11-08.md`.
+**Integração, APIs e eventos (issue #24), em andamento.** Ver `relatorios/auditoria-integracao-2026-11-08.md`.
+- **Lote 5a (2026-11-09):** 9 funcionalidades, 11 metadata types e 7 estruturas, com 6 referências por nome entre componentes.
+  - Funcionalidades: named credentials, sites remotos, CSP, CORS, eventos de plataforma, Change Data Capture, External Services, objetos externos e auth providers.
+  - Metadata types: NamedCredential, ExternalCredential, RemoteSiteSetting, CspTrustedSite, CorsWhitelistOrigin, PlatformEventChannel, PlatformEventChannelMember, PlatformEventSubscriberConfig, ExternalServiceRegistration, ExternalDataSource e AuthProvider.
+  - Extração: `fontes/extracoes/mdapi-lote5a.txt`.
+  - Novo no schema: propriedade com `referencia.alvos` para referência pelo nome do componente no XML.
+- **Falta (lote 5b em diante):**
+  - Connected Apps e External Client Apps, com suas configurações.
+  - OAuth: OauthCustomScope, OauthOidcSettings e OauthTokenExchangeHandler.
+  - Certificados e SAML: Certificate, SamlSsoConfig e ExternalAuthIdentityProvider.
+  - Endpoints: OutboundNetworkConnection, RegisteredExternalService, McpServerDefinition e ApiNamedQuery.
+  - Eventos: EventRelayConfig, ManagedEventSubscription e PlatformEventSettings.
+  - Conectores de dados.
+  - Os **objetos API** do tema.
+  - A definição do evento (`__e`) e do objeto externo (`__x`), ambos via CustomObject.
+  - Exemplos XML.
+  - Caminhos de Setup, ainda `desconhecido`.
 
 ## Próximos lotes
 
