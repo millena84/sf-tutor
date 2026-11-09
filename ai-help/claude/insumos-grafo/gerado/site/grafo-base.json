@@ -1115,6 +1115,18 @@
       "tipo": "representacao_objeto_api"
     },
     {
+      "destino": "mdt:ManagedEventSubscription",
+      "origem": "func:pub-sub-api",
+      "papel": "Assinatura gerenciada, consumida pelo ManagedSubscribe.",
+      "tipo": "representacao_xml"
+    },
+    {
+      "destino": "obj:PlatformEventUsageMetric",
+      "origem": "func:pub-sub-api",
+      "papel": "Uso de publicação e entrega; o cliente aparece como PUB_SUB_API.",
+      "tipo": "representacao_objeto_api"
+    },
+    {
       "destino": "mdt:AssignmentRules",
       "origem": "func:regras-de-atribuicao",
       "papel": "Regras de atribuição implantáveis, por objeto.",
@@ -2056,6 +2068,15 @@
       ]
     },
     {
+      "destino": "func:bulk-api",
+      "origem": "nuv:platform-core",
+      "tipo": "nuvem_funcionalidade",
+      "via": [
+        "cls:integracao-apis-e-eventos",
+        "sub:apis-de-dados-e-metadados"
+      ]
+    },
+    {
       "destino": "func:campos-customizados",
       "origem": "nuv:platform-core",
       "tipo": "nuvem_funcionalidade",
@@ -2191,6 +2212,15 @@
       ]
     },
     {
+      "destino": "func:limites-e-falhas-de-callouts",
+      "origem": "nuv:platform-core",
+      "tipo": "nuvem_funcionalidade",
+      "via": [
+        "cls:integracao-apis-e-eventos",
+        "sub:contratos-limites-e-tratamento-de-falhas"
+      ]
+    },
+    {
       "destino": "func:named-credentials",
       "origem": "nuv:platform-core",
       "tipo": "nuvem_funcionalidade",
@@ -2255,6 +2285,15 @@
     },
     {
       "destino": "func:platform-events",
+      "origem": "nuv:platform-core",
+      "tipo": "nuvem_funcionalidade",
+      "via": [
+        "cls:integracao-apis-e-eventos",
+        "sub:eventos-e-mensageria"
+      ]
+    },
+    {
+      "destino": "func:pub-sub-api",
       "origem": "nuv:platform-core",
       "tipo": "nuvem_funcionalidade",
       "via": [
@@ -3104,6 +3143,11 @@
       "tipo": "classificacao_principal"
     },
     {
+      "destino": "func:bulk-api",
+      "origem": "sub:apis-de-dados-e-metadados",
+      "tipo": "classificacao_principal"
+    },
+    {
       "destino": "func:cors",
       "origem": "sub:apis-de-dados-e-metadados",
       "tipo": "classificacao_principal"
@@ -3234,6 +3278,12 @@
       "tipo": "classificacao_principal"
     },
     {
+      "destino": "func:limites-e-falhas-de-callouts",
+      "motivo": "Restringe as chamadas a endpoints externos feitas em Apex.",
+      "origem": "sub:chamadas-externas-e-endpoints",
+      "tipo": "classificacao_secundaria"
+    },
+    {
       "destino": "func:remote-site-settings",
       "origem": "sub:chamadas-externas-e-endpoints",
       "tipo": "classificacao_principal"
@@ -3247,6 +3297,12 @@
       "destino": "func:external-objects",
       "origem": "sub:conectividade-e-virtualizacao-de-dados",
       "tipo": "classificacao_principal"
+    },
+    {
+      "destino": "func:bulk-api",
+      "motivo": "Tem alocações próprias de lotes, jobs, arquivos e consultas, e regras de retentativa.",
+      "origem": "sub:contratos-limites-e-tratamento-de-falhas",
+      "tipo": "classificacao_secundaria"
     },
     {
       "destino": "func:event-relay",
@@ -3266,8 +3322,19 @@
       "tipo": "classificacao_principal"
     },
     {
+      "destino": "func:limites-e-falhas-de-callouts",
+      "origem": "sub:contratos-limites-e-tratamento-de-falhas",
+      "tipo": "classificacao_principal"
+    },
+    {
       "destino": "func:platform-events",
       "motivo": "Publicação e entrega de eventos têm alocações próprias, listadas no recurso /limits.",
+      "origem": "sub:contratos-limites-e-tratamento-de-falhas",
+      "tipo": "classificacao_secundaria"
+    },
+    {
+      "destino": "func:pub-sub-api",
+      "motivo": "Tem alocações próprias de publicação, assinatura e conexões.",
       "origem": "sub:contratos-limites-e-tratamento-de-falhas",
       "tipo": "classificacao_secundaria"
     },
@@ -3309,6 +3376,11 @@
     },
     {
       "destino": "func:platform-events",
+      "origem": "sub:eventos-e-mensageria",
+      "tipo": "classificacao_principal"
+    },
+    {
+      "destino": "func:pub-sub-api",
       "origem": "sub:eventos-e-mensageria",
       "tipo": "classificacao_principal"
     },
@@ -3655,6 +3727,15 @@
     },
     {
       "estado": "verificado",
+      "grupo_cor": "cls:integracao-apis-e-eventos",
+      "id": "func:bulk-api",
+      "resumo": "APIs REST para grandes volumes de dados: o pedido vira um job processado em segundo plano, e o resultado é buscado depois. A Bulk API (1.0) é a antecessora, ainda disponível.",
+      "rotulo": "Bulk API 2.0 e Bulk API",
+      "rotulo_tecnico": "Bulk API 2.0 and Bulk API",
+      "tipo": "funcionalidade"
+    },
+    {
+      "estado": "verificado",
       "grupo_cor": "cls:processos-de-negocio-especificos-de-produto",
       "id": "func:campanhas",
       "resumo": "Campanha é uma ação de marketing (evento, e-mail, webinar) e seus participantes.",
@@ -3881,6 +3962,15 @@
     {
       "estado": "verificado",
       "grupo_cor": "cls:integracao-apis-e-eventos",
+      "id": "func:limites-e-falhas-de-callouts",
+      "resumo": "Regras que valem quando o Apex chama um sistema externo: quantas chamadas, quanto tempo cada uma pode esperar e o que não pode vir antes delas.",
+      "rotulo": "Limites e falhas de callouts",
+      "rotulo_tecnico": "Apex Callout Limits and Limitations",
+      "tipo": "funcionalidade"
+    },
+    {
+      "estado": "verificado",
+      "grupo_cor": "cls:integracao-apis-e-eventos",
       "id": "func:named-credentials",
       "resumo": "Guardam o endereço de um sistema externo e a forma de se autenticar nele, fora do código.",
       "rotulo": "Named credentials e credenciais externas",
@@ -3984,6 +4074,15 @@
       "resumo": "Produtos são o que a empresa vende; catálogos de preço definem quanto custa cada produto.",
       "rotulo": "Produtos e catálogos de preço",
       "rotulo_tecnico": "Products and Price Books",
+      "tipo": "funcionalidade"
+    },
+    {
+      "estado": "verificado",
+      "grupo_cor": "cls:integracao-apis-e-eventos",
+      "id": "func:pub-sub-api",
+      "resumo": "Interface única para publicar e assinar eventos de plataforma, eventos de alteração e eventos de monitoramento em tempo real. Usa gRPC e HTTP/2, com mensagens em Avro.",
+      "rotulo": "Pub/Sub API",
+      "rotulo_tecnico": "Pub/Sub API",
       "tipo": "funcionalidade"
     },
     {

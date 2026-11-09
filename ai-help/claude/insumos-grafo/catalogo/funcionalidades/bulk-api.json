@@ -1,0 +1,97 @@
+{
+  "id": "func:bulk-api",
+  "nome": "Bulk API 2.0 e Bulk API",
+  "nome_tecnico": "Bulk API 2.0 and Bulk API",
+  "aliases": [
+    "bulk api",
+    "bulk api 2.0",
+    "carga em massa",
+    "jobs assíncronos",
+    "dailybulkv2queryjobs",
+    "query_timeout"
+  ],
+  "termos_busca": [
+    "bulk api",
+    "bulk api 2.0",
+    "bulk api 2.0 and bulk api",
+    "bulk api 2.0 e bulk api",
+    "carga em massa",
+    "dailybulkv2queryjobs",
+    "jobs assíncronos",
+    "query_timeout"
+  ],
+  "o_que_e": "APIs REST para grandes volumes de dados: o pedido vira um job processado em segundo plano, e o resultado é buscado depois. A Bulk API (1.0) é a antecessora, ainda disponível.",
+  "finalidade": "Inserir, atualizar, fazer upsert, excluir ou consultar muitos registros sem esbarrar nos limites das chamadas síncronas.",
+  "exemplo": "Uma migração de 2 milhões de contatos sobe em jobs de ingestão da Bulk API 2.0, com arquivos CSV de cerca de 100 MB.",
+  "classificacao_principal": {
+    "classificacao": "cls:integracao-apis-e-eventos",
+    "subclassificacao": "sub:apis-de-dados-e-metadados"
+  },
+  "classificacoes_secundarias": [
+    {
+      "classificacao": "cls:integracao-apis-e-eventos",
+      "subclassificacao": "sub:contratos-limites-e-tratamento-de-falhas",
+      "motivo": "Tem alocações próprias de lotes, jobs, arquivos e consultas, e regras de retentativa."
+    }
+  ],
+  "representacoes": {
+    "metadata_types": [],
+    "objetos_api": [],
+    "ausencias": [
+      {
+        "tipo": "metadata_type",
+        "estado": "desconhecido",
+        "motivo": "API de dados: não é configurada por metadata type nas fontes deste lote.",
+        "evidencias": [
+          {
+            "fonte": "src:bulk-api-intro"
+          }
+        ]
+      },
+      {
+        "tipo": "objeto_api",
+        "estado": "desconhecido",
+        "motivo": "Jobs e lotes não foram investigados como objetos API neste lote."
+      }
+    ],
+    "codigo": [
+      "REST: jobs de ingestão e de consulta da Bulk API 2.0 (lotes automáticos)",
+      "REST: Bulk API 1.0 com lotes criados pelo cliente",
+      "Paginação de resultados de consulta na 2.0: parâmetros locator e maxRecords"
+    ]
+  },
+  "setup": {
+    "estado": "desconhecido",
+    "nota": "Caminho no Setup não verificado nesta sessão."
+  },
+  "recomendacoes": [
+    {
+      "texto": "Use a Bulk API 2.0 para operações com mais de 2.000 registros; abaixo disso, prefira chamadas síncronas em lote (REST Composite ou SOAP).",
+      "natureza": "orientacao_oficial",
+      "evidencias": [
+        {
+          "fonte": "src:limits-bulk-api"
+        }
+      ]
+    }
+  ],
+  "alertas": [
+    "Até 15.000 lotes por 24 horas móveis, compartilhados entre 1.0 e 2.0 (na 2.0, só jobs de ingestão consomem).",
+    "Ingestão: até 150 milhões de registros por 24 horas; na 2.0, até 150 MB de CSV em base64 por job (subir cerca de 100 MB).",
+    "Bulk API 2.0: até 10.000 jobs de consulta e 1 TB de resultados por 24 horas, acompanháveis em /limits.",
+    "Jobs terminados há mais de 7 dias são apagados; resultados ficam disponíveis por 7 dias."
+  ],
+  "limitacoes": [
+    "Não há SLA garantido para a Bulk API 1.0 nem para a 2.0.",
+    "Números conforme a documentação v68.0 lida em 2026-11-09."
+  ],
+  "estado": "verificado",
+  "evidencias": [
+    {
+      "fonte": "src:bulk-api-intro"
+    },
+    {
+      "fonte": "src:limits-bulk-api"
+    }
+  ]
+}

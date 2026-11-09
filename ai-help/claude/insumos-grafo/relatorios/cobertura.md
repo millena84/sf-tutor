@@ -163,4 +163,4 @@ Gerado por `ferramentas/sftutor.py cobertura`. Cobertura estrutural, explicativa
 ## Taxonomia e funcionalidades
 
 - Classificações: 14; subclassificações: 92 (com funcionalidades: 34).
-- Funcionalidades cadastradas: 51 (universo de funcionalidades não definido).
+- Funcionalidades cadastradas: 54 (universo de funcionalidades não definido).

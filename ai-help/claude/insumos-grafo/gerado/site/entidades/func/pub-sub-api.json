@@ -1,0 +1,97 @@
+{
+  "alertas": [
+    "Acima de 4 MB por requisição, a chamada falha com UNAVAILABLE e o servidor fecha o stream.",
+    "Cada evento tem no máximo 1 MB; um evento grande demais falha sozinho, sem impedir os outros do lote.",
+    "No máximo 100 eventos pedidos por vez (num_requested) e 200 assinaturas gerenciadas por org.",
+    "Até 1.000 streams simultâneos por canal gRPC (conexão HTTP/2)."
+  ],
+  "aliases": [
+    "pub/sub api",
+    "pubsub",
+    "grpc",
+    "avro",
+    "managedsubscribe",
+    "assinar eventos",
+    "publicar eventos"
+  ],
+  "classificacao_principal": {
+    "classificacao": "cls:integracao-apis-e-eventos",
+    "subclassificacao": "sub:eventos-e-mensageria"
+  },
+  "classificacoes_secundarias": [
+    {
+      "classificacao": "cls:integracao-apis-e-eventos",
+      "motivo": "Tem alocações próprias de publicação, assinatura e conexões.",
+      "subclassificacao": "sub:contratos-limites-e-tratamento-de-falhas"
+    }
+  ],
+  "estado": "verificado",
+  "evidencias": [
+    {
+      "fonte": "src:pubsub-overview"
+    },
+    {
+      "fonte": "src:pubsub-allocations"
+    },
+    {
+      "fonte": "src:objref-platformeventusagemetric"
+    },
+    {
+      "fonte": "src:mdapi-managedeventsubscription"
+    }
+  ],
+  "exemplo": "Um serviço externo assina AccountChangeEvent pela Pub/Sub API e pede até 100 eventos por chamada, no ritmo em que consegue processar.",
+  "finalidade": "Integrar sistemas externos aos eventos da org, com o cliente controlando quantos eventos recebe por vez.",
+  "id": "func:pub-sub-api",
+  "limitacoes": [
+    "As páginas da Pub/Sub API não trazem versão; leitura em 2026-11-09.",
+    "ManagedSubscribe aparece como Beta na página de alocações."
+  ],
+  "nome": "Pub/Sub API",
+  "nome_tecnico": "Pub/Sub API",
+  "o_que_e": "Interface única para publicar e assinar eventos de plataforma, eventos de alteração e eventos de monitoramento em tempo real. Usa gRPC e HTTP/2, com mensagens em Avro.",
+  "recomendacoes": [
+    {
+      "evidencias": [
+        {
+          "fonte": "src:pubsub-allocations"
+        }
+      ],
+      "natureza": "orientacao_oficial",
+      "texto": "Mantenha cada PublishRequest abaixo de cerca de 3 MB e com até 200 eventos."
+    }
+  ],
+  "representacoes": {
+    "ausencias": [],
+    "codigo": [
+      "gRPC: Publish e PublishStream",
+      "gRPC: Subscribe (assinatura por pull)",
+      "gRPC: ManagedSubscribe (Beta na página de alocações)"
+    ],
+    "metadata_types": [
+      {
+        "papel": "Assinatura gerenciada, consumida pelo ManagedSubscribe.",
+        "ref": "mdt:ManagedEventSubscription"
+      }
+    ],
+    "objetos_api": [
+      {
+        "papel": "Uso de publicação e entrega; o cliente aparece como PUB_SUB_API.",
+        "ref": "obj:PlatformEventUsageMetric"
+      }
+    ]
+  },
+  "setup": {
+    "estado": "nao_aplicavel",
+    "nota": "API acessada por clientes gRPC; não é configurada por uma tela de Setup nas fontes deste lote."
+  },
+  "termos_busca": [
+    "assinar eventos",
+    "avro",
+    "grpc",
+    "managedsubscribe",
+    "pub/sub api",
+    "publicar eventos",
+    "pubsub"
+  ]
+}

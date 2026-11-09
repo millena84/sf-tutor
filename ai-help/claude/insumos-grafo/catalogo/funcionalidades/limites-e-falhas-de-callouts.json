@@ -1,0 +1,96 @@
+{
+  "id": "func:limites-e-falhas-de-callouts",
+  "nome": "Limites e falhas de callouts",
+  "nome_tecnico": "Apex Callout Limits and Limitations",
+  "aliases": [
+    "callout",
+    "timeout",
+    "settimeout",
+    "timeout_x",
+    "uncommitted work pending",
+    "chamada externa apex",
+    "modo somente leitura"
+  ],
+  "termos_busca": [
+    "apex callout limits and limitations",
+    "callout",
+    "chamada externa apex",
+    "limites e falhas de callouts",
+    "modo somente leitura",
+    "settimeout",
+    "timeout",
+    "timeout_x",
+    "uncommitted work pending"
+  ],
+  "o_que_e": "Regras que valem quando o Apex chama um sistema externo: quantas chamadas, quanto tempo cada uma pode esperar e o que não pode vir antes delas.",
+  "finalidade": "Desenhar integrações que não estourem o tempo da transação e falhem de forma previsível.",
+  "exemplo": "Um trigger grava o pedido e depois tenta chamar o ERP na mesma transação: a chamada é recusada porque há DML pendente. A solução é chamar antes ou mover a chamada para um processo assíncrono.",
+  "classificacao_principal": {
+    "classificacao": "cls:integracao-apis-e-eventos",
+    "subclassificacao": "sub:contratos-limites-e-tratamento-de-falhas"
+  },
+  "classificacoes_secundarias": [
+    {
+      "classificacao": "cls:integracao-apis-e-eventos",
+      "subclassificacao": "sub:chamadas-externas-e-endpoints",
+      "motivo": "Restringe as chamadas a endpoints externos feitas em Apex."
+    }
+  ],
+  "representacoes": {
+    "metadata_types": [],
+    "objetos_api": [],
+    "ausencias": [
+      {
+        "tipo": "metadata_type",
+        "estado": "desconhecido",
+        "motivo": "São regras de execução do Apex, não configuração implantável; nenhum metadata type foi associado nas fontes deste lote.",
+        "evidencias": [
+          {
+            "fonte": "src:apex-callout-limits"
+          }
+        ]
+      },
+      {
+        "tipo": "objeto_api",
+        "estado": "desconhecido",
+        "motivo": "Nenhum objeto API associado nas fontes deste lote."
+      }
+    ],
+    "codigo": [
+      "Apex: HttpRequest.setTimeout(ms) — de 1 a 120.000 ms; padrão de 10 s",
+      "Apex (classes geradas de WSDL): stub.timeout_x = ms",
+      "Apex: System.getApplicationReadWriteMode() para detectar o modo somente leitura"
+    ]
+  },
+  "setup": {
+    "estado": "nao_aplicavel",
+    "nota": "Não é configuração de Setup: são limites de execução do Apex."
+  },
+  "recomendacoes": [
+    {
+      "texto": "Em modo somente leitura, pule os callouts: eles executam, mas as gravações que viriam depois são bloqueadas.",
+      "natureza": "orientacao_oficial",
+      "evidencias": [
+        {
+          "fonte": "src:apex-callout-limits"
+        }
+      ]
+    }
+  ],
+  "alertas": [
+    "Até 100 callouts por transação, e a soma dos timeouts não passa de 120 segundos.",
+    "Não é possível fazer callout depois de DML, Apex assíncrono, Apex agendado ou envio de e-mail pendentes na mesma transação; antes deles, pode.",
+    "Developer Edition: até 20 callouts simultâneos para fora do domínio da org.",
+    "Enviar Expect: 100-Continue a um servidor que não responde 100 Continue causa timeout."
+  ],
+  "limitacoes": [
+    "A página não lista limites de tamanho de requisição ou resposta, nem nomeia a exceção lançada; não foram catalogados.",
+    "Números conforme a documentação v68.0 lida em 2026-11-09."
+  ],
+  "estado": "verificado",
+  "evidencias": [
+    {
+      "fonte": "src:apex-callout-limits"
+    }
+  ]
+}
