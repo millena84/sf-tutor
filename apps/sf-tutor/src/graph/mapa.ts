@@ -1,7 +1,7 @@
 // Desenho do grafo com Cytoscape.js. Recebe a cena já calculada pelo adaptador; não conhece conteúdo técnico.
 import cytoscape from 'cytoscape';
 import type { Core, EventObject, NodeSingular, NodeCollection, ElementDefinition } from 'cytoscape';
-import type { Cena } from '../model/adaptador';
+import { SEP, type Cena } from '../model/adaptador';
 import { LIGACAO } from '../rotulos';
 import { posicionar, type Ponto } from './layout';
 
@@ -47,7 +47,13 @@ const TAMANHO: Record<string, number> = {
 
 export class Mapa {
   readonly cy: Core;
-  private posicoes = new Map<string, Ponto>();
+  // Posições por visão, guardadas na memória da sessão (#18): nós arrastados e calculados ficam onde estão
+  // ao reconstruir a cena, trocar de visão e voltar, ou recolher e expandir de novo.
+  private porVisao = new Map<string, Map<string, Ponto>>();
+  private visao = 'padrao';
+  private ultimaCena: Cena | null = null;
+  // Arraste em grupo (#42): o nó leva a subárvore (chaves com o prefixo do caminho dele). Com Shift, só o nó.
+  private arraste: { chave: string; inicio: Ponto; grupo: { n: NodeSingular; p: Ponto }[]; sozinho: boolean } | null = null;
   private animar: boolean;
   private primeira = true;
   private margemInferior = 0;
@@ -80,9 +86,37 @@ export class Mapa {
     this.cy.on('tap', (e: EventObject) => {
       if (e.target === this.cy) this.ev.limparSelecao();
     });
+    this.cy.on('grab', 'node', (e: EventObject) => {
+      const n = e.target as NodeSingular;
+      const chave = n.id();
+      const sozinho = !!(e.originalEvent as MouseEvent | undefined)?.shiftKey;
+      const pref = chave + SEP;
+      const grupo = sozinho ? [] : this.cy.nodes().filter((x) => x.id().startsWith(pref)).map((x) => { const m = x as unknown as NodeSingular; return { n: m, p: { ...m.position() } }; });
+      this.arraste = { chave, inicio: { ...n.position() }, grupo, sozinho };
+    });
+    this.cy.on('drag', 'node', (e: EventObject) => {
+      const a = this.arraste;
+      const n = e.target as NodeSingular;
+      if (!a || a.chave !== n.id() || !a.grupo.length) return;
+      const p = n.position();
+      const dx = p.x - a.inicio.x;
+      const dy = p.y - a.inicio.y;
+      this.cy.batch(() => { for (const g of a.grupo) g.n.position({ x: g.p.x + dx, y: g.p.y + dy }); });
+    });
     this.cy.on('dragfree', 'node', (e: EventObject) => {
       const n = e.target as NodeSingular;
-      this.posicoes.set(n.id(), { ...n.position() });
+      const a = this.arraste;
+      this.arraste = null;
+      const p = n.position();
+      const pos = this.posicoes;
+      if (a && a.chave === n.id() && !a.sozinho) {
+        // move também as posições guardadas de descendentes recolhidos: ao expandir de novo, nascem perto do pai
+        const dx = p.x - a.inicio.x;
+        const dy = p.y - a.inicio.y;
+        const pref = a.chave + SEP;
+        for (const [k, v] of pos) if (k.startsWith(pref)) pos.set(k, { x: v.x + dx, y: v.y + dy });
+      }
+      pos.set(n.id(), { ...p });
     });
     // Logos oficiais: o canvas erra o tamanho de SVG sem largura/altura declaradas. Por isso o logo é um <img>
     // comum (object-fit: contain) posicionado sobre o nó e reposicionado a cada quadro desenhado (zoom, pan, arraste).
@@ -133,9 +167,36 @@ export class Mapa {
     this.animar = !v;
   }
 
+  private get posicoes(): Map<string, Ponto> {
+    let m = this.porVisao.get(this.visao);
+    if (!m) { m = new Map(); this.porVisao.set(this.visao, m); }
+    return m;
+  }
+  /** Escolhe o conjunto de posições guardadas (um por visão). Chame antes de desenhar(). */
+  usarVisao(v: string): void {
+    this.visao = v;
+  }
+  /** Descarta as posições guardadas da visão atual e recalcula o leque (#18, botão "Reorganizar"). */
+  reorganizar(): void {
+    if (!this.ultimaCena) return;
+    const pos = posicionar(this.ultimaCena, new Map());
+    this.porVisao.set(this.visao, new Map(pos));
+    this.cy.batch(() => {
+      this.cy.nodes().forEach((n) => { const q = pos.get(n.id()); if (q) n.position({ ...q }); });
+    });
+    this.agendarLogos();
+  }
+  /** Posição no modelo (não na tela) de um nó; gancho de teste. */
+  posicaoDe(chave: string): Ponto | null {
+    const n = this.cy.getElementById(chave);
+    return n.empty() ? null : { ...n.position() };
+  }
+
   desenhar(cena: Cena, nos: Map<string, NoVisual>, paginas: Map<string, string>): void {
-    const pos = posicionar(cena, this.posicoes);
-    this.posicoes = pos;
+    this.ultimaCena = cena;
+    const guardadas = this.posicoes;
+    const pos = posicionar(cena, guardadas);
+    for (const [k, v] of pos) guardadas.set(k, v);
     const queremos = new Set<string>();
     const add: ElementDefinition[] = [];
     for (const o of cena.ocorrencias) {
