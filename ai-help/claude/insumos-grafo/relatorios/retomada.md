@@ -150,6 +150,16 @@ O WSDL **não** é bloqueio: a documentação de cada tipo é a fonte alternativ
 - **Equivalência conferida:** os lotes 5c (metadata types e estruturas) e 5j (objetos API) foram rodados com a biblioteca numa cópia da base e geraram arquivos idênticos byte a byte aos do catálogo.
 - O teste `TestCargaNova` carrega um lote de exemplo numa cópia temporária e valida.
 
+## Avisos do validador (issue #20, 2026-11-09)
+- De 69 para 3 avisos.
+- **64 metadata types** ganharam esqueleto XML comentado, gerado por `ferramentas/exemplos_xml.py` só com propriedades catalogadas:
+  - obrigatórios ativos;
+  - condicionais comentados;
+  - valores documentados, ou textos entre colchetes dizendo o que preencher.
+  - Natureza `didatico_projeto`, com nota de que não é arquivo pronto para implantação.
+- **Fontes sem uso removidas do registro:** `src:mdapi-types-list` (índice de tipos, sem afirmação que dependa dele) e `src:rest-sobject-describe` (nunca relida). As duas continuam citadas em `tarefas/00-especificacao-grafo.md`.
+- **Avisos restantes, justificados:** AssignmentRules, BusinessHoursSettings e EscalationRules. As únicas propriedades são de tipo composto ainda sem estrutura detalhada (por exemplo, `assignmentRule`). O esqueleto sairia vazio. O exemplo depende de detalhar essas estruturas primeiro.
+
 ## Próximos lotes
 
 1. **Lote 3 — fechar as lacunas da tabela acima** que dependem só de documentação:

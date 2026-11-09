@@ -322,3 +322,21 @@ class TestCargaNova(BaseTemp):
         d = ler(self.cat("metadata-types", "AIApplication.json"))
         self.assertEqual(d["cobertura"]["estrutural"]["estado"], "completa")
         self.assertEqual(d["estruturas"], ["mdx:AIApplicationItem"])
+
+
+class TestExemplosXml(unittest.TestCase):
+    """Issue #20: esqueletos gerados são XML bem formado e só usam propriedades catalogadas (o validador confere as tags)."""
+
+    def test_esqueletos_bem_formados(self):
+        import xml.etree.ElementTree as ET
+        import exemplos_xml as X
+        est = {e["id"]: e for e in (ler(p) for p in glob.glob(os.path.join(BASE, "catalogo", "estruturas", "*.json")))}
+        for p in glob.glob(os.path.join(BASE, "catalogo", "metadata-types", "*.json")):
+            m = ler(p)
+            xml = X.gerar(m, est)
+            if xml is None:
+                continue
+            raiz = ET.fromstring(xml.encode("utf-8"))
+            nomes = {x["nome"] for x in m["propriedades"]}
+            for ch in raiz:
+                self.assertIn(ch.tag.split("}", 1)[-1], nomes, m["nome"])
