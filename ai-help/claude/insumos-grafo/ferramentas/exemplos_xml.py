@@ -10,6 +10,7 @@ textos ficam entre colchetes, descrevendo o que preencher (nunca um valor invent
 
 Uso, a partir de ai-help/claude/insumos-grafo/:
     python3 ferramentas/exemplos_xml.py            # só os tipos sem exemplo
+    python3 ferramentas/exemplos_xml.py --regerar  # também refaz os esqueletos gerados antes por esta ferramenta (nunca os escritos à mão)
     python3 ferramentas/exemplos_xml.py --mostrar AccountSettings
 Depois rode `python3 ferramentas/sftutor.py tudo`.
 """
@@ -35,8 +36,9 @@ def _interna(p):
     return "uso interno" in t or "reservado" in t or "internal" in t
 
 
-def _excluir(p):
-    return (p["nome"] == "fullName" or p.get("herdada") or (p.get("disponibilidade") or {}).get("ate_versao")
+def _excluir(p, topo=True):
+    # fullName só é excluído no topo (vira o nome do arquivo); dentro de estruturas é um elemento real (ex.: o nome de cada regra)
+    return ((topo and p["nome"] == "fullName") or p.get("herdada") or (p.get("disponibilidade") or {}).get("ate_versao")
             or _interna(p) or p["tipo_tecnico"].startswith("(") or p["tipo_tecnico"] in ("base64Binary",))
 
 
@@ -103,7 +105,7 @@ def _elemento(p, estruturas, ind, prof=0):
     nome = p["nome"]
     sref = p.get("estrutura_ref")
     if sref and sref in estruturas and prof < 2:
-        filhos = _selecionar(estruturas[sref]["propriedades"], amostra=1)
+        filhos = _selecionar(estruturas[sref]["propriedades"], amostra=3, topo=False, aninhar=prof < 1)
         linhas = [f"{ind}<{nome}>"]
         for f in filhos:
             linhas += _bloco(f, estruturas, ind + "    ", prof + 1)
@@ -125,13 +127,16 @@ def _bloco(p, estruturas, ind, prof=0, cond=None):
     return ([f"{ind}<!-- {escape(com)} -->"] if com else []) + linhas
 
 
-def _selecionar(props, amostra=3):
-    ok = [p for p in props if not _excluir(p)]
+def _selecionar(props, amostra=3, topo=True, aninhar=True):
+    """Obrigatórios; sem obrigatórios, uma amostra (estruturas primeiro, para mostrar o aninhamento, depois simples).
+    Dentro de estruturas, além dos obrigatórios entra a primeira estrutura filha (um nível), para o exemplo mostrar a forma do XML."""
+    ok = [p for p in props if not _excluir(p, topo)]
     req = [p for p in ok if p["obrigatoriedade"].get("valor") == "sim"]
+    comp = [p for p in ok if p.get("estrutura_ref") and p not in req]
+    simples = [p for p in ok if p["tipo_tecnico"].replace("[]", "") in SIMPLES and p not in req]
     if req:
-        return req
-    simples = [p for p in ok if p["tipo_tecnico"].replace("[]", "") in SIMPLES]
-    return simples[:amostra]
+        return req + (comp[:1] if (not topo and aninhar) else [])
+    return (comp[:1] if aninhar else []) + simples[:amostra - (1 if comp and aninhar else 0)]
 
 
 def gerar(m, estruturas):
@@ -155,10 +160,11 @@ def main(argv):
     if len(argv) > 1 and argv[0] == "--mostrar":
         print(gerar(_ler(os.path.join(CAT, "metadata-types", argv[1] + ".json")), estruturas))
         return 0
+    regerar = "--regerar" in argv
     feitos, sem = [], []
     for p in sorted(glob.glob(os.path.join(CAT, "metadata-types", "*.json"))):
         m = _ler(p)
-        if "exemplo_xml" in m:
+        if "exemplo_xml" in m and not (regerar and m["exemplo_xml"].get("nota") == NOTA):
             continue
         xml = gerar(m, estruturas)
         if xml is None:
