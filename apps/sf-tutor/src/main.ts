@@ -95,10 +95,8 @@ async function iniciar(): Promise<void> {
   };
   // logos oficiais por referência: pré-carregados; só substituem o ícone quando a imagem carregou
   const logos = new Map<string, 'carregando' | 'ok' | 'falhou'>();
-  const proporcao = new Map<string, number>(); // largura/altura natural de cada logo
   const iconeDe = (id: string, tipo: string, cor: string): string => {
     const n = ind.no(id)!;
-    if (n.logo && logos.get(id) === 'ok') return n.logo.url;
     if (tipo === 'salesforce') return iconeSvg('Salesforce', cor, { placeholder: true });
     if (tipo === 'nuvem' || tipo === 'classificacao' || tipo === 'subclassificacao') return iconeSvg(n.sigla ?? n.rotulo.slice(0, 3), cor);
     if (tipo === 'funcionalidade') return iconeSvg(siglaFuncionalidade(n.rotulo), cor);
@@ -120,8 +118,7 @@ async function iniciar(): Promise<void> {
       vis.set(o.chave, {
         chave: o.chave, rotulo: n.tipo === 'salesforce' ? 'Salesforce' : n.rotulo, tipo: n.tipo, icone: iconeDe(o.id, n.tipo, cor), cor,
         oculto: !!oc, totalFilhos: o.totalFilhos, expandido: exp().expandidos.has(o.chave), acessivel: `${NOME_TIPO[n.tipo]}: ${n.rotulo}`,
-        logo: !!n.logo && logos.get(o.id) === 'ok',
-        logoTam: tamanhoLogo(proporcao.get(o.id) ?? 1),
+        logoUrl: n.logo && logos.get(o.id) === 'ok' ? n.logo.url : undefined,
       });
     }
     const pags = new Map(cena.paginacoes.map((p) => [p.chave, `+${p.restantes} mais`]));
@@ -384,7 +381,7 @@ async function iniciar(): Promise<void> {
     logos.set(n.id, 'carregando');
     const img = new Image();
     img.referrerPolicy = 'no-referrer';
-    img.onload = () => { proporcao.set(n.id, img.naturalWidth && img.naturalHeight ? img.naturalWidth / img.naturalHeight : 1); logos.set(n.id, 'ok'); atualizar(); };
+    img.onload = () => { logos.set(n.id, 'ok'); atualizar(); };
     img.onerror = () => { logos.set(n.id, 'falhou'); };
     img.src = n.logo.url;
   }
@@ -404,15 +401,10 @@ async function iniciar(): Promise<void> {
     visao: () => st.visao,
     totalCatalogo: ind.nos.size,
     logo: (id: string) => logos.get(id) ?? null,
+    caixasLogo: (id: string) => { const c = st.cena?.ocorrencias.find((o) => o.id === id)?.chave; return c ? mapa.caixasLogo(c) : null; },
     pronto: true,
     folha: (id: string) => TIPOS_FOLHA.has(ind.no(id)?.tipo as never),
   };
-}
-
-/** Cabe o logo num quadrado de 64% do nó sem distorcer. */
-function tamanhoLogo(r: number): [string, string] {
-  const lado = 64;
-  return r >= 1 ? [`${lado}%`, `${(lado / r).toFixed(1)}%`] : [`${(lado * r).toFixed(1)}%`, `${lado}%`];
 }
 
 function mostrarErro(e: unknown): void {

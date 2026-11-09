@@ -66,7 +66,7 @@ apps/sf-tutor/dist/                (site publicável)
 - **Logos da Salesforce e das nuvens:**
   - São exibidos **por referência** aos endereços oficiais registrados em `ai-help/claude/insumos-grafo/config/marcas.json`. O arquivo não é copiado para o projeto.
   - O app pré-carrega cada imagem e só troca o ícone do nó quando ela carrega; se falhar, fica o substituto.
-  - Logos SVG sem largura/altura declaradas podem sair cortados no canvas. É preciso conferir no site publicado.
+  - O canvas erra o tamanho de SVG sem largura/altura declaradas, caso do logo central. Por isso o logo é um `<img>` comum sobre o nó (camada `.camada-logos`), encaixado no círculo e reposicionado a cada quadro do grafo.
   - Os testes simulam os servidores, carregando e falhando, sem depender da rede.
 - **Referência visual (flavinho.pages.dev):** não pôde ser inspecionada (bloqueada para acesso automatizado). A paleta e o layout seguem a especificação do prompt e as diretrizes do projeto, não essa referência.
 - **Arraste de nós:** a posição arrastada não é preservada quando a cena é reconstruída.
