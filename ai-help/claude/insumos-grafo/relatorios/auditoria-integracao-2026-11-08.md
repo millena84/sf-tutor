@@ -39,3 +39,8 @@ Lote de integração (issue no GitHub):
 1. Definir as funcionalidades, por exemplo Named Credentials, Platform Events, Change Data Capture, Connected/External Client Apps, Remote Site Settings, External Services e External Objects.
 2. Ler cada tipo na documentação v68.
 3. Cadastrar com fontes e notas de extração, como nos lotes anteriores.
+
+## Andamento
+
+- **2026-11-09, lote 5a:** cadastrados 11 metadata types, 7 estruturas e 9 funcionalidades nas sub-classificações credenciais, chamadas externas e endpoints, APIs de dados e metadados, eventos e mensageria, conectividade e virtualização de dados, e autenticação de integrações. Detalhe em `relatorios/retomada.md`.
+- Ainda sem itens: **contratos, limites e tratamento de falhas**.

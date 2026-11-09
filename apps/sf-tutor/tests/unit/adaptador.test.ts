@@ -134,3 +134,23 @@ describe('caminhos', () => {
     expect(sem.map((n) => n.id)).toEqual([]);
   });
 });
+
+describe('integração (lote 5a)', () => {
+  it('as funcionalidades de integração são alcançáveis nas duas visões', () => {
+    for (const id of ['func:named-credentials', 'func:platform-events', 'func:change-data-capture', 'func:external-objects', 'func:auth-providers', 'func:cors']) {
+      const cam = ind.caminhoPreferido(id, 'funcionalidade')!;
+      expect(cam, id).toBeTruthy();
+      expect(cam[1], id).toBe('cls:integracao-apis-e-eventos');
+      expect(ind.caminhoPreferido(id, 'nuvem'), id).toBeTruthy();
+    }
+  });
+  it('referência por nome no XML vira aresta técnica (parâmetro da named credential → ExternalCredential)', () => {
+    const e = exp0();
+    revelarCaminho(ind, 'funcionalidade', e, ind.caminhoPreferido('mdx:NamedCredentialParameter.externalCredential', 'funcionalidade')!);
+    revelarCaminho(ind, 'funcionalidade', e, ind.caminhoPreferido('mdt:ExternalCredential', 'funcionalidade')!);
+    const cena = montarCena(ind, 'funcionalidade', e);
+    const t = cena.arestas.find((a) => a.tecnica && a.aresta?.rel_id === 'rel:ncparam-externalcredential');
+    expect(t).toBeTruthy();
+    expect(t!.destino.endsWith('mdt:ExternalCredential')).toBe(true);
+  });
+});
