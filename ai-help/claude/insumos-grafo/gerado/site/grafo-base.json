@@ -2221,6 +2221,15 @@
       ]
     },
     {
+      "destino": "func:metadata-api",
+      "origem": "nuv:platform-core",
+      "tipo": "nuvem_funcionalidade",
+      "via": [
+        "cls:integracao-apis-e-eventos",
+        "sub:apis-de-dados-e-metadados"
+      ]
+    },
+    {
       "destino": "func:named-credentials",
       "origem": "nuv:platform-core",
       "tipo": "nuvem_funcionalidade",
@@ -2329,12 +2338,30 @@
       ]
     },
     {
+      "destino": "func:rest-api",
+      "origem": "nuv:platform-core",
+      "tipo": "nuvem_funcionalidade",
+      "via": [
+        "cls:integracao-apis-e-eventos",
+        "sub:apis-de-dados-e-metadados"
+      ]
+    },
+    {
       "destino": "func:servicos-externos-registrados-commerce",
       "origem": "nuv:platform-core",
       "tipo": "nuvem_funcionalidade",
       "via": [
         "cls:integracao-apis-e-eventos",
         "sub:chamadas-externas-e-endpoints"
+      ]
+    },
+    {
+      "destino": "func:soap-api",
+      "origem": "nuv:platform-core",
+      "tipo": "nuvem_funcionalidade",
+      "via": [
+        "cls:integracao-apis-e-eventos",
+        "sub:apis-de-dados-e-metadados"
       ]
     },
     {
@@ -2362,6 +2389,15 @@
       "via": [
         "cls:dados-e-modelagem",
         "sub:tipos-de-registro-e-processos-de-negocio"
+      ]
+    },
+    {
+      "destino": "func:tooling-api",
+      "origem": "nuv:platform-core",
+      "tipo": "nuvem_funcionalidade",
+      "via": [
+        "cls:integracao-apis-e-eventos",
+        "sub:apis-de-dados-e-metadados"
       ]
     },
     {
@@ -3153,6 +3189,26 @@
       "tipo": "classificacao_principal"
     },
     {
+      "destino": "func:metadata-api",
+      "origem": "sub:apis-de-dados-e-metadados",
+      "tipo": "classificacao_principal"
+    },
+    {
+      "destino": "func:rest-api",
+      "origem": "sub:apis-de-dados-e-metadados",
+      "tipo": "classificacao_principal"
+    },
+    {
+      "destino": "func:soap-api",
+      "origem": "sub:apis-de-dados-e-metadados",
+      "tipo": "classificacao_principal"
+    },
+    {
+      "destino": "func:tooling-api",
+      "origem": "sub:apis-de-dados-e-metadados",
+      "tipo": "classificacao_principal"
+    },
+    {
       "destino": "func:apps-de-console",
       "origem": "sub:aplicativos-e-navegacao",
       "tipo": "classificacao_principal"
@@ -3292,6 +3348,12 @@
       "destino": "func:servicos-externos-registrados-commerce",
       "origem": "sub:chamadas-externas-e-endpoints",
       "tipo": "classificacao_principal"
+    },
+    {
+      "destino": "func:tooling-api",
+      "motivo": "É a API das ferramentas de desenvolvimento que editam código e componentes.",
+      "origem": "sub:codigo-e-bundles",
+      "tipo": "classificacao_secundaria"
     },
     {
       "destino": "func:external-objects",
@@ -3567,6 +3629,12 @@
     {
       "destino": "func:flow",
       "motivo": "Cada flow tem versões com status (Active, Draft, Obsolete...).",
+      "origem": "sub:versionamento-deploy-e-recuperacao",
+      "tipo": "classificacao_secundaria"
+    },
+    {
+      "destino": "func:metadata-api",
+      "motivo": "deploy() e retrieve() são a base da implantação entre orgs.",
       "origem": "sub:versionamento-deploy-e-recuperacao",
       "tipo": "classificacao_secundaria"
     }
@@ -3971,6 +4039,15 @@
     {
       "estado": "verificado",
       "grupo_cor": "cls:integracao-apis-e-eventos",
+      "id": "func:metadata-api",
+      "resumo": "API que move metadados (a estrutura e a configuração da org) entre orgs. Trabalha com metadata types e seus componentes; não trata dados de negócio.",
+      "rotulo": "Metadata API",
+      "rotulo_tecnico": "Metadata API",
+      "tipo": "funcionalidade"
+    },
+    {
+      "estado": "verificado",
+      "grupo_cor": "cls:integracao-apis-e-eventos",
       "id": "func:named-credentials",
       "resumo": "Guardam o endereço de um sistema externo e a forma de se autenticar nele, fora do código.",
       "rotulo": "Named credentials e credenciais externas",
@@ -4124,10 +4201,28 @@
     {
       "estado": "verificado",
       "grupo_cor": "cls:integracao-apis-e-eventos",
+      "id": "func:rest-api",
+      "resumo": "API baseada em HTTP para ler e gravar dados da Salesforce: cada recurso (registro, consulta, metadados de objeto, limites) tem uma URI própria.",
+      "rotulo": "REST API",
+      "rotulo_tecnico": "REST API",
+      "tipo": "funcionalidade"
+    },
+    {
+      "estado": "verificado",
+      "grupo_cor": "cls:integracao-apis-e-eventos",
       "id": "func:servicos-externos-registrados-commerce",
       "resumo": "Registra classes Apex como provedores de preço, estoque, frete, impostos, promoções ou pontos de extensão do Commerce.",
       "rotulo": "Serviços externos registrados (Commerce)",
       "rotulo_tecnico": "Registered External Services",
+      "tipo": "funcionalidade"
+    },
+    {
+      "estado": "verificado",
+      "grupo_cor": "cls:integracao-apis-e-eventos",
+      "id": "func:soap-api",
+      "resumo": "API baseada em SOAP e WSDL para acessar os objetos da org. Oferece dois WSDLs: Enterprise, fortemente tipado e específico da org; e Partner, fracamente tipado e genérico.",
+      "rotulo": "SOAP API",
+      "rotulo_tecnico": "SOAP API",
       "tipo": "funcionalidade"
     },
     {
@@ -4164,6 +4259,15 @@
       "resumo": "Variações de um mesmo objeto com valores de picklist, processos e páginas diferentes.",
       "rotulo": "Tipos de registro",
       "rotulo_tecnico": "Record Types",
+      "tipo": "funcionalidade"
+    },
+    {
+      "estado": "verificado",
+      "grupo_cor": "cls:integracao-apis-e-eventos",
+      "id": "func:tooling-api",
+      "resumo": "API para construir ferramentas de desenvolvimento: expõe, como objetos consultáveis, os metadados usados por essas ferramentas, por REST ou SOAP.",
+      "rotulo": "Tooling API",
+      "rotulo_tecnico": "Tooling API",
       "tipo": "funcionalidade"
     },
     {

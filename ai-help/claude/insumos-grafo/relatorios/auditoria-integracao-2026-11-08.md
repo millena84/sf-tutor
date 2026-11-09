@@ -47,4 +47,5 @@ Lote de integração (issue no GitHub):
 - **2026-11-09, lote 5c:** certificados, SSO por SAML, provedor de identidade de autenticação externa, conexões de rede privadas, serviços registrados do Commerce, Event Relay e assinaturas gerenciadas: 8 metadata types e 5 funcionalidades novas.
 - **2026-11-09, lote 5d:** contratos, limites e tratamento de falhas deixou de estar vazia: limites de API, versões de API e reprocessamento e monitoramento de eventos, com os objetos EventBusSubscriber e PlatformEventUsageMetric.
 - **2026-11-09, lote 5e:** limites e falhas de callouts, Bulk API e Pub/Sub API. INT-07 tem agora 4 funcionalidades principais e 5 secundárias.
-- Em aberto: a relação entre a versão de API e os componentes; a sub-classificação APIs de dados e metadados ainda não tem REST, SOAP, Metadata nem Tooling API como funcionalidades.
+- **2026-11-09, lote 5f:** REST, SOAP, Metadata e Tooling API como funcionalidades em APIs de dados e metadados.
+- Em aberto: a relação entre a versão de API e os componentes; os limites da Metadata API.

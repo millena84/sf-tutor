@@ -106,13 +106,18 @@ O WSDL **não** é bloqueio: a documentação de cada tipo é a fonte alternativ
   - As páginas da Pub/Sub API não têm versão; o registro diz isso.
   - Extração: `fontes/extracoes/lote5e-int07.txt`.
   - Ainda fora: relação geral entre a versão de API e os componentes (`apiVersion`).
-- **Falta (lote 5f em diante):**
+- **Lote 5f (2026-11-09): APIs de dados e metadados.** 4 funcionalidades: REST API (com Composite), SOAP API, Metadata API e Tooling API.
+  - Nenhuma tem metadata type: a ausência está registrada como `nao_aplicavel`, com fonte.
+  - Metadata API e Tooling API também aparecem em desenvolvimento, testes e entrega, como classificação secundária.
+  - Não obtidos: os limites da Metadata API e a página geral de recursos compostos (as URLs devolveram binário).
+  - Extração: `fontes/extracoes/lote5f-apis.txt`.
+- **Falta (lote 5g em diante):**
   - Sub-estruturas pendentes de ConnectedApp e plugins de external client app: mobile, push, canvas, notificação, attest, SAML e ExtlClntAppOauthSecuritySettings.
   - Outros certificados: PublicKeyCertificate, PublicKeyCertificateSet, UserAuthCertificate e InboundCertificate.
   - McpServerDefinition e ApiNamedQuery, quando houver fonte.
   - Conectores de dados.
   - Os **objetos API** do tema.
-  - As demais APIs como funcionalidades (REST, SOAP, Metadata, Tooling, Composite); só Bulk API e Pub/Sub API estão cadastradas.
+  - Limites da Metadata API; relação entre a versão de API e os componentes (`apiVersion`).
   - A definição do evento (`__e`) e do objeto externo (`__x`), ambos via CustomObject.
   - Exemplos XML.
   - Caminhos de Setup, ainda `desconhecido`.

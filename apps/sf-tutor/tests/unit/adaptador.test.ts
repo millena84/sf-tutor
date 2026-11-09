@@ -205,3 +205,11 @@ describe('INT-07, segunda parte (lote 5e)', () => {
     expect(ind.caminhoPreferido('func:pub-sub-api', 'funcionalidade')![2]).toBe('sub:eventos-e-mensageria');
   });
 });
+
+describe('APIs de dados e metadados (lote 5f)', () => {
+  it('REST, SOAP, Metadata e Tooling API ficam na sub-classificação de APIs', () => {
+    for (const id of ['func:rest-api', 'func:soap-api', 'func:metadata-api', 'func:tooling-api']) {
+      expect(ind.caminhoPreferido(id, 'funcionalidade')![2], id).toBe('sub:apis-de-dados-e-metadados');
+    }
+  });
+});
