@@ -533,6 +533,18 @@
       "tipo": "representacao_xml"
     },
     {
+      "destino": "mdt:ConnectedApp",
+      "origem": "func:connected-apps",
+      "papel": "Definição do app.",
+      "tipo": "representacao_xml"
+    },
+    {
+      "destino": "mdt:ConnectedAppSettings",
+      "origem": "func:connected-apps",
+      "papel": "Configurações da org (acesso à API só por apps aprovados).",
+      "tipo": "representacao_xml"
+    },
+    {
       "destino": "mdt:AccountSettings",
       "origem": "func:contas",
       "papel": "Configurações da org (Settings).",
@@ -671,6 +683,42 @@
       "tipo": "representacao_objeto_api"
     },
     {
+      "destino": "mdt:ExternalClientAppSettings",
+      "origem": "func:external-client-apps",
+      "papel": "Configurações da org.",
+      "tipo": "representacao_xml"
+    },
+    {
+      "destino": "mdt:ExternalClientApplication",
+      "origem": "func:external-client-apps",
+      "papel": "Definição do app.",
+      "tipo": "representacao_xml"
+    },
+    {
+      "destino": "mdt:ExtlClntAppConfigurablePolicies",
+      "origem": "func:external-client-apps",
+      "papel": "Chaves dos plugins.",
+      "tipo": "representacao_xml"
+    },
+    {
+      "destino": "mdt:ExtlClntAppGlobalOauthSettings",
+      "origem": "func:external-client-apps",
+      "papel": "Chaves, callback e fluxos habilitados.",
+      "tipo": "representacao_xml"
+    },
+    {
+      "destino": "mdt:ExtlClntAppOauthConfigurablePolicies",
+      "origem": "func:external-client-apps",
+      "papel": "Políticas OAuth do administrador.",
+      "tipo": "representacao_xml"
+    },
+    {
+      "destino": "mdt:ExtlClntAppOauthSettings",
+      "origem": "func:external-client-apps",
+      "papel": "Configurações OAuth do desenvolvedor.",
+      "tipo": "representacao_xml"
+    },
+    {
       "destino": "mdt:ExternalDataSource",
       "origem": "func:external-objects",
       "papel": "Conexão e autenticação da fonte de dados externa.",
@@ -770,6 +818,24 @@
       "destino": "mdt:NamedCredential",
       "origem": "func:named-credentials",
       "papel": "Endpoint e parâmetros da chamada.",
+      "tipo": "representacao_xml"
+    },
+    {
+      "destino": "mdt:OauthCustomScope",
+      "origem": "func:oauth-escopos-e-troca-de-token",
+      "papel": "Escopo customizado.",
+      "tipo": "representacao_xml"
+    },
+    {
+      "destino": "mdt:OauthOidcSettings",
+      "origem": "func:oauth-escopos-e-troca-de-token",
+      "papel": "Configurações de fluxos OAuth e OIDC.",
+      "tipo": "representacao_xml"
+    },
+    {
+      "destino": "mdt:OauthTokenExchangeHandler",
+      "origem": "func:oauth-escopos-e-troca-de-token",
+      "papel": "Handler Apex de troca de token.",
       "tipo": "representacao_xml"
     },
     {
@@ -1154,6 +1220,40 @@
       "tipo": "tipo_composto"
     },
     {
+      "destino": "mdx:ConnectedAppAttribute",
+      "origem": "mdt:ConnectedApp.attributes",
+      "tipo": "tipo_composto"
+    },
+    {
+      "destino": "mdx:ConnectedAppCanvasConfig",
+      "origem": "mdt:ConnectedApp.canvasConfig",
+      "tipo": "tipo_composto"
+    },
+    {
+      "destino": "mdx:ConnectedAppIpRange",
+      "origem": "mdt:ConnectedApp.ipRanges",
+      "tipo": "tipo_composto"
+    },
+    {
+      "destino": "mdx:ConnectedAppOauthConfig",
+      "origem": "mdt:ConnectedApp.oauthConfig",
+      "tipo": "tipo_composto"
+    },
+    {
+      "destino": "mdt:PermissionSet",
+      "estado": "verificado",
+      "origem": "mdt:ConnectedApp.permissionSetName",
+      "rel_id": "rel:connectedapp-permissionset",
+      "tipo": "referencia_campo"
+    },
+    {
+      "destino": "mdt:Profile",
+      "estado": "verificado",
+      "origem": "mdt:ConnectedApp.profileName",
+      "rel_id": "rel:connectedapp-profile",
+      "tipo": "referencia_campo"
+    },
+    {
       "destino": "obj:CustomField.Metadata",
       "estado": "verificado",
       "natureza": "transformada",
@@ -1267,6 +1367,54 @@
       "tipo": "tipo_composto"
     },
     {
+      "destino": "mdt:ExternalClientApplication",
+      "estado": "verificado",
+      "origem": "mdt:ExtlClntAppConfigurablePolicies.externalClientApplication",
+      "rel_id": "rel:extlclntappconfigurablepolicies-eca",
+      "tipo": "referencia_campo"
+    },
+    {
+      "destino": "mdt:ExternalClientApplication",
+      "estado": "verificado",
+      "origem": "mdt:ExtlClntAppGlobalOauthSettings.externalClientApplication",
+      "rel_id": "rel:extlclntappglobaloauthsettings-eca",
+      "tipo": "referencia_campo"
+    },
+    {
+      "destino": "mdx:ExternalAppIdTokenConfig",
+      "origem": "mdt:ExtlClntAppGlobalOauthSettings.idTokenConfig",
+      "tipo": "tipo_composto"
+    },
+    {
+      "destino": "mdx:ExtlClntAppOauthPoliciesAttribute",
+      "origem": "mdt:ExtlClntAppOauthConfigurablePolicies.customAttributes",
+      "tipo": "tipo_composto"
+    },
+    {
+      "destino": "mdt:ExternalClientApplication",
+      "estado": "verificado",
+      "origem": "mdt:ExtlClntAppOauthConfigurablePolicies.externalClientApplication",
+      "rel_id": "rel:extlclntappoauthconfigurablepolicies-eca",
+      "tipo": "referencia_campo"
+    },
+    {
+      "destino": "mdx:ExtlClntAppOauthSettingsAttribute",
+      "origem": "mdt:ExtlClntAppOauthSettings.customAttributes",
+      "tipo": "tipo_composto"
+    },
+    {
+      "destino": "mdt:ExternalClientApplication",
+      "estado": "verificado",
+      "origem": "mdt:ExtlClntAppOauthSettings.externalClientApplication",
+      "rel_id": "rel:extlclntappoauthsettings-eca",
+      "tipo": "referencia_campo"
+    },
+    {
+      "destino": "mdx:ExtlClntAppOauthIpRange",
+      "origem": "mdt:ExtlClntAppOauthSettings.trustedIpRanges",
+      "tipo": "tipo_composto"
+    },
+    {
       "destino": "obj:FlexiPage.Metadata",
       "estado": "verificado",
       "natureza": "transformada",
@@ -1297,6 +1445,18 @@
     {
       "destino": "mdx:NamedCredentialParameter",
       "origem": "mdt:NamedCredential.namedCredentialParameters",
+      "tipo": "tipo_composto"
+    },
+    {
+      "destino": "mdt:ConnectedApp",
+      "estado": "verificado",
+      "origem": "mdt:OauthCustomScope.assignedTo",
+      "rel_id": "rel:oauthcustomscope-connectedapp",
+      "tipo": "referencia_campo"
+    },
+    {
+      "destino": "mdx:OauthTokenExchHandlerApp",
+      "origem": "mdt:OauthTokenExchangeHandler.enablements",
       "tipo": "tipo_composto"
     },
     {
@@ -1679,6 +1839,11 @@
       "tipo": "tipo_composto"
     },
     {
+      "destino": "mdx:ConnectedAppOauthAssetToken",
+      "origem": "mdx:ConnectedAppOauthConfig.assetTokenConfig",
+      "tipo": "tipo_composto"
+    },
+    {
       "destino": "mdx:FilterItem",
       "origem": "mdx:EntitlementProcessMilestoneItem.milestoneCriteriaFilterItems",
       "tipo": "tipo_composto"
@@ -1720,6 +1885,20 @@
       "estado": "verificado",
       "origem": "mdx:NamedCredentialParameter.externalCredential",
       "rel_id": "rel:ncparam-externalcredential",
+      "tipo": "referencia_campo"
+    },
+    {
+      "destino": "mdt:ConnectedApp",
+      "estado": "verificado",
+      "origem": "mdx:OauthTokenExchHandlerApp.connectedApp",
+      "rel_id": "rel:tokenexch-connectedapp",
+      "tipo": "referencia_campo"
+    },
+    {
+      "destino": "mdt:ExternalClientApplication",
+      "estado": "verificado",
+      "origem": "mdx:OauthTokenExchHandlerApp.externalClientApp",
+      "rel_id": "rel:tokenexch-eca",
       "tipo": "referencia_campo"
     },
     {
@@ -1779,6 +1958,15 @@
       ]
     },
     {
+      "destino": "func:connected-apps",
+      "origem": "nuv:platform-core",
+      "tipo": "nuvem_funcionalidade",
+      "via": [
+        "cls:integracao-apis-e-eventos",
+        "sub:autenticacao-de-integracoes"
+      ]
+    },
+    {
       "destino": "func:cors",
       "origem": "nuv:platform-core",
       "tipo": "nuvem_funcionalidade",
@@ -1803,6 +1991,15 @@
       "via": [
         "cls:acesso-identidade-e-seguranca",
         "sub:sessoes-e-politicas-de-login"
+      ]
+    },
+    {
+      "destino": "func:external-client-apps",
+      "origem": "nuv:platform-core",
+      "tipo": "nuvem_funcionalidade",
+      "via": [
+        "cls:integracao-apis-e-eventos",
+        "sub:autenticacao-de-integracoes"
       ]
     },
     {
@@ -1848,6 +2045,15 @@
       "via": [
         "cls:integracao-apis-e-eventos",
         "sub:credenciais"
+      ]
+    },
+    {
+      "destino": "func:oauth-escopos-e-troca-de-token",
+      "origem": "nuv:platform-core",
+      "tipo": "nuvem_funcionalidade",
+      "via": [
+        "cls:integracao-apis-e-eventos",
+        "sub:autenticacao-de-integracoes"
       ]
     },
     {
@@ -2770,8 +2976,35 @@
       "tipo": "classificacao_principal"
     },
     {
+      "destino": "func:connected-apps",
+      "origem": "sub:autenticacao-de-integracoes",
+      "tipo": "classificacao_principal"
+    },
+    {
+      "destino": "func:external-client-apps",
+      "origem": "sub:autenticacao-de-integracoes",
+      "tipo": "classificacao_principal"
+    },
+    {
+      "destino": "func:oauth-escopos-e-troca-de-token",
+      "origem": "sub:autenticacao-de-integracoes",
+      "tipo": "classificacao_principal"
+    },
+    {
       "destino": "func:auth-providers",
       "motivo": "Também serve para login único de usuários na org.",
+      "origem": "sub:autenticacao-sso-e-mfa",
+      "tipo": "classificacao_secundaria"
+    },
+    {
+      "destino": "func:connected-apps",
+      "motivo": "Também configura login único por SAML para apps de terceiros.",
+      "origem": "sub:autenticacao-sso-e-mfa",
+      "tipo": "classificacao_secundaria"
+    },
+    {
+      "destino": "func:oauth-escopos-e-troca-de-token",
+      "motivo": "Políticas de fluxos OAuth e PKCE afetam a autenticação na org.",
       "origem": "sub:autenticacao-sso-e-mfa",
       "tipo": "classificacao_secundaria"
     },
@@ -3200,6 +3433,15 @@
     },
     {
       "estado": "verificado",
+      "grupo_cor": "cls:integracao-apis-e-eventos",
+      "id": "func:connected-apps",
+      "resumo": "Registro de um app ou sistema externo que se conecta à org por OAuth, SAML ou canvas, com suas políticas de acesso.",
+      "rotulo": "Connected apps",
+      "rotulo_tecnico": "Connected Apps",
+      "tipo": "funcionalidade"
+    },
+    {
+      "estado": "verificado",
       "grupo_cor": "cls:processos-de-negocio-especificos-de-produto",
       "id": "func:contas",
       "resumo": "Conta é uma organização ou pessoa com quem a empresa se relaciona: cliente, parceiro ou concorrente.",
@@ -3273,6 +3515,15 @@
     {
       "estado": "verificado",
       "grupo_cor": "cls:integracao-apis-e-eventos",
+      "id": "func:external-client-apps",
+      "resumo": "Sucessor dos connected apps: o app é um componente e as configurações OAuth, políticas e plugins ficam em componentes separados.",
+      "rotulo": "External client apps",
+      "rotulo_tecnico": "External Client Apps",
+      "tipo": "funcionalidade"
+    },
+    {
+      "estado": "verificado",
+      "grupo_cor": "cls:integracao-apis-e-eventos",
       "id": "func:external-objects",
       "resumo": "Mostra dados de outro sistema como objetos da org, consultados sob demanda e sem cópia.",
       "rotulo": "Objetos externos (Salesforce Connect)",
@@ -3340,6 +3591,15 @@
       "resumo": "Guardam o endereço de um sistema externo e a forma de se autenticar nele, fora do código.",
       "rotulo": "Named credentials e credenciais externas",
       "rotulo_tecnico": "Named Credentials",
+      "tipo": "funcionalidade"
+    },
+    {
+      "estado": "verificado",
+      "grupo_cor": "cls:integracao-apis-e-eventos",
+      "id": "func:oauth-escopos-e-troca-de-token",
+      "resumo": "Recursos de OAuth da org: escopos customizados para apps, handlers Apex de troca de token e configurações que bloqueiam fluxos ou exigem PKCE.",
+      "rotulo": "OAuth: escopos customizados, troca de token e fluxos",
+      "rotulo_tecnico": "OAuth Custom Scopes and Token Exchange",
       "tipo": "funcionalidade"
     },
     {
@@ -3532,6 +3792,20 @@
     },
     {
       "estado": "verificado",
+      "id": "mdt:ConnectedApp",
+      "resumo": "Define um connected app: como um sistema externo se conecta à org por OAuth, SAML ou canvas.",
+      "rotulo": "ConnectedApp",
+      "tipo": "metadata_type"
+    },
+    {
+      "estado": "verificado",
+      "id": "mdt:ConnectedAppSettings",
+      "resumo": "Configurações da org para connected apps.",
+      "rotulo": "ConnectedAppSettings",
+      "tipo": "metadata_type"
+    },
+    {
+      "estado": "verificado",
       "id": "mdt:CorsWhitelistOrigin",
       "resumo": "Registra uma origem (domínio) que pode chamar as APIs da org a partir do navegador (CORS).",
       "rotulo": "CorsWhitelistOrigin",
@@ -3595,6 +3869,20 @@
     },
     {
       "estado": "verificado",
+      "id": "mdt:ExternalClientAppSettings",
+      "resumo": "Configurações da org para external client apps.",
+      "rotulo": "ExternalClientAppSettings",
+      "tipo": "metadata_type"
+    },
+    {
+      "estado": "verificado",
+      "id": "mdt:ExternalClientApplication",
+      "resumo": "Define um external client app: o sucessor dos connected apps para integrações e apps externos.",
+      "rotulo": "ExternalClientApplication",
+      "tipo": "metadata_type"
+    },
+    {
+      "estado": "verificado",
       "id": "mdt:ExternalCredential",
       "resumo": "Define como a org se autentica num sistema externo: protocolo, principals e parâmetros.",
       "rotulo": "ExternalCredential",
@@ -3612,6 +3900,34 @@
       "id": "mdt:ExternalServiceRegistration",
       "resumo": "Registra a especificação (OpenAPI) de uma API externa para usá-la como ações em Flow e Apex.",
       "rotulo": "ExternalServiceRegistration",
+      "tipo": "metadata_type"
+    },
+    {
+      "estado": "verificado",
+      "id": "mdt:ExtlClntAppConfigurablePolicies",
+      "resumo": "Liga ou desliga os plugins (OAuth, SAML, canvas, mobile, push, notificação) de um external client app.",
+      "rotulo": "ExtlClntAppConfigurablePolicies",
+      "tipo": "metadata_type"
+    },
+    {
+      "estado": "verificado",
+      "id": "mdt:ExtlClntAppGlobalOauthSettings",
+      "resumo": "Configurações OAuth globais de um external client app: chaves, callback e fluxos habilitados.",
+      "rotulo": "ExtlClntAppGlobalOauthSettings",
+      "tipo": "metadata_type"
+    },
+    {
+      "estado": "verificado",
+      "id": "mdt:ExtlClntAppOauthConfigurablePolicies",
+      "resumo": "Políticas OAuth de um external client app definidas pelo administrador.",
+      "rotulo": "ExtlClntAppOauthConfigurablePolicies",
+      "tipo": "metadata_type"
+    },
+    {
+      "estado": "verificado",
+      "id": "mdt:ExtlClntAppOauthSettings",
+      "resumo": "Configurações OAuth de um external client app definidas pelo desenvolvedor.",
+      "rotulo": "ExtlClntAppOauthSettings",
       "tipo": "metadata_type"
     },
     {
@@ -3661,6 +3977,27 @@
       "id": "mdt:NamedCredential",
       "resumo": "Define o endpoint de um sistema externo e como chegar a ele numa chamada (callout).",
       "rotulo": "NamedCredential",
+      "tipo": "metadata_type"
+    },
+    {
+      "estado": "verificado",
+      "id": "mdt:OauthCustomScope",
+      "resumo": "Define um escopo OAuth customizado, que um connected app pode solicitar.",
+      "rotulo": "OauthCustomScope",
+      "tipo": "metadata_type"
+    },
+    {
+      "estado": "verificado",
+      "id": "mdt:OauthOidcSettings",
+      "resumo": "Configurações da org para fluxos OAuth e OpenID Connect.",
+      "rotulo": "OauthOidcSettings",
+      "tipo": "metadata_type"
+    },
+    {
+      "estado": "verificado",
+      "id": "mdt:OauthTokenExchangeHandler",
+      "resumo": "Define um handler Apex que valida tokens de um provedor externo e os troca por tokens da Salesforce.",
+      "rotulo": "OauthTokenExchangeHandler",
       "tipo": "metadata_type"
     },
     {
@@ -3850,6 +4187,36 @@
     },
     {
       "estado": "verificado",
+      "id": "mdx:ConnectedAppAttribute",
+      "rotulo": "ConnectedAppAttribute",
+      "tipo": "estrutura_auxiliar"
+    },
+    {
+      "estado": "verificado",
+      "id": "mdx:ConnectedAppCanvasConfig",
+      "rotulo": "ConnectedAppCanvasConfig",
+      "tipo": "estrutura_auxiliar"
+    },
+    {
+      "estado": "verificado",
+      "id": "mdx:ConnectedAppIpRange",
+      "rotulo": "ConnectedAppIpRange",
+      "tipo": "estrutura_auxiliar"
+    },
+    {
+      "estado": "verificado",
+      "id": "mdx:ConnectedAppOauthAssetToken",
+      "rotulo": "ConnectedAppOauthAssetToken",
+      "tipo": "estrutura_auxiliar"
+    },
+    {
+      "estado": "verificado",
+      "id": "mdx:ConnectedAppOauthConfig",
+      "rotulo": "ConnectedAppOauthConfig",
+      "tipo": "estrutura_auxiliar"
+    },
+    {
+      "estado": "verificado",
       "id": "mdx:CustomHttpHeaders",
       "rotulo": "CustomHttpHeaders",
       "tipo": "estrutura_auxiliar"
@@ -3892,6 +4259,12 @@
     },
     {
       "estado": "verificado",
+      "id": "mdx:ExternalAppIdTokenConfig",
+      "rotulo": "ExternalAppIdTokenConfig",
+      "tipo": "estrutura_auxiliar"
+    },
+    {
+      "estado": "verificado",
       "id": "mdx:ExternalCredentialParameter",
       "rotulo": "ExternalCredentialParameter",
       "tipo": "estrutura_auxiliar"
@@ -3906,6 +4279,24 @@
       "estado": "verificado",
       "id": "mdx:ExternalServiceOperation",
       "rotulo": "ExternalServiceOperation",
+      "tipo": "estrutura_auxiliar"
+    },
+    {
+      "estado": "verificado",
+      "id": "mdx:ExtlClntAppOauthIpRange",
+      "rotulo": "ExtlClntAppOauthIpRange",
+      "tipo": "estrutura_auxiliar"
+    },
+    {
+      "estado": "verificado",
+      "id": "mdx:ExtlClntAppOauthPoliciesAttribute",
+      "rotulo": "ExtlClntAppOauthPoliciesAttribute",
+      "tipo": "estrutura_auxiliar"
+    },
+    {
+      "estado": "verificado",
+      "id": "mdx:ExtlClntAppOauthSettingsAttribute",
+      "rotulo": "ExtlClntAppOauthSettingsAttribute",
       "tipo": "estrutura_auxiliar"
     },
     {
@@ -3942,6 +4333,12 @@
       "estado": "verificado",
       "id": "mdx:NamedCredentialParameter",
       "rotulo": "NamedCredentialParameter",
+      "tipo": "estrutura_auxiliar"
+    },
+    {
+      "estado": "verificado",
+      "id": "mdx:OauthTokenExchHandlerApp",
+      "rotulo": "OauthTokenExchHandlerApp",
       "tipo": "estrutura_auxiliar"
     },
     {

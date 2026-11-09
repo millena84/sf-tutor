@@ -77,9 +77,14 @@ O WSDL **não** é bloqueio: a documentação de cada tipo é a fonte alternativ
   - Metadata types: NamedCredential, ExternalCredential, RemoteSiteSetting, CspTrustedSite, CorsWhitelistOrigin, PlatformEventChannel, PlatformEventChannelMember, PlatformEventSubscriberConfig, ExternalServiceRegistration, ExternalDataSource e AuthProvider.
   - Extração: `fontes/extracoes/mdapi-lote5a.txt`.
   - Novo no schema: propriedade com `referencia.alvos` para referência pelo nome do componente no XML.
-- **Falta (lote 5b em diante):**
-  - Connected Apps e External Client Apps, com suas configurações.
-  - OAuth: OauthCustomScope, OauthOidcSettings e OauthTokenExchangeHandler.
+- **Lote 5b (2026-11-09):** 3 funcionalidades, 11 metadata types e 12 estruturas, com 9 referências por nome (inclusive ConnectedApp → PermissionSet e Profile).
+  - Funcionalidades: connected apps, external client apps e OAuth (escopos customizados, troca de token e fluxos).
+  - Metadata types: ConnectedApp, ConnectedAppSettings, ExternalClientApplication, ExtlClntAppOauthSettings, ExtlClntAppGlobalOauthSettings, ExtlClntAppOauthConfigurablePolicies, ExtlClntAppConfigurablePolicies, ExternalClientAppSettings, OauthCustomScope, OauthTokenExchangeHandler e OauthOidcSettings.
+  - Extração: `fontes/extracoes/mdapi-lote5b.txt`.
+  - **ConnectedApp está parcial:** ConnectedAppOauthIdToken, ConnectedAppOauthPolicy, ConnectedAppSamlConfig, ConnectedAppSessionPolicy e ConnectedAppMobileDetailConfig não foram extraídos. O conteúdo servido veio truncado e a página renderizada não mostra os nomes dos campos.
+  - A página de ExtlClntAppOauthSecuritySettings não foi encontrada (meta_extlclntappoauthsecuritysettings.htm devolveu binário).
+- **Falta (lote 5c em diante):**
+  - Sub-estruturas pendentes de ConnectedApp e plugins de external client app: mobile, push, canvas, notificação, attest, SAML e ExtlClntAppOauthSecuritySettings.
   - Certificados e SAML: Certificate, SamlSsoConfig e ExternalAuthIdentityProvider.
   - Endpoints: OutboundNetworkConnection, RegisteredExternalService, McpServerDefinition e ApiNamedQuery.
   - Eventos: EventRelayConfig, ManagedEventSubscription e PlatformEventSettings.
