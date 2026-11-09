@@ -16,8 +16,8 @@
     "outbound network connections",
     "private connect"
   ],
-  "o_que_e": "Conexão privada entre a org e a AWS, usada por named credentials do tipo PrivateEndpoint.",
-  "finalidade": "Fazer callouts para serviços na AWS sem trafegar pela internet pública.",
+  "o_que_e": "Conexões privadas entre a org e a AWS, nos dois sentidos: de saída (usadas por named credentials do tipo PrivateEndpoint) e de entrada (chamadas de serviços na AWS para a org).",
+  "finalidade": "Trocar chamadas com serviços na AWS sem trafegar pela internet pública.",
   "exemplo": "A named credential do serviço de pedidos na AWS usa uma conexão PrivateLink já provisionada.",
   "classificacao_principal": {
     "classificacao": "cls:integracao-apis-e-eventos",
@@ -29,6 +29,10 @@
       {
         "ref": "mdt:OutboundNetworkConnection",
         "papel": "Definição da conexão privada."
+      },
+      {
+        "ref": "mdt:InboundNetworkConnection",
+        "papel": "Conexão privada de entrada (chamadas de serviços na AWS para a org)."
       }
     ],
     "objetos_api": [],
@@ -56,6 +60,9 @@
     },
     {
       "fonte": "src:rest-limits"
+    },
+    {
+      "fonte": "src:mdapi-inboundnetworkconnection"
     }
   ]
 }

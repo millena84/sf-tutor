@@ -1,0 +1,53 @@
+Lote 5g (issue #24) — certificados restantes, conexão de rede de entrada e plugins de external client app. Extração documental assistida em 2026-11-09.
+Conteúdo lido via developer.salesforce.com/docs/get_document_content/api_meta/meta_<tipo>.htm/en-us/264.0 (Metadata API v68.0). Notas em português; nomes técnicos no original.
+Todos os tipos abaixo estendem Metadata e herdam fullName, salvo indicação.
+
+[src:mdapi-publickeycertificate] PublicKeyCertificate — certificado público ou JSON web key para validar JWTs fornecidos pelo cliente. Sufixo .PublicKeyCertificate, pasta PublicKeyCertificate; desde 62.0; curinga suportado.
+  description | string; isActive | boolean (default false); jsonWebKey | string (chave pública para verificar tokens); masterLabel | string | obrigatório.
+  O exemplo de jsonWebKey traz parâmetros de chave privada e de curva elíptica com kty RSA (valores ilustrativos).
+[src:mdapi-publickeycertificateset] PublicKeyCertificateSet — conjunto de chaves públicas (certificados ou JWKs). Sufixo .PublicKeyCertificateSet, pasta PublicKeyCertificateSet; desde 62.0; curinga suportado.
+  description | string; jwksEndPoint | string (URL HTTPS que devolve o JWKS); jwtIssuer | string (emissor do JWT, diferencia maiúsculas); masterLabel | string | obrigatório;
+  publicKeyCertificateSetKeys | PublicKeyCertificateSetKey[]; type | PublicKeyCertificateSetType | obrigatório (JWKS: chaves via PublicKeyCertificateSetKey; JWKS_URL: via jwksEndPoint).
+  PublicKeyCertificateSetKey: publicKeyCertificate | string | obrigatório (o PublicKeyCertificate referenciado). Título da seção no plural, tipo no singular.
+[src:mdapi-userauthcertificate] UserAuthCertificate — certificado de usuário codificado em PEM, enviado de fora e usado para autenticar o usuário. Sufixo .userAuthCertificate, pasta userAuthCertificates; desde 50.0; curinga suportado.
+  developerName | string | obrigatório (só visível com View DeveloperName ou View Setup and Configuration); expirationDate | dateTime | obrigatório; masterLabel | string | obrigatório (até 64);
+  serialNumber | string | obrigatório; user | string | obrigatório (nome do usuário).
+  O exemplo traz content (nil), fora da tabela, e um valor de user com formato de Id.
+[src:mdapi-inboundcertificate] InboundCertificate — certificado de autenticação mútua importado para a org. Sufixo .inboundCertificate, pasta inboundCertificates; desde 49.0. A página não diz o tipo pai; o exemplo de package.xml usa *.
+  Disponível só com a permissão MutualAuthentication habilitada na org.
+  expirationDate | date | obrigatório; issuer | string | obrigatório; masterLabel | string | obrigatório (até 64); serialId | string | obrigatório.
+[src:mdapi-inboundnetworkconnection] InboundNetworkConnection — conexão privada de um serviço de terceiros para a org (chamadas de entrada). Sufixo .inboundNetworkConnection, pasta inboundNetworkConnections; desde 49.0; curinga suportado.
+  connectionType | string | obrigatório (AwsPrivateLink; DataCloudPrivateConnection interno); description | string | obrigatório (até 255); inboundNetworkConnProperties | InboundNetworkConnProperty;
+  isActive | boolean | obrigatório (default false); label | string | obrigatório;
+  status | string | obrigatório (Unprovisioned, Allocating, PendingAcceptance, PendingActivation, RejectedRemotely, DeletedRemotely, TeardownInProgress, Ready; muda após Provision, Sync ou Teardown).
+  InboundNetworkConnProperty: propertyName | obrigatório (AwsVpcEndpointId, só leitura com status Ready; Region; SourceIpRanges); propertyValue | string | obrigatório (para SourceIpRanges, JSON com IP inicial e final).
+  Divergência: a página de OutboundNetworkConnection (lote 5c) lista Allocation; esta lista Allocating.
+[src:mdapi-extlclntappmobilesettings] ExtlClntAppMobileSettings — configurações de app móvel do external client app (ex.: bloqueio de tela). Piloto ou beta. Sufixo .ecaMobile, pasta extlClntAppMobileSettings; desde 64.0.
+  externalClientApplication | string | obrigatório (nome do external client app); isScreenLockEnabled | boolean | obrigatório; label | string.
+[src:mdapi-extlclntappmobileconfigurablepolicies] ExtlClntAppMobileConfigurablePolicies — políticas móveis. Sufixo .ecaMobilePlcy, pasta extlClntAppMobilePolicies; desde 64.0.
+  externalClientApplication | string | obrigatório; label | string; screenLockTimeout | ScreenLockTimeout (Never, One, Five, Ten, Thirty, Sixty, OneTwenty, OneEighty, TwoForty minutos), vale só com isScreenLockEnabled em ExtlClntAppMobileSettings.
+[src:mdapi-extlclntapppushsettings] ExtlClntAppPushSettings — notificações push. Piloto ou beta; exige o plugin OAuth. Sufixo .ecaPush, pasta extlClntAppPushSettings; desde 64.0.
+  androidPushConfig | ExtlClntAppAndroidPushConfig (condicional); applePushConfig | ExtlClntAppApplePushConfig (condicional); externalClientApplication | string | obrigatório; label | string;
+  pushConfigLink | string (condicional; orgId:recordId; gerado ao criar com configuração embutida); pushServiceType | obrigatório (Apple, Android).
+  Regras: exatamente um entre androidPushConfig, applePushConfig e pushConfigLink; ao instalar em outra org, manter só pushConfigLink.
+  ExtlClntAppAndroidPushConfig: fcmProject | string | obrigatório; serviceAccount | string | obrigatório (chave privada do Admin SDK do Firebase, base64, até 8.000).
+  ExtlClntAppApplePushConfig: applicationBundle | string; certificate | string (.p12, base64); environment | obrigatório (Production, Sandbox); keyIdentifier | string (.p8); password | string (.p12); signingKey | string (.p8, base64); teamIdentifier | string (.p8).
+[src:mdapi-extlclntapppushconfigurablepolicies] ExtlClntAppPushConfigurablePolicies — políticas de push. Piloto ou beta; exige o plugin OAuth. Sufixo .ecaPushPlcy, pasta extlClntAppPushPolicies; desde 64.0.
+  externalClientApplication | string | obrigatório; isFullContent | boolean | obrigatório (true: título e corpo completos; false: mensagem genérica ou só título); label | string.
+[src:mdapi-extlclntappcanvassettings] ExtlClntAppCanvasSettings — app canvas. Sufixo .ecaCanvas, pasta extlClntAppCanvasSettings; desde 66.0; curinga suportado.
+  accessMethod | obrigatório (Get, Post); canvasLocationOptions | [] (Aura, ChatterFeed, MobileNav, None, PageLayout, Publisher, Visualforce); canvasOptions | [] (HideShare, HideHeader);
+  canvasUrl | string | obrigatório; externalClientApplication | string | obrigatório; label | string; lifeCycleHandler | string (classe Apex); samlInitiationMethod (IdpInitiated, SpInitiated, None).
+[src:mdapi-extlclntappnotificationsettings] ExtlClntAppNotificationSettings — assinaturas de notificação para mobile. Piloto ou beta; exige o plugin OAuth. Sufixo .ecaNotifications, pasta extlClntAppNotifSettings; desde 64.0.
+  externalClientApplication | string | obrigatório; label | string; notificationTypes | ExtlClntAppNotificationType[].
+  ExtlClntAppNotificationType (só tipos customizados com canal mobile): notificationType | string | obrigatório; pushByDefault | boolean | obrigatório (exige ExtlClntAppPushSettings).
+[src:mdapi-extlclntappsamlconfigurablepolicies] ExtlClntAppSamlConfigurablePolicies — Salesforce como provedor de identidade SAML para um provedor de serviço. Sufixo .ecaSamlPlcy, pasta extlClntAppSamlConfigurablePolicies; desde 63.0; curinga suportado.
+  Exige permissões de ver external client apps, ver configurações e editar políticas. O app pai precisa de distributionState Local e de ExtlClntAppConfigurablePolicies com isSamlPluginEnabled true.
+  acsUrl | string | obrigatório; certificate | string (do provedor de serviço, só no fluxo iniciado por ele); commaSeparatedPermissionSet | string (Ids); commaSeparatedProfile | string (Ids; recomenda permission sets);
+  customAttributes | ExtlClntAppSamlConfigurablePoliciesAttribute[]; encryptionCertificate | string; encryptionType (AES_128, AES_256); entityUrl | string | obrigatório;
+  externalClientApplication | string | obrigatório (rótulo do app pai); issuer | string (default: My Domain); label | string; nameIdFormat (Unspecified default, EmailAddress, Persistent, Transient);
+  signingAlgorithmType (SHA1, SHA256); singleLogoutBindingType (PostBinding, RedirectBinding); singleLogoutUrl | string; startUrl | string (obsoleto a partir da 64.0; usar o de ExtlClntAppConfigurablePolicies);
+  subjectCustomAttribute | string (condicional, com subjectType CustomAttribute); subjectType (Username, FederationId, UserId, CustomAttribute, PersistentId).
+  ExtlClntAppSamlConfigurablePoliciesAttribute: formula | string | obrigatório ($Objeto.Campo); key | string | obrigatório.
+  O exemplo XML tem marcadores inválidos nas URLs e certificados truncados.
+
+Não obtidos (URLs devolveram binário): ExtlClntAppAttestSettings, ExtlClntAppAttestConfigurablePolicies, ExtlClntAppOauthSecuritySettings.

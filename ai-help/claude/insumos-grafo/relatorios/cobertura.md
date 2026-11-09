@@ -7,7 +7,7 @@ Gerado por `ferramentas/sftutor.py cobertura`. Cobertura estrutural, explicativa
 
 - Universo v68 (METADATA_SUPPORT.md): **993** tipos.
 - Classificados como incluídos no recorte Core: 12; pendentes de classificação: 981.
-- Cadastrados: **66** de 993. Estruturalmente completos (contra a página oficial): 53. Completos nas três dimensões: 0.
+- Cadastrados: **78** de 993. Estruturalmente completos (contra a página oficial): 65. Completos nas três dimensões: 0.
 - Porcentagem do recorte Core: não calculada, porque o denominador do recorte ainda não está definido (classificação item a item pendente).
 
 | Tipo | Estrutural | Esperadas | Presentes | Explicadas | Estruturas | Mapeamento | Completo |
@@ -36,13 +36,22 @@ Gerado por `ferramentas/sftutor.py cobertura`. Cobertura estrutural, explicativa
 | mdt:ExternalCredential | completa | 5 | 5 | 5 | 1 | parcial | não |
 | mdt:ExternalDataSource | completa | 20 | 20 | 20 | 2 | parcial | não |
 | mdt:ExternalServiceRegistration | completa | 20 | 20 | 20 | 1 | parcial | não |
+| mdt:ExtlClntAppCanvasSettings | completa | 9 | 9 | 9 | 0 | parcial | não |
 | mdt:ExtlClntAppConfigurablePolicies | completa | 12 | 12 | 12 | 0 | parcial | não |
 | mdt:ExtlClntAppGlobalOauthSettings | completa | 22 | 22 | 22 | 1 | parcial | não |
+| mdt:ExtlClntAppMobileConfigurablePolicies | completa | 4 | 4 | 4 | 0 | parcial | não |
+| mdt:ExtlClntAppMobileSettings | completa | 4 | 4 | 4 | 0 | parcial | não |
+| mdt:ExtlClntAppNotificationSettings | completa | 4 | 4 | 4 | 1 | parcial | não |
 | mdt:ExtlClntAppOauthConfigurablePolicies | completa | 28 | 28 | 28 | 1 | parcial | não |
 | mdt:ExtlClntAppOauthSettings | completa | 15 | 15 | 15 | 2 | parcial | não |
+| mdt:ExtlClntAppPushConfigurablePolicies | completa | 4 | 4 | 4 | 0 | parcial | não |
+| mdt:ExtlClntAppPushSettings | completa | 7 | 7 | 7 | 2 | parcial | não |
+| mdt:ExtlClntAppSamlConfigurablePolicies | completa | 19 | 19 | 19 | 1 | parcial | não |
 | mdt:FlexiPage | parcial | 12 | 12 | 12 | 0 | parcial | não |
 | mdt:Flow | parcial | 50 | 50 | 13 | 0 | parcial | não |
 | mdt:ForecastingSettings | parcial | 10 | 10 | 10 | 0 | parcial | não |
+| mdt:InboundCertificate | completa | 4 | 4 | 4 | 0 | parcial | não |
+| mdt:InboundNetworkConnection | completa | 7 | 7 | 7 | 1 | parcial | não |
 | mdt:KnowledgeSettings | parcial | 23 | 23 | 23 | 0 | parcial | não |
 | mdt:LeadConvertSettings | completa | 3 | 3 | 3 | 1 | parcial | não |
 | mdt:ManagedEventSubscription | completa | 7 | 7 | 7 | 0 | parcial | não |
@@ -63,6 +72,8 @@ Gerado por `ferramentas/sftutor.py cobertura`. Cobertura estrutural, explicativa
 | mdt:PlatformEventSubscriberConfig | completa | 8 | 8 | 8 | 0 | parcial | não |
 | mdt:PresenceUserConfig | parcial | n/d | 18 | 18 | 1 | parcial | não |
 | mdt:Profile | parcial | 27 | 27 | 27 | 16 | parcial | não |
+| mdt:PublicKeyCertificate | completa | 5 | 5 | 5 | 0 | parcial | não |
+| mdt:PublicKeyCertificateSet | completa | 7 | 7 | 7 | 1 | parcial | não |
 | mdt:QueueRoutingConfig | completa | 15 | 15 | 15 | 1 | parcial | não |
 | mdt:QuickAction | parcial | 22 | 22 | 22 | 0 | parcial | não |
 | mdt:QuoteSettings | completa | 2 | 2 | 2 | 0 | parcial | não |
@@ -77,12 +88,13 @@ Gerado por `ferramentas/sftutor.py cobertura`. Cobertura estrutural, explicativa
 | mdt:Territory2Rule | completa | 6 | 6 | 6 | 1 | parcial | não |
 | mdt:Territory2Settings | completa | 12 | 12 | 12 | 2 | parcial | não |
 | mdt:Territory2Type | completa | 4 | 4 | 4 | 0 | parcial | não |
+| mdt:UserAuthCertificate | completa | 6 | 6 | 6 | 0 | parcial | não |
 | mdt:ValidationRule | completa | 6 | 6 | 6 | 0 | parcial | não |
 
 ## Propriedades XML
 
-- Em metadata types: 881 listadas, 844 explicadas.
-- Em estruturas auxiliares: 324 listadas, 324 explicadas.
+- Em metadata types: 961 listadas, 924 explicadas.
+- Em estruturas auxiliares: 340 listadas, 340 explicadas.
 - Universo total: Sem WSDL não há denominador confiável do total de propriedades do recorte.
 
 ## Objetos consultáveis via API
@@ -157,8 +169,8 @@ Gerado por `ferramentas/sftutor.py cobertura`. Cobertura estrutural, explicativa
 
 ## Relacionamentos
 
-- Total: 109; verificados: 106.
-- Por tipo: correspondencia_xml_api: 11, referencia_campo: 85, representacao_comum: 13
+- Total: 117; verificados: 114.
+- Por tipo: correspondencia_xml_api: 11, referencia_campo: 93, representacao_comum: 13
 
 ## Taxonomia e funcionalidades
 

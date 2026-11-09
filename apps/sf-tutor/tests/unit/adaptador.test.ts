@@ -213,3 +213,18 @@ describe('APIs de dados e metadados (lote 5f)', () => {
     }
   });
 });
+
+describe('certificados e plugins de external client app (lote 5g)', () => {
+  it('PublicKeyCertificateSetKey.publicKeyCertificate referencia PublicKeyCertificate', () => {
+    const e = exp0();
+    revelarCaminho(ind, 'funcionalidade', e, ind.caminhoPreferido('mdx:PublicKeyCertificateSetKey.publicKeyCertificate', 'funcionalidade')!);
+    revelarCaminho(ind, 'funcionalidade', e, ind.caminhoPreferido('mdt:PublicKeyCertificate', 'funcionalidade')!);
+    const t = montarCena(ind, 'funcionalidade', e).arestas.find((a) => a.tecnica && a.aresta?.rel_id === 'rel:pkcsetkey-pkc');
+    expect(t?.destino.endsWith('mdt:PublicKeyCertificate')).toBe(true);
+  });
+  it('plugins de ECA ficam sob external client apps', () => {
+    for (const id of ['mdt:ExtlClntAppPushSettings', 'mdt:ExtlClntAppCanvasSettings', 'mdt:ExtlClntAppSamlConfigurablePolicies']) {
+      expect(ind.caminhoPreferido(id, 'funcionalidade'), id).toContain('func:external-client-apps');
+    }
+  });
+});

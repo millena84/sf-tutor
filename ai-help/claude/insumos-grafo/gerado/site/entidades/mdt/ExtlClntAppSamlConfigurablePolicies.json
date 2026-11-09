@@ -1,0 +1,1098 @@
+{
+  "alertas": [
+    "O app pai precisa de distributionState Local (apps com SAML não podem ser empacotados) e de ExtlClntAppConfigurablePolicies com isSamlPluginEnabled true.",
+    "Exige permissões para ver external client apps, ver as configurações e editar as políticas."
+  ],
+  "arquivos": {
+    "curinga_package_xml": {
+      "estado": "verificado",
+      "evidencias": [
+        {
+          "fonte": "src:mdapi-extlclntappsamlconfigurablepolicies"
+        }
+      ],
+      "valor": true
+    },
+    "metadata_api_format": {
+      "estado": "verificado",
+      "evidencias": [
+        {
+          "fonte": "src:sdr-registry",
+          "nota": "types.extlclntappsamlconfigurablepolicies"
+        }
+      ],
+      "valor": {
+        "arquivo": "<Nome>.ecaSamlPlcy",
+        "pasta": "extlClntAppSamlConfigurablePolicies/"
+      }
+    },
+    "source_format": {
+      "estado": "verificado",
+      "evidencias": [
+        {
+          "fonte": "src:sdr-registry",
+          "nota": "types.extlclntappsamlconfigurablepolicies"
+        }
+      ],
+      "nota": "Pasta e sufixo do registro do Salesforce CLI; sufixo '-meta.xml' segue a convenção do source format.",
+      "valor": {
+        "arquivo": "<Nome>.ecaSamlPlcy-meta.xml",
+        "pasta": "extlClntAppSamlConfigurablePolicies/"
+      }
+    }
+  },
+  "cobertura": {
+    "estrutural": {
+      "esperado": 19,
+      "estado": "completa",
+      "nota": "Universo esperado = tabela Fields da página oficial 68.0 (mais fullName herdado quando declarado).",
+      "presente": 19
+    },
+    "explicativa": {
+      "esperado": 19,
+      "estado": "completa",
+      "presente": 19
+    },
+    "mapeamento": {
+      "estado": "parcial",
+      "nota": "Correspondências registradas apenas onde há evidência; demais pendentes."
+    }
+  },
+  "disponibilidade": {
+    "ate_versao": null,
+    "desde_versao": "63.0",
+    "estado": "verificado"
+  },
+  "divergencias_documentais": [
+    "O exemplo XML (src:mdapi-extlclntappsamlconfigurablepolicies) tem marcadores inválidos nas URLs e certificados truncados; não é implantável como está.",
+    "externalClientApplication é descrito como o rótulo do app pai, enquanto os outros plugins usam o nome."
+  ],
+  "estado": "verificado",
+  "estende": "Metadata",
+  "estruturas": [
+    "mdx:ExtlClntAppSamlConfigurablePoliciesAttribute"
+  ],
+  "evidencias": [
+    {
+      "fonte": "src:mdapi-extlclntappsamlconfigurablepolicies"
+    },
+    {
+      "fonte": "src:sdr-registry"
+    },
+    {
+      "fonte": "src:sdr-metadata-support"
+    }
+  ],
+  "finalidade": "Usuários entram em um serviço de terceiros com a conta Salesforce.",
+  "id": "mdt:ExtlClntAppSamlConfigurablePolicies",
+  "nome": "ExtlClntAppSamlConfigurablePolicies",
+  "o_que_e": "Políticas SAML de um external client app: a Salesforce atua como provedor de identidade para um provedor de serviço.",
+  "propriedades": [
+    {
+      "default": {
+        "estado": "desconhecido",
+        "forma": "nao_declarado_na_fonte"
+      },
+      "disponibilidade": {
+        "ate_versao": null,
+        "desde_versao": null,
+        "estado": "desconhecido"
+      },
+      "dominio": {
+        "contexto": "A fonte tipa como string sem lista de valores; não inventar valores.",
+        "estado": "verificado",
+        "evidencias": [
+          {
+            "fonte": "src:mdapi-extlclntappsamlconfigurablepolicies"
+          }
+        ],
+        "natureza": "texto_livre"
+      },
+      "estado": "verificado",
+      "evidencias": [
+        {
+          "fonte": "src:mdapi-extlclntappsamlconfigurablepolicies"
+        }
+      ],
+      "explicacao": "explicada",
+      "id": "mdt:ExtlClntAppSamlConfigurablePolicies.acsUrl",
+      "nome": "acsUrl",
+      "o_que_e": "Endpoint ACS do provedor de serviço, que recebe as respostas SAML.",
+      "obrigatoriedade": {
+        "estado": "verificado",
+        "evidencias": [
+          {
+            "fonte": "src:mdapi-extlclntappsamlconfigurablepolicies"
+          }
+        ],
+        "valor": "sim"
+      },
+      "origem": {
+        "estado": "verificado",
+        "evidencias": [
+          {
+            "fonte": "src:mdapi-extlclntappsamlconfigurablepolicies"
+          }
+        ],
+        "nota": "Propriedade definida pelo schema da Metadata API.",
+        "valor": "padrao_plataforma"
+      },
+      "tipo_tecnico": "string"
+    },
+    {
+      "default": {
+        "estado": "desconhecido",
+        "forma": "nao_declarado_na_fonte"
+      },
+      "disponibilidade": {
+        "ate_versao": null,
+        "desde_versao": null,
+        "estado": "desconhecido"
+      },
+      "dominio": {
+        "contexto": "A fonte tipa como string sem lista de valores; não inventar valores.",
+        "estado": "verificado",
+        "evidencias": [
+          {
+            "fonte": "src:mdapi-extlclntappsamlconfigurablepolicies"
+          }
+        ],
+        "natureza": "texto_livre"
+      },
+      "estado": "verificado",
+      "evidencias": [
+        {
+          "fonte": "src:mdapi-extlclntappsamlconfigurablepolicies"
+        }
+      ],
+      "explicacao": "explicada",
+      "id": "mdt:ExtlClntAppSamlConfigurablePolicies.certificate",
+      "nome": "certificate",
+      "o_que_e": "Certificado do provedor de serviço para assinar requisições (fluxo iniciado por ele); se definido, toda requisição precisa vir assinada.",
+      "obrigatoriedade": {
+        "condicao": "A documentação 68.0 não marca o campo como obrigatório; ausência de marcação não comprova opcionalidade (confirmar no WSDL).",
+        "estado": "desconhecido",
+        "valor": "nao"
+      },
+      "origem": {
+        "estado": "verificado",
+        "evidencias": [
+          {
+            "fonte": "src:mdapi-extlclntappsamlconfigurablepolicies"
+          }
+        ],
+        "nota": "Propriedade definida pelo schema da Metadata API.",
+        "valor": "padrao_plataforma"
+      },
+      "tipo_tecnico": "string"
+    },
+    {
+      "default": {
+        "estado": "desconhecido",
+        "forma": "nao_declarado_na_fonte"
+      },
+      "disponibilidade": {
+        "ate_versao": null,
+        "desde_versao": null,
+        "estado": "desconhecido"
+      },
+      "dominio": {
+        "contexto": "A fonte tipa como string sem lista de valores; não inventar valores.",
+        "estado": "verificado",
+        "evidencias": [
+          {
+            "fonte": "src:mdapi-extlclntappsamlconfigurablepolicies"
+          }
+        ],
+        "natureza": "texto_livre"
+      },
+      "estado": "verificado",
+      "evidencias": [
+        {
+          "fonte": "src:mdapi-extlclntappsamlconfigurablepolicies"
+        }
+      ],
+      "explicacao": "explicada",
+      "id": "mdt:ExtlClntAppSamlConfigurablePolicies.commaSeparatedPermissionSet",
+      "nome": "commaSeparatedPermissionSet",
+      "o_que_e": "Ids de permission sets exigidos para o SSO, separados por vírgula.",
+      "obrigatoriedade": {
+        "condicao": "A documentação 68.0 não marca o campo como obrigatório; ausência de marcação não comprova opcionalidade (confirmar no WSDL).",
+        "estado": "desconhecido",
+        "valor": "nao"
+      },
+      "origem": {
+        "estado": "verificado",
+        "evidencias": [
+          {
+            "fonte": "src:mdapi-extlclntappsamlconfigurablepolicies"
+          }
+        ],
+        "nota": "Propriedade definida pelo schema da Metadata API.",
+        "valor": "padrao_plataforma"
+      },
+      "tipo_tecnico": "string"
+    },
+    {
+      "default": {
+        "estado": "desconhecido",
+        "forma": "nao_declarado_na_fonte"
+      },
+      "disponibilidade": {
+        "ate_versao": null,
+        "desde_versao": null,
+        "estado": "desconhecido"
+      },
+      "dominio": {
+        "contexto": "A fonte tipa como string sem lista de valores; não inventar valores.",
+        "estado": "verificado",
+        "evidencias": [
+          {
+            "fonte": "src:mdapi-extlclntappsamlconfigurablepolicies"
+          }
+        ],
+        "natureza": "texto_livre"
+      },
+      "estado": "verificado",
+      "evidencias": [
+        {
+          "fonte": "src:mdapi-extlclntappsamlconfigurablepolicies"
+        }
+      ],
+      "explicacao": "explicada",
+      "id": "mdt:ExtlClntAppSamlConfigurablePolicies.commaSeparatedProfile",
+      "nome": "commaSeparatedProfile",
+      "o_que_e": "Ids de perfis exigidos para o SSO, separados por vírgula (a página recomenda permission sets).",
+      "obrigatoriedade": {
+        "condicao": "A documentação 68.0 não marca o campo como obrigatório; ausência de marcação não comprova opcionalidade (confirmar no WSDL).",
+        "estado": "desconhecido",
+        "valor": "nao"
+      },
+      "origem": {
+        "estado": "verificado",
+        "evidencias": [
+          {
+            "fonte": "src:mdapi-extlclntappsamlconfigurablepolicies"
+          }
+        ],
+        "nota": "Propriedade definida pelo schema da Metadata API.",
+        "valor": "padrao_plataforma"
+      },
+      "tipo_tecnico": "string"
+    },
+    {
+      "cardinalidade": "0..n",
+      "default": {
+        "estado": "desconhecido",
+        "forma": "nao_declarado_na_fonte"
+      },
+      "disponibilidade": {
+        "ate_versao": null,
+        "desde_versao": null,
+        "estado": "desconhecido"
+      },
+      "dominio": {
+        "estado": "verificado",
+        "evidencias": [
+          {
+            "fonte": "src:mdapi-extlclntappsamlconfigurablepolicies"
+          }
+        ],
+        "natureza": "tipo_composto"
+      },
+      "estado": "verificado",
+      "estrutura_ref": "mdx:ExtlClntAppSamlConfigurablePoliciesAttribute",
+      "evidencias": [
+        {
+          "fonte": "src:mdapi-extlclntappsamlconfigurablepolicies"
+        }
+      ],
+      "explicacao": "explicada",
+      "id": "mdt:ExtlClntAppSamlConfigurablePolicies.customAttributes",
+      "nome": "customAttributes",
+      "o_que_e": "Dados extras do usuário na resposta SAML.",
+      "obrigatoriedade": {
+        "condicao": "A documentação 68.0 não marca o campo como obrigatório; ausência de marcação não comprova opcionalidade (confirmar no WSDL).",
+        "estado": "desconhecido",
+        "valor": "nao"
+      },
+      "origem": {
+        "estado": "verificado",
+        "evidencias": [
+          {
+            "fonte": "src:mdapi-extlclntappsamlconfigurablepolicies"
+          }
+        ],
+        "nota": "Propriedade definida pelo schema da Metadata API.",
+        "valor": "padrao_plataforma"
+      },
+      "tipo_tecnico": "ExtlClntAppSamlConfigurablePoliciesAttribute[]"
+    },
+    {
+      "default": {
+        "estado": "desconhecido",
+        "forma": "nao_declarado_na_fonte"
+      },
+      "disponibilidade": {
+        "ate_versao": null,
+        "desde_versao": null,
+        "estado": "desconhecido"
+      },
+      "dominio": {
+        "contexto": "A fonte tipa como string sem lista de valores; não inventar valores.",
+        "estado": "verificado",
+        "evidencias": [
+          {
+            "fonte": "src:mdapi-extlclntappsamlconfigurablepolicies"
+          }
+        ],
+        "natureza": "texto_livre"
+      },
+      "estado": "verificado",
+      "evidencias": [
+        {
+          "fonte": "src:mdapi-extlclntappsamlconfigurablepolicies"
+        }
+      ],
+      "explicacao": "explicada",
+      "id": "mdt:ExtlClntAppSamlConfigurablePolicies.encryptionCertificate",
+      "nome": "encryptionCertificate",
+      "o_que_e": "Certificado X.509 (Certificate and Key Management) que cifra as asserções.",
+      "obrigatoriedade": {
+        "condicao": "A documentação 68.0 não marca o campo como obrigatório; ausência de marcação não comprova opcionalidade (confirmar no WSDL).",
+        "estado": "desconhecido",
+        "valor": "nao"
+      },
+      "origem": {
+        "estado": "verificado",
+        "evidencias": [
+          {
+            "fonte": "src:mdapi-extlclntappsamlconfigurablepolicies"
+          }
+        ],
+        "nota": "Propriedade definida pelo schema da Metadata API.",
+        "valor": "padrao_plataforma"
+      },
+      "tipo_tecnico": "string"
+    },
+    {
+      "default": {
+        "estado": "desconhecido",
+        "forma": "nao_declarado_na_fonte"
+      },
+      "disponibilidade": {
+        "ate_versao": null,
+        "desde_versao": null,
+        "estado": "desconhecido"
+      },
+      "dominio": {
+        "estado": "verificado",
+        "evidencias": [
+          {
+            "fonte": "src:mdapi-extlclntappsamlconfigurablepolicies"
+          }
+        ],
+        "lista_completa": "sim",
+        "natureza": "enum_fechado",
+        "valores": [
+          {
+            "valor": "AES_128"
+          },
+          {
+            "valor": "AES_256"
+          }
+        ]
+      },
+      "estado": "verificado",
+      "evidencias": [
+        {
+          "fonte": "src:mdapi-extlclntappsamlconfigurablepolicies"
+        }
+      ],
+      "explicacao": "explicada",
+      "id": "mdt:ExtlClntAppSamlConfigurablePolicies.encryptionType",
+      "nome": "encryptionType",
+      "o_que_e": "Método de cifragem das asserções.",
+      "obrigatoriedade": {
+        "condicao": "A documentação 68.0 não marca o campo como obrigatório; ausência de marcação não comprova opcionalidade (confirmar no WSDL).",
+        "estado": "desconhecido",
+        "valor": "nao"
+      },
+      "origem": {
+        "estado": "verificado",
+        "evidencias": [
+          {
+            "fonte": "src:mdapi-extlclntappsamlconfigurablepolicies"
+          }
+        ],
+        "nota": "Propriedade definida pelo schema da Metadata API.",
+        "valor": "padrao_plataforma"
+      },
+      "tipo_tecnico": "string"
+    },
+    {
+      "default": {
+        "estado": "desconhecido",
+        "forma": "nao_declarado_na_fonte"
+      },
+      "disponibilidade": {
+        "ate_versao": null,
+        "desde_versao": null,
+        "estado": "desconhecido"
+      },
+      "dominio": {
+        "contexto": "A fonte tipa como string sem lista de valores; não inventar valores.",
+        "estado": "verificado",
+        "evidencias": [
+          {
+            "fonte": "src:mdapi-extlclntappsamlconfigurablepolicies"
+          }
+        ],
+        "natureza": "texto_livre"
+      },
+      "estado": "verificado",
+      "evidencias": [
+        {
+          "fonte": "src:mdapi-extlclntappsamlconfigurablepolicies"
+        }
+      ],
+      "explicacao": "explicada",
+      "id": "mdt:ExtlClntAppSamlConfigurablePolicies.entityUrl",
+      "nome": "entityUrl",
+      "o_que_e": "Entity ID único do provedor de serviço.",
+      "obrigatoriedade": {
+        "estado": "verificado",
+        "evidencias": [
+          {
+            "fonte": "src:mdapi-extlclntappsamlconfigurablepolicies"
+          }
+        ],
+        "valor": "sim"
+      },
+      "origem": {
+        "estado": "verificado",
+        "evidencias": [
+          {
+            "fonte": "src:mdapi-extlclntappsamlconfigurablepolicies"
+          }
+        ],
+        "nota": "Propriedade definida pelo schema da Metadata API.",
+        "valor": "padrao_plataforma"
+      },
+      "tipo_tecnico": "string"
+    },
+    {
+      "default": {
+        "estado": "desconhecido",
+        "forma": "nao_declarado_na_fonte"
+      },
+      "disponibilidade": {
+        "ate_versao": null,
+        "desde_versao": null,
+        "estado": "desconhecido"
+      },
+      "dominio": {
+        "contexto": "A fonte tipa como string sem lista de valores; não inventar valores.",
+        "estado": "verificado",
+        "evidencias": [
+          {
+            "fonte": "src:mdapi-extlclntappsamlconfigurablepolicies"
+          }
+        ],
+        "natureza": "texto_livre"
+      },
+      "estado": "verificado",
+      "evidencias": [
+        {
+          "fonte": "src:mdapi-extlclntappsamlconfigurablepolicies"
+        }
+      ],
+      "explicacao": "explicada",
+      "id": "mdt:ExtlClntAppSamlConfigurablePolicies.externalClientApplication",
+      "nome": "externalClientApplication",
+      "o_que_e": "Rótulo do external client app pai.",
+      "obrigatoriedade": {
+        "estado": "verificado",
+        "evidencias": [
+          {
+            "fonte": "src:mdapi-extlclntappsamlconfigurablepolicies"
+          }
+        ],
+        "valor": "sim"
+      },
+      "origem": {
+        "estado": "verificado",
+        "evidencias": [
+          {
+            "fonte": "src:mdapi-extlclntappsamlconfigurablepolicies"
+          }
+        ],
+        "nota": "Propriedade definida pelo schema da Metadata API.",
+        "valor": "padrao_plataforma"
+      },
+      "referencia": {
+        "alvos": [
+          "mdt:ExternalClientApplication"
+        ],
+        "nota": "Referência pelo rótulo do app pai, segundo a página."
+      },
+      "tipo_tecnico": "string"
+    },
+    {
+      "default": {
+        "estado": "verificado",
+        "evidencias": [
+          {
+            "fonte": "src:mdapi-extlclntappsamlconfigurablepolicies"
+          }
+        ],
+        "forma": "valor",
+        "nota": "Quando omitido.",
+        "valor": "My Domain"
+      },
+      "disponibilidade": {
+        "ate_versao": null,
+        "desde_versao": null,
+        "estado": "desconhecido"
+      },
+      "dominio": {
+        "contexto": "A fonte tipa como string sem lista de valores; não inventar valores.",
+        "estado": "verificado",
+        "evidencias": [
+          {
+            "fonte": "src:mdapi-extlclntappsamlconfigurablepolicies"
+          }
+        ],
+        "natureza": "texto_livre"
+      },
+      "estado": "verificado",
+      "evidencias": [
+        {
+          "fonte": "src:mdapi-extlclntappsamlconfigurablepolicies"
+        }
+      ],
+      "explicacao": "explicada",
+      "id": "mdt:ExtlClntAppSamlConfigurablePolicies.issuer",
+      "nome": "issuer",
+      "o_que_e": "URI usada como emissor das respostas (pode ser a URL de um site Experience Cloud).",
+      "obrigatoriedade": {
+        "condicao": "A documentação 68.0 não marca o campo como obrigatório; ausência de marcação não comprova opcionalidade (confirmar no WSDL).",
+        "estado": "desconhecido",
+        "valor": "nao"
+      },
+      "origem": {
+        "estado": "verificado",
+        "evidencias": [
+          {
+            "fonte": "src:mdapi-extlclntappsamlconfigurablepolicies"
+          }
+        ],
+        "nota": "Propriedade definida pelo schema da Metadata API.",
+        "valor": "padrao_plataforma"
+      },
+      "tipo_tecnico": "string"
+    },
+    {
+      "default": {
+        "estado": "desconhecido",
+        "forma": "nao_declarado_na_fonte"
+      },
+      "disponibilidade": {
+        "ate_versao": null,
+        "desde_versao": null,
+        "estado": "desconhecido"
+      },
+      "dominio": {
+        "contexto": "A fonte tipa como string sem lista de valores; não inventar valores.",
+        "estado": "verificado",
+        "evidencias": [
+          {
+            "fonte": "src:mdapi-extlclntappsamlconfigurablepolicies"
+          }
+        ],
+        "natureza": "texto_livre"
+      },
+      "estado": "verificado",
+      "evidencias": [
+        {
+          "fonte": "src:mdapi-extlclntappsamlconfigurablepolicies"
+        }
+      ],
+      "explicacao": "explicada",
+      "id": "mdt:ExtlClntAppSamlConfigurablePolicies.label",
+      "nome": "label",
+      "o_que_e": "Rótulo da configuração.",
+      "obrigatoriedade": {
+        "condicao": "A documentação 68.0 não marca o campo como obrigatório; ausência de marcação não comprova opcionalidade (confirmar no WSDL).",
+        "estado": "desconhecido",
+        "valor": "nao"
+      },
+      "origem": {
+        "estado": "verificado",
+        "evidencias": [
+          {
+            "fonte": "src:mdapi-extlclntappsamlconfigurablepolicies"
+          }
+        ],
+        "nota": "Propriedade definida pelo schema da Metadata API.",
+        "valor": "padrao_plataforma"
+      },
+      "tipo_tecnico": "string"
+    },
+    {
+      "default": {
+        "estado": "verificado",
+        "evidencias": [
+          {
+            "fonte": "src:mdapi-extlclntappsamlconfigurablepolicies"
+          }
+        ],
+        "forma": "valor",
+        "valor": "Unspecified"
+      },
+      "disponibilidade": {
+        "ate_versao": null,
+        "desde_versao": null,
+        "estado": "desconhecido"
+      },
+      "dominio": {
+        "estado": "verificado",
+        "evidencias": [
+          {
+            "fonte": "src:mdapi-extlclntappsamlconfigurablepolicies"
+          }
+        ],
+        "lista_completa": "sim",
+        "natureza": "enum_fechado",
+        "valores": [
+          {
+            "valor": "Unspecified"
+          },
+          {
+            "valor": "EmailAddress"
+          },
+          {
+            "valor": "Persistent"
+          },
+          {
+            "valor": "Transient"
+          }
+        ]
+      },
+      "estado": "verificado",
+      "evidencias": [
+        {
+          "fonte": "src:mdapi-extlclntappsamlconfigurablepolicies"
+        }
+      ],
+      "explicacao": "explicada",
+      "id": "mdt:ExtlClntAppSamlConfigurablePolicies.nameIdFormat",
+      "nome": "nameIdFormat",
+      "o_que_e": "Formato do NameID; precisa casar com o provedor de serviço.",
+      "obrigatoriedade": {
+        "condicao": "A documentação 68.0 não marca o campo como obrigatório; ausência de marcação não comprova opcionalidade (confirmar no WSDL).",
+        "estado": "desconhecido",
+        "valor": "nao"
+      },
+      "origem": {
+        "estado": "verificado",
+        "evidencias": [
+          {
+            "fonte": "src:mdapi-extlclntappsamlconfigurablepolicies"
+          }
+        ],
+        "nota": "Propriedade definida pelo schema da Metadata API.",
+        "valor": "padrao_plataforma"
+      },
+      "tipo_tecnico": "string"
+    },
+    {
+      "default": {
+        "estado": "desconhecido",
+        "forma": "nao_declarado_na_fonte"
+      },
+      "disponibilidade": {
+        "ate_versao": null,
+        "desde_versao": null,
+        "estado": "desconhecido"
+      },
+      "dominio": {
+        "estado": "verificado",
+        "evidencias": [
+          {
+            "fonte": "src:mdapi-extlclntappsamlconfigurablepolicies"
+          }
+        ],
+        "lista_completa": "sim",
+        "natureza": "enum_fechado",
+        "valores": [
+          {
+            "valor": "SHA1"
+          },
+          {
+            "valor": "SHA256"
+          }
+        ]
+      },
+      "estado": "verificado",
+      "evidencias": [
+        {
+          "fonte": "src:mdapi-extlclntappsamlconfigurablepolicies"
+        }
+      ],
+      "explicacao": "explicada",
+      "id": "mdt:ExtlClntAppSamlConfigurablePolicies.signingAlgorithmType",
+      "nome": "signingAlgorithmType",
+      "o_que_e": "Algoritmo de assinatura das mensagens SAML e de logout.",
+      "obrigatoriedade": {
+        "condicao": "A documentação 68.0 não marca o campo como obrigatório; ausência de marcação não comprova opcionalidade (confirmar no WSDL).",
+        "estado": "desconhecido",
+        "valor": "nao"
+      },
+      "origem": {
+        "estado": "verificado",
+        "evidencias": [
+          {
+            "fonte": "src:mdapi-extlclntappsamlconfigurablepolicies"
+          }
+        ],
+        "nota": "Propriedade definida pelo schema da Metadata API.",
+        "valor": "padrao_plataforma"
+      },
+      "tipo_tecnico": "string"
+    },
+    {
+      "default": {
+        "estado": "desconhecido",
+        "forma": "nao_declarado_na_fonte"
+      },
+      "disponibilidade": {
+        "ate_versao": null,
+        "desde_versao": null,
+        "estado": "desconhecido"
+      },
+      "dominio": {
+        "estado": "verificado",
+        "evidencias": [
+          {
+            "fonte": "src:mdapi-extlclntappsamlconfigurablepolicies"
+          }
+        ],
+        "lista_completa": "sim",
+        "natureza": "enum_fechado",
+        "valores": [
+          {
+            "valor": "PostBinding"
+          },
+          {
+            "valor": "RedirectBinding"
+          }
+        ]
+      },
+      "estado": "verificado",
+      "evidencias": [
+        {
+          "fonte": "src:mdapi-extlclntappsamlconfigurablepolicies"
+        }
+      ],
+      "explicacao": "explicada",
+      "id": "mdt:ExtlClntAppSamlConfigurablePolicies.singleLogoutBindingType",
+      "nome": "singleLogoutBindingType",
+      "o_que_e": "Binding HTTP do logout único.",
+      "obrigatoriedade": {
+        "condicao": "A documentação 68.0 não marca o campo como obrigatório; ausência de marcação não comprova opcionalidade (confirmar no WSDL).",
+        "estado": "desconhecido",
+        "valor": "nao"
+      },
+      "origem": {
+        "estado": "verificado",
+        "evidencias": [
+          {
+            "fonte": "src:mdapi-extlclntappsamlconfigurablepolicies"
+          }
+        ],
+        "nota": "Propriedade definida pelo schema da Metadata API.",
+        "valor": "padrao_plataforma"
+      },
+      "tipo_tecnico": "string"
+    },
+    {
+      "default": {
+        "estado": "desconhecido",
+        "forma": "nao_declarado_na_fonte"
+      },
+      "disponibilidade": {
+        "ate_versao": null,
+        "desde_versao": null,
+        "estado": "desconhecido"
+      },
+      "dominio": {
+        "contexto": "A fonte tipa como string sem lista de valores; não inventar valores.",
+        "estado": "verificado",
+        "evidencias": [
+          {
+            "fonte": "src:mdapi-extlclntappsamlconfigurablepolicies"
+          }
+        ],
+        "natureza": "texto_livre"
+      },
+      "estado": "verificado",
+      "evidencias": [
+        {
+          "fonte": "src:mdapi-extlclntappsamlconfigurablepolicies"
+        }
+      ],
+      "explicacao": "explicada",
+      "id": "mdt:ExtlClntAppSamlConfigurablePolicies.singleLogoutUrl",
+      "nome": "singleLogoutUrl",
+      "o_que_e": "Endpoint de logout único do provedor de serviço.",
+      "obrigatoriedade": {
+        "condicao": "A documentação 68.0 não marca o campo como obrigatório; ausência de marcação não comprova opcionalidade (confirmar no WSDL).",
+        "estado": "desconhecido",
+        "valor": "nao"
+      },
+      "origem": {
+        "estado": "verificado",
+        "evidencias": [
+          {
+            "fonte": "src:mdapi-extlclntappsamlconfigurablepolicies"
+          }
+        ],
+        "nota": "Propriedade definida pelo schema da Metadata API.",
+        "valor": "padrao_plataforma"
+      },
+      "tipo_tecnico": "string"
+    },
+    {
+      "default": {
+        "estado": "desconhecido",
+        "forma": "nao_declarado_na_fonte"
+      },
+      "disponibilidade": {
+        "ate_versao": null,
+        "desde_versao": null,
+        "estado": "desconhecido"
+      },
+      "dominio": {
+        "contexto": "A fonte tipa como string sem lista de valores; não inventar valores.",
+        "estado": "verificado",
+        "evidencias": [
+          {
+            "fonte": "src:mdapi-extlclntappsamlconfigurablepolicies"
+          }
+        ],
+        "natureza": "texto_livre"
+      },
+      "estado": "verificado",
+      "evidencias": [
+        {
+          "fonte": "src:mdapi-extlclntappsamlconfigurablepolicies"
+        }
+      ],
+      "explicacao": "explicada",
+      "id": "mdt:ExtlClntAppSamlConfigurablePolicies.startUrl",
+      "nome": "startUrl",
+      "notas": [
+        "Obsoleto a partir da 64.0; use startUrl em ExtlClntAppConfigurablePolicies."
+      ],
+      "o_que_e": "Página após a autenticação.",
+      "obrigatoriedade": {
+        "condicao": "A documentação 68.0 não marca o campo como obrigatório; ausência de marcação não comprova opcionalidade (confirmar no WSDL).",
+        "estado": "desconhecido",
+        "valor": "nao"
+      },
+      "origem": {
+        "estado": "verificado",
+        "evidencias": [
+          {
+            "fonte": "src:mdapi-extlclntappsamlconfigurablepolicies"
+          }
+        ],
+        "nota": "Propriedade definida pelo schema da Metadata API.",
+        "valor": "padrao_plataforma"
+      },
+      "tipo_tecnico": "string"
+    },
+    {
+      "default": {
+        "estado": "desconhecido",
+        "forma": "nao_declarado_na_fonte"
+      },
+      "disponibilidade": {
+        "ate_versao": null,
+        "desde_versao": null,
+        "estado": "desconhecido"
+      },
+      "dominio": {
+        "contexto": "A fonte tipa como string sem lista de valores; não inventar valores.",
+        "estado": "verificado",
+        "evidencias": [
+          {
+            "fonte": "src:mdapi-extlclntappsamlconfigurablepolicies"
+          }
+        ],
+        "natureza": "texto_livre"
+      },
+      "estado": "verificado",
+      "evidencias": [
+        {
+          "fonte": "src:mdapi-extlclntappsamlconfigurablepolicies"
+        }
+      ],
+      "explicacao": "explicada",
+      "id": "mdt:ExtlClntAppSamlConfigurablePolicies.subjectCustomAttribute",
+      "nome": "subjectCustomAttribute",
+      "o_que_e": "Campo do usuário usado como identidade.",
+      "obrigatoriedade": {
+        "condicao": "obrigatório quando subjectType é CustomAttribute",
+        "estado": "verificado",
+        "evidencias": [
+          {
+            "fonte": "src:mdapi-extlclntappsamlconfigurablepolicies"
+          }
+        ],
+        "valor": "condicional"
+      },
+      "origem": {
+        "estado": "verificado",
+        "evidencias": [
+          {
+            "fonte": "src:mdapi-extlclntappsamlconfigurablepolicies"
+          }
+        ],
+        "nota": "Propriedade definida pelo schema da Metadata API.",
+        "valor": "padrao_plataforma"
+      },
+      "tipo_tecnico": "string"
+    },
+    {
+      "default": {
+        "estado": "desconhecido",
+        "forma": "nao_declarado_na_fonte"
+      },
+      "disponibilidade": {
+        "ate_versao": null,
+        "desde_versao": null,
+        "estado": "desconhecido"
+      },
+      "dominio": {
+        "estado": "verificado",
+        "evidencias": [
+          {
+            "fonte": "src:mdapi-extlclntappsamlconfigurablepolicies"
+          }
+        ],
+        "lista_completa": "sim",
+        "natureza": "enum_fechado",
+        "valores": [
+          {
+            "valor": "Username"
+          },
+          {
+            "valor": "FederationId"
+          },
+          {
+            "valor": "UserId"
+          },
+          {
+            "valor": "CustomAttribute"
+          },
+          {
+            "valor": "PersistentId"
+          }
+        ]
+      },
+      "estado": "verificado",
+      "evidencias": [
+        {
+          "fonte": "src:mdapi-extlclntappsamlconfigurablepolicies"
+        }
+      ],
+      "explicacao": "explicada",
+      "id": "mdt:ExtlClntAppSamlConfigurablePolicies.subjectType",
+      "nome": "subjectType",
+      "o_que_e": "Tipo de identificador do usuário no SSO.",
+      "obrigatoriedade": {
+        "condicao": "A documentação 68.0 não marca o campo como obrigatório; ausência de marcação não comprova opcionalidade (confirmar no WSDL).",
+        "estado": "desconhecido",
+        "valor": "nao"
+      },
+      "origem": {
+        "estado": "verificado",
+        "evidencias": [
+          {
+            "fonte": "src:mdapi-extlclntappsamlconfigurablepolicies"
+          }
+        ],
+        "nota": "Propriedade definida pelo schema da Metadata API.",
+        "valor": "padrao_plataforma"
+      },
+      "tipo_tecnico": "string"
+    },
+    {
+      "default": {
+        "estado": "desconhecido",
+        "forma": "nao_declarado_na_fonte"
+      },
+      "disponibilidade": {
+        "ate_versao": null,
+        "desde_versao": null,
+        "estado": "desconhecido"
+      },
+      "dominio": {
+        "contexto": "A fonte tipa como string sem lista de valores; não inventar valores.",
+        "estado": "verificado",
+        "evidencias": [
+          {
+            "fonte": "src:mdapi-extlclntappsamlconfigurablepolicies"
+          }
+        ],
+        "natureza": "texto_livre"
+      },
+      "estado": "verificado",
+      "evidencias": [
+        {
+          "fonte": "src:mdapi-extlclntappsamlconfigurablepolicies"
+        }
+      ],
+      "explicacao": "explicada",
+      "herdada_de": "Metadata",
+      "id": "mdt:ExtlClntAppSamlConfigurablePolicies.fullName",
+      "nome": "fullName",
+      "o_que_e": "Nome completo (API name) do componente; herdado do tipo Metadata.",
+      "obrigatoriedade": {
+        "estado": "desconhecido",
+        "valor": "desconhecida"
+      },
+      "origem": {
+        "estado": "verificado",
+        "evidencias": [
+          {
+            "fonte": "src:mdapi-extlclntappsamlconfigurablepolicies"
+          }
+        ],
+        "nota": "Propriedade definida pelo schema da Metadata API.",
+        "valor": "padrao_plataforma"
+      },
+      "tipo_tecnico": "string"
+    }
+  ],
+  "recomendacoes": [],
+  "setup": {
+    "estado": "desconhecido",
+    "nota": "Caminho no Setup não verificado nesta sessão."
+  },
+  "suporte_cli": {
+    "estado": "verificado",
+    "evidencias": [
+      {
+        "fonte": "src:sdr-metadata-support"
+      }
+    ],
+    "nota": "Suporte do Salesforce CLI (source-deploy-retrieve), não do Metadata API em geral.",
+    "valor": {
+      "nota_fonte": null,
+      "status": "suportado"
+    }
+  }
+}
