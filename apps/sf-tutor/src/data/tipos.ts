@@ -15,6 +15,8 @@ export interface NoBase {
   rotulo_tecnico?: string;
   rotulo_curto?: string;
   sigla?: string;
+  /** logo exibido por referência ao endereço oficial (config/marcas.json); só centro e nuvens */
+  logo?: { url: string; formato: string; marca: string };
   estado?: Estado;
   grupo_cor?: string;
   resumo?: string;

@@ -99,7 +99,7 @@ test('painéis de cada tipo de nó abrem sem erro', async ({ page }) => {
 
 test('Método e legenda acessíveis; logo marcado como placeholder', async ({ page }) => {
   await abrir(page);
-  await expect(painel(page).locator('.aviso-logo')).toContainText('placeholder');
+  await expect(painel(page).locator('.aviso-logo')).toContainText('não é afiliado');
   await page.getByRole('button', { name: 'Método', exact: true }).click();
   await expect(page.getByRole('dialog')).toContainText('não é afiliado');
   await page.getByRole('dialog').getByRole('button', { name: 'Fechar' }).click();
@@ -117,4 +117,24 @@ test('capturas de tela desktop', async ({ page }) => {
   await abrir(page, '?v=nuvem&n=func:apps-de-console');
   await page.waitForTimeout(800);
   await page.screenshot({ path: 'tests/resultados/desktop-nuvem.png' });
+});
+
+type WLogo = { __sfTutor: { logo(id: string): string | null } };
+const SFDC = /sfdcstatic\.com|sfdcdigital\.com/;
+
+test('logos oficiais carregam por referência (servidores simulados)', async ({ page }) => {
+  const svg = '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 10 10"><circle cx="5" cy="5" r="5" fill="#00a1e0"/></svg>';
+  await page.route(SFDC, (r) => r.fulfill({ status: 200, contentType: 'image/svg+xml', body: svg }));
+  await abrir(page, '?n=nuv:sales-cloud');
+  await expect.poll(() => page.evaluate(() => (window as unknown as WLogo).__sfTutor.logo('salesforce'))).toBe('ok');
+  await expect.poll(() => page.evaluate(() => (window as unknown as WLogo).__sfTutor.logo('nuv:sales-cloud'))).toBe('ok');
+  await expect(painel(page).locator('img.logo-marca')).toBeVisible();
+  await expect(painel(page).locator('details.secao', { hasText: 'Fornecido por' })).toHaveCount(1);
+});
+
+test('sem acesso aos servidores dos logos, o mapa usa o substituto sem erro', async ({ page }) => {
+  await page.route(SFDC, (r) => r.abort());
+  await abrir(page, '?n=salesforce');
+  await expect.poll(() => page.evaluate(() => (window as unknown as WLogo).__sfTutor.logo('salesforce'))).toBe('falhou');
+  await expect(painel(page).locator('img.logo-marca')).toHaveCount(0);
 });
