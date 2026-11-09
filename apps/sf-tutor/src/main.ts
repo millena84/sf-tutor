@@ -245,15 +245,51 @@ async function iniciar(): Promise<void> {
     for (const b of document.querySelectorAll<HTMLButtonElement>('[data-modo]')) b.setAttribute('aria-pressed', String(b.dataset.modo === st.modo));
   }
 
-  // ------------------------------------------------------------ painel (gaveta no celular)
+  // ------------------------------------------------------------ painel (no celular: gaveta com meia altura e altura cheia)
+  // Meia altura deixa o mapa visível acima (o foco centraliza o nó nessa área); altura cheia é a ficha completa.
+  const ALTURA_MEIO = 0.42; // igual a --altura-meio no CSS
+  const celular = () => matchMedia('(max-width: 760px)').matches;
+  const puxador = $<HTMLButtonElement>('puxador');
+  type EstadoGaveta = 'fechado' | 'meio' | 'cheio';
+  const estadoGaveta = (): EstadoGaveta => (aside.dataset.estado as EstadoGaveta | undefined) ?? 'fechado';
+  function definirGaveta(e: EstadoGaveta): void {
+    aside.dataset.estado = e;
+    aside.classList.toggle('aberto', e !== 'fechado');
+    puxador.setAttribute('aria-expanded', String(e === 'cheio'));
+    puxador.setAttribute('aria-label', e === 'cheio' ? 'Reduzir a ficha e ver o mapa' : 'Ver ficha completa');
+    // parte do mapa coberta pela gaveta: do topo da gaveta até o fim do contêiner do mapa
+    const r = containerMapa.getBoundingClientRect();
+    mapa.definirMargemInferior(celular() && e === 'meio' ? r.bottom - window.innerHeight * (1 - ALTURA_MEIO) : 0);
+  }
   function abrirPainel(): void {
-    aside.classList.add('aberto');
+    if (!celular()) { definirGaveta('cheio'); return; }
+    if (estadoGaveta() !== 'cheio') definirGaveta('meio');
   }
   function fecharPainel(): void {
-    aside.classList.remove('aberto');
+    definirGaveta('fechado');
     (st.modo === 'mapa' ? containerMapa : (containerLista.querySelector('[tabindex="0"]') as HTMLElement) ?? containerLista).focus();
   }
+  function refocar(): void {
+    if (st.modo === 'mapa' && st.sel?.tipo === 'no') mapa.focar(chaveDe(st.sel.caminho));
+  }
   $('fechar-painel').addEventListener('click', fecharPainel);
+  puxador.addEventListener('click', () => {
+    if (estadoGaveta() === 'cheio') { definirGaveta('meio'); refocar(); } else definirGaveta('cheio');
+  });
+  // arrastar a barra da gaveta: para cima abre a ficha completa; para baixo reduz ou fecha
+  let arrasteY: number | null = null;
+  const barra = $('barra-gaveta');
+  barra.addEventListener('pointerdown', (ev) => { arrasteY = ev.clientY; });
+  barra.addEventListener('pointerup', (ev) => {
+    if (arrasteY === null) return;
+    const dy = ev.clientY - arrasteY;
+    arrasteY = null;
+    if (Math.abs(dy) < 30) return;
+    ev.preventDefault();
+    if (dy < 0) definirGaveta('cheio');
+    else if (estadoGaveta() === 'cheio') { definirGaveta('meio'); refocar(); } else fecharPainel();
+  });
+  barra.addEventListener('pointercancel', () => { arrasteY = null; });
 
   const ctxPainel: CtxPainel = {
     ind, entidades, fontes: dados.fontes, manifesto: dados.manifesto, build: dados.build, cobertura: dados.cobertura,
@@ -263,7 +299,12 @@ async function iniciar(): Promise<void> {
     abrirCaminho: (c) => selecionarCaminho([...c]),
     alternar: (c) => alternar(c),
     expandido: (c) => exp().expandidos.has(chaveDe(c)),
-    focarNoMapa: (c) => { if (st.modo !== 'mapa') trocarModo('mapa'); revelarCaminho(ind, st.visao, exp(), c); atualizar(); mapa.focar(chaveDe(c), 1); if (matchMedia('(max-width: 760px)').matches) fecharPainel(); },
+    focarNoMapa: (c) => {
+      if (document.body.classList.contains('modo-leitura')) alternarLeitura(false);
+      if (st.modo !== 'mapa') trocarModo('mapa');
+      if (celular()) definirGaveta('meio');
+      revelarCaminho(ind, st.visao, exp(), c); atualizar(); mapa.focar(chaveDe(c));
+    },
     link: (id, c) => montarURL({ visao: st.visao, modo: 'mapa', id, caminho: c ? [...c] : undefined, sintetico: url.sintetico }),
     abrirMetodo: () => abrirDialogo('metodo'),
     abrirRelacao: (relId) => { st.sel = { tipo: 'rel', relId }; abrirPainel(); void renderizarRelacaoPorId(ctxPainel, painel, relId); gravarURL(true); },
@@ -311,12 +352,13 @@ async function iniciar(): Promise<void> {
   const marcarAnim = () => { btnAnim.setAttribute('aria-pressed', String(st.reduzir)); btnAnim.textContent = st.reduzir ? 'Animações: desligadas' : 'Animações: ligadas'; };
   marcarAnim();
   btnAnim.addEventListener('click', () => { st.reduzir = !st.reduzir; mapa.setReduzirMovimento(st.reduzir); marcarAnim(); });
-  $('btn-leitura').addEventListener('click', () => {
-    const on = document.body.classList.toggle('modo-leitura');
+  function alternarLeitura(ligar?: boolean): void {
+    const on = document.body.classList.toggle('modo-leitura', ligar);
     $('btn-leitura').setAttribute('aria-pressed', String(on));
     if (!on) mapa.redimensionar();
     ($('titulo-painel') ?? painel).focus();
-  });
+  }
+  $('btn-leitura').addEventListener('click', () => alternarLeitura());
   for (const b of document.querySelectorAll<HTMLButtonElement>('[data-visao]')) b.addEventListener('click', () => trocarVisao(b.dataset.visao as Visao));
   for (const b of document.querySelectorAll<HTMLButtonElement>('[data-modo]')) b.addEventListener('click', () => trocarModo(b.dataset.modo as 'mapa' | 'lista'));
 
@@ -374,7 +416,7 @@ async function iniciar(): Promise<void> {
   const topo = document.querySelector<HTMLElement>('.topo')!;
   const medirTopo = () => document.documentElement.style.setProperty('--topo', `${topo.getBoundingClientRect().bottom}px`);
   new ResizeObserver(medirTopo).observe(topo);
-  window.addEventListener('resize', () => { medirTopo(); mapa.redimensionar(); });
+  window.addEventListener('resize', () => { medirTopo(); mapa.redimensionar(); definirGaveta(estadoGaveta()); });
 
   for (const n of ind.nos.values()) {
     if (!n.logo) continue;
@@ -402,6 +444,8 @@ async function iniciar(): Promise<void> {
     totalCatalogo: ind.nos.size,
     logo: (id: string) => logos.get(id) ?? null,
     caixasLogo: (id: string) => { const c = st.cena?.ocorrencias.find((o) => o.id === id)?.chave; return c ? mapa.caixasLogo(c) : null; },
+    gaveta: () => estadoGaveta(),
+    classes: (id: string) => { const c = st.cena?.ocorrencias.find((o) => o.id === id)?.chave; return c ? mapa.classesDe(c) : null; },
     pronto: true,
     folha: (id: string) => TIPOS_FOLHA.has(ind.no(id)?.tipo as never),
   };

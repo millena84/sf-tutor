@@ -91,7 +91,7 @@ function cabecalho(ctx: CtxPainel, caminho: readonly string[]): HTMLElement {
     h('div', { class: 'acoes' },
       total > 0 ? h('button', { type: 'button', class: 'btn btn-primario', 'aria-expanded': String(exp), on: { click: () => ctx.alternar(caminho) } },
         exp ? `Recolher (${total})` : `Expandir (${total} ${total === 1 ? 'item' : 'itens'})`) : null,
-      h('button', { type: 'button', class: 'btn', on: { click: () => ctx.focarNoMapa(caminho) } }, 'Mostrar no mapa'),
+      h('button', { type: 'button', class: 'btn btn-mostrar-mapa', on: { click: () => ctx.focarNoMapa(caminho) } }, 'Mostrar no mapa'),
       btnLink),
     outros.length ? h('details', { class: 'outros-caminhos' },
       h('summary', null, `Também aparece em ${outros.length} outro${outros.length > 1 ? 's' : ''} caminho${outros.length > 1 ? 's' : ''} (mesma ficha)`),
