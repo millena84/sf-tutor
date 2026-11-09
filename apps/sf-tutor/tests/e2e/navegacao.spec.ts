@@ -168,3 +168,9 @@ test('funcionalidade sem metadata type mostra código e recursos de API', async 
   await expect(rep.getByText(/\/services\/data\/vXX\.X\/limits\//)).toBeVisible();
   await expect(rep.getByRole('heading', { name: /Sem metadata type \(XML\)/ })).toBeVisible();
 });
+
+test('funcionalidade de integração mostra caminho de Setup verificado', async ({ page }) => {
+  await abrir(page, '?n=func:event-relay');
+  await expect(titulo(page)).toHaveText(/Event Relay/);
+  await expect(painel(page).getByText(/Quick Find: Event Relays > New Event Relay/)).toBeVisible();
+});

@@ -50,4 +50,5 @@ Lote de integração (issue no GitHub):
 - **2026-11-09, lote 5f:** REST, SOAP, Metadata e Tooling API como funcionalidades em APIs de dados e metadados.
 - **2026-11-09, lote 5g:** certificados restantes, conexão de rede de entrada e 7 plugins de external client app.
 - **2026-11-09, lote 5h:** ConnectedApp com as 4 estruturas antes truncadas; CustomObject como definição de `__e` e `__x`; 2 referências novas.
-- Em aberto: a relação entre a versão de API e os componentes; os limites da Metadata API; attest e OAuth security de external client app; ConnectedAppMobileDetailConfig; conectores de dados (recorte a decidir).
+- **2026-11-09, lote 5i:** caminhos de Setup verificados em 19 funcionalidades de integração.
+- Em aberto: a relação entre a versão de API e os componentes; os limites da Metadata API; attest e OAuth security de external client app; ConnectedAppMobileDetailConfig; conectores de dados (recorte a decidir); objetos API do tema.

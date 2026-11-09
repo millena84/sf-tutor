@@ -124,14 +124,17 @@ O WSDL **não** é bloqueio: a documentação de cada tipo é a fonte alternativ
   - Referências novas: ConnectedAppSamlConfig.encryptionCertificate → Certificate e CustomObject.externalDataSource → ExternalDataSource. A página diz "nome" nos dois casos.
   - Eventos de plataforma e objetos externos passam a apontar CustomObject como a definição do `__e` e do `__x`.
   - Attest de external client app e ExtlClntAppOauthSecuritySettings seguem sem página legível (o atlas também falhou).
-- **Falta (lote 5i em diante):**
+- **Lote 5i (2026-11-09): caminhos de Setup da integração.** 19 das 20 funcionalidades que estavam `desconhecido` agora têm caminho verificado na Ajuda ou nos guias oficiais (21 fontes novas, extração em `help-setup-integracao.txt`).
+  - Segue `desconhecido`: serviços externos registrados (Commerce). A fonte descreve o registro só por API.
+  - Parciais, com nota: conexões privadas (só a saída), escopos OAuth (só a atribuição) e Bulk API (tela de acompanhamento, não de configuração).
+- **Falta (lote 5j em diante):**
   - ConnectedAppMobileDetailConfig (sem tabela na página); attest de external client app e ExtlClntAppOauthSecuritySettings (sem página legível).
   - McpServerDefinition e ApiNamedQuery, quando houver fonte.
   - Conectores de dados (DataConnector*, DataStream*, ExternalDataConnector etc.). Pelos nomes, parecem ser do Data 360: antes de catalogar, decidir se entram na visão Platform/Core ou numa nuvem própria.
   - Os **objetos API** do tema.
   - Limites da Metadata API; relação entre a versão de API e os componentes (`apiVersion`).
   - Exemplos XML.
-  - Caminhos de Setup, ainda `desconhecido`.
+  - Caminhos de Setup restantes: criação de escopo OAuth customizado e de handler de troca de token; conexão de entrada do Private Connect.
 
 ## Próximos lotes
 
