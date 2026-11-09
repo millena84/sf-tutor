@@ -1,0 +1,41 @@
+# Auditoria: integração, APIs e eventos (2026-11-08)
+
+Pedido da Millena: checar se os metadados de integração estão bem documentados.
+
+## Resultado
+
+A classificação `cls:integracao-apis-e-eventos` **não tem nenhuma funcionalidade cadastrada**. Suas 7 sub-classificações existem só como agrupamento vazio, e o site as mostra como "ainda não mapeado":
+- APIs de dados e metadados;
+- Autenticação de integrações;
+- Chamadas externas e endpoints;
+- Credenciais;
+- Eventos e mensageria;
+- Conectividade e virtualização de dados;
+- Contratos, limites e tratamento de falhas.
+
+Nenhum metadata type de integração está catalogado. No inventário v68, todos os candidatos abaixo estão com `recorte_core: pendente` e `cadastro: null`.
+
+Não é uma afirmação parcial nem errada sobre integração: o tema simplesmente ainda não foi coberto. A cobertura do site não declara completude para esses itens.
+
+## Método
+
+Filtro **por nome** sobre `inventarios/metadata-types-v68.json` (993 itens). Ele achou 64 nomes candidatos; a lista abaixo agrupa os que parecem de integração.
+- O agrupamento é **didático e provisório**: cada tipo precisa ser lido na documentação antes de ser classificado.
+- Ficaram de fora falsos positivos do filtro, como `FeatureParameterInteger`, `SalesPlanDataSource`, `RecordAlertDataSource` e `IntegratedPlanDefinition`.
+
+| Grupo provisório | Candidatos (inventário v68) |
+|---|---|
+| Credenciais e autenticação | NamedCredential, ExternalCredential, AuthProvider, ExternalAuthIdentityProvider, ConnectedApp, ConnectedAppSettings, ExternalClientApplication, ExternalClientAppSettings, ExtlClntAppOauthSettings, ExtlClntAppGlobalOauthSettings, ExtlClntAppOauthConfigurablePolicies, ExtlClntAppOauthSecuritySettings, ExtlClntAppSamlConfigurablePolicies, OauthCustomScope, OauthOidcSettings, OauthTokenExchangeHandler, SamlSsoConfig, Certificate, PublicKeyCertificate, PublicKeyCertificateSet, UserAuthCertificate, InboundCertificate |
+| Chamadas externas e endpoints | RemoteSiteSetting, CspTrustedSite, CorsWhitelistOrigin, ExternalServiceRegistration, RegisteredExternalService, OutboundNetworkConnection, WorkflowOutboundMessage, McpServerDefinition, ApiNamedQuery |
+| Eventos e mensageria | PlatformEventChannel, PlatformEventChannelMember, PlatformEventSettings, PlatformEventSubscriberConfig, EventRelayConfig, ManagedEventSubscription, LightningMessageChannel (mensageria entre componentes de UI: confirmar se entra aqui) |
+| Conectividade e dados externos | ExternalDataSource, ExternalDataConnector, InternalDataConnector, DataConnector, DataConnectorIngestApi, DataConnectorS3, StreamingAppDataConnector, DataSource, DataSourceObject, DataSourceTenant, DataSourceBundleDefinition |
+| Outros a avaliar | IntegrationProviderDef, IntegrationProcdDefinition, IntegArtifactDef, ObjIntegProviderDefMapping, OmniIntegrationProcedure, ExternalAIModel, ExternalAiAgentSetup, EmailIntegrationSettings, ConversationServiceIntegrationSettings, TmfOutboundNotificationSettings |
+
+Também faltam os **objetos API** do tema, como os registros de credenciais e de eventos expostos por API padrão ou Tooling, e os platform events customizados (`__e`, que são `CustomObject`). Nenhum nome desses objetos foi verificado nesta auditoria.
+
+## Próximo passo
+
+Lote de integração (issue no GitHub):
+1. Definir as funcionalidades, por exemplo Named Credentials, Platform Events, Change Data Capture, Connected/External Client Apps, Remote Site Settings, External Services e External Objects.
+2. Ler cada tipo na documentação v68.
+3. Cadastrar com fontes e notas de extração, como nos lotes anteriores.

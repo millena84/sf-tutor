@@ -69,6 +69,9 @@ Os lotes e o site são acompanhados por issues em millena84/sf-tutor (milestones
    - o `metadata.wsdl`, para as propriedades.
 
 O WSDL **não** é bloqueio: a documentação de cada tipo é a fonte alternativa prevista no prompt.
+3. **Logos da Salesforce e das nuvens:** os termos de uso exigem permissão escrita, e o ambiente não baixa do portal de marca. Detalhes e caminhos em `relatorios/logos-salesforce-2026-11-08.md`.
+
+**Lacuna grande conhecida:** integração, APIs e eventos ainda não tem nenhuma funcionalidade nem metadata type cadastrado. Ver `relatorios/auditoria-integracao-2026-11-08.md`.
 
 ## Próximos lotes
 
