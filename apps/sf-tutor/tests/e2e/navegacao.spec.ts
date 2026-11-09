@@ -174,3 +174,14 @@ test('funcionalidade de integração mostra caminho de Setup verificado', async 
   await expect(titulo(page)).toHaveText(/Event Relay/);
   await expect(painel(page).getByText(/Quick Find: Event Relays > New Event Relay/)).toBeVisible();
 });
+
+test('desktop: "Mostrar no mapa" só aparece no modo leitura e volta ao mapa com destaque', async ({ page, isMobile }) => {
+  test.skip(isMobile, 'somente desktop');
+  await abrir(page, '?n=func:event-relay');
+  await expect(painel(page).getByRole('button', { name: 'Mostrar no mapa' })).toBeHidden();
+  await page.getByRole('button', { name: 'Modo leitura' }).click();
+  await painel(page).getByRole('button', { name: 'Mostrar no mapa' }).click();
+  await expect(page.locator('body')).not.toHaveClass(/modo-leitura/);
+  const cls = await page.evaluate(() => (window as unknown as { __sfTutor: { classes(id: string): string[] | null } }).__sfTutor.classes('func:event-relay'));
+  expect(cls).toContain('foco');
+});

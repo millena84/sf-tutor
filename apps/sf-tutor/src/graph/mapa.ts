@@ -1,6 +1,6 @@
 // Desenho do grafo com Cytoscape.js. Recebe a cena já calculada pelo adaptador; não conhece conteúdo técnico.
 import cytoscape from 'cytoscape';
-import type { Core, EventObject, NodeSingular, ElementDefinition } from 'cytoscape';
+import type { Core, EventObject, NodeSingular, NodeCollection, ElementDefinition } from 'cytoscape';
 import type { Cena } from '../model/adaptador';
 import { LIGACAO } from '../rotulos';
 import { posicionar, type Ponto } from './layout';
@@ -50,6 +50,7 @@ export class Mapa {
   private posicoes = new Map<string, Ponto>();
   private animar: boolean;
   private primeira = true;
+  private margemInferior = 0;
 
   constructor(container: HTMLElement, private ev: Eventos, opts: { reduzirMovimento: boolean }) {
     this.animar = !opts.reduzirMovimento;
@@ -231,24 +232,34 @@ export class Mapa {
     });
   }
 
+  /** Altura (px) coberta por baixo, como a gaveta do celular em meia altura: o foco centraliza o nó na área visível acima dela. */
+  definirMargemInferior(px: number): void {
+    this.margemInferior = Math.max(0, Math.round(px));
+  }
   focar(chave: string, zoom?: number): void {
     const n = this.cy.getElementById(chave);
     if (n.empty()) return;
+    const w = this.cy.width();
+    const hUtil = Math.max(120, this.cy.height() - this.margemInferior);
+    let z: number;
+    let alvo = n as unknown as NodeCollection;
     if (zoom !== undefined) {
-      if (this.animar) this.cy.animate({ center: { eles: n }, zoom }, { duration: 300 });
-      else { this.cy.zoom(zoom); this.cy.center(n); }
-      return;
+      z = zoom;
+    } else {
+      // enquadra o nó com seus vizinhos imediatos (pai, filhos visíveis, relações técnicas), sem zoom exagerado
+      const eles = n.closedNeighborhood().nodes();
+      const bb0 = eles.boundingBox({ includeLabels: true });
+      const pad = 50;
+      const zFit = Math.min((w - 2 * pad) / Math.max(bb0.w, 1), (hUtil - 2 * pad) / Math.max(bb0.h, 1));
+      z = Math.max(0.35, Math.min(1.3, zFit));
+      if (eles.length > 1) alvo = eles;
     }
-    // enquadra o nó com seus vizinhos imediatos (pai, filhos visíveis, relações técnicas), sem zoom exagerado
-    const eles = n.closedNeighborhood().nodes();
-    const bb = eles.boundingBox({ includeLabels: true });
-    const pad = 50;
-    const zFit = Math.min((this.cy.width() - 2 * pad) / Math.max(bb.w, 1), (this.cy.height() - 2 * pad) / Math.max(bb.h, 1));
-    const z = Math.max(0.35, Math.min(1.3, zFit));
-    const alvo = eles.length > 1 ? eles : n;
-    if (this.animar) this.cy.animate({ center: { eles: alvo }, zoom: z }, { duration: 300 });
-    else { this.cy.zoom(z); this.cy.center(alvo); }
+    const bb = alvo.boundingBox({ includeLabels: zoom === undefined });
+    const pan = { x: w / 2 - ((bb.x1 + bb.x2) / 2) * z, y: hUtil / 2 - ((bb.y1 + bb.y2) / 2) * z };
+    if (this.animar) this.cy.animate({ zoom: z, pan }, { duration: 300 });
+    else this.cy.viewport({ zoom: z, pan });
   }
+
 
   enquadrar(animar = this.animar): void {
     if (animar) this.cy.animate({ fit: { eles: this.cy.elements(), padding: 40 } }, { duration: 300 });
@@ -290,6 +301,11 @@ export class Mapa {
     return null;
   }
 
+  /** Classes de destaque de um nó (gancho de teste, somente leitura). */
+  classesDe(chave: string): string[] {
+    const n = this.cy.getElementById(chave);
+    return n.empty() ? [] : ['foco', 'vizinho', 'esmaecido', 'selecionado'].filter((c) => n.hasClass(c));
+  }
   quantidadeNos(): number {
     return this.cy.nodes().length;
   }
