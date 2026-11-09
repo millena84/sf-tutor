@@ -44,4 +44,5 @@ Lote de integração (issue no GitHub):
 
 - **2026-11-09, lote 5a:** cadastrados 11 metadata types, 7 estruturas e 9 funcionalidades nas sub-classificações credenciais, chamadas externas e endpoints, APIs de dados e metadados, eventos e mensageria, conectividade e virtualização de dados, e autenticação de integrações. Detalhe em `relatorios/retomada.md`.
 - **2026-11-09, lote 5b:** connected apps, external client apps (núcleo) e OAuth, com 11 metadata types e 3 funcionalidades em autenticação de integrações.
+- **2026-11-09, lote 5c:** certificados, SSO por SAML, provedor de identidade de autenticação externa, conexões de rede privadas, serviços registrados do Commerce, Event Relay e assinaturas gerenciadas: 8 metadata types e 5 funcionalidades novas.
 - Ainda sem itens: **contratos, limites e tratamento de falhas**.

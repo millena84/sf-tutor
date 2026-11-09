@@ -521,6 +521,18 @@
       "tipo": "representacao_objeto_api"
     },
     {
+      "destino": "mdt:Certificate",
+      "origem": "func:certificados",
+      "papel": "Certificado e chave.",
+      "tipo": "representacao_xml"
+    },
+    {
+      "destino": "mdt:ManagedEventSubscription",
+      "origem": "func:change-data-capture",
+      "papel": "Assinatura gerenciada de eventos de alteração (/data/...).",
+      "tipo": "representacao_xml"
+    },
+    {
       "destino": "mdt:PlatformEventChannel",
       "origem": "func:change-data-capture",
       "papel": "Canal customizado de captura de alterações (channelType data).",
@@ -530,6 +542,12 @@
       "destino": "mdt:PlatformEventChannelMember",
       "origem": "func:change-data-capture",
       "papel": "Seleciona a entidade (e filtros e campos extras) num canal.",
+      "tipo": "representacao_xml"
+    },
+    {
+      "destino": "mdt:OutboundNetworkConnection",
+      "origem": "func:conexoes-de-rede-privadas",
+      "papel": "Definição da conexão privada.",
       "tipo": "representacao_xml"
     },
     {
@@ -683,6 +701,12 @@
       "tipo": "representacao_objeto_api"
     },
     {
+      "destino": "mdt:EventRelayConfig",
+      "origem": "func:event-relay",
+      "papel": "Configuração do relay.",
+      "tipo": "representacao_xml"
+    },
+    {
       "destino": "mdt:ExternalClientAppSettings",
       "origem": "func:external-client-apps",
       "papel": "Configurações da org.",
@@ -807,6 +831,12 @@
       "origem": "func:lightning-pages",
       "papel": "Página consultável (Tooling).",
       "tipo": "representacao_objeto_api"
+    },
+    {
+      "destino": "mdt:ExternalAuthIdentityProvider",
+      "origem": "func:named-credentials",
+      "papel": "Provedor de identidade de autenticação externa usado pela credencial externa.",
+      "tipo": "representacao_xml"
     },
     {
       "destino": "mdt:ExternalCredential",
@@ -995,9 +1025,21 @@
       "tipo": "representacao_objeto_api"
     },
     {
+      "destino": "mdt:ManagedEventSubscription",
+      "origem": "func:platform-events",
+      "papel": "Assinatura gerenciada (Pub/Sub API).",
+      "tipo": "representacao_xml"
+    },
+    {
       "destino": "mdt:PlatformEventChannel",
       "origem": "func:platform-events",
       "papel": "Canal customizado que agrupa eventos (channelType event).",
+      "tipo": "representacao_xml"
+    },
+    {
+      "destino": "mdt:PlatformEventSettings",
+      "origem": "func:platform-events",
+      "papel": "Configurações da org (métricas de uso).",
       "tipo": "representacao_xml"
     },
     {
@@ -1106,6 +1148,18 @@
       "destino": "mdt:RemoteSiteSetting",
       "origem": "func:remote-site-settings",
       "papel": "Registro do site remoto.",
+      "tipo": "representacao_xml"
+    },
+    {
+      "destino": "mdt:RegisteredExternalService",
+      "origem": "func:servicos-externos-registrados-commerce",
+      "papel": "Registro do provedor.",
+      "tipo": "representacao_xml"
+    },
+    {
+      "destino": "mdt:SamlSsoConfig",
+      "origem": "func:sso-saml",
+      "papel": "Configuração do SSO por SAML.",
       "tipo": "representacao_xml"
     },
     {
@@ -1326,6 +1380,25 @@
       "tipo": "tipo_composto"
     },
     {
+      "destino": "mdt:NamedCredential",
+      "estado": "verificado",
+      "origem": "mdt:EventRelayConfig.destinationResourceName",
+      "rel_id": "rel:eventrelay-namedcredential",
+      "tipo": "referencia_campo"
+    },
+    {
+      "destino": "mdt:PlatformEventChannel",
+      "estado": "verificado",
+      "origem": "mdt:EventRelayConfig.eventChannel",
+      "rel_id": "rel:eventrelay-channel",
+      "tipo": "referencia_campo"
+    },
+    {
+      "destino": "mdx:ExternalAuthIdentityProviderParameter",
+      "origem": "mdt:ExternalAuthIdentityProvider.externalAuthIdentityProviderParameters",
+      "tipo": "tipo_composto"
+    },
+    {
       "destino": "mdx:ExternalCredentialParameter",
       "origem": "mdt:ExternalCredential.externalCredentialParameters",
       "tipo": "tipo_composto"
@@ -1462,6 +1535,11 @@
     {
       "destino": "mdx:FindSimilarOppFilter",
       "origem": "mdt:OpportunitySettings.findSimilarOppFilter",
+      "tipo": "tipo_composto"
+    },
+    {
+      "destino": "mdx:OutboundNetworkConnProperty",
+      "origem": "mdt:OutboundNetworkConnection.outboundNetworkConnProperties",
       "tipo": "tipo_composto"
     },
     {
@@ -1876,6 +1954,13 @@
       "tipo": "referencia_campo"
     },
     {
+      "destino": "mdt:ExternalAuthIdentityProvider",
+      "estado": "verificado",
+      "origem": "mdx:ExternalCredentialParameter.externalAuthIdentityProvider",
+      "rel_id": "rel:ecparam-extauthidp",
+      "tipo": "referencia_campo"
+    },
+    {
       "destino": "mdx:FilterItem",
       "origem": "mdx:LookupFilter.filterItems",
       "tipo": "tipo_composto"
@@ -1885,6 +1970,13 @@
       "estado": "verificado",
       "origem": "mdx:NamedCredentialParameter.externalCredential",
       "rel_id": "rel:ncparam-externalcredential",
+      "tipo": "referencia_campo"
+    },
+    {
+      "destino": "mdt:OutboundNetworkConnection",
+      "estado": "verificado",
+      "origem": "mdx:NamedCredentialParameter.outboundNetworkConnection",
+      "rel_id": "rel:ncparam-outboundnetwork",
       "tipo": "referencia_campo"
     },
     {
@@ -1949,12 +2041,30 @@
       ]
     },
     {
+      "destino": "func:certificados",
+      "origem": "nuv:platform-core",
+      "tipo": "nuvem_funcionalidade",
+      "via": [
+        "cls:acesso-identidade-e-seguranca",
+        "sub:credenciais-certificados-e-protecao-de-dados"
+      ]
+    },
+    {
       "destino": "func:change-data-capture",
       "origem": "nuv:platform-core",
       "tipo": "nuvem_funcionalidade",
       "via": [
         "cls:integracao-apis-e-eventos",
         "sub:eventos-e-mensageria"
+      ]
+    },
+    {
+      "destino": "func:conexoes-de-rede-privadas",
+      "origem": "nuv:platform-core",
+      "tipo": "nuvem_funcionalidade",
+      "via": [
+        "cls:integracao-apis-e-eventos",
+        "sub:chamadas-externas-e-endpoints"
       ]
     },
     {
@@ -1991,6 +2101,15 @@
       "via": [
         "cls:acesso-identidade-e-seguranca",
         "sub:sessoes-e-politicas-de-login"
+      ]
+    },
+    {
+      "destino": "func:event-relay",
+      "origem": "nuv:platform-core",
+      "tipo": "nuvem_funcionalidade",
+      "via": [
+        "cls:integracao-apis-e-eventos",
+        "sub:eventos-e-mensageria"
       ]
     },
     {
@@ -2126,6 +2245,24 @@
       "via": [
         "cls:integracao-apis-e-eventos",
         "sub:chamadas-externas-e-endpoints"
+      ]
+    },
+    {
+      "destino": "func:servicos-externos-registrados-commerce",
+      "origem": "nuv:platform-core",
+      "tipo": "nuvem_funcionalidade",
+      "via": [
+        "cls:integracao-apis-e-eventos",
+        "sub:chamadas-externas-e-endpoints"
+      ]
+    },
+    {
+      "destino": "func:sso-saml",
+      "origem": "nuv:platform-core",
+      "tipo": "nuvem_funcionalidade",
+      "via": [
+        "cls:acesso-identidade-e-seguranca",
+        "sub:autenticacao-sso-e-mfa"
       ]
     },
     {
@@ -2976,6 +3113,12 @@
       "tipo": "classificacao_principal"
     },
     {
+      "destino": "func:certificados",
+      "motivo": "Usados para assinar requisições e autenticar integrações.",
+      "origem": "sub:autenticacao-de-integracoes",
+      "tipo": "classificacao_secundaria"
+    },
+    {
       "destino": "func:connected-apps",
       "origem": "sub:autenticacao-de-integracoes",
       "tipo": "classificacao_principal"
@@ -3009,6 +3152,11 @@
       "tipo": "classificacao_secundaria"
     },
     {
+      "destino": "func:sso-saml",
+      "origem": "sub:autenticacao-sso-e-mfa",
+      "tipo": "classificacao_principal"
+    },
+    {
       "destino": "func:campos-customizados",
       "origem": "sub:campos-e-tipos",
       "tipo": "classificacao_principal"
@@ -3018,6 +3166,11 @@
       "motivo": "A regra é definida no objeto e avalia seus campos.",
       "origem": "sub:campos-e-tipos",
       "tipo": "classificacao_secundaria"
+    },
+    {
+      "destino": "func:conexoes-de-rede-privadas",
+      "origem": "sub:chamadas-externas-e-endpoints",
+      "tipo": "classificacao_principal"
     },
     {
       "destino": "func:csp-trusted-sites",
@@ -3035,6 +3188,11 @@
       "tipo": "classificacao_principal"
     },
     {
+      "destino": "func:servicos-externos-registrados-commerce",
+      "origem": "sub:chamadas-externas-e-endpoints",
+      "tipo": "classificacao_principal"
+    },
+    {
       "destino": "func:external-objects",
       "origem": "sub:conectividade-e-virtualizacao-de-dados",
       "tipo": "classificacao_principal"
@@ -3045,6 +3203,11 @@
       "tipo": "classificacao_principal"
     },
     {
+      "destino": "func:certificados",
+      "origem": "sub:credenciais-certificados-e-protecao-de-dados",
+      "tipo": "classificacao_principal"
+    },
+    {
       "destino": "func:named-credentials",
       "motivo": "Guardam segredos de autenticação usados em integrações.",
       "origem": "sub:credenciais-certificados-e-protecao-de-dados",
@@ -3052,6 +3215,11 @@
     },
     {
       "destino": "func:change-data-capture",
+      "origem": "sub:eventos-e-mensageria",
+      "tipo": "classificacao_principal"
+    },
+    {
+      "destino": "func:event-relay",
       "origem": "sub:eventos-e-mensageria",
       "tipo": "classificacao_principal"
     },
@@ -3424,11 +3592,29 @@
     },
     {
       "estado": "verificado",
+      "grupo_cor": "cls:acesso-identidade-e-seguranca",
+      "id": "func:certificados",
+      "resumo": "Certificados e chaves guardados na org, autoassinados ou assinados por uma autoridade certificadora.",
+      "rotulo": "Certificados e chaves",
+      "rotulo_tecnico": "Certificate and Key Management",
+      "tipo": "funcionalidade"
+    },
+    {
+      "estado": "verificado",
       "grupo_cor": "cls:integracao-apis-e-eventos",
       "id": "func:change-data-capture",
       "resumo": "Publica um evento a cada criação, alteração, exclusão ou restauração de registros dos objetos selecionados.",
       "rotulo": "Captura de alterações de dados",
       "rotulo_tecnico": "Change Data Capture",
+      "tipo": "funcionalidade"
+    },
+    {
+      "estado": "verificado",
+      "grupo_cor": "cls:integracao-apis-e-eventos",
+      "id": "func:conexoes-de-rede-privadas",
+      "resumo": "Conexão privada entre a org e a AWS, usada por named credentials do tipo PrivateEndpoint.",
+      "rotulo": "Conexões de rede privadas de saída",
+      "rotulo_tecnico": "Outbound Network Connections",
       "tipo": "funcionalidade"
     },
     {
@@ -3510,6 +3696,15 @@
       "resumo": "Mostra o estado atual de login de cada usuário (congelado, bloqueado) e o histórico de tentativas.",
       "rotulo": "Estado e histórico de login",
       "rotulo_tecnico": "User login state and history",
+      "tipo": "funcionalidade"
+    },
+    {
+      "estado": "verificado",
+      "grupo_cor": "cls:integracao-apis-e-eventos",
+      "id": "func:event-relay",
+      "resumo": "Encaminha eventos de um canal da plataforma para o Amazon EventBridge.",
+      "rotulo": "Event Relay (Amazon EventBridge)",
+      "rotulo_tecnico": "Event Relay",
       "tipo": "funcionalidade"
     },
     {
@@ -3721,6 +3916,24 @@
     },
     {
       "estado": "verificado",
+      "grupo_cor": "cls:integracao-apis-e-eventos",
+      "id": "func:servicos-externos-registrados-commerce",
+      "resumo": "Registra classes Apex como provedores de preço, estoque, frete, impostos, promoções ou pontos de extensão do Commerce.",
+      "rotulo": "Serviços externos registrados (Commerce)",
+      "rotulo_tecnico": "Registered External Services",
+      "tipo": "funcionalidade"
+    },
+    {
+      "estado": "verificado",
+      "grupo_cor": "cls:acesso-identidade-e-seguranca",
+      "id": "func:sso-saml",
+      "resumo": "Configura a org para aceitar login de um provedor de identidade corporativo via SAML.",
+      "rotulo": "Login único por SAML",
+      "rotulo_tecnico": "SAML Single Sign-On",
+      "tipo": "funcionalidade"
+    },
+    {
+      "estado": "verificado",
       "grupo_cor": "cls:interface-e-experiencia-do-usuario",
       "id": "func:tabs",
       "resumo": "Entradas de navegação para objetos, páginas, componentes ou URLs.",
@@ -3788,6 +4001,13 @@
       "id": "mdt:CampaignSettings",
       "resumo": "Configurações de campanhas da org.",
       "rotulo": "CampaignSettings",
+      "tipo": "metadata_type"
+    },
+    {
+      "estado": "verificado",
+      "id": "mdt:Certificate",
+      "resumo": "Certificado (e chave) guardado na org, autoassinado ou assinado por uma autoridade certificadora.",
+      "rotulo": "Certificate",
       "tipo": "metadata_type"
     },
     {
@@ -3865,6 +4085,20 @@
       "id": "mdt:EscalationRules",
       "resumo": "Contêiner das regras de escalonamento de casos (arquivo Case.escalationRules).",
       "rotulo": "EscalationRules",
+      "tipo": "metadata_type"
+    },
+    {
+      "estado": "verificado",
+      "id": "mdt:EventRelayConfig",
+      "resumo": "Define um Event Relay: encaminha eventos de um canal da plataforma para o Amazon EventBridge.",
+      "rotulo": "EventRelayConfig",
+      "tipo": "metadata_type"
+    },
+    {
+      "estado": "verificado",
+      "id": "mdt:ExternalAuthIdentityProvider",
+      "resumo": "Define um provedor de identidade de autenticação externa: o fluxo e os endpoints OAuth para obter tokens de APIs protegidas.",
+      "rotulo": "ExternalAuthIdentityProvider",
       "tipo": "metadata_type"
     },
     {
@@ -3967,6 +4201,13 @@
     },
     {
       "estado": "verificado",
+      "id": "mdt:ManagedEventSubscription",
+      "resumo": "Assinatura gerenciada de eventos (Pub/Sub API): a plataforma guarda a posição de leitura do assinante.",
+      "rotulo": "ManagedEventSubscription",
+      "tipo": "metadata_type"
+    },
+    {
+      "estado": "verificado",
       "id": "mdt:MilestoneType",
       "resumo": "Define um tipo de milestone.",
       "rotulo": "MilestoneType",
@@ -4016,6 +4257,13 @@
     },
     {
       "estado": "verificado",
+      "id": "mdt:OutboundNetworkConnection",
+      "resumo": "Define uma conexão de rede privada de saída (AWS PrivateLink) usada por callouts.",
+      "rotulo": "OutboundNetworkConnection",
+      "tipo": "metadata_type"
+    },
+    {
+      "estado": "verificado",
       "id": "mdt:PathAssistant",
       "resumo": "Definição de um Path: barra de etapas baseada em uma picklist, com campos e orientação por etapa.",
       "rotulo": "PathAssistant",
@@ -4047,6 +4295,13 @@
       "id": "mdt:PlatformEventChannelMember",
       "resumo": "Inclui uma entidade num canal de eventos (por exemplo, AccountChangeEvent em ChangeEvents).",
       "rotulo": "PlatformEventChannelMember",
+      "tipo": "metadata_type"
+    },
+    {
+      "estado": "verificado",
+      "id": "mdt:PlatformEventSettings",
+      "resumo": "Configurações da org para eventos de plataforma.",
+      "rotulo": "PlatformEventSettings",
       "tipo": "metadata_type"
     },
     {
@@ -4100,9 +4355,23 @@
     },
     {
       "estado": "verificado",
+      "id": "mdt:RegisteredExternalService",
+      "resumo": "Registra uma classe Apex como provedor de um serviço do Commerce (preço, estoque, frete, impostos, promoções) ou de um ponto de extensão.",
+      "rotulo": "RegisteredExternalService",
+      "tipo": "metadata_type"
+    },
+    {
+      "estado": "verificado",
       "id": "mdt:RemoteSiteSetting",
       "resumo": "Registra um site externo que o código da org pode chamar.",
       "rotulo": "RemoteSiteSetting",
+      "tipo": "metadata_type"
+    },
+    {
+      "estado": "verificado",
+      "id": "mdt:SamlSsoConfig",
+      "resumo": "Configuração de login único (SSO) por SAML com um provedor de identidade externo.",
+      "rotulo": "SamlSsoConfig",
       "tipo": "metadata_type"
     },
     {
@@ -4265,6 +4534,12 @@
     },
     {
       "estado": "verificado",
+      "id": "mdx:ExternalAuthIdentityProviderParameter",
+      "rotulo": "ExternalAuthIdentityProviderParameter",
+      "tipo": "estrutura_auxiliar"
+    },
+    {
+      "estado": "verificado",
       "id": "mdx:ExternalCredentialParameter",
       "rotulo": "ExternalCredentialParameter",
       "tipo": "estrutura_auxiliar"
@@ -4351,6 +4626,12 @@
       "estado": "verificado",
       "id": "mdx:ObjectMappingField",
       "rotulo": "ObjectMappingField",
+      "tipo": "estrutura_auxiliar"
+    },
+    {
+      "estado": "verificado",
+      "id": "mdx:OutboundNetworkConnProperty",
+      "rotulo": "OutboundNetworkConnProperty",
       "tipo": "estrutura_auxiliar"
     },
     {

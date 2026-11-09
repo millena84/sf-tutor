@@ -83,11 +83,18 @@ O WSDL **não** é bloqueio: a documentação de cada tipo é a fonte alternativ
   - Extração: `fontes/extracoes/mdapi-lote5b.txt`.
   - **ConnectedApp está parcial:** ConnectedAppOauthIdToken, ConnectedAppOauthPolicy, ConnectedAppSamlConfig, ConnectedAppSessionPolicy e ConnectedAppMobileDetailConfig não foram extraídos. O conteúdo servido veio truncado e a página renderizada não mostra os nomes dos campos.
   - A página de ExtlClntAppOauthSecuritySettings não foi encontrada (meta_extlclntappoauthsecuritysettings.htm devolveu binário).
-- **Falta (lote 5c em diante):**
+- **Lote 5c (2026-11-09):** 5 funcionalidades novas, 8 metadata types e 2 estruturas, com 4 referências por nome.
+  - Funcionalidades novas: certificados e chaves, login único por SAML, conexões de rede privadas de saída, serviços externos registrados (Commerce) e Event Relay.
+  - Funcionalidades ampliadas: named credentials (ExternalAuthIdentityProvider), eventos de plataforma e Change Data Capture (ManagedEventSubscription e PlatformEventSettings).
+  - Metadata types: Certificate, SamlSsoConfig, ExternalAuthIdentityProvider, OutboundNetworkConnection, RegisteredExternalService, EventRelayConfig, ManagedEventSubscription e PlatformEventSettings.
+  - Referências: ExternalCredentialParameter.externalAuthIdentityProvider, NamedCredentialParameter.outboundNetworkConnection, EventRelayConfig.destinationResourceName (→ NamedCredential) e EventRelayConfig.eventChannel (→ PlatformEventChannel).
+  - Extração: `fontes/extracoes/mdapi-lote5c.txt`.
+  - **Não ligados de propósito:** campos `certificate`/`decryptionCertificate` e o legado NamedCredential.outboundNetworkConnection. As notas extraídas não dizem que o valor é o nome de um componente Certificate; ficam para conferência.
+  - **McpServerDefinition e ApiNamedQuery:** sem página de referência da Metadata API (as URLs devolveram binário). Não catalogados.
+- **Falta (lote 5d em diante):**
   - Sub-estruturas pendentes de ConnectedApp e plugins de external client app: mobile, push, canvas, notificação, attest, SAML e ExtlClntAppOauthSecuritySettings.
-  - Certificados e SAML: Certificate, SamlSsoConfig e ExternalAuthIdentityProvider.
-  - Endpoints: OutboundNetworkConnection, RegisteredExternalService, McpServerDefinition e ApiNamedQuery.
-  - Eventos: EventRelayConfig, ManagedEventSubscription e PlatformEventSettings.
+  - Outros certificados: PublicKeyCertificate, PublicKeyCertificateSet, UserAuthCertificate e InboundCertificate.
+  - McpServerDefinition e ApiNamedQuery, quando houver fonte.
   - Conectores de dados.
   - Os **objetos API** do tema.
   - A definição do evento (`__e`) e do objeto externo (`__x`), ambos via CustomObject.
