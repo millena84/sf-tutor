@@ -169,3 +169,18 @@ describe('integração (lote 5b)', () => {
     expect(t?.destino.endsWith('mdt:PermissionSet')).toBe(true);
   });
 });
+
+describe('integração (lote 5c)', () => {
+  it('certificados e SSO SAML ficam em acesso; Event Relay em eventos', () => {
+    expect(ind.caminhoPreferido('func:certificados', 'funcionalidade')![2]).toBe('sub:credenciais-certificados-e-protecao-de-dados');
+    expect(ind.caminhoPreferido('func:sso-saml', 'funcionalidade')![2]).toBe('sub:autenticacao-sso-e-mfa');
+    expect(ind.caminhoPreferido('func:event-relay', 'funcionalidade')![2]).toBe('sub:eventos-e-mensageria');
+  });
+  it('EventRelayConfig.eventChannel liga o relay ao canal de eventos', () => {
+    const e = exp0();
+    revelarCaminho(ind, 'funcionalidade', e, ind.caminhoPreferido('mdt:EventRelayConfig.eventChannel', 'funcionalidade')!);
+    revelarCaminho(ind, 'funcionalidade', e, ind.caminhoPreferido('mdt:PlatformEventChannel', 'funcionalidade')!);
+    const t = montarCena(ind, 'funcionalidade', e).arestas.find((a) => a.tecnica && a.aresta?.rel_id === 'rel:eventrelay-channel');
+    expect(t?.destino.endsWith('mdt:PlatformEventChannel')).toBe(true);
+  });
+});

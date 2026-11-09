@@ -1,0 +1,503 @@
+{
+  "funcionalidades": [
+    {
+      "id": "func:change-data-capture",
+      "nome": "Captura de alterações de dados"
+    },
+    {
+      "id": "func:platform-events",
+      "nome": "Eventos de plataforma"
+    }
+  ],
+  "metadata_type": {
+    "alertas": [],
+    "arquivos": {
+      "curinga_package_xml": {
+        "estado": "verificado",
+        "evidencias": [
+          {
+            "fonte": "src:mdapi-managedeventsubscription"
+          }
+        ],
+        "valor": true
+      },
+      "metadata_api_format": {
+        "estado": "verificado",
+        "evidencias": [
+          {
+            "fonte": "src:sdr-registry",
+            "nota": "types.managedeventsubscription"
+          }
+        ],
+        "valor": {
+          "arquivo": "<Nome>.managedEventSubscription",
+          "pasta": "managedEventSubscriptions/"
+        }
+      },
+      "source_format": {
+        "estado": "verificado",
+        "evidencias": [
+          {
+            "fonte": "src:sdr-registry",
+            "nota": "types.managedeventsubscription"
+          }
+        ],
+        "nota": "Pasta e sufixo do registro do Salesforce CLI; sufixo '-meta.xml' segue a convenção do source format.",
+        "valor": {
+          "arquivo": "<Nome>.managedEventSubscription-meta.xml",
+          "pasta": "managedEventSubscriptions/"
+        }
+      }
+    },
+    "cobertura": {
+      "estrutural": {
+        "esperado": 7,
+        "estado": "completa",
+        "nota": "Universo esperado = tabela Fields da página oficial 68.0 (mais fullName herdado quando declarado).",
+        "presente": 7
+      },
+      "explicativa": {
+        "esperado": 7,
+        "estado": "completa",
+        "presente": 7
+      },
+      "mapeamento": {
+        "estado": "parcial",
+        "nota": "Correspondências registradas apenas onde há evidência; demais pendentes."
+      }
+    },
+    "disponibilidade": {
+      "ate_versao": null,
+      "desde_versao": "60.0",
+      "estado": "verificado"
+    },
+    "divergencias_documentais": [
+      "O exemplo da página (src:mdapi-managedeventsubscription) usa o sufixo .managedSubscription, diferente do sufixo declarado (.managedEventSubscription)."
+    ],
+    "estado": "verificado",
+    "estende": "Metadata",
+    "estruturas": [],
+    "evidencias": [
+      {
+        "fonte": "src:mdapi-managedeventsubscription"
+      },
+      {
+        "fonte": "src:sdr-registry"
+      },
+      {
+        "fonte": "src:sdr-metadata-support"
+      }
+    ],
+    "finalidade": "Consumir eventos de plataforma ou de alteração sem perder a posição entre conexões.",
+    "id": "mdt:ManagedEventSubscription",
+    "nome": "ManagedEventSubscription",
+    "o_que_e": "Assinatura gerenciada de eventos (Pub/Sub API): a plataforma guarda a posição de leitura do assinante.",
+    "propriedades": [
+      {
+        "default": {
+          "estado": "verificado",
+          "evidencias": [
+            {
+              "fonte": "src:mdapi-managedeventsubscription"
+            }
+          ],
+          "forma": "valor",
+          "valor": "LATEST"
+        },
+        "disponibilidade": {
+          "ate_versao": null,
+          "desde_versao": null,
+          "estado": "desconhecido"
+        },
+        "dominio": {
+          "estado": "verificado",
+          "evidencias": [
+            {
+              "fonte": "src:mdapi-managedeventsubscription"
+            }
+          ],
+          "lista_completa": "sim",
+          "natureza": "enum_fechado",
+          "valores": [
+            {
+              "valor": "LATEST"
+            },
+            {
+              "valor": "EARLIEST"
+            }
+          ]
+        },
+        "estado": "verificado",
+        "evidencias": [
+          {
+            "fonte": "src:mdapi-managedeventsubscription"
+          }
+        ],
+        "explicacao": "explicada",
+        "id": "mdt:ManagedEventSubscription.defaultReplay",
+        "nome": "defaultReplay",
+        "o_que_e": "Onde começa na primeira assinatura ou sem posição gravada.",
+        "obrigatoriedade": {
+          "condicao": "A documentação 68.0 não marca o campo como obrigatório; ausência de marcação não comprova opcionalidade (confirmar no WSDL).",
+          "estado": "desconhecido",
+          "valor": "nao"
+        },
+        "origem": {
+          "estado": "verificado",
+          "evidencias": [
+            {
+              "fonte": "src:mdapi-managedeventsubscription"
+            }
+          ],
+          "nota": "Propriedade definida pelo schema da Metadata API.",
+          "valor": "padrao_plataforma"
+        },
+        "tipo_tecnico": "string"
+      },
+      {
+        "default": {
+          "estado": "verificado",
+          "evidencias": [
+            {
+              "fonte": "src:mdapi-managedeventsubscription"
+            }
+          ],
+          "forma": "valor",
+          "valor": "LATEST"
+        },
+        "disponibilidade": {
+          "ate_versao": null,
+          "desde_versao": null,
+          "estado": "desconhecido"
+        },
+        "dominio": {
+          "estado": "verificado",
+          "evidencias": [
+            {
+              "fonte": "src:mdapi-managedeventsubscription"
+            }
+          ],
+          "lista_completa": "sim",
+          "natureza": "enum_fechado",
+          "valores": [
+            {
+              "valor": "LATEST"
+            },
+            {
+              "valor": "EARLIEST"
+            }
+          ]
+        },
+        "estado": "verificado",
+        "evidencias": [
+          {
+            "fonte": "src:mdapi-managedeventsubscription"
+          }
+        ],
+        "explicacao": "explicada",
+        "id": "mdt:ManagedEventSubscription.errorRecoveryReplay",
+        "nome": "errorRecoveryReplay",
+        "o_que_e": "Onde recomeça se a posição gravada for inválida (por exemplo, fora da retenção).",
+        "obrigatoriedade": {
+          "condicao": "A documentação 68.0 não marca o campo como obrigatório; ausência de marcação não comprova opcionalidade (confirmar no WSDL).",
+          "estado": "desconhecido",
+          "valor": "nao"
+        },
+        "origem": {
+          "estado": "verificado",
+          "evidencias": [
+            {
+              "fonte": "src:mdapi-managedeventsubscription"
+            }
+          ],
+          "nota": "Propriedade definida pelo schema da Metadata API.",
+          "valor": "padrao_plataforma"
+        },
+        "tipo_tecnico": "string"
+      },
+      {
+        "default": {
+          "estado": "desconhecido",
+          "forma": "nao_declarado_na_fonte"
+        },
+        "disponibilidade": {
+          "ate_versao": null,
+          "desde_versao": null,
+          "estado": "desconhecido"
+        },
+        "dominio": {
+          "contexto": "A fonte tipa como string sem lista de valores; não inventar valores.",
+          "estado": "verificado",
+          "evidencias": [
+            {
+              "fonte": "src:mdapi-managedeventsubscription"
+            }
+          ],
+          "natureza": "texto_livre"
+        },
+        "estado": "verificado",
+        "evidencias": [
+          {
+            "fonte": "src:mdapi-managedeventsubscription"
+          }
+        ],
+        "explicacao": "explicada",
+        "id": "mdt:ManagedEventSubscription.label",
+        "nome": "label",
+        "o_que_e": "Rótulo.",
+        "obrigatoriedade": {
+          "condicao": "A documentação 68.0 não marca o campo como obrigatório; ausência de marcação não comprova opcionalidade (confirmar no WSDL).",
+          "estado": "desconhecido",
+          "valor": "nao"
+        },
+        "origem": {
+          "estado": "verificado",
+          "evidencias": [
+            {
+              "fonte": "src:mdapi-managedeventsubscription"
+            }
+          ],
+          "nota": "Propriedade definida pelo schema da Metadata API.",
+          "valor": "padrao_plataforma"
+        },
+        "tipo_tecnico": "string"
+      },
+      {
+        "default": {
+          "estado": "verificado",
+          "evidencias": [
+            {
+              "fonte": "src:mdapi-managedeventsubscription"
+            }
+          ],
+          "forma": "valor",
+          "valor": "RUN"
+        },
+        "disponibilidade": {
+          "ate_versao": null,
+          "desde_versao": null,
+          "estado": "desconhecido"
+        },
+        "dominio": {
+          "estado": "verificado",
+          "evidencias": [
+            {
+              "fonte": "src:mdapi-managedeventsubscription"
+            }
+          ],
+          "lista_completa": "sim",
+          "natureza": "enum_fechado",
+          "valores": [
+            {
+              "valor": "RUN"
+            },
+            {
+              "valor": "STOP"
+            },
+            {
+              "significado": "uso interno",
+              "valor": "PAUSE"
+            }
+          ]
+        },
+        "estado": "verificado",
+        "evidencias": [
+          {
+            "fonte": "src:mdapi-managedeventsubscription"
+          }
+        ],
+        "explicacao": "explicada",
+        "id": "mdt:ManagedEventSubscription.state",
+        "nome": "state",
+        "o_que_e": "Se a assinatura roda; STOP para a entrega e apaga a posição gravada.",
+        "obrigatoriedade": {
+          "condicao": "A documentação 68.0 não marca o campo como obrigatório; ausência de marcação não comprova opcionalidade (confirmar no WSDL).",
+          "estado": "desconhecido",
+          "valor": "nao"
+        },
+        "origem": {
+          "estado": "verificado",
+          "evidencias": [
+            {
+              "fonte": "src:mdapi-managedeventsubscription"
+            }
+          ],
+          "nota": "Propriedade definida pelo schema da Metadata API.",
+          "valor": "padrao_plataforma"
+        },
+        "tipo_tecnico": "string"
+      },
+      {
+        "default": {
+          "estado": "desconhecido",
+          "forma": "nao_declarado_na_fonte"
+        },
+        "disponibilidade": {
+          "ate_versao": null,
+          "desde_versao": null,
+          "estado": "desconhecido"
+        },
+        "dominio": {
+          "contexto": "A fonte tipa como string sem lista de valores; não inventar valores.",
+          "estado": "verificado",
+          "evidencias": [
+            {
+              "fonte": "src:mdapi-managedeventsubscription"
+            }
+          ],
+          "natureza": "texto_livre"
+        },
+        "estado": "verificado",
+        "evidencias": [
+          {
+            "fonte": "src:mdapi-managedeventsubscription"
+          }
+        ],
+        "explicacao": "explicada",
+        "id": "mdt:ManagedEventSubscription.topicName",
+        "nome": "topicName",
+        "o_que_e": "Evento, evento de alteração ou canal consumido (/event/Evento__e, /data/ChangeEvents, /data/ObjetoChangeEvent, canais __chn).",
+        "obrigatoriedade": {
+          "condicao": "A documentação 68.0 não marca o campo como obrigatório; ausência de marcação não comprova opcionalidade (confirmar no WSDL).",
+          "estado": "desconhecido",
+          "valor": "nao"
+        },
+        "origem": {
+          "estado": "verificado",
+          "evidencias": [
+            {
+              "fonte": "src:mdapi-managedeventsubscription"
+            }
+          ],
+          "nota": "Propriedade definida pelo schema da Metadata API.",
+          "valor": "padrao_plataforma"
+        },
+        "tipo_tecnico": "string"
+      },
+      {
+        "default": {
+          "estado": "desconhecido",
+          "forma": "nao_declarado_na_fonte"
+        },
+        "disponibilidade": {
+          "ate_versao": null,
+          "desde_versao": null,
+          "estado": "desconhecido"
+        },
+        "dominio": {
+          "contexto": "A fonte tipa como string sem lista de valores; não inventar valores.",
+          "estado": "verificado",
+          "evidencias": [
+            {
+              "fonte": "src:mdapi-managedeventsubscription"
+            }
+          ],
+          "natureza": "texto_livre"
+        },
+        "estado": "verificado",
+        "evidencias": [
+          {
+            "fonte": "src:mdapi-managedeventsubscription"
+          }
+        ],
+        "explicacao": "explicada",
+        "id": "mdt:ManagedEventSubscription.version",
+        "nome": "version",
+        "notas": [
+          "Reservado para uso interno da Salesforce (página oficial)."
+        ],
+        "o_que_e": "Uso interno.",
+        "obrigatoriedade": {
+          "condicao": "A documentação 68.0 não marca o campo como obrigatório; ausência de marcação não comprova opcionalidade (confirmar no WSDL).",
+          "estado": "desconhecido",
+          "valor": "nao"
+        },
+        "origem": {
+          "estado": "verificado",
+          "evidencias": [
+            {
+              "fonte": "src:mdapi-managedeventsubscription"
+            }
+          ],
+          "nota": "Propriedade definida pelo schema da Metadata API.",
+          "valor": "padrao_plataforma"
+        },
+        "tipo_tecnico": "string"
+      },
+      {
+        "default": {
+          "estado": "desconhecido",
+          "forma": "nao_declarado_na_fonte"
+        },
+        "disponibilidade": {
+          "ate_versao": null,
+          "desde_versao": null,
+          "estado": "desconhecido"
+        },
+        "dominio": {
+          "contexto": "A fonte tipa como string sem lista de valores; não inventar valores.",
+          "estado": "verificado",
+          "evidencias": [
+            {
+              "fonte": "src:mdapi-managedeventsubscription"
+            }
+          ],
+          "natureza": "texto_livre"
+        },
+        "estado": "verificado",
+        "evidencias": [
+          {
+            "fonte": "src:mdapi-managedeventsubscription"
+          }
+        ],
+        "explicacao": "explicada",
+        "herdada_de": "Metadata",
+        "id": "mdt:ManagedEventSubscription.fullName",
+        "nome": "fullName",
+        "o_que_e": "Nome completo (API name) do componente; herdado do tipo Metadata.",
+        "obrigatoriedade": {
+          "estado": "desconhecido",
+          "valor": "desconhecida"
+        },
+        "origem": {
+          "estado": "verificado",
+          "evidencias": [
+            {
+              "fonte": "src:mdapi-managedeventsubscription"
+            }
+          ],
+          "nota": "Propriedade definida pelo schema da Metadata API.",
+          "valor": "padrao_plataforma"
+        },
+        "tipo_tecnico": "string"
+      }
+    ],
+    "recomendacoes": [],
+    "setup": {
+      "estado": "desconhecido",
+      "nota": "Caminho no Setup não verificado nesta sessão."
+    },
+    "suporte_cli": {
+      "estado": "verificado",
+      "evidencias": [
+        {
+          "fonte": "src:sdr-metadata-support"
+        }
+      ],
+      "nota": "Suporte do Salesforce CLI (source-deploy-retrieve), não do Metadata API em geral.",
+      "valor": {
+        "nota_fonte": null,
+        "status": "suportado"
+      }
+    }
+  },
+  "nota": "Gerado deterministicamente a partir de catalogo/. Não editar à mão.",
+  "objetos_relacionados": [],
+  "relacionamentos": [],
+  "versao_base": {
+    "api_version": "68.0",
+    "data_referencia": "2026-11-07",
+    "escopo": "config/escopo.json",
+    "release": "Winter '27"
+  }
+}

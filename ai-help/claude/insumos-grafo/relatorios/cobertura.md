@@ -7,7 +7,7 @@ Gerado por `ferramentas/sftutor.py cobertura`. Cobertura estrutural, explicativa
 
 - Universo v68 (METADATA_SUPPORT.md): **993** tipos.
 - Classificados como incluídos no recorte Core: 12; pendentes de classificação: 981.
-- Cadastrados: **58** de 993. Estruturalmente completos (contra a página oficial): 45. Completos nas três dimensões: 0.
+- Cadastrados: **66** de 993. Estruturalmente completos (contra a página oficial): 53. Completos nas três dimensões: 0.
 - Porcentagem do recorte Core: não calculada, porque o denominador do recorte ainda não está definido (classificação item a item pendente).
 
 | Tipo | Estrutural | Esperadas | Presentes | Explicadas | Estruturas | Mapeamento | Completo |
@@ -17,6 +17,7 @@ Gerado por `ferramentas/sftutor.py cobertura`. Cobertura estrutural, explicativa
 | mdt:AuthProvider | completa | 34 | 34 | 34 | 1 | parcial | não |
 | mdt:BusinessHoursSettings | completa | 3 | 3 | 3 | 2 | parcial | não |
 | mdt:CampaignSettings | completa | 11 | 11 | 11 | 0 | parcial | não |
+| mdt:Certificate | completa | 8 | 8 | 8 | 0 | parcial | não |
 | mdt:ConnectedApp | parcial | 21 | 21 | 21 | 4 | parcial | não |
 | mdt:ConnectedAppSettings | completa | 3 | 3 | 3 | 0 | parcial | não |
 | mdt:CorsWhitelistOrigin | completa | 2 | 2 | 2 | 0 | parcial | não |
@@ -28,6 +29,8 @@ Gerado por `ferramentas/sftutor.py cobertura`. Cobertura estrutural, explicativa
 | mdt:EntitlementSettings | completa | 13 | 13 | 13 | 0 | parcial | não |
 | mdt:EntitlementTemplate | completa | 7 | 7 | 7 | 0 | parcial | não |
 | mdt:EscalationRules | completa | 1 | 1 | 1 | 1 | parcial | não |
+| mdt:EventRelayConfig | completa | 7 | 7 | 7 | 0 | parcial | não |
+| mdt:ExternalAuthIdentityProvider | completa | 6 | 6 | 6 | 1 | parcial | não |
 | mdt:ExternalClientAppSettings | completa | 3 | 3 | 3 | 0 | parcial | não |
 | mdt:ExternalClientApplication | completa | 12 | 12 | 12 | 0 | parcial | não |
 | mdt:ExternalCredential | completa | 5 | 5 | 5 | 1 | parcial | não |
@@ -42,6 +45,7 @@ Gerado por `ferramentas/sftutor.py cobertura`. Cobertura estrutural, explicativa
 | mdt:ForecastingSettings | parcial | 10 | 10 | 10 | 0 | parcial | não |
 | mdt:KnowledgeSettings | parcial | 23 | 23 | 23 | 0 | parcial | não |
 | mdt:LeadConvertSettings | completa | 3 | 3 | 3 | 1 | parcial | não |
+| mdt:ManagedEventSubscription | completa | 7 | 7 | 7 | 0 | parcial | não |
 | mdt:MilestoneType | completa | 3 | 3 | 3 | 0 | parcial | não |
 | mdt:NamedCredential | completa | 31 | 31 | 31 | 1 | parcial | não |
 | mdt:OauthCustomScope | completa | 7 | 7 | 7 | 0 | parcial | não |
@@ -49,11 +53,13 @@ Gerado por `ferramentas/sftutor.py cobertura`. Cobertura estrutural, explicativa
 | mdt:OauthTokenExchangeHandler | completa | 15 | 15 | 15 | 1 | parcial | não |
 | mdt:OmniChannelSettings | completa | 6 | 6 | 6 | 0 | parcial | não |
 | mdt:OpportunitySettings | completa | 23 | 23 | 23 | 1 | parcial | não |
+| mdt:OutboundNetworkConnection | completa | 7 | 7 | 7 | 1 | parcial | não |
 | mdt:PathAssistant | completa | 7 | 7 | 7 | 1 | parcial | não |
 | mdt:PermissionSet | completa | 24 | 24 | 24 | 18 | parcial | não |
 | mdt:PermissionSetGroup | completa | 7 | 7 | 7 | 0 | parcial | não |
 | mdt:PlatformEventChannel | completa | 5 | 5 | 5 | 1 | parcial | não |
 | mdt:PlatformEventChannelMember | completa | 5 | 5 | 5 | 1 | parcial | não |
+| mdt:PlatformEventSettings | completa | 1 | 1 | 1 | 0 | parcial | não |
 | mdt:PlatformEventSubscriberConfig | completa | 8 | 8 | 8 | 0 | parcial | não |
 | mdt:PresenceUserConfig | parcial | n/d | 18 | 18 | 1 | parcial | não |
 | mdt:Profile | parcial | 27 | 27 | 27 | 16 | parcial | não |
@@ -61,7 +67,9 @@ Gerado por `ferramentas/sftutor.py cobertura`. Cobertura estrutural, explicativa
 | mdt:QuickAction | parcial | 22 | 22 | 22 | 0 | parcial | não |
 | mdt:QuoteSettings | completa | 2 | 2 | 2 | 0 | parcial | não |
 | mdt:RecordType | parcial | 7 | 7 | 7 | 1 | parcial | não |
+| mdt:RegisteredExternalService | completa | 11 | 11 | 11 | 0 | parcial | não |
 | mdt:RemoteSiteSetting | completa | 5 | 5 | 5 | 0 | parcial | não |
+| mdt:SamlSsoConfig | completa | 26 | 26 | 26 | 0 | parcial | não |
 | mdt:ServiceChannel | completa | 19 | 19 | 19 | 1 | parcial | não |
 | mdt:ServicePresenceStatus | completa | 3 | 3 | 3 | 1 | parcial | não |
 | mdt:Territory2 | completa | 12 | 12 | 12 | 3 | parcial | não |
@@ -73,8 +81,8 @@ Gerado por `ferramentas/sftutor.py cobertura`. Cobertura estrutural, explicativa
 
 ## Propriedades XML
 
-- Em metadata types: 808 listadas, 771 explicadas.
-- Em estruturas auxiliares: 317 listadas, 317 explicadas.
+- Em metadata types: 881 listadas, 844 explicadas.
+- Em estruturas auxiliares: 324 listadas, 324 explicadas.
 - Universo total: Sem WSDL não há denominador confiável do total de propriedades do recorte.
 
 ## Objetos consultáveis via API
@@ -147,10 +155,10 @@ Gerado por `ferramentas/sftutor.py cobertura`. Cobertura estrutural, explicativa
 
 ## Relacionamentos
 
-- Total: 105; verificados: 102.
-- Por tipo: correspondencia_xml_api: 11, referencia_campo: 81, representacao_comum: 13
+- Total: 109; verificados: 106.
+- Por tipo: correspondencia_xml_api: 11, referencia_campo: 85, representacao_comum: 13
 
 ## Taxonomia e funcionalidades
 
 - Classificações: 14; subclassificações: 92 (com funcionalidades: 33).
-- Funcionalidades cadastradas: 43 (universo de funcionalidades não definido).
+- Funcionalidades cadastradas: 48 (universo de funcionalidades não definido).
