@@ -289,3 +289,36 @@ class TestConvencaoCorrespondencia(unittest.TestCase):
             r = ler(p)
             if r["tipo"] == "correspondencia_xml_api" and r.get("natureza_correspondencia") in ("direta", "transformada"):
                 self.assertTrue(r["destino"].get("campo") or r["origem"].get("campo"), f"{r['id']} sem campo comprovado")
+
+
+class TestCargaNova(BaseTemp):
+    """Issue #11: um lote novo pode ser carregado só com ferramentas do repositório (numa cópia temporária da base)."""
+
+    def test_lote_de_exemplo_valida(self):
+        import subprocess, textwrap
+        with open(os.path.join(self.tmp, "fontes", "extracoes", "teste-carga.txt"), "w", encoding="utf-8") as f:
+            f.write("Nota de teste (não é fonte real): AIApplication com label, itens; AIApplicationItem com nome.\n")
+        script = textwrap.dedent('''
+            from carga import mdt as M, catalogo as C
+            from carga.mdt import P
+            from carga.base import af
+            C.registrar_fontes([C.fonte("src:teste-carga", "Fonte de teste", "https://developer.salesforce.com/docs/teste-da-biblioteca", "Teste da biblioteca.",
+                                        "fontes/extracoes/teste-carga.txt", "2026-11-09")])
+            M.struct("AIApplicationItem", "src:teste-carga", ["mdt:AIApplication"], [P("nome", "string", None, "Nome do item.", "S")], "Item de teste.")
+            M.mdt("AIApplication", "src:teste-carga", "Tipo de teste.", "Testar a carga.", "60.0", [
+                P("label", "string", None, "Rótulo.", "S"),
+                P("itens", "AIApplicationItem[]", None, "Itens.", estrutura="AIApplicationItem"),
+            ], setup=af("desconhecido", None, "Teste."))
+            M.emit_structs()
+            C.ampliar_funcionalidade("flow", mdts=[("AIApplication", "Teste.")], srcs=["src:teste-carga"])
+        ''')
+        env = dict(os.environ, SFTUTOR_BASE=self.tmp, PYTHONPATH=os.path.join(BASE, "ferramentas"))
+        r = subprocess.run([sys.executable, "-c", script], env=env, capture_output=True, text=True)
+        self.assertEqual(r.returncode, 0, r.stderr)
+        self.assertTrue(os.path.exists(self.cat("metadata-types", "AIApplication.json")))
+        self.assertTrue(os.path.exists(self.cat("estruturas", "AIApplicationItem.json")))
+        self.assertFalse(os.path.exists(os.path.join(BASE, "catalogo", "metadata-types", "AIApplication.json")), "o catálogo real não pode ser tocado")
+        self.assertEqual(self.erros(), [])
+        d = ler(self.cat("metadata-types", "AIApplication.json"))
+        self.assertEqual(d["cobertura"]["estrutural"]["estado"], "completa")
+        self.assertEqual(d["estruturas"], ["mdx:AIApplicationItem"])

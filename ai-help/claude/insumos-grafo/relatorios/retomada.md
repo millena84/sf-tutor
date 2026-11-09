@@ -17,7 +17,7 @@ Situação em 2026-11-08, após o lote 3d (pendências de Agentforce Sales e Ser
 - **Data 360:** contexto técnico verificado.
 - **Agentforce Sales e Agentforce Service** (antes Sales Cloud e Service Cloud): nome, contexto técnico e licenças verificados. Vendas tem 10 funcionalidades próprias e atendimento, 3; Knowledge, regras de atribuição, horário comercial, apps de console e Path entram como capacidades compartilhadas. O relatório de pesquisa usado como mapa está em `fontes/pesquisas/`.
 
-Os JSONs de `catalogo/` são a fonte da verdade. Os lotes 1, 2 e 3a a 3d foram aplicados por scripts de carga mantidos fora do repositório; edições futuras devem ser feitas nos JSONs ou por ferramentas criadas em `ferramentas/`.
+Os JSONs de `catalogo/` são a fonte da verdade. Os lotes 1 a 5k foram aplicados por scripts de carga, hoje guardados como registro em `ferramentas/carga/historico/`. Edições futuras devem ser feitas nos JSONs ou com a biblioteca `ferramentas/carga/`.
 
 ## Acompanhamento no GitHub
 
@@ -143,6 +143,12 @@ O WSDL **não** é bloqueio: a documentação de cada tipo é a fonte alternativ
   - Limites da Metadata API (página não legível). Relação funcionalidade↔propriedade: exigiria estender o schema; está como decisão pendente.
   - Exemplos XML.
   - Caminhos de Setup restantes: criação de escopo OAuth customizado e de handler de troca de token; conexão de entrada do Private Connect.
+
+## Ferramentas de carga (issue #11, 2026-11-09)
+- Lotes novos usam a biblioteca `ferramentas/carga/` (uso em `ferramentas/README.md`). Ela não depende de nada fora do repositório.
+- Os scripts originais dos lotes 1 a 5k estão em `ferramentas/carga/historico/`, só como registro: não reexecute sobre o catálogo atual.
+- **Equivalência conferida:** os lotes 5c (metadata types e estruturas) e 5j (objetos API) foram rodados com a biblioteca numa cópia da base e geraram arquivos idênticos byte a byte aos do catálogo.
+- O teste `TestCargaNova` carrega um lote de exemplo numa cópia temporária e valida.
 
 ## Próximos lotes
 
