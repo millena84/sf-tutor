@@ -154,3 +154,18 @@ describe('integração (lote 5a)', () => {
     expect(t!.destino.endsWith('mdt:ExternalCredential')).toBe(true);
   });
 });
+
+describe('integração (lote 5b)', () => {
+  it('connected apps e external client apps ficam em autenticação de integrações', () => {
+    for (const id of ['func:connected-apps', 'func:external-client-apps', 'func:oauth-escopos-e-troca-de-token']) {
+      expect(ind.caminhoPreferido(id, 'funcionalidade')![2], id).toBe('sub:autenticacao-de-integracoes');
+    }
+  });
+  it('ConnectedApp.permissionSetName liga o app ao metadata type PermissionSet', () => {
+    const e = exp0();
+    revelarCaminho(ind, 'funcionalidade', e, ind.caminhoPreferido('mdt:ConnectedApp.permissionSetName', 'funcionalidade')!);
+    revelarCaminho(ind, 'funcionalidade', e, ind.caminhoPreferido('mdt:PermissionSet', 'funcionalidade')!);
+    const t = montarCena(ind, 'funcionalidade', e).arestas.find((a) => a.tecnica && a.aresta?.rel_id === 'rel:connectedapp-permissionset');
+    expect(t?.destino.endsWith('mdt:PermissionSet')).toBe(true);
+  });
+});

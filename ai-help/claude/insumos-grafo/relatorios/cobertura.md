@@ -7,7 +7,7 @@ Gerado por `ferramentas/sftutor.py cobertura`. Cobertura estrutural, explicativa
 
 - Universo v68 (METADATA_SUPPORT.md): **993** tipos.
 - Classificados como incluídos no recorte Core: 12; pendentes de classificação: 981.
-- Cadastrados: **47** de 993. Estruturalmente completos (contra a página oficial): 35. Completos nas três dimensões: 0.
+- Cadastrados: **58** de 993. Estruturalmente completos (contra a página oficial): 45. Completos nas três dimensões: 0.
 - Porcentagem do recorte Core: não calculada, porque o denominador do recorte ainda não está definido (classificação item a item pendente).
 
 | Tipo | Estrutural | Esperadas | Presentes | Explicadas | Estruturas | Mapeamento | Completo |
@@ -17,6 +17,8 @@ Gerado por `ferramentas/sftutor.py cobertura`. Cobertura estrutural, explicativa
 | mdt:AuthProvider | completa | 34 | 34 | 34 | 1 | parcial | não |
 | mdt:BusinessHoursSettings | completa | 3 | 3 | 3 | 2 | parcial | não |
 | mdt:CampaignSettings | completa | 11 | 11 | 11 | 0 | parcial | não |
+| mdt:ConnectedApp | parcial | 21 | 21 | 21 | 4 | parcial | não |
+| mdt:ConnectedAppSettings | completa | 3 | 3 | 3 | 0 | parcial | não |
 | mdt:CorsWhitelistOrigin | completa | 2 | 2 | 2 | 0 | parcial | não |
 | mdt:CspTrustedSite | completa | 14 | 14 | 14 | 0 | parcial | não |
 | mdt:CustomField | parcial | 60 | 60 | 60 | 2 | parcial | não |
@@ -26,9 +28,15 @@ Gerado por `ferramentas/sftutor.py cobertura`. Cobertura estrutural, explicativa
 | mdt:EntitlementSettings | completa | 13 | 13 | 13 | 0 | parcial | não |
 | mdt:EntitlementTemplate | completa | 7 | 7 | 7 | 0 | parcial | não |
 | mdt:EscalationRules | completa | 1 | 1 | 1 | 1 | parcial | não |
+| mdt:ExternalClientAppSettings | completa | 3 | 3 | 3 | 0 | parcial | não |
+| mdt:ExternalClientApplication | completa | 12 | 12 | 12 | 0 | parcial | não |
 | mdt:ExternalCredential | completa | 5 | 5 | 5 | 1 | parcial | não |
 | mdt:ExternalDataSource | completa | 20 | 20 | 20 | 2 | parcial | não |
 | mdt:ExternalServiceRegistration | completa | 20 | 20 | 20 | 1 | parcial | não |
+| mdt:ExtlClntAppConfigurablePolicies | completa | 12 | 12 | 12 | 0 | parcial | não |
+| mdt:ExtlClntAppGlobalOauthSettings | completa | 22 | 22 | 22 | 1 | parcial | não |
+| mdt:ExtlClntAppOauthConfigurablePolicies | completa | 28 | 28 | 28 | 1 | parcial | não |
+| mdt:ExtlClntAppOauthSettings | completa | 15 | 15 | 15 | 2 | parcial | não |
 | mdt:FlexiPage | parcial | 12 | 12 | 12 | 0 | parcial | não |
 | mdt:Flow | parcial | 50 | 50 | 13 | 0 | parcial | não |
 | mdt:ForecastingSettings | parcial | 10 | 10 | 10 | 0 | parcial | não |
@@ -36,6 +44,9 @@ Gerado por `ferramentas/sftutor.py cobertura`. Cobertura estrutural, explicativa
 | mdt:LeadConvertSettings | completa | 3 | 3 | 3 | 1 | parcial | não |
 | mdt:MilestoneType | completa | 3 | 3 | 3 | 0 | parcial | não |
 | mdt:NamedCredential | completa | 31 | 31 | 31 | 1 | parcial | não |
+| mdt:OauthCustomScope | completa | 7 | 7 | 7 | 0 | parcial | não |
+| mdt:OauthOidcSettings | completa | 6 | 6 | 6 | 0 | parcial | não |
+| mdt:OauthTokenExchangeHandler | completa | 15 | 15 | 15 | 1 | parcial | não |
 | mdt:OmniChannelSettings | completa | 6 | 6 | 6 | 0 | parcial | não |
 | mdt:OpportunitySettings | completa | 23 | 23 | 23 | 1 | parcial | não |
 | mdt:PathAssistant | completa | 7 | 7 | 7 | 1 | parcial | não |
@@ -62,8 +73,8 @@ Gerado por `ferramentas/sftutor.py cobertura`. Cobertura estrutural, explicativa
 
 ## Propriedades XML
 
-- Em metadata types: 664 listadas, 627 explicadas.
-- Em estruturas auxiliares: 265 listadas, 265 explicadas.
+- Em metadata types: 808 listadas, 771 explicadas.
+- Em estruturas auxiliares: 317 listadas, 317 explicadas.
 - Universo total: Sem WSDL não há denominador confiável do total de propriedades do recorte.
 
 ## Objetos consultáveis via API
@@ -136,10 +147,10 @@ Gerado por `ferramentas/sftutor.py cobertura`. Cobertura estrutural, explicativa
 
 ## Relacionamentos
 
-- Total: 96; verificados: 93.
-- Por tipo: correspondencia_xml_api: 11, referencia_campo: 72, representacao_comum: 13
+- Total: 105; verificados: 102.
+- Por tipo: correspondencia_xml_api: 11, referencia_campo: 81, representacao_comum: 13
 
 ## Taxonomia e funcionalidades
 
 - Classificações: 14; subclassificações: 92 (com funcionalidades: 33).
-- Funcionalidades cadastradas: 40 (universo de funcionalidades não definido).
+- Funcionalidades cadastradas: 43 (universo de funcionalidades não definido).
