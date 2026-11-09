@@ -99,7 +99,7 @@ Gerado por `ferramentas/sftutor.py cobertura`. Cobertura estrutural, explicativa
 
 ## Objetos consultáveis via API
 
-- Catalogados: 62. Campos listados: 1458; explicados: 648.
+- Catalogados: 68. Campos listados: 1557; explicados: 747.
 - Universo: Universo de objetos da plataforma não enumerado.
 
 | Objeto | Estrutural | Esperados | Presentes | Explicados | APIs verificadas |
@@ -108,18 +108,22 @@ Gerado por `ferramentas/sftutor.py cobertura`. Cobertura estrutural, explicativa
 | obj:AccountTeamMember | completa | 11 | 11 | 11 | padrao |
 | obj:AgentWork | parcial | n/d | 41 | 3 | padrao |
 | obj:AssignmentRule | completa | 3 | 3 | 3 | padrao |
+| obj:AuthProvider | completa | 30 | 30 | 30 | padrao |
 | obj:BusinessHours | completa | 20 | 20 | 19 | padrao |
 | obj:Campaign | parcial | n/d | 45 | 4 | padrao |
 | obj:CampaignMember | completa | 32 | 32 | 7 | padrao |
 | obj:Case | parcial | n/d | 56 | 12 | padrao |
 | obj:CaseMilestone | completa | 20 | 20 | 20 | padrao |
+| obj:ConnectedApplication | completa | 15 | 15 | 15 | padrao |
 | obj:Contact | parcial | n/d | 37 | 3 | padrao |
+| obj:CspTrustedSite | completa | 16 | 16 | 16 | padrao |
 | obj:CustomField | parcial | n/d | 6 | 6 | tooling |
 | obj:CustomObject | parcial | n/d | 10 | 10 | tooling |
 | obj:CustomTab | completa | 13 | 13 | 13 | tooling |
 | obj:Entitlement | parcial | 23 | 22 | 9 | padrao |
 | obj:EntityDefinition | parcial | n/d | 13 | 6 | tooling |
 | obj:EventBusSubscriber | completa | 12 | 12 | 12 | padrao |
+| obj:ExternalDataSource | completa | 13 | 13 | 13 | padrao |
 | obj:FieldDefinition | parcial | n/d | 12 | 11 | tooling |
 | obj:FlexiPage | completa | 11 | 11 | 11 | tooling |
 | obj:Flow | completa | 15 | 15 | 15 | tooling |
@@ -136,6 +140,8 @@ Gerado por `ferramentas/sftutor.py cobertura`. Cobertura estrutural, explicativa
 | obj:LeadStatus | completa | 5 | 5 | 5 | padrao |
 | obj:LoginHistory | parcial | n/d | 24 | 24 | padrao |
 | obj:MilestoneType | completa | 3 | 3 | 3 | padrao |
+| obj:NamedCredential | completa | 16 | 16 | 16 | padrao |
+| obj:OauthToken | completa | 9 | 9 | 9 | padrao |
 | obj:ObjectTerritory2Association | completa | 4 | 4 | 4 | padrao |
 | obj:Opportunity | parcial | n/d | 58 | 11 | padrao |
 | obj:OpportunityLineItem | completa | 27 | 27 | 7 | padrao |
@@ -169,8 +175,8 @@ Gerado por `ferramentas/sftutor.py cobertura`. Cobertura estrutural, explicativa
 
 ## Relacionamentos
 
-- Total: 119; verificados: 116.
-- Por tipo: correspondencia_xml_api: 11, referencia_campo: 95, representacao_comum: 13
+- Total: 126; verificados: 123.
+- Por tipo: correspondencia_xml_api: 16, referencia_campo: 97, representacao_comum: 13
 
 ## Taxonomia e funcionalidades
 
