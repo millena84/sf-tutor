@@ -210,6 +210,25 @@ O WSDL **não** é bloqueio: a documentação de cada tipo é a fonte alternativ
     - IA: recuperação de conhecimento.
     - Produto: serviço de campo, experiências externas, capacidades setoriais, outras áreas.
   - Esses temas continuam com o texto genérico e o resumo calculado. Próximo: pesquisar fontes para eles e depois detalhar cada tema por seção, como pediu a autora.
+- **Pendentes, lote 1 (2026-11-09):**
+  - 7 dos 22 temas pendentes ganharam conteúdo: tipos de relatório, mecanismos legados e migração, notificações, logs e rastreamento, domínios e URLs, parâmetros reutilizáveis e caminhos assíncronos.
+  - Fontes: 17 novas, lidas pelos resultados de busca restritos a help.salesforce.com e developer.salesforce.com. Nota de extração: `fontes/extracoes/temas-pendentes-lote1.txt`. Script: `conteudo_pendentes.py`.
+  - Continuam pendentes 15:
+    - habilitação de recursos;
+    - metadados de configuração de dados;
+    - classificação e sensibilidade;
+    - retenção;
+    - consentimento;
+    - experiências web, portais e mobile;
+    - pastas e acesso;
+    - métricas;
+    - colaboração;
+    - templates;
+    - recuperação de conhecimento;
+    - serviço de campo;
+    - experiências externas;
+    - capacidades setoriais;
+    - outras áreas.
 
 ## Próximos lotes
 

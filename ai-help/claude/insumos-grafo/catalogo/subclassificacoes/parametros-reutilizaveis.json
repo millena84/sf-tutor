@@ -7,6 +7,58 @@
   "descricao": "Valores configuráveis reaproveitados por várias funcionalidades, como metadados e configurações personalizadas.",
   "escopo": "Entram os mecanismos que guardam valores configuráveis para serem lidos por várias funcionalidades, como metadados e configurações personalizadas.",
   "fora_do_escopo": "A definição de objetos e campos comuns fica em \"Objetos e entidades\" e \"Campos e tipos\".",
+  "para_iniciantes": {
+    "explicacao": "Guarda valores de configuração lidos por várias funcionalidades, como tabelas de regras ou mapeamentos. Há dois mecanismos: custom metadata types, cujos registros são metadados, e custom settings, cujos registros são dados.",
+    "exemplo": "Uma tabela de faixas de desconto fica num custom metadata type e é lida por um flow e por uma regra de validação.",
+    "evidencias": [
+      {
+        "fonte": "src:help-custom-settings"
+      },
+      {
+        "fonte": "src:mdapi-custommetadata"
+      }
+    ]
+  },
+  "encadeamento": {
+    "texto": "É configuração reaproveitada pela org inteira; o lado 'como código' das configurações gerais fica em 'Settings'.",
+    "evidencias": [
+      {
+        "fonte": "src:help-custom-settings"
+      }
+    ]
+  },
+  "avancado": [
+    {
+      "tipo": "decisao",
+      "titulo": "Custom metadata em vez de custom settings",
+      "texto": "A Salesforce recomenda custom metadata types: os registros podem ser migrados por pacotes de segunda geração ou Metadata API, ao contrário dos de list custom settings. Custom settings do tipo Hierarchy personalizam por perfil ou usuário.",
+      "evidencias": [
+        {
+          "fonte": "src:help-custom-settings"
+        }
+      ]
+    },
+    {
+      "tipo": "atencao",
+      "titulo": "Cache e bloqueios",
+      "texto": "Registros de custom metadata ficam em cache por tipo depois da primeira leitura; durante o deploy, os registros incluídos ficam bloqueados e podem causar row lock. Para alterá-los pelo Apex, use o pacote Metadata.",
+      "evidencias": [
+        {
+          "fonte": "src:help-cmdt-limitations"
+        }
+      ]
+    },
+    {
+      "tipo": "implantacao",
+      "titulo": "Registro como arquivo",
+      "texto": "Cada registro é um componente CustomMetadata, com sufixo .md na pasta customMetadata.",
+      "evidencias": [
+        {
+          "fonte": "src:mdapi-custommetadata"
+        }
+      ]
+    }
+  ],
   "funcionalidades": [],
   "estado": "desconhecido",
   "nota_estado": "Agrupamento proposto na especificação; fronteira ainda não cruzada com a documentação oficial."
