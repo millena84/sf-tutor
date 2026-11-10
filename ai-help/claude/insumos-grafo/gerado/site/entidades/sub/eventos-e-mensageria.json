@@ -1,4 +1,36 @@
 {
+  "avancado": [
+    {
+      "evidencias": [
+        {
+          "fonte": "src:pubsub-allocations"
+        }
+      ],
+      "texto": "Cada evento tem no máximo 1 MB, cada pedido busca até 100 eventos e a org tem até 200 assinaturas gerenciadas; acima de 4 MB por requisição, a chamada falha.",
+      "tipo": "limite",
+      "titulo": "Pub/Sub API"
+    },
+    {
+      "evidencias": [
+        {
+          "fonte": "src:mdapi-platformeventchannelmember"
+        }
+      ],
+      "texto": "PlatformEventChannelMember não aceita createMetadata() nem deleteMetadata(); a exclusão é feita via destructiveChanges.xml.",
+      "tipo": "implantacao",
+      "titulo": "Excluir membro de canal"
+    },
+    {
+      "evidencias": [
+        {
+          "fonte": "src:mdapi-eventrelayconfig"
+        }
+      ],
+      "texto": "Depois de criado, só o estado e a opção de retomada do Event Relay podem mudar.",
+      "tipo": "atencao",
+      "titulo": "Event Relay depois de criado"
+    }
+  ],
   "classificacao": "cls:integracao-apis-e-eventos",
   "derivado": {
     "dependencias": [
@@ -189,6 +221,17 @@
     "temas_sem_funcionalidade": []
   },
   "descricao": "Eventos de plataforma, captura de alterações e mensagens.",
+  "encadeamento": {
+    "evidencias": [
+      {
+        "fonte": "src:help-platform-events-define"
+      },
+      {
+        "fonte": "src:pe-retry-apex"
+      }
+    ],
+    "texto": "A reação dentro da org fica em 'Processamento orientado a eventos'; retentativas e monitoramento, em 'Contratos, limites e tratamento de falhas'."
+  },
   "escopo": "Entram eventos de plataforma, captura de alterações, assinatura externa e transporte de mensagens.",
   "estado": "desconhecido",
   "fora_do_escopo": "A reação a eventos dentro da org fica em \"Processamento orientado a eventos\".",
@@ -203,5 +246,27 @@
   "natureza": "curadoria_didatica",
   "nome": "Eventos e mensageria",
   "nota_estado": "Agrupamento proposto na especificação; fronteira ainda não cruzada com a documentação oficial.",
+  "para_iniciantes": {
+    "evidencias": [
+      {
+        "fonte": "src:help-platform-events-define"
+      },
+      {
+        "fonte": "src:pubsub-qs-events"
+      },
+      {
+        "fonte": "src:pubsub-overview"
+      },
+      {
+        "fonte": "src:help-event-relay-create"
+      }
+    ],
+    "exemplo": "AccountChangeEvent no canal ChangeEvents avisa um data warehouse a cada conta alterada.",
+    "explicacao": "Eventos avisam outros sistemas quando algo acontece, sem consulta periódica: eventos de plataforma, eventos de captura de alterações a cada mudança de registro, a Pub/Sub API para assinar de fora e o Event Relay para levar eventos à AWS.",
+    "por_onde_comecar": [
+      "func:platform-events",
+      "func:change-data-capture"
+    ]
+  },
   "sigla": "INT-05"
 }

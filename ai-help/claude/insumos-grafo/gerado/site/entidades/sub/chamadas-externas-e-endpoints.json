@@ -1,4 +1,49 @@
 {
+  "avancado": [
+    {
+      "evidencias": [
+        {
+          "fonte": "src:help-remote-site"
+        },
+        {
+          "fonte": "src:mdapi-namedcredential"
+        }
+      ],
+      "texto": "Sites remotos só liberam o endereço; para callouts novos, a Salesforce recomenda named credentials, que guardam endereço e autenticação fora do código.",
+      "tipo": "seguranca",
+      "titulo": "Named credential no lugar de site remoto"
+    },
+    {
+      "evidencias": [
+        {
+          "fonte": "src:help-trusted-urls"
+        }
+      ],
+      "texto": "Sites confiáveis (CSP) liberam conteúdo carregado pelas páginas da org, como scripts e imagens; não liberam callouts.",
+      "tipo": "atencao",
+      "titulo": "Sites confiáveis são outra lista"
+    },
+    {
+      "evidencias": [
+        {
+          "fonte": "src:mdapi-externalserviceregistration"
+        }
+      ],
+      "texto": "Em serviços externos, systemVersion é somente leitura e não é atualizado no lugar: uma versão nova da especificação exige novo registro.",
+      "tipo": "atencao",
+      "titulo": "Versão nova de serviço externo"
+    },
+    {
+      "evidencias": [
+        {
+          "fonte": "src:apex-callout-limits"
+        }
+      ],
+      "texto": "Até 100 callouts por transação, com soma de timeouts de até 120 segundos.",
+      "tipo": "limite",
+      "titulo": "Callouts por transação"
+    }
+  ],
   "classificacao": "cls:integracao-apis-e-eventos",
   "derivado": {
     "dependencias": [
@@ -134,6 +179,17 @@
     "temas_sem_funcionalidade": []
   },
   "descricao": "Chamadas da org para serviços externos e seus endereços.",
+  "encadeamento": {
+    "evidencias": [
+      {
+        "fonte": "src:mdapi-namedcredential"
+      },
+      {
+        "fonte": "src:apex-callout-limits"
+      }
+    ],
+    "texto": "A autenticação dessas chamadas fica em 'Credenciais'; os limites, em 'Contratos, limites e tratamento de falhas'."
+  },
   "escopo": "Entram as chamadas da org para serviços externos e o registro dos endereços permitidos.",
   "estado": "desconhecido",
   "fora_do_escopo": "Credenciais usadas nessas chamadas ficam em \"Credenciais\".",
@@ -149,5 +205,27 @@
   "natureza": "curadoria_didatica",
   "nome": "Chamadas externas e endpoints",
   "nota_estado": "Agrupamento proposto na especificação; fronteira ainda não cruzada com a documentação oficial.",
+  "para_iniciantes": {
+    "evidencias": [
+      {
+        "fonte": "src:help-remote-site"
+      },
+      {
+        "fonte": "src:help-trusted-urls"
+      },
+      {
+        "fonte": "src:help-external-services-register"
+      },
+      {
+        "fonte": "src:mdapi-outboundnetworkconnection"
+      }
+    ],
+    "exemplo": "A especificação da API de frete é registrada; a operação calcularFrete vira uma ação usada num Screen Flow.",
+    "explicacao": "Cobre as chamadas que a org faz para serviços de fora e os endereços liberados para isso: sites remotos, sites confiáveis para conteúdo, serviços externos importados por OpenAPI e conexões privadas.",
+    "por_onde_comecar": [
+      "func:external-services",
+      "func:remote-site-settings"
+    ]
+  },
   "sigla": "INT-03"
 }

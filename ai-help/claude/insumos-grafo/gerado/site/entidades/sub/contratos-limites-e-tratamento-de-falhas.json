@@ -1,4 +1,39 @@
 {
+  "avancado": [
+    {
+      "evidencias": [
+        {
+          "fonte": "src:limits-api-requests"
+        }
+      ],
+      "texto": "O limite diário vale para a org inteira, não por usuário. Requisições de 20 segundos ou mais têm limite de simultaneidade (25 em produção e sandbox), e chamadas REST e SOAP expiram após 10 minutos.",
+      "tipo": "limite",
+      "titulo": "Alocação diária e tempo de chamada"
+    },
+    {
+      "evidencias": [
+        {
+          "fonte": "src:rest-api-eol"
+        }
+      ],
+      "texto": "As versões 31.0 a 40.0 ficam sem suporte a partir do Summer '27 e são aposentadas no Summer '28; versões aposentadas respondem 410:GONE.",
+      "tipo": "atencao",
+      "titulo": "Versões em descontinuação"
+    },
+    {
+      "evidencias": [
+        {
+          "fonte": "src:limits-bulk-api"
+        },
+        {
+          "fonte": "src:bulk-api-intro"
+        }
+      ],
+      "texto": "Não há SLA garantido para a Bulk API 1.0 nem para a 2.0; jobs terminados há mais de 7 dias são apagados.",
+      "tipo": "atencao",
+      "titulo": "Bulk API sem SLA"
+    }
+  ],
   "classificacao": "cls:integracao-apis-e-eventos",
   "derivado": {
     "dependencias": [
@@ -232,6 +267,14 @@
     "temas_sem_funcionalidade": []
   },
   "descricao": "Limites de API, versões e estratégias de erro.",
+  "encadeamento": {
+    "evidencias": [
+      {
+        "fonte": "src:rest-limits"
+      }
+    ],
+    "texto": "Vale para todas as APIs e eventos do tema; o consumo também aparece em Observabilidade."
+  },
   "escopo": "Entram limites de API, versões, retentativas e estratégias de erro das integrações.",
   "estado": "desconhecido",
   "fora_do_escopo": "Limites gerais de consumo da org ficam em \"Limites e consumo\".",
@@ -250,5 +293,24 @@
   "natureza": "curadoria_didatica",
   "nome": "Contratos, limites e tratamento de falhas",
   "nota_estado": "Agrupamento proposto na especificação; fronteira ainda não cruzada com a documentação oficial.",
+  "para_iniciantes": {
+    "evidencias": [
+      {
+        "fonte": "src:limits-api-requests"
+      },
+      {
+        "fonte": "src:rest-versions"
+      },
+      {
+        "fonte": "src:pe-retry-apex"
+      }
+    ],
+    "exemplo": "Uma org Enterprise com 15 licenças Salesforce tem 115.000 requisições por 24 horas (100.000 + 15 × 1.000), segundo o exemplo da documentação.",
+    "explicacao": "Reúne as regras do 'contrato' de uma integração: quantas chamadas cabem por dia, quanto tempo cada uma pode levar, quais versões de API continuam valendo e como tratar falhas e retentativas.",
+    "por_onde_comecar": [
+      "func:limites-de-api-e-alocacoes",
+      "func:versoes-de-api"
+    ]
+  },
   "sigla": "INT-07"
 }

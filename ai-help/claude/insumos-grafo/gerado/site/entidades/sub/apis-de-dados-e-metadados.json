@@ -1,4 +1,48 @@
 {
+  "avancado": [
+    {
+      "evidencias": [
+        {
+          "fonte": "src:rest-intro"
+        },
+        {
+          "fonte": "src:soap-intro"
+        },
+        {
+          "fonte": "src:bulk-api-intro"
+        },
+        {
+          "fonte": "src:mdapi-intro"
+        },
+        {
+          "fonte": "src:tooling-intro"
+        }
+      ],
+      "texto": "REST para HTTP simples; SOAP para contrato WSDL; Bulk API 2.0 acima de 2.000 registros; Metadata API para mover configuração; Tooling API para ferramentas que leem pedaços pequenos de metadados.",
+      "tipo": "decisao",
+      "titulo": "Qual API usar"
+    },
+    {
+      "evidencias": [
+        {
+          "fonte": "src:soap-intro"
+        }
+      ],
+      "texto": "O Enterprise WSDL é tipado e específico da org: precisa ser gerado de novo quando objetos ou campos customizados mudam. O Partner WSDL é genérico.",
+      "tipo": "atencao",
+      "titulo": "Enterprise WSDL muda com a org"
+    },
+    {
+      "evidencias": [
+        {
+          "fonte": "src:help-cors"
+        }
+      ],
+      "texto": "CORS libera o JavaScript de outras origens a chamar as APIs da org pelo navegador; não libera chamadas da org para fora.",
+      "tipo": "atencao",
+      "titulo": "CORS é para o navegador"
+    }
+  ],
   "classificacao": "cls:integracao-apis-e-eventos",
   "derivado": {
     "dependencias": [],
@@ -75,6 +119,17 @@
     "temas_sem_funcionalidade": []
   },
   "descricao": "APIs para ler e gravar registros e metadados.",
+  "encadeamento": {
+    "evidencias": [
+      {
+        "fonte": "src:rest-intro"
+      },
+      {
+        "fonte": "src:limits-api-requests"
+      }
+    ],
+    "texto": "Toda chamada precisa de autenticação ('Autenticação de integrações') e consome alocações ('Contratos, limites e tratamento de falhas')."
+  },
   "escopo": "Entram as APIs que leem e gravam registros e metadados na org.",
   "estado": "desconhecido",
   "fora_do_escopo": "Limites e versões dessas APIs ficam em \"Contratos, limites e tratamento de falhas\".",
@@ -90,5 +145,33 @@
   "natureza": "curadoria_didatica",
   "nome": "APIs de dados e metadados",
   "nota_estado": "Agrupamento proposto na especificação; fronteira ainda não cruzada com a documentação oficial.",
+  "para_iniciantes": {
+    "evidencias": [
+      {
+        "fonte": "src:rest-intro"
+      },
+      {
+        "fonte": "src:soap-intro"
+      },
+      {
+        "fonte": "src:bulk-api-intro"
+      },
+      {
+        "fonte": "src:mdapi-intro"
+      },
+      {
+        "fonte": "src:tooling-intro"
+      },
+      {
+        "fonte": "src:rest-composite"
+      }
+    ],
+    "exemplo": "Um app de pedidos busca uma conta por Id e cria uma oportunidade com duas requisições HTTP; com o recurso Composite, as duas viram uma só chamada.",
+    "explicacao": "São as portas de entrada da org para outros sistemas: REST e SOAP para dados, Bulk API para grandes volumes, Metadata API para configuração e Tooling API para ferramentas de desenvolvimento.",
+    "por_onde_comecar": [
+      "func:rest-api",
+      "func:bulk-api"
+    ]
+  },
   "sigla": "INT-01"
 }

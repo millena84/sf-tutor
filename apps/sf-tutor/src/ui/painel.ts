@@ -220,7 +220,12 @@ interface ParaIniciantes { explicacao: string; exemplo: string; analogia?: { tex
 interface ItemAvancado { tipo: string; titulo: string; texto: string; evidencias: Ev[] }
 
 /** Lista curta e clicável (vírgulas), para economizar altura no celular. */
-function linksEmLinha(ctx: CtxPainel, ids: string[], extra?: (id: string) => Node | string | null): HTMLElement {
+function linksEmLinha(ctx: CtxPainel, ids: string[], extra?: (id: string) => Node | string | null, max = 12): HTMLElement {
+  if (ids.length > max) {
+    // listas longas (ex.: dezenas de metadata types) ficam recolhidas para não ocupar a tela do celular
+    return h('div', null, linksEmLinha(ctx, ids.slice(0, max), extra, max),
+      h('details', { class: 'mais-itens' }, h('summary', null, `Ver os outros ${ids.length - max}`), linksEmLinha(ctx, ids.slice(max), extra, Infinity)));
+  }
   const p = h('p', { class: 'links-linha' });
   ids.forEach((id, i) => {
     if (i) p.append(', ');

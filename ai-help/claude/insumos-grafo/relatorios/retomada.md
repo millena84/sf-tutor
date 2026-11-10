@@ -193,7 +193,23 @@ O WSDL **não** é bloqueio: a documentação de cada tipo é a fonte alternativ
     - Piloto: `cls:interface-e-experiencia-do-usuario` e `sub:lightning-pages-e-componentes` (`ferramentas/carga/lotes/conteudo_temas.py`).
     - Fontes novas: o guia Building Forms (architect.salesforce.com, domínio incluído na lista de fontes), Field-Level Security (lida na versão 58.0: a página atual não exibiu o artigo) e Lightning Pages (Ajuda).
   - **Não incluído por falta de fonte legível:** opções de ativação de Lightning record pages, limite de componentes por página e orientação de desempenho.
-  - **Próximo:** depois da aprovação do tom pela autora, estender o conteúdo curado aos outros 13 temas principais e, em seguida, aos 92 internos.
+- **Conteúdo curado em todos os temas principais e na maior parte dos internos (2026-11-09):**
+  - Cobertura: os 14 temas principais e 70 dos 92 internos têm conteúdo curado. Scripts: `conteudo_cls.py` e `conteudo_sub.py`, aplicados por `conteudo_temas.py`.
+  - Os textos recombinam fatos já catalogados nas funcionalidades e as notas de extração do #34, com as fontes citadas em cada bloco.
+  - Uma fonte nova: `src:apex-queueable`, lida pelo resultado de busca.
+  - **22 temas internos ficaram sem conteúdo curado, por falta de fonte lida** (lista `PENDENTES` em `conteudo_sub.py`):
+    - Organização: parâmetros reutilizáveis, domínios e URLs, habilitação de recursos.
+    - Dados: metadados de configuração de dados.
+    - Qualidade: classificação e sensibilidade, retenção, consentimento.
+    - Automação: notificações, mecanismos legados.
+    - Interface: experiências web, portais e mobile.
+    - Execução assíncrona: caminhos assíncronos.
+    - Relatórios: tipos de relatório, pastas, métricas.
+    - Conteúdo: colaboração, templates.
+    - Observabilidade: logs.
+    - IA: recuperação de conhecimento.
+    - Produto: serviço de campo, experiências externas, capacidades setoriais, outras áreas.
+  - Esses temas continuam com o texto genérico e o resumo calculado. Próximo: pesquisar fontes para eles e depois detalhar cada tema por seção, como pediu a autora.
 
 ## Próximos lotes
 

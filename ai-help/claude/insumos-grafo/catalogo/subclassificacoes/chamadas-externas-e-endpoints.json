@@ -7,6 +7,84 @@
   "descricao": "Chamadas da org para serviços externos e seus endereços.",
   "escopo": "Entram as chamadas da org para serviços externos e o registro dos endereços permitidos.",
   "fora_do_escopo": "Credenciais usadas nessas chamadas ficam em \"Credenciais\".",
+  "para_iniciantes": {
+    "explicacao": "Cobre as chamadas que a org faz para serviços de fora e os endereços liberados para isso: sites remotos, sites confiáveis para conteúdo, serviços externos importados por OpenAPI e conexões privadas.",
+    "exemplo": "A especificação da API de frete é registrada; a operação calcularFrete vira uma ação usada num Screen Flow.",
+    "por_onde_comecar": [
+      "func:external-services",
+      "func:remote-site-settings"
+    ],
+    "evidencias": [
+      {
+        "fonte": "src:help-remote-site"
+      },
+      {
+        "fonte": "src:help-trusted-urls"
+      },
+      {
+        "fonte": "src:help-external-services-register"
+      },
+      {
+        "fonte": "src:mdapi-outboundnetworkconnection"
+      }
+    ]
+  },
+  "encadeamento": {
+    "texto": "A autenticação dessas chamadas fica em 'Credenciais'; os limites, em 'Contratos, limites e tratamento de falhas'.",
+    "evidencias": [
+      {
+        "fonte": "src:mdapi-namedcredential"
+      },
+      {
+        "fonte": "src:apex-callout-limits"
+      }
+    ]
+  },
+  "avancado": [
+    {
+      "tipo": "seguranca",
+      "titulo": "Named credential no lugar de site remoto",
+      "texto": "Sites remotos só liberam o endereço; para callouts novos, a Salesforce recomenda named credentials, que guardam endereço e autenticação fora do código.",
+      "evidencias": [
+        {
+          "fonte": "src:help-remote-site"
+        },
+        {
+          "fonte": "src:mdapi-namedcredential"
+        }
+      ]
+    },
+    {
+      "tipo": "atencao",
+      "titulo": "Sites confiáveis são outra lista",
+      "texto": "Sites confiáveis (CSP) liberam conteúdo carregado pelas páginas da org, como scripts e imagens; não liberam callouts.",
+      "evidencias": [
+        {
+          "fonte": "src:help-trusted-urls"
+        }
+      ]
+    },
+    {
+      "tipo": "atencao",
+      "titulo": "Versão nova de serviço externo",
+      "texto": "Em serviços externos, systemVersion é somente leitura e não é atualizado no lugar: uma versão nova da especificação exige novo registro.",
+      "evidencias": [
+        {
+          "fonte": "src:mdapi-externalserviceregistration"
+        }
+      ]
+    },
+    {
+      "tipo": "limite",
+      "titulo": "Callouts por transação",
+      "texto": "Até 100 callouts por transação, com soma de timeouts de até 120 segundos.",
+      "evidencias": [
+        {
+          "fonte": "src:apex-callout-limits"
+        }
+      ]
+    }
+  ],
   "funcionalidades": [
     "func:conexoes-de-rede-privadas",
     "func:csp-trusted-sites",
