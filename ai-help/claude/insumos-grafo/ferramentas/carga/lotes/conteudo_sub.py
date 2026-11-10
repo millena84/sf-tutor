@@ -5,9 +5,7 @@ Temas internos sem fonte lida ficam de fora (lista PENDENTES) até a próxima ro
 """
 from conteudo_cls import E, ini, enc, av, AF
 
-PENDENTES = [
-    "sub:servico-de-campo", "sub:experiencias-externas", "sub:capacidades-setoriais", "sub:outras-areas",
-]
+PENDENTES = []  # todos os temas internos têm conteúdo desde o lote 4 (issue #34)
 
 S = {}
 

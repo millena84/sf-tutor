@@ -1,0 +1,69 @@
+Issue #34, temas internos pendentes (lote 4: Produto). Leitura pelos resultados de busca restritos a help.salesforce.com e
+developer.salesforce.com, em 2026-11-10 (método leitura_resultado_busca: páginas não abertas por inteiro). Resumo em
+português; nomes de objetos, licenças, permissões e telas no original.
+
+-- Serviço de campo
+[src:help-field-service-overview] Agentforce Field Service and Operations (https://help.salesforce.com/s/articleView?id=service.fs_overview.htm&type=5)
+  Field Service agora se chama Agentforce Field Service and Operations. Três partes: core features (objetos padrão liberados ao
+  habilitar o recurso, como work orders e service appointments), managed package (Guided Setup, console de agendamento,
+  otimizador de agenda, scheduling policies) e o app móvel offline para iOS e Android. Core, pacote e app: edições Enterprise,
+  Unlimited e Developer.
+[src:dev-field-service-core-data-model] Field Service Core Data Model (https://developer.salesforce.com/docs/service/field-service-dev/guide/fsl-dev-soap-core.html)
+  Work order: trabalho a fazer para o cliente, com work order line items como filhos; pode ligar-se a asset, case, account,
+  contact, entitlement e service contract. Service appointment: a visita, com janela de chegada e horários; sempre tem um
+  registro pai (em geral work order ou line item). Work type: modelo com duração e skill requirements. Service resource: técnico;
+  service crew: equipe. Assigned resource liga resource e appointment. Service territory agrupa recursos (service territory
+  members). Operating hours e time slots definem quando se trabalha.
+[src:help-field-service-objects] Field Service Objects (https://help.salesforce.com/s/articleView?id=fs_standard_objects.htm&type=0)
+  Ao habilitar Field Service, a org ganha objetos padrão (inventário, manutenção preventiva, turnos, time sheets, service reports,
+  entre outros); o managed package acrescenta objetos customizados para agendamento e otimização.
+[src:help-field-service-managed-package] Install the Field Service Managed Package (https://help.salesforce.com/s/articleView?id=pfs_install.htm&type=5)
+  O pacote se instala depois de habilitar Field Service e traz Guided Setup, agendamento e otimização, o Classic Dispatch Console
+  (Gantt e mapa) e o app Field Service Admin. Pede Chatter ligado; desde o Spring '26 Chatter vem desligado em orgs novas.
+[src:help-field-service-sharing] Limit Access to Field Service Records (https://help.salesforce.com/s/articleView?id=service.fs_sharing.htm&type=5)
+  Ao instalar o pacote, o org-wide default de Work Order, Work Order Line Item e Service Appointment fica Public Read/Write. Muitas
+  empresas restringem; com User Territories Sharing, cada service territory ganha um public group e os appointments do território
+  são compartilhados com ele. Dispatchers precisam de Read/Write nos appointments do seu território.
+[src:help-field-service-scheduling-ready] Get Ready for Field Service Scheduling and Optimization (https://help.salesforce.com/s/articleView?id=service.pfs_customization.htm&type=5)
+  Recurso do managed package. Desde o Summer '23, orgs novas têm Enhanced Scheduling and Optimization ligado para todos os
+  territórios; orgs antigas podem aderir. Scheduling policies definem regras e objetivos da distribuição do trabalho.
+[src:help-field-service-mobile] Field Service Mobile App (https://help.salesforce.com/s/articleView?id=service.mfs_overview.htm)
+  O app exige a licença Field Service Mobile. Funciona offline e tem ações e layouts configuráveis, service reports com
+  assinatura, inventário e acesso de usuários de site Experience Builder.
+
+-- Experiências externas
+[src:help-experience-cloud-licenses] Experience Cloud User Licenses (https://help.salesforce.com/s/articleView?id=users_license_types_communities.htm&type=0)
+  Licenças para usuários externos: Customer Community, Customer Community Plus, Partner Community, External Apps, External
+  Identity e Channel Account, com versões por login. Em Enterprise, Performance e Unlimited dá para criar até 100 sites sem comprar
+  licença, mas alguns templates e recursos exigem (Partner Central exige ao menos uma Partner Community). Customer Community: B2C
+  em grande volume, casos e knowledge. Customer Community Plus: relatórios, dashboards e compartilhamento padrão. Partner
+  Community: B2B com dados de vendas; não serve para conta pessoal. Customer Community Plus e Partner Community exigem papéis;
+  limite padrão de 50.000 papéis de portal. Boa prática: clonar o perfil padrão da licença e ajustar.
+[src:help-experience-cloud-license-limitations] Experience Cloud License Limitations (https://help.salesforce.com/s/articleView?id=networks_licenses_limitations.htm&type=0)
+  Customer Community aceita sharing sets, mas não sharing rules. Usuário Partner Community precisa estar numa conta habilitada
+  como partner account. Usuários de licenças de comunidade e portal não criam nem alteram email templates.
+[src:help-experience-cloud-sharing-sets] Create a Sharing Set for Experience Cloud Site Users (https://help.salesforce.com/s/articleView?id=sf.networks_setting_light_users.htm&type=5)
+  Sharing set dá ao usuário do site acesso a registros ligados a uma conta ou contato iguais aos dele, por access mapping. Vale em
+  todos os sites de que o usuário é membro. Um sharing set por perfil. Share groups dão a usuários internos acesso a registros
+  criados por usuários de alto volume (não disponível para Customer Community Plus e Partner Community).
+[src:help-experience-cloud-create-users] Create Experience Cloud Site Users (https://help.salesforce.com/s/articleView?id=networks_create_external_users.htm&type=5)
+  O usuário externo nasce do contato (Enable Customer User ou Enable Partner User), recebe licença, perfil e papel. Permissões:
+  Manage External Users (ou a versão Limited) e Manage Customer Users. A conta do contato precisa ter dono com papel.
+[src:help-experience-cloud-license-upgrades] Experience Cloud Licenses Eligible for Upgrades (https://help.salesforce.com/s/articleView?id=sf.networks_license_upgrade_eligible.htm&type=5)
+  Dá para subir de Customer Community para Customer Community Plus ou Partner Community. O upgrade remove sharing sets, permission
+  sets e permission set licenses do usuário e recalcula o compartilhamento. Descer de licença perde funcionalidade e exige
+  desabilitar e reabilitar o contato.
+
+-- Capacidades setoriais
+[src:help-industries-data-models] Insurance and Financial Services Data Model (https://help.salesforce.com/s/articleView?id=ind.v_data_models_vlocity_insurance_and_financial_services_data_model_667142.htm&type=5)
+  A Salesforce oferece modelos de dados por setor, construídos sobre o modelo de objetos padrão. O de seguros e serviços
+  financeiros é uma extensão 100% aditiva do modelo padrão e foi feito para trabalhar com Financial Services Cloud.
+[src:help-health-cloud-psl] View and Assign Health Cloud Permission Sets and Permission Set Licenses (https://help.salesforce.com/s/articleView?id=ind.admin_permissionset_licenses_assign.htm&type=5)
+  Permission set licenses dão acesso a recursos fora da licença de usuário. Todo usuário interno do Health Cloud precisa ao menos
+  da PSL Health Cloud Platform. Atribuir um permission set atribui junto a PSL correspondente. Atribuir exige Manage Users.
+[src:dev-health-cloud-clinical-data-model] Clinical Data Model (https://developer.salesforce.com/docs/industries/health-cloud-dev-guide/guide/hc-clinical-data-model.html)
+  Modelo alinhado ao FHIR R4, habilitado pela preferência FHIR-Aligned Clinical Data Model em FHIR R4 Support Settings; ao ligar,
+  objetos padrão como Account e Contact ganham campos. Edições Enterprise e Unlimited.
+[src:help-industry-psl-integration-user] Health Cloud: Cannot assign Health Cloud Starter or Provider Relationship Management permission set license to Salesforce Integration license users (https://help.salesforce.com/s/articleView?id=005385054&type=1)
+  A licença Salesforce Integration é mínima, para API servidor a servidor em objetos CRM padrão, e não aceita permission set
+  licenses de nuvens setoriais; os objetos do Health Cloud ficam inacessíveis a esse usuário.
