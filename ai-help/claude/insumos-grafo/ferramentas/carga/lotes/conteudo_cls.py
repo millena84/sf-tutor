@@ -144,11 +144,14 @@ CONTEUDO_CLS = {
                       "Na planilha, a aba é um arquivo que você controla por inteiro. Na Salesforce, objetos são definições de metadados com "
                       "regras de acesso, relacionamentos e comportamento próprios, e não tabelas acessadas diretamente.")),
         "encadeamento": enc(
-            "O objeto é a base. Os campos dão forma a cada registro, e os campos de relacionamento ligam objetos, inclusive por objetos de "
-            "junção. Tipos de registro criam variações do mesmo objeto, com listas de valores próprias. Metadados de configuração e modelos "
-            "externos estendem o modelo para casos especiais, como dados que ficam em outro sistema.",
+            "Roteiro pelas sete seções do tema. 1) 'Objetos e entidades': o objeto é a base, padrão ou customizado. 2) 'Campos e tipos': "
+            "os campos dão forma a cada registro. 3) 'Relacionamentos e junções': campos que ligam objetos, inclusive por objetos de junção. "
+            "4) 'Tipos de registro e processos de negócio': variações do mesmo objeto. 5) 'Listas de valores': picklists e conjuntos de "
+            "valores, que cada tipo de registro pode recortar. 6) 'Metadados de configuração de dados': índices, histórico e feed. "
+            "7) 'Modelos externos e especializações': dados que ficam em outro sistema e outras formas especiais de modelar.",
             E("src:mdapi-customobject", "src:mdapi-customfield", "src:mdapi-recordtype", "src:objref-data-model", "src:mdapi-externaldatasource")),
         "avancado": [
+            # 1) Objetos e entidades
             av("decisao", "Objeto padrão, customizado ou externo",
                "Antes de criar um objeto customizado, confira os objetos padrão nos diagramas do Data Model: o customizado serve para "
                "entidades que não existem entre os padrão. Quando os dados ficam em outro sistema e não devem ser copiados, objetos "
@@ -158,11 +161,42 @@ CONTEUDO_CLS = {
                "A definição de objetos e campos pode ser consultada pela Tooling API (EntityDefinition, FieldDefinition, CustomObject, "
                "CustomField). Cada objeto tem exposição própria: não suponha que o que existe na API padrão existe igual na Tooling API.",
                E("src:tooling-entitydefinition", "src:tooling-fielddefinition", "src:tooling-intro")),
+            # 2) Campos e tipos
             av("seguranca", "Campo novo precisa de segurança de campo",
                "Ao criar campos, defina quem pode vê-los e editá-los pela segurança em nível de campo. Tirar o campo do layout não "
                "restringe o acesso, porque a segurança de campo prevalece.", E("src:security-fls")),
+            av("implantacao", "O tipo define o resto do campo",
+               "No CustomField, type escolhe entre tipos como Text, Number, Currency, Date, Picklist, MultiselectPicklist, Lookup, "
+               "MasterDetail, Summary e EncryptedText, e cada tipo usa um conjunto diferente de propriedades. Para campos customizados, type "
+               "é incluído; em alguns campos padrão, é opcional.", E("src:mdapi-customfield")),
+            # 3) Relacionamentos e junções
+            av("decisao", "Lookup ou master-detail",
+               "No lookup, deleteConstraint decide o que acontece quando o pai é excluído: SetNull (padrão), Restrict ou Cascade. No "
+               "master-detail, o filho não muda de pai, a menos que reparentableMasterDetail seja ligado, e writeRequiresMasterRead "
+               "define se ler o pai basta para alterar os filhos. Campos de resumo (Summary) agregam filhos com Count, Min, Max ou Sum.",
+               E("src:mdapi-customfield")),
+            av("implantacao", "Objeto de junção",
+               "Num objeto de junção com dois pais master-detail, relationshipOrder marca qual é o primário (0) e qual é o secundário (1). "
+               "Um lookupFilter restringe quais registros podem ser escolhidos num lookup.", E("src:mdapi-customfield")),
+            # 4) Tipos de registro e processos de negócio
             av("atencao", "Tipos de registro de Opportunity",
                "Tipos de registro de Opportunity exigem um processo de vendas (BusinessProcessId em RecordType).", E("src:objref-recordtype")),
+            # 5) Listas de valores
+            av("decisao", "Valores locais ou conjunto global",
+               "A picklist guarda os próprios valores (valueSetDefinition) ou herda um conjunto global pelo nome (valueSetName). Com "
+               "restricted, ela só aceita os valores definidos. Picklists dependentes usam controllingField e valueSettings. Cada tipo de "
+               "registro pode mostrar só parte dos valores (picklistValues no RecordType).",
+               E("src:mdapi-field-types", "src:mdapi-customfield", "src:mdapi-recordtype")),
+            # 6) Metadados de configuração de dados
+            av("escala", "Índices e External ID",
+               "A plataforma já indexa campos como Id, Name, CreatedDate e chaves estrangeiras. External ID e Unique criam índice; External ID "
+               "serve de chave no upsert, mas aceita valores repetidos, e Unique impede repetição. Índice em outros campos é pedido ao Support.",
+               E("src:dev-ldv-indexes", "src:help-external-id-unique-index")),
+            # 7) Modelos externos e especializações
+            av("implantacao", "Um metadata type, vários tipos de objeto",
+               "O CustomObject define objetos customizados e também objetos externos (sufixo __x, com externalDataSource) e eventos de "
+               "plataforma (eventType, publishBehavior). O arquivamento do Field Audit Trail usa o big object FieldHistoryArchive.",
+               E("src:mdapi-customobject", "src:help-field-audit-trail")),
         ],
     },
     "cls:qualidade-governanca-e-ciclo-de-vida-dos-dados": {
