@@ -1,4 +1,49 @@
 {
+  "avancado": [
+    {
+      "evidencias": [
+        {
+          "fonte": "src:help-produtos-platform"
+        },
+        {
+          "fonte": "src:architect-build-forms"
+        }
+      ],
+      "texto": "A Ajuda separa as ferramentas declarativas de automação (experiências guiadas, automação em segundo plano e aprovações) da área de desenvolvimento com código. Para formulários, o guia de decisão lembra que no Screen Flow a lógica fica com administradores, enquanto LWC exige desenvolvimento.",
+      "tipo": "decisao",
+      "titulo": "Declarativo ou código"
+    },
+    {
+      "evidencias": [
+        {
+          "fonte": "src:help-assign-guide"
+        }
+      ],
+      "texto": "Só uma regra de atribuição de cada tipo fica ativa por vez, e uma regra de atribuição de casos aceita até 3.000 entradas, incluindo 300 de fórmula.",
+      "tipo": "limite",
+      "titulo": "Uma regra ativa por tipo"
+    },
+    {
+      "evidencias": [
+        {
+          "fonte": "src:architect-build-forms"
+        }
+      ],
+      "texto": "Screen Flow roda no contexto do usuário por padrão, mas pode rodar em contexto de sistema; esse modo deve ficar restrito a usuários confiáveis.",
+      "tipo": "seguranca",
+      "titulo": "Contexto de execução do Screen Flow"
+    },
+    {
+      "evidencias": [
+        {
+          "fonte": "src:apex-callout-limits"
+        }
+      ],
+      "texto": "Em automação Apex, não é possível chamar um sistema externo depois de DML pendente na mesma transação. Faça a chamada antes ou leve-a para um processo assíncrono.",
+      "tipo": "atencao",
+      "titulo": "Chamada externa dentro da transação"
+    }
+  ],
   "derivado": {
     "dependencias": [
       {
@@ -222,6 +267,23 @@
     ]
   },
   "descricao": "Reúne o que executa trabalho automaticamente: fluxos, decisões, aprovações, ações e código Apex.",
+  "encadeamento": {
+    "evidencias": [
+      {
+        "fonte": "src:mdapi-flow"
+      },
+      {
+        "fonte": "src:help-assign-guide"
+      },
+      {
+        "fonte": "src:help-escalation-setup"
+      },
+      {
+        "fonte": "src:help-produtos-platform"
+      }
+    ],
+    "texto": "Flow é a ferramenta declarativa principal e pode ser disparado por tela, por registro, por agendamento ou por outros gatilhos. Decisões e aprovações organizam quem decide; regras definem dono e escalonamento; a automação Apex cobre o que exige código; notificações avisam pessoas; e os mecanismos legados explicam ferramentas antigas e a migração para as atuais."
+  },
   "escopo": "Entra o que executa trabalho sem ação manual a cada passo: fluxos, decisões, aprovações, regras que disparam comportamento, automação em Apex e notificações.",
   "estado": "desconhecido",
   "fora_do_escopo": "Execuções que acontecem depois, em fila ou em horário marcado, ficam em \"Execução assíncrona, lotes e agendamento\". Regras que só bloqueiam dado inválido ficam também em \"Validação\".",
@@ -230,6 +292,29 @@
   "nome": "Automação de processos e regras de negócio",
   "nome_curto": "Automação",
   "nota_estado": "Tema criado pelo projeto (00-especificacao-grafo.md), não é nomenclatura oficial da Salesforce. Cruzado em 2026-11-09 com áreas da documentação oficial listadas nas referências; a correspondência é parcial e o recorte continua sendo do projeto.",
+  "para_iniciantes": {
+    "analogia": {
+      "limite": "A automação só faz o que foi configurado: se a regra não prevê um caso, ele passa sem tratamento.",
+      "texto": "Como as regras de uma linha de produção: cada etapa dispara a próxima sem alguém empurrar."
+    },
+    "evidencias": [
+      {
+        "fonte": "src:help-produtos-platform"
+      },
+      {
+        "fonte": "src:mdapi-flow"
+      },
+      {
+        "fonte": "src:help-assign-setup"
+      }
+    ],
+    "exemplo": "Quando um contrato é assinado, um Flow atualiza o status. Casos de prioridade alta vão automaticamente para a fila de nível 1 por uma regra de atribuição.",
+    "explicacao": "Reúne o que faz trabalho sem que alguém execute cada passo: fluxos criados sem código, regras que distribuem e escalonam registros, aprovações e automação em código Apex.",
+    "por_onde_comecar": [
+      "func:flow",
+      "func:regras-de-atribuicao"
+    ]
+  },
   "referencias_oficiais": [
     {
       "fonte": "src:help-produtos-platform",

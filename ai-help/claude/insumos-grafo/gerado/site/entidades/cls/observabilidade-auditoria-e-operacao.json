@@ -1,4 +1,52 @@
 {
+  "avancado": [
+    {
+      "evidencias": [
+        {
+          "fonte": "src:help-login-history"
+        }
+      ],
+      "texto": "A tela de Setup mostra até 20.000 registros dos últimos 6 meses, e o download cobre os últimos 6 meses. A retenção do objeto LoginHistory pela API não foi confirmada.",
+      "tipo": "limite",
+      "titulo": "Janela do histórico de login"
+    },
+    {
+      "evidencias": [
+        {
+          "fonte": "src:mdapi-profile"
+        },
+        {
+          "fonte": "src:objref-loginhistory"
+        }
+      ],
+      "texto": "Não existe um item 'IpLogin': as faixas de IP permitidas por perfil ficam em Profile.loginIpRanges, e o IP de cada tentativa fica em LoginHistory.SourceIp.",
+      "tipo": "atencao",
+      "titulo": "IP: onde está cada coisa"
+    },
+    {
+      "evidencias": [
+        {
+          "fonte": "src:security-guide"
+        }
+      ],
+      "texto": "O Real-Time Event Monitoring detecta eventos padrão quase em tempo real, guarda os dados para auditoria e permite criar políticas de segurança de transação.",
+      "tipo": "decisao",
+      "titulo": "Monitoramento quase em tempo real"
+    },
+    {
+      "evidencias": [
+        {
+          "fonte": "src:rest-limits"
+        },
+        {
+          "fonte": "src:limits-api-requests"
+        }
+      ],
+      "texto": "O recurso /limits mostra o consumo com precisão de até cinco minutos: evite consultá-lo em rajadas e configure notificações de uso de API.",
+      "tipo": "atencao",
+      "titulo": "Consumo de API"
+    }
+  ],
   "derivado": {
     "dependencias": [
       {
@@ -79,6 +127,20 @@
     ]
   },
   "descricao": "Reúne como a operação da org é acompanhada: logs, auditoria, histórico de login, limites e diagnóstico.",
+  "encadeamento": {
+    "evidencias": [
+      {
+        "fonte": "src:security-guide"
+      },
+      {
+        "fonte": "src:help-login-history"
+      },
+      {
+        "fonte": "src:rest-limits"
+      }
+    ],
+    "texto": "Logs de depuração e rastreamento mostram o que o código fez; a auditoria de configuração registra mudanças no Setup; o histórico de login guarda tentativas de acesso; eventos de monitoramento registram uso e atividade; limites e consumo mostram quanto da alocação já foi usado; e jobs e incidentes reúnem o diagnóstico."
+  },
   "escopo": "Entra o que mostra como a org está funcionando e o que foi feito nela: logs, auditoria, histórico de login, eventos de monitoramento, consumo de limites e diagnóstico.",
   "estado": "desconhecido",
   "fora_do_escopo": "Regras de acesso ficam em \"Acesso, identidade e segurança\". Relatórios sobre dados de negócio ficam em \"Relatórios, analytics e exploração\".",
@@ -87,6 +149,21 @@
   "nome": "Observabilidade, auditoria e operação",
   "nome_curto": "Observabilidade",
   "nota_estado": "Tema criado pelo projeto (00-especificacao-grafo.md), não é nomenclatura oficial da Salesforce. Cruzado em 2026-11-09 com áreas da documentação oficial listadas nas referências; a correspondência é parcial e o recorte continua sendo do projeto.",
+  "para_iniciantes": {
+    "evidencias": [
+      {
+        "fonte": "src:security-guide"
+      },
+      {
+        "fonte": "src:help-login-history"
+      }
+    ],
+    "exemplo": "Depois de uma tentativa de acesso suspeita, a equipe confere no histórico de login de qual IP veio a tentativa que falhou.",
+    "explicacao": "Reúne o que mostra como a org está funcionando e o que foi feito nela: logins, alterações de configuração, eventos de uso, consumo de limites e investigação de problemas.",
+    "por_onde_comecar": [
+      "func:estado-e-historico-de-login"
+    ]
+  },
   "referencias_oficiais": [
     {
       "fonte": "src:security-guide",

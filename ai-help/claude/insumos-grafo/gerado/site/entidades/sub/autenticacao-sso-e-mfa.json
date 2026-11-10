@@ -1,4 +1,29 @@
 {
+  "avancado": [
+    {
+      "evidencias": [
+        {
+          "fonte": "src:mdapi-samlssoconfig"
+        },
+        {
+          "fonte": "src:help-auth-provider-oidc"
+        }
+      ],
+      "texto": "Para login com o provedor corporativo, a configuração SAML aceita a asserção e pode criar o usuário no primeiro acesso. Provedores de autenticação (OpenID Connect, Google, Microsoft) servem tanto para login quanto para obter tokens usados por integrações.",
+      "tipo": "decisao",
+      "titulo": "SAML ou provedor de autenticação"
+    },
+    {
+      "evidencias": [
+        {
+          "fonte": "src:mdapi-authprovider"
+        }
+      ],
+      "texto": "O segredo do app do provedor (consumerSecret) não vem no retrieve: é exportado como marcador e precisa ser preenchido em cada ambiente.",
+      "tipo": "implantacao",
+      "titulo": "Segredo não vem no retrieve"
+    }
+  ],
   "classificacao": "cls:acesso-identidade-e-seguranca",
   "derivado": {
     "dependencias": [
@@ -185,6 +210,14 @@
     "temas_sem_funcionalidade": []
   },
   "descricao": "Como a identidade é comprovada: senha, login único e múltiplos fatores.",
+  "encadeamento": {
+    "evidencias": [
+      {
+        "fonte": "src:security-guide"
+      }
+    ],
+    "texto": "Depois de autenticada, a pessoa passa pelas políticas de sessão e login e só então pelas permissões."
+  },
   "escopo": "Entram as formas de comprovar identidade: senha, login único, provedores de autenticação, múltiplos fatores e apps conectados usados no login.",
   "estado": "desconhecido",
   "fora_do_escopo": "A autenticação de sistemas externos tratada como integração fica também em \"Autenticação de integrações\". Regras de sessão ficam em \"Sessões e políticas de login\".",
@@ -198,5 +231,21 @@
   "natureza": "curadoria_didatica",
   "nome": "Autenticação, SSO e MFA",
   "nota_estado": "Agrupamento proposto na especificação; fronteira ainda não cruzada com a documentação oficial.",
+  "para_iniciantes": {
+    "evidencias": [
+      {
+        "fonte": "src:mdapi-samlssoconfig"
+      },
+      {
+        "fonte": "src:help-auth-provider-oidc"
+      }
+    ],
+    "exemplo": "Funcionários entram pelo provedor corporativo; a asserção traz o Federation ID e o usuário é criado no primeiro login.",
+    "explicacao": "É como a pessoa prova quem é: senha, login único com a conta da empresa (SSO) ou provedores externos, como Google e Microsoft.",
+    "por_onde_comecar": [
+      "func:sso-saml",
+      "func:auth-providers"
+    ]
+  },
   "sigla": "ACS-02"
 }

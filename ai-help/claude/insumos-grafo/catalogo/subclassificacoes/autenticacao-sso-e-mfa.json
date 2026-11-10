@@ -7,6 +7,55 @@
   "descricao": "Como a identidade é comprovada: senha, login único e múltiplos fatores.",
   "escopo": "Entram as formas de comprovar identidade: senha, login único, provedores de autenticação, múltiplos fatores e apps conectados usados no login.",
   "fora_do_escopo": "A autenticação de sistemas externos tratada como integração fica também em \"Autenticação de integrações\". Regras de sessão ficam em \"Sessões e políticas de login\".",
+  "para_iniciantes": {
+    "explicacao": "É como a pessoa prova quem é: senha, login único com a conta da empresa (SSO) ou provedores externos, como Google e Microsoft.",
+    "exemplo": "Funcionários entram pelo provedor corporativo; a asserção traz o Federation ID e o usuário é criado no primeiro login.",
+    "por_onde_comecar": [
+      "func:sso-saml",
+      "func:auth-providers"
+    ],
+    "evidencias": [
+      {
+        "fonte": "src:mdapi-samlssoconfig"
+      },
+      {
+        "fonte": "src:help-auth-provider-oidc"
+      }
+    ]
+  },
+  "encadeamento": {
+    "texto": "Depois de autenticada, a pessoa passa pelas políticas de sessão e login e só então pelas permissões.",
+    "evidencias": [
+      {
+        "fonte": "src:security-guide"
+      }
+    ]
+  },
+  "avancado": [
+    {
+      "tipo": "decisao",
+      "titulo": "SAML ou provedor de autenticação",
+      "texto": "Para login com o provedor corporativo, a configuração SAML aceita a asserção e pode criar o usuário no primeiro acesso. Provedores de autenticação (OpenID Connect, Google, Microsoft) servem tanto para login quanto para obter tokens usados por integrações.",
+      "evidencias": [
+        {
+          "fonte": "src:mdapi-samlssoconfig"
+        },
+        {
+          "fonte": "src:help-auth-provider-oidc"
+        }
+      ]
+    },
+    {
+      "tipo": "implantacao",
+      "titulo": "Segredo não vem no retrieve",
+      "texto": "O segredo do app do provedor (consumerSecret) não vem no retrieve: é exportado como marcador e precisa ser preenchido em cada ambiente.",
+      "evidencias": [
+        {
+          "fonte": "src:mdapi-authprovider"
+        }
+      ]
+    }
+  ],
   "funcionalidades": [
     "func:auth-providers",
     "func:connected-apps",

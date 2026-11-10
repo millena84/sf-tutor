@@ -1,4 +1,86 @@
 {
+  "avancado": [
+    {
+      "evidencias": [
+        {
+          "fonte": "src:help-users"
+        },
+        {
+          "fonte": "src:mdapi-profile"
+        },
+        {
+          "fonte": "src:help-psg-create"
+        }
+      ],
+      "texto": "O catálogo registra a recomendação de manter perfis enxutos e conceder acessos adicionais por permission sets, agrupados em permission set groups quando formam um papel de trabalho. O que só existe no perfil, como horários e faixas de IP de login, continua nele.",
+      "tipo": "decisao",
+      "titulo": "Perfil enxuto, acesso por permission set"
+    },
+    {
+      "evidencias": [
+        {
+          "fonte": "src:security-guide"
+        },
+        {
+          "fonte": "src:security-fls"
+        }
+      ],
+      "texto": "O acesso a dados passa por camadas: permissão no objeto, segurança em nível de campo e compartilhamento de registros. A segurança de campo prevalece sobre o layout da página: tirar o campo da tela não restringe o acesso.",
+      "tipo": "seguranca",
+      "titulo": "Camadas que precisam permitir"
+    },
+    {
+      "evidencias": [
+        {
+          "fonte": "src:mdapi-connectedapp"
+        },
+        {
+          "fonte": "src:help-connected-app-basics"
+        },
+        {
+          "fonte": "src:mdapi-externalclientapplication"
+        },
+        {
+          "fonte": "src:help-eca-create"
+        }
+      ],
+      "texto": "Para integrações novas, a Salesforce recomenda external client apps; a criação de connected apps está restrita desde o Spring '26. No external client app, as configurações OAuth ficam em componentes separados, o que separa o que vai no pacote do que cada org define.",
+      "tipo": "decisao",
+      "titulo": "Connected app ou external client app"
+    },
+    {
+      "evidencias": [
+        {
+          "fonte": "src:objref-permissionsetassignment"
+        },
+        {
+          "fonte": "src:mdapi-permissionset"
+        },
+        {
+          "fonte": "src:mdapi-intro"
+        },
+        {
+          "fonte": "src:help-psg-assign"
+        }
+      ],
+      "texto": "A atribuição de permission sets e grupos é um registro de PermissionSetAssignment, não parte do XML, e a Metadata API não move dados de negócio: a atribuição não vai junto no deploy. Grupos só podem ser atribuídos com status Updated.",
+      "tipo": "implantacao",
+      "titulo": "Atribuição é registro, não metadado"
+    },
+    {
+      "evidencias": [
+        {
+          "fonte": "src:objref-user"
+        },
+        {
+          "fonte": "src:help-users"
+        }
+      ],
+      "texto": "Usuários não podem ser excluídos, só desativados (IsActive); a API não oferece delete() em User. O ciclo de vida e o provisionamento precisam contar com isso.",
+      "tipo": "atencao",
+      "titulo": "Usuário não se exclui"
+    }
+  ],
   "derivado": {
     "dependencias": [
       {
@@ -649,6 +731,29 @@
     ]
   },
   "descricao": "Reúne quem pode entrar na org, como se autentica e o que cada pessoa ou integração pode ver e fazer.",
+  "encadeamento": {
+    "evidencias": [
+      {
+        "fonte": "src:security-guide"
+      },
+      {
+        "fonte": "src:objref-user"
+      },
+      {
+        "fonte": "src:mdapi-profile"
+      },
+      {
+        "fonte": "src:mdapi-permissionsetgroup"
+      },
+      {
+        "fonte": "src:objref-accountteammember"
+      },
+      {
+        "fonte": "src:mdapi-certificate"
+      }
+    ],
+    "texto": "Primeiro existe o usuário. Depois vêm a autenticação (senha, SSO, provedores externos) e as políticas de sessão e login. Com a pessoa dentro, perfis, permission sets e grupos dizem o que ela pode fazer; licenças limitam o que pode ser concedido; papéis, compartilhamento e equipes dizem quais registros ela enxerga. Certificados e credenciais protegem as conexões com outros sistemas."
+  },
   "escopo": "Entra tudo que responde a três perguntas: quem pode entrar na org, como comprova quem é, e o que pode ver e fazer depois de entrar. Vale para pessoas e para integrações.",
   "estado": "desconhecido",
   "fora_do_escopo": "Registro de tentativas de login como dado de auditoria fica também em \"Observabilidade, auditoria e operação\". Como uma integração se conecta (APIs, callouts) fica em \"Integração, APIs e eventos\".",
@@ -657,6 +762,38 @@
   "nome": "Acesso, identidade e segurança",
   "nome_curto": "Acesso e segurança",
   "nota_estado": "Tema criado pelo projeto (00-especificacao-grafo.md), não é nomenclatura oficial da Salesforce. Cruzado em 2026-11-09 com áreas da documentação oficial listadas nas referências; a correspondência é parcial e o recorte continua sendo do projeto.",
+  "para_iniciantes": {
+    "analogia": {
+      "limite": "No prédio, entrar no andar costuma bastar. Na Salesforce há camadas separadas (objeto, campo e registro) e todas precisam permitir o acesso.",
+      "texto": "Como um prédio comercial: o crachá identifica a pessoa, a catraca confere a entrada e cada andar tem portas que o crachá abre ou não."
+    },
+    "evidencias": [
+      {
+        "fonte": "src:objref-user"
+      },
+      {
+        "fonte": "src:help-users"
+      },
+      {
+        "fonte": "src:mdapi-profile"
+      },
+      {
+        "fonte": "src:mdapi-permissionset"
+      },
+      {
+        "fonte": "src:mdapi-samlssoconfig"
+      },
+      {
+        "fonte": "src:help-login-history"
+      }
+    ],
+    "exemplo": "Uma nova analista entra com o login da empresa (SSO), recebe o perfil padrão da área e um permission set que libera contratos. No histórico de login aparece de onde ela acessou.",
+    "explicacao": "Responde a três perguntas: quem pode entrar na org, como prova quem é e o que pode ver e fazer depois de entrar. Cada pessoa ou integração é um usuário; o perfil dá o acesso básico e os permission sets somam acessos extras.",
+    "por_onde_comecar": [
+      "func:usuarios",
+      "func:permission-sets"
+    ]
+  },
   "referencias_oficiais": [
     {
       "fonte": "src:help-produtos-platform",

@@ -7,6 +7,71 @@
   "descricao": "Eventos de plataforma, captura de alterações e mensagens.",
   "escopo": "Entram eventos de plataforma, captura de alterações, assinatura externa e transporte de mensagens.",
   "fora_do_escopo": "A reação a eventos dentro da org fica em \"Processamento orientado a eventos\".",
+  "para_iniciantes": {
+    "explicacao": "Eventos avisam outros sistemas quando algo acontece, sem consulta periódica: eventos de plataforma, eventos de captura de alterações a cada mudança de registro, a Pub/Sub API para assinar de fora e o Event Relay para levar eventos à AWS.",
+    "exemplo": "AccountChangeEvent no canal ChangeEvents avisa um data warehouse a cada conta alterada.",
+    "por_onde_comecar": [
+      "func:platform-events",
+      "func:change-data-capture"
+    ],
+    "evidencias": [
+      {
+        "fonte": "src:help-platform-events-define"
+      },
+      {
+        "fonte": "src:pubsub-qs-events"
+      },
+      {
+        "fonte": "src:pubsub-overview"
+      },
+      {
+        "fonte": "src:help-event-relay-create"
+      }
+    ]
+  },
+  "encadeamento": {
+    "texto": "A reação dentro da org fica em 'Processamento orientado a eventos'; retentativas e monitoramento, em 'Contratos, limites e tratamento de falhas'.",
+    "evidencias": [
+      {
+        "fonte": "src:help-platform-events-define"
+      },
+      {
+        "fonte": "src:pe-retry-apex"
+      }
+    ]
+  },
+  "avancado": [
+    {
+      "tipo": "limite",
+      "titulo": "Pub/Sub API",
+      "texto": "Cada evento tem no máximo 1 MB, cada pedido busca até 100 eventos e a org tem até 200 assinaturas gerenciadas; acima de 4 MB por requisição, a chamada falha.",
+      "evidencias": [
+        {
+          "fonte": "src:pubsub-allocations"
+        }
+      ]
+    },
+    {
+      "tipo": "implantacao",
+      "titulo": "Excluir membro de canal",
+      "texto": "PlatformEventChannelMember não aceita createMetadata() nem deleteMetadata(); a exclusão é feita via destructiveChanges.xml.",
+      "evidencias": [
+        {
+          "fonte": "src:mdapi-platformeventchannelmember"
+        }
+      ]
+    },
+    {
+      "tipo": "atencao",
+      "titulo": "Event Relay depois de criado",
+      "texto": "Depois de criado, só o estado e a opção de retomada do Event Relay podem mudar.",
+      "evidencias": [
+        {
+          "fonte": "src:mdapi-eventrelayconfig"
+        }
+      ]
+    }
+  ],
   "funcionalidades": [
     "func:change-data-capture",
     "func:event-relay",

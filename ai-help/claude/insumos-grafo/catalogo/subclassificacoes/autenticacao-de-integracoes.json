@@ -7,6 +7,80 @@
   "descricao": "Como sistemas externos se autenticam na org.",
   "escopo": "Entram as formas de um sistema externo se autenticar na org.",
   "fora_do_escopo": "Login de pessoas por SSO e MFA fica em \"Autenticação, SSO e MFA\".",
+  "para_iniciantes": {
+    "explicacao": "É como um sistema externo prova quem é ao chamar a org: um connected app ou external client app registra a integração, e o OAuth entrega tokens com escopos definidos.",
+    "exemplo": "Um sistema de BI se conecta por OAuth com a consumer key de um app que só usuários com um permission set podem usar.",
+    "por_onde_comecar": [
+      "func:external-client-apps",
+      "func:connected-apps"
+    ],
+    "evidencias": [
+      {
+        "fonte": "src:mdapi-connectedapp"
+      },
+      {
+        "fonte": "src:mdapi-externalclientapplication"
+      },
+      {
+        "fonte": "src:mdapi-oauthcustomscope"
+      }
+    ]
+  },
+  "encadeamento": {
+    "texto": "Depois de autenticada, a integração usa as APIs do tema. Nas chamadas da org para fora, a autenticação mora em credenciais externas.",
+    "evidencias": [
+      {
+        "fonte": "src:help-eca-create"
+      },
+      {
+        "fonte": "src:mdapi-externalcredential"
+      }
+    ]
+  },
+  "avancado": [
+    {
+      "tipo": "decisao",
+      "titulo": "External client app para integrações novas",
+      "texto": "A Salesforce recomenda external client apps para integrações novas; a criação de connected apps está restrita desde o Spring '26. O external client app separa o que vai no pacote do que cada org define.",
+      "evidencias": [
+        {
+          "fonte": "src:help-connected-app-basics"
+        },
+        {
+          "fonte": "src:mdapi-externalclientapplication"
+        }
+      ]
+    },
+    {
+      "tipo": "atencao",
+      "titulo": "Permissão para usar external client apps",
+      "texto": "Usar external client apps exige a permissão Opt in to External Client Apps; os plugins de mobile, push e notificação são piloto ou beta.",
+      "evidencias": [
+        {
+          "fonte": "src:help-eca-create"
+        },
+        {
+          "fonte": "src:mdapi-externalclientapplication"
+        }
+      ]
+    },
+    {
+      "tipo": "seguranca",
+      "titulo": "Escopos e troca de token",
+      "texto": "Escopos customizados refinam o que cada app pode fazer, e handlers Apex de troca de token aceitam tokens de provedores externos; há configurações para bloquear fluxos ou exigir PKCE.",
+      "evidencias": [
+        {
+          "fonte": "src:mdapi-oauthcustomscope"
+        },
+        {
+          "fonte": "src:mdapi-oauthtokenexchangehandler"
+        },
+        {
+          "fonte": "src:mdapi-oauthoidcsettings"
+        }
+      ]
+    }
+  ],
   "funcionalidades": [
     "func:auth-providers",
     "func:certificados",
