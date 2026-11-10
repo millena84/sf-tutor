@@ -229,6 +229,14 @@ O WSDL **não** é bloqueio: a documentação de cada tipo é a fonte alternativ
     - experiências externas;
     - capacidades setoriais;
     - outras áreas.
+- **Pendentes, lotes 2 a 4 (2026-11-10):** os 15 restantes ganharam conteúdo; a lista `PENDENTES` ficou vazia e os 106 temas têm conteúdo curado.
+  - Lote 2 (Qualidade e Relatórios, 5 temas): 21 fontes, `temas-pendentes-lote2.txt`, `conteudo_pendentes2.py` (PR #52).
+  - Lote 3 (Conteúdo, IA, Interface, Organização e Dados, 6 temas): 28 fontes, `temas-pendentes-lote3.txt`, `conteudo_pendentes3.py` (PR #53).
+  - Lote 4 (Produto, 4 temas): 16 fontes, `temas-pendentes-lote4.txt`, `conteudo_pendentes4.py`.
+  - Todas as fontes foram lidas pelos resultados de busca restritos a help.salesforce.com e developer.salesforce.com (`leitura_resultado_busca`).
+  - "Outras áreas" é um agrupamento do projeto: tem só as camadas para iniciantes e encadeamento, apoiadas em `src:sdr-metadata-support`, sem nível avançado.
+  - Os temas seguem com `estado: desconhecido`; a fronteira do recorte não foi cruzada com a documentação oficial.
+  - Próximo no #34: detalhar seção por seção os 13 temas principais (Relatórios, IA e Conteúdo primeiro). A camada de certificações continua bloqueada por acesso.
 
 ## Próximos lotes
 
