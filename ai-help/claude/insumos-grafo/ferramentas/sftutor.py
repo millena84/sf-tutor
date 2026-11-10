@@ -20,6 +20,7 @@ MD_NS = "http://soap.sforce.com/2006/04/metadata"
 ESTADOS = {"verificado", "desconhecido", "nao_aplicavel", "nao_exposto", "bloqueado"}
 PASTAS = {"nuvens": "nuvem", "classificacoes": "classificacao", "subclassificacoes": "subclassificacao", "funcionalidades": "funcionalidade",
           "metadata-types": "metadata-type", "estruturas": "estrutura", "objetos-api": "objeto-api", "relacionamentos": "relacionamento"}
+CORRESPONDENCIA_TEMA = ("Cobre o tema:", "Cobre parte do tema:", "Mais ampla que o tema:")
 DOMINIOS_FONTE = ("https://developer.salesforce.com/", "https://help.salesforce.com/", "https://github.com/forcedotcom/", "https://www.npmjs.com/package/@salesforce/", "https://www.salesforce.com/")
 
 
@@ -209,6 +210,13 @@ def validar_referencias(C, R):
         for s in c["subclassificacoes"]:
             if s not in C["subclassificacoes"]: R.e(f"{c['id']} referencia {s} inexistente")
             elif C["subclassificacoes"][s]["classificacao"] != c["id"]: R.e(f"{s} não aponta de volta para {c['id']}")
+    # temas (#34): referência oficial diz como corresponde ao recorte; escopo e fora_do_escopo são exigidos pelo schema
+    for t in list(C["classificacoes"].values()) + list(C["subclassificacoes"].values()):
+        for r in t.get("referencias_oficiais", []):
+            if not str(r.get("nota", "")).startswith(CORRESPONDENCIA_TEMA):
+                R.e(f"{t['id']}: referência {r['fonte']} sem correspondência no início da nota ({' / '.join(CORRESPONDENCIA_TEMA)})")
+        if t.get("estado") == "verificado" and not t.get("referencias_oficiais"):
+            R.e(f"{t['id']}: tema verificado sem referência oficial")
     for s in C["subclassificacoes"].values():
         if s["classificacao"] not in C["classificacoes"]: R.e(f"{s['id']}: classificação {s['classificacao']} inexistente")
         for f in s["funcionalidades"]:

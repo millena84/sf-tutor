@@ -198,7 +198,15 @@ test('"Sobre este tema" mostra as três camadas na mesma ordem em tema e tema in
     await expect(avancado.locator('summary')).toHaveText('Nível avançado');
     expect(await avancado.evaluate((d) => (d as HTMLDetailsElement).open)).toBe(false);
     await avancado.locator('summary').click();
-    await expect(avancado).toContainText('Curadoria do projeto');
+    await expect(avancado.locator('h5')).toContainText(['Estado do recorte', 'O que entra neste tema', 'O que fica fora e onde procurar', 'Correspondência com referências oficiais']);
+    if (id.startsWith('cls:')) {
+      // tema com referências oficiais registradas, mas recorte ainda do projeto
+      await expect(avancado).toContainText('Parcialmente conferido');
+      await expect(avancado.locator('ul.fontes li').first()).toContainText(/Cobre (o tema|parte do tema)|Mais ampla que o tema/);
+    } else {
+      await expect(avancado).toContainText('Curadoria do projeto');
+      await expect(avancado).toContainText('Veja as do tema de cima');
+    }
     await expect(painel(page)).not.toContainText('Estado do agrupamento');
     // rótulos da interface usam "tema"; "classificação" só aparece em texto dos dados (nota do recorte)
     for (const t of await painel(page).locator('summary, h4').allTextContents()) expect(t).not.toMatch(/lassificaç/);

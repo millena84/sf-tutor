@@ -217,6 +217,7 @@ function sobreTema(ctx: CtxPainel, e: Entidade): HTMLElement | null {
   const refs = arr(e.referencias_oficiais);
   const rec = estadoRecorte(e.estado, refs.length > 0);
   const didatico = e.natureza === 'curadoria_didatica';
+  const pai = typeof e.classificacao === 'string' ? e.classificacao : null;
   const itens: string[] = [];
   if (c.temas) itens.push(plural(c.temas, 'tema mais específico', 'temas mais específicos'));
   itens.push(plural(c.funcionalidades, 'funcionalidade', 'funcionalidades')
@@ -228,10 +229,19 @@ function sobreTema(ctx: CtxPainel, e: Entidade): HTMLElement | null {
     h('h5', null, 'Estado do recorte'),
     h('p', null, h('strong', null, rec.rotulo), `: ${rec.explicacao}`),
     e.nota_estado ? h('p', { class: 'nota' }, String(e.nota_estado)) : null,
+    e.escopo ? h('h5', null, 'O que entra neste tema') : null,
+    e.escopo ? h('p', null, String(e.escopo)) : null,
+    e.fora_do_escopo ? h('h5', null, 'O que fica fora e onde procurar') : null,
+    e.fora_do_escopo ? h('p', null, String(e.fora_do_escopo)) : null,
     h('h5', null, 'Correspondência com referências oficiais'),
     refs.length
-      ? h('ul', { class: 'lista' }, refs.map((x) => h('li', null, valorEl(x))))
-      : h('p', { class: 'vazio' }, 'Nenhuma referência oficial registrada: o recorte ainda não foi cruzado com a documentação.'),
+      ? h('div', null,
+        h('p', { class: 'nota' }, 'Cada referência diz se a área oficial cobre o tema, cobre só parte dele ou é mais ampla que ele.'),
+        fontesEl(ctx, refs as { fonte: string; secao?: string; nota?: string }[]))
+      : pai
+        ? h('p', { class: 'vazio' }, 'Nenhuma referência oficial própria. Veja as do tema de cima: ',
+          h('button', { type: 'button', class: 'link', on: { click: () => ctx.abrir(pai) } }, ctx.rotulo(pai)), '.')
+        : h('p', { class: 'vazio' }, 'Nenhuma referência oficial registrada: o recorte ainda não foi cruzado com a documentação.'),
     h('p', { class: 'nota' }, 'Nos dados do projeto, este nível se chama ', h('code', null, ctx.ind.no(e.id)?.tipo === 'classificacao' ? 'classificacao' : 'subclassificacao'),
       '. "Tema" é a tradução didática usada na interface.'),
   );
@@ -265,7 +275,7 @@ function painelClassificacao(ctx: CtxPainel, e: Entidade, caminho: readonly stri
         h('span', { class: n ? 'contagem' : 'contagem vazio' }, n ? ` ${n} funcionalidade${n > 1 ? 's' : ''}` : ' ainda não mapeado'));
     }))),
     secao('Pré-requisitos, exemplos e limites', false, h('p', { class: 'vazio' }, 'Não registrados no cadastro deste tema. Veja os de cada funcionalidade.')),
-    restantes(e, ['id', 'nome', 'nome_curto', 'sigla', 'natureza', 'descricao', 'subclassificacoes', 'referencias_oficiais', 'estado', 'nota_estado']),
+    restantes(e, ['id', 'nome', 'nome_curto', 'sigla', 'natureza', 'descricao', 'escopo', 'fora_do_escopo', 'subclassificacoes', 'referencias_oficiais', 'estado', 'nota_estado']),
   ];
 }
 
@@ -284,7 +294,7 @@ function painelSub(ctx: CtxPainel, e: Entidade, caminho: readonly string[]): (No
         h('span', { class: 'selo' }, principais.has(f) ? 'principal' : 'secundária'))))
       : h('p', { class: 'vazio' }, 'Ainda não mapeado: nenhuma funcionalidade catalogada neste tema.')),
     secao('Pré-requisitos, exemplos e limites', false, h('p', { class: 'vazio' }, 'Não registrados no cadastro deste tema.')),
-    restantes(e, ['id', 'nome', 'sigla', 'classificacao', 'natureza', 'descricao', 'funcionalidades', 'referencias_oficiais', 'estado', 'nota_estado']),
+    restantes(e, ['id', 'nome', 'sigla', 'classificacao', 'natureza', 'descricao', 'escopo', 'fora_do_escopo', 'funcionalidades', 'referencias_oficiais', 'estado', 'nota_estado']),
   ];
 }
 

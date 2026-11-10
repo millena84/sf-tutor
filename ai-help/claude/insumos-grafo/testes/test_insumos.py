@@ -324,6 +324,38 @@ class TestCargaNova(BaseTemp):
         self.assertEqual(d["estruturas"], ["mdx:AIApplicationItem"])
 
 
+
+class TestTemas(BaseTemp):
+    """Issue #34: escopo, fora_do_escopo e referências oficiais dos temas."""
+
+    def test_todo_tema_tem_escopo_e_fora(self):
+        for pasta in ("classificacoes", "subclassificacoes"):
+            for p in glob.glob(os.path.join(BASE, "catalogo", pasta, "*.json")):
+                t = ler(p)
+                self.assertGreaterEqual(len(t.get("escopo", "")), 20, t["id"])
+                self.assertGreaterEqual(len(t.get("fora_do_escopo", "")), 20, t["id"])
+
+    def test_escopo_ausente_e_erro(self):
+        p = self.cat("subclassificacoes", "credenciais.json")
+        d = ler(p); del d["escopo"]; gravar(p, d)
+        self.assertErro("escopo")
+
+    def test_referencia_sem_correspondencia_e_erro(self):
+        p = self.cat("classificacoes", "integracao-apis-e-eventos.json")
+        d = ler(p); d["referencias_oficiais"][0]["nota"] = "Guia de integração."; gravar(p, d)
+        self.assertErro("sem correspondência no início da nota")
+
+    def test_verificado_sem_referencia_e_erro(self):
+        p = self.cat("subclassificacoes", "credenciais.json")
+        d = ler(p); d["estado"] = "verificado"; gravar(p, d)
+        self.assertErro("tema verificado sem referência oficial")
+
+    def test_classificacoes_com_referencia_oficial(self):
+        for p in glob.glob(os.path.join(BASE, "catalogo", "classificacoes", "*.json")):
+            t = ler(p)
+            self.assertTrue(t["referencias_oficiais"], t["id"])
+            self.assertNotEqual(t["estado"], "verificado", "conferência parcial não vira verificado")
+
 class TestExemplosXml(unittest.TestCase):
     """Issue #20: esqueletos gerados são XML bem formado e só usam propriedades catalogadas (o validador confere as tags)."""
 

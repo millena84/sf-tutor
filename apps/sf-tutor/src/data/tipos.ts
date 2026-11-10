@@ -88,7 +88,7 @@ export interface Afirmacao {
   valor?: unknown;
   nota?: string;
   condicao?: string;
-  evidencias?: { fonte: string; nota?: string }[];
+  evidencias?: { fonte: string; secao?: string; nota?: string }[];
   [k: string]: unknown;
 }
 
