@@ -116,6 +116,48 @@ TEMAS = {
         [ev("src:help-cert-self-signed", "Cobre parte do tema: certificados autoassinados.", "Generate a Self-Signed Certificate"),
          ev("src:mdapi-certificate", "Cobre parte do tema: certificados como metadado.", "Certificate")],
     ),
+    # ------------------------------------------------------------------ Dados e modelagem
+    "sub:objetos-e-entidades": (
+        "As estruturas que guardam os registros: objetos padrão, que vêm com a Salesforce, e objetos customizados, criados para o que é "
+        "próprio do negócio.",
+        [ev("src:objref-data-model", "Cobre parte do tema: diagramas dos objetos padrão.", "Data Model"),
+         ev("src:mdapi-customobject", "Cobre parte do tema: definição de objetos customizados como metadado.", "CustomObject")],
+    ),
+    "sub:campos-e-tipos": (
+        "As informações de cada registro: o tipo de cada campo define o que ele aceita e quais propriedades usa, e regras de validação "
+        "barram valores fora do esperado.",
+        [ev("src:mdapi-customfield", "Cobre parte do tema: definição de campos customizados como metadado.", "CustomField"),
+         ev("src:mdapi-field-types", "Cobre parte do tema: tipos compostos usados na definição dos campos.", "Metadata Field Types")],
+    ),
+    "sub:relacionamentos-e-juncoes": (
+        "As ligações entre registros de objetos diferentes: lookup e master-detail, campos de resumo sobre os filhos e objetos de "
+        "junção para relações de muitos para muitos.",
+        [ev("src:mdapi-customfield", "Cobre parte do tema: propriedades de campos de relacionamento (tipo, exclusão do pai, junção).", "CustomField")],
+    ),
+    "sub:tipos-de-registro-e-processos-de-negocio": (
+        "Variações de um mesmo objeto, cada uma com valores de lista, processo de negócio e páginas próprios.",
+        [ev("src:mdapi-recordtype", "Cobre parte do tema: tipos de registro como metadado.", "RecordType"),
+         ev("src:objref-recordtype", "Cobre parte do tema: o objeto RecordType na API.", "RecordType")],
+    ),
+    "sub:listas-de-valores": (
+        "As listas fechadas de valores de um campo: valores próprios ou herdados de um conjunto global, picklists dependentes e o "
+        "recorte de valores por tipo de registro.",
+        [ev("src:mdapi-field-types", "Cobre parte do tema: estrutura ValueSet das picklists.", "Metadata Field Types"),
+         ev("src:mdapi-recordtype", "Cobre parte do tema: valores de picklist por tipo de registro.", "RecordType")],
+    ),
+    "sub:metadados-de-configuracao-de-dados": (
+        "Opções do campo ou do objeto que mudam como os dados se comportam, sem criar dados novos: índices, External ID e Unique, "
+        "histórico de campos e feed tracking.",
+        [ev("src:dev-ldv-indexes", "Cobre parte do tema: índices padrão e customizados.", "Indexes"),
+         ev("src:help-field-history-tracking", "Cobre parte do tema: histórico de campos.", "Field History Tracking Overview")],
+    ),
+    "sub:modelos-externos-e-especializacoes": (
+        "Formas especiais de modelar dados: objetos externos, que mostram dados de outro sistema sem copiá-los, e big objects, como o "
+        "arquivo do histórico de campos.",
+        [ev("src:help-external-data-source-odata", "Cobre parte do tema: objetos externos pelo adaptador OData do Salesforce Connect.",
+            "Define an External Data Source for Salesforce Connect—OData 2.0 or 4.0 Adapter"),
+         ev("src:help-field-audit-trail", "Cobre parte do tema: exemplo de big object (FieldHistoryArchive).", "Field Audit Trail")],
+    ),
 }
 
 

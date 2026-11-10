@@ -243,6 +243,7 @@ O WSDL **não** é bloqueio: a documentação de cada tipo é a fonte alternativ
   - Cada passada também limpa o dado genérico dos temas internos (`temas_internos.py`): descrição curta escrita pelo projeto, referências oficiais já registradas (o site passa de "Curadoria do projeto" para "Parcialmente conferido") e a mesma nota de estado dos temas principais. O estado continua `desconhecido`.
   - Concluído: Integração, texto (PR #55) e limpeza dos 7 temas internos.
   - Concluído: Acesso e segurança, texto e limpeza dos 7 temas internos (avançado de 5 para 12 itens, sem fonte nova).
+  - Concluído: Dados e modelagem, texto e limpeza dos 7 temas internos (avançado de 4 para 11 itens, sem fonte nova).
 
 ## Próximos lotes
 

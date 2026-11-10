@@ -45,12 +45,84 @@
     {
       "evidencias": [
         {
+          "fonte": "src:mdapi-customfield"
+        }
+      ],
+      "texto": "No CustomField, type escolhe entre tipos como Text, Number, Currency, Date, Picklist, MultiselectPicklist, Lookup, MasterDetail, Summary e EncryptedText, e cada tipo usa um conjunto diferente de propriedades. Para campos customizados, type é incluído; em alguns campos padrão, é opcional.",
+      "tipo": "implantacao",
+      "titulo": "O tipo define o resto do campo"
+    },
+    {
+      "evidencias": [
+        {
+          "fonte": "src:mdapi-customfield"
+        }
+      ],
+      "texto": "No lookup, deleteConstraint decide o que acontece quando o pai é excluído: SetNull (padrão), Restrict ou Cascade. No master-detail, o filho não muda de pai, a menos que reparentableMasterDetail seja ligado, e writeRequiresMasterRead define se ler o pai basta para alterar os filhos. Campos de resumo (Summary) agregam filhos com Count, Min, Max ou Sum.",
+      "tipo": "decisao",
+      "titulo": "Lookup ou master-detail"
+    },
+    {
+      "evidencias": [
+        {
+          "fonte": "src:mdapi-customfield"
+        }
+      ],
+      "texto": "Num objeto de junção com dois pais master-detail, relationshipOrder marca qual é o primário (0) e qual é o secundário (1). Um lookupFilter restringe quais registros podem ser escolhidos num lookup.",
+      "tipo": "implantacao",
+      "titulo": "Objeto de junção"
+    },
+    {
+      "evidencias": [
+        {
           "fonte": "src:objref-recordtype"
         }
       ],
       "texto": "Tipos de registro de Opportunity exigem um processo de vendas (BusinessProcessId em RecordType).",
       "tipo": "atencao",
       "titulo": "Tipos de registro de Opportunity"
+    },
+    {
+      "evidencias": [
+        {
+          "fonte": "src:mdapi-field-types"
+        },
+        {
+          "fonte": "src:mdapi-customfield"
+        },
+        {
+          "fonte": "src:mdapi-recordtype"
+        }
+      ],
+      "texto": "A picklist guarda os próprios valores (valueSetDefinition) ou herda um conjunto global pelo nome (valueSetName). Com restricted, ela só aceita os valores definidos. Picklists dependentes usam controllingField e valueSettings. Cada tipo de registro pode mostrar só parte dos valores (picklistValues no RecordType).",
+      "tipo": "decisao",
+      "titulo": "Valores locais ou conjunto global"
+    },
+    {
+      "evidencias": [
+        {
+          "fonte": "src:dev-ldv-indexes"
+        },
+        {
+          "fonte": "src:help-external-id-unique-index"
+        }
+      ],
+      "texto": "A plataforma já indexa campos como Id, Name, CreatedDate e chaves estrangeiras. External ID e Unique criam índice; External ID serve de chave no upsert, mas aceita valores repetidos, e Unique impede repetição. Índice em outros campos é pedido ao Support.",
+      "tipo": "escala",
+      "titulo": "Índices e External ID"
+    },
+    {
+      "evidencias": [
+        {
+          "fonte": "src:mdapi-customobject"
+        },
+        {
+          "fonte": "src:help-field-audit-trail"
+        }
+      ],
+      "texto": "O CustomObject define objetos customizados e também objetos externos (sufixo __x, com externalDataSource) e eventos de plataforma (eventType, publishBehavior). O arquivamento do Field Audit Trail usa o big object FieldHistoryArchive.",
+      "tipo": "implantacao",
+      "titulo": "Um metadata type, vários tipos de objeto"
     }
   ],
   "derivado": {
@@ -313,7 +385,7 @@
         "fonte": "src:mdapi-externaldatasource"
       }
     ],
-    "texto": "O objeto é a base. Os campos dão forma a cada registro, e os campos de relacionamento ligam objetos, inclusive por objetos de junção. Tipos de registro criam variações do mesmo objeto, com listas de valores próprias. Metadados de configuração e modelos externos estendem o modelo para casos especiais, como dados que ficam em outro sistema."
+    "texto": "Roteiro pelas sete seções do tema. 1) 'Objetos e entidades': o objeto é a base, padrão ou customizado. 2) 'Campos e tipos': os campos dão forma a cada registro. 3) 'Relacionamentos e junções': campos que ligam objetos, inclusive por objetos de junção. 4) 'Tipos de registro e processos de negócio': variações do mesmo objeto. 5) 'Listas de valores': picklists e conjuntos de valores, que cada tipo de registro pode recortar. 6) 'Metadados de configuração de dados': índices, histórico e feed. 7) 'Modelos externos e especializações': dados que ficam em outro sistema e outras formas especiais de modelar."
   },
   "escopo": "Entra a estrutura onde os dados vivem: objetos, campos, relacionamentos, tipos de registro, listas de valores e especializações do modelo.",
   "estado": "desconhecido",
