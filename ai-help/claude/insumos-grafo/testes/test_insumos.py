@@ -347,7 +347,7 @@ class TestTemas(BaseTemp):
 
     def test_verificado_sem_referencia_e_erro(self):
         p = self.cat("subclassificacoes", "credenciais.json")
-        d = ler(p); d["estado"] = "verificado"; gravar(p, d)
+        d = ler(p); d["estado"] = "verificado"; d.pop("referencias_oficiais", None); gravar(p, d)
         self.assertErro("tema verificado sem referência oficial")
 
     def test_por_onde_comecar_fora_do_tema_e_erro(self):
