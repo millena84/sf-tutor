@@ -7,6 +7,48 @@
   "descricao": "Partes assíncronas de automações declarativas.",
   "escopo": "Entram as partes assíncronas de automações declarativas.",
   "fora_do_escopo": "O fluxo como um todo fica em \"Flow e orquestração\".",
+  "para_iniciantes": {
+    "explicacao": "Num flow disparado por registro, o caminho assíncrono roda em segundo plano depois que a gravação é confirmada. É ele que permite chamar sistemas externos, o que o caminho imediato não pode fazer.",
+    "exemplo": "Ao criar um pedido, o caminho assíncrono do flow avisa o sistema de entregas sem prender a gravação.",
+    "evidencias": [
+      {
+        "fonte": "src:help-rtf-considerations"
+      }
+    ]
+  },
+  "encadeamento": {
+    "texto": "É a parte assíncrona de 'Flow e orquestração'; o equivalente em código fica em Queueable e Future.",
+    "evidencias": [
+      {
+        "fonte": "src:help-rtf-considerations"
+      },
+      {
+        "fonte": "src:apex-queueable"
+      }
+    ]
+  },
+  "avancado": [
+    {
+      "tipo": "atencao",
+      "titulo": "Callout só fora do caminho imediato",
+      "texto": "Um record-triggered flow falha se tentar acessar dados externos no caminho síncrono, porque callouts não rodam enquanto o registro é salvo. Caminhos assíncronos não suportam o operador ISCHANGED.",
+      "evidencias": [
+        {
+          "fonte": "src:help-rtf-considerations"
+        }
+      ]
+    },
+    {
+      "tipo": "limite",
+      "titulo": "Flows agendados",
+      "texto": "Flows agendados têm teto de 250.000 entrevistas por 24 horas, ou licenças × 200, o que for maior; transações Apex síncronas chamadas por flows assíncronos contam nos limites síncronos.",
+      "evidencias": [
+        {
+          "fonte": "src:help-schedule-flow-considerations"
+        }
+      ]
+    }
+  ],
   "funcionalidades": [],
   "estado": "desconhecido",
   "nota_estado": "Agrupamento proposto na especificação; fronteira ainda não cruzada com a documentação oficial."

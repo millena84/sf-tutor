@@ -1,0 +1,66 @@
+Issue #34, temas internos pendentes (lote 1). Leitura pelos resultados de busca restritos a help.salesforce.com e
+developer.salesforce.com, em 2026-11-09 (método leitura_resultado_busca: páginas não abertas por inteiro). Resumo em português.
+
+[src:help-custom-report-types] Custom Report Types (https://help.salesforce.com/s/articleView?id=sf.reports_report_type_objects.htm)
+  Um tipo de relatório define o conjunto de registros e campos disponíveis para um relatório, a partir das relações entre um objeto
+  principal e seus objetos relacionados; tipos customizados incluem objetos e campos adicionais. Edições: Essentials, Professional,
+  Enterprise, Performance, Unlimited e Developer.
+[src:help-crt-legacy-builder] Create a Custom Report Type in the Legacy Custom Report Type Builder (https://help.salesforce.com/s/articleView?id=reports_defining_report_types.htm)
+  O objeto principal não pode ser trocado depois de salvo. Relação com objetos filhos: "cada A precisa ter ao menos um B" (só pais com
+  filhos) ou "A pode ou não ter B" (todos os pais). Campos de objetos fora da estrutura entram por "Add fields related via lookup".
+[src:help-report-limits] Reports and Dashboards Limits and Allocations (https://help.salesforce.com/s/articleView?id=analytics.rd_reports_dashboards_limits.htm)
+  Tipos de relatório customizados: 50 (Professional), 300 (Enterprise), 2.000 (Unlimited e Performance), 400 (Developer). Até 60
+  referências de objeto por tipo (quatro relações principais + campos via lookup); erro se o relatório tiver colunas de mais de 20
+  objetos; até 1.000 campos por tipo. Campos de histórico, de agenda de produto e Age de casos e oportunidades não podem ser incluídos.
+
+[src:help-wf-pb-eos] Salesforce Workflow Rules & Process Builder End of Support (https://help.salesforce.com/s/articleView?id=001096524&type=1)
+  Fim do suporte em 31/12/2025: regras e processos ativos continuam rodando, mas sem suporte nem correção de bugs. Recomenda migrar
+  para Flow Builder com a ferramenta Migrate to Flow.
+[src:help-migrate-to-flow-considerations] Migrate to Flow Tool Considerations (https://help.salesforce.com/s/articleView?id=sf.migrate_to_flow_tool_considerations.htm)
+  Só processos disparados por registro; processos com recursão avaliam o registro uma vez; migrar na mesma org do processo original
+  (não migrar numa org intermediária e implantar), para que o flow trate as ações agendadas pendentes; workflow só com atualização de
+  campos vira flow de atualização rápida (before-save); flows disparados por registro podem se comportar diferente das regras por
+  causa da ordem de execução; ações com callout, ações externas ou pausas precisam de caminho assíncrono.
+
+[src:apex-customnotification] CustomNotification Class — Apex Reference (https://developer.salesforce.com/docs/atlas.en-us.apexref.meta/apexref/apex_class_Messaging_CustomNotification.htm)
+  Envia notificações customizadas pelo Apex; exige um tipo de notificação (criado no Notification Builder ou pela Tooling API) e um
+  destino (targetId ou targetPageRef). Título até 250 caracteres, corpo até 750; até 500 destinatários (usuário, equipe de conta ou
+  oportunidade, grupo ou fila). Exige a permissão Send Custom Notifications.
+[src:actions-custom-notification] Custom Notification Actions — Actions Developer Guide (https://developer.salesforce.com/docs/platform/api-action/guide/actions-obj-custom-notification.html)
+  Notificações para desktop ou mobile. Em orgs criadas no Winter '21 ou depois, a permissão Send Custom Notifications é exigida em
+  flows no contexto do usuário, REST API e Apex; não é exigida em flows ou processos no contexto de sistema. API 46.0+.
+[src:pkg1-components] Components Available in First-Generation Managed Packages (https://developer.salesforce.com/docs/platform/pkg1-dev/guide/first-gen-packageable-components.html)
+  CustomNotificationType: até 500 tipos por org assinante (compartilhado entre namespaces); até 10.000 ações de notificação por hora.
+
+[src:apex-debug-logs] Working with Logs in the Developer Console — Apex Developer Guide (https://developer.salesforce.com/docs/atlas.en-us.264.0.apexcode.meta/pages/apex_debugging_system_log_console.htm)
+  O nível de informação é definido por categoria (Database, Workflow, Validation, Callout, Apex Code, Apex Profiling, Visualforce,
+  System) e por nível (NONE, ERROR, WARN, INFO, DEBUG, FINE, FINER, FINEST); o tipo de evento combina os dois. A maioria dos eventos
+  começa a ser registrada no nível INFO. Os níveis são cumulativos (trecho de versão anterior da mesma página).
+
+[src:help-mydomain] My Domain (https://help.salesforce.com/s/articleView?id=sf.domain_name_overview.htm)
+  O nome do My Domain é o subdomínio da org nas URLs de login e de aplicação, como https://mycompany.my.salesforce.com e
+  https://mycompany.my.site.com. Código com URLs fixas pode quebrar quando o My Domain muda.
+[src:help-mydomain-changes] Update Your Org for My Domain Changes (https://help.salesforce.com/s/articleView?id=sf.domain_name_guidelines.htm)
+  Mudar o nome ou o sufixo muda a URL de login; SSO e MFA podem parar de funcionar. Integrações de API devem usar o serverURL devolvido
+  pelo login, não uma URL fixa; named credentials e templates de e-mail com a URL antiga precisam ser atualizados.
+[src:help-mydomain-login-policy] Set the My Domain Login Policy (https://help.salesforce.com/s/articleView?id=sf.domain_name_setting_login_policy.htm)
+  É possível impedir login por https://login.salesforce.com e exigir que logins SOAP usem a URL do My Domain; tráfego de API com URL
+  de instância incorreta é bloqueado depois do Summer '26.
+
+[src:help-custom-settings] Define Custom Settings (https://help.salesforce.com/s/articleView?id=platform.cs_define.htm)
+  A Salesforce recomenda custom metadata types no lugar de custom settings: os registros de custom metadata types podem ser migrados
+  por pacotes de segunda geração ou Metadata API, ao contrário dos de list custom settings. List: dados de aplicação, iguais para a org;
+  Hierarchy: personaliza por perfil ou usuário; o tipo não muda depois de salvo; os dados ficam em cache.
+[src:help-cmdt-limitations] Custom Metadata Types Limitations (https://help.salesforce.com/s/articleView?id=platform.custommetadatatypes_limitations.htm)
+  Registros ficam em cache por tipo depois da primeira leitura; para alterar registros pelo Apex, use o pacote Metadata; até 15 custom
+  metadata types distintos em validações por objeto; durante o deploy, registros incluídos ficam bloqueados (pode haver row lock).
+[src:mdapi-custommetadata] CustomMetadata — Metadata API (https://developer.salesforce.com/docs/platform/api-metadata/references/meta-types/metadata-custommetadata.html)
+  Representa um registro de custom metadata type; sufixo .md, pasta customMetadata; criar registros exige Customize Application.
+
+[src:help-rtf-considerations] Record-Triggered Flow Considerations (https://help.salesforce.com/s/articleView?id=sf.flow_considerations_trigger_record.htm)
+  Um record-triggered flow falha se tentar acessar dados externos no caminho síncrono, porque callouts não rodam enquanto o registro é
+  salvo; o caminho assíncrono (Add Asynchronous Path) roda depois que a gravação é confirmada e permite o callout. Caminhos assíncronos
+  não suportam o operador ISCHANGED.
+[src:help-schedule-flow-considerations] Schedule-Triggered Flow Considerations (https://help.salesforce.com/s/articleView?id=flow_considerations_trigger_schedule.htm)
+  Máximo de 250.000 entrevistas de flow agendado por 24 horas, ou licenças de usuário × 200, o que for maior; o horário segue o fuso
+  padrão da org; transações Apex síncronas chamadas por flows assíncronos contam nos limites síncronos.

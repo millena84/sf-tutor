@@ -1,4 +1,29 @@
 {
+  "avancado": [
+    {
+      "evidencias": [
+        {
+          "fonte": "src:actions-custom-notification"
+        }
+      ],
+      "texto": "Em orgs criadas no Winter '21 ou depois, a permissão Send Custom Notifications é exigida em flows no contexto do usuário, na REST API e no Apex; não é exigida em flows no contexto de sistema.",
+      "tipo": "seguranca",
+      "titulo": "Permissão para enviar"
+    },
+    {
+      "evidencias": [
+        {
+          "fonte": "src:apex-customnotification"
+        },
+        {
+          "fonte": "src:pkg1-components"
+        }
+      ],
+      "texto": "Cada envio aceita até 500 destinatários (usuários, equipes, grupos ou filas), com título de até 250 e corpo de até 750 caracteres. Uma org aceita até 500 tipos de notificação e 10.000 ações de notificação por hora.",
+      "tipo": "limite",
+      "titulo": "Destinatários e volume"
+    }
+  ],
   "classificacao": "cls:automacao-de-processos-e-regras-de-negocio",
   "derivado": {
     "dependencias": [],
@@ -9,6 +34,14 @@
     "temas_sem_funcionalidade": []
   },
   "descricao": "Alertas e notificações enviados por automações.",
+  "encadeamento": {
+    "evidencias": [
+      {
+        "fonte": "src:actions-custom-notification"
+      }
+    ],
+    "texto": "Costuma ser o último passo de uma automação; modelos de e-mail, outro canal de aviso, ficam em 'Templates e comunicação'."
+  },
   "escopo": "Entram alertas e notificações enviados por automações.",
   "estado": "desconhecido",
   "fora_do_escopo": "Modelos de e-mail usados nas notificações ficam em \"Templates e comunicação\".",
@@ -17,5 +50,17 @@
   "natureza": "curadoria_didatica",
   "nome": "Notificações",
   "nota_estado": "Agrupamento proposto na especificação; fronteira ainda não cruzada com a documentação oficial.",
+  "para_iniciantes": {
+    "evidencias": [
+      {
+        "fonte": "src:actions-custom-notification"
+      },
+      {
+        "fonte": "src:apex-customnotification"
+      }
+    ],
+    "exemplo": "Quando um caso de prioridade alta é aberto, um flow envia uma notificação à fila responsável, que abre o caso com um toque.",
+    "explicacao": "Notificações customizadas avisam pessoas no desktop ou no celular quando algo acontece. Primeiro se cria um tipo de notificação; depois, um flow, o Apex ou a REST API envia a notificação usando esse tipo."
+  },
   "sigla": "AUT-05"
 }

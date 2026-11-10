@@ -7,6 +7,48 @@
   "descricao": "Domínio da org e endereços pelos quais usuários e integrações acessam a plataforma.",
   "escopo": "Entram o domínio da org e os endereços pelos quais pessoas e integrações chegam à plataforma.",
   "fora_do_escopo": "Endereços externos chamados pela org ficam em \"Chamadas externas e endpoints\".",
+  "para_iniciantes": {
+    "explicacao": "O My Domain é o nome da org nas URLs de login e de aplicação, como mycompany.my.salesforce.com e mycompany.my.site.com.",
+    "exemplo": "Os usuários da empresa entram por https://mycompany.my.salesforce.com, e o portal de clientes usa mycompany.my.site.com.",
+    "evidencias": [
+      {
+        "fonte": "src:help-mydomain"
+      }
+    ]
+  },
+  "encadeamento": {
+    "texto": "Afeta login, SSO e integrações; os endereços externos que a org chama ficam em 'Chamadas externas e endpoints'.",
+    "evidencias": [
+      {
+        "fonte": "src:help-mydomain-changes"
+      }
+    ]
+  },
+  "avancado": [
+    {
+      "tipo": "atencao",
+      "titulo": "Mudar o My Domain quebra o que está fixo",
+      "texto": "Mudar o nome ou o sufixo muda a URL de login: SSO e MFA podem parar de funcionar, e named credentials e templates com a URL antiga precisam ser atualizados.",
+      "evidencias": [
+        {
+          "fonte": "src:help-mydomain-changes"
+        }
+      ]
+    },
+    {
+      "tipo": "decisao",
+      "titulo": "Integração com URL devolvida pelo login",
+      "texto": "Integrações de API devem usar o serverURL devolvido pelo login, não uma URL fixa. Dá para exigir que logins SOAP usem o My Domain, e tráfego de API com URL de instância incorreta é bloqueado depois do Summer '26.",
+      "evidencias": [
+        {
+          "fonte": "src:help-mydomain-changes"
+        },
+        {
+          "fonte": "src:help-mydomain-login-policy"
+        }
+      ]
+    }
+  ],
   "funcionalidades": [],
   "estado": "desconhecido",
   "nota_estado": "Agrupamento proposto na especificação; fronteira ainda não cruzada com a documentação oficial."
