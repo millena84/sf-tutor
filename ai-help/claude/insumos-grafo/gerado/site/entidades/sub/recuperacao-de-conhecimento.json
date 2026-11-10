@@ -1,4 +1,49 @@
 {
+  "avancado": [
+    {
+      "evidencias": [
+        {
+          "fonte": "src:help-adl-setup-troubleshoot"
+        },
+        {
+          "fonte": "src:dev-website-search-index-retriever"
+        }
+      ],
+      "texto": "A library divide o conteúdo em chunks, gera embeddings e guarda tudo num vector search index; depois cria um retriever que a ação Answer Questions with Knowledge usa. A ação só funciona com o índice em Ready.",
+      "tipo": "implantacao",
+      "titulo": "O que a library cria"
+    },
+    {
+      "evidencias": [
+        {
+          "fonte": "src:help-agentforce-data-library"
+        }
+      ],
+      "texto": "Exige Data 360 e consome créditos dele. Em companion org do Data Cloud One, Knowledge e Files não são aceitos como fonte; usa-se um custom retriever.",
+      "tipo": "limite",
+      "titulo": "Requisitos e custo"
+    },
+    {
+      "evidencias": [
+        {
+          "fonte": "src:help-adl-setup-troubleshoot"
+        }
+      ],
+      "texto": "Com Use Public Knowledge Articles ligado, só entram artigos publicados e visíveis na base pública. O chunking pega só texto, não imagens dos arquivos. Depois de mudanças grandes, o rebuild reindexa tudo.",
+      "tipo": "atencao",
+      "titulo": "Artigos que não aparecem"
+    },
+    {
+      "evidencias": [
+        {
+          "fonte": "src:connect-rest-adl"
+        }
+      ],
+      "texto": "A Connect REST API tem recursos em Beta para criar, indexar e excluir libraries, com fontes SFDRIVE, KNOWLEDGE, RETRIEVER e SITEMAP. Os campos primaryIndexField1 e primaryIndexField2 não mudam depois de criados, e excluir a library apaga em cascata o retriever e o search index.",
+      "tipo": "implantacao",
+      "titulo": "Library por API (Beta)"
+    }
+  ],
   "classificacao": "cls:ia-agentes-e-decisoes-assistidas",
   "derivado": {
     "dependencias": [],
@@ -9,6 +54,17 @@
     "temas_sem_funcionalidade": []
   },
   "descricao": "Busca de conteúdo para alimentar respostas.",
+  "encadeamento": {
+    "evidencias": [
+      {
+        "fonte": "src:help-agentforce-data-library"
+      },
+      {
+        "fonte": "src:help-adl-setup-troubleshoot"
+      }
+    ],
+    "texto": "Fica entre o conteúdo e a resposta: os artigos vêm de 'Knowledge e categorias', e o uso dos trechos pelo modelo fica em 'Modelos e grounding' e 'Prompts'."
+  },
   "escopo": "Entra a busca de conteúdo para alimentar respostas de IA.",
   "estado": "desconhecido",
   "fora_do_escopo": "Os artigos de conhecimento em si ficam em \"Knowledge e categorias\".",
@@ -17,5 +73,21 @@
   "natureza": "curadoria_didatica",
   "nome": "Recursos de recuperação de conhecimento",
   "nota_estado": "Agrupamento proposto na especificação; fronteira ainda não cruzada com a documentação oficial.",
+  "para_iniciantes": {
+    "analogia": {
+      "limite": "O bibliotecário não escreve a resposta: quem redige é o modelo, e ele pode errar se os trechos trazidos forem ruins.",
+      "texto": "É como um bibliotecário que separa as páginas certas antes de alguém responder."
+    },
+    "evidencias": [
+      {
+        "fonte": "src:help-agentforce-data-library"
+      },
+      {
+        "fonte": "src:dev-website-search-index-retriever"
+      }
+    ],
+    "exemplo": "Um cliente pergunta como trocar a senha; o retriever acha o trecho do artigo de ajuda e o agente responde com base nele.",
+    "explicacao": "Para um agente de IA responder com base no conteúdo da empresa, esse conteúdo precisa ser encontrável. A Agentforce Data Library indexa artigos do Knowledge, arquivos ou páginas web, e um retriever busca os trechos mais relevantes para cada pergunta e os entrega ao modelo."
+  },
   "sigla": "IA-05"
 }
