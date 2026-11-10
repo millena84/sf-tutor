@@ -13,6 +13,8 @@ import json, os, sys
 sys.path.insert(0, os.path.join(os.path.dirname(os.path.abspath(__file__)), "..", ".."))
 from carga.base import ROOT, save, ev  # noqa: E402
 from carga.catalogo import fonte, registrar_fontes  # noqa: E402
+sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+from conteudo_cls import CONTEUDO_CLS  # noqa: E402
 
 DATA = "2026-11-09"
 EXT = "fontes/extracoes/temas-piloto-interface.txt"
@@ -28,6 +30,10 @@ FONTES = [
     fonte("src:help-lightning-pages", "Lightning Pages (Salesforce Help)", "https://help.salesforce.com/s/articleView?id=sf.lightning_page_overview.htm&type=5",
           "O que são Lightning pages, tipos de página e origem dos componentes.", EXT, DATA,
           tipo="oficial_ajuda", versao="sem versão (Ajuda Salesforce)"),
+    fonte("src:apex-queueable", "Queueable Apex (Apex Developer Guide)",
+          "https://developer.salesforce.com/docs/atlas.en-us.apexcode.meta/pages/apex_queueing_jobs.htm",
+          "Recomendação de Queueable no lugar de future methods; identificador do job.",
+          "fontes/extracoes/temas-referencias-oficiais.txt", DATA, metodo="leitura_resultado_busca"),
 ]
 
 AF = "src:architect-build-forms"
@@ -131,7 +137,8 @@ CAMPOS = ("para_iniciantes", "encadeamento", "avancado")
 
 def aplicar():
     novos = registrar_fontes(FONTES)
-    for tid, cont in CONTEUDO.items():
+    todos = {**CONTEUDO, **CONTEUDO_CLS}
+    for tid, cont in todos.items():
         pasta = "classificacoes" if tid.startswith("cls:") else "subclassificacoes"
         nome = tid.split(":", 1)[1]
         with open(os.path.join(ROOT, pasta, nome + ".json"), encoding="utf-8") as f:
@@ -146,7 +153,7 @@ def aplicar():
                     if c in cont:
                         novo[c] = cont[c]
         save(pasta, nome, novo)
-    print(f"fontes novas: {len(novos)}; temas com conteúdo: {len(CONTEUDO)}")
+    print(f"fontes novas: {len(novos)}; temas com conteúdo: {len(todos)}")
 
 
 if __name__ == "__main__":

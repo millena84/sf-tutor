@@ -1,4 +1,58 @@
 {
+  "avancado": [
+    {
+      "evidencias": [
+        {
+          "fonte": "src:objref-data-model"
+        },
+        {
+          "fonte": "src:mdapi-customobject"
+        },
+        {
+          "fonte": "src:help-external-data-source-odata"
+        }
+      ],
+      "texto": "Antes de criar um objeto customizado, confira os objetos padrão nos diagramas do Data Model: o customizado serve para entidades que não existem entre os padrão. Quando os dados ficam em outro sistema e não devem ser copiados, objetos externos (sufixo __x) mostram os registros sob demanda.",
+      "tipo": "decisao",
+      "titulo": "Objeto padrão, customizado ou externo"
+    },
+    {
+      "evidencias": [
+        {
+          "fonte": "src:tooling-entitydefinition"
+        },
+        {
+          "fonte": "src:tooling-fielddefinition"
+        },
+        {
+          "fonte": "src:tooling-intro"
+        }
+      ],
+      "texto": "A definição de objetos e campos pode ser consultada pela Tooling API (EntityDefinition, FieldDefinition, CustomObject, CustomField). Cada objeto tem exposição própria: não suponha que o que existe na API padrão existe igual na Tooling API.",
+      "tipo": "implantacao",
+      "titulo": "Definição pela Tooling API"
+    },
+    {
+      "evidencias": [
+        {
+          "fonte": "src:security-fls"
+        }
+      ],
+      "texto": "Ao criar campos, defina quem pode vê-los e editá-los pela segurança em nível de campo. Tirar o campo do layout não restringe o acesso, porque a segurança de campo prevalece.",
+      "tipo": "seguranca",
+      "titulo": "Campo novo precisa de segurança de campo"
+    },
+    {
+      "evidencias": [
+        {
+          "fonte": "src:objref-recordtype"
+        }
+      ],
+      "texto": "Tipos de registro de Opportunity exigem um processo de vendas (BusinessProcessId em RecordType).",
+      "tipo": "atencao",
+      "titulo": "Tipos de registro de Opportunity"
+    }
+  ],
   "derivado": {
     "dependencias": [
       {
@@ -241,6 +295,26 @@
     ]
   },
   "descricao": "Reúne a estrutura onde os dados vivem: objetos, campos, relacionamentos, tipos de registro e listas de valores.",
+  "encadeamento": {
+    "evidencias": [
+      {
+        "fonte": "src:mdapi-customobject"
+      },
+      {
+        "fonte": "src:mdapi-customfield"
+      },
+      {
+        "fonte": "src:mdapi-recordtype"
+      },
+      {
+        "fonte": "src:objref-data-model"
+      },
+      {
+        "fonte": "src:mdapi-externaldatasource"
+      }
+    ],
+    "texto": "O objeto é a base. Os campos dão forma a cada registro, e os campos de relacionamento ligam objetos, inclusive por objetos de junção. Tipos de registro criam variações do mesmo objeto, com listas de valores próprias. Metadados de configuração e modelos externos estendem o modelo para casos especiais, como dados que ficam em outro sistema."
+  },
   "escopo": "Entra a estrutura onde os dados vivem: objetos, campos, relacionamentos, tipos de registro, listas de valores e especializações do modelo.",
   "estado": "desconhecido",
   "fora_do_escopo": "Regras que protegem a qualidade e o ciclo de vida dos dados ficam em \"Qualidade, governança e ciclo de vida dos dados\". Como os campos aparecem na tela fica em \"Interface e experiência do usuário\".",
@@ -249,6 +323,32 @@
   "nome": "Dados e modelagem",
   "nome_curto": "Dados e modelagem",
   "nota_estado": "Tema criado pelo projeto (00-especificacao-grafo.md), não é nomenclatura oficial da Salesforce. Cruzado em 2026-11-09 com áreas da documentação oficial listadas nas referências; a correspondência é parcial e o recorte continua sendo do projeto.",
+  "para_iniciantes": {
+    "analogia": {
+      "limite": "Na planilha, a aba é um arquivo que você controla por inteiro. Na Salesforce, objetos são definições de metadados com regras de acesso, relacionamentos e comportamento próprios, e não tabelas acessadas diretamente.",
+      "texto": "Como uma planilha bem organizada: cada aba é um objeto, cada coluna é um campo e cada linha é um registro."
+    },
+    "evidencias": [
+      {
+        "fonte": "src:mdapi-customobject"
+      },
+      {
+        "fonte": "src:mdapi-customfield"
+      },
+      {
+        "fonte": "src:mdapi-validationrule"
+      },
+      {
+        "fonte": "src:mdapi-recordtype"
+      }
+    ],
+    "exemplo": "Uma empresa cria o objeto Contrato_Servico__c, com o campo Valor_Mensal__c do tipo moeda, uma regra que impede valor negativo e os tipos de registro Manutenção e Licenciamento, com listas de status diferentes.",
+    "explicacao": "É a estrutura onde os dados ficam guardados: objetos, os campos de cada registro, os relacionamentos entre objetos, os tipos de registro e as listas de valores. Antes de automatizar ou desenhar telas, é aqui que se decide o que existe e como se liga.",
+    "por_onde_comecar": [
+      "func:objetos-customizados",
+      "func:campos-customizados"
+    ]
+  },
   "referencias_oficiais": [
     {
       "fonte": "src:objref-data-model",

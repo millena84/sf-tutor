@@ -7,6 +7,91 @@
   "descricao": "Reúne como mudanças são construídas, testadas e levadas entre ambientes.",
   "escopo": "Entra como mudanças são construídas, testadas, empacotadas e levadas entre ambientes, incluindo os formatos de arquivo de metadados.",
   "fora_do_escopo": "As APIs usadas por ferramentas de desenvolvimento são estudadas também em \"APIs de dados e metadados\". Logs de execução ficam em \"Logs e rastreamento\".",
+  "para_iniciantes": {
+    "explicacao": "Reúne como mudanças são construídas, testadas e levadas de um ambiente para outro: código e componentes, testes, pacotes, os formatos de arquivo dos metadados, sandboxes e a implantação.",
+    "exemplo": "Um desenvolvedor cria uma classe numa scratch org, recupera a mudança para o projeto, roda os testes e implanta em produção pela Metadata API.",
+    "analogia": {
+      "texto": "Como reformar uma casa com planta: testa-se na maquete antes de mexer na obra.",
+      "limite": "Na maquete, tudo vai junto. Aqui, a planta são arquivos de metadados; o que não é metadado, como registros e atribuições de permissão, não vai no deploy."
+    },
+    "por_onde_comecar": [
+      "func:metadata-api",
+      "func:tooling-api"
+    ],
+    "evidencias": [
+      {
+        "fonte": "src:sfdx-dev-guide"
+      },
+      {
+        "fonte": "src:mdapi-intro"
+      },
+      {
+        "fonte": "src:help-produtos-platform"
+      }
+    ]
+  },
+  "encadeamento": {
+    "texto": "Código e componentes vivem como metadados em dois formatos: o source format, usado no projeto, e o Metadata API format. Testes garantem que funcionam; sandboxes e scratch orgs isolam o trabalho; pacotes agrupam componentes e dependências; e a implantação leva tudo para produção, com versionamento e caminho de volta.",
+    "evidencias": [
+      {
+        "fonte": "src:sfdx-dev-guide"
+      },
+      {
+        "fonte": "src:sdr-registry"
+      },
+      {
+        "fonte": "src:mdapi-intro"
+      },
+      {
+        "fonte": "src:help-produtos-platform"
+      }
+    ]
+  },
+  "avancado": [
+    {
+      "tipo": "decisao",
+      "titulo": "deploy/retrieve ou source tracking",
+      "texto": "A Metadata API indica deploy() e retrieve() para as fases finais, como implantar em produção, e source push/pull com source tracking nas fases intermediárias, que movem só o que mudou.",
+      "evidencias": [
+        {
+          "fonte": "src:mdapi-intro"
+        }
+      ]
+    },
+    {
+      "tipo": "decisao",
+      "titulo": "Metadata API ou Tooling API",
+      "texto": "A Tooling API expõe metadados como objetos consultáveis e serve a ferramentas que leem e alteram pedaços pequenos com rapidez; a Metadata API move o modelo completo. A exposição de cada objeto é própria de cada API.",
+      "evidencias": [
+        {
+          "fonte": "src:tooling-intro"
+        },
+        {
+          "fonte": "src:mdapi-intro"
+        }
+      ]
+    },
+    {
+      "tipo": "atencao",
+      "titulo": "Nem todo tipo tem source tracking",
+      "texto": "A lista de suporte do Salesforce CLI marca, para cada metadata type, se há deploy, retrieve e source tracking; alguns tipos só têm deploy e retrieve. Confira antes de contar com o rastreamento automático.",
+      "evidencias": [
+        {
+          "fonte": "src:sdr-metadata-support"
+        }
+      ]
+    },
+    {
+      "tipo": "testes",
+      "titulo": "Teste unitário só no pro-code",
+      "texto": "Só LWC permite testes unitários escritos, por exemplo com Jest; Dynamic Forms e Screen Flow dependem de automação de interface de ponta a ponta.",
+      "evidencias": [
+        {
+          "fonte": "src:architect-build-forms"
+        }
+      ]
+    }
+  ],
   "subclassificacoes": [
     "sub:codigo-e-bundles",
     "sub:testes",
