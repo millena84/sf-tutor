@@ -7,6 +7,93 @@
   "descricao": "Modelos de e-mail e de comunicação.",
   "escopo": "Entram modelos de e-mail e de outras comunicações.",
   "fora_do_escopo": "Prompts usados por IA ficam em \"Prompts\".",
+  "para_iniciantes": {
+    "explicacao": "Um email template é um e-mail pronto para reaproveitar, com merge fields que trocam marcadores pelos dados do registro na hora do envio. Um letterhead padroniza cabeçalho e rodapé, como logo e contato da empresa.",
+    "exemplo": "O template de boas-vindas usa {{{Recipient.FirstName}}}; ao enviar para a contato Ana, o texto sai 'Olá, Ana'.",
+    "evidencias": [
+      {
+        "fonte": "src:help-email-templates-lex"
+      },
+      {
+        "fonte": "src:help-handlebars-merge-language"
+      }
+    ]
+  },
+  "encadeamento": {
+    "texto": "Depende dos campos dos objetos, que viram merge fields. Templates usados por automações também aparecem em 'Notificações'; prompts de IA ficam em 'Prompts'.",
+    "evidencias": [
+      {
+        "fonte": "src:help-merge-fields-considerations"
+      }
+    ]
+  },
+  "avancado": [
+    {
+      "tipo": "decisao",
+      "titulo": "HML ou SML",
+      "texto": "Templates Lightning criados desde o Summer '18 usam Handlebars Merge Language ({{{ }}}); os anteriores e os do Classic usam Salesforce Merge Language ({! }). Enhanced letterheads só funcionam com HML, e a implementação HML não traz todos os recursos do Handlebars.",
+      "evidencias": [
+        {
+          "fonte": "src:help-handlebars-merge-language"
+        },
+        {
+          "fonte": "src:help-enhanced-letterheads-create"
+        }
+      ]
+    },
+    {
+      "tipo": "atencao",
+      "titulo": "Merge fields que ficam vazios",
+      "texto": "Merge field de um objeto que não é o destinatário nem o Related To fica sem valor, e campo sem dado some do e-mail. Recipient não funciona em templates usados por automações, e nenhum merge field de destinatário vale quando o destinatário é um usuário.",
+      "evidencias": [
+        {
+          "fonte": "src:help-merge-fields-considerations"
+        },
+        {
+          "fonte": "src:help-handlebars-merge-language"
+        }
+      ]
+    },
+    {
+      "tipo": "seguranca",
+      "titulo": "Quem vê e quem cria",
+      "texto": "Templates nascem privados; pastas com enhanced sharing decidem quem usa cada um, e sem elas todos ficam públicos. Criar ou alterar enhanced letterheads exige Modify All Data, e eles são públicos por padrão.",
+      "evidencias": [
+        {
+          "fonte": "src:help-email-templates-lex"
+        },
+        {
+          "fonte": "src:help-enhanced-letterheads-create"
+        }
+      ]
+    },
+    {
+      "tipo": "limite",
+      "titulo": "Assunto e letterhead",
+      "texto": "O assunto aceita até 1.000 caracteres no Lightning e 230 no Classic, contando os merge fields. Letterheads não aparecem no Outlook desktop, e o Email Template Builder não os suporta.",
+      "evidencias": [
+        {
+          "fonte": "src:help-merge-fields-considerations"
+        },
+        {
+          "fonte": "src:help-enhanced-letterheads-create"
+        }
+      ]
+    },
+    {
+      "tipo": "implantacao",
+      "titulo": "Template no modelo de dados",
+      "texto": "No objeto EmailTemplate, o letterhead clássico vem pela referência ao BrandTemplate e o enhanced pela relação EnhancedLetterhead. Ao empacotar ou pôr num change set, só alguns tipos de anexo acompanham o template.",
+      "evidencias": [
+        {
+          "fonte": "src:objref-emailtemplate"
+        },
+        {
+          "fonte": "src:help-email-templates-lex"
+        }
+      ]
+    }
+  ],
   "funcionalidades": [],
   "estado": "desconhecido",
   "nota_estado": "Agrupamento proposto na especificação; fronteira ainda não cruzada com a documentação oficial."

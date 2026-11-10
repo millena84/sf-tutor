@@ -7,6 +7,93 @@
   "descricao": "Configurações que descrevem comportamento dos dados, como índices e históricos.",
   "escopo": "Entram configurações que descrevem o comportamento dos dados sem ser um objeto ou campo em si.",
   "fora_do_escopo": "Histórico de alterações como requisito de rastreabilidade fica em \"Rastreabilidade e histórico\".",
+  "para_iniciantes": {
+    "explicacao": "Além de objetos e campos, a org guarda configurações sobre como os dados se comportam: quais campos têm índice para buscas rápidas, quais guardam histórico de mudanças e quais aparecem no feed. São opções do campo ou do objeto, não dados novos.",
+    "exemplo": "Marcar o campo Código do ERP como External ID cria um índice nele e permite usá-lo como chave no upsert.",
+    "evidencias": [
+      {
+        "fonte": "src:dev-ldv-indexes"
+      },
+      {
+        "fonte": "src:help-external-id-unique-index"
+      }
+    ]
+  },
+  "encadeamento": {
+    "texto": "Vem depois de 'Objetos e entidades' e 'Campos e tipos', porque essas opções ficam no campo ou no objeto. O uso do histórico como trilha de auditoria fica em 'Rastreabilidade e histórico'.",
+    "evidencias": [
+      {
+        "fonte": "src:dev-ldv-indexes"
+      },
+      {
+        "fonte": "src:help-field-history-tracking"
+      }
+    ]
+  },
+  "avancado": [
+    {
+      "tipo": "implantacao",
+      "titulo": "Onde ficam no metadado",
+      "texto": "No CustomField, externalId, unique, caseSensitive, trackHistory, trackFeedHistory e trackTrending; no CustomObject, enableHistory, enableFeeds e historyRetentionPolicy.",
+      "evidencias": [
+        {
+          "fonte": "src:mdapi-customfield"
+        },
+        {
+          "fonte": "src:mdapi-customobject"
+        }
+      ]
+    },
+    {
+      "tipo": "escala",
+      "titulo": "Índices padrão e customizados",
+      "texto": "A plataforma já indexa Id, Name, CreatedDate, Systemmodstamp, RecordTypeId, chaves estrangeiras e Email de contato e lead. External ID e Unique criam índice; índice em outros campos, inclusive padrão, é pedido ao Support. Um índice customizado só é usado se o filtro trouxer menos de 10% do primeiro milhão de registros e menos de 5% do resto.",
+      "evidencias": [
+        {
+          "fonte": "src:dev-ldv-indexes"
+        },
+        {
+          "fonte": "src:help-custom-index-limit"
+        }
+      ]
+    },
+    {
+      "tipo": "limite",
+      "titulo": "O que não indexa",
+      "texto": "Não há índice customizado em text area long ou rich, fórmula não determinística nem texto criptografado. External ID só existe em Auto Number, Email, Number e Text. Por padrão, valores nulos ficam fora do índice. Marcar External ID ou Unique tem limite próprio, com padrão de 7 por objeto.",
+      "evidencias": [
+        {
+          "fonte": "src:dev-ldv-indexes"
+        },
+        {
+          "fonte": "src:help-custom-index-limit"
+        }
+      ]
+    },
+    {
+      "tipo": "decisao",
+      "titulo": "External ID ou Unique",
+      "texto": "External ID cria índice e serve de chave no upsert, mas aceita valores repetidos. Unique impede repetição e também cria índice.",
+      "evidencias": [
+        {
+          "fonte": "src:help-external-id-unique-index"
+        }
+      ]
+    },
+    {
+      "tipo": "limite",
+      "titulo": "Histórico e feed",
+      "texto": "O histórico de campos fica até 18 meses (24 pela API) sem Field Audit Trail. Atualizações de feed tracking com mais de 45 dias e sem interação são apagadas.",
+      "evidencias": [
+        {
+          "fonte": "src:help-field-history-tracking"
+        },
+        {
+          "fonte": "src:help-chatter-feeds-overview"
+        }
+      ]
+    }
+  ],
   "funcionalidades": [],
   "estado": "desconhecido",
   "nota_estado": "Agrupamento proposto na especificação; fronteira ainda não cruzada com a documentação oficial."
