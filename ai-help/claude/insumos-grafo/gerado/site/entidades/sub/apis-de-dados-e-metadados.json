@@ -1,5 +1,79 @@
 {
   "classificacao": "cls:integracao-apis-e-eventos",
+  "derivado": {
+    "dependencias": [],
+    "funcionalidades": [
+      {
+        "alertas": [
+          "Até 15.000 lotes por 24 horas móveis, compartilhados entre 1.0 e 2.0 (na 2.0, só jobs de ingestão consomem).",
+          "Ingestão: até 150 milhões de registros por 24 horas; na 2.0, até 150 MB de CSV em base64 por job (subir cerca de 100 MB).",
+          "Bulk API 2.0: até 10.000 jobs de consulta e 1 TB de resultados por 24 horas, acompanháveis em /limits.",
+          "Jobs terminados há mais de 7 dias são apagados; resultados ficam disponíveis por 7 dias."
+        ],
+        "exemplo": "Uma migração de 2 milhões de contatos sobe em jobs de ingestão da Bulk API 2.0, com arquivos CSV de cerca de 100 MB.",
+        "id": "func:bulk-api",
+        "principal": true
+      },
+      {
+        "alertas": [
+          "CORS controla chamadas que chegam à org (vindas do navegador); não libera chamadas que saem da org (para isso: named credentials ou sites remotos)."
+        ],
+        "exemplo": "Um portal em https://app.exemplo.com chama a API REST da org; a origem precisa estar na lista de CORS.",
+        "id": "func:cors",
+        "principal": true
+      },
+      {
+        "exemplo": "Um objeto customizado e seu layout são recuperados da sandbox com retrieve() e implantados em produção com deploy().",
+        "id": "func:metadata-api",
+        "principal": true
+      },
+      {
+        "alertas": [
+          "Conta no limite diário de requisições de API da org (ver Limites de API e alocações).",
+          "IDs diferenciam maiúsculas de minúsculas; nomes de objeto e de campo, não."
+        ],
+        "exemplo": "Um app de pedidos busca uma conta por Id e cria uma oportunidade com duas requisições HTTP; com o recurso Composite, as duas viram uma só chamada.",
+        "id": "func:rest-api",
+        "pre_requisitos": [
+          "App cliente autorizado por external client app ou connected app, com fluxo OAuth 2.0.",
+          "Org com acesso à API e usuário com acesso à API habilitado."
+        ],
+        "principal": true
+      },
+      {
+        "alertas": [
+          "Conta no limite diário de requisições de API da org (ver Limites de API e alocações).",
+          "O Enterprise WSDL precisa ser gerado de novo quando objetos ou campos customizados mudam."
+        ],
+        "exemplo": "Um ERP gera o cliente a partir do Enterprise WSDL da org; quando um campo customizado é criado, o WSDL precisa ser gerado de novo.",
+        "id": "func:soap-api",
+        "pre_requisitos": [
+          "Edição Enterprise, Performance, Unlimited ou Developer.",
+          "Permissão API Enabled no usuário."
+        ],
+        "principal": true
+      },
+      {
+        "exemplo": "Um editor de código consulta, via SOQL na Tooling API, só a classe Apex que o desenvolvedor abriu, em vez de recuperar todos os metadados.",
+        "id": "func:tooling-api",
+        "principal": true
+      }
+    ],
+    "metadata_types": [
+      {
+        "estrutura": "completa",
+        "funcionalidades": [
+          "func:cors"
+        ],
+        "id": "mdt:CorsWhitelistOrigin",
+        "nota_suporte": null,
+        "suporte_cli": "suportado"
+      }
+    ],
+    "nota": "Calculado pelo gerador a partir do catálogo; não é cadastro.",
+    "objetos_api": [],
+    "temas_sem_funcionalidade": []
+  },
   "descricao": "APIs para ler e gravar registros e metadados.",
   "escopo": "Entram as APIs que leem e gravam registros e metadados na org.",
   "estado": "desconhecido",

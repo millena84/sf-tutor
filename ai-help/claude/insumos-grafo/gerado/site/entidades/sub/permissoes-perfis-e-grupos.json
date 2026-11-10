@@ -1,5 +1,178 @@
 {
   "classificacao": "cls:acesso-identidade-e-seguranca",
+  "derivado": {
+    "dependencias": [
+      {
+        "destino": "obj:PermissionSetGroup",
+        "destino_no_tema": true,
+        "estado": "verificado",
+        "origem": "obj:PermissionSet",
+        "rel": "rel:permissionset-permissionsetgroup",
+        "via": "PermissionSetGroupId"
+      },
+      {
+        "destino": "obj:Profile",
+        "destino_no_tema": true,
+        "estado": "verificado",
+        "origem": "obj:PermissionSet",
+        "rel": "rel:permissionset-profile",
+        "via": "ProfileId"
+      },
+      {
+        "destino": "obj:User",
+        "destino_no_tema": false,
+        "estado": "verificado",
+        "origem": "obj:PermissionSetAssignment",
+        "rel": "rel:psa-assignee-user",
+        "via": "AssigneeId"
+      },
+      {
+        "destino": "obj:PermissionSet",
+        "destino_no_tema": true,
+        "estado": "verificado",
+        "origem": "obj:PermissionSetAssignment",
+        "rel": "rel:psa-permissionset",
+        "via": "PermissionSetId"
+      },
+      {
+        "destino": "obj:PermissionSetGroup",
+        "destino_no_tema": true,
+        "estado": "verificado",
+        "origem": "obj:PermissionSetAssignment",
+        "rel": "rel:psa-permissionsetgroup",
+        "via": "PermissionSetGroupId"
+      }
+    ],
+    "funcionalidades": [
+      {
+        "exemplo": "Todo usuário tem exatamente um perfil, como 'Vendedor padrão'.",
+        "id": "func:perfis",
+        "principal": true
+      },
+      {
+        "alertas": [
+          "Só grupos com status Updated podem ser atribuídos; usuários guest, de integração e de sistema só podem ser atribuídos pelo objeto PermissionSetAssignment (Ajuda)."
+        ],
+        "exemplo": "O grupo 'Analista de Crédito' reúne três permission sets e é atribuído em um passo.",
+        "id": "func:permission-set-groups",
+        "pre_requisitos": [
+          "Edições (Ajuda): Contact Manager, Group, Essentials, Professional, Enterprise, Performance, Unlimited, Developer e Database.com.",
+          "Criar: Manage Profiles and Permission Sets."
+        ],
+        "principal": true
+      },
+      {
+        "alertas": [
+          "A atribuição a usuários é um registro de PermissionSetAssignment, não parte do XML."
+        ],
+        "exemplo": "O permission set 'Gestão de Contratos' dá leitura e edição de contratos só para quem precisa.",
+        "id": "func:permission-sets",
+        "pre_requisitos": [
+          "Edições (Ajuda): Essentials, Contact Manager, Professional, Group, Enterprise, Performance, Unlimited, Developer e Database.com.",
+          "Criar: Manage Profiles and Permission Sets; atribuir: Assign Permission Sets."
+        ],
+        "principal": true
+      }
+    ],
+    "metadata_types": [
+      {
+        "estrutura": "completa",
+        "funcionalidades": [
+          "func:permission-sets"
+        ],
+        "id": "mdt:PermissionSet",
+        "nota_suporte": null,
+        "suporte_cli": "suportado"
+      },
+      {
+        "estrutura": "completa",
+        "funcionalidades": [
+          "func:permission-set-groups"
+        ],
+        "id": "mdt:PermissionSetGroup",
+        "nota_suporte": null,
+        "suporte_cli": "suportado"
+      },
+      {
+        "estrutura": "parcial",
+        "funcionalidades": [
+          "func:perfis"
+        ],
+        "id": "mdt:Profile",
+        "nota_suporte": null,
+        "suporte_cli": "suportado"
+      }
+    ],
+    "nota": "Calculado pelo gerador a partir do catálogo; não é cadastro.",
+    "objetos_api": [
+      {
+        "apis": [
+          {
+            "api": "padrao",
+            "estado": "verificado"
+          },
+          {
+            "api": "tooling",
+            "estado": "verificado"
+          }
+        ],
+        "funcionalidades": [
+          "func:permission-sets"
+        ],
+        "id": "obj:PermissionSet"
+      },
+      {
+        "apis": [
+          {
+            "api": "padrao",
+            "estado": "verificado"
+          },
+          {
+            "api": "tooling",
+            "estado": "verificado"
+          }
+        ],
+        "funcionalidades": [
+          "func:permission-set-groups",
+          "func:permission-sets"
+        ],
+        "id": "obj:PermissionSetAssignment"
+      },
+      {
+        "apis": [
+          {
+            "api": "padrao",
+            "estado": "verificado"
+          },
+          {
+            "api": "tooling",
+            "estado": "verificado"
+          }
+        ],
+        "funcionalidades": [
+          "func:permission-set-groups"
+        ],
+        "id": "obj:PermissionSetGroup"
+      },
+      {
+        "apis": [
+          {
+            "api": "padrao",
+            "estado": "verificado"
+          },
+          {
+            "api": "tooling",
+            "estado": "verificado"
+          }
+        ],
+        "funcionalidades": [
+          "func:perfis"
+        ],
+        "id": "obj:Profile"
+      }
+    ],
+    "temas_sem_funcionalidade": []
+  },
   "descricao": "O que um usuário pode fazer: perfis, permission sets e grupos de permission sets.",
   "escopo": "Entram os mecanismos que dizem o que um usuário pode fazer: perfis, permission sets e grupos de permission sets.",
   "estado": "desconhecido",

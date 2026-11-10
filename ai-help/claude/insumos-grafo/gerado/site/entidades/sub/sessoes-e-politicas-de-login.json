@@ -1,5 +1,109 @@
 {
   "classificacao": "cls:acesso-identidade-e-seguranca",
+  "derivado": {
+    "dependencias": [
+      {
+        "destino": "obj:User",
+        "destino_no_tema": false,
+        "estado": "verificado",
+        "origem": "obj:LoginHistory",
+        "rel": "rel:loginhistory-user",
+        "via": "UserId"
+      },
+      {
+        "destino": "obj:User",
+        "destino_no_tema": false,
+        "estado": "verificado",
+        "origem": "obj:UserLogin",
+        "rel": "rel:userlogin-user",
+        "via": "UserId"
+      }
+    ],
+    "funcionalidades": [
+      {
+        "alertas": [
+          "Não existe um item 'IpLogin': restrições de IP por perfil estão em Profile.loginIpRanges; o IP de cada tentativa está em LoginHistory.SourceIp.",
+          "A tela de Setup mostra até 20.000 registros dos últimos 6 meses; o download cobre os últimos 6 meses (Ajuda). Retenção do objeto LoginHistory na API não confirmada."
+        ],
+        "exemplo": "Verificar de qual IP veio uma tentativa de login que falhou ontem.",
+        "id": "func:estado-e-historico-de-login",
+        "pre_requisitos": [
+          "Edições (Ajuda): Contact Manager, Group, Professional, Enterprise, Performance, Unlimited e Developer.",
+          "Monitor Login History ou Manage Users."
+        ],
+        "principal": true
+      },
+      {
+        "exemplo": "Todo usuário tem exatamente um perfil, como 'Vendedor padrão'.",
+        "id": "func:perfis",
+        "principal": false,
+        "tema_principal": "sub:permissoes-perfis-e-grupos"
+      }
+    ],
+    "metadata_types": [
+      {
+        "estrutura": "parcial",
+        "funcionalidades": [
+          "func:perfis"
+        ],
+        "id": "mdt:Profile",
+        "nota_suporte": null,
+        "suporte_cli": "suportado"
+      }
+    ],
+    "nota": "Calculado pelo gerador a partir do catálogo; não é cadastro.",
+    "objetos_api": [
+      {
+        "apis": [
+          {
+            "api": "padrao",
+            "estado": "verificado"
+          },
+          {
+            "api": "tooling",
+            "estado": "nao_exposto"
+          }
+        ],
+        "funcionalidades": [
+          "func:estado-e-historico-de-login"
+        ],
+        "id": "obj:LoginHistory"
+      },
+      {
+        "apis": [
+          {
+            "api": "padrao",
+            "estado": "verificado"
+          },
+          {
+            "api": "tooling",
+            "estado": "verificado"
+          }
+        ],
+        "funcionalidades": [
+          "func:perfis"
+        ],
+        "id": "obj:Profile"
+      },
+      {
+        "apis": [
+          {
+            "api": "padrao",
+            "estado": "verificado"
+          },
+          {
+            "api": "tooling",
+            "estado": "desconhecido"
+          }
+        ],
+        "funcionalidades": [
+          "func:estado-e-historico-de-login"
+        ],
+        "id": "obj:UserLogin"
+      }
+    ],
+    "temas_sem_funcionalidade": []
+  },
   "descricao": "Regras de sessão, restrições de login e estado de acesso dos usuários.",
   "escopo": "Entram as regras de sessão, as restrições de login e o estado de acesso dos usuários.",
   "estado": "desconhecido",

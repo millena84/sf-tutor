@@ -1,5 +1,304 @@
 {
+  "avancado": [
+    {
+      "evidencias": [
+        {
+          "fonte": "src:architect-build-forms",
+          "secao": "Building Forms"
+        }
+      ],
+      "texto": "Para criar, editar ou ver um único objeto numa página de registro, o guia de decisão indica Dynamic Forms: é o caminho com menos armadilhas, mas o menos flexível; não faz navegação em várias telas nem reúso e não está disponível em páginas do Experience Cloud. Assistentes com várias telas, sem exigência rígida de marca, ficam com Screen Flow. Experiência sofisticada e estilo detalhado pedem LWC, com mais liberdade e menos proteções. Omnistudio atende clientes de Industries e exige o pacote correspondente.",
+      "tipo": "decisao",
+      "titulo": "Qual ferramenta usar para um formulário"
+    },
+    {
+      "evidencias": [
+        {
+          "fonte": "src:security-fls",
+          "nota": "Lida na versão 58.0; a página atual não exibiu o artigo."
+        },
+        {
+          "fonte": "src:architect-build-forms",
+          "secao": "Sanitize Inputs"
+        }
+      ],
+      "texto": "Page layout e segurança em nível de campo se combinam e vale a configuração mais restritiva: um campo obrigatório no layout, mas somente leitura na segurança de campo, continua somente leitura. Campos universalmente obrigatórios aparecem na edição de qualquer forma. Dynamic Forms e LWC rodam no contexto do usuário; Screen Flow também, por padrão, mas pode rodar em contexto de sistema, o que deve ficar restrito a usuários confiáveis.",
+      "tipo": "seguranca",
+      "titulo": "A página não é controle de acesso"
+    },
+    {
+      "evidencias": [
+        {
+          "fonte": "src:architect-build-forms",
+          "secao": "Consider UI Test Automation Requirements"
+        }
+      ],
+      "texto": "Só LWC permite testes unitários escritos, por exemplo com Jest. Dynamic Forms e Screen Flow dependem de automação de interface de ponta a ponta, que confere o resultado na tela, mas não as saídas de métodos.",
+      "tipo": "testes",
+      "titulo": "Como testar cada abordagem"
+    },
+    {
+      "evidencias": [
+        {
+          "fonte": "src:architect-build-forms"
+        }
+      ],
+      "texto": "Dynamic Forms, Screen Flows e LWC podem ir por pacotes gerenciados (1GP e 2GP), pacotes desbloqueados, change sets e DevOps Center. Omnistudio usa o IDX Workbench e não aceita empacotamento, o que pesa na escolha quando a entrega é por pacote.",
+      "tipo": "implantacao",
+      "titulo": "Como levar entre ambientes"
+    }
+  ],
+  "derivado": {
+    "dependencias": [
+      {
+        "destino": "obj:EntityDefinition",
+        "destino_no_tema": false,
+        "estado": "verificado",
+        "origem": "obj:FlexiPage",
+        "rel": "rel:flexipage-entitydefinition",
+        "via": "EntityDefinitionId"
+      },
+      {
+        "destino": "obj:RecordType",
+        "destino_no_tema": true,
+        "estado": "verificado",
+        "origem": "obj:PathAssistant",
+        "rel": "rel:pathassistant-recordtype",
+        "via": "RecordTypeId"
+      },
+      {
+        "destino": "obj:EntityDefinition",
+        "destino_no_tema": false,
+        "estado": "verificado",
+        "origem": "obj:QuickActionDefinition",
+        "rel": "rel:quickaction-entitydefinition",
+        "via": "EntityDefinitionId"
+      },
+      {
+        "destino": "obj:RecordType",
+        "destino_no_tema": true,
+        "estado": "verificado",
+        "origem": "obj:QuickActionDefinition",
+        "rel": "rel:quickaction-recordtype",
+        "via": "TargetRecordTypeId"
+      }
+    ],
+    "funcionalidades": [
+      {
+        "alertas": [
+          "Usar exige a permissão Lightning Console User e o perfil atribuído ao app.",
+          "O Service Console é atribuído automaticamente a todos os perfis; ajuste as atribuições."
+        ],
+        "exemplo": "No Service Console, o caso abre numa aba e o contato e a conta relacionados abrem em subabas.",
+        "id": "func:apps-de-console",
+        "pre_requisitos": [
+          "Gerenciar apps: Customize Application.",
+          "Edições: Essentials, Professional, Enterprise, Performance, Unlimited e Developer; o Service Console exige Service Cloud."
+        ],
+        "principal": true
+      },
+      {
+        "exemplo": "A tab 'Contratos de Serviço' no app de Operações.",
+        "id": "func:tabs",
+        "pre_requisitos": [
+          "Edições variam por tipo de tab (Ajuda); tabs de Lightning page: todas as edições exceto Database.com."
+        ],
+        "principal": true
+      },
+      {
+        "exemplo": "Uma página de registro de Contrato com abas e um componente de histórico.",
+        "id": "func:lightning-pages",
+        "pre_requisitos": [
+          "Edições (Ajuda): Group, Essentials, Professional, Enterprise, Performance, Unlimited e Developer.",
+          "Customize Application."
+        ],
+        "principal": true
+      },
+      {
+        "exemplo": "Contratos 'Manutenção' e 'Licenciamento' com listas de status diferentes.",
+        "id": "func:tipos-de-registro",
+        "principal": false,
+        "tema_principal": "sub:tipos-de-registro-e-processos-de-negocio"
+      },
+      {
+        "exemplo": "'Registrar renovação' a partir de um contrato, abrindo um flow.",
+        "id": "func:acoes-rapidas",
+        "pre_requisitos": [
+          "Criar ações: Customize Application."
+        ],
+        "principal": true
+      },
+      {
+        "alertas": [
+          "Um Path por combinação de objeto, picklist e tipo de registro (Ajuda)."
+        ],
+        "exemplo": "Etapas de um contrato: Rascunho, Em análise, Assinado.",
+        "id": "func:path",
+        "pre_requisitos": [
+          "Modify All Data ou Customize Application."
+        ],
+        "principal": true
+      }
+    ],
+    "metadata_types": [
+      {
+        "estrutura": "parcial",
+        "funcionalidades": [
+          "func:tabs"
+        ],
+        "id": "mdt:CustomTab",
+        "nota_suporte": null,
+        "suporte_cli": "suportado"
+      },
+      {
+        "estrutura": "parcial",
+        "funcionalidades": [
+          "func:lightning-pages"
+        ],
+        "id": "mdt:FlexiPage",
+        "nota_suporte": null,
+        "suporte_cli": "suportado"
+      },
+      {
+        "estrutura": "completa",
+        "funcionalidades": [
+          "func:path"
+        ],
+        "id": "mdt:PathAssistant",
+        "nota_suporte": null,
+        "suporte_cli": "suportado"
+      },
+      {
+        "estrutura": "parcial",
+        "funcionalidades": [
+          "func:acoes-rapidas"
+        ],
+        "id": "mdt:QuickAction",
+        "nota_suporte": null,
+        "suporte_cli": "suportado"
+      },
+      {
+        "estrutura": "parcial",
+        "funcionalidades": [
+          "func:tipos-de-registro"
+        ],
+        "id": "mdt:RecordType",
+        "nota_suporte": null,
+        "suporte_cli": "suportado"
+      }
+    ],
+    "nota": "Calculado pelo gerador a partir do catálogo; não é cadastro.",
+    "objetos_api": [
+      {
+        "apis": [
+          {
+            "api": "tooling",
+            "estado": "verificado"
+          },
+          {
+            "api": "padrao",
+            "estado": "desconhecido"
+          }
+        ],
+        "funcionalidades": [
+          "func:tabs"
+        ],
+        "id": "obj:CustomTab"
+      },
+      {
+        "apis": [
+          {
+            "api": "tooling",
+            "estado": "verificado"
+          },
+          {
+            "api": "padrao",
+            "estado": "desconhecido"
+          }
+        ],
+        "funcionalidades": [
+          "func:lightning-pages"
+        ],
+        "id": "obj:FlexiPage"
+      },
+      {
+        "apis": [
+          {
+            "api": "tooling",
+            "estado": "verificado"
+          },
+          {
+            "api": "padrao",
+            "estado": "desconhecido"
+          }
+        ],
+        "funcionalidades": [
+          "func:path"
+        ],
+        "id": "obj:PathAssistant"
+      },
+      {
+        "apis": [
+          {
+            "api": "tooling",
+            "estado": "verificado"
+          },
+          {
+            "api": "padrao",
+            "estado": "desconhecido"
+          }
+        ],
+        "funcionalidades": [
+          "func:acoes-rapidas"
+        ],
+        "id": "obj:QuickActionDefinition"
+      },
+      {
+        "apis": [
+          {
+            "api": "padrao",
+            "estado": "verificado"
+          },
+          {
+            "api": "tooling",
+            "estado": "verificado"
+          }
+        ],
+        "funcionalidades": [
+          "func:tipos-de-registro"
+        ],
+        "id": "obj:RecordType"
+      }
+    ],
+    "temas_sem_funcionalidade": [
+      "sub:experiencias-web-portais-e-mobile",
+      "sub:acessibilidade-e-personalizacao"
+    ]
+  },
   "descricao": "Reúne o que a pessoa usuária vê e usa: apps, navegação, páginas, ações e orientação visual.",
+  "encadeamento": {
+    "evidencias": [
+      {
+        "fonte": "src:help-custom-tabs"
+      },
+      {
+        "fonte": "src:help-lightning-pages"
+      },
+      {
+        "fonte": "src:help-app-builder"
+      },
+      {
+        "fonte": "src:help-quick-actions"
+      },
+      {
+        "fonte": "src:help-path-create"
+      },
+      {
+        "fonte": "src:help-console-intro"
+      }
+    ],
+    "texto": "As abas são as entradas de navegação de um app e levam a objetos, páginas, componentes ou endereços. Ao abrir um registro, uma Lightning page organiza o que aparece, montada com componentes no Lightning App Builder. Ações rápidas são botões que abrem um formulário curto ou executam algo no contexto do registro, e o Path mostra as etapas de um processo a partir de um campo picklist. Apps de console colocam vários registros em abas e subabas ao mesmo tempo. Sites, portais e mobile levam a experiência para fora do app interno; esse tema interno ainda não tem funcionalidades catalogadas."
+  },
   "escopo": "Entra o que a pessoa usuária vê e usa: apps, navegação, tabs, páginas de registro, componentes, ações, orientação visual e experiências externas e móveis.",
   "estado": "desconhecido",
   "fora_do_escopo": "A estrutura de dados por trás da tela fica em \"Dados e modelagem\". Quem pode ver cada item fica em \"Acesso, identidade e segurança\".",
@@ -8,6 +307,36 @@
   "nome": "Interface e experiência do usuário",
   "nome_curto": "Interface (UX)",
   "nota_estado": "Tema criado pelo projeto (00-especificacao-grafo.md), não é nomenclatura oficial da Salesforce. Cruzado em 2026-11-09 com áreas da documentação oficial listadas nas referências; a correspondência é parcial e o recorte continua sendo do projeto.",
+  "para_iniciantes": {
+    "analogia": {
+      "limite": "Na loja, tirar um produto da vitrine o esconde. Na Salesforce, tirar um campo da página não é controle de acesso: quem decide se a pessoa pode ver ou editar o campo é a segurança em nível de campo.",
+      "texto": "Pense numa loja: os dados são o estoque no depósito; a interface é a vitrine, as prateleiras e as placas que levam cada cliente ao que precisa."
+    },
+    "evidencias": [
+      {
+        "fonte": "src:help-lightning-pages"
+      },
+      {
+        "fonte": "src:help-custom-tabs"
+      },
+      {
+        "fonte": "src:help-quick-actions"
+      },
+      {
+        "fonte": "src:help-path-create"
+      },
+      {
+        "fonte": "src:security-fls",
+        "nota": "Segurança de campo prevalece sobre o layout."
+      }
+    ],
+    "exemplo": "Uma vendedora abre o app de vendas, clica na aba Oportunidades e abre uma oportunidade. Na mesma página ela vê os campos principais, um botão de ação rápida e a barra com as etapas da venda.",
+    "explicacao": "É o que a pessoa vê e usa ao trabalhar na Salesforce: o app aberto, as abas de navegação, a página de um registro com seus campos e componentes, os botões de ação e as etapas que guiam um processo. Configurar este tema é decidir o que aparece, onde e em que ordem, sem mudar os dados guardados por trás.",
+    "por_onde_comecar": [
+      "func:lightning-pages",
+      "func:tabs"
+    ]
+  },
   "referencias_oficiais": [
     {
       "fonte": "src:help-setup-company",

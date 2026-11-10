@@ -1,4 +1,653 @@
 {
+  "derivado": {
+    "dependencias": [
+      {
+        "destino": "obj:Account",
+        "destino_no_tema": false,
+        "estado": "verificado",
+        "origem": "obj:AccountTeamMember",
+        "rel": "rel:atm-account",
+        "via": "AccountId"
+      },
+      {
+        "destino": "obj:User",
+        "destino_no_tema": true,
+        "estado": "verificado",
+        "origem": "obj:AccountTeamMember",
+        "rel": "rel:atm-user",
+        "via": "UserId"
+      },
+      {
+        "destino": "mdt:PermissionSet",
+        "destino_no_tema": true,
+        "estado": "verificado",
+        "origem": "mdt:ConnectedApp",
+        "rel": "rel:connectedapp-permissionset",
+        "via": "permissionSetName"
+      },
+      {
+        "destino": "mdt:Profile",
+        "destino_no_tema": true,
+        "estado": "verificado",
+        "origem": "mdt:ConnectedApp",
+        "rel": "rel:connectedapp-profile",
+        "via": "profileName"
+      },
+      {
+        "destino": "obj:User",
+        "destino_no_tema": true,
+        "estado": "verificado",
+        "origem": "obj:LoginHistory",
+        "rel": "rel:loginhistory-user",
+        "via": "UserId"
+      },
+      {
+        "destino": "obj:AuthProvider",
+        "destino_no_tema": true,
+        "estado": "verificado",
+        "origem": "obj:NamedCredential",
+        "rel": "rel:namedcredential-authprovider",
+        "via": "AuthProviderId"
+      },
+      {
+        "destino": "mdt:ConnectedApp",
+        "destino_no_tema": true,
+        "estado": "verificado",
+        "origem": "mdt:OauthCustomScope",
+        "rel": "rel:oauthcustomscope-connectedapp",
+        "via": "assignedTo"
+      },
+      {
+        "destino": "obj:User",
+        "destino_no_tema": true,
+        "estado": "verificado",
+        "origem": "obj:OauthToken",
+        "rel": "rel:oauthtoken-user",
+        "via": "UserId"
+      },
+      {
+        "destino": "obj:Opportunity",
+        "destino_no_tema": false,
+        "estado": "verificado",
+        "origem": "obj:OpportunityTeamMember",
+        "rel": "rel:otm-opportunity",
+        "via": "OpportunityId"
+      },
+      {
+        "destino": "obj:User",
+        "destino_no_tema": true,
+        "estado": "verificado",
+        "origem": "obj:OpportunityTeamMember",
+        "rel": "rel:otm-user",
+        "via": "UserId"
+      },
+      {
+        "destino": "obj:PermissionSetGroup",
+        "destino_no_tema": true,
+        "estado": "verificado",
+        "origem": "obj:PermissionSet",
+        "rel": "rel:permissionset-permissionsetgroup",
+        "via": "PermissionSetGroupId"
+      },
+      {
+        "destino": "obj:Profile",
+        "destino_no_tema": true,
+        "estado": "verificado",
+        "origem": "obj:PermissionSet",
+        "rel": "rel:permissionset-profile",
+        "via": "ProfileId"
+      },
+      {
+        "destino": "obj:User",
+        "destino_no_tema": true,
+        "estado": "verificado",
+        "origem": "obj:PermissionSetAssignment",
+        "rel": "rel:psa-assignee-user",
+        "via": "AssigneeId"
+      },
+      {
+        "destino": "obj:PermissionSet",
+        "destino_no_tema": true,
+        "estado": "verificado",
+        "origem": "obj:PermissionSetAssignment",
+        "rel": "rel:psa-permissionset",
+        "via": "PermissionSetId"
+      },
+      {
+        "destino": "obj:PermissionSetGroup",
+        "destino_no_tema": true,
+        "estado": "verificado",
+        "origem": "obj:PermissionSetAssignment",
+        "rel": "rel:psa-permissionsetgroup",
+        "via": "PermissionSetGroupId"
+      },
+      {
+        "destino": "obj:Profile",
+        "destino_no_tema": true,
+        "estado": "verificado",
+        "origem": "obj:User",
+        "rel": "rel:user-profile",
+        "via": "ProfileId"
+      },
+      {
+        "destino": "obj:User",
+        "destino_no_tema": true,
+        "estado": "verificado",
+        "origem": "obj:UserLogin",
+        "rel": "rel:userlogin-user",
+        "via": "UserId"
+      }
+    ],
+    "funcionalidades": [
+      {
+        "alertas": [
+          "Usuários não podem ser excluídos por completo: são desativados (IsActive). A API não oferece delete() em User e a Ajuda confirma."
+        ],
+        "exemplo": "Uma nova analista entra na empresa: o administrador cria o usuário com o perfil adequado e depois atribui permission sets extras.",
+        "id": "func:usuarios",
+        "pre_requisitos": [
+          "Edições (Ajuda): Contact Manager, Essentials, Group, Professional, Enterprise, Performance, Unlimited, Developer e Database.com.",
+          "Ver a lista: View Setup and Configuration; gerenciar: Manage Users."
+        ],
+        "principal": true
+      },
+      {
+        "alertas": [
+          "O segredo do app (consumerSecret) não vem no retrieve: é exportado como marcador."
+        ],
+        "exemplo": "Usuários de um portal entram com a conta Microsoft; uma credencial externa usa o mesmo provedor para chamar uma API.",
+        "id": "func:auth-providers",
+        "principal": false,
+        "tema_principal": "sub:autenticacao-de-integracoes"
+      },
+      {
+        "alertas": [
+          "Criação de connected apps restrita a partir do Spring '26 (página oficial); para novas integrações, a Salesforce recomenda external client apps."
+        ],
+        "exemplo": "Um sistema de BI se conecta por OAuth com a consumer key de um connected app que só usuários com um permission set podem usar.",
+        "id": "func:connected-apps",
+        "principal": false,
+        "tema_principal": "sub:autenticacao-de-integracoes"
+      },
+      {
+        "exemplo": "Um app recebe o escopo customizado 'pedidos_leitura'; um handler troca o token do provedor corporativo por um token da Salesforce.",
+        "id": "func:oauth-escopos-e-troca-de-token",
+        "principal": false,
+        "tema_principal": "sub:autenticacao-de-integracoes"
+      },
+      {
+        "exemplo": "Funcionários entram pelo provedor corporativo; a asserção traz o Federation ID e o usuário é criado no primeiro login.",
+        "id": "func:sso-saml",
+        "principal": true
+      },
+      {
+        "alertas": [
+          "Não existe um item 'IpLogin': restrições de IP por perfil estão em Profile.loginIpRanges; o IP de cada tentativa está em LoginHistory.SourceIp.",
+          "A tela de Setup mostra até 20.000 registros dos últimos 6 meses; o download cobre os últimos 6 meses (Ajuda). Retenção do objeto LoginHistory na API não confirmada."
+        ],
+        "exemplo": "Verificar de qual IP veio uma tentativa de login que falhou ontem.",
+        "id": "func:estado-e-historico-de-login",
+        "pre_requisitos": [
+          "Edições (Ajuda): Contact Manager, Group, Professional, Enterprise, Performance, Unlimited e Developer.",
+          "Monitor Login History ou Manage Users."
+        ],
+        "principal": true
+      },
+      {
+        "exemplo": "Todo usuário tem exatamente um perfil, como 'Vendedor padrão'.",
+        "id": "func:perfis",
+        "principal": true
+      },
+      {
+        "alertas": [
+          "Só grupos com status Updated podem ser atribuídos; usuários guest, de integração e de sistema só podem ser atribuídos pelo objeto PermissionSetAssignment (Ajuda)."
+        ],
+        "exemplo": "O grupo 'Analista de Crédito' reúne três permission sets e é atribuído em um passo.",
+        "id": "func:permission-set-groups",
+        "pre_requisitos": [
+          "Edições (Ajuda): Contact Manager, Group, Essentials, Professional, Enterprise, Performance, Unlimited, Developer e Database.com.",
+          "Criar: Manage Profiles and Permission Sets."
+        ],
+        "principal": true
+      },
+      {
+        "alertas": [
+          "A atribuição a usuários é um registro de PermissionSetAssignment, não parte do XML."
+        ],
+        "exemplo": "O permission set 'Gestão de Contratos' dá leitura e edição de contratos só para quem precisa.",
+        "id": "func:permission-sets",
+        "pre_requisitos": [
+          "Edições (Ajuda): Essentials, Contact Manager, Professional, Group, Enterprise, Performance, Unlimited, Developer e Database.com.",
+          "Criar: Manage Profiles and Permission Sets; atribuir: Assign Permission Sets."
+        ],
+        "principal": true
+      },
+      {
+        "exemplo": "Na conta ACME, o executivo de contas é dono e o engenheiro de pré-venda entra na equipe com acesso de leitura.",
+        "id": "func:equipes-de-conta-e-oportunidade",
+        "pre_requisitos": [
+          "Equipes de conta: Enterprise, Unlimited e Performance, com o recurso habilitado.",
+          "Equipes de oportunidade: team selling habilitado."
+        ],
+        "principal": false,
+        "tema_principal": "sub:vendas"
+      },
+      {
+        "alertas": [
+          "InboundCertificate só existe com a permissão MutualAuthentication habilitada na org."
+        ],
+        "exemplo": "Um certificado autoassinado de 4096 bits assina o JWT usado por uma credencial externa.",
+        "id": "func:certificados",
+        "principal": true
+      },
+      {
+        "alertas": [
+          "Desde a 56.0, a autenticação mora na credencial externa; named credentials do tipo Legacy ainda usam os campos antigos."
+        ],
+        "exemplo": "Um Flow chama 'callout:ERP/pedidos'; a named credential ERP guarda a URL, e a credencial externa associada guarda o OAuth.",
+        "id": "func:named-credentials",
+        "principal": false,
+        "tema_principal": "sub:credenciais"
+      }
+    ],
+    "metadata_types": [
+      {
+        "estrutura": "completa",
+        "funcionalidades": [
+          "func:equipes-de-conta-e-oportunidade"
+        ],
+        "id": "mdt:AccountSettings",
+        "nota_suporte": null,
+        "suporte_cli": "suportado"
+      },
+      {
+        "estrutura": "completa",
+        "funcionalidades": [
+          "func:auth-providers"
+        ],
+        "id": "mdt:AuthProvider",
+        "nota_suporte": null,
+        "suporte_cli": "suportado"
+      },
+      {
+        "estrutura": "completa",
+        "funcionalidades": [
+          "func:certificados"
+        ],
+        "id": "mdt:Certificate",
+        "nota_suporte": null,
+        "suporte_cli": "suportado"
+      },
+      {
+        "estrutura": "completa",
+        "funcionalidades": [
+          "func:connected-apps"
+        ],
+        "id": "mdt:ConnectedApp",
+        "nota_suporte": null,
+        "suporte_cli": "suportado"
+      },
+      {
+        "estrutura": "completa",
+        "funcionalidades": [
+          "func:connected-apps"
+        ],
+        "id": "mdt:ConnectedAppSettings",
+        "nota_suporte": null,
+        "suporte_cli": "suportado"
+      },
+      {
+        "estrutura": "completa",
+        "funcionalidades": [
+          "func:named-credentials"
+        ],
+        "id": "mdt:ExternalAuthIdentityProvider",
+        "nota_suporte": null,
+        "suporte_cli": "suportado"
+      },
+      {
+        "estrutura": "completa",
+        "funcionalidades": [
+          "func:named-credentials"
+        ],
+        "id": "mdt:ExternalCredential",
+        "nota_suporte": null,
+        "suporte_cli": "suportado"
+      },
+      {
+        "estrutura": "completa",
+        "funcionalidades": [
+          "func:certificados"
+        ],
+        "id": "mdt:InboundCertificate",
+        "nota_suporte": null,
+        "suporte_cli": "suportado"
+      },
+      {
+        "estrutura": "completa",
+        "funcionalidades": [
+          "func:named-credentials"
+        ],
+        "id": "mdt:NamedCredential",
+        "nota_suporte": null,
+        "suporte_cli": "suportado"
+      },
+      {
+        "estrutura": "completa",
+        "funcionalidades": [
+          "func:oauth-escopos-e-troca-de-token"
+        ],
+        "id": "mdt:OauthCustomScope",
+        "nota_suporte": null,
+        "suporte_cli": "suportado"
+      },
+      {
+        "estrutura": "completa",
+        "funcionalidades": [
+          "func:oauth-escopos-e-troca-de-token"
+        ],
+        "id": "mdt:OauthOidcSettings",
+        "nota_suporte": null,
+        "suporte_cli": "suportado"
+      },
+      {
+        "estrutura": "completa",
+        "funcionalidades": [
+          "func:oauth-escopos-e-troca-de-token"
+        ],
+        "id": "mdt:OauthTokenExchangeHandler",
+        "nota_suporte": null,
+        "suporte_cli": "suportado"
+      },
+      {
+        "estrutura": "completa",
+        "funcionalidades": [
+          "func:equipes-de-conta-e-oportunidade"
+        ],
+        "id": "mdt:OpportunitySettings",
+        "nota_suporte": null,
+        "suporte_cli": "suportado"
+      },
+      {
+        "estrutura": "completa",
+        "funcionalidades": [
+          "func:permission-sets"
+        ],
+        "id": "mdt:PermissionSet",
+        "nota_suporte": null,
+        "suporte_cli": "suportado"
+      },
+      {
+        "estrutura": "completa",
+        "funcionalidades": [
+          "func:permission-set-groups"
+        ],
+        "id": "mdt:PermissionSetGroup",
+        "nota_suporte": null,
+        "suporte_cli": "suportado"
+      },
+      {
+        "estrutura": "parcial",
+        "funcionalidades": [
+          "func:perfis"
+        ],
+        "id": "mdt:Profile",
+        "nota_suporte": null,
+        "suporte_cli": "suportado"
+      },
+      {
+        "estrutura": "completa",
+        "funcionalidades": [
+          "func:certificados"
+        ],
+        "id": "mdt:PublicKeyCertificate",
+        "nota_suporte": "Supports deploy/retrieve but not source tracking",
+        "suporte_cli": "suportado_com_ressalvas"
+      },
+      {
+        "estrutura": "completa",
+        "funcionalidades": [
+          "func:certificados"
+        ],
+        "id": "mdt:PublicKeyCertificateSet",
+        "nota_suporte": "Supports deploy/retrieve but not source tracking",
+        "suporte_cli": "suportado_com_ressalvas"
+      },
+      {
+        "estrutura": "completa",
+        "funcionalidades": [
+          "func:sso-saml"
+        ],
+        "id": "mdt:SamlSsoConfig",
+        "nota_suporte": null,
+        "suporte_cli": "suportado"
+      },
+      {
+        "estrutura": "completa",
+        "funcionalidades": [
+          "func:certificados"
+        ],
+        "id": "mdt:UserAuthCertificate",
+        "nota_suporte": null,
+        "suporte_cli": "suportado"
+      }
+    ],
+    "nota": "Calculado pelo gerador a partir do catálogo; não é cadastro.",
+    "objetos_api": [
+      {
+        "apis": [
+          {
+            "api": "padrao",
+            "estado": "verificado"
+          },
+          {
+            "api": "tooling",
+            "estado": "desconhecido"
+          }
+        ],
+        "funcionalidades": [
+          "func:equipes-de-conta-e-oportunidade"
+        ],
+        "id": "obj:AccountTeamMember"
+      },
+      {
+        "apis": [
+          {
+            "api": "padrao",
+            "estado": "verificado"
+          },
+          {
+            "api": "tooling",
+            "estado": "desconhecido"
+          }
+        ],
+        "funcionalidades": [
+          "func:auth-providers"
+        ],
+        "id": "obj:AuthProvider"
+      },
+      {
+        "apis": [
+          {
+            "api": "padrao",
+            "estado": "verificado"
+          },
+          {
+            "api": "tooling",
+            "estado": "desconhecido"
+          }
+        ],
+        "funcionalidades": [
+          "func:connected-apps"
+        ],
+        "id": "obj:ConnectedApplication"
+      },
+      {
+        "apis": [
+          {
+            "api": "padrao",
+            "estado": "verificado"
+          },
+          {
+            "api": "tooling",
+            "estado": "nao_exposto"
+          }
+        ],
+        "funcionalidades": [
+          "func:estado-e-historico-de-login"
+        ],
+        "id": "obj:LoginHistory"
+      },
+      {
+        "apis": [
+          {
+            "api": "padrao",
+            "estado": "verificado"
+          },
+          {
+            "api": "tooling",
+            "estado": "desconhecido"
+          }
+        ],
+        "funcionalidades": [
+          "func:named-credentials"
+        ],
+        "id": "obj:NamedCredential"
+      },
+      {
+        "apis": [
+          {
+            "api": "padrao",
+            "estado": "verificado"
+          },
+          {
+            "api": "tooling",
+            "estado": "desconhecido"
+          }
+        ],
+        "funcionalidades": [
+          "func:connected-apps"
+        ],
+        "id": "obj:OauthToken"
+      },
+      {
+        "apis": [
+          {
+            "api": "padrao",
+            "estado": "verificado"
+          },
+          {
+            "api": "tooling",
+            "estado": "desconhecido"
+          }
+        ],
+        "funcionalidades": [
+          "func:equipes-de-conta-e-oportunidade"
+        ],
+        "id": "obj:OpportunityTeamMember"
+      },
+      {
+        "apis": [
+          {
+            "api": "padrao",
+            "estado": "verificado"
+          },
+          {
+            "api": "tooling",
+            "estado": "verificado"
+          }
+        ],
+        "funcionalidades": [
+          "func:permission-sets"
+        ],
+        "id": "obj:PermissionSet"
+      },
+      {
+        "apis": [
+          {
+            "api": "padrao",
+            "estado": "verificado"
+          },
+          {
+            "api": "tooling",
+            "estado": "verificado"
+          }
+        ],
+        "funcionalidades": [
+          "func:permission-set-groups",
+          "func:permission-sets"
+        ],
+        "id": "obj:PermissionSetAssignment"
+      },
+      {
+        "apis": [
+          {
+            "api": "padrao",
+            "estado": "verificado"
+          },
+          {
+            "api": "tooling",
+            "estado": "verificado"
+          }
+        ],
+        "funcionalidades": [
+          "func:permission-set-groups"
+        ],
+        "id": "obj:PermissionSetGroup"
+      },
+      {
+        "apis": [
+          {
+            "api": "padrao",
+            "estado": "verificado"
+          },
+          {
+            "api": "tooling",
+            "estado": "verificado"
+          }
+        ],
+        "funcionalidades": [
+          "func:perfis"
+        ],
+        "id": "obj:Profile"
+      },
+      {
+        "apis": [
+          {
+            "api": "padrao",
+            "estado": "verificado"
+          },
+          {
+            "api": "tooling",
+            "estado": "verificado"
+          }
+        ],
+        "funcionalidades": [
+          "func:usuarios"
+        ],
+        "id": "obj:User"
+      },
+      {
+        "apis": [
+          {
+            "api": "padrao",
+            "estado": "verificado"
+          },
+          {
+            "api": "tooling",
+            "estado": "desconhecido"
+          }
+        ],
+        "funcionalidades": [
+          "func:estado-e-historico-de-login"
+        ],
+        "id": "obj:UserLogin"
+      }
+    ],
+    "temas_sem_funcionalidade": [
+      "sub:licencas-e-entitlements-de-acesso"
+    ]
+  },
   "descricao": "Reúne quem pode entrar na org, como se autentica e o que cada pessoa ou integração pode ver e fazer.",
   "escopo": "Entra tudo que responde a três perguntas: quem pode entrar na org, como comprova quem é, e o que pode ver e fazer depois de entrar. Vale para pessoas e para integrações.",
   "estado": "desconhecido",

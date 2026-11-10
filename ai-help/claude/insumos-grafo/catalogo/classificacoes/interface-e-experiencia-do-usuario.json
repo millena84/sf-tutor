@@ -7,6 +7,108 @@
   "descricao": "Reúne o que a pessoa usuária vê e usa: apps, navegação, páginas, ações e orientação visual.",
   "escopo": "Entra o que a pessoa usuária vê e usa: apps, navegação, tabs, páginas de registro, componentes, ações, orientação visual e experiências externas e móveis.",
   "fora_do_escopo": "A estrutura de dados por trás da tela fica em \"Dados e modelagem\". Quem pode ver cada item fica em \"Acesso, identidade e segurança\".",
+  "para_iniciantes": {
+    "explicacao": "É o que a pessoa vê e usa ao trabalhar na Salesforce: o app aberto, as abas de navegação, a página de um registro com seus campos e componentes, os botões de ação e as etapas que guiam um processo. Configurar este tema é decidir o que aparece, onde e em que ordem, sem mudar os dados guardados por trás.",
+    "exemplo": "Uma vendedora abre o app de vendas, clica na aba Oportunidades e abre uma oportunidade. Na mesma página ela vê os campos principais, um botão de ação rápida e a barra com as etapas da venda.",
+    "analogia": {
+      "texto": "Pense numa loja: os dados são o estoque no depósito; a interface é a vitrine, as prateleiras e as placas que levam cada cliente ao que precisa.",
+      "limite": "Na loja, tirar um produto da vitrine o esconde. Na Salesforce, tirar um campo da página não é controle de acesso: quem decide se a pessoa pode ver ou editar o campo é a segurança em nível de campo."
+    },
+    "por_onde_comecar": [
+      "func:lightning-pages",
+      "func:tabs"
+    ],
+    "evidencias": [
+      {
+        "fonte": "src:help-lightning-pages"
+      },
+      {
+        "fonte": "src:help-custom-tabs"
+      },
+      {
+        "fonte": "src:help-quick-actions"
+      },
+      {
+        "fonte": "src:help-path-create"
+      },
+      {
+        "fonte": "src:security-fls",
+        "nota": "Segurança de campo prevalece sobre o layout."
+      }
+    ]
+  },
+  "encadeamento": {
+    "texto": "As abas são as entradas de navegação de um app e levam a objetos, páginas, componentes ou endereços. Ao abrir um registro, uma Lightning page organiza o que aparece, montada com componentes no Lightning App Builder. Ações rápidas são botões que abrem um formulário curto ou executam algo no contexto do registro, e o Path mostra as etapas de um processo a partir de um campo picklist. Apps de console colocam vários registros em abas e subabas ao mesmo tempo. Sites, portais e mobile levam a experiência para fora do app interno; esse tema interno ainda não tem funcionalidades catalogadas.",
+    "evidencias": [
+      {
+        "fonte": "src:help-custom-tabs"
+      },
+      {
+        "fonte": "src:help-lightning-pages"
+      },
+      {
+        "fonte": "src:help-app-builder"
+      },
+      {
+        "fonte": "src:help-quick-actions"
+      },
+      {
+        "fonte": "src:help-path-create"
+      },
+      {
+        "fonte": "src:help-console-intro"
+      }
+    ]
+  },
+  "avancado": [
+    {
+      "tipo": "decisao",
+      "titulo": "Qual ferramenta usar para um formulário",
+      "texto": "Para criar, editar ou ver um único objeto numa página de registro, o guia de decisão indica Dynamic Forms: é o caminho com menos armadilhas, mas o menos flexível; não faz navegação em várias telas nem reúso e não está disponível em páginas do Experience Cloud. Assistentes com várias telas, sem exigência rígida de marca, ficam com Screen Flow. Experiência sofisticada e estilo detalhado pedem LWC, com mais liberdade e menos proteções. Omnistudio atende clientes de Industries e exige o pacote correspondente.",
+      "evidencias": [
+        {
+          "fonte": "src:architect-build-forms",
+          "secao": "Building Forms"
+        }
+      ]
+    },
+    {
+      "tipo": "seguranca",
+      "titulo": "A página não é controle de acesso",
+      "texto": "Page layout e segurança em nível de campo se combinam e vale a configuração mais restritiva: um campo obrigatório no layout, mas somente leitura na segurança de campo, continua somente leitura. Campos universalmente obrigatórios aparecem na edição de qualquer forma. Dynamic Forms e LWC rodam no contexto do usuário; Screen Flow também, por padrão, mas pode rodar em contexto de sistema, o que deve ficar restrito a usuários confiáveis.",
+      "evidencias": [
+        {
+          "fonte": "src:security-fls",
+          "nota": "Lida na versão 58.0; a página atual não exibiu o artigo."
+        },
+        {
+          "fonte": "src:architect-build-forms",
+          "secao": "Sanitize Inputs"
+        }
+      ]
+    },
+    {
+      "tipo": "testes",
+      "titulo": "Como testar cada abordagem",
+      "texto": "Só LWC permite testes unitários escritos, por exemplo com Jest. Dynamic Forms e Screen Flow dependem de automação de interface de ponta a ponta, que confere o resultado na tela, mas não as saídas de métodos.",
+      "evidencias": [
+        {
+          "fonte": "src:architect-build-forms",
+          "secao": "Consider UI Test Automation Requirements"
+        }
+      ]
+    },
+    {
+      "tipo": "implantacao",
+      "titulo": "Como levar entre ambientes",
+      "texto": "Dynamic Forms, Screen Flows e LWC podem ir por pacotes gerenciados (1GP e 2GP), pacotes desbloqueados, change sets e DevOps Center. Omnistudio usa o IDX Workbench e não aceita empacotamento, o que pesa na escolha quando a entrega é por pacote.",
+      "evidencias": [
+        {
+          "fonte": "src:architect-build-forms"
+        }
+      ]
+    }
+  ],
   "subclassificacoes": [
     "sub:aplicativos-e-navegacao",
     "sub:tabs",

@@ -1,5 +1,193 @@
 {
   "classificacao": "cls:integracao-apis-e-eventos",
+  "derivado": {
+    "dependencias": [
+      {
+        "destino": "mdt:ExternalDataSource",
+        "destino_no_tema": false,
+        "estado": "verificado",
+        "origem": "mdt:CustomObject",
+        "rel": "rel:customobject-externaldatasource",
+        "via": "externalDataSource"
+      },
+      {
+        "destino": "mdt:PlatformEventChannel",
+        "destino_no_tema": true,
+        "estado": "verificado",
+        "origem": "mdt:EventRelayConfig",
+        "rel": "rel:eventrelay-channel",
+        "via": "eventChannel"
+      },
+      {
+        "destino": "mdt:NamedCredential",
+        "destino_no_tema": false,
+        "estado": "verificado",
+        "origem": "mdt:EventRelayConfig",
+        "rel": "rel:eventrelay-namedcredential",
+        "via": "destinationResourceName"
+      },
+      {
+        "destino": "mdt:PlatformEventChannel",
+        "destino_no_tema": true,
+        "estado": "verificado",
+        "origem": "mdt:PlatformEventChannelMember",
+        "rel": "rel:pecmember-channel",
+        "via": "eventChannel"
+      }
+    ],
+    "funcionalidades": [
+      {
+        "alertas": [
+          "PlatformEventChannelMember não aceita createMetadata() nem deleteMetadata(); exclua via destructiveChanges.xml."
+        ],
+        "exemplo": "AccountChangeEvent no canal ChangeEvents avisa um data warehouse a cada conta alterada.",
+        "id": "func:change-data-capture",
+        "principal": true
+      },
+      {
+        "alertas": [
+          "Depois de criado, só o estado e a opção de retomada podem mudar."
+        ],
+        "exemplo": "Eventos PedidoFaturado__e vão para o EventBridge, que aciona uma função na AWS.",
+        "id": "func:event-relay",
+        "principal": true
+      },
+      {
+        "exemplo": "Um ERP publica PedidoFaturado__e; um trigger Apex assina o evento e atualiza a oportunidade.",
+        "id": "func:platform-events",
+        "principal": true
+      },
+      {
+        "alertas": [
+          "Acima de 4 MB por requisição, a chamada falha com UNAVAILABLE e o servidor fecha o stream.",
+          "Cada evento tem no máximo 1 MB; um evento grande demais falha sozinho, sem impedir os outros do lote.",
+          "No máximo 100 eventos pedidos por vez (num_requested) e 200 assinaturas gerenciadas por org.",
+          "Até 1.000 streams simultâneos por canal gRPC (conexão HTTP/2)."
+        ],
+        "exemplo": "Um serviço externo assina AccountChangeEvent pela Pub/Sub API e pede até 100 eventos por chamada, no ritmo em que consegue processar.",
+        "id": "func:pub-sub-api",
+        "principal": true
+      },
+      {
+        "alertas": [
+          "Um trigger roda no máximo 10 vezes (a inicial + 9 retentativas); depois disso vai para o estado Error e eventos enviados nesse período não são reenviados.",
+          "A retentativa reenvia o lote inteiro e desfaz o DML feito antes dela.",
+          "Asserções e exceções não tratadas não levam o assinante ao estado Error."
+        ],
+        "exemplo": "Um trigger de Pedido__e lança RetryableException enquanto o ERP está fora; depois de algumas tentativas, avisa um usuário em vez de esgotar as retentativas.",
+        "id": "func:reprocessamento-e-monitoramento-de-eventos",
+        "principal": false,
+        "tema_principal": "sub:contratos-limites-e-tratamento-de-falhas"
+      }
+    ],
+    "metadata_types": [
+      {
+        "estrutura": "parcial",
+        "funcionalidades": [
+          "func:platform-events"
+        ],
+        "id": "mdt:CustomObject",
+        "nota_suporte": null,
+        "suporte_cli": "suportado"
+      },
+      {
+        "estrutura": "completa",
+        "funcionalidades": [
+          "func:event-relay"
+        ],
+        "id": "mdt:EventRelayConfig",
+        "nota_suporte": null,
+        "suporte_cli": "suportado"
+      },
+      {
+        "estrutura": "completa",
+        "funcionalidades": [
+          "func:change-data-capture",
+          "func:platform-events",
+          "func:pub-sub-api"
+        ],
+        "id": "mdt:ManagedEventSubscription",
+        "nota_suporte": null,
+        "suporte_cli": "suportado"
+      },
+      {
+        "estrutura": "completa",
+        "funcionalidades": [
+          "func:change-data-capture",
+          "func:platform-events"
+        ],
+        "id": "mdt:PlatformEventChannel",
+        "nota_suporte": null,
+        "suporte_cli": "suportado"
+      },
+      {
+        "estrutura": "completa",
+        "funcionalidades": [
+          "func:change-data-capture"
+        ],
+        "id": "mdt:PlatformEventChannelMember",
+        "nota_suporte": null,
+        "suporte_cli": "suportado"
+      },
+      {
+        "estrutura": "completa",
+        "funcionalidades": [
+          "func:platform-events",
+          "func:reprocessamento-e-monitoramento-de-eventos"
+        ],
+        "id": "mdt:PlatformEventSettings",
+        "nota_suporte": null,
+        "suporte_cli": "suportado"
+      },
+      {
+        "estrutura": "completa",
+        "funcionalidades": [
+          "func:platform-events",
+          "func:reprocessamento-e-monitoramento-de-eventos"
+        ],
+        "id": "mdt:PlatformEventSubscriberConfig",
+        "nota_suporte": null,
+        "suporte_cli": "suportado"
+      }
+    ],
+    "nota": "Calculado pelo gerador a partir do catálogo; não é cadastro.",
+    "objetos_api": [
+      {
+        "apis": [
+          {
+            "api": "padrao",
+            "estado": "verificado"
+          },
+          {
+            "api": "tooling",
+            "estado": "desconhecido"
+          }
+        ],
+        "funcionalidades": [
+          "func:reprocessamento-e-monitoramento-de-eventos"
+        ],
+        "id": "obj:EventBusSubscriber"
+      },
+      {
+        "apis": [
+          {
+            "api": "padrao",
+            "estado": "verificado"
+          },
+          {
+            "api": "tooling",
+            "estado": "desconhecido"
+          }
+        ],
+        "funcionalidades": [
+          "func:pub-sub-api",
+          "func:reprocessamento-e-monitoramento-de-eventos"
+        ],
+        "id": "obj:PlatformEventUsageMetric"
+      }
+    ],
+    "temas_sem_funcionalidade": []
+  },
   "descricao": "Eventos de plataforma, captura de alterações e mensagens.",
   "escopo": "Entram eventos de plataforma, captura de alterações, assinatura externa e transporte de mensagens.",
   "estado": "desconhecido",

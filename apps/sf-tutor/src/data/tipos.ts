@@ -17,6 +17,8 @@ export interface NoBase {
   sigla?: string;
   /** logo exibido por referência ao endereço oficial (config/marcas.json); só centro e nuvens */
   logo?: { url: string; formato: string; marca: string };
+  /** temas (#34): estado do recorte calculado pelo gerador */
+  recorte?: 'conferido' | 'parcial' | 'curadoria';
   estado?: Estado;
   grupo_cor?: string;
   resumo?: string;
