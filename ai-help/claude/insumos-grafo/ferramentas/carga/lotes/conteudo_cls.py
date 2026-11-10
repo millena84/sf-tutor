@@ -69,31 +69,67 @@ CONTEUDO_CLS = {
             analogia=("Como um prédio comercial: o crachá identifica a pessoa, a catraca confere a entrada e cada andar tem portas que o crachá abre ou não.",
                       "No prédio, entrar no andar costuma bastar. Na Salesforce há camadas separadas (objeto, campo e registro) e todas precisam permitir o acesso.")),
         "encadeamento": enc(
-            "Primeiro existe o usuário. Depois vêm a autenticação (senha, SSO, provedores externos) e as políticas de sessão e login. Com a "
-            "pessoa dentro, perfis, permission sets e grupos dizem o que ela pode fazer; licenças limitam o que pode ser concedido; papéis, "
-            "compartilhamento e equipes dizem quais registros ela enxerga. Certificados e credenciais protegem as conexões com outros sistemas.",
+            "Roteiro pelas sete seções do tema. 1) 'Usuários e provisionamento': primeiro existe o usuário. 2) 'Autenticação, SSO e MFA': "
+            "como ele prova quem é (senha, SSO, provedores externos). 3) 'Sessões e políticas de login': de onde, quando e por qual endereço "
+            "pode entrar. 4) 'Permissões, perfis e grupos': o que pode fazer depois de entrar. 5) 'Licenças e entitlements de acesso': o "
+            "teto do que pode ser concedido. 6) 'Acesso a registros e hierarquias': quais registros enxerga (padrões da org, compartilhamento "
+            "e equipes). 7) 'Credenciais, certificados e proteção de dados': os segredos que protegem as conexões com outros sistemas.",
             E("src:security-guide", "src:objref-user", "src:mdapi-profile", "src:mdapi-permissionsetgroup", "src:objref-accountteammember", "src:mdapi-certificate")),
         "avancado": [
+            # 1) Usuários e provisionamento
+            av("atencao", "Desativar ou congelar, nunca excluir",
+               "Usuários não podem ser excluídos, só desativados (IsActive); a API não oferece delete() em User. Para bloquear o acesso sem "
+               "desativar, há o congelamento (UserLogin.IsFrozen). O ciclo de vida e o provisionamento precisam contar com isso.",
+               E("src:objref-user", "src:help-users", "src:objref-userlogin")),
+            # 2) Autenticação, SSO e MFA
+            av("decisao", "SAML ou provedor de autenticação",
+               "Para login com o provedor corporativo, a configuração SAML aceita a asserção e pode criar o usuário no primeiro acesso "
+               "(just-in-time). Provedores de autenticação (OpenID Connect, Google, Microsoft) servem para login e também para obter tokens "
+               "usados por integrações. Para integrações novas, a Salesforce recomenda external client apps; a criação de connected apps "
+               "está restrita desde o Spring '26.",
+               E("src:mdapi-samlssoconfig", "src:help-auth-provider-oidc", "src:help-connected-app-basics", "src:help-eca-create")),
+            av("implantacao", "Segredo do provedor não vem no retrieve",
+               "O segredo do app do provedor de autenticação (consumerSecret) é exportado como marcador e precisa ser preenchido em cada "
+               "ambiente depois do deploy.", E("src:mdapi-authprovider")),
+            # 3) Sessões e políticas de login
+            av("seguranca", "Por onde se entra",
+               "A política de login do My Domain pode impedir o login por login.salesforce.com e exigir que logins SOAP usem a URL do My "
+               "Domain; tráfego de API com URL de instância incorreta é bloqueado depois do Summer '26. Faixas de IP e horários de login "
+               "ficam no perfil (loginIpRanges).", E("src:help-mydomain-login-policy", "src:mdapi-profile")),
+            av("limite", "Histórico de login",
+               "A tela Login History mostra até 20.000 registros dos últimos 6 meses, e o download cobre o mesmo período. O IP de cada "
+               "tentativa fica em LoginHistory.SourceIp.", E("src:help-login-history", "src:objref-loginhistory")),
+            # 4) Permissões, perfis e grupos
             av("decisao", "Perfil enxuto, acesso por permission set",
                "O catálogo registra a recomendação de manter perfis enxutos e conceder acessos adicionais por permission sets, agrupados em "
                "permission set groups quando formam um papel de trabalho. O que só existe no perfil, como horários e faixas de IP de login, continua nele.",
                E("src:help-users", "src:mdapi-profile", "src:help-psg-create")),
-            av("seguranca", "Camadas que precisam permitir",
-               "O acesso a dados passa por camadas: permissão no objeto, segurança em nível de campo e compartilhamento de registros. A "
-               "segurança de campo prevalece sobre o layout da página: tirar o campo da tela não restringe o acesso.",
-               E("src:security-guide", "src:security-fls")),
-            av("decisao", "Connected app ou external client app",
-               "Para integrações novas, a Salesforce recomenda external client apps; a criação de connected apps está restrita desde o "
-               "Spring '26. No external client app, as configurações OAuth ficam em componentes separados, o que separa o que vai no "
-               "pacote do que cada org define.",
-               E("src:mdapi-connectedapp", "src:help-connected-app-basics", "src:mdapi-externalclientapplication", "src:help-eca-create")),
             av("implantacao", "Atribuição é registro, não metadado",
                "A atribuição de permission sets e grupos é um registro de PermissionSetAssignment, não parte do XML, e a Metadata API não "
                "move dados de negócio: a atribuição não vai junto no deploy. Grupos só podem ser atribuídos com status Updated.",
                E("src:objref-permissionsetassignment", "src:mdapi-permissionset", "src:mdapi-intro", "src:help-psg-assign")),
-            av("atencao", "Usuário não se exclui",
-               "Usuários não podem ser excluídos, só desativados (IsActive); a API não oferece delete() em User. O ciclo de vida e o "
-               "provisionamento precisam contar com isso.", E("src:objref-user", "src:help-users")),
+            # 5) Licenças e entitlements de acesso
+            av("limite", "A licença é o teto",
+               "A licença Salesforce dá acesso completo ao CRM padrão; a Salesforce Platform não dá direito a objetos padrão como leads, "
+               "oportunidades, campanhas e previsões. Feature licenses e permission set licenses liberam o que a licença de usuário não "
+               "inclui, como o Service Cloud User para o Service Console. A licença Salesforce Integration não aceita permission set "
+               "licenses de nuvens setoriais.",
+               E("src:help-user-licenses", "src:help-service-feature-license", "src:help-health-cloud-psl", "src:help-industry-psl-integration-user")),
+            # 6) Acesso a registros e hierarquias
+            av("seguranca", "Camadas que precisam permitir",
+               "O acesso a dados passa por camadas: permissão no objeto, segurança em nível de campo e compartilhamento de registros. A "
+               "segurança de campo prevalece sobre o layout da página: tirar o campo da tela não restringe o acesso.",
+               E("src:security-guide", "src:security-fls")),
+            av("atencao", "Compartilhar sem trocar o dono",
+               "Equipes de conta e de oportunidade dão acesso e responsabilidade compartilhada sem mudar o dono do registro. Alguns padrões "
+               "de compartilhamento (SharingSettings) dependem da data de criação da org, então duas orgs podem se comportar diferente.",
+               E("src:objref-accountteammember", "src:objref-opportunityteammember", "src:mdapi-sharingsettings")),
+            # 7) Credenciais, certificados e proteção de dados
+            av("limite", "Certificados",
+               "Certificados autoassinados são criados em Certificate and Key Management, com a permissão Manage Certificates e no máximo "
+               "50 por org. InboundCertificate, usado na autenticação mútua, só existe com a permissão MutualAuthentication habilitada. "
+               "Named credentials e external credentials são estudadas em Integração.",
+               E("src:help-cert-self-signed", "src:mdapi-inboundcertificate", "src:mdapi-namedcredential")),
         ],
     },
     "cls:dados-e-modelagem": {

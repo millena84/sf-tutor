@@ -3,6 +3,77 @@
     {
       "evidencias": [
         {
+          "fonte": "src:objref-user"
+        },
+        {
+          "fonte": "src:help-users"
+        },
+        {
+          "fonte": "src:objref-userlogin"
+        }
+      ],
+      "texto": "Usuários não podem ser excluídos, só desativados (IsActive); a API não oferece delete() em User. Para bloquear o acesso sem desativar, há o congelamento (UserLogin.IsFrozen). O ciclo de vida e o provisionamento precisam contar com isso.",
+      "tipo": "atencao",
+      "titulo": "Desativar ou congelar, nunca excluir"
+    },
+    {
+      "evidencias": [
+        {
+          "fonte": "src:mdapi-samlssoconfig"
+        },
+        {
+          "fonte": "src:help-auth-provider-oidc"
+        },
+        {
+          "fonte": "src:help-connected-app-basics"
+        },
+        {
+          "fonte": "src:help-eca-create"
+        }
+      ],
+      "texto": "Para login com o provedor corporativo, a configuração SAML aceita a asserção e pode criar o usuário no primeiro acesso (just-in-time). Provedores de autenticação (OpenID Connect, Google, Microsoft) servem para login e também para obter tokens usados por integrações. Para integrações novas, a Salesforce recomenda external client apps; a criação de connected apps está restrita desde o Spring '26.",
+      "tipo": "decisao",
+      "titulo": "SAML ou provedor de autenticação"
+    },
+    {
+      "evidencias": [
+        {
+          "fonte": "src:mdapi-authprovider"
+        }
+      ],
+      "texto": "O segredo do app do provedor de autenticação (consumerSecret) é exportado como marcador e precisa ser preenchido em cada ambiente depois do deploy.",
+      "tipo": "implantacao",
+      "titulo": "Segredo do provedor não vem no retrieve"
+    },
+    {
+      "evidencias": [
+        {
+          "fonte": "src:help-mydomain-login-policy"
+        },
+        {
+          "fonte": "src:mdapi-profile"
+        }
+      ],
+      "texto": "A política de login do My Domain pode impedir o login por login.salesforce.com e exigir que logins SOAP usem a URL do My Domain; tráfego de API com URL de instância incorreta é bloqueado depois do Summer '26. Faixas de IP e horários de login ficam no perfil (loginIpRanges).",
+      "tipo": "seguranca",
+      "titulo": "Por onde se entra"
+    },
+    {
+      "evidencias": [
+        {
+          "fonte": "src:help-login-history"
+        },
+        {
+          "fonte": "src:objref-loginhistory"
+        }
+      ],
+      "texto": "A tela Login History mostra até 20.000 registros dos últimos 6 meses, e o download cobre o mesmo período. O IP de cada tentativa fica em LoginHistory.SourceIp.",
+      "tipo": "limite",
+      "titulo": "Histórico de login"
+    },
+    {
+      "evidencias": [
+        {
           "fonte": "src:help-users"
         },
         {
@@ -15,38 +86,6 @@
       "texto": "O catálogo registra a recomendação de manter perfis enxutos e conceder acessos adicionais por permission sets, agrupados em permission set groups quando formam um papel de trabalho. O que só existe no perfil, como horários e faixas de IP de login, continua nele.",
       "tipo": "decisao",
       "titulo": "Perfil enxuto, acesso por permission set"
-    },
-    {
-      "evidencias": [
-        {
-          "fonte": "src:security-guide"
-        },
-        {
-          "fonte": "src:security-fls"
-        }
-      ],
-      "texto": "O acesso a dados passa por camadas: permissão no objeto, segurança em nível de campo e compartilhamento de registros. A segurança de campo prevalece sobre o layout da página: tirar o campo da tela não restringe o acesso.",
-      "tipo": "seguranca",
-      "titulo": "Camadas que precisam permitir"
-    },
-    {
-      "evidencias": [
-        {
-          "fonte": "src:mdapi-connectedapp"
-        },
-        {
-          "fonte": "src:help-connected-app-basics"
-        },
-        {
-          "fonte": "src:mdapi-externalclientapplication"
-        },
-        {
-          "fonte": "src:help-eca-create"
-        }
-      ],
-      "texto": "Para integrações novas, a Salesforce recomenda external client apps; a criação de connected apps está restrita desde o Spring '26. No external client app, as configurações OAuth ficam em componentes separados, o que separa o que vai no pacote do que cada org define.",
-      "tipo": "decisao",
-      "titulo": "Connected app ou external client app"
     },
     {
       "evidencias": [
@@ -70,15 +109,66 @@
     {
       "evidencias": [
         {
-          "fonte": "src:objref-user"
+          "fonte": "src:help-user-licenses"
         },
         {
-          "fonte": "src:help-users"
+          "fonte": "src:help-service-feature-license"
+        },
+        {
+          "fonte": "src:help-health-cloud-psl"
+        },
+        {
+          "fonte": "src:help-industry-psl-integration-user"
         }
       ],
-      "texto": "Usuários não podem ser excluídos, só desativados (IsActive); a API não oferece delete() em User. O ciclo de vida e o provisionamento precisam contar com isso.",
+      "texto": "A licença Salesforce dá acesso completo ao CRM padrão; a Salesforce Platform não dá direito a objetos padrão como leads, oportunidades, campanhas e previsões. Feature licenses e permission set licenses liberam o que a licença de usuário não inclui, como o Service Cloud User para o Service Console. A licença Salesforce Integration não aceita permission set licenses de nuvens setoriais.",
+      "tipo": "limite",
+      "titulo": "A licença é o teto"
+    },
+    {
+      "evidencias": [
+        {
+          "fonte": "src:security-guide"
+        },
+        {
+          "fonte": "src:security-fls"
+        }
+      ],
+      "texto": "O acesso a dados passa por camadas: permissão no objeto, segurança em nível de campo e compartilhamento de registros. A segurança de campo prevalece sobre o layout da página: tirar o campo da tela não restringe o acesso.",
+      "tipo": "seguranca",
+      "titulo": "Camadas que precisam permitir"
+    },
+    {
+      "evidencias": [
+        {
+          "fonte": "src:objref-accountteammember"
+        },
+        {
+          "fonte": "src:objref-opportunityteammember"
+        },
+        {
+          "fonte": "src:mdapi-sharingsettings"
+        }
+      ],
+      "texto": "Equipes de conta e de oportunidade dão acesso e responsabilidade compartilhada sem mudar o dono do registro. Alguns padrões de compartilhamento (SharingSettings) dependem da data de criação da org, então duas orgs podem se comportar diferente.",
       "tipo": "atencao",
-      "titulo": "Usuário não se exclui"
+      "titulo": "Compartilhar sem trocar o dono"
+    },
+    {
+      "evidencias": [
+        {
+          "fonte": "src:help-cert-self-signed"
+        },
+        {
+          "fonte": "src:mdapi-inboundcertificate"
+        },
+        {
+          "fonte": "src:mdapi-namedcredential"
+        }
+      ],
+      "texto": "Certificados autoassinados são criados em Certificate and Key Management, com a permissão Manage Certificates e no máximo 50 por org. InboundCertificate, usado na autenticação mútua, só existe com a permissão MutualAuthentication habilitada. Named credentials e external credentials são estudadas em Integração.",
+      "tipo": "limite",
+      "titulo": "Certificados"
     }
   ],
   "derivado": {
@@ -752,7 +842,7 @@
         "fonte": "src:mdapi-certificate"
       }
     ],
-    "texto": "Primeiro existe o usuário. Depois vêm a autenticação (senha, SSO, provedores externos) e as políticas de sessão e login. Com a pessoa dentro, perfis, permission sets e grupos dizem o que ela pode fazer; licenças limitam o que pode ser concedido; papéis, compartilhamento e equipes dizem quais registros ela enxerga. Certificados e credenciais protegem as conexões com outros sistemas."
+    "texto": "Roteiro pelas sete seções do tema. 1) 'Usuários e provisionamento': primeiro existe o usuário. 2) 'Autenticação, SSO e MFA': como ele prova quem é (senha, SSO, provedores externos). 3) 'Sessões e políticas de login': de onde, quando e por qual endereço pode entrar. 4) 'Permissões, perfis e grupos': o que pode fazer depois de entrar. 5) 'Licenças e entitlements de acesso': o teto do que pode ser concedido. 6) 'Acesso a registros e hierarquias': quais registros enxerga (padrões da org, compartilhamento e equipes). 7) 'Credenciais, certificados e proteção de dados': os segredos que protegem as conexões com outros sistemas."
   },
   "escopo": "Entra tudo que responde a três perguntas: quem pode entrar na org, como comprova quem é, e o que pode ver e fazer depois de entrar. Vale para pessoas e para integrações.",
   "estado": "desconhecido",

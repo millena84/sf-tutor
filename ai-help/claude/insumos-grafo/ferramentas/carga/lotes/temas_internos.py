@@ -70,6 +70,52 @@ TEMAS = {
          ev("src:rest-api-eol", "Cobre parte do tema: política de fim de vida das versões de API.", "API End-of-Life Policy"),
          ev("src:pe-retry-apex", "Cobre parte do tema: retentativa em assinantes de eventos.")],
     ),
+    # ------------------------------------------------------------------ Acesso, identidade e segurança
+    "sub:usuarios-e-provisionamento": (
+        "O cadastro de quem acessa a org, pessoa ou integração, e o seu ciclo de vida: criar, ativar, congelar e desativar usuários, "
+        "inclusive pela criação automática no primeiro login com SSO.",
+        [ev("src:help-users", "Cobre parte do tema: gestão de usuários no Setup.", "View and Manage Users"),
+         ev("src:objref-user", "Cobre parte do tema: o objeto User na API.", "User")],
+    ),
+    "sub:autenticacao-sso-e-mfa": (
+        "Como uma pessoa prova quem é ao entrar: senha, login único com o provedor da empresa (SAML) e provedores de autenticação "
+        "como OpenID Connect, Google e Microsoft.",
+        [ev("src:security-guide", "Cobre parte do tema: a seção de autenticação de usuários do guia de segurança.", "Authenticate Users"),
+         ev("src:mdapi-samlssoconfig", "Cobre parte do tema: configuração de SSO por SAML como metadado.", "SamlSsoConfig"),
+         ev("src:help-auth-provider-oidc", "Cobre parte do tema: provedor de autenticação por OpenID Connect.",
+            "Configure an Authentication Provider Using OpenID Connect")],
+    ),
+    "sub:sessoes-e-politicas-de-login": (
+        "As regras de entrada depois que a identidade foi provada: por qual endereço, de quais IPs e em quais horários se pode entrar, "
+        "e o histórico e o estado de login de cada usuário.",
+        [ev("src:help-mydomain-login-policy", "Cobre parte do tema: política de login do My Domain.", "Set the My Domain Login Policy"),
+         ev("src:help-login-history", "Cobre parte do tema: acompanhamento do histórico de login.", "Monitor Login History")],
+    ),
+    "sub:permissoes-perfis-e-grupos": (
+        "O que cada usuário pode fazer: o perfil, único por usuário, dá o acesso básico; permission sets somam acessos; permission set "
+        "groups juntam vários para atribuir de uma vez.",
+        [ev("src:help-perm-sets-create", "Cobre parte do tema: criação de permission sets.", "Create Permission Sets"),
+         ev("src:help-psg-create", "Cobre parte do tema: criação de permission set groups.", "Create a Permission Set Group")],
+    ),
+    "sub:licencas-e-entitlements-de-acesso": (
+        "O teto do que pode ser concedido a um usuário: a licença de usuário dá o pacote básico, e feature licenses e permission set "
+        "licenses liberam recursos que ela não inclui.",
+        [ev("src:help-user-licenses", "Cobre parte do tema: licenças de usuário padrão.", "Standard User Licenses"),
+         ev("src:help-service-feature-license", "Cobre parte do tema: exemplo de feature license (Service Cloud User).",
+            "Assign the Service Cloud User Feature License")],
+    ),
+    "sub:acesso-a-registros-e-hierarquias": (
+        "Quais registros cada usuário enxerga: os padrões de acesso da org, o compartilhamento e as equipes de conta e de oportunidade.",
+        [ev("src:security-guide", "Cobre parte do tema: as seções de acesso a dados e de compartilhamento do guia de segurança.",
+            "Give Users Access to Data; Share Objects and Fields"),
+         ev("src:mdapi-sharingsettings", "Cobre parte do tema: configurações de compartilhamento como metadado.", "SharingSettings")],
+    ),
+    "sub:credenciais-certificados-e-protecao-de-dados": (
+        "Os segredos que protegem as conexões da org: certificados e chaves, a autenticação mútua e as credenciais de acesso a "
+        "sistemas externos.",
+        [ev("src:help-cert-self-signed", "Cobre parte do tema: certificados autoassinados.", "Generate a Self-Signed Certificate"),
+         ev("src:mdapi-certificate", "Cobre parte do tema: certificados como metadado.", "Certificate")],
+    ),
 }
 
 
