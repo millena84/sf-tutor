@@ -240,7 +240,8 @@ O WSDL **não** é bloqueio: a documentação de cada tipo é a fonte alternativ
 - **Detalhamento dos temas principais (item 3 do #34, a partir de 2026-11-10):**
   - Ordem definida pela autora: 1) Integração, 2) Acesso e segurança, 3) Dados e modelagem, 4) Qualidade e governança, 5) Relatórios, 6) Org e configurações, 7) Processos de produto, 8) Automação, 9) Desenvolvimento, 10) Assíncrono e lotes, 11) Interface, 12) Observabilidade, 13) Conteúdo, 14) IA e agentes.
   - Leitura adotada para "seção por seção": cada tema interno é uma seção. O encadeamento vira um roteiro numerado pelos temas internos, e o avançado ganha ao menos um item por seção, na mesma ordem. Só texto: sem cadastro novo no catálogo e sem preencher `prerequisitos` (pontos deixados em aberto com a autora).
-  - Concluído: Integração (sem fonte nova; reaproveita fatos já catalogados nas funcionalidades e nos temas internos).
+  - Cada passada também limpa o dado genérico dos temas internos (`temas_internos.py`): descrição curta escrita pelo projeto, referências oficiais já registradas (o site passa de "Curadoria do projeto" para "Parcialmente conferido") e a mesma nota de estado dos temas principais. O estado continua `desconhecido`.
+  - Concluído: Integração, texto (PR #55) e limpeza dos 7 temas internos.
 
 ## Próximos lotes
 
