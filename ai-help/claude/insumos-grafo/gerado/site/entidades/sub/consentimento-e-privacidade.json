@@ -1,4 +1,56 @@
 {
+  "avancado": [
+    {
+      "evidencias": [
+        {
+          "fonte": "src:help-consent-data-model"
+        }
+      ],
+      "texto": "O modelo tem quatro níveis: global (Individual), canal (ContactPointTypeConsent), ponto de contato (ContactPointConsent) e finalidade (DataUsePurpose, ligada aos dois anteriores). BusinessBrand separa preferências de marcas diferentes na mesma org.",
+      "tipo": "decisao",
+      "titulo": "Em que nível registrar"
+    },
+    {
+      "evidencias": [
+        {
+          "fonte": "src:help-consent-objects"
+        }
+      ],
+      "texto": "Os objetos de consentimento registram as preferências, mas não as cumprem sozinhos: a empresa decide como honrar a privacidade e implementa o processo.",
+      "tipo": "atencao",
+      "titulo": "Os objetos só guardam"
+    },
+    {
+      "evidencias": [
+        {
+          "fonte": "src:rest-consent-write"
+        }
+      ],
+      "texto": "A Consent Write API grava consentimento em vários objetos ligados por lookup ou e-mail, até 1.000 ids por chamada. Exige ModifyAllData ou ConsentApiUpdate e grava na org inteira, não só nos registros que o usuário vê. A resposta pode vir com 200 mesmo havendo erros.",
+      "tipo": "seguranca",
+      "titulo": "Consent Write passa por cima do compartilhamento"
+    },
+    {
+      "evidencias": [
+        {
+          "fonte": "src:help-consent-event-stream"
+        }
+      ],
+      "texto": "O Consent Event Stream emite um evento a cada mudança de consentimento ou contato nos objetos principais; cada evento fica disponível por 24 horas. Exige ReadAllData ou PrivacyDataAccess.",
+      "tipo": "escala",
+      "titulo": "Acompanhar mudanças"
+    },
+    {
+      "evidencias": [
+        {
+          "fonte": "src:help-consent-data-model"
+        }
+      ],
+      "texto": "A Consent API não localiza registros cujo e-mail esteja protegido por Shield Platform Encryption.",
+      "tipo": "limite",
+      "titulo": "Criptografia e Consent API"
+    }
+  ],
   "classificacao": "cls:qualidade-governanca-e-ciclo-de-vida-dos-dados",
   "derivado": {
     "dependencias": [],
@@ -9,6 +61,17 @@
     "temas_sem_funcionalidade": []
   },
   "descricao": "Registro de consentimento e atendimento a requisitos de privacidade.",
+  "encadeamento": {
+    "evidencias": [
+      {
+        "fonte": "src:help-consent-data-model"
+      },
+      {
+        "fonte": "src:help-consent-objects"
+      }
+    ],
+    "texto": "Fecha o trio de governança de Qualidade: depois de classificar e definir retenção, registra-se a vontade da pessoa sobre os próprios dados. Lead, Contact, User e contas pessoais se ligam ao Individual."
+  },
   "escopo": "Entram o registro de consentimento e o atendimento a requisitos de privacidade sobre dados de pessoas.",
   "estado": "desconhecido",
   "fora_do_escopo": "Classificação dos dados por sensibilidade fica em \"Classificação e sensibilidade\".",
@@ -17,5 +80,17 @@
   "natureza": "curadoria_didatica",
   "nome": "Consentimento e privacidade",
   "nota_estado": "Agrupamento proposto na especificação; fronteira ainda não cruzada com a documentação oficial.",
+  "para_iniciantes": {
+    "evidencias": [
+      {
+        "fonte": "src:help-consent-data-model"
+      },
+      {
+        "fonte": "src:help-contact-point-type-consent-fields"
+      }
+    ],
+    "exemplo": "Uma cliente aceita receber e-mail, mas não ligações: o registro de ContactPointTypeConsent de e-mail fica Opt In e o de telefone, Opt Out.",
+    "explicacao": "Guarda o que cada pessoa autorizou: se aceita ser contatada, por qual canal, em qual endereço e para qual finalidade. O objeto Individual concentra as preferências gerais de privacidade, e outros objetos detalham o consentimento por canal e por ponto de contato."
+  },
   "sigla": "QLD-06"
 }

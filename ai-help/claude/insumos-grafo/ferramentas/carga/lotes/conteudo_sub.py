@@ -6,9 +6,8 @@ Temas internos sem fonte lida ficam de fora (lista PENDENTES) até a próxima ro
 from conteudo_cls import E, ini, enc, av, AF
 
 PENDENTES = [
-    "sub:habilitacao-de-recursos", "sub:metadados-de-configuracao-de-dados", "sub:classificacao-e-sensibilidade",
-    "sub:retencao-arquivamento-e-exclusao", "sub:consentimento-e-privacidade", "sub:experiencias-web-portais-e-mobile",
-    "sub:pastas-e-acesso", "sub:metricas-e-agregacoes", "sub:colaboracao", "sub:templates-e-comunicacao",
+    "sub:habilitacao-de-recursos", "sub:metadados-de-configuracao-de-dados", "sub:experiencias-web-portais-e-mobile",
+    "sub:colaboracao", "sub:templates-e-comunicacao",
     "sub:recuperacao-de-conhecimento", "sub:servico-de-campo", "sub:experiencias-externas", "sub:capacidades-setoriais", "sub:outras-areas",
 ]
 

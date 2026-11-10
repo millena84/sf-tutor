@@ -7,6 +7,80 @@
   "descricao": "Cálculos de resumo e indicadores.",
   "escopo": "Entram os cálculos de resumo e os indicadores.",
   "fora_do_escopo": "Campos de resumo definidos no modelo de dados ficam em \"Campos e tipos\".",
+  "para_iniciantes": {
+    "explicacao": "São os cálculos feitos dentro do relatório. Summaries somam, tiram média, mínimo ou máximo de uma coluna, por grupo e no total. Row-level formulas calculam algo para cada registro, e summary formulas calculam sobre os grupos. Bucket columns agrupam valores em faixas sem precisar de fórmula.",
+    "exemplo": "Num relatório de oportunidades, uma row-level formula calcula os dias até fechar cada uma, e uma bucket column separa os valores em pequeno, médio e grande.",
+    "evidencias": [
+      {
+        "fonte": "src:help-report-formulas"
+      },
+      {
+        "fonte": "src:help-add-bucket-column"
+      }
+    ]
+  },
+  "encadeamento": {
+    "texto": "Funciona sobre o tipo de relatório escolhido ('Tipos de relatório'): só entram campos que ele oferece. Campos de resumo definidos no modelo de dados ficam em 'Campos e tipos'.",
+    "evidencias": [
+      {
+        "fonte": "src:help-report-formulas"
+      },
+      {
+        "fonte": "src:help-custom-report-types"
+      }
+    ]
+  },
+  "avancado": [
+    {
+      "tipo": "decisao",
+      "titulo": "Qual cálculo usar",
+      "texto": "Summaries não exigem fórmula. Row-level formula responde perguntas por registro; summary formula compara grupos, e PREVGROUPVAL e PARENTGROUPVAL comparam com o grupo anterior ou com o grupo pai e o total. Para reusar um agrupamento em vários relatórios, um formula field no objeto substitui a bucket column, que vale só no relatório onde foi criada.",
+      "evidencias": [
+        {
+          "fonte": "src:help-report-formulas"
+        },
+        {
+          "fonte": "src:help-add-bucket-column"
+        }
+      ]
+    },
+    {
+      "tipo": "limite",
+      "titulo": "Row-level formulas",
+      "texto": "Até duas por relatório, cada uma com até 5 campos distintos. Não referenciam buckets, summary formulas nem outras row-level formulas, e não existem em tipos 'with or without', joined reports e reporting snapshots.",
+      "evidencias": [
+        {
+          "fonte": "src:help-row-level-formula-limits"
+        }
+      ]
+    },
+    {
+      "tipo": "limite",
+      "titulo": "Summary formulas e buckets",
+      "texto": "Summary formulas não usam datas, não referenciam outra summary formula nem row-level formula e exigem relatório agrupado; não dá para agrupar, filtrar ou reordenar por elas. Cada relatório aceita até 5 bucket fields, com até 20 buckets de até 20 valores.",
+      "evidencias": [
+        {
+          "fonte": "src:help-summary-formula-tips"
+        },
+        {
+          "fonte": "src:help-add-bucket-column"
+        }
+      ]
+    },
+    {
+      "tipo": "atencao",
+      "titulo": "Moeda e erros",
+      "texto": "Row-level formulas usam sempre a moeda padrão da org, mesmo com multimoeda no relatório. Em summary formulas, percentuais são decimais (20% vira 0,20), e divisão por zero mostra #Error!.",
+      "evidencias": [
+        {
+          "fonte": "src:help-row-level-formula-limits"
+        },
+        {
+          "fonte": "src:help-summary-formula-tips"
+        }
+      ]
+    }
+  ],
   "funcionalidades": [],
   "estado": "desconhecido",
   "nota_estado": "Agrupamento proposto na especificação; fronteira ainda não cruzada com a documentação oficial."
