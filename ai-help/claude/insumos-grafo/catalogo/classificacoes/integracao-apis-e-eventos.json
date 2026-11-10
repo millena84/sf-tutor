@@ -31,7 +31,7 @@
     ]
   },
   "encadeamento": {
-    "texto": "Para dentro, as APIs (REST, SOAP, Bulk, Metadata, Tooling) recebem chamadas autenticadas por connected apps ou external client apps, com OAuth. Para fora, a org chama serviços por named credentials, sites remotos e serviços externos. Eventos (de plataforma, captura de alterações, Pub/Sub API, Event Relay) avisam sistemas sem consulta periódica. Objetos externos mostram dados de fora sem copiar. Tudo isso esbarra em contratos: limites, versões e tratamento de falhas.",
+    "texto": "Roteiro pelas sete seções do tema. 1) 'APIs de dados e metadados': as portas de entrada (REST, SOAP, Bulk, Metadata, Tooling). 2) 'Autenticação de integrações': quem chama prova quem é por um external client app ou connected app, com OAuth. 3) 'Credenciais' e 4) 'Chamadas externas e endpoints': o sentido contrário, a org chamando serviços de fora por named credentials, sites remotos e serviços externos. 5) 'Eventos e mensageria': avisar sistemas sem consulta periódica (eventos de plataforma, captura de alterações, Pub/Sub API, Event Relay). 6) 'Conectividade e virtualização de dados': ler dados de fora sem copiar, com objetos externos. 7) 'Contratos, limites e tratamento de falhas': o que vale para todas as anteriores (alocações, versões, retentativas).",
     "evidencias": [
       {
         "fonte": "src:rest-intro"
@@ -92,15 +92,50 @@
       ]
     },
     {
-      "tipo": "limite",
-      "titulo": "Alocação diária e tempo de chamada",
-      "texto": "O limite diário de requisições vale para a org inteira, não por usuário, e chamadas de pacotes gerenciados contam. Requisições de 20 segundos ou mais têm limite de simultaneidade (25 em produção e sandbox), e chamadas REST e SOAP expiram após 10 minutos.",
+      "tipo": "seguranca",
+      "titulo": "Registrar a integração",
+      "texto": "Para integrações novas, a Salesforce recomenda external client apps; a criação de connected apps está restrita desde o Spring '26. Usar external client apps exige a permissão Opt in to External Client Apps. Escopos customizados limitam o que cada app faz, e há configurações para bloquear fluxos OAuth ou exigir PKCE.",
       "evidencias": [
         {
-          "fonte": "src:limits-api-requests"
+          "fonte": "src:help-connected-app-basics"
         },
         {
-          "fonte": "src:rest-limits"
+          "fonte": "src:help-eca-create"
+        },
+        {
+          "fonte": "src:mdapi-externalclientapplication"
+        },
+        {
+          "fonte": "src:mdapi-oauthcustomscope"
+        },
+        {
+          "fonte": "src:mdapi-oauthoidcsettings"
+        }
+      ]
+    },
+    {
+      "tipo": "seguranca",
+      "titulo": "Segredo fora do código e o sentido de cada lista",
+      "texto": "Named credentials guardam o endereço e a autenticação fora do código; desde a 56.0, a autenticação mora na credencial externa. Sites remotos só liberam o endereço, e a Salesforce recomenda named credentials para callouts novos. CORS é o sentido contrário: libera chamadas do navegador para a org, não da org para fora.",
+      "evidencias": [
+        {
+          "fonte": "src:mdapi-namedcredential"
+        },
+        {
+          "fonte": "src:help-remote-site"
+        },
+        {
+          "fonte": "src:help-cors"
+        }
+      ]
+    },
+    {
+      "tipo": "limite",
+      "titulo": "Callouts dentro de uma transação",
+      "texto": "Uma transação Apex faz até 100 callouts, e a soma dos timeouts não passa de 120 segundos. Não dá para fazer callout depois de DML, Apex assíncrono, Apex agendado ou envio de e-mail pendentes na mesma transação; antes deles, pode.",
+      "evidencias": [
+        {
+          "fonte": "src:apex-callout-limits"
         }
       ]
     },
@@ -121,18 +156,70 @@
       ]
     },
     {
-      "tipo": "seguranca",
-      "titulo": "Segredo fora do código e o sentido de cada lista",
-      "texto": "Named credentials guardam o endereço e a autenticação fora do código; desde a 56.0, a autenticação mora na credencial externa. Sites remotos só liberam o endereço, e a Salesforce recomenda named credentials para callouts novos. CORS é o sentido contrário: libera chamadas do navegador para a org, não da org para fora.",
+      "tipo": "atencao",
+      "titulo": "Falha em quem recebe o evento",
+      "texto": "Um trigger de evento roda no máximo 10 vezes (a inicial e 9 retentativas) e depois vai para o estado Error; eventos enviados nesse período não são reenviados. Cada retentativa reenvia o lote inteiro e desfaz o DML anterior. A orientação oficial é limitar as tentativas e ter uma ação alternativa.",
       "evidencias": [
         {
-          "fonte": "src:mdapi-namedcredential"
+          "fonte": "src:pe-retry-apex"
+        }
+      ]
+    },
+    {
+      "tipo": "decisao",
+      "titulo": "Copiar ou consultar sob demanda",
+      "texto": "Objetos externos leem os dados no momento da consulta e permitem usá-los em listas, relacionamentos e relatórios sem manter cópia na org. A definição usa CustomObject (externalDataSource, externalName), com sufixo __x.",
+      "evidencias": [
+        {
+          "fonte": "src:help-external-data-source-odata"
         },
         {
-          "fonte": "src:help-remote-site"
+          "fonte": "src:mdapi-customobject"
+        }
+      ]
+    },
+    {
+      "tipo": "limite",
+      "titulo": "Alocação diária e tempo de chamada",
+      "texto": "O limite diário de requisições vale para a org inteira, não por usuário, e chamadas de pacotes gerenciados contam. Requisições de 20 segundos ou mais têm limite de simultaneidade (25 em produção e sandbox), e chamadas REST e SOAP expiram após 10 minutos.",
+      "evidencias": [
+        {
+          "fonte": "src:limits-api-requests"
         },
         {
-          "fonte": "src:help-cors"
+          "fonte": "src:rest-limits"
+        }
+      ]
+    },
+    {
+      "tipo": "escala",
+      "titulo": "Acompanhar o consumo",
+      "texto": "API Usage Notifications avisam por e-mail quando o uso passa de uma porcentagem da alocação. O recurso /limits tem precisão de até cinco minutos, então não deve ser chamado em rajadas. Orgs pagas podem passar um pouco do limite diário, até um teto rígido; trial, Developer Edition e sandbox não.",
+      "evidencias": [
+        {
+          "fonte": "src:limits-api-requests"
+        },
+        {
+          "fonte": "src:rest-limits"
+        }
+      ]
+    },
+    {
+      "tipo": "atencao",
+      "titulo": "Contratos que mudam",
+      "texto": "O Enterprise WSDL é específico da org e precisa ser gerado de novo quando objetos ou campos customizados mudam. Num serviço externo, uma versão nova da especificação exige novo registro, porque systemVersion não é atualizado no lugar. Não há SLA para a Bulk API, e jobs terminados há mais de 7 dias são apagados.",
+      "evidencias": [
+        {
+          "fonte": "src:soap-intro"
+        },
+        {
+          "fonte": "src:mdapi-externalserviceregistration"
+        },
+        {
+          "fonte": "src:limits-bulk-api"
+        },
+        {
+          "fonte": "src:bulk-api-intro"
         }
       ]
     },

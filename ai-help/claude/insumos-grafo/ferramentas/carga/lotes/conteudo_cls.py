@@ -222,31 +222,67 @@ CONTEUDO_CLS = {
             analogia=("Como os correios entre empresas: cada uma tem endereço, regras de entrega e um jeito de provar quem enviou.",
                       "Nos correios, a carta chega ou não. Numa integração há limites de volume e tempo, versões que deixam de existir e falhas que pedem nova tentativa.")),
         "encadeamento": enc(
-            "Para dentro, as APIs (REST, SOAP, Bulk, Metadata, Tooling) recebem chamadas autenticadas por connected apps ou external client "
-            "apps, com OAuth. Para fora, a org chama serviços por named credentials, sites remotos e serviços externos. Eventos (de "
-            "plataforma, captura de alterações, Pub/Sub API, Event Relay) avisam sistemas sem consulta periódica. Objetos externos mostram "
-            "dados de fora sem copiar. Tudo isso esbarra em contratos: limites, versões e tratamento de falhas.",
+            "Roteiro pelas sete seções do tema. 1) 'APIs de dados e metadados': as portas de entrada (REST, SOAP, Bulk, Metadata, Tooling). "
+            "2) 'Autenticação de integrações': quem chama prova quem é por um external client app ou connected app, com OAuth. "
+            "3) 'Credenciais' e 4) 'Chamadas externas e endpoints': o sentido contrário, a org chamando serviços de fora por named "
+            "credentials, sites remotos e serviços externos. 5) 'Eventos e mensageria': avisar sistemas sem consulta periódica (eventos de "
+            "plataforma, captura de alterações, Pub/Sub API, Event Relay). 6) 'Conectividade e virtualização de dados': ler dados de fora "
+            "sem copiar, com objetos externos. 7) 'Contratos, limites e tratamento de falhas': o que vale para todas as anteriores "
+            "(alocações, versões, retentativas).",
             E("src:rest-intro", "src:soap-intro", "src:bulk-api-intro", "src:mdapi-intro", "src:tooling-intro", "src:help-eca-create",
               "src:mdapi-namedcredential", "src:pubsub-overview", "src:help-event-relay-create", "src:help-external-data-source-odata", "src:limits-api-requests")),
         "avancado": [
+            # 1) APIs de dados e metadados
             av("decisao", "Qual API usar",
                "REST para chamadas HTTP simples, em JSON ou XML. SOAP quando o sistema trabalha com contrato WSDL (Enterprise, tipado e da "
                "org; Partner, genérico). Bulk API 2.0 para operações com mais de 2.000 registros. Metadata API para mover configuração entre "
                "orgs. Tooling API para ferramentas que leem e alteram pedaços pequenos de metadados.",
                E("src:rest-intro", "src:soap-intro", "src:bulk-api-intro", "src:mdapi-intro", "src:tooling-intro")),
-            av("limite", "Alocação diária e tempo de chamada",
-               "O limite diário de requisições vale para a org inteira, não por usuário, e chamadas de pacotes gerenciados contam. "
-               "Requisições de 20 segundos ou mais têm limite de simultaneidade (25 em produção e sandbox), e chamadas REST e SOAP expiram "
-               "após 10 minutos.", E("src:limits-api-requests", "src:rest-limits")),
-            av("decisao", "Eventos em vez de consulta periódica",
-               "A captura de alterações publica um evento a cada mudança de registro e mantém sistemas sincronizados quase em tempo real. "
-               "Pela Pub/Sub API, o cliente controla quantos eventos recebe por vez (até 100 por pedido), com eventos de até 1 MB.",
-               E("src:pubsub-qs-events", "src:pubsub-overview", "src:pubsub-allocations")),
+            # 2) Autenticação de integrações
+            av("seguranca", "Registrar a integração",
+               "Para integrações novas, a Salesforce recomenda external client apps; a criação de connected apps está restrita desde o "
+               "Spring '26. Usar external client apps exige a permissão Opt in to External Client Apps. Escopos customizados limitam o que "
+               "cada app faz, e há configurações para bloquear fluxos OAuth ou exigir PKCE.",
+               E("src:help-connected-app-basics", "src:help-eca-create", "src:mdapi-externalclientapplication",
+                 "src:mdapi-oauthcustomscope", "src:mdapi-oauthoidcsettings")),
+            # 3) Credenciais e 4) Chamadas externas
             av("seguranca", "Segredo fora do código e o sentido de cada lista",
                "Named credentials guardam o endereço e a autenticação fora do código; desde a 56.0, a autenticação mora na credencial "
                "externa. Sites remotos só liberam o endereço, e a Salesforce recomenda named credentials para callouts novos. CORS é o "
                "sentido contrário: libera chamadas do navegador para a org, não da org para fora.",
                E("src:mdapi-namedcredential", "src:help-remote-site", "src:help-cors")),
+            av("limite", "Callouts dentro de uma transação",
+               "Uma transação Apex faz até 100 callouts, e a soma dos timeouts não passa de 120 segundos. Não dá para fazer callout depois "
+               "de DML, Apex assíncrono, Apex agendado ou envio de e-mail pendentes na mesma transação; antes deles, pode.",
+               E("src:apex-callout-limits")),
+            # 5) Eventos e mensageria
+            av("decisao", "Eventos em vez de consulta periódica",
+               "A captura de alterações publica um evento a cada mudança de registro e mantém sistemas sincronizados quase em tempo real. "
+               "Pela Pub/Sub API, o cliente controla quantos eventos recebe por vez (até 100 por pedido), com eventos de até 1 MB.",
+               E("src:pubsub-qs-events", "src:pubsub-overview", "src:pubsub-allocations")),
+            av("atencao", "Falha em quem recebe o evento",
+               "Um trigger de evento roda no máximo 10 vezes (a inicial e 9 retentativas) e depois vai para o estado Error; eventos "
+               "enviados nesse período não são reenviados. Cada retentativa reenvia o lote inteiro e desfaz o DML anterior. A orientação "
+               "oficial é limitar as tentativas e ter uma ação alternativa.", E("src:pe-retry-apex")),
+            # 6) Conectividade e virtualização de dados
+            av("decisao", "Copiar ou consultar sob demanda",
+               "Objetos externos leem os dados no momento da consulta e permitem usá-los em listas, relacionamentos e relatórios sem "
+               "manter cópia na org. A definição usa CustomObject (externalDataSource, externalName), com sufixo __x.",
+               E("src:help-external-data-source-odata", "src:mdapi-customobject")),
+            # 7) Contratos, limites e tratamento de falhas
+            av("limite", "Alocação diária e tempo de chamada",
+               "O limite diário de requisições vale para a org inteira, não por usuário, e chamadas de pacotes gerenciados contam. "
+               "Requisições de 20 segundos ou mais têm limite de simultaneidade (25 em produção e sandbox), e chamadas REST e SOAP expiram "
+               "após 10 minutos.", E("src:limits-api-requests", "src:rest-limits")),
+            av("escala", "Acompanhar o consumo",
+               "API Usage Notifications avisam por e-mail quando o uso passa de uma porcentagem da alocação. O recurso /limits tem precisão "
+               "de até cinco minutos, então não deve ser chamado em rajadas. Orgs pagas podem passar um pouco do limite diário, até um teto "
+               "rígido; trial, Developer Edition e sandbox não.", E("src:limits-api-requests", "src:rest-limits")),
+            av("atencao", "Contratos que mudam",
+               "O Enterprise WSDL é específico da org e precisa ser gerado de novo quando objetos ou campos customizados mudam. Num serviço "
+               "externo, uma versão nova da especificação exige novo registro, porque systemVersion não é atualizado no lugar. Não há SLA "
+               "para a Bulk API, e jobs terminados há mais de 7 dias são apagados.",
+               E("src:soap-intro", "src:mdapi-externalserviceregistration", "src:limits-bulk-api", "src:bulk-api-intro")),
             av("atencao", "Versões de API",
                "As versões 31.0 a 40.0 estão em descontinuação: sem suporte a partir do Summer '27 e aposentadas no Summer '28. Chamadas a "
                "versões aposentadas recebem 410:GONE. O evento API Total Usage ajuda a achar integrações antigas.",
