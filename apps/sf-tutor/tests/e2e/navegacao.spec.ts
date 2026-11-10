@@ -185,3 +185,23 @@ test('desktop: "Mostrar no mapa" só aparece no modo leitura e volta ao mapa com
   const cls = await page.evaluate(() => (window as unknown as { __sfTutor: { classes(id: string): string[] | null } }).__sfTutor.classes('func:event-relay'));
   expect(cls).toContain('foco');
 });
+
+test('"Sobre este tema" mostra as três camadas na mesma ordem em tema e tema interno (#34)', async ({ page }) => {
+  for (const id of ['cls:integracao-apis-e-eventos', 'sub:acoes-e-regras']) {
+    await abrir(page, `?n=${id}`);
+    await expect(painel(page).locator('.tipo-no')).toHaveText(/Tema/);
+    const sobre = await secao(page, /^Sobre este tema$/);
+    await expect(sobre.locator('.camada > h4')).toHaveText(['Para quem está começando', 'Para quem já conhece Salesforce']);
+    await expect(sobre).toContainText('Não é uma categoria oficial da Salesforce');
+    await expect(sobre).toContainText(/\d+ funcionalidades?/);
+    const avancado = sobre.locator('details.camada-avancada');
+    await expect(avancado.locator('summary')).toHaveText('Nível avançado');
+    expect(await avancado.evaluate((d) => (d as HTMLDetailsElement).open)).toBe(false);
+    await avancado.locator('summary').click();
+    await expect(avancado).toContainText('Curadoria do projeto');
+    await expect(painel(page)).not.toContainText('Estado do agrupamento');
+    // rótulos da interface usam "tema"; "classificação" só aparece em texto dos dados (nota do recorte)
+    for (const t of await painel(page).locator('summary, h4').allTextContents()) expect(t).not.toMatch(/lassificaç/);
+    await semErroNoPainel(page);
+  }
+});

@@ -1,5 +1,5 @@
 // Paleta própria do sf-tutor (a referência flavinho.pages.dev não pôde ser aberta: robots bloqueia leitura automática).
-// Duas escalas: por classificação e por nuvem. Sub-classificações usam tons próximos da classificação.
+// Duas escalas: por tema (classificação nos dados) e por nuvem. Temas internos (subclassificação) usam tons próximos.
 
 const PALETA_CLASSIFICACAO = [
   '#2563eb', '#dc2626', '#059669', '#d97706', '#7c3aed', '#db2777', '#0891b2',

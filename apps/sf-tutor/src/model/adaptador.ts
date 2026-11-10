@@ -43,6 +43,15 @@ export const LIGACOES_HIERARQUIA = new Set([
 /** Relações técnicas desenhadas entre itens visíveis, em qualquer caminho. */
 export const LIGACOES_TECNICAS = new Set(['referencia_campo', 'correspondencia_xml_api', 'representacao_comum']);
 
+export interface ConteudoTema {
+  temas: number;
+  funcionalidades: number;
+  /** funcionalidades cujo lugar principal é outro tema */
+  soSecundarias: number;
+  metadataTypes: number;
+  objetosApi: number;
+}
+
 export class Indice {
   readonly nos = new Map<string, NoIndice>();
   readonly saindo = new Map<string, Aresta[]>();
@@ -154,6 +163,40 @@ export class Indice {
         .map((a) => ({ id: a.destino, ligacao: 'tipo_composto' }));
     }
     return [];
+  }
+
+  /**
+   * Conteúdo de um tema (classificação ou subclassificação nos dados): temas internos, funcionalidades
+   * (principal ou secundária) e os metadata types/objetos API ligados a elas. Contagens distintas.
+   */
+  conteudoDoTema(id: string): ConteudoTema {
+    const n = this.nos.get(id);
+    const subs = n?.tipo === 'classificacao'
+      ? (this.saindo.get(id) ?? []).filter((a) => a.tipo === 'navegacao_subclassificacao').map((a) => a.destino)
+      : [id];
+    const principais = new Set<string>();
+    const todas = new Set<string>();
+    for (const s of subs) {
+      for (const a of this.saindo.get(s) ?? []) {
+        if (a.tipo === 'classificacao_principal') { principais.add(a.destino); todas.add(a.destino); }
+        else if (a.tipo === 'classificacao_secundaria') todas.add(a.destino);
+      }
+    }
+    const mdt = new Set<string>();
+    const obj = new Set<string>();
+    for (const f of todas) {
+      for (const a of this.saindo.get(f) ?? []) {
+        if (a.tipo === 'representacao_xml') mdt.add(a.destino);
+        else if (a.tipo === 'representacao_objeto_api') obj.add(a.destino);
+      }
+    }
+    return {
+      temas: n?.tipo === 'classificacao' ? subs.length : 0,
+      funcionalidades: todas.size,
+      soSecundarias: [...todas].filter((f) => !principais.has(f)).length,
+      metadataTypes: mdt.size,
+      objetosApi: obj.size,
+    };
   }
 
   quantidadeFilhos(visao: Visao, caminho: readonly string[]): number {
