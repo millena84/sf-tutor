@@ -161,17 +161,26 @@ O WSDL **não** é bloqueio: a documentação de cada tipo é a fonte alternativ
 - **AssignmentRules, BusinessHoursSettings e EscalationRules:** as estruturas já estavam catalogadas; o gerador é que não tratava tipos sem propriedade obrigatória e só com estruturas. Os três ganharam exemplos escritos à mão (`ferramentas/carga/lotes/exemplos_regras_e_horarios.py`), com regra, entrada, critério e ação. **O validador termina com 0 avisos.**
 - O gerador também foi corrigido: `fullName` dentro de estruturas é elemento real (o nome de cada regra), e, sem obrigatórios, a amostra mostra a primeira estrutura. A opção `--regerar` refaz só esqueletos gerados por ele.
 
-## "Sobre este tema" (issue #34, fase 1, 2026-11-09)
+## "Sobre este tema" (issue #34, 2026-11-09)
 - **Divergência registrada (tradução didática):** a especificação (`tarefas/00-especificacao-grafo.md`) chama os dois níveis de classificação e subclassificação. O site mostra os dois como **"Tema"**, por decisão da autora (opção B). Os nomes nos dados, no schema e no validador não mudam.
-- A seção "Estado do agrupamento" foi substituída por "Sobre este tema", com três camadas fixas:
+- **Fase 1 (tela):** "Sobre este tema" em três camadas fixas:
   1. Para quem está começando;
   2. Para quem já conhece Salesforce (contagens derivadas do grafo);
-  3. Nível avançado, recolhido (estado do recorte e referências oficiais).
-- O estado do recorte é derivado de `estado` e `referencias_oficiais`. Hoje todos os temas estão como **curadoria do projeto**: estado `desconhecido`, sem referência oficial.
-- Pendentes:
-  - **Fase 2:** `criterio_inclusao` por tema, exigido pelo validador.
-  - **Fase 3:** cruzar com referências oficiais; a fonte ainda não foi escolhida.
-  - **Fase 4:** seletor de nível de leitura no site (opcional).
+  3. Nível avançado, recolhido.
+- **Fase 2 (dados):** os 106 temas têm `escopo` (o que entra) e `fora_do_escopo` (o que fica fora e em qual tema procurar).
+  - Os dois campos são obrigatórios nos schemas de classificação e subclassificação.
+  - São redação do projeto: delimitam o recorte e não afirmam fatos técnicos. Script: `ferramentas/carga/lotes/escopo_temas.py`.
+- **Fase 3 (referências oficiais):** os 14 temas de primeiro nível têm referências à documentação oficial, com 11 fontes novas. Nota de extração: `fontes/extracoes/temas-referencias-oficiais.txt`.
+  - Cada referência começa dizendo como corresponde ao tema: "Cobre o tema", "Cobre parte do tema" ou "Mais ampla que o tema". O validador recusa referência sem isso.
+  - O estado continua `desconhecido` e o site mostra "Parcialmente conferido". Tema `verificado` sem referência é erro.
+  - Os temas internos (subclassificações) ainda não têm referência própria. O site aponta para as referências do tema de cima.
+- **Camada de certificações (pedida pela autora): bloqueada.**
+  - As páginas de credencial e as trilhas de preparação do Trailhead não trazem o roteiro da prova na leitura automática (conteúdo renderizado por JavaScript).
+  - O guia oficial da prova e a Trailhead Academy precisam de aprovação de acesso.
+  - Nada foi registrado a partir de sites de terceiros.
+  - Para retomar: aprovar o acesso a trailhead.salesforce.com/help e trailheadacademy.salesforce.com, ou anexar os PDFs dos guias.
+  - Ao incluir esses domínios na lista de fontes, ajustar `DOMINIOS_FONTE` em `ferramentas/sftutor.py`.
+- **Fase 4:** seletor de nível de leitura no site, adiado pela autora.
 
 ## Próximos lotes
 

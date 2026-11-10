@@ -12,7 +12,7 @@ export function selo(estado?: string): HTMLElement {
   return h('span', { class: `selo selo-${estado ?? 'nenhum'}`, title: e?.explicacao ?? 'Estado não informado' }, e ? `${e.simbolo} ${e.rotulo}` : rotuloEstado(estado));
 }
 
-export function fontesEl(ctx: CtxPartes, evid?: { fonte: string; nota?: string }[] | null): HTMLElement | null {
+export function fontesEl(ctx: CtxPartes, evid?: { fonte: string; secao?: string; nota?: string }[] | null): HTMLElement | null {
   if (!evid?.length) return null;
   return h('ul', { class: 'fontes', 'aria-label': 'Fontes' },
     evid.map((e) => {
@@ -22,6 +22,7 @@ export function fontesEl(ctx: CtxPartes, evid?: { fonte: string; nota?: string }
       return h('li', null,
         h('a', { href: f.url, target: '_blank', rel: 'noopener noreferrer' }, f.titulo),
         meta ? h('span', { class: 'fonte-meta' }, ` — ${meta}`) : null,
+        e.secao ? h('span', { class: 'fonte-meta' }, ` · seção: ${e.secao}`) : null,
         e.nota ? h('span', { class: 'fonte-meta' }, ` (${e.nota})`) : null,
       );
     }));
