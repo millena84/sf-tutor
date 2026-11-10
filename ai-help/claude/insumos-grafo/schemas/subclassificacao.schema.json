@@ -48,6 +48,110 @@
       "minLength": 20,
       "description": "O que fica fora do tema e em qual tema procurar."
     },
+    "para_iniciantes": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "explicacao",
+        "exemplo",
+        "evidencias"
+      ],
+      "description": "Camada 'Para quem está começando' (redação do projeto; fatos com fonte).",
+      "properties": {
+        "explicacao": {
+          "type": "string",
+          "minLength": 40
+        },
+        "exemplo": {
+          "type": "string",
+          "minLength": 20
+        },
+        "analogia": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "texto",
+            "limite"
+          ],
+          "properties": {
+            "texto": {
+              "type": "string"
+            },
+            "limite": {
+              "type": "string"
+            }
+          }
+        },
+        "por_onde_comecar": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "pattern": "^func:"
+          }
+        },
+        "evidencias": {
+          "$ref": "comum.schema.json#/$defs/evidencias",
+          "minItems": 1
+        }
+      }
+    },
+    "encadeamento": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "texto",
+        "evidencias"
+      ],
+      "description": "Como as partes do tema se ligam (classificação) ou como o tema se encaixa no de cima (subclassificação).",
+      "properties": {
+        "texto": {
+          "type": "string",
+          "minLength": 40
+        },
+        "evidencias": {
+          "$ref": "comum.schema.json#/$defs/evidencias",
+          "minItems": 1
+        }
+      }
+    },
+    "avancado": {
+      "type": "array",
+      "description": "Camada 'Nível avançado': decisões, segurança, implantação, testes, limites, escala e pontos de atenção, cada item com fonte.",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "tipo",
+          "titulo",
+          "texto",
+          "evidencias"
+        ],
+        "properties": {
+          "tipo": {
+            "enum": [
+              "decisao",
+              "seguranca",
+              "implantacao",
+              "testes",
+              "limite",
+              "escala",
+              "atencao"
+            ]
+          },
+          "titulo": {
+            "type": "string"
+          },
+          "texto": {
+            "type": "string",
+            "minLength": 40
+          },
+          "evidencias": {
+            "$ref": "comum.schema.json#/$defs/evidencias",
+            "minItems": 1
+          }
+        }
+      }
+    },
     "funcionalidades": {
       "type": "array",
       "items": {

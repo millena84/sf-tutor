@@ -187,29 +187,57 @@ test('desktop: "Mostrar no mapa" só aparece no modo leitura e volta ao mapa com
 });
 
 test('"Sobre este tema" mostra as três camadas na mesma ordem em tema e tema interno (#34)', async ({ page }) => {
-  for (const id of ['cls:integracao-apis-e-eventos', 'sub:acoes-e-regras']) {
+  for (const id of ['cls:integracao-apis-e-eventos', 'sub:acoes-e-regras', 'cls:interface-e-experiencia-do-usuario']) {
     await abrir(page, `?n=${id}`);
     await expect(painel(page).locator('.tipo-no')).toHaveText(/Tema/);
+    // cabeçalho mostra o estado do recorte, não o estado bruto
+    await expect(painel(page).locator('.linha-selos')).not.toContainText('Desconhecido');
+    await expect(painel(page).locator('.linha-selos .selo-recorte')).toHaveText(id.startsWith('cls:') ? 'Parcialmente conferido' : 'Curadoria do projeto');
     const sobre = await secao(page, /^Sobre este tema$/);
     await expect(sobre.locator('.camada > h4')).toHaveText(['Para quem está começando', 'Para quem já conhece Salesforce']);
-    await expect(sobre).toContainText('Não é uma categoria oficial da Salesforce');
-    await expect(sobre).toContainText(/\d+ funcionalidades?/);
+    await expect(sobre).toContainText(/Funcionalidades \(\d+\)/);
     const avancado = sobre.locator('details.camada-avancada');
-    await expect(avancado.locator('summary')).toHaveText('Nível avançado');
+    await expect(avancado.locator('summary').first()).toHaveText('Nível avançado');
     expect(await avancado.evaluate((d) => (d as HTMLDetailsElement).open)).toBe(false);
-    await avancado.locator('summary').click();
-    await expect(avancado.locator('h5')).toContainText(['Estado do recorte', 'O que entra neste tema', 'O que fica fora e onde procurar', 'Correspondência com referências oficiais']);
+    await avancado.locator('summary').first().click();
+    const recorte = avancado.locator('details.sobre-recorte');
+    await recorte.locator('summary').click();
+    await expect(recorte.locator('h5')).toContainText(['O que entra neste tema', 'O que fica fora e onde procurar', 'Correspondência com referências oficiais']);
     if (id.startsWith('cls:')) {
-      // tema com referências oficiais registradas, mas recorte ainda do projeto
-      await expect(avancado).toContainText('Parcialmente conferido');
-      await expect(avancado.locator('ul.fontes li').first()).toContainText(/Cobre (o tema|parte do tema)|Mais ampla que o tema/);
+      await expect(recorte).toContainText('Parcialmente conferido');
+      await expect(recorte.locator('ul.fontes li').first()).toContainText(/Cobre (o tema|parte do tema)|Mais ampla que o tema/);
     } else {
-      await expect(avancado).toContainText('Curadoria do projeto');
-      await expect(avancado).toContainText('Veja as do tema de cima');
+      await expect(recorte).toContainText('Veja as do tema de cima');
     }
     await expect(painel(page)).not.toContainText('Estado do agrupamento');
-    // rótulos da interface usam "tema"; "classificação" só aparece em texto dos dados (nota do recorte)
     for (const t of await painel(page).locator('summary, h4').allTextContents()) expect(t).not.toMatch(/lassificaç/);
     await semErroNoPainel(page);
   }
+});
+
+test('tema com conteúdo próprio: exemplo, comece por, encadeamento e decisões com fonte (#34, piloto)', async ({ page }) => {
+  await abrir(page, '?n=cls:interface-e-experiencia-do-usuario');
+  const sobre = await secao(page, /^Sobre este tema$/);
+  const c1 = sobre.locator('.camada').nth(0);
+  await expect(c1).toContainText('Exemplo:');
+  await expect(c1.locator('.analogia')).toContainText('Onde a analogia para');
+  await expect(c1.locator('.comece-por button')).toHaveText(['Lightning pages', 'Tabs']);
+  const c2 = sobre.locator('.camada').nth(1);
+  await expect(c2.locator('h5').first()).toHaveText('Como as partes se ligam');
+  await expect(c2).toContainText('FlexiPage');
+  await expect(c2).toContainText('Experiências web/portais e mobile');
+  const avancado = sobre.locator('details.camada-avancada');
+  await avancado.locator('summary').first().click();
+  await expect(avancado.locator('.item-avancado h5')).toContainText(['Decisão: Qual ferramenta usar para um formulário', 'Segurança: A página não é controle de acesso']);
+  await expect(avancado).toContainText('Implantação: suporte no Salesforce CLI');
+  await expect(avancado).toContainText('Dependências entre componentes');
+  // todo item curado tem fonte
+  const itens = avancado.locator('.item-avancado:has(.fontes-camada)');
+  expect(await itens.count()).toBeGreaterThanOrEqual(4);
+  // tema interno navega para a funcionalidade pelo "comece por"
+  await abrir(page, '?n=sub:lightning-pages-e-componentes');
+  const s2 = await secao(page, /^Sobre este tema$/);
+  await expect(s2.locator('.camada').nth(1).locator('h5').first()).toHaveText('Como se encaixa no tema de cima');
+  await s2.locator('.comece-por button').first().click();
+  await expect(titulo(page)).toHaveText('Lightning pages');
 });

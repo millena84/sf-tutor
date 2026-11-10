@@ -181,6 +181,19 @@ O WSDL **não** é bloqueio: a documentação de cada tipo é a fonte alternativ
   - Para retomar: aprovar o acesso a trailhead.salesforce.com/help e trailheadacademy.salesforce.com, ou anexar os PDFs dos guias.
   - Ao incluir esses domínios na lista de fontes, ajustar `DOMINIOS_FONTE` em `ferramentas/sftutor.py`.
 - **Fase 4:** seletor de nível de leitura no site, adiado pela autora.
+- **Conteúdo específico por tema (piloto, 2026-11-09):** feito depois do retorno da autora de que as camadas estavam genéricas.
+  - **Parte automática:** o gerador grava em cada tema o campo calculado `derivado`, com:
+    - funcionalidades, metadata types e objetos API;
+    - suporte no Salesforce CLI, exposição por API e dependências entre componentes;
+    - pré-requisitos, alertas e exemplos das funcionalidades.
+  - O cabeçalho dos temas mostra o estado do recorte (campo `recorte` no grafo), não "Desconhecido".
+  - Contrato do site: 1.2.0.
+  - **Curado, com fontes:** os campos opcionais `para_iniciantes`, `encadeamento` e `avancado` (decisão, segurança, implantação, testes, limite, escala, ponto de atenção). Cada bloco exige evidências.
+    - O validador confere se `por_onde_comecar` cita funcionalidades do próprio tema.
+    - Piloto: `cls:interface-e-experiencia-do-usuario` e `sub:lightning-pages-e-componentes` (`ferramentas/carga/lotes/conteudo_temas.py`).
+    - Fontes novas: o guia Building Forms (architect.salesforce.com, domínio incluído na lista de fontes), Field-Level Security (lida na versão 58.0: a página atual não exibiu o artigo) e Lightning Pages (Ajuda).
+  - **Não incluído por falta de fonte legível:** opções de ativação de Lightning record pages, limite de componentes por página e orientação de desempenho.
+  - **Próximo:** depois da aprovação do tom pela autora, estender o conteúdo curado aos outros 13 temas principais e, em seguida, aos 92 internos.
 
 ## Próximos lotes
 

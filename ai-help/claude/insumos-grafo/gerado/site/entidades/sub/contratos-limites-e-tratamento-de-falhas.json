@@ -1,5 +1,236 @@
 {
   "classificacao": "cls:integracao-apis-e-eventos",
+  "derivado": {
+    "dependencias": [
+      {
+        "destino": "mdt:ExternalDataSource",
+        "destino_no_tema": false,
+        "estado": "verificado",
+        "origem": "mdt:CustomObject",
+        "rel": "rel:customobject-externaldatasource",
+        "via": "externalDataSource"
+      },
+      {
+        "destino": "mdt:PlatformEventChannel",
+        "destino_no_tema": true,
+        "estado": "verificado",
+        "origem": "mdt:EventRelayConfig",
+        "rel": "rel:eventrelay-channel",
+        "via": "eventChannel"
+      },
+      {
+        "destino": "mdt:NamedCredential",
+        "destino_no_tema": false,
+        "estado": "verificado",
+        "origem": "mdt:EventRelayConfig",
+        "rel": "rel:eventrelay-namedcredential",
+        "via": "destinationResourceName"
+      },
+      {
+        "destino": "mdt:NamedCredential",
+        "destino_no_tema": false,
+        "estado": "verificado",
+        "origem": "mdt:ExternalServiceRegistration",
+        "rel": "rel:externalservice-namedcredential",
+        "via": "namedCredential"
+      }
+    ],
+    "funcionalidades": [
+      {
+        "alertas": [
+          "Até 15.000 lotes por 24 horas móveis, compartilhados entre 1.0 e 2.0 (na 2.0, só jobs de ingestão consomem).",
+          "Ingestão: até 150 milhões de registros por 24 horas; na 2.0, até 150 MB de CSV em base64 por job (subir cerca de 100 MB).",
+          "Bulk API 2.0: até 10.000 jobs de consulta e 1 TB de resultados por 24 horas, acompanháveis em /limits.",
+          "Jobs terminados há mais de 7 dias são apagados; resultados ficam disponíveis por 7 dias."
+        ],
+        "exemplo": "Uma migração de 2 milhões de contatos sobe em jobs de ingestão da Bulk API 2.0, com arquivos CSV de cerca de 100 MB.",
+        "id": "func:bulk-api",
+        "principal": false,
+        "tema_principal": "sub:apis-de-dados-e-metadados"
+      },
+      {
+        "alertas": [
+          "Depois de criado, só o estado e a opção de retomada podem mudar."
+        ],
+        "exemplo": "Eventos PedidoFaturado__e vão para o EventBridge, que aciona uma função na AWS.",
+        "id": "func:event-relay",
+        "principal": false,
+        "tema_principal": "sub:eventos-e-mensageria"
+      },
+      {
+        "alertas": [
+          "systemVersion é somente leitura e não é atualizado no lugar: uma versão nova exige novo registro."
+        ],
+        "exemplo": "A especificação da API de frete é registrada; a operação calcularFrete vira uma ação usada num Screen Flow.",
+        "id": "func:external-services",
+        "principal": false,
+        "tema_principal": "sub:chamadas-externas-e-endpoints"
+      },
+      {
+        "alertas": [
+          "O limite diário vale para o total da org, não por usuário; chamadas de pacotes gerenciados contam.",
+          "Requisições de 20 segundos ou mais têm limite de simultaneidade (25 em produção e sandbox; 5 em Developer Edition e trial); o excedente recebe REQUEST_LIMIT_EXCEEDED.",
+          "Chamadas REST e SOAP expiram após 10 minutos (REQUEST_RUNNING_TOO_LONG no SOAP; QUERY_TIMEOUT no REST)."
+        ],
+        "exemplo": "Uma org Enterprise com 15 licenças Salesforce tem 115.000 requisições por 24 horas (100.000 + 15 × 1.000), segundo o exemplo da documentação.",
+        "id": "func:limites-de-api-e-alocacoes",
+        "principal": true
+      },
+      {
+        "alertas": [
+          "Até 100 callouts por transação, e a soma dos timeouts não passa de 120 segundos.",
+          "Não é possível fazer callout depois de DML, Apex assíncrono, Apex agendado ou envio de e-mail pendentes na mesma transação; antes deles, pode.",
+          "Developer Edition: até 20 callouts simultâneos para fora do domínio da org.",
+          "Enviar Expect: 100-Continue a um servidor que não responde 100 Continue causa timeout."
+        ],
+        "exemplo": "Um trigger grava o pedido e depois tenta chamar o ERP na mesma transação: a chamada é recusada porque há DML pendente. A solução é chamar antes ou mover a chamada para um processo assíncrono.",
+        "id": "func:limites-e-falhas-de-callouts",
+        "principal": true
+      },
+      {
+        "exemplo": "Um ERP publica PedidoFaturado__e; um trigger Apex assina o evento e atualiza a oportunidade.",
+        "id": "func:platform-events",
+        "principal": false,
+        "tema_principal": "sub:eventos-e-mensageria"
+      },
+      {
+        "alertas": [
+          "Acima de 4 MB por requisição, a chamada falha com UNAVAILABLE e o servidor fecha o stream.",
+          "Cada evento tem no máximo 1 MB; um evento grande demais falha sozinho, sem impedir os outros do lote.",
+          "No máximo 100 eventos pedidos por vez (num_requested) e 200 assinaturas gerenciadas por org.",
+          "Até 1.000 streams simultâneos por canal gRPC (conexão HTTP/2)."
+        ],
+        "exemplo": "Um serviço externo assina AccountChangeEvent pela Pub/Sub API e pede até 100 eventos por chamada, no ritmo em que consegue processar.",
+        "id": "func:pub-sub-api",
+        "principal": false,
+        "tema_principal": "sub:eventos-e-mensageria"
+      },
+      {
+        "alertas": [
+          "Um trigger roda no máximo 10 vezes (a inicial + 9 retentativas); depois disso vai para o estado Error e eventos enviados nesse período não são reenviados.",
+          "A retentativa reenvia o lote inteiro e desfaz o DML feito antes dela.",
+          "Asserções e exceções não tratadas não levam o assinante ao estado Error."
+        ],
+        "exemplo": "Um trigger de Pedido__e lança RetryableException enquanto o ERP está fora; depois de algumas tentativas, avisa um usuário em vez de esgotar as retentativas.",
+        "id": "func:reprocessamento-e-monitoramento-de-eventos",
+        "principal": true
+      },
+      {
+        "alertas": [
+          "Versões 31.0 a 40.0 estão em descontinuação: sem suporte a partir do Summer '27 e aposentadas no Summer '28.",
+          "Versões 21.0 a 30.0 estão aposentadas desde o Summer '25, e 7.0 a 20.0 desde o Summer '22; chamadas a versões aposentadas recebem 410:GONE."
+        ],
+        "exemplo": "Uma integração antiga que chama /services/data/v30.0/ passou a receber 410:GONE depois do Summer '25.",
+        "id": "func:versoes-de-api",
+        "principal": true
+      }
+    ],
+    "metadata_types": [
+      {
+        "estrutura": "parcial",
+        "funcionalidades": [
+          "func:platform-events"
+        ],
+        "id": "mdt:CustomObject",
+        "nota_suporte": null,
+        "suporte_cli": "suportado"
+      },
+      {
+        "estrutura": "completa",
+        "funcionalidades": [
+          "func:event-relay"
+        ],
+        "id": "mdt:EventRelayConfig",
+        "nota_suporte": null,
+        "suporte_cli": "suportado"
+      },
+      {
+        "estrutura": "completa",
+        "funcionalidades": [
+          "func:external-services"
+        ],
+        "id": "mdt:ExternalServiceRegistration",
+        "nota_suporte": null,
+        "suporte_cli": "suportado"
+      },
+      {
+        "estrutura": "completa",
+        "funcionalidades": [
+          "func:platform-events",
+          "func:pub-sub-api"
+        ],
+        "id": "mdt:ManagedEventSubscription",
+        "nota_suporte": null,
+        "suporte_cli": "suportado"
+      },
+      {
+        "estrutura": "completa",
+        "funcionalidades": [
+          "func:platform-events"
+        ],
+        "id": "mdt:PlatformEventChannel",
+        "nota_suporte": null,
+        "suporte_cli": "suportado"
+      },
+      {
+        "estrutura": "completa",
+        "funcionalidades": [
+          "func:platform-events",
+          "func:reprocessamento-e-monitoramento-de-eventos"
+        ],
+        "id": "mdt:PlatformEventSettings",
+        "nota_suporte": null,
+        "suporte_cli": "suportado"
+      },
+      {
+        "estrutura": "completa",
+        "funcionalidades": [
+          "func:platform-events",
+          "func:reprocessamento-e-monitoramento-de-eventos"
+        ],
+        "id": "mdt:PlatformEventSubscriberConfig",
+        "nota_suporte": null,
+        "suporte_cli": "suportado"
+      }
+    ],
+    "nota": "Calculado pelo gerador a partir do catálogo; não é cadastro.",
+    "objetos_api": [
+      {
+        "apis": [
+          {
+            "api": "padrao",
+            "estado": "verificado"
+          },
+          {
+            "api": "tooling",
+            "estado": "desconhecido"
+          }
+        ],
+        "funcionalidades": [
+          "func:reprocessamento-e-monitoramento-de-eventos"
+        ],
+        "id": "obj:EventBusSubscriber"
+      },
+      {
+        "apis": [
+          {
+            "api": "padrao",
+            "estado": "verificado"
+          },
+          {
+            "api": "tooling",
+            "estado": "desconhecido"
+          }
+        ],
+        "funcionalidades": [
+          "func:pub-sub-api",
+          "func:reprocessamento-e-monitoramento-de-eventos"
+        ],
+        "id": "obj:PlatformEventUsageMetric"
+      }
+    ],
+    "temas_sem_funcionalidade": []
+  },
   "descricao": "Limites de API, versões e estratégias de erro.",
   "escopo": "Entram limites de API, versões, retentativas e estratégias de erro das integrações.",
   "estado": "desconhecido",

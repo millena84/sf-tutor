@@ -1,5 +1,596 @@
 {
   "classificacao": "cls:processos-de-negocio-especificos-de-produto",
+  "derivado": {
+    "dependencias": [
+      {
+        "destino": "obj:PendingServiceRouting",
+        "destino_no_tema": true,
+        "estado": "verificado",
+        "origem": "obj:AgentWork",
+        "rel": "rel:agentwork-pendingservicerouting",
+        "via": "PendingServiceRoutingId"
+      },
+      {
+        "destino": "obj:Account",
+        "destino_no_tema": false,
+        "estado": "verificado",
+        "origem": "obj:Case",
+        "rel": "rel:case-account",
+        "via": "AccountId"
+      },
+      {
+        "destino": "obj:Contact",
+        "destino_no_tema": false,
+        "estado": "verificado",
+        "origem": "obj:Case",
+        "rel": "rel:case-contact",
+        "via": "ContactId"
+      },
+      {
+        "destino": "obj:User",
+        "destino_no_tema": false,
+        "estado": "verificado",
+        "origem": "obj:Case",
+        "rel": "rel:case-owner-user",
+        "via": "OwnerId"
+      },
+      {
+        "destino": "obj:BusinessHours",
+        "destino_no_tema": true,
+        "estado": "verificado",
+        "origem": "obj:CaseMilestone",
+        "rel": "rel:casemilestone-businesshours",
+        "via": "BusinessHoursId"
+      },
+      {
+        "destino": "obj:Case",
+        "destino_no_tema": true,
+        "estado": "verificado",
+        "origem": "obj:CaseMilestone",
+        "rel": "rel:casemilestone-case",
+        "via": "CaseId"
+      },
+      {
+        "destino": "obj:Account",
+        "destino_no_tema": false,
+        "estado": "verificado",
+        "origem": "obj:Entitlement",
+        "rel": "rel:entitlement-account",
+        "via": "AccountId"
+      },
+      {
+        "destino": "obj:BusinessHours",
+        "destino_no_tema": true,
+        "estado": "verificado",
+        "origem": "obj:Entitlement",
+        "rel": "rel:entitlement-businesshours",
+        "via": "BusinessHoursId"
+      },
+      {
+        "destino": "obj:ServiceContract",
+        "destino_no_tema": true,
+        "estado": "verificado",
+        "origem": "obj:Entitlement",
+        "rel": "rel:entitlement-servicecontract",
+        "via": "ServiceContractId"
+      },
+      {
+        "destino": "obj:SlaProcess",
+        "destino_no_tema": true,
+        "estado": "verificado",
+        "origem": "obj:Entitlement",
+        "rel": "rel:entitlement-slaprocess",
+        "via": "SlaProcessId"
+      },
+      {
+        "destino": "obj:KnowledgeArticle",
+        "destino_no_tema": true,
+        "estado": "verificado",
+        "origem": "obj:KnowledgeArticleVersion",
+        "rel": "rel:knowledgearticleversion-knowledgearticle",
+        "via": "KnowledgeArticleId"
+      },
+      {
+        "destino": "obj:Case",
+        "destino_no_tema": true,
+        "estado": "verificado",
+        "origem": "obj:PendingServiceRouting",
+        "rel": "rel:pendingservicerouting-case",
+        "via": "WorkItemId"
+      },
+      {
+        "destino": "obj:QueueRoutingConfig",
+        "destino_no_tema": true,
+        "estado": "verificado",
+        "origem": "obj:ServiceChannel",
+        "rel": "rel:servicechannel-queueroutingconfig",
+        "via": "RoutingConfigurationId"
+      },
+      {
+        "destino": "obj:Account",
+        "destino_no_tema": false,
+        "estado": "verificado",
+        "origem": "obj:ServiceContract",
+        "rel": "rel:servicecontract-account",
+        "via": "AccountId"
+      },
+      {
+        "destino": "obj:Contact",
+        "destino_no_tema": false,
+        "estado": "verificado",
+        "origem": "obj:ServiceContract",
+        "rel": "rel:servicecontract-contact",
+        "via": "ContactId"
+      },
+      {
+        "destino": "obj:Pricebook2",
+        "destino_no_tema": false,
+        "estado": "verificado",
+        "origem": "obj:ServiceContract",
+        "rel": "rel:servicecontract-pricebook2",
+        "via": "Pricebook2Id"
+      }
+    ],
+    "funcionalidades": [
+      {
+        "alertas": [
+          "Usar exige a permissão Lightning Console User e o perfil atribuído ao app.",
+          "O Service Console é atribuído automaticamente a todos os perfis; ajuste as atribuições."
+        ],
+        "exemplo": "No Service Console, o caso abre numa aba e o contato e a conta relacionados abrem em subabas.",
+        "id": "func:apps-de-console",
+        "pre_requisitos": [
+          "Gerenciar apps: Customize Application.",
+          "Edições: Essentials, Professional, Enterprise, Performance, Unlimited e Developer; o Service Console exige Service Cloud."
+        ],
+        "principal": false,
+        "tema_principal": "sub:aplicativos-e-navegacao"
+      },
+      {
+        "alertas": [
+          "IsClosed segue o Status; não é definido diretamente."
+        ],
+        "exemplo": "Um cliente escreve relatando atraso na entrega; o caso registra o contato, a origem por e-mail, a prioridade e segue até ser fechado.",
+        "id": "func:casos",
+        "principal": true
+      },
+      {
+        "alertas": [
+          "Na configuração simplificada, Entitlement Management se chama SLA Management, e Entitlement Processes se chamam SLA Policies; não há versionamento.",
+          "Business hours: as do milestone prevalecem sobre as do processo, que prevalecem sobre as do caso."
+        ],
+        "exemplo": "Clientes Ouro têm primeira resposta em 1 hora; o caso mostra o milestone e o tempo restante.",
+        "id": "func:entitlements-e-milestones",
+        "pre_requisitos": [
+          "Criar e atualizar processos: Manage Entitlements.",
+          "Configuração simplificada: Professional, Enterprise, Performance, Unlimited e Developer com Service Cloud."
+        ],
+        "principal": true
+      },
+      {
+        "exemplo": "Suporte de São Paulo: segunda a sexta, 8h às 18h, fuso de Brasília.",
+        "id": "func:horario-comercial",
+        "pre_requisitos": [
+          "Manage Business Hours Holidays."
+        ],
+        "principal": false,
+        "tema_principal": "sub:horarios-comerciais-e-feriados"
+      },
+      {
+        "alertas": [
+          "Habilitar Lightning Knowledge é irreversível e muda o modelo de dados para record types; exige ao menos um article type."
+        ],
+        "exemplo": "Um artigo de 'Como trocar a senha' é sugerido ao atendente e publicado no portal.",
+        "id": "func:lightning-knowledge",
+        "pre_requisitos": [
+          "Ver Knowledge Settings: licença Knowledge User."
+        ],
+        "principal": false,
+        "tema_principal": "sub:knowledge-e-categorias"
+      },
+      {
+        "alertas": [
+          "Standard Omni-Channel foi aposentado no Summer '26; a Salesforce faz o upgrade automático para Enhanced Omni-Channel.",
+          "Orgs criadas depois do Summer '23 já têm Enhanced por padrão; Enhanced não suporta canais standard (Chat e Messaging standard)."
+        ],
+        "exemplo": "Um caso novo vai automaticamente para um atendente disponível no canal de casos.",
+        "id": "func:omni-channel",
+        "pre_requisitos": [
+          "Licença: Agentforce Service ou add-ons Digital Engagement, Enhanced Chat, Salesforce Voice ou Workforce Management."
+        ],
+        "principal": true
+      },
+      {
+        "alertas": [
+          "Só uma regra de atribuição de cada tipo fica ativa por vez.",
+          "Uma regra de atribuição de casos aceita até 3.000 entradas, incluindo 300 de fórmula."
+        ],
+        "exemplo": "Casos com prioridade alta vão para a fila de nível 1; leads do site vão para a equipe de inbound.",
+        "id": "func:regras-de-atribuicao",
+        "principal": false,
+        "tema_principal": "sub:acoes-e-regras"
+      }
+    ],
+    "metadata_types": [
+      {
+        "estrutura": "completa",
+        "funcionalidades": [
+          "func:regras-de-atribuicao"
+        ],
+        "id": "mdt:AssignmentRules",
+        "nota_suporte": null,
+        "suporte_cli": "suportado"
+      },
+      {
+        "estrutura": "completa",
+        "funcionalidades": [
+          "func:horario-comercial"
+        ],
+        "id": "mdt:BusinessHoursSettings",
+        "nota_suporte": null,
+        "suporte_cli": "suportado"
+      },
+      {
+        "estrutura": "parcial",
+        "funcionalidades": [
+          "func:entitlements-e-milestones"
+        ],
+        "id": "mdt:EntitlementProcess",
+        "nota_suporte": null,
+        "suporte_cli": "suportado"
+      },
+      {
+        "estrutura": "completa",
+        "funcionalidades": [
+          "func:entitlements-e-milestones"
+        ],
+        "id": "mdt:EntitlementSettings",
+        "nota_suporte": null,
+        "suporte_cli": "suportado"
+      },
+      {
+        "estrutura": "completa",
+        "funcionalidades": [
+          "func:entitlements-e-milestones"
+        ],
+        "id": "mdt:EntitlementTemplate",
+        "nota_suporte": null,
+        "suporte_cli": "suportado"
+      },
+      {
+        "estrutura": "completa",
+        "funcionalidades": [
+          "func:regras-de-atribuicao"
+        ],
+        "id": "mdt:EscalationRules",
+        "nota_suporte": null,
+        "suporte_cli": "suportado"
+      },
+      {
+        "estrutura": "parcial",
+        "funcionalidades": [
+          "func:lightning-knowledge"
+        ],
+        "id": "mdt:KnowledgeSettings",
+        "nota_suporte": null,
+        "suporte_cli": "suportado"
+      },
+      {
+        "estrutura": "completa",
+        "funcionalidades": [
+          "func:entitlements-e-milestones"
+        ],
+        "id": "mdt:MilestoneType",
+        "nota_suporte": null,
+        "suporte_cli": "suportado"
+      },
+      {
+        "estrutura": "completa",
+        "funcionalidades": [
+          "func:omni-channel"
+        ],
+        "id": "mdt:OmniChannelSettings",
+        "nota_suporte": null,
+        "suporte_cli": "suportado"
+      },
+      {
+        "estrutura": "parcial",
+        "funcionalidades": [
+          "func:omni-channel"
+        ],
+        "id": "mdt:PresenceUserConfig",
+        "nota_suporte": null,
+        "suporte_cli": "suportado"
+      },
+      {
+        "estrutura": "completa",
+        "funcionalidades": [
+          "func:omni-channel"
+        ],
+        "id": "mdt:QueueRoutingConfig",
+        "nota_suporte": null,
+        "suporte_cli": "suportado"
+      },
+      {
+        "estrutura": "completa",
+        "funcionalidades": [
+          "func:omni-channel"
+        ],
+        "id": "mdt:ServiceChannel",
+        "nota_suporte": null,
+        "suporte_cli": "suportado"
+      },
+      {
+        "estrutura": "completa",
+        "funcionalidades": [
+          "func:omni-channel"
+        ],
+        "id": "mdt:ServicePresenceStatus",
+        "nota_suporte": null,
+        "suporte_cli": "suportado"
+      }
+    ],
+    "nota": "Calculado pelo gerador a partir do catálogo; não é cadastro.",
+    "objetos_api": [
+      {
+        "apis": [
+          {
+            "api": "padrao",
+            "estado": "verificado"
+          },
+          {
+            "api": "tooling",
+            "estado": "desconhecido"
+          }
+        ],
+        "funcionalidades": [
+          "func:omni-channel"
+        ],
+        "id": "obj:AgentWork"
+      },
+      {
+        "apis": [
+          {
+            "api": "padrao",
+            "estado": "verificado"
+          },
+          {
+            "api": "tooling",
+            "estado": "desconhecido"
+          }
+        ],
+        "funcionalidades": [
+          "func:regras-de-atribuicao"
+        ],
+        "id": "obj:AssignmentRule"
+      },
+      {
+        "apis": [
+          {
+            "api": "padrao",
+            "estado": "verificado"
+          },
+          {
+            "api": "tooling",
+            "estado": "desconhecido"
+          }
+        ],
+        "funcionalidades": [
+          "func:horario-comercial"
+        ],
+        "id": "obj:BusinessHours"
+      },
+      {
+        "apis": [
+          {
+            "api": "padrao",
+            "estado": "verificado"
+          },
+          {
+            "api": "tooling",
+            "estado": "desconhecido"
+          }
+        ],
+        "funcionalidades": [
+          "func:casos"
+        ],
+        "id": "obj:Case"
+      },
+      {
+        "apis": [
+          {
+            "api": "padrao",
+            "estado": "verificado"
+          },
+          {
+            "api": "tooling",
+            "estado": "desconhecido"
+          }
+        ],
+        "funcionalidades": [
+          "func:entitlements-e-milestones"
+        ],
+        "id": "obj:CaseMilestone"
+      },
+      {
+        "apis": [
+          {
+            "api": "padrao",
+            "estado": "verificado"
+          },
+          {
+            "api": "tooling",
+            "estado": "desconhecido"
+          }
+        ],
+        "funcionalidades": [
+          "func:entitlements-e-milestones"
+        ],
+        "id": "obj:Entitlement"
+      },
+      {
+        "apis": [
+          {
+            "api": "padrao",
+            "estado": "verificado"
+          },
+          {
+            "api": "tooling",
+            "estado": "desconhecido"
+          }
+        ],
+        "funcionalidades": [
+          "func:lightning-knowledge"
+        ],
+        "id": "obj:KnowledgeArticle"
+      },
+      {
+        "apis": [
+          {
+            "api": "padrao",
+            "estado": "verificado"
+          },
+          {
+            "api": "tooling",
+            "estado": "desconhecido"
+          }
+        ],
+        "funcionalidades": [
+          "func:lightning-knowledge"
+        ],
+        "id": "obj:KnowledgeArticleVersion"
+      },
+      {
+        "apis": [
+          {
+            "api": "padrao",
+            "estado": "verificado"
+          },
+          {
+            "api": "tooling",
+            "estado": "desconhecido"
+          }
+        ],
+        "funcionalidades": [
+          "func:entitlements-e-milestones"
+        ],
+        "id": "obj:MilestoneType"
+      },
+      {
+        "apis": [
+          {
+            "api": "padrao",
+            "estado": "verificado"
+          },
+          {
+            "api": "tooling",
+            "estado": "desconhecido"
+          }
+        ],
+        "funcionalidades": [
+          "func:omni-channel"
+        ],
+        "id": "obj:PendingServiceRouting"
+      },
+      {
+        "apis": [
+          {
+            "api": "padrao",
+            "estado": "verificado"
+          },
+          {
+            "api": "tooling",
+            "estado": "desconhecido"
+          }
+        ],
+        "funcionalidades": [
+          "func:omni-channel"
+        ],
+        "id": "obj:PresenceUserConfig"
+      },
+      {
+        "apis": [
+          {
+            "api": "padrao",
+            "estado": "verificado"
+          },
+          {
+            "api": "tooling",
+            "estado": "desconhecido"
+          }
+        ],
+        "funcionalidades": [
+          "func:omni-channel"
+        ],
+        "id": "obj:QueueRoutingConfig"
+      },
+      {
+        "apis": [
+          {
+            "api": "padrao",
+            "estado": "verificado"
+          },
+          {
+            "api": "tooling",
+            "estado": "desconhecido"
+          }
+        ],
+        "funcionalidades": [
+          "func:omni-channel"
+        ],
+        "id": "obj:ServiceChannel"
+      },
+      {
+        "apis": [
+          {
+            "api": "padrao",
+            "estado": "verificado"
+          },
+          {
+            "api": "tooling",
+            "estado": "desconhecido"
+          }
+        ],
+        "funcionalidades": [
+          "func:entitlements-e-milestones"
+        ],
+        "id": "obj:ServiceContract"
+      },
+      {
+        "apis": [
+          {
+            "api": "padrao",
+            "estado": "verificado"
+          },
+          {
+            "api": "tooling",
+            "estado": "desconhecido"
+          }
+        ],
+        "funcionalidades": [
+          "func:omni-channel"
+        ],
+        "id": "obj:ServicePresenceStatus"
+      },
+      {
+        "apis": [
+          {
+            "api": "padrao",
+            "estado": "verificado"
+          },
+          {
+            "api": "tooling",
+            "estado": "desconhecido"
+          }
+        ],
+        "funcionalidades": [
+          "func:entitlements-e-milestones"
+        ],
+        "id": "obj:SlaProcess"
+      }
+    ],
+    "temas_sem_funcionalidade": []
+  },
   "descricao": "Capacidades próprias de atendimento.",
   "escopo": "Entram as capacidades próprias do processo de atendimento.",
   "estado": "desconhecido",

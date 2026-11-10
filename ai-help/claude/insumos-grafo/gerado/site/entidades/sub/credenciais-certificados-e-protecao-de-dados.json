@@ -1,5 +1,130 @@
 {
   "classificacao": "cls:acesso-identidade-e-seguranca",
+  "derivado": {
+    "dependencias": [
+      {
+        "destino": "obj:AuthProvider",
+        "destino_no_tema": false,
+        "estado": "verificado",
+        "origem": "obj:NamedCredential",
+        "rel": "rel:namedcredential-authprovider",
+        "via": "AuthProviderId"
+      }
+    ],
+    "funcionalidades": [
+      {
+        "alertas": [
+          "InboundCertificate só existe com a permissão MutualAuthentication habilitada na org."
+        ],
+        "exemplo": "Um certificado autoassinado de 4096 bits assina o JWT usado por uma credencial externa.",
+        "id": "func:certificados",
+        "principal": true
+      },
+      {
+        "alertas": [
+          "Desde a 56.0, a autenticação mora na credencial externa; named credentials do tipo Legacy ainda usam os campos antigos."
+        ],
+        "exemplo": "Um Flow chama 'callout:ERP/pedidos'; a named credential ERP guarda a URL, e a credencial externa associada guarda o OAuth.",
+        "id": "func:named-credentials",
+        "principal": false,
+        "tema_principal": "sub:credenciais"
+      }
+    ],
+    "metadata_types": [
+      {
+        "estrutura": "completa",
+        "funcionalidades": [
+          "func:certificados"
+        ],
+        "id": "mdt:Certificate",
+        "nota_suporte": null,
+        "suporte_cli": "suportado"
+      },
+      {
+        "estrutura": "completa",
+        "funcionalidades": [
+          "func:named-credentials"
+        ],
+        "id": "mdt:ExternalAuthIdentityProvider",
+        "nota_suporte": null,
+        "suporte_cli": "suportado"
+      },
+      {
+        "estrutura": "completa",
+        "funcionalidades": [
+          "func:named-credentials"
+        ],
+        "id": "mdt:ExternalCredential",
+        "nota_suporte": null,
+        "suporte_cli": "suportado"
+      },
+      {
+        "estrutura": "completa",
+        "funcionalidades": [
+          "func:certificados"
+        ],
+        "id": "mdt:InboundCertificate",
+        "nota_suporte": null,
+        "suporte_cli": "suportado"
+      },
+      {
+        "estrutura": "completa",
+        "funcionalidades": [
+          "func:named-credentials"
+        ],
+        "id": "mdt:NamedCredential",
+        "nota_suporte": null,
+        "suporte_cli": "suportado"
+      },
+      {
+        "estrutura": "completa",
+        "funcionalidades": [
+          "func:certificados"
+        ],
+        "id": "mdt:PublicKeyCertificate",
+        "nota_suporte": "Supports deploy/retrieve but not source tracking",
+        "suporte_cli": "suportado_com_ressalvas"
+      },
+      {
+        "estrutura": "completa",
+        "funcionalidades": [
+          "func:certificados"
+        ],
+        "id": "mdt:PublicKeyCertificateSet",
+        "nota_suporte": "Supports deploy/retrieve but not source tracking",
+        "suporte_cli": "suportado_com_ressalvas"
+      },
+      {
+        "estrutura": "completa",
+        "funcionalidades": [
+          "func:certificados"
+        ],
+        "id": "mdt:UserAuthCertificate",
+        "nota_suporte": null,
+        "suporte_cli": "suportado"
+      }
+    ],
+    "nota": "Calculado pelo gerador a partir do catálogo; não é cadastro.",
+    "objetos_api": [
+      {
+        "apis": [
+          {
+            "api": "padrao",
+            "estado": "verificado"
+          },
+          {
+            "api": "tooling",
+            "estado": "desconhecido"
+          }
+        ],
+        "funcionalidades": [
+          "func:named-credentials"
+        ],
+        "id": "obj:NamedCredential"
+      }
+    ],
+    "temas_sem_funcionalidade": []
+  },
   "descricao": "Segredos, certificados e criptografia usados para proteger dados e integrações.",
   "escopo": "Entram segredos, certificados, chaves e criptografia usados para proteger dados e conexões.",
   "estado": "desconhecido",

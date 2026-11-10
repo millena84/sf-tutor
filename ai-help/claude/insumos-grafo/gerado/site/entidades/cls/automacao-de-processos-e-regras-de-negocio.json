@@ -1,4 +1,226 @@
 {
+  "derivado": {
+    "dependencias": [
+      {
+        "destino": "obj:FlowDefinition",
+        "destino_no_tema": true,
+        "estado": "verificado",
+        "origem": "obj:Flow",
+        "rel": "rel:flow-flowdefinition",
+        "via": "DefinitionId"
+      },
+      {
+        "destino": "obj:Flow",
+        "destino_no_tema": true,
+        "estado": "verificado",
+        "origem": "obj:FlowDefinition",
+        "rel": "rel:flowdefinition-activeversion",
+        "via": "ActiveVersionId"
+      },
+      {
+        "destino": "obj:Flow",
+        "destino_no_tema": true,
+        "estado": "verificado",
+        "origem": "obj:FlowDefinition",
+        "rel": "rel:flowdefinition-latestversion",
+        "via": "LatestVersionId"
+      },
+      {
+        "destino": "obj:EntityDefinition",
+        "destino_no_tema": false,
+        "estado": "verificado",
+        "origem": "obj:QuickActionDefinition",
+        "rel": "rel:quickaction-entitydefinition",
+        "via": "EntityDefinitionId"
+      },
+      {
+        "destino": "obj:RecordType",
+        "destino_no_tema": false,
+        "estado": "verificado",
+        "origem": "obj:QuickActionDefinition",
+        "rel": "rel:quickaction-recordtype",
+        "via": "TargetRecordTypeId"
+      },
+      {
+        "destino": "obj:EntityDefinition",
+        "destino_no_tema": false,
+        "estado": "verificado",
+        "origem": "obj:ValidationRule",
+        "rel": "rel:validationrule-entitydefinition",
+        "via": "EntityDefinitionId"
+      }
+    ],
+    "funcionalidades": [
+      {
+        "exemplo": "Atualizar o status do contrato quando a assinatura é registrada.",
+        "id": "func:flow",
+        "pre_requisitos": [
+          "Abrir, editar ou criar flows: Manage Flow."
+        ],
+        "principal": true
+      },
+      {
+        "exemplo": "'Registrar renovação' a partir de um contrato, abrindo um flow.",
+        "id": "func:acoes-rapidas",
+        "pre_requisitos": [
+          "Criar ações: Customize Application."
+        ],
+        "principal": false,
+        "tema_principal": "sub:acoes-rapidas"
+      },
+      {
+        "alertas": [
+          "Só uma regra de atribuição de cada tipo fica ativa por vez.",
+          "Uma regra de atribuição de casos aceita até 3.000 entradas, incluindo 300 de fórmula."
+        ],
+        "exemplo": "Casos com prioridade alta vão para a fila de nível 1; leads do site vão para a equipe de inbound.",
+        "id": "func:regras-de-atribuicao",
+        "principal": true
+      },
+      {
+        "exemplo": "Impedir salvar um contrato com valor negativo.",
+        "id": "func:regras-de-validacao",
+        "principal": false,
+        "tema_principal": "sub:validacao"
+      }
+    ],
+    "metadata_types": [
+      {
+        "estrutura": "completa",
+        "funcionalidades": [
+          "func:regras-de-atribuicao"
+        ],
+        "id": "mdt:AssignmentRules",
+        "nota_suporte": null,
+        "suporte_cli": "suportado"
+      },
+      {
+        "estrutura": "completa",
+        "funcionalidades": [
+          "func:regras-de-atribuicao"
+        ],
+        "id": "mdt:EscalationRules",
+        "nota_suporte": null,
+        "suporte_cli": "suportado"
+      },
+      {
+        "estrutura": "parcial",
+        "funcionalidades": [
+          "func:flow"
+        ],
+        "id": "mdt:Flow",
+        "nota_suporte": null,
+        "suporte_cli": "suportado"
+      },
+      {
+        "estrutura": "parcial",
+        "funcionalidades": [
+          "func:acoes-rapidas"
+        ],
+        "id": "mdt:QuickAction",
+        "nota_suporte": null,
+        "suporte_cli": "suportado"
+      },
+      {
+        "estrutura": "completa",
+        "funcionalidades": [
+          "func:regras-de-validacao"
+        ],
+        "id": "mdt:ValidationRule",
+        "nota_suporte": null,
+        "suporte_cli": "suportado"
+      }
+    ],
+    "nota": "Calculado pelo gerador a partir do catálogo; não é cadastro.",
+    "objetos_api": [
+      {
+        "apis": [
+          {
+            "api": "padrao",
+            "estado": "verificado"
+          },
+          {
+            "api": "tooling",
+            "estado": "desconhecido"
+          }
+        ],
+        "funcionalidades": [
+          "func:regras-de-atribuicao"
+        ],
+        "id": "obj:AssignmentRule"
+      },
+      {
+        "apis": [
+          {
+            "api": "tooling",
+            "estado": "verificado"
+          },
+          {
+            "api": "padrao",
+            "estado": "desconhecido"
+          }
+        ],
+        "funcionalidades": [
+          "func:flow"
+        ],
+        "id": "obj:Flow"
+      },
+      {
+        "apis": [
+          {
+            "api": "tooling",
+            "estado": "verificado"
+          },
+          {
+            "api": "padrao",
+            "estado": "desconhecido"
+          }
+        ],
+        "funcionalidades": [
+          "func:flow"
+        ],
+        "id": "obj:FlowDefinition"
+      },
+      {
+        "apis": [
+          {
+            "api": "tooling",
+            "estado": "verificado"
+          },
+          {
+            "api": "padrao",
+            "estado": "desconhecido"
+          }
+        ],
+        "funcionalidades": [
+          "func:acoes-rapidas"
+        ],
+        "id": "obj:QuickActionDefinition"
+      },
+      {
+        "apis": [
+          {
+            "api": "tooling",
+            "estado": "verificado"
+          },
+          {
+            "api": "padrao",
+            "estado": "nao_exposto"
+          }
+        ],
+        "funcionalidades": [
+          "func:regras-de-validacao"
+        ],
+        "id": "obj:ValidationRule"
+      }
+    ],
+    "temas_sem_funcionalidade": [
+      "sub:decisoes-e-aprovacoes",
+      "sub:automacao-apex",
+      "sub:notificacoes",
+      "sub:mecanismos-legados-e-migracao"
+    ]
+  },
   "descricao": "Reúne o que executa trabalho automaticamente: fluxos, decisões, aprovações, ações e código Apex.",
   "escopo": "Entra o que executa trabalho sem ação manual a cada passo: fluxos, decisões, aprovações, regras que disparam comportamento, automação em Apex e notificações.",
   "estado": "desconhecido",

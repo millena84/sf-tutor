@@ -1,5 +1,189 @@
 {
   "classificacao": "cls:acesso-identidade-e-seguranca",
+  "derivado": {
+    "dependencias": [
+      {
+        "destino": "mdt:PermissionSet",
+        "destino_no_tema": false,
+        "estado": "verificado",
+        "origem": "mdt:ConnectedApp",
+        "rel": "rel:connectedapp-permissionset",
+        "via": "permissionSetName"
+      },
+      {
+        "destino": "mdt:Profile",
+        "destino_no_tema": false,
+        "estado": "verificado",
+        "origem": "mdt:ConnectedApp",
+        "rel": "rel:connectedapp-profile",
+        "via": "profileName"
+      },
+      {
+        "destino": "mdt:ConnectedApp",
+        "destino_no_tema": true,
+        "estado": "verificado",
+        "origem": "mdt:OauthCustomScope",
+        "rel": "rel:oauthcustomscope-connectedapp",
+        "via": "assignedTo"
+      },
+      {
+        "destino": "obj:User",
+        "destino_no_tema": false,
+        "estado": "verificado",
+        "origem": "obj:OauthToken",
+        "rel": "rel:oauthtoken-user",
+        "via": "UserId"
+      }
+    ],
+    "funcionalidades": [
+      {
+        "alertas": [
+          "O segredo do app (consumerSecret) não vem no retrieve: é exportado como marcador."
+        ],
+        "exemplo": "Usuários de um portal entram com a conta Microsoft; uma credencial externa usa o mesmo provedor para chamar uma API.",
+        "id": "func:auth-providers",
+        "principal": false,
+        "tema_principal": "sub:autenticacao-de-integracoes"
+      },
+      {
+        "alertas": [
+          "Criação de connected apps restrita a partir do Spring '26 (página oficial); para novas integrações, a Salesforce recomenda external client apps."
+        ],
+        "exemplo": "Um sistema de BI se conecta por OAuth com a consumer key de um connected app que só usuários com um permission set podem usar.",
+        "id": "func:connected-apps",
+        "principal": false,
+        "tema_principal": "sub:autenticacao-de-integracoes"
+      },
+      {
+        "exemplo": "Um app recebe o escopo customizado 'pedidos_leitura'; um handler troca o token do provedor corporativo por um token da Salesforce.",
+        "id": "func:oauth-escopos-e-troca-de-token",
+        "principal": false,
+        "tema_principal": "sub:autenticacao-de-integracoes"
+      },
+      {
+        "exemplo": "Funcionários entram pelo provedor corporativo; a asserção traz o Federation ID e o usuário é criado no primeiro login.",
+        "id": "func:sso-saml",
+        "principal": true
+      }
+    ],
+    "metadata_types": [
+      {
+        "estrutura": "completa",
+        "funcionalidades": [
+          "func:auth-providers"
+        ],
+        "id": "mdt:AuthProvider",
+        "nota_suporte": null,
+        "suporte_cli": "suportado"
+      },
+      {
+        "estrutura": "completa",
+        "funcionalidades": [
+          "func:connected-apps"
+        ],
+        "id": "mdt:ConnectedApp",
+        "nota_suporte": null,
+        "suporte_cli": "suportado"
+      },
+      {
+        "estrutura": "completa",
+        "funcionalidades": [
+          "func:connected-apps"
+        ],
+        "id": "mdt:ConnectedAppSettings",
+        "nota_suporte": null,
+        "suporte_cli": "suportado"
+      },
+      {
+        "estrutura": "completa",
+        "funcionalidades": [
+          "func:oauth-escopos-e-troca-de-token"
+        ],
+        "id": "mdt:OauthCustomScope",
+        "nota_suporte": null,
+        "suporte_cli": "suportado"
+      },
+      {
+        "estrutura": "completa",
+        "funcionalidades": [
+          "func:oauth-escopos-e-troca-de-token"
+        ],
+        "id": "mdt:OauthOidcSettings",
+        "nota_suporte": null,
+        "suporte_cli": "suportado"
+      },
+      {
+        "estrutura": "completa",
+        "funcionalidades": [
+          "func:oauth-escopos-e-troca-de-token"
+        ],
+        "id": "mdt:OauthTokenExchangeHandler",
+        "nota_suporte": null,
+        "suporte_cli": "suportado"
+      },
+      {
+        "estrutura": "completa",
+        "funcionalidades": [
+          "func:sso-saml"
+        ],
+        "id": "mdt:SamlSsoConfig",
+        "nota_suporte": null,
+        "suporte_cli": "suportado"
+      }
+    ],
+    "nota": "Calculado pelo gerador a partir do catálogo; não é cadastro.",
+    "objetos_api": [
+      {
+        "apis": [
+          {
+            "api": "padrao",
+            "estado": "verificado"
+          },
+          {
+            "api": "tooling",
+            "estado": "desconhecido"
+          }
+        ],
+        "funcionalidades": [
+          "func:auth-providers"
+        ],
+        "id": "obj:AuthProvider"
+      },
+      {
+        "apis": [
+          {
+            "api": "padrao",
+            "estado": "verificado"
+          },
+          {
+            "api": "tooling",
+            "estado": "desconhecido"
+          }
+        ],
+        "funcionalidades": [
+          "func:connected-apps"
+        ],
+        "id": "obj:ConnectedApplication"
+      },
+      {
+        "apis": [
+          {
+            "api": "padrao",
+            "estado": "verificado"
+          },
+          {
+            "api": "tooling",
+            "estado": "desconhecido"
+          }
+        ],
+        "funcionalidades": [
+          "func:connected-apps"
+        ],
+        "id": "obj:OauthToken"
+      }
+    ],
+    "temas_sem_funcionalidade": []
+  },
   "descricao": "Como a identidade é comprovada: senha, login único e múltiplos fatores.",
   "escopo": "Entram as formas de comprovar identidade: senha, login único, provedores de autenticação, múltiplos fatores e apps conectados usados no login.",
   "estado": "desconhecido",

@@ -350,6 +350,23 @@ class TestTemas(BaseTemp):
         d = ler(p); d["estado"] = "verificado"; gravar(p, d)
         self.assertErro("tema verificado sem referência oficial")
 
+    def test_por_onde_comecar_fora_do_tema_e_erro(self):
+        p = self.cat("subclassificacoes", "lightning-pages-e-componentes.json")
+        d = ler(p); d["para_iniciantes"]["por_onde_comecar"] = ["func:flow"]; gravar(p, d)
+        self.assertErro("não é funcionalidade deste tema")
+
+    def test_item_avancado_sem_fonte_e_erro(self):
+        p = self.cat("classificacoes", "interface-e-experiencia-do-usuario.json")
+        d = ler(p); d["avancado"][0]["evidencias"] = []; gravar(p, d)
+        self.assertErro("avancado")
+
+    def test_derivado_do_tema_no_site(self):
+        e = ler(os.path.join(BASE, "gerado", "site", "entidades", "cls", "interface-e-experiencia-do-usuario.json"))
+        d = e["derivado"]
+        self.assertIn("mdt:FlexiPage", [m["id"] for m in d["metadata_types"]])
+        self.assertTrue(all(m["suporte_cli"] for m in d["metadata_types"]))
+        self.assertIn("sub:experiencias-web-portais-e-mobile", d["temas_sem_funcionalidade"])
+
     def test_classificacoes_com_referencia_oficial(self):
         for p in glob.glob(os.path.join(BASE, "catalogo", "classificacoes", "*.json")):
             t = ler(p)

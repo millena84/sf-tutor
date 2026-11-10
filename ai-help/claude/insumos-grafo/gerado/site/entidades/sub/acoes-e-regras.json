@@ -1,5 +1,149 @@
 {
   "classificacao": "cls:automacao-de-processos-e-regras-de-negocio",
+  "derivado": {
+    "dependencias": [
+      {
+        "destino": "obj:EntityDefinition",
+        "destino_no_tema": false,
+        "estado": "verificado",
+        "origem": "obj:QuickActionDefinition",
+        "rel": "rel:quickaction-entitydefinition",
+        "via": "EntityDefinitionId"
+      },
+      {
+        "destino": "obj:RecordType",
+        "destino_no_tema": false,
+        "estado": "verificado",
+        "origem": "obj:QuickActionDefinition",
+        "rel": "rel:quickaction-recordtype",
+        "via": "TargetRecordTypeId"
+      },
+      {
+        "destino": "obj:EntityDefinition",
+        "destino_no_tema": false,
+        "estado": "verificado",
+        "origem": "obj:ValidationRule",
+        "rel": "rel:validationrule-entitydefinition",
+        "via": "EntityDefinitionId"
+      }
+    ],
+    "funcionalidades": [
+      {
+        "exemplo": "'Registrar renovação' a partir de um contrato, abrindo um flow.",
+        "id": "func:acoes-rapidas",
+        "pre_requisitos": [
+          "Criar ações: Customize Application."
+        ],
+        "principal": false,
+        "tema_principal": "sub:acoes-rapidas"
+      },
+      {
+        "alertas": [
+          "Só uma regra de atribuição de cada tipo fica ativa por vez.",
+          "Uma regra de atribuição de casos aceita até 3.000 entradas, incluindo 300 de fórmula."
+        ],
+        "exemplo": "Casos com prioridade alta vão para a fila de nível 1; leads do site vão para a equipe de inbound.",
+        "id": "func:regras-de-atribuicao",
+        "principal": true
+      },
+      {
+        "exemplo": "Impedir salvar um contrato com valor negativo.",
+        "id": "func:regras-de-validacao",
+        "principal": false,
+        "tema_principal": "sub:validacao"
+      }
+    ],
+    "metadata_types": [
+      {
+        "estrutura": "completa",
+        "funcionalidades": [
+          "func:regras-de-atribuicao"
+        ],
+        "id": "mdt:AssignmentRules",
+        "nota_suporte": null,
+        "suporte_cli": "suportado"
+      },
+      {
+        "estrutura": "completa",
+        "funcionalidades": [
+          "func:regras-de-atribuicao"
+        ],
+        "id": "mdt:EscalationRules",
+        "nota_suporte": null,
+        "suporte_cli": "suportado"
+      },
+      {
+        "estrutura": "parcial",
+        "funcionalidades": [
+          "func:acoes-rapidas"
+        ],
+        "id": "mdt:QuickAction",
+        "nota_suporte": null,
+        "suporte_cli": "suportado"
+      },
+      {
+        "estrutura": "completa",
+        "funcionalidades": [
+          "func:regras-de-validacao"
+        ],
+        "id": "mdt:ValidationRule",
+        "nota_suporte": null,
+        "suporte_cli": "suportado"
+      }
+    ],
+    "nota": "Calculado pelo gerador a partir do catálogo; não é cadastro.",
+    "objetos_api": [
+      {
+        "apis": [
+          {
+            "api": "padrao",
+            "estado": "verificado"
+          },
+          {
+            "api": "tooling",
+            "estado": "desconhecido"
+          }
+        ],
+        "funcionalidades": [
+          "func:regras-de-atribuicao"
+        ],
+        "id": "obj:AssignmentRule"
+      },
+      {
+        "apis": [
+          {
+            "api": "tooling",
+            "estado": "verificado"
+          },
+          {
+            "api": "padrao",
+            "estado": "desconhecido"
+          }
+        ],
+        "funcionalidades": [
+          "func:acoes-rapidas"
+        ],
+        "id": "obj:QuickActionDefinition"
+      },
+      {
+        "apis": [
+          {
+            "api": "tooling",
+            "estado": "verificado"
+          },
+          {
+            "api": "padrao",
+            "estado": "nao_exposto"
+          }
+        ],
+        "funcionalidades": [
+          "func:regras-de-validacao"
+        ],
+        "id": "obj:ValidationRule"
+      }
+    ],
+    "temas_sem_funcionalidade": []
+  },
   "descricao": "Ações reutilizáveis e regras que disparam comportamento.",
   "escopo": "Entram ações reutilizáveis e regras que disparam comportamento, como atribuição e escalonamento.",
   "estado": "desconhecido",

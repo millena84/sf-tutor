@@ -1,5 +1,109 @@
 {
   "classificacao": "cls:acesso-identidade-e-seguranca",
+  "derivado": {
+    "dependencias": [
+      {
+        "destino": "obj:Account",
+        "destino_no_tema": false,
+        "estado": "verificado",
+        "origem": "obj:AccountTeamMember",
+        "rel": "rel:atm-account",
+        "via": "AccountId"
+      },
+      {
+        "destino": "obj:User",
+        "destino_no_tema": false,
+        "estado": "verificado",
+        "origem": "obj:AccountTeamMember",
+        "rel": "rel:atm-user",
+        "via": "UserId"
+      },
+      {
+        "destino": "obj:Opportunity",
+        "destino_no_tema": false,
+        "estado": "verificado",
+        "origem": "obj:OpportunityTeamMember",
+        "rel": "rel:otm-opportunity",
+        "via": "OpportunityId"
+      },
+      {
+        "destino": "obj:User",
+        "destino_no_tema": false,
+        "estado": "verificado",
+        "origem": "obj:OpportunityTeamMember",
+        "rel": "rel:otm-user",
+        "via": "UserId"
+      }
+    ],
+    "funcionalidades": [
+      {
+        "exemplo": "Na conta ACME, o executivo de contas é dono e o engenheiro de pré-venda entra na equipe com acesso de leitura.",
+        "id": "func:equipes-de-conta-e-oportunidade",
+        "pre_requisitos": [
+          "Equipes de conta: Enterprise, Unlimited e Performance, com o recurso habilitado.",
+          "Equipes de oportunidade: team selling habilitado."
+        ],
+        "principal": false,
+        "tema_principal": "sub:vendas"
+      }
+    ],
+    "metadata_types": [
+      {
+        "estrutura": "completa",
+        "funcionalidades": [
+          "func:equipes-de-conta-e-oportunidade"
+        ],
+        "id": "mdt:AccountSettings",
+        "nota_suporte": null,
+        "suporte_cli": "suportado"
+      },
+      {
+        "estrutura": "completa",
+        "funcionalidades": [
+          "func:equipes-de-conta-e-oportunidade"
+        ],
+        "id": "mdt:OpportunitySettings",
+        "nota_suporte": null,
+        "suporte_cli": "suportado"
+      }
+    ],
+    "nota": "Calculado pelo gerador a partir do catálogo; não é cadastro.",
+    "objetos_api": [
+      {
+        "apis": [
+          {
+            "api": "padrao",
+            "estado": "verificado"
+          },
+          {
+            "api": "tooling",
+            "estado": "desconhecido"
+          }
+        ],
+        "funcionalidades": [
+          "func:equipes-de-conta-e-oportunidade"
+        ],
+        "id": "obj:AccountTeamMember"
+      },
+      {
+        "apis": [
+          {
+            "api": "padrao",
+            "estado": "verificado"
+          },
+          {
+            "api": "tooling",
+            "estado": "desconhecido"
+          }
+        ],
+        "funcionalidades": [
+          "func:equipes-de-conta-e-oportunidade"
+        ],
+        "id": "obj:OpportunityTeamMember"
+      }
+    ],
+    "temas_sem_funcionalidade": []
+  },
   "descricao": "Quais registros cada usuário enxerga: padrões da org, papéis e compartilhamento.",
   "escopo": "Entram os mecanismos que decidem quais registros cada usuário enxerga: padrões da org, papéis, compartilhamento e equipes.",
   "estado": "desconhecido",

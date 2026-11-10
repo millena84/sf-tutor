@@ -5,7 +5,7 @@ import type { Entidades } from '../data/carregador';
 import { Indice, TIPOS_FOLHA, TIPOS_OBJETO, type Visao } from '../model/adaptador';
 import {
   FORMA_DEFAULT, ICONE_TIPO, LIGACAO, NATUREZA_DOMINIO, NATUREZA_RECOMENDACAO, NOME_API, NOME_TIPO, OBRIGATORIEDADE, ORIGEM,
-  PROPRIEDADES_API, TIPO_LICENCA, estadoRecorte, rotuloEstado,
+  PROPRIEDADES_API, TIPO_LICENCA, RECORTE, TIPO_AVANCADO, estadoRecorte, rotuloEstado,
 } from '../rotulos';
 import { copiar, h, limpar } from './dom';
 import { afirmacao, codigo, fontesEl, listaTexto, restantes, secao, selo, texto, valorEl } from './partes';
@@ -81,7 +81,9 @@ function cabecalho(ctx: CtxPainel, caminho: readonly string[]): HTMLElement {
     h('h2', { id: 'titulo-painel', tabindex: -1 }, no.rotulo),
     no.rotulo_tecnico && no.rotulo_tecnico !== no.rotulo ? h('p', { class: 'nome-tecnico' }, no.rotulo_tecnico) : null,
     TIPOS_FOLHA.has(no.tipo) ? h('p', { class: 'nome-tecnico' }, id.replace(/^(obj|mdt|mdx):/, '')) : null,
-    h('p', { class: 'linha-selos' }, no.estado ? selo(no.estado) : null, no.tipo_tecnico ? h('span', { class: 'selo selo-tipo' }, no.tipo_tecnico) : null,
+    h('p', { class: 'linha-selos' }, no.recorte
+      ? h('span', { class: `selo selo-recorte selo-recorte-${no.recorte}`, title: RECORTE[no.recorte].explicacao }, RECORTE[no.recorte].rotulo)
+      : no.estado ? selo(no.estado) : null, no.tipo_tecnico ? h('span', { class: 'selo selo-tipo' }, no.tipo_tecnico) : null,
       ...(no.apis ?? []).map((a) => h('span', { class: 'selo selo-api' }, NOME_API[a] ?? a))),
     oculto ? h('p', { class: 'aviso' }, `Esmaecido pelos filtros: ${oculto}.`) : null,
     h('nav', { class: 'migalhas', 'aria-label': 'Caminho no mapa' },
@@ -204,29 +206,139 @@ function painelNuvem(ctx: CtxPainel, e: Entidade, caminho: readonly string[]): (
 
 // ------------------------------------------------------------------ Tema (classificação / subclassificação nos dados)
 
-function plural(n: number, um: string, varios: string): string {
-  return `${n} ${n === 1 ? um : varios}`;
+type Ev = { fonte: string; secao?: string; nota?: string };
+interface FuncDerivada { id: string; principal: boolean; tema_principal?: string; pre_requisitos?: string[]; alertas?: string[]; exemplo?: string }
+interface Derivado {
+  funcionalidades: FuncDerivada[];
+  metadata_types: { id: string; suporte_cli?: string; nota_suporte?: string | null; estrutura?: string; funcionalidades: string[] }[];
+  objetos_api: { id: string; apis: { api: string; estado: string }[]; funcionalidades: string[] }[];
+  dependencias: { rel: string; origem: string; via?: string | null; destino: string; destino_no_tema: boolean; estado: string }[];
+  temas_sem_funcionalidade: string[];
+}
+interface Bloco { texto?: string; evidencias?: Ev[] }
+interface ParaIniciantes { explicacao: string; exemplo: string; analogia?: { texto: string; limite: string }; por_onde_comecar?: string[]; evidencias?: Ev[] }
+interface ItemAvancado { tipo: string; titulo: string; texto: string; evidencias: Ev[] }
+
+/** Lista curta e clicável (vírgulas), para economizar altura no celular. */
+function linksEmLinha(ctx: CtxPainel, ids: string[], extra?: (id: string) => Node | string | null): HTMLElement {
+  const p = h('p', { class: 'links-linha' });
+  ids.forEach((id, i) => {
+    if (i) p.append(', ');
+    p.append(h('button', { type: 'button', class: 'link', on: { click: () => ctx.abrir(id) } }, ctx.rotulo(id)));
+    const x = extra?.(id);
+    if (x) p.append(typeof x === 'string' ? x : x);
+  });
+  return p;
+}
+
+function fontesCamada(ctx: CtxPainel, evs?: Ev[]): HTMLElement | null {
+  if (!evs?.length) return null;
+  return h('details', { class: 'fontes-camada' }, h('summary', null, `Fontes (${evs.length})`), fontesEl(ctx, evs));
+}
+
+function textoSuporte(m: Derivado['metadata_types'][number]): string {
+  if (m.suporte_cli === 'suportado') return 'suportado pelo Salesforce CLI';
+  if (m.suporte_cli === 'suportado_com_ressalvas') return m.nota_suporte === 'Supports deploy/retrieve but not source tracking'
+    ? 'deploy e retrieve pelo Salesforce CLI, sem source tracking' : `com ressalvas no Salesforce CLI (${m.nota_suporte ?? 'ver fonte'})`;
+  return m.suporte_cli ? `Salesforce CLI: ${m.suporte_cli}` : 'suporte no Salesforce CLI não registrado';
+}
+
+const NOME_API_CURTO: Record<string, string> = { padrao: 'API padrão', tooling: 'Tooling API' };
+function textoApi(a: { api: string; estado: string }): string {
+  const n = NOME_API_CURTO[a.api] ?? a.api;
+  if (a.estado === 'verificado') return n;
+  if (a.estado === 'nao_exposto') return `${n}: não exposto`;
+  if (a.estado === 'desconhecido') return `${n}: não investigada`;
+  return `${n}: ${rotuloEstado(a.estado)}`;
 }
 
 /**
  * "Sobre este tema": três camadas com os mesmos rótulos e a mesma ordem em todos os temas.
- * 1) começando (sempre visível), 2) já conhece Salesforce (sempre visível), 3) nível avançado (recolhido).
+ * O conteúdo de cada camada é específico do tema: texto curado (para_iniciantes, encadeamento, avancado) quando existe,
+ * mais o resumo técnico calculado pelo gerador (campo "derivado"). Sem texto curado, cai no texto genérico.
  */
 function sobreTema(ctx: CtxPainel, e: Entidade): HTMLElement | null {
   const c = ctx.ind.conteudoDoTema(e.id);
-  const refs = arr(e.referencias_oficiais);
+  const d = (e.derivado ?? null) as Derivado | null;
+  const refs = arr<Ev>(e.referencias_oficiais);
   const rec = estadoRecorte(e.estado, refs.length > 0);
   const didatico = e.natureza === 'curadoria_didatica';
   const pai = typeof e.classificacao === 'string' ? e.classificacao : null;
-  const itens: string[] = [];
-  if (c.temas) itens.push(plural(c.temas, 'tema mais específico', 'temas mais específicos'));
-  itens.push(plural(c.funcionalidades, 'funcionalidade', 'funcionalidades')
-    + (c.soSecundarias ? ` (${c.soSecundarias} com lugar principal em outro tema)` : ''));
-  itens.push(plural(c.metadataTypes, 'metadata type (XML)', 'metadata types (XML)'));
-  itens.push(plural(c.objetosApi, 'objeto API', 'objetos API'));
-  const avancado = h('details', { class: 'secao camada-avancada' },
-    h('summary', null, 'Nível avançado'),
-    h('h5', null, 'Estado do recorte'),
+  const ehCls = ctx.ind.no(e.id)?.tipo === 'classificacao';
+  const pi = (e.para_iniciantes ?? null) as ParaIniciantes | null;
+  const enc = (e.encadeamento ?? null) as Bloco | null;
+  const avc = arr<ItemAvancado>(e.avancado);
+  const aviso = didatico ? 'Tema criado por este tutorial para organizar o estudo; não é uma categoria oficial da Salesforce.' : `Natureza: ${String(e.natureza ?? 'não informada')}`;
+
+  // camada 1
+  const c1 = pi
+    ? [
+      h('p', null, pi.explicacao, h('span', { class: 'marca-didatica', title: 'Redação do projeto a partir das fontes citadas; não é texto oficial.' }, ' · explicação do projeto')),
+      h('p', null, h('strong', null, 'Exemplo: '), pi.exemplo),
+      pi.analogia ? h('div', { class: 'analogia' }, h('p', null, h('strong', null, 'Analogia: '), pi.analogia.texto),
+        h('p', { class: 'nota' }, h('strong', null, 'Onde a analogia para: '), pi.analogia.limite)) : null,
+      pi.por_onde_comecar?.length ? h('div', { class: 'comece-por' }, h('strong', null, 'Comece por: '), linksEmLinha(ctx, pi.por_onde_comecar)) : null,
+      h('p', { class: 'nota' }, aviso),
+      fontesCamada(ctx, pi.evidencias),
+    ]
+    : [h('p', null, didatico
+      ? 'Tema criado por este tutorial para organizar o estudo. Não é uma categoria oficial da Salesforce: a documentação oficial pode agrupar os mesmos assuntos de outro jeito.'
+      : aviso)];
+
+  // camada 2
+  const funcs = d?.funcionalidades ?? [];
+  const c2: (Node | null)[] = [];
+  if (enc?.texto) c2.push(h('h5', null, ehCls ? 'Como as partes se ligam' : 'Como se encaixa no tema de cima'), h('p', null, enc.texto), fontesCamada(ctx, enc.evidencias));
+  if (d && (funcs.length || c.temas)) {
+    if (funcs.length) {
+      c2.push(h('h5', null, `Funcionalidades (${funcs.length})`), linksEmLinha(ctx, funcs.map((f) => f.id), (id) => {
+        const f = funcs.find((x) => x.id === id);
+        return f && !f.principal && f.tema_principal ? h('span', { class: 'nota' }, ` (lugar principal: ${ctx.rotulo(f.tema_principal)})`) : null;
+      }));
+    }
+    if (d.metadata_types.length) c2.push(h('h5', null, `Metadata types (${d.metadata_types.length})`), linksEmLinha(ctx, d.metadata_types.map((m) => m.id)));
+    if (d.objetos_api.length) c2.push(h('h5', null, `Objetos API (${d.objetos_api.length})`), linksEmLinha(ctx, d.objetos_api.map((o) => o.id)));
+    if (d.temas_sem_funcionalidade.length) c2.push(h('h5', null, 'Ainda sem funcionalidades catalogadas'), h('p', { class: 'vazio' }, d.temas_sem_funcionalidade.map((t) => ctx.rotulo(t)).join(', ')));
+    c2.push(h('p', { class: 'nota' }, 'Metadata types e objetos API vêm das funcionalidades do tema; um mesmo item pode servir a vários temas.'));
+  } else if (!funcs.length) {
+    c2.push(h('p', { class: 'vazio' }, 'Ainda não mapeado: nenhuma funcionalidade catalogada neste tema.'));
+  }
+
+  // camada 3
+  const c3: (Node | null)[] = [];
+  for (const it of avc) {
+    c3.push(h('div', { class: 'item-avancado' }, h('h5', null, `${TIPO_AVANCADO[it.tipo] ?? it.tipo}: ${it.titulo}`), h('p', null, it.texto), fontesCamada(ctx, it.evidencias)));
+  }
+  if (d?.metadata_types.length) {
+    const completas = d.metadata_types.filter((m) => m.estrutura === 'completa').length;
+    c3.push(h('div', { class: 'item-avancado' }, h('h5', null, 'Implantação: suporte no Salesforce CLI'),
+      h('ul', { class: 'lista' }, d.metadata_types.map((m) => h('li', null,
+        h('button', { type: 'button', class: 'link', on: { click: () => ctx.abrir(m.id) } }, ctx.rotulo(m.id)), ` — ${textoSuporte(m)}`))),
+      h('p', { class: 'nota' }, `Estrutura do XML catalogada por completo em ${completas} de ${d.metadata_types.length}.`)));
+  }
+  if (d?.objetos_api.length) {
+    c3.push(h('div', { class: 'item-avancado' }, h('h5', null, 'Acesso por API'),
+      h('ul', { class: 'lista' }, d.objetos_api.map((o) => h('li', null,
+        h('button', { type: 'button', class: 'link', on: { click: () => ctx.abrir(o.id) } }, ctx.rotulo(o.id)),
+        ` — ${o.apis.length ? o.apis.map(textoApi).join('; ') : 'exposição não registrada'}`)))));
+  }
+  if (d?.dependencias.length) {
+    c3.push(h('div', { class: 'item-avancado' }, h('h5', null, 'Dependências entre componentes'),
+      h('p', { class: 'nota' }, 'Referências documentadas: ajudam a prever a ordem de implantação e o impacto de uma mudança.'),
+      h('ul', { class: 'lista' }, d.dependencias.map((x) => h('li', null,
+        h('button', { type: 'button', class: 'link', on: { click: () => ctx.abrir(x.origem) } }, ctx.rotulo(x.origem)),
+        x.via ? ` (${x.via})` : '', ' → ',
+        h('button', { type: 'button', class: 'link', on: { click: () => ctx.abrir(x.destino) } }, ctx.rotulo(x.destino)),
+        x.destino_no_tema ? '' : h('span', { class: 'nota' }, ' · fora deste tema'))))));
+  }
+  const alertas = funcs.filter((f) => f.alertas?.length);
+  if (alertas.length) {
+    c3.push(h('div', { class: 'item-avancado' }, h('h5', null, 'Pontos de atenção das funcionalidades'),
+      h('ul', { class: 'lista' }, alertas.flatMap((f) => f.alertas!.map((a) => h('li', null,
+        h('button', { type: 'button', class: 'link', on: { click: () => ctx.abrir(f.id) } }, ctx.rotulo(f.id)), `: ${a}`))))));
+  }
+  const recorte = h('details', { class: 'sobre-recorte' },
+    h('summary', null, 'Sobre o recorte deste tema'),
     h('p', null, h('strong', null, rec.rotulo), `: ${rec.explicacao}`),
     e.nota_estado ? h('p', { class: 'nota' }, String(e.nota_estado)) : null,
     e.escopo ? h('h5', null, 'O que entra neste tema') : null,
@@ -237,28 +349,33 @@ function sobreTema(ctx: CtxPainel, e: Entidade): HTMLElement | null {
     refs.length
       ? h('div', null,
         h('p', { class: 'nota' }, 'Cada referência diz se a área oficial cobre o tema, cobre só parte dele ou é mais ampla que ele.'),
-        fontesEl(ctx, refs as { fonte: string; secao?: string; nota?: string }[]))
+        fontesEl(ctx, refs))
       : pai
         ? h('p', { class: 'vazio' }, 'Nenhuma referência oficial própria. Veja as do tema de cima: ',
           h('button', { type: 'button', class: 'link', on: { click: () => ctx.abrir(pai) } }, ctx.rotulo(pai)), '.')
         : h('p', { class: 'vazio' }, 'Nenhuma referência oficial registrada: o recorte ainda não foi cruzado com a documentação.'),
-    h('p', { class: 'nota' }, 'Nos dados do projeto, este nível se chama ', h('code', null, ctx.ind.no(e.id)?.tipo === 'classificacao' ? 'classificacao' : 'subclassificacao'),
-      '. "Tema" é a tradução didática usada na interface.'),
-  );
+    h('p', { class: 'nota' }, 'Nos dados do projeto, este nível se chama ', h('code', null, ehCls ? 'classificacao' : 'subclassificacao'),
+      '. "Tema" é a tradução didática usada na interface.'));
+  if (!c3.length) c3.push(h('p', { class: 'vazio' }, 'Ainda sem decisões técnicas registradas para este tema.'));
+  const avancado = h('details', { class: 'secao camada-avancada' }, h('summary', null, 'Nível avançado'), ...c3.filter(Boolean) as Node[], recorte);
+
   return secao('Sobre este tema', true,
-    h('div', { class: 'camada' },
-      h('h4', null, 'Para quem está começando'),
-      didatico
-        ? h('p', null, 'Tema criado por este tutorial para organizar o estudo. Não é uma categoria oficial da Salesforce: a documentação oficial pode agrupar os mesmos assuntos de outro jeito.')
-        : h('p', null, `Natureza: ${String(e.natureza ?? 'não informada')}`)),
-    h('div', { class: 'camada' },
-      h('h4', null, 'Para quem já conhece Salesforce'),
-      c.funcionalidades || c.temas
-        ? h('div', null, h('p', null, 'Este tema reúne, no catálogo atual:'), h('ul', { class: 'lista' }, itens.map((t) => h('li', null, t))),
-          c.funcionalidades ? h('p', { class: 'nota' }, 'Metadata types e objetos API contados pelas funcionalidades do tema; um mesmo item pode servir a vários temas.') : null)
-        : h('p', { class: 'vazio' }, 'Ainda não mapeado: nenhuma funcionalidade catalogada neste tema.')),
+    h('div', { class: 'camada' }, h('h4', null, 'Para quem está começando'), ...c1.filter(Boolean) as Node[]),
+    h('div', { class: 'camada' }, h('h4', null, 'Para quem já conhece Salesforce'), ...c2.filter(Boolean) as Node[]),
     avancado,
   );
+}
+
+/** Pré-requisitos e exemplos das funcionalidades do tema (do cadastro de cada funcionalidade). */
+function prereqTema(ctx: CtxPainel, e: Entidade): HTMLElement | null {
+  const funcs = ((e.derivado as Derivado | undefined)?.funcionalidades ?? []).filter((f) => f.pre_requisitos?.length || f.exemplo);
+  if (!funcs.length) return null;
+  return secao('Pré-requisitos e exemplos das funcionalidades', false,
+    h('ul', { class: 'lista' }, funcs.map((f) => h('li', null,
+      h('button', { type: 'button', class: 'link', on: { click: () => ctx.abrir(f.id) } }, ctx.rotulo(f.id)),
+      f.pre_requisitos?.length ? h('p', null, h('strong', null, 'Pré-requisitos: '), f.pre_requisitos.join(' ')) : null,
+      f.exemplo ? h('p', null, h('strong', null, 'Exemplo: '), f.exemplo) : null))),
+    h('p', { class: 'nota' }, 'Vêm do cadastro de cada funcionalidade, com as fontes na ficha dela.'));
 }
 
 function painelClassificacao(ctx: CtxPainel, e: Entidade, caminho: readonly string[]): (Node | null)[] {
@@ -274,8 +391,8 @@ function painelClassificacao(ctx: CtxPainel, e: Entidade, caminho: readonly stri
         noCaminho ? h('button', { type: 'button', class: 'link', on: { click: () => ctx.abrirCaminho(noCaminho) } }, ctx.rotulo(s)) : h('span', null, ctx.rotulo(s)),
         h('span', { class: n ? 'contagem' : 'contagem vazio' }, n ? ` ${n} funcionalidade${n > 1 ? 's' : ''}` : ' ainda não mapeado'));
     }))),
-    secao('Pré-requisitos, exemplos e limites', false, h('p', { class: 'vazio' }, 'Não registrados no cadastro deste tema. Veja os de cada funcionalidade.')),
-    restantes(e, ['id', 'nome', 'nome_curto', 'sigla', 'natureza', 'descricao', 'escopo', 'fora_do_escopo', 'subclassificacoes', 'referencias_oficiais', 'estado', 'nota_estado']),
+    prereqTema(ctx, e),
+    restantes(e, ['id', 'nome', 'nome_curto', 'sigla', 'natureza', 'descricao', 'escopo', 'fora_do_escopo', 'para_iniciantes', 'encadeamento', 'avancado', 'derivado', 'subclassificacoes', 'referencias_oficiais', 'estado', 'nota_estado']),
   ];
 }
 
@@ -293,8 +410,8 @@ function painelSub(ctx: CtxPainel, e: Entidade, caminho: readonly string[]): (No
           : h('button', { type: 'button', class: 'link', on: { click: () => ctx.abrir(f, caminho) } }, ctx.rotulo(f)),
         h('span', { class: 'selo' }, principais.has(f) ? 'principal' : 'secundária'))))
       : h('p', { class: 'vazio' }, 'Ainda não mapeado: nenhuma funcionalidade catalogada neste tema.')),
-    secao('Pré-requisitos, exemplos e limites', false, h('p', { class: 'vazio' }, 'Não registrados no cadastro deste tema.')),
-    restantes(e, ['id', 'nome', 'sigla', 'classificacao', 'natureza', 'descricao', 'escopo', 'fora_do_escopo', 'funcionalidades', 'referencias_oficiais', 'estado', 'nota_estado']),
+    prereqTema(ctx, e),
+    restantes(e, ['id', 'nome', 'sigla', 'classificacao', 'natureza', 'descricao', 'escopo', 'fora_do_escopo', 'para_iniciantes', 'encadeamento', 'avancado', 'derivado', 'funcionalidades', 'referencias_oficiais', 'estado', 'nota_estado']),
   ];
 }
 

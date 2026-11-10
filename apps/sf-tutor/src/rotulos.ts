@@ -102,8 +102,17 @@ export const NOME_TIPO_LEGENDA: Partial<Record<TipoNo | 'pagina', string>> = {
  * Hoje não há estado "parcial" no catálogo: "parcialmente conferido" só aparece quando o tema
  * tem referências oficiais registradas mas ainda não está verificado.
  */
+export const RECORTE: Record<'conferido' | 'parcial' | 'curadoria', { rotulo: string; explicacao: string }> = {
+  conferido: { rotulo: 'Conferido com fonte oficial', explicacao: 'O recorte deste tema foi comparado com referências oficiais registradas.' },
+  parcial: { rotulo: 'Parcialmente conferido', explicacao: 'Há referências oficiais registradas, mas o recorte ainda não foi conferido por completo.' },
+  curadoria: { rotulo: 'Curadoria do projeto', explicacao: 'Recorte proposto pelo projeto; ainda não conferido com fonte oficial.' },
+};
+
 export function estadoRecorte(estado: unknown, temReferencias: boolean): { rotulo: string; explicacao: string } {
-  if (estado === 'verificado') return { rotulo: 'Conferido com fonte oficial', explicacao: 'O recorte deste tema foi comparado com referências oficiais registradas.' };
-  if (temReferencias) return { rotulo: 'Parcialmente conferido', explicacao: 'Há referências oficiais registradas, mas o recorte ainda não foi conferido por completo.' };
-  return { rotulo: 'Curadoria do projeto', explicacao: 'Recorte proposto pelo projeto; ainda não conferido com fonte oficial.' };
+  return RECORTE[estado === 'verificado' ? 'conferido' : temReferencias ? 'parcial' : 'curadoria'];
 }
+
+/** Rótulos dos itens do "Nível avançado" (campo avancado[].tipo). */
+export const TIPO_AVANCADO: Record<string, string> = {
+  decisao: 'Decisão', seguranca: 'Segurança', implantacao: 'Implantação', testes: 'Testes', limite: 'Limite', escala: 'Escala', atencao: 'Ponto de atenção',
+};

@@ -1,0 +1,40 @@
+Issue #34, piloto de conteúdo por tema: "Interface e experiência do usuário" e "Lightning pages e componentes".
+Extração documental assistida em 2026-11-09 (WebFetch). Resumo em português; nomes técnicos no original.
+
+[src:architect-build-forms] Building Forms — Salesforce Architects, Platform Decision Guides (https://architect.salesforce.com/decision-guides/build-forms)
+  Sem data ou versão na página. Compara Dynamic Forms (Lightning App Builder), Screen Flow (Flow Builder), Omnistudio
+  (Omniscripts, FlexCards, Integration Procedures, Data Mapper), LWC e combinações como Screen Flow com LWC.
+  Dynamic Forms: indicado para criar, editar ou ver um único objeto em páginas de registro e formulários simples de uma tela;
+  o mais fácil e com menos armadilhas, mas o menos flexível; sem navegação em várias páginas nem reúso; não disponível em páginas
+  do Experience Cloud.
+  Screen Flow: assistentes com várias telas quando não há exigência rígida de marca; navegação pronta; lógica mantida por admins.
+  LWC: experiência sofisticada, estilo detalhado, eventos customizados; o mais robusto e customizável, com menos proteções.
+  Omnistudio: clientes de Industries; exige o pacote Industries e não pode ser empacotado.
+  Segurança: Dynamic Forms, Omniscripts e LWC rodam no contexto do usuário; Screen Flow roda no contexto do usuário por padrão,
+  mas pode rodar em contexto de sistema, o que deve ficar restrito a usuários confiáveis. Formulários para convidado e Experience
+  Cloud pedem cuidado extra. Acesso controlado por atribuição de Lightning page, restrição de flows por perfil ou permission set.
+  Testes: só LWC tem testes unitários escritos (por exemplo, Jest); ferramentas low-code dependem de automação de interface de
+  ponta a ponta, que não verifica saídas de métodos.
+  Implantação: Dynamic Forms, Screen Flows e LWC por pacotes gerenciados (1GP e 2GP), pacotes desbloqueados, change sets e DevOps
+  Center; Omnistudio usa o IDX Workbench e não aceita empacotamento.
+
+[src:security-fls] Field-Level Security — Salesforce Security Guide (https://developer.salesforce.com/docs/atlas.en-us.244.0.securityImplGuide.meta/securityImplGuide/admin_fls.htm)
+  Lida na versão Summer '23 (API 58.0). A página da versão atual (Summer '26) não exibiu o conteúdo do artigo na leitura.
+  Page layout e segurança em nível de campo definem quais campos a pessoa vê; vale a configuração mais restritiva, e a segurança de
+  campo prevalece sobre o layout. Exemplo: campo obrigatório no layout e somente leitura na segurança de campo continua somente leitura.
+  Exceções citadas: campos universalmente obrigatórios aparecem na edição independentemente da segurança de campo; campos de
+  resumo e fórmula podem continuar visíveis mesmo referenciando campos ocultos.
+  Para esconder dos resultados de busca um campo não protegido por segurança de campo, retire-o do search layout.
+
+[src:help-lightning-pages] Lightning Pages — Salesforce Help (https://help.salesforce.com/s/articleView?id=sf.lightning_page_overview.htm&type=5)
+  Lightning pages são layouts personalizáveis para Lightning Experience e o app móvel. Ficam entre o page layout (que posiciona
+  campos) e o Visualforce (desenvolvimento livre): posicionam componentes Lightning e se adaptam ao dispositivo conforme o modelo
+  (template) escolhido.
+  Tipos citados: app pages (na barra de navegação de um app), Home pages, record pages, Email Application panes e páginas de console.
+  Montagem no Lightning App Builder, arrastando componentes para as regiões do modelo. Componentes: padrão da Salesforce,
+  customizados (que podem precisar de configuração para funcionar no builder) e de terceiros (AppExchange).
+  O artigo remete a tópicos próprios sobre ativação, regras de visibilidade, limites e considerações do Lightning App Builder,
+  limitações de Dynamic Forms e desempenho (não lidos nesta rodada).
+
+Fontes já registradas reutilizadas: src:mdapi-flexipage (propriedade type do FlexiPage e seus valores), src:help-app-builder,
+src:help-custom-tabs, src:help-path-create, src:help-quick-actions, src:help-console-intro.

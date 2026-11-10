@@ -21,7 +21,7 @@ ESTADOS = {"verificado", "desconhecido", "nao_aplicavel", "nao_exposto", "bloque
 PASTAS = {"nuvens": "nuvem", "classificacoes": "classificacao", "subclassificacoes": "subclassificacao", "funcionalidades": "funcionalidade",
           "metadata-types": "metadata-type", "estruturas": "estrutura", "objetos-api": "objeto-api", "relacionamentos": "relacionamento"}
 CORRESPONDENCIA_TEMA = ("Cobre o tema:", "Cobre parte do tema:", "Mais ampla que o tema:")
-DOMINIOS_FONTE = ("https://developer.salesforce.com/", "https://help.salesforce.com/", "https://github.com/forcedotcom/", "https://www.npmjs.com/package/@salesforce/", "https://www.salesforce.com/")
+DOMINIOS_FONTE = ("https://developer.salesforce.com/", "https://help.salesforce.com/", "https://github.com/forcedotcom/", "https://www.npmjs.com/package/@salesforce/", "https://www.salesforce.com/", "https://architect.salesforce.com/")
 
 
 def ler(p):
@@ -217,6 +217,11 @@ def validar_referencias(C, R):
                 R.e(f"{t['id']}: referência {r['fonte']} sem correspondência no início da nota ({' / '.join(CORRESPONDENCIA_TEMA)})")
         if t.get("estado") == "verificado" and not t.get("referencias_oficiais"):
             R.e(f"{t['id']}: tema verificado sem referência oficial")
+        funcs_tema = set()
+        for sid in (t["subclassificacoes"] if t["id"].startswith("cls:") else [t["id"]]):
+            funcs_tema |= set(C["subclassificacoes"].get(sid, {}).get("funcionalidades", []))
+        for fid in (t.get("para_iniciantes") or {}).get("por_onde_comecar", []):
+            if fid not in funcs_tema: R.e(f"{t['id']}: por_onde_comecar cita {fid}, que não é funcionalidade deste tema")
     for s in C["subclassificacoes"].values():
         if s["classificacao"] not in C["classificacoes"]: R.e(f"{s['id']}: classificação {s['classificacao']} inexistente")
         for f in s["funcionalidades"]:
@@ -647,10 +652,10 @@ def gerar(base=BASE, destino=None):
                 for fid in sc["funcionalidades"]:
                     ar(n["id"], fid, "nuvem_funcionalidade", via=[ca["classificacao"], sc["subclassificacao"]])
     for c in C["classificacoes"].values():
-        no(c["id"], "classificacao", c["nome"], sigla=c["sigla"], rotulo_curto=c["nome_curto"], estado=c["estado"], grupo_cor=c["id"])
+        no(c["id"], "classificacao", c["nome"], sigla=c["sigla"], rotulo_curto=c["nome_curto"], estado=c["estado"], recorte=recorte_tema(c), grupo_cor=c["id"])
         ar("salesforce", c["id"], "navegacao_classificacao")
     for s in C["subclassificacoes"].values():
-        no(s["id"], "subclassificacao", s["nome"], sigla=s.get("sigla"), estado=s["estado"], grupo_cor=s["classificacao"])
+        no(s["id"], "subclassificacao", s["nome"], sigla=s.get("sigla"), estado=s["estado"], recorte=recorte_tema(s), grupo_cor=s["classificacao"])
         ar(s["classificacao"], s["id"], "navegacao_subclassificacao")
     for f in funcs.values():
         no(f["id"], "funcionalidade", f["nome"], rotulo_tecnico=f["nome_tecnico"], estado=f["estado"], grupo_cor=f["classificacao_principal"]["classificacao"], resumo=f["o_que_e"])
@@ -719,7 +724,7 @@ def gerar(base=BASE, destino=None):
 
 
 # --------------------------------------------------------------------------- projeção para o site (contrato versionado)
-CONTRATO_SITE = {"nome": "sf-tutor-site", "versao": "1.1.0"}
+CONTRATO_SITE = {"nome": "sf-tutor-site", "versao": "1.2.0"}  # 1.2.0: campo "derivado" nos temas (#34)
 TIPOS_FOLHA = {"campo_api", "propriedade_xml"}          # vivem dentro da entidade-mãe
 TIPOS_ARESTA_FOLHA = {"campo", "propriedade"}           # deriváveis da entidade-mãe
 
@@ -732,9 +737,80 @@ def caminho_entidade(i):
     return f"entidades/{prefixo}/{nome}.json"
 
 
+
+def recorte_tema(t):
+    """Estado do recorte de um tema (#34): conferido (verificado), parcial (com referência oficial) ou curadoria."""
+    if t.get("estado") == "verificado": return "conferido"
+    return "parcial" if t.get("referencias_oficiais") else "curadoria"
+
+def resumo_tecnico_tema(C, tema_id):
+    """Resumo técnico de um tema, calculado só a partir do catálogo (issue #34). Não é cadastro:
+    vai para a entidade do site no campo "derivado" e é recalculado a cada geração."""
+    if tema_id.startswith("cls:"):
+        subs = C["classificacoes"][tema_id]["subclassificacoes"]
+    else:
+        subs = [tema_id]
+    funcs = []
+    vistos = set()
+    for s in subs:
+        for fid in C["subclassificacoes"][s]["funcionalidades"]:
+            if fid in vistos or fid not in C["funcionalidades"]:
+                continue
+            vistos.add(fid)
+            f = C["funcionalidades"][fid]
+            cp = f["classificacao_principal"]
+            principal = cp["subclassificacao"] in subs
+            item = {"id": fid, "principal": principal}
+            if not principal:
+                item["tema_principal"] = cp["subclassificacao"]
+            for k in ("pre_requisitos", "alertas"):
+                if f.get(k): item[k] = f[k]
+            if f.get("exemplo"): item["exemplo"] = f["exemplo"]
+            funcs.append(item)
+    mdts, objs = {}, {}
+    for it in funcs:
+        rep = C["funcionalidades"][it["id"]]["representacoes"]
+        for m in rep.get("metadata_types", []):
+            mdts.setdefault(m["ref"], set()).add(it["id"])
+        for o in rep.get("objetos_api", []):
+            objs.setdefault(o["ref"], set()).add(it["id"])
+    lista_mdt = []
+    for mid in sorted(mdts):
+        m = C["metadata-types"].get(mid)
+        if not m:
+            continue
+        sup = (m.get("suporte_cli") or {}).get("valor") or {}
+        est = (m.get("cobertura") or {}).get("estrutural") or {}
+        lista_mdt.append({"id": mid, "suporte_cli": sup.get("status"), "nota_suporte": sup.get("nota_fonte"),
+                          "estrutura": est.get("estado"), "funcionalidades": sorted(mdts[mid])})
+    lista_obj = []
+    for oid in sorted(objs):
+        o = C["objetos-api"].get(oid)
+        if not o:
+            continue
+        lista_obj.append({"id": oid, "apis": [{"api": x["api"], "estado": x["estado"]} for x in o.get("exposicoes", [])],
+                          "funcionalidades": sorted(objs[oid])})
+    itens = set(mdts) | set(objs)
+    deps = []
+    for r in sorted(C["relacionamentos"].values(), key=lambda r: r["id"]):
+        if r["tipo"] != "referencia_campo":
+            continue
+        o, d = r["origem"]["entidade"], r["destino"]["entidade"]
+        if o in itens and o != d:
+            deps.append({"rel": r["id"], "origem": o, "via": r["origem"].get("campo") or r["origem"].get("propriedade"),
+                         "destino": d, "destino_no_tema": d in itens, "estado": r["estado"]})
+    return {
+        "nota": "Calculado pelo gerador a partir do catálogo; não é cadastro.",
+        "funcionalidades": funcs,
+        "metadata_types": lista_mdt,
+        "objetos_api": lista_obj,
+        "dependencias": deps,
+        "temas_sem_funcionalidade": [s for s in subs if not C["subclassificacoes"][s]["funcionalidades"]] if tema_id.startswith("cls:") else [],
+    }
+
 def gerar_site(C, base, out, nos, arestas, visoes, cob):
     """Projeção determinística consumida pelo tutorial (apps/sf-tutor). Não é segunda fonte:
-    as entidades são cópias dos cadastros de catalogo/, e o grafo-base é o recorte de grafo/ sem as folhas."""
+    as entidades são cópias dos cadastros de catalogo/ (temas recebem só o campo calculado "derivado"), e o grafo-base é o recorte de grafo/ sem as folhas."""
     site = os.path.join(out, "site")
     pai_de = {}
     for a in arestas:
@@ -782,6 +858,8 @@ def gerar_site(C, base, out, nos, arestas, visoes, cob):
     for i, e in sorted(entidades.items()):
         if i in logos:
             e = {**e, "logo_marca": {k: logos[i][k] for k in ("marca", "url", "formato", "fornecido_por", "pagina_origem", "verificacao")}}
+        if i.startswith(("cls:", "sub:")):
+            e = {**e, "derivado": resumo_tecnico_tema(C, i)}
         gravar(os.path.join(site, caminho_entidade(i)), e)
     reg = json.load(open(os.path.join(base, "fontes", "registro.json"), encoding="utf-8"))
     fontes = {f["id"]: {k: f.get(k) for k in ("titulo", "url", "tipo", "versao", "data_verificacao", "metodo")} for f in reg["fontes"]}

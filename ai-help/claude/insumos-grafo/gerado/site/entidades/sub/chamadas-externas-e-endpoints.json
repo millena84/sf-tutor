@@ -1,5 +1,138 @@
 {
   "classificacao": "cls:integracao-apis-e-eventos",
+  "derivado": {
+    "dependencias": [
+      {
+        "destino": "mdt:NamedCredential",
+        "destino_no_tema": false,
+        "estado": "verificado",
+        "origem": "mdt:ExternalServiceRegistration",
+        "rel": "rel:externalservice-namedcredential",
+        "via": "namedCredential"
+      }
+    ],
+    "funcionalidades": [
+      {
+        "exemplo": "A named credential do serviço de pedidos na AWS usa uma conexão PrivateLink já provisionada.",
+        "id": "func:conexoes-de-rede-privadas",
+        "principal": true
+      },
+      {
+        "exemplo": "Um componente que exibe um mapa precisa carregar imagens de tiles.exemplo.com: o domínio entra como site confiável com img-src.",
+        "id": "func:csp-trusted-sites",
+        "principal": true
+      },
+      {
+        "alertas": [
+          "systemVersion é somente leitura e não é atualizado no lugar: uma versão nova exige novo registro."
+        ],
+        "exemplo": "A especificação da API de frete é registrada; a operação calcularFrete vira uma ação usada num Screen Flow.",
+        "id": "func:external-services",
+        "principal": true
+      },
+      {
+        "alertas": [
+          "Até 100 callouts por transação, e a soma dos timeouts não passa de 120 segundos.",
+          "Não é possível fazer callout depois de DML, Apex assíncrono, Apex agendado ou envio de e-mail pendentes na mesma transação; antes deles, pode.",
+          "Developer Edition: até 20 callouts simultâneos para fora do domínio da org.",
+          "Enviar Expect: 100-Continue a um servidor que não responde 100 Continue causa timeout."
+        ],
+        "exemplo": "Um trigger grava o pedido e depois tenta chamar o ERP na mesma transação: a chamada é recusada porque há DML pendente. A solução é chamar antes ou mover a chamada para um processo assíncrono.",
+        "id": "func:limites-e-falhas-de-callouts",
+        "principal": false,
+        "tema_principal": "sub:contratos-limites-e-tratamento-de-falhas"
+      },
+      {
+        "exemplo": "Uma classe Apex chama https://api.exemplo.com; sem o registro do site remoto, a chamada é bloqueada.",
+        "id": "func:remote-site-settings",
+        "principal": true
+      },
+      {
+        "alertas": [
+          "Exige licença B2B Commerce ou D2C Commerce."
+        ],
+        "exemplo": "Uma classe Apex consulta a transportadora e é registrada como provedor Shipment do checkout.",
+        "id": "func:servicos-externos-registrados-commerce",
+        "principal": true
+      }
+    ],
+    "metadata_types": [
+      {
+        "estrutura": "completa",
+        "funcionalidades": [
+          "func:csp-trusted-sites"
+        ],
+        "id": "mdt:CspTrustedSite",
+        "nota_suporte": null,
+        "suporte_cli": "suportado"
+      },
+      {
+        "estrutura": "completa",
+        "funcionalidades": [
+          "func:external-services"
+        ],
+        "id": "mdt:ExternalServiceRegistration",
+        "nota_suporte": null,
+        "suporte_cli": "suportado"
+      },
+      {
+        "estrutura": "completa",
+        "funcionalidades": [
+          "func:conexoes-de-rede-privadas"
+        ],
+        "id": "mdt:InboundNetworkConnection",
+        "nota_suporte": null,
+        "suporte_cli": "suportado"
+      },
+      {
+        "estrutura": "completa",
+        "funcionalidades": [
+          "func:conexoes-de-rede-privadas"
+        ],
+        "id": "mdt:OutboundNetworkConnection",
+        "nota_suporte": null,
+        "suporte_cli": "suportado"
+      },
+      {
+        "estrutura": "completa",
+        "funcionalidades": [
+          "func:servicos-externos-registrados-commerce"
+        ],
+        "id": "mdt:RegisteredExternalService",
+        "nota_suporte": null,
+        "suporte_cli": "suportado"
+      },
+      {
+        "estrutura": "completa",
+        "funcionalidades": [
+          "func:remote-site-settings"
+        ],
+        "id": "mdt:RemoteSiteSetting",
+        "nota_suporte": null,
+        "suporte_cli": "suportado"
+      }
+    ],
+    "nota": "Calculado pelo gerador a partir do catálogo; não é cadastro.",
+    "objetos_api": [
+      {
+        "apis": [
+          {
+            "api": "padrao",
+            "estado": "verificado"
+          },
+          {
+            "api": "tooling",
+            "estado": "desconhecido"
+          }
+        ],
+        "funcionalidades": [
+          "func:csp-trusted-sites"
+        ],
+        "id": "obj:CspTrustedSite"
+      }
+    ],
+    "temas_sem_funcionalidade": []
+  },
   "descricao": "Chamadas da org para serviços externos e seus endereços.",
   "escopo": "Entram as chamadas da org para serviços externos e o registro dos endereços permitidos.",
   "estado": "desconhecido",
