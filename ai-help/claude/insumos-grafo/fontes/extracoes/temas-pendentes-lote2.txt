@@ -1,0 +1,108 @@
+Issue #34, temas internos pendentes (lote 2: Qualidade e Relatórios). Leitura pelos resultados de busca restritos a
+help.salesforce.com e developer.salesforce.com, em 2026-11-10 (método leitura_resultado_busca: páginas não abertas por inteiro).
+Resumo em português; nomes de campos, permissões e telas no original.
+
+-- Classificação e sensibilidade
+[src:help-data-classification-intro] Classify Sensitive Data to Support Data Management Policies (https://help.salesforce.com/s/articleView?id=platform.data_classification_intro.htm&type=5)
+  Sensibilidade e categorização de conformidade são registradas no nível do campo, em campos padrão ou customizados, e servem
+  para orientar decisões de acesso, relatórios e conformidade. Permissão para ver ou editar: Customize Application ou Modify
+  Data Classification. Há relatórios sobre os metadados de classificação e acesso pela API e pelo Apex.
+[src:help-data-classification-fields] Data Classification Metadata Fields (https://help.salesforce.com/s/articleView?id=platform.data_classification_metadata_fields.htm&type=5)
+  Quatro campos: Compliance Categorization (padrão: CCPA, COPPA, GDPR, HIPAA, PCI, PersonalInfo, PII; corresponde a ComplianceGroup
+  em FieldDefinition), Data Owner (pessoa ou grupo; BusinessOwnerId), Data Sensitivity Level (padrão: Public, Internal,
+  Confidential, Restricted, MissionCritical; SecurityClassification em FieldDefinition e objeto FieldSecurityClassification) e
+  Field Usage (Active, DeprecateCandidate, Hidden; BusinessStatus). Mudar Field Usage não esconde nem expõe o campo. Valores
+  editáveis na página Data Classification Settings ou pelos StandardValueSet ComplianceGroup, SecurityClassification e
+  FieldBusinessStatus. Campos __pc de conta pessoal: a categorização aparece consultando Contact. No Object Manager, Data Owner,
+  Data Sensitivity Level e Field Usage não aparecem para o objeto User: usar CustomField (Metadata API) ou Data Classification Upload.
+[src:help-data-classification-setup] Set Up Data Classification Metadata (https://help.salesforce.com/s/articleView?id=sf.data_classification_set_up.htm)
+  Opção Use default data sensitivity level (alguns campos já vêm com valor, como e-mail = confidencial). Valores por campo em
+  Object Manager > Fields & Relationships > Edit. Valores de sensibilidade podem receber descrição e a marca High-risk level.
+  Data Classification Upload: CSV de até 10.000 linhas (objeto, campo e nível de sensibilidade). Data Classification Download:
+  CSV de até 5 MB, só campos com nível de sensibilidade, até 2.000 registros por nível.
+
+-- Retenção, arquivamento e exclusão
+[src:help-recycle-bin-lex] Manage the Recycle Bin in Lightning Experience (https://help.salesforce.com/s/articleView?id=xcloud.recycle_bin_manage.htm&type=5)
+  Itens excluídos ficam 15 dias na Recycle Bin, podem ser restaurados nesse período e depois são agendados para exclusão
+  permanente, sem hora garantida. Registros na Recycle Bin não contam no armazenamento e não há limite de quantidade. Restaurar
+  registros de outros usuários e excluir permanentemente exigem Modify All Data. Um processo de esvaziamento por vez; o status
+  aparece no View Setup Audit Trail.
+[src:help-delete-unwanted-data] Delete Unwanted Data in a Salesforce Organization (https://help.salesforce.com/s/articleView?id=000387294&type=1)
+  Três etapas: exclusão comum (soft delete, vai para a Recycle Bin; registros consultáveis com isDeleted = True por quem tem
+  Modify All Data e API Enabled), purga (esvaziar a Recycle Bin, ou hard delete pela API, que manda direto para a fila de purga
+  e não passa pela Recycle Bin) e physical delete, pedido ao Support, que remove o registro da tabela do banco.
+[src:help-field-history-tracking] Field History Tracking Overview (https://help.salesforce.com/s/articleView?id=tracking_field_history.htm&type=0)
+  Sem Field Audit Trail, o histórico de campos fica até 18 meses (até 24 pela API); com Field Audit Trail, até ser excluído. O
+  histórico fica num objeto relacionado (AccountHistory, MyCustomObject__History) e não conta no armazenamento. Só registra a
+  partir de quando o rastreamento é ligado; campos de texto longo registram só que houve mudança.
+[src:help-field-audit-trail] Field Audit Trail (https://help.salesforce.com/s/articleView?id=000383595&type=1)
+  Estende o Field History Tracking: até 200 campos por objeto (contra 20), retenção até exclusão (contra 18–24 meses), dados em
+  FieldHistoryArchive (big object), acesso só por API. Política de retenção definida por objeto (HistoryRetentionPolicy, em meses)
+  e implantada pela Metadata API; padrão: arquiva após 18 meses em produção e um mês em sandbox. A política padrão não vem no
+  retrieve do objeto, só políticas customizadas. Excluir um registro em produção apaga o histórico relacionado, mas não a cópia
+  em FieldHistoryArchive.
+[src:mdapi-historyretentionpolicy] HistoryRetentionPolicy (Metadata API) (https://developer.salesforce.com/docs/atlas.en-us.api_meta.meta/api_meta/meta_historyretentionpolicy.htm)
+  Representa a política de arquivamento do histórico de campos: número de meses que o histórico fica na Salesforce antes de ser
+  arquivado. Com Field Audit Trail ligado, por padrão todo o histórico é mantido.
+
+-- Consentimento e privacidade
+[src:help-consent-data-model] Understand the Salesforce Consent Data Model (https://help.salesforce.com/s/articleView?id=sf.consent_data_model_mc_about.htm&type=5)
+  Modelo padrão de consentimento em quatro níveis: global (objeto Individual), canal de engajamento (ContactPointTypeConsent, por
+  tipo de contato como e-mail ou telefone), ponto de contato (ContactPointConsent, por endereço específico) e finalidade de uso
+  (DataUsePurpose, relacionada aos dois anteriores). Lead, User, conta pessoal e Contact podem se relacionar ao Individual.
+  BusinessBrand separa preferências por marca na mesma org. A Consent API não localiza registros cujo e-mail esteja protegido
+  por Shield Platform Encryption.
+[src:help-consent-objects] Consent Management Objects (https://help.salesforce.com/s/articleView?id=sf.consent_mgmt_fields.htm&type=5)
+  Lista os objetos de consentimento (Authorization Form*, Communication Subscription*, Contact Point Consent, Contact Point Email,
+  Contact Point Phone, Contact Point Type Consent, Data Use Purpose, Data Use Legal Basis, Engagement Channel Type, Individual,
+  Party Consent). Individual guarda preferências sobre coleta, armazenamento, compartilhamento, portabilidade e exclusão de dados
+  pessoais, solicitação e rastreamento. A empresa decide como honrar a privacidade e implementa o processo; os objetos só guardam.
+[src:help-contact-point-type-consent-fields] Fields in Contact Point Type Consent Records (https://help.salesforce.com/s/articleView?id=sf.contact_point_type_fields.htm)
+  Campos como Capture Date, Capture Source, Contact Point Type (Email, Mailing Address, Phone, Social, Web), Data Use Purpose,
+  Double Consent Capture Date, Effective From, Effective To, Party (o Individual) e Privacy Consent Status (Not Seen, Seen,
+  Opt In, Opt Out).
+[src:rest-consent-write] Consent Write (REST API Developer Guide) (https://developer.salesforce.com/docs/platform/api-rest/guide/resources-consent-write.html)
+  Grava consentimento em vários registros numa chamada (Contact, ContactPointTypeConsent, DataUsePurpose, Individual, Lead, conta
+  pessoal, User) ligados por lookup ou pelo mesmo e-mail. Até 1.000 ids por requisição. Status: OptIn, OptOut, Seen, NotSeen.
+  Exige ModifyAllData ou ConsentApiUpdate; grava dados de consentimento da org inteira, não só os registros a que o usuário
+  normalmente tem acesso. A resposta pode ter status 200 mesmo com erros.
+[src:help-consent-event-stream] Use the Consent Event Stream (https://help.salesforce.com/s/articleView?id=sf.consent_event_stream.htm&type=5)
+  Um stream (canal /event/ConsentEvent) recebe mudanças em campos de consentimento e de contato dos objetos principais; o evento
+  fica disponível por 24 horas. Exige ReadAllData ou PrivacyDataAccess. No Individual, entram campos como Don't Process, Don't
+  Market, Don't Track, Forget this Individual e Export Individual's Data.
+
+-- Pastas e acesso
+[src:help-folder-access-levels] Access Levels for Report and Dashboard Folders (https://help.salesforce.com/s/articleView?id=sf.analytics_folder_access.htm&type=5)
+  Cada usuário, grupo ou papel tem seu nível na pasta: Viewer vê, Editor decide o que é mostrado (salva, renomeia, exclui itens),
+  Manager controla o acesso. O nível da pasta não decide sozinho o acesso ao conteúdo: as permissões do usuário sobre relatórios
+  e dashboards também contam. Pastas pessoais já existem; uma pasta nova só é acessível ao criador e a administradores até ser
+  compartilhada. Edições: Essentials, Group, Professional, Enterprise, Performance, Unlimited e Developer.
+[src:help-enhanced-folder-sharing] Enhanced Folder Sharing for Reports and Dashboards (https://help.salesforce.com/s/articleView?id=analytics.analytics_sharing_enable.htm&type=5)
+  No legado, a pasta era criada como somente leitura ou leitura e escrita e visível a todos, oculta ou a grupos e papéis. No
+  enhanced folder sharing, a pasta tem só nome e cada compartilhamento recebe View, Edit ou Manage. Permissões como Manage Reports
+  in Public Folders e View Reports in Public Folders alcançam todas as pastas, menos as pessoais de outros usuários. Pastas
+  especiais renomeadas (Unfiled Public Reports > Public Reports; My Personal Custom Reports > Private Reports).
+[src:help-share-folder-lightning] Share a Lightning Report or Dashboard Folder (https://help.salesforce.com/s/articleView?id=analytics.rd_folders_share_enhanced.htm&type=5)
+  Compartilha com usuários, grupos, papéis ou territórios: até 25 pela interface e até 500 pela folder sharing REST API. Se o
+  usuário aparece em mais de uma entrada, vale o maior nível. Exige Manage Reports in Public Folders (ou de Dashboards).
+[src:help-folder-sharing-mdapi] Automatically update Report or Dashboard folder sharing with Metadata API (https://help.salesforce.com/s/articleView?id=000233549&type=1)
+  O compartilhamento das pastas pode ser recuperado e implantado pela Metadata API, editando accessLevel em FolderShare; valores
+  View, EditAllContents e Manage.
+
+-- Métricas e agregações
+[src:help-report-formulas] Evaluate Report Data with Formulas (https://help.salesforce.com/s/articleView?id=sf.reports_formulas_overview.htm&type=5)
+  Três tipos: summaries (soma, média, mínimo, máximo numa coluna numérica, com subtotal por grupo e total geral, sem escrever
+  fórmula), row-level formulas (avaliam cada registro, por exemplo dias até fechar) e summary formulas (avaliam um grupo, todos os
+  grupos ou o total). PREVGROUPVAL compara um grupo com o anterior; PARENTGROUPVAL compara com o grupo pai ou o total.
+[src:help-summary-formula-tips] Get the Most Out of Summary Formulas: Tips, Limits, and Limitations (https://help.salesforce.com/s/articleView?id=analytics.reports_csf_tips.htm&type=5)
+  Sem funções ou campos de data; uma summary formula não referencia outra nem uma row-level formula; não dá para agrupar, filtrar
+  ou reordenar por ela; o relatório precisa estar agrupado ao menos uma vez antes; percentuais são decimais (20% = 0,20); divisão
+  por zero mostra #Error!.
+[src:help-row-level-formula-limits] Get the Most Out of Row-Level Formulas: Tips, Limits, and Limitations (https://help.salesforce.com/s/articleView?id=sf.reports_formulas_row_level_limits.htm&type=5)
+  Duas row-level formulas por relatório, cada uma com até 5 campos distintos; não servem para cross filters nem buckets; não
+  referenciam buckets, summary formulas ou outras row-level formulas; usam sempre a moeda padrão da org; indisponíveis em tipos
+  de relatório "with or without", joined reports e reporting snapshots.
+[src:help-add-bucket-column] Add a Bucket Column (https://help.salesforce.com/s/articleView?id=reports_bucketing_adding.htm&type=5)
+  Bucket column agrupa valores de um campo em categorias sem fórmula nem campo customizado; tipos numérico, picklist e texto. Até
+  5 bucket fields por relatório, 20 buckets por campo e 20 valores por bucket. Vale só no relatório onde foi criado: para reusar,
+  recriar ou criar um formula field no objeto. Indisponível em relatórios com objetos externos.

@@ -17,6 +17,7 @@ sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 from conteudo_cls import CONTEUDO_CLS  # noqa: E402
 from conteudo_sub import CONTEUDO_SUB, PENDENTES  # noqa: E402
 from conteudo_pendentes import CONTEUDO_PENDENTES, FONTES_PENDENTES  # noqa: E402
+from conteudo_pendentes2 import CONTEUDO_PENDENTES2, FONTES_PENDENTES2  # noqa: E402
 
 DATA = "2026-11-09"
 EXT = "fontes/extracoes/temas-piloto-interface.txt"
@@ -138,8 +139,8 @@ CAMPOS = ("para_iniciantes", "encadeamento", "avancado")
 
 
 def aplicar():
-    novos = registrar_fontes(FONTES + FONTES_PENDENTES)
-    todos = {**CONTEUDO, **CONTEUDO_CLS, **CONTEUDO_SUB, **CONTEUDO_PENDENTES}
+    novos = registrar_fontes(FONTES + FONTES_PENDENTES + FONTES_PENDENTES2)
+    todos = {**CONTEUDO, **CONTEUDO_CLS, **CONTEUDO_SUB, **CONTEUDO_PENDENTES, **CONTEUDO_PENDENTES2}
     assert not set(todos) & set(PENDENTES), "tema pendente com conteúdo"
     for tid, cont in todos.items():
         pasta = "classificacoes" if tid.startswith("cls:") else "subclassificacoes"

@@ -7,6 +7,78 @@
   "descricao": "Marcação de dados por sensibilidade e conformidade.",
   "escopo": "Entram as marcações de dados por sensibilidade e por requisito de conformidade.",
   "fora_do_escopo": "Criptografia e proteção técnica ficam em \"Credenciais, certificados e proteção de dados\".",
+  "para_iniciantes": {
+    "explicacao": "Data Classification marca cada campo com o quanto o dado é sensível e com as regras de conformidade que se aplicam a ele, além de quem responde pelo campo e se ele ainda está em uso. A marcação é informativa: serve para orientar decisões de acesso, relatórios e conformidade.",
+    "exemplo": "O campo de CPF de um cliente recebe o nível Restricted e a categoria PII; um relatório sobre os metadados lista todos os campos Restricted para revisão do time de segurança.",
+    "analogia": {
+      "texto": "É como a etiqueta 'confidencial' num arquivo de papel: avisa como tratar o conteúdo.",
+      "limite": "A etiqueta não tranca a gaveta. Na Salesforce, quem limita o acesso é a segurança em nível de campo e o compartilhamento, não a classificação."
+    },
+    "evidencias": [
+      {
+        "fonte": "src:help-data-classification-intro"
+      },
+      {
+        "fonte": "src:help-data-classification-fields"
+      }
+    ]
+  },
+  "encadeamento": {
+    "texto": "Abre o assunto de governança em Qualidade: depois de saber o que é sensível, decide-se quanto tempo guardar ('Retenção, arquivamento e exclusão') e como registrar a vontade da pessoa ('Consentimento e privacidade'). Criptografia e proteção técnica ficam em 'Credenciais, certificados e proteção de dados'.",
+    "evidencias": [
+      {
+        "fonte": "src:help-data-classification-intro"
+      }
+    ]
+  },
+  "avancado": [
+    {
+      "tipo": "implantacao",
+      "titulo": "Classificação como metadado",
+      "texto": "Os valores ficam no próprio campo: no CustomField, as propriedades securityClassification, complianceGroup, businessOwnerUser, businessOwnerGroup e businessStatus; na Tooling API, em FieldDefinition (SecurityClassification, ComplianceGroup, BusinessOwnerId, BusinessStatus). As listas de valores são os StandardValueSet SecurityClassification, ComplianceGroup e FieldBusinessStatus.",
+      "evidencias": [
+        {
+          "fonte": "src:help-data-classification-fields"
+        },
+        {
+          "fonte": "src:mdapi-customfield"
+        }
+      ]
+    },
+    {
+      "tipo": "atencao",
+      "titulo": "Field Usage não esconde campo",
+      "texto": "Marcar um campo como Hidden ou DeprecateCandidate em Field Usage não esconde nem expõe nada: é só registro. Para o objeto User, Data Owner, Data Sensitivity Level e Field Usage não aparecem no Object Manager; use CustomField ou o Data Classification Upload. Em contas pessoais, a categorização dos campos __pc aparece consultando Contact.",
+      "evidencias": [
+        {
+          "fonte": "src:help-data-classification-fields"
+        }
+      ]
+    },
+    {
+      "tipo": "escala",
+      "titulo": "Classificar em massa",
+      "texto": "O Data Classification Upload aceita CSV de até 10.000 linhas (objeto, campo e nível). O download traz só campos com nível de sensibilidade, em arquivo de até 5 MB e até 2.000 registros por nível.",
+      "evidencias": [
+        {
+          "fonte": "src:help-data-classification-setup"
+        }
+      ]
+    },
+    {
+      "tipo": "seguranca",
+      "titulo": "Quem pode classificar",
+      "texto": "Ver ou editar a classificação exige Customize Application ou Modify Data Classification. Níveis de sensibilidade podem ser marcados como High-risk level para indicar dados muito sensíveis à empresa.",
+      "evidencias": [
+        {
+          "fonte": "src:help-data-classification-intro"
+        },
+        {
+          "fonte": "src:help-data-classification-setup"
+        }
+      ]
+    }
+  ],
   "funcionalidades": [],
   "estado": "desconhecido",
   "nota_estado": "Agrupamento proposto na especificação; fronteira ainda não cruzada com a documentação oficial."

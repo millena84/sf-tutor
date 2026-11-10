@@ -7,6 +7,87 @@
   "descricao": "Quanto tempo os dados ficam e como são arquivados ou removidos.",
   "escopo": "Entram o tempo de permanência dos dados e as formas de arquivá-los ou removê-los.",
   "fora_do_escopo": "Recuperação de metadados depois de um deploy fica em \"Versionamento, deploy e recuperação\".",
+  "para_iniciantes": {
+    "explicacao": "Trata de quanto tempo um dado fica na org e do que acontece quando é apagado. Um registro excluído vai para a Recycle Bin, onde pode ser restaurado por 15 dias; depois é apagado de vez. O histórico de mudanças de campos também tem prazo: sem Field Audit Trail, fica até 18 meses.",
+    "exemplo": "Um vendedor exclui uma conta por engano e a restaura da Recycle Bin no dia seguinte.",
+    "evidencias": [
+      {
+        "fonte": "src:help-recycle-bin-lex"
+      },
+      {
+        "fonte": "src:help-field-history-tracking"
+      }
+    ]
+  },
+  "encadeamento": {
+    "texto": "Vem depois de 'Classificação e sensibilidade': o que é sensível costuma ter regra de guarda e de descarte. Recuperar metadados depois de um deploy fica em 'Versionamento, deploy e recuperação'.",
+    "evidencias": [
+      {
+        "fonte": "src:help-recycle-bin-lex"
+      },
+      {
+        "fonte": "src:help-delete-unwanted-data"
+      }
+    ]
+  },
+  "avancado": [
+    {
+      "tipo": "decisao",
+      "titulo": "Três graus de exclusão",
+      "texto": "A exclusão comum (soft delete) manda para a Recycle Bin. Esvaziar a Recycle Bin ou usar hard delete pela API manda o registro para a fila de purga, sem passar pela Recycle Bin. Para remover o registro da tabela do banco, o caminho é pedir um physical delete ao Support.",
+      "evidencias": [
+        {
+          "fonte": "src:help-delete-unwanted-data"
+        }
+      ]
+    },
+    {
+      "tipo": "limite",
+      "titulo": "Recycle Bin",
+      "texto": "Itens ficam 15 dias e depois são agendados para exclusão permanente, sem hora garantida. Não contam no armazenamento e não há limite de quantidade. Restaurar itens de outros usuários e excluir permanentemente exigem Modify All Data.",
+      "evidencias": [
+        {
+          "fonte": "src:help-recycle-bin-lex"
+        }
+      ]
+    },
+    {
+      "tipo": "decisao",
+      "titulo": "Field History Tracking ou Field Audit Trail",
+      "texto": "O rastreamento padrão guarda até 20 campos por objeto por 18 a 24 meses no objeto de histórico. O Field Audit Trail vai até 200 campos, guarda até ser excluído no big object FieldHistoryArchive e só é acessível por API.",
+      "evidencias": [
+        {
+          "fonte": "src:help-field-audit-trail"
+        },
+        {
+          "fonte": "src:help-field-history-tracking"
+        }
+      ]
+    },
+    {
+      "tipo": "implantacao",
+      "titulo": "Política de retenção do histórico",
+      "texto": "Com Field Audit Trail, a política HistoryRetentionPolicy define, por objeto, quantos meses o histórico fica antes de ser arquivado, e é implantada pela Metadata API. O padrão (18 meses em produção, um mês em sandbox) não vem no retrieve do objeto: só políticas customizadas vêm.",
+      "evidencias": [
+        {
+          "fonte": "src:help-field-audit-trail"
+        },
+        {
+          "fonte": "src:mdapi-historyretentionpolicy"
+        }
+      ]
+    },
+    {
+      "tipo": "atencao",
+      "titulo": "Excluir não apaga o arquivo",
+      "texto": "Excluir um registro em produção apaga o histórico relacionado, mas não a cópia já levada para FieldHistoryArchive.",
+      "evidencias": [
+        {
+          "fonte": "src:help-field-audit-trail"
+        }
+      ]
+    }
+  ],
   "funcionalidades": [],
   "estado": "desconhecido",
   "nota_estado": "Agrupamento proposto na especificação; fronteira ainda não cruzada com a documentação oficial."
