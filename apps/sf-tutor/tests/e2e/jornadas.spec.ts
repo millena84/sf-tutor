@@ -128,7 +128,7 @@ test('7. Funcionalidade compartilhada: Sales e Service apontam para a mesma fich
   const nuvens = new Set([primeiro.split('>')[1], segundo.split('>')[1]]);
   expect(nuvens.has('nuv:sales-cloud') || nuvens.has('nuv:service-cloud')).toBe(true);
   await expect(titulo(page)).toHaveText(/console/i);
-  const nuvSec = await secao(page, /Nuvens e classificações/);
+  const nuvSec = await secao(page, /Nuvens e temas/);
   await expect(nuvSec.getByRole('button', { name: 'Agentforce Sales' })).toBeVisible();
   await expect(nuvSec.getByRole('button', { name: 'Agentforce Service' })).toBeVisible();
 });

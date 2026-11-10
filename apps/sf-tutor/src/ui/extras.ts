@@ -4,7 +4,7 @@ import type { Indice } from '../model/adaptador';
 import type { IndiceBusca } from '../model/busca';
 import { filtrosAtivos, type Filtros } from '../model/filtros';
 import type { Cores } from '../cores';
-import { ESTADO, LIGACAO, NOME_TIPO, ICONE_TIPO } from '../rotulos';
+import { ESTADO, LIGACAO, NOME_TIPO, NOME_TIPO_LEGENDA, ICONE_TIPO } from '../rotulos';
 import { h, limpar } from './dom';
 
 // ------------------------------------------------------------------ Método
@@ -21,14 +21,14 @@ export function conteudoMetodo(d: DadosBase, salesforce: Record<string, unknown>
   return h('div', { class: 'metodo' },
     h('h3', null, 'De onde vêm as informações'),
     h('p', null, 'O conteúdo vem da base de insumos do projeto (ai-help/claude/insumos-grafo/ no repositório sf-tutor). Cada afirmação técnica cita a fonte: documentação oficial da Salesforce (Object Reference, Metadata API, Tooling API, Field Reference e Ajuda), evidência de schema (registro do Salesforce CLI) ou observação autorizada em org. Esta versão não tem observações em org: toda validação é documental.'),
-    h('p', null, 'As classificações e sub-classificações são curadoria didática do projeto, não nomenclatura oficial da Salesforce. As explicações são redação do projeto a partir das fontes citadas e estão marcadas como tal.'),
+    h('p', null, 'Os temas (e os temas dentro deles) são curadoria didática do projeto, não nomenclatura oficial da Salesforce. Nos dados, esses dois níveis se chamam classificação e subclassificação; "tema" é a tradução didática usada na tela. As explicações são redação do projeto a partir das fontes citadas e estão marcadas como tal.'),
     h('h3', null, 'Ligações, datas e nível de evidência'),
     h('p', null, 'Cada ligação técnica (referência entre campos, correspondência XML ↔ API) tem ficha própria com explicação, campos, cardinalidade quando verificada, condições, fontes e data de verificação. O nível de evidência aparece no traço da linha:'),
     h('ul', { class: 'lista' },
       h('li', null, h('span', { class: 'amostra-linha solida' }), ' linha contínua: verificado'),
       h('li', null, h('span', { class: 'amostra-linha tracejada' }), ' linha tracejada: desconhecido (sem evidência suficiente)'),
       h('li', null, h('span', { class: 'amostra-linha pontilhada' }), ' linha pontilhada: não exposto, bloqueado ou não aplicável')),
-    h('p', null, 'As ligações da hierarquia (centro → classificação → funcionalidade…) organizam a navegação e não afirmam relação entre registros.'),
+    h('p', null, 'As ligações da hierarquia (centro → tema → funcionalidade…) organizam a navegação e não afirmam relação entre registros.'),
     h('h3', null, 'Estados de validação'),
     h('dl', { class: 'kv' }, Object.entries(ESTADO).flatMap(([, e]) => [h('dt', null, `${e.simbolo} ${e.rotulo}`), h('dd', null, e.explicacao)])),
     h('h3', null, 'Versão e cobertura desta publicação'),
@@ -68,7 +68,7 @@ export function conteudoLegenda(cores: Cores, visao: 'funcionalidade' | 'nuvem',
     h('h3', null, 'Tipos de nó'),
     h('p', { class: 'nota' }, 'Forma, borda e sigla distinguem os tipos; a cor indica o contexto.'),
     h('p', { class: 'nota' }, 'Arrastar um item leva junto os itens abaixo dele no ramo; com Shift, move só o item. "Reorganizar" desfaz os arrastes da visão atual.'),
-    h('ul', { class: 'lista-legenda' }, tipos.map((t) => h('li', null, h('span', { class: `ico ico-${t}`, 'aria-hidden': 'true' }, ICONE_TIPO[t] || '●'), NOME_TIPO[t]))),
+    h('ul', { class: 'lista-legenda' }, tipos.map((t) => h('li', null, h('span', { class: `ico ico-${t}`, 'aria-hidden': 'true' }, ICONE_TIPO[t] || '●'), NOME_TIPO_LEGENDA[t] ?? NOME_TIPO[t]))),
     h('h3', null, 'Ligações'),
     h('ul', { class: 'lista-legenda' }, ligs.map((l) => h('li', null, h('span', { class: `amostra-lig lig-${l}`, 'aria-hidden': 'true' }), LIGACAO[l].rotulo))),
     h('h3', null, 'Traço = nível de evidência'),
@@ -76,7 +76,7 @@ export function conteudoLegenda(cores: Cores, visao: 'funcionalidade' | 'nuvem',
       h('li', null, h('span', { class: 'amostra-linha solida' }), 'verificado'),
       h('li', null, h('span', { class: 'amostra-linha tracejada' }), 'desconhecido'),
       h('li', null, h('span', { class: 'amostra-linha pontilhada' }), 'não exposto / bloqueado / não aplicável')),
-    h('h3', null, visao === 'funcionalidade' ? 'Cores por classificação' : 'Cores por nuvem'),
+    h('h3', null, visao === 'funcionalidade' ? 'Cores por tema' : 'Cores por nuvem'),
     h('ul', { class: 'lista-legenda cores' }, escala.map(([id, cor]) => h('li', null, h('span', { class: 'amostra-cor', style: `background:${cor}`, 'aria-hidden': 'true' }), rotulo(id)))),
   );
 }
@@ -105,7 +105,7 @@ export function conteudoFiltros(ind: Indice, f: Filtros, rotulo: (id: string) =>
   return h('div', { class: 'filtros-conteudo' },
     h('p', { class: 'nota', role: 'status' }, `${filtrosAtivos(f)} filtro(s) ativo(s). ${ocultos} item(ns) esmaecido(s) no mapa. Itens filtrados não somem: ficam esmaecidos, para as relações continuarem corretas, e o painel explica o motivo.`),
     grupo('Nuvem / produto', nuvens.map((n) => [n.id, n.rotulo]), f.nuvens),
-    grupo('Classificação', clss.map((c) => [c.id, rotulo(c.id)]), f.classificacoes),
+    grupo('Tema', clss.map((c) => [c.id, rotulo(c.id)]), f.classificacoes),
     h('fieldset', null, h('legend', null, 'Representação'), sel),
     grupo('Família de API (objetos e campos)', [['padrao', 'API padrão'], ['tooling', 'Tooling API']], f.apis),
     grupo('Estado de validação', Object.entries(ESTADO).map(([k, e]) => [k, e.rotulo]), f.estados),

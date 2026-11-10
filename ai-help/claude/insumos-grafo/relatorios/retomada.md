@@ -161,6 +161,18 @@ O WSDL **não** é bloqueio: a documentação de cada tipo é a fonte alternativ
 - **AssignmentRules, BusinessHoursSettings e EscalationRules:** as estruturas já estavam catalogadas; o gerador é que não tratava tipos sem propriedade obrigatória e só com estruturas. Os três ganharam exemplos escritos à mão (`ferramentas/carga/lotes/exemplos_regras_e_horarios.py`), com regra, entrada, critério e ação. **O validador termina com 0 avisos.**
 - O gerador também foi corrigido: `fullName` dentro de estruturas é elemento real (o nome de cada regra), e, sem obrigatórios, a amostra mostra a primeira estrutura. A opção `--regerar` refaz só esqueletos gerados por ele.
 
+## "Sobre este tema" (issue #34, fase 1, 2026-11-09)
+- **Divergência registrada (tradução didática):** a especificação (`tarefas/00-especificacao-grafo.md`) chama os dois níveis de classificação e subclassificação. O site mostra os dois como **"Tema"**, por decisão da autora (opção B). Os nomes nos dados, no schema e no validador não mudam.
+- A seção "Estado do agrupamento" foi substituída por "Sobre este tema", com três camadas fixas:
+  1. Para quem está começando;
+  2. Para quem já conhece Salesforce (contagens derivadas do grafo);
+  3. Nível avançado, recolhido (estado do recorte e referências oficiais).
+- O estado do recorte é derivado de `estado` e `referencias_oficiais`. Hoje todos os temas estão como **curadoria do projeto**: estado `desconhecido`, sem referência oficial.
+- Pendentes:
+  - **Fase 2:** `criterio_inclusao` por tema, exigido pelo validador.
+  - **Fase 3:** cruzar com referências oficiais; a fonte ainda não foi escolhida.
+  - **Fase 4:** seletor de nível de leitura no site (opcional).
+
 ## Próximos lotes
 
 1. **Lote 3 — fechar as lacunas da tabela acima** que dependem só de documentação:

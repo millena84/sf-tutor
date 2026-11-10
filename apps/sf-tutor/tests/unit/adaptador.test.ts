@@ -258,3 +258,43 @@ describe('objetos API de integração (lote 5j)', () => {
     expect(t?.destino.endsWith('obj:NamedCredential')).toBe(true);
   });
 });
+
+describe('Sobre este tema (#34): contagens do conteúdo do tema', () => {
+  const nomeArq = (id: string) => `${id.startsWith('cls:') ? 'cls' : 'sub'}/${id.slice(4)}.json`;
+  it('subclassificação: funcionalidades batem com o cadastro do tema', () => {
+    for (const n of ind.nos.values()) {
+      if (n.tipo !== 'subclassificacao') continue;
+      const e = entidadeReal(nomeArq(n.id));
+      const c = ind.conteudoDoTema(n.id);
+      expect(c.temas, n.id).toBe(0);
+      expect(c.funcionalidades, n.id).toBe(new Set(e.funcionalidades as string[]).size);
+    }
+  });
+  it('classificação: temas internos e funcionalidades somam os cadastros das subclassificações', () => {
+    for (const n of ind.nos.values()) {
+      if (n.tipo !== 'classificacao') continue;
+      const subs = entidadeReal(nomeArq(n.id)).subclassificacoes as string[];
+      const funcs = new Set(subs.flatMap((s) => entidadeReal(nomeArq(s)).funcionalidades as string[]));
+      const c = ind.conteudoDoTema(n.id);
+      expect(c.temas, n.id).toBe(subs.length);
+      expect(c.funcionalidades, n.id).toBe(funcs.size);
+      expect(c.soSecundarias).toBeLessThanOrEqual(c.funcionalidades);
+    }
+  });
+  it('metadata types e objetos API vêm das representações das funcionalidades do tema', () => {
+    const c = ind.conteudoDoTema('sub:acoes-e-regras');
+    const funcs = entidadeReal('sub/acoes-e-regras.json').funcionalidades as string[];
+    const mdt = new Set(funcs.flatMap((f) => (ind.saindo.get(f) ?? []).filter((a) => a.tipo === 'representacao_xml').map((a) => a.destino)));
+    expect(c.metadataTypes).toBe(mdt.size);
+    expect(c.metadataTypes).toBeGreaterThan(0);
+  });
+});
+
+describe('estado do recorte de um tema', () => {
+  it('três estados, sem inventar verificação', async () => {
+    const { estadoRecorte } = await import('../../src/rotulos');
+    expect(estadoRecorte('desconhecido', false).rotulo).toBe('Curadoria do projeto');
+    expect(estadoRecorte('desconhecido', true).rotulo).toBe('Parcialmente conferido');
+    expect(estadoRecorte('verificado', true).rotulo).toBe('Conferido com fonte oficial');
+  });
+});

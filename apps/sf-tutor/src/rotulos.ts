@@ -4,8 +4,9 @@ import type { TipoNo } from './data/tipos';
 export const NOME_TIPO: Record<TipoNo | 'pagina', string> = {
   salesforce: 'Centro do mapa',
   nuvem: 'Nuvem / produto',
-  classificacao: 'Classificação',
-  subclassificacao: 'Sub-classificação',
+  // Tradução didática: nos dados os níveis se chamam classificação e subclassificação (00-especificacao-grafo.md).
+  classificacao: 'Tema',
+  subclassificacao: 'Tema',
   funcionalidade: 'Funcionalidade',
   metadata_type: 'Metadata type (XML)',
   estrutura_auxiliar: 'Estrutura auxiliar do XML',
@@ -31,14 +32,14 @@ export const ESTADO: Record<string, { rotulo: string; simbolo: string; explicaca
 export const rotuloEstado = (e?: string): string => (e ? ESTADO[e]?.rotulo ?? e : 'Sem estado');
 
 export const LIGACAO: Record<string, { rotulo: string; grupo: 'hierarquia' | 'representacao' | 'estrutura' | 'referencia' | 'correspondencia'; explicacao: string }> = {
-  navegacao_classificacao: { rotulo: 'Agrupa (classificação)', grupo: 'hierarquia', explicacao: 'Hierarquia didática do mapa: o centro leva às classificações funcionais.' },
-  navegacao_subclassificacao: { rotulo: 'Agrupa (sub-classificação)', grupo: 'hierarquia', explicacao: 'Hierarquia didática: a classificação reúne sub-classificações.' },
+  navegacao_classificacao: { rotulo: 'Agrupa (tema)', grupo: 'hierarquia', explicacao: 'Hierarquia didática do mapa: o centro leva aos temas.' },
+  navegacao_subclassificacao: { rotulo: 'Agrupa (tema dentro de tema)', grupo: 'hierarquia', explicacao: 'Hierarquia didática: um tema reúne temas mais específicos.' },
   navegacao_nuvem: { rotulo: 'Nuvem / produto', grupo: 'hierarquia', explicacao: 'Hierarquia didática da visão por nuvem. Não afirma que os produtos dividem a mesma infraestrutura.' },
-  nuvem_classificacao: { rotulo: 'Classificação aplicável', grupo: 'hierarquia', explicacao: 'Classificação que tem funcionalidades desta nuvem.' },
-  nuvem_subclassificacao: { rotulo: 'Sub-classificação aplicável', grupo: 'hierarquia', explicacao: 'Sub-classificação que tem funcionalidades desta nuvem.' },
+  nuvem_classificacao: { rotulo: 'Tema aplicável', grupo: 'hierarquia', explicacao: 'Tema que tem funcionalidades desta nuvem.' },
+  nuvem_subclassificacao: { rotulo: 'Tema aplicável (dentro de tema)', grupo: 'hierarquia', explicacao: 'Tema mais específico que tem funcionalidades desta nuvem.' },
   nuvem_funcionalidade: { rotulo: 'Funcionalidade na nuvem', grupo: 'hierarquia', explicacao: 'Funcionalidade associada à nuvem no cadastro da nuvem. A mesma funcionalidade pode aparecer em várias nuvens com o mesmo conteúdo.' },
-  classificacao_principal: { rotulo: 'Classificação principal', grupo: 'hierarquia', explicacao: 'Lugar principal da funcionalidade na taxonomia didática.' },
-  classificacao_secundaria: { rotulo: 'Classificação secundária', grupo: 'hierarquia', explicacao: 'A funcionalidade também aparece aqui; é a mesma ficha da ocorrência principal.' },
+  classificacao_principal: { rotulo: 'Tema principal', grupo: 'hierarquia', explicacao: 'Lugar principal da funcionalidade na organização didática.' },
+  classificacao_secundaria: { rotulo: 'Tema secundário', grupo: 'hierarquia', explicacao: 'A funcionalidade também aparece neste tema; é a mesma ficha da ocorrência principal.' },
   representacao_xml: { rotulo: 'Representada por XML', grupo: 'representacao', explicacao: 'Metadata type que representa a funcionalidade como configuração implantável.' },
   representacao_objeto_api: { rotulo: 'Representada por objeto API', grupo: 'representacao', explicacao: 'Objeto consultável via API ligado à funcionalidade. Não é tabela física privada.' },
   propriedade: { rotulo: 'Propriedade', grupo: 'estrutura', explicacao: 'Propriedade documentada do metadata type ou da estrutura.' },
@@ -89,3 +90,20 @@ export const PROPRIEDADES_API: [string, string][] = [
 ];
 
 export const NOME_API: Record<string, string> = { padrao: 'API padrão', tooling: 'Tooling API' };
+
+/** Na legenda, os dois níveis de tema têm formas diferentes e precisam de nomes distintos. */
+export const NOME_TIPO_LEGENDA: Partial<Record<TipoNo | 'pagina', string>> = {
+  classificacao: 'Tema',
+  subclassificacao: 'Tema dentro de outro tema',
+};
+
+/**
+ * Estado do recorte de um tema (camada "Nível avançado" de "Sobre este tema").
+ * Hoje não há estado "parcial" no catálogo: "parcialmente conferido" só aparece quando o tema
+ * tem referências oficiais registradas mas ainda não está verificado.
+ */
+export function estadoRecorte(estado: unknown, temReferencias: boolean): { rotulo: string; explicacao: string } {
+  if (estado === 'verificado') return { rotulo: 'Conferido com fonte oficial', explicacao: 'O recorte deste tema foi comparado com referências oficiais registradas.' };
+  if (temReferencias) return { rotulo: 'Parcialmente conferido', explicacao: 'Há referências oficiais registradas, mas o recorte ainda não foi conferido por completo.' };
+  return { rotulo: 'Curadoria do projeto', explicacao: 'Recorte proposto pelo projeto; ainda não conferido com fonte oficial.' };
+}

@@ -5,7 +5,7 @@ import type { Entidades } from '../data/carregador';
 import { Indice, TIPOS_FOLHA, TIPOS_OBJETO, type Visao } from '../model/adaptador';
 import {
   FORMA_DEFAULT, ICONE_TIPO, LIGACAO, NATUREZA_DOMINIO, NATUREZA_RECOMENDACAO, NOME_API, NOME_TIPO, OBRIGATORIEDADE, ORIGEM,
-  PROPRIEDADES_API, TIPO_LICENCA, rotuloEstado,
+  PROPRIEDADES_API, TIPO_LICENCA, estadoRecorte, rotuloEstado,
 } from '../rotulos';
 import { copiar, h, limpar } from './dom';
 import { afirmacao, codigo, fontesEl, listaTexto, restantes, secao, selo, texto, valorEl } from './partes';
@@ -145,8 +145,8 @@ function painelSalesforce(ctx: CtxPainel, e: Entidade): (Node | null)[] {
       ),
       h('p', { class: 'nota' }, 'Cobertura parcial: itens sem cadastro aparecem como "ainda não mapeado". Contagens completas em Método.'),
       h('button', { type: 'button', class: 'btn', on: { click: () => ctx.abrirMetodo() } }, 'Abrir Método e cobertura')),
-    secao('Nuvens e classificações', false,
-      listaLinks(ctx, 'Nuvens / produtos', arr<string>(e.nuvens)), listaLinks(ctx, 'Classificações funcionais', arr<string>(e.classificacoes))),
+    secao('Nuvens e temas', false,
+      listaLinks(ctx, 'Nuvens / produtos', arr<string>(e.nuvens)), listaLinks(ctx, 'Temas', arr<string>(e.classificacoes))),
     secao('Fontes', false, fontesEl(ctx, arr(e.evidencias))),
     restantes(e, ['id', 'nome', 'nota_logo', 'logo_marca', 'o_que_e', 'conceitos', 'organizacao_do_mapa', 'relacoes_entre_produtos', 'como_navegar', 'nuvens', 'classificacoes', 'versao_base', 'estado', 'evidencias']),
   ];
@@ -202,12 +202,53 @@ function painelNuvem(ctx: CtxPainel, e: Entidade, caminho: readonly string[]): (
   ];
 }
 
-// ------------------------------------------------------------------ Classificação / sub
+// ------------------------------------------------------------------ Tema (classificação / subclassificação nos dados)
 
-function natureza(n: unknown): HTMLElement {
-  return n === 'curadoria_didatica'
-    ? h('p', { class: 'aviso' }, 'Agrupamento didático (curadoria do projeto), não nomenclatura oficial da Salesforce.')
-    : h('p', null, `Natureza: ${String(n ?? 'não informada')}`);
+function plural(n: number, um: string, varios: string): string {
+  return `${n} ${n === 1 ? um : varios}`;
+}
+
+/**
+ * "Sobre este tema": três camadas com os mesmos rótulos e a mesma ordem em todos os temas.
+ * 1) começando (sempre visível), 2) já conhece Salesforce (sempre visível), 3) nível avançado (recolhido).
+ */
+function sobreTema(ctx: CtxPainel, e: Entidade): HTMLElement | null {
+  const c = ctx.ind.conteudoDoTema(e.id);
+  const refs = arr(e.referencias_oficiais);
+  const rec = estadoRecorte(e.estado, refs.length > 0);
+  const didatico = e.natureza === 'curadoria_didatica';
+  const itens: string[] = [];
+  if (c.temas) itens.push(plural(c.temas, 'tema mais específico', 'temas mais específicos'));
+  itens.push(plural(c.funcionalidades, 'funcionalidade', 'funcionalidades')
+    + (c.soSecundarias ? ` (${c.soSecundarias} com lugar principal em outro tema)` : ''));
+  itens.push(plural(c.metadataTypes, 'metadata type (XML)', 'metadata types (XML)'));
+  itens.push(plural(c.objetosApi, 'objeto API', 'objetos API'));
+  const avancado = h('details', { class: 'secao camada-avancada' },
+    h('summary', null, 'Nível avançado'),
+    h('h5', null, 'Estado do recorte'),
+    h('p', null, h('strong', null, rec.rotulo), `: ${rec.explicacao}`),
+    e.nota_estado ? h('p', { class: 'nota' }, String(e.nota_estado)) : null,
+    h('h5', null, 'Correspondência com referências oficiais'),
+    refs.length
+      ? h('ul', { class: 'lista' }, refs.map((x) => h('li', null, valorEl(x))))
+      : h('p', { class: 'vazio' }, 'Nenhuma referência oficial registrada: o recorte ainda não foi cruzado com a documentação.'),
+    h('p', { class: 'nota' }, 'Nos dados do projeto, este nível se chama ', h('code', null, ctx.ind.no(e.id)?.tipo === 'classificacao' ? 'classificacao' : 'subclassificacao'),
+      '. "Tema" é a tradução didática usada na interface.'),
+  );
+  return secao('Sobre este tema', true,
+    h('div', { class: 'camada' },
+      h('h4', null, 'Para quem está começando'),
+      didatico
+        ? h('p', null, 'Tema criado por este tutorial para organizar o estudo. Não é uma categoria oficial da Salesforce: a documentação oficial pode agrupar os mesmos assuntos de outro jeito.')
+        : h('p', null, `Natureza: ${String(e.natureza ?? 'não informada')}`)),
+    h('div', { class: 'camada' },
+      h('h4', null, 'Para quem já conhece Salesforce'),
+      c.funcionalidades || c.temas
+        ? h('div', null, h('p', null, 'Este tema reúne, no catálogo atual:'), h('ul', { class: 'lista' }, itens.map((t) => h('li', null, t))),
+          c.funcionalidades ? h('p', { class: 'nota' }, 'Metadata types e objetos API contados pelas funcionalidades do tema; um mesmo item pode servir a vários temas.') : null)
+        : h('p', { class: 'vazio' }, 'Ainda não mapeado: nenhuma funcionalidade catalogada neste tema.')),
+    avancado,
+  );
 }
 
 function painelClassificacao(ctx: CtxPainel, e: Entidade, caminho: readonly string[]): (Node | null)[] {
@@ -215,17 +256,15 @@ function painelClassificacao(ctx: CtxPainel, e: Entidade, caminho: readonly stri
   const visao = ctx.visao();
   return [
     texto('O que agrupa', e.descricao, { didatico: true }),
-    natureza(e.natureza),
-    secao(`Sub-classificações (${subs.length})`, true, h('ul', { class: 'lista-links' }, subs.map((s) => {
+    sobreTema(ctx, e),
+    secao(`Temas dentro deste tema (${subs.length})`, true, h('ul', { class: 'lista-links' }, subs.map((s) => {
       const n = ctx.ind.quantidadeFilhos('funcionalidade', ['salesforce', e.id, s]);
       const noCaminho = visao === 'funcionalidade' ? [...caminho, s] : null;
       return h('li', null,
         noCaminho ? h('button', { type: 'button', class: 'link', on: { click: () => ctx.abrirCaminho(noCaminho) } }, ctx.rotulo(s)) : h('span', null, ctx.rotulo(s)),
         h('span', { class: n ? 'contagem' : 'contagem vazio' }, n ? ` ${n} funcionalidade${n > 1 ? 's' : ''}` : ' ainda não mapeado'));
     }))),
-    secao('Pré-requisitos, exemplos e limites', false, h('p', { class: 'vazio' }, 'Não registrados no cadastro desta classificação. Veja os de cada funcionalidade.')),
-    afirmacao(ctx, 'Estado do agrupamento', { estado: String(e.estado ?? ''), nota: String(e.nota_estado ?? '') }),
-    listaTexto('Referências oficiais', arr(e.referencias_oficiais), 'Nenhuma referência oficial registrada: o agrupamento ainda não foi cruzado com a documentação.'),
+    secao('Pré-requisitos, exemplos e limites', false, h('p', { class: 'vazio' }, 'Não registrados no cadastro deste tema. Veja os de cada funcionalidade.')),
     restantes(e, ['id', 'nome', 'nome_curto', 'sigla', 'natureza', 'descricao', 'subclassificacoes', 'referencias_oficiais', 'estado', 'nota_estado']),
   ];
 }
@@ -236,17 +275,16 @@ function painelSub(ctx: CtxPainel, e: Entidade, caminho: readonly string[]): (No
   const nestaVisao = ctx.ind.filhos(ctx.visao(), caminho).map((f) => f.id);
   return [
     texto('O que agrupa', e.descricao, { didatico: true }),
-    natureza(e.natureza),
-    h('p', null, 'Classificação: ', h('button', { type: 'button', class: 'link', on: { click: () => ctx.abrir(String(e.classificacao)) } }, ctx.rotulo(String(e.classificacao)))),
+    h('p', null, 'Faz parte do tema: ', h('button', { type: 'button', class: 'link', on: { click: () => ctx.abrir(String(e.classificacao)) } }, ctx.rotulo(String(e.classificacao)))),
+    sobreTema(ctx, e),
     secao(`Funcionalidades (${funcs.length})`, true, funcs.length
       ? h('ul', { class: 'lista-links' }, funcs.map((f) => h('li', null,
         nestaVisao.includes(f) ? h('button', { type: 'button', class: 'link', on: { click: () => ctx.abrirCaminho([...caminho, f]) } }, ctx.rotulo(f))
           : h('button', { type: 'button', class: 'link', on: { click: () => ctx.abrir(f, caminho) } }, ctx.rotulo(f)),
         h('span', { class: 'selo' }, principais.has(f) ? 'principal' : 'secundária'))))
-      : h('p', { class: 'vazio' }, 'Ainda não mapeado: nenhuma funcionalidade catalogada nesta sub-classificação.')),
-    secao('Pré-requisitos, exemplos e limites', false, h('p', { class: 'vazio' }, 'Não registrados no cadastro desta sub-classificação.')),
-    afirmacao(ctx, 'Estado do agrupamento', { estado: String(e.estado ?? ''), nota: String(e.nota_estado ?? '') }),
-    restantes(e, ['id', 'nome', 'sigla', 'classificacao', 'natureza', 'descricao', 'funcionalidades', 'estado', 'nota_estado']),
+      : h('p', { class: 'vazio' }, 'Ainda não mapeado: nenhuma funcionalidade catalogada neste tema.')),
+    secao('Pré-requisitos, exemplos e limites', false, h('p', { class: 'vazio' }, 'Não registrados no cadastro deste tema.')),
+    restantes(e, ['id', 'nome', 'sigla', 'classificacao', 'natureza', 'descricao', 'funcionalidades', 'referencias_oficiais', 'estado', 'nota_estado']),
   ];
 }
 
@@ -272,12 +310,12 @@ function painelFunc(ctx: CtxPainel, e: Entidade, caminho: readonly string[]): (N
         h('p', null, String(a.motivo ?? '')), fontesEl(ctx, arr(a.evidencias))))),
     afirmacao(ctx, 'Caminho no Setup', ent<Afirmacao>(e, 'setup')),
     listaTexto('Pré-requisitos, edições e permissões', arr(e.pre_requisitos)),
-    secao('Nuvens e classificações', true,
+    secao('Nuvens e temas', true,
       h('h4', null, 'Nuvens / produtos'),
       nuvens.length ? h('ul', { class: 'lista-links' }, nuvens.map((n) => h('li', null, h('button', { type: 'button', class: 'link', on: { click: () => ctx.abrir(n) } }, ctx.rotulo(n))))) : h('p', { class: 'vazio' }, 'Nenhuma nuvem associada no catálogo.'),
-      h('h4', null, 'Classificação principal'),
+      h('h4', null, 'Tema principal'),
       cp ? h('p', null, `${ctx.rotulo(cp.classificacao)} › ${ctx.rotulo(cp.subclassificacao)}`) : null,
-      cs.length ? h('div', null, h('h4', null, 'Classificações secundárias'), h('ul', { class: 'lista' }, cs.map((c) => h('li', null, `${ctx.rotulo(c.classificacao)} › ${ctx.rotulo(c.subclassificacao)}`, c.motivo ? h('span', { class: 'nota' }, ` — ${c.motivo}`) : null)))) : null),
+      cs.length ? h('div', null, h('h4', null, 'Também aparece nos temas'), h('ul', { class: 'lista' }, cs.map((c) => h('li', null, `${ctx.rotulo(c.classificacao)} › ${ctx.rotulo(c.subclassificacao)}`, c.motivo ? h('span', { class: 'nota' }, ` — ${c.motivo}`) : null)))) : null),
     rec.length ? secao('Recomendações', false, h('ul', { class: 'lista' }, rec.map((r) => h('li', null, r.texto, h('span', { class: 'selo' }, NATUREZA_RECOMENDACAO[r.natureza ?? ''] ?? r.natureza ?? ''))))) : null,
     listaTexto('Alertas', arr(e.alertas)),
     listaTexto('Limitações conhecidas', arr(e.limitacoes)),
@@ -572,7 +610,7 @@ export async function renderizarAresta(ctx: CtxPainel, alvo: HTMLElement, a: Are
   alvo.append(h('p', null, lig?.explicacao ?? ''));
   if (!a.tecnica) {
     alvo.append(h('p', { class: 'nota' }, 'Ligação da hierarquia didática do mapa: organiza a navegação e não afirma relação entre registros.'));
-    if (a.motivo) alvo.append(texto('Motivo da classificação secundária', a.motivo)!);
+    if (a.motivo) alvo.append(texto('Motivo de aparecer também neste tema', a.motivo)!);
     if (a.papel) alvo.append(texto('Papel da representação', a.papel, { didatico: true })!);
     return;
   }
