@@ -242,6 +242,7 @@ O WSDL **não** é bloqueio: a documentação de cada tipo é a fonte alternativ
   - Leitura adotada para "seção por seção": cada tema interno é uma seção. O encadeamento vira um roteiro numerado pelos temas internos, e o avançado ganha ao menos um item por seção, na mesma ordem. Só texto: sem cadastro novo no catálogo e sem preencher `prerequisitos` (pontos deixados em aberto com a autora).
   - Cada passada também limpa o dado genérico dos temas internos (`temas_internos.py`): descrição curta escrita pelo projeto, referências oficiais já registradas (o site passa de "Curadoria do projeto" para "Parcialmente conferido") e a mesma nota de estado dos temas principais. O estado continua `desconhecido`.
   - Concluído: Integração, texto (PR #55) e limpeza dos 7 temas internos.
+  - Concluído: Acesso e segurança, texto e limpeza dos 7 temas internos (avançado de 5 para 12 itens, sem fonte nova).
 
 ## Próximos lotes
 
