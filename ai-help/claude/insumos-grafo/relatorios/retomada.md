@@ -237,6 +237,10 @@ O WSDL **não** é bloqueio: a documentação de cada tipo é a fonte alternativ
   - "Outras áreas" é um agrupamento do projeto: tem só as camadas para iniciantes e encadeamento, apoiadas em `src:sdr-metadata-support`, sem nível avançado.
   - Os temas seguem com `estado: desconhecido`; a fronteira do recorte não foi cruzada com a documentação oficial.
   - Próximo no #34: detalhar seção por seção os 13 temas principais (Relatórios, IA e Conteúdo primeiro). A camada de certificações continua bloqueada por acesso.
+- **Detalhamento dos temas principais (item 3 do #34, a partir de 2026-11-10):**
+  - Ordem definida pela autora: 1) Integração, 2) Acesso e segurança, 3) Dados e modelagem, 4) Qualidade e governança, 5) Relatórios, 6) Org e configurações, 7) Processos de produto, 8) Automação, 9) Desenvolvimento, 10) Assíncrono e lotes, 11) Interface, 12) Observabilidade, 13) Conteúdo, 14) IA e agentes.
+  - Leitura adotada para "seção por seção": cada tema interno é uma seção. O encadeamento vira um roteiro numerado pelos temas internos, e o avançado ganha ao menos um item por seção, na mesma ordem. Só texto: sem cadastro novo no catálogo e sem preencher `prerequisitos` (pontos deixados em aberto com a autora).
+  - Concluído: Integração (sem fonte nova; reaproveita fatos já catalogados nas funcionalidades e nos temas internos).
 
 ## Próximos lotes
 
