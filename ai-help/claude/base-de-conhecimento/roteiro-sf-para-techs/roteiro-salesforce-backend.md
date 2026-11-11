@@ -4,14 +4,14 @@ Roteiro de conversa orientado à leitura de documentação gerada a partir de um
 
 **Verificação das fontes:** 11 de novembro de 2026. O escopo é o core da Salesforce Platform e suas integrações, não todos os produtos do portfólio Salesforce.
 
-**Versão 2, revisão comparativa:** esta versão incorpora a leitura integral do anexo `Roteiro-Salesforce-para-dev-back-end.md`, fornecido como documento de origem dos trechos do repositório. O arquivo `leitura-critica-e-registro-de-mudancas.md` registra o que foi preservado, corrigido e complementado, inclusive limitações da primeira revisão.
+**Versão 3, integração ao repositório:** mantém a revisão comparativa do anexo `Roteiro-Salesforce-para-dev-back-end.md` e adapta os vínculos à estrutura desta pasta. A [leitura crítica de origem](leitura-critica-e-registro-de-mudancas.md) registra a revisão anterior; a [revisão da base](../revisao-base-conhecimento.md) registra as correções entre arquivos, a navegação e os diagramas.
 
 ## Como usar este material
 
 - **Parte de consulta:** leia as verificações técnicas antes de apresentar. Elas corrigem generalizações do roteiro anterior e delimitam o que é confirmado, conceitual ou não confirmado.
 - **Parte de apresentação:** use os onze blocos, de 0 a 10. Cada um contém objetivo, de três a cinco pontos principais, analogia back-end, desenho SVG e uma pergunta de fixação.
 - **Fio condutor:** use um exemplo fictício: um cliente faz um `Pedido__c`, com `Valor__c`, `Status__c`, itens e integração com ERP. Os nomes das classes, flows e componentes propostos são ilustrativos, não componentes verificados na sua org.
-- **SVGs:** os arquivos da pasta `svg/` são desenhos vetoriais independentes, com texto selecionável e descrições acessíveis. Eles representam modelos didáticos; não são diagramas físicos da infraestrutura Salesforce.
+- **SVGs:** os arquivos da pasta irmã [`../svg/`](../svg/) são desenhos vetoriais independentes, com texto selecionável e descrições acessíveis. Eles representam modelos didáticos; não são diagramas físicos da infraestrutura Salesforce.
 - **Duas velocidades:** os onze blocos são a condução da conversa; verificação técnica, exemplos de arquivos e aprofundamento são material de apoio. Não tente ler todas as ressalvas e todos os exemplos dentro do tempo do bloco.
 
 ## Cartão de condução da conversa
@@ -133,7 +133,7 @@ Analogia back-end: imagine um application server gerenciado, com ORM, autorizaç
 
 Desenho de lousa: três faixas, “Front-end”, “Lógica” e “Dados”, com “Segurança” atravessando o conjunto e “Integração” na lateral. Desenhe primeiro as faixas e só depois acrescente os exemplos verbalmente.
 
-![Mapa das camadas da org](svg/bloco-00-camadas.svg)
+![Mapa das camadas da org](../svg/bloco-00-camadas.svg)
 
 Pergunta de fixação: “O pedido de número 123 e a definição do campo Valor são a mesma categoria de coisa?” Transição: “Agora vamos entender como esse ambiente pode compartilhar infraestrutura sem virar uma aplicação misturada com a de outros clientes.”
 
@@ -150,7 +150,7 @@ Analogia back-end: SaaS multi-tenant com isolamento de contexto e quotas de exec
 
 Desenho de lousa: um prédio com dois apartamentos, “Org A” e “Org B”, dentro de uma área compartilhada. Na base, escreva “quotas por transação”.
 
-![Orgs em infraestrutura compartilhada](svg/bloco-01-multitenancy.svg)
+![Orgs em infraestrutura compartilhada](../svg/bloco-01-multitenancy.svg)
 
 Pergunta de fixação: “Se o trigger chamar mais três classes, quantos novos orçamentos de SOQL ele ganhou?” Transição: “Como cada apartamento pode ter campos e comportamentos diferentes sem uma cópia completa da aplicação?”
 
@@ -172,7 +172,7 @@ Fala sugerida: “O XML é uma representação usada para transportar muitas def
 
 Desenho de lousa: separe visualmente “implantação” e “uso”. Na primeira linha, projeto → deploy → configuração; na segunda, configuração → runtime → browser.
 
-![Implantação e uso dos metadados](svg/bloco-02-metadados-runtime.svg)
+![Implantação e uso dos metadados](../svg/bloco-02-metadados-runtime.svg)
 
 Distribuição sugerida: 2 minutos para fonte/deploy; 3 para runtime; 3 para a bananinha; 2 para a pergunta e a documentação. Deixe LSM e história dos bancos para a seção opcional ao final.
 
@@ -206,7 +206,7 @@ O primeiro vai de pai para filhos; o segundo vai de filho para pai. Para relaç�
 
 Desenho de lousa: Account → Pedido → Item, indicando o sentido “o filho referencia o pai” e diferenciando lookup de master-detail. O desenho representa uma proposta para o exemplo, não um relacionamento standard pré-existente.
 
-![Modelo lógico do pedido](svg/bloco-03-modelo-dados.svg)
+![Modelo lógico do pedido](../svg/bloco-03-modelo-dados.svg)
 
 Pergunta de fixação: “Se o pedido for excluído, o que você quer que aconteça com seus itens? Isso é a mesma pergunta que saber quem pode ler Valor?” Transição: “O schema diz o que existe; agora precisamos saber quem pode fazer o quê.”
 
@@ -224,7 +224,7 @@ Analogia back-end: autorização por capacidade combinada com row-level security
 
 Desenho de lousa: desenhe duas entradas que precisam se encontrar: “CRUD + FLS” e “registros permitidos”. A saída é “operação autorizada”; escreva abaixo “contexto do código explícito”.
 
-![Interseção das camadas de segurança](svg/bloco-04-seguranca.svg)
+![Interseção das camadas de segurança](../svg/bloco-04-seguranca.svg)
 
 Pergunta de fixação: “Uma classe `with sharing` pode, só por essa palavra-chave, garantir que um campo sensível nunca seja lido?” Transição: “Agora vamos ver como essa configuração e esse código chegam a um ambiente.”
 
@@ -242,7 +242,7 @@ Analogia back-end: entrega de uma aplicação gerenciada, com fontes, configura�
 
 Desenho de lousa: Git → validação/testes → QA/UAT → produção. Faça uma pergunta em cada seta: “o que mudou?”, “qual teste prova?”, “qual configuração depende do ambiente?”
 
-![Pipeline de entrega](svg/bloco-05-deploy.svg)
+![Pipeline de entrega](../svg/bloco-05-deploy.svg)
 
 Pergunta de fixação: “Implantar o objeto Pedido implica levar os pedidos reais da produção?” Transição: “Vamos entrar na execução de uma dessas regras, agora em Apex.”
 
@@ -251,7 +251,7 @@ Pergunta de fixação: “Implantar o objeto Pedido implica levar os pedidos rea
 Bloco 6, duração de 10 minutos. Objetivo: entender o ciclo de salvamento, os limites compartilhados e a organização do código.
 
 - **Apex e triggers:** apresente Apex como a linguagem server-side da plataforma e triggers como pontos de entrada do ciclo de dados. Um trigger pode receber um lote de até 200 registros; isso não significa que todo carregamento de milhares de registros aconteça em uma única transação ([limites Apex](https://developer.salesforce.com/docs/platform/apex-dev/references/apex-dev/apex-gov-limits.html)).
-- **Order of execution:** a versão resumida correta é before-save Flow → before Apex → validações → gravação ainda não confirmada → after Apex → demais etapas/after-save Flow → commit → pós-commit. É um recorte: há regras de duplicidade, atribuição, workflows, rollups e possíveis reentradas entre etapas ([sequência oficial](https://developer.salesforce.com/docs/platform/apex-dev/references/apex-dev/apex-triggers-order-of-execution.html)).
+- **Order of execution:** após as verificações iniciais aplicáveis, o recorte é before-save Flow → before Apex → validações → gravação ainda não confirmada → after Apex → demais etapas/after-save Flow → commit → pós-commit. Há regras de duplicidade, atribuição, workflows, escalation, rollups e possíveis reentradas entre etapas; a sequência é de insert/update/upsert, não uma receita idêntica para delete/undelete ([sequência oficial](https://developer.salesforce.com/docs/platform/apex-dev/references/apex-dev/apex-triggers-order-of-execution.html)). Para investigar, consulte a [tabela completa da base](../orderOfExecution.md).
 - **Bulkification:** colete IDs, consulte em conjunto, use Map/Set e faça DML com coleções; o anti-pattern é uma operação de banco por item que consome o orçamento. Flow e Apex no caminho síncrono também contribuem para a carga da transação ([limites](https://developer.salesforce.com/docs/platform/apex-dev/references/apex-dev/apex-gov-limits.html), [guia de automação](https://architect.salesforce.com/docs/architect/decision-guides/guide/record-triggered)).
 - **Organização do código:** proponha um trigger fino e um handler; acrescente Service para casos de uso e Selector para consultas quando ajudarem. Domain e Unit of Work são opções de desenho, e fflib é uma implementação open source, não exigência nativa nem garantia de “um único DML para tudo”; `commitWork()` tampouco substitui o commit final da transação ([Unit of Work no Trailhead](https://trailhead.salesforce.com/content/learn/modules/apex_patterns_sl/apex_patterns_sl_learn_uow_principles), [order of execution](https://developer.salesforce.com/docs/platform/apex-dev/references/apex-dev/apex-triggers-order-of-execution.html)).
 - **Assíncrono e testes:** explique Queueable, Batch e Schedulable por finalidade, sem uma aula de todas as APIs. Use assertions de resultado, execução em lote, falhas e mocks de callout; uma transação posterior não está dentro do rollback do salvamento original ([pós-commit](https://developer.salesforce.com/docs/platform/apex-dev/references/apex-dev/apex-triggers-order-of-execution.html), [limites e contextos](https://developer.salesforce.com/docs/platform/apex-dev/references/apex-dev/apex-gov-limits.html)).
@@ -262,7 +262,7 @@ Exercício oral: com 200 pedidos, uma query por pedido pede 200 queries antes de
 
 Desenho de lousa: uma linha do tempo com before-save Flow, before Apex/validações, after Apex/Flow, commit e trabalho assíncrono. Circule tudo que vem antes do commit como uma fronteira transacional; avise que o desenho omite etapas intermediárias.
 
-![Fronteira da transação e pós-commit](svg/bloco-06-transacao.svg)
+![Fronteira da transação e pós-commit](../svg/bloco-06-transacao.svg)
 
 Distribuição sugerida: 3 minutos para transação; 3 para bulkification; 2 para padrões; 2 para assíncrono e pergunta. fflib detalhado fica para uma conversa posterior.
 
@@ -281,7 +281,7 @@ Analogia back-end: motor de workflow e serviços de domínio cooperando por cont
 
 Desenho de lousa: três colunas, “Flow”, “Flow + Apex” e “Apex”, ao longo de um eixo de complexidade e controle. Diga explicitamente que não é uma régua automática nem uma hierarquia de qualidade.
 
-![Escolha entre Flow, híbrido e Apex](svg/bloco-07-flow-apex.svg)
+![Escolha entre Flow, híbrido e Apex](../svg/bloco-07-flow-apex.svg)
 
 Pergunta de fixação: “A regra é simples, mas executa em massa e atualiza vários objetos. O fato de caber num Flow decide a arquitetura?” Transição: “Agora vamos ver quem chama essa lógica a partir da interface.”
 
@@ -299,7 +299,7 @@ Analogia back-end: uma UI de componentes que pode consumir um serviço de dados 
 
 Desenho de lousa: LWC tem dois caminhos: LDS/UI API e Apex; ambos chegam a dados protegidos da org. Identifique no desenho o caminho padronizado e o customizado.
 
-![Dois caminhos de dados da UI](svg/bloco-08-frontend.svg)
+![Dois caminhos de dados da UI](../svg/bloco-08-frontend.svg)
 
 Pergunta de fixação: “Se o método está marcado com `@AuraEnabled`, ele ganhou autorização de negócio e FLS automaticamente em qualquer versão e contexto?” Transição: “O outro consumidor desses serviços pode estar fora da Salesforce.”
 
@@ -310,16 +310,18 @@ Bloco 9, duração de 10 minutos. Objetivo: escolher mecanismos por contrato e c
 - **Entrada por contrato:** apresente REST/SOAP para operações de dados e Bulk para cargas; situe Composite e contratos Apex customizados como alternativas a avaliar conforme o caso. Não confunda famílias de API com protocolos e formatos; GraphQL também deve ser avaliado pelos recursos suportados, não como substituição universal ([visão das APIs Salesforce](https://trailhead.salesforce.com/content/learn/modules/api_basics/api_basics_overview)).
 - **OAuth atual:** comece por External Client Apps; a criação de Connected Apps está restrita desde Spring ’26, embora as existentes continuem utilizáveis. Autenticação do cliente, identidade do usuário de integração e permissões são decisões separadas ([documentação oficial de External Client Apps](https://developer.salesforce.com/docs/platform/mobile-sdk/guide/eca-create.html)).
 - **Saída autenticada:** Named Credential identifica endpoint/transporte; External Credential define protocolo e principals; User External Credentials guardam tokens criptografados. Evite “os segredos estão no XML que o utilitário extraiu” ([Get Started with Named Credentials](https://developer.salesforce.com/docs/platform/named-credentials/guide/get-started.html)).
-- **Eventos e consumo:** Platform Event representa um contrato de evento definido; CDC comunica alterações de dados; Pub/Sub API publica/consome o barramento, portanto eventos não são apenas uma categoria de “saída”. Ensine replay e checkpoint com a janela documentada de 72 horas, sem prometer retenção ilimitada ([Pub/Sub e event bus](https://developer.salesforce.com/docs/platform/pub-sub-api/guide/expanded-event-bus.html), [durabilidade de mensagens](https://developer.salesforce.com/docs/platform/pub-sub-api/guide/event-message-durability.html)).
+- **Eventos e consumo:** Platform Event representa um contrato de evento definido; CDC comunica alterações de dados; Pub/Sub API publica Platform Events e consome eventos suportados, não publica alterações CDC. Ensine replay e checkpoint com a janela documentada de 72 horas, sem prometer retenção ilimitada ([Pub/Sub e event bus](https://developer.salesforce.com/docs/platform/pub-sub-api/guide/expanded-event-bus.html), [durabilidade de mensagens](https://developer.salesforce.com/docs/platform/pub-sub-api/guide/event-message-durability.html)).
 - **Confiabilidade e limites:** há 100 callouts e 120 s acumulados por transação Apex, com timeout padrão de 10 s por chamada; não mantenha DML pendente ao fazer callout e desenhe a fronteira de commit antes de escolher trabalho pós-commit. Proponha idempotência, correlação, retentativas e acompanhamento de falhas; middleware, como MuleSoft, é uma decisão arquitetural, não requisito universal ([limites de callout](https://developer.salesforce.com/docs/platform/apex-dev/references/apex-dev/apex-callouts-timeouts.html), [governors](https://developer.salesforce.com/docs/platform/apex-dev/references/apex-dev/apex-gov-limits.html), [controle transacional](https://developer.salesforce.com/docs/platform/apex-dev/references/apex-dev/langcon-apex-transaction-control.html)).
 
 Analogia back-end: serviço com APIs gerenciadas, cliente HTTP autenticado e barramento de eventos. A existência de todos os mecanismos não dispensa desenhar contrato, consentimento/autorização, política de entrega e tratamento de duplicidade.
 
 Caso do Pedido: proponha salvar o pedido e processar a integração desacoplada conforme requisitos de consistência. Um timeout no ERP não prova que o ERP deixou de gravar; por isso a próxima tentativa deve ter uma chave de correlação/idempotência e uma política de reconciliação.
 
+Nota de consulta, fora do tempo principal: Platform Event não é automaticamente pós-commit. Para publicação na plataforma, `Publish Immediately` pode publicar antes do commit e mesmo com falha da transação; `Publish After Commit` condiciona a publicação à confirmação bem-sucedida. Essa configuração não se aplica à publicação via Pub/Sub API ([comportamento oficial de publicação](https://developer.salesforce.com/docs/platform/platform-events/guide/platform-events-define-ui.html)).
+
 Desenho de lousa: aplicativo externo → org; org → ERP por callout; org → barramento → consumidor. O barramento tem setas simplificadas; não atribua a ele garantia de exactly-once de ponta a ponta.
 
-![Integrações síncronas e por eventos](svg/bloco-09-integracao.svg)
+![Integrações síncronas e por eventos](../svg/bloco-09-integracao.svg)
 
 Distribuição sugerida: 2 minutos para APIs; 2 para OAuth/credenciais; 3 para eventos; 3 para falhas e limites. A lista completa de APIs fica como referência, não como sequência de slides.
 
@@ -339,7 +341,7 @@ Analogia back-end: combinar documentação de contratos, navegação de código 
 
 Desenho de lousa: Pedido → automação → integração, com UI/acesso entrando no pedido. Use linha contínua para referência comprovada e tracejada para hipótese; não trate este desenho fictício como descoberta já feita na org.
 
-![Rastro de componentes e grau de evidência](svg/bloco-10-documentacao.svg)
+![Rastro de componentes e grau de evidência](../svg/bloco-10-documentacao.svg)
 
 Pergunta de fixação: “Se uma classe aparece na mesma pasta e tem ‘Pedido’ no nome, isso prova que ela executa ao salvar esse objeto?” Fechamento sugerido: “Agora você consegue usar a documentação para formular perguntas concretas, em vez de depender de conhecer cada nome Salesforce de memória.”
 
@@ -462,7 +464,7 @@ Use esse exercício no encerramento de oito minutos, reservando os dois minutos 
 
 ## Distribuição de tempo
 
-O roteiro original soma 95 minutos; os cinco blocos indicados como versão de 30 minutos somam 41 minutos. A revisão abaixo reduz os blocos completos para 85 minutos, sem contar intervalos e perguntas extras.
+Os tempos declarados no roteiro original somam 85 minutos, não 95 como afirmou incorretamente a revisão anterior. A distribuição abaixo mantém o total de 85 minutos, redistribuindo o tempo entre temas; os cinco blocos completos originalmente indicados como versão de trinta minutos somam 41 minutos e precisam do recorte explícito adiante. Intervalos e perguntas extras ficam fora desses totais.
 
 | Bloco | Tema | Tempo |
 |---|---|---:|
