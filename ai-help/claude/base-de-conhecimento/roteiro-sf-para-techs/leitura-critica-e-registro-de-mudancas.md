@@ -2,7 +2,7 @@
 
 Revisão do anexo `Roteiro-Salesforce-para-dev-back-end.md`, usado como referência de origem, em comparação com a primeira versão dos materiais produzidos nesta conversa. A finalidade é manter a força didática do texto, corrigir imprecisões e evitar que uma analogia seja interpretada como garantia técnica.
 
-**Revisão:** 11 de novembro de 2026. O resultado é a versão 2 de `roteiro-salesforce-backend.md`, com os onze SVGs e o pacote ZIP atualizados; o anexo original foi preservado, e nenhum arquivo do GitHub foi alterado.
+**Escopo histórico:** revisão de 11 de novembro de 2026, anterior à integração desta base no GitHub. Naquela entrega, o resultado foi a versão 2 do roteiro e do pacote ZIP, sem alterações no repositório; essa descrição não representa o estado das revisões posteriores. Para a versão 3 e as mudanças atuais, veja a [revisão da base no repositório](../revisao-base-conhecimento.md).
 
 ## Avaliação geral
 
@@ -25,7 +25,7 @@ Os trechos da primeira coluna identificam a formulação do anexo; a coluna fina
 | Formulação ou problema | Avaliação | Tratamento aplicado |
 |---|---|---|
 | “São 10 blocos”, enumerados de 0 a 10. | Erro de contagem. | Corrigido para onze blocos, preservando os identificadores de 0 a 10. |
-| “85 minutos” para a sequência original. | Os tempos indicados somam 95 minutos. | Nova distribuição de 85 minutos; todos os blocos permanecem com até dez minutos. |
+| “85 minutos” para a sequência original. | O total original está correto: 3+8+10+8+8+10+10+5+8+10+5 = 85. A versão anterior desta leitura crítica errou ao afirmar 95 minutos. | Corrigida a própria crítica; nova distribuição mantém 85 minutos, sem alegar uma redução inexistente. |
 | “30 min” com 0, 1, 2, 6 e 9 completos. | Os tempos originais somam 41 minutos. | Criado recorte de trinta minutos com duração parcial explícita, incluindo navegação final. |
 | “Tudo isso = metadado (XML)”. | Confunde natureza do componente e representação em arquivos. | Metadados incluem fontes e recursos em diferentes formatos; retirado o equivalente universal “metadado = XML” ([source format](https://developer.salesforce.com/docs/platform/sfdx-dev/guide/sfdx-dev-source-file-format.html)). |
 | “XML só existe na fronteira”, “só no deploy/retrieve”, “uma vez”. | A ideia de não reler o projeto local é boa; os absolutos sobre XML e persistência são amplos demais. | Descrita a função de intercâmbio e implantação, sem prometer uma representação única para todo componente ou operação ([Metadata API](https://developer.salesforce.com/docs/platform/api-metadata/guide/file-based.html), [Tooling REST/SOAP](https://developer.salesforce.com/docs/platform/api-tooling/guide/intro-api-tooling.html)). |
