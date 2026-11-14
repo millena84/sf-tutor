@@ -62,7 +62,7 @@ P["sub:servico-de-campo"] = {
                            "(service resource) e onde essa pessoa atua (service territory).",
                            "Um cliente pede conserto do ar-condicionado; nasce uma work order, que gera uma service appointment para "
                            "quinta à tarde, atribuída ao técnico da região.",
-                           E("src:help-field-service-overview", "src:dev-field-service-core-data-model")),
+                           E("src:help-field-service-overview", "src:dev-field-service-core-data-model"), comece=["func:field-service"]),
     "encadeamento": enc("Costuma vir depois de 'Atendimento': uma work order pode nascer de um case e ligar-se a asset, entitlement e "
                         "service contract. Horários de trabalho usam operating hours, e o acesso aos registros segue 'Acesso a "
                         "registros e hierarquias'.",
@@ -81,6 +81,12 @@ P["sub:servico-de-campo"] = {
         av("implantacao", "Como o modelo se encaixa", "Toda service appointment tem um registro pai, em geral a work order ou um line item. Work "
            "types padronizam duração e skill requirements; assigned resource liga o técnico à visita; service territory members dizem onde cada "
            "técnico trabalha.", E("src:dev-field-service-core-data-model")),
+        av("atencao", "O que vem ligado ao habilitar", "Field Service é ligado em Field Service Settings. Sem a licença complementar, a opção de work "
+           "orders vem ligada por padrão; se a licença foi removida ou expirou, vem desligada. O objeto Work Order não pode ser desligado "
+           "enquanto Field Service está ligado.", E("src:help-field-service-enable", "src:mdapi-fieldservicesettings")),
+        av("implantacao", "Como metadado", "FieldServiceSettings leva a ativação (fieldServiceOrgPref, enableWorkOrders), os status padrão das "
+           "visitas, o compartilhamento com os técnicos atribuídos (doesShareSaWithAr) e opções do app móvel. A página do tipo não informa o "
+           "nome-base do arquivo, e 14 dos 54 campos estão sem descrição.", E("src:mdapi-fieldservicesettings")),
     ],
 }
 P["sub:experiencias-externas"] = {
@@ -89,7 +95,7 @@ P["sub:experiencias-externas"] = {
                            "e oportunidades como parceiro.",
                            "Clientes com Customer Community abrem casos no portal; revendedores com Partner Community registram "
                            "oportunidades.",
-                           E("src:help-experience-cloud-licenses")),
+                           E("src:help-experience-cloud-licenses"), comece=["func:digital-experiences"]),
     "encadeamento": enc("Vem depois de montar o site em 'Experiências web/portais e mobile' e se apoia em 'Licenças e entitlements de "
                         "acesso' e 'Acesso a registros e hierarquias', porque o compartilhamento muda conforme a licença.",
                         E("src:help-experience-cloud-licenses", "src:help-experience-cloud-sharing-sets")),
@@ -106,6 +112,12 @@ P["sub:experiencias-externas"] = {
         av("implantacao", "Criar e trocar usuários", "O usuário externo nasce do contato (Enable Customer User ou Enable Partner User), e a conta "
            "precisa ter dono com papel. Subir de licença remove sharing sets, permission sets e PSLs do usuário; descer exige desabilitar e "
            "reabilitar o contato.", E("src:help-experience-cloud-create-users", "src:help-experience-cloud-license-upgrades")),
+        av("atencao", "Ligar digital experiences não tem volta", "A ativação é feita em Digital Experiences > Settings e não pode ser desfeita. O "
+           "domínio dos sites usa o My Domain da org. Outras nuvens também exigem essa ativação, como Commerce Cloud, Financial Services Cloud "
+           "e Health Cloud.", E("src:help-digital-experiences-enable", "src:help-experience-org-setup")),
+        av("implantacao", "Como metadado", "CommunitiesSettings leva as opções gerais dos sites: ativação (enableNetworksEnabled), Experience "
+           "Workspaces, usuários parceiros (enableEnablePRM), moderação e opções de guest user. Alguns padrões dependem de quando a org foi "
+           "criada.", E("src:mdapi-communitiessettings")),
     ],
 }
 P["sub:capacidades-setoriais"] = {

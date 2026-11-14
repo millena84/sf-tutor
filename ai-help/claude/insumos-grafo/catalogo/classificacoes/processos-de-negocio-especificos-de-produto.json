@@ -34,13 +34,28 @@
     ]
   },
   "encadeamento": {
-    "texto": "Em vendas, o caminho vai de lead a conta, contato e oportunidade, com produtos, cotações, previsões, equipes e territórios. No atendimento, o caso é a base, com Omni-Channel, Knowledge, entitlements e horário comercial. Serviço de campo, receita e comércio, experiências externas e capacidades setoriais ainda não têm funcionalidades catalogadas.",
+    "texto": "Roteiro pelas sete seções do tema. 1) 'Vendas': de lead a conta, contato e oportunidade, com produtos, cotações, contratos, previsões, equipes e territórios. 2) 'Atendimento': o caso, com Omni-Channel, Knowledge, entitlements e horário comercial. 3) 'Serviço de campo': o trabalho feito no local do cliente. 4) 'Receita e comércio': pedidos e os produtos de preço, assinatura e faturamento. 5) 'Experiências externas': sites para clientes e parceiros. 6) 'Capacidades setoriais': o que as nuvens de setor acrescentam. 7) 'Outras áreas': fila de espera do que ainda não tem tema. Só as duas últimas seguem sem funcionalidade cadastrada.",
     "evidencias": [
       {
         "fonte": "src:help-sales-basics"
       },
       {
         "fonte": "src:help-service-basics"
+      },
+      {
+        "fonte": "src:help-field-service-overview"
+      },
+      {
+        "fonte": "src:help-orders-enable"
+      },
+      {
+        "fonte": "src:help-experience-cloud-licenses"
+      },
+      {
+        "fonte": "src:help-industries-data-models"
+      },
+      {
+        "fonte": "src:sdr-metadata-support"
       }
     ]
   },
@@ -61,10 +76,13 @@
     {
       "tipo": "atencao",
       "titulo": "Converter lead é operação própria",
-      "texto": "Mudar o status de um lead pela API não o converte; use convertLead() ou a interface.",
+      "texto": "Mudar o status de um lead pela API não o converte; use convertLead() ou a interface. Em Lead Settings, Require Validation for Converted Leads decide se as regras de validação valem na conversão.",
       "evidencias": [
         {
           "fonte": "src:objref-lead"
+        },
+        {
+          "fonte": "src:help-lead-convert-considerations"
         }
       ]
     },
@@ -80,6 +98,16 @@
     },
     {
       "tipo": "atencao",
+      "titulo": "Territórios: um modelo ativo",
+      "texto": "Só um modelo de territórios fica ativo por vez e, depois de ativo, não volta para Planning.",
+      "evidencias": [
+        {
+          "fonte": "src:help-tm2-activate"
+        }
+      ]
+    },
+    {
+      "tipo": "atencao",
       "titulo": "Omni-Channel Enhanced",
       "texto": "Standard Omni-Channel foi aposentado no Summer '26, com upgrade automático para Enhanced, que não suporta canais standard.",
       "evidencias": [
@@ -89,12 +117,102 @@
       ]
     },
     {
-      "tipo": "atencao",
-      "titulo": "Territórios: um modelo ativo",
-      "texto": "Só um modelo de territórios fica ativo por vez e, depois de ativo, não volta para Planning.",
+      "tipo": "decisao",
+      "titulo": "Field Service: recurso, pacote e app",
+      "texto": "Ligar o Field Service em Field Service Settings libera os recursos da plataforma. O managed package, instalado depois, acrescenta o Classic Dispatch Console, ferramentas de agendamento, objetos customizados e o Guided Setup.",
       "evidencias": [
         {
-          "fonte": "src:help-tm2-activate"
+          "fonte": "src:help-field-service-enable"
+        },
+        {
+          "fonte": "src:help-field-service-setup-basics"
+        }
+      ]
+    },
+    {
+      "tipo": "decisao",
+      "titulo": "Produto de receita: pacote ou nativo",
+      "texto": "Salesforce CPQ é um managed package; Revenue Management (antes Revenue Cloud) é nativo da plataforma, com outro modelo de dados. Trocar de um para o outro muda modelo, processos e governança: não é uma migração de dados comum.",
+      "evidencias": [
+        {
+          "fonte": "src:help-revenue-vs-cpq"
+        },
+        {
+          "fonte": "src:help-revenue-migrate"
+        }
+      ]
+    },
+    {
+      "tipo": "limite",
+      "titulo": "Pedidos têm regras de ativação",
+      "texto": "Um pedido só é ativado se tiver order products e, quando ligado a contrato, se o contrato estiver ativo. Reduction orders só valem para pedidos ativados e não podem ser criadas no Lightning Experience.",
+      "evidencias": [
+        {
+          "fonte": "src:help-orders-activation"
+        },
+        {
+          "fonte": "src:help-orders-reduce"
+        }
+      ]
+    },
+    {
+      "tipo": "atencao",
+      "titulo": "Ligar digital experiences não tem volta",
+      "texto": "A ativação dos sites Experience Cloud não pode ser desfeita, e o domínio dos sites usa o My Domain da org. A licença externa escolhida define o que cada pessoa vê e faz.",
+      "evidencias": [
+        {
+          "fonte": "src:help-digital-experiences-enable"
+        },
+        {
+          "fonte": "src:help-experience-cloud-licenses"
+        }
+      ]
+    },
+    {
+      "tipo": "decisao",
+      "titulo": "Nuvem setorial estende o modelo padrão",
+      "texto": "Os modelos setoriais são extensões aditivas: Account, Contact e outros objetos padrão continuam valendo, e o setor acrescenta objetos e campos. O acesso vem de permission set licenses próprias de cada nuvem.",
+      "evidencias": [
+        {
+          "fonte": "src:help-industries-data-models"
+        },
+        {
+          "fonte": "src:help-health-cloud-psl"
+        }
+      ]
+    },
+    {
+      "tipo": "atencao",
+      "titulo": "'Outras áreas' não é área oficial",
+      "texto": "É um agrupamento provisório deste tutorial para tipos da lista oficial de metadata types que ainda não têm tema próprio. Não corresponde a um produto nem a uma área da documentação da Salesforce.",
+      "evidencias": [
+        {
+          "fonte": "src:sdr-metadata-support"
+        }
+      ]
+    },
+    {
+      "tipo": "implantacao",
+      "titulo": "Opções gerais como metadado",
+      "texto": "As opções gerais de cada produto ficam em tipos Settings: por exemplo LeadConfigSettings, OrderSettings, ContractSettings, FieldServiceSettings e CommunitiesSettings, detalhados neste catálogo. CaseSettings ainda não foi cadastrado.",
+      "evidencias": [
+        {
+          "fonte": "src:mdapi-leadconfigsettings"
+        },
+        {
+          "fonte": "src:mdapi-ordersettings"
+        },
+        {
+          "fonte": "src:mdapi-contractsettings"
+        },
+        {
+          "fonte": "src:mdapi-fieldservicesettings"
+        },
+        {
+          "fonte": "src:mdapi-communitiessettings"
+        },
+        {
+          "fonte": "src:mdapi-casesettings"
         }
       ]
     }

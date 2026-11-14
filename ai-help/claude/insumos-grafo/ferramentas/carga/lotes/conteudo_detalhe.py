@@ -543,3 +543,48 @@ D["sub:dominios-e-urls"] = {
            "Domain aparecem como campos somente leitura: a troca do nome não é feita por esse tipo.", E("src:mdapi-mydomainsettings")),
     ],
 }
+
+
+# ====================================================================== Processos de negócio específicos de produto
+# Só fontes: o conteúdo destes temas internos é editado no lugar (conteudo_sub.py e conteudo_pendentes4.py).
+_EXT = "fontes/extracoes/temas-detalhe-processos.txt"
+
+_f("src:help-lead-settings", "Define Default Settings for Lead Creation (Salesforce Help)", _H + "sales.customize_leadsettings.htm&language=en_US&type=5",
+   "Caminho no Setup e opções padrão de leads e de conversão.", **AJ)
+_f("src:help-lead-convert-considerations", "Considerations for Converting Leads (Salesforce Help)", _H + "sales.leads_notes.htm&language=en_US&type=5",
+   "Efeitos da conversão de leads sobre campos, validação e visibilidade.", **AJ)
+_f("src:help-contracts-setup", "Set Up Contracts (Salesforce Help)", _H + "sf.customize_contract.htm&language=en_US&type=5",
+   "Caminho no Setup e opções de contratos.", **AJ)
+_f("src:help-contracts-things", "Things to Know About Contracts (Salesforce Help)",
+   "https://help.salesforce.com/apex/HTViewHelpDoc?id=sf.contract_supplemental.htm&language=en_us", "Datas e prazo de um contrato.", **AJ)
+_f("src:help-product-schedules", "Product Schedules (Salesforce Help)", _H + "sales.products_schedules_def.htm&language=en_US&type=5",
+   "O que são quantity schedules, revenue schedules e default schedules.", **AJ)
+_f("src:help-product-schedules-enable", "Enable Product Schedules in Salesforce Classic (Salesforce Help)", _H + "sales.enabling_schedules.htm&language=en_US&type=5",
+   "Efeito de ligar e desligar schedules de produto.", **AJ)
+_f("src:help-product-schedules-considerations", "Considerations for Using Product Schedules (Salesforce Help)",
+   _H + "sales.products_considerations_for_using_schedules.htm&language=en_US&type=5", "Limites de automação e de Apex com schedules.", **AJ)
+_f("src:help-orders-enable", "Enable Orders (Salesforce Help)", _H + "sf.customize_order_enable.htm&language=en_US&type=5",
+   "Caminho no Setup para ligar pedidos e suas variações.", **AJ)
+_f("src:help-orders-manage", "Manage Your Orders (Salesforce Help)", _H + "sales.order_manage_your_orders.htm&language=en_US",
+   "Order products, reduction orders e histórico de pedidos.", **AJ)
+_f("src:help-orders-reduce", "Reduce Orders (Salesforce Help)", _H + "order_reduce.htm&language=en_US&type=5", "Limites das reduction orders.", **AJ)
+_f("src:help-orders-activation", "Considerations for Activation Limitations (Salesforce Help)", _H + "order_activate.htm&language=en_US&type=5",
+   "Regras de ativação de pedidos e relação com contratos.", **AJ)
+_f("src:help-orders-high-scale", "Enable High Scale Orders for B2B Stores (Salesforce Help)", _H + "sf.comm_high_scale_order_enable.htm&language=en_US&type=5",
+   "Enhanced Commerce Orders em lojas B2B.", **AJ)
+_f("src:help-revenue-vs-cpq", "Key Differences Between Revenue Management and Salesforce CPQ (Salesforce Help)",
+   _H + "ind.rev_migration_revenue_differences_from_cpq.htm&language=en_US&type=5", "Diferenças de arquitetura e de modelo entre Revenue Management e CPQ.", **AJ)
+_f("src:help-billing-overview", "Salesforce Billing Overview (Salesforce Help)", _H + "sales.blng_overview.htm&language=en_US&type=5",
+   "Como o Salesforce Billing se apoia no Salesforce CPQ.", **AJ)
+_f("src:help-revenue-migrate", "Migrate to Revenue Cloud (Salesforce Help)", _H + "ind.rev_data_migration.htm&language=en_US&type=5",
+   "O que muda ao sair de CPQ e Billing para o Revenue Cloud.", **AJ)
+_f("src:help-revenue-get-started", "Get Started with Revenue Management (Salesforce Help)",
+   _H + "sf.revenue_lifecycle_management_get_started.htm&language=en_US&type=5", "Nome atual do produto e como saber qual produto de receita a org usa.", **AJ)
+_f("src:help-field-service-enable", "Enable Field Service (Salesforce Help)", _H + "fs_enable.htm&language=en_US&type=5",
+   "Caminho no Setup e efeitos de ligar o Field Service.", **AJ)
+_f("src:help-field-service-setup-basics", "Set Up Field Service Basics (Salesforce Help)", _H + "service.fs_set_up.htm&language=en_US&type=5",
+   "Ordem de configuração do Field Service e o que o managed package acrescenta.", **AJ)
+_f("src:help-digital-experiences-enable", "Enable Digital Experiences (Salesforce Help)", _H + "experience.networks_enable.htm&language=en_US&type=5",
+   "Caminho no Setup, domínio dos sites e irreversibilidade da ativação.", **AJ)
+_f("src:help-experience-org-setup", "Set Up and Configure Your Org for Experience Cloud Sites (Salesforce Help)",
+   _H + "experience.networks_setup_maintain_communities.htm&language=en_US&type=5", "Preparação da org antes do primeiro site.", **AJ)

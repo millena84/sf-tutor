@@ -7,7 +7,7 @@ Gerado por `ferramentas/sftutor.py cobertura`. Cobertura estrutural, explicativa
 
 - Universo v68 (METADATA_SUPPORT.md): **993** tipos.
 - Classificados como incluídos no recorte Core: 12; pendentes de classificação: 981.
-- Cadastrados: **84** de 993. Estruturalmente completos (contra a página oficial): 72. Completos nas três dimensões: 0.
+- Cadastrados: **90** de 993. Estruturalmente completos (contra a página oficial): 78. Completos nas três dimensões: 0.
 - Porcentagem do recorte Core: não calculada, porque o denominador do recorte ainda não está definido (classificação item a item pendente).
 
 | Tipo | Estrutural | Esperadas | Presentes | Explicadas | Estruturas | Mapeamento | Completo |
@@ -18,9 +18,11 @@ Gerado por `ferramentas/sftutor.py cobertura`. Cobertura estrutural, explicativa
 | mdt:BusinessHoursSettings | completa | 3 | 3 | 3 | 2 | parcial | não |
 | mdt:CampaignSettings | completa | 11 | 11 | 11 | 0 | parcial | não |
 | mdt:Certificate | completa | 8 | 8 | 8 | 0 | parcial | não |
+| mdt:CommunitiesSettings | completa | 26 | 26 | 23 | 0 | parcial | não |
 | mdt:CompanySettings | completa | 3 | 3 | 3 | 1 | parcial | não |
 | mdt:ConnectedApp | completa | 21 | 21 | 21 | 7 | parcial | não |
 | mdt:ConnectedAppSettings | completa | 3 | 3 | 3 | 0 | parcial | não |
+| mdt:ContractSettings | completa | 7 | 7 | 3 | 0 | parcial | não |
 | mdt:CorsWhitelistOrigin | completa | 2 | 2 | 2 | 0 | parcial | não |
 | mdt:CspTrustedSite | completa | 14 | 14 | 14 | 0 | parcial | não |
 | mdt:CurrencySettings | completa | 8 | 8 | 8 | 1 | parcial | não |
@@ -51,6 +53,7 @@ Gerado por `ferramentas/sftutor.py cobertura`. Cobertura estrutural, explicativa
 | mdt:ExtlClntAppPushConfigurablePolicies | completa | 4 | 4 | 4 | 0 | parcial | não |
 | mdt:ExtlClntAppPushSettings | completa | 7 | 7 | 7 | 2 | parcial | não |
 | mdt:ExtlClntAppSamlConfigurablePolicies | completa | 19 | 19 | 19 | 1 | parcial | não |
+| mdt:FieldServiceSettings | completa | 55 | 55 | 41 | 1 | parcial | não |
 | mdt:FlexiPage | parcial | 12 | 12 | 12 | 0 | parcial | não |
 | mdt:Flow | parcial | 50 | 50 | 13 | 0 | parcial | não |
 | mdt:ForecastingSettings | parcial | 10 | 10 | 10 | 0 | parcial | não |
@@ -58,6 +61,7 @@ Gerado por `ferramentas/sftutor.py cobertura`. Cobertura estrutural, explicativa
 | mdt:InboundNetworkConnection | completa | 7 | 7 | 7 | 1 | parcial | não |
 | mdt:KnowledgeSettings | parcial | 23 | 23 | 23 | 0 | parcial | não |
 | mdt:LanguageSettings | completa | 13 | 13 | 13 | 0 | parcial | não |
+| mdt:LeadConfigSettings | completa | 11 | 11 | 11 | 0 | parcial | não |
 | mdt:LeadConvertSettings | completa | 3 | 3 | 3 | 1 | parcial | não |
 | mdt:ManagedEventSubscription | completa | 7 | 7 | 7 | 0 | parcial | não |
 | mdt:MilestoneType | completa | 3 | 3 | 3 | 0 | parcial | não |
@@ -68,6 +72,7 @@ Gerado por `ferramentas/sftutor.py cobertura`. Cobertura estrutural, explicativa
 | mdt:OauthTokenExchangeHandler | completa | 15 | 15 | 15 | 1 | parcial | não |
 | mdt:OmniChannelSettings | completa | 6 | 6 | 6 | 0 | parcial | não |
 | mdt:OpportunitySettings | completa | 23 | 23 | 23 | 1 | parcial | não |
+| mdt:OrderSettings | completa | 9 | 9 | 9 | 0 | parcial | não |
 | mdt:OutboundNetworkConnection | completa | 7 | 7 | 7 | 1 | parcial | não |
 | mdt:PathAssistant | completa | 7 | 7 | 7 | 1 | parcial | não |
 | mdt:PermissionSet | completa | 24 | 24 | 24 | 18 | parcial | não |
@@ -77,6 +82,7 @@ Gerado por `ferramentas/sftutor.py cobertura`. Cobertura estrutural, explicativa
 | mdt:PlatformEventSettings | completa | 1 | 1 | 1 | 0 | parcial | não |
 | mdt:PlatformEventSubscriberConfig | completa | 8 | 8 | 8 | 0 | parcial | não |
 | mdt:PresenceUserConfig | parcial | n/d | 18 | 18 | 1 | parcial | não |
+| mdt:ProductSettings | completa | 5 | 5 | 5 | 0 | parcial | não |
 | mdt:Profile | parcial | 27 | 27 | 27 | 16 | parcial | não |
 | mdt:PublicKeyCertificate | completa | 5 | 5 | 5 | 0 | parcial | não |
 | mdt:PublicKeyCertificateSet | completa | 7 | 7 | 7 | 1 | parcial | não |
@@ -99,8 +105,8 @@ Gerado por `ferramentas/sftutor.py cobertura`. Cobertura estrutural, explicativa
 
 ## Propriedades XML
 
-- Em metadata types: 1024 listadas, 984 explicadas.
-- Em estruturas auxiliares: 377 listadas, 377 explicadas.
+- Em metadata types: 1137 listadas, 1076 explicadas.
+- Em estruturas auxiliares: 379 listadas, 379 explicadas.
 - Universo total: Sem WSDL não há denominador confiável do total de propriedades do recorte.
 
 ## Objetos consultáveis via API
@@ -186,5 +192,5 @@ Gerado por `ferramentas/sftutor.py cobertura`. Cobertura estrutural, explicativa
 
 ## Taxonomia e funcionalidades
 
-- Classificações: 14; subclassificações: 92 (com funcionalidades: 40).
-- Funcionalidades cadastradas: 67 (universo de funcionalidades não definido).
+- Classificações: 14; subclassificações: 92 (com funcionalidades: 44).
+- Funcionalidades cadastradas: 71 (universo de funcionalidades não definido).

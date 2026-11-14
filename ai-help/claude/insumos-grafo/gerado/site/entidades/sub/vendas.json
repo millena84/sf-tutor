@@ -42,6 +42,70 @@
       "texto": "Cotações não podem ser desabilitadas se houver referências em customizações ou cotações sincronizadas. Só um modelo de territórios fica ativo por vez e não volta para Planning.",
       "tipo": "atencao",
       "titulo": "Cotações e territórios"
+    },
+    {
+      "evidencias": [
+        {
+          "fonte": "src:help-lead-convert-considerations"
+        },
+        {
+          "fonte": "src:help-lead-settings"
+        },
+        {
+          "fonte": "src:mdapi-leadconfigsettings"
+        }
+      ],
+      "texto": "Em Lead Settings, a opção Require Validation for Converted Leads decide se as regras valem na conversão; desmarcada, lookup filters são ignorados. Preserve Lead Status evita que o status mude para o padrão do novo dono. No metadado, são shouldLeadConvertRequireValidation e doesPreserveLeadStatus, os dois com padrão true.",
+      "tipo": "atencao",
+      "titulo": "Validação na conversão de leads"
+    },
+    {
+      "evidencias": [
+        {
+          "fonte": "src:help-product-schedules"
+        },
+        {
+          "fonte": "src:help-product-schedules-enable"
+        },
+        {
+          "fonte": "src:help-product-schedules-considerations"
+        }
+      ],
+      "texto": "Quantity schedule diz quando o produto é entregue; revenue schedule, quando é pago. Desligar um tipo apaga as informações desse tipo nos produtos ativos. Se o Apex referencia OpportunityLineItemSchedule, só um dos dois tipos pode ser desligado.",
+      "tipo": "atencao",
+      "titulo": "Desligar schedules apaga dados"
+    },
+    {
+      "evidencias": [
+        {
+          "fonte": "src:help-contracts-things"
+        },
+        {
+          "fonte": "src:help-contracts-setup"
+        }
+      ],
+      "texto": "O contrato tem data de início, prazo em meses e data final. Com Auto-calculate Contract End Date, a data final sai do início e do prazo e deixa de aparecer na edição do contrato.",
+      "tipo": "decisao",
+      "titulo": "Data final do contrato"
+    },
+    {
+      "evidencias": [
+        {
+          "fonte": "src:mdapi-leadconfigsettings"
+        },
+        {
+          "fonte": "src:mdapi-productsettings"
+        },
+        {
+          "fonte": "src:mdapi-contractsettings"
+        },
+        {
+          "fonte": "src:mdapi-opportunitysettings"
+        }
+      ],
+      "texto": "As opções gerais de vendas ficam em tipos Settings, um por assunto: LeadConfigSettings, OpportunitySettings, QuoteSettings, ProductSettings, ContractSettings, ForecastingSettings, Territory2Settings, AccountSettings e CampaignSettings.",
+      "tipo": "implantacao",
+      "titulo": "Como metadado"
     }
   ],
   "classificacao": "cls:processos-de-negocio-especificos-de-produto",
@@ -297,6 +361,14 @@
         "principal": true
       },
       {
+        "exemplo": "Um contrato de 12 meses começa em 1º de março; com o cálculo automático ligado, a data final sai da data de início e do prazo.",
+        "id": "func:contratos",
+        "pre_requisitos": [
+          "Customize Application (para mudar as configurações de contratos)."
+        ],
+        "principal": true
+      },
+      {
         "alertas": [
           "Não é possível desabilitar cotações se houver referências em customizações ou cotações sincronizadas."
         ],
@@ -335,6 +407,12 @@
         "exemplo": "Uma proposta de renovação para um cliente, em negociação, com fechamento previsto para o fim do trimestre.",
         "id": "func:oportunidades",
         "principal": true
+      },
+      {
+        "exemplo": "Depois de fechar a oportunidade, o time registra um pedido com três produtos; mais tarde, uma devolução entra como reduction order.",
+        "id": "func:pedidos",
+        "principal": false,
+        "tema_principal": "sub:receita-e-comercio"
       },
       {
         "exemplo": "A gerente revisa a previsão do trimestre e ajusta o valor de um vendedor.",
@@ -402,6 +480,15 @@
       {
         "estrutura": "completa",
         "funcionalidades": [
+          "func:contratos"
+        ],
+        "id": "mdt:ContractSettings",
+        "nota_suporte": null,
+        "suporte_cli": "suportado"
+      },
+      {
+        "estrutura": "completa",
+        "funcionalidades": [
           "func:regras-de-atribuicao"
         ],
         "id": "mdt:EscalationRules",
@@ -422,6 +509,15 @@
         "funcionalidades": [
           "func:leads"
         ],
+        "id": "mdt:LeadConfigSettings",
+        "nota_suporte": null,
+        "suporte_cli": "suportado"
+      },
+      {
+        "estrutura": "completa",
+        "funcionalidades": [
+          "func:leads"
+        ],
         "id": "mdt:LeadConvertSettings",
         "nota_suporte": null,
         "suporte_cli": "suportado"
@@ -433,6 +529,24 @@
           "func:oportunidades"
         ],
         "id": "mdt:OpportunitySettings",
+        "nota_suporte": null,
+        "suporte_cli": "suportado"
+      },
+      {
+        "estrutura": "completa",
+        "funcionalidades": [
+          "func:pedidos"
+        ],
+        "id": "mdt:OrderSettings",
+        "nota_suporte": null,
+        "suporte_cli": "suportado"
+      },
+      {
+        "estrutura": "completa",
+        "funcionalidades": [
+          "func:produtos-e-catalogos-de-preco"
+        ],
+        "id": "mdt:ProductSettings",
         "nota_suporte": null,
         "suporte_cli": "suportado"
       },
@@ -912,7 +1026,7 @@
     ],
     "temas_sem_funcionalidade": []
   },
-  "descricao": "Capacidades próprias de vendas.",
+  "descricao": "O processo de vendas: leads, contas, contatos e oportunidades, com produtos e catálogos de preço, cotações, contratos, previsões, equipes e territórios.",
   "encadeamento": {
     "evidencias": [
       {
@@ -920,9 +1034,12 @@
       },
       {
         "fonte": "src:objref-lead"
+      },
+      {
+        "fonte": "src:help-contracts-things"
       }
     ],
-    "texto": "Contas e contatos são a base; o lead vira conta, contato e oportunidade; produtos e cotações compõem o valor; previsões, equipes e territórios organizam a operação."
+    "texto": "Contas e contatos são a base; o lead vira conta, contato e oportunidade; produtos e cotações compõem o valor; contratos registram o acordo fechado; previsões, equipes e territórios organizam a operação. Pedidos ficam em 'Receita e comércio'."
   },
   "escopo": "Entram as capacidades próprias do processo de vendas.",
   "estado": "desconhecido",
@@ -931,10 +1048,12 @@
     "func:campanhas",
     "func:contas",
     "func:contatos",
+    "func:contratos",
     "func:cotacoes",
     "func:equipes-de-conta-e-oportunidade",
     "func:leads",
     "func:oportunidades",
+    "func:pedidos",
     "func:previsoes-colaborativas",
     "func:produtos-e-catalogos-de-preco",
     "func:regras-de-atribuicao",
@@ -943,7 +1062,7 @@
   "id": "sub:vendas",
   "natureza": "curadoria_didatica",
   "nome": "Vendas",
-  "nota_estado": "Agrupamento didático. Leads e oportunidades são citados pela Ajuda como recursos de Agentforce Sales (src:help-sales-features); a fronteira completa da subclassificação ainda não foi cruzada.",
+  "nota_estado": "Tema criado pelo projeto (00-especificacao-grafo.md), não é nomenclatura oficial da Salesforce. Cruzado em 2026-11-10 com áreas da documentação oficial listadas nas referências; a correspondência é parcial e o recorte continua sendo do projeto.",
   "para_iniciantes": {
     "evidencias": [
       {
@@ -963,5 +1082,22 @@
       "func:oportunidades"
     ]
   },
+  "referencias_oficiais": [
+    {
+      "fonte": "src:help-sales-basics",
+      "nota": "Mais ampla que o tema: guia de base de vendas, que inclui recursos de plataforma.",
+      "secao": "Sales Basics"
+    },
+    {
+      "fonte": "src:help-lead-settings",
+      "nota": "Cobre parte do tema: configurações padrão de leads.",
+      "secao": "Define Default Settings for Lead Creation"
+    },
+    {
+      "fonte": "src:help-contracts-setup",
+      "nota": "Cobre parte do tema: contratos.",
+      "secao": "Set Up Contracts"
+    }
+  ],
   "sigla": "NEG-01"
 }
