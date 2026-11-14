@@ -613,14 +613,27 @@ S["sub:vendas"] = {
                            "cotações, previsões, equipes e territórios.",
                            "Uma pessoa preenche o formulário do site; o lead é qualificado e, ao ser convertido, nascem conta, contato e oportunidade.",
                            E("src:help-sales-basics", "src:help-sales-features", "src:objref-lead"), comece=["func:leads", "func:oportunidades"]),
-    "encadeamento": enc("Contas e contatos são a base; o lead vira conta, contato e oportunidade; produtos e cotações compõem o valor; previsões, "
-                        "equipes e territórios organizam a operação.", E("src:help-sales-basics", "src:objref-lead")),
+    "encadeamento": enc("Contas e contatos são a base; o lead vira conta, contato e oportunidade; produtos e cotações compõem o valor; contratos "
+                        "registram o acordo fechado; previsões, equipes e territórios organizam a operação. Pedidos ficam em 'Receita e comércio'.",
+                        E("src:help-sales-basics", "src:objref-lead", "src:help-contracts-things")),
     "avancado": [
         av("atencao", "Converter lead é operação própria", "Mudar o status de um lead pela API não o converte; use convertLead() ou a interface.", E("src:objref-lead")),
         av("atencao", "IsClosed e IsWon", "Em oportunidades, IsClosed e IsWon não são gravados diretamente: refletem a etapa.", E("src:objref-opportunity")),
         av("limite", "Licença Salesforce Platform", "Usuários com licença Salesforce Platform não têm direito a leads, oportunidades e previsões.", E("src:help-user-licenses")),
         av("atencao", "Cotações e territórios", "Cotações não podem ser desabilitadas se houver referências em customizações ou cotações sincronizadas. Só um modelo "
            "de territórios fica ativo por vez e não volta para Planning.", E("src:help-quotes-setup", "src:help-tm2-activate")),
+        av("atencao", "Validação na conversão de leads", "Em Lead Settings, a opção Require Validation for Converted Leads decide se as regras valem na "
+           "conversão; desmarcada, lookup filters são ignorados. Preserve Lead Status evita que o status mude para o padrão do novo dono. No "
+           "metadado, são shouldLeadConvertRequireValidation e doesPreserveLeadStatus, os dois com padrão true.",
+           E("src:help-lead-convert-considerations", "src:help-lead-settings", "src:mdapi-leadconfigsettings")),
+        av("atencao", "Desligar schedules apaga dados", "Quantity schedule diz quando o produto é entregue; revenue schedule, quando é pago. Desligar "
+           "um tipo apaga as informações desse tipo nos produtos ativos. Se o Apex referencia OpportunityLineItemSchedule, só um dos dois tipos "
+           "pode ser desligado.", E("src:help-product-schedules", "src:help-product-schedules-enable", "src:help-product-schedules-considerations")),
+        av("decisao", "Data final do contrato", "O contrato tem data de início, prazo em meses e data final. Com Auto-calculate Contract End Date, a "
+           "data final sai do início e do prazo e deixa de aparecer na edição do contrato.", E("src:help-contracts-things", "src:help-contracts-setup")),
+        av("implantacao", "Como metadado", "As opções gerais de vendas ficam em tipos Settings, um por assunto: LeadConfigSettings, OpportunitySettings, "
+           "QuoteSettings, ProductSettings, ContractSettings, ForecastingSettings, Territory2Settings, AccountSettings e CampaignSettings.",
+           E("src:mdapi-leadconfigsettings", "src:mdapi-productsettings", "src:mdapi-contractsettings", "src:mdapi-opportunitysettings")),
     ],
 }
 S["sub:atendimento"] = {
@@ -635,13 +648,39 @@ S["sub:atendimento"] = {
         av("atencao", "Nomes na configuração simplificada", "Na configuração simplificada, Entitlement Management se chama SLA Management e Entitlement Processes se chamam SLA Policies, sem versionamento.",
            E("src:help-ent-sla")),
         av("atencao", "IsClosed do caso", "IsClosed segue o Status do caso; não é definido diretamente.", E("src:objref-case")),
+        av("implantacao", "Como metadado", "OmniChannelSettings, EntitlementSettings e KnowledgeSettings estão detalhados neste catálogo. CaseSettings, "
+           "que guarda o dono padrão do caso e as configurações de Email-to-Case e Web-to-Case, consta do inventário mas ainda não foi "
+           "cadastrado: a leitura da página não devolveu os nomes dos campos.",
+           E("src:mdapi-omnichannelsettings", "src:mdapi-entitlementsettings", "src:mdapi-knowledgesettings", "src:mdapi-casesettings")),
     ],
 }
 S["sub:receita-e-comercio"] = {
-    "para_iniciantes": ini("Reúne capacidades de receita, cotação e comércio que vão além das cotações padrão, como Salesforce CPQ, Salesforce Billing, "
-                           "Subscription Management e Agentforce Revenue Management.",
-                           "Uma empresa usa o Salesforce CPQ para criar, gerenciar e enviar propostas.", E("src:help-produtos-sales")),
-    "encadeamento": enc("As cotações padrão, ligadas às oportunidades, ficam no tema interno Vendas.", E("src:help-quotes-setup")),
+    "para_iniciantes": ini("Reúne o que acontece depois que a venda é acertada: pedidos, preços mais elaborados, assinaturas e faturamento. Na "
+                           "plataforma padrão, isso começa nos pedidos (orders). Produtos próprios vão além: Salesforce CPQ, Salesforce Billing, "
+                           "Subscription Management e Revenue Management (antes Revenue Cloud).",
+                           "Depois de fechar a oportunidade, o time registra um pedido com os produtos vendidos; uma devolução parcial entra "
+                           "como reduction order.",
+                           E("src:help-produtos-sales", "src:help-orders-enable", "src:help-orders-manage", "src:help-revenue-get-started"),
+                           comece=["func:pedidos"]),
+    "encadeamento": enc("Vem depois de 'Vendas': as cotações padrão, ligadas às oportunidades, e os contratos ficam lá. O pedido pode ser ativado "
+                        "para um contrato ativo. Os produtos de receita assumem a partir da cotação ou do pedido, cada um com licença e modelo "
+                        "próprios.", E("src:help-quotes-setup", "src:help-orders-activation", "src:help-billing-overview")),
+    "avancado": [
+        av("decisao", "Pacote ou plataforma nativa", "Salesforce CPQ é um managed package; Revenue Management roda de forma nativa na plataforma, "
+           "com outro modelo de dados e outra forma de configurar. Salesforce Billing é um pacote complementar que recebe o pedido do CPQ para "
+           "faturamento, pagamento e reconhecimento de receita.", E("src:help-revenue-vs-cpq", "src:help-billing-overview")),
+        av("atencao", "Trocar de produto não é migração de dados comum", "Sair de Salesforce CPQ e Salesforce Billing para o Revenue Cloud muda modelo de "
+           "dados, processos e governança. A Ajuda tem um tópico para descobrir qual produto de receita a org usa; comece por ele.",
+           E("src:help-revenue-migrate", "src:help-revenue-get-started")),
+        av("limite", "Ativação de pedidos", "Um pedido só é ativado se tiver order products e, quando ligado a contrato, se o contrato estiver ativo. "
+           "Depois de ativar, dá para alterar os order products, mas não incluir nem remover.", E("src:help-orders-activation")),
+        av("limite", "Reduction orders", "Registram redução, devolução ou desativação de produtos de um pedido. Só pedidos ativados podem ser "
+           "reduzidos, cada reduction order vale para um pedido, e no Lightning Experience não dá para criá-las.",
+           E("src:help-orders-manage", "src:help-orders-reduce")),
+        av("implantacao", "Como metadado", "OrderSettings liga pedidos (enableOrders, obrigatório) e as variações: reduction orders, quantidade zero "
+           "ou negativa e pedidos sem price book. enableEnhancedCommerceOrders só existe com a licença Salesforce Order Management e é usado por "
+           "lojas B2B para pedidos em alta escala.", E("src:mdapi-ordersettings", "src:help-orders-high-scale")),
+    ],
 }
 
 CONTEUDO_SUB = S

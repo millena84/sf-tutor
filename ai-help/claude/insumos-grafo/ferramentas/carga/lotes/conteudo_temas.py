@@ -66,10 +66,11 @@ CONTEUDO = {
                       "registro, uma Lightning page organiza o que aparece, montada com componentes no Lightning App Builder. Ações "
                       "rápidas são botões que abrem um formulário curto ou executam algo no contexto do registro, e o Path mostra as "
                       "etapas de um processo a partir de um campo picklist. Apps de console colocam vários registros em abas e subabas "
-                      "ao mesmo tempo. Sites, portais e mobile levam a experiência para fora do app interno; esse tema interno ainda não "
-                      "tem funcionalidades catalogadas."),
+                      "ao mesmo tempo. Sites, portais e mobile levam a experiência para fora do app interno; para os sites, o ponto de partida é "
+                      "ligar digital experiences."),
             "evidencias": [ev("src:help-custom-tabs"), ev("src:help-lightning-pages"), ev("src:help-app-builder"),
-                           ev("src:help-quick-actions"), ev("src:help-path-create"), ev("src:help-console-intro")],
+                           ev("src:help-quick-actions"), ev("src:help-path-create"), ev("src:help-console-intro"),
+                           ev("src:help-experience-org-setup")],
         },
         "avancado": [
             {"tipo": "decisao", "titulo": "Qual ferramenta usar para um formulário",

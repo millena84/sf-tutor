@@ -48,18 +48,60 @@
       "texto": "Toda service appointment tem um registro pai, em geral a work order ou um line item. Work types padronizam duração e skill requirements; assigned resource liga o técnico à visita; service territory members dizem onde cada técnico trabalha.",
       "tipo": "implantacao",
       "titulo": "Como o modelo se encaixa"
+    },
+    {
+      "evidencias": [
+        {
+          "fonte": "src:help-field-service-enable"
+        },
+        {
+          "fonte": "src:mdapi-fieldservicesettings"
+        }
+      ],
+      "texto": "Field Service é ligado em Field Service Settings. Sem a licença complementar, a opção de work orders vem ligada por padrão; se a licença foi removida ou expirou, vem desligada. O objeto Work Order não pode ser desligado enquanto Field Service está ligado.",
+      "tipo": "atencao",
+      "titulo": "O que vem ligado ao habilitar"
+    },
+    {
+      "evidencias": [
+        {
+          "fonte": "src:mdapi-fieldservicesettings"
+        }
+      ],
+      "texto": "FieldServiceSettings leva a ativação (fieldServiceOrgPref, enableWorkOrders), os status padrão das visitas, o compartilhamento com os técnicos atribuídos (doesShareSaWithAr) e opções do app móvel. A página do tipo não informa o nome-base do arquivo, e 14 dos 54 campos estão sem descrição.",
+      "tipo": "implantacao",
+      "titulo": "Como metadado"
     }
   ],
   "classificacao": "cls:processos-de-negocio-especificos-de-produto",
   "derivado": {
     "dependencias": [],
-    "funcionalidades": [],
-    "metadata_types": [],
+    "funcionalidades": [
+      {
+        "exemplo": "Um cliente pede conserto do ar-condicionado; nasce uma work order, que gera uma visita para quinta à tarde com o técnico da região.",
+        "id": "func:field-service",
+        "pre_requisitos": [
+          "Customize Application (para ligar o Field Service)."
+        ],
+        "principal": true
+      }
+    ],
+    "metadata_types": [
+      {
+        "estrutura": "completa",
+        "funcionalidades": [
+          "func:field-service"
+        ],
+        "id": "mdt:FieldServiceSettings",
+        "nota_suporte": null,
+        "suporte_cli": "suportado"
+      }
+    ],
     "nota": "Calculado pelo gerador a partir do catálogo; não é cadastro.",
     "objetos_api": [],
     "temas_sem_funcionalidade": []
   },
-  "descricao": "Capacidades de serviço de campo.",
+  "descricao": "Field Service: o trabalho feito no local do cliente, com work orders, visitas agendadas (service appointments), técnicos (service resources) e territórios de serviço.",
   "encadeamento": {
     "evidencias": [
       {
@@ -74,11 +116,13 @@
   "escopo": "Entram as capacidades próprias de serviço de campo.",
   "estado": "desconhecido",
   "fora_do_escopo": "O atendimento por casos fica em \"Atendimento\".",
-  "funcionalidades": [],
+  "funcionalidades": [
+    "func:field-service"
+  ],
   "id": "sub:servico-de-campo",
   "natureza": "curadoria_didatica",
   "nome": "Serviço de campo",
-  "nota_estado": "Agrupamento proposto na especificação; fronteira ainda não cruzada com a documentação oficial.",
+  "nota_estado": "Tema criado pelo projeto (00-especificacao-grafo.md), não é nomenclatura oficial da Salesforce. Cruzado em 2026-11-10 com áreas da documentação oficial listadas nas referências; a correspondência é parcial e o recorte continua sendo do projeto.",
   "para_iniciantes": {
     "evidencias": [
       {
@@ -89,7 +133,22 @@
       }
     ],
     "exemplo": "Um cliente pede conserto do ar-condicionado; nasce uma work order, que gera uma service appointment para quinta à tarde, atribuída ao técnico da região.",
-    "explicacao": "Field Service (hoje Agentforce Field Service and Operations) organiza o trabalho feito na casa ou no local do cliente: o que precisa ser feito (work order), a visita marcada (service appointment), quem vai (service resource) e onde essa pessoa atua (service territory)."
+    "explicacao": "Field Service (hoje Agentforce Field Service and Operations) organiza o trabalho feito na casa ou no local do cliente: o que precisa ser feito (work order), a visita marcada (service appointment), quem vai (service resource) e onde essa pessoa atua (service territory).",
+    "por_onde_comecar": [
+      "func:field-service"
+    ]
   },
+  "referencias_oficiais": [
+    {
+      "fonte": "src:help-field-service-overview",
+      "nota": "Cobre o tema: visão geral do Field Service.",
+      "secao": "Agentforce Field Service and Operations"
+    },
+    {
+      "fonte": "src:help-field-service-enable",
+      "nota": "Cobre parte do tema: ativação.",
+      "secao": "Enable Field Service"
+    }
+  ],
   "sigla": "NEG-03"
 }

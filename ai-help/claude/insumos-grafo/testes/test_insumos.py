@@ -365,7 +365,7 @@ class TestTemas(BaseTemp):
         d = e["derivado"]
         self.assertIn("mdt:FlexiPage", [m["id"] for m in d["metadata_types"]])
         self.assertTrue(all(m["suporte_cli"] for m in d["metadata_types"]))
-        self.assertIn("sub:experiencias-web-portais-e-mobile", d["temas_sem_funcionalidade"])
+        self.assertIn("sub:acessibilidade-e-personalizacao", d["temas_sem_funcionalidade"])
 
     def test_classificacoes_com_referencia_oficial(self):
         for p in glob.glob(os.path.join(BASE, "catalogo", "classificacoes", "*.json")):

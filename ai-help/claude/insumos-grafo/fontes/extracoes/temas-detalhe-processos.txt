@@ -1,0 +1,92 @@
+Issue #34, item 3 (detalhamento dos temas principais): Processos de negócio específicos de produto. Leitura pelos resultados
+de busca restritos a help.salesforce.com e developer.salesforce.com, em 2026-11-14 (método leitura_resultado_busca: páginas
+não abertas por inteiro). Resumo em português; nomes de recursos, permissões e telas no original.
+
+-- Vendas
+[src:help-lead-settings] Define Default Settings for Lead Creation (https://help.salesforce.com/s/articleView?id=sales.customize_leadsettings.htm&language=en_US&type=5)
+  Setup: Quick Find "Lead Settings" > Lead Settings > Edit. Define-se o dono padrão do lead (com opção Notify Default Lead
+  Owner) e as opções de conversão. Quem converte o lead vira o novo dono; Preserve Lead Status evita que o Lead Status mude
+  para o padrão do novo dono. Há a opção Relate Emails to Contacts Upon Lead Conversion. Permissão Customize Application.
+[src:help-lead-convert-considerations] Considerations for Converting Leads (https://help.salesforce.com/s/articleView?id=sales.leads_notes.htm&language=en_US&type=5)
+  Campos customizados do lead podem preencher campos customizados de conta, contato e oportunidade, se mapeados. Leads
+  convertidos só são vistos por quem tem a permissão View and Edit Converted Leads, mas aparecem em relatórios de leads. Se
+  Require Validation for Converted Leads estiver desmarcado em Lead Settings, lookup filters são ignorados na conversão.
+  Triggers disparam durante a conversão.
+[src:help-contracts-setup] Set Up Contracts (https://help.salesforce.com/s/articleView?id=sf.customize_contract.htm&language=en_US&type=5)
+  Setup: Quick Find "Contract Settings" > Contract Settings. Opções: Send Contract Expiration Notice Emails to Account and
+  Contract Owners; Auto-calculate Contract End Date (com o cálculo automático, a data final não aparece na página de edição do
+  contrato). Contratos: Performance e Developer; Professional, Enterprise e Unlimited com Sales. Permissão Customize
+  Application.
+[src:help-contracts-things] Things to Know About Contracts (https://help.salesforce.com/apex/HTViewHelpDoc?id=sf.contract_supplemental.htm&language=en_us)
+  Um contrato tem data de início (obrigatória), prazo em meses (obrigatório) e data final. Alguns admins configuram o cálculo
+  da data final a partir da data de início e do prazo; nesse caso ela não aparece na edição.
+[src:help-product-schedules] Product Schedules (https://help.salesforce.com/s/articleView?id=sales.products_schedules_def.htm&language=en_US&type=5)
+  Schedules definem ciclos de pagamento e de entrega de produtos pagos ou entregues ao longo do tempo. Quantity schedule:
+  quando o produto é entregue. Revenue schedule: quando é pago. Um default schedule é ligado a um produto num price book e é
+  usado sempre que o produto entra numa oportunidade. No Lightning Experience, schedules aceitam campos e botões customizados,
+  layout, regras de validação e triggers Apex.
+[src:help-product-schedules-enable] Enable Product Schedules in Salesforce Classic (https://help.salesforce.com/s/articleView?id=sales.enabling_schedules.htm&language=en_US&type=5)
+  Marca-se Enable quantity scheduling, Enable revenue scheduling ou os dois. Desligar um tipo de schedule apaga as informações
+  desse tipo nos produtos ativos; produtos arquivados não são afetados. Permissão Customize Application.
+[src:help-product-schedules-considerations] Considerations for Using Product Schedules (https://help.salesforce.com/s/articleView?id=sales.products_considerations_for_using_schedules.htm&language=en_US&type=5)
+  Line Item Schedule não está disponível em Process Builder nem em Workflow. Se o Apex referencia o objeto de schedule
+  (OpportunityLineItemSchedule), só um dos dois tipos de schedule pode ser desligado, não os dois.
+
+-- Receita e comércio
+[src:help-orders-enable] Enable Orders (https://help.salesforce.com/s/articleView?id=sf.customize_order_enable.htm&language=en_US&type=5)
+  Pedidos deixam o time de vendas acompanhar e gerir pedidos de clientes por produtos ou serviços. Setup: Quick Find "Order
+  Settings" > Order Settings > Enable Orders. Tópicos irmãos: Enable Negative Quantities for Order Products, Enable Reduction
+  Orders, Enable Zero Quantity Orders, Enable Orders Without Price Books.
+[src:help-orders-manage] Manage Your Orders (https://help.salesforce.com/s/articleView?id=sales.order_manage_your_orders.htm&language=en_US)
+  Order product: produto ou serviço fornecido ao cliente conforme um pedido. Reduction orders registram pedidos de reduzir,
+  devolver, desativar ou desabilitar produtos ou serviços do cliente. O histórico do pedido fica na lista Order History. O
+  modelo de compartilhamento padrão pode ser ampliado, não restringido.
+[src:help-orders-reduce] Reduce Orders (https://help.salesforce.com/s/articleView?id=order_reduce.htm&language=en_US&type=5)
+  No Lightning Experience não dá para criar reduction orders: usar o Salesforce Classic. Só pedidos ativados podem ser
+  reduzidos. Uma reduction order vale para um único pedido.
+[src:help-orders-activation] Considerations for Activation Limitations (https://help.salesforce.com/s/articleView?id=order_activate.htm&language=en_US&type=5)
+  Pedidos podem ser ativados para contratos ativos, não para inativos, e só se tiverem order products. Depois de ativar, dá
+  para modificar order products, mas não incluir nem remover. Permissões: Activate Orders; Edit Activated Orders para
+  desativar. Pedidos: Professional, Enterprise, Performance, Unlimited e Developer; reduction orders: Enterprise, Performance,
+  Unlimited e Developer.
+[src:help-orders-high-scale] Enable High Scale Orders for B2B Stores (https://help.salesforce.com/s/articleView?id=sf.comm_high_scale_order_enable.htm&language=en_US&type=5)
+  Para lojas B2B existentes, a ingestão de pedidos em alta escala é ligada com Enable Orders e Enable Enhanced Commerce Orders,
+  em Order Settings. Em lojas novas criadas pelo Commerce Setup Assistant com template LWR, vem ligada desde o Summer '24.
+[src:help-revenue-vs-cpq] Key Differences Between Revenue Management and Salesforce CPQ (https://help.salesforce.com/s/articleView?id=ind.rev_migration_revenue_differences_from_cpq.htm&language=en_US&type=5)
+  Revenue Management (antes Revenue Cloud) é outro sistema, com outro modelo de dados e outra forma de configurar. Salesforce
+  CPQ é managed package; Revenue Management tem arquitetura nativa na plataforma. CPQ: produtos por SKU, com hierarquia de
+  bundles e opções, e motor de preço no navegador, por regras em sequência. Revenue Management: produtos por atributos e
+  pricing procedures no servidor.
+[src:help-billing-overview] Salesforce Billing Overview (https://help.salesforce.com/s/articleView?id=sales.blng_overview.htm&language=en_US&type=5)
+  Salesforce Billing é um pacote complementar que herda registros do Salesforce CPQ: depois que a cotação vira pedido no CPQ,
+  o Billing assume o pedido para faturamento, pagamento e reconhecimento de receita. O objeto order fica no pacote CPQ e é o
+  ponto de encontro dos dois. Há um tópico para o Billing coexistir com o Revenue Cloud durante a transição.
+[src:help-revenue-migrate] Migrate to Revenue Cloud (https://help.salesforce.com/s/articleView?id=ind.rev_data_migration.htm&language=en_US&type=5)
+  Revenue Cloud é plataforma nativa que reúne o ciclo de receita, do catálogo de produtos ao faturamento. Sair de Salesforce
+  CPQ e Salesforce Billing exige mudar a arquitetura: modelo de dados, processos de negócio e governança de dados; não é uma
+  migração de dados comum.
+[src:help-revenue-get-started] Get Started with Revenue Management (https://help.salesforce.com/s/articleView?id=sf.revenue_lifecycle_management_get_started.htm&language=en_US&type=5)
+  Revenue Cloud agora se chama Revenue Management. Há um tópico "Which Revenue Management Product Am I Using?" para distinguir
+  Revenue Management, Salesforce CPQ e Industries CPQ, e uma comparação de licenças: a licença define o que está disponível.
+
+-- Serviço de campo
+[src:help-field-service-enable] Enable Field Service (https://help.salesforce.com/s/articleView?id=fs_enable.htm&language=en_US&type=5)
+  Setup: Quick Find "Field Service Settings" > Field Service Settings > ligar Field Service e salvar para ver mais opções. Sem
+  a licença complementar de Field Service, a opção de ligar work orders vem ligada por padrão; se a licença foi removida ou
+  expirou, vem desligada. Dá para ligar notificações no app para mudanças em work orders. Permissão Customize Application.
+[src:help-field-service-setup-basics] Set Up Field Service Basics (https://help.salesforce.com/s/articleView?id=service.fs_set_up.htm&language=en_US&type=5)
+  Ordem dos tópicos: ligar Field Service; instalar o managed package, que dá acesso ao Classic Dispatch Console, a ferramentas
+  de agendamento, a objetos customizados e ao Guided Setup; gerir permissões. Salesforce Go reúne descoberta e configuração
+  dos recursos.
+
+-- Experiências externas
+[src:help-digital-experiences-enable] Enable Digital Experiences (https://help.salesforce.com/s/articleView?id=experience.networks_enable.htm&language=en_US&type=5)
+  Setup: Quick Find "Digital Experiences" > Digital Experiences | Settings > Enable Digital Experiences. O domínio dos sites
+  inclui o My Domain, no formato MyDomainName.my.site.com em produção. Depois de ligar, não dá para desligar. Se o acesso ao
+  Experience Cloud for suspenso por falta de pagamento, todos os sites são desativados. Edições Enterprise, Performance,
+  Unlimited e Developer. Permissão Customize Application.
+[src:help-experience-org-setup] Set Up and Configure Your Org for Experience Cloud Sites (https://help.salesforce.com/s/articleView?id=experience.networks_setup_maintain_communities.htm&language=en_US&type=5)
+  Ligar digital experiences é o primeiro passo para qualquer site (comunidade, portal, central de ajuda, website) e também é
+  exigido ao configurar Commerce Cloud, Financial Services Cloud, Health Cloud e Work.com. Configure Digital Experiences
+  Settings reúne as opções que valem para todos os sites. Um custom domain permanece estável mesmo se a URL hospedada pela
+  Salesforce mudar por causa do My Domain.

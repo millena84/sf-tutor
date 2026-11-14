@@ -17,9 +17,12 @@
       "evidencias": [
         {
           "fonte": "src:objref-lead"
+        },
+        {
+          "fonte": "src:help-lead-convert-considerations"
         }
       ],
-      "texto": "Mudar o status de um lead pela API não o converte; use convertLead() ou a interface.",
+      "texto": "Mudar o status de um lead pela API não o converte; use convertLead() ou a interface. Em Lead Settings, Require Validation for Converted Leads decide se as regras de validação valem na conversão.",
       "tipo": "atencao",
       "titulo": "Converter lead é operação própria"
     },
@@ -36,6 +39,16 @@
     {
       "evidencias": [
         {
+          "fonte": "src:help-tm2-activate"
+        }
+      ],
+      "texto": "Só um modelo de territórios fica ativo por vez e, depois de ativo, não volta para Planning.",
+      "tipo": "atencao",
+      "titulo": "Territórios: um modelo ativo"
+    },
+    {
+      "evidencias": [
+        {
           "fonte": "src:help-omni-upgrade"
         }
       ],
@@ -46,12 +59,102 @@
     {
       "evidencias": [
         {
-          "fonte": "src:help-tm2-activate"
+          "fonte": "src:help-field-service-enable"
+        },
+        {
+          "fonte": "src:help-field-service-setup-basics"
         }
       ],
-      "texto": "Só um modelo de territórios fica ativo por vez e, depois de ativo, não volta para Planning.",
+      "texto": "Ligar o Field Service em Field Service Settings libera os recursos da plataforma. O managed package, instalado depois, acrescenta o Classic Dispatch Console, ferramentas de agendamento, objetos customizados e o Guided Setup.",
+      "tipo": "decisao",
+      "titulo": "Field Service: recurso, pacote e app"
+    },
+    {
+      "evidencias": [
+        {
+          "fonte": "src:help-revenue-vs-cpq"
+        },
+        {
+          "fonte": "src:help-revenue-migrate"
+        }
+      ],
+      "texto": "Salesforce CPQ é um managed package; Revenue Management (antes Revenue Cloud) é nativo da plataforma, com outro modelo de dados. Trocar de um para o outro muda modelo, processos e governança: não é uma migração de dados comum.",
+      "tipo": "decisao",
+      "titulo": "Produto de receita: pacote ou nativo"
+    },
+    {
+      "evidencias": [
+        {
+          "fonte": "src:help-orders-activation"
+        },
+        {
+          "fonte": "src:help-orders-reduce"
+        }
+      ],
+      "texto": "Um pedido só é ativado se tiver order products e, quando ligado a contrato, se o contrato estiver ativo. Reduction orders só valem para pedidos ativados e não podem ser criadas no Lightning Experience.",
+      "tipo": "limite",
+      "titulo": "Pedidos têm regras de ativação"
+    },
+    {
+      "evidencias": [
+        {
+          "fonte": "src:help-digital-experiences-enable"
+        },
+        {
+          "fonte": "src:help-experience-cloud-licenses"
+        }
+      ],
+      "texto": "A ativação dos sites Experience Cloud não pode ser desfeita, e o domínio dos sites usa o My Domain da org. A licença externa escolhida define o que cada pessoa vê e faz.",
       "tipo": "atencao",
-      "titulo": "Territórios: um modelo ativo"
+      "titulo": "Ligar digital experiences não tem volta"
+    },
+    {
+      "evidencias": [
+        {
+          "fonte": "src:help-industries-data-models"
+        },
+        {
+          "fonte": "src:help-health-cloud-psl"
+        }
+      ],
+      "texto": "Os modelos setoriais são extensões aditivas: Account, Contact e outros objetos padrão continuam valendo, e o setor acrescenta objetos e campos. O acesso vem de permission set licenses próprias de cada nuvem.",
+      "tipo": "decisao",
+      "titulo": "Nuvem setorial estende o modelo padrão"
+    },
+    {
+      "evidencias": [
+        {
+          "fonte": "src:sdr-metadata-support"
+        }
+      ],
+      "texto": "É um agrupamento provisório deste tutorial para tipos da lista oficial de metadata types que ainda não têm tema próprio. Não corresponde a um produto nem a uma área da documentação da Salesforce.",
+      "tipo": "atencao",
+      "titulo": "'Outras áreas' não é área oficial"
+    },
+    {
+      "evidencias": [
+        {
+          "fonte": "src:mdapi-leadconfigsettings"
+        },
+        {
+          "fonte": "src:mdapi-ordersettings"
+        },
+        {
+          "fonte": "src:mdapi-contractsettings"
+        },
+        {
+          "fonte": "src:mdapi-fieldservicesettings"
+        },
+        {
+          "fonte": "src:mdapi-communitiessettings"
+        },
+        {
+          "fonte": "src:mdapi-casesettings"
+        }
+      ],
+      "texto": "As opções gerais de cada produto ficam em tipos Settings: por exemplo LeadConfigSettings, OrderSettings, ContractSettings, FieldServiceSettings e CommunitiesSettings, detalhados neste catálogo. CaseSettings ainda não foi cadastrado.",
+      "tipo": "implantacao",
+      "titulo": "Opções gerais como metadado"
     }
   ],
   "derivado": {
@@ -434,6 +537,14 @@
         "principal": true
       },
       {
+        "exemplo": "Um contrato de 12 meses começa em 1º de março; com o cálculo automático ligado, a data final sai da data de início e do prazo.",
+        "id": "func:contratos",
+        "pre_requisitos": [
+          "Customize Application (para mudar as configurações de contratos)."
+        ],
+        "principal": true
+      },
+      {
         "alertas": [
           "Não é possível desabilitar cotações se houver referências em customizações ou cotações sincronizadas."
         ],
@@ -471,6 +582,11 @@
         ],
         "exemplo": "Uma proposta de renovação para um cliente, em negociação, com fechamento previsto para o fim do trimestre.",
         "id": "func:oportunidades",
+        "principal": true
+      },
+      {
+        "exemplo": "Depois de fechar a oportunidade, o time registra um pedido com três produtos; mais tarde, uma devolução entra como reduction order.",
+        "id": "func:pedidos",
         "principal": true
       },
       {
@@ -582,6 +698,25 @@
           "Licença: Agentforce Service ou add-ons Digital Engagement, Enhanced Chat, Salesforce Voice ou Workforce Management."
         ],
         "principal": true
+      },
+      {
+        "exemplo": "Um cliente pede conserto do ar-condicionado; nasce uma work order, que gera uma visita para quinta à tarde com o técnico da região.",
+        "id": "func:field-service",
+        "pre_requisitos": [
+          "Customize Application (para ligar o Field Service)."
+        ],
+        "principal": true
+      },
+      {
+        "alertas": [
+          "Depois de ligar digital experiences, não dá para desligar."
+        ],
+        "exemplo": "A empresa liga digital experiences e passa a ter um domínio de sites no formato MyDomainName.my.site.com, onde cria o portal de clientes.",
+        "id": "func:digital-experiences",
+        "pre_requisitos": [
+          "Customize Application (para ligar digital experiences)."
+        ],
+        "principal": true
       }
     ],
     "metadata_types": [
@@ -624,6 +759,24 @@
         "suporte_cli": "suportado"
       },
       {
+        "estrutura": "completa",
+        "funcionalidades": [
+          "func:digital-experiences"
+        ],
+        "id": "mdt:CommunitiesSettings",
+        "nota_suporte": null,
+        "suporte_cli": "suportado"
+      },
+      {
+        "estrutura": "completa",
+        "funcionalidades": [
+          "func:contratos"
+        ],
+        "id": "mdt:ContractSettings",
+        "nota_suporte": null,
+        "suporte_cli": "suportado"
+      },
+      {
         "estrutura": "parcial",
         "funcionalidades": [
           "func:entitlements-e-milestones"
@@ -660,6 +813,15 @@
         "suporte_cli": "suportado"
       },
       {
+        "estrutura": "completa",
+        "funcionalidades": [
+          "func:field-service"
+        ],
+        "id": "mdt:FieldServiceSettings",
+        "nota_suporte": null,
+        "suporte_cli": "suportado"
+      },
+      {
         "estrutura": "parcial",
         "funcionalidades": [
           "func:previsoes-colaborativas"
@@ -674,6 +836,15 @@
           "func:lightning-knowledge"
         ],
         "id": "mdt:KnowledgeSettings",
+        "nota_suporte": null,
+        "suporte_cli": "suportado"
+      },
+      {
+        "estrutura": "completa",
+        "funcionalidades": [
+          "func:leads"
+        ],
+        "id": "mdt:LeadConfigSettings",
         "nota_suporte": null,
         "suporte_cli": "suportado"
       },
@@ -715,11 +886,29 @@
         "suporte_cli": "suportado"
       },
       {
+        "estrutura": "completa",
+        "funcionalidades": [
+          "func:pedidos"
+        ],
+        "id": "mdt:OrderSettings",
+        "nota_suporte": null,
+        "suporte_cli": "suportado"
+      },
+      {
         "estrutura": "parcial",
         "funcionalidades": [
           "func:omni-channel"
         ],
         "id": "mdt:PresenceUserConfig",
+        "nota_suporte": null,
+        "suporte_cli": "suportado"
+      },
+      {
+        "estrutura": "completa",
+        "funcionalidades": [
+          "func:produtos-e-catalogos-de-preco"
+        ],
+        "id": "mdt:ProductSettings",
         "nota_suporte": null,
         "suporte_cli": "suportado"
       },
@@ -1465,9 +1654,6 @@
       }
     ],
     "temas_sem_funcionalidade": [
-      "sub:servico-de-campo",
-      "sub:receita-e-comercio",
-      "sub:experiencias-externas",
       "sub:capacidades-setoriais",
       "sub:outras-areas"
     ]
@@ -1480,9 +1666,24 @@
       },
       {
         "fonte": "src:help-service-basics"
+      },
+      {
+        "fonte": "src:help-field-service-overview"
+      },
+      {
+        "fonte": "src:help-orders-enable"
+      },
+      {
+        "fonte": "src:help-experience-cloud-licenses"
+      },
+      {
+        "fonte": "src:help-industries-data-models"
+      },
+      {
+        "fonte": "src:sdr-metadata-support"
       }
     ],
-    "texto": "Em vendas, o caminho vai de lead a conta, contato e oportunidade, com produtos, cotações, previsões, equipes e territórios. No atendimento, o caso é a base, com Omni-Channel, Knowledge, entitlements e horário comercial. Serviço de campo, receita e comércio, experiências externas e capacidades setoriais ainda não têm funcionalidades catalogadas."
+    "texto": "Roteiro pelas sete seções do tema. 1) 'Vendas': de lead a conta, contato e oportunidade, com produtos, cotações, contratos, previsões, equipes e territórios. 2) 'Atendimento': o caso, com Omni-Channel, Knowledge, entitlements e horário comercial. 3) 'Serviço de campo': o trabalho feito no local do cliente. 4) 'Receita e comércio': pedidos e os produtos de preço, assinatura e faturamento. 5) 'Experiências externas': sites para clientes e parceiros. 6) 'Capacidades setoriais': o que as nuvens de setor acrescentam. 7) 'Outras áreas': fila de espera do que ainda não tem tema. Só as duas últimas seguem sem funcionalidade cadastrada."
   },
   "escopo": "Entram capacidades próprias de um produto ou setor, que não fazem parte da plataforma compartilhada por todas as nuvens.",
   "estado": "desconhecido",
