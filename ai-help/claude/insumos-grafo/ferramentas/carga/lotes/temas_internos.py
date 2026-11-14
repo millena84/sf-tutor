@@ -195,6 +195,41 @@ TEMAS = {
         [ev("src:help-consent-data-model", "Cobre o tema: modelo de dados de consentimento.", "Understand the Salesforce Consent Data Model"),
          ev("src:help-consent-objects", "Cobre parte do tema: objetos de consentimento.", "Consent Management Objects")],
     ),
+    # ------------------------------------------------------------------ Relatórios, analytics e exploração
+    "sub:reports": (
+        "Relatórios montados no report builder para responder perguntas sobre os registros da org: escolhe-se o tipo de relatório, o "
+        "formato e os campos, e depois se agrupa, filtra e resume.",
+        [ev("src:help-reports-overview", "Cobre o tema: relatórios.", "Reports"),
+         ev("src:help-reports-build", "Cobre parte do tema: construção de relatórios.", "Build a Report")],
+    ),
+    "sub:dashboards": (
+        "Painéis que mostram, em gráficos e tabelas, os resultados de relatórios de origem, com os dados vistos conforme o running user.",
+        [ev("src:help-dashboards-build-lex", "Cobre parte do tema: construção de dashboards no Lightning Experience.",
+            "Build a Lightning Experience Dashboard"),
+         ev("src:help-dashboards-view-as", "Cobre parte do tema: visibilidade dos dados do dashboard.",
+            "Configure Dashboard Data Visibility in Lightning Experience")],
+    ),
+    "sub:tipos-de-relatorio": (
+        "A definição de quais registros e campos um relatório pode usar, a partir de um objeto principal e dos objetos relacionados a ele.",
+        [ev("src:help-custom-report-types", "Cobre parte do tema: tipos de relatório customizados.", "Custom Report Types")],
+    ),
+    "sub:pastas-e-acesso": (
+        "As pastas onde relatórios e dashboards ficam e os níveis de acesso (Viewer, Editor, Manager) dados a cada usuário, grupo ou papel.",
+        [ev("src:help-folder-access-levels", "Cobre o tema: níveis de acesso em pastas de relatórios e dashboards.",
+            "Access Levels for Report and Dashboard Folders"),
+         ev("src:help-enhanced-folder-sharing", "Cobre parte do tema: enhanced folder sharing.", "Enhanced Folder Sharing for Reports and Dashboards")],
+    ),
+    "sub:metricas-e-agregacoes": (
+        "Os cálculos feitos dentro de um relatório: totais e médias por grupo, fórmulas por registro, fórmulas sobre grupos e faixas "
+        "de valores (bucket columns).",
+        [ev("src:help-report-formulas", "Cobre o tema: fórmulas e resumos em relatórios.", "Evaluate Report Data with Formulas"),
+         ev("src:help-add-bucket-column", "Cobre parte do tema: bucket columns.", "Add a Bucket Column")],
+    ),
+    "sub:recursos-analiticos-de-produto": (
+        "Produtos analíticos que vão além dos relatórios nativos e dependem de licença própria, como CRM Analytics e Tableau.",
+        [ev("src:help-produtos-analytics", "Mais ampla que o tema: diretório da documentação de Analytics, que inclui os relatórios nativos.", "Analytics"),
+         ev("src:help-crm-analytics-collections", "Cobre parte do tema: assets do CRM Analytics.", "Collections of Data in CRM Analytics")],
+    ),
 }
 
 
