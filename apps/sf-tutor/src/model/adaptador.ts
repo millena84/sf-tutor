@@ -30,6 +30,11 @@ export interface Filho {
 }
 
 export const TIPOS_FOLHA: ReadonlySet<TipoNo> = new Set(['campo_api', 'propriedade_xml']);
+/**
+ * Tipos que não são nós do mapa: campos e propriedades aparecem na tabela do metadata type ou do objeto,
+ * e as estruturas auxiliares (tipos compostos) abrem como tabela a partir da propriedade que as usa.
+ */
+export const TIPOS_FORA_DO_MAPA: ReadonlySet<TipoNo> = new Set(['campo_api', 'propriedade_xml', 'estrutura_auxiliar']);
 export const TIPOS_OBJETO: ReadonlySet<TipoNo> = new Set(['objeto_api', 'objeto_api_juncao']);
 
 /** Ligações que formam a hierarquia de navegação (o resto é relação técnica entre itens visíveis). */
@@ -64,6 +69,8 @@ export class Indice {
   readonly nuvensDaFunc = new Map<string, string[]>();
   readonly classificacoesDaFunc = new Map<string, string[]>();
   readonly funcsDoItem = new Map<string, string[]>();
+  private readonly cacheAncoras = new Map<string, string[]>();
+  private tecnicasPorAncora: Map<string, Aresta[]> | null = null;
 
   constructor(d: Pick<DadosBase, 'nos' | 'arestas' | 'visoes' | 'busca'>) {
     for (const n of d.nos) this.nos.set(n.id, { ...n });
@@ -150,18 +157,7 @@ export class Indice {
       const api = s.filter((a) => a.tipo === 'representacao_objeto_api');
       return [...xml, ...api].map((a) => ({ id: a.destino, ligacao: a.tipo }));
     }
-    if (n.tipo === 'metadata_type' || n.tipo === 'estrutura_auxiliar') {
-      return (this.folhasPorPai.get(id) ?? []).map((f) => ({ id: f, ligacao: 'propriedade' }));
-    }
-    if (TIPOS_OBJETO.has(n.tipo)) {
-      return (this.folhasPorPai.get(id) ?? []).map((f) => ({ id: f, ligacao: 'campo' }));
-    }
-    if (n.tipo === 'propriedade_xml') {
-      // tipo composto: a propriedade leva à estrutura auxiliar; evita ciclo no mesmo caminho
-      return (this.saindo.get(id) ?? [])
-        .filter((a) => a.tipo === 'tipo_composto' && !caminho.includes(a.destino))
-        .map((a) => ({ id: a.destino, ligacao: 'tipo_composto' }));
-    }
+    // metadata type e objeto são o último nó do mapa: campos e propriedades abrem em tabela, não como nós
     return [];
   }
 
@@ -205,6 +201,13 @@ export class Indice {
 
   /** Todos os caminhos do centro até o id, na visão (limitado para evitar explosão combinatória). */
   caminhosPara(id: string, visao: Visao, limite = 40): string[][] {
+    const fora = this.nos.get(id);
+    if (fora && TIPOS_FORA_DO_MAPA.has(fora.tipo)) {
+      // campo, propriedade ou estrutura: o caminho termina no metadata type ou objeto que os contém
+      const out: string[][] = [];
+      for (const a of this.ancoras(id)) for (const c of this.caminhosPara(a, visao, limite)) if (out.length < limite) out.push(c);
+      return out;
+    }
     const topo = this.caminhosTopo[visao].get(id);
     if (topo) return topo.slice(0, limite).map((c) => [...c]);
     if (id === this.arvores[visao].id) return [[id]];
@@ -256,6 +259,48 @@ export class Indice {
       if (!this.filhos(visao, caminho.slice(0, i)).some((f) => f.id === caminho[i])) return false;
     }
     return true;
+  }
+
+  /** Itens da tabela de um dono (metadata type, estrutura auxiliar ou objeto), na ordem da documentação. */
+  itensDaTabela(dono: string): string[] {
+    return this.folhasPorPai.get(dono) ?? [];
+  }
+
+  /**
+   * Nós do mapa que representam um id. Para um nó do mapa, ele mesmo. Para campo, propriedade ou estrutura
+   * auxiliar, os metadata types ou objetos a que pertencem (uma estrutura pode ser usada por mais de um).
+   */
+  ancoras(id: string): string[] {
+    const cache = this.cacheAncoras.get(id);
+    if (cache) return cache;
+    const out = new Set<string>();
+    const visto = new Set<string>();
+    const rec = (x: string): void => {
+      if (visto.has(x)) return;
+      visto.add(x);
+      const n = this.nos.get(x);
+      if (!n) return;
+      if (!TIPOS_FORA_DO_MAPA.has(n.tipo)) { out.add(x); return; }
+      if (n.pai) { rec(n.pai); return; }
+      // estrutura auxiliar: sobe pelas propriedades que a usam como tipo composto
+      for (const a of this.entrando.get(x) ?? []) if (a.tipo === 'tipo_composto') rec(a.origem);
+    };
+    rec(id);
+    const lista = [...out];
+    this.cacheAncoras.set(id, lista);
+    return lista;
+  }
+
+  /** Relações técnicas que saem de um nó do mapa ou de qualquer item das suas tabelas. */
+  tecnicasDoNo(id: string): Aresta[] {
+    if (!this.tecnicasPorAncora) {
+      this.tecnicasPorAncora = new Map();
+      for (const a of this.arestas) {
+        if (!LIGACOES_TECNICAS.has(a.tipo)) continue;
+        for (const anc of this.ancoras(a.origem)) push(this.tecnicasPorAncora, anc, a);
+      }
+    }
+    return this.tecnicasPorAncora.get(id) ?? [];
   }
 
   /** Relações técnicas que tocam um id (para painel e destaque). */
@@ -340,15 +385,21 @@ export function montarCena(ind: Indice, visao: Visao, exp: EstadoExpansao, taman
   // relações técnicas entre ocorrências visíveis (por id canônico)
   const porId = new Map<string, Ocorrencia[]>();
   for (const o of ocorrencias) push(porId, o.id, o);
+  // campos e propriedades não são nós: a relação é desenhada entre os donos (metadata type ou objeto)
+  const feitas = new Set<string>();
   for (const o of ocorrencias) {
-    for (const a of ind.saindo.get(o.id) ?? []) {
-      if (!LIGACOES_TECNICAS.has(a.tipo)) continue;
-      const alvos = porId.get(a.destino);
-      if (!alvos) continue;
-      // liga à ocorrência de destino mais próxima no caminho (maior prefixo comum)
-      const alvo = maisProxima(o, alvos);
-      if (alvo.chave === o.chave) continue;
-      arestas.push({ id: `t|${a.tipo}|${o.chave}|${alvo.chave}`, origem: o.chave, destino: alvo.chave, ligacao: a.tipo, tecnica: true, aresta: a });
+    for (const a of ind.tecnicasDoNo(o.id)) {
+      for (const dest of ind.ancoras(a.destino)) {
+        const alvos = porId.get(dest);
+        if (!alvos) continue;
+        // liga à ocorrência de destino mais próxima no caminho (maior prefixo comum)
+        const alvo = maisProxima(o, alvos);
+        if (alvo.chave === o.chave) continue;
+        const idAresta = `t|${a.tipo}|${o.chave}|${alvo.chave}`;
+        if (feitas.has(idAresta)) continue;
+        feitas.add(idAresta);
+        arestas.push({ id: idAresta, origem: o.chave, destino: alvo.chave, ligacao: a.tipo, tecnica: true, aresta: a });
+      }
     }
   }
   return { ocorrencias, paginacoes, arestas };

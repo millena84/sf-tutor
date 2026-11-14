@@ -22,6 +22,8 @@ export interface CtxPainel {
   rotulo(id: string): string;
   abrir(id: string, contexto?: readonly string[]): void;
   abrirCaminho(caminho: readonly string[]): void;
+  /** Abre a tabela de campos ou propriedades de um metadata type, estrutura auxiliar ou objeto; foco abre o detalhe de um item. */
+  abrirTabela(dono: string, foco?: string): void;
   alternar(caminho: readonly string[]): void;
   expandido(caminho: readonly string[]): boolean;
   focarNoMapa(caminho: readonly string[]): void;
@@ -108,12 +110,9 @@ function corpoPorTipo(ctx: CtxPainel, tipo: string, e: Entidade, caminho: readon
     case 'classificacao': return painelClassificacao(ctx, e, caminho);
     case 'subclassificacao': return painelSub(ctx, e, caminho);
     case 'funcionalidade': return painelFunc(ctx, e, caminho);
-    case 'metadata_type': return painelMdt(ctx, e, caminho);
-    case 'estrutura_auxiliar': return painelMdx(ctx, e, caminho);
+    case 'metadata_type': return painelMdt(ctx, e);
     case 'objeto_api':
-    case 'objeto_api_juncao': return painelObj(ctx, e, caminho);
-    case 'campo_api':
-    case 'propriedade_xml': return painelFolha(ctx, e, caminho);
+    case 'objeto_api_juncao': return painelObj(ctx, e);
     default: return [h('p', null, 'Tipo de nó sem painel.')];
   }
 }
@@ -471,7 +470,7 @@ function arquivo(v: unknown): string {
   return o && typeof o === 'object' ? `Pasta ${o.pasta ?? '?'} · arquivo ${o.arquivo ?? '?'}` : String(v);
 }
 
-function painelMdt(ctx: CtxPainel, e: Entidade, caminho: readonly string[]): (Node | null)[] {
+function painelMdt(ctx: CtxPainel, e: Entidade): (Node | null)[] {
   const arqs = ent<Record<string, Afirmacao>>(e, 'arquivos') ?? {};
   const disp = ent<Record<string, string | null>>(e, 'disponibilidade') ?? {};
   const ex = ent<{ xml: string; natureza?: string; nota?: string }>(e, 'exemplo_xml');
@@ -489,7 +488,7 @@ function painelMdt(ctx: CtxPainel, e: Entidade, caminho: readonly string[]): (No
     afirmacao(ctx, 'Suporte no Salesforce CLI', ent<Afirmacao>(e, 'suporte_cli')),
     e.componente_filho_de ? texto('Componente filho de', e.componente_filho_de) : null,
     ex?.xml ? codigo('Exemplo XML', ex.xml, 'XML', `${ex.natureza === 'didatico_projeto' ? 'Exemplo didático do projeto, sem dados reais. ' : ''}${ex.nota ?? ''}`) : h('p', { class: 'vazio' }, 'Exemplo XML ainda não registrado no cadastro.'),
-    listaPropriedades(ctx, arr(e.propriedades), caminho, 'Propriedades XML'),
+    botaoTabela(ctx, e.id, arr(e.propriedades), 'Propriedades XML', 'propriedades'),
     estruturas(ctx, arr<string>(e.estruturas)),
     coberturaEl(e),
     relacoes(ctx, e.id),
@@ -502,26 +501,15 @@ function painelMdt(ctx: CtxPainel, e: Entidade, caminho: readonly string[]): (No
   ];
 }
 
-function painelMdx(ctx: CtxPainel, e: Entidade, caminho: readonly string[]): (Node | null)[] {
-  return [
-    texto('O que é', e.o_que_e, { didatico: true }),
-    h('p', { class: 'nota' }, 'Estrutura auxiliar do schema da Metadata API: aparece dentro de um XML, mas não é um metadata type implantável sozinho.'),
-    listaLinks(ctx, 'Usada por', arr<string>(e.usada_por)),
-    listaPropriedades(ctx, arr(e.propriedades), caminho, 'Propriedades'),
-    coberturaEl(e),
-    secao('Fontes', false, fontesEl(ctx, arr(e.evidencias))),
-    restantes(e, ['id', 'nome', 'natureza', 'o_que_e', 'usada_por', 'propriedades', 'cobertura', 'estado', 'evidencias']),
-  ];
-}
-
 function estruturas(ctx: CtxPainel, ids: string[]): HTMLElement | null {
   if (!ids.length) return null;
-  return secao(`Estruturas auxiliares usadas (${ids.length})`, false, h('ul', { class: 'lista-links' }, ids.map((s) => h('li', null, h('button', { type: 'button', class: 'link', on: { click: () => ctx.abrir(s) } }, ctx.rotulo(s))))));
+  return secao(`Estruturas auxiliares usadas (${ids.length})`, false, h('ul', { class: 'lista-links' }, ids.map((s) => h('li', null, h('button', { type: 'button', class: 'link', on: { click: () => ctx.abrirTabela(s) } }, ctx.rotulo(s))))),
+    h('p', { class: 'nota' }, 'Cada estrutura abre como tabela de propriedades.'));
 }
 
 // ------------------------------------------------------------------ Objeto API
 
-function painelObj(ctx: CtxPainel, e: Entidade, caminho: readonly string[]): (Node | null)[] {
+function painelObj(ctx: CtxPainel, e: Entidade): (Node | null)[] {
   const exps = arr<Record<string, unknown>>(e.exposicoes);
   const cons = arr<{ api: string; soql: string; contexto?: string; validacao?: string }>(e.consultas);
   const apex = ent<{ consulta_soql_direta?: Afirmacao; nota?: string }>(e, 'apex');
@@ -545,7 +533,7 @@ function painelObj(ctx: CtxPainel, e: Entidade, caminho: readonly string[]): (No
       apex?.nota ? h('p', { class: 'nota' }, apex.nota) : null),
     afirmacao(ctx, 'Caminho no Setup', ent<Afirmacao>(e, 'setup')),
     e.dominio_dinamico_de_campos ? texto('Campos dinâmicos', e.dominio_dinamico_de_campos) : null,
-    listaCampos(ctx, arr(e.campos), caminho),
+    botaoTabela(ctx, e.id, arr(e.campos), 'Campos', 'campos'),
     coberturaEl(e),
     relacoes(ctx, e.id, true),
     funcs.length ? listaLinks(ctx, 'Funcionalidades', funcs) : null,
@@ -555,52 +543,102 @@ function painelObj(ctx: CtxPainel, e: Entidade, caminho: readonly string[]): (No
   ];
 }
 
-// ------------------------------------------------------------------ listas pesquisáveis de folhas
+// ------------------------------------------------------------------ tabela de campos e propriedades
 
-function listaFolhas(ctx: CtxPainel, titulo: string, itens: Record<string, unknown>[], caminho: readonly string[], extra: (i: Record<string, unknown>) => string): HTMLElement {
-  const filtro = h('input', { type: 'search', class: 'filtro-lista', placeholder: `Filtrar ${itens.length} itens…`, 'aria-label': `Filtrar ${titulo.toLowerCase()}` });
-  const ul = h('ul', { class: 'lista-folhas' });
-  const render = () => {
-    limpar(ul);
+/** No painel do metadata type ou do objeto: resumo e botão que abre a tabela em janela. */
+function botaoTabela(ctx: CtxPainel, dono: string, itens: Record<string, unknown>[], titulo: string, plural: string): HTMLElement | null {
+  if (!itens.length) return h('p', { class: 'vazio' }, `Nenhum item registrado em ${titulo.toLowerCase()}.`);
+  return h('div', { class: 'bloco-tabela' },
+    h('h4', null, `${titulo} (${itens.length})`),
+    h('p', { class: 'nota' }, `Este é o último nó do mapa. Os ${plural} abrem numa tabela, com o detalhe de cada um.`),
+    h('button', { type: 'button', class: 'btn btn-tabela', on: { click: () => ctx.abrirTabela(dono) } }, `Ver ${itens.length} ${plural} em tabela`));
+}
+
+function textoObrigatoriedade(f: Record<string, unknown>): string {
+  const ob = f.obrigatoriedade as { valor?: string; estado?: string } | undefined;
+  return ob?.valor ? OBRIGATORIEDADE[ob.valor] ?? ob.valor : rotuloEstado(String(ob?.estado ?? 'desconhecido'));
+}
+
+function textoDefault(f: Record<string, unknown>): string {
+  const df = f.default as { forma?: string; valor?: unknown; estado?: string } | undefined;
+  if (df?.forma === 'valor') return String(df.valor);
+  // na tabela, só a parte curta; o texto completo fica no detalhe da linha
+  return df?.forma ? (FORMA_DEFAULT[df.forma] ?? df.forma).replace(/\s*\(.*\)$/, '') : rotuloEstado(String(df?.estado ?? 'desconhecido'));
+}
+
+export interface TabelaItens {
+  el: HTMLElement;
+  /** rola até a linha em foco, se houver */
+  focar(): void;
+}
+
+/** Conteúdo da janela: tabela pesquisável dos campos ou propriedades de um dono; cada linha abre o detalhe. */
+export function conteudoTabela(ctx: CtxPainel, e: Entidade, foco?: string): TabelaItens {
+  const itens = arr<Record<string, unknown>>(e.campos ?? e.propriedades);
+  const ehEstrutura = ctx.ind.no(e.id)?.tipo === 'estrutura_auxiliar';
+  const corpo = h('tbody');
+  const contagem = h('p', { class: 'nota contagem-tabela', role: 'status' });
+  const filtro = h('input', { type: 'search', class: 'filtro-lista', placeholder: `Filtrar ${itens.length} itens por nome ou explicação…`, 'aria-label': 'Filtrar itens da tabela' });
+  const linhas: { f: Record<string, unknown>; tr: HTMLElement; det: HTMLElement; abrir: (v: boolean) => void }[] = [];
+  for (const f of itens) {
+    const idDet = `det-${String(f.id).replace(/[^A-Za-z0-9_-]/g, '_')}`;
+    const celDet = h('td', { colspan: '5' });
+    const det = h('tr', { class: 'linha-detalhe', id: idDet, hidden: '' }, celDet);
+    const botao = h('button', { type: 'button', class: 'link nome-item', 'aria-expanded': 'false', 'aria-controls': idDet }, String(f.nome));
+    const abrir = (v: boolean) => {
+      if (v && !celDet.childNodes.length) celDet.append(...detalheItem(ctx, f).filter(Boolean) as Node[]);
+      det.hidden = !v;
+      botao.setAttribute('aria-expanded', String(v));
+      tr.classList.toggle('aberta', v);
+    };
+    botao.addEventListener('click', () => abrir(det.hasAttribute('hidden')));
+    const ref = f.referencia as { alvos?: string[] } | undefined;
+    const tr = h('tr', { class: 'linha-item', 'data-id': String(f.id) },
+      h('th', { scope: 'row' }, botao),
+      h('td', { 'data-rotulo': 'Tipo' }, String(f.tipo_tecnico ?? '?'),
+        f.estrutura_ref ? [' ', h('button', { type: 'button', class: 'link link-sec', on: { click: () => ctx.abrirTabela(String(f.estrutura_ref)) } }, '(abrir estrutura)')] : null,
+        ref?.alvos?.length ? h('span', { class: 'nota' }, ` → ${ref.alvos.map((a) => a.replace(/^obj:/, '')).join(', ')}`) : null),
+      h('td', { 'data-rotulo': 'Obrigatoriedade' }, textoObrigatoriedade(f)),
+      h('td', { 'data-rotulo': 'Valor padrão' }, textoDefault(f)),
+      h('td', { 'data-rotulo': 'O que é' }, f.o_que_e ? String(f.o_que_e) : h('span', { class: 'vazio' }, 'Explicação pendente.'), ' ', selo(String(f.estado))));
+    corpo.append(tr, det);
+    linhas.push({ f, tr, det, abrir });
+  }
+  const filtrar = () => {
     const q = filtro.value.trim().toLowerCase();
-    const vis = itens.filter((i) => !q || String(i.nome).toLowerCase().includes(q) || String(i.o_que_e ?? '').toLowerCase().includes(q));
-    for (const i of vis) {
-      ul.append(h('li', null,
-        h('button', { type: 'button', class: 'link', on: { click: () => ctx.abrirCaminho([...caminho, String(i.id)]) } }, String(i.nome)),
-        h('span', { class: 'tipo-mini' }, ` ${String(i.tipo_tecnico ?? '')}`), ' ', selo(String(i.estado)),
-        extra(i) ? h('span', { class: 'nota' }, ` ${extra(i)}`) : null,
-        i.o_que_e ? h('p', { class: 'resumo-folha' }, String(i.o_que_e)) : h('p', { class: 'resumo-folha vazio' }, 'Explicação pendente.')));
+    let vis = 0;
+    for (const l of linhas) {
+      const ok = !q || String(l.f.nome).toLowerCase().includes(q) || String(l.f.o_que_e ?? '').toLowerCase().includes(q);
+      l.tr.hidden = !ok;
+      if (!ok) l.abrir(false);
+      if (ok) vis++;
     }
-    if (!vis.length) ul.append(h('li', { class: 'vazio' }, 'Nenhum item com esse filtro.'));
+    contagem.textContent = q ? `${vis} de ${itens.length} itens` : `${itens.length} itens, na ordem da documentação. Clique no nome para ver o detalhe.`;
   };
-  filtro.addEventListener('input', render);
-  render();
-  return secao(`${titulo} (${itens.length}) — lista completa`, itens.length <= 30, h('p', { class: 'nota' }, 'Ordem da documentação. Cada item abre a própria ficha e o leva ao nó no mapa.'), filtro, ul)!;
+  filtro.addEventListener('input', filtrar);
+  filtrar();
+  const usada = arr<string>(e.usada_por);
+  const el = h('div', { class: 'tabela-itens' },
+    ehEstrutura ? [
+      texto('O que é', e.o_que_e, { didatico: true }),
+      h('p', { class: 'nota' }, 'Estrutura auxiliar do schema da Metadata API: aparece dentro de um XML, mas não é um metadata type implantável sozinho.'),
+      usada.length ? h('p', null, 'Usada por: ', usada.map((u, k) => [k ? ', ' : '', h('button', { type: 'button', class: 'link', on: { click: () => ctx.abrir(u) } }, ctx.rotulo(u))])) : null,
+    ] : null,
+    filtro, contagem,
+    itens.length
+      ? h('div', { class: 'rolagem-tabela' }, h('table', { class: 'tabela-campos' },
+        h('thead', null, h('tr', null, ['Nome', 'Tipo', 'Obrigatoriedade', 'Valor padrão', 'O que é'].map((c) => h('th', { scope: 'col' }, c)))),
+        corpo))
+      : h('p', { class: 'vazio' }, 'Nenhum item registrado.'),
+    coberturaEl(e));
+  const alvo = foco ? linhas.find((l) => l.f.id === foco) : undefined;
+  alvo?.abrir(true);
+  return { el, focar: () => alvo?.tr.scrollIntoView({ block: 'start' }) };
 }
 
-function listaPropriedades(ctx: CtxPainel, itens: Record<string, unknown>[], caminho: readonly string[], titulo: string): HTMLElement | null {
-  if (!itens.length) return h('p', { class: 'vazio' }, 'Nenhuma propriedade registrada.');
-  return listaFolhas(ctx, titulo, itens, caminho, (i) => {
-    const o = i.obrigatoriedade as { valor?: string } | undefined;
-    return o?.valor === 'sim' ? '· obrigatória' : o?.valor === 'condicional' ? '· condicional' : '';
-  });
-}
-
-function listaCampos(ctx: CtxPainel, itens: Record<string, unknown>[], caminho: readonly string[]): HTMLElement | null {
-  if (!itens.length) return h('p', { class: 'vazio' }, 'Nenhum campo registrado.');
-  return listaFolhas(ctx, 'Campos', itens, caminho, (i) => {
-    const r = i.referencia as { alvos?: string[] } | undefined;
-    return r?.alvos?.length ? `→ ${r.alvos.map((a) => a.replace(/^obj:/, '')).join(', ')}` : '';
-  });
-}
-
-// ------------------------------------------------------------------ Propriedade / campo
-
-function painelFolha(ctx: CtxPainel, pai: Entidade, caminho: readonly string[]): (Node | null)[] {
-  const id = caminho[caminho.length - 1];
-  const lista = arr<Record<string, unknown>>(pai.campos ?? pai.propriedades);
-  const f = lista.find((x) => x.id === id);
-  if (!f) return [h('p', { class: 'erro' }, `O item ${id} não foi encontrado no cadastro de ${String(pai.id)}.`)];
+/** Detalhe de um campo ou propriedade, mostrado na linha aberta da tabela. */
+function detalheItem(ctx: CtxPainel, f: Record<string, unknown>): (Node | null)[] {
+  const id = String(f.id);
   const ehCampo = 'propriedades_api' in f;
   const ob = f.obrigatoriedade as Afirmacao & { valor?: string } | undefined;
   const df = f.default as Afirmacao & { forma?: string; valor?: unknown } | undefined;
@@ -609,7 +647,6 @@ function painelFolha(ctx: CtxPainel, pai: Entidade, caminho: readonly string[]):
   const pa = f.propriedades_api as Record<string, unknown> | undefined;
   const ref = f.referencia as { alvos?: string[]; nome_relacionamento?: string } | undefined;
   return [
-    h('p', null, 'Pertence a ', h('button', { type: 'button', class: 'link', on: { click: () => ctx.abrirCaminho(caminho.slice(0, -1)) } }, String(pai.nome ?? pai.id))),
     texto('O que é', f.o_que_e, { didatico: true }),
     f.rotulo_didatico ? texto('Rótulo didático (não oficial)', f.rotulo_didatico) : null,
     h('dl', { class: 'kv' },
@@ -628,7 +665,7 @@ function painelFolha(ctx: CtxPainel, pai: Entidade, caminho: readonly string[]):
     ehCampo ? propsApi(ctx, pa) : null,
     ref?.alvos?.length ? h('div', { class: 'campo-txt' }, h('h4', null, 'Referência (lookup)'),
       h('ul', { class: 'lista-links' }, ref.alvos.map((a) => h('li', null, ctx.ind.no(a)
-        ? h('button', { type: 'button', class: 'link', on: { click: () => ctx.abrir(a, caminho) } }, `${ctx.rotulo(a)} (abrir objeto)`)
+        ? h('button', { type: 'button', class: 'link', on: { click: () => ctx.abrir(a) } }, `${ctx.rotulo(a)} (abrir objeto no mapa)`)
         : h('span', null, `${a} (objeto não catalogado)`)))),
       ref.nome_relacionamento ? h('p', null, `Nome do relacionamento: ${ref.nome_relacionamento}`) : null) : null,
     f.restricoes ? texto('Restrições', f.restricoes) : null,
@@ -638,7 +675,7 @@ function painelFolha(ctx: CtxPainel, pai: Entidade, caminho: readonly string[]):
     secao('Fontes', true, fontesEl(ctx, arr(f.evidencias))),
     h('p', { class: 'linha-selos' }, 'Explicação: ', String(f.explicacao ?? '?'), ' · Estado: ', rotuloEstado(String(f.estado))),
     restantes(f, ['id', 'nome', 'tipo_tecnico', 'o_que_e', 'origem', 'obrigatoriedade', 'default', 'dominio', 'disponibilidade', 'explicacao', 'estado', 'evidencias', 'cardinalidade', 'estrutura_ref', 'herdada_de', 'notas', 'restricoes', 'rotulo_didatico', 'exemplo', 'tipo_explicado', 'apis', 'propriedades_api', 'somente_leitura', 'referencia']),
-    f.estrutura_ref ? h('p', null, 'Tipo composto: ', h('button', { type: 'button', class: 'link', on: { click: () => ctx.abrirCaminho([...caminho, String(f.estrutura_ref)]) } }, ctx.rotulo(String(f.estrutura_ref)))) : null,
+    f.estrutura_ref ? h('p', null, 'Tipo composto: ', h('button', { type: 'button', class: 'link', on: { click: () => ctx.abrirTabela(String(f.estrutura_ref)) } }, `${ctx.rotulo(String(f.estrutura_ref))} (abrir tabela)`)) : null,
   ];
 }
 

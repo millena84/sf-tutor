@@ -52,34 +52,31 @@ describe('cena (ocorrências visíveis)', () => {
     const arestas = a.arestas.map((x) => x.id);
     expect(new Set(arestas).size).toBe(arestas.length);
   });
-  it('pagina listas grandes (User tem mais campos que uma página)', () => {
-    const cam = ind.caminhoPreferido('obj:User', 'funcionalidade')!;
-    const e = exp0();
-    revelarCaminho(ind, 'funcionalidade', e, cam);
-    e.expandidos.add(chaveDe(cam));
-    const total = ind.quantidadeFilhos('funcionalidade', cam);
-    expect(total).toBeGreaterThan(TAMANHO_PAGINA);
-    const cena = montarCena(ind, 'funcionalidade', e);
-    const filhos = cena.ocorrencias.filter((o) => o.paiChave === chaveDe(cam));
-    expect(filhos.length).toBe(TAMANHO_PAGINA);
-    const pag = cena.paginacoes.find((p) => p.paiChave === chaveDe(cam))!;
-    expect(pag.restantes).toBe(total - TAMANHO_PAGINA);
-    e.paginas.set(chaveDe(cam), 2);
-    expect(montarCena(ind, 'funcionalidade', e).ocorrencias.filter((o) => o.paiChave === chaveDe(cam)).length).toBe(Math.min(total, 2 * TAMANHO_PAGINA));
+  it('metadata type e objeto são o último nó: campos e propriedades não entram no mapa', () => {
+    for (const id of ['obj:User', 'mdt:PermissionSet', 'mdt:NamedCredential']) {
+      const cam = ind.caminhoPreferido(id, 'funcionalidade')!;
+      expect(cam[cam.length - 1]).toBe(id);
+      expect(ind.quantidadeFilhos('funcionalidade', cam), id).toBe(0);
+      expect(ind.itensDaTabela(id).length, id).toBeGreaterThan(0);
+      const e = exp0();
+      revelarCaminho(ind, 'funcionalidade', e, cam);
+      e.expandidos.add(chaveDe(cam));
+      const cena = montarCena(ind, 'funcionalidade', e);
+      expect(cena.ocorrencias.some((o) => o.paiChave === chaveDe(cam)), id).toBe(false);
+      for (const o of cena.ocorrencias) expect(['campo_api', 'propriedade_xml', 'estrutura_auxiliar']).not.toContain(ind.no(o.id)!.tipo);
+    }
+    expect(ind.itensDaTabela('obj:User').length).toBeGreaterThan(TAMANHO_PAGINA);
   });
-  it('revelarCaminho mostra um campo ainda não carregado, mesmo fora da 1ª página', () => {
+  it('campo, propriedade e estrutura levam ao nó que os contém (âncora)', () => {
+    expect(ind.ancoras('obj:User.ProfileId')).toEqual(['obj:User']);
+    expect(ind.ancoras('obj:User')).toEqual(['obj:User']);
+    expect(ind.ancoras('mdt:PermissionSet.applicationVisibilities')).toEqual(['mdt:PermissionSet']);
+    // propriedade de estrutura auxiliar: sobe até o metadata type que usa a estrutura
+    expect(ind.ancoras('mdx:NamedCredentialParameter.externalCredential')).toContain('mdt:NamedCredential');
+    expect(ind.ancoras('mdx:NamedCredentialParameter')).toContain('mdt:NamedCredential');
     const cam = ind.caminhoPreferido('obj:User.ProfileId', 'funcionalidade')!;
-    expect(cam[cam.length - 2]).toBe('obj:User');
-    const e = exp0();
-    revelarCaminho(ind, 'funcionalidade', e, cam);
-    const cena = montarCena(ind, 'funcionalidade', e);
-    expect(cena.ocorrencias.some((o) => o.chave === chaveDe(cam))).toBe(true);
-    // não carrega todas as páginas até o item: 1ª página + o item fixado (se estiver fora dela)
-    const pai = chaveDe(cam.slice(0, -1));
-    const irmaos = cena.ocorrencias.filter((o) => o.paiChave === pai).length;
-    expect(irmaos).toBeLessThanOrEqual(TAMANHO_PAGINA + 1);
-    const pag = cena.paginacoes.find((p) => p.paiChave === pai)!;
-    expect(irmaos + pag.restantes).toBe(ind.quantidadeFilhos('funcionalidade', cam.slice(0, -1)));
+    expect(cam[cam.length - 1]).toBe('obj:User');
+    expect(ind.caminhoValido(cam, 'funcionalidade')).toBe(true);
   });
   it('recolher remove descendentes da expansão', () => {
     const cam = ind.caminhoPreferido('obj:User.ProfileId', 'funcionalidade')!;
@@ -89,14 +86,16 @@ describe('cena (ocorrências visíveis)', () => {
     const cena = montarCena(ind, 'funcionalidade', e);
     expect(cena.ocorrencias.some((o) => o.id === 'obj:User')).toBe(false);
   });
-  it('arestas técnicas ligam ocorrências visíveis (User.ProfileId → Profile)', () => {
+  it('relação técnica de um campo é desenhada entre os donos (User → Profile, por User.ProfileId)', () => {
     const e = exp0();
     revelarCaminho(ind, 'funcionalidade', e, ind.caminhoPreferido('obj:User.ProfileId', 'funcionalidade')!);
     revelarCaminho(ind, 'funcionalidade', e, ind.caminhoPreferido('obj:Profile', 'funcionalidade')!);
     const cena = montarCena(ind, 'funcionalidade', e);
     const t = cena.arestas.find((a) => a.tecnica && a.aresta?.rel_id === 'rel:user-profile');
     expect(t).toBeTruthy();
+    expect(t!.origem.endsWith('obj:User')).toBe(true);
     expect(t!.destino.endsWith('obj:Profile')).toBe(true);
+    expect(cena.arestas.filter((a) => a.id === t!.id).length).toBe(1);
   });
 });
 
@@ -194,7 +193,9 @@ describe('contratos, limites e falhas (lote 5d)', () => {
   it('EventBusSubscriber.Retries é alcançável pela funcionalidade de reprocessamento', () => {
     const c = ind.caminhoPreferido('obj:EventBusSubscriber.Retries', 'funcionalidade')!;
     expect(c).toContain('func:reprocessamento-e-monitoramento-de-eventos');
-    expect(c[c.length - 1]).toBe('obj:EventBusSubscriber.Retries');
+    // o caminho termina no objeto; o campo abre na tabela dele
+    expect(c[c.length - 1]).toBe('obj:EventBusSubscriber');
+    expect(ind.itensDaTabela('obj:EventBusSubscriber')).toContain('obj:EventBusSubscriber.Retries');
   });
 });
 

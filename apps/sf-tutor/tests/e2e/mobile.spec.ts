@@ -17,7 +17,12 @@ test.describe('360px', () => {
     await page.locator('#resultados [role=option]').filter({ hasText: 'User' }).first().click();
     await expect(page.locator('#painel')).toHaveClass(/aberto/);
     await expect(page.locator('#painel')).toHaveAttribute('data-estado', 'meio');
-    await expect(titulo(page)).toHaveText('ProfileId');
+    // o campo abre na tabela do objeto, numa janela que cabe na tela
+    await expect(titulo(page)).toHaveText('User');
+    await expect(page.locator('#dialogo tr.linha-item.aberta')).toHaveAttribute('data-id', 'obj:User.ProfileId');
+    expect(await page.evaluate(() => document.documentElement.scrollWidth)).toBeLessThanOrEqual(360);
+    await page.screenshot({ path: 'tests/resultados/mobile-tabela.png' });
+    await page.locator('#dialogo').getByRole('button', { name: 'Fechar' }).click();
     await page.waitForTimeout(400);
     await page.screenshot({ path: 'tests/resultados/mobile-painel.png' });
     await page.getByRole('button', { name: 'Voltar ao mapa' }).click();

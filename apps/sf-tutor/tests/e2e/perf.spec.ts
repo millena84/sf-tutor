@@ -38,11 +38,20 @@ test('dados reais', async ({ page }) => {
   await medir(page, m, 'abrir_campo_por_busca', async () => {
     await page.locator('#busca').fill('ProfileId');
     await page.locator('#resultados [role=option]').filter({ hasText: 'User' }).first().click();
-  }, 'ProfileId');
-  await medir(page, m, 'abrir_objeto_e_expandir', async () => {
-    await page.locator('#conteudo-painel').locator('p', { hasText: 'Pertence a' }).getByRole('button').click();
+    await expect(page.locator('#dialogo tr.linha-item.aberta')).toHaveAttribute('data-id', 'obj:User.ProfileId');
   }, 'User');
+  await page.locator('#fechar-dialogo').click();
   let t1 = Date.now();
+  await page.locator('#conteudo-painel').getByRole('button', { name: /^Ver \d+ campos em tabela/ }).click();
+  await expect(page.locator('#dialogo tr.linha-item').first()).toBeVisible();
+  m.abrir_tabela_de_campos_ms = Date.now() - t1;
+  m.linhas_na_tabela = await page.locator('#dialogo tr.linha-item').count();
+  await page.locator('#fechar-dialogo').click();
+  await medir(page, m, 'abrir_funcionalidade', async () => {
+    await page.locator('#busca').fill('Usuários');
+    await page.locator('#resultados [role=option]').filter({ hasText: /Funcionalidade/ }).first().click();
+  }, 'Usuários');
+  t1 = Date.now();
   await page.locator('#conteudo-painel').getByRole('button', { name: /^Expandir|^Recolher/ }).first().click();
   m.expandir_recolher_ms = Date.now() - t1;
   t1 = Date.now();
@@ -63,29 +72,24 @@ test('fixture sintética', async ({ page }) => {
     await page.locator('#busca').fill('SintObj0');
     await page.locator('#resultados [role=option]').filter({ hasText: /^.*SintObj0/ }).first().click();
   }, 'SintObj0');
+  // objeto com 3000 campos: é o último nó; a tabela abre com as 3000 linhas e filtra
   let t0 = Date.now();
-  await page.locator('#conteudo-painel').getByRole('button', { name: /^Expandir/ }).click();
-  await page.waitForFunction(() => (window as unknown as W).__sfTutor.nosRenderizados() > 40);
-  m.expandir_3000_campos_1a_pagina_ms = Date.now() - t0;
-  m.nos_desenhados_apos_expandir = await page.evaluate(() => (window as unknown as W).__sfTutor.nosRenderizados());
-  // carrega mais 4 páginas tocando no nó "+N mais" (chave = caminho do objeto + '>#mais'), para o arraste mover mais de 100 nós
-  const chaveObj = await page.evaluate(() => (window as unknown as W).__sfTutor.selecao());
-  for (let i = 0; i < 4 && chaveObj; i++) {
-    const pm = await page.evaluate((c) => (window as unknown as { __sfTutor: { ponto(a: { no?: string }): { x: number; y: number } | null } }).__sfTutor.ponto({ no: c }), `${chaveObj}>#mais`);
-    if (!pm) break;
-    await page.locator('#btn-enquadrar').click();
-    await page.waitForTimeout(350);
-    const pm2 = await page.evaluate((c) => (window as unknown as { __sfTutor: { ponto(a: { no?: string }): { x: number; y: number } | null } }).__sfTutor.ponto({ no: c }), `${chaveObj}>#mais`);
-    if (!pm2) break;
-    await page.mouse.click(pm2.x, pm2.y);
-    await page.waitForTimeout(150);
-  }
-  m.nos_desenhados_apos_paginar = await page.evaluate(() => (window as unknown as W).__sfTutor.nosRenderizados());
-  // campo profundo, fora das páginas carregadas
-  await medir(page, m, 'busca_e_revelar_campo_2999', async () => {
-    await page.locator('#busca').fill('Campo2999__c');
-    await page.locator('#resultados [role=option]').filter({ hasText: 'SintObj0' }).first().click();
-  }, 'Campo2999__c');
+  await page.locator('#conteudo-painel').getByRole('button', { name: /^Ver 3000 campos em tabela/ }).click();
+  await expect(page.locator('#dialogo tr.linha-item')).toHaveCount(3000, { timeout: 30_000 });
+  m.abrir_tabela_3000_campos_ms = Date.now() - t0;
+  t0 = Date.now();
+  await page.locator('#dialogo').getByRole('searchbox').fill('Campo2999__c');
+  await expect(page.locator('#dialogo tr.linha-item:not([hidden])')).toHaveCount(1);
+  m.filtrar_tabela_3000_campos_ms = Date.now() - t0;
+  await page.locator('#fechar-dialogo').click();
+  m.nos_desenhados_apos_tabela = await page.evaluate(() => (window as unknown as W).__sfTutor.nosRenderizados());
+  // campo profundo: a busca abre o objeto e a tabela na linha do campo
+  t0 = Date.now();
+  await page.locator('#busca').fill('Campo2999__c');
+  await page.locator('#resultados [role=option]').filter({ hasText: 'SintObj0' }).first().click();
+  await expect(page.locator('#dialogo tr.linha-item.aberta')).toBeVisible({ timeout: 30_000 });
+  m.busca_e_abrir_campo_2999_ms = Date.now() - t0;
+  await page.locator('#fechar-dialogo').click();
   t0 = Date.now();
   await page.locator('#busca').fill('SintType1199');
   await expect(page.locator('#resultados [role=option]').first()).toContainText('SintType1199');

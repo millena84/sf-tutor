@@ -26,27 +26,45 @@ test('deep link com caminho preserva o contexto; id inexistente cai no centro se
   expect(await selecao(page)).toBe('salesforce');
 });
 
-test('busca abre um campo que ainda não estava carregado no mapa', async ({ page }) => {
+test('busca por um campo abre o objeto no mapa e a tabela na linha do campo', async ({ page }) => {
   await abrir(page);
   const antes = await page.evaluate(() => (window as unknown as { __sfTutor: { nosRenderizados(): number } }).__sfTutor.nosRenderizados());
   await page.locator('#busca').fill('AssigneeId');
   await page.keyboard.press('ArrowDown');
   await page.keyboard.press('Enter');
-  await expect(titulo(page)).toHaveText('AssigneeId');
-  expect(await selecao(page)).toMatch(/obj:PermissionSetAssignment>obj:PermissionSetAssignment\.AssigneeId$/);
+  await expect(titulo(page)).toHaveText('PermissionSetAssignment');
+  expect(await selecao(page)).toMatch(/>obj:PermissionSetAssignment$/);
+  await expect(page.locator('#dialogo tr.linha-item.aberta')).toHaveAttribute('data-id', 'obj:PermissionSetAssignment.AssigneeId');
+  await expect(page).toHaveURL(/t=obj%3APermissionSetAssignment&f=obj%3APermissionSetAssignment\.AssigneeId/);
   const depois = await page.evaluate(() => (window as unknown as { __sfTutor: { nosRenderizados(): number } }).__sfTutor.nosRenderizados());
   expect(depois).toBeGreaterThan(antes);
+  // voltar no histórico não deixa a janela aberta sobre outro item
+  await page.keyboard.press('Escape');
+  await expect(page.locator('#dialogo')).toBeHidden();
+  await expect(page).not.toHaveURL(/t=obj/);
 });
 
-test('expandir, paginar e recolher pelo painel', async ({ page }) => {
+test('metadata type e objeto são o último nó; expandir e recolher pela funcionalidade', async ({ page }) => {
   await abrir(page, '?n=obj:User');
+  await expect(painel(page).getByRole('button', { name: /^Expandir/ })).toHaveCount(0);
+  await abrir(page, '?n=func:permission-sets');
   const qtd = () => page.evaluate(() => (window as unknown as { __sfTutor: { nosRenderizados(): number } }).__sfTutor.nosRenderizados());
   const a = await qtd();
   await painel(page).getByRole('button', { name: /^Expandir \(\d+ itens\)/ }).click();
-  const b = await qtd();
-  expect(b).toBeGreaterThanOrEqual(a + 24); // 1ª página de campos + nó "mais"
+  expect(await qtd()).toBeGreaterThan(a);
   await page.getByRole('button', { name: /^Recolher/ }).click();
   expect(await qtd()).toBe(a);
+});
+
+test('estrutura auxiliar abre como tabela a partir do metadata type', async ({ page }) => {
+  await abrir(page, '?n=mdt:NamedCredential');
+  const est = await secao(page, /Estruturas auxiliares usadas/);
+  await est.getByRole('button', { name: 'NamedCredentialParameter', exact: true }).click();
+  const janela = page.locator('#dialogo');
+  await expect(page.locator('#dialogo-titulo')).toContainText('Propriedades de NamedCredentialParameter');
+  await expect(janela).toContainText('Estrutura auxiliar do schema');
+  expect(await janela.locator('tr.linha-item').count()).toBeGreaterThan(0);
+  await expect(titulo(page)).toHaveText('NamedCredential');
 });
 
 test('troca de visão mantém o item selecionado quando ele existe na outra visão', async ({ page }) => {
@@ -88,11 +106,28 @@ test('filtros esmaecem e explicam o motivo, sem apagar o item', async ({ page })
 
 test('painéis de cada tipo de nó abrem sem erro', async ({ page }) => {
   const ids = ['salesforce', 'nuv:sales-cloud', 'cls:acesso-identidade-e-seguranca', 'sub:permissoes-perfis-e-grupos', 'func:permission-sets',
-    'mdt:PermissionSet', 'mdx:AssignmentRules_RuleEntry', 'mdt:PermissionSet.applicationVisibilities', 'obj:PermissionSetAssignment', 'obj:User.ProfileId'];
+    'mdt:PermissionSet', 'obj:PermissionSetAssignment'];
   for (const id of ids) {
     await abrir(page, `?n=${encodeURIComponent(id)}`);
     await expect(titulo(page), id).not.toBeEmpty();
     expect(await selecao(page), id).toMatch(new RegExp(`${id.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')}$`));
+    await semErroNoPainel(page);
+  }
+});
+
+test('links antigos para campo, propriedade e estrutura abrem o nó dono com a tabela', async ({ page }) => {
+  const casos: [string, string, string | null][] = [
+    ['obj:User.ProfileId', 'obj:User', 'obj:User.ProfileId'],
+    ['mdt:PermissionSet.applicationVisibilities', 'mdt:PermissionSet', 'mdt:PermissionSet.applicationVisibilities'],
+    ['mdx:AssignmentRules_RuleEntry', 'mdt:AssignmentRules', null],
+  ];
+  for (const [id, dono, foco] of casos) {
+    await abrir(page, `?n=${encodeURIComponent(id)}`);
+    expect(await selecao(page), id).toMatch(new RegExp(`>${dono.replace('.', '\\.')}$`));
+    const janela = page.locator('#dialogo');
+    await expect(janela, id).toBeVisible();
+    if (foco) await expect(janela.locator('tr.linha-item.aberta'), id).toHaveAttribute('data-id', foco);
+    await expect(janela.locator('.erro'), id).toHaveCount(0);
     await semErroNoPainel(page);
   }
 });

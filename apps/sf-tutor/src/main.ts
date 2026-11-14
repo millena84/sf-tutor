@@ -1,13 +1,13 @@
 import './estilos.css';
 import { carregarBase, Entidades, ErroCarga } from './data/carregador';
 import type { DadosBase } from './data/tipos';
-import { Indice, chaveDe, caminhoDe, montarCena, recolher, revelarCaminho, SEP, TIPOS_FOLHA, type EstadoExpansao, type Visao, type Cena } from './model/adaptador';
+import { Indice, chaveDe, caminhoDe, montarCena, recolher, revelarCaminho, SEP, TIPOS_FOLHA, TIPOS_FORA_DO_MAPA, type EstadoExpansao, type Visao, type Cena } from './model/adaptador';
 import { IndiceBusca } from './model/busca';
 import { filtrosAtivos, filtrosVazios, motivoOculto } from './model/filtros';
 import { Cores, misturar } from './cores';
 import { Mapa, type ArestaClicada, type NoVisual } from './graph/mapa';
 import { iconeSvg, siglaFuncionalidade } from './graph/icones';
-import { renderizarAresta, renderizarNo, renderizarRelacaoPorId, type CtxPainel } from './ui/painel';
+import { conteudoTabela, renderizarAresta, renderizarNo, renderizarRelacaoPorId, type CtxPainel } from './ui/painel';
 import { renderizarLista } from './ui/lista';
 import { conteudoFiltros, conteudoLegenda, conteudoMetodo, ligarBusca } from './ui/extras';
 import { anunciar, h, limpar } from './ui/dom';
@@ -46,6 +46,8 @@ async function iniciar(): Promise<void> {
     reduzir,
     cena: null as Cena | null,
     sintetico: url.sintetico || dados.build.sintetico === true,
+    /** tabela de campos ou propriedades aberta na janela */
+    tabela: null as { dono: string; foco?: string } | null,
   };
   const exp = () => st.exp[st.visao];
 
@@ -144,6 +146,7 @@ async function iniciar(): Promise<void> {
       id: s?.tipo === 'no' ? s.caminho[s.caminho.length - 1] : undefined,
       caminho: s?.tipo === 'no' ? s.caminho : undefined,
       rel: s?.tipo === 'rel' ? s.relId : s?.tipo === 'aresta' ? s.a.relId : undefined,
+      tabela: st.tabela?.dono, foco: st.tabela?.foco,
     };
   }
   function gravarURL(push: boolean): void {
@@ -166,7 +169,50 @@ async function iniciar(): Promise<void> {
     if (n) anunciar(`${NOME_TIPO[n.tipo]} selecionado: ${n.rotulo}`);
   }
 
+  function fecharTabela(): void {
+    const d = $<HTMLDialogElement>('dialogo');
+    if (st.tabela && d.open) d.close();
+    st.tabela = null;
+  }
+
+  /** Abre a tabela de campos ou propriedades de um dono (metadata type, estrutura auxiliar ou objeto). */
+  async function abrirTabela(dono: string, foco?: string): Promise<void> {
+    const n = ind.no(dono);
+    if (!n) return;
+    const d = $<HTMLDialogElement>('dialogo');
+    const corpo = $('dialogo-corpo');
+    try {
+      const e = await entidades.obter(dono);
+      limpar(corpo);
+      const ehObjeto = Array.isArray((e as Record<string, unknown>).campos);
+      $('dialogo-titulo').textContent = `${ehObjeto ? 'Campos' : 'Propriedades'} de ${n.rotulo} (${NOME_TIPO[n.tipo]})`;
+      const t = conteudoTabela(ctxPainel, e, foco);
+      corpo.append(t.el);
+      d.classList.add('largo');
+      st.tabela = { dono, foco };
+      if (!d.open) d.showModal();
+      d.scrollTop = 0;
+      t.focar();
+      gravarURL(false);
+      anunciar(`Tabela aberta: ${$('dialogo-titulo').textContent}`);
+    } catch (err) {
+      anunciar(`Não foi possível abrir a tabela de ${n.rotulo}: ${String((err as Error)?.message ?? err)}`);
+    }
+  }
+
   function abrirId(id: string, contexto?: readonly string[], o: { push?: boolean } = {}): void {
+    const alvo = ind.no(id);
+    if (alvo && TIPOS_FORA_DO_MAPA.has(alvo.tipo)) {
+      // campo, propriedade ou estrutura: seleciona o nó do mapa que os contém e abre a tabela nele
+      const ancoras = ind.ancoras(id);
+      if (!ancoras.length) { anunciar('Item sem caminho no mapa.'); return; }
+      const atual = st.sel?.tipo === 'no' ? st.sel.caminho[st.sel.caminho.length - 1] : null;
+      st.tabela = null;
+      if (!atual || !ancoras.includes(atual)) abrirId(ancoras[0], contexto, o);
+      void abrirTabela(alvo.tipo === 'estrutura_auxiliar' ? id : alvo.pai!, alvo.tipo === 'estrutura_auxiliar' ? undefined : id);
+      return;
+    }
+    fecharTabela();
     const ctx = contexto ?? (st.sel?.tipo === 'no' ? st.sel.caminho : undefined);
     let cam = ind.caminhoPreferido(id, st.visao, ctx);
     if (!cam) {
@@ -297,6 +343,7 @@ async function iniciar(): Promise<void> {
     rotulo,
     abrir: (id, contexto) => abrirId(id, contexto),
     abrirCaminho: (c) => selecionarCaminho([...c]),
+    abrirTabela: (dono, foco) => { void abrirTabela(dono, foco); },
     alternar: (c) => alternar(c),
     expandido: (c) => exp().expandidos.has(chaveDe(c)),
     focarNoMapa: (c) => {
@@ -336,6 +383,11 @@ async function iniciar(): Promise<void> {
     d.showModal();
   }
   $('fechar-dialogo').addEventListener('click', () => $<HTMLDialogElement>('dialogo').close());
+  // ao fechar (botão, Esc ou navegação), a janela volta ao tamanho normal e a tabela sai da URL
+  $<HTMLDialogElement>('dialogo').addEventListener('close', () => {
+    $('dialogo').classList.remove('largo');
+    if (st.tabela) { st.tabela = null; gravarURL(false); }
+  });
   $('btn-metodo').addEventListener('click', () => abrirDialogo('metodo'));
   $('btn-legenda').addEventListener('click', () => abrirDialogo('legenda'));
   $('btn-filtros').addEventListener('click', () => abrirDialogo('filtros'));
@@ -406,8 +458,9 @@ async function iniciar(): Promise<void> {
     }
     if (u.id && ind.no(u.id)) {
       const cam = u.caminho && u.caminho[u.caminho.length - 1] === u.id && ind.caminhoValido(u.caminho, st.visao) ? u.caminho : null;
-      if (cam) selecionarCaminho(cam, { push });
+      if (cam) { fecharTabela(); selecionarCaminho(cam, { push }); }
       else abrirId(u.id, undefined, { push });
+      if (u.tabela && ind.no(u.tabela) && !TIPOS_FORA_DO_MAPA.has(ind.no(u.id)!.tipo)) void abrirTabela(u.tabela, u.foco);
       return;
     }
     if (u.id) anunciar(`Item ${u.id} não existe nesta versão dos dados.`);
@@ -450,6 +503,7 @@ async function iniciar(): Promise<void> {
     classes: (id: string) => { const c = st.cena?.ocorrencias.find((o) => o.id === id)?.chave; return c ? mapa.classesDe(c) : null; },
     pronto: true,
     folha: (id: string) => TIPOS_FOLHA.has(ind.no(id)?.tipo as never),
+    tabela: () => st.tabela,
   };
 }
 
