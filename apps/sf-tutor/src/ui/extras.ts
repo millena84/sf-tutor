@@ -61,12 +61,13 @@ function resumo(o: Record<string, unknown>): string {
 // ------------------------------------------------------------------ Legenda
 
 export function conteudoLegenda(cores: Cores, visao: 'funcionalidade' | 'nuvem', rotulo: (id: string) => string): HTMLElement {
-  const tipos: (keyof typeof NOME_TIPO)[] = ['salesforce', 'nuvem', 'classificacao', 'subclassificacao', 'funcionalidade', 'metadata_type', 'estrutura_auxiliar', 'propriedade_xml', 'objeto_api', 'objeto_api_juncao', 'campo_api'];
-  const ligs = ['classificacao_principal', 'classificacao_secundaria', 'representacao_xml', 'tipo_composto', 'referencia_campo', 'correspondencia_xml_api', 'representacao_comum'];
+  const tipos: (keyof typeof NOME_TIPO)[] = ['salesforce', 'nuvem', 'classificacao', 'subclassificacao', 'funcionalidade', 'metadata_type', 'objeto_api', 'objeto_api_juncao'];
+  const ligs = ['classificacao_principal', 'classificacao_secundaria', 'representacao_xml', 'referencia_campo', 'correspondencia_xml_api', 'representacao_comum'];
   const escala = visao === 'funcionalidade' ? cores.entradasClassificacao() : cores.entradasNuvem();
   return h('div', { class: 'legenda-conteudo' },
     h('h3', null, 'Tipos de nó'),
     h('p', { class: 'nota' }, 'Forma, borda e sigla distinguem os tipos; a cor indica o contexto.'),
+    h('p', { class: 'nota' }, 'O metadata type (XML) e o objeto API são o último nó do mapa. Propriedades, campos e estruturas auxiliares abrem em tabela a partir da ficha deles.'),
     h('p', { class: 'nota' }, 'Arrastar um item leva junto os itens abaixo dele no ramo; com Shift, move só o item. "Reorganizar" desfaz os arrastes da visão atual.'),
     h('ul', { class: 'lista-legenda' }, tipos.map((t) => h('li', null, h('span', { class: `ico ico-${t}`, 'aria-hidden': 'true' }, ICONE_TIPO[t] || '●'), NOME_TIPO_LEGENDA[t] ?? NOME_TIPO[t]))),
     h('h3', null, 'Ligações'),

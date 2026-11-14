@@ -44,10 +44,14 @@ apps/sf-tutor/dist/                (site publicável)
 |---|---|
 | `src/data/` | tipos do contrato e carregador (valida contrato; `?dados=sintetico` troca a pasta) |
 | `src/model/adaptador.ts` | índice e **cena**. A cena é uma função pura do estado de expansão: quais ocorrências estão visíveis, paginação de 24 em 24 e arestas técnicas entre ocorrências visíveis |
-| `src/model/busca.ts`, `filtros.ts` | busca em todo o catálogo (inclui campos não desenhados); filtros que esmaecem e explicam o motivo |
+| `src/model/busca.ts`, `filtros.ts` | busca em todo o catálogo (inclui campos e propriedades, que não são nós do mapa); filtros que esmaecem e explicam o motivo |
 | `src/graph/` | Cytoscape.js: estilo, layout radial incremental (nós existentes não se movem), ícones SVG |
 | `src/ui/` | painel por tipo de nó, modo lista (árvore ARIA), Método, legenda, filtros, busca |
-| `src/rotas.ts` | estado na URL (`v`, `m`, `n`, `c`, `r`, `dados`): deep link e voltar/avançar |
+| `src/rotas.ts` | estado na URL (`v`, `m`, `n`, `c`, `r`, `t`, `f`, `dados`): deep link e voltar/avançar |
+
+**Último nó do mapa.** O metadata type (XML) e o objeto API são o último nó. Propriedades, campos e estruturas auxiliares não são desenhados (`TIPOS_FORA_DO_MAPA`): abrem numa tabela em janela (`conteudoTabela` em `src/ui/painel.ts`), a partir da ficha do dono, com o detalhe de cada item na linha aberta. No celular cada linha vira um cartão empilhado.
+- `Indice.ancoras(id)` devolve o nó do mapa que contém um campo, propriedade ou estrutura. Busca, links e URLs antigas (`?n=obj:User.ProfileId`) selecionam esse nó e abrem a tabela na linha do item (`t` = dono da tabela, `f` = item em foco).
+- Uma relação técnica que sai de um campo ou propriedade é desenhada entre os donos (por exemplo, User → Profile por `User.ProfileId`), uma vez por par.
 
 **Ocorrência × id canônico.** Um mesmo item aparece em vários caminhos; por exemplo, uma funcionalidade aparece em Agentforce Sales e em Agentforce Service.
 - A chave de ocorrência é o caminho: ids unidos por `>`.

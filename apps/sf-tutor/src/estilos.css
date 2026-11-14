@@ -213,6 +213,37 @@ dialog::backdrop { background: rgb(15 23 42 / .45); }
 .dialogo-cab { position: sticky; top: 0; display: flex; justify-content: space-between; align-items: center; gap: 8px; padding: 10px 16px; background: #fff; border-bottom: 1px solid var(--borda); }
 .dialogo-cab h2 { margin: 0; font-size: 1.2rem; }
 #dialogo-corpo { padding: 12px 16px 20px; }
+/* tabela de campos e propriedades (janela larga) */
+dialog.largo { width: min(1120px, calc(100vw - 24px)); }
+.bloco-tabela { margin: 12px 0; padding: 10px 12px; border: 1px solid var(--borda); border-radius: 10px; background: #f8fafc; }
+.bloco-tabela h4 { margin: 0 0 4px; }
+.btn-tabela { font-weight: 600; }
+.rolagem-tabela { overflow-x: auto; border: 1px solid var(--borda); border-radius: 10px; }
+.tabela-campos { width: 100%; border-collapse: collapse; font-size: .92rem; }
+.tabela-campos th, .tabela-campos td { padding: 6px 10px; text-align: left; vertical-align: top; border-bottom: 1px solid var(--borda); }
+.tabela-campos thead th { position: sticky; top: 0; background: #f1f5f9; white-space: nowrap; }
+.tabela-campos tbody th { font-weight: 600; white-space: nowrap; }
+.tabela-campos .linha-item.aberta > * { background: #eef6ff; border-bottom-color: transparent; }
+.tabela-campos .linha-detalhe > td { background: #f8fbff; padding: 8px 14px 14px; }
+.tabela-campos .linha-item.aberta > th::before { content: "▾ "; }
+.tabela-campos .linha-item:not(.aberta) > th::before { content: "▸ "; }
+.contagem-tabela { margin: 6px 0; }
+.tabela-campos tr[hidden] { display: none !important; }
+/* a linha em foco não fica escondida sob o cabeçalho fixo da janela */
+.tabela-campos .linha-item { scroll-margin-top: 104px; }
+@media (max-width: 760px) {
+  /* no celular cada linha vira um cartão empilhado: sem rolagem lateral */
+  .rolagem-tabela { border: 0; overflow: visible; }
+  .tabela-campos { font-size: .9rem; }
+  .tabela-campos thead { position: absolute; left: -9999px; }
+  .tabela-campos, .tabela-campos tbody, .tabela-campos tr, .tabela-campos th, .tabela-campos td { display: block; }
+  .tabela-campos .linha-item { margin-top: 8px; padding: 4px 0; border: 1px solid var(--borda); border-radius: 10px; scroll-margin-top: 84px; }
+  .tabela-campos .linha-item.aberta { border-bottom-left-radius: 0; border-bottom-right-radius: 0; }
+  .tabela-campos th, .tabela-campos td { padding: 3px 10px; border-bottom: 0; white-space: normal; }
+  .tabela-campos tbody th { white-space: normal; overflow-wrap: anywhere; }
+  .tabela-campos td[data-rotulo]::before { content: attr(data-rotulo) ": "; font-weight: 600; color: #475569; }
+  .tabela-campos .linha-detalhe > td { padding: 8px 10px 12px; border: 1px solid var(--borda); border-top: 0; border-radius: 0 0 10px 10px; overflow-wrap: anywhere; }
+}
 .lista-legenda { list-style: none; margin: 6px 0 12px; padding: 0; display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 6px 12px; }
 .lista-legenda li { display: flex; align-items: center; gap: 8px; font-size: .88rem; }
 .amostra-cor { display: inline-block; width: 18px; height: 18px; border-radius: 50%; border: 1px solid rgb(0 0 0 / .2); flex: none; }

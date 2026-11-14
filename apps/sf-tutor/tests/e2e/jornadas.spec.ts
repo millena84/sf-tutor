@@ -17,14 +17,25 @@ test('1. User: campos do objeto, sem XML inventado', async ({ page }) => {
   await expect(titulo(page)).toHaveText('User');
   expect(await selecao(page)).toMatch(/func:usuarios>obj:User$/);
   await expect(painel(page).locator('summary', { hasText: 'Arquivo no projeto Salesforce' })).toHaveCount(0);
-  const campos = await secao(page, /^Campos \(\d+\) — lista completa/);
-  const n = Number((await campos.locator('summary').textContent())!.match(/\((\d+)\)/)![1]);
+  // o objeto é o último nó: os campos abrem em tabela, numa janela
+  const bloco = painel(page).locator('.bloco-tabela');
+  const n = Number((await bloco.locator('h4').textContent())!.match(/\((\d+)\)/)![1]);
   expect(n).toBeGreaterThan(100);
-  await expect(campos.locator('.lista-folhas > li')).toHaveCount(n);
-  await campos.getByRole('searchbox').fill('Username');
-  await campos.getByRole('button', { name: 'Username', exact: true }).click();
-  await expect(titulo(page)).toHaveText('Username');
-  await expect(painel(page).getByText('Pertence a')).toBeVisible();
+  await bloco.getByRole('button', { name: /^Ver \d+ campos em tabela/ }).click();
+  const janela = page.locator('#dialogo');
+  await expect(janela).toBeVisible();
+  await expect(page.locator('#dialogo-titulo')).toContainText('Campos de User');
+  await expect(janela.locator('tr.linha-item')).toHaveCount(n);
+  await expect(page).toHaveURL(/t=obj%3AUser/);
+  await janela.getByRole('searchbox').fill('Username');
+  await janela.getByRole('button', { name: 'Username', exact: true }).click();
+  await expect(janela.locator('tr.linha-detalhe:not([hidden])')).toContainText('Nome técnico');
+  await expect(titulo(page), 'a seleção no mapa continua no objeto').toHaveText('User');
+  expect(await selecao(page)).toMatch(/func:usuarios>obj:User$/);
+  await expect(janela.locator('.erro')).toHaveCount(0);
+  await janela.getByRole('button', { name: 'Fechar' }).click();
+  await expect(janela).toBeHidden();
+  await expect(page).not.toHaveURL(/t=obj/);
   await semErroNoPainel(page);
 });
 
@@ -42,10 +53,10 @@ test('2. PermissionSet: metadata type XML e objeto API são itens distintos', as
   await rep.getByRole('button', { name: 'PermissionSet', exact: true }).first().click();
   expect(await selecao(page)).toMatch(/>mdt:PermissionSet$/);
   await expect(painel(page).locator('summary', { hasText: 'Arquivo no projeto Salesforce' })).toBeVisible();
-  await expect(painel(page).locator('summary', { hasText: /^Propriedades XML \(\d+\)/ })).toBeVisible();
+  await expect(painel(page).locator('.bloco-tabela h4', { hasText: /^Propriedades XML \(\d+\)/ })).toBeVisible();
   await abrir(page, '?n=obj:PermissionSet');
   await expect(titulo(page)).toHaveText('PermissionSet');
-  await expect(painel(page).locator('summary', { hasText: /^Campos \(\d+\)/ })).toBeVisible();
+  await expect(painel(page).locator('.bloco-tabela h4', { hasText: /^Campos \(\d+\)/ })).toBeVisible();
   await expect(painel(page).locator('summary', { hasText: 'APIs de acesso e operações' })).toBeVisible();
   await semErroNoPainel(page);
 });
@@ -54,9 +65,12 @@ test('3. User → PermissionSetAssignment → PermissionSet / PermissionSetGroup
   await abrir(page, '?n=obj:User');
   const rel = await secao(page, /Relações técnicas/);
   await rel.getByRole('button', { name: 'PermissionSetAssignment.AssigneeId' }).click();
-  await expect(titulo(page)).toHaveText('AssigneeId');
-  await painel(page).locator('p', { hasText: 'Pertence a' }).getByRole('button', { name: 'PermissionSetAssignment', exact: true }).click();
+  // o campo leva ao objeto que o contém, com a tabela aberta na linha dele
   await expect(titulo(page)).toHaveText('PermissionSetAssignment');
+  const janela = page.locator('#dialogo');
+  await expect(janela.locator('tr.linha-item.aberta')).toHaveAttribute('data-id', 'obj:PermissionSetAssignment.AssigneeId');
+  await janela.getByRole('button', { name: 'Fechar' }).click();
+  await expect(janela).toBeHidden();
   const rel2 = await secao(page, /Relações técnicas/);
   await expect(rel2.getByRole('button', { name: 'PermissionSet', exact: true })).toBeVisible();
   await expect(rel2.getByRole('button', { name: 'PermissionSetGroup', exact: true })).toBeVisible();
@@ -72,10 +86,13 @@ test('3. User → PermissionSetAssignment → PermissionSet / PermissionSetGroup
 test('4. User.ProfileId → Profile, com aresta selecionável no mapa', async ({ page, isMobile }) => {
   await abrir(page);
   await buscarEAbrir(page, 'ProfileId', /User/);
-  await expect(titulo(page)).toHaveText('ProfileId');
-  expect(await selecao(page)).toMatch(/obj:User>obj:User\.ProfileId$/);
-  const rel = await secao(page, /Relações técnicas/);
-  await rel.getByRole('button', { name: 'Profile', exact: true }).click();
+  await expect(titulo(page)).toHaveText('User');
+  expect(await selecao(page)).toMatch(/>obj:User$/);
+  const janela = page.locator('#dialogo');
+  const linha = janela.locator('tr.linha-item.aberta');
+  await expect(linha).toHaveAttribute('data-id', 'obj:User.ProfileId');
+  await janela.locator('tr.linha-detalhe:not([hidden])').getByRole('button', { name: /^Profile \(abrir objeto no mapa\)/ }).click();
+  await expect(janela).toBeHidden();
   await expect(titulo(page)).toHaveText('Profile');
   expect(await selecao(page)).toMatch(/>obj:Profile$/);
   test.skip(!!isMobile, 'clique na aresta testado no desktop');
