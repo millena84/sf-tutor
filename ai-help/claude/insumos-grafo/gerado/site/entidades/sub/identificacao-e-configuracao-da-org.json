@@ -1,38 +1,115 @@
 {
+  "avancado": [
+    {
+      "evidencias": [
+        {
+          "fonte": "src:help-language-locale-currency"
+        },
+        {
+          "fonte": "src:help-org-default-timezone"
+        }
+      ],
+      "texto": "Default Language e Default Time Zone valem para usuários novos. Quem já está cadastrado mantém o idioma e o fuso que tinha, até trocar nas configurações pessoais.",
+      "tipo": "atencao",
+      "titulo": "O padrão da org não muda quem já existe"
+    },
+    {
+      "evidencias": [
+        {
+          "fonte": "src:help-company-info-fields"
+        },
+        {
+          "fonte": "src:help-language-locale-currency"
+        }
+      ],
+      "texto": "Em org de moeda única, o administrador define Currency Locale, que dá o formato dos valores em moeda. Em org com múltiplas moedas, o campo é Corporate Currency: a moeda em que a matriz reporta e a base de todas as taxas de conversão.",
+      "tipo": "decisao",
+      "titulo": "Moeda única ou múltiplas moedas muda a página"
+    },
+    {
+      "evidencias": [
+        {
+          "fonte": "src:help-org-id"
+        }
+      ],
+      "texto": "O Organization ID de produção é diferente do de um sandbox, e cada refresh de sandbox gera um ID novo. O que depender do ID precisa considerar isso.",
+      "tipo": "atencao",
+      "titulo": "Sandbox tem outro Organization ID"
+    },
+    {
+      "evidencias": [
+        {
+          "fonte": "src:mdapi-companysettings"
+        }
+      ],
+      "texto": "CompanySettings é o metadata type das configurações gerais da empresa; na versão lida, os campos dele tratam do ano fiscal. Para os demais dados da página Company Information, este catálogo ainda não confirmou um metadata type.",
+      "tipo": "implantacao",
+      "titulo": "O que existe como metadado"
+    }
+  ],
   "classificacao": "cls:organizacao-e-configuracoes-base",
   "derivado": {
     "dependencias": [],
-    "funcionalidades": [],
+    "funcionalidades": [
+      {
+        "exemplo": "A administradora troca o fuso padrão da org; quem for cadastrado depois já nasce com o fuso novo.",
+        "id": "func:informacoes-da-empresa",
+        "principal": true
+      }
+    ],
     "metadata_types": [],
     "nota": "Calculado pelo gerador a partir do catálogo; não é cadastro.",
     "objetos_api": [],
     "temas_sem_funcionalidade": []
   },
-  "descricao": "Dados cadastrais e parâmetros gerais que identificam a org.",
+  "descricao": "A ficha cadastral da org: dados da empresa, padrões de idioma, localidade, fuso e moeda, licenças compradas e o Organization ID que identifica a org.",
   "encadeamento": {
     "evidencias": [
       {
-        "fonte": "src:help-setup-company"
+        "fonte": "src:help-language-locale-currency"
       }
     ],
-    "texto": "É o ponto de partida de Organização: idioma, moeda, ano fiscal e horários são ajustados sobre essa base."
+    "texto": "É o ponto de partida do tema. Os padrões definidos aqui são detalhados em 'Localização, idiomas e tradução' e em 'Moedas e calendário fiscal'. O administrador define o padrão da org; cada usuário pode trocar idioma, localidade e fuso nas configurações pessoais."
   },
   "escopo": "Entram os dados cadastrais e os parâmetros gerais que identificam a org como um todo.",
   "estado": "desconhecido",
   "fora_do_escopo": "Domínio e endereços de acesso ficam em \"Domínios e URLs\". Ativação de recursos opcionais fica em \"Habilitação de recursos\".",
-  "funcionalidades": [],
+  "funcionalidades": [
+    "func:informacoes-da-empresa"
+  ],
   "id": "sub:identificacao-e-configuracao-da-org",
   "natureza": "curadoria_didatica",
   "nome": "Identificação e configuração da org",
-  "nota_estado": "Agrupamento proposto na especificação; fronteira ainda não cruzada com a documentação oficial.",
+  "nota_estado": "Tema criado pelo projeto (00-especificacao-grafo.md), não é nomenclatura oficial da Salesforce. Cruzado em 2026-11-10 com áreas da documentação oficial listadas nas referências; a correspondência é parcial e o recorte continua sendo do projeto.",
   "para_iniciantes": {
     "evidencias": [
       {
+        "fonte": "src:help-company-info-fields"
+      },
+      {
         "fonte": "src:help-setup-company"
+      },
+      {
+        "fonte": "src:help-org-id"
       }
     ],
-    "exemplo": "O administrador confere as licenças disponíveis e atualiza o contato de segurança da empresa.",
-    "explicacao": "São os dados que identificam a empresa na Salesforce e os parâmetros gerais da org: informações da empresa, licenças compradas e os contatos responsáveis pela org."
+    "exemplo": "A administradora troca o fuso padrão da org; quem for cadastrado depois já recebe o fuso novo.",
+    "explicacao": "É a ficha cadastral da org. A página Company Information, no Setup, reúne os dados da empresa, os padrões de idioma, localidade e fuso, a moeda e as licenças compradas. Cada org também tem um Organization ID, o identificador pedido pelo suporte.",
+    "por_onde_comecar": [
+      "func:informacoes-da-empresa"
+    ]
   },
+  "referencias_oficiais": [
+    {
+      "fonte": "src:help-company-info-fields",
+      "nota": "Cobre o tema: campos da página Company Information.",
+      "secao": "Manage Information About Your Company"
+    },
+    {
+      "fonte": "src:help-setup-company",
+      "nota": "Mais ampla que o tema: guia de configuração da empresa, que inclui idioma, moeda e ano fiscal.",
+      "secao": "Set Up Your Company in Salesforce"
+    }
+  ],
   "sigla": "ORG-01"
 }

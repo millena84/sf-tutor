@@ -37,22 +37,61 @@ CONTEUDO_CLS = {
             "moeda, ano fiscal, horários de funcionamento e quais recursos estão ligados. Mudar algo aqui afeta todos os usuários.",
             "Uma empresa brasileira define o idioma e a moeda padrão, o ano fiscal e o horário do suporte: segunda a sexta, das 8h às 18h, no fuso de Brasília.",
             E("src:help-setup-company", "src:help-bh"),
-            comece=["func:horario-comercial"],
+            comece=["func:informacoes-da-empresa", "func:horario-comercial"],
             analogia=("Como as configurações de um celular novo: idioma, fuso e região valem para todos os apps.",
                       "No celular, a configuração é de uma pessoa. Na org, um ajuste muda o comportamento para todos os usuários e processos.")),
         "encadeamento": enc(
-            "Primeiro vêm os dados que identificam a org e as configurações gerais. Idioma, localidade, moeda e ano fiscal mudam como os "
-            "valores aparecem. Horários comerciais e feriados alimentam prazos de outras regras, como escalonamento e marcos de atendimento. "
-            "Domínios e habilitação de recursos completam o quadro. No catálogo, só o horário comercial já tem funcionalidade cadastrada.",
-            E("src:help-setup-company", "src:help-bh", "src:help-ent-bh")),
+            "Roteiro pelas oito seções do tema. 1) 'Identificação e configuração da org': a ficha cadastral e os padrões da org. "
+            "2) 'Settings': as mesmas configurações vistas como metadados. 3) 'Parâmetros reutilizáveis': valores de configuração "
+            "criados pela empresa. 4) 'Localização, idiomas e tradução': em que língua e formato tudo aparece. 5) 'Moedas e calendário "
+            "fiscal': moedas, taxas e ano fiscal. 6) 'Horários comerciais e feriados': quando o atendimento funciona. 7) 'Domínios e "
+            "URLs': os endereços da org. 8) 'Habilitação de recursos': o que está ligado. Só 'Settings' e 'Habilitação de recursos' "
+            "ainda não têm funcionalidade cadastrada, porque atravessam as outras seções.",
+            E("src:help-setup-company", "src:help-company-info-fields", "src:mdapi-settings", "src:help-cmdt-about",
+              "src:help-language-locale-currency", "src:help-multicurrency-manage", "src:help-bh", "src:help-mydomain")),
         "avancado": [
+            # 1) Identificação e configuração da org
+            av("atencao", "O padrão da org vale para quem chega depois",
+               "Idioma e fuso padrão, definidos em Company Information, valem para usuários novos. Quem já existe mantém os valores "
+               "pessoais. Mudar o padrão não uniformiza a org.",
+               E("src:help-language-locale-currency", "src:help-org-default-timezone")),
+            # 2) Settings
+            av("implantacao", "Configuração como metadado",
+               "Grupos de configurações gerais são metadata types da família Settings: CompanySettings, CurrencySettings, "
+               "LanguageSettings, MyDomainSettings e BusinessHoursSettings estão detalhados neste catálogo. Podem ser recuperados e "
+               "implantados pela Metadata API, em vez de repetidos à mão em cada ambiente.",
+               E("src:mdapi-companysettings", "src:mdapi-currencysettings", "src:mdapi-languagesettings", "src:mdapi-mydomainsettings",
+                 "src:mdapi-businesshourssettings")),
+            # 3) Parâmetros reutilizáveis
+            av("decisao", "Onde guardar um parâmetro",
+               "Para valores lidos por várias funcionalidades, a Salesforce recomenda custom metadata types: os registros são metadados "
+               "e migram por pacote ou Metadata API. Custom settings do tipo Hierarchy servem para variar o valor por perfil ou usuário.",
+               E("src:help-custom-settings", "src:help-cmdt-about")),
+            # 4) Localização, idiomas e tradução
+            av("decisao", "Idioma, localidade e tradução são decisões separadas",
+               "O idioma define a língua da interface, e há três níveis de suporte: fully supported, end-user e platform-only. A "
+               "localidade define formatos de data, hora e número. A tradução dos rótulos customizados é feita no Translation Workbench, "
+               "que não cobre objetos padrão.",
+               E("src:help-supported-languages", "src:help-locales-overview", "src:help-translations-manage")),
+            # 5) Moedas e calendário fiscal
+            av("atencao", "Duas ativações sem volta",
+               "Múltiplas moedas e ano fiscal customizado não podem ser desligados depois de ligados. Mudar o mês de início do ano "
+               "fiscal apaga cotas e ajustes de previsão. Vale testar em sandbox e exportar um backup antes.",
+               E("src:help-multicurrency-considerations", "src:help-fiscal-year-define", "src:help-fiscal-year-set")),
+            # 6) Horários comerciais e feriados
             av("atencao", "Horário comercial em cascata",
                "Nos processos de SLA, o horário comercial do milestone prevalece sobre o do processo, que prevalece sobre o do caso. Ao "
-               "desenhar prazos, decida em que nível cada horário será configurado.", E("src:help-ent-bh")),
-            av("implantacao", "Configuração como metadado",
-               "Grupos de configurações gerais são metadata types da família Settings, como BusinessHoursSettings. Por isso podem ser "
-               "recuperados e implantados pela Metadata API, em vez de repetidos à mão em cada ambiente.",
-               E("src:mdapi-businesshourssettings", "src:mdapi-intro")),
+               "desenhar prazos, decida em que nível cada horário será configurado. Feriados suspendem a contagem só nos horários a que "
+               "foram associados.", E("src:help-ent-bh", "src:help-holidays")),
+            # 7) Domínios e URLs
+            av("atencao", "Mudar o My Domain quebra o que está fixo",
+               "Mudar o nome ou o sufixo muda a URL de login e as URLs de aplicação: SSO e MFA podem parar de funcionar, e o que guarda "
+               "a URL antiga precisa ser atualizado. A mudança passa por salvar, provisionar e implantar.",
+               E("src:help-mydomain-changes", "src:help-mydomain-provisioning")),
+            # 8) Habilitação de recursos
+            av("atencao", "Ligar um recurso pode não ter volta",
+               "Alguns recursos mudam o comportamento ou o modelo de dados da org e não podem ser desligados, como Lightning Knowledge. "
+               "Confira a página do recurso antes de ligar em produção.", E("src:help-lightning-knowledge-enable")),
             av("atencao", "Atualizações de release",
                "O guia de configuração da org trata as atualizações de release (Release Updates) como tópico próprio: são mudanças que "
                "podem afetar customizações existentes e pedem acompanhamento a cada versão.", E("src:help-setup-company")),

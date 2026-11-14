@@ -3,25 +3,118 @@
     {
       "evidencias": [
         {
-          "fonte": "src:help-ent-bh"
+          "fonte": "src:help-language-locale-currency"
+        },
+        {
+          "fonte": "src:help-org-default-timezone"
         }
       ],
-      "texto": "Nos processos de SLA, o horário comercial do milestone prevalece sobre o do processo, que prevalece sobre o do caso. Ao desenhar prazos, decida em que nível cada horário será configurado.",
+      "texto": "Idioma e fuso padrão, definidos em Company Information, valem para usuários novos. Quem já existe mantém os valores pessoais. Mudar o padrão não uniformiza a org.",
+      "tipo": "atencao",
+      "titulo": "O padrão da org vale para quem chega depois"
+    },
+    {
+      "evidencias": [
+        {
+          "fonte": "src:mdapi-companysettings"
+        },
+        {
+          "fonte": "src:mdapi-currencysettings"
+        },
+        {
+          "fonte": "src:mdapi-languagesettings"
+        },
+        {
+          "fonte": "src:mdapi-mydomainsettings"
+        },
+        {
+          "fonte": "src:mdapi-businesshourssettings"
+        }
+      ],
+      "texto": "Grupos de configurações gerais são metadata types da família Settings: CompanySettings, CurrencySettings, LanguageSettings, MyDomainSettings e BusinessHoursSettings estão detalhados neste catálogo. Podem ser recuperados e implantados pela Metadata API, em vez de repetidos à mão em cada ambiente.",
+      "tipo": "implantacao",
+      "titulo": "Configuração como metadado"
+    },
+    {
+      "evidencias": [
+        {
+          "fonte": "src:help-custom-settings"
+        },
+        {
+          "fonte": "src:help-cmdt-about"
+        }
+      ],
+      "texto": "Para valores lidos por várias funcionalidades, a Salesforce recomenda custom metadata types: os registros são metadados e migram por pacote ou Metadata API. Custom settings do tipo Hierarchy servem para variar o valor por perfil ou usuário.",
+      "tipo": "decisao",
+      "titulo": "Onde guardar um parâmetro"
+    },
+    {
+      "evidencias": [
+        {
+          "fonte": "src:help-supported-languages"
+        },
+        {
+          "fonte": "src:help-locales-overview"
+        },
+        {
+          "fonte": "src:help-translations-manage"
+        }
+      ],
+      "texto": "O idioma define a língua da interface, e há três níveis de suporte: fully supported, end-user e platform-only. A localidade define formatos de data, hora e número. A tradução dos rótulos customizados é feita no Translation Workbench, que não cobre objetos padrão.",
+      "tipo": "decisao",
+      "titulo": "Idioma, localidade e tradução são decisões separadas"
+    },
+    {
+      "evidencias": [
+        {
+          "fonte": "src:help-multicurrency-considerations"
+        },
+        {
+          "fonte": "src:help-fiscal-year-define"
+        },
+        {
+          "fonte": "src:help-fiscal-year-set"
+        }
+      ],
+      "texto": "Múltiplas moedas e ano fiscal customizado não podem ser desligados depois de ligados. Mudar o mês de início do ano fiscal apaga cotas e ajustes de previsão. Vale testar em sandbox e exportar um backup antes.",
+      "tipo": "atencao",
+      "titulo": "Duas ativações sem volta"
+    },
+    {
+      "evidencias": [
+        {
+          "fonte": "src:help-ent-bh"
+        },
+        {
+          "fonte": "src:help-holidays"
+        }
+      ],
+      "texto": "Nos processos de SLA, o horário comercial do milestone prevalece sobre o do processo, que prevalece sobre o do caso. Ao desenhar prazos, decida em que nível cada horário será configurado. Feriados suspendem a contagem só nos horários a que foram associados.",
       "tipo": "atencao",
       "titulo": "Horário comercial em cascata"
     },
     {
       "evidencias": [
         {
-          "fonte": "src:mdapi-businesshourssettings"
+          "fonte": "src:help-mydomain-changes"
         },
         {
-          "fonte": "src:mdapi-intro"
+          "fonte": "src:help-mydomain-provisioning"
         }
       ],
-      "texto": "Grupos de configurações gerais são metadata types da família Settings, como BusinessHoursSettings. Por isso podem ser recuperados e implantados pela Metadata API, em vez de repetidos à mão em cada ambiente.",
-      "tipo": "implantacao",
-      "titulo": "Configuração como metadado"
+      "texto": "Mudar o nome ou o sufixo muda a URL de login e as URLs de aplicação: SSO e MFA podem parar de funcionar, e o que guarda a URL antiga precisa ser atualizado. A mudança passa por salvar, provisionar e implantar.",
+      "tipo": "atencao",
+      "titulo": "Mudar o My Domain quebra o que está fixo"
+    },
+    {
+      "evidencias": [
+        {
+          "fonte": "src:help-lightning-knowledge-enable"
+        }
+      ],
+      "texto": "Alguns recursos mudam o comportamento ou o modelo de dados da org e não podem ser desligados, como Lightning Knowledge. Confira a página do recurso antes de ligar em produção.",
+      "tipo": "atencao",
+      "titulo": "Ligar um recurso pode não ter volta"
     },
     {
       "evidencias": [
@@ -38,10 +131,89 @@
     "dependencias": [],
     "funcionalidades": [
       {
+        "exemplo": "A administradora troca o fuso padrão da org; quem for cadastrado depois já nasce com o fuso novo.",
+        "id": "func:informacoes-da-empresa",
+        "principal": true
+      },
+      {
+        "exemplo": "O tipo 'Faixa de desconto' tem um registro por faixa; um flow e uma regra de validação leem esses registros.",
+        "id": "func:custom-metadata-types",
+        "pre_requisitos": [
+          "Customize Application."
+        ],
+        "principal": true
+      },
+      {
+        "exemplo": "A mensagem 'Informe o CNPJ antes de salvar' fica num custom label; o componente lê o label e mostra a tradução conforme o idioma de quem usa.",
+        "id": "func:custom-labels",
+        "pre_requisitos": [
+          "Customize Application (para criar, editar ou excluir)."
+        ],
+        "principal": true
+      },
+      {
+        "exemplo": "Uma empresa brasileira com equipe em Portugal liga os idiomas de usuário final e põe Português (Portugal) na lista exibida.",
+        "id": "func:idiomas-da-org",
+        "pre_requisitos": [
+          "Customize Application (para mudar); View Setup and Configuration (para ver)."
+        ],
+        "principal": true
+      },
+      {
+        "exemplo": "O rótulo do campo customizado 'Faixa de desconto' ganha tradução para espanhol, vista por quem usa a interface em espanhol.",
+        "id": "func:translation-workbench",
+        "pre_requisitos": [
+          "Manage Translation (para incluir idiomas e designar tradutores)."
+        ],
+        "principal": true
+      },
+      {
+        "alertas": [
+          "Depois de ligar o ano fiscal customizado, não dá para desligar.",
+          "Mudar o mês de início do ano fiscal apaga cotas e ajustes de previsão."
+        ],
+        "exemplo": "Uma empresa com exercício de abril a março escolhe o ano fiscal padrão com início em abril.",
+        "id": "func:ano-fiscal",
+        "pre_requisitos": [
+          "Customize Application."
+        ],
+        "principal": true
+      },
+      {
+        "alertas": [
+          "Depois de ligar múltiplas moedas, não dá para desligar."
+        ],
+        "exemplo": "A matriz reporta em reais; a filial do Chile registra oportunidades em pesos, convertidas para reais pela taxa cadastrada.",
+        "id": "func:multiplas-moedas",
+        "pre_requisitos": [
+          "Customize Application (para alterar moedas); View Setup and Configuration (para ver)."
+        ],
+        "principal": true
+      },
+      {
+        "exemplo": "O feriado 'Ano Novo' vai das 20h de 31 de dezembro às 9h de 2 de janeiro; nesse intervalo, as regras de escalonamento não contam tempo.",
+        "id": "func:feriados",
+        "pre_requisitos": [
+          "Manage Business Hours Holidays."
+        ],
+        "principal": true
+      },
+      {
         "exemplo": "Suporte de São Paulo: segunda a sexta, 8h às 18h, fuso de Brasília.",
         "id": "func:horario-comercial",
         "pre_requisitos": [
           "Manage Business Hours Holidays."
+        ],
+        "principal": true
+      },
+      {
+        "alertas": [
+          "Quando a URL de login ou de site muda, SSO e MFA podem parar de funcionar; preserve o acesso de administradores antes de implantar a mudança."
+        ],
+        "exemplo": "Os usuários entram por https://mycompany.my.salesforce.com em vez de um endereço genérico.",
+        "id": "func:my-domain",
+        "pre_requisitos": [
+          "Customize Application (para editar); Customize Application e Modify All Data (para definir o nome)."
         ],
         "principal": true
       }
@@ -50,9 +222,65 @@
       {
         "estrutura": "completa",
         "funcionalidades": [
+          "func:feriados",
           "func:horario-comercial"
         ],
         "id": "mdt:BusinessHoursSettings",
+        "nota_suporte": null,
+        "suporte_cli": "suportado"
+      },
+      {
+        "estrutura": "completa",
+        "funcionalidades": [
+          "func:ano-fiscal"
+        ],
+        "id": "mdt:CompanySettings",
+        "nota_suporte": null,
+        "suporte_cli": "suportado"
+      },
+      {
+        "estrutura": "completa",
+        "funcionalidades": [
+          "func:multiplas-moedas"
+        ],
+        "id": "mdt:CurrencySettings",
+        "nota_suporte": null,
+        "suporte_cli": "suportado"
+      },
+      {
+        "estrutura": "completa",
+        "funcionalidades": [
+          "func:custom-labels"
+        ],
+        "id": "mdt:CustomLabels",
+        "nota_suporte": null,
+        "suporte_cli": "suportado"
+      },
+      {
+        "estrutura": "completa",
+        "funcionalidades": [
+          "func:custom-metadata-types"
+        ],
+        "id": "mdt:CustomMetadata",
+        "nota_suporte": null,
+        "suporte_cli": "suportado"
+      },
+      {
+        "estrutura": "completa",
+        "funcionalidades": [
+          "func:idiomas-da-org",
+          "func:translation-workbench"
+        ],
+        "id": "mdt:LanguageSettings",
+        "nota_suporte": null,
+        "suporte_cli": "suportado"
+      },
+      {
+        "estrutura": "completa",
+        "funcionalidades": [
+          "func:my-domain"
+        ],
+        "id": "mdt:MyDomainSettings",
         "nota_suporte": null,
         "suporte_cli": "suportado"
       }
@@ -77,12 +305,7 @@
       }
     ],
     "temas_sem_funcionalidade": [
-      "sub:identificacao-e-configuracao-da-org",
       "sub:settings",
-      "sub:parametros-reutilizaveis",
-      "sub:localizacao-idiomas-e-traducao",
-      "sub:moedas-e-calendario-fiscal",
-      "sub:dominios-e-urls",
       "sub:habilitacao-de-recursos"
     ]
   },
@@ -93,13 +316,28 @@
         "fonte": "src:help-setup-company"
       },
       {
+        "fonte": "src:help-company-info-fields"
+      },
+      {
+        "fonte": "src:mdapi-settings"
+      },
+      {
+        "fonte": "src:help-cmdt-about"
+      },
+      {
+        "fonte": "src:help-language-locale-currency"
+      },
+      {
+        "fonte": "src:help-multicurrency-manage"
+      },
+      {
         "fonte": "src:help-bh"
       },
       {
-        "fonte": "src:help-ent-bh"
+        "fonte": "src:help-mydomain"
       }
     ],
-    "texto": "Primeiro vêm os dados que identificam a org e as configurações gerais. Idioma, localidade, moeda e ano fiscal mudam como os valores aparecem. Horários comerciais e feriados alimentam prazos de outras regras, como escalonamento e marcos de atendimento. Domínios e habilitação de recursos completam o quadro. No catálogo, só o horário comercial já tem funcionalidade cadastrada."
+    "texto": "Roteiro pelas oito seções do tema. 1) 'Identificação e configuração da org': a ficha cadastral e os padrões da org. 2) 'Settings': as mesmas configurações vistas como metadados. 3) 'Parâmetros reutilizáveis': valores de configuração criados pela empresa. 4) 'Localização, idiomas e tradução': em que língua e formato tudo aparece. 5) 'Moedas e calendário fiscal': moedas, taxas e ano fiscal. 6) 'Horários comerciais e feriados': quando o atendimento funciona. 7) 'Domínios e URLs': os endereços da org. 8) 'Habilitação de recursos': o que está ligado. Só 'Settings' e 'Habilitação de recursos' ainda não têm funcionalidade cadastrada, porque atravessam as outras seções."
   },
   "escopo": "Entra o que vale para a org inteira e não pertence a um processo de negócio: dados da org, configurações gerais (Settings), parâmetros reaproveitados, idiomas, moedas, calendário fiscal, horários comerciais, domínios e ativação de recursos.",
   "estado": "desconhecido",
@@ -125,6 +363,7 @@
     "exemplo": "Uma empresa brasileira define o idioma e a moeda padrão, o ano fiscal e o horário do suporte: segunda a sexta, das 8h às 18h, no fuso de Brasília.",
     "explicacao": "São as configurações que valem para a org inteira, antes de qualquer processo: dados da empresa, idioma, localidade e moeda, ano fiscal, horários de funcionamento e quais recursos estão ligados. Mudar algo aqui afeta todos os usuários.",
     "por_onde_comecar": [
+      "func:informacoes-da-empresa",
       "func:horario-comercial"
     ]
   },

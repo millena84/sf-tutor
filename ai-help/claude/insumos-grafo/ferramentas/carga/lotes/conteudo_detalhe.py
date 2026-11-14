@@ -264,3 +264,282 @@ D["sub:recursos-analiticos-de-produto"] = {
            E("src:sdr-metadata-support")),
     ],
 }
+
+
+# ====================================================================== Organização e configurações base
+_EXT = "fontes/extracoes/temas-detalhe-org.txt"
+
+_f("src:help-company-info-fields", "Manage Information About Your Company (Salesforce Help)",
+   "https://help.salesforce.com/apex/HTViewHelpDoc?id=company_information_fields.htm",
+   "Campos da página Company Information e o que cada um define.", **AJ)
+_f("src:help-language-locale-currency", "Language, Locale, and Currency Settings (Salesforce Help)",
+   _H + "xcloud.admin_language_locale_currency.htm&language=en_US",
+   "Quem define idioma, localidade, fuso e moeda: administrador (padrões da org) e usuário (valores pessoais).", **AJ)
+_f("src:help-org-default-timezone", "How to Change Default Time Zones for Users and the Salesforce Organization (Salesforce Help)",
+   _H + "000386323&language=en_US&type=1", "O fuso padrão da org vale só para usuários novos.", **AJ)
+_f("src:help-org-id", "Find Your Salesforce Organization ID (Salesforce Help)", _H + "000385215&language=en_US&type=1",
+   "O que é o Organization ID e a diferença entre produção e sandbox.", **AJ)
+_f("src:help-supported-languages", "Supported Languages (Salesforce Help)", _H + "xcloud.faq_getstart_what_languages_does.htm&language=en_US&type=5",
+   "Os três níveis de suporte a idioma e onde cada um é gerido no Setup.", **AJ)
+_f("src:help-select-languages", "Select Languages for Your Org (Salesforce Help)", _H + "sf.admin_select_languages_for_your_org.htm&language=en_US&type=5",
+   "Como ligar idiomas end-user e platform-only e as permissões exigidas.", **AJ)
+_f("src:help-locales-overview", "Locales Overview (Salesforce Help)", _H + "sf.admin_locales_overview.htm&language=en_US&type=5",
+   "O que a localidade controla e a adoção dos formatos ICU.", **AJ)
+_f("src:help-icu-considerations", "Considerations for Adopting the ICU Locale Formats (Salesforce Help)",
+   _H + "xcloud.admin_locales_changes_considerations.htm&language=en_US&type=5", "Efeitos de passar dos formatos JDK para ICU.", **AJ)
+_f("src:help-translation-workbench", "Translation Workbench (Salesforce Help)", _H + "platform.workbench.htm&language=en_US&type=5",
+   "O que o Translation Workbench mantém e em que edições e interfaces.", **AJ)
+_f("src:help-translations-manage", "Manage Your Translations (Salesforce Help)", _H + "sf.workbench_overview.htm&language=en_US&type=5",
+   "Objetos padrão ficam fora do Translation Workbench.", **AJ)
+_f("src:help-translation-languages-add", "Add Translation Languages and Translators (Salesforce Help)",
+   _H + "platform.ls_add_translation_language_and_translators.htm&language=en_US&type=5",
+   "Caminho no Setup, pré-requisitos e ativação de idiomas de tradução.", **AJ)
+_f("src:help-translation-override-packages", "Override Translations in Second-Generation Managed Packages and Unlocked Packages (Salesforce Help)",
+   _H + "entering_translated_terms_in_packages.htm&language=en_US&type=5", "Traduções vindas de pacotes e o que pode ser sobrescrito.", **AJ)
+_f("src:help-custom-labels", "Custom Labels (Salesforce Help)", _H + "sf.cl_about.htm&language=en_US&type=5",
+   "O que são custom labels, limites e permissões.", **AJ)
+_f("src:help-custom-labels-edit", "Create and Edit Custom Labels (Salesforce Help)", _H + "sf.cl_edit.htm&language=en_US&type=5",
+   "Caminho no Setup e campos de um custom label.", **AJ)
+_f("src:help-multicurrency-manage", "Manage Multiple Currencies (Salesforce Help)", _H + "sales.admin_currency.htm&language=en_US&type=5",
+   "Passos e caminho no Setup para moeda corporativa, moedas ativas e taxas.", **AJ)
+_f("src:help-multicurrency-considerations", "Considerations for Enabling Multiple Currencies (Salesforce Help)",
+   _H + "sales.admin_enable_multicurrency_implications.htm&language=en_US&type=5", "Efeitos de ligar múltiplas moedas.", **AJ)
+_f("src:help-conversion-rates", "Edit Conversion Rates (Salesforce Help)", _H + "xcloud.editing_conversion_rates.htm&language=en_US&type=5",
+   "Como as taxas de conversão são editadas e aplicadas.", **AJ)
+_f("src:help-advanced-currency", "About Advanced Currency Management (Salesforce Help)",
+   _H + "administration_about_advanced_currency_management.htm&language=en_US", "Taxas de câmbio por data (dated exchange rates).", **AJ)
+_f("src:help-advanced-currency-enable", "Enable or Disable Advanced Currency Management (Salesforce Help)",
+   "https://help.salesforce.com/apex/HTViewHelpDoc?id=sf.administration_enable_advanced_currency_management.htm&language=en_US",
+   "Pré-requisito e efeito de ligar o advanced currency management.", **AJ)
+_f("src:help-fiscal-year-set", "Set the Fiscal Year (Salesforce Help)", _H + "sf.setting_the_fiscal_year.htm&language=en_US",
+   "Caminho no Setup e efeitos de mudar o ano fiscal.", **AJ)
+_f("src:help-fiscal-year-define", "Define Your Fiscal Year (Salesforce Help)", _H + "sf.admin_about_cfy.htm&language=en_US&type=5",
+   "Diferença entre ano fiscal padrão e customizado.", **AJ)
+_f("src:help-custom-fiscal-year", "Define or Modify a Custom Fiscal Year (Salesforce Help)", "https://help.salesforce.com/apex/HTViewHelpDoc?id=admin_define_cfy.htm",
+   "Efeitos do primeiro ano fiscal customizado sobre cotas e ajustes.", **AJ)
+_f("src:help-holidays", "Set Up Support Holidays (Salesforce Help)", _H + "sf.customizesupport_holidays.htm&language=en_US&type=5",
+   "Caminho no Setup, permissão e efeito dos feriados.", **AJ)
+_f("src:help-holidays-guidelines", "Guidelines for Creating Support Holidays (Salesforce Help)",
+   _H + "sf.customizesupport_holidays_guidelines.htm&language=en_US&type=5", "Limites e regras dos feriados.", **AJ)
+_f("src:help-bh-guidelines", "Guidelines for Setting Business Hours (Salesforce Help)", _H + "sf.customize_supporthours_guidelines.htm&language=en_US&type=5",
+   "Como casos e regras de escalonamento usam o horário comercial.", **AJ)
+_f("src:help-mydomain-rename", "Change Your My Domain Details (Salesforce Help)", _H + "domain_name_rename.htm&language=en_US&type=0",
+   "Caminho no Setup e permissões para mudar o My Domain.", **AJ)
+_f("src:help-mydomain-provisioning", "My Domain Provisioning and Deployment (Salesforce Help)", _H + "sf.domain_name_setup.htm&language=en_US&type=5",
+   "Os três passos de uma mudança de My Domain.", **AJ)
+_f("src:help-domains-view", "View Your Custom Domain Details (Salesforce Help)", _H + "platform.domain_mgmt_view.htm&language=en_US&type=5",
+   "Custom domains e system-managed domains na tela Domains.", **AJ)
+_f("src:help-cmdt-about", "What are Custom Metadata Types? (Salesforce Help)", _H + "sf.custommetadatatypes_about.htm&language=en_US&type=5",
+   "O que são custom metadata types e como os registros migram.", **AJ)
+_f("src:help-cmdt-create", "Add or Edit a Custom Metadata Type Declaratively (Salesforce Help)", _H + "custommetadatatypes_ui_create.htm&language=en_US&type=5",
+   "Caminho no Setup e regras de nome de custom metadata types.", **AJ)
+
+D["sub:identificacao-e-configuracao-da-org"] = {
+    "para_iniciantes": ini(
+        "É a ficha cadastral da org. A página Company Information, no Setup, reúne os dados da empresa, os padrões de idioma, localidade "
+        "e fuso, a moeda e as licenças compradas. Cada org também tem um Organization ID, o identificador pedido pelo suporte.",
+        "A administradora troca o fuso padrão da org; quem for cadastrado depois já recebe o fuso novo.",
+        E("src:help-company-info-fields", "src:help-setup-company", "src:help-org-id"), comece=["func:informacoes-da-empresa"]),
+    "encadeamento": enc(
+        "É o ponto de partida do tema. Os padrões definidos aqui são detalhados em 'Localização, idiomas e tradução' e em 'Moedas e "
+        "calendário fiscal'. O administrador define o padrão da org; cada usuário pode trocar idioma, localidade e fuso nas "
+        "configurações pessoais.", E("src:help-language-locale-currency")),
+    "avancado": [
+        av("atencao", "O padrão da org não muda quem já existe",
+           "Default Language e Default Time Zone valem para usuários novos. Quem já está cadastrado mantém o idioma e o fuso que tinha, "
+           "até trocar nas configurações pessoais.", E("src:help-language-locale-currency", "src:help-org-default-timezone")),
+        av("decisao", "Moeda única ou múltiplas moedas muda a página",
+           "Em org de moeda única, o administrador define Currency Locale, que dá o formato dos valores em moeda. Em org com múltiplas "
+           "moedas, o campo é Corporate Currency: a moeda em que a matriz reporta e a base de todas as taxas de conversão.",
+           E("src:help-company-info-fields", "src:help-language-locale-currency")),
+        av("atencao", "Sandbox tem outro Organization ID",
+           "O Organization ID de produção é diferente do de um sandbox, e cada refresh de sandbox gera um ID novo. O que depender do ID "
+           "precisa considerar isso.", E("src:help-org-id")),
+        av("implantacao", "O que existe como metadado",
+           "CompanySettings é o metadata type das configurações gerais da empresa; na versão lida, os campos dele tratam do ano fiscal. "
+           "Para os demais dados da página Company Information, este catálogo ainda não confirmou um metadata type.",
+           E("src:mdapi-companysettings")),
+    ],
+}
+D["sub:settings"] = {
+    "para_iniciantes": ini(
+        "Settings é uma família de metadata types com nomes terminados em Settings. Cada um guarda um grupo de configurações da org e "
+        "vira um arquivo .settings na pasta settings.",
+        "CurrencySettings guarda a configuração de moedas no arquivo Currency.settings; LanguageSettings guarda a de idiomas em "
+        "Language.settings.", E("src:mdapi-settings", "src:mdapi-currencysettings", "src:mdapi-languagesettings")),
+    "encadeamento": enc(
+        "É o lado 'como código' do tema. Ano fiscal (CompanySettings), moedas (CurrencySettings), idiomas (LanguageSettings), My Domain "
+        "(MyDomainSettings) e horários comerciais (BusinessHoursSettings) têm um Settings cada, estudado na seção do assunto. O efeito "
+        "de ligar cada recurso fica em 'Habilitação de recursos'.",
+        E("src:mdapi-companysettings", "src:mdapi-currencysettings", "src:mdapi-languagesettings", "src:mdapi-mydomainsettings",
+          "src:mdapi-businesshourssettings")),
+    "avancado": [
+        av("implantacao", "Um nome só no package.xml",
+           "No package.xml, todos os tipos da família são pedidos pelo nome Settings. O curinga * não vale para um setting individual: "
+           "só serve para recuperar todos de uma vez.", E("src:mdapi-settings", "src:mdapi-companysettings")),
+        av("atencao", "Nem todo campo pode ser implantado",
+           "Alguns campos são somente leitura, como myDomainName e myDomainSuffix em MyDomainSettings. Outros ligam algo sem volta: "
+           "implantar enableMultiCurrency como true liga múltiplas moedas, e implantar false numa org que já as tem devolve erro.",
+           E("src:mdapi-mydomainsettings", "src:mdapi-currencysettings")),
+        av("atencao", "O padrão depende de quando a org foi criada",
+           "Alguns defaults mudam conforme a idade da org. enableICULocaleDateFormat nasce true em orgs criadas na API 47.0 ou depois, e "
+           "isFirstPartyCookieUseRequired nasce true em orgs criadas a partir do Summer '24. Dois ambientes podem recuperar valores "
+           "diferentes sem que ninguém tenha mexido.", E("src:mdapi-languagesettings", "src:mdapi-mydomainsettings")),
+        av("implantacao", "Confira o suporte de cada Settings",
+           "Cada Settings é um metadata type próprio, com suporte registrado na lista do Salesforce CLI. Confira esse suporte antes de "
+           "incluir um Settings num pipeline de implantação.", E("src:sdr-metadata-support")),
+    ],
+}
+D["sub:parametros-reutilizaveis"] = {
+    "para_iniciantes": ini(
+        "Guarda valores de configuração lidos por várias funcionalidades, como tabelas de regras ou mapeamentos. Há dois mecanismos: "
+        "custom metadata types, cujos registros são metadados, e custom settings, cujos registros são dados.",
+        "Uma tabela de faixas de desconto fica num custom metadata type e é lida por um flow e por uma regra de validação.",
+        E("src:help-custom-settings", "src:help-cmdt-about"), comece=["func:custom-metadata-types"]),
+    "encadeamento": enc(
+        "É configuração reaproveitada pela org inteira. Textos reaproveitados e traduzíveis são custom labels, em 'Localização, idiomas "
+        "e tradução'. O lado 'como código' das configurações gerais fica em 'Settings'.",
+        E("src:help-custom-settings", "src:help-custom-labels")),
+    "avancado": [
+        av("decisao", "Custom metadata em vez de custom settings",
+           "A Salesforce recomenda custom metadata types: os registros podem ser migrados por pacotes de segunda geração ou Metadata API, "
+           "ao contrário dos de list custom settings. Custom settings do tipo Hierarchy personalizam por perfil ou usuário.",
+           E("src:help-custom-settings")),
+        av("atencao", "Cache e bloqueios",
+           "Registros de custom metadata ficam em cache por tipo depois da primeira leitura; durante o deploy, os registros incluídos "
+           "ficam bloqueados e podem causar row lock. Para alterá-los pelo Apex, use o pacote Metadata.", E("src:help-cmdt-limitations")),
+        av("seguranca", "Registro protegido",
+           "O campo protected marca o registro como protegido. Em pacote gerenciado, isso limita que código pode ler ou alterar o "
+           "registro.", E("src:mdapi-custommetadata-tipo")),
+        av("implantacao", "Registro como arquivo",
+           "Cada registro é um componente CustomMetadata, com sufixo .md na pasta customMetadata. O nome começa com o nome do tipo, sem "
+           "__mdt, e os valores vão em pares field e value.", E("src:mdapi-custommetadata", "src:mdapi-custommetadata-tipo")),
+    ],
+}
+D["sub:localizacao-idiomas-e-traducao"] = {
+    "para_iniciantes": ini(
+        "São três coisas diferentes. Idioma: em que língua a interface aparece. Localidade (locale): como datas, horas, números, nomes e "
+        "endereços são formatados. Tradução: o texto dos rótulos customizados em cada idioma. A org define os padrões, e cada usuário "
+        "escolhe o próprio idioma e a própria localidade.",
+        "Duas pessoas abrem o mesmo registro: uma vê a interface em português e as datas no formato do Brasil; a outra, em inglês e no "
+        "formato dos Estados Unidos. O dado guardado é o mesmo.",
+        E("src:help-language-locale-currency", "src:help-locales-overview", "src:help-translation-workbench"),
+        comece=["func:idiomas-da-org", "func:translation-workbench", "func:custom-labels"]),
+    "encadeamento": enc(
+        "Os padrões vêm de 'Identificação e configuração da org'. Primeiro escolhem-se os idiomas que a org oferece. Depois, com o "
+        "Translation Workbench, traduzem-se os rótulos customizados. Custom labels cobrem os textos usados por código e por páginas. "
+        "Moeda e formato de moeda ficam em 'Moedas e calendário fiscal'.",
+        E("src:help-select-languages", "src:help-translation-languages-add", "src:help-custom-labels")),
+    "avancado": [
+        av("decisao", "Três níveis de idioma",
+           "Fully supported: recursos e interface no idioma, como Portuguese (Brazil). End-user: a Salesforce traduz rótulos de objetos e "
+           "páginas padrão, menos Setup e Help, como Portuguese (European); não deve ser usado como idioma corporativo. Platform-only: "
+           "sem tradução padrão, serve para localizar apps e customizações.", E("src:help-supported-languages")),
+        av("atencao", "Formato ICU muda o que o usuário lê",
+           "A localidade segue os formatos ICU desde o Winter '20; orgs mais antigas usam por padrão os formatos JDK. Migrar pode mudar a "
+           "ordem de dia e mês em algumas localidades e causar má leitura de dados. A Ajuda recomenda avisar usuários e parceiros.",
+           E("src:help-locales-overview", "src:help-icu-considerations")),
+        av("limite", "O que o Translation Workbench não cobre",
+           "Objetos padrão ficam fora: para eles, usa-se a tela de renomear abas e rótulos. O Translation Workbench não está disponível "
+           "em orgs de idioma único, e a tradução de dados só existe em Lightning Experience, aplicada a B2B Commerce.",
+           E("src:help-translations-manage", "src:help-translation-languages-add", "src:help-translation-workbench")),
+        av("atencao", "Ative o idioma só no fim",
+           "Marcar um idioma como Active mostra as traduções aos usuários; a recomendação é ativar depois de traduzir tudo. Traduções "
+           "trazidas por pacote gerenciado aparecem mesmo com o idioma inativo.",
+           E("src:help-translation-languages-add", "src:help-translation-override-packages")),
+        av("limite", "Custom labels",
+           "Até 5.000 custom labels por org, com até 1.000 caracteres cada; os de pacotes gerenciados não contam. Não dá para trocar o "
+           "idioma de um label que já existe.", E("src:help-custom-labels", "src:help-custom-labels-edit")),
+        av("implantacao", "Como metadado",
+           "LanguageSettings guarda a seleção de idiomas e a ativação do Translation Workbench. CustomLabels guarda os textos. As "
+           "traduções viajam pelo tipo Translations, em arquivos nomeados pelo código de localidade; esse tipo ainda não está "
+           "cadastrado neste catálogo.", E("src:mdapi-languagesettings", "src:mdapi-customlabels", "src:mdapi-translations")),
+    ],
+}
+D["sub:moedas-e-calendario-fiscal"] = {
+    "para_iniciantes": ini(
+        "Define em que moedas a org registra valores e como o ano fiscal é contado. Por padrão, a org trabalha com uma moeda só; ela "
+        "pode ligar múltiplas moedas, com uma moeda corporativa e uma taxa de conversão para cada moeda ativa. O ano fiscal pode ser "
+        "padrão (calendário gregoriano, com o mês de início à escolha) ou customizado.",
+        "Uma empresa com exercício de abril a março escolhe o ano fiscal padrão começando em abril. A filial do Chile registra valores "
+        "em pesos, convertidos para a moeda da matriz pela taxa cadastrada.",
+        E("src:help-multicurrency-manage", "src:help-fiscal-year-define", "src:mdapi-currencysettings"),
+        comece=["func:multiplas-moedas", "func:ano-fiscal"]),
+    "encadeamento": enc(
+        "A moeda padrão aparece em 'Identificação e configuração da org' (Currency Locale ou Corporate Currency). As duas decisões "
+        "daqui mexem com vendas: oportunidades usam as taxas de conversão, e previsões usam os períodos fiscais. As previsões em si "
+        "ficam em 'Vendas'.", E("src:help-company-info-fields", "src:help-advanced-currency", "src:help-fiscal-year-set")),
+    "avancado": [
+        av("atencao", "Múltiplas moedas não têm volta",
+           "Depois de ligar, não dá para desligar. Os registros existentes recebem um código de moeda padrão, e filtros campo a campo em "
+           "relatórios deixam de aceitar campos de moeda.", E("src:help-multicurrency-considerations")),
+        av("decisao", "Taxa única ou taxa por data",
+           "Por padrão, toda conversão usa a taxa atual, e as taxas anteriores não são guardadas. Com advanced currency management, as "
+           "taxas valem por intervalo de datas (dated exchange rates), e a oportunidade usa a taxa da data de fechamento. Ao ligar, as "
+           "taxas existentes viram o primeiro conjunto datado.",
+           E("src:help-conversion-rates", "src:help-advanced-currency", "src:help-advanced-currency-enable")),
+        av("atencao", "Mudar o ano fiscal apaga cotas",
+           "Mudar o mês de início do ano fiscal apaga cotas (quotas) e ajustes de previsão, e desloca os períodos de oportunidades e "
+           "previsões da org inteira. A Ajuda manda exportar um backup antes.", E("src:help-fiscal-year-set")),
+        av("atencao", "Ano fiscal customizado não tem volta",
+           "Depois de ligado, o ano fiscal customizado não pode ser desligado, e anos customizados não podem ser excluídos. Em org que "
+           "usa forecasting, criar o primeiro apaga cotas e ajustes do ano padrão correspondente e dos seguintes.",
+           E("src:help-fiscal-year-define", "src:help-custom-fiscal-year")),
+        av("implantacao", "Como metadado",
+           "CurrencySettings leva a ativação de múltiplas moedas, a moeda corporativa e as moedas com suas taxas. CompanySettings leva o "
+           "ano fiscal padrão no campo fiscalYear. Os mesmos avisos da tela valem para o deploy.",
+           E("src:mdapi-currencysettings", "src:mdapi-companysettings")),
+    ],
+}
+D["sub:horarios-comerciais-e-feriados"] = {
+    "para_iniciantes": ini(
+        "Define os dias, horários e fuso em que o atendimento funciona, e os feriados em que esse horário não vale.",
+        "Suporte de São Paulo: segunda a sexta, das 8h às 18h, no fuso de Brasília. No feriado de Ano Novo, os prazos param de contar.",
+        E("src:help-bh", "src:help-holidays", "src:objref-businesshours"), comece=["func:horario-comercial", "func:feriados"]),
+    "encadeamento": enc(
+        "Outras regras usam esses horários para contar prazos, como o escalonamento de casos e os marcos de SLA, no tema Atendimento. Um "
+        "feriado só vale para os horários comerciais a que foi associado.", E("src:help-bh", "src:help-ent-bh", "src:help-holidays")),
+    "avancado": [
+        av("atencao", "Horário comercial em cascata",
+           "Nos processos de SLA, o horário do milestone prevalece sobre o do processo, que prevalece sobre o do caso.", E("src:help-ent-bh")),
+        av("atencao", "O caso herda o horário padrão",
+           "O caso recebe o horário comercial padrão da org, a não ser que case com uma regra de escalonamento ligada a outro horário. "
+           "Regras de escalonamento só rodam dentro do horário a que estão associadas, e um horário usado em regra não pode ser "
+           "desativado.", E("src:help-bh-guidelines")),
+        av("limite", "Feriados",
+           "Cada horário comercial aceita até 1.000 feriados. O feriado assume o fuso do horário a que foi associado, e só horários "
+           "ativos podem ser associados.", E("src:help-holidays-guidelines")),
+        av("implantacao", "Como metadado",
+           "BusinessHoursSettings leva horários comerciais e feriados no mesmo arquivo, nas listas businessHours e holidays.",
+           E("src:mdapi-businesshourssettings")),
+    ],
+}
+D["sub:dominios-e-urls"] = {
+    "para_iniciantes": ini(
+        "O My Domain é o nome da org nas URLs de login e de aplicação, como mycompany.my.salesforce.com e mycompany.my.site.com.",
+        "Os usuários da empresa entram por https://mycompany.my.salesforce.com, e o portal de clientes usa mycompany.my.site.com.",
+        E("src:help-mydomain"), comece=["func:my-domain"]),
+    "encadeamento": enc(
+        "Afeta login, SSO e integrações. Além do My Domain, que a Salesforce gerencia, a org pode ter custom domains para os sites. Os "
+        "endereços externos que a org chama ficam em 'Chamadas externas e endpoints'.",
+        E("src:help-mydomain-changes", "src:help-domains-view")),
+    "avancado": [
+        av("atencao", "Mudar o My Domain quebra o que está fixo",
+           "Mudar o nome ou o sufixo muda a URL de login: SSO e MFA podem parar de funcionar, e named credentials e templates com a URL "
+           "antiga precisam ser atualizados.", E("src:help-mydomain-changes")),
+        av("implantacao", "A mudança tem três passos",
+           "Salvar a mudança, provisionar os novos domínios e implantá-los. Na implantação mudam juntas a URL de login e as URLs de "
+           "aplicação, como as de Visualforce, conteúdo e Experience Cloud. A Ajuda recomenda testar antes em sandbox.",
+           E("src:help-mydomain-provisioning", "src:help-mydomain-rename")),
+        av("decisao", "Integração com URL devolvida pelo login",
+           "Integrações de API devem usar o serverURL devolvido pelo login, não uma URL fixa. Dá para exigir que logins SOAP usem o My "
+           "Domain, e tráfego de API com URL de instância incorreta é bloqueado depois do Summer '26.",
+           E("src:help-mydomain-changes", "src:help-mydomain-login-policy")),
+        av("seguranca", "Exigir o login pelo My Domain",
+           "Em MyDomainSettings, canOnlyLoginWithMyDomainUrl obriga os usuários a entrar pela URL do My Domain, e "
+           "doesApiLoginRequireOrgDomain faz o mesmo para o acesso por API.", E("src:mdapi-mydomainsettings")),
+        av("implantacao", "Como metadado",
+           "MyDomainSettings leva políticas de login, redirecionamentos de URLs antigas e opções de cookies. O nome e o sufixo do My "
+           "Domain aparecem como campos somente leitura: a troca do nome não é feita por esse tipo.", E("src:mdapi-mydomainsettings")),
+    ],
+}

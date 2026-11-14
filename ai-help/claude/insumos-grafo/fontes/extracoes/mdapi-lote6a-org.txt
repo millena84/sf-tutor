@@ -1,0 +1,150 @@
+fonte: páginas da Metadata API (lote 6a, tema Organização e configurações base) | URL base: https://developer.salesforce.com/docs/platform/api-metadata/references/meta-types/metadata-<tipo em minúsculas>.html
+obtido em 2026-11-14 via WebFetch; método: extração documental assistida por IA; descrições parafraseadas em português.
+alcance da leitura: caracteres 0 a 100000 de cada página (cada página tem de 206 mil a 222 mil caracteres). Em metadata-mydomainsettings.html, o trecho
+  100000-200000 foi conferido e contém só o índice de navegação da referência (links para outros tipos); os últimos 22 mil caracteres dessa página e a
+  segunda metade das demais não foram abertos.
+versão: as páginas não trazem versão na URL (o endereço antigo, atlas.en-us.264.0.api_meta, hoje devolve só um índice em PDF). O conteúdo cita campos
+  "API version 68.0 and later".
+convenção das linhas: nome | tipo | versão em que entrou (quando a página informa) | marcação "Required" (quando a página informa).
+
+[src:mdapi-companysettings] CompanySettings: arquivo settings/Company.settings (um arquivo por componente de settings); desde 27.0; estende Metadata
+  Representa configurações globais que afetam vários recursos. No package.xml, todos os tipos de settings são pedidos pelo nome Settings; o curinga *
+  não vale para um setting individual, só para recuperar todos.
+  CompanySettings (2): enableCustomFiscalYear | boolean | 47.0 | Required, fiscalYear | FiscalYearSettings
+    enableCustomFiscalYear: se há período fiscal customizado configurado, indica se ele é usado nas previsões (forecasts); padrão false (períodos padrão).
+    fiscalYear: ano fiscal definido por ano e mês de início; indisponível se Custom Fiscal Year ou Forecasts (Classic) estiver ligado; mudar pode
+      apagar cotas (quotas) e ajustes.
+  FiscalYearSettings: fiscalYearNameBasedOn | string (enumeração: endingMonth, startingMonth), startMonth | string
+    startMonth: mês em que o ano fiscal se baseia. A página não descreve o efeito de cada valor de fiscalYearNameBasedOn.
+  Divergência na página: há duas seções de subtipo, "FiscalYearSetting Type" e "FiscalYearSettings Type", com os mesmos dois campos, sem explicar a
+    relação entre elas. O exemplo XML usa os elementos CompanySettings, fiscalYear, fiscalYearNameBasedOn e startMonth.
+
+[src:mdapi-currencysettings] CurrencySettings: arquivo settings/Currency.settings; desde 47.0; estende Metadata
+  Configuração de moedas da org: ligar múltiplas moedas, moedas ativas, moeda corporativa e datas de vigência. Curinga * não vale para um setting
+  individual.
+  CurrencySettings (7): corporateCurrency | string | 68.0, currency | Currency[] | 68.0, enableCurrencyEffectiveDates | boolean,
+    enableCurrencySymbolWithMultiCurrency | boolean, enableMultiCurrency | boolean, isMultiCurrencyActivationAllowed | boolean,
+    isParenCurrencyConvDisabled | boolean
+    corporateCurrency: código ISO 4217 da moeda corporativa (taxa fixa em 1.0); a moeda precisa estar cadastrada e ativa; sem efeito se
+      enableMultiCurrency não for true (antes ou no mesmo deploy).
+    currency: entradas de moeda; entrada nova é inserida, entrada com isoCode existente atualiza active, scale e conversionRate; sem efeito sem
+      enableMultiCurrency true.
+    enableCurrencyEffectiveDates: liga moeda com data de vigência; padrão false; exige enableMultiCurrency true.
+    enableCurrencySymbolWithMultiCurrency: mostra o símbolo (true) ou o código ISO (false) em org com múltiplas moedas; padrão false.
+    enableMultiCurrency: liga múltiplas moedas; padrão false. A partir da API 68.0, implantar true liga o recurso; em org que já tem, não faz nada.
+      A moeda corporativa vem de corporateCurrency (se enviada no mesmo deploy) ou da localidade da org. Ligar é irreversível; implantar false em
+      org com múltiplas moedas devolve erro.
+    isMultiCurrencyActivationAllowed: descontinuado na API 49.0 e posteriores; não muda se o admin pode ativar múltiplas moedas; visível só com
+      múltiplas moedas desligadas; padrão false.
+    isParenCurrencyConvDisabled: desliga a conversão de moeda entre parênteses; padrão true; com false, o usuário vê o valor convertido quando a
+      moeda pessoal difere da do registro.
+  Currency: active | boolean, conversionRate | double, isoCode | string | Required, scale | int
+    active: se usuários podem atribuir a moeda a registros; moeda inativa não pode ser a corporativa; padrão true para moeda nova.
+    conversionRate: taxa de conversão para a moeda corporativa; 1.0 para a própria corporativa.
+    isoCode: código ISO 4217 suportado pela Salesforce; código não suportado devolve erro.
+    scale: casas decimais, de 0 a 6.
+  Divergência na página: a descrição de conversionRate diz que o campo é obrigatório para moedas novas; a seção do tipo Currency o lista como não
+    obrigatório.
+
+[src:mdapi-languagesettings] LanguageSettings: arquivo settings/Language.settings; desde 47.0; estende Metadata
+  Configurações de idioma da org: seleção de idioma pelo usuário final, formatos de localidade e opções de tradução. Curinga * não vale para um
+  setting individual.
+  LanguageSettings (12): displayedLanguages | string | 68.0, enableCanadaIcuFormat | boolean, enableDataTranslation | boolean | 49.0,
+    enableEndUserLanguages | boolean, enableICULocaleDateFormat | boolean, enableLanguageExtensionPackage | boolean | 58.0 (Beta),
+    enableLocaleInsensitiveFiltering | boolean | 56.0, enableLocalNamesForStdObjects | boolean | 48.0, enablePlatformLanguages | boolean,
+    enableTranslationWorkbench | boolean, enableTranslationWorkbenchConnectAPI | boolean | 67.0, useLanguageFallback | boolean
+    displayedLanguages: códigos de idioma separados por vírgula (ex.: en_US, fr, de, ja); a ordem define a ordem da lista; "all" mostra todos os
+      disponíveis; se omitido, a configuração existente não muda.
+    enableCanadaIcuFormat: formato ICU para a localidade en_CA; padrão true em orgs criadas na API 47.0 ou depois, false nas anteriores.
+    enableDataTranslation: tradução de dados; padrão false.
+    enableEndUserLanguages: idiomas de usuário final; padrão false.
+    enableICULocaleDateFormat: data e moeda formatadas com International Components for Unicode; padrão true em orgs criadas na API 47.0 ou depois,
+      false nas anteriores.
+    enableLanguageExtensionPackage: pacotes de extensão de idioma; padrão false.
+    enableLocaleInsensitiveFiltering: filtrar resultados de consulta sem depender da localidade ou do idioma do usuário; padrão false.
+    enableLocalNamesForStdObjects: campos de nome local em objetos padrão; padrão false.
+    enablePlatformLanguages: idiomas platform-only; padrão false; ligar também põe enableEndUserLanguages em true.
+    enableTranslationWorkbench: Translation Workbench; padrão false.
+    enableTranslationWorkbenchConnectAPI: API REST Connect do Translation Workbench; padrão false.
+    useLanguageFallback: a tradução segue a regra de fallback de idioma (true) ou devolve o rótulo primário (false); padrão true.
+
+[src:mdapi-mydomainsettings] MyDomainSettings: arquivo settings/MyDomain.settings; desde 47.0; estende Metadata
+  Configurações do My Domain da org, que põe o nome da empresa nas URLs. O trecho lido não traz declaração sobre o curinga *.
+  MyDomainSettings (31): areLegacyRedirectsMaintained | boolean | 63.0, areLgcyRdirMaintainedWntr26 | boolean | 64.0,
+    canOnlyLoginWithMyDomainUrl | boolean, doesApiLoginRequireOrgDomain | boolean, doesWarnOnForceComRedirect | boolean | 59.0,
+    doesWarnOnRedirect | boolean | 59.0, domainPartition | OrgDomainShard | 55.0, edgeRoutingMethod | EdgeRoutingOption | 65.0,
+    enableCrossDomainPreviewCookies | boolean | 62.0, enableEdgeDuringRollout | boolean | 58.0, enableExtendedRedirections | boolean | 62.0,
+    enableLegacyRedirections | boolean | 62.0, enableNativeBrowserForAuthOnAndroid | boolean, enableNativeBrowserForAuthOnIos | boolean,
+    enableShareBrowserSessionAndroidForAuth | boolean, enableShareBrowserSessionIOSForAuth | boolean,
+    instancedUrlRedirectHandling | OrgDomainRedirectOption | 59.0, isFirstPartyCookieUseRequired | boolean | 61.0,
+    isIcorInstApiTrafficBlocked | boolean | 64.0, isInstancedApiTrafficBlocked | boolean, logRedirections | boolean | 56.0,
+    myDomainName | string | 51.0, myDomainSuffix | OrgDomainProdSuffix | 51.0, onboardCustomerSpecificSuffix | boolean | 63.0,
+    redirectForceComSiteUrls | boolean | 55.0, redirectPriorMyDomain | boolean | 54.0, use3rdPartyCookieBlockingCompatibleHostnames | boolean | 51.0,
+    useEdge | boolean | 51.0, useEnhancedDomainsInSandbox | boolean, useStabilizedMyDomainHostnames | boolean,
+    useStabilizedSandboxMyDomainHostnames | boolean
+    areLegacyRedirectsMaintained: conferido no upgrade para o Summer '25; se false, enableLegacyRedirections é desligado; padrão false; sem efeito
+      depois do Summer '25. areLgcyRdirMaintainedWntr26: o mesmo para o upgrade do Winter '26; padrão false.
+    canOnlyLoginWithMyDomainUrl: true obriga o login pela URL do My Domain; padrão false. doesApiLoginRequireOrgDomain: true obriga o acesso de API
+      pela URL de login do My Domain; padrão false.
+    doesWarnOnForceComRedirect: aviso ao redirecionar de uma URL *.force.com anterior; padrão false. doesWarnOnRedirect: aviso ao redirecionar de uma
+      URL de My Domain anterior; padrão false.
+    domainPartition (somente leitura): partição da org; valores demo (60.0+), develop (Developer Edition), free (uso interno), none (sem domínios
+      particionados), patch (59.0+), sandbox (sandboxes com enhanced domains), scratch (scratch orgs), sfdctest (uso interno), trailblaze
+      (Trailblazer Playgrounds).
+    edgeRoutingMethod (somente leitura): roteamento das requisições quando useEdge é true; padrão global; valores global (local Edge mais próximo),
+      regional (só locais Salesforce no país da org; apenas Hyperforce Japão), gsr (nó de rede confiável mais próximo, contornando certos locais de
+      rede do Oriente Médio).
+    enableCrossDomainPreviewCookies: se isFirstPartyCookieUseRequired é true, permite cookies entre domínios no domínio de preview do Experience
+      Builder. enableEdgeDuringRollout: Edge ligado durante a implantação programada; padrão true; sem efeito se useEdge é true.
+    enableExtendedRedirections: redireciona chamadas a hostnames temporários de redirecionamento estendido; padrão true. enableLegacyRedirections:
+      se redirectPriorMyDomain é true, redireciona hostnames legados.
+    enableNativeBrowserForAuthOnAndroid / enableNativeBrowserForAuthOnIos: navegador nativo para autenticação nos apps móveis Android / iOS; padrão
+      false. enableShareBrowserSessionAndroidForAuth, enableShareBrowserSessionIOSForAuth, isInstancedApiTrafficBlocked: sem descrição na página.
+    instancedUrlRedirectHandling: como tratar visitas à URL com instância; não afeta o login; valores Redirect (redireciona para a página equivalente
+      do My Domain), WarnOnRedirect (mostra um aviso breve antes), NoRedirect (não redireciona; é preciso usar os hostnames do My Domain).
+    isFirstPartyCookieUseRequired: remove o atributo SameSite=None dos cookies da Salesforce; padrão true em orgs criadas no Summer '24 ou depois,
+      false nas demais. isIcorInstApiTrafficBlocked e onboardCustomerSpecificSuffix: reservados para uso futuro; padrão false.
+    logRedirections: true gera o log de eventos Hostname Redirects junto dos logs diários; padrão false.
+    myDomainName (somente leitura): subdomínio usado nas URLs do My Domain. myDomainSuffix (somente leitura): sufixo da URL de login; valores
+      CloudforceLimited (cloudforce.com), DatabaseLimited (database.com), MySalesforce (my.salesforce.com com enhanced domains), MySalesforceLimited
+      (my.salesforce.com sem enhanced domains), OrgLevelCertificate (my-salesforce.com), OrgLevelCertificateLimited (my-salesforce.com legado,
+      incompatível com navegadores que bloqueiam cookies de terceiros), Restricted1 e Restricted2 (reservados).
+    redirectForceComSiteUrls: true redireciona URLs de site .force.com para a URL atual; padrão true. redirectPriorMyDomain: true redireciona URLs
+      do My Domain anterior; padrão true e volta a true ao implantar um My Domain novo.
+    use3rdPartyCookieBlockingCompatibleHostnames: inclui o nome da instância nas URLs de Visualforce quando cookies de terceiros são bloqueados;
+      padrão true. useEdge (somente leitura): URLs qualificadas passam pela Salesforce Edge Network; padrão true.
+    useEnhancedDomainsInSandbox: campo legado; desde a API 58.0 o valor é sempre true. useStabilizedMyDomainHostnames: esconde o nome da instância
+      nas URLs de Visualforce, Experience Builder, Site.com Studio e arquivos de conteúdo; padrão true. useStabilizedSandboxMyDomainHostnames: campo
+      legado; valor sempre true.
+
+[src:mdapi-custommetadata-tipo] CustomMetadata: pasta customMetadata, sufixo .md; desde 31.0; estende Metadata; aceita o curinga * no package.xml
+  Representa um registro de um custom metadata type. O nome do registro começa com o nome do tipo, sem o sufixo __mdt, e inclui o namespace quando
+  o tipo vem de pacote gerenciado instalado.
+  CustomMetadata (4): description | string, label | string, protected | boolean, values | CustomMetadataValue[]; mais fullName herdado de Metadata
+    description: descrição do registro, até 1.000 caracteres. label: rótulo; hoje visível só pela interface de empacotamento.
+    protected: se o registro é protegido; em pacote gerenciado, limita que código pode lê-lo ou alterá-lo; sem padrão declarado.
+    values: valores dos campos customizados do registro.
+  CustomMetadataValue: field | string | Required, value | anyType | Required
+    field: nome de um campo customizado do tipo, com namespace (se gerenciado) e sufixo __c, sem o nome do tipo.
+    value: valor no registro; para campos EntityDefinition e FieldDefinition, o nome de API qualificado; pode ser nulo.
+
+[src:mdapi-customlabels] CustomLabels: arquivo CustomLabels.labels; desde 14.0; estende Metadata
+  Permite criar custom labels que podem ser localizados por idioma, país e moeda. CustomLabel representa um único custom label e também estende
+  Metadata. Traduções ficam na pasta translations, em arquivos <código de localidade>.translation.
+  CustomLabels (2): fullName | string (herdado), labels | CustomLabel[]
+  CustomLabel (6): categories | string, fullName | string (herdado), language | string | Required, protected | boolean | Required,
+    shortDescription | string | Required, value | string | Required
+    categories: categorias separadas por vírgula, usadas em filtros das list views de custom labels; até 255 caracteres.
+    language: idioma do rótulo. protected: componente protegido não pode ser referenciado por componentes da org que instala.
+    shortDescription: termo fácil de reconhecer, usado em merge fields. value: texto do rótulo; até 1.000 caracteres.
+  package.xml: CustomLabels aceita o curinga * (todos os labels da org) e não recupera labels por nome; para labels específicos, usa-se o tipo
+    CustomLabel com os nomes como membros. Não é possível recuperar CustomLabels com namespace.
+  Divergência na página: nas duas tabelas, fullName aparece como não obrigatório, mas a descrição diz "Required" (informar ao criar, atualizar ou
+    excluir).
+
+[src:mdapi-translations] Translations: desde 14.0; estende Metadata; aceita o curinga *
+  Trabalha com traduções nos idiomas suportados; traduzir rótulos de componentes faz parte do Translation Workbench. Arquivos
+  <código de localidade>.translation (ex.: de.translation); traduções de objetos customizados ficam na pasta objectTranslations.
+  A página lista cerca de 40 listas de tradução (custom labels, abas, apps, flows, bots, relatórios, dashboards e outras) e dezenas de subtipos.
+  NÃO cadastrado no catálogo nesta rodada: a leitura assistida não devolveu com segurança o nome de cada elemento (parte veio identificada só pelo
+  tipo), e três listas de relatório aparecem duas vezes na página. Usado aqui só como fonte de texto.

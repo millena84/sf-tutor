@@ -4,12 +4,15 @@
   "sigla": "ORG-07",
   "classificacao": "cls:organizacao-e-configuracoes-base",
   "natureza": "curadoria_didatica",
-  "descricao": "Domínio da org e endereços pelos quais usuários e integrações acessam a plataforma.",
+  "descricao": "Os endereços pelos quais pessoas e integrações chegam à org: o My Domain, que põe o nome da empresa nas URLs de login e de aplicação, e os custom domains dos sites.",
   "escopo": "Entram o domínio da org e os endereços pelos quais pessoas e integrações chegam à plataforma.",
   "fora_do_escopo": "Endereços externos chamados pela org ficam em \"Chamadas externas e endpoints\".",
   "para_iniciantes": {
     "explicacao": "O My Domain é o nome da org nas URLs de login e de aplicação, como mycompany.my.salesforce.com e mycompany.my.site.com.",
     "exemplo": "Os usuários da empresa entram por https://mycompany.my.salesforce.com, e o portal de clientes usa mycompany.my.site.com.",
+    "por_onde_comecar": [
+      "func:my-domain"
+    ],
     "evidencias": [
       {
         "fonte": "src:help-mydomain"
@@ -17,10 +20,13 @@
     ]
   },
   "encadeamento": {
-    "texto": "Afeta login, SSO e integrações; os endereços externos que a org chama ficam em 'Chamadas externas e endpoints'.",
+    "texto": "Afeta login, SSO e integrações. Além do My Domain, que a Salesforce gerencia, a org pode ter custom domains para os sites. Os endereços externos que a org chama ficam em 'Chamadas externas e endpoints'.",
     "evidencias": [
       {
         "fonte": "src:help-mydomain-changes"
+      },
+      {
+        "fonte": "src:help-domains-view"
       }
     ]
   },
@@ -36,6 +42,19 @@
       ]
     },
     {
+      "tipo": "implantacao",
+      "titulo": "A mudança tem três passos",
+      "texto": "Salvar a mudança, provisionar os novos domínios e implantá-los. Na implantação mudam juntas a URL de login e as URLs de aplicação, como as de Visualforce, conteúdo e Experience Cloud. A Ajuda recomenda testar antes em sandbox.",
+      "evidencias": [
+        {
+          "fonte": "src:help-mydomain-provisioning"
+        },
+        {
+          "fonte": "src:help-mydomain-rename"
+        }
+      ]
+    },
+    {
       "tipo": "decisao",
       "titulo": "Integração com URL devolvida pelo login",
       "texto": "Integrações de API devem usar o serverURL devolvido pelo login, não uma URL fixa. Dá para exigir que logins SOAP usem o My Domain, e tráfego de API com URL de instância incorreta é bloqueado depois do Summer '26.",
@@ -47,9 +66,43 @@
           "fonte": "src:help-mydomain-login-policy"
         }
       ]
+    },
+    {
+      "tipo": "seguranca",
+      "titulo": "Exigir o login pelo My Domain",
+      "texto": "Em MyDomainSettings, canOnlyLoginWithMyDomainUrl obriga os usuários a entrar pela URL do My Domain, e doesApiLoginRequireOrgDomain faz o mesmo para o acesso por API.",
+      "evidencias": [
+        {
+          "fonte": "src:mdapi-mydomainsettings"
+        }
+      ]
+    },
+    {
+      "tipo": "implantacao",
+      "titulo": "Como metadado",
+      "texto": "MyDomainSettings leva políticas de login, redirecionamentos de URLs antigas e opções de cookies. O nome e o sufixo do My Domain aparecem como campos somente leitura: a troca do nome não é feita por esse tipo.",
+      "evidencias": [
+        {
+          "fonte": "src:mdapi-mydomainsettings"
+        }
+      ]
     }
   ],
-  "funcionalidades": [],
+  "funcionalidades": [
+    "func:my-domain"
+  ],
   "estado": "desconhecido",
-  "nota_estado": "Agrupamento proposto na especificação; fronteira ainda não cruzada com a documentação oficial."
+  "nota_estado": "Tema criado pelo projeto (00-especificacao-grafo.md), não é nomenclatura oficial da Salesforce. Cruzado em 2026-11-10 com áreas da documentação oficial listadas nas referências; a correspondência é parcial e o recorte continua sendo do projeto.",
+  "referencias_oficiais": [
+    {
+      "fonte": "src:help-mydomain",
+      "secao": "My Domain",
+      "nota": "Cobre parte do tema: My Domain."
+    },
+    {
+      "fonte": "src:help-domains-view",
+      "secao": "View Your Custom Domain Details",
+      "nota": "Cobre parte do tema: custom domains e system-managed domains."
+    }
+  ]
 }

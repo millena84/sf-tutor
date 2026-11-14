@@ -16,7 +16,7 @@ import json, os, sys
 sys.path.insert(0, os.path.join(os.path.dirname(os.path.abspath(__file__)), "..", ".."))
 from carga.base import ROOT, save, ev  # noqa: E402
 
-DATA = "2026-11-10"
+DATA = "2026-11-10"  # data do primeiro cruzamento; rodadas seguintes mantêm a mesma nota
 NOTA_ESTADO = ("Tema criado pelo projeto (00-especificacao-grafo.md), não é nomenclatura oficial da Salesforce. Cruzado em "
                + DATA + " com áreas da documentação oficial listadas nas referências; a correspondência é parcial e o recorte continua sendo do projeto.")
 
@@ -229,6 +229,58 @@ TEMAS = {
         "Produtos analíticos que vão além dos relatórios nativos e dependem de licença própria, como CRM Analytics e Tableau.",
         [ev("src:help-produtos-analytics", "Mais ampla que o tema: diretório da documentação de Analytics, que inclui os relatórios nativos.", "Analytics"),
          ev("src:help-crm-analytics-collections", "Cobre parte do tema: assets do CRM Analytics.", "Collections of Data in CRM Analytics")],
+    ),
+    # ------------------------------------------------------------------ Organização e configurações base
+    "sub:identificacao-e-configuracao-da-org": (
+        "A ficha cadastral da org: dados da empresa, padrões de idioma, localidade, fuso e moeda, licenças compradas e o Organization "
+        "ID que identifica a org.",
+        [ev("src:help-company-info-fields", "Cobre o tema: campos da página Company Information.", "Manage Information About Your Company"),
+         ev("src:help-setup-company", "Mais ampla que o tema: guia de configuração da empresa, que inclui idioma, moeda e ano fiscal.",
+            "Set Up Your Company in Salesforce")],
+    ),
+    "sub:settings": (
+        "A família de metadata types com nome terminado em Settings: cada um guarda um grupo de configurações da org num arquivo "
+        ".settings e pode ser recuperado e implantado.",
+        [ev("src:mdapi-settings", "Cobre o tema: a família Settings na Metadata API.", "Settings"),
+         ev("src:mdapi-companysettings", "Cobre parte do tema: um dos tipos da família.", "CompanySettings")],
+    ),
+    "sub:parametros-reutilizaveis": (
+        "Valores de configuração criados pela empresa e lidos por várias funcionalidades: custom metadata types, cujos registros são "
+        "metadados, e custom settings, cujos registros são dados.",
+        [ev("src:help-cmdt-about", "Cobre parte do tema: custom metadata types.", "What are Custom Metadata Types?"),
+         ev("src:help-custom-settings", "Cobre parte do tema: custom settings.", "Define Custom Settings")],
+    ),
+    "sub:localizacao-idiomas-e-traducao": (
+        "Em que língua e em que formato a org aparece para cada pessoa: idiomas oferecidos, localidade (formatos de data, hora e número) "
+        "e tradução de rótulos customizados e custom labels.",
+        [ev("src:help-language-locale-currency", "Mais ampla que o tema: idioma e localidade, junto com moeda.", "Language, Locale, and Currency Settings"),
+         ev("src:help-supported-languages", "Cobre parte do tema: níveis de suporte a idioma.", "Supported Languages"),
+         ev("src:help-translation-workbench", "Cobre parte do tema: tradução de rótulos.", "Translation Workbench"),
+         ev("src:help-custom-labels", "Cobre parte do tema: custom labels.", "Custom Labels")],
+    ),
+    "sub:moedas-e-calendario-fiscal": (
+        "As moedas em que a org registra valores, com moeda corporativa e taxas de conversão, e a forma de contar o ano fiscal: padrão "
+        "ou customizado.",
+        [ev("src:help-multicurrency-manage", "Cobre parte do tema: múltiplas moedas.", "Manage Multiple Currencies"),
+         ev("src:help-fiscal-year-define", "Cobre parte do tema: ano fiscal padrão e customizado.", "Define Your Fiscal Year")],
+    ),
+    "sub:horarios-comerciais-e-feriados": (
+        "Os dias, horários e fuso em que o atendimento funciona e os feriados que suspendem esse horário; outras regras usam os dois "
+        "para contar prazos.",
+        [ev("src:help-bh", "Cobre parte do tema: horários comerciais.", "Set Business Hours"),
+         ev("src:help-holidays", "Cobre parte do tema: feriados.", "Set Up Support Holidays")],
+    ),
+    "sub:dominios-e-urls": (
+        "Os endereços pelos quais pessoas e integrações chegam à org: o My Domain, que põe o nome da empresa nas URLs de login e de "
+        "aplicação, e os custom domains dos sites.",
+        [ev("src:help-mydomain", "Cobre parte do tema: My Domain.", "My Domain"),
+         ev("src:help-domains-view", "Cobre parte do tema: custom domains e system-managed domains.", "View Your Custom Domain Details")],
+    ),
+    "sub:habilitacao-de-recursos": (
+        "A ativação de recursos opcionais no Setup. Alguns mudam o comportamento ou o modelo de dados da org e não podem ser desligados "
+        "depois; muitas ativações ficam gravadas em tipos da família Settings.",
+        [ev("src:mdapi-settings", "Cobre parte do tema: ativações gravadas como metadado na família Settings.", "Settings"),
+         ev("src:help-lightning-knowledge-enable", "Cobre parte do tema: exemplo de ativação sem volta.", "Create a Knowledge Base with Salesforce Knowledge")],
     ),
 }
 

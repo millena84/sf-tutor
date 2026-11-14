@@ -1,0 +1,220 @@
+{
+  "id": "mdt:CustomLabels",
+  "nome": "CustomLabels",
+  "o_que_e": "O conjunto de custom labels da org: textos customizados que podem ser traduzidos e lidos por código e por páginas.",
+  "finalidade": "Versionar e implantar os textos da aplicação em vez de deixá-los fixos no código.",
+  "estende": "Metadata",
+  "arquivos": {
+    "source_format": {
+      "estado": "verificado",
+      "valor": {
+        "pasta": "labels/",
+        "arquivo": "<Nome>.labels-meta.xml"
+      },
+      "nota": "Pasta e sufixo do registro do Salesforce CLI; sufixo '-meta.xml' segue a convenção do source format.",
+      "evidencias": [
+        {
+          "fonte": "src:sdr-registry",
+          "nota": "types.customlabels"
+        }
+      ]
+    },
+    "metadata_api_format": {
+      "estado": "verificado",
+      "valor": {
+        "pasta": "labels/",
+        "arquivo": "<Nome>.labels"
+      },
+      "evidencias": [
+        {
+          "fonte": "src:sdr-registry",
+          "nota": "types.customlabels"
+        }
+      ]
+    },
+    "curinga_package_xml": {
+      "estado": "verificado",
+      "valor": true,
+      "evidencias": [
+        {
+          "fonte": "src:mdapi-customlabels"
+        }
+      ]
+    }
+  },
+  "disponibilidade": {
+    "desde_versao": "14.0",
+    "ate_versao": null,
+    "estado": "verificado"
+  },
+  "suporte_cli": {
+    "estado": "verificado",
+    "valor": {
+      "status": "suportado",
+      "nota_fonte": null
+    },
+    "nota": "Suporte do Salesforce CLI (source-deploy-retrieve), não do Metadata API em geral.",
+    "evidencias": [
+      {
+        "fonte": "src:sdr-metadata-support"
+      }
+    ]
+  },
+  "setup": {
+    "estado": "verificado",
+    "valor": "Setup > Quick Find: Custom Labels > Custom Labels",
+    "nota": "Lista de custom labels. Rótulos em inglês, como na fonte; a tradução da interface em pt-BR não foi verificada.",
+    "evidencias": [
+      {
+        "fonte": "src:help-custom-labels-edit"
+      }
+    ]
+  },
+  "propriedades": [
+    {
+      "id": "mdt:CustomLabels.fullName",
+      "nome": "fullName",
+      "tipo_tecnico": "string",
+      "o_que_e": "Nome do conjunto de custom labels; herdado do tipo Metadata.",
+      "origem": {
+        "estado": "verificado",
+        "valor": "padrao_plataforma",
+        "nota": "Propriedade definida pelo schema da Metadata API.",
+        "evidencias": [
+          {
+            "fonte": "src:mdapi-customlabels"
+          }
+        ]
+      },
+      "obrigatoriedade": {
+        "valor": "desconhecida",
+        "estado": "desconhecido"
+      },
+      "default": {
+        "forma": "nao_declarado_na_fonte",
+        "estado": "desconhecido"
+      },
+      "dominio": {
+        "natureza": "texto_livre",
+        "estado": "verificado",
+        "evidencias": [
+          {
+            "fonte": "src:mdapi-customlabels"
+          }
+        ],
+        "contexto": "A fonte tipa como string sem lista de valores; não inventar valores."
+      },
+      "disponibilidade": {
+        "desde_versao": null,
+        "ate_versao": null,
+        "estado": "desconhecido"
+      },
+      "explicacao": "explicada",
+      "estado": "verificado",
+      "evidencias": [
+        {
+          "fonte": "src:mdapi-customlabels"
+        }
+      ],
+      "herdada_de": "Metadata",
+      "notas": [
+        "A tabela marca o campo como não obrigatório, mas a descrição diz que ele deve ser informado ao criar, atualizar ou excluir."
+      ]
+    },
+    {
+      "id": "mdt:CustomLabels.labels",
+      "nome": "labels",
+      "tipo_tecnico": "CustomLabel[]",
+      "o_que_e": "Lista de custom labels.",
+      "origem": {
+        "estado": "verificado",
+        "valor": "padrao_plataforma",
+        "nota": "Propriedade definida pelo schema da Metadata API.",
+        "evidencias": [
+          {
+            "fonte": "src:mdapi-customlabels"
+          }
+        ]
+      },
+      "obrigatoriedade": {
+        "valor": "nao",
+        "estado": "desconhecido",
+        "condicao": "A documentação 68.0 não marca o campo como obrigatório; ausência de marcação não comprova opcionalidade (confirmar no WSDL)."
+      },
+      "default": {
+        "forma": "nao_declarado_na_fonte",
+        "estado": "desconhecido"
+      },
+      "dominio": {
+        "natureza": "tipo_composto",
+        "estado": "verificado",
+        "evidencias": [
+          {
+            "fonte": "src:mdapi-customlabels"
+          }
+        ]
+      },
+      "disponibilidade": {
+        "desde_versao": null,
+        "ate_versao": null,
+        "estado": "desconhecido"
+      },
+      "explicacao": "explicada",
+      "estado": "verificado",
+      "evidencias": [
+        {
+          "fonte": "src:mdapi-customlabels"
+        }
+      ],
+      "cardinalidade": "0..n",
+      "estrutura_ref": "mdx:CustomLabel"
+    }
+  ],
+  "estruturas": [
+    "mdx:CustomLabel"
+  ],
+  "cobertura": {
+    "estrutural": {
+      "estado": "completa",
+      "esperado": 2,
+      "presente": 2,
+      "nota": "Universo esperado = tabela Fields da página oficial lida em 2026-11-14."
+    },
+    "explicativa": {
+      "estado": "completa",
+      "esperado": 2,
+      "presente": 2
+    },
+    "mapeamento": {
+      "estado": "parcial",
+      "nota": "Correspondências registradas apenas onde há evidência; demais pendentes."
+    }
+  },
+  "recomendacoes": [],
+  "alertas": [
+    "O tipo CustomLabels não recupera labels por nome: para labels específicos, a página manda usar o tipo CustomLabel com os nomes como membros no package.xml.",
+    "Não é possível recuperar CustomLabels com namespace.",
+    "As traduções dos labels não ficam neste arquivo: ficam na pasta translations, em arquivos <código de localidade>.translation (tipo Translations, ainda não cadastrado no catálogo)."
+  ],
+  "divergencias_documentais": [
+    "Nas tabelas de CustomLabels e CustomLabel (src:mdapi-customlabels), fullName aparece como não obrigatório, mas a descrição diz Required.",
+    "A página trata CustomLabel como metadata type próprio; ele não consta do inventário v68 do projeto e foi cadastrado como estrutura."
+  ],
+  "estado": "verificado",
+  "evidencias": [
+    {
+      "fonte": "src:mdapi-customlabels"
+    },
+    {
+      "fonte": "src:sdr-registry"
+    },
+    {
+      "fonte": "src:sdr-metadata-support"
+    }
+  ],
+  "exemplo_xml": {
+    "xml": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<CustomLabels xmlns=\"http://soap.sforce.com/2006/04/metadata\">\n    <!-- Um bloco labels por custom label -->\n    <labels>\n        <fullName>[NomeDoLabel]</fullName>\n        <language>[código do idioma do texto]</language>\n        <protected>false</protected>\n        <shortDescription>[termo curto que identifica o label]</shortDescription>\n        <value>[texto do label, até 1.000 caracteres]</value>\n    </labels>\n</CustomLabels>",
+    "natureza": "didatico_projeto",
+    "nota": "Exemplo escrito pelo projeto apenas com elementos documentados; sem dados reais."
+  }
+}

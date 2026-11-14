@@ -1,0 +1,583 @@
+{
+  "id": "mdt:CurrencySettings",
+  "nome": "CurrencySettings",
+  "o_que_e": "Configuração de moedas da org: múltiplas moedas, moedas ativas, moeda corporativa e taxas com data de vigência.",
+  "finalidade": "Recuperar e implantar a configuração de moedas em vez de repeti-la à mão em cada ambiente.",
+  "estende": "Metadata",
+  "arquivos": {
+    "source_format": {
+      "estado": "verificado",
+      "valor": {
+        "pasta": "settings/",
+        "arquivo": "Currency.settings-meta.xml"
+      },
+      "nota": "Pasta e sufixo do tipo genérico Settings no registro do Salesforce CLI; o nome-base do arquivo vem da página do tipo.",
+      "evidencias": [
+        {
+          "fonte": "src:sdr-registry",
+          "nota": "types.settings"
+        },
+        {
+          "fonte": "src:mdapi-currencysettings"
+        }
+      ]
+    },
+    "metadata_api_format": {
+      "estado": "verificado",
+      "valor": {
+        "pasta": "settings/",
+        "arquivo": "Currency.settings"
+      },
+      "nota": "Um único arquivo; no package.xml, o tipo é Settings e o membro é Currency.",
+      "evidencias": [
+        {
+          "fonte": "src:mdapi-currencysettings"
+        }
+      ]
+    },
+    "curinga_package_xml": {
+      "estado": "verificado",
+      "valor": false,
+      "evidencias": [
+        {
+          "fonte": "src:mdapi-currencysettings"
+        }
+      ]
+    }
+  },
+  "disponibilidade": {
+    "desde_versao": "47.0",
+    "ate_versao": null,
+    "estado": "verificado"
+  },
+  "suporte_cli": {
+    "estado": "verificado",
+    "valor": {
+      "status": "suportado",
+      "nota_fonte": null
+    },
+    "nota": "Suporte do Salesforce CLI (source-deploy-retrieve), não do Metadata API em geral.",
+    "evidencias": [
+      {
+        "fonte": "src:sdr-metadata-support"
+      }
+    ]
+  },
+  "setup": {
+    "estado": "verificado",
+    "valor": "Setup > Quick Find: Manage Currencies > Manage Currencies",
+    "nota": "Tela de moedas da org. Rótulos em inglês, como na fonte; a tradução da interface em pt-BR não foi verificada.",
+    "evidencias": [
+      {
+        "fonte": "src:help-multicurrency-manage"
+      }
+    ]
+  },
+  "propriedades": [
+    {
+      "id": "mdt:CurrencySettings.corporateCurrency",
+      "nome": "corporateCurrency",
+      "tipo_tecnico": "string",
+      "o_que_e": "Código ISO 4217 da moeda corporativa, cuja taxa é fixa em 1.0. Informar o campo troca a moeda corporativa; a nova precisa estar cadastrada e ativa.",
+      "origem": {
+        "estado": "verificado",
+        "valor": "padrao_plataforma",
+        "nota": "Propriedade definida pelo schema da Metadata API.",
+        "evidencias": [
+          {
+            "fonte": "src:mdapi-currencysettings"
+          }
+        ]
+      },
+      "obrigatoriedade": {
+        "valor": "nao",
+        "estado": "desconhecido",
+        "condicao": "A documentação 68.0 não marca o campo como obrigatório; ausência de marcação não comprova opcionalidade (confirmar no WSDL)."
+      },
+      "default": {
+        "forma": "nao_declarado_na_fonte",
+        "estado": "desconhecido"
+      },
+      "dominio": {
+        "natureza": "texto_livre",
+        "estado": "verificado",
+        "evidencias": [
+          {
+            "fonte": "src:mdapi-currencysettings"
+          }
+        ],
+        "contexto": "A fonte tipa como string sem lista de valores; não inventar valores."
+      },
+      "disponibilidade": {
+        "desde_versao": "68.0",
+        "ate_versao": null,
+        "estado": "verificado"
+      },
+      "explicacao": "explicada",
+      "estado": "verificado",
+      "evidencias": [
+        {
+          "fonte": "src:mdapi-currencysettings"
+        }
+      ],
+      "notas": [
+        "Sem efeito se enableMultiCurrency não for true, antes ou no mesmo deploy."
+      ]
+    },
+    {
+      "id": "mdt:CurrencySettings.currency",
+      "nome": "currency",
+      "tipo_tecnico": "Currency[]",
+      "o_que_e": "Moedas da org. Uma entrada nova é inserida; uma entrada com isoCode já existente atualiza active, scale e conversionRate.",
+      "origem": {
+        "estado": "verificado",
+        "valor": "padrao_plataforma",
+        "nota": "Propriedade definida pelo schema da Metadata API.",
+        "evidencias": [
+          {
+            "fonte": "src:mdapi-currencysettings"
+          }
+        ]
+      },
+      "obrigatoriedade": {
+        "valor": "nao",
+        "estado": "desconhecido",
+        "condicao": "A documentação 68.0 não marca o campo como obrigatório; ausência de marcação não comprova opcionalidade (confirmar no WSDL)."
+      },
+      "default": {
+        "forma": "nao_declarado_na_fonte",
+        "estado": "desconhecido"
+      },
+      "dominio": {
+        "natureza": "tipo_composto",
+        "estado": "verificado",
+        "evidencias": [
+          {
+            "fonte": "src:mdapi-currencysettings"
+          }
+        ]
+      },
+      "disponibilidade": {
+        "desde_versao": "68.0",
+        "ate_versao": null,
+        "estado": "verificado"
+      },
+      "explicacao": "explicada",
+      "estado": "verificado",
+      "evidencias": [
+        {
+          "fonte": "src:mdapi-currencysettings"
+        }
+      ],
+      "cardinalidade": "0..n",
+      "notas": [
+        "Sem efeito se enableMultiCurrency não for true."
+      ],
+      "estrutura_ref": "mdx:Currency"
+    },
+    {
+      "id": "mdt:CurrencySettings.enableCurrencyEffectiveDates",
+      "nome": "enableCurrencyEffectiveDates",
+      "tipo_tecnico": "boolean",
+      "o_que_e": "Liga as taxas de câmbio com data de vigência. Exige enableMultiCurrency em true.",
+      "origem": {
+        "estado": "verificado",
+        "valor": "padrao_plataforma",
+        "nota": "Propriedade definida pelo schema da Metadata API.",
+        "evidencias": [
+          {
+            "fonte": "src:mdapi-currencysettings"
+          }
+        ]
+      },
+      "obrigatoriedade": {
+        "valor": "nao",
+        "estado": "desconhecido",
+        "condicao": "A documentação 68.0 não marca o campo como obrigatório; ausência de marcação não comprova opcionalidade (confirmar no WSDL)."
+      },
+      "default": {
+        "forma": "false",
+        "estado": "verificado",
+        "evidencias": [
+          {
+            "fonte": "src:mdapi-currencysettings"
+          }
+        ],
+        "valor": false,
+        "nota": "A página declara default false."
+      },
+      "dominio": {
+        "natureza": "booleano",
+        "valores": [
+          {
+            "valor": "true"
+          },
+          {
+            "valor": "false"
+          }
+        ],
+        "lista_completa": "sim",
+        "estado": "verificado",
+        "evidencias": [
+          {
+            "fonte": "src:mdapi-currencysettings"
+          }
+        ]
+      },
+      "disponibilidade": {
+        "desde_versao": null,
+        "ate_versao": null,
+        "estado": "desconhecido"
+      },
+      "explicacao": "explicada",
+      "estado": "verificado",
+      "evidencias": [
+        {
+          "fonte": "src:mdapi-currencysettings"
+        }
+      ]
+    },
+    {
+      "id": "mdt:CurrencySettings.enableCurrencySymbolWithMultiCurrency",
+      "nome": "enableCurrencySymbolWithMultiCurrency",
+      "tipo_tecnico": "boolean",
+      "o_que_e": "Em org com múltiplas moedas, mostra o símbolo da moeda (true) ou o código ISO (false). Sem efeito com enableMultiCurrency em false.",
+      "origem": {
+        "estado": "verificado",
+        "valor": "padrao_plataforma",
+        "nota": "Propriedade definida pelo schema da Metadata API.",
+        "evidencias": [
+          {
+            "fonte": "src:mdapi-currencysettings"
+          }
+        ]
+      },
+      "obrigatoriedade": {
+        "valor": "nao",
+        "estado": "desconhecido",
+        "condicao": "A documentação 68.0 não marca o campo como obrigatório; ausência de marcação não comprova opcionalidade (confirmar no WSDL)."
+      },
+      "default": {
+        "forma": "false",
+        "estado": "verificado",
+        "evidencias": [
+          {
+            "fonte": "src:mdapi-currencysettings"
+          }
+        ],
+        "valor": false,
+        "nota": "A página declara default false."
+      },
+      "dominio": {
+        "natureza": "booleano",
+        "valores": [
+          {
+            "valor": "true"
+          },
+          {
+            "valor": "false"
+          }
+        ],
+        "lista_completa": "sim",
+        "estado": "verificado",
+        "evidencias": [
+          {
+            "fonte": "src:mdapi-currencysettings"
+          }
+        ]
+      },
+      "disponibilidade": {
+        "desde_versao": null,
+        "ate_versao": null,
+        "estado": "desconhecido"
+      },
+      "explicacao": "explicada",
+      "estado": "verificado",
+      "evidencias": [
+        {
+          "fonte": "src:mdapi-currencysettings"
+        }
+      ]
+    },
+    {
+      "id": "mdt:CurrencySettings.enableMultiCurrency",
+      "nome": "enableMultiCurrency",
+      "tipo_tecnico": "boolean",
+      "o_que_e": "Liga múltiplas moedas. A partir da API 68.0, implantar true liga o recurso; em org que já o tem, nada muda. A moeda corporativa vem de corporateCurrency, se enviado no mesmo deploy, ou da localidade da org.",
+      "origem": {
+        "estado": "verificado",
+        "valor": "padrao_plataforma",
+        "nota": "Propriedade definida pelo schema da Metadata API.",
+        "evidencias": [
+          {
+            "fonte": "src:mdapi-currencysettings"
+          }
+        ]
+      },
+      "obrigatoriedade": {
+        "valor": "nao",
+        "estado": "desconhecido",
+        "condicao": "A documentação 68.0 não marca o campo como obrigatório; ausência de marcação não comprova opcionalidade (confirmar no WSDL)."
+      },
+      "default": {
+        "forma": "false",
+        "estado": "verificado",
+        "evidencias": [
+          {
+            "fonte": "src:mdapi-currencysettings"
+          }
+        ],
+        "valor": false,
+        "nota": "A página declara default false."
+      },
+      "dominio": {
+        "natureza": "booleano",
+        "valores": [
+          {
+            "valor": "true"
+          },
+          {
+            "valor": "false"
+          }
+        ],
+        "lista_completa": "sim",
+        "estado": "verificado",
+        "evidencias": [
+          {
+            "fonte": "src:mdapi-currencysettings"
+          }
+        ]
+      },
+      "disponibilidade": {
+        "desde_versao": null,
+        "ate_versao": null,
+        "estado": "desconhecido"
+      },
+      "explicacao": "explicada",
+      "estado": "verificado",
+      "evidencias": [
+        {
+          "fonte": "src:mdapi-currencysettings"
+        }
+      ],
+      "notas": [
+        "Ligar é irreversível. Implantar false numa org com múltiplas moedas devolve erro."
+      ]
+    },
+    {
+      "id": "mdt:CurrencySettings.isMultiCurrencyActivationAllowed",
+      "nome": "isMultiCurrencyActivationAllowed",
+      "tipo_tecnico": "boolean",
+      "o_que_e": "Descontinuado na API 49.0 e posteriores: não muda se o administrador pode ativar múltiplas moedas. Só é visível com múltiplas moedas desligadas.",
+      "origem": {
+        "estado": "verificado",
+        "valor": "padrao_plataforma",
+        "nota": "Propriedade definida pelo schema da Metadata API.",
+        "evidencias": [
+          {
+            "fonte": "src:mdapi-currencysettings"
+          }
+        ]
+      },
+      "obrigatoriedade": {
+        "valor": "nao",
+        "estado": "desconhecido",
+        "condicao": "A documentação 68.0 não marca o campo como obrigatório; ausência de marcação não comprova opcionalidade (confirmar no WSDL)."
+      },
+      "default": {
+        "forma": "false",
+        "estado": "verificado",
+        "evidencias": [
+          {
+            "fonte": "src:mdapi-currencysettings"
+          }
+        ],
+        "valor": false,
+        "nota": "A página declara default false."
+      },
+      "dominio": {
+        "natureza": "booleano",
+        "valores": [
+          {
+            "valor": "true"
+          },
+          {
+            "valor": "false"
+          }
+        ],
+        "lista_completa": "sim",
+        "estado": "verificado",
+        "evidencias": [
+          {
+            "fonte": "src:mdapi-currencysettings"
+          }
+        ]
+      },
+      "disponibilidade": {
+        "desde_versao": null,
+        "ate_versao": null,
+        "estado": "desconhecido"
+      },
+      "explicacao": "explicada",
+      "estado": "verificado",
+      "evidencias": [
+        {
+          "fonte": "src:mdapi-currencysettings"
+        }
+      ]
+    },
+    {
+      "id": "mdt:CurrencySettings.isParenCurrencyConvDisabled",
+      "nome": "isParenCurrencyConvDisabled",
+      "tipo_tecnico": "boolean",
+      "o_que_e": "Desliga a conversão de moeda entre parênteses. Com false, o usuário vê o valor convertido quando a moeda pessoal difere da moeda do registro.",
+      "origem": {
+        "estado": "verificado",
+        "valor": "padrao_plataforma",
+        "nota": "Propriedade definida pelo schema da Metadata API.",
+        "evidencias": [
+          {
+            "fonte": "src:mdapi-currencysettings"
+          }
+        ]
+      },
+      "obrigatoriedade": {
+        "valor": "nao",
+        "estado": "desconhecido",
+        "condicao": "A documentação 68.0 não marca o campo como obrigatório; ausência de marcação não comprova opcionalidade (confirmar no WSDL)."
+      },
+      "default": {
+        "forma": "valor",
+        "estado": "verificado",
+        "evidencias": [
+          {
+            "fonte": "src:mdapi-currencysettings"
+          }
+        ],
+        "valor": "true"
+      },
+      "dominio": {
+        "natureza": "booleano",
+        "valores": [
+          {
+            "valor": "true"
+          },
+          {
+            "valor": "false"
+          }
+        ],
+        "lista_completa": "sim",
+        "estado": "verificado",
+        "evidencias": [
+          {
+            "fonte": "src:mdapi-currencysettings"
+          }
+        ]
+      },
+      "disponibilidade": {
+        "desde_versao": null,
+        "ate_versao": null,
+        "estado": "desconhecido"
+      },
+      "explicacao": "explicada",
+      "estado": "verificado",
+      "evidencias": [
+        {
+          "fonte": "src:mdapi-currencysettings"
+        }
+      ]
+    },
+    {
+      "id": "mdt:CurrencySettings.fullName",
+      "nome": "fullName",
+      "tipo_tecnico": "string",
+      "o_que_e": "Nome completo (API name) do componente; herdado do tipo Metadata.",
+      "origem": {
+        "estado": "verificado",
+        "valor": "padrao_plataforma",
+        "nota": "Propriedade definida pelo schema da Metadata API.",
+        "evidencias": [
+          {
+            "fonte": "src:mdapi-currencysettings"
+          }
+        ]
+      },
+      "obrigatoriedade": {
+        "valor": "desconhecida",
+        "estado": "desconhecido"
+      },
+      "default": {
+        "forma": "nao_declarado_na_fonte",
+        "estado": "desconhecido"
+      },
+      "dominio": {
+        "natureza": "texto_livre",
+        "estado": "verificado",
+        "evidencias": [
+          {
+            "fonte": "src:mdapi-currencysettings"
+          }
+        ],
+        "contexto": "A fonte tipa como string sem lista de valores; não inventar valores."
+      },
+      "disponibilidade": {
+        "desde_versao": null,
+        "ate_versao": null,
+        "estado": "desconhecido"
+      },
+      "explicacao": "explicada",
+      "estado": "verificado",
+      "evidencias": [
+        {
+          "fonte": "src:mdapi-currencysettings"
+        }
+      ],
+      "herdada_de": "Metadata"
+    }
+  ],
+  "estruturas": [
+    "mdx:Currency"
+  ],
+  "cobertura": {
+    "estrutural": {
+      "estado": "completa",
+      "esperado": 8,
+      "presente": 8,
+      "nota": "Universo esperado = tabela Fields da página oficial lida em 2026-11-14 (mais fullName herdado)."
+    },
+    "explicativa": {
+      "estado": "completa",
+      "esperado": 8,
+      "presente": 8
+    },
+    "mapeamento": {
+      "estado": "parcial",
+      "nota": "Correspondências registradas apenas onde há evidência; demais pendentes."
+    }
+  },
+  "recomendacoes": [],
+  "alertas": [
+    "No package.xml, use o tipo Settings com o nome-base do arquivo como membro; o curinga só vale para recuperar todas as configurações.",
+    "Ligar múltiplas moedas por enableMultiCurrency é irreversível; teste em sandbox antes."
+  ],
+  "divergencias_documentais": [
+    "Na página (src:mdapi-currencysettings), a descrição de conversionRate diz que o campo é obrigatório para moedas novas, mas a seção do subtipo Currency o lista como não obrigatório."
+  ],
+  "estado": "verificado",
+  "evidencias": [
+    {
+      "fonte": "src:mdapi-currencysettings"
+    },
+    {
+      "fonte": "src:sdr-registry"
+    },
+    {
+      "fonte": "src:sdr-metadata-support"
+    }
+  ],
+  "exemplo_xml": {
+    "xml": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<CurrencySettings xmlns=\"http://soap.sforce.com/2006/04/metadata\">\n    <!-- Moeda corporativa: precisa estar cadastrada e ativa -->\n    <corporateCurrency>USD</corporateCurrency>\n    <currency>\n        <active>true</active>\n        <!-- A moeda corporativa tem taxa 1.0 -->\n        <conversionRate>1.0</conversionRate>\n        <isoCode>USD</isoCode>\n        <scale>2</scale>\n    </currency>\n    <currency>\n        <active>true</active>\n        <conversionRate>[taxa de conversão para a moeda corporativa]</conversionRate>\n        <isoCode>EUR</isoCode>\n        <scale>2</scale>\n    </currency>\n    <!-- Atenção: ligar múltiplas moedas é irreversível -->\n    <enableMultiCurrency>true</enableMultiCurrency>\n</CurrencySettings>",
+    "natureza": "didatico_projeto",
+    "nota": "Exemplo escrito pelo projeto apenas com elementos documentados; sem dados reais."
+  }
+}

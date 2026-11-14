@@ -1,0 +1,286 @@
+{
+  "alertas": [
+    "No package.xml, use o tipo Settings com o nome-base do arquivo como membro; o curinga só vale para recuperar todas as configurações.",
+    "Mudar o ano fiscal por este tipo pode apagar cotas e ajustes de previsão, como na tela de Setup."
+  ],
+  "arquivos": {
+    "curinga_package_xml": {
+      "estado": "verificado",
+      "evidencias": [
+        {
+          "fonte": "src:mdapi-companysettings"
+        }
+      ],
+      "valor": false
+    },
+    "metadata_api_format": {
+      "estado": "verificado",
+      "evidencias": [
+        {
+          "fonte": "src:mdapi-companysettings"
+        }
+      ],
+      "nota": "Um único arquivo; no package.xml, o tipo é Settings e o membro é Company.",
+      "valor": {
+        "arquivo": "Company.settings",
+        "pasta": "settings/"
+      }
+    },
+    "source_format": {
+      "estado": "verificado",
+      "evidencias": [
+        {
+          "fonte": "src:sdr-registry",
+          "nota": "types.settings"
+        },
+        {
+          "fonte": "src:mdapi-companysettings"
+        }
+      ],
+      "nota": "Pasta e sufixo do tipo genérico Settings no registro do Salesforce CLI; o nome-base do arquivo vem da página do tipo.",
+      "valor": {
+        "arquivo": "Company.settings-meta.xml",
+        "pasta": "settings/"
+      }
+    }
+  },
+  "cobertura": {
+    "estrutural": {
+      "esperado": 3,
+      "estado": "completa",
+      "nota": "Universo esperado = tabela Fields da página oficial lida em 2026-11-14 (mais fullName herdado).",
+      "presente": 3
+    },
+    "explicativa": {
+      "esperado": 3,
+      "estado": "completa",
+      "presente": 3
+    },
+    "mapeamento": {
+      "estado": "parcial",
+      "nota": "Correspondências registradas apenas onde há evidência; demais pendentes."
+    }
+  },
+  "disponibilidade": {
+    "ate_versao": null,
+    "desde_versao": "27.0",
+    "estado": "verificado"
+  },
+  "divergencias_documentais": [
+    "A página (src:mdapi-companysettings) traz duas seções de subtipo, 'FiscalYearSetting Type' e 'FiscalYearSettings Type', com os mesmos dois campos, sem explicar a relação entre elas. O catálogo registra uma estrutura só, FiscalYearSettings, que é o tipo declarado no campo fiscalYear."
+  ],
+  "estado": "verificado",
+  "estende": "Metadata",
+  "estruturas": [
+    "mdx:FiscalYearSettings"
+  ],
+  "evidencias": [
+    {
+      "fonte": "src:mdapi-companysettings"
+    },
+    {
+      "fonte": "src:sdr-registry"
+    },
+    {
+      "fonte": "src:sdr-metadata-support"
+    }
+  ],
+  "exemplo_xml": {
+    "natureza": "didatico_projeto",
+    "nota": "Exemplo escrito pelo projeto apenas com elementos documentados; sem dados reais.",
+    "xml": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<CompanySettings xmlns=\"http://soap.sforce.com/2006/04/metadata\">\n    <!-- false: as previsões usam os períodos fiscais padrão -->\n    <enableCustomFiscalYear>false</enableCustomFiscalYear>\n    <fiscalYear>\n        <!-- Valores documentados: endingMonth ou startingMonth -->\n        <fiscalYearNameBasedOn>startingMonth</fiscalYearNameBasedOn>\n        <startMonth>[mês de início do ano fiscal]</startMonth>\n    </fiscalYear>\n</CompanySettings>"
+  },
+  "finalidade": "Recuperar e implantar a definição do ano fiscal padrão e o uso de período fiscal customizado nas previsões.",
+  "id": "mdt:CompanySettings",
+  "nome": "CompanySettings",
+  "o_que_e": "Configurações globais da org que afetam vários recursos. Na versão lida, os campos tratam do ano fiscal.",
+  "propriedades": [
+    {
+      "default": {
+        "estado": "verificado",
+        "evidencias": [
+          {
+            "fonte": "src:mdapi-companysettings"
+          }
+        ],
+        "forma": "false",
+        "nota": "A página declara default false.",
+        "valor": false
+      },
+      "disponibilidade": {
+        "ate_versao": null,
+        "desde_versao": "47.0",
+        "estado": "verificado"
+      },
+      "dominio": {
+        "estado": "verificado",
+        "evidencias": [
+          {
+            "fonte": "src:mdapi-companysettings"
+          }
+        ],
+        "lista_completa": "sim",
+        "natureza": "booleano",
+        "valores": [
+          {
+            "valor": "true"
+          },
+          {
+            "valor": "false"
+          }
+        ]
+      },
+      "estado": "verificado",
+      "evidencias": [
+        {
+          "fonte": "src:mdapi-companysettings"
+        }
+      ],
+      "explicacao": "explicada",
+      "id": "mdt:CompanySettings.enableCustomFiscalYear",
+      "nome": "enableCustomFiscalYear",
+      "o_que_e": "Quando há período fiscal customizado configurado, indica se ele é usado nas previsões (forecasts). Com false, valem os períodos padrão.",
+      "obrigatoriedade": {
+        "estado": "verificado",
+        "evidencias": [
+          {
+            "fonte": "src:mdapi-companysettings"
+          }
+        ],
+        "valor": "sim"
+      },
+      "origem": {
+        "estado": "verificado",
+        "evidencias": [
+          {
+            "fonte": "src:mdapi-companysettings"
+          }
+        ],
+        "nota": "Propriedade definida pelo schema da Metadata API.",
+        "valor": "padrao_plataforma"
+      },
+      "tipo_tecnico": "boolean"
+    },
+    {
+      "default": {
+        "estado": "desconhecido",
+        "forma": "nao_declarado_na_fonte"
+      },
+      "disponibilidade": {
+        "ate_versao": null,
+        "desde_versao": null,
+        "estado": "desconhecido"
+      },
+      "dominio": {
+        "estado": "verificado",
+        "evidencias": [
+          {
+            "fonte": "src:mdapi-companysettings"
+          }
+        ],
+        "natureza": "tipo_composto"
+      },
+      "estado": "verificado",
+      "estrutura_ref": "mdx:FiscalYearSettings",
+      "evidencias": [
+        {
+          "fonte": "src:mdapi-companysettings"
+        }
+      ],
+      "explicacao": "explicada",
+      "id": "mdt:CompanySettings.fiscalYear",
+      "nome": "fiscalYear",
+      "notas": [
+        "Mudar o ano fiscal pode apagar cotas (quotas) e ajustes de previsão."
+      ],
+      "o_que_e": "Ano fiscal definido por ano e mês de início. Não fica disponível se Custom Fiscal Year ou Forecasts (Classic) estiver ligado.",
+      "obrigatoriedade": {
+        "condicao": "A documentação 68.0 não marca o campo como obrigatório; ausência de marcação não comprova opcionalidade (confirmar no WSDL).",
+        "estado": "desconhecido",
+        "valor": "nao"
+      },
+      "origem": {
+        "estado": "verificado",
+        "evidencias": [
+          {
+            "fonte": "src:mdapi-companysettings"
+          }
+        ],
+        "nota": "Propriedade definida pelo schema da Metadata API.",
+        "valor": "padrao_plataforma"
+      },
+      "tipo_tecnico": "FiscalYearSettings"
+    },
+    {
+      "default": {
+        "estado": "desconhecido",
+        "forma": "nao_declarado_na_fonte"
+      },
+      "disponibilidade": {
+        "ate_versao": null,
+        "desde_versao": null,
+        "estado": "desconhecido"
+      },
+      "dominio": {
+        "contexto": "A fonte tipa como string sem lista de valores; não inventar valores.",
+        "estado": "verificado",
+        "evidencias": [
+          {
+            "fonte": "src:mdapi-companysettings"
+          }
+        ],
+        "natureza": "texto_livre"
+      },
+      "estado": "verificado",
+      "evidencias": [
+        {
+          "fonte": "src:mdapi-companysettings"
+        }
+      ],
+      "explicacao": "explicada",
+      "herdada_de": "Metadata",
+      "id": "mdt:CompanySettings.fullName",
+      "nome": "fullName",
+      "o_que_e": "Nome completo (API name) do componente; herdado do tipo Metadata.",
+      "obrigatoriedade": {
+        "estado": "desconhecido",
+        "valor": "desconhecida"
+      },
+      "origem": {
+        "estado": "verificado",
+        "evidencias": [
+          {
+            "fonte": "src:mdapi-companysettings"
+          }
+        ],
+        "nota": "Propriedade definida pelo schema da Metadata API.",
+        "valor": "padrao_plataforma"
+      },
+      "tipo_tecnico": "string"
+    }
+  ],
+  "recomendacoes": [],
+  "setup": {
+    "estado": "verificado",
+    "evidencias": [
+      {
+        "fonte": "src:help-fiscal-year-set"
+      }
+    ],
+    "nota": "Tela que define o ano fiscal. Rótulos em inglês, como na fonte; a tradução da interface em pt-BR não foi verificada.",
+    "valor": "Setup > Quick Find: Fiscal Year > Fiscal Year"
+  },
+  "suporte_cli": {
+    "estado": "verificado",
+    "evidencias": [
+      {
+        "fonte": "src:sdr-metadata-support"
+      }
+    ],
+    "nota": "Suporte do Salesforce CLI (source-deploy-retrieve), não do Metadata API em geral.",
+    "valor": {
+      "nota_fonte": null,
+      "status": "suportado"
+    }
+  }
+}

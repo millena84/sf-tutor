@@ -473,6 +473,12 @@
       "tipo": "representacao_objeto_api"
     },
     {
+      "destino": "mdt:CompanySettings",
+      "origem": "func:ano-fiscal",
+      "papel": "Ano fiscal padrão e uso de período customizado nas previsões, implantáveis.",
+      "tipo": "representacao_xml"
+    },
+    {
       "destino": "mdt:AuthProvider",
       "origem": "func:auth-providers",
       "papel": "Configuração do provedor.",
@@ -663,6 +669,18 @@
       "origem": "func:csp-trusted-sites",
       "papel": "Trusted URL exposta por API, com criação e edição.",
       "tipo": "representacao_objeto_api"
+    },
+    {
+      "destino": "mdt:CustomLabels",
+      "origem": "func:custom-labels",
+      "papel": "Conjunto de custom labels implantável.",
+      "tipo": "representacao_xml"
+    },
+    {
+      "destino": "mdt:CustomMetadata",
+      "origem": "func:custom-metadata-types",
+      "papel": "Cada registro de um custom metadata type.",
+      "tipo": "representacao_xml"
     },
     {
       "destino": "mdt:EntitlementProcess",
@@ -863,6 +881,12 @@
       "tipo": "representacao_xml"
     },
     {
+      "destino": "mdt:BusinessHoursSettings",
+      "origem": "func:feriados",
+      "papel": "Feriados implantáveis junto dos horários comerciais (estrutura Holidays).",
+      "tipo": "representacao_xml"
+    },
+    {
       "destino": "mdt:Flow",
       "origem": "func:flow",
       "papel": "Definição implantável de uma versão de flow.",
@@ -891,6 +915,12 @@
       "origem": "func:horario-comercial",
       "papel": "Registro de cada horário comercial.",
       "tipo": "representacao_objeto_api"
+    },
+    {
+      "destino": "mdt:LanguageSettings",
+      "origem": "func:idiomas-da-org",
+      "papel": "Seleção de idiomas, formato ICU e opções de tradução implantáveis.",
+      "tipo": "representacao_xml"
     },
     {
       "destino": "mdt:LeadConvertSettings",
@@ -939,6 +969,18 @@
       "origem": "func:lightning-pages",
       "papel": "Página consultável (Tooling).",
       "tipo": "representacao_objeto_api"
+    },
+    {
+      "destino": "mdt:CurrencySettings",
+      "origem": "func:multiplas-moedas",
+      "papel": "Ativação de múltiplas moedas, moeda corporativa, moedas e taxas implantáveis.",
+      "tipo": "representacao_xml"
+    },
+    {
+      "destino": "mdt:MyDomainSettings",
+      "origem": "func:my-domain",
+      "papel": "Políticas de login, redirecionamentos e opções de roteamento implantáveis.",
+      "tipo": "representacao_xml"
     },
     {
       "destino": "mdt:ExternalAuthIdentityProvider",
@@ -1397,6 +1439,12 @@
       "tipo": "representacao_objeto_api"
     },
     {
+      "destino": "mdt:LanguageSettings",
+      "origem": "func:translation-workbench",
+      "papel": "Liga o Translation Workbench (enableTranslationWorkbench).",
+      "tipo": "representacao_xml"
+    },
+    {
       "destino": "obj:User",
       "origem": "func:usuarios",
       "papel": "Registro de cada usuário.",
@@ -1434,6 +1482,11 @@
     {
       "destino": "mdx:Holidays",
       "origem": "mdt:BusinessHoursSettings.holidays",
+      "tipo": "tipo_composto"
+    },
+    {
+      "destino": "mdx:FiscalYearSettings",
+      "origem": "mdt:CompanySettings.fiscalYear",
       "tipo": "tipo_composto"
     },
     {
@@ -1500,6 +1553,11 @@
       "tipo": "representacao_comum"
     },
     {
+      "destino": "mdx:Currency",
+      "origem": "mdt:CurrencySettings.currency",
+      "tipo": "tipo_composto"
+    },
+    {
       "destino": "obj:CustomField.Metadata",
       "estado": "verificado",
       "natureza": "transformada",
@@ -1523,6 +1581,16 @@
     {
       "destino": "mdx:ValueSet",
       "origem": "mdt:CustomField.valueSet",
+      "tipo": "tipo_composto"
+    },
+    {
+      "destino": "mdx:CustomLabel",
+      "origem": "mdt:CustomLabels.labels",
+      "tipo": "tipo_composto"
+    },
+    {
+      "destino": "mdx:CustomMetadataValue",
+      "origem": "mdt:CustomMetadata.values",
       "tipo": "tipo_composto"
     },
     {
@@ -3525,6 +3593,12 @@
       "tipo": "classificacao_principal"
     },
     {
+      "destino": "func:feriados",
+      "motivo": "Suspende regras de escalonamento e marcos de entitlement durante o feriado.",
+      "origem": "sub:atendimento",
+      "tipo": "classificacao_secundaria"
+    },
+    {
       "destino": "func:horario-comercial",
       "motivo": "Usado por casos, regras de escalonamento, milestones e processos de entitlement.",
       "origem": "sub:atendimento",
@@ -3716,6 +3790,11 @@
       "tipo": "classificacao_secundaria"
     },
     {
+      "destino": "func:my-domain",
+      "origem": "sub:dominios-e-urls",
+      "tipo": "classificacao_principal"
+    },
+    {
       "destino": "func:change-data-capture",
       "origem": "sub:eventos-e-mensageria",
       "tipo": "classificacao_principal"
@@ -3753,8 +3832,18 @@
       "tipo": "classificacao_secundaria"
     },
     {
+      "destino": "func:feriados",
+      "origem": "sub:horarios-comerciais-e-feriados",
+      "tipo": "classificacao_principal"
+    },
+    {
       "destino": "func:horario-comercial",
       "origem": "sub:horarios-comerciais-e-feriados",
+      "tipo": "classificacao_principal"
+    },
+    {
+      "destino": "func:informacoes-da-empresa",
+      "origem": "sub:identificacao-e-configuracao-da-org",
       "tipo": "classificacao_principal"
     },
     {
@@ -3792,6 +3881,31 @@
       "tipo": "classificacao_secundaria"
     },
     {
+      "destino": "func:custom-labels",
+      "origem": "sub:localizacao-idiomas-e-traducao",
+      "tipo": "classificacao_principal"
+    },
+    {
+      "destino": "func:idiomas-da-org",
+      "origem": "sub:localizacao-idiomas-e-traducao",
+      "tipo": "classificacao_principal"
+    },
+    {
+      "destino": "func:translation-workbench",
+      "origem": "sub:localizacao-idiomas-e-traducao",
+      "tipo": "classificacao_principal"
+    },
+    {
+      "destino": "func:ano-fiscal",
+      "origem": "sub:moedas-e-calendario-fiscal",
+      "tipo": "classificacao_principal"
+    },
+    {
+      "destino": "func:multiplas-moedas",
+      "origem": "sub:moedas-e-calendario-fiscal",
+      "tipo": "classificacao_principal"
+    },
+    {
       "destino": "func:objetos-customizados",
       "origem": "sub:objetos-e-entidades",
       "tipo": "classificacao_principal"
@@ -3799,6 +3913,11 @@
     {
       "destino": "func:path",
       "origem": "sub:orientacao-visual-e-path",
+      "tipo": "classificacao_principal"
+    },
+    {
+      "destino": "func:custom-metadata-types",
+      "origem": "sub:parametros-reutilizaveis",
       "tipo": "classificacao_principal"
     },
     {
@@ -4080,6 +4199,15 @@
     },
     {
       "estado": "verificado",
+      "grupo_cor": "cls:organizacao-e-configuracoes-base",
+      "id": "func:ano-fiscal",
+      "resumo": "Define como a org conta o ano fiscal: padrão (calendário gregoriano, com o mês de início à escolha) ou customizado (períodos definidos pela empresa).",
+      "rotulo": "Ano fiscal",
+      "rotulo_tecnico": "Fiscal Year",
+      "tipo": "funcionalidade"
+    },
+    {
+      "estado": "verificado",
       "grupo_cor": "cls:interface-e-experiencia-do-usuario",
       "id": "func:apps-de-console",
       "resumo": "Apps com navegação em abas e subabas para trabalhar vários registros ao mesmo tempo.",
@@ -4215,6 +4343,24 @@
     },
     {
       "estado": "verificado",
+      "grupo_cor": "cls:organizacao-e-configuracoes-base",
+      "id": "func:custom-labels",
+      "resumo": "Textos customizados, com nome próprio, que podem ser traduzidos e lidos por classes Apex, páginas Visualforce, Lightning pages e componentes Lightning.",
+      "rotulo": "Custom labels",
+      "rotulo_tecnico": "Custom Labels",
+      "tipo": "funcionalidade"
+    },
+    {
+      "estado": "verificado",
+      "grupo_cor": "cls:organizacao-e-configuracoes-base",
+      "id": "func:custom-metadata-types",
+      "resumo": "Tipos de metadado criados pela empresa para guardar configuração da aplicação. Os registros de cada tipo são metadados: podem ser empacotados e implantados.",
+      "rotulo": "Custom metadata types",
+      "rotulo_tecnico": "Custom Metadata Types",
+      "tipo": "funcionalidade"
+    },
+    {
+      "estado": "verificado",
       "grupo_cor": "cls:processos-de-negocio-especificos-de-produto",
       "id": "func:entitlements-e-milestones",
       "resumo": "Define a que suporte cada cliente tem direito e os prazos (milestones) que o atendimento precisa cumprir.",
@@ -4278,6 +4424,15 @@
     },
     {
       "estado": "verificado",
+      "grupo_cor": "cls:organizacao-e-configuracoes-base",
+      "id": "func:feriados",
+      "resumo": "Datas e horários em que o atendimento não funciona. Cada feriado é associado a um ou mais horários comerciais e suspende a contagem deles.",
+      "rotulo": "Feriados",
+      "rotulo_tecnico": "Holidays",
+      "tipo": "funcionalidade"
+    },
+    {
+      "estado": "verificado",
       "grupo_cor": "cls:automacao-de-processos-e-regras-de-negocio",
       "id": "func:flow",
       "resumo": "Automação declarativa construída no Flow Builder, com elementos, variáveis e decisões.",
@@ -4292,6 +4447,24 @@
       "resumo": "Define os dias, horários e fuso em que o atendimento funciona.",
       "rotulo": "Horário comercial",
       "rotulo_tecnico": "Business Hours",
+      "tipo": "funcionalidade"
+    },
+    {
+      "estado": "verificado",
+      "grupo_cor": "cls:organizacao-e-configuracoes-base",
+      "id": "func:idiomas-da-org",
+      "resumo": "Define quais idiomas os usuários podem escolher, entre os três níveis de suporte: totalmente suportados, de usuário final e platform-only.",
+      "rotulo": "Idiomas da org",
+      "rotulo_tecnico": "Language Settings",
+      "tipo": "funcionalidade"
+    },
+    {
+      "estado": "verificado",
+      "grupo_cor": "cls:organizacao-e-configuracoes-base",
+      "id": "func:informacoes-da-empresa",
+      "resumo": "Página de Setup com os dados cadastrais da org: endereço, idioma, localidade e fuso padrão, moeda e as licenças compradas.",
+      "rotulo": "Informações da empresa",
+      "rotulo_tecnico": "Company Information",
       "tipo": "funcionalidade"
     },
     {
@@ -4346,6 +4519,24 @@
       "resumo": "API que move metadados (a estrutura e a configuração da org) entre orgs. Trabalha com metadata types e seus componentes; não trata dados de negócio.",
       "rotulo": "Metadata API",
       "rotulo_tecnico": "Metadata API",
+      "tipo": "funcionalidade"
+    },
+    {
+      "estado": "verificado",
+      "grupo_cor": "cls:organizacao-e-configuracoes-base",
+      "id": "func:multiplas-moedas",
+      "resumo": "Permite registrar valores em mais de uma moeda: há uma moeda corporativa, moedas ativas e a taxa de conversão de cada uma para a corporativa.",
+      "rotulo": "Múltiplas moedas",
+      "rotulo_tecnico": "Multiple Currencies",
+      "tipo": "funcionalidade"
+    },
+    {
+      "estado": "verificado",
+      "grupo_cor": "cls:organizacao-e-configuracoes-base",
+      "id": "func:my-domain",
+      "resumo": "O subdomínio próprio da org nas URLs que a Salesforce hospeda, como a URL de login e as de aplicação.",
+      "rotulo": "My Domain",
+      "rotulo_tecnico": "My Domain",
       "tipo": "funcionalidade"
     },
     {
@@ -4575,6 +4766,15 @@
     },
     {
       "estado": "verificado",
+      "grupo_cor": "cls:organizacao-e-configuracoes-base",
+      "id": "func:translation-workbench",
+      "resumo": "Ferramenta para manter traduções de rótulos de metadados (e de dados, onde houver): escolhe-se o idioma, designam-se tradutores e as traduções são digitadas na tela ou importadas por arquivo.",
+      "rotulo": "Translation Workbench",
+      "rotulo_tecnico": "Translation Workbench",
+      "tipo": "funcionalidade"
+    },
+    {
+      "estado": "verificado",
       "grupo_cor": "cls:acesso-identidade-e-seguranca",
       "id": "func:usuarios",
       "resumo": "Cada pessoa ou integração que acessa a org é um usuário, registrado no objeto User.",
@@ -4635,6 +4835,13 @@
     },
     {
       "estado": "verificado",
+      "id": "mdt:CompanySettings",
+      "resumo": "Configurações globais da org que afetam vários recursos. Na versão lida, os campos tratam do ano fiscal.",
+      "rotulo": "CompanySettings",
+      "tipo": "metadata_type"
+    },
+    {
+      "estado": "verificado",
       "id": "mdt:ConnectedApp",
       "resumo": "Define um connected app: como um sistema externo se conecta à org por OAuth, SAML ou canvas.",
       "rotulo": "ConnectedApp",
@@ -4663,9 +4870,30 @@
     },
     {
       "estado": "verificado",
+      "id": "mdt:CurrencySettings",
+      "resumo": "Configuração de moedas da org: múltiplas moedas, moedas ativas, moeda corporativa e taxas com data de vigência.",
+      "rotulo": "CurrencySettings",
+      "tipo": "metadata_type"
+    },
+    {
+      "estado": "verificado",
       "id": "mdt:CustomField",
       "resumo": "Definição de um campo de objeto. É componente filho de CustomObject.",
       "rotulo": "CustomField",
+      "tipo": "metadata_type"
+    },
+    {
+      "estado": "verificado",
+      "id": "mdt:CustomLabels",
+      "resumo": "O conjunto de custom labels da org: textos customizados que podem ser traduzidos e lidos por código e por páginas.",
+      "rotulo": "CustomLabels",
+      "tipo": "metadata_type"
+    },
+    {
+      "estado": "verificado",
+      "id": "mdt:CustomMetadata",
+      "resumo": "Um registro de um custom metadata type. Cada registro é um componente de metadado, com arquivo próprio.",
+      "rotulo": "CustomMetadata",
       "tipo": "metadata_type"
     },
     {
@@ -4880,6 +5108,13 @@
     },
     {
       "estado": "verificado",
+      "id": "mdt:LanguageSettings",
+      "resumo": "Configurações de idioma da org: quais idiomas os usuários podem escolher, formatos de localidade e opções de tradução.",
+      "rotulo": "LanguageSettings",
+      "tipo": "metadata_type"
+    },
+    {
+      "estado": "verificado",
       "id": "mdt:LeadConvertSettings",
       "resumo": "Define as configurações de conversão de leads, incluindo o mapeamento de campos customizados.",
       "rotulo": "LeadConvertSettings",
@@ -4897,6 +5132,13 @@
       "id": "mdt:MilestoneType",
       "resumo": "Define um tipo de milestone.",
       "rotulo": "MilestoneType",
+      "tipo": "metadata_type"
+    },
+    {
+      "estado": "verificado",
+      "id": "mdt:MyDomainSettings",
+      "resumo": "Configurações do My Domain da org, o recurso que põe o nome da empresa nas URLs.",
+      "rotulo": "MyDomainSettings",
       "tipo": "metadata_type"
     },
     {
@@ -5217,8 +5459,26 @@
     },
     {
       "estado": "verificado",
+      "id": "mdx:Currency",
+      "rotulo": "Currency",
+      "tipo": "estrutura_auxiliar"
+    },
+    {
+      "estado": "verificado",
       "id": "mdx:CustomHttpHeaders",
       "rotulo": "CustomHttpHeaders",
+      "tipo": "estrutura_auxiliar"
+    },
+    {
+      "estado": "verificado",
+      "id": "mdx:CustomLabel",
+      "rotulo": "CustomLabel",
+      "tipo": "estrutura_auxiliar"
+    },
+    {
+      "estado": "verificado",
+      "id": "mdx:CustomMetadataValue",
+      "rotulo": "CustomMetadataValue",
       "tipo": "estrutura_auxiliar"
     },
     {
@@ -5345,6 +5605,12 @@
       "estado": "verificado",
       "id": "mdx:FindSimilarOppFilter",
       "rotulo": "FindSimilarOppFilter",
+      "tipo": "estrutura_auxiliar"
+    },
+    {
+      "estado": "verificado",
+      "id": "mdx:FiscalYearSettings",
+      "rotulo": "FiscalYearSettings",
       "tipo": "estrutura_auxiliar"
     },
     {
@@ -6733,7 +6999,7 @@
       "estado": "desconhecido",
       "grupo_cor": "cls:organizacao-e-configuracoes-base",
       "id": "sub:dominios-e-urls",
-      "recorte": "curadoria",
+      "recorte": "parcial",
       "rotulo": "Domínios e URLs",
       "sigla": "ORG-07",
       "tipo": "subclassificacao"
@@ -6814,7 +7080,7 @@
       "estado": "desconhecido",
       "grupo_cor": "cls:organizacao-e-configuracoes-base",
       "id": "sub:habilitacao-de-recursos",
-      "recorte": "curadoria",
+      "recorte": "parcial",
       "rotulo": "Habilitação de recursos",
       "sigla": "ORG-08",
       "tipo": "subclassificacao"
@@ -6832,7 +7098,7 @@
       "estado": "desconhecido",
       "grupo_cor": "cls:organizacao-e-configuracoes-base",
       "id": "sub:horarios-comerciais-e-feriados",
-      "recorte": "curadoria",
+      "recorte": "parcial",
       "rotulo": "Horários comerciais e feriados",
       "sigla": "ORG-06",
       "tipo": "subclassificacao"
@@ -6841,7 +7107,7 @@
       "estado": "desconhecido",
       "grupo_cor": "cls:organizacao-e-configuracoes-base",
       "id": "sub:identificacao-e-configuracao-da-org",
-      "recorte": "curadoria",
+      "recorte": "parcial",
       "rotulo": "Identificação e configuração da org",
       "sigla": "ORG-01",
       "tipo": "subclassificacao"
@@ -6913,7 +7179,7 @@
       "estado": "desconhecido",
       "grupo_cor": "cls:organizacao-e-configuracoes-base",
       "id": "sub:localizacao-idiomas-e-traducao",
-      "recorte": "curadoria",
+      "recorte": "parcial",
       "rotulo": "Localização, idiomas e tradução",
       "sigla": "ORG-04",
       "tipo": "subclassificacao"
@@ -6976,7 +7242,7 @@
       "estado": "desconhecido",
       "grupo_cor": "cls:organizacao-e-configuracoes-base",
       "id": "sub:moedas-e-calendario-fiscal",
-      "recorte": "curadoria",
+      "recorte": "parcial",
       "rotulo": "Moedas e calendário fiscal",
       "sigla": "ORG-05",
       "tipo": "subclassificacao"
@@ -7039,7 +7305,7 @@
       "estado": "desconhecido",
       "grupo_cor": "cls:organizacao-e-configuracoes-base",
       "id": "sub:parametros-reutilizaveis",
-      "recorte": "curadoria",
+      "recorte": "parcial",
       "rotulo": "Parâmetros reutilizáveis",
       "sigla": "ORG-03",
       "tipo": "subclassificacao"
@@ -7183,7 +7449,7 @@
       "estado": "desconhecido",
       "grupo_cor": "cls:organizacao-e-configuracoes-base",
       "id": "sub:settings",
-      "recorte": "curadoria",
+      "recorte": "parcial",
       "rotulo": "Settings",
       "sigla": "ORG-02",
       "tipo": "subclassificacao"
