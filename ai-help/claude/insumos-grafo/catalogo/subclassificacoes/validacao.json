@@ -4,11 +4,11 @@
   "sigla": "QLD-01",
   "classificacao": "cls:qualidade-governanca-e-ciclo-de-vida-dos-dados",
   "natureza": "curadoria_didatica",
-  "descricao": "Regras que impedem gravar dados inválidos.",
+  "descricao": "Regras que barram, no momento de salvar, um registro cujos valores não atendem ao que o negócio exige.",
   "escopo": "Entram as regras que impedem gravar dados inválidos.",
   "fora_do_escopo": "Regras que disparam ações (atribuição, escalonamento) ficam em \"Ações e regras\".",
   "para_iniciantes": {
-    "explicacao": "Regras de validação são fórmulas que impedem salvar um registro quando uma condição de erro é verdadeira.",
+    "explicacao": "Regras de validação são fórmulas que impedem salvar um registro quando uma condição de erro é verdadeira. Ao salvar, todas as regras são verificadas; se alguma acusa erro, a mensagem aparece e nada é gravado.",
     "exemplo": "Impedir salvar um contrato com valor negativo.",
     "por_onde_comecar": [
       "func:regras-de-validacao"
@@ -16,14 +16,20 @@
     "evidencias": [
       {
         "fonte": "src:mdapi-validationrule"
+      },
+      {
+        "fonte": "src:help-validation-rules"
       }
     ]
   },
   "encadeamento": {
-    "texto": "É a primeira barreira de qualidade: atua no momento de salvar.",
+    "texto": "É a primeira barreira de qualidade: atua no momento de salvar e vem antes das regras de atribuição, de resposta automática, de workflow e de escalonamento. Duplicados são tratados em 'Duplicidade e correspondência'.",
     "evidencias": [
       {
         "fonte": "src:mdapi-validationrule"
+      },
+      {
+        "fonte": "src:help-validation-considerations"
       }
     ]
   },
@@ -43,11 +49,59 @@
           "fonte": "src:mdapi-flow"
         }
       ]
+    },
+    {
+      "tipo": "implantacao",
+      "titulo": "Onde a validação entra na gravação",
+      "texto": "A ordem de processamento é: validation rules, assignment rules, auto-response rules, workflow rules com ações imediatas e escalation rules. Quando uma regra de validação falha, as demais continuam sendo verificadas. Record-triggered flows também executam as regras de validação customizadas.",
+      "evidencias": [
+        {
+          "fonte": "src:help-validation-considerations"
+        },
+        {
+          "fonte": "src:help-rtf-considerations"
+        }
+      ]
+    },
+    {
+      "tipo": "atencao",
+      "titulo": "Regra que trava dado válido",
+      "texto": "Regras conflitantes no mesmo campo impedem salvar o registro; por isso a orientação é testar antes de ativar e acompanhar pelo debug log. Vale considerar tudo o que pode fazer o registro falhar: assignment rules, field updates, segurança de campo e campos ocultos. Não se recomenda validar um campo numérico gerenciado pelo Einstein Prediction Builder.",
+      "evidencias": [
+        {
+          "fonte": "src:help-validation-tips"
+        },
+        {
+          "fonte": "src:help-validation-rules"
+        }
+      ]
+    },
+    {
+      "tipo": "decisao",
+      "titulo": "Fórmulas mais seguras",
+      "texto": "Em Opportunity, a orientação é evitar os merge fields IsClosed e IsWon e usar ISPICKVAL sobre o Stage. RecordType.Id permite aplicar a regra só a um tipo de registro.",
+      "evidencias": [
+        {
+          "fonte": "src:help-validation-tips"
+        }
+      ]
     }
   ],
   "funcionalidades": [
     "func:regras-de-validacao"
   ],
   "estado": "desconhecido",
-  "nota_estado": "Agrupamento proposto na especificação; fronteira ainda não cruzada com a documentação oficial."
+  "nota_estado": "Tema criado pelo projeto (00-especificacao-grafo.md), não é nomenclatura oficial da Salesforce. Cruzado em 2026-11-10 com áreas da documentação oficial listadas nas referências; a correspondência é parcial e o recorte continua sendo do projeto.",
+  "referencias_oficiais": [
+    {
+      "fonte": "src:help-validation-rules",
+      "secao": "Validation Rules",
+      "nota": "Cobre o tema: regras de validação."
+    },
+    {
+      "fonte": "src:mdapi-validationrule",
+      "secao": "ValidationRule",
+      "nota": "Cobre parte do tema: regra de validação como metadado."
+    }
+  ]
 }

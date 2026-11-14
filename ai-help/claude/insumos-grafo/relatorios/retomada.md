@@ -244,6 +244,8 @@ O WSDL **não** é bloqueio: a documentação de cada tipo é a fonte alternativ
   - Concluído: Integração, texto (PR #55) e limpeza dos 7 temas internos.
   - Concluído: Acesso e segurança, texto e limpeza dos 7 temas internos (avançado de 5 para 12 itens, sem fonte nova).
   - Concluído: Dados e modelagem, texto e limpeza dos 7 temas internos (avançado de 4 para 11 itens, sem fonte nova).
+  - Concluído: Qualidade e governança, texto e limpeza dos 6 temas internos (avançado de 2 para 10 itens). 15 fontes novas (`temas-detalhe-qualidade.txt`, `conteudo_detalhe.py`): Duplicidade ganhou conteúdo completo; Validação e Rastreabilidade ganharam nível avançado. DuplicateRule e MatchingRules constam do inventário mas não estão no catálogo.
+  - Achado para a camada de certificações: o guia de prova "Salesforce Certified Platform Administrator Exam Guide" apareceu como artigo em help.salesforce.com (id=005298966), domínio já aceito. Não foi lido nem usado; conferir se os demais guias também estão lá.
 
 ## Próximos lotes
 

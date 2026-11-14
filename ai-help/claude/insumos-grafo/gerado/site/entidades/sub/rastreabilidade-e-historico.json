@@ -1,4 +1,42 @@
 {
+  "avancado": [
+    {
+      "evidencias": [
+        {
+          "fonte": "src:help-field-history-tracking"
+        },
+        {
+          "fonte": "src:help-field-audit-trail"
+        }
+      ],
+      "texto": "Sem Field Audit Trail, o histórico fica até 18 meses (24 pela API), em até 20 campos por objeto. Ele mora num objeto relacionado (AccountHistory, MyCustomObject__History) e não conta no armazenamento. Campos de texto longo registram só que houve mudança, não os valores.",
+      "tipo": "limite",
+      "titulo": "O que o histórico guarda"
+    },
+    {
+      "evidencias": [
+        {
+          "fonte": "src:mdapi-customobject"
+        },
+        {
+          "fonte": "src:mdapi-customfield"
+        }
+      ],
+      "texto": "O rastreamento é ligado no objeto (enableHistory no CustomObject) e em cada campo (trackHistory no CustomField).",
+      "tipo": "implantacao",
+      "titulo": "Como metadado"
+    },
+    {
+      "evidencias": [
+        {
+          "fonte": "src:help-field-audit-trail"
+        }
+      ],
+      "texto": "O Field Audit Trail amplia para até 200 campos por objeto e guarda o histórico até ser excluído, no big object FieldHistoryArchive, acessível só por API.",
+      "tipo": "decisao",
+      "titulo": "Quando o padrão não basta"
+    }
+  ],
   "classificacao": "cls:qualidade-governanca-e-ciclo-de-vida-dos-dados",
   "derivado": {
     "dependencias": [],
@@ -8,14 +46,17 @@
     "objetos_api": [],
     "temas_sem_funcionalidade": []
   },
-  "descricao": "Histórico de alterações de campos e registros.",
+  "descricao": "O registro de quem alterou cada campo rastreado, o valor anterior, o novo e a data, guardado num objeto de histórico ao lado do registro.",
   "encadeamento": {
     "evidencias": [
       {
         "fonte": "src:security-guide"
+      },
+      {
+        "fonte": "src:help-field-history-tracking"
       }
     ],
-    "texto": "Cruza com Observabilidade: o Security Guide trata o histórico de campos junto com auditoria e monitoramento."
+    "texto": "Cruza com Observabilidade: o Security Guide trata o histórico de campos junto com auditoria e monitoramento. Por quanto tempo o histórico fica guardado é assunto de 'Retenção, arquivamento e exclusão'."
   },
   "escopo": "Entra o histórico de alterações de campos e de registros.",
   "estado": "desconhecido",
@@ -24,15 +65,25 @@
   "id": "sub:rastreabilidade-e-historico",
   "natureza": "curadoria_didatica",
   "nome": "Rastreabilidade e histórico",
-  "nota_estado": "Agrupamento proposto na especificação; fronteira ainda não cruzada com a documentação oficial.",
+  "nota_estado": "Tema criado pelo projeto (00-especificacao-grafo.md), não é nomenclatura oficial da Salesforce. Cruzado em 2026-11-10 com áreas da documentação oficial listadas nas referências; a correspondência é parcial e o recorte continua sendo do projeto.",
   "para_iniciantes": {
     "evidencias": [
       {
         "fonte": "src:security-guide"
+      },
+      {
+        "fonte": "src:help-field-history-tracking"
       }
     ],
     "exemplo": "Um auditor confere quem alterou o valor de um contrato no mês passado.",
-    "explicacao": "Guarda o histórico de alterações de campos e registros: quem mudou, o que mudou e quando."
+    "explicacao": "Guarda o histórico de alterações de campos: quem mudou, o que mudou e quando. O rastreamento é ligado campo a campo e só registra a partir do momento em que é ligado."
   },
+  "referencias_oficiais": [
+    {
+      "fonte": "src:help-field-history-tracking",
+      "nota": "Cobre o tema: histórico de campos.",
+      "secao": "Field History Tracking Overview"
+    }
+  ],
   "sigla": "QLD-05"
 }
