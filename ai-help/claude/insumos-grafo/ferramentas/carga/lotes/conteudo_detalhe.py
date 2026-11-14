@@ -142,3 +142,125 @@ D["sub:rastreabilidade-e-historico"] = {
            "FieldHistoryArchive, acessível só por API.", E("src:help-field-audit-trail")),
     ],
 }
+
+# ====================================================================== Relatórios, analytics e exploração
+_EXT = "fontes/extracoes/temas-detalhe-relatorios.txt"
+
+_f("src:help-reports-overview", "Reports", _H + "analytics.rd_reports_overview.htm&type=5", "Report builder, edição inline e edições.", **AJ)
+_f("src:help-reports-build", "Build a Report", _H + "rd_reports_build.htm", "Lightning Report Builder e formato joined.", **AJ)
+_f("src:help-joined-reports-concepts", "How Joined Reports Work", _H + "analytics.reports_joined_format_concepts.htm&type=5",
+   "Blocos, relação entre tipos de relatório e agrupamentos.", **AJ)
+_f("src:help-joined-summary-formulas", "Summary Formulas with Joined Reports", _H + "reports_csf_joined_reports.htm&type=5",
+   "Formatos summary e matrix; summary formulas por bloco.", **AJ)
+_f("src:help-report-run-page", "Customize Report Views in the Run Page", _H + "sf.lightning_report_builder_run_page.htm&type=5",
+   "Métricas do cabeçalho e chaves do rodapé.", **AJ)
+_f("src:help-reports-mobile-differences", "Reports and Dashboards: What's Different or Not Available in the Salesforce Mobile App",
+   _H + "limits_mobile_sf1_analytics.htm&type=0", "Diferenças no app móvel e quando cada um é atualizado.", **AJ)
+_f("src:help-dashboards-build-lex", "Build a Lightning Experience Dashboard", _H + "dashboards_create_lex.htm",
+   "Widgets, source reports, filtros e Lightning table.", **AJ)
+_f("src:help-dashboards-view-as", "Configure Dashboard Data Visibility in Lightning Experience", _H + "analytics.dashboards_view_as.htm&type=5",
+   "Running user e visibilidade dos dados.", **AJ)
+_f("src:help-dynamic-dashboards", "Dynamic Dashboards", _H + "sf.dashboards_dynamic_overview.htm&type=5", "Limites e restrições de dynamic dashboards.", **AJ)
+_f("src:help-dynamic-dashboards-create", "Create a Dynamic Dashboard in Lightning Experience", _H + "analytics.dashboards_dynamic_lightning.htm&type=5",
+   "Permissão e pastas de um dynamic dashboard.", **AJ)
+_f("src:help-dashboard-performance", "Improve Dashboard Performance: Best Practices", _H + "analytics.improving_dashboard_performance.htm&type=5",
+   "O que uma atualização dispara e limite por usuário.", **AJ)
+_f("src:help-crm-analytics-collections", "Collections of Data in CRM Analytics", _H + "bi_explorer_data_collections.htm&type=5",
+   "Datasets, lenses, dashboards e apps.", **AJ)
+_f("src:help-crm-analytics-licenses", "Learn about CRM Analytics Platform Licenses and Permission Sets", _H + "bi_help_setup_general.htm&type=5",
+   "Licenças por usuário e limite de linhas.", **AJ)
+_f("src:help-crm-analytics-enable-kb", "Prerequisites, Licensing Requirements, and Irreversible Effects of Enabling CRM Analytics (KB)",
+   _H + "000232305&type=1", "Efeitos de ligar e desligar CRM Analytics.", **AJ)
+_f("src:help-crm-analytics-permsets", "Enable CRM Analytics and Create Permission Sets", _H + "bi_setup_enable_create_permset.htm&type=0",
+   "Permission sets Manage e View CRM Analytics.", **AJ)
+_f("src:help-crm-analytics-tab-studio", "What's the Difference Between Analytics Tab and Analytics Studio?",
+   _H + "bi_analytics_tab_studio_difference.htm&type=5", "Caminho de quem usa e de quem cria.", **AJ)
+_f("src:help-crm-analytics-experience", "Share CRM Analytics in Experience Cloud Sites", _H + "sf.bi_app_communities.htm&type=5",
+   "Licenças externas que podem usar CRM Analytics.", **AJ)
+
+D["sub:reports"] = {
+    "para_iniciantes": ini("Um relatório responde uma pergunta sobre os registros da org, como quantas oportunidades estão em cada etapa. "
+                           "Ele é montado no report builder, onde se escolhem o tipo de relatório, o formato e os campos, e depois se "
+                           "agrupa, filtra e resume.",
+                           "Um relatório de oportunidades agrupado por etapa, com a soma do valor de cada grupo.",
+                           E("src:help-reports-overview", "src:help-reports-build")),
+    "encadeamento": enc("Começa pelo tipo de relatório ('Tipos de relatório'), que define os campos disponíveis. Os cálculos ficam em "
+                        "'Métricas e agregações', o relatório alimenta 'Dashboards' e quem o enxerga depende de 'Pastas e acesso'.",
+                        E("src:help-reports-overview", "src:help-custom-report-types")),
+    "avancado": [
+        av("decisao", "Qual formato",
+           "Os formatos são tabular, summary (agrupado por linhas), matrix (agrupado por linhas e colunas) e joined. O joined junta até "
+           "cinco blocos, com dados de vários tipos de relatório que tenham relação com o mesmo objeto, e aceita até três agrupamentos "
+           "comuns aos blocos.", E("src:help-joined-summary-formulas", "src:help-joined-reports-concepts", "src:help-reports-build")),
+        av("limite", "O que cabe num relatório",
+           "Um tipo de relatório customizado aceita até 60 referências de objeto e 1.000 campos, e o relatório dá erro com colunas de mais "
+           "de 20 objetos. Na página de execução, o cabeçalho mostra até 8 métricas.",
+           E("src:help-report-limits", "src:help-report-run-page")),
+        av("atencao", "No celular é diferente",
+           "No app móvel não há joined reports nem criação, edição ou exclusão de relatórios. Um relatório é atualizado cada vez que é "
+           "aberto, diferente de um componente de dashboard.", E("src:help-reports-mobile-differences")),
+        av("implantacao", "Como metadado",
+           "Report, ReportType e ReportFolder constam da lista oficial de metadata types da versão 68; as propriedades deles ainda não "
+           "estão detalhadas neste catálogo.", E("src:sdr-metadata-support")),
+    ],
+}
+D["sub:dashboards"] = {
+    "para_iniciantes": ini("Um dashboard mostra, em gráficos e tabelas, os resultados de relatórios. Cada peça do painel (widget) tem um "
+                           "relatório de origem. O painel mostra os dados da última atualização, não necessariamente os de agora.",
+                           "Uma gerente acompanha num painel o funil de oportunidades e os casos abertos por prioridade, cada gráfico "
+                           "vindo de um relatório.",
+                           E("src:help-dashboards-build-lex", "src:help-reports-mobile-differences")),
+    "encadeamento": enc("Vem depois de 'Reports': sem relatório de origem não há widget. Quem pode abrir o painel depende de 'Pastas e "
+                        "acesso'; quais dados aparecem depende do running user.",
+                        E("src:help-dashboards-build-lex", "src:help-dashboards-view-as")),
+    "avancado": [
+        av("seguranca", "De quem são os dados do painel",
+           "O running user define os dados mostrados. Com Me ou Another person, todos veem conforme o acesso dessa pessoa, mesmo que o "
+           "próprio acesso seja menor. Com The dashboard viewer, cada um vê conforme o próprio acesso: é o dynamic dashboard.",
+           E("src:help-dashboards-view-as", "src:help-dynamic-dashboards")),
+        av("limite", "Dynamic dashboards",
+           "Até 5 em Enterprise, 10 em Unlimited e Performance e 3 em Developer; os que estão na lixeira contam até a exclusão "
+           "definitiva. Não aceitam atualização agendada, e criar ou editar exige Manage Dynamic Dashboards.",
+           E("src:help-dynamic-dashboards", "src:help-dynamic-dashboards-create")),
+        av("escala", "Atualização e desempenho",
+           "Atualizar roda cada relatório de origem, aplica filtros e redesenha os gráficos. Cada usuário atualiza um painel uma vez por "
+           "minuto, e a org pode pedir até 200 atualizações por hora. Em geral, menos relatórios de origem atualizam mais rápido.",
+           E("src:help-dashboard-performance", "src:help-report-limits")),
+        av("limite", "Tabelas e celular",
+           "Uma Lightning table mostra até 200 registros e 10 colunas. No app móvel não dá para criar, editar ou excluir dashboards.",
+           E("src:help-dashboards-build-lex", "src:help-reports-mobile-differences")),
+        av("implantacao", "Como metadado",
+           "Dashboard e DashboardFolder constam da lista oficial de metadata types da versão 68; as propriedades deles ainda não estão "
+           "detalhadas neste catálogo.", E("src:sdr-metadata-support")),
+    ],
+}
+D["sub:recursos-analiticos-de-produto"] = {
+    "para_iniciantes": ini("São produtos analíticos que vão além dos relatórios nativos e dependem de licença, como CRM Analytics, "
+                           "Tableau e Tableau Next. No CRM Analytics, os dados são carregados em datasets, explorados em lenses e "
+                           "apresentados em dashboards reunidos em apps.",
+                           "Um time de vendas usa um app do CRM Analytics com dashboards prontos sobre o funil, montados a partir de "
+                           "um dataset de oportunidades.",
+                           E("src:help-produtos-analytics", "src:help-crm-analytics-collections")),
+    "encadeamento": enc("Fica ao lado de 'Reports' e 'Dashboards': aqueles são nativos da plataforma; estes exigem licença e "
+                        "configuração próprias. O acesso passa por 'Licenças e entitlements de acesso'.",
+                        E("src:help-produtos-analytics", "src:help-crm-analytics-licenses")),
+    "avancado": [
+        av("decisao", "Quem usa e quem cria",
+           "Na aba Analytics trabalha quem usa apps e dashboards prontos; no Analytics Studio, quem cria datasets, lenses, dashboards e "
+           "apps. Os permission sets típicos são View CRM Analytics e Manage CRM Analytics.",
+           E("src:help-crm-analytics-tab-studio", "src:help-crm-analytics-permsets")),
+        av("limite", "Licença e volume",
+           "CRM Analytics Growth e CRM Analytics Plus são licenças por usuário. A licença limita a instância a 1 bilhão de linhas, e o "
+           "limite é contratual, não técnico: cabe à empresa acompanhar.", E("src:help-crm-analytics-licenses")),
+        av("atencao", "Ligar e desligar",
+           "Ligar CRM Analytics não dá acesso a ninguém: é preciso atribuir licenças e permission sets. Desligar remove as permissões de "
+           "CRM Analytics de todos os permission sets e para dataflows e recipes agendados; os assets ficam, mas sem acesso até "
+           "reatribuir.", E("src:help-crm-analytics-enable-kb")),
+        av("seguranca", "Em sites externos",
+           "Em sites Experience Cloud, só usuários com licença Customer Community Plus, Partner Community ou Lightning External Apps "
+           "Plus usam CRM Analytics.", E("src:help-crm-analytics-experience")),
+        av("implantacao", "Como metadado",
+           "WaveDashboard e WaveDataset constam da lista oficial de metadata types da versão 68; não estão detalhados neste catálogo.",
+           E("src:sdr-metadata-support")),
+    ],
+}

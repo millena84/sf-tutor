@@ -1,0 +1,65 @@
+Issue #34, item 3 (detalhamento dos temas principais): Relatórios, analytics e exploração. Leitura pelos resultados de busca
+restritos a help.salesforce.com e developer.salesforce.com, em 2026-11-14 (método leitura_resultado_busca: páginas não
+abertas por inteiro). Resumo em português; nomes de recursos, permissões e telas no original.
+
+-- Reports
+[src:help-reports-overview] Reports (https://help.salesforce.com/s/articleView?id=analytics.rd_reports_overview.htm&type=5)
+  O report builder é a ferramenta visual onde se escolhem o tipo de relatório, o formato e os campos; abre pela aba Analytics
+  ou pela aba Reports. Dá para editar valores de campo direto em relatórios tabular, summary e matrix. Edições Essentials,
+  Group, Professional, Enterprise, Performance, Unlimited e Developer.
+[src:help-reports-build] Build a Report (https://help.salesforce.com/s/articleView?id=rd_reports_build.htm)
+  No Lightning Report Builder, agrupa-se, filtra-se e resume-se; um relatório agrupado pode ter gráfico. O formato joined
+  mostra tipos diferentes de informação num só relatório, com dados de vários tipos de relatório.
+[src:help-joined-reports-concepts] How Joined Reports Work (https://help.salesforce.com/s/articleView?id=analytics.reports_joined_format_concepts.htm&type=5)
+  Um joined report tem até cinco blocos; os tipos de relatório precisam ter relação com o mesmo objeto (Opportunities e Cases,
+  ambos ligados a Accounts). Agrupamentos valem para todos os blocos, até três, como no formato summary.
+[src:help-joined-summary-formulas] Summary Formulas with Joined Reports (https://help.salesforce.com/s/articleView?id=reports_csf_joined_reports.htm&type=5)
+  A página descreve summary como relatório agrupado por linhas e matrix como agrupado por linhas e colunas. Uma summary formula
+  padrão vale para um tipo de relatório e só entra em blocos desse tipo.
+[src:help-report-run-page] Customize Report Views in the Run Page (https://help.salesforce.com/s/articleView?id=sf.lightning_report_builder_run_page.htm&type=5)
+  O cabeçalho da página de execução mostra até 8 métricas (totais, subtotais, contagens, resultados de fórmulas). O rodapé
+  tem chaves para mostrar ou esconder contagem de linhas, linhas de detalhe, subtotais e total geral.
+[src:help-reports-mobile-differences] Reports and Dashboards: What's Different or Not Available in the Salesforce Mobile App (https://help.salesforce.com/s/articleView?id=limits_mobile_sf1_analytics.htm&type=0)
+  No app móvel não há joined reports nem criação, edição ou exclusão de relatórios e dashboards. Um relatório é atualizado
+  cada vez que é aberto; um componente de dashboard só é atualizado quando o dashboard é atualizado.
+
+-- Dashboards
+[src:help-dashboards-build-lex] Build a Lightning Experience Dashboard (https://help.salesforce.com/s/articleView?id=dashboards_create_lex.htm)
+  Cada widget tem um source report; widgets diferentes podem ter relatórios diferentes. Os campos de filtro do dashboard vêm
+  dos objetos dos source reports. Uma Lightning table mostra até 200 registros e 10 colunas.
+[src:help-dashboards-view-as] Configure Dashboard Data Visibility in Lightning Experience (https://help.salesforce.com/s/articleView?id=analytics.dashboards_view_as.htm&type=5)
+  Em View Dashboard As escolhe-se o running user: Me (todos veem os dados conforme o acesso de quem criou), Another person
+  (conforme o acesso da pessoa indicada) ou The dashboard viewer (cada um vê conforme o próprio acesso).
+[src:help-dynamic-dashboards] Dynamic Dashboards (https://help.salesforce.com/s/articleView?id=sf.dashboards_dynamic_overview.htm&type=5)
+  Dynamic dashboard é o que roda como quem está vendo. Limite: 5 em Enterprise, 10 em Unlimited e Performance, 3 em
+  Developer. Não aceita atualização agendada. Dashboards na lixeira contam no limite até a exclusão definitiva. Quem tem View
+  My Team's Dashboards ou View All Data pode ver como os usuários abaixo na hierarquia de papéis.
+[src:help-dynamic-dashboards-create] Create a Dynamic Dashboard in Lightning Experience (https://help.salesforce.com/s/articleView?id=analytics.dashboards_dynamic_lightning.htm&type=5)
+  Criar, editar e excluir exige Manage Dynamic Dashboards. As pastas do dashboard e dos source reports precisam ser
+  compartilhadas com o público.
+[src:help-dashboard-performance] Improve Dashboard Performance: Best Practices (https://help.salesforce.com/s/articleView?id=analytics.improving_dashboard_performance.htm&type=5)
+  Atualizar um dashboard roda cada source report, aplica filtros e redesenha gráficos; cada usuário pode atualizar um dashboard
+  uma vez por minuto. Em geral, menos source reports atualizam mais rápido; widgets com agrupamentos diferentes, filtros e troca
+  de running user podem rodar o mesmo relatório várias vezes.
+[src:help-report-limits] Reports and Dashboards Limits and Allocations (fonte já registrada; trecho lido de novo em 2026-11-14)
+  Esperar ao menos 1 minuto entre atualizações de dashboard; a org pode pedir até 200 atualizações de dashboard por hora.
+
+-- Recursos analíticos específicos de produto
+[src:help-crm-analytics-collections] Collections of Data in CRM Analytics (https://help.salesforce.com/s/articleView?id=bi_explorer_data_collections.htm&type=5)
+  Quatro tipos de asset: dataset (dados de origem formatados para exploração), lens (uma visão exploratória de um dataset),
+  dashboard (gráficos, métricas e tabelas sobre uma ou mais lenses) e app (organiza e compartilha dashboards).
+[src:help-crm-analytics-licenses] Learn about CRM Analytics Platform Licenses and Permission Sets (https://help.salesforce.com/s/articleView?id=bi_help_setup_general.htm&type=5)
+  CRM Analytics Growth e CRM Analytics Plus são licenças por usuário. A licença limita a instância a 1 bilhão de linhas; o
+  limite é contratual, não técnico, e há compra de linhas adicionais (100 milhões).
+[src:help-crm-analytics-enable-kb] Prerequisites, Licensing Requirements, and Irreversible Effects of Enabling CRM Analytics (KB) (https://help.salesforce.com/s/articleView?id=000232305&type=1)
+  CRM Analytics é ligado como recurso da org e exige licenças add-on; ligar não dá acesso a ninguém. Desligar remove todas as
+  permissões de CRM Analytics dos permission sets e para dataflows e recipes agendados; apps, datasets, lenses e dashboards
+  não são apagados, mas ficam sem acesso até reatribuir.
+[src:help-crm-analytics-permsets] Enable CRM Analytics and Create Permission Sets (https://help.salesforce.com/s/articleView?id=bi_setup_enable_create_permset.htm&type=0)
+  Dois permission sets típicos: Manage CRM Analytics (quem administra) e View CRM Analytics (quem explora dashboards e datasets).
+[src:help-crm-analytics-tab-studio] What's the Difference Between Analytics Tab and Analytics Studio? (https://help.salesforce.com/s/articleView?id=bi_analytics_tab_studio_difference.htm&type=5)
+  Aba Analytics: caminho de quem usa apps e dashboards prontos. Analytics Studio: caminho de quem cria datasets, lenses,
+  dashboards e apps.
+[src:help-crm-analytics-experience] Share CRM Analytics in Experience Cloud Sites (https://help.salesforce.com/s/articleView?id=sf.bi_app_communities.htm&type=5)
+  Só usuários com licença Customer Community Plus, Partner Community ou Lightning External Apps Plus usam o recurso; exige a
+  PSL CRM Analytics for Communities.
