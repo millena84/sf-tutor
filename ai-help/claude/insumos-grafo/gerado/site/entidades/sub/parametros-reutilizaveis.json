@@ -23,10 +23,23 @@
     {
       "evidencias": [
         {
-          "fonte": "src:mdapi-custommetadata"
+          "fonte": "src:mdapi-custommetadata-tipo"
         }
       ],
-      "texto": "Cada registro é um componente CustomMetadata, com sufixo .md na pasta customMetadata.",
+      "texto": "O campo protected marca o registro como protegido. Em pacote gerenciado, isso limita que código pode ler ou alterar o registro.",
+      "tipo": "seguranca",
+      "titulo": "Registro protegido"
+    },
+    {
+      "evidencias": [
+        {
+          "fonte": "src:mdapi-custommetadata"
+        },
+        {
+          "fonte": "src:mdapi-custommetadata-tipo"
+        }
+      ],
+      "texto": "Cada registro é um componente CustomMetadata, com sufixo .md na pasta customMetadata. O nome começa com o nome do tipo, sem __mdt, e os valores vão em pares field e value.",
       "tipo": "implantacao",
       "titulo": "Registro como arquivo"
     }
@@ -34,40 +47,79 @@
   "classificacao": "cls:organizacao-e-configuracoes-base",
   "derivado": {
     "dependencias": [],
-    "funcionalidades": [],
-    "metadata_types": [],
+    "funcionalidades": [
+      {
+        "exemplo": "O tipo 'Faixa de desconto' tem um registro por faixa; um flow e uma regra de validação leem esses registros.",
+        "id": "func:custom-metadata-types",
+        "pre_requisitos": [
+          "Customize Application."
+        ],
+        "principal": true
+      }
+    ],
+    "metadata_types": [
+      {
+        "estrutura": "completa",
+        "funcionalidades": [
+          "func:custom-metadata-types"
+        ],
+        "id": "mdt:CustomMetadata",
+        "nota_suporte": null,
+        "suporte_cli": "suportado"
+      }
+    ],
     "nota": "Calculado pelo gerador a partir do catálogo; não é cadastro.",
     "objetos_api": [],
     "temas_sem_funcionalidade": []
   },
-  "descricao": "Valores configuráveis reaproveitados por várias funcionalidades, como metadados e configurações personalizadas.",
+  "descricao": "Valores de configuração criados pela empresa e lidos por várias funcionalidades: custom metadata types, cujos registros são metadados, e custom settings, cujos registros são dados.",
   "encadeamento": {
     "evidencias": [
       {
         "fonte": "src:help-custom-settings"
+      },
+      {
+        "fonte": "src:help-custom-labels"
       }
     ],
-    "texto": "É configuração reaproveitada pela org inteira; o lado 'como código' das configurações gerais fica em 'Settings'."
+    "texto": "É configuração reaproveitada pela org inteira. Textos reaproveitados e traduzíveis são custom labels, em 'Localização, idiomas e tradução'. O lado 'como código' das configurações gerais fica em 'Settings'."
   },
   "escopo": "Entram os mecanismos que guardam valores configuráveis para serem lidos por várias funcionalidades, como metadados e configurações personalizadas.",
   "estado": "desconhecido",
   "fora_do_escopo": "A definição de objetos e campos comuns fica em \"Objetos e entidades\" e \"Campos e tipos\".",
-  "funcionalidades": [],
+  "funcionalidades": [
+    "func:custom-metadata-types"
+  ],
   "id": "sub:parametros-reutilizaveis",
   "natureza": "curadoria_didatica",
   "nome": "Parâmetros reutilizáveis",
-  "nota_estado": "Agrupamento proposto na especificação; fronteira ainda não cruzada com a documentação oficial.",
+  "nota_estado": "Tema criado pelo projeto (00-especificacao-grafo.md), não é nomenclatura oficial da Salesforce. Cruzado em 2026-11-10 com áreas da documentação oficial listadas nas referências; a correspondência é parcial e o recorte continua sendo do projeto.",
   "para_iniciantes": {
     "evidencias": [
       {
         "fonte": "src:help-custom-settings"
       },
       {
-        "fonte": "src:mdapi-custommetadata"
+        "fonte": "src:help-cmdt-about"
       }
     ],
     "exemplo": "Uma tabela de faixas de desconto fica num custom metadata type e é lida por um flow e por uma regra de validação.",
-    "explicacao": "Guarda valores de configuração lidos por várias funcionalidades, como tabelas de regras ou mapeamentos. Há dois mecanismos: custom metadata types, cujos registros são metadados, e custom settings, cujos registros são dados."
+    "explicacao": "Guarda valores de configuração lidos por várias funcionalidades, como tabelas de regras ou mapeamentos. Há dois mecanismos: custom metadata types, cujos registros são metadados, e custom settings, cujos registros são dados.",
+    "por_onde_comecar": [
+      "func:custom-metadata-types"
+    ]
   },
+  "referencias_oficiais": [
+    {
+      "fonte": "src:help-cmdt-about",
+      "nota": "Cobre parte do tema: custom metadata types.",
+      "secao": "What are Custom Metadata Types?"
+    },
+    {
+      "fonte": "src:help-custom-settings",
+      "nota": "Cobre parte do tema: custom settings.",
+      "secao": "Define Custom Settings"
+    }
+  ],
   "sigla": "ORG-03"
 }

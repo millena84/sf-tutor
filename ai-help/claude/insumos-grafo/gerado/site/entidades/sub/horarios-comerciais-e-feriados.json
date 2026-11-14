@@ -9,12 +9,50 @@
       "texto": "Nos processos de SLA, o horário do milestone prevalece sobre o do processo, que prevalece sobre o do caso.",
       "tipo": "atencao",
       "titulo": "Horário comercial em cascata"
+    },
+    {
+      "evidencias": [
+        {
+          "fonte": "src:help-bh-guidelines"
+        }
+      ],
+      "texto": "O caso recebe o horário comercial padrão da org, a não ser que case com uma regra de escalonamento ligada a outro horário. Regras de escalonamento só rodam dentro do horário a que estão associadas, e um horário usado em regra não pode ser desativado.",
+      "tipo": "atencao",
+      "titulo": "O caso herda o horário padrão"
+    },
+    {
+      "evidencias": [
+        {
+          "fonte": "src:help-holidays-guidelines"
+        }
+      ],
+      "texto": "Cada horário comercial aceita até 1.000 feriados. O feriado assume o fuso do horário a que foi associado, e só horários ativos podem ser associados.",
+      "tipo": "limite",
+      "titulo": "Feriados"
+    },
+    {
+      "evidencias": [
+        {
+          "fonte": "src:mdapi-businesshourssettings"
+        }
+      ],
+      "texto": "BusinessHoursSettings leva horários comerciais e feriados no mesmo arquivo, nas listas businessHours e holidays.",
+      "tipo": "implantacao",
+      "titulo": "Como metadado"
     }
   ],
   "classificacao": "cls:organizacao-e-configuracoes-base",
   "derivado": {
     "dependencias": [],
     "funcionalidades": [
+      {
+        "exemplo": "O feriado 'Ano Novo' vai das 20h de 31 de dezembro às 9h de 2 de janeiro; nesse intervalo, as regras de escalonamento não contam tempo.",
+        "id": "func:feriados",
+        "pre_requisitos": [
+          "Manage Business Hours Holidays."
+        ],
+        "principal": true
+      },
       {
         "exemplo": "Suporte de São Paulo: segunda a sexta, 8h às 18h, fuso de Brasília.",
         "id": "func:horario-comercial",
@@ -28,6 +66,7 @@
       {
         "estrutura": "completa",
         "funcionalidades": [
+          "func:feriados",
           "func:horario-comercial"
         ],
         "id": "mdt:BusinessHoursSettings",
@@ -56,7 +95,7 @@
     ],
     "temas_sem_funcionalidade": []
   },
-  "descricao": "Janelas de atendimento e feriados usados por regras e prazos.",
+  "descricao": "Os dias, horários e fuso em que o atendimento funciona e os feriados que suspendem esse horário; outras regras usam os dois para contar prazos.",
   "encadeamento": {
     "evidencias": [
       {
@@ -64,34 +103,54 @@
       },
       {
         "fonte": "src:help-ent-bh"
+      },
+      {
+        "fonte": "src:help-holidays"
       }
     ],
-    "texto": "Outras regras usam esses horários para contar prazos, como o escalonamento de casos e os marcos de SLA, no tema Atendimento."
+    "texto": "Outras regras usam esses horários para contar prazos, como o escalonamento de casos e os marcos de SLA, no tema Atendimento. Um feriado só vale para os horários comerciais a que foi associado."
   },
   "escopo": "Entram as janelas de funcionamento e os feriados que outras regras usam para calcular prazos.",
   "estado": "desconhecido",
   "fora_do_escopo": "As regras que consomem esses horários (escalonamento, marcos de SLA) ficam em \"Ações e regras\" e \"Atendimento\".",
   "funcionalidades": [
+    "func:feriados",
     "func:horario-comercial"
   ],
   "id": "sub:horarios-comerciais-e-feriados",
   "natureza": "curadoria_didatica",
   "nome": "Horários comerciais e feriados",
-  "nota_estado": "Agrupamento proposto na especificação; fronteira ainda não cruzada com a documentação oficial.",
+  "nota_estado": "Tema criado pelo projeto (00-especificacao-grafo.md), não é nomenclatura oficial da Salesforce. Cruzado em 2026-11-10 com áreas da documentação oficial listadas nas referências; a correspondência é parcial e o recorte continua sendo do projeto.",
   "para_iniciantes": {
     "evidencias": [
       {
         "fonte": "src:help-bh"
       },
       {
+        "fonte": "src:help-holidays"
+      },
+      {
         "fonte": "src:objref-businesshours"
       }
     ],
-    "exemplo": "Suporte de São Paulo: segunda a sexta, das 8h às 18h, no fuso de Brasília.",
+    "exemplo": "Suporte de São Paulo: segunda a sexta, das 8h às 18h, no fuso de Brasília. No feriado de Ano Novo, os prazos param de contar.",
     "explicacao": "Define os dias, horários e fuso em que o atendimento funciona, e os feriados em que esse horário não vale.",
     "por_onde_comecar": [
-      "func:horario-comercial"
+      "func:horario-comercial",
+      "func:feriados"
     ]
   },
+  "referencias_oficiais": [
+    {
+      "fonte": "src:help-bh",
+      "nota": "Cobre parte do tema: horários comerciais.",
+      "secao": "Set Business Hours"
+    },
+    {
+      "fonte": "src:help-holidays",
+      "nota": "Cobre parte do tema: feriados.",
+      "secao": "Set Up Support Holidays"
+    }
+  ],
   "sigla": "ORG-06"
 }

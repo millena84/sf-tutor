@@ -1,41 +1,176 @@
 {
+  "avancado": [
+    {
+      "evidencias": [
+        {
+          "fonte": "src:help-multicurrency-considerations"
+        }
+      ],
+      "texto": "Depois de ligar, não dá para desligar. Os registros existentes recebem um código de moeda padrão, e filtros campo a campo em relatórios deixam de aceitar campos de moeda.",
+      "tipo": "atencao",
+      "titulo": "Múltiplas moedas não têm volta"
+    },
+    {
+      "evidencias": [
+        {
+          "fonte": "src:help-conversion-rates"
+        },
+        {
+          "fonte": "src:help-advanced-currency"
+        },
+        {
+          "fonte": "src:help-advanced-currency-enable"
+        }
+      ],
+      "texto": "Por padrão, toda conversão usa a taxa atual, e as taxas anteriores não são guardadas. Com advanced currency management, as taxas valem por intervalo de datas (dated exchange rates), e a oportunidade usa a taxa da data de fechamento. Ao ligar, as taxas existentes viram o primeiro conjunto datado.",
+      "tipo": "decisao",
+      "titulo": "Taxa única ou taxa por data"
+    },
+    {
+      "evidencias": [
+        {
+          "fonte": "src:help-fiscal-year-set"
+        }
+      ],
+      "texto": "Mudar o mês de início do ano fiscal apaga cotas (quotas) e ajustes de previsão, e desloca os períodos de oportunidades e previsões da org inteira. A Ajuda manda exportar um backup antes.",
+      "tipo": "atencao",
+      "titulo": "Mudar o ano fiscal apaga cotas"
+    },
+    {
+      "evidencias": [
+        {
+          "fonte": "src:help-fiscal-year-define"
+        },
+        {
+          "fonte": "src:help-custom-fiscal-year"
+        }
+      ],
+      "texto": "Depois de ligado, o ano fiscal customizado não pode ser desligado, e anos customizados não podem ser excluídos. Em org que usa forecasting, criar o primeiro apaga cotas e ajustes do ano padrão correspondente e dos seguintes.",
+      "tipo": "atencao",
+      "titulo": "Ano fiscal customizado não tem volta"
+    },
+    {
+      "evidencias": [
+        {
+          "fonte": "src:mdapi-currencysettings"
+        },
+        {
+          "fonte": "src:mdapi-companysettings"
+        }
+      ],
+      "texto": "CurrencySettings leva a ativação de múltiplas moedas, a moeda corporativa e as moedas com suas taxas. CompanySettings leva o ano fiscal padrão no campo fiscalYear. Os mesmos avisos da tela valem para o deploy.",
+      "tipo": "implantacao",
+      "titulo": "Como metadado"
+    }
+  ],
   "classificacao": "cls:organizacao-e-configuracoes-base",
   "derivado": {
     "dependencias": [],
-    "funcionalidades": [],
-    "metadata_types": [],
+    "funcionalidades": [
+      {
+        "alertas": [
+          "Depois de ligar o ano fiscal customizado, não dá para desligar.",
+          "Mudar o mês de início do ano fiscal apaga cotas e ajustes de previsão."
+        ],
+        "exemplo": "Uma empresa com exercício de abril a março escolhe o ano fiscal padrão com início em abril.",
+        "id": "func:ano-fiscal",
+        "pre_requisitos": [
+          "Customize Application."
+        ],
+        "principal": true
+      },
+      {
+        "alertas": [
+          "Depois de ligar múltiplas moedas, não dá para desligar."
+        ],
+        "exemplo": "A matriz reporta em reais; a filial do Chile registra oportunidades em pesos, convertidas para reais pela taxa cadastrada.",
+        "id": "func:multiplas-moedas",
+        "pre_requisitos": [
+          "Customize Application (para alterar moedas); View Setup and Configuration (para ver)."
+        ],
+        "principal": true
+      }
+    ],
+    "metadata_types": [
+      {
+        "estrutura": "completa",
+        "funcionalidades": [
+          "func:ano-fiscal"
+        ],
+        "id": "mdt:CompanySettings",
+        "nota_suporte": null,
+        "suporte_cli": "suportado"
+      },
+      {
+        "estrutura": "completa",
+        "funcionalidades": [
+          "func:multiplas-moedas"
+        ],
+        "id": "mdt:CurrencySettings",
+        "nota_suporte": null,
+        "suporte_cli": "suportado"
+      }
+    ],
     "nota": "Calculado pelo gerador a partir do catálogo; não é cadastro.",
     "objetos_api": [],
     "temas_sem_funcionalidade": []
   },
-  "descricao": "Moedas da org, taxas de conversão e definição do ano fiscal.",
+  "descricao": "As moedas em que a org registra valores, com moeda corporativa e taxas de conversão, e a forma de contar o ano fiscal: padrão ou customizado.",
   "encadeamento": {
     "evidencias": [
       {
-        "fonte": "src:help-setup-company"
+        "fonte": "src:help-company-info-fields"
       },
       {
-        "fonte": "src:help-sales-basics"
+        "fonte": "src:help-advanced-currency"
+      },
+      {
+        "fonte": "src:help-fiscal-year-set"
       }
     ],
-    "texto": "Previsões de vendas, que trabalham por período, ficam em Vendas."
+    "texto": "A moeda padrão aparece em 'Identificação e configuração da org' (Currency Locale ou Corporate Currency). As duas decisões daqui mexem com vendas: oportunidades usam as taxas de conversão, e previsões usam os períodos fiscais. As previsões em si ficam em 'Vendas'."
   },
   "escopo": "Entram as moedas da org, as taxas de conversão e a definição do ano fiscal.",
   "estado": "desconhecido",
   "fora_do_escopo": "Previsões de vendas que usam o calendário fiscal ficam em \"Vendas\".",
-  "funcionalidades": [],
+  "funcionalidades": [
+    "func:ano-fiscal",
+    "func:multiplas-moedas"
+  ],
   "id": "sub:moedas-e-calendario-fiscal",
   "natureza": "curadoria_didatica",
   "nome": "Moedas e calendário fiscal",
-  "nota_estado": "Agrupamento proposto na especificação; fronteira ainda não cruzada com a documentação oficial.",
+  "nota_estado": "Tema criado pelo projeto (00-especificacao-grafo.md), não é nomenclatura oficial da Salesforce. Cruzado em 2026-11-10 com áreas da documentação oficial listadas nas referências; a correspondência é parcial e o recorte continua sendo do projeto.",
   "para_iniciantes": {
     "evidencias": [
       {
-        "fonte": "src:help-setup-company"
+        "fonte": "src:help-multicurrency-manage"
+      },
+      {
+        "fonte": "src:help-fiscal-year-define"
+      },
+      {
+        "fonte": "src:mdapi-currencysettings"
       }
     ],
-    "exemplo": "Uma empresa com ano fiscal de abril a março registra isso na org para que os períodos batam com a contabilidade.",
-    "explicacao": "Define as moedas da org e como o ano fiscal da empresa é contado."
+    "exemplo": "Uma empresa com exercício de abril a março escolhe o ano fiscal padrão começando em abril. A filial do Chile registra valores em pesos, convertidos para a moeda da matriz pela taxa cadastrada.",
+    "explicacao": "Define em que moedas a org registra valores e como o ano fiscal é contado. Por padrão, a org trabalha com uma moeda só; ela pode ligar múltiplas moedas, com uma moeda corporativa e uma taxa de conversão para cada moeda ativa. O ano fiscal pode ser padrão (calendário gregoriano, com o mês de início à escolha) ou customizado.",
+    "por_onde_comecar": [
+      "func:multiplas-moedas",
+      "func:ano-fiscal"
+    ]
   },
+  "referencias_oficiais": [
+    {
+      "fonte": "src:help-multicurrency-manage",
+      "nota": "Cobre parte do tema: múltiplas moedas.",
+      "secao": "Manage Multiple Currencies"
+    },
+    {
+      "fonte": "src:help-fiscal-year-define",
+      "nota": "Cobre parte do tema: ano fiscal padrão e customizado.",
+      "secao": "Define Your Fiscal Year"
+    }
+  ],
   "sigla": "ORG-05"
 }

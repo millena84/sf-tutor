@@ -1,38 +1,209 @@
 {
+  "avancado": [
+    {
+      "evidencias": [
+        {
+          "fonte": "src:help-supported-languages"
+        }
+      ],
+      "texto": "Fully supported: recursos e interface no idioma, como Portuguese (Brazil). End-user: a Salesforce traduz rótulos de objetos e páginas padrão, menos Setup e Help, como Portuguese (European); não deve ser usado como idioma corporativo. Platform-only: sem tradução padrão, serve para localizar apps e customizações.",
+      "tipo": "decisao",
+      "titulo": "Três níveis de idioma"
+    },
+    {
+      "evidencias": [
+        {
+          "fonte": "src:help-locales-overview"
+        },
+        {
+          "fonte": "src:help-icu-considerations"
+        }
+      ],
+      "texto": "A localidade segue os formatos ICU desde o Winter '20; orgs mais antigas usam por padrão os formatos JDK. Migrar pode mudar a ordem de dia e mês em algumas localidades e causar má leitura de dados. A Ajuda recomenda avisar usuários e parceiros.",
+      "tipo": "atencao",
+      "titulo": "Formato ICU muda o que o usuário lê"
+    },
+    {
+      "evidencias": [
+        {
+          "fonte": "src:help-translations-manage"
+        },
+        {
+          "fonte": "src:help-translation-languages-add"
+        },
+        {
+          "fonte": "src:help-translation-workbench"
+        }
+      ],
+      "texto": "Objetos padrão ficam fora: para eles, usa-se a tela de renomear abas e rótulos. O Translation Workbench não está disponível em orgs de idioma único, e a tradução de dados só existe em Lightning Experience, aplicada a B2B Commerce.",
+      "tipo": "limite",
+      "titulo": "O que o Translation Workbench não cobre"
+    },
+    {
+      "evidencias": [
+        {
+          "fonte": "src:help-translation-languages-add"
+        },
+        {
+          "fonte": "src:help-translation-override-packages"
+        }
+      ],
+      "texto": "Marcar um idioma como Active mostra as traduções aos usuários; a recomendação é ativar depois de traduzir tudo. Traduções trazidas por pacote gerenciado aparecem mesmo com o idioma inativo.",
+      "tipo": "atencao",
+      "titulo": "Ative o idioma só no fim"
+    },
+    {
+      "evidencias": [
+        {
+          "fonte": "src:help-custom-labels"
+        },
+        {
+          "fonte": "src:help-custom-labels-edit"
+        }
+      ],
+      "texto": "Até 5.000 custom labels por org, com até 1.000 caracteres cada; os de pacotes gerenciados não contam. Não dá para trocar o idioma de um label que já existe.",
+      "tipo": "limite",
+      "titulo": "Custom labels"
+    },
+    {
+      "evidencias": [
+        {
+          "fonte": "src:mdapi-languagesettings"
+        },
+        {
+          "fonte": "src:mdapi-customlabels"
+        },
+        {
+          "fonte": "src:mdapi-translations"
+        }
+      ],
+      "texto": "LanguageSettings guarda a seleção de idiomas e a ativação do Translation Workbench. CustomLabels guarda os textos. As traduções viajam pelo tipo Translations, em arquivos nomeados pelo código de localidade; esse tipo ainda não está cadastrado neste catálogo.",
+      "tipo": "implantacao",
+      "titulo": "Como metadado"
+    }
+  ],
   "classificacao": "cls:organizacao-e-configuracoes-base",
   "derivado": {
     "dependencias": [],
-    "funcionalidades": [],
-    "metadata_types": [],
+    "funcionalidades": [
+      {
+        "exemplo": "A mensagem 'Informe o CNPJ antes de salvar' fica num custom label; o componente lê o label e mostra a tradução conforme o idioma de quem usa.",
+        "id": "func:custom-labels",
+        "pre_requisitos": [
+          "Customize Application (para criar, editar ou excluir)."
+        ],
+        "principal": true
+      },
+      {
+        "exemplo": "Uma empresa brasileira com equipe em Portugal liga os idiomas de usuário final e põe Português (Portugal) na lista exibida.",
+        "id": "func:idiomas-da-org",
+        "pre_requisitos": [
+          "Customize Application (para mudar); View Setup and Configuration (para ver)."
+        ],
+        "principal": true
+      },
+      {
+        "exemplo": "O rótulo do campo customizado 'Faixa de desconto' ganha tradução para espanhol, vista por quem usa a interface em espanhol.",
+        "id": "func:translation-workbench",
+        "pre_requisitos": [
+          "Manage Translation (para incluir idiomas e designar tradutores)."
+        ],
+        "principal": true
+      }
+    ],
+    "metadata_types": [
+      {
+        "estrutura": "completa",
+        "funcionalidades": [
+          "func:custom-labels"
+        ],
+        "id": "mdt:CustomLabels",
+        "nota_suporte": null,
+        "suporte_cli": "suportado"
+      },
+      {
+        "estrutura": "completa",
+        "funcionalidades": [
+          "func:idiomas-da-org",
+          "func:translation-workbench"
+        ],
+        "id": "mdt:LanguageSettings",
+        "nota_suporte": null,
+        "suporte_cli": "suportado"
+      }
+    ],
     "nota": "Calculado pelo gerador a partir do catálogo; não é cadastro.",
     "objetos_api": [],
     "temas_sem_funcionalidade": []
   },
-  "descricao": "Idiomas habilitados, formatos regionais e traduções da interface e de metadados.",
+  "descricao": "Em que língua e em que formato a org aparece para cada pessoa: idiomas oferecidos, localidade (formatos de data, hora e número) e tradução de rótulos customizados e custom labels.",
   "encadeamento": {
     "evidencias": [
       {
-        "fonte": "src:help-setup-company"
+        "fonte": "src:help-select-languages"
+      },
+      {
+        "fonte": "src:help-translation-languages-add"
+      },
+      {
+        "fonte": "src:help-custom-labels"
       }
     ],
-    "texto": "Junto com moedas e ano fiscal, muda como os valores aparecem, sem mudar os dados guardados."
+    "texto": "Os padrões vêm de 'Identificação e configuração da org'. Primeiro escolhem-se os idiomas que a org oferece. Depois, com o Translation Workbench, traduzem-se os rótulos customizados. Custom labels cobrem os textos usados por código e por páginas. Moeda e formato de moeda ficam em 'Moedas e calendário fiscal'."
   },
   "escopo": "Entram idiomas habilitados, formatos regionais e tradução de rótulos da interface e de metadados.",
   "estado": "desconhecido",
   "fora_do_escopo": "Moedas e conversão ficam em \"Moedas e calendário fiscal\".",
-  "funcionalidades": [],
+  "funcionalidades": [
+    "func:custom-labels",
+    "func:idiomas-da-org",
+    "func:translation-workbench"
+  ],
   "id": "sub:localizacao-idiomas-e-traducao",
   "natureza": "curadoria_didatica",
   "nome": "Localização, idiomas e tradução",
-  "nota_estado": "Agrupamento proposto na especificação; fronteira ainda não cruzada com a documentação oficial.",
+  "nota_estado": "Tema criado pelo projeto (00-especificacao-grafo.md), não é nomenclatura oficial da Salesforce. Cruzado em 2026-11-10 com áreas da documentação oficial listadas nas referências; a correspondência é parcial e o recorte continua sendo do projeto.",
   "para_iniciantes": {
     "evidencias": [
       {
-        "fonte": "src:help-setup-company"
+        "fonte": "src:help-language-locale-currency"
+      },
+      {
+        "fonte": "src:help-locales-overview"
+      },
+      {
+        "fonte": "src:help-translation-workbench"
       }
     ],
-    "exemplo": "A empresa define português como idioma padrão e a localidade do Brasil para exibir datas e números.",
-    "explicacao": "Define em que idioma a interface aparece e qual localidade a org usa, o que muda como os valores são exibidos."
+    "exemplo": "Duas pessoas abrem o mesmo registro: uma vê a interface em português e as datas no formato do Brasil; a outra, em inglês e no formato dos Estados Unidos. O dado guardado é o mesmo.",
+    "explicacao": "São três coisas diferentes. Idioma: em que língua a interface aparece. Localidade (locale): como datas, horas, números, nomes e endereços são formatados. Tradução: o texto dos rótulos customizados em cada idioma. A org define os padrões, e cada usuário escolhe o próprio idioma e a própria localidade.",
+    "por_onde_comecar": [
+      "func:idiomas-da-org",
+      "func:translation-workbench",
+      "func:custom-labels"
+    ]
   },
+  "referencias_oficiais": [
+    {
+      "fonte": "src:help-language-locale-currency",
+      "nota": "Mais ampla que o tema: idioma e localidade, junto com moeda.",
+      "secao": "Language, Locale, and Currency Settings"
+    },
+    {
+      "fonte": "src:help-supported-languages",
+      "nota": "Cobre parte do tema: níveis de suporte a idioma.",
+      "secao": "Supported Languages"
+    },
+    {
+      "fonte": "src:help-translation-workbench",
+      "nota": "Cobre parte do tema: tradução de rótulos.",
+      "secao": "Translation Workbench"
+    },
+    {
+      "fonte": "src:help-custom-labels",
+      "nota": "Cobre parte do tema: custom labels.",
+      "secao": "Custom Labels"
+    }
+  ],
   "sigla": "ORG-04"
 }

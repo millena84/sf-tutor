@@ -7,7 +7,7 @@ Gerado por `ferramentas/sftutor.py cobertura`. Cobertura estrutural, explicativa
 
 - Universo v68 (METADATA_SUPPORT.md): **993** tipos.
 - Classificados como incluídos no recorte Core: 12; pendentes de classificação: 981.
-- Cadastrados: **78** de 993. Estruturalmente completos (contra a página oficial): 66. Completos nas três dimensões: 0.
+- Cadastrados: **84** de 993. Estruturalmente completos (contra a página oficial): 72. Completos nas três dimensões: 0.
 - Porcentagem do recorte Core: não calculada, porque o denominador do recorte ainda não está definido (classificação item a item pendente).
 
 | Tipo | Estrutural | Esperadas | Presentes | Explicadas | Estruturas | Mapeamento | Completo |
@@ -18,11 +18,15 @@ Gerado por `ferramentas/sftutor.py cobertura`. Cobertura estrutural, explicativa
 | mdt:BusinessHoursSettings | completa | 3 | 3 | 3 | 2 | parcial | não |
 | mdt:CampaignSettings | completa | 11 | 11 | 11 | 0 | parcial | não |
 | mdt:Certificate | completa | 8 | 8 | 8 | 0 | parcial | não |
+| mdt:CompanySettings | completa | 3 | 3 | 3 | 1 | parcial | não |
 | mdt:ConnectedApp | completa | 21 | 21 | 21 | 7 | parcial | não |
 | mdt:ConnectedAppSettings | completa | 3 | 3 | 3 | 0 | parcial | não |
 | mdt:CorsWhitelistOrigin | completa | 2 | 2 | 2 | 0 | parcial | não |
 | mdt:CspTrustedSite | completa | 14 | 14 | 14 | 0 | parcial | não |
+| mdt:CurrencySettings | completa | 8 | 8 | 8 | 1 | parcial | não |
 | mdt:CustomField | parcial | 60 | 60 | 60 | 2 | parcial | não |
+| mdt:CustomLabels | completa | 2 | 2 | 2 | 1 | parcial | não |
+| mdt:CustomMetadata | completa | 5 | 5 | 5 | 1 | parcial | não |
 | mdt:CustomObject | parcial | 55 | 55 | 55 | 0 | parcial | não |
 | mdt:CustomTab | parcial | 17 | 17 | 17 | 0 | parcial | não |
 | mdt:EntitlementProcess | parcial | 14 | 14 | 14 | 2 | parcial | não |
@@ -53,9 +57,11 @@ Gerado por `ferramentas/sftutor.py cobertura`. Cobertura estrutural, explicativa
 | mdt:InboundCertificate | completa | 4 | 4 | 4 | 0 | parcial | não |
 | mdt:InboundNetworkConnection | completa | 7 | 7 | 7 | 1 | parcial | não |
 | mdt:KnowledgeSettings | parcial | 23 | 23 | 23 | 0 | parcial | não |
+| mdt:LanguageSettings | completa | 13 | 13 | 13 | 0 | parcial | não |
 | mdt:LeadConvertSettings | completa | 3 | 3 | 3 | 1 | parcial | não |
 | mdt:ManagedEventSubscription | completa | 7 | 7 | 7 | 0 | parcial | não |
 | mdt:MilestoneType | completa | 3 | 3 | 3 | 0 | parcial | não |
+| mdt:MyDomainSettings | completa | 32 | 32 | 29 | 0 | parcial | não |
 | mdt:NamedCredential | completa | 31 | 31 | 31 | 1 | parcial | não |
 | mdt:OauthCustomScope | completa | 7 | 7 | 7 | 0 | parcial | não |
 | mdt:OauthOidcSettings | completa | 6 | 6 | 6 | 0 | parcial | não |
@@ -93,8 +99,8 @@ Gerado por `ferramentas/sftutor.py cobertura`. Cobertura estrutural, explicativa
 
 ## Propriedades XML
 
-- Em metadata types: 961 listadas, 924 explicadas.
-- Em estruturas auxiliares: 363 listadas, 363 explicadas.
+- Em metadata types: 1024 listadas, 984 explicadas.
+- Em estruturas auxiliares: 377 listadas, 377 explicadas.
 - Universo total: Sem WSDL não há denominador confiável do total de propriedades do recorte.
 
 ## Objetos consultáveis via API
@@ -180,5 +186,5 @@ Gerado por `ferramentas/sftutor.py cobertura`. Cobertura estrutural, explicativa
 
 ## Taxonomia e funcionalidades
 
-- Classificações: 14; subclassificações: 92 (com funcionalidades: 35).
-- Funcionalidades cadastradas: 58 (universo de funcionalidades não definido).
+- Classificações: 14; subclassificações: 92 (com funcionalidades: 40).
+- Funcionalidades cadastradas: 67 (universo de funcionalidades não definido).

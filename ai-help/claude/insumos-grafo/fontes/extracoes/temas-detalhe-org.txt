@@ -1,0 +1,135 @@
+Issue #34, item 3 (detalhamento dos temas principais): Organização e configurações base. Leitura pelos resultados de busca
+restritos a help.salesforce.com e developer.salesforce.com, em 2026-11-14 (método leitura_resultado_busca: páginas não
+abertas por inteiro). Resumo em português; nomes de recursos, permissões e telas no original.
+
+-- Identificação e configuração da org
+[src:help-company-info-fields] Manage Information About Your Company (https://help.salesforce.com/apex/HTViewHelpDoc?id=company_information_fields.htm)
+  Tabela dos campos da página Company Information. Entre eles: City (até 40 caracteres), Country, Created By (quem cadastrou a
+  org, só leitura), Corporate Currency (moeda em que a matriz reporta receita e base de todas as taxas de conversão; só em orgs
+  com múltiplas moedas), Currency Locale (país ou região da org, afeta o formato dos valores em moeda; só em orgs de moeda
+  única) e Default Language (idioma padrão dos usuários novos). A página também lista as licenças de usuário e de recurso.
+[src:help-language-locale-currency] Language, Locale, and Currency Settings (https://help.salesforce.com/s/articleView?id=xcloud.admin_language_locale_currency.htm&language=en_US)
+  Em org de moeda única, o administrador define currency locale, default language, default locale e default time zone; em org
+  de múltiplas moedas, define corporate currency no lugar de currency locale. Cada usuário define idioma, localidade, fuso e
+  (em múltiplas moedas) moeda nas configurações pessoais. O Default Language vale para usuários novos até que escolham o
+  próprio idioma. Language Preferences: o administrador escolhe os idiomas exibidos, e o usuário escolhe entre eles.
+  Locales: definem formatos de data e hora, nomes, endereços e separadores de números; o primeiro dia da semana varia por
+  localidade; em org de moeda única, a localidade escolhida em Currency Locale define a moeda padrão.
+[src:help-org-default-timezone] How to Change Default Time Zones for Users and the Salesforce Organization (https://help.salesforce.com/s/articleView?id=000386323&language=en_US&type=1)
+  Campos de data e hora aparecem no fuso de cada usuário. O Default Time Zone da org (Setup > Company Settings > Company
+  Information) vale para usuários novos criados depois da mudança; os existentes mantêm o fuso individual.
+[src:help-org-id] Find Your Salesforce Organization ID (https://help.salesforce.com/s/articleView?id=000385215&language=en_US&type=1)
+  O Organization ID identifica a org e deve ser informado ao abrir casos no suporte. O ID de produção é diferente do ID de um
+  sandbox, e cada refresh de sandbox gera um ID novo.
+
+-- Localização, idiomas e tradução
+[src:help-supported-languages] Supported Languages (https://help.salesforce.com/s/articleView?id=xcloud.faq_getstart_what_languages_does.htm&language=en_US&type=5)
+  Três níveis de suporte: fully supported (recursos e interface no idioma; inclui Portuguese (Brazil), pt_BR), end-user (o
+  usuário escolhe um idioma diferente do padrão da empresa; a Salesforce traduz rótulos de objetos e páginas padrão, exceto
+  páginas de administração, Setup e Help; não usar como idioma corporativo; inclui Portuguese (European), pt_PT) e
+  platform-only (sem tradução padrão da Salesforce; serve para localizar apps e customizações). O idioma de todos os recursos
+  é trocado em Setup: Quick Find "Company Information" > Company Information > Edit. Idiomas end-user e platform-only são
+  geridos em Setup: Quick Find "Company Settings" > Language Settings.
+[src:help-select-languages] Select Languages for Your Org (https://help.salesforce.com/s/articleView?id=sf.admin_select_languages_for_your_org.htm&language=en_US&type=5)
+  Em Setup > Language Settings: marcar Enable end-user languages e, se preciso, Enable platform-only languages; os idiomas
+  entram na lista Available Languages. Desmarcar end-user também desmarca platform-only e tira esses idiomas das listas; não
+  dá para desmarcar se um deles é o idioma padrão da org. Permissões: View Setup and Configuration (ver), Customize
+  Application (mudar).
+[src:help-locales-overview] Locales Overview (https://help.salesforce.com/s/articleView?id=sf.admin_locales_overview.htm&language=en_US&type=5)
+  Locales controlam formatos de datas, horas, moedas, endereços, nomes e números. A Salesforce adotou os formatos ICU
+  (International Components for Unicode) no Winter '20; orgs criadas antes usam por padrão os formatos do JDK da Oracle. Para
+  visitantes não autenticados de Salesforce Sites, data e hora seguem o navegador.
+[src:help-icu-considerations] Considerations for Adopting the ICU Locale Formats (https://help.salesforce.com/s/articleView?id=xcloud.admin_locales_changes_considerations.htm&language=en_US&type=5)
+  Passar de JDK para ICU pode afetar usuários e causar má leitura de dados (exemplo: em Spanish (Honduras), a data curta muda
+  de MM-dd-yyyy para dd-MM-yyyy). A atualização Enable ICU Locale Formats se aplica quando classes Apex, triggers e páginas
+  Visualforce usam API versão 45 ou superior. Avisar usuários e parceiros.
+[src:help-translation-workbench] Translation Workbench (https://help.salesforce.com/s/articleView?id=platform.workbench.htm&language=en_US&type=5)
+  Mantém valores traduzidos de rótulos de metadados e de dados: definem-se idiomas e tradutores; traduz-se na tela ou por
+  arquivos exportados e importados (.xlf e .stf). Tradução de metadados em Classic e Lightning; tradução de dados só em
+  Lightning Experience e aplicada a B2B Commerce. Edições Professional, Enterprise, Performance, Unlimited e Developer.
+[src:help-translations-manage] Manage Your Translations (https://help.salesforce.com/s/articleView?id=sf.workbench_overview.htm&language=en_US&type=5)
+  Com vários idiomas ligados, a Salesforce traduz alguns rótulos conforme o tipo de idioma. Objetos padrão não estão no
+  Translation Workbench: usa-se a tela de renomear abas e rótulos (rename tabs and labels).
+[src:help-translation-languages-add] Add Translation Languages and Translators (https://help.salesforce.com/s/articleView?id=platform.ls_add_translation_language_and_translators.htm&language=en_US&type=5)
+  Setup: Quick Find "Translation Language Settings" > Translation Language Settings > Add. Antes, é preciso selecionar os
+  idiomas da org e ligar o Translation Workbench. Active torna as traduções visíveis aos usuários; recomenda-se ativar o idioma
+  só depois de traduzir tudo. Permissão Manage Translation (vem ligada no perfil System Administrator). O Translation Workbench
+  não está disponível em orgs de idioma único.
+[src:help-translation-override-packages] Override Translations in Second-Generation Managed Packages and Unlocked Packages (https://help.salesforce.com/s/articleView?id=entering_translated_terms_in_packages.htm&language=en_US&type=5)
+  Traduções trazidas por pacote gerenciado aparecem aos usuários mesmo com o idioma inativo em Translation Language Settings.
+  Dá para sobrescrever traduções de objetos customizados do pacote; não dá para objetos padrão do pacote, global picklist
+  value sets nem traduções de dados.
+[src:help-custom-labels] Custom Labels (https://help.salesforce.com/s/articleView?id=sf.cl_about.htm&language=en_US&type=5)
+  Textos customizados acessíveis de classes Apex, páginas Visualforce, Lightning pages e componentes Lightning, traduzíveis
+  para qualquer idioma suportado. Até 5.000 custom labels por org, com até 1.000 caracteres; labels de pacotes gerenciados não
+  contam. Permissões: Customize Application (criar, editar, excluir); Manage Translation, ou View Setup and Configuration mais
+  ser tradutor designado (traduzir).
+[src:help-custom-labels-edit] Create and Edit Custom Labels (https://help.salesforce.com/s/articleView?id=sf.cl_edit.htm&language=en_US&type=5)
+  Setup: Quick Find "Custom Labels" > Custom Labels > New Custom Label. Short Description identifica o label e é usada em merge
+  fields. Não dá para trocar o idioma de um label existente. Mudanças no valor podem levar alguns minutos para aparecer.
+
+-- Moedas e calendário fiscal
+[src:help-multicurrency-manage] Manage Multiple Currencies (https://help.salesforce.com/s/articleView?id=sales.admin_currency.htm&language=en_US&type=5)
+  Passos: ligar múltiplas moedas; em Setup, Quick Find "Manage Currencies" > Manage Currencies > Change Corporate para definir a
+  moeda corporativa; New na lista Active Currencies para ativar moedas; ligar advanced currency management para usar dated
+  exchange rates; definir as taxas de conversão. Permissões: View Setup and Configuration (ver), Customize Application (mudar).
+[src:help-multicurrency-considerations] Considerations for Enabling Multiple Currencies (https://help.salesforce.com/s/articleView?id=sales.admin_enable_multicurrency_implications.htm&language=en_US&type=5)
+  Depois de ligar, não dá para desligar. Os registros existentes recebem um código de moeda padrão informado no pedido de
+  ativação. Filtros campo a campo em relatórios deixam de aceitar campos de moeda. Por padrão, os valores convertidos usam as
+  taxas atuais da org, que são definidas e atualizadas à mão.
+[src:help-conversion-rates] Edit Conversion Rates (https://help.salesforce.com/s/articleView?id=xcloud.editing_conversion_rates.htm&language=en_US&type=5)
+  Em Manage Currencies > Edit Rates, informa-se a taxa entre cada moeda e a corporativa. Ao mudar a taxa, os valores são
+  recalculados com a nova; as taxas anteriores não são guardadas.
+[src:help-advanced-currency] About Advanced Currency Management (https://help.salesforce.com/s/articleView?id=administration_about_advanced_currency_management.htm&language=en_US)
+  Dated exchange rates: a taxa vale por intervalo de datas; oportunidades usam a taxa vigente na data de fechamento. Campos de
+  oportunidade em campanhas usam a taxa datada para o valor na moeda da campanha, mas não ao converter para a moeda do usuário.
+[src:help-advanced-currency-enable] Enable or Disable Advanced Currency Management (https://help.salesforce.com/apex/HTViewHelpDoc?id=sf.administration_enable_advanced_currency_management.htm&language=en_US)
+  Exige múltiplas moedas ligadas. Em Manage Currencies > Enable. Ao ligar, as taxas existentes viram o primeiro conjunto de
+  taxas datadas.
+[src:help-fiscal-year-set] Set the Fiscal Year (https://help.salesforce.com/s/articleView?id=sf.setting_the_fiscal_year.htm&language=en_US)
+  Setup: Quick Find "Fiscal Year" > Fiscal Year; escolhe-se Standard Fiscal Year ou Custom Fiscal Year. Mudar o mês de início
+  apaga cotas (quota) e ajustes; a página manda fazer backup antes, porque os períodos fiscais se deslocam e isso afeta
+  oportunidades e previsões da org inteira. Ano fiscal customizado não pode ser desligado depois de ligado. Permissão
+  Customize Application.
+[src:help-fiscal-year-define] Define Your Fiscal Year (https://help.salesforce.com/s/articleView?id=sf.admin_about_cfy.htm&language=en_US&type=5)
+  Ano fiscal padrão: segue o calendário gregoriano e pode começar em outro mês. Ano fiscal customizado: para estruturas
+  diferentes do gregoriano (períodos, trimestres e semanas próprios). Depois de ligar o customizado, não dá para desligar;
+  para voltar, definem-se anos customizados com a mesma estrutura do padrão.
+[src:help-custom-fiscal-year] Define or Modify a Custom Fiscal Year (https://help.salesforce.com/apex/HTViewHelpDoc?id=admin_define_cfy.htm)
+  Se a empresa usa forecasting, criar o primeiro ano fiscal customizado apaga cotas e ajustes do ano padrão correspondente e
+  dos seguintes. Anos fiscais customizados não podem ser excluídos.
+
+-- Horários comerciais e feriados
+[src:help-holidays] Set Up Support Holidays (https://help.salesforce.com/s/articleView?id=sf.customizesupport_holidays.htm&language=en_US&type=5)
+  Setup: Quick Find "Holidays" > Holidays > New (ou Clone de um feriado já passado). Informam-se nome e data; Recurring Holiday
+  permite recorrência. O feriado é associado a um ou mais business hours. Exemplo da página: New Year's Day das 20h de 31/12
+  às 9h de 2/1; regras de escalonamento e entitlement milestones não se aplicam durante o feriado. Permissão Manage Business
+  Hours Holidays.
+[src:help-holidays-guidelines] Guidelines for Creating Support Holidays (https://help.salesforce.com/s/articleView?id=sf.customizesupport_holidays_guidelines.htm&language=en_US&type=5)
+  Até 1.000 feriados por business hours. O feriado assume o fuso do business hours associado. Só business hours ativos podem
+  ser associados. Nomes de feriado não precisam ser únicos.
+[src:help-bh-guidelines] Guidelines for Setting Business Hours (https://help.salesforce.com/s/articleView?id=sf.customize_supporthours_guidelines.htm&language=en_US&type=5)
+  O caso recebe o business hours padrão da org, salvo se casar com uma regra de escalonamento ligada a outro horário. Regras de
+  escalonamento só rodam dentro do business hours associado. O horário de verão é calculado automaticamente. Não dá para
+  desativar um business hours usado em regra de escalonamento.
+
+-- Domínios e URLs
+[src:help-mydomain-rename] Change Your My Domain Details (https://help.salesforce.com/s/articleView?id=domain_name_rename.htm&language=en_US&type=0)
+  Setup: Quick Find "My Domain" > My Domain > Edit em My Domain Details. Recomenda testar a mudança em sandbox. Permissões:
+  Customize Application (editar configurações); Customize Application e Modify All Data (definir o nome).
+[src:help-mydomain-provisioning] My Domain Provisioning and Deployment (https://help.salesforce.com/s/articleView?id=sf.domain_name_setup.htm&language=en_US&type=5)
+  Mudar o My Domain tem três passos: salvar a mudança, provisionar os novos domínios e implantá-los. Além da URL de login, a
+  org tem URLs de aplicação em outros domínios (Visualforce, conteúdo, Experience Cloud), todos atualizados na implantação.
+[src:help-domains-view] View Your Custom Domain Details (https://help.salesforce.com/s/articleView?id=platform.domain_mgmt_view.htm&language=en_US&type=5)
+  Setup: Quick Find "Domains" > Domains. A lista traz os custom domains e os system-managed domains, que são os servidos pela
+  Salesforce para a org (sites Experience Cloud, Salesforce Sites e My Domain).
+
+-- Parâmetros reutilizáveis
+[src:help-cmdt-about] What are Custom Metadata Types? (https://help.salesforce.com/s/articleView?id=sf.custommetadatatypes_about.htm&language=en_US&type=5)
+  Custom metadata é metadado de aplicação customizável, implantável, empacotável e atualizável. Primeiro cria-se o tipo, que
+  define a forma; depois, registros desse tipo. Como os registros são metadados, migram por pacotes ou por ferramentas da
+  Metadata API. Usos citados: mapeamentos, regras de negócio e dados primários.
+[src:help-cmdt-create] Add or Edit a Custom Metadata Type Declaratively (https://help.salesforce.com/s/articleView?id=custommetadatatypes_ui_create.htm&language=en_US&type=5)
+  Setup: Quick Find "Custom Metadata Types" > Custom Metadata Types > New Custom Metadata Type. Nomes de tipo são únicos no
+  namespace; nomes de registro, únicos dentro do tipo e do namespace. Permissão Customize Application. A página irmã (Create,
+  Edit, and Delete Custom Metadata Types and Records) remete a "Custom Metadata Types (CustomObject)" no guia da Metadata API.

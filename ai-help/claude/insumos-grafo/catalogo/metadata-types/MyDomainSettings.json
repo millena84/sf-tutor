@@ -1,0 +1,2070 @@
+{
+  "id": "mdt:MyDomainSettings",
+  "nome": "MyDomainSettings",
+  "o_que_e": "Configurações do My Domain da org, o recurso que põe o nome da empresa nas URLs.",
+  "finalidade": "Recuperar e implantar políticas de login pelo My Domain, redirecionamentos de URLs antigas e opções de roteamento e cookies.",
+  "estende": "Metadata",
+  "arquivos": {
+    "source_format": {
+      "estado": "verificado",
+      "valor": {
+        "pasta": "settings/",
+        "arquivo": "MyDomain.settings-meta.xml"
+      },
+      "nota": "Pasta e sufixo do tipo genérico Settings no registro do Salesforce CLI; o nome-base do arquivo vem da página do tipo.",
+      "evidencias": [
+        {
+          "fonte": "src:sdr-registry",
+          "nota": "types.settings"
+        },
+        {
+          "fonte": "src:mdapi-mydomainsettings"
+        }
+      ]
+    },
+    "metadata_api_format": {
+      "estado": "verificado",
+      "valor": {
+        "pasta": "settings/",
+        "arquivo": "MyDomain.settings"
+      },
+      "nota": "Um único arquivo; no package.xml, o tipo é Settings e o membro é MyDomain.",
+      "evidencias": [
+        {
+          "fonte": "src:mdapi-mydomainsettings"
+        }
+      ]
+    }
+  },
+  "disponibilidade": {
+    "desde_versao": "47.0",
+    "ate_versao": null,
+    "estado": "verificado"
+  },
+  "suporte_cli": {
+    "estado": "verificado",
+    "valor": {
+      "status": "suportado",
+      "nota_fonte": null
+    },
+    "nota": "Suporte do Salesforce CLI (source-deploy-retrieve), não do Metadata API em geral.",
+    "evidencias": [
+      {
+        "fonte": "src:sdr-metadata-support"
+      }
+    ]
+  },
+  "setup": {
+    "estado": "verificado",
+    "valor": "Setup > Quick Find: My Domain > My Domain",
+    "nota": "Tela do My Domain. Rótulos em inglês, como na fonte; a tradução da interface em pt-BR não foi verificada.",
+    "evidencias": [
+      {
+        "fonte": "src:help-mydomain-rename"
+      }
+    ]
+  },
+  "propriedades": [
+    {
+      "id": "mdt:MyDomainSettings.areLegacyRedirectsMaintained",
+      "nome": "areLegacyRedirectsMaintained",
+      "tipo_tecnico": "boolean",
+      "o_que_e": "Conferido no upgrade para o Summer '25: se false, enableLegacyRedirections é desligado. Sem efeito depois do Summer '25.",
+      "origem": {
+        "estado": "verificado",
+        "valor": "padrao_plataforma",
+        "nota": "Propriedade definida pelo schema da Metadata API.",
+        "evidencias": [
+          {
+            "fonte": "src:mdapi-mydomainsettings"
+          }
+        ]
+      },
+      "obrigatoriedade": {
+        "valor": "nao",
+        "estado": "desconhecido",
+        "condicao": "A documentação 68.0 não marca o campo como obrigatório; ausência de marcação não comprova opcionalidade (confirmar no WSDL)."
+      },
+      "default": {
+        "forma": "false",
+        "estado": "verificado",
+        "evidencias": [
+          {
+            "fonte": "src:mdapi-mydomainsettings"
+          }
+        ],
+        "valor": false,
+        "nota": "A página declara default false."
+      },
+      "dominio": {
+        "natureza": "booleano",
+        "valores": [
+          {
+            "valor": "true"
+          },
+          {
+            "valor": "false"
+          }
+        ],
+        "lista_completa": "sim",
+        "estado": "verificado",
+        "evidencias": [
+          {
+            "fonte": "src:mdapi-mydomainsettings"
+          }
+        ]
+      },
+      "disponibilidade": {
+        "desde_versao": "63.0",
+        "ate_versao": null,
+        "estado": "verificado"
+      },
+      "explicacao": "explicada",
+      "estado": "verificado",
+      "evidencias": [
+        {
+          "fonte": "src:mdapi-mydomainsettings"
+        }
+      ]
+    },
+    {
+      "id": "mdt:MyDomainSettings.areLgcyRdirMaintainedWntr26",
+      "nome": "areLgcyRdirMaintainedWntr26",
+      "tipo_tecnico": "boolean",
+      "o_que_e": "Conferido no upgrade para o Winter '26, com o mesmo papel de areLegacyRedirectsMaintained. Sem efeito depois do Winter '26.",
+      "origem": {
+        "estado": "verificado",
+        "valor": "padrao_plataforma",
+        "nota": "Propriedade definida pelo schema da Metadata API.",
+        "evidencias": [
+          {
+            "fonte": "src:mdapi-mydomainsettings"
+          }
+        ]
+      },
+      "obrigatoriedade": {
+        "valor": "nao",
+        "estado": "desconhecido",
+        "condicao": "A documentação 68.0 não marca o campo como obrigatório; ausência de marcação não comprova opcionalidade (confirmar no WSDL)."
+      },
+      "default": {
+        "forma": "false",
+        "estado": "verificado",
+        "evidencias": [
+          {
+            "fonte": "src:mdapi-mydomainsettings"
+          }
+        ],
+        "valor": false,
+        "nota": "A página declara default false."
+      },
+      "dominio": {
+        "natureza": "booleano",
+        "valores": [
+          {
+            "valor": "true"
+          },
+          {
+            "valor": "false"
+          }
+        ],
+        "lista_completa": "sim",
+        "estado": "verificado",
+        "evidencias": [
+          {
+            "fonte": "src:mdapi-mydomainsettings"
+          }
+        ]
+      },
+      "disponibilidade": {
+        "desde_versao": "64.0",
+        "ate_versao": null,
+        "estado": "verificado"
+      },
+      "explicacao": "explicada",
+      "estado": "verificado",
+      "evidencias": [
+        {
+          "fonte": "src:mdapi-mydomainsettings"
+        }
+      ]
+    },
+    {
+      "id": "mdt:MyDomainSettings.canOnlyLoginWithMyDomainUrl",
+      "nome": "canOnlyLoginWithMyDomainUrl",
+      "tipo_tecnico": "boolean",
+      "o_que_e": "Com true, os usuários só entram pela URL de login do My Domain.",
+      "origem": {
+        "estado": "verificado",
+        "valor": "padrao_plataforma",
+        "nota": "Propriedade definida pelo schema da Metadata API.",
+        "evidencias": [
+          {
+            "fonte": "src:mdapi-mydomainsettings"
+          }
+        ]
+      },
+      "obrigatoriedade": {
+        "valor": "nao",
+        "estado": "desconhecido",
+        "condicao": "A documentação 68.0 não marca o campo como obrigatório; ausência de marcação não comprova opcionalidade (confirmar no WSDL)."
+      },
+      "default": {
+        "forma": "false",
+        "estado": "verificado",
+        "evidencias": [
+          {
+            "fonte": "src:mdapi-mydomainsettings"
+          }
+        ],
+        "valor": false,
+        "nota": "A página declara default false."
+      },
+      "dominio": {
+        "natureza": "booleano",
+        "valores": [
+          {
+            "valor": "true"
+          },
+          {
+            "valor": "false"
+          }
+        ],
+        "lista_completa": "sim",
+        "estado": "verificado",
+        "evidencias": [
+          {
+            "fonte": "src:mdapi-mydomainsettings"
+          }
+        ]
+      },
+      "disponibilidade": {
+        "desde_versao": null,
+        "ate_versao": null,
+        "estado": "desconhecido"
+      },
+      "explicacao": "explicada",
+      "estado": "verificado",
+      "evidencias": [
+        {
+          "fonte": "src:mdapi-mydomainsettings"
+        }
+      ]
+    },
+    {
+      "id": "mdt:MyDomainSettings.doesApiLoginRequireOrgDomain",
+      "nome": "doesApiLoginRequireOrgDomain",
+      "tipo_tecnico": "boolean",
+      "o_que_e": "Com true, o acesso por API exige a URL de login do My Domain.",
+      "origem": {
+        "estado": "verificado",
+        "valor": "padrao_plataforma",
+        "nota": "Propriedade definida pelo schema da Metadata API.",
+        "evidencias": [
+          {
+            "fonte": "src:mdapi-mydomainsettings"
+          }
+        ]
+      },
+      "obrigatoriedade": {
+        "valor": "nao",
+        "estado": "desconhecido",
+        "condicao": "A documentação 68.0 não marca o campo como obrigatório; ausência de marcação não comprova opcionalidade (confirmar no WSDL)."
+      },
+      "default": {
+        "forma": "false",
+        "estado": "verificado",
+        "evidencias": [
+          {
+            "fonte": "src:mdapi-mydomainsettings"
+          }
+        ],
+        "valor": false,
+        "nota": "A página declara default false."
+      },
+      "dominio": {
+        "natureza": "booleano",
+        "valores": [
+          {
+            "valor": "true"
+          },
+          {
+            "valor": "false"
+          }
+        ],
+        "lista_completa": "sim",
+        "estado": "verificado",
+        "evidencias": [
+          {
+            "fonte": "src:mdapi-mydomainsettings"
+          }
+        ]
+      },
+      "disponibilidade": {
+        "desde_versao": null,
+        "ate_versao": null,
+        "estado": "desconhecido"
+      },
+      "explicacao": "explicada",
+      "estado": "verificado",
+      "evidencias": [
+        {
+          "fonte": "src:mdapi-mydomainsettings"
+        }
+      ]
+    },
+    {
+      "id": "mdt:MyDomainSettings.doesWarnOnForceComRedirect",
+      "nome": "doesWarnOnForceComRedirect",
+      "tipo_tecnico": "boolean",
+      "o_que_e": "Indica se o usuário vê um aviso ao ser redirecionado de uma URL *.force.com anterior.",
+      "origem": {
+        "estado": "verificado",
+        "valor": "padrao_plataforma",
+        "nota": "Propriedade definida pelo schema da Metadata API.",
+        "evidencias": [
+          {
+            "fonte": "src:mdapi-mydomainsettings"
+          }
+        ]
+      },
+      "obrigatoriedade": {
+        "valor": "nao",
+        "estado": "desconhecido",
+        "condicao": "A documentação 68.0 não marca o campo como obrigatório; ausência de marcação não comprova opcionalidade (confirmar no WSDL)."
+      },
+      "default": {
+        "forma": "false",
+        "estado": "verificado",
+        "evidencias": [
+          {
+            "fonte": "src:mdapi-mydomainsettings"
+          }
+        ],
+        "valor": false,
+        "nota": "A página declara default false."
+      },
+      "dominio": {
+        "natureza": "booleano",
+        "valores": [
+          {
+            "valor": "true"
+          },
+          {
+            "valor": "false"
+          }
+        ],
+        "lista_completa": "sim",
+        "estado": "verificado",
+        "evidencias": [
+          {
+            "fonte": "src:mdapi-mydomainsettings"
+          }
+        ]
+      },
+      "disponibilidade": {
+        "desde_versao": "59.0",
+        "ate_versao": null,
+        "estado": "verificado"
+      },
+      "explicacao": "explicada",
+      "estado": "verificado",
+      "evidencias": [
+        {
+          "fonte": "src:mdapi-mydomainsettings"
+        }
+      ]
+    },
+    {
+      "id": "mdt:MyDomainSettings.doesWarnOnRedirect",
+      "nome": "doesWarnOnRedirect",
+      "tipo_tecnico": "boolean",
+      "o_que_e": "Indica se o usuário vê um aviso ao ser redirecionado de uma URL de My Domain anterior.",
+      "origem": {
+        "estado": "verificado",
+        "valor": "padrao_plataforma",
+        "nota": "Propriedade definida pelo schema da Metadata API.",
+        "evidencias": [
+          {
+            "fonte": "src:mdapi-mydomainsettings"
+          }
+        ]
+      },
+      "obrigatoriedade": {
+        "valor": "nao",
+        "estado": "desconhecido",
+        "condicao": "A documentação 68.0 não marca o campo como obrigatório; ausência de marcação não comprova opcionalidade (confirmar no WSDL)."
+      },
+      "default": {
+        "forma": "false",
+        "estado": "verificado",
+        "evidencias": [
+          {
+            "fonte": "src:mdapi-mydomainsettings"
+          }
+        ],
+        "valor": false,
+        "nota": "A página declara default false."
+      },
+      "dominio": {
+        "natureza": "booleano",
+        "valores": [
+          {
+            "valor": "true"
+          },
+          {
+            "valor": "false"
+          }
+        ],
+        "lista_completa": "sim",
+        "estado": "verificado",
+        "evidencias": [
+          {
+            "fonte": "src:mdapi-mydomainsettings"
+          }
+        ]
+      },
+      "disponibilidade": {
+        "desde_versao": "59.0",
+        "ate_versao": null,
+        "estado": "verificado"
+      },
+      "explicacao": "explicada",
+      "estado": "verificado",
+      "evidencias": [
+        {
+          "fonte": "src:mdapi-mydomainsettings"
+        }
+      ]
+    },
+    {
+      "id": "mdt:MyDomainSettings.domainPartition",
+      "nome": "domainPartition",
+      "tipo_tecnico": "OrgDomainShard",
+      "o_que_e": "Partição da org nos domínios particionados.",
+      "origem": {
+        "estado": "verificado",
+        "valor": "padrao_plataforma",
+        "nota": "Propriedade definida pelo schema da Metadata API.",
+        "evidencias": [
+          {
+            "fonte": "src:mdapi-mydomainsettings"
+          }
+        ]
+      },
+      "obrigatoriedade": {
+        "valor": "nao",
+        "estado": "desconhecido",
+        "condicao": "A documentação 68.0 não marca o campo como obrigatório; ausência de marcação não comprova opcionalidade (confirmar no WSDL)."
+      },
+      "default": {
+        "forma": "nao_declarado_na_fonte",
+        "estado": "desconhecido"
+      },
+      "dominio": {
+        "natureza": "enum_fechado",
+        "valores": [
+          {
+            "valor": "demo",
+            "significado": "Disponível na API 60.0 e posteriores; a página não descreve o uso."
+          },
+          {
+            "valor": "develop",
+            "significado": "Orgs Developer Edition."
+          },
+          {
+            "valor": "free",
+            "significado": "Uso interno."
+          },
+          {
+            "valor": "none",
+            "significado": "A org não usa domínios particionados."
+          },
+          {
+            "valor": "patch",
+            "significado": "Disponível na API 59.0 e posteriores; a página não descreve o uso."
+          },
+          {
+            "valor": "sandbox",
+            "significado": "Sandboxes com enhanced domains."
+          },
+          {
+            "valor": "scratch",
+            "significado": "Scratch orgs."
+          },
+          {
+            "valor": "sfdctest",
+            "significado": "Uso interno."
+          },
+          {
+            "valor": "trailblaze",
+            "significado": "Trailblazer Playgrounds."
+          }
+        ],
+        "lista_completa": "sim",
+        "estado": "verificado",
+        "evidencias": [
+          {
+            "fonte": "src:mdapi-mydomainsettings"
+          }
+        ]
+      },
+      "disponibilidade": {
+        "desde_versao": "55.0",
+        "ate_versao": null,
+        "estado": "verificado"
+      },
+      "explicacao": "explicada",
+      "estado": "verificado",
+      "evidencias": [
+        {
+          "fonte": "src:mdapi-mydomainsettings"
+        }
+      ],
+      "notas": [
+        "Somente leitura, segundo a página."
+      ]
+    },
+    {
+      "id": "mdt:MyDomainSettings.edgeRoutingMethod",
+      "nome": "edgeRoutingMethod",
+      "tipo_tecnico": "EdgeRoutingOption",
+      "o_que_e": "Método de roteamento das requisições quando useEdge é true.",
+      "origem": {
+        "estado": "verificado",
+        "valor": "padrao_plataforma",
+        "nota": "Propriedade definida pelo schema da Metadata API.",
+        "evidencias": [
+          {
+            "fonte": "src:mdapi-mydomainsettings"
+          }
+        ]
+      },
+      "obrigatoriedade": {
+        "valor": "nao",
+        "estado": "desconhecido",
+        "condicao": "A documentação 68.0 não marca o campo como obrigatório; ausência de marcação não comprova opcionalidade (confirmar no WSDL)."
+      },
+      "default": {
+        "forma": "valor",
+        "estado": "verificado",
+        "evidencias": [
+          {
+            "fonte": "src:mdapi-mydomainsettings"
+          }
+        ],
+        "valor": "global"
+      },
+      "dominio": {
+        "natureza": "enum_fechado",
+        "valores": [
+          {
+            "valor": "global",
+            "significado": "Local Edge mais próximo."
+          },
+          {
+            "valor": "regional",
+            "significado": "Só locais da Salesforce no país da org; apenas Hyperforce Japão."
+          },
+          {
+            "valor": "gsr",
+            "significado": "Nó de rede confiável mais próximo, contornando certos locais de rede do Oriente Médio."
+          }
+        ],
+        "lista_completa": "sim",
+        "estado": "verificado",
+        "evidencias": [
+          {
+            "fonte": "src:mdapi-mydomainsettings"
+          }
+        ]
+      },
+      "disponibilidade": {
+        "desde_versao": "65.0",
+        "ate_versao": null,
+        "estado": "verificado"
+      },
+      "explicacao": "explicada",
+      "estado": "verificado",
+      "evidencias": [
+        {
+          "fonte": "src:mdapi-mydomainsettings"
+        }
+      ],
+      "notas": [
+        "Somente leitura, segundo a página."
+      ]
+    },
+    {
+      "id": "mdt:MyDomainSettings.enableCrossDomainPreviewCookies",
+      "nome": "enableCrossDomainPreviewCookies",
+      "tipo_tecnico": "boolean",
+      "o_que_e": "Quando isFirstPartyCookieUseRequired é true, indica se cookies entre domínios são permitidos no domínio de preview do Experience Builder.",
+      "origem": {
+        "estado": "verificado",
+        "valor": "padrao_plataforma",
+        "nota": "Propriedade definida pelo schema da Metadata API.",
+        "evidencias": [
+          {
+            "fonte": "src:mdapi-mydomainsettings"
+          }
+        ]
+      },
+      "obrigatoriedade": {
+        "valor": "nao",
+        "estado": "desconhecido",
+        "condicao": "A documentação 68.0 não marca o campo como obrigatório; ausência de marcação não comprova opcionalidade (confirmar no WSDL)."
+      },
+      "default": {
+        "forma": "nao_declarado_na_fonte",
+        "estado": "desconhecido"
+      },
+      "dominio": {
+        "natureza": "booleano",
+        "valores": [
+          {
+            "valor": "true"
+          },
+          {
+            "valor": "false"
+          }
+        ],
+        "lista_completa": "sim",
+        "estado": "verificado",
+        "evidencias": [
+          {
+            "fonte": "src:mdapi-mydomainsettings"
+          }
+        ]
+      },
+      "disponibilidade": {
+        "desde_versao": "62.0",
+        "ate_versao": null,
+        "estado": "verificado"
+      },
+      "explicacao": "explicada",
+      "estado": "verificado",
+      "evidencias": [
+        {
+          "fonte": "src:mdapi-mydomainsettings"
+        }
+      ]
+    },
+    {
+      "id": "mdt:MyDomainSettings.enableEdgeDuringRollout",
+      "nome": "enableEdgeDuringRollout",
+      "tipo_tecnico": "boolean",
+      "o_que_e": "Indica se o Edge fica ligado durante a implantação programada. Sem efeito se useEdge é true.",
+      "origem": {
+        "estado": "verificado",
+        "valor": "padrao_plataforma",
+        "nota": "Propriedade definida pelo schema da Metadata API.",
+        "evidencias": [
+          {
+            "fonte": "src:mdapi-mydomainsettings"
+          }
+        ]
+      },
+      "obrigatoriedade": {
+        "valor": "nao",
+        "estado": "desconhecido",
+        "condicao": "A documentação 68.0 não marca o campo como obrigatório; ausência de marcação não comprova opcionalidade (confirmar no WSDL)."
+      },
+      "default": {
+        "forma": "valor",
+        "estado": "verificado",
+        "evidencias": [
+          {
+            "fonte": "src:mdapi-mydomainsettings"
+          }
+        ],
+        "valor": "true"
+      },
+      "dominio": {
+        "natureza": "booleano",
+        "valores": [
+          {
+            "valor": "true"
+          },
+          {
+            "valor": "false"
+          }
+        ],
+        "lista_completa": "sim",
+        "estado": "verificado",
+        "evidencias": [
+          {
+            "fonte": "src:mdapi-mydomainsettings"
+          }
+        ]
+      },
+      "disponibilidade": {
+        "desde_versao": "58.0",
+        "ate_versao": null,
+        "estado": "verificado"
+      },
+      "explicacao": "explicada",
+      "estado": "verificado",
+      "evidencias": [
+        {
+          "fonte": "src:mdapi-mydomainsettings"
+        }
+      ]
+    },
+    {
+      "id": "mdt:MyDomainSettings.enableExtendedRedirections",
+      "nome": "enableExtendedRedirections",
+      "tipo_tecnico": "boolean",
+      "o_que_e": "Indica se chamadas a hostnames temporários de redirecionamento estendido são redirecionadas.",
+      "origem": {
+        "estado": "verificado",
+        "valor": "padrao_plataforma",
+        "nota": "Propriedade definida pelo schema da Metadata API.",
+        "evidencias": [
+          {
+            "fonte": "src:mdapi-mydomainsettings"
+          }
+        ]
+      },
+      "obrigatoriedade": {
+        "valor": "nao",
+        "estado": "desconhecido",
+        "condicao": "A documentação 68.0 não marca o campo como obrigatório; ausência de marcação não comprova opcionalidade (confirmar no WSDL)."
+      },
+      "default": {
+        "forma": "valor",
+        "estado": "verificado",
+        "evidencias": [
+          {
+            "fonte": "src:mdapi-mydomainsettings"
+          }
+        ],
+        "valor": "true"
+      },
+      "dominio": {
+        "natureza": "booleano",
+        "valores": [
+          {
+            "valor": "true"
+          },
+          {
+            "valor": "false"
+          }
+        ],
+        "lista_completa": "sim",
+        "estado": "verificado",
+        "evidencias": [
+          {
+            "fonte": "src:mdapi-mydomainsettings"
+          }
+        ]
+      },
+      "disponibilidade": {
+        "desde_versao": "62.0",
+        "ate_versao": null,
+        "estado": "verificado"
+      },
+      "explicacao": "explicada",
+      "estado": "verificado",
+      "evidencias": [
+        {
+          "fonte": "src:mdapi-mydomainsettings"
+        }
+      ]
+    },
+    {
+      "id": "mdt:MyDomainSettings.enableLegacyRedirections",
+      "nome": "enableLegacyRedirections",
+      "tipo_tecnico": "boolean",
+      "o_que_e": "Quando redirectPriorMyDomain é true, indica se hostnames legados são redirecionados.",
+      "origem": {
+        "estado": "verificado",
+        "valor": "padrao_plataforma",
+        "nota": "Propriedade definida pelo schema da Metadata API.",
+        "evidencias": [
+          {
+            "fonte": "src:mdapi-mydomainsettings"
+          }
+        ]
+      },
+      "obrigatoriedade": {
+        "valor": "nao",
+        "estado": "desconhecido",
+        "condicao": "A documentação 68.0 não marca o campo como obrigatório; ausência de marcação não comprova opcionalidade (confirmar no WSDL)."
+      },
+      "default": {
+        "forma": "nao_declarado_na_fonte",
+        "estado": "desconhecido"
+      },
+      "dominio": {
+        "natureza": "booleano",
+        "valores": [
+          {
+            "valor": "true"
+          },
+          {
+            "valor": "false"
+          }
+        ],
+        "lista_completa": "sim",
+        "estado": "verificado",
+        "evidencias": [
+          {
+            "fonte": "src:mdapi-mydomainsettings"
+          }
+        ]
+      },
+      "disponibilidade": {
+        "desde_versao": "62.0",
+        "ate_versao": null,
+        "estado": "verificado"
+      },
+      "explicacao": "explicada",
+      "estado": "verificado",
+      "evidencias": [
+        {
+          "fonte": "src:mdapi-mydomainsettings"
+        }
+      ]
+    },
+    {
+      "id": "mdt:MyDomainSettings.enableNativeBrowserForAuthOnAndroid",
+      "nome": "enableNativeBrowserForAuthOnAndroid",
+      "tipo_tecnico": "boolean",
+      "o_que_e": "Usa o navegador nativo para autenticação nos apps móveis Android.",
+      "origem": {
+        "estado": "verificado",
+        "valor": "padrao_plataforma",
+        "nota": "Propriedade definida pelo schema da Metadata API.",
+        "evidencias": [
+          {
+            "fonte": "src:mdapi-mydomainsettings"
+          }
+        ]
+      },
+      "obrigatoriedade": {
+        "valor": "nao",
+        "estado": "desconhecido",
+        "condicao": "A documentação 68.0 não marca o campo como obrigatório; ausência de marcação não comprova opcionalidade (confirmar no WSDL)."
+      },
+      "default": {
+        "forma": "false",
+        "estado": "verificado",
+        "evidencias": [
+          {
+            "fonte": "src:mdapi-mydomainsettings"
+          }
+        ],
+        "valor": false,
+        "nota": "A página declara default false."
+      },
+      "dominio": {
+        "natureza": "booleano",
+        "valores": [
+          {
+            "valor": "true"
+          },
+          {
+            "valor": "false"
+          }
+        ],
+        "lista_completa": "sim",
+        "estado": "verificado",
+        "evidencias": [
+          {
+            "fonte": "src:mdapi-mydomainsettings"
+          }
+        ]
+      },
+      "disponibilidade": {
+        "desde_versao": null,
+        "ate_versao": null,
+        "estado": "desconhecido"
+      },
+      "explicacao": "explicada",
+      "estado": "verificado",
+      "evidencias": [
+        {
+          "fonte": "src:mdapi-mydomainsettings"
+        }
+      ]
+    },
+    {
+      "id": "mdt:MyDomainSettings.enableNativeBrowserForAuthOnIos",
+      "nome": "enableNativeBrowserForAuthOnIos",
+      "tipo_tecnico": "boolean",
+      "o_que_e": "Usa o navegador nativo para autenticação nos apps móveis iOS.",
+      "origem": {
+        "estado": "verificado",
+        "valor": "padrao_plataforma",
+        "nota": "Propriedade definida pelo schema da Metadata API.",
+        "evidencias": [
+          {
+            "fonte": "src:mdapi-mydomainsettings"
+          }
+        ]
+      },
+      "obrigatoriedade": {
+        "valor": "nao",
+        "estado": "desconhecido",
+        "condicao": "A documentação 68.0 não marca o campo como obrigatório; ausência de marcação não comprova opcionalidade (confirmar no WSDL)."
+      },
+      "default": {
+        "forma": "false",
+        "estado": "verificado",
+        "evidencias": [
+          {
+            "fonte": "src:mdapi-mydomainsettings"
+          }
+        ],
+        "valor": false,
+        "nota": "A página declara default false."
+      },
+      "dominio": {
+        "natureza": "booleano",
+        "valores": [
+          {
+            "valor": "true"
+          },
+          {
+            "valor": "false"
+          }
+        ],
+        "lista_completa": "sim",
+        "estado": "verificado",
+        "evidencias": [
+          {
+            "fonte": "src:mdapi-mydomainsettings"
+          }
+        ]
+      },
+      "disponibilidade": {
+        "desde_versao": null,
+        "ate_versao": null,
+        "estado": "desconhecido"
+      },
+      "explicacao": "explicada",
+      "estado": "verificado",
+      "evidencias": [
+        {
+          "fonte": "src:mdapi-mydomainsettings"
+        }
+      ]
+    },
+    {
+      "id": "mdt:MyDomainSettings.enableShareBrowserSessionAndroidForAuth",
+      "nome": "enableShareBrowserSessionAndroidForAuth",
+      "tipo_tecnico": "boolean",
+      "o_que_e": "Explicação pendente: item listado a partir da fonte, ainda sem texto didático.",
+      "origem": {
+        "estado": "verificado",
+        "valor": "padrao_plataforma",
+        "nota": "Propriedade definida pelo schema da Metadata API.",
+        "evidencias": [
+          {
+            "fonte": "src:mdapi-mydomainsettings"
+          }
+        ]
+      },
+      "obrigatoriedade": {
+        "valor": "nao",
+        "estado": "desconhecido",
+        "condicao": "A documentação 68.0 não marca o campo como obrigatório; ausência de marcação não comprova opcionalidade (confirmar no WSDL)."
+      },
+      "default": {
+        "forma": "nao_declarado_na_fonte",
+        "estado": "desconhecido"
+      },
+      "dominio": {
+        "natureza": "booleano",
+        "valores": [
+          {
+            "valor": "true"
+          },
+          {
+            "valor": "false"
+          }
+        ],
+        "lista_completa": "sim",
+        "estado": "verificado",
+        "evidencias": [
+          {
+            "fonte": "src:mdapi-mydomainsettings"
+          }
+        ]
+      },
+      "disponibilidade": {
+        "desde_versao": null,
+        "ate_versao": null,
+        "estado": "desconhecido"
+      },
+      "explicacao": "pendente",
+      "estado": "verificado",
+      "evidencias": [
+        {
+          "fonte": "src:mdapi-mydomainsettings"
+        }
+      ]
+    },
+    {
+      "id": "mdt:MyDomainSettings.enableShareBrowserSessionIOSForAuth",
+      "nome": "enableShareBrowserSessionIOSForAuth",
+      "tipo_tecnico": "boolean",
+      "o_que_e": "Explicação pendente: item listado a partir da fonte, ainda sem texto didático.",
+      "origem": {
+        "estado": "verificado",
+        "valor": "padrao_plataforma",
+        "nota": "Propriedade definida pelo schema da Metadata API.",
+        "evidencias": [
+          {
+            "fonte": "src:mdapi-mydomainsettings"
+          }
+        ]
+      },
+      "obrigatoriedade": {
+        "valor": "nao",
+        "estado": "desconhecido",
+        "condicao": "A documentação 68.0 não marca o campo como obrigatório; ausência de marcação não comprova opcionalidade (confirmar no WSDL)."
+      },
+      "default": {
+        "forma": "nao_declarado_na_fonte",
+        "estado": "desconhecido"
+      },
+      "dominio": {
+        "natureza": "booleano",
+        "valores": [
+          {
+            "valor": "true"
+          },
+          {
+            "valor": "false"
+          }
+        ],
+        "lista_completa": "sim",
+        "estado": "verificado",
+        "evidencias": [
+          {
+            "fonte": "src:mdapi-mydomainsettings"
+          }
+        ]
+      },
+      "disponibilidade": {
+        "desde_versao": null,
+        "ate_versao": null,
+        "estado": "desconhecido"
+      },
+      "explicacao": "pendente",
+      "estado": "verificado",
+      "evidencias": [
+        {
+          "fonte": "src:mdapi-mydomainsettings"
+        }
+      ]
+    },
+    {
+      "id": "mdt:MyDomainSettings.instancedUrlRedirectHandling",
+      "nome": "instancedUrlRedirectHandling",
+      "tipo_tecnico": "OrgDomainRedirectOption",
+      "o_que_e": "Como são tratadas as visitas à URL da org com nome de instância. Não afeta o login (veja canOnlyLoginWithMyDomainUrl).",
+      "origem": {
+        "estado": "verificado",
+        "valor": "padrao_plataforma",
+        "nota": "Propriedade definida pelo schema da Metadata API.",
+        "evidencias": [
+          {
+            "fonte": "src:mdapi-mydomainsettings"
+          }
+        ]
+      },
+      "obrigatoriedade": {
+        "valor": "nao",
+        "estado": "desconhecido",
+        "condicao": "A documentação 68.0 não marca o campo como obrigatório; ausência de marcação não comprova opcionalidade (confirmar no WSDL)."
+      },
+      "default": {
+        "forma": "nao_declarado_na_fonte",
+        "estado": "desconhecido"
+      },
+      "dominio": {
+        "natureza": "enum_fechado",
+        "valores": [
+          {
+            "valor": "Redirect",
+            "significado": "Redireciona para a página equivalente no My Domain."
+          },
+          {
+            "valor": "WarnOnRedirect",
+            "significado": "Mostra um aviso breve antes de redirecionar."
+          },
+          {
+            "valor": "NoRedirect",
+            "significado": "Não redireciona; é preciso usar os hostnames do My Domain."
+          }
+        ],
+        "lista_completa": "sim",
+        "estado": "verificado",
+        "evidencias": [
+          {
+            "fonte": "src:mdapi-mydomainsettings"
+          }
+        ]
+      },
+      "disponibilidade": {
+        "desde_versao": "59.0",
+        "ate_versao": null,
+        "estado": "verificado"
+      },
+      "explicacao": "explicada",
+      "estado": "verificado",
+      "evidencias": [
+        {
+          "fonte": "src:mdapi-mydomainsettings"
+        }
+      ]
+    },
+    {
+      "id": "mdt:MyDomainSettings.isFirstPartyCookieUseRequired",
+      "nome": "isFirstPartyCookieUseRequired",
+      "tipo_tecnico": "boolean",
+      "o_que_e": "Indica se o atributo SameSite=None é removido dos cookies da Salesforce.",
+      "origem": {
+        "estado": "verificado",
+        "valor": "padrao_plataforma",
+        "nota": "Propriedade definida pelo schema da Metadata API.",
+        "evidencias": [
+          {
+            "fonte": "src:mdapi-mydomainsettings"
+          }
+        ]
+      },
+      "obrigatoriedade": {
+        "valor": "nao",
+        "estado": "desconhecido",
+        "condicao": "A documentação 68.0 não marca o campo como obrigatório; ausência de marcação não comprova opcionalidade (confirmar no WSDL)."
+      },
+      "default": {
+        "forma": "valor",
+        "estado": "verificado",
+        "evidencias": [
+          {
+            "fonte": "src:mdapi-mydomainsettings"
+          }
+        ],
+        "valor": "true",
+        "nota": "true em orgs criadas no Summer '24 ou depois; false nas demais."
+      },
+      "dominio": {
+        "natureza": "booleano",
+        "valores": [
+          {
+            "valor": "true"
+          },
+          {
+            "valor": "false"
+          }
+        ],
+        "lista_completa": "sim",
+        "estado": "verificado",
+        "evidencias": [
+          {
+            "fonte": "src:mdapi-mydomainsettings"
+          }
+        ]
+      },
+      "disponibilidade": {
+        "desde_versao": "61.0",
+        "ate_versao": null,
+        "estado": "verificado"
+      },
+      "explicacao": "explicada",
+      "estado": "verificado",
+      "evidencias": [
+        {
+          "fonte": "src:mdapi-mydomainsettings"
+        }
+      ]
+    },
+    {
+      "id": "mdt:MyDomainSettings.isIcorInstApiTrafficBlocked",
+      "nome": "isIcorInstApiTrafficBlocked",
+      "tipo_tecnico": "boolean",
+      "o_que_e": "Reservado para uso futuro.",
+      "origem": {
+        "estado": "verificado",
+        "valor": "padrao_plataforma",
+        "nota": "Propriedade definida pelo schema da Metadata API.",
+        "evidencias": [
+          {
+            "fonte": "src:mdapi-mydomainsettings"
+          }
+        ]
+      },
+      "obrigatoriedade": {
+        "valor": "nao",
+        "estado": "desconhecido",
+        "condicao": "A documentação 68.0 não marca o campo como obrigatório; ausência de marcação não comprova opcionalidade (confirmar no WSDL)."
+      },
+      "default": {
+        "forma": "false",
+        "estado": "verificado",
+        "evidencias": [
+          {
+            "fonte": "src:mdapi-mydomainsettings"
+          }
+        ],
+        "valor": false,
+        "nota": "A página declara default false."
+      },
+      "dominio": {
+        "natureza": "booleano",
+        "valores": [
+          {
+            "valor": "true"
+          },
+          {
+            "valor": "false"
+          }
+        ],
+        "lista_completa": "sim",
+        "estado": "verificado",
+        "evidencias": [
+          {
+            "fonte": "src:mdapi-mydomainsettings"
+          }
+        ]
+      },
+      "disponibilidade": {
+        "desde_versao": "64.0",
+        "ate_versao": null,
+        "estado": "verificado"
+      },
+      "explicacao": "explicada",
+      "estado": "verificado",
+      "evidencias": [
+        {
+          "fonte": "src:mdapi-mydomainsettings"
+        }
+      ]
+    },
+    {
+      "id": "mdt:MyDomainSettings.isInstancedApiTrafficBlocked",
+      "nome": "isInstancedApiTrafficBlocked",
+      "tipo_tecnico": "boolean",
+      "o_que_e": "Explicação pendente: item listado a partir da fonte, ainda sem texto didático.",
+      "origem": {
+        "estado": "verificado",
+        "valor": "padrao_plataforma",
+        "nota": "Propriedade definida pelo schema da Metadata API.",
+        "evidencias": [
+          {
+            "fonte": "src:mdapi-mydomainsettings"
+          }
+        ]
+      },
+      "obrigatoriedade": {
+        "valor": "nao",
+        "estado": "desconhecido",
+        "condicao": "A documentação 68.0 não marca o campo como obrigatório; ausência de marcação não comprova opcionalidade (confirmar no WSDL)."
+      },
+      "default": {
+        "forma": "nao_declarado_na_fonte",
+        "estado": "desconhecido"
+      },
+      "dominio": {
+        "natureza": "booleano",
+        "valores": [
+          {
+            "valor": "true"
+          },
+          {
+            "valor": "false"
+          }
+        ],
+        "lista_completa": "sim",
+        "estado": "verificado",
+        "evidencias": [
+          {
+            "fonte": "src:mdapi-mydomainsettings"
+          }
+        ]
+      },
+      "disponibilidade": {
+        "desde_versao": null,
+        "ate_versao": null,
+        "estado": "desconhecido"
+      },
+      "explicacao": "pendente",
+      "estado": "verificado",
+      "evidencias": [
+        {
+          "fonte": "src:mdapi-mydomainsettings"
+        }
+      ]
+    },
+    {
+      "id": "mdt:MyDomainSettings.logRedirections",
+      "nome": "logRedirections",
+      "tipo_tecnico": "boolean",
+      "o_que_e": "Com true, o log de eventos Hostname Redirects é gerado junto dos logs de eventos diários.",
+      "origem": {
+        "estado": "verificado",
+        "valor": "padrao_plataforma",
+        "nota": "Propriedade definida pelo schema da Metadata API.",
+        "evidencias": [
+          {
+            "fonte": "src:mdapi-mydomainsettings"
+          }
+        ]
+      },
+      "obrigatoriedade": {
+        "valor": "nao",
+        "estado": "desconhecido",
+        "condicao": "A documentação 68.0 não marca o campo como obrigatório; ausência de marcação não comprova opcionalidade (confirmar no WSDL)."
+      },
+      "default": {
+        "forma": "false",
+        "estado": "verificado",
+        "evidencias": [
+          {
+            "fonte": "src:mdapi-mydomainsettings"
+          }
+        ],
+        "valor": false,
+        "nota": "A página declara default false."
+      },
+      "dominio": {
+        "natureza": "booleano",
+        "valores": [
+          {
+            "valor": "true"
+          },
+          {
+            "valor": "false"
+          }
+        ],
+        "lista_completa": "sim",
+        "estado": "verificado",
+        "evidencias": [
+          {
+            "fonte": "src:mdapi-mydomainsettings"
+          }
+        ]
+      },
+      "disponibilidade": {
+        "desde_versao": "56.0",
+        "ate_versao": null,
+        "estado": "verificado"
+      },
+      "explicacao": "explicada",
+      "estado": "verificado",
+      "evidencias": [
+        {
+          "fonte": "src:mdapi-mydomainsettings"
+        }
+      ]
+    },
+    {
+      "id": "mdt:MyDomainSettings.myDomainName",
+      "nome": "myDomainName",
+      "tipo_tecnico": "string",
+      "o_que_e": "Subdomínio usado nas URLs do My Domain.",
+      "origem": {
+        "estado": "verificado",
+        "valor": "padrao_plataforma",
+        "nota": "Propriedade definida pelo schema da Metadata API.",
+        "evidencias": [
+          {
+            "fonte": "src:mdapi-mydomainsettings"
+          }
+        ]
+      },
+      "obrigatoriedade": {
+        "valor": "nao",
+        "estado": "desconhecido",
+        "condicao": "A documentação 68.0 não marca o campo como obrigatório; ausência de marcação não comprova opcionalidade (confirmar no WSDL)."
+      },
+      "default": {
+        "forma": "nao_declarado_na_fonte",
+        "estado": "desconhecido"
+      },
+      "dominio": {
+        "natureza": "texto_livre",
+        "estado": "verificado",
+        "evidencias": [
+          {
+            "fonte": "src:mdapi-mydomainsettings"
+          }
+        ],
+        "contexto": "A fonte tipa como string sem lista de valores; não inventar valores."
+      },
+      "disponibilidade": {
+        "desde_versao": "51.0",
+        "ate_versao": null,
+        "estado": "verificado"
+      },
+      "explicacao": "explicada",
+      "estado": "verificado",
+      "evidencias": [
+        {
+          "fonte": "src:mdapi-mydomainsettings"
+        }
+      ],
+      "notas": [
+        "Somente leitura, segundo a página."
+      ]
+    },
+    {
+      "id": "mdt:MyDomainSettings.myDomainSuffix",
+      "nome": "myDomainSuffix",
+      "tipo_tecnico": "OrgDomainProdSuffix",
+      "o_que_e": "Sufixo de domínio da URL de login do My Domain.",
+      "origem": {
+        "estado": "verificado",
+        "valor": "padrao_plataforma",
+        "nota": "Propriedade definida pelo schema da Metadata API.",
+        "evidencias": [
+          {
+            "fonte": "src:mdapi-mydomainsettings"
+          }
+        ]
+      },
+      "obrigatoriedade": {
+        "valor": "nao",
+        "estado": "desconhecido",
+        "condicao": "A documentação 68.0 não marca o campo como obrigatório; ausência de marcação não comprova opcionalidade (confirmar no WSDL)."
+      },
+      "default": {
+        "forma": "nao_declarado_na_fonte",
+        "estado": "desconhecido"
+      },
+      "dominio": {
+        "natureza": "enum_fechado",
+        "valores": [
+          {
+            "valor": "CloudforceLimited",
+            "significado": "cloudforce.com."
+          },
+          {
+            "valor": "DatabaseLimited",
+            "significado": "database.com."
+          },
+          {
+            "valor": "MySalesforce",
+            "significado": "my.salesforce.com, com enhanced domains."
+          },
+          {
+            "valor": "MySalesforceLimited",
+            "significado": "my.salesforce.com, sem enhanced domains."
+          },
+          {
+            "valor": "OrgLevelCertificate",
+            "significado": "my-salesforce.com."
+          },
+          {
+            "valor": "OrgLevelCertificateLimited",
+            "significado": "my-salesforce.com legado; incompatível com navegadores que bloqueiam cookies de terceiros."
+          },
+          {
+            "valor": "Restricted1",
+            "significado": "Reservado para uso futuro."
+          },
+          {
+            "valor": "Restricted2",
+            "significado": "Reservado para uso futuro."
+          }
+        ],
+        "lista_completa": "sim",
+        "estado": "verificado",
+        "evidencias": [
+          {
+            "fonte": "src:mdapi-mydomainsettings"
+          }
+        ]
+      },
+      "disponibilidade": {
+        "desde_versao": "51.0",
+        "ate_versao": null,
+        "estado": "verificado"
+      },
+      "explicacao": "explicada",
+      "estado": "verificado",
+      "evidencias": [
+        {
+          "fonte": "src:mdapi-mydomainsettings"
+        }
+      ],
+      "notas": [
+        "Somente leitura, segundo a página."
+      ]
+    },
+    {
+      "id": "mdt:MyDomainSettings.onboardCustomerSpecificSuffix",
+      "nome": "onboardCustomerSpecificSuffix",
+      "tipo_tecnico": "boolean",
+      "o_que_e": "Reservado para uso futuro.",
+      "origem": {
+        "estado": "verificado",
+        "valor": "padrao_plataforma",
+        "nota": "Propriedade definida pelo schema da Metadata API.",
+        "evidencias": [
+          {
+            "fonte": "src:mdapi-mydomainsettings"
+          }
+        ]
+      },
+      "obrigatoriedade": {
+        "valor": "nao",
+        "estado": "desconhecido",
+        "condicao": "A documentação 68.0 não marca o campo como obrigatório; ausência de marcação não comprova opcionalidade (confirmar no WSDL)."
+      },
+      "default": {
+        "forma": "false",
+        "estado": "verificado",
+        "evidencias": [
+          {
+            "fonte": "src:mdapi-mydomainsettings"
+          }
+        ],
+        "valor": false,
+        "nota": "A página declara default false."
+      },
+      "dominio": {
+        "natureza": "booleano",
+        "valores": [
+          {
+            "valor": "true"
+          },
+          {
+            "valor": "false"
+          }
+        ],
+        "lista_completa": "sim",
+        "estado": "verificado",
+        "evidencias": [
+          {
+            "fonte": "src:mdapi-mydomainsettings"
+          }
+        ]
+      },
+      "disponibilidade": {
+        "desde_versao": "63.0",
+        "ate_versao": null,
+        "estado": "verificado"
+      },
+      "explicacao": "explicada",
+      "estado": "verificado",
+      "evidencias": [
+        {
+          "fonte": "src:mdapi-mydomainsettings"
+        }
+      ]
+    },
+    {
+      "id": "mdt:MyDomainSettings.redirectForceComSiteUrls",
+      "nome": "redirectForceComSiteUrls",
+      "tipo_tecnico": "boolean",
+      "o_que_e": "Com true, URLs de site .force.com são redirecionadas para a URL de site atual do My Domain.",
+      "origem": {
+        "estado": "verificado",
+        "valor": "padrao_plataforma",
+        "nota": "Propriedade definida pelo schema da Metadata API.",
+        "evidencias": [
+          {
+            "fonte": "src:mdapi-mydomainsettings"
+          }
+        ]
+      },
+      "obrigatoriedade": {
+        "valor": "nao",
+        "estado": "desconhecido",
+        "condicao": "A documentação 68.0 não marca o campo como obrigatório; ausência de marcação não comprova opcionalidade (confirmar no WSDL)."
+      },
+      "default": {
+        "forma": "valor",
+        "estado": "verificado",
+        "evidencias": [
+          {
+            "fonte": "src:mdapi-mydomainsettings"
+          }
+        ],
+        "valor": "true"
+      },
+      "dominio": {
+        "natureza": "booleano",
+        "valores": [
+          {
+            "valor": "true"
+          },
+          {
+            "valor": "false"
+          }
+        ],
+        "lista_completa": "sim",
+        "estado": "verificado",
+        "evidencias": [
+          {
+            "fonte": "src:mdapi-mydomainsettings"
+          }
+        ]
+      },
+      "disponibilidade": {
+        "desde_versao": "55.0",
+        "ate_versao": null,
+        "estado": "verificado"
+      },
+      "explicacao": "explicada",
+      "estado": "verificado",
+      "evidencias": [
+        {
+          "fonte": "src:mdapi-mydomainsettings"
+        }
+      ]
+    },
+    {
+      "id": "mdt:MyDomainSettings.redirectPriorMyDomain",
+      "nome": "redirectPriorMyDomain",
+      "tipo_tecnico": "boolean",
+      "o_que_e": "Com true, URLs do My Domain anterior são redirecionadas para o atual.",
+      "origem": {
+        "estado": "verificado",
+        "valor": "padrao_plataforma",
+        "nota": "Propriedade definida pelo schema da Metadata API.",
+        "evidencias": [
+          {
+            "fonte": "src:mdapi-mydomainsettings"
+          }
+        ]
+      },
+      "obrigatoriedade": {
+        "valor": "nao",
+        "estado": "desconhecido",
+        "condicao": "A documentação 68.0 não marca o campo como obrigatório; ausência de marcação não comprova opcionalidade (confirmar no WSDL)."
+      },
+      "default": {
+        "forma": "valor",
+        "estado": "verificado",
+        "evidencias": [
+          {
+            "fonte": "src:mdapi-mydomainsettings"
+          }
+        ],
+        "valor": "true",
+        "nota": "Volta a true quando um My Domain novo é implantado."
+      },
+      "dominio": {
+        "natureza": "booleano",
+        "valores": [
+          {
+            "valor": "true"
+          },
+          {
+            "valor": "false"
+          }
+        ],
+        "lista_completa": "sim",
+        "estado": "verificado",
+        "evidencias": [
+          {
+            "fonte": "src:mdapi-mydomainsettings"
+          }
+        ]
+      },
+      "disponibilidade": {
+        "desde_versao": "54.0",
+        "ate_versao": null,
+        "estado": "verificado"
+      },
+      "explicacao": "explicada",
+      "estado": "verificado",
+      "evidencias": [
+        {
+          "fonte": "src:mdapi-mydomainsettings"
+        }
+      ]
+    },
+    {
+      "id": "mdt:MyDomainSettings.use3rdPartyCookieBlockingCompatibleHostnames",
+      "nome": "use3rdPartyCookieBlockingCompatibleHostnames",
+      "tipo_tecnico": "boolean",
+      "o_que_e": "Indica se o nome da instância entra nas URLs de Visualforce quando cookies de terceiros são bloqueados.",
+      "origem": {
+        "estado": "verificado",
+        "valor": "padrao_plataforma",
+        "nota": "Propriedade definida pelo schema da Metadata API.",
+        "evidencias": [
+          {
+            "fonte": "src:mdapi-mydomainsettings"
+          }
+        ]
+      },
+      "obrigatoriedade": {
+        "valor": "nao",
+        "estado": "desconhecido",
+        "condicao": "A documentação 68.0 não marca o campo como obrigatório; ausência de marcação não comprova opcionalidade (confirmar no WSDL)."
+      },
+      "default": {
+        "forma": "valor",
+        "estado": "verificado",
+        "evidencias": [
+          {
+            "fonte": "src:mdapi-mydomainsettings"
+          }
+        ],
+        "valor": "true"
+      },
+      "dominio": {
+        "natureza": "booleano",
+        "valores": [
+          {
+            "valor": "true"
+          },
+          {
+            "valor": "false"
+          }
+        ],
+        "lista_completa": "sim",
+        "estado": "verificado",
+        "evidencias": [
+          {
+            "fonte": "src:mdapi-mydomainsettings"
+          }
+        ]
+      },
+      "disponibilidade": {
+        "desde_versao": "51.0",
+        "ate_versao": null,
+        "estado": "verificado"
+      },
+      "explicacao": "explicada",
+      "estado": "verificado",
+      "evidencias": [
+        {
+          "fonte": "src:mdapi-mydomainsettings"
+        }
+      ]
+    },
+    {
+      "id": "mdt:MyDomainSettings.useEdge",
+      "nome": "useEdge",
+      "tipo_tecnico": "boolean",
+      "o_que_e": "Indica se as URLs qualificadas do My Domain passam pela Salesforce Edge Network.",
+      "origem": {
+        "estado": "verificado",
+        "valor": "padrao_plataforma",
+        "nota": "Propriedade definida pelo schema da Metadata API.",
+        "evidencias": [
+          {
+            "fonte": "src:mdapi-mydomainsettings"
+          }
+        ]
+      },
+      "obrigatoriedade": {
+        "valor": "nao",
+        "estado": "desconhecido",
+        "condicao": "A documentação 68.0 não marca o campo como obrigatório; ausência de marcação não comprova opcionalidade (confirmar no WSDL)."
+      },
+      "default": {
+        "forma": "valor",
+        "estado": "verificado",
+        "evidencias": [
+          {
+            "fonte": "src:mdapi-mydomainsettings"
+          }
+        ],
+        "valor": "true"
+      },
+      "dominio": {
+        "natureza": "booleano",
+        "valores": [
+          {
+            "valor": "true"
+          },
+          {
+            "valor": "false"
+          }
+        ],
+        "lista_completa": "sim",
+        "estado": "verificado",
+        "evidencias": [
+          {
+            "fonte": "src:mdapi-mydomainsettings"
+          }
+        ]
+      },
+      "disponibilidade": {
+        "desde_versao": "51.0",
+        "ate_versao": null,
+        "estado": "verificado"
+      },
+      "explicacao": "explicada",
+      "estado": "verificado",
+      "evidencias": [
+        {
+          "fonte": "src:mdapi-mydomainsettings"
+        }
+      ],
+      "notas": [
+        "Somente leitura, segundo a página."
+      ]
+    },
+    {
+      "id": "mdt:MyDomainSettings.useEnhancedDomainsInSandbox",
+      "nome": "useEnhancedDomainsInSandbox",
+      "tipo_tecnico": "boolean",
+      "o_que_e": "Campo legado: desde a API 58.0 o valor é sempre true, qualquer que seja o valor enviado.",
+      "origem": {
+        "estado": "verificado",
+        "valor": "padrao_plataforma",
+        "nota": "Propriedade definida pelo schema da Metadata API.",
+        "evidencias": [
+          {
+            "fonte": "src:mdapi-mydomainsettings"
+          }
+        ]
+      },
+      "obrigatoriedade": {
+        "valor": "nao",
+        "estado": "desconhecido",
+        "condicao": "A documentação 68.0 não marca o campo como obrigatório; ausência de marcação não comprova opcionalidade (confirmar no WSDL)."
+      },
+      "default": {
+        "forma": "nao_declarado_na_fonte",
+        "estado": "desconhecido"
+      },
+      "dominio": {
+        "natureza": "booleano",
+        "valores": [
+          {
+            "valor": "true"
+          },
+          {
+            "valor": "false"
+          }
+        ],
+        "lista_completa": "sim",
+        "estado": "verificado",
+        "evidencias": [
+          {
+            "fonte": "src:mdapi-mydomainsettings"
+          }
+        ]
+      },
+      "disponibilidade": {
+        "desde_versao": null,
+        "ate_versao": null,
+        "estado": "desconhecido"
+      },
+      "explicacao": "explicada",
+      "estado": "verificado",
+      "evidencias": [
+        {
+          "fonte": "src:mdapi-mydomainsettings"
+        }
+      ]
+    },
+    {
+      "id": "mdt:MyDomainSettings.useStabilizedMyDomainHostnames",
+      "nome": "useStabilizedMyDomainHostnames",
+      "tipo_tecnico": "boolean",
+      "o_que_e": "Indica se o nome da instância fica escondido nas URLs de Visualforce, Experience Builder, Site.com Studio e arquivos de conteúdo.",
+      "origem": {
+        "estado": "verificado",
+        "valor": "padrao_plataforma",
+        "nota": "Propriedade definida pelo schema da Metadata API.",
+        "evidencias": [
+          {
+            "fonte": "src:mdapi-mydomainsettings"
+          }
+        ]
+      },
+      "obrigatoriedade": {
+        "valor": "nao",
+        "estado": "desconhecido",
+        "condicao": "A documentação 68.0 não marca o campo como obrigatório; ausência de marcação não comprova opcionalidade (confirmar no WSDL)."
+      },
+      "default": {
+        "forma": "valor",
+        "estado": "verificado",
+        "evidencias": [
+          {
+            "fonte": "src:mdapi-mydomainsettings"
+          }
+        ],
+        "valor": "true"
+      },
+      "dominio": {
+        "natureza": "booleano",
+        "valores": [
+          {
+            "valor": "true"
+          },
+          {
+            "valor": "false"
+          }
+        ],
+        "lista_completa": "sim",
+        "estado": "verificado",
+        "evidencias": [
+          {
+            "fonte": "src:mdapi-mydomainsettings"
+          }
+        ]
+      },
+      "disponibilidade": {
+        "desde_versao": null,
+        "ate_versao": null,
+        "estado": "desconhecido"
+      },
+      "explicacao": "explicada",
+      "estado": "verificado",
+      "evidencias": [
+        {
+          "fonte": "src:mdapi-mydomainsettings"
+        }
+      ]
+    },
+    {
+      "id": "mdt:MyDomainSettings.useStabilizedSandboxMyDomainHostnames",
+      "nome": "useStabilizedSandboxMyDomainHostnames",
+      "tipo_tecnico": "boolean",
+      "o_que_e": "Campo legado: o valor é sempre true em todas as versões da API.",
+      "origem": {
+        "estado": "verificado",
+        "valor": "padrao_plataforma",
+        "nota": "Propriedade definida pelo schema da Metadata API.",
+        "evidencias": [
+          {
+            "fonte": "src:mdapi-mydomainsettings"
+          }
+        ]
+      },
+      "obrigatoriedade": {
+        "valor": "nao",
+        "estado": "desconhecido",
+        "condicao": "A documentação 68.0 não marca o campo como obrigatório; ausência de marcação não comprova opcionalidade (confirmar no WSDL)."
+      },
+      "default": {
+        "forma": "nao_declarado_na_fonte",
+        "estado": "desconhecido"
+      },
+      "dominio": {
+        "natureza": "booleano",
+        "valores": [
+          {
+            "valor": "true"
+          },
+          {
+            "valor": "false"
+          }
+        ],
+        "lista_completa": "sim",
+        "estado": "verificado",
+        "evidencias": [
+          {
+            "fonte": "src:mdapi-mydomainsettings"
+          }
+        ]
+      },
+      "disponibilidade": {
+        "desde_versao": null,
+        "ate_versao": null,
+        "estado": "desconhecido"
+      },
+      "explicacao": "explicada",
+      "estado": "verificado",
+      "evidencias": [
+        {
+          "fonte": "src:mdapi-mydomainsettings"
+        }
+      ]
+    },
+    {
+      "id": "mdt:MyDomainSettings.fullName",
+      "nome": "fullName",
+      "tipo_tecnico": "string",
+      "o_que_e": "Nome completo (API name) do componente; herdado do tipo Metadata.",
+      "origem": {
+        "estado": "verificado",
+        "valor": "padrao_plataforma",
+        "nota": "Propriedade definida pelo schema da Metadata API.",
+        "evidencias": [
+          {
+            "fonte": "src:mdapi-mydomainsettings"
+          }
+        ]
+      },
+      "obrigatoriedade": {
+        "valor": "desconhecida",
+        "estado": "desconhecido"
+      },
+      "default": {
+        "forma": "nao_declarado_na_fonte",
+        "estado": "desconhecido"
+      },
+      "dominio": {
+        "natureza": "texto_livre",
+        "estado": "verificado",
+        "evidencias": [
+          {
+            "fonte": "src:mdapi-mydomainsettings"
+          }
+        ],
+        "contexto": "A fonte tipa como string sem lista de valores; não inventar valores."
+      },
+      "disponibilidade": {
+        "desde_versao": null,
+        "ate_versao": null,
+        "estado": "desconhecido"
+      },
+      "explicacao": "explicada",
+      "estado": "verificado",
+      "evidencias": [
+        {
+          "fonte": "src:mdapi-mydomainsettings"
+        }
+      ],
+      "herdada_de": "Metadata"
+    }
+  ],
+  "estruturas": [],
+  "cobertura": {
+    "estrutural": {
+      "estado": "completa",
+      "esperado": 32,
+      "presente": 32,
+      "nota": "Universo esperado = tabela Fields da página oficial lida em 2026-11-14 (mais fullName herdado). O trecho lido não traz declaração sobre o curinga no package.xml."
+    },
+    "explicativa": {
+      "estado": "parcial",
+      "esperado": 32,
+      "presente": 29
+    },
+    "mapeamento": {
+      "estado": "parcial",
+      "nota": "Correspondências registradas apenas onde há evidência; demais pendentes."
+    }
+  },
+  "recomendacoes": [],
+  "alertas": [
+    "No package.xml, use o tipo Settings com o membro MyDomain.",
+    "Vários campos são somente leitura (domainPartition, edgeRoutingMethod, myDomainName, myDomainSuffix, useEdge): o nome do My Domain não é trocado por este tipo."
+  ],
+  "divergencias_documentais": [],
+  "estado": "verificado",
+  "evidencias": [
+    {
+      "fonte": "src:mdapi-mydomainsettings"
+    },
+    {
+      "fonte": "src:sdr-registry"
+    },
+    {
+      "fonte": "src:sdr-metadata-support"
+    }
+  ],
+  "exemplo_xml": {
+    "xml": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<MyDomainSettings xmlns=\"http://soap.sforce.com/2006/04/metadata\">\n    <!-- Usuários e API só entram pela URL do My Domain -->\n    <canOnlyLoginWithMyDomainUrl>true</canOnlyLoginWithMyDomainUrl>\n    <doesApiLoginRequireOrgDomain>true</doesApiLoginRequireOrgDomain>\n    <!-- Valores documentados: Redirect, WarnOnRedirect, NoRedirect -->\n    <instancedUrlRedirectHandling>WarnOnRedirect</instancedUrlRedirectHandling>\n    <redirectPriorMyDomain>true</redirectPriorMyDomain>\n</MyDomainSettings>",
+    "natureza": "didatico_projeto",
+    "nota": "Exemplo escrito pelo projeto apenas com elementos documentados; sem dados reais."
+  }
+}

@@ -14,3 +14,4 @@ Scripts de lotes carregados com `ferramentas/carga/` (a partir do lote 6). Veja 
 | `conteudo_pendentes4.py` | Lote 4 dos temas sem fonte: serviço de campo, experiências externas, capacidades setoriais, outras áreas (issue #34). Usado por `conteudo_temas.py`. |
 | `temas_internos.py` | Limpeza do dado genérico dos temas internos (issue #34, item 3): descrição, referências oficiais já registradas e nota de estado, um tema principal por vez. Reexecutável. |
 | `conteudo_detalhe.py` | Detalhamento dos temas principais (issue #34, item 3): fontes novas e conteúdo que substitui o de temas internos rasos. Aplicado por último por `conteudo_temas.py`. |
+| `lote6a_org.py` | Lote 6a (issue #34, item 3): metadata types, estruturas e funcionalidades do tema Organização e configurações base. Reexecutável; rode depois `conteudo_temas.py` e `temas_internos.py`. |

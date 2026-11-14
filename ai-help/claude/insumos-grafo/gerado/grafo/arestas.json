@@ -472,6 +472,12 @@
     "tipo": "representacao_objeto_api"
   },
   {
+    "destino": "mdt:CompanySettings",
+    "origem": "func:ano-fiscal",
+    "papel": "Ano fiscal padrão e uso de período customizado nas previsões, implantáveis.",
+    "tipo": "representacao_xml"
+  },
+  {
     "destino": "mdt:AuthProvider",
     "origem": "func:auth-providers",
     "papel": "Configuração do provedor.",
@@ -662,6 +668,18 @@
     "origem": "func:csp-trusted-sites",
     "papel": "Trusted URL exposta por API, com criação e edição.",
     "tipo": "representacao_objeto_api"
+  },
+  {
+    "destino": "mdt:CustomLabels",
+    "origem": "func:custom-labels",
+    "papel": "Conjunto de custom labels implantável.",
+    "tipo": "representacao_xml"
+  },
+  {
+    "destino": "mdt:CustomMetadata",
+    "origem": "func:custom-metadata-types",
+    "papel": "Cada registro de um custom metadata type.",
+    "tipo": "representacao_xml"
   },
   {
     "destino": "mdt:EntitlementProcess",
@@ -862,6 +880,12 @@
     "tipo": "representacao_xml"
   },
   {
+    "destino": "mdt:BusinessHoursSettings",
+    "origem": "func:feriados",
+    "papel": "Feriados implantáveis junto dos horários comerciais (estrutura Holidays).",
+    "tipo": "representacao_xml"
+  },
+  {
     "destino": "mdt:Flow",
     "origem": "func:flow",
     "papel": "Definição implantável de uma versão de flow.",
@@ -890,6 +914,12 @@
     "origem": "func:horario-comercial",
     "papel": "Registro de cada horário comercial.",
     "tipo": "representacao_objeto_api"
+  },
+  {
+    "destino": "mdt:LanguageSettings",
+    "origem": "func:idiomas-da-org",
+    "papel": "Seleção de idiomas, formato ICU e opções de tradução implantáveis.",
+    "tipo": "representacao_xml"
   },
   {
     "destino": "mdt:LeadConvertSettings",
@@ -938,6 +968,18 @@
     "origem": "func:lightning-pages",
     "papel": "Página consultável (Tooling).",
     "tipo": "representacao_objeto_api"
+  },
+  {
+    "destino": "mdt:CurrencySettings",
+    "origem": "func:multiplas-moedas",
+    "papel": "Ativação de múltiplas moedas, moeda corporativa, moedas e taxas implantáveis.",
+    "tipo": "representacao_xml"
+  },
+  {
+    "destino": "mdt:MyDomainSettings",
+    "origem": "func:my-domain",
+    "papel": "Políticas de login, redirecionamentos e opções de roteamento implantáveis.",
+    "tipo": "representacao_xml"
   },
   {
     "destino": "mdt:ExternalAuthIdentityProvider",
@@ -1396,6 +1438,12 @@
     "tipo": "representacao_objeto_api"
   },
   {
+    "destino": "mdt:LanguageSettings",
+    "origem": "func:translation-workbench",
+    "papel": "Liga o Translation Workbench (enableTranslationWorkbench).",
+    "tipo": "representacao_xml"
+  },
+  {
     "destino": "obj:User",
     "origem": "func:usuarios",
     "papel": "Registro de cada usuário.",
@@ -1766,6 +1814,26 @@
     "tipo": "propriedade"
   },
   {
+    "destino": "mdt:CompanySettings.enableCustomFiscalYear",
+    "origem": "mdt:CompanySettings",
+    "tipo": "propriedade"
+  },
+  {
+    "destino": "mdt:CompanySettings.fiscalYear",
+    "origem": "mdt:CompanySettings",
+    "tipo": "propriedade"
+  },
+  {
+    "destino": "mdt:CompanySettings.fullName",
+    "origem": "mdt:CompanySettings",
+    "tipo": "propriedade"
+  },
+  {
+    "destino": "mdx:FiscalYearSettings",
+    "origem": "mdt:CompanySettings.fiscalYear",
+    "tipo": "tipo_composto"
+  },
+  {
     "destino": "mdt:ConnectedApp.attributes",
     "origem": "mdt:ConnectedApp",
     "tipo": "propriedade"
@@ -2027,6 +2095,51 @@
     "origem": "mdt:CspTrustedSite",
     "rel_id": "rel:rep-csptrustedsite",
     "tipo": "representacao_comum"
+  },
+  {
+    "destino": "mdt:CurrencySettings.corporateCurrency",
+    "origem": "mdt:CurrencySettings",
+    "tipo": "propriedade"
+  },
+  {
+    "destino": "mdt:CurrencySettings.currency",
+    "origem": "mdt:CurrencySettings",
+    "tipo": "propriedade"
+  },
+  {
+    "destino": "mdt:CurrencySettings.enableCurrencyEffectiveDates",
+    "origem": "mdt:CurrencySettings",
+    "tipo": "propriedade"
+  },
+  {
+    "destino": "mdt:CurrencySettings.enableCurrencySymbolWithMultiCurrency",
+    "origem": "mdt:CurrencySettings",
+    "tipo": "propriedade"
+  },
+  {
+    "destino": "mdt:CurrencySettings.enableMultiCurrency",
+    "origem": "mdt:CurrencySettings",
+    "tipo": "propriedade"
+  },
+  {
+    "destino": "mdt:CurrencySettings.fullName",
+    "origem": "mdt:CurrencySettings",
+    "tipo": "propriedade"
+  },
+  {
+    "destino": "mdt:CurrencySettings.isMultiCurrencyActivationAllowed",
+    "origem": "mdt:CurrencySettings",
+    "tipo": "propriedade"
+  },
+  {
+    "destino": "mdt:CurrencySettings.isParenCurrencyConvDisabled",
+    "origem": "mdt:CurrencySettings",
+    "tipo": "propriedade"
+  },
+  {
+    "destino": "mdx:Currency",
+    "origem": "mdt:CurrencySettings.currency",
+    "tipo": "tipo_composto"
   },
   {
     "destino": "mdt:CustomField.businessOwnerGroup",
@@ -2352,6 +2465,51 @@
   {
     "destino": "mdx:ValueSet",
     "origem": "mdt:CustomField.valueSet",
+    "tipo": "tipo_composto"
+  },
+  {
+    "destino": "mdt:CustomLabels.fullName",
+    "origem": "mdt:CustomLabels",
+    "tipo": "propriedade"
+  },
+  {
+    "destino": "mdt:CustomLabels.labels",
+    "origem": "mdt:CustomLabels",
+    "tipo": "propriedade"
+  },
+  {
+    "destino": "mdx:CustomLabel",
+    "origem": "mdt:CustomLabels.labels",
+    "tipo": "tipo_composto"
+  },
+  {
+    "destino": "mdt:CustomMetadata.description",
+    "origem": "mdt:CustomMetadata",
+    "tipo": "propriedade"
+  },
+  {
+    "destino": "mdt:CustomMetadata.fullName",
+    "origem": "mdt:CustomMetadata",
+    "tipo": "propriedade"
+  },
+  {
+    "destino": "mdt:CustomMetadata.label",
+    "origem": "mdt:CustomMetadata",
+    "tipo": "propriedade"
+  },
+  {
+    "destino": "mdt:CustomMetadata.protected",
+    "origem": "mdt:CustomMetadata",
+    "tipo": "propriedade"
+  },
+  {
+    "destino": "mdt:CustomMetadata.values",
+    "origem": "mdt:CustomMetadata",
+    "tipo": "propriedade"
+  },
+  {
+    "destino": "mdx:CustomMetadataValue",
+    "origem": "mdt:CustomMetadata.values",
     "tipo": "tipo_composto"
   },
   {
@@ -4669,6 +4827,71 @@
     "tipo": "propriedade"
   },
   {
+    "destino": "mdt:LanguageSettings.displayedLanguages",
+    "origem": "mdt:LanguageSettings",
+    "tipo": "propriedade"
+  },
+  {
+    "destino": "mdt:LanguageSettings.enableCanadaIcuFormat",
+    "origem": "mdt:LanguageSettings",
+    "tipo": "propriedade"
+  },
+  {
+    "destino": "mdt:LanguageSettings.enableDataTranslation",
+    "origem": "mdt:LanguageSettings",
+    "tipo": "propriedade"
+  },
+  {
+    "destino": "mdt:LanguageSettings.enableEndUserLanguages",
+    "origem": "mdt:LanguageSettings",
+    "tipo": "propriedade"
+  },
+  {
+    "destino": "mdt:LanguageSettings.enableICULocaleDateFormat",
+    "origem": "mdt:LanguageSettings",
+    "tipo": "propriedade"
+  },
+  {
+    "destino": "mdt:LanguageSettings.enableLanguageExtensionPackage",
+    "origem": "mdt:LanguageSettings",
+    "tipo": "propriedade"
+  },
+  {
+    "destino": "mdt:LanguageSettings.enableLocalNamesForStdObjects",
+    "origem": "mdt:LanguageSettings",
+    "tipo": "propriedade"
+  },
+  {
+    "destino": "mdt:LanguageSettings.enableLocaleInsensitiveFiltering",
+    "origem": "mdt:LanguageSettings",
+    "tipo": "propriedade"
+  },
+  {
+    "destino": "mdt:LanguageSettings.enablePlatformLanguages",
+    "origem": "mdt:LanguageSettings",
+    "tipo": "propriedade"
+  },
+  {
+    "destino": "mdt:LanguageSettings.enableTranslationWorkbench",
+    "origem": "mdt:LanguageSettings",
+    "tipo": "propriedade"
+  },
+  {
+    "destino": "mdt:LanguageSettings.enableTranslationWorkbenchConnectAPI",
+    "origem": "mdt:LanguageSettings",
+    "tipo": "propriedade"
+  },
+  {
+    "destino": "mdt:LanguageSettings.fullName",
+    "origem": "mdt:LanguageSettings",
+    "tipo": "propriedade"
+  },
+  {
+    "destino": "mdt:LanguageSettings.useLanguageFallback",
+    "origem": "mdt:LanguageSettings",
+    "tipo": "propriedade"
+  },
+  {
     "destino": "mdt:LeadConvertSettings.allowOwnerChange",
     "origem": "mdt:LeadConvertSettings",
     "tipo": "propriedade"
@@ -4744,6 +4967,166 @@
     "origem": "mdt:MilestoneType",
     "rel_id": "rel:rep-milestonetype",
     "tipo": "representacao_comum"
+  },
+  {
+    "destino": "mdt:MyDomainSettings.areLegacyRedirectsMaintained",
+    "origem": "mdt:MyDomainSettings",
+    "tipo": "propriedade"
+  },
+  {
+    "destino": "mdt:MyDomainSettings.areLgcyRdirMaintainedWntr26",
+    "origem": "mdt:MyDomainSettings",
+    "tipo": "propriedade"
+  },
+  {
+    "destino": "mdt:MyDomainSettings.canOnlyLoginWithMyDomainUrl",
+    "origem": "mdt:MyDomainSettings",
+    "tipo": "propriedade"
+  },
+  {
+    "destino": "mdt:MyDomainSettings.doesApiLoginRequireOrgDomain",
+    "origem": "mdt:MyDomainSettings",
+    "tipo": "propriedade"
+  },
+  {
+    "destino": "mdt:MyDomainSettings.doesWarnOnForceComRedirect",
+    "origem": "mdt:MyDomainSettings",
+    "tipo": "propriedade"
+  },
+  {
+    "destino": "mdt:MyDomainSettings.doesWarnOnRedirect",
+    "origem": "mdt:MyDomainSettings",
+    "tipo": "propriedade"
+  },
+  {
+    "destino": "mdt:MyDomainSettings.domainPartition",
+    "origem": "mdt:MyDomainSettings",
+    "tipo": "propriedade"
+  },
+  {
+    "destino": "mdt:MyDomainSettings.edgeRoutingMethod",
+    "origem": "mdt:MyDomainSettings",
+    "tipo": "propriedade"
+  },
+  {
+    "destino": "mdt:MyDomainSettings.enableCrossDomainPreviewCookies",
+    "origem": "mdt:MyDomainSettings",
+    "tipo": "propriedade"
+  },
+  {
+    "destino": "mdt:MyDomainSettings.enableEdgeDuringRollout",
+    "origem": "mdt:MyDomainSettings",
+    "tipo": "propriedade"
+  },
+  {
+    "destino": "mdt:MyDomainSettings.enableExtendedRedirections",
+    "origem": "mdt:MyDomainSettings",
+    "tipo": "propriedade"
+  },
+  {
+    "destino": "mdt:MyDomainSettings.enableLegacyRedirections",
+    "origem": "mdt:MyDomainSettings",
+    "tipo": "propriedade"
+  },
+  {
+    "destino": "mdt:MyDomainSettings.enableNativeBrowserForAuthOnAndroid",
+    "origem": "mdt:MyDomainSettings",
+    "tipo": "propriedade"
+  },
+  {
+    "destino": "mdt:MyDomainSettings.enableNativeBrowserForAuthOnIos",
+    "origem": "mdt:MyDomainSettings",
+    "tipo": "propriedade"
+  },
+  {
+    "destino": "mdt:MyDomainSettings.enableShareBrowserSessionAndroidForAuth",
+    "origem": "mdt:MyDomainSettings",
+    "tipo": "propriedade"
+  },
+  {
+    "destino": "mdt:MyDomainSettings.enableShareBrowserSessionIOSForAuth",
+    "origem": "mdt:MyDomainSettings",
+    "tipo": "propriedade"
+  },
+  {
+    "destino": "mdt:MyDomainSettings.fullName",
+    "origem": "mdt:MyDomainSettings",
+    "tipo": "propriedade"
+  },
+  {
+    "destino": "mdt:MyDomainSettings.instancedUrlRedirectHandling",
+    "origem": "mdt:MyDomainSettings",
+    "tipo": "propriedade"
+  },
+  {
+    "destino": "mdt:MyDomainSettings.isFirstPartyCookieUseRequired",
+    "origem": "mdt:MyDomainSettings",
+    "tipo": "propriedade"
+  },
+  {
+    "destino": "mdt:MyDomainSettings.isIcorInstApiTrafficBlocked",
+    "origem": "mdt:MyDomainSettings",
+    "tipo": "propriedade"
+  },
+  {
+    "destino": "mdt:MyDomainSettings.isInstancedApiTrafficBlocked",
+    "origem": "mdt:MyDomainSettings",
+    "tipo": "propriedade"
+  },
+  {
+    "destino": "mdt:MyDomainSettings.logRedirections",
+    "origem": "mdt:MyDomainSettings",
+    "tipo": "propriedade"
+  },
+  {
+    "destino": "mdt:MyDomainSettings.myDomainName",
+    "origem": "mdt:MyDomainSettings",
+    "tipo": "propriedade"
+  },
+  {
+    "destino": "mdt:MyDomainSettings.myDomainSuffix",
+    "origem": "mdt:MyDomainSettings",
+    "tipo": "propriedade"
+  },
+  {
+    "destino": "mdt:MyDomainSettings.onboardCustomerSpecificSuffix",
+    "origem": "mdt:MyDomainSettings",
+    "tipo": "propriedade"
+  },
+  {
+    "destino": "mdt:MyDomainSettings.redirectForceComSiteUrls",
+    "origem": "mdt:MyDomainSettings",
+    "tipo": "propriedade"
+  },
+  {
+    "destino": "mdt:MyDomainSettings.redirectPriorMyDomain",
+    "origem": "mdt:MyDomainSettings",
+    "tipo": "propriedade"
+  },
+  {
+    "destino": "mdt:MyDomainSettings.use3rdPartyCookieBlockingCompatibleHostnames",
+    "origem": "mdt:MyDomainSettings",
+    "tipo": "propriedade"
+  },
+  {
+    "destino": "mdt:MyDomainSettings.useEdge",
+    "origem": "mdt:MyDomainSettings",
+    "tipo": "propriedade"
+  },
+  {
+    "destino": "mdt:MyDomainSettings.useEnhancedDomainsInSandbox",
+    "origem": "mdt:MyDomainSettings",
+    "tipo": "propriedade"
+  },
+  {
+    "destino": "mdt:MyDomainSettings.useStabilizedMyDomainHostnames",
+    "origem": "mdt:MyDomainSettings",
+    "tipo": "propriedade"
+  },
+  {
+    "destino": "mdt:MyDomainSettings.useStabilizedSandboxMyDomainHostnames",
+    "origem": "mdt:MyDomainSettings",
+    "tipo": "propriedade"
   },
   {
     "destino": "mdt:NamedCredential.allowMergeFieldsInBody",
@@ -7476,6 +7859,26 @@
     "tipo": "propriedade"
   },
   {
+    "destino": "mdx:Currency.active",
+    "origem": "mdx:Currency",
+    "tipo": "propriedade"
+  },
+  {
+    "destino": "mdx:Currency.conversionRate",
+    "origem": "mdx:Currency",
+    "tipo": "propriedade"
+  },
+  {
+    "destino": "mdx:Currency.isoCode",
+    "origem": "mdx:Currency",
+    "tipo": "propriedade"
+  },
+  {
+    "destino": "mdx:Currency.scale",
+    "origem": "mdx:Currency",
+    "tipo": "propriedade"
+  },
+  {
     "destino": "mdx:CustomHttpHeaders.description",
     "origem": "mdx:CustomHttpHeaders",
     "tipo": "propriedade"
@@ -7493,6 +7896,46 @@
   {
     "destino": "mdx:CustomHttpHeaders.isActive",
     "origem": "mdx:CustomHttpHeaders",
+    "tipo": "propriedade"
+  },
+  {
+    "destino": "mdx:CustomLabel.categories",
+    "origem": "mdx:CustomLabel",
+    "tipo": "propriedade"
+  },
+  {
+    "destino": "mdx:CustomLabel.fullName",
+    "origem": "mdx:CustomLabel",
+    "tipo": "propriedade"
+  },
+  {
+    "destino": "mdx:CustomLabel.language",
+    "origem": "mdx:CustomLabel",
+    "tipo": "propriedade"
+  },
+  {
+    "destino": "mdx:CustomLabel.protected",
+    "origem": "mdx:CustomLabel",
+    "tipo": "propriedade"
+  },
+  {
+    "destino": "mdx:CustomLabel.shortDescription",
+    "origem": "mdx:CustomLabel",
+    "tipo": "propriedade"
+  },
+  {
+    "destino": "mdx:CustomLabel.value",
+    "origem": "mdx:CustomLabel",
+    "tipo": "propriedade"
+  },
+  {
+    "destino": "mdx:CustomMetadataValue.field",
+    "origem": "mdx:CustomMetadataValue",
+    "tipo": "propriedade"
+  },
+  {
+    "destino": "mdx:CustomMetadataValue.value",
+    "origem": "mdx:CustomMetadataValue",
     "tipo": "propriedade"
   },
   {
@@ -7987,6 +8430,16 @@
   {
     "destino": "mdx:FindSimilarOppFilter.similarOpportunitiesMatchFields",
     "origem": "mdx:FindSimilarOppFilter",
+    "tipo": "propriedade"
+  },
+  {
+    "destino": "mdx:FiscalYearSettings.fiscalYearNameBasedOn",
+    "origem": "mdx:FiscalYearSettings",
+    "tipo": "propriedade"
+  },
+  {
+    "destino": "mdx:FiscalYearSettings.startMonth",
+    "origem": "mdx:FiscalYearSettings",
     "tipo": "propriedade"
   },
   {
@@ -17929,6 +18382,12 @@
     "tipo": "classificacao_principal"
   },
   {
+    "destino": "func:feriados",
+    "motivo": "Suspende regras de escalonamento e marcos de entitlement durante o feriado.",
+    "origem": "sub:atendimento",
+    "tipo": "classificacao_secundaria"
+  },
+  {
     "destino": "func:horario-comercial",
     "motivo": "Usado por casos, regras de escalonamento, milestones e processos de entitlement.",
     "origem": "sub:atendimento",
@@ -18120,6 +18579,11 @@
     "tipo": "classificacao_secundaria"
   },
   {
+    "destino": "func:my-domain",
+    "origem": "sub:dominios-e-urls",
+    "tipo": "classificacao_principal"
+  },
+  {
     "destino": "func:change-data-capture",
     "origem": "sub:eventos-e-mensageria",
     "tipo": "classificacao_principal"
@@ -18157,8 +18621,18 @@
     "tipo": "classificacao_secundaria"
   },
   {
+    "destino": "func:feriados",
+    "origem": "sub:horarios-comerciais-e-feriados",
+    "tipo": "classificacao_principal"
+  },
+  {
     "destino": "func:horario-comercial",
     "origem": "sub:horarios-comerciais-e-feriados",
+    "tipo": "classificacao_principal"
+  },
+  {
+    "destino": "func:informacoes-da-empresa",
+    "origem": "sub:identificacao-e-configuracao-da-org",
     "tipo": "classificacao_principal"
   },
   {
@@ -18196,6 +18670,31 @@
     "tipo": "classificacao_secundaria"
   },
   {
+    "destino": "func:custom-labels",
+    "origem": "sub:localizacao-idiomas-e-traducao",
+    "tipo": "classificacao_principal"
+  },
+  {
+    "destino": "func:idiomas-da-org",
+    "origem": "sub:localizacao-idiomas-e-traducao",
+    "tipo": "classificacao_principal"
+  },
+  {
+    "destino": "func:translation-workbench",
+    "origem": "sub:localizacao-idiomas-e-traducao",
+    "tipo": "classificacao_principal"
+  },
+  {
+    "destino": "func:ano-fiscal",
+    "origem": "sub:moedas-e-calendario-fiscal",
+    "tipo": "classificacao_principal"
+  },
+  {
+    "destino": "func:multiplas-moedas",
+    "origem": "sub:moedas-e-calendario-fiscal",
+    "tipo": "classificacao_principal"
+  },
+  {
     "destino": "func:objetos-customizados",
     "origem": "sub:objetos-e-entidades",
     "tipo": "classificacao_principal"
@@ -18203,6 +18702,11 @@
   {
     "destino": "func:path",
     "origem": "sub:orientacao-visual-e-path",
+    "tipo": "classificacao_principal"
+  },
+  {
+    "destino": "func:custom-metadata-types",
+    "origem": "sub:parametros-reutilizaveis",
     "tipo": "classificacao_principal"
   },
   {

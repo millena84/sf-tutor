@@ -4,26 +4,32 @@
   "sigla": "ORG-03",
   "classificacao": "cls:organizacao-e-configuracoes-base",
   "natureza": "curadoria_didatica",
-  "descricao": "Valores configuráveis reaproveitados por várias funcionalidades, como metadados e configurações personalizadas.",
+  "descricao": "Valores de configuração criados pela empresa e lidos por várias funcionalidades: custom metadata types, cujos registros são metadados, e custom settings, cujos registros são dados.",
   "escopo": "Entram os mecanismos que guardam valores configuráveis para serem lidos por várias funcionalidades, como metadados e configurações personalizadas.",
   "fora_do_escopo": "A definição de objetos e campos comuns fica em \"Objetos e entidades\" e \"Campos e tipos\".",
   "para_iniciantes": {
     "explicacao": "Guarda valores de configuração lidos por várias funcionalidades, como tabelas de regras ou mapeamentos. Há dois mecanismos: custom metadata types, cujos registros são metadados, e custom settings, cujos registros são dados.",
     "exemplo": "Uma tabela de faixas de desconto fica num custom metadata type e é lida por um flow e por uma regra de validação.",
+    "por_onde_comecar": [
+      "func:custom-metadata-types"
+    ],
     "evidencias": [
       {
         "fonte": "src:help-custom-settings"
       },
       {
-        "fonte": "src:mdapi-custommetadata"
+        "fonte": "src:help-cmdt-about"
       }
     ]
   },
   "encadeamento": {
-    "texto": "É configuração reaproveitada pela org inteira; o lado 'como código' das configurações gerais fica em 'Settings'.",
+    "texto": "É configuração reaproveitada pela org inteira. Textos reaproveitados e traduzíveis são custom labels, em 'Localização, idiomas e tradução'. O lado 'como código' das configurações gerais fica em 'Settings'.",
     "evidencias": [
       {
         "fonte": "src:help-custom-settings"
+      },
+      {
+        "fonte": "src:help-custom-labels"
       }
     ]
   },
@@ -49,17 +55,44 @@
       ]
     },
     {
+      "tipo": "seguranca",
+      "titulo": "Registro protegido",
+      "texto": "O campo protected marca o registro como protegido. Em pacote gerenciado, isso limita que código pode ler ou alterar o registro.",
+      "evidencias": [
+        {
+          "fonte": "src:mdapi-custommetadata-tipo"
+        }
+      ]
+    },
+    {
       "tipo": "implantacao",
       "titulo": "Registro como arquivo",
-      "texto": "Cada registro é um componente CustomMetadata, com sufixo .md na pasta customMetadata.",
+      "texto": "Cada registro é um componente CustomMetadata, com sufixo .md na pasta customMetadata. O nome começa com o nome do tipo, sem __mdt, e os valores vão em pares field e value.",
       "evidencias": [
         {
           "fonte": "src:mdapi-custommetadata"
+        },
+        {
+          "fonte": "src:mdapi-custommetadata-tipo"
         }
       ]
     }
   ],
-  "funcionalidades": [],
+  "funcionalidades": [
+    "func:custom-metadata-types"
+  ],
   "estado": "desconhecido",
-  "nota_estado": "Agrupamento proposto na especificação; fronteira ainda não cruzada com a documentação oficial."
+  "nota_estado": "Tema criado pelo projeto (00-especificacao-grafo.md), não é nomenclatura oficial da Salesforce. Cruzado em 2026-11-10 com áreas da documentação oficial listadas nas referências; a correspondência é parcial e o recorte continua sendo do projeto.",
+  "referencias_oficiais": [
+    {
+      "fonte": "src:help-cmdt-about",
+      "secao": "What are Custom Metadata Types?",
+      "nota": "Cobre parte do tema: custom metadata types."
+    },
+    {
+      "fonte": "src:help-custom-settings",
+      "secao": "Define Custom Settings",
+      "nota": "Cobre parte do tema: custom settings."
+    }
+  ]
 }

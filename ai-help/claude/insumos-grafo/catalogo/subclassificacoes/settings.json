@@ -4,33 +4,84 @@
   "sigla": "ORG-02",
   "classificacao": "cls:organizacao-e-configuracoes-base",
   "natureza": "curadoria_didatica",
-  "descricao": "Família de tipos de configuração da org (nomes terminados em Settings), cada um com seu próprio metadata type.",
+  "descricao": "A família de metadata types com nome terminado em Settings: cada um guarda um grupo de configurações da org num arquivo .settings e pode ser recuperado e implantado.",
   "escopo": "Entram os metadata types da família Settings (nomes terminados em Settings) quando o assunto principal deles é a configuração geral da org.",
   "fora_do_escopo": "Um Settings dedicado a um assunto com tema próprio (por exemplo, horário comercial ou Knowledge) é estudado nesse tema e só citado aqui.",
   "para_iniciantes": {
-    "explicacao": "Settings é uma família de metadata types com nomes terminados em Settings. Cada um guarda um grupo de configurações gerais da org, como as de horário comercial.",
-    "exemplo": "BusinessHoursSettings guarda configurações de horário comercial e pode ser recuperado e implantado como qualquer outro metadado.",
+    "explicacao": "Settings é uma família de metadata types com nomes terminados em Settings. Cada um guarda um grupo de configurações da org e vira um arquivo .settings na pasta settings.",
+    "exemplo": "CurrencySettings guarda a configuração de moedas no arquivo Currency.settings; LanguageSettings guarda a de idiomas em Language.settings.",
     "evidencias": [
       {
-        "fonte": "src:mdapi-businesshourssettings"
+        "fonte": "src:mdapi-settings"
       },
       {
-        "fonte": "src:mdapi-intro"
+        "fonte": "src:mdapi-currencysettings"
+      },
+      {
+        "fonte": "src:mdapi-languagesettings"
       }
     ]
   },
   "encadeamento": {
-    "texto": "Dentro de Organização, é o lado 'como código': várias configurações gerais existem como metadata types Settings, que podem ser recuperados e implantados. Um Settings de assunto com tema próprio é estudado nesse tema.",
+    "texto": "É o lado 'como código' do tema. Ano fiscal (CompanySettings), moedas (CurrencySettings), idiomas (LanguageSettings), My Domain (MyDomainSettings) e horários comerciais (BusinessHoursSettings) têm um Settings cada, estudado na seção do assunto. O efeito de ligar cada recurso fica em 'Habilitação de recursos'.",
     "evidencias": [
       {
-        "fonte": "src:mdapi-businesshourssettings"
+        "fonte": "src:mdapi-companysettings"
       },
       {
-        "fonte": "src:mdapi-intro"
+        "fonte": "src:mdapi-currencysettings"
+      },
+      {
+        "fonte": "src:mdapi-languagesettings"
+      },
+      {
+        "fonte": "src:mdapi-mydomainsettings"
+      },
+      {
+        "fonte": "src:mdapi-businesshourssettings"
       }
     ]
   },
   "avancado": [
+    {
+      "tipo": "implantacao",
+      "titulo": "Um nome só no package.xml",
+      "texto": "No package.xml, todos os tipos da família são pedidos pelo nome Settings. O curinga * não vale para um setting individual: só serve para recuperar todos de uma vez.",
+      "evidencias": [
+        {
+          "fonte": "src:mdapi-settings"
+        },
+        {
+          "fonte": "src:mdapi-companysettings"
+        }
+      ]
+    },
+    {
+      "tipo": "atencao",
+      "titulo": "Nem todo campo pode ser implantado",
+      "texto": "Alguns campos são somente leitura, como myDomainName e myDomainSuffix em MyDomainSettings. Outros ligam algo sem volta: implantar enableMultiCurrency como true liga múltiplas moedas, e implantar false numa org que já as tem devolve erro.",
+      "evidencias": [
+        {
+          "fonte": "src:mdapi-mydomainsettings"
+        },
+        {
+          "fonte": "src:mdapi-currencysettings"
+        }
+      ]
+    },
+    {
+      "tipo": "atencao",
+      "titulo": "O padrão depende de quando a org foi criada",
+      "texto": "Alguns defaults mudam conforme a idade da org. enableICULocaleDateFormat nasce true em orgs criadas na API 47.0 ou depois, e isFirstPartyCookieUseRequired nasce true em orgs criadas a partir do Summer '24. Dois ambientes podem recuperar valores diferentes sem que ninguém tenha mexido.",
+      "evidencias": [
+        {
+          "fonte": "src:mdapi-languagesettings"
+        },
+        {
+          "fonte": "src:mdapi-mydomainsettings"
+        }
+      ]
+    },
     {
       "tipo": "implantacao",
       "titulo": "Confira o suporte de cada Settings",
@@ -44,5 +95,17 @@
   ],
   "funcionalidades": [],
   "estado": "desconhecido",
-  "nota_estado": "Agrupamento proposto na especificação; fronteira ainda não cruzada com a documentação oficial."
+  "nota_estado": "Tema criado pelo projeto (00-especificacao-grafo.md), não é nomenclatura oficial da Salesforce. Cruzado em 2026-11-10 com áreas da documentação oficial listadas nas referências; a correspondência é parcial e o recorte continua sendo do projeto.",
+  "referencias_oficiais": [
+    {
+      "fonte": "src:mdapi-settings",
+      "secao": "Settings",
+      "nota": "Cobre o tema: a família Settings na Metadata API."
+    },
+    {
+      "fonte": "src:mdapi-companysettings",
+      "secao": "CompanySettings",
+      "nota": "Cobre parte do tema: um dos tipos da família."
+    }
+  ]
 }
