@@ -1,4 +1,87 @@
 {
+  "avancado": [
+    {
+      "evidencias": [
+        {
+          "fonte": "src:help-duplicate-prevention"
+        },
+        {
+          "fonte": "src:help-duplicate-rules-customize"
+        },
+        {
+          "fonte": "src:help-duplicate-rules-things-to-know"
+        }
+      ],
+      "texto": "As duplicate rules padrão vêm ativas para business accounts, contatos e leads; para person accounts, é preciso ativá-las. A ação padrão na criação é permitir com alerta e reportar. Com a opção Report, o registro e seus duplicados entram num duplicate record set, até 100 duplicados por matching rule executada.",
+      "tipo": "decisao",
+      "titulo": "Avisar, bloquear ou reportar"
+    },
+    {
+      "evidencias": [
+        {
+          "fonte": "src:help-duplicate-rules-things-to-know"
+        },
+        {
+          "fonte": "src:help-matching-rules-considerations"
+        },
+        {
+          "fonte": "src:help-matching-rules"
+        }
+      ],
+      "texto": "Até cinco duplicate rules ativas por objeto, cada uma com até três matching rules. Matching rules: até cinco ativas por objeto, 25 ativas no total e 100 no total, com um único campo de lookup por regra. As matching rules padrão não podem ser editadas. Valores de global picklist não são suportados em duplicate rules.",
+      "tipo": "limite",
+      "titulo": "Quantas regras"
+    },
+    {
+      "evidencias": [
+        {
+          "fonte": "src:help-duplicate-rules-customize"
+        },
+        {
+          "fonte": "src:help-duplicate-rules-classic-view"
+        }
+      ],
+      "texto": "Para ver os duplicados detectados, o usuário precisa de Read no objeto da regra, e a contagem mostra só os registros a que ele tem acesso. Com Bypass sharing rule, a comparação inclui todos os registros, e a mensagem só indica que há duplicados.",
+      "tipo": "seguranca",
+      "titulo": "O que o usuário enxerga"
+    },
+    {
+      "evidencias": [
+        {
+          "fonte": "src:help-duplicate-web-to-lead"
+        },
+        {
+          "fonte": "src:help-matching-rule-ineffective"
+        }
+      ],
+      "texto": "Em Web-to-Lead, um envio que bate com o critério é sempre bloqueado, mesmo com a regra em permitir com alerta. Uma matching rule considerada ineficaz não pode ser ativada: o limiar padrão é de 2% de match keys repetidas.",
+      "tipo": "atencao",
+      "titulo": "Comportamentos que surpreendem"
+    },
+    {
+      "evidencias": [
+        {
+          "fonte": "src:help-duplicate-jobs-considerations"
+        },
+        {
+          "fonte": "src:soap-findduplicates"
+        }
+      ],
+      "texto": "Duplicate jobs rodam também em objetos customizados, mas sem comparar e mesclar. Rodar de novo com o mesmo objeto e a mesma matching rule sobrescreve o resultado anterior, e 1.000.000 de duplicados acumulados bloqueia novos jobs. Pela SOAP API, findDuplicates() aplica as duplicate rules a até 50 registros por chamada.",
+      "tipo": "escala",
+      "titulo": "Limpeza em massa e API"
+    },
+    {
+      "evidencias": [
+        {
+          "fonte": "src:sdr-metadata-support"
+        }
+      ],
+      "texto": "DuplicateRule e MatchingRules constam da lista oficial de metadata types da versão 68; as propriedades deles ainda não estão detalhadas neste catálogo.",
+      "tipo": "implantacao",
+      "titulo": "Como metadado"
+    }
+  ],
   "classificacao": "cls:qualidade-governanca-e-ciclo-de-vida-dos-dados",
   "derivado": {
     "dependencias": [],
@@ -8,17 +91,17 @@
     "objetos_api": [],
     "temas_sem_funcionalidade": []
   },
-  "descricao": "Detecção e tratamento de registros duplicados.",
+  "descricao": "Como a org reconhece registros repetidos e o que faz com eles: matching rules definem a comparação, duplicate rules definem o alerta ou o bloqueio, e duplicate jobs procuram duplicados que já existem.",
   "encadeamento": {
     "evidencias": [
       {
-        "fonte": "src:help-produtos-sales"
+        "fonte": "src:help-duplicate-management-customize"
       },
       {
         "fonte": "src:mdapi-validationrule"
       }
     ],
-    "texto": "Atua na criação e na importação de registros; a validação atua no valor de cada campo."
+    "texto": "Atua quando um registro é criado ou editado; a validação, em 'Validação', olha o valor de cada campo. Para limpar duplicados que já existem, duplicate jobs usam as mesmas matching rules."
   },
   "escopo": "Entram a detecção e o tratamento de registros duplicados.",
   "estado": "desconhecido",
@@ -27,15 +110,30 @@
   "id": "sub:duplicidade-e-correspondencia",
   "natureza": "curadoria_didatica",
   "nome": "Duplicidade e correspondência",
-  "nota_estado": "Agrupamento proposto na especificação; fronteira ainda não cruzada com a documentação oficial.",
+  "nota_estado": "Tema criado pelo projeto (00-especificacao-grafo.md), não é nomenclatura oficial da Salesforce. Cruzado em 2026-11-10 com áreas da documentação oficial listadas nas referências; a correspondência é parcial e o recorte continua sendo do projeto.",
   "para_iniciantes": {
     "evidencias": [
       {
-        "fonte": "src:help-produtos-sales"
+        "fonte": "src:help-duplicate-management-customize"
+      },
+      {
+        "fonte": "src:help-duplicate-detection-process"
       }
     ],
-    "exemplo": "Ao tentar cadastrar um contato que já existe, a pessoa é avisada antes de criar outro.",
-    "explicacao": "Trata registros duplicados: ajuda a evitar que o mesmo cliente ou contato seja cadastrado duas vezes, inclusive na importação de dados de terceiros."
+    "exemplo": "Ao cadastrar um lead com o mesmo e-mail de um contato existente, a vendedora vê o alerta com o possível duplicado antes de salvar.",
+    "explicacao": "Duas regras trabalham juntas contra registros repetidos. A matching rule define como reconhecer um duplicado (quais campos comparar e com que rigor). A duplicate rule define o que fazer quando ele aparece: avisar, bloquear ou só registrar para relatório."
   },
+  "referencias_oficiais": [
+    {
+      "fonte": "src:help-duplicate-management-customize",
+      "nota": "Cobre o tema: gestão de duplicados com matching rules e duplicate rules.",
+      "secao": "Customize Duplicate Management"
+    },
+    {
+      "fonte": "src:help-duplicate-jobs-considerations",
+      "nota": "Cobre parte do tema: duplicate jobs.",
+      "secao": "Things to Know About Duplicate Jobs"
+    }
+  ],
   "sigla": "QLD-02"
 }

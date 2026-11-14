@@ -158,6 +158,43 @@ TEMAS = {
             "Define an External Data Source for Salesforce Connect—OData 2.0 or 4.0 Adapter"),
          ev("src:help-field-audit-trail", "Cobre parte do tema: exemplo de big object (FieldHistoryArchive).", "Field Audit Trail")],
     ),
+    # ------------------------------------------------------------------ Qualidade, governança e ciclo de vida dos dados
+    "sub:validacao": (
+        "Regras que barram, no momento de salvar, um registro cujos valores não atendem ao que o negócio exige.",
+        [ev("src:help-validation-rules", "Cobre o tema: regras de validação.", "Validation Rules"),
+         ev("src:mdapi-validationrule", "Cobre parte do tema: regra de validação como metadado.", "ValidationRule")],
+    ),
+    "sub:duplicidade-e-correspondencia": (
+        "Como a org reconhece registros repetidos e o que faz com eles: matching rules definem a comparação, duplicate rules definem "
+        "o alerta ou o bloqueio, e duplicate jobs procuram duplicados que já existem.",
+        [ev("src:help-duplicate-management-customize", "Cobre o tema: gestão de duplicados com matching rules e duplicate rules.",
+            "Customize Duplicate Management"),
+         ev("src:help-duplicate-jobs-considerations", "Cobre parte do tema: duplicate jobs.", "Things to Know About Duplicate Jobs")],
+    ),
+    "sub:classificacao-e-sensibilidade": (
+        "A marcação de cada campo com o nível de sensibilidade, a categoria de conformidade, o responsável e o uso, para orientar "
+        "decisões de acesso e de conformidade.",
+        [ev("src:help-data-classification-intro", "Cobre o tema: classificação de dados sensíveis.",
+            "Classify Sensitive Data to Support Data Management Policies")],
+    ),
+    "sub:retencao-arquivamento-e-exclusao": (
+        "Quanto tempo os dados ficam na org e o que acontece quando são apagados: Recycle Bin, exclusão definitiva e o prazo de guarda "
+        "do histórico de campos.",
+        [ev("src:help-recycle-bin-lex", "Cobre parte do tema: Recycle Bin.", "Manage the Recycle Bin in Lightning Experience"),
+         ev("src:help-delete-unwanted-data", "Cobre parte do tema: graus de exclusão de dados.", "Delete Unwanted Data in a Salesforce Organization"),
+         ev("src:help-field-audit-trail", "Cobre parte do tema: retenção do histórico de campos.", "Field Audit Trail")],
+    ),
+    "sub:rastreabilidade-e-historico": (
+        "O registro de quem alterou cada campo rastreado, o valor anterior, o novo e a data, guardado num objeto de histórico ao lado "
+        "do registro.",
+        [ev("src:help-field-history-tracking", "Cobre o tema: histórico de campos.", "Field History Tracking Overview")],
+    ),
+    "sub:consentimento-e-privacidade": (
+        "O registro do que cada pessoa autorizou sobre os próprios dados: se aceita contato, por qual canal, em qual endereço e para "
+        "qual finalidade.",
+        [ev("src:help-consent-data-model", "Cobre o tema: modelo de dados de consentimento.", "Understand the Salesforce Consent Data Model"),
+         ev("src:help-consent-objects", "Cobre parte do tema: objetos de consentimento.", "Consent Management Objects")],
+    ),
 }
 
 

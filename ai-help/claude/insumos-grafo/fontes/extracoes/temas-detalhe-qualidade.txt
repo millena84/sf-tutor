@@ -1,0 +1,64 @@
+Issue #34, item 3 (detalhamento dos temas principais): Qualidade, governança e ciclo de vida dos dados. Leitura pelos
+resultados de busca restritos a help.salesforce.com e developer.salesforce.com, em 2026-11-14 (método
+leitura_resultado_busca: páginas não abertas por inteiro). Resumo em português; nomes de recursos, permissões e telas no
+original.
+
+-- Duplicidade e correspondência
+[src:help-duplicate-management-customize] Customize Duplicate Management (https://help.salesforce.com/s/articleView?id=sales.duplicate_prevention_map_of_tasks.htm&type=5)
+  Duas peças: a matching rule define como os duplicados são identificados (em duplicate rules e duplicate jobs); a duplicate
+  rule define o que acontece quando alguém vê um registro com duplicados ou começa a criar um. Há regras padrão das duas para
+  contas (business e person), contatos e leads. Criar, editar, ativar: Customize Application; ver: View Setup and Configuration.
+  Edições Essentials, Professional, Enterprise, Performance, Unlimited e Developer.
+[src:help-duplicate-detection-process] Duplicate Detection and Handling Process (https://help.salesforce.com/s/articleView?id=sf.duplicate_detection_and_handling.htm&type=5)
+  A matching rule compara registros do mesmo objeto ou de um outro objeto (leads que duplicam contatos, por exemplo). Ao
+  ativar, match keys são aplicadas aos registros existentes, e a regra só procura duplicados entre registros com a mesma
+  match key. Depois a duplicate rule avisa o usuário e lista os possíveis duplicados.
+[src:help-duplicate-rules-things-to-know] Things to Know About Duplicate Rules (https://help.salesforce.com/s/articleView?id=sales.duplicate_rules_overview.htm&type=5)
+  Até cinco duplicate rules ativas por objeto. Até três matching rules em cada duplicate rule, uma por objeto; com várias
+  duplicate rules, até cinco matching rules ativas por objeto. Com a opção Report, o registro salvo e seus duplicados vão
+  para um duplicate record set; até 100 duplicados por matching rule executada. Valores de global picklist não são
+  suportados em duplicate rules.
+[src:help-duplicate-rules-customize] Customize Duplicate Rules (https://help.salesforce.com/s/articleView?id=sales.duplicate_rules_create.htm&type=5)
+  Ações padrão de uma regra padrão: na criação, permitir, mostrar alerta e reportar; o texto do alerta é editável. Para ver
+  os duplicados detectados, o usuário precisa de Read no objeto da regra. A ativação só funciona se todas as matching rules
+  associadas estiverem ativas. Com mais de uma duplicate rule ativa no objeto, a ordem de processamento pode ser ajustada.
+[src:help-duplicate-prevention] Stop Users from Creating Duplicate Records (https://help.salesforce.com/s/articleView?id=sf.duplicate_prevention.htm&type=5)
+  As duplicate rules padrão vêm ativas para business accounts, contatos e leads. Para person accounts, é preciso habilitar
+  person accounts e ativar as regras no Setup. Conforme Action on Create, a regra alerta e permite ou bloqueia; registros a
+  que o usuário não tem acesso não são mostrados.
+[src:help-matching-rules] Matching Rules (https://help.salesforce.com/s/articleView?id=sales.matching_rule_map_of_reference.htm&type=5)
+  As matching rules padrão não podem ser editadas; dá para criar matching rules customizadas.
+[src:help-matching-rules-considerations] Things to Know Before You Customize Matching Rules (https://help.salesforce.com/s/articleView?id=sf.matching_rules_considerations.htm&type=5)
+  Limites: até cinco matching rules ativadas ou desativadas por vez; até cinco ativas por objeto; até 25 ativas no total; até
+  100 no total (ativas e inativas); um único campo de lookup por matching rule.
+[src:help-duplicate-jobs-considerations] Things to Know About Duplicate Jobs (https://help.salesforce.com/s/articleView?id=sf.duplicate_jobs_considerations.htm&type=5)
+  Duplicate jobs rodam em objetos customizados, mas sem comparar e mesclar. Um job com o mesmo objeto e a mesma matching rule
+  de um job concluído sobrescreve o anterior (com aviso). Editar a matching rule e rodar de novo apaga o resultado anterior
+  sem aviso. Com 1.000.000 de duplicados somados nos jobs concluídos, novos jobs são bloqueados até apagar resultados.
+[src:help-duplicate-rules-classic-view] Show Duplicate Records in Salesforce Classic (https://help.salesforce.com/s/articleView?id=sf.duplicate_rules_what_my_users_see_classic.htm&type=5)
+  O número de duplicados mostrado conta só os registros a que o usuário tem acesso. Com a opção Bypass sharing rule, a
+  comparação inclui todos os registros e a mensagem só indica que há duplicados. Se a regra permite, aparece o botão Save
+  (Ignore Alert); se bloqueia, o registro não é salvo.
+[src:help-duplicate-web-to-lead] Salesforce Duplicate Matching Rules Blocking Web-to-Lead Submissions (KB) (https://help.salesforce.com/s/articleView?id=000336839&type=1)
+  Em Web-to-Lead, um envio que bate com o critério de duplicidade é sempre bloqueado, mesmo que a regra esteja em Allow com
+  alerta.
+[src:help-matching-rule-ineffective] Unable to Activate Matching Rule to Identify Duplicate Records in a Salesforce Organization (KB) (https://help.salesforce.com/s/articleView?id=000383122&type=1)
+  Desde o Summer '17, uma matching rule considerada ineficaz não pode ser ativada: quando os conjuntos de 100 ou mais match
+  keys idênticas somam mais de 2% do total de match keys (limiar padrão).
+[src:soap-findduplicates] findDuplicates() (SOAP API Developer Guide) (https://developer.salesforce.com/docs/platform/api/guide/sforce-api-calls-findduplicates.html)
+  A chamada aplica as duplicate rules do objeto aos valores de cada sObject enviado; todos do mesmo tipo, e o array de
+  entrada aceita até 50 elementos.
+
+-- Validação
+[src:help-validation-rules] Validation Rules (https://help.salesforce.com/s/articleView?id=fields_about_field_validation.htm&type=5)
+  Ao salvar, todas as regras de validação são verificadas; com dado inválido, a mensagem de erro aparece e o registro não é
+  salvo. Não se recomenda usar em regra de validação um campo numérico gerenciado pelo Einstein Prediction Builder.
+[src:help-validation-considerations] Validation Rule Considerations (https://help.salesforce.com/s/articleView?id=sf.fields_validation_considerations.htm&type=5)
+  Ordem de processamento das regras: validation rules, assignment rules, auto-response rules, workflow rules (ações
+  imediatas), escalation rules. Quando uma regra de validação falha, a Salesforce continua verificando as demais.
+[src:help-validation-tips] Tips for Writing Validation Rules (https://help.salesforce.com/s/articleView?id=platform.fields_validation_rules_tips.htm&type=5)
+  Considerar tudo o que pode fazer o registro falhar: assignment rules, field updates, segurança de campo, campos ocultos.
+  Testar antes de ativar: regras conflitantes no mesmo campo impedem salvar; o debug log ajuda. Evitar os merge fields
+  IsClosed e IsWon de Opportunity; usar ISPICKVAL no Stage. RecordType.Id permite aplicar a regra por tipo de registro.
+[src:help-rtf-considerations] Record-Triggered Flow Considerations (fonte já registrada; trecho lido de novo em 2026-11-14)
+  Record-triggered flows executam as regras de validação customizadas.

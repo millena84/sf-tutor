@@ -202,24 +202,71 @@ CONTEUDO_CLS = {
     "cls:qualidade-governanca-e-ciclo-de-vida-dos-dados": {
         "para_iniciantes": ini(
             "Reúne o que protege a qualidade dos dados ao longo do tempo: regras que impedem gravar dados errados, detecção de "
-            "duplicados, marcação de dados sensíveis, retenção e histórico de alterações.",
+            "duplicados, marcação de dados sensíveis, retenção, histórico de alterações e registro do consentimento das pessoas.",
             "Uma regra de validação impede salvar um contrato com valor negativo; a detecção de duplicados avisa quando alguém tenta "
             "criar um registro que já existe.",
-            E("src:mdapi-validationrule", "src:help-produtos-sales", "src:help-produtos-platform"),
-            comece=["func:regras-de-validacao"]),
+            E("src:mdapi-validationrule", "src:help-duplicate-management-customize", "src:help-data-classification-intro",
+              "src:help-recycle-bin-lex", "src:help-field-history-tracking", "src:help-consent-data-model"),
+            comece=["func:regras-de-validacao"],
+            analogia=("É como cuidar de um arquivo de fichas: conferir a ficha antes de guardar, não guardar a mesma duas vezes, "
+                      "etiquetar o que é confidencial e decidir quando descartar.",
+                      "A etiqueta não tranca a gaveta: classificar um campo como sensível não restringe o acesso a ele. Quem "
+                      "restringe é a segurança de campo e o compartilhamento.")),
         "encadeamento": enc(
-            "A validação atua no momento da gravação. Duplicidade e correspondência atuam na criação e na importação de registros. "
-            "Classificação, retenção e consentimento tratam do ciclo de vida e da privacidade, e a rastreabilidade guarda o histórico de "
-            "mudanças. No catálogo, só a validação já tem funcionalidade cadastrada.",
-            E("src:mdapi-validationrule", "src:help-produtos-sales", "src:help-produtos-platform", "src:security-guide")),
+            "Roteiro pelas seis seções do tema. 1) 'Validação': barra o dado errado no momento de salvar. 2) 'Duplicidade e "
+            "correspondência': reconhece e trata registros repetidos, na criação e na edição. 3) 'Classificação e sensibilidade': marca "
+            "o que é sensível. 4) 'Retenção, arquivamento e exclusão': quanto tempo o dado fica e o que acontece ao apagar. "
+            "5) 'Rastreabilidade e histórico': quem mudou o quê e quando. 6) 'Consentimento e privacidade': o que cada pessoa autorizou. "
+            "No catálogo, só a validação já tem funcionalidade cadastrada.",
+            E("src:mdapi-validationrule", "src:help-duplicate-management-customize", "src:help-data-classification-intro",
+              "src:help-recycle-bin-lex", "src:help-field-history-tracking", "src:help-consent-data-model")),
         "avancado": [
+            # 1) Validação
             av("decisao", "Validação, automação ou segurança",
                "A regra de validação bloqueia a gravação quando uma condição de erro é verdadeira; ela não esconde o campo nem corrige o "
                "valor. Para restringir quem edita, use a segurança de campo; para preencher ou corrigir valores, use automação.",
                E("src:mdapi-validationrule", "src:security-fls", "src:mdapi-flow")),
+            av("implantacao", "Onde a validação entra na gravação",
+               "A ordem de processamento é: validation rules, assignment rules, auto-response rules, workflow rules com ações imediatas "
+               "e escalation rules. Record-triggered flows também executam as regras de validação customizadas. Regras conflitantes no "
+               "mesmo campo impedem salvar, então vale testar antes de ativar.",
+               E("src:help-validation-considerations", "src:help-rtf-considerations", "src:help-validation-tips")),
+            # 2) Duplicidade e correspondência
+            av("decisao", "Duas regras contra duplicados",
+               "A matching rule define como reconhecer um duplicado; a duplicate rule define o que fazer: alertar, bloquear ou reportar. "
+               "As regras padrão vêm ativas para business accounts, contatos e leads. Cada objeto aceita até cinco duplicate rules ativas.",
+               E("src:help-duplicate-management-customize", "src:help-duplicate-prevention", "src:help-duplicate-rules-things-to-know")),
+            av("atencao", "Duplicados e acesso",
+               "A contagem de duplicados mostra só os registros a que o usuário tem acesso, a menos que a regra use Bypass sharing rule. "
+               "Em Web-to-Lead, um envio que bate com o critério é sempre bloqueado, mesmo com a regra em permitir com alerta.",
+               E("src:help-duplicate-rules-classic-view", "src:help-duplicate-web-to-lead")),
+            # 3) Classificação e sensibilidade
+            av("seguranca", "Classificar não é proteger",
+               "Data Classification registra no campo o nível de sensibilidade, a categoria de conformidade, o responsável e o uso. É "
+               "informação para orientar decisões: marcar Field Usage como Hidden não esconde o campo. Os valores ficam no CustomField "
+               "(securityClassification, complianceGroup) e exigem Customize Application ou Modify Data Classification.",
+               E("src:help-data-classification-intro", "src:help-data-classification-fields", "src:mdapi-customfield")),
+            # 4) Retenção, arquivamento e exclusão
+            av("decisao", "Três graus de exclusão",
+               "A exclusão comum manda o registro para a Recycle Bin, onde fica 15 dias. Esvaziar a Recycle Bin ou usar hard delete pela "
+               "API manda para a fila de purga. Remover da tabela do banco é um physical delete, pedido ao Support.",
+               E("src:help-delete-unwanted-data", "src:help-recycle-bin-lex")),
+            # 5) Rastreabilidade e histórico
+            av("limite", "Histórico de campos",
+               "Sem Field Audit Trail, o histórico cobre até 20 campos por objeto e fica até 18 meses (24 pela API). Com Field Audit "
+               "Trail, vai a 200 campos e fica até ser excluído, no big object FieldHistoryArchive. Excluir o registro apaga o histórico "
+               "relacionado, mas não a cópia já arquivada.", E("src:help-field-history-tracking", "src:help-field-audit-trail")),
             av("atencao", "Histórico de campos também é auditoria",
                "O Security Guide trata o histórico de campos dentro de auditoria e monitoramento, junto com logins e alterações de "
                "configuração. Parte da rastreabilidade se cruza com o tema de observabilidade.", E("src:security-guide")),
+            # 6) Consentimento e privacidade
+            av("decisao", "Consentimento em quatro níveis",
+               "O modelo registra consentimento no nível global (Individual), por canal (ContactPointTypeConsent), por ponto de contato "
+               "(ContactPointConsent) e por finalidade (DataUsePurpose). Os objetos só guardam as preferências: cumprir cada uma é "
+               "processo que a empresa implementa.", E("src:help-consent-data-model", "src:help-consent-objects")),
+            av("seguranca", "Gravar consentimento pela API",
+               "A Consent Write API grava consentimento na org inteira, não só nos registros que o usuário vê, e exige ModifyAllData ou "
+               "ConsentApiUpdate.", E("src:rest-consent-write")),
         ],
     },
     "cls:automacao-de-processos-e-regras-de-negocio": {
