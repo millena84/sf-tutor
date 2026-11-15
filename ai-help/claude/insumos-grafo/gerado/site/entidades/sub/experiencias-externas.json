@@ -48,18 +48,63 @@
       "texto": "O usuário externo nasce do contato (Enable Customer User ou Enable Partner User), e a conta precisa ter dono com papel. Subir de licença remove sharing sets, permission sets e PSLs do usuário; descer exige desabilitar e reabilitar o contato.",
       "tipo": "implantacao",
       "titulo": "Criar e trocar usuários"
+    },
+    {
+      "evidencias": [
+        {
+          "fonte": "src:help-digital-experiences-enable"
+        },
+        {
+          "fonte": "src:help-experience-org-setup"
+        }
+      ],
+      "texto": "A ativação é feita em Digital Experiences > Settings e não pode ser desfeita. O domínio dos sites usa o My Domain da org. Outras nuvens também exigem essa ativação, como Commerce Cloud, Financial Services Cloud e Health Cloud.",
+      "tipo": "atencao",
+      "titulo": "Ligar digital experiences não tem volta"
+    },
+    {
+      "evidencias": [
+        {
+          "fonte": "src:mdapi-communitiessettings"
+        }
+      ],
+      "texto": "CommunitiesSettings leva as opções gerais dos sites: ativação (enableNetworksEnabled), Experience Workspaces, usuários parceiros (enableEnablePRM), moderação e opções de guest user. Alguns padrões dependem de quando a org foi criada.",
+      "tipo": "implantacao",
+      "titulo": "Como metadado"
     }
   ],
   "classificacao": "cls:processos-de-negocio-especificos-de-produto",
   "derivado": {
     "dependencias": [],
-    "funcionalidades": [],
-    "metadata_types": [],
+    "funcionalidades": [
+      {
+        "alertas": [
+          "Depois de ligar digital experiences, não dá para desligar."
+        ],
+        "exemplo": "A empresa liga digital experiences e passa a ter um domínio de sites no formato MyDomainName.my.site.com, onde cria o portal de clientes.",
+        "id": "func:digital-experiences",
+        "pre_requisitos": [
+          "Customize Application (para ligar digital experiences)."
+        ],
+        "principal": true
+      }
+    ],
+    "metadata_types": [
+      {
+        "estrutura": "completa",
+        "funcionalidades": [
+          "func:digital-experiences"
+        ],
+        "id": "mdt:CommunitiesSettings",
+        "nota_suporte": null,
+        "suporte_cli": "suportado"
+      }
+    ],
     "nota": "Calculado pelo gerador a partir do catálogo; não é cadastro.",
     "objetos_api": [],
     "temas_sem_funcionalidade": []
   },
-  "descricao": "Capacidades de sites e portais para públicos externos.",
+  "descricao": "O acesso de clientes e parceiros por sites Experience Cloud: a ativação de digital experiences, as licenças de usuário externo e o que cada uma permite ver e fazer.",
   "encadeamento": {
     "evidencias": [
       {
@@ -74,11 +119,13 @@
   "escopo": "Entram as capacidades de produto voltadas a públicos externos, como clientes e parceiros.",
   "estado": "desconhecido",
   "fora_do_escopo": "Sites e portais vistos como interface ficam em \"Experiências web/portais e mobile\".",
-  "funcionalidades": [],
+  "funcionalidades": [
+    "func:digital-experiences"
+  ],
   "id": "sub:experiencias-externas",
   "natureza": "curadoria_didatica",
   "nome": "Experiências externas",
-  "nota_estado": "Agrupamento proposto na especificação; fronteira ainda não cruzada com a documentação oficial.",
+  "nota_estado": "Tema criado pelo projeto (00-especificacao-grafo.md), não é nomenclatura oficial da Salesforce. Cruzado em 2026-11-10 com áreas da documentação oficial listadas nas referências; a correspondência é parcial e o recorte continua sendo do projeto.",
   "para_iniciantes": {
     "evidencias": [
       {
@@ -86,7 +133,22 @@
       }
     ],
     "exemplo": "Clientes com Customer Community abrem casos no portal; revendedores com Partner Community registram oportunidades.",
-    "explicacao": "Clientes e parceiros acessam a org por sites Experience Cloud usando licenças próprias para usuários externos. A licença escolhida define o que a pessoa pode ver e fazer: de abrir casos e ler artigos até trabalhar leads e oportunidades como parceiro."
+    "explicacao": "Clientes e parceiros acessam a org por sites Experience Cloud usando licenças próprias para usuários externos. A licença escolhida define o que a pessoa pode ver e fazer: de abrir casos e ler artigos até trabalhar leads e oportunidades como parceiro.",
+    "por_onde_comecar": [
+      "func:digital-experiences"
+    ]
   },
+  "referencias_oficiais": [
+    {
+      "fonte": "src:help-experience-cloud-licenses",
+      "nota": "Cobre parte do tema: licenças de usuário externo.",
+      "secao": "Experience Cloud User Licenses"
+    },
+    {
+      "fonte": "src:help-digital-experiences-enable",
+      "nota": "Cobre parte do tema: ativação dos sites.",
+      "secao": "Enable Digital Experiences"
+    }
+  ],
   "sigla": "NEG-05"
 }

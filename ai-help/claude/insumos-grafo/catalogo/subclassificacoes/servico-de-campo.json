@@ -4,12 +4,15 @@
   "sigla": "NEG-03",
   "classificacao": "cls:processos-de-negocio-especificos-de-produto",
   "natureza": "curadoria_didatica",
-  "descricao": "Capacidades de serviço de campo.",
+  "descricao": "Field Service: o trabalho feito no local do cliente, com work orders, visitas agendadas (service appointments), técnicos (service resources) e territórios de serviço.",
   "escopo": "Entram as capacidades próprias de serviço de campo.",
   "fora_do_escopo": "O atendimento por casos fica em \"Atendimento\".",
   "para_iniciantes": {
     "explicacao": "Field Service (hoje Agentforce Field Service and Operations) organiza o trabalho feito na casa ou no local do cliente: o que precisa ser feito (work order), a visita marcada (service appointment), quem vai (service resource) e onde essa pessoa atua (service territory).",
     "exemplo": "Um cliente pede conserto do ar-condicionado; nasce uma work order, que gera uma service appointment para quinta à tarde, atribuída ao técnico da região.",
+    "por_onde_comecar": [
+      "func:field-service"
+    ],
     "evidencias": [
       {
         "fonte": "src:help-field-service-overview"
@@ -79,9 +82,46 @@
           "fonte": "src:dev-field-service-core-data-model"
         }
       ]
+    },
+    {
+      "tipo": "atencao",
+      "titulo": "O que vem ligado ao habilitar",
+      "texto": "Field Service é ligado em Field Service Settings. Sem a licença complementar, a opção de work orders vem ligada por padrão; se a licença foi removida ou expirou, vem desligada. O objeto Work Order não pode ser desligado enquanto Field Service está ligado.",
+      "evidencias": [
+        {
+          "fonte": "src:help-field-service-enable"
+        },
+        {
+          "fonte": "src:mdapi-fieldservicesettings"
+        }
+      ]
+    },
+    {
+      "tipo": "implantacao",
+      "titulo": "Como metadado",
+      "texto": "FieldServiceSettings leva a ativação (fieldServiceOrgPref, enableWorkOrders), os status padrão das visitas, o compartilhamento com os técnicos atribuídos (doesShareSaWithAr) e opções do app móvel. A página do tipo não informa o nome-base do arquivo, e 14 dos 54 campos estão sem descrição.",
+      "evidencias": [
+        {
+          "fonte": "src:mdapi-fieldservicesettings"
+        }
+      ]
     }
   ],
-  "funcionalidades": [],
+  "funcionalidades": [
+    "func:field-service"
+  ],
   "estado": "desconhecido",
-  "nota_estado": "Agrupamento proposto na especificação; fronteira ainda não cruzada com a documentação oficial."
+  "nota_estado": "Tema criado pelo projeto (00-especificacao-grafo.md), não é nomenclatura oficial da Salesforce. Cruzado em 2026-11-10 com áreas da documentação oficial listadas nas referências; a correspondência é parcial e o recorte continua sendo do projeto.",
+  "referencias_oficiais": [
+    {
+      "fonte": "src:help-field-service-overview",
+      "secao": "Agentforce Field Service and Operations",
+      "nota": "Cobre o tema: visão geral do Field Service."
+    },
+    {
+      "fonte": "src:help-field-service-enable",
+      "secao": "Enable Field Service",
+      "nota": "Cobre parte do tema: ativação."
+    }
+  ]
 }

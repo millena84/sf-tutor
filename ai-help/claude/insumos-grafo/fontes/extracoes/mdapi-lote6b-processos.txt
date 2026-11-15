@@ -1,0 +1,150 @@
+fonte: páginas da Metadata API (lote 6b, tema Processos de negócio específicos de produto) | URL base: https://developer.salesforce.com/docs/platform/api-metadata/references/meta-types/metadata-<tipo em minúsculas>.html
+obtido em 2026-11-14 via WebFetch; método: extração documental assistida por IA; descrições parafraseadas em português.
+alcance da leitura: caracteres 0 a 100000 de cada página (o artigo fica nesse trecho; o restante é índice de navegação, conferido no lote 6a em
+  metadata-mydomainsettings.html). versão: sem versão na URL; páginas da referência atual.
+convenção das linhas: nome | tipo | versão em que entrou (quando a página informa) | marcação "Required" (quando a página informa).
+fullName herdado: as páginas dizem que cada tipo estende Metadata e herda seus campos; as tabelas não listam fullName. Vale para
+  LeadConfigSettings, ProductSettings, OrderSettings, ContractSettings, FieldServiceSettings e CommunitiesSettings.
+
+[src:mdapi-leadconfigsettings] LeadConfigSettings: arquivo settings/LeadConfig.settings; desde 47.0; estende Metadata
+  Configurações de leads para a org inteira: como os leads são convertidos e exibidos e que ações ficam disponíveis. O trecho lido não traz
+  declaração sobre o curinga *.
+  LeadConfigSettings (10): doesEnableLeadConvertDefaultSubjectBlankTaskCreation | boolean, doesHideOpportunityInConvertLeadWindow | boolean,
+    doesPreserveLeadStatus | boolean, doesSelectNoOpportunityOnConvertLead | boolean, doesTrackHistory | boolean, enableConversionsOnMobile | boolean,
+    enableOrgWideMergeAndDelete | boolean, relateEmailsToContactOnConvert | boolean, shouldLeadConvertRequireValidation | boolean,
+    shouldSendNotificationEmailWhenLeadOwnerUpdatesViaApexInLEX | boolean
+    doesEnableLeadConvertDefaultSubjectBlankTaskCreation: true cria tarefas na conversão mesmo com assunto padrão em branco; false, só tarefas com
+      assunto; sem padrão declarado.
+    doesHideOpportunityInConvertLeadWindow: esconde a seção de oportunidade da janela Convert Lead; padrão false.
+    doesPreserveLeadStatus: mantém o status do lead na conversão, em vez do padrão do record type do novo dono; padrão true.
+    doesSelectNoOpportunityOnConvertLead: impede criar oportunidade ao converter; padrão false.
+    doesTrackHistory: liga o histórico de campos de leads; padrão false.
+    enableConversionsOnMobile: permite converter leads em dispositivos móveis; padrão true.
+    enableOrgWideMergeAndDelete: permite mesclar e excluir leads (os usuários também precisam do acesso Public Read/Write/Transfer); padrão false.
+    relateEmailsToContactOnConvert: associa os e-mails do lead ao contato resultante; padrão false.
+    shouldLeadConvertRequireValidation: aplica regras de validação ao converter leads; padrão true.
+    shouldSendNotificationEmailWhenLeadOwnerUpdatesViaApexInLEX: envia e-mail quando Apex troca o dono do lead no Lightning Experience; padrão false.
+
+[src:mdapi-productsettings] ProductSettings: arquivo settings/Product.settings; desde 28.0; estende Metadata
+  Preferências da org para quantity schedules, revenue schedules e o efeito do indicador ativo sobre os preços relacionados. Curinga * não vale
+  para um setting individual.
+  ProductSettings (4): enableCascadeActivateToRelatedPrices | boolean, enableMySettings | boolean | 47.0, enableQuantitySchedule | boolean,
+    enableRevenueSchedule | boolean
+    enableCascadeActivateToRelatedPrices: ao mudar o indicador ativo de um produto, atualiza o indicador ativo dos preços relacionados.
+    enableMySettings: move as páginas de configurações pessoais para um painel My Settings separado; padrão true; afeta todos os usuários.
+    enableQuantitySchedule: liga quantity schedules para produtos. enableRevenueSchedule: liga revenue schedules para produtos.
+
+[src:mdapi-ordersettings] OrderSettings: arquivo settings/Order.settings; desde 30.0; estende Metadata
+  Configurações de pedidos da org. Curinga * não vale para um setting individual.
+  OrderSettings (8): enableEnhancedCommerceOrders | boolean | 48.0, enableNegativeQuantity | boolean, enableOptionalPricebook | boolean,
+    enableOrderEvents | boolean, enableOrders | boolean | Required, enableOrderWithMultiplePriceBooks | boolean | 60.0, enableReductionOrders | boolean,
+    enableZeroQuantity | boolean | 42.0
+    enableEnhancedCommerceOrders: enhanced commerce orders; só com a licença Salesforce Order Management; padrão false.
+    enableNegativeQuantity: order products com quantidade negativa; exige enableOrders true.
+    enableOptionalPricebook: pedidos sem price book. enableOrderEvents: eventos de pedido (ver OrderStatusChangedEvent no guia de Platform Events).
+    enableOrders: se pedidos estão ligados na org.
+    enableOrderWithMultiplePriceBooks: pedidos com itens de vários price books; exige enableOrders e enableEnhancedCommerceOrders true.
+    enableReductionOrders: reduction orders; exige enableOrders true.
+    enableZeroQuantity: order products com quantidade zero; padrão false; exige enableOrders true.
+
+[src:mdapi-contractsettings] ContractSettings: arquivo settings/Contract.settings; desde 27.0; estende Metadata
+  Configurações de contratos. Curinga * não vale para um setting individual. Nenhum padrão declarado.
+  ContractSettings (6): autoCalculateEndDate | boolean, autoExpirationDelay | string, autoExpirationRecipient | string, autoExpireContracts | boolean,
+    enableContractHistoryTracking | boolean, notifyOwnersOnContractExpiration | boolean
+    autoCalculateEndDate: se a data final do contrato é calculada automaticamente.
+    notifyOwnersOnContractExpiration: se os donos da conta e do contrato recebem e-mail quando o contrato expira.
+    autoExpirationDelay, autoExpirationRecipient, autoExpireContracts, enableContractHistoryTracking: sem descrição na página.
+
+[src:mdapi-fieldservicesettings] FieldServiceSettings: pasta settings, extensão .settings (a página não informa o nome-base do arquivo); desde 40.0;
+  estende Metadata. Configurações de Field Service da org. Curinga * não vale para um setting individual. Todos os campos são opcionais.
+  FieldServiceSettings (54): advancedDataSyncOrgPreference | boolean, apptAssistantExpiration | int | 50.0, apptAssistantInfoUrl | string | 50.0,
+    apptAssistantRadiusUnitValue | ApptAssistantRadiusUnit | 50.0, apptAssistantRadiusValue | int | 50.0, apptAssistantStatus | string | 50.0,
+    canceledDefaultStatus | string | 65.0, cannotCompleteDefaultStatus | string | 65.0, canPopulateGoogleAddress | boolean | 57.0,
+    canSendAppCenterCrashReports | boolean | 57.0, canStoreMobileAnalytics | boolean | 57.0, completedDefaultStatus | string | 65.0,
+    deepLinkPublicSecurityKey | string | 54.0, dispatchedDefaultStatus | string | 65.0, doesAllowEditSaForCrew | boolean,
+    doesAvlCalcInclOvertime | boolean, doesAvlCalcInclPrimOnly | boolean, doesShareSaParentWoWithAr | boolean, doesShareSaWithAr | boolean,
+    enableAdvancedDataSync | boolean, enableBatchWindow | boolean, enableDataCaptureControlByParent | boolean, enableDocumentBuilder | boolean,
+    enableFieldServiceNotifications | boolean, enableFloatingWorkOrder | boolean, enableGeolocationBasedActionControlByParent | boolean,
+    enableLsdkMode | boolean, enablePopulateWorkOrderAddress | boolean, enableServiceAppointmentLifecycle | boolean, enableStandbyMode | boolean,
+    enableWorkOrders | boolean, enableWorkPlansAutoGeneration | boolean | 52.0, enableWorkStepManualStatusUpdate | boolean,
+    enableWorkStepsHideNotApplicable | boolean, enrouteStatus | string, fieldServiceNotificationsOrgPref | boolean, fieldServiceOrgPref | boolean,
+    inProgressDefaultStatus | string | 65.0, isGeoCodeSyncEnabled | boolean, isLocationHistoryEnabled | boolean, mobileFeedbackEmails | string | 54.0,
+    noneDefaultStatus | string | 65.0, o2EngineEnabled | boolean | 55.0, objectMappingItem | ObjectMappingItem[] | 52.0,
+    optimizationServiceAccess | boolean, overrideDefaultLwcStyling | boolean, scheduledDefaultStatus | string | 65.0,
+    serviceAppointmentsDueDateOffsetOrgValue | int, useBundler | boolean, useLicenselessPermset | boolean, useWorkCapacity | boolean,
+    workOrderDurationSource | WorkOrderDurationSource | 55.0, workOrderLineItemSearchFields | string[], workOrderSearchFields | string[]
+    apptAssistantExpiration: tempo depois do qual o cliente deixa de ver localização e previsão de chegada do técnico pela URL de rastreamento.
+    apptAssistantInfoUrl: URL de rastreamento com previsão de chegada. apptAssistantRadiusUnitValue: unidade do raio da geofence (Kilometer, Meter,
+      Mile, Yard). apptAssistantRadiusValue: raio da geofence em torno do endereço que dispara a notificação ao cliente. apptAssistantStatus: status
+      da appointment que dispara a notificação En Route; precisa bater com uma opção de Status.
+    canceledDefaultStatus, cannotCompleteDefaultStatus, completedDefaultStatus, dispatchedDefaultStatus, inProgressDefaultStatus, noneDefaultStatus,
+      scheduledDefaultStatus: status padrão da service appointment quando cancelada, não concluída, concluída, despachada, em andamento, sem status
+      específico e agendada.
+    canPopulateGoogleAddress: permite enviar geolocalização e dados de mapa a Google e Apple. canSendAppCenterCrashReports: permite enviar relatórios
+      de falha ao Microsoft App Center. canStoreMobileAnalytics: permite que terceiros guardem analytics do app móvel.
+    deepLinkPublicSecurityKey: chave pública de segurança para ações de deep link no app móvel Field Service.
+    doesAllowEditSaForCrew: membros de equipe (crew) editam as próprias service appointments; só vale com doesShareSaWithAr ligado.
+    doesShareSaParentWoWithAr: compartilha a work order pai com os recursos atribuídos. doesShareSaWithAr: compartilha service appointments
+      despachadas com os recursos atribuídos.
+    enableDocumentBuilder: acesso ao Document Builder. enableFloatingWorkOrder: floating work orders, cuja recorrência parte da conclusão da work
+      order anterior. enableLsdkMode: Lightning SDK no app móvel. enablePopulateWorkOrderAddress: preenche o endereço das work orders geradas por
+      maintenance plan. enableStandbyMode: modo standby do app móvel, que pausa notificações e sincronizações para poupar bateria.
+    enableWorkOrders: liga o objeto Work Order, com ou sem Field Service; não pode ser desligado enquanto Field Service está ligado.
+    enableWorkPlansAutoGeneration: gera work plans e work steps automaticamente na criação, por regras de seleção.
+    enableWorkStepManualStatusUpdate: permite atualizar à mão o status de work steps.
+    fieldServiceNotificationsOrgPref: notificações no app para mudanças em work orders. fieldServiceOrgPref: indica se Field Service está ligado.
+    isGeoCodeSyncEnabled: sincroniza a localização do Service Resource com um objeto de inventário. isLocationHistoryEnabled: guarda o histórico de
+      localização do Service Resource. mobileFeedbackEmails: e-mail que recebe o feedback enviado pelo app móvel.
+    o2EngineEnabled: liga Field Service Enhanced Scheduling and Optimization; padrão false. objectMappingItem: mapeamentos de campos customizados
+      para a geração de Work Plan ou Work Step. optimizationServiceAccess: permite ao serviço de otimização acessar dados da org.
+    overrideDefaultLwcStyling: o app móvel aplica estilo próprio aos Lightning Web Components. serviceAppointmentsDueDateOffsetOrgValue: dias depois
+      da Created Date em que cai a Due Date das appointments criadas automaticamente.
+    workOrderDurationSource: origem da duração da work order (WorkType, TotalFromWorkPlan, Custom). workOrderLineItemSearchFields e
+      workOrderSearchFields: campos que a busca examina para sugerir artigos de knowledge.
+    sem descrição na página: advancedDataSyncOrgPreference, doesAvlCalcInclOvertime, doesAvlCalcInclPrimOnly, enableAdvancedDataSync,
+      enableBatchWindow, enableDataCaptureControlByParent, enableFieldServiceNotifications, enableGeolocationBasedActionControlByParent,
+      enableServiceAppointmentLifecycle, enableWorkStepsHideNotApplicable, enrouteStatus, useBundler, useLicenselessPermset, useWorkCapacity.
+  ObjectMappingItem (desde 52.0): mappingType | MappingType | Required (WorkPlans_WorkPlanTemplate_WorkPlan, WorkPlans_WorkStepTemplate_WorkStep,
+    WorkPlans_WorkPlanTemplateEntry_WorkStep), objectMapping | ObjectMapping | Required
+  ObjectMapping: inputObject | string | Required (WorkPlanTemplate, WorkStepTemplate, WorkPlanTemplateEntry), mappingFields | ObjectMappingField[],
+    outputObject | string | Required (WorkPlan, WorkStep). ObjectMappingField: inputField | string | Required, outputField | string | Required.
+    (ObjectMapping e ObjectMappingField já estão no catálogo, vindos de LeadConvertSettings; os valores acima são os desta página.)
+
+[src:mdapi-communitiessettings] CommunitiesSettings: arquivo settings/Communities.settings; desde 47.0; estende Metadata
+  Configurações de sites (communities) da org: ligar digital experiences e workspaces, moderação, usuário convidado (guest) e parceiros. Curinga *
+  não vale para um setting individual.
+  CommunitiesSettings (25): applyLoginPageTypeToEmbeddedLogin | boolean | 49.0, blockEmbeddedLoginUnknownURLRedirect | boolean | 52.0,
+    canModerateAllFeedPosts | boolean, canModerateInternalFeedPosts | boolean, embeddedVisualforcePages | boolean | 48.0,
+    enableCommunityWorkspaces | boolean | 48.0, enableCspContactVisibilityPref | boolean | 48.0, enableCspNotesOnAccConPref | boolean | 48.0,
+    enableEnablePRM | boolean | 48.0, enableExternalAccHierPref | boolean | 48.0, enableGuestPermDisOptOutCruc | boolean,
+    enableGuestRecordReassignOrgPref | boolean | 48.0 (descontinuado na 63.0), enableGuestSecurityOptOutCruc | boolean,
+    enableGuvSecurityOptOutPref | boolean | 49.0, enableInviteChatterGuestEnabled | boolean | 48.0, enableNameFieldsUserPIIEnabled | boolean,
+    enableNetPortalUserReportOpts | boolean | 48.0, enableNetworksEnabled | boolean | 47.0, enableOotbProfExtUserOpsEnable | boolean | 48.0,
+    enablePowerCustomerCaseStatus | boolean | 48.0, enablePreventBadgeGuestAccess | boolean | 53.0, enablePRMAccRelPref | boolean | 48.0,
+    enableRelaxPartnerAccountFieldPref | boolean | 48.0, enableUnsupportedBrowserModalPref | boolean | 48.0, enableUsernameUniqForOrgPref | boolean | 48.0
+    applyLoginPageTypeToEmbeddedLogin: aplica o tipo de página de login do site a todo Embedded Login; padrão false em orgs anteriores ao Summer '20
+      e true nas novas. blockEmbeddedLoginUnknownURLRedirect: bloqueia redirecionamento a URLs desconhecidas no parâmetro state do OAuth; padrão
+      false em orgs anteriores ao Summer '21 e true nas novas.
+    canModerateAllFeedPosts: moderação (flags, regras) em todos os posts de feed; padrão false. canModerateInternalFeedPosts: moderação em posts de
+      feed de registro criados por usuários internos; padrão false. embeddedVisualforcePages: links a páginas Visualforce a partir de outras páginas
+      Visualforce pela API; padrão false.
+    enableCommunityWorkspaces: permite ligar Experience Workspaces. enableCspContactVisibilityPref: usuários veem contatos de contas privadas a que
+      têm leitura, quando o registro pai controla o contato. enableCspNotesOnAccConPref: clientes acessam notas e anexos de contas e contatos.
+    enableEnablePRM: permite habilitar usuários parceiros. enableExternalAccHierPref: liga o objeto External Account Hierarchy.
+    enableGuestRecordReassignOrgPref: permite definir um dono padrão para registros criados por guest users; disponível da 48.0 à 63.0.
+    enableGuvSecurityOptOutPref: permite desligar a visibilidade de guest user. enableInviteChatterGuestEnabled: permite convidar guests para o Chatter.
+    enableNetPortalUserReportOpts: usuários externos com permissão rodam relatórios nos sites. enableNetworksEnabled: permite ligar digital
+      experiences. enableOotbProfExtUserOpsEnable: permite perfis externos padrão no autocadastro e na criação de usuários.
+    enablePowerCustomerCaseStatus: usuários Customer Community Plus mudam o status de casos. enablePreventBadgeGuestAccess: esconde badges de guest
+      users em sites Experience Builder. enablePRMAccRelPref: liga o objeto Account Relationship e as opções de data sharing rule.
+    enableRelaxPartnerAccountFieldPref: permite editar campos de conta parceira em oportunidades e leads. enableUnsupportedBrowserModalPref: mostra
+      aviso de navegador não suportado nos sites. enableUsernameUniqForOrgPref: unicidade de username no nível da org.
+    sem descrição na página: enableGuestPermDisOptOutCruc, enableGuestSecurityOptOutCruc, enableNameFieldsUserPIIEnabled.
+
+[src:mdapi-casesettings] CaseSettings: arquivo settings/Case.settings; desde 27.0; estende Metadata
+  Configurações de casos da org: dono padrão do caso, recursos de caso ligados e templates de e-mail Classic usados; inclui as configurações de
+  Email-to-Case e Web-to-Case e os itens de feed do Case Feed. A página lista 69 campos de primeiro nível e subtipos.
+  NÃO cadastrado no catálogo nesta rodada: o texto devolvido pela leitura trouxe tipo e descrição de cada campo, mas NÃO os nomes dos elementos
+  (conferido numa segunda leitura só para isso). Usado aqui só como fonte de texto. Mesma causa provável da pendência de Translations (lote 6a).
+
+não lido: metadata-revenuemanagementsettings.html devolveu erro do site (client_error) em 2026-11-14; RevenueManagementSettings segue só no inventário.

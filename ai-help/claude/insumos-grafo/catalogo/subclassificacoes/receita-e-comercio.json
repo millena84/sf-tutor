@@ -4,27 +4,128 @@
   "sigla": "NEG-04",
   "classificacao": "cls:processos-de-negocio-especificos-de-produto",
   "natureza": "curadoria_didatica",
-  "descricao": "Capacidades de receita, cotação e comércio.",
+  "descricao": "O que vem depois da venda acertada: pedidos (orders) na plataforma padrão e os produtos de preço, assinatura e faturamento, como Salesforce CPQ, Salesforce Billing e Revenue Management.",
   "escopo": "Entram as capacidades de receita, cotação e comércio.",
   "fora_do_escopo": "Cotações do processo de vendas da plataforma ficam em \"Vendas\".",
   "para_iniciantes": {
-    "explicacao": "Reúne capacidades de receita, cotação e comércio que vão além das cotações padrão, como Salesforce CPQ, Salesforce Billing, Subscription Management e Agentforce Revenue Management.",
-    "exemplo": "Uma empresa usa o Salesforce CPQ para criar, gerenciar e enviar propostas.",
+    "explicacao": "Reúne o que acontece depois que a venda é acertada: pedidos, preços mais elaborados, assinaturas e faturamento. Na plataforma padrão, isso começa nos pedidos (orders). Produtos próprios vão além: Salesforce CPQ, Salesforce Billing, Subscription Management e Revenue Management (antes Revenue Cloud).",
+    "exemplo": "Depois de fechar a oportunidade, o time registra um pedido com os produtos vendidos; uma devolução parcial entra como reduction order.",
+    "por_onde_comecar": [
+      "func:pedidos"
+    ],
     "evidencias": [
       {
         "fonte": "src:help-produtos-sales"
+      },
+      {
+        "fonte": "src:help-orders-enable"
+      },
+      {
+        "fonte": "src:help-orders-manage"
+      },
+      {
+        "fonte": "src:help-revenue-get-started"
       }
     ]
   },
   "encadeamento": {
-    "texto": "As cotações padrão, ligadas às oportunidades, ficam no tema interno Vendas.",
+    "texto": "Vem depois de 'Vendas': as cotações padrão, ligadas às oportunidades, e os contratos ficam lá. O pedido pode ser ativado para um contrato ativo. Os produtos de receita assumem a partir da cotação ou do pedido, cada um com licença e modelo próprios.",
     "evidencias": [
       {
         "fonte": "src:help-quotes-setup"
+      },
+      {
+        "fonte": "src:help-orders-activation"
+      },
+      {
+        "fonte": "src:help-billing-overview"
       }
     ]
   },
-  "funcionalidades": [],
+  "avancado": [
+    {
+      "tipo": "decisao",
+      "titulo": "Pacote ou plataforma nativa",
+      "texto": "Salesforce CPQ é um managed package; Revenue Management roda de forma nativa na plataforma, com outro modelo de dados e outra forma de configurar. Salesforce Billing é um pacote complementar que recebe o pedido do CPQ para faturamento, pagamento e reconhecimento de receita.",
+      "evidencias": [
+        {
+          "fonte": "src:help-revenue-vs-cpq"
+        },
+        {
+          "fonte": "src:help-billing-overview"
+        }
+      ]
+    },
+    {
+      "tipo": "atencao",
+      "titulo": "Trocar de produto não é migração de dados comum",
+      "texto": "Sair de Salesforce CPQ e Salesforce Billing para o Revenue Cloud muda modelo de dados, processos e governança. A Ajuda tem um tópico para descobrir qual produto de receita a org usa; comece por ele.",
+      "evidencias": [
+        {
+          "fonte": "src:help-revenue-migrate"
+        },
+        {
+          "fonte": "src:help-revenue-get-started"
+        }
+      ]
+    },
+    {
+      "tipo": "limite",
+      "titulo": "Ativação de pedidos",
+      "texto": "Um pedido só é ativado se tiver order products e, quando ligado a contrato, se o contrato estiver ativo. Depois de ativar, dá para alterar os order products, mas não incluir nem remover.",
+      "evidencias": [
+        {
+          "fonte": "src:help-orders-activation"
+        }
+      ]
+    },
+    {
+      "tipo": "limite",
+      "titulo": "Reduction orders",
+      "texto": "Registram redução, devolução ou desativação de produtos de um pedido. Só pedidos ativados podem ser reduzidos, cada reduction order vale para um pedido, e no Lightning Experience não dá para criá-las.",
+      "evidencias": [
+        {
+          "fonte": "src:help-orders-manage"
+        },
+        {
+          "fonte": "src:help-orders-reduce"
+        }
+      ]
+    },
+    {
+      "tipo": "implantacao",
+      "titulo": "Como metadado",
+      "texto": "OrderSettings liga pedidos (enableOrders, obrigatório) e as variações: reduction orders, quantidade zero ou negativa e pedidos sem price book. enableEnhancedCommerceOrders só existe com a licença Salesforce Order Management e é usado por lojas B2B para pedidos em alta escala.",
+      "evidencias": [
+        {
+          "fonte": "src:mdapi-ordersettings"
+        },
+        {
+          "fonte": "src:help-orders-high-scale"
+        }
+      ]
+    }
+  ],
+  "funcionalidades": [
+    "func:pedidos"
+  ],
   "estado": "desconhecido",
-  "nota_estado": "Agrupamento proposto na especificação; fronteira ainda não cruzada com a documentação oficial."
+  "nota_estado": "Tema criado pelo projeto (00-especificacao-grafo.md), não é nomenclatura oficial da Salesforce. Cruzado em 2026-11-10 com áreas da documentação oficial listadas nas referências; a correspondência é parcial e o recorte continua sendo do projeto.",
+  "referencias_oficiais": [
+    {
+      "fonte": "src:help-orders-enable",
+      "secao": "Enable Orders",
+      "nota": "Cobre parte do tema: pedidos."
+    },
+    {
+      "fonte": "src:help-revenue-get-started",
+      "secao": "Get Started with Revenue Management",
+      "nota": "Cobre parte do tema: Revenue Management."
+    },
+    {
+      "fonte": "src:help-billing-overview",
+      "secao": "Salesforce Billing Overview",
+      "nota": "Cobre parte do tema: Salesforce Billing."
+    }
+  ]
 }

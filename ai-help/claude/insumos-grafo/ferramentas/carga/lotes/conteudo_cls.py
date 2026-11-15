@@ -615,24 +615,66 @@ CONTEUDO_CLS = {
             analogia=("Como lojas diferentes num mesmo shopping: cada uma vende algo próprio, mas todas usam o mesmo estacionamento, energia e segurança.",
                       "No shopping, as lojas são separadas. Na Salesforce, a mesma funcionalidade de plataforma, como regras de atribuição, serve a vendas e atendimento ao mesmo tempo.")),
         "encadeamento": enc(
-            "Em vendas, o caminho vai de lead a conta, contato e oportunidade, com produtos, cotações, previsões, equipes e territórios. No "
-            "atendimento, o caso é a base, com Omni-Channel, Knowledge, entitlements e horário comercial. Serviço de campo, receita e "
-            "comércio, experiências externas e capacidades setoriais ainda não têm funcionalidades catalogadas.",
-            E("src:help-sales-basics", "src:help-service-basics")),
+            "Roteiro pelas sete seções do tema. 1) 'Vendas': de lead a conta, contato e oportunidade, com produtos, cotações, contratos, "
+            "previsões, equipes e territórios. 2) 'Atendimento': o caso, com Omni-Channel, Knowledge, entitlements e horário comercial. "
+            "3) 'Serviço de campo': o trabalho feito no local do cliente. 4) 'Receita e comércio': pedidos e os produtos de preço, "
+            "assinatura e faturamento. 5) 'Experiências externas': sites para clientes e parceiros. 6) 'Capacidades setoriais': o que as "
+            "nuvens de setor acrescentam. 7) 'Outras áreas': fila de espera do que ainda não tem tema. Só as duas últimas seguem sem "
+            "funcionalidade cadastrada.",
+            E("src:help-sales-basics", "src:help-service-basics", "src:help-field-service-overview", "src:help-orders-enable",
+              "src:help-experience-cloud-licenses", "src:help-industries-data-models", "src:sdr-metadata-support")),
         "avancado": [
+            # 1) Vendas
             av("atencao", "Campos de estado derivados",
                "IsClosed e IsWon em oportunidades e IsClosed em casos não são gravados diretamente: refletem a etapa ou o status. "
                "Integrações devem mudar a etapa ou o status, não esses campos.", E("src:objref-opportunity", "src:objref-case")),
             av("atencao", "Converter lead é operação própria",
-               "Mudar o status de um lead pela API não o converte; use convertLead() ou a interface.", E("src:objref-lead")),
+               "Mudar o status de um lead pela API não o converte; use convertLead() ou a interface. Em Lead Settings, Require Validation "
+               "for Converted Leads decide se as regras de validação valem na conversão.",
+               E("src:objref-lead", "src:help-lead-convert-considerations")),
             av("limite", "Licença Salesforce Platform",
                "Usuários com licença Salesforce Platform não têm direito a leads, oportunidades e previsões, segundo a Ajuda.",
                E("src:help-user-licenses")),
+            av("atencao", "Territórios: um modelo ativo",
+               "Só um modelo de territórios fica ativo por vez e, depois de ativo, não volta para Planning.", E("src:help-tm2-activate")),
+            # 2) Atendimento
             av("atencao", "Omni-Channel Enhanced",
                "Standard Omni-Channel foi aposentado no Summer '26, com upgrade automático para Enhanced, que não suporta canais standard.",
                E("src:help-omni-upgrade")),
-            av("atencao", "Territórios: um modelo ativo",
-               "Só um modelo de territórios fica ativo por vez e, depois de ativo, não volta para Planning.", E("src:help-tm2-activate")),
+            # 3) Serviço de campo
+            av("decisao", "Field Service: recurso, pacote e app",
+               "Ligar o Field Service em Field Service Settings libera os recursos da plataforma. O managed package, instalado depois, "
+               "acrescenta o Classic Dispatch Console, ferramentas de agendamento, objetos customizados e o Guided Setup.",
+               E("src:help-field-service-enable", "src:help-field-service-setup-basics")),
+            # 4) Receita e comércio
+            av("decisao", "Produto de receita: pacote ou nativo",
+               "Salesforce CPQ é um managed package; Revenue Management (antes Revenue Cloud) é nativo da plataforma, com outro modelo de "
+               "dados. Trocar de um para o outro muda modelo, processos e governança: não é uma migração de dados comum.",
+               E("src:help-revenue-vs-cpq", "src:help-revenue-migrate")),
+            av("limite", "Pedidos têm regras de ativação",
+               "Um pedido só é ativado se tiver order products e, quando ligado a contrato, se o contrato estiver ativo. Reduction orders "
+               "só valem para pedidos ativados e não podem ser criadas no Lightning Experience.",
+               E("src:help-orders-activation", "src:help-orders-reduce")),
+            # 5) Experiências externas
+            av("atencao", "Ligar digital experiences não tem volta",
+               "A ativação dos sites Experience Cloud não pode ser desfeita, e o domínio dos sites usa o My Domain da org. A licença "
+               "externa escolhida define o que cada pessoa vê e faz.",
+               E("src:help-digital-experiences-enable", "src:help-experience-cloud-licenses")),
+            # 6) Capacidades setoriais
+            av("decisao", "Nuvem setorial estende o modelo padrão",
+               "Os modelos setoriais são extensões aditivas: Account, Contact e outros objetos padrão continuam valendo, e o setor "
+               "acrescenta objetos e campos. O acesso vem de permission set licenses próprias de cada nuvem.",
+               E("src:help-industries-data-models", "src:help-health-cloud-psl")),
+            # 7) Outras áreas
+            av("atencao", "'Outras áreas' não é área oficial",
+               "É um agrupamento provisório deste tutorial para tipos da lista oficial de metadata types que ainda não têm tema próprio. "
+               "Não corresponde a um produto nem a uma área da documentação da Salesforce.", E("src:sdr-metadata-support")),
+            # Transversal
+            av("implantacao", "Opções gerais como metadado",
+               "As opções gerais de cada produto ficam em tipos Settings: por exemplo LeadConfigSettings, OrderSettings, ContractSettings, "
+               "FieldServiceSettings e CommunitiesSettings, detalhados neste catálogo. CaseSettings ainda não foi cadastrado.",
+               E("src:mdapi-leadconfigsettings", "src:mdapi-ordersettings", "src:mdapi-contractsettings", "src:mdapi-fieldservicesettings",
+                 "src:mdapi-communitiessettings", "src:mdapi-casesettings")),
         ],
     },
 }

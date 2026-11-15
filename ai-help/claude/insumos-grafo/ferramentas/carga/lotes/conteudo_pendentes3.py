@@ -168,11 +168,11 @@ P["sub:experiencias-web-portais-e-mobile"] = {
                            "para clientes, parceiros ou funcionários, e pelo Salesforce mobile app, no celular. Nos dois casos os dados "
                            "são os da própria org; muda a interface.",
                            "Clientes abrem chamados num portal Customer Service, e o técnico vê o mesmo caso no app do celular.",
-                           E("src:help-experience-cloud-overview", "src:help-mobile-app-customize")),
+                           E("src:help-experience-cloud-overview", "src:help-mobile-app-customize"), comece=["func:digital-experiences"]),
     "encadeamento": enc("Reaproveita o que vem de 'Layouts e páginas de registro' e 'Aplicativos e navegação': o app móvel usa compact "
-                        "layouts e a navegação dos Lightning apps. As capacidades de produto para público externo ficam em "
-                        "'Experiências externas'.",
-                        E("src:help-compact-layouts", "src:help-mobile-only-navigation")),
+                        "layouts e a navegação dos Lightning apps. Antes do primeiro site, é preciso ligar digital experiences. As "
+                        "capacidades de produto para público externo ficam em 'Experiências externas'.",
+                        E("src:help-compact-layouts", "src:help-mobile-only-navigation", "src:help-experience-org-setup")),
     "avancado": [
         av("decisao", "Qual template de site", "Há templates prontos (Customer Account Portal, Partner Central, Customer Service, Help Center) e "
            "os Build Your Own em Aura ou LWR, além de Microsites (LWR). Sites LWR aceitam só Lightning web components; sites Aura aceitam Aura e "

@@ -282,6 +282,50 @@ TEMAS = {
         [ev("src:mdapi-settings", "Cobre parte do tema: ativações gravadas como metadado na família Settings.", "Settings"),
          ev("src:help-lightning-knowledge-enable", "Cobre parte do tema: exemplo de ativação sem volta.", "Create a Knowledge Base with Salesforce Knowledge")],
     ),
+    # ------------------------------------------------------------------ Processos de negócio específicos de produto
+    "sub:vendas": (
+        "O processo de vendas: leads, contas, contatos e oportunidades, com produtos e catálogos de preço, cotações, contratos, "
+        "previsões, equipes e territórios.",
+        [ev("src:help-sales-basics", "Mais ampla que o tema: guia de base de vendas, que inclui recursos de plataforma.", "Sales Basics"),
+         ev("src:help-lead-settings", "Cobre parte do tema: configurações padrão de leads.", "Define Default Settings for Lead Creation"),
+         ev("src:help-contracts-setup", "Cobre parte do tema: contratos.", "Set Up Contracts")],
+    ),
+    "sub:atendimento": (
+        "O processo de atendimento: o caso como registro central, o roteamento pelo Omni-Channel, o conhecimento que apoia as "
+        "respostas e os níveis de serviço medidos por entitlements.",
+        [ev("src:help-service-basics", "Mais ampla que o tema: guia de base de atendimento.", "Service Basics")],
+    ),
+    "sub:servico-de-campo": (
+        "Field Service: o trabalho feito no local do cliente, com work orders, visitas agendadas (service appointments), técnicos "
+        "(service resources) e territórios de serviço.",
+        [ev("src:help-field-service-overview", "Cobre o tema: visão geral do Field Service.", "Agentforce Field Service and Operations"),
+         ev("src:help-field-service-enable", "Cobre parte do tema: ativação.", "Enable Field Service")],
+    ),
+    "sub:receita-e-comercio": (
+        "O que vem depois da venda acertada: pedidos (orders) na plataforma padrão e os produtos de preço, assinatura e faturamento, "
+        "como Salesforce CPQ, Salesforce Billing e Revenue Management.",
+        [ev("src:help-orders-enable", "Cobre parte do tema: pedidos.", "Enable Orders"),
+         ev("src:help-revenue-get-started", "Cobre parte do tema: Revenue Management.", "Get Started with Revenue Management"),
+         ev("src:help-billing-overview", "Cobre parte do tema: Salesforce Billing.", "Salesforce Billing Overview")],
+    ),
+    "sub:experiencias-externas": (
+        "O acesso de clientes e parceiros por sites Experience Cloud: a ativação de digital experiences, as licenças de usuário "
+        "externo e o que cada uma permite ver e fazer.",
+        [ev("src:help-experience-cloud-licenses", "Cobre parte do tema: licenças de usuário externo.", "Experience Cloud User Licenses"),
+         ev("src:help-digital-experiences-enable", "Cobre parte do tema: ativação dos sites.", "Enable Digital Experiences")],
+    ),
+    "sub:capacidades-setoriais": (
+        "O que as nuvens de setor, como Financial Services Cloud e Health Cloud, acrescentam ao modelo padrão: objetos, campos e "
+        "recursos próprios, liberados por permission set licenses.",
+        [ev("src:help-industries-data-models", "Cobre parte do tema: modelo de dados de seguros e serviços financeiros, como exemplo de nuvem setorial.",
+            "Insurance and Financial Services Data Model")],
+    ),
+    "sub:outras-areas": (
+        "Agrupamento provisório deste tutorial para tipos da lista oficial de metadata types que ainda não têm tema próprio; não é uma "
+        "área oficial da Salesforce.",
+        [ev("src:sdr-metadata-support", "Mais ampla que o tema: lista oficial de metadata types suportados pelo Salesforce CLI, de onde vêm os "
+            "itens deste agrupamento.", "METADATA_SUPPORT.md")],
+    ),
 }
 
 
