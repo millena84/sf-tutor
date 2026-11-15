@@ -260,7 +260,8 @@ test('tema com conteúdo próprio: exemplo, comece por, encadeamento e decisões
   const c2 = sobre.locator('.camada').nth(1);
   await expect(c2.locator('h5').first()).toHaveText('Como as partes se ligam');
   await expect(c2).toContainText('FlexiPage');
-  await expect(c2).toContainText('Experiências web/portais e mobile');
+  // tema interno ainda sem funcionalidade, listado no fim da camada
+  await expect(c2).toContainText('Acessibilidade e personalização');
   const avancado = sobre.locator('details.camada-avancada');
   await avancado.locator('summary').first().click();
   await expect(avancado.locator('.item-avancado h5')).toContainText(['Decisão: Qual ferramenta usar para um formulário', 'Segurança: A página não é controle de acesso']);
