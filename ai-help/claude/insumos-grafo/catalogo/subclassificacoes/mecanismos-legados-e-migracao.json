@@ -4,12 +4,15 @@
   "sigla": "AUT-06",
   "classificacao": "cls:automacao-de-processos-e-regras-de-negocio",
   "natureza": "curadoria_didatica",
-  "descricao": "Ferramentas antigas de automação e caminhos de migração.",
+  "descricao": "Workflow Rules e Process Builder, ferramentas antigas de automação sem suporte desde 31 de dezembro de 2025, e a migração delas para Flow.",
   "escopo": "Entram ferramentas antigas de automação e os caminhos de migração para as atuais.",
   "fora_do_escopo": "Mecanismos assíncronos antigos ficam em \"Future e mecanismos legados quando aplicáveis\".",
   "para_iniciantes": {
     "explicacao": "Workflow Rules e Process Builder são ferramentas antigas de automação. O suporte acabou em 31 de dezembro de 2025: o que já existe continua rodando, mas sem suporte nem correção de bugs. O caminho é migrar para Flow.",
     "exemplo": "Uma regra de workflow que só atualiza um campo é convertida pela ferramenta Migrate to Flow num flow de atualização rápida.",
+    "por_onde_comecar": [
+      "func:workflow-rules-e-process-builder"
+    ],
     "evidencias": [
       {
         "fonte": "src:help-wf-pb-eos"
@@ -32,6 +35,19 @@
   },
   "avancado": [
     {
+      "tipo": "atencao",
+      "titulo": "A ordem de execução muda na migração",
+      "texto": "Workflow rules rodam num ponto da ordem de execução diferente do dos record-triggered flows. Um flow que substitui uma regra pode se comportar diferente por causa disso.",
+      "evidencias": [
+        {
+          "fonte": "src:apex-triggers-order"
+        },
+        {
+          "fonte": "src:help-flow-record-triggered-considerations"
+        }
+      ]
+    },
+    {
       "tipo": "implantacao",
       "titulo": "Migre na mesma org",
       "texto": "Migre o processo na mesma org do original, e não numa org intermediária para depois implantar: assim o flow trata as ações agendadas pendentes do processo antigo.",
@@ -52,7 +68,21 @@
       ]
     }
   ],
-  "funcionalidades": [],
+  "funcionalidades": [
+    "func:workflow-rules-e-process-builder"
+  ],
   "estado": "desconhecido",
-  "nota_estado": "Agrupamento proposto na especificação; fronteira ainda não cruzada com a documentação oficial."
+  "nota_estado": "Tema criado pelo projeto (00-especificacao-grafo.md), não é nomenclatura oficial da Salesforce. Cruzado em 2026-11-10 com áreas da documentação oficial listadas nas referências; a correspondência é parcial e o recorte continua sendo do projeto.",
+  "referencias_oficiais": [
+    {
+      "fonte": "src:help-wf-pb-eos",
+      "secao": "Salesforce Workflow Rules & Process Builder End of Support",
+      "nota": "Cobre o tema: fim do suporte de Workflow Rules e Process Builder."
+    },
+    {
+      "fonte": "src:help-migrate-to-flow-considerations",
+      "secao": "Migrate to Flow Tool Considerations",
+      "nota": "Cobre parte do tema: ferramenta Migrate to Flow."
+    }
+  ]
 }

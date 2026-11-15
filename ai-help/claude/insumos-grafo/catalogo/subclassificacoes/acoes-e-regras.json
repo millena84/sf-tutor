@@ -4,7 +4,7 @@
   "sigla": "AUT-03",
   "classificacao": "cls:automacao-de-processos-e-regras-de-negocio",
   "natureza": "curadoria_didatica",
-  "descricao": "Ações reutilizáveis e regras que disparam comportamento.",
+  "descricao": "Regras que agem sobre leads e casos (atribuição, resposta automática e escalonamento) e ações rápidas oferecidas como botões.",
   "escopo": "Entram ações reutilizáveis e regras que disparam comportamento, como atribuição e escalonamento.",
   "fora_do_escopo": "Ações rápidas vistas como botão da interface ficam também em \"Ações rápidas\".",
   "para_iniciantes": {
@@ -12,6 +12,7 @@
     "exemplo": "Casos com prioridade alta vão para a fila de nível 1; leads do site vão para a equipe de inbound.",
     "por_onde_comecar": [
       "func:regras-de-atribuicao",
+      "func:regras-de-resposta-automatica",
       "func:acoes-rapidas"
     ],
     "evidencias": [
@@ -27,13 +28,16 @@
     ]
   },
   "encadeamento": {
-    "texto": "Ações rápidas também aparecem em Interface, como botões; regras de atribuição também servem a Vendas e Atendimento.",
+    "texto": "São três tipos de regra para leads e casos: atribuição define o dono, resposta automática envia o primeiro e-mail e escalonamento sobe o caso parado. Ações rápidas também aparecem em Interface, como botões; as regras também servem a Vendas e Atendimento.",
     "evidencias": [
       {
         "fonte": "src:help-quick-actions"
       },
       {
         "fonte": "src:help-assign-guide"
+      },
+      {
+        "fonte": "src:help-case-rules-overview"
       }
     ]
   },
@@ -41,10 +45,36 @@
     {
       "tipo": "limite",
       "titulo": "Uma regra ativa por tipo",
-      "texto": "Só uma regra de atribuição de cada tipo fica ativa por vez, e uma regra de atribuição de casos aceita até 3.000 entradas, incluindo 300 de fórmula.",
+      "texto": "Só uma regra de atribuição de cada tipo fica ativa por vez, e uma regra de atribuição de casos aceita até 3.000 entradas, incluindo 300 de fórmula. O mesmo vale para resposta automática: uma regra ativa para leads e uma para casos.",
       "evidencias": [
         {
           "fonte": "src:help-assign-guide"
+        },
+        {
+          "fonte": "src:help-auto-response-setup"
+        }
+      ]
+    },
+    {
+      "tipo": "atencao",
+      "titulo": "A primeira entrada que casar vence",
+      "texto": "Numa regra de resposta automática, as entradas são avaliadas em ordem e a regra para na primeira que casar. A ordem das entradas faz parte da lógica.",
+      "evidencias": [
+        {
+          "fonte": "src:help-auto-response-setup"
+        }
+      ]
+    },
+    {
+      "tipo": "decisao",
+      "titulo": "Resposta automática ou alerta de e-mail",
+      "texto": "A regra de resposta automática roda só na criação e responde a quem abriu o caso ou enviou o lead. Para avisar outras pessoas, ou reagir a edições, o caminho é outro: alerta de e-mail de workflow, hoje feito em Flow.",
+      "evidencias": [
+        {
+          "fonte": "src:help-auto-response-vs-workflow"
+        },
+        {
+          "fonte": "src:help-wf-pb-eos"
         }
       ]
     }
@@ -52,8 +82,21 @@
   "funcionalidades": [
     "func:acoes-rapidas",
     "func:regras-de-atribuicao",
+    "func:regras-de-resposta-automatica",
     "func:regras-de-validacao"
   ],
   "estado": "desconhecido",
-  "nota_estado": "Agrupamento proposto na especificação; fronteira ainda não cruzada com a documentação oficial."
+  "nota_estado": "Tema criado pelo projeto (00-especificacao-grafo.md), não é nomenclatura oficial da Salesforce. Cruzado em 2026-11-10 com áreas da documentação oficial listadas nas referências; a correspondência é parcial e o recorte continua sendo do projeto.",
+  "referencias_oficiais": [
+    {
+      "fonte": "src:help-case-rules-overview",
+      "secao": "Automate Case Processing with Rules",
+      "nota": "Cobre parte do tema: regras de atribuição, resposta automática e escalonamento."
+    },
+    {
+      "fonte": "src:help-quick-actions",
+      "secao": "Create a Lightning Component Action",
+      "nota": "Cobre parte do tema: ações rápidas, pelo caso da ação com componente Lightning."
+    }
+  ]
 }

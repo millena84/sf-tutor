@@ -318,24 +318,53 @@ CONTEUDO_CLS = {
             analogia=("Como as regras de uma linha de produção: cada etapa dispara a próxima sem alguém empurrar.",
                       "A automação só faz o que foi configurado: se a regra não prevê um caso, ele passa sem tratamento.")),
         "encadeamento": enc(
-            "Flow é a ferramenta declarativa principal e pode ser disparado por tela, por registro, por agendamento ou por outros gatilhos. "
-            "Decisões e aprovações organizam quem decide; regras definem dono e escalonamento; a automação Apex cobre o que exige código; "
-            "notificações avisam pessoas; e os mecanismos legados explicam ferramentas antigas e a migração para as atuais.",
-            E("src:mdapi-flow", "src:help-assign-guide", "src:help-escalation-setup", "src:help-produtos-platform")),
+            "Roteiro pelas seis seções do tema. 1) 'Flow e orquestração': a ferramenta declarativa principal, disparada por tela, por "
+            "registro ou por agendamento. 2) 'Decisões e aprovações': quem precisa aprovar antes de o processo seguir. 3) 'Ações e "
+            "regras': regras que definem dono, respondem e escalonam, e botões de ação. 4) 'Automação Apex': triggers e classes para o "
+            "que exige código. 5) 'Notificações': avisos a pessoas no fim da automação. 6) 'Mecanismos legados e migração': Workflow "
+            "Rules e Process Builder, e o caminho para Flow.",
+            E("src:mdapi-flow", "src:help-flow-types", "src:help-approvals-classic", "src:help-assign-guide", "src:help-escalation-setup",
+              "src:apex-triggers", "src:help-notif-builder", "src:help-wf-pb-eos", "src:help-produtos-platform")),
         "avancado": [
+            # 1) Flow e orquestração
             av("decisao", "Declarativo ou código",
                "A Ajuda separa as ferramentas declarativas de automação (experiências guiadas, automação em segundo plano e aprovações) "
                "da área de desenvolvimento com código. Para formulários, o guia de decisão lembra que no Screen Flow a lógica fica com "
                "administradores, enquanto LWC exige desenvolvimento.", E("src:help-produtos-platform", AF)),
-            av("limite", "Uma regra ativa por tipo",
-               "Só uma regra de atribuição de cada tipo fica ativa por vez, e uma regra de atribuição de casos aceita até 3.000 entradas, "
-               "incluindo 300 de fórmula.", E("src:help-assign-guide")),
             av("seguranca", "Contexto de execução do Screen Flow",
                "Screen Flow roda no contexto do usuário por padrão, mas pode rodar em contexto de sistema; esse modo deve ficar restrito a "
                "usuários confiáveis.", E(AF)),
+            av("limite", "Flow também tem governor limits",
+               "Flows seguem os limites da transação: 100 consultas SOQL, 150 instruções DML e 10.000 registros gravados. Um "
+               "record-triggered flow não faz chamada externa no caminho síncrono; isso vai para um caminho assíncrono ou agendado.",
+               E("src:help-flow-limits-transaction", "src:help-flow-record-triggered-considerations")),
+            # 2) Decisões e aprovações
+            av("decisao", "Duas formas de aprovação",
+               "Classic Approval Processes são presos a um objeto e travam a estrutura depois de ativados. Flow Approval Processes usam "
+               "stages e steps no Flow Builder e são a alternativa que a Ajuda recomenda experimentar.",
+               E("src:help-approvals-classic-considerations", "src:help-approvals-classic-manage", "src:help-flow-approvals-concepts")),
+            # 3) Ações e regras
+            av("limite", "Uma regra ativa por tipo",
+               "Só uma regra de atribuição de cada tipo fica ativa por vez, e uma regra de atribuição de casos aceita até 3.000 entradas, "
+               "incluindo 300 de fórmula. Resposta automática segue a mesma lógica: uma regra ativa para leads e uma para casos.",
+               E("src:help-assign-guide", "src:help-auto-response-setup")),
+            # 4) Automação Apex
+            av("atencao", "Ordem de execução ao salvar",
+               "Flows, triggers e regras reagem à mesma gravação numa ordem fixa: os record-triggered flows before-save rodam antes dos "
+               "before triggers, e as workflow rules vêm mais adiante. Misturar ferramentas no mesmo objeto exige conhecer essa ordem.",
+               E("src:apex-triggers-order")),
             av("atencao", "Chamada externa dentro da transação",
                "Em automação Apex, não é possível chamar um sistema externo depois de DML pendente na mesma transação. Faça a chamada antes "
                "ou leve-a para um processo assíncrono.", E("src:apex-callout-limits")),
+            # 5) Notificações
+            av("limite", "Notificação em excesso se perde",
+               "A org executa até 10.000 ações de notificação por hora; o que passar disso naquela hora é perdido, não enfileirado.",
+               E("src:help-notif-considerations")),
+            # 6) Mecanismos legados e migração
+            av("implantacao", "Legado continua rodando, sem suporte",
+               "Workflow Rules e Process Builder perderam o suporte em 31 de dezembro de 2025: o que existe continua rodando, mas sem "
+               "correção de bugs. A migração para Flow deve ser feita na mesma org do processo original e testada, porque a ordem de "
+               "execução muda.", E("src:help-wf-pb-eos", "src:help-migrate-to-flow-considerations")),
         ],
     },
     "cls:execucao-assincrona-lotes-e-agendamento": {

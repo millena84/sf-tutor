@@ -1,0 +1,129 @@
+Issue #34, item 3 (detalhamento dos temas principais): Automação de processos e regras de negócio. Leitura pelos resultados
+de busca restritos a help.salesforce.com e developer.salesforce.com, em 2026-11-15 (método leitura_resultado_busca: páginas
+não abertas por inteiro). Resumo em português; nomes de recursos, permissões e telas no original.
+Observação: nesta rodada o WebFetch das páginas da Metadata API ficou sem aprovação (pedido não respondido), então NENHUM
+metadata type foi lido por inteiro nem cadastrado. O que consta abaixo de páginas da Metadata API vem só do resumo da busca.
+
+-- Flow e orquestração
+[src:help-flow-types] Flow Types (https://help.salesforce.com/s/articleView?language=en_US&id=sf.flow_concepts_type.htm&type=5)
+  O tipo do flow define que elementos e recursos podem ser usados e como o flow é distribuído. Exemplos: um screen flow é
+  embutido numa página para coletar informações; um autolaunched flow roda em segundo plano, por exemplo a partir de um botão
+  customizado. O elemento Custom Error só existe em record-triggered flow; o recurso Choice, só em screen flow.
+[src:help-flow-triggered] Triggered Flows (https://help.salesforce.com/s/articleView?language=en_US&id=platform.flow_concepts_trigger.htm&type=5)
+  No elemento Start de um triggered flow define-se o que o inicia: um agendamento ou registros novos e alterados de um objeto.
+  Before-save record-triggered flows atualizam o próprio registro antes de ele ser gravado, até 10 vezes mais rápido que os
+  processos de mudança de registro. Scheduled paths rodam parte do flow num deslocamento de tempo depois do evento. O Flow
+  Trigger Explorer mostra, filtra e reordena os record-triggered flows de um objeto. Schedule-triggered flows começam em
+  hora e frequência definidas, para um lote de registros.
+[src:help-flow-record-triggered-considerations] Record-Triggered Flow Considerations (https://help.salesforce.com/s/articleView?id=platform.flow_considerations_trigger_record.htm&language=en_US&type=5)
+  Um record-triggered flow falha se tentar acessar dados externos no caminho síncrono, porque a Salesforce impede callouts
+  enquanto o registro está sendo gravado. Record-triggered flows rodam regras de validação customizadas. Um autolaunched flow
+  não pode referenciar um screen flow. Pela posição na ordem de execução, podem se comportar diferente de workflow rules
+  parecidas.
+[src:help-flow-transactions] How Flows Run in Transactions (https://help.salesforce.com/s/articleView?language=en_US&id=flow_concepts_transaction.htm&type=0)
+  Em cada transação valem governor limits, para que uma org não esgote recursos compartilhados. Desde o Winter '26, todo tipo
+  de flow pode decidir em tempo de execução se uma ação precisa de transação nova; em record-triggered flows, isso vale para
+  ações em caminho assíncrono ou agendado, não no caminho imediato.
+[src:help-flow-limits-transaction] Per-Transaction Flow Limits (https://help.salesforce.com/s/articleView?id=platform.flow_considerations_limit_transaction.htm&language=en_US&type=5)
+  Limites por transação: 100 consultas SOQL (execuções de Get Records e de Update/Delete Records com filtro), 50.000 registros
+  lidos por SOQL, 150 instruções DML (Create, Update e Delete Records) e 10.000 registros processados por DML.
+[src:help-flow-run-order] Define the Run Order of Record-Triggered Flows for an Object (https://help.salesforce.com/s/articleView?id=sf.flow_task_trigger_run_order.htm&language=en_US&type=5)
+  Ao salvar um record-triggered flow before-save ou after-save, informa-se um trigger order de 1 a 2.000. A ordem só vale
+  entre flows do mesmo objeto e do mesmo tipo de gatilho.
+[src:help-flow-scheduled-paths] Scheduled Paths (https://help.salesforce.com/s/articleView?language=en_US&id=platform.flow_concepts_trigger_scheduled_path.htm&type=5)
+  Batch size do caminho agendado: padrão e máximo 200, mínimo 1; ajuda a não bater no limite por transação. Se a execução
+  falha, um e-mail de erro é enviado e há nova tentativa 15 minutos depois, até 5 tentativas.
+[src:help-flow-schedule-triggered] Schedule-Triggered Flow Limits and Considerations (https://help.salesforce.com/s/articleView?language=en_US&id=platform.flow_considerations_trigger_schedule.htm&type=5)
+  Máximo de entrevistas de schedule-triggered flow por 24 horas: 250.000 ou 200 vezes o número de licenças de usuário, o que
+  for maior. Cada registro retornado pela consulta do flow cria uma entrevista.
+[src:help-orchestration-overview] Automate Complex Processes with Orchestrations (https://help.salesforce.com/s/articleView?language=en_US&id=sf.orchestrator_flow_orchestrator.htm&type=5)
+  Uma orquestração é uma sequência de stages, cada um com um ou mais steps. Interactive steps têm usuário atribuído e executam
+  um screen flow. Background steps chamam um autolaunched flow, síncrono ou assíncrono, sem interação. MuleSoft steps chamam
+  uma ação MuleSoft.
+[src:help-orchestration-types] Orchestrations (https://help.salesforce.com/s/articleView?id=platform.orchestrator_concept_orchestrations.htm&language=en_US&type=5)
+  Orquestrações são construídas no Flow Builder, pelos tiles de Flow Orchestration, sempre em Auto-Layout. Tipos: Autolaunched
+  Orchestration (No Trigger), chamada por Apex ou URL customizada; Record-Triggered Orchestration, disparada depois que o
+  registro é salvo; External System Change-Triggered Orchestration.
+[src:help-orchestration-steps] Orchestration Steps (https://help.salesforce.com/s/articleView?id=platform.orchestrator_concepts_steps.htm&language=en_US&type=5)
+  Steps ficam agrupados em stages e rodam em sequência ou ao mesmo tempo. Um interactive step atribui um screen flow ativo a
+  pessoa, grupo ou fila e gera um orchestration work item, concluído no Flow Orchestration Work Guide.
+
+-- Decisões e aprovações
+[src:help-approvals-classic] Classic Approval Processes (https://help.salesforce.com/s/articleView?language=en_US&id=sf.what_are_approvals.htm&type=5)
+  Um classic approval process automatiza como registros são aprovados: define cada passo, de quem pedir aprovação e o que fazer
+  em cada ponto. Exemplo da página: despesas em três níveis; ao submeter, o registro é bloqueado para edição; acima de certo
+  valor, segue para outro aprovador; aprovado tudo, o status muda e o registro é desbloqueado.
+[src:help-approvals-classic-limits] Classic Approval Processes Limits (https://help.salesforce.com/s/articleView?id=approvals_limits.htm&language=en_US)
+  Por org: 1.000 processos ativos e 2.000 no total; por objeto: 300 ativos e 500 no total. 30 passos por processo; 25
+  aprovadores por passo; 40 ações de cada tipo (submissão inicial, aprovação final, rejeição final, recall). Edições
+  Enterprise, Performance, Unlimited e Developer.
+[src:help-approvals-classic-considerations] Limits and Considerations for Classic Approval Processes (https://help.salesforce.com/s/articleView?id=platform.approvals_considerations.htm&language=en_US&type=5)
+  A página recomenda experimentar Flow Approval Processes, alternativa moderna: interface baseada em flow, disparo por mudança
+  de registro, extensão por Apex, log detalhado e roteamento dinâmico. Classic Approval Processes são presos a um objeto.
+[src:help-approvals-classic-manage] Considerations for Managing Classic Approval Processes (https://help.salesforce.com/s/articleView?language=en_US&id=platform.approvals_considerations_manage.htm&type=5)
+  Approval admins (Modify All Records no objeto ou Modify All Data) aprovam ou rejeitam sem fazer parte do processo e editam
+  registros bloqueados. O processo precisa de pelo menos um passo para ser ativado; recomenda-se testar em sandbox. Depois de
+  ativado, não dá para incluir, excluir ou reordenar passos nem mudar o comportamento de rejeição ou de pulo.
+[src:help-approvals-classic-prepare] Prepare to Create a Classic Approval Process (https://help.salesforce.com/s/articleView?id=approvals_checklist.htm&language=en_US&type=5)
+  Checklist: template de e-mail do pedido, remetente, aprovador atribuído e delegado, filtro de entrada, ações de submissão,
+  edição de registros em aprovação, níveis do processo. Classic não aceita o objeto User; Flow Approval Processes aceitam.
+[src:help-flow-approvals-concepts] Flow Approval Processes Concepts (https://help.salesforce.com/s/articleView?id=platform.automate_automated_approvals_concepts.htm&language=en_US&type=5)
+  Um flow approval process tem stages, steps e decisões; é construído no Flow Builder (tiles de Flow Approval Process) ou, o
+  autolaunched, no app Approvals. Approval steps criam work items para usuários, grupos ou filas e enviam e-mail aos
+  aprovadores.
+[src:help-flow-approvals-steps] Approval Steps (https://help.salesforce.com/s/articleView?language=en_US&id=platform.automate_automated_approvals_concepts_approval_step.htm&type=5)
+  Approval steps exigem interação e criam ações de aprovação que aprovadores ou delegados concluem de forma assíncrona. Um
+  flow approval process sem nenhum approval step sempre aprova a submissão. Para atualizar registros relacionados, usa-se um
+  background step depois do approval step.
+[src:help-flow-approvals-considerations] Considerations for Flow Approval Processes (https://help.salesforce.com/s/articleView?language=en_US&id=platform.automate_automated_approvals_considerations_orchestrations.htm&type=5)
+  Até 10 requirements para decidir quando um step começa ou quando um stage ou approval step termina. O registro referenciado
+  usa campos do próprio objeto, não de registro relacionado. Se os valores de entrada de um flow chamado por um step somam
+  mais de 32.768 caracteres, o processo falha.
+[src:mdapi-approvalprocess] ApprovalProcess (Metadata API) (https://developer.salesforce.com/docs/platform/api-metadata/references/meta-types/metadata-approvalprocess.html)
+  Do resumo da busca: componentes com sufixo .approvalProcess na pasta approvalProcesses; desde a API 28.0. O metadado não
+  inclui a ordem dos approval processes ativos. Send actions e approval processes de rascunhos de e-mail não são suportados.
+  Tabela de campos NÃO lida: tipo ainda não cadastrado.
+
+-- Ações e regras
+[src:help-auto-response-setup] Set Up Auto-Response Rules (https://help.salesforce.com/s/articleView?language=en_US&id=creating_auto-response_rules.htm&type=5)
+  Regras de resposta automática para leads de Web-to-Lead e para casos de Self-Service portal, Customer Portal, Web-to-Case,
+  Email-to-Case e On-Demand Email-to-Case. Só uma regra ativa para leads e uma para casos. As entradas são processadas em
+  ordem; a regra para na primeira que casar e envia o e-mail com o template indicado. Permissão Customize Application.
+[src:help-auto-response-vs-workflow] Differences Between Auto-Response Rules and Workflow Email Alerts (https://help.salesforce.com/apex/HTViewHelpDoc?id=rules_differences_auto_workflow.htm)
+  Auto-response rule: resposta inicial a quem criou o caso ou enviou o lead; roda só na criação; envia um e-mail, pela
+  primeira entrada que casar. Workflow email alert: aviso a quem se escolher; roda na criação ou edição.
+[src:help-case-rules-overview] Automate Case Processing with Rules (https://help.salesforce.com/s/articleView?id=sf.automation_rules_queues_parent.htm&language=en_US&type=5)
+  Regras para priorizar, distribuir, atribuir, responder e escalonar registros: assignment rules, auto-response rules e
+  escalation rules.
+[src:help-survey-case-feedback] Set Up a Customer Feedback Survey (https://help.salesforce.com/s/articleView?language=en_US&id=cases_set_up_lex_surveys.htm&type=0)
+  Usado só pelo caminho de Setup: Quick Find "Case Auto-Response Rules" > Case Auto-Response Rules.
+
+-- Automação Apex
+[src:apex-triggers] Triggers (Apex Developer Guide) (https://developer.salesforce.com/docs/platform/apex-dev/references/apex-dev/apex-triggers.html)
+  Um trigger é código Apex que roda antes ou depois de insert, update, delete, merge e upsert, e depois de undelete. Dá para
+  definir triggers em objetos padrão de primeiro nível e em objetos customizados.
+[src:apex-triggers-order] Triggers and Order of Execution (Apex Developer Guide) (https://developer.salesforce.com/docs/atlas.en-us.apexcode.meta/apexcode/apex_triggers_order_of_execution.htm)
+  Ao salvar um registro, a Salesforce segue uma ordem fixa: carrega o registro, aplica os novos valores, executa os
+  record-triggered flows before-save, depois todos os before triggers; mais adiante, as workflow rules.
+[src:apex-triggers-bulk] Bulk Triggers (Apex Developer Guide) (https://developer.salesforce.com/docs/platform/apex-dev/references/apex-dev/apex-triggers-bulk.html)
+  Todo trigger é bulk por padrão e pode receber vários registros de uma vez: importação de dados, Bulk API, ações em massa.
+  Deve-se sempre planejar para mais de um registro.
+[src:apex-triggers-defining] Defining Triggers (Apex Developer Guide) (https://developer.salesforce.com/docs/platform/apex-dev/references/apex-dev/apex-triggers-defining.html)
+  Na interface: object management settings do objeto > Triggers > New. Para Attachment, ContentDocument e Note, o trigger só
+  é criado por ferramentas de desenvolvimento ou Metadata API. Is Active compila e habilita o trigger.
+[src:apex-testing-best-practices] Testing Best Practices (Apex Developer Guide) (https://developer.salesforce.com/docs/platform/apex-dev/references/apex-dev/apex-testing-best-practices.html)
+  75% do código Apex precisa de cobertura de testes; todo trigger precisa de alguma cobertura. Recomenda testar em massa, com
+  pelo menos 20 registros.
+
+-- Notificações
+[src:help-notif-flow-example] Send a Custom Notification with a Flow (https://help.salesforce.com/s/articleView?language=en_US&id=platform.automate_flow_build_example_send_custom_notification.htm&type=5)
+  Setup: Quick Find "Notification Builder" > Custom Notifications > New. Notificações customizadas aparecem no sino e podem ir
+  para o desktop ou o app móvel. Permissões: View Setup and Configuration (ver tipos), Customize Application (criar e editar
+  tipos), Send Custom Notifications (enviar).
+[src:help-notif-considerations] Considerations for Notifications (https://help.salesforce.com/s/articleView?language=en_US&id=sf.notif_builder_considerations.htm&type=5)
+  Até 500 tipos customizados. Cada notificação alcança até 10.000 usuários, depois de expandir grupos, filas e equipes. Até
+  10.000 ações de notificação por hora; passado o limite, as notificações não enviadas naquela hora são perdidas. Título e
+  corpo aceitam só texto simples.
+[src:help-notif-builder] Manage Your Notifications with Notification Builder (https://help.salesforce.com/s/articleView?id=platform.notif_builder.htm&language=en_US&type=5)
+  Notification Builder reúne notificações customizadas de desktop e mobile, notificações customizadas de Slack e as
+  configurações de entrega (onde cada notificação aparece).

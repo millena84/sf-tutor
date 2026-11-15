@@ -53,10 +53,13 @@ P["sub:mecanismos-legados-e-migracao"] = {
     "para_iniciantes": ini("Workflow Rules e Process Builder são ferramentas antigas de automação. O suporte acabou em 31 de dezembro de 2025: "
                            "o que já existe continua rodando, mas sem suporte nem correção de bugs. O caminho é migrar para Flow.",
                            "Uma regra de workflow que só atualiza um campo é convertida pela ferramenta Migrate to Flow num flow de atualização rápida.",
-                           E("src:help-wf-pb-eos", "src:help-migrate-to-flow-considerations")),
+                           E("src:help-wf-pb-eos", "src:help-migrate-to-flow-considerations"), comece=["func:workflow-rules-e-process-builder"]),
     "encadeamento": enc("Explica de onde vêm automações antigas que ainda rodam na org; o destino da migração é 'Flow e orquestração'.",
                         E("src:help-wf-pb-eos", "src:mdapi-flow")),
     "avancado": [
+        av("atencao", "A ordem de execução muda na migração", "Workflow rules rodam num ponto da ordem de execução diferente do dos "
+           "record-triggered flows. Um flow que substitui uma regra pode se comportar diferente por causa disso.",
+           E("src:apex-triggers-order", "src:help-flow-record-triggered-considerations")),
         av("implantacao", "Migre na mesma org", "Migre o processo na mesma org do original, e não numa org intermediária para depois implantar: assim o flow trata as "
            "ações agendadas pendentes do processo antigo.", E("src:help-migrate-to-flow-considerations")),
         av("atencao", "O que a ferramenta não cobre", "A Migrate to Flow só aceita processos disparados por registro; processos com recursão avaliam o registro uma vez; "
@@ -68,10 +71,14 @@ P["sub:notificacoes"] = {
     "para_iniciantes": ini("Notificações customizadas avisam pessoas no desktop ou no celular quando algo acontece. Primeiro se cria um tipo de "
                            "notificação; depois, um flow, o Apex ou a REST API envia a notificação usando esse tipo.",
                            "Quando um caso de prioridade alta é aberto, um flow envia uma notificação à fila responsável, que abre o caso com um toque.",
-                           E("src:actions-custom-notification", "src:apex-customnotification")),
-    "encadeamento": enc("Costuma ser o último passo de uma automação; modelos de e-mail, outro canal de aviso, ficam em 'Templates e comunicação'.",
-                        E("src:actions-custom-notification")),
+                           E("src:actions-custom-notification", "src:apex-customnotification"), comece=["func:notificacoes-customizadas"]),
+    "encadeamento": enc("Costuma ser o último passo de uma automação; modelos de e-mail, outro canal de aviso, ficam em 'Templates e comunicação'. "
+                        "O Notification Builder também define onde cada notificação aparece: desktop, mobile ou Slack.",
+                        E("src:actions-custom-notification", "src:help-notif-builder")),
     "avancado": [
+        av("atencao", "Passou do limite, a notificação se perde", "A org executa até 10.000 ações de notificação por hora. Passado o limite, as "
+           "notificações daquela hora não são enviadas depois: são perdidas. Uma notificação alcança até 10.000 usuários, depois de expandir "
+           "grupos, filas e equipes, e aceita só texto simples.", E("src:help-notif-considerations")),
         av("seguranca", "Permissão para enviar", "Em orgs criadas no Winter '21 ou depois, a permissão Send Custom Notifications é exigida em flows no contexto do usuário, "
            "na REST API e no Apex; não é exigida em flows no contexto de sistema.", E("src:actions-custom-notification")),
         av("limite", "Destinatários e volume", "Cada envio aceita até 500 destinatários (usuários, equipes, grupos ou filas), com título de até 250 e corpo de até 750 "

@@ -3,6 +3,36 @@
     {
       "evidencias": [
         {
+          "fonte": "src:apex-triggers-order"
+        }
+      ],
+      "texto": "Ao salvar um registro, a plataforma segue uma ordem fixa: os record-triggered flows before-save rodam antes dos before triggers, e as workflow rules vêm mais adiante. Quem mistura flow, trigger e regra no mesmo objeto precisa conhecer essa ordem.",
+      "tipo": "atencao",
+      "titulo": "Ordem de execução ao salvar"
+    },
+    {
+      "evidencias": [
+        {
+          "fonte": "src:apex-triggers-bulk"
+        }
+      ],
+      "texto": "Um trigger pode receber vários registros de uma vez, em importações, Bulk API e ações em massa. O código deve sempre ser escrito para mais de um registro.",
+      "tipo": "escala",
+      "titulo": "Todo trigger é em massa"
+    },
+    {
+      "evidencias": [
+        {
+          "fonte": "src:apex-testing-best-practices"
+        }
+      ],
+      "texto": "Para implantar, 75% do código Apex precisa de cobertura de testes, e todo trigger precisa de alguma cobertura. A recomendação é testar em massa, com pelo menos 20 registros.",
+      "tipo": "implantacao",
+      "titulo": "Trigger exige teste"
+    },
+    {
+      "evidencias": [
+        {
           "fonte": "src:apex-callout-limits"
         }
       ],
@@ -24,29 +54,43 @@
   "classificacao": "cls:automacao-de-processos-e-regras-de-negocio",
   "derivado": {
     "dependencias": [],
-    "funcionalidades": [],
+    "funcionalidades": [
+      {
+        "alertas": [
+          "Um trigger pode receber vários registros de uma vez; o código deve ser escrito para mais de um registro."
+        ],
+        "exemplo": "Ao inserir itens de um pedido, um trigger confere o estoque de todos os itens de uma vez antes de gravar.",
+        "id": "func:apex-triggers",
+        "principal": true
+      }
+    ],
     "metadata_types": [],
     "nota": "Calculado pelo gerador a partir do catálogo; não é cadastro.",
     "objetos_api": [],
     "temas_sem_funcionalidade": []
   },
-  "descricao": "Triggers e classes Apex que automatizam processos.",
+  "descricao": "Triggers e classes Apex que automatizam o que as ferramentas declarativas não cobrem; o trigger roda antes ou depois de um registro ser inserido, alterado ou excluído.",
   "encadeamento": {
     "evidencias": [
       {
         "fonte": "src:apex-async-overview"
+      },
+      {
+        "fonte": "src:apex-triggers-order"
       }
     ],
-    "texto": "Apex que roda depois, em fila ou agendado, fica em 'Execução assíncrona, lotes e agendamento'."
+    "texto": "Triggers e record-triggered flows reagem à mesma gravação e têm posição definida na ordem de execução. Apex que roda depois, em fila ou agendado, fica em 'Execução assíncrona, lotes e agendamento'; testes e deploy ficam em 'Desenvolvimento, testes e entrega'."
   },
   "escopo": "Entram triggers e classes Apex usados para automatizar processos.",
   "estado": "desconhecido",
   "fora_do_escopo": "Apex assíncrono fica em \"Execução assíncrona, lotes e agendamento\". Código como artefato de entrega fica em \"Código e bundles\".",
-  "funcionalidades": [],
+  "funcionalidades": [
+    "func:apex-triggers"
+  ],
   "id": "sub:automacao-apex",
   "natureza": "curadoria_didatica",
   "nome": "Automação Apex",
-  "nota_estado": "Agrupamento proposto na especificação; fronteira ainda não cruzada com a documentação oficial.",
+  "nota_estado": "Tema criado pelo projeto (00-especificacao-grafo.md), não é nomenclatura oficial da Salesforce. Cruzado em 2026-11-10 com áreas da documentação oficial listadas nas referências; a correspondência é parcial e o recorte continua sendo do projeto.",
   "para_iniciantes": {
     "evidencias": [
       {
@@ -54,10 +98,28 @@
       },
       {
         "fonte": "src:help-produtos-platform"
+      },
+      {
+        "fonte": "src:apex-triggers"
       }
     ],
     "exemplo": "Um trigger grava o pedido e precisa avisar o ERP; a chamada externa tem de vir antes da gravação ou ir para um processo assíncrono.",
-    "explicacao": "Cobre triggers e classes Apex que automatizam processos quando as ferramentas declarativas não bastam."
+    "explicacao": "Cobre triggers e classes Apex que automatizam processos quando as ferramentas declarativas não bastam. Um trigger é código Apex que roda antes ou depois de um registro ser inserido, alterado ou excluído.",
+    "por_onde_comecar": [
+      "func:apex-triggers"
+    ]
   },
+  "referencias_oficiais": [
+    {
+      "fonte": "src:apex-triggers",
+      "nota": "Cobre o tema: triggers Apex.",
+      "secao": "Triggers"
+    },
+    {
+      "fonte": "src:apex-triggers-order",
+      "nota": "Cobre parte do tema: ordem de execução ao salvar um registro.",
+      "secao": "Triggers and Order of Execution"
+    }
+  ],
   "sigla": "AUT-04"
 }

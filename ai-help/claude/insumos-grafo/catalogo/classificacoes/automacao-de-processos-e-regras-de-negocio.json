@@ -31,16 +31,31 @@
     ]
   },
   "encadeamento": {
-    "texto": "Flow é a ferramenta declarativa principal e pode ser disparado por tela, por registro, por agendamento ou por outros gatilhos. Decisões e aprovações organizam quem decide; regras definem dono e escalonamento; a automação Apex cobre o que exige código; notificações avisam pessoas; e os mecanismos legados explicam ferramentas antigas e a migração para as atuais.",
+    "texto": "Roteiro pelas seis seções do tema. 1) 'Flow e orquestração': a ferramenta declarativa principal, disparada por tela, por registro ou por agendamento. 2) 'Decisões e aprovações': quem precisa aprovar antes de o processo seguir. 3) 'Ações e regras': regras que definem dono, respondem e escalonam, e botões de ação. 4) 'Automação Apex': triggers e classes para o que exige código. 5) 'Notificações': avisos a pessoas no fim da automação. 6) 'Mecanismos legados e migração': Workflow Rules e Process Builder, e o caminho para Flow.",
     "evidencias": [
       {
         "fonte": "src:mdapi-flow"
+      },
+      {
+        "fonte": "src:help-flow-types"
+      },
+      {
+        "fonte": "src:help-approvals-classic"
       },
       {
         "fonte": "src:help-assign-guide"
       },
       {
         "fonte": "src:help-escalation-setup"
+      },
+      {
+        "fonte": "src:apex-triggers"
+      },
+      {
+        "fonte": "src:help-notif-builder"
+      },
+      {
+        "fonte": "src:help-wf-pb-eos"
       },
       {
         "fonte": "src:help-produtos-platform"
@@ -62,16 +77,6 @@
       ]
     },
     {
-      "tipo": "limite",
-      "titulo": "Uma regra ativa por tipo",
-      "texto": "Só uma regra de atribuição de cada tipo fica ativa por vez, e uma regra de atribuição de casos aceita até 3.000 entradas, incluindo 300 de fórmula.",
-      "evidencias": [
-        {
-          "fonte": "src:help-assign-guide"
-        }
-      ]
-    },
-    {
       "tipo": "seguranca",
       "titulo": "Contexto de execução do Screen Flow",
       "texto": "Screen Flow roda no contexto do usuário por padrão, mas pode rodar em contexto de sistema; esse modo deve ficar restrito a usuários confiáveis.",
@@ -82,12 +87,87 @@
       ]
     },
     {
+      "tipo": "limite",
+      "titulo": "Flow também tem governor limits",
+      "texto": "Flows seguem os limites da transação: 100 consultas SOQL, 150 instruções DML e 10.000 registros gravados. Um record-triggered flow não faz chamada externa no caminho síncrono; isso vai para um caminho assíncrono ou agendado.",
+      "evidencias": [
+        {
+          "fonte": "src:help-flow-limits-transaction"
+        },
+        {
+          "fonte": "src:help-flow-record-triggered-considerations"
+        }
+      ]
+    },
+    {
+      "tipo": "decisao",
+      "titulo": "Duas formas de aprovação",
+      "texto": "Classic Approval Processes são presos a um objeto e travam a estrutura depois de ativados. Flow Approval Processes usam stages e steps no Flow Builder e são a alternativa que a Ajuda recomenda experimentar.",
+      "evidencias": [
+        {
+          "fonte": "src:help-approvals-classic-considerations"
+        },
+        {
+          "fonte": "src:help-approvals-classic-manage"
+        },
+        {
+          "fonte": "src:help-flow-approvals-concepts"
+        }
+      ]
+    },
+    {
+      "tipo": "limite",
+      "titulo": "Uma regra ativa por tipo",
+      "texto": "Só uma regra de atribuição de cada tipo fica ativa por vez, e uma regra de atribuição de casos aceita até 3.000 entradas, incluindo 300 de fórmula. Resposta automática segue a mesma lógica: uma regra ativa para leads e uma para casos.",
+      "evidencias": [
+        {
+          "fonte": "src:help-assign-guide"
+        },
+        {
+          "fonte": "src:help-auto-response-setup"
+        }
+      ]
+    },
+    {
+      "tipo": "atencao",
+      "titulo": "Ordem de execução ao salvar",
+      "texto": "Flows, triggers e regras reagem à mesma gravação numa ordem fixa: os record-triggered flows before-save rodam antes dos before triggers, e as workflow rules vêm mais adiante. Misturar ferramentas no mesmo objeto exige conhecer essa ordem.",
+      "evidencias": [
+        {
+          "fonte": "src:apex-triggers-order"
+        }
+      ]
+    },
+    {
       "tipo": "atencao",
       "titulo": "Chamada externa dentro da transação",
       "texto": "Em automação Apex, não é possível chamar um sistema externo depois de DML pendente na mesma transação. Faça a chamada antes ou leve-a para um processo assíncrono.",
       "evidencias": [
         {
           "fonte": "src:apex-callout-limits"
+        }
+      ]
+    },
+    {
+      "tipo": "limite",
+      "titulo": "Notificação em excesso se perde",
+      "texto": "A org executa até 10.000 ações de notificação por hora; o que passar disso naquela hora é perdido, não enfileirado.",
+      "evidencias": [
+        {
+          "fonte": "src:help-notif-considerations"
+        }
+      ]
+    },
+    {
+      "tipo": "implantacao",
+      "titulo": "Legado continua rodando, sem suporte",
+      "texto": "Workflow Rules e Process Builder perderam o suporte em 31 de dezembro de 2025: o que existe continua rodando, mas sem correção de bugs. A migração para Flow deve ser feita na mesma org do processo original e testada, porque a ordem de execução muda.",
+      "evidencias": [
+        {
+          "fonte": "src:help-wf-pb-eos"
+        },
+        {
+          "fonte": "src:help-migrate-to-flow-considerations"
         }
       ]
     }

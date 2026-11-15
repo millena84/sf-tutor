@@ -588,3 +588,74 @@ _f("src:help-digital-experiences-enable", "Enable Digital Experiences (Salesforc
    "Caminho no Setup, domínio dos sites e irreversibilidade da ativação.", **AJ)
 _f("src:help-experience-org-setup", "Set Up and Configure Your Org for Experience Cloud Sites (Salesforce Help)",
    _H + "experience.networks_setup_maintain_communities.htm&language=en_US&type=5", "Preparação da org antes do primeiro site.", **AJ)
+
+
+# ====================================================================== Automação de processos e regras de negócio
+# Só fontes: o conteúdo destes temas internos é editado no lugar (conteudo_sub.py e conteudo_pendentes.py).
+_EXT = "fontes/extracoes/temas-detalhe-automacao.txt"
+_DATA = "2026-11-15"
+_AX = "https://developer.salesforce.com/docs/platform/apex-dev/references/apex-dev/"
+
+_f("src:help-flow-types", "Flow Types (Salesforce Help)", _H + "sf.flow_concepts_type.htm&language=en_US&type=5",
+   "O que o tipo de um flow determina.", **AJ)
+_f("src:help-flow-triggered", "Triggered Flows (Salesforce Help)", _H + "platform.flow_concepts_trigger.htm&language=en_US&type=5",
+   "Gatilhos de flow: registro, agendamento, before-save e scheduled paths.", **AJ)
+_f("src:help-flow-record-triggered-considerations", "Record-Triggered Flow Considerations (Salesforce Help)",
+   _H + "platform.flow_considerations_trigger_record.htm&language=en_US&type=5", "Comportamentos e restrições de record-triggered flows.", **AJ)
+_f("src:help-flow-transactions", "How Flows Run in Transactions (Salesforce Help)", _H + "flow_concepts_transaction.htm&language=en_US&type=0",
+   "Flows e transações; controle de transação por ação.", **AJ)
+_f("src:help-flow-limits-transaction", "Per-Transaction Flow Limits (Salesforce Help)", _H + "platform.flow_considerations_limit_transaction.htm&language=en_US&type=5",
+   "Limites de SOQL e DML por transação em flows.", **AJ)
+_f("src:help-flow-run-order", "Define the Run Order of Record-Triggered Flows for an Object (Salesforce Help)",
+   _H + "sf.flow_task_trigger_run_order.htm&language=en_US&type=5", "Ordem de execução entre record-triggered flows do mesmo objeto.", **AJ)
+_f("src:help-flow-scheduled-paths", "Scheduled Paths (Salesforce Help)", _H + "platform.flow_concepts_trigger_scheduled_path.htm&language=en_US&type=5",
+   "Batch size e novas tentativas de caminhos agendados.", **AJ)
+_f("src:help-flow-schedule-triggered", "Schedule-Triggered Flow Limits and Considerations (Salesforce Help)",
+   _H + "platform.flow_considerations_trigger_schedule.htm&language=en_US&type=5", "Limite diário de entrevistas de schedule-triggered flows.", **AJ)
+_f("src:help-orchestration-overview", "Automate Complex Processes with Orchestrations (Salesforce Help)",
+   _H + "sf.orchestrator_flow_orchestrator.htm&language=en_US&type=5", "O que é uma orquestração: stages e tipos de step.", **AJ)
+_f("src:help-orchestration-types", "Orchestrations (Salesforce Help)", _H + "platform.orchestrator_concept_orchestrations.htm&language=en_US&type=5",
+   "Tipos de orquestração e onde são construídas.", **AJ)
+_f("src:help-orchestration-steps", "Orchestration Steps (Salesforce Help)", _H + "platform.orchestrator_concepts_steps.htm&language=en_US&type=5",
+   "Steps interativos, de segundo plano e work items.", **AJ)
+_f("src:help-approvals-classic", "Classic Approval Processes (Salesforce Help)", _H + "sf.what_are_approvals.htm&language=en_US&type=5",
+   "O que é um classic approval process.", **AJ)
+_f("src:help-approvals-classic-limits", "Classic Approval Processes Limits (Salesforce Help)", _H + "approvals_limits.htm&language=en_US",
+   "Limites de processos, passos, aprovadores e ações.", **AJ)
+_f("src:help-approvals-classic-considerations", "Limits and Considerations for Classic Approval Processes (Salesforce Help)",
+   _H + "platform.approvals_considerations.htm&language=en_US&type=5", "Recomendação de Flow Approval Processes e diferenças para o Classic.", **AJ)
+_f("src:help-approvals-classic-manage", "Considerations for Managing Classic Approval Processes (Salesforce Help)",
+   _H + "platform.approvals_considerations_manage.htm&language=en_US&type=5", "Approval admins e restrições depois da ativação.", **AJ)
+_f("src:help-approvals-classic-prepare", "Prepare to Create a Classic Approval Process (Salesforce Help)", _H + "approvals_checklist.htm&language=en_US&type=5",
+   "Checklist antes de criar um classic approval process.", **AJ)
+_f("src:help-flow-approvals-concepts", "Flow Approval Processes Concepts (Salesforce Help)",
+   _H + "platform.automate_automated_approvals_concepts.htm&language=en_US&type=5", "Blocos de um flow approval process.", **AJ)
+_f("src:help-flow-approvals-steps", "Approval Steps (Salesforce Help)", _H + "platform.automate_automated_approvals_concepts_approval_step.htm&language=en_US&type=5",
+   "Como funcionam os approval steps.", **AJ)
+_f("src:help-flow-approvals-considerations", "Considerations for Flow Approval Processes (Salesforce Help)",
+   _H + "platform.automate_automated_approvals_considerations_orchestrations.htm&language=en_US&type=5", "Limites de requirements e de entradas.", **AJ)
+_f("src:mdapi-approvalprocess", "ApprovalProcess (Metadata API)",
+   "https://developer.salesforce.com/docs/platform/api-metadata/references/meta-types/metadata-approvalprocess.html",
+   "Sufixo, pasta, versão e notas de uso do tipo ApprovalProcess (tabela de campos não lida; tipo não cadastrado).", **DOC)
+_f("src:help-auto-response-setup", "Set Up Auto-Response Rules (Salesforce Help)", _H + "creating_auto-response_rules.htm&language=en_US&type=5",
+   "Onde valem as regras de resposta automática e como as entradas são processadas.", **AJ)
+_f("src:help-auto-response-vs-workflow", "Differences Between Auto-Response Rules and Workflow Email Alerts (Salesforce Help)",
+   "https://help.salesforce.com/apex/HTViewHelpDoc?id=rules_differences_auto_workflow.htm", "Quando usar resposta automática e quando usar alerta de e-mail.", **AJ)
+_f("src:help-case-rules-overview", "Automate Case Processing with Rules (Salesforce Help)", _H + "sf.automation_rules_queues_parent.htm&language=en_US&type=5",
+   "Visão das regras de atribuição, resposta automática e escalonamento.", **AJ)
+_f("src:help-survey-case-feedback", "Set Up a Customer Feedback Survey (Salesforce Help)", _H + "cases_set_up_lex_surveys.htm&language=en_US&type=0",
+   "Caminho de Setup das regras de resposta automática de casos.", **AJ)
+_f("src:apex-triggers", "Triggers (Apex Developer Guide)", _AX + "apex-triggers.html", "O que é um trigger Apex e em que operações roda.", **DOC)
+_f("src:apex-triggers-order", "Triggers and Order of Execution (Apex Developer Guide)",
+   "https://developer.salesforce.com/docs/atlas.en-us.apexcode.meta/apexcode/apex_triggers_order_of_execution.htm",
+   "Ordem de execução ao salvar um registro.", **DOC)
+_f("src:apex-triggers-bulk", "Bulk Triggers (Apex Developer Guide)", _AX + "apex-triggers-bulk.html", "Triggers recebem vários registros de uma vez.", **DOC)
+_f("src:apex-triggers-defining", "Defining Triggers (Apex Developer Guide)", _AX + "apex-triggers-defining.html", "Onde criar um trigger na interface.", **DOC)
+_f("src:apex-testing-best-practices", "Testing Best Practices (Apex Developer Guide)", _AX + "apex-testing-best-practices.html",
+   "Cobertura de testes exigida para Apex e triggers.", **DOC)
+_f("src:help-notif-flow-example", "Send a Custom Notification with a Flow (Salesforce Help)",
+   _H + "platform.automate_flow_build_example_send_custom_notification.htm&language=en_US&type=5", "Caminho de Setup e permissões de notificações customizadas.", **AJ)
+_f("src:help-notif-considerations", "Considerations for Notifications (Salesforce Help)", _H + "sf.notif_builder_considerations.htm&language=en_US&type=5",
+   "Limites de tipos, destinatários e ações por hora.", **AJ)
+_f("src:help-notif-builder", "Manage Your Notifications with Notification Builder (Salesforce Help)", _H + "platform.notif_builder.htm&language=en_US&type=5",
+   "O que o Notification Builder reúne.", **AJ)

@@ -4,29 +4,42 @@
   "sigla": "AUT-01",
   "classificacao": "cls:automacao-de-processos-e-regras-de-negocio",
   "natureza": "curadoria_didatica",
-  "descricao": "Fluxos declarativos e orquestrações de várias etapas.",
+  "descricao": "Flows, a automação declarativa feita no Flow Builder e disparada por tela, registro ou agendamento, e orquestrações, que encadeiam flows em etapas com passos para pessoas e passos automáticos.",
   "escopo": "Entram os fluxos declarativos e as orquestrações de várias etapas.",
   "fora_do_escopo": "Caminhos assíncronos de um fluxo ficam em \"Caminhos assíncronos\". Versões e implantação de fluxos ficam em \"Versionamento, deploy e recuperação\".",
   "para_iniciantes": {
-    "explicacao": "Flow é a automação declarativa feita no Flow Builder, com elementos, variáveis e decisões. Pode começar por uma tela, pela gravação de um registro, por um agendamento ou por outros gatilhos.",
+    "explicacao": "Flow é a automação declarativa feita no Flow Builder, com elementos, variáveis e decisões. Pode começar por uma tela, pela gravação de um registro, por um agendamento ou por outros gatilhos. Uma orquestração junta vários flows num processo de etapas, com passos para pessoas e passos automáticos.",
     "exemplo": "Atualizar o status do contrato quando a assinatura é registrada.",
     "por_onde_comecar": [
-      "func:flow"
+      "func:flow",
+      "func:flow-orchestration"
     ],
     "evidencias": [
       {
         "fonte": "src:mdapi-flow"
+      },
+      {
+        "fonte": "src:help-flow-types"
+      },
+      {
+        "fonte": "src:help-orchestration-overview"
       }
     ]
   },
   "encadeamento": {
-    "texto": "É a ferramenta principal do tema. Screen Flows também aparecem em Interface, como opção para formulários de várias telas.",
+    "texto": "É a ferramenta principal do tema. O tipo do flow define o que ele pode conter e como é distribuído: screen flow para telas, autolaunched para segundo plano, record-triggered para reagir a registros. Screen Flows também aparecem em Interface, como opção para formulários de várias telas. Aprovações feitas com flow ficam em 'Decisões e aprovações'.",
     "evidencias": [
       {
         "fonte": "src:mdapi-flow"
       },
       {
         "fonte": "src:architect-build-forms"
+      },
+      {
+        "fonte": "src:help-flow-types"
+      },
+      {
+        "fonte": "src:help-flow-triggered"
       }
     ]
   },
@@ -50,11 +63,97 @@
           "fonte": "src:architect-build-forms"
         }
       ]
+    },
+    {
+      "tipo": "decisao",
+      "titulo": "Antes ou depois de salvar",
+      "texto": "Um record-triggered flow before-save altera o próprio registro antes da gravação e é bem mais rápido. Para o resto, usa-se after-save. Chamada a sistema externo não cabe no caminho síncrono: a Salesforce impede callouts enquanto o registro é gravado.",
+      "evidencias": [
+        {
+          "fonte": "src:help-flow-triggered"
+        },
+        {
+          "fonte": "src:help-flow-record-triggered-considerations"
+        }
+      ]
+    },
+    {
+      "tipo": "limite",
+      "titulo": "Limites por transação",
+      "texto": "Flows seguem os governor limits da transação: 100 consultas SOQL, 50.000 registros lidos, 150 instruções DML e 10.000 registros gravados. Get Records, Create, Update e Delete Records contam para esses totais.",
+      "evidencias": [
+        {
+          "fonte": "src:help-flow-limits-transaction"
+        },
+        {
+          "fonte": "src:help-flow-transactions"
+        }
+      ]
+    },
+    {
+      "tipo": "atencao",
+      "titulo": "Ordem entre flows do mesmo objeto",
+      "texto": "Cada record-triggered flow recebe um trigger order de 1 a 2.000. A ordem só vale entre flows do mesmo objeto e do mesmo tipo de gatilho; o Flow Trigger Explorer mostra e reordena todos.",
+      "evidencias": [
+        {
+          "fonte": "src:help-flow-run-order"
+        },
+        {
+          "fonte": "src:help-flow-triggered"
+        }
+      ]
+    },
+    {
+      "tipo": "escala",
+      "titulo": "Caminhos agendados e flows agendados",
+      "texto": "Um scheduled path processa até 200 registros por lote e tenta de novo até 5 vezes depois de falhar. Schedule-triggered flows têm teto diário de entrevistas: 250.000 ou 200 por licença de usuário, o que for maior.",
+      "evidencias": [
+        {
+          "fonte": "src:help-flow-scheduled-paths"
+        },
+        {
+          "fonte": "src:help-flow-schedule-triggered"
+        }
+      ]
+    },
+    {
+      "tipo": "decisao",
+      "titulo": "Quando usar orquestração",
+      "texto": "Uma orquestração tem stages, e cada stage tem steps. O interactive step atribui um screen flow a uma pessoa, grupo ou fila e gera um work item; o background step roda um autolaunched flow sem interação. Serve a processos longos, com várias pessoas e esperas.",
+      "evidencias": [
+        {
+          "fonte": "src:help-orchestration-overview"
+        },
+        {
+          "fonte": "src:help-orchestration-steps"
+        },
+        {
+          "fonte": "src:help-orchestration-types"
+        }
+      ]
     }
   ],
   "funcionalidades": [
-    "func:flow"
+    "func:flow",
+    "func:flow-orchestration"
   ],
   "estado": "desconhecido",
-  "nota_estado": "Agrupamento proposto na especificação; fronteira ainda não cruzada com a documentação oficial."
+  "nota_estado": "Tema criado pelo projeto (00-especificacao-grafo.md), não é nomenclatura oficial da Salesforce. Cruzado em 2026-11-10 com áreas da documentação oficial listadas nas referências; a correspondência é parcial e o recorte continua sendo do projeto.",
+  "referencias_oficiais": [
+    {
+      "fonte": "src:help-flow-types",
+      "secao": "Flow Types",
+      "nota": "Cobre parte do tema: tipos de flow."
+    },
+    {
+      "fonte": "src:help-flow-triggered",
+      "secao": "Triggered Flows",
+      "nota": "Cobre parte do tema: flows disparados por registro e por agendamento."
+    },
+    {
+      "fonte": "src:help-orchestration-overview",
+      "secao": "Automate Complex Processes with Orchestrations",
+      "nota": "Cobre parte do tema: Flow Orchestration."
+    }
+  ]
 }
