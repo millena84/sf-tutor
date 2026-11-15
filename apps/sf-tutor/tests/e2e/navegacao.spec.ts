@@ -222,15 +222,23 @@ test('desktop: "Mostrar no mapa" só aparece no modo leitura e volta ao mapa com
 });
 
 test('"Sobre este tema" mostra as três camadas na mesma ordem em tema e tema interno (#34)', async ({ page }) => {
-  for (const id of ['cls:integracao-apis-e-eventos', 'sub:acoes-e-regras', 'cls:interface-e-experiencia-do-usuario']) {
+  // [id, tem referências oficiais próprias]. 'sub:prompts' é do último tema da fila de detalhamento (IA e agentes):
+  // quando ele ganhar referências, troque por outro tema interno sem referências ou remova o caso.
+  const casos: [string, boolean][] = [
+    ['cls:integracao-apis-e-eventos', true],
+    ['sub:acoes-e-regras', true],
+    ['sub:prompts', false],
+    ['cls:interface-e-experiencia-do-usuario', true],
+  ];
+  for (const [id, comReferencias] of casos) {
     await abrir(page, `?n=${id}`);
     await expect(painel(page).locator('.tipo-no')).toHaveText(/Tema/);
     // cabeçalho mostra o estado do recorte, não o estado bruto
     await expect(painel(page).locator('.linha-selos')).not.toContainText('Desconhecido');
-    await expect(painel(page).locator('.linha-selos .selo-recorte')).toHaveText(id.startsWith('cls:') ? 'Parcialmente conferido' : 'Curadoria do projeto');
+    await expect(painel(page).locator('.linha-selos .selo-recorte')).toHaveText(comReferencias ? 'Parcialmente conferido' : 'Curadoria do projeto');
     const sobre = await secao(page, /^Sobre este tema$/);
     await expect(sobre.locator('.camada > h4')).toHaveText(['Para quem está começando', 'Para quem já conhece Salesforce']);
-    await expect(sobre).toContainText(/Funcionalidades \(\d+\)/);
+    if (id !== 'sub:prompts') await expect(sobre).toContainText(/Funcionalidades \(\d+\)/);
     const avancado = sobre.locator('details.camada-avancada');
     await expect(avancado.locator('summary').first()).toHaveText('Nível avançado');
     expect(await avancado.evaluate((d) => (d as HTMLDetailsElement).open)).toBe(false);
@@ -238,7 +246,7 @@ test('"Sobre este tema" mostra as três camadas na mesma ordem em tema e tema in
     const recorte = avancado.locator('details.sobre-recorte');
     await recorte.locator('summary').click();
     await expect(recorte.locator('h5')).toContainText(['O que entra neste tema', 'O que fica fora e onde procurar', 'Correspondência com referências oficiais']);
-    if (id.startsWith('cls:')) {
+    if (comReferencias) {
       await expect(recorte).toContainText('Parcialmente conferido');
       await expect(recorte.locator('ul.fontes li').first()).toContainText(/Cobre (o tema|parte do tema)|Mais ampla que o tema/);
     } else {
@@ -260,7 +268,8 @@ test('tema com conteúdo próprio: exemplo, comece por, encadeamento e decisões
   const c2 = sobre.locator('.camada').nth(1);
   await expect(c2.locator('h5').first()).toHaveText('Como as partes se ligam');
   await expect(c2).toContainText('FlexiPage');
-  await expect(c2).toContainText('Experiências web/portais e mobile');
+  // tema interno ainda sem funcionalidade, listado no fim da camada
+  await expect(c2).toContainText('Acessibilidade e personalização');
   const avancado = sobre.locator('details.camada-avancada');
   await avancado.locator('summary').first().click();
   await expect(avancado.locator('.item-avancado h5')).toContainText(['Decisão: Qual ferramenta usar para um formulário', 'Segurança: A página não é controle de acesso']);

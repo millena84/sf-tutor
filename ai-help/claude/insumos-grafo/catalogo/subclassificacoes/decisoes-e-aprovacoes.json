@@ -4,27 +4,124 @@
   "sigla": "AUT-02",
   "classificacao": "cls:automacao-de-processos-e-regras-de-negocio",
   "natureza": "curadoria_didatica",
-  "descricao": "Processos de aprovação e pontos de decisão.",
+  "descricao": "Os pontos em que alguém precisa aprovar antes de o processo seguir: Classic Approval Processes, presos a um objeto, e Flow Approval Processes, construídos no Flow Builder.",
   "escopo": "Entram os processos de aprovação e os pontos de decisão de um processo.",
   "fora_do_escopo": "Decisões assistidas por IA ficam em \"IA, agentes e decisões assistidas\".",
   "para_iniciantes": {
-    "explicacao": "Organiza os pontos em que alguém precisa decidir antes de o processo seguir, como aprovar um desconto ou um contrato.",
-    "exemplo": "Um desconto acima do padrão vai para aprovação do gestor antes de a cotação ser enviada.",
+    "explicacao": "Organiza os pontos em que alguém precisa decidir antes de o processo seguir, como aprovar um desconto ou um contrato. Um approval process define cada passo, de quem pedir a aprovação e o que acontece em cada ponto. Há duas formas: Classic Approval Processes e Flow Approval Processes.",
+    "exemplo": "Um desconto acima do padrão vai para aprovação do gestor antes de a cotação ser enviada. Enquanto espera, o registro fica bloqueado para edição.",
+    "por_onde_comecar": [
+      "func:processos-de-aprovacao"
+    ],
     "evidencias": [
       {
         "fonte": "src:help-produtos-platform"
+      },
+      {
+        "fonte": "src:help-approvals-classic"
+      },
+      {
+        "fonte": "src:help-flow-approvals-concepts"
       }
     ]
   },
   "encadeamento": {
-    "texto": "A Ajuda reúne aprovações entre as ferramentas declarativas de automação, ao lado de experiências guiadas e automação em segundo plano.",
+    "texto": "A Ajuda reúne aprovações entre as ferramentas declarativas de automação. Flow Approval Processes usam stages e steps, como as orquestrações de 'Flow e orquestração'. As ações de uma aprovação clássica, como atualizar campo e enviar e-mail, são as mesmas das workflow rules de 'Mecanismos legados e migração'.",
     "evidencias": [
       {
         "fonte": "src:help-produtos-platform"
+      },
+      {
+        "fonte": "src:help-flow-approvals-concepts"
+      },
+      {
+        "fonte": "src:help-approvals-classic"
       }
     ]
   },
-  "funcionalidades": [],
+  "avancado": [
+    {
+      "tipo": "decisao",
+      "titulo": "Classic ou Flow Approval Process",
+      "texto": "A Ajuda apresenta Flow Approval Processes como alternativa moderna: interface baseada em flow, disparo por mudança de registro, roteamento dinâmico e log detalhado. O processo clássico é preso a um objeto e não aceita o objeto User; o baseado em flow aceita.",
+      "evidencias": [
+        {
+          "fonte": "src:help-approvals-classic-considerations"
+        },
+        {
+          "fonte": "src:help-approvals-classic-prepare"
+        }
+      ]
+    },
+    {
+      "tipo": "limite",
+      "titulo": "Limites do processo clássico",
+      "texto": "Por org, até 1.000 processos ativos e 2.000 no total; por objeto, 300 ativos e 500 no total. Cada processo aceita 30 passos, 25 aprovadores por passo e 40 ações de cada tipo.",
+      "evidencias": [
+        {
+          "fonte": "src:help-approvals-classic-limits"
+        }
+      ]
+    },
+    {
+      "tipo": "atencao",
+      "titulo": "Depois de ativar, a estrutura trava",
+      "texto": "Um processo clássico ativado não aceita incluir, excluir ou reordenar passos, nem mudar o comportamento de rejeição. Precisa de pelo menos um passo para ser ativado; a Ajuda recomenda testar em sandbox.",
+      "evidencias": [
+        {
+          "fonte": "src:help-approvals-classic-manage"
+        }
+      ]
+    },
+    {
+      "tipo": "seguranca",
+      "titulo": "Approval admins",
+      "texto": "Quem tem Modify All Records no objeto ou Modify All Data aprova ou rejeita pedidos sem fazer parte do processo e edita registros bloqueados para aprovação.",
+      "evidencias": [
+        {
+          "fonte": "src:help-approvals-classic-manage"
+        }
+      ]
+    },
+    {
+      "tipo": "atencao",
+      "titulo": "Flow approval process sem approval step",
+      "texto": "Sem nenhum approval step, a submissão é sempre aprovada. Atualizações de registros relacionados vão num background step depois do approval step. Cada condição de início ou de conclusão aceita até 10 requirements.",
+      "evidencias": [
+        {
+          "fonte": "src:help-flow-approvals-steps"
+        },
+        {
+          "fonte": "src:help-flow-approvals-considerations"
+        }
+      ]
+    },
+    {
+      "tipo": "implantacao",
+      "titulo": "Como metadado",
+      "texto": "O processo clássico é o metadata type ApprovalProcess: arquivos com sufixo .approvalProcess na pasta approvalProcesses. O metadado não guarda a ordem dos processos ativos, então pode ser preciso reordená-los depois do deploy. Implantar um processo sem entry criteria sobre um que já tem mantém os critérios antigos.",
+      "evidencias": [
+        {
+          "fonte": "src:mdapi-approvalprocess"
+        }
+      ]
+    }
+  ],
+  "funcionalidades": [
+    "func:processos-de-aprovacao"
+  ],
   "estado": "desconhecido",
-  "nota_estado": "Agrupamento proposto na especificação; fronteira ainda não cruzada com a documentação oficial."
+  "nota_estado": "Tema criado pelo projeto (00-especificacao-grafo.md), não é nomenclatura oficial da Salesforce. Cruzado em 2026-11-10 com áreas da documentação oficial listadas nas referências; a correspondência é parcial e o recorte continua sendo do projeto.",
+  "referencias_oficiais": [
+    {
+      "fonte": "src:help-approvals-classic",
+      "secao": "Classic Approval Processes",
+      "nota": "Cobre parte do tema: processos de aprovação clássicos."
+    },
+    {
+      "fonte": "src:help-flow-approvals-concepts",
+      "secao": "Flow Approval Processes Concepts",
+      "nota": "Cobre parte do tema: processos de aprovação baseados em flow."
+    }
+  ]
 }

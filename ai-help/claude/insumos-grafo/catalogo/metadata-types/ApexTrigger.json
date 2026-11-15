@@ -1,0 +1,375 @@
+{
+  "id": "mdt:ApexTrigger",
+  "nome": "ApexTrigger",
+  "o_que_e": "Um trigger Apex: código que roda antes ou depois de eventos de gravação (DML) num objeto.",
+  "finalidade": "Versionar e implantar triggers junto com o resto do código da org.",
+  "estende": "MetadataWithContent",
+  "arquivos": {
+    "source_format": {
+      "estado": "verificado",
+      "valor": {
+        "pasta": "triggers/",
+        "arquivo": "<Nome>.trigger-meta.xml"
+      },
+      "nota": "Pasta e sufixo do registro do Salesforce CLI; sufixo '-meta.xml' segue a convenção do source format.",
+      "evidencias": [
+        {
+          "fonte": "src:sdr-registry",
+          "nota": "types.apextrigger"
+        }
+      ]
+    },
+    "metadata_api_format": {
+      "estado": "verificado",
+      "valor": {
+        "pasta": "triggers/",
+        "arquivo": "<Nome>.trigger"
+      },
+      "evidencias": [
+        {
+          "fonte": "src:sdr-registry",
+          "nota": "types.apextrigger"
+        }
+      ]
+    },
+    "curinga_package_xml": {
+      "estado": "verificado",
+      "valor": true,
+      "evidencias": [
+        {
+          "fonte": "src:mdapi-apextrigger"
+        }
+      ]
+    }
+  },
+  "disponibilidade": {
+    "desde_versao": "10.0",
+    "ate_versao": null,
+    "estado": "verificado"
+  },
+  "suporte_cli": {
+    "estado": "verificado",
+    "valor": {
+      "status": "suportado",
+      "nota_fonte": null
+    },
+    "nota": "Suporte do Salesforce CLI (source-deploy-retrieve), não do Metadata API em geral.",
+    "evidencias": [
+      {
+        "fonte": "src:sdr-metadata-support"
+      }
+    ]
+  },
+  "setup": {
+    "estado": "verificado",
+    "valor": "Object management settings do objeto > Triggers",
+    "nota": "Lista de triggers do objeto. Rótulos em inglês, como na fonte; a tradução da interface em pt-BR não foi verificada.",
+    "evidencias": [
+      {
+        "fonte": "src:apex-triggers-defining"
+      }
+    ]
+  },
+  "propriedades": [
+    {
+      "id": "mdt:ApexTrigger.apiVersion",
+      "nome": "apiVersion",
+      "tipo_tecnico": "double",
+      "o_que_e": "Versão da API do trigger, definida na criação.",
+      "origem": {
+        "estado": "verificado",
+        "valor": "padrao_plataforma",
+        "nota": "Propriedade definida pelo schema da Metadata API.",
+        "evidencias": [
+          {
+            "fonte": "src:mdapi-apextrigger"
+          }
+        ]
+      },
+      "obrigatoriedade": {
+        "valor": "sim",
+        "estado": "verificado",
+        "evidencias": [
+          {
+            "fonte": "src:mdapi-apextrigger"
+          }
+        ]
+      },
+      "default": {
+        "forma": "nao_declarado_na_fonte",
+        "estado": "desconhecido"
+      },
+      "dominio": {
+        "natureza": "numerico",
+        "estado": "verificado",
+        "evidencias": [
+          {
+            "fonte": "src:mdapi-apextrigger"
+          }
+        ]
+      },
+      "disponibilidade": {
+        "desde_versao": null,
+        "ate_versao": null,
+        "estado": "desconhecido"
+      },
+      "explicacao": "explicada",
+      "estado": "verificado",
+      "evidencias": [
+        {
+          "fonte": "src:mdapi-apextrigger"
+        }
+      ]
+    },
+    {
+      "id": "mdt:ApexTrigger.content",
+      "nome": "content",
+      "tipo_tecnico": "base64Binary",
+      "o_que_e": "A definição do trigger (o código-fonte).",
+      "origem": {
+        "estado": "verificado",
+        "valor": "padrao_plataforma",
+        "nota": "Propriedade definida pelo schema da Metadata API.",
+        "evidencias": [
+          {
+            "fonte": "src:mdapi-apextrigger"
+          }
+        ]
+      },
+      "obrigatoriedade": {
+        "valor": "desconhecida",
+        "estado": "desconhecido"
+      },
+      "default": {
+        "forma": "nao_declarado_na_fonte",
+        "estado": "desconhecido"
+      },
+      "dominio": {
+        "natureza": "texto_livre",
+        "estado": "verificado",
+        "contexto": "Na API, o conteúdo trafega em base64; em arquivo, é o código-fonte .trigger.",
+        "evidencias": [
+          {
+            "fonte": "src:mdapi-apextrigger"
+          }
+        ]
+      },
+      "disponibilidade": {
+        "desde_versao": null,
+        "ate_versao": null,
+        "estado": "desconhecido"
+      },
+      "explicacao": "explicada",
+      "estado": "verificado",
+      "evidencias": [
+        {
+          "fonte": "src:mdapi-apextrigger"
+        }
+      ],
+      "herdada_de": "MetadataWithContent"
+    },
+    {
+      "id": "mdt:ApexTrigger.fullName",
+      "nome": "fullName",
+      "tipo_tecnico": "string",
+      "o_que_e": "Nome do trigger; herdado. Começa com letra e não pode terminar com sublinhado nem ter dois sublinhados seguidos.",
+      "origem": {
+        "estado": "verificado",
+        "valor": "padrao_plataforma",
+        "nota": "Propriedade definida pelo schema da Metadata API.",
+        "evidencias": [
+          {
+            "fonte": "src:mdapi-apextrigger"
+          }
+        ]
+      },
+      "obrigatoriedade": {
+        "valor": "desconhecida",
+        "estado": "desconhecido"
+      },
+      "default": {
+        "forma": "nao_declarado_na_fonte",
+        "estado": "desconhecido"
+      },
+      "dominio": {
+        "natureza": "texto_livre",
+        "estado": "verificado",
+        "evidencias": [
+          {
+            "fonte": "src:mdapi-apextrigger"
+          }
+        ],
+        "contexto": "A fonte tipa como string sem lista de valores; não inventar valores."
+      },
+      "disponibilidade": {
+        "desde_versao": null,
+        "ate_versao": null,
+        "estado": "desconhecido"
+      },
+      "explicacao": "explicada",
+      "estado": "verificado",
+      "evidencias": [
+        {
+          "fonte": "src:mdapi-apextrigger"
+        }
+      ],
+      "herdada_de": "Metadata"
+    },
+    {
+      "id": "mdt:ApexTrigger.packageVersions",
+      "nome": "packageVersions",
+      "tipo_tecnico": "PackageVersion[]",
+      "o_que_e": "Versões de pacotes gerenciados instalados que o trigger referencia.",
+      "origem": {
+        "estado": "verificado",
+        "valor": "padrao_plataforma",
+        "nota": "Propriedade definida pelo schema da Metadata API.",
+        "evidencias": [
+          {
+            "fonte": "src:mdapi-apextrigger"
+          }
+        ]
+      },
+      "obrigatoriedade": {
+        "valor": "nao",
+        "estado": "desconhecido",
+        "condicao": "A documentação 68.0 não marca o campo como obrigatório; ausência de marcação não comprova opcionalidade (confirmar no WSDL)."
+      },
+      "default": {
+        "forma": "nao_declarado_na_fonte",
+        "estado": "desconhecido"
+      },
+      "dominio": {
+        "natureza": "tipo_composto",
+        "estado": "verificado",
+        "evidencias": [
+          {
+            "fonte": "src:mdapi-apextrigger"
+          }
+        ]
+      },
+      "disponibilidade": {
+        "desde_versao": "16.0",
+        "ate_versao": null,
+        "estado": "verificado"
+      },
+      "explicacao": "explicada",
+      "estado": "verificado",
+      "evidencias": [
+        {
+          "fonte": "src:mdapi-apextrigger"
+        }
+      ],
+      "cardinalidade": "0..n",
+      "notas": [
+        "A página remete à referência de ApexClass para os campos de PackageVersion; a estrutura não foi lida."
+      ]
+    },
+    {
+      "id": "mdt:ApexTrigger.status",
+      "nome": "status",
+      "tipo_tecnico": "ApexCodeUnitStatus",
+      "o_que_e": "Estado do trigger.",
+      "origem": {
+        "estado": "verificado",
+        "valor": "padrao_plataforma",
+        "nota": "Propriedade definida pelo schema da Metadata API.",
+        "evidencias": [
+          {
+            "fonte": "src:mdapi-apextrigger"
+          }
+        ]
+      },
+      "obrigatoriedade": {
+        "valor": "sim",
+        "estado": "verificado",
+        "evidencias": [
+          {
+            "fonte": "src:mdapi-apextrigger"
+          }
+        ]
+      },
+      "default": {
+        "forma": "nao_declarado_na_fonte",
+        "estado": "desconhecido"
+      },
+      "dominio": {
+        "natureza": "enum_fechado",
+        "valores": [
+          {
+            "valor": "Active",
+            "significado": "O trigger está ativo."
+          },
+          {
+            "valor": "Inactive",
+            "significado": "O trigger está inativo, mas não foi excluído."
+          },
+          {
+            "valor": "Deleted",
+            "significado": "O trigger está marcado para exclusão; útil na atualização de pacotes gerenciados."
+          }
+        ],
+        "lista_completa": "sim",
+        "estado": "verificado",
+        "evidencias": [
+          {
+            "fonte": "src:mdapi-apextrigger"
+          }
+        ]
+      },
+      "disponibilidade": {
+        "desde_versao": null,
+        "ate_versao": null,
+        "estado": "desconhecido"
+      },
+      "explicacao": "explicada",
+      "estado": "verificado",
+      "evidencias": [
+        {
+          "fonte": "src:mdapi-apextrigger"
+        }
+      ]
+    }
+  ],
+  "estruturas": [],
+  "cobertura": {
+    "estrutural": {
+      "estado": "parcial",
+      "esperado": null,
+      "presente": 5,
+      "nota": "Universo esperado = tabela Fields da página oficial lida em 2026-11-15. Parcial: PackageVersion não foi detalhado. Primeiro nível completo; 1 propriedade(s) de tipo composto ainda sem estrutura detalhada: packageVersions."
+    },
+    "explicativa": {
+      "estado": "completa",
+      "esperado": 5,
+      "presente": 5
+    },
+    "mapeamento": {
+      "estado": "parcial",
+      "nota": "Correspondências registradas apenas onde há evidência; demais pendentes."
+    }
+  },
+  "recomendacoes": [],
+  "alertas": [
+    "O componente tem dois arquivos: o código-fonte .trigger e o arquivo de metadado que o acompanha.",
+    "É suportado por todas as chamadas da Metadata API, exceto as CRUD-based."
+  ],
+  "divergencias_documentais": [],
+  "estado": "verificado",
+  "evidencias": [
+    {
+      "fonte": "src:mdapi-apextrigger"
+    },
+    {
+      "fonte": "src:sdr-registry"
+    },
+    {
+      "fonte": "src:sdr-metadata-support"
+    }
+  ],
+  "exemplo_xml": {
+    "xml": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<!-- Arquivo de metadado que acompanha o código-fonte .trigger -->\n<ApexTrigger xmlns=\"http://soap.sforce.com/2006/04/metadata\">\n    <apiVersion>68.0</apiVersion>\n    <!-- Valores documentados: Active, Inactive, Deleted -->\n    <status>Active</status>\n</ApexTrigger>",
+    "natureza": "didatico_projeto",
+    "nota": "Exemplo escrito pelo projeto apenas com elementos documentados; sem dados reais."
+  }
+}

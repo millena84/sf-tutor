@@ -326,6 +326,45 @@ TEMAS = {
         [ev("src:sdr-metadata-support", "Mais ampla que o tema: lista oficial de metadata types suportados pelo Salesforce CLI, de onde vêm os "
             "itens deste agrupamento.", "METADATA_SUPPORT.md")],
     ),
+    # ------------------------------------------------------------------ Automação de processos e regras de negócio
+    "sub:flow-e-orquestracao": (
+        "Flows, a automação declarativa feita no Flow Builder e disparada por tela, registro ou agendamento, e orquestrações, que "
+        "encadeiam flows em etapas com passos para pessoas e passos automáticos.",
+        [ev("src:help-flow-types", "Cobre parte do tema: tipos de flow.", "Flow Types"),
+         ev("src:help-flow-triggered", "Cobre parte do tema: flows disparados por registro e por agendamento.", "Triggered Flows"),
+         ev("src:help-orchestration-overview", "Cobre parte do tema: Flow Orchestration.", "Automate Complex Processes with Orchestrations")],
+    ),
+    "sub:decisoes-e-aprovacoes": (
+        "Os pontos em que alguém precisa aprovar antes de o processo seguir: Classic Approval Processes, presos a um objeto, e Flow "
+        "Approval Processes, construídos no Flow Builder.",
+        [ev("src:help-approvals-classic", "Cobre parte do tema: processos de aprovação clássicos.", "Classic Approval Processes"),
+         ev("src:help-flow-approvals-concepts", "Cobre parte do tema: processos de aprovação baseados em flow.", "Flow Approval Processes Concepts")],
+    ),
+    "sub:acoes-e-regras": (
+        "Regras que agem sobre leads e casos (atribuição, resposta automática e escalonamento) e ações rápidas oferecidas como botões.",
+        [ev("src:help-case-rules-overview", "Cobre parte do tema: regras de atribuição, resposta automática e escalonamento.",
+            "Automate Case Processing with Rules"),
+         ev("src:help-quick-actions", "Cobre parte do tema: ações rápidas, pelo caso da ação com componente Lightning.", "Create a Lightning Component Action")],
+    ),
+    "sub:automacao-apex": (
+        "Triggers e classes Apex que automatizam o que as ferramentas declarativas não cobrem; o trigger roda antes ou depois de um "
+        "registro ser inserido, alterado ou excluído.",
+        [ev("src:apex-triggers", "Cobre o tema: triggers Apex.", "Triggers"),
+         ev("src:apex-triggers-order", "Cobre parte do tema: ordem de execução ao salvar um registro.", "Triggers and Order of Execution")],
+    ),
+    "sub:notificacoes": (
+        "Notificações customizadas enviadas por automações para o desktop, o celular ou o Slack, a partir de um tipo de notificação "
+        "criado no Notification Builder.",
+        [ev("src:help-notif-builder", "Cobre o tema: Notification Builder.", "Manage Your Notifications with Notification Builder"),
+         ev("src:help-notif-considerations", "Cobre parte do tema: limites de notificações.", "Considerations for Notifications")],
+    ),
+    "sub:mecanismos-legados-e-migracao": (
+        "Workflow Rules e Process Builder, ferramentas antigas de automação sem suporte desde 31 de dezembro de 2025, e a migração "
+        "delas para Flow.",
+        [ev("src:help-wf-pb-eos", "Cobre o tema: fim do suporte de Workflow Rules e Process Builder.",
+            "Salesforce Workflow Rules & Process Builder End of Support"),
+         ev("src:help-migrate-to-flow-considerations", "Cobre parte do tema: ferramenta Migrate to Flow.", "Migrate to Flow Tool Considerations")],
+    ),
 }
 
 

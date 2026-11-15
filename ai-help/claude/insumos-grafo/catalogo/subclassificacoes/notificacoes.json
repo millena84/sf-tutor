@@ -4,12 +4,15 @@
   "sigla": "AUT-05",
   "classificacao": "cls:automacao-de-processos-e-regras-de-negocio",
   "natureza": "curadoria_didatica",
-  "descricao": "Alertas e notificações enviados por automações.",
+  "descricao": "Notificações customizadas enviadas por automações para o desktop, o celular ou o Slack, a partir de um tipo de notificação criado no Notification Builder.",
   "escopo": "Entram alertas e notificações enviados por automações.",
   "fora_do_escopo": "Modelos de e-mail usados nas notificações ficam em \"Templates e comunicação\".",
   "para_iniciantes": {
     "explicacao": "Notificações customizadas avisam pessoas no desktop ou no celular quando algo acontece. Primeiro se cria um tipo de notificação; depois, um flow, o Apex ou a REST API envia a notificação usando esse tipo.",
     "exemplo": "Quando um caso de prioridade alta é aberto, um flow envia uma notificação à fila responsável, que abre o caso com um toque.",
+    "por_onde_comecar": [
+      "func:notificacoes-customizadas"
+    ],
     "evidencias": [
       {
         "fonte": "src:actions-custom-notification"
@@ -20,14 +23,37 @@
     ]
   },
   "encadeamento": {
-    "texto": "Costuma ser o último passo de uma automação; modelos de e-mail, outro canal de aviso, ficam em 'Templates e comunicação'.",
+    "texto": "Costuma ser o último passo de uma automação; modelos de e-mail, outro canal de aviso, ficam em 'Templates e comunicação'. O Notification Builder também define onde cada notificação aparece: desktop, mobile ou Slack.",
     "evidencias": [
       {
         "fonte": "src:actions-custom-notification"
+      },
+      {
+        "fonte": "src:help-notif-builder"
       }
     ]
   },
   "avancado": [
+    {
+      "tipo": "atencao",
+      "titulo": "Passou do limite, a notificação se perde",
+      "texto": "A org executa até 10.000 ações de notificação por hora. Passado o limite, as notificações daquela hora não são enviadas depois: são perdidas. Uma notificação alcança até 10.000 usuários, depois de expandir grupos, filas e equipes, e aceita só texto simples.",
+      "evidencias": [
+        {
+          "fonte": "src:help-notif-considerations"
+        }
+      ]
+    },
+    {
+      "tipo": "implantacao",
+      "titulo": "Como metadado",
+      "texto": "Cada tipo de notificação é um componente CustomNotificationType, com arquivo .notiftype na pasta notificationtypes. O curinga * não vale para esse tipo no package.xml: cada tipo de notificação é listado pelo nome.",
+      "evidencias": [
+        {
+          "fonte": "src:mdapi-customnotificationtype"
+        }
+      ]
+    },
     {
       "tipo": "seguranca",
       "titulo": "Permissão para enviar",
@@ -52,7 +78,21 @@
       ]
     }
   ],
-  "funcionalidades": [],
+  "funcionalidades": [
+    "func:notificacoes-customizadas"
+  ],
   "estado": "desconhecido",
-  "nota_estado": "Agrupamento proposto na especificação; fronteira ainda não cruzada com a documentação oficial."
+  "nota_estado": "Tema criado pelo projeto (00-especificacao-grafo.md), não é nomenclatura oficial da Salesforce. Cruzado em 2026-11-10 com áreas da documentação oficial listadas nas referências; a correspondência é parcial e o recorte continua sendo do projeto.",
+  "referencias_oficiais": [
+    {
+      "fonte": "src:help-notif-builder",
+      "secao": "Manage Your Notifications with Notification Builder",
+      "nota": "Cobre o tema: Notification Builder."
+    },
+    {
+      "fonte": "src:help-notif-considerations",
+      "secao": "Considerations for Notifications",
+      "nota": "Cobre parte do tema: limites de notificações."
+    }
+  ]
 }

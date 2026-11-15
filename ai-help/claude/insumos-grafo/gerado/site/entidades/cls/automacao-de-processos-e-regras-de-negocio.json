@@ -16,16 +16,6 @@
     {
       "evidencias": [
         {
-          "fonte": "src:help-assign-guide"
-        }
-      ],
-      "texto": "Só uma regra de atribuição de cada tipo fica ativa por vez, e uma regra de atribuição de casos aceita até 3.000 entradas, incluindo 300 de fórmula.",
-      "tipo": "limite",
-      "titulo": "Uma regra ativa por tipo"
-    },
-    {
-      "evidencias": [
-        {
           "fonte": "src:architect-build-forms"
         }
       ],
@@ -36,12 +26,87 @@
     {
       "evidencias": [
         {
+          "fonte": "src:help-flow-limits-transaction"
+        },
+        {
+          "fonte": "src:help-flow-record-triggered-considerations"
+        }
+      ],
+      "texto": "Flows seguem os limites da transação: 100 consultas SOQL, 150 instruções DML e 10.000 registros gravados. Um record-triggered flow não faz chamada externa no caminho síncrono; isso vai para um caminho assíncrono ou agendado.",
+      "tipo": "limite",
+      "titulo": "Flow também tem governor limits"
+    },
+    {
+      "evidencias": [
+        {
+          "fonte": "src:help-approvals-classic-considerations"
+        },
+        {
+          "fonte": "src:help-approvals-classic-manage"
+        },
+        {
+          "fonte": "src:help-flow-approvals-concepts"
+        }
+      ],
+      "texto": "Classic Approval Processes são presos a um objeto e travam a estrutura depois de ativados. Flow Approval Processes usam stages e steps no Flow Builder e são a alternativa que a Ajuda recomenda experimentar.",
+      "tipo": "decisao",
+      "titulo": "Duas formas de aprovação"
+    },
+    {
+      "evidencias": [
+        {
+          "fonte": "src:help-assign-guide"
+        },
+        {
+          "fonte": "src:help-auto-response-setup"
+        }
+      ],
+      "texto": "Só uma regra de atribuição de cada tipo fica ativa por vez, e uma regra de atribuição de casos aceita até 3.000 entradas, incluindo 300 de fórmula. Resposta automática segue a mesma lógica: uma regra ativa para leads e uma para casos.",
+      "tipo": "limite",
+      "titulo": "Uma regra ativa por tipo"
+    },
+    {
+      "evidencias": [
+        {
+          "fonte": "src:apex-triggers-order"
+        }
+      ],
+      "texto": "Flows, triggers e regras reagem à mesma gravação numa ordem fixa: os record-triggered flows before-save rodam antes dos before triggers, e as workflow rules vêm mais adiante. Misturar ferramentas no mesmo objeto exige conhecer essa ordem.",
+      "tipo": "atencao",
+      "titulo": "Ordem de execução ao salvar"
+    },
+    {
+      "evidencias": [
+        {
           "fonte": "src:apex-callout-limits"
         }
       ],
       "texto": "Em automação Apex, não é possível chamar um sistema externo depois de DML pendente na mesma transação. Faça a chamada antes ou leve-a para um processo assíncrono.",
       "tipo": "atencao",
       "titulo": "Chamada externa dentro da transação"
+    },
+    {
+      "evidencias": [
+        {
+          "fonte": "src:help-notif-considerations"
+        }
+      ],
+      "texto": "A org executa até 10.000 ações de notificação por hora; o que passar disso naquela hora é perdido, não enfileirado.",
+      "tipo": "limite",
+      "titulo": "Notificação em excesso se perde"
+    },
+    {
+      "evidencias": [
+        {
+          "fonte": "src:help-wf-pb-eos"
+        },
+        {
+          "fonte": "src:help-migrate-to-flow-considerations"
+        }
+      ],
+      "texto": "Workflow Rules e Process Builder perderam o suporte em 31 de dezembro de 2025: o que existe continua rodando, mas sem correção de bugs. A migração para Flow deve ser feita na mesma org do processo original e testada, porque a ordem de execução muda.",
+      "tipo": "implantacao",
+      "titulo": "Legado continua rodando, sem suporte"
     }
   ],
   "derivado": {
@@ -105,6 +170,19 @@
         "principal": true
       },
       {
+        "exemplo": "Na admissão de um funcionário, o RH preenche um formulário, a TI recebe a tarefa de criar acessos e um passo automático atualiza o registro.",
+        "id": "func:flow-orchestration",
+        "principal": true
+      },
+      {
+        "alertas": [
+          "Depois de ativado, um processo clássico não aceita incluir, excluir ou reordenar passos."
+        ],
+        "exemplo": "Uma despesa acima de certo valor vai para o gestor e depois para a diretoria; enquanto espera, o registro fica bloqueado para edição.",
+        "id": "func:processos-de-aprovacao",
+        "principal": true
+      },
+      {
         "exemplo": "'Registrar renovação' a partir de um contrato, abrindo um flow.",
         "id": "func:acoes-rapidas",
         "pre_requisitos": [
@@ -123,19 +201,88 @@
         "principal": true
       },
       {
+        "exemplo": "Quem abre um caso pelo formulário do site recebe na hora um e-mail com o número do caso.",
+        "id": "func:regras-de-resposta-automatica",
+        "pre_requisitos": [
+          "Customize Application (para criar regras de resposta automática)."
+        ],
+        "principal": true
+      },
+      {
         "exemplo": "Impedir salvar um contrato com valor negativo.",
         "id": "func:regras-de-validacao",
         "principal": false,
         "tema_principal": "sub:validacao"
+      },
+      {
+        "alertas": [
+          "Um trigger pode receber vários registros de uma vez; o código deve ser escrito para mais de um registro."
+        ],
+        "exemplo": "Ao inserir itens de um pedido, um trigger confere o estoque de todos os itens de uma vez antes de gravar.",
+        "id": "func:apex-triggers",
+        "principal": true
+      },
+      {
+        "exemplo": "Quando um caso de prioridade alta é aberto, um flow envia uma notificação à fila responsável.",
+        "id": "func:notificacoes-customizadas",
+        "pre_requisitos": [
+          "Customize Application (para criar e editar tipos); Send Custom Notifications (para enviar)."
+        ],
+        "principal": true
+      },
+      {
+        "alertas": [
+          "Sem suporte desde 31 de dezembro de 2025; a Salesforce recomenda migrar para Flow.",
+          "Flows que substituem regras podem se comportar diferente, por causa da ordem de execução; teste depois de migrar."
+        ],
+        "exemplo": "Uma regra de workflow que só atualiza um campo é convertida pela ferramenta Migrate to Flow num flow equivalente.",
+        "id": "func:workflow-rules-e-process-builder",
+        "principal": true
       }
     ],
     "metadata_types": [
+      {
+        "estrutura": "parcial",
+        "funcionalidades": [
+          "func:apex-triggers"
+        ],
+        "id": "mdt:ApexTrigger",
+        "nota_suporte": null,
+        "suporte_cli": "suportado"
+      },
+      {
+        "estrutura": "parcial",
+        "funcionalidades": [
+          "func:processos-de-aprovacao"
+        ],
+        "id": "mdt:ApprovalProcess",
+        "nota_suporte": null,
+        "suporte_cli": "suportado"
+      },
       {
         "estrutura": "completa",
         "funcionalidades": [
           "func:regras-de-atribuicao"
         ],
         "id": "mdt:AssignmentRules",
+        "nota_suporte": null,
+        "suporte_cli": "suportado"
+      },
+      {
+        "estrutura": "parcial",
+        "funcionalidades": [
+          "func:regras-de-resposta-automatica"
+        ],
+        "id": "mdt:AutoResponseRules",
+        "nota_suporte": null,
+        "suporte_cli": "suportado"
+      },
+      {
+        "estrutura": "completa",
+        "funcionalidades": [
+          "func:notificacoes-customizadas"
+        ],
+        "id": "mdt:CustomNotificationType",
         "nota_suporte": null,
         "suporte_cli": "suportado"
       },
@@ -154,6 +301,15 @@
           "func:flow"
         ],
         "id": "mdt:Flow",
+        "nota_suporte": null,
+        "suporte_cli": "suportado"
+      },
+      {
+        "estrutura": "completa",
+        "funcionalidades": [
+          "func:flow"
+        ],
+        "id": "mdt:FlowSettings",
         "nota_suporte": null,
         "suporte_cli": "suportado"
       },
@@ -259,12 +415,7 @@
         "id": "obj:ValidationRule"
       }
     ],
-    "temas_sem_funcionalidade": [
-      "sub:decisoes-e-aprovacoes",
-      "sub:automacao-apex",
-      "sub:notificacoes",
-      "sub:mecanismos-legados-e-migracao"
-    ]
+    "temas_sem_funcionalidade": []
   },
   "descricao": "Reúne o que executa trabalho automaticamente: fluxos, decisões, aprovações, ações e código Apex.",
   "encadeamento": {
@@ -273,16 +424,31 @@
         "fonte": "src:mdapi-flow"
       },
       {
+        "fonte": "src:help-flow-types"
+      },
+      {
+        "fonte": "src:help-approvals-classic"
+      },
+      {
         "fonte": "src:help-assign-guide"
       },
       {
         "fonte": "src:help-escalation-setup"
       },
       {
+        "fonte": "src:apex-triggers"
+      },
+      {
+        "fonte": "src:help-notif-builder"
+      },
+      {
+        "fonte": "src:help-wf-pb-eos"
+      },
+      {
         "fonte": "src:help-produtos-platform"
       }
     ],
-    "texto": "Flow é a ferramenta declarativa principal e pode ser disparado por tela, por registro, por agendamento ou por outros gatilhos. Decisões e aprovações organizam quem decide; regras definem dono e escalonamento; a automação Apex cobre o que exige código; notificações avisam pessoas; e os mecanismos legados explicam ferramentas antigas e a migração para as atuais."
+    "texto": "Roteiro pelas seis seções do tema. 1) 'Flow e orquestração': a ferramenta declarativa principal, disparada por tela, por registro ou por agendamento. 2) 'Decisões e aprovações': quem precisa aprovar antes de o processo seguir. 3) 'Ações e regras': regras que definem dono, respondem e escalonam, e botões de ação. 4) 'Automação Apex': triggers e classes para o que exige código. 5) 'Notificações': avisos a pessoas no fim da automação. 6) 'Mecanismos legados e migração': Workflow Rules e Process Builder, e o caminho para Flow."
   },
   "escopo": "Entra o que executa trabalho sem ação manual a cada passo: fluxos, decisões, aprovações, regras que disparam comportamento, automação em Apex e notificações.",
   "estado": "desconhecido",

@@ -209,40 +209,111 @@ S["sub:rastreabilidade-e-historico"] = {
 # ------------------------------------------------------------------ Automação
 S["sub:flow-e-orquestracao"] = {
     "para_iniciantes": ini("Flow é a automação declarativa feita no Flow Builder, com elementos, variáveis e decisões. Pode começar por uma "
-                           "tela, pela gravação de um registro, por um agendamento ou por outros gatilhos.",
-                           "Atualizar o status do contrato quando a assinatura é registrada.", E("src:mdapi-flow"), comece=["func:flow"]),
-    "encadeamento": enc("É a ferramenta principal do tema. Screen Flows também aparecem em Interface, como opção para formulários de várias telas.",
-                        E("src:mdapi-flow", AF)),
+                           "tela, pela gravação de um registro, por um agendamento ou por outros gatilhos. Uma orquestração junta vários "
+                           "flows num processo de etapas, com passos para pessoas e passos automáticos.",
+                           "Atualizar o status do contrato quando a assinatura é registrada.",
+                           E("src:mdapi-flow", "src:help-flow-types", "src:help-orchestration-overview"), comece=["func:flow", "func:flow-orchestration"]),
+    "encadeamento": enc("É a ferramenta principal do tema. O tipo do flow define o que ele pode conter e como é distribuído: screen flow para "
+                        "telas, autolaunched para segundo plano, record-triggered para reagir a registros. Screen Flows também aparecem em "
+                        "Interface, como opção para formulários de várias telas. Aprovações feitas com flow ficam em 'Decisões e aprovações'.",
+                        E("src:mdapi-flow", AF, "src:help-flow-types", "src:help-flow-triggered")),
     "avancado": [
         av("decisao", "Quando o Screen Flow é a escolha", "Para assistentes com várias telas, sem exigência rígida de marca, o guia de decisão indica "
            "Screen Flow: navegação pronta e lógica mantida por administradores.", E(AF)),
         av("seguranca", "Contexto de sistema", "Screen Flow roda no contexto do usuário por padrão, mas pode rodar em contexto de sistema; esse modo deve "
            "ficar restrito a usuários confiáveis.", E(AF)),
+        av("decisao", "Antes ou depois de salvar", "Um record-triggered flow before-save altera o próprio registro antes da gravação e é bem mais "
+           "rápido. Para o resto, usa-se after-save. Chamada a sistema externo não cabe no caminho síncrono: a Salesforce impede callouts "
+           "enquanto o registro é gravado.", E("src:help-flow-triggered", "src:help-flow-record-triggered-considerations")),
+        av("limite", "Limites por transação", "Flows seguem os governor limits da transação: 100 consultas SOQL, 50.000 registros lidos, 150 "
+           "instruções DML e 10.000 registros gravados. Get Records, Create, Update e Delete Records contam para esses totais.",
+           E("src:help-flow-limits-transaction", "src:help-flow-transactions")),
+        av("atencao", "Ordem entre flows do mesmo objeto", "Cada record-triggered flow recebe um trigger order de 1 a 2.000. A ordem só vale entre "
+           "flows do mesmo objeto e do mesmo tipo de gatilho; o Flow Trigger Explorer mostra e reordena todos.",
+           E("src:help-flow-run-order", "src:help-flow-triggered")),
+        av("escala", "Caminhos agendados e flows agendados", "Um scheduled path processa até 200 registros por lote e tenta de novo até 5 vezes "
+           "depois de falhar. Schedule-triggered flows têm teto diário de entrevistas: 250.000 ou 200 por licença de usuário, o que for maior.",
+           E("src:help-flow-scheduled-paths", "src:help-flow-schedule-triggered")),
+        av("decisao", "Quando usar orquestração", "Uma orquestração tem stages, e cada stage tem steps. O interactive step atribui um screen "
+           "flow a uma pessoa, grupo ou fila e gera um work item; o background step roda um autolaunched flow sem interação. Serve a "
+           "processos longos, com várias pessoas e esperas.", E("src:help-orchestration-overview", "src:help-orchestration-steps", "src:help-orchestration-types")),
+        av("implantacao", "Como metadado", "Cada flow é um componente Flow. As opções gerais ficam em FlowSettings: por exemplo, "
+           "enableFlowDeployAsActiveEnabled decide se flows podem ser implantados já ativos, e o padrão é false em produção.",
+           E("src:mdapi-flow", "src:mdapi-flowsettings")),
     ],
 }
 S["sub:decisoes-e-aprovacoes"] = {
-    "para_iniciantes": ini("Organiza os pontos em que alguém precisa decidir antes de o processo seguir, como aprovar um desconto ou um contrato.",
-                           "Um desconto acima do padrão vai para aprovação do gestor antes de a cotação ser enviada.", E("src:help-produtos-platform")),
-    "encadeamento": enc("A Ajuda reúne aprovações entre as ferramentas declarativas de automação, ao lado de experiências guiadas e automação em segundo plano.",
-                        E("src:help-produtos-platform")),
+    "para_iniciantes": ini("Organiza os pontos em que alguém precisa decidir antes de o processo seguir, como aprovar um desconto ou um "
+                           "contrato. Um approval process define cada passo, de quem pedir a aprovação e o que acontece em cada ponto. Há "
+                           "duas formas: Classic Approval Processes e Flow Approval Processes.",
+                           "Um desconto acima do padrão vai para aprovação do gestor antes de a cotação ser enviada. Enquanto espera, o "
+                           "registro fica bloqueado para edição.",
+                           E("src:help-produtos-platform", "src:help-approvals-classic", "src:help-flow-approvals-concepts"),
+                           comece=["func:processos-de-aprovacao"]),
+    "encadeamento": enc("A Ajuda reúne aprovações entre as ferramentas declarativas de automação. Flow Approval Processes usam stages e steps, "
+                        "como as orquestrações de 'Flow e orquestração'. As ações de uma aprovação clássica, como atualizar campo e enviar "
+                        "e-mail, são as mesmas das workflow rules de 'Mecanismos legados e migração'.",
+                        E("src:help-produtos-platform", "src:help-flow-approvals-concepts", "src:help-approvals-classic")),
+    "avancado": [
+        av("decisao", "Classic ou Flow Approval Process", "A Ajuda apresenta Flow Approval Processes como alternativa moderna: interface baseada em "
+           "flow, disparo por mudança de registro, roteamento dinâmico e log detalhado. O processo clássico é preso a um objeto e não aceita o "
+           "objeto User; o baseado em flow aceita.", E("src:help-approvals-classic-considerations", "src:help-approvals-classic-prepare")),
+        av("limite", "Limites do processo clássico", "Por org, até 1.000 processos ativos e 2.000 no total; por objeto, 300 ativos e 500 no total. "
+           "Cada processo aceita 30 passos, 25 aprovadores por passo e 40 ações de cada tipo.", E("src:help-approvals-classic-limits")),
+        av("atencao", "Depois de ativar, a estrutura trava", "Um processo clássico ativado não aceita incluir, excluir ou reordenar passos, nem mudar "
+           "o comportamento de rejeição. Precisa de pelo menos um passo para ser ativado; a Ajuda recomenda testar em sandbox.",
+           E("src:help-approvals-classic-manage")),
+        av("seguranca", "Approval admins", "Quem tem Modify All Records no objeto ou Modify All Data aprova ou rejeita pedidos sem fazer parte do "
+           "processo e edita registros bloqueados para aprovação.", E("src:help-approvals-classic-manage")),
+        av("atencao", "Flow approval process sem approval step", "Sem nenhum approval step, a submissão é sempre aprovada. Atualizações de registros "
+           "relacionados vão num background step depois do approval step. Cada condição de início ou de conclusão aceita até 10 requirements.",
+           E("src:help-flow-approvals-steps", "src:help-flow-approvals-considerations")),
+        av("implantacao", "Como metadado", "O processo clássico é o metadata type ApprovalProcess: arquivos com sufixo .approvalProcess na pasta "
+           "approvalProcesses. O metadado não guarda a ordem dos processos ativos, então pode ser preciso reordená-los depois do deploy. "
+           "Implantar um processo sem entry criteria sobre um que já tem mantém os critérios antigos.", E("src:mdapi-approvalprocess")),
+    ],
 }
 S["sub:acoes-e-regras"] = {
     "para_iniciantes": ini("Reúne ações reutilizáveis e regras que disparam comportamento: definir automaticamente o dono de leads e casos, "
                            "escalonar casos e oferecer botões de ação.",
                            "Casos com prioridade alta vão para a fila de nível 1; leads do site vão para a equipe de inbound.",
                            E("src:help-assign-setup", "src:help-escalation-setup", "src:help-quick-actions"),
-                           comece=["func:regras-de-atribuicao", "func:acoes-rapidas"]),
-    "encadeamento": enc("Ações rápidas também aparecem em Interface, como botões; regras de atribuição também servem a Vendas e Atendimento.",
-                        E("src:help-quick-actions", "src:help-assign-guide")),
-    "avancado": [av("limite", "Uma regra ativa por tipo", "Só uma regra de atribuição de cada tipo fica ativa por vez, e uma regra de atribuição de casos "
-                    "aceita até 3.000 entradas, incluindo 300 de fórmula.", E("src:help-assign-guide"))],
+                           comece=["func:regras-de-atribuicao", "func:regras-de-resposta-automatica", "func:acoes-rapidas"]),
+    "encadeamento": enc("São três tipos de regra para leads e casos: atribuição define o dono, resposta automática envia o primeiro e-mail e "
+                        "escalonamento sobe o caso parado. Ações rápidas também aparecem em Interface, como botões; as regras também servem a "
+                        "Vendas e Atendimento.", E("src:help-quick-actions", "src:help-assign-guide", "src:help-case-rules-overview")),
+    "avancado": [
+        av("limite", "Uma regra ativa por tipo", "Só uma regra de atribuição de cada tipo fica ativa por vez, e uma regra de atribuição de casos "
+           "aceita até 3.000 entradas, incluindo 300 de fórmula. O mesmo vale para resposta automática: uma regra ativa para leads e uma para "
+           "casos.", E("src:help-assign-guide", "src:help-auto-response-setup")),
+        av("atencao", "A primeira entrada que casar vence", "Numa regra de resposta automática, as entradas são avaliadas em ordem e a regra para "
+           "na primeira que casar. A ordem das entradas faz parte da lógica.", E("src:help-auto-response-setup")),
+        av("decisao", "Resposta automática ou alerta de e-mail", "A regra de resposta automática roda só na criação e responde a quem abriu o caso "
+           "ou enviou o lead. Para avisar outras pessoas, ou reagir a edições, o caminho é outro: alerta de e-mail de workflow, hoje feito em "
+           "Flow.", E("src:help-auto-response-vs-workflow", "src:help-wf-pb-eos")),
+        av("implantacao", "Como metadado", "Cada tipo de regra é um metadata type com um arquivo por objeto: AssignmentRules, EscalationRules e "
+           "AutoResponseRules (por exemplo Case.autoResponseRules). Dentro do arquivo ficam as regras e, em cada regra, as entradas em ordem.",
+           E("src:mdapi-autoresponserules", "src:mdapi-assignmentrules", "src:mdapi-escalationrules")),
+    ],
 }
 S["sub:automacao-apex"] = {
-    "para_iniciantes": ini("Cobre triggers e classes Apex que automatizam processos quando as ferramentas declarativas não bastam.",
+    "para_iniciantes": ini("Cobre triggers e classes Apex que automatizam processos quando as ferramentas declarativas não bastam. Um trigger "
+                           "é código Apex que roda antes ou depois de um registro ser inserido, alterado ou excluído.",
                            "Um trigger grava o pedido e precisa avisar o ERP; a chamada externa tem de vir antes da gravação ou ir para um processo assíncrono.",
-                           E("src:apex-callout-limits", "src:help-produtos-platform")),
-    "encadeamento": enc("Apex que roda depois, em fila ou agendado, fica em 'Execução assíncrona, lotes e agendamento'.", E("src:apex-async-overview")),
+                           E("src:apex-callout-limits", "src:help-produtos-platform", "src:apex-triggers"), comece=["func:apex-triggers"]),
+    "encadeamento": enc("Triggers e record-triggered flows reagem à mesma gravação e têm posição definida na ordem de execução. Apex que roda "
+                        "depois, em fila ou agendado, fica em 'Execução assíncrona, lotes e agendamento'; testes e deploy ficam em "
+                        "'Desenvolvimento, testes e entrega'.", E("src:apex-async-overview", "src:apex-triggers-order")),
     "avancado": [
+        av("atencao", "Ordem de execução ao salvar", "Ao salvar um registro, a plataforma segue uma ordem fixa: os record-triggered flows before-save "
+           "rodam antes dos before triggers, e as workflow rules vêm mais adiante. Quem mistura flow, trigger e regra no mesmo objeto precisa "
+           "conhecer essa ordem.", E("src:apex-triggers-order")),
+        av("escala", "Todo trigger é em massa", "Um trigger pode receber vários registros de uma vez, em importações, Bulk API e ações em massa. O "
+           "código deve sempre ser escrito para mais de um registro.", E("src:apex-triggers-bulk")),
+        av("implantacao", "Trigger exige teste", "Para implantar, 75% do código Apex precisa de cobertura de testes, e todo trigger precisa de alguma "
+           "cobertura. A recomendação é testar em massa, com pelo menos 20 registros.", E("src:apex-testing-best-practices")),
+        av("implantacao", "Como metadado", "Cada trigger é um componente ApexTrigger, com dois arquivos na pasta triggers: o código-fonte .trigger e "
+           "o arquivo de metadado, que guarda a versão da API e o status (Active, Inactive ou Deleted).", E("src:mdapi-apextrigger")),
         av("limite", "Callouts por transação", "Até 100 callouts por transação, e a soma dos timeouts não passa de 120 segundos.", E("src:apex-callout-limits")),
         av("atencao", "Ordem dentro da transação", "Não é possível fazer callout depois de DML, Apex assíncrono, Apex agendado ou envio de e-mail pendentes na mesma transação; antes deles, pode.",
            E("src:apex-callout-limits")),

@@ -1,0 +1,1737 @@
+{
+  "funcionalidades": [
+    {
+      "id": "func:regras-de-resposta-automatica",
+      "nome": "Regras de resposta automática"
+    }
+  ],
+  "metadata_type": {
+    "alertas": [
+      "Há um arquivo por objeto (por exemplo Case.autoResponseRules). Para apontar uma regra específica no package.xml, a página usa o nome AutoResponseRule com o membro Objeto.regra.",
+      "Templates Lightning não são empacotáveis; a página recomenda templates Classic."
+    ],
+    "arquivos": {
+      "curinga_package_xml": {
+        "estado": "verificado",
+        "evidencias": [
+          {
+            "fonte": "src:mdapi-autoresponserules"
+          }
+        ],
+        "valor": true
+      },
+      "metadata_api_format": {
+        "estado": "verificado",
+        "evidencias": [
+          {
+            "fonte": "src:sdr-registry",
+            "nota": "types.autoresponserules"
+          }
+        ],
+        "valor": {
+          "arquivo": "<Nome>.autoResponseRules",
+          "pasta": "autoResponseRules/"
+        }
+      },
+      "source_format": {
+        "estado": "verificado",
+        "evidencias": [
+          {
+            "fonte": "src:sdr-registry",
+            "nota": "types.autoresponserules"
+          }
+        ],
+        "nota": "Pasta e sufixo do registro do Salesforce CLI; sufixo '-meta.xml' segue a convenção do source format.",
+        "valor": {
+          "arquivo": "<Nome>.autoResponseRules-meta.xml",
+          "pasta": "autoResponseRules/"
+        }
+      }
+    },
+    "cobertura": {
+      "estrutural": {
+        "esperado": null,
+        "estado": "parcial",
+        "nota": "Universo esperado = tabela Fields da página oficial lida em 2026-11-15. Parcial: três enumerações de RuleEntry não têm os valores listados no texto lido.",
+        "presente": 1
+      },
+      "explicativa": {
+        "esperado": 1,
+        "estado": "completa",
+        "presente": 1
+      },
+      "mapeamento": {
+        "estado": "parcial",
+        "nota": "Correspondências registradas apenas onde há evidência; demais pendentes."
+      }
+    },
+    "disponibilidade": {
+      "ate_versao": null,
+      "desde_versao": "27.0",
+      "estado": "verificado"
+    },
+    "divergencias_documentais": [],
+    "estado": "verificado",
+    "estende": "Metadata",
+    "estruturas": [
+      "mdx:AutoResponseRule"
+    ],
+    "evidencias": [
+      {
+        "fonte": "src:mdapi-autoresponserules"
+      },
+      {
+        "fonte": "src:sdr-registry"
+      },
+      {
+        "fonte": "src:sdr-metadata-support"
+      }
+    ],
+    "exemplo_xml": {
+      "natureza": "didatico_projeto",
+      "nota": "Exemplo escrito pelo projeto apenas com elementos documentados; sem dados reais.",
+      "xml": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<AutoResponseRules xmlns=\"http://soap.sforce.com/2006/04/metadata\">\n    <autoResponseRule>\n        <fullName>[nome da regra]</fullName>\n        <active>false</active>\n        <!-- As entradas são avaliadas em ordem; a regra para na primeira que casar -->\n        <ruleEntry>\n            <senderEmail>[e-mail do remetente]</senderEmail>\n            <senderName>[nome do remetente]</senderName>\n            <template>[pasta/nome do template de e-mail]</template>\n        </ruleEntry>\n    </autoResponseRule>\n</AutoResponseRules>"
+    },
+    "finalidade": "Versionar e implantar as regras que enviam o primeiro e-mail a quem abriu um caso ou enviou um lead.",
+    "id": "mdt:AutoResponseRules",
+    "nome": "AutoResponseRules",
+    "o_que_e": "As regras de resposta automática de um objeto (lead ou caso): cada regra tem entradas com critério e template de e-mail.",
+    "propriedades": [
+      {
+        "cardinalidade": "0..n",
+        "default": {
+          "estado": "desconhecido",
+          "forma": "nao_declarado_na_fonte"
+        },
+        "disponibilidade": {
+          "ate_versao": null,
+          "desde_versao": null,
+          "estado": "desconhecido"
+        },
+        "dominio": {
+          "estado": "verificado",
+          "evidencias": [
+            {
+              "fonte": "src:mdapi-autoresponserules"
+            }
+          ],
+          "natureza": "tipo_composto"
+        },
+        "estado": "verificado",
+        "estrutura_expandida": {
+          "id": "mdx:AutoResponseRule",
+          "nome": "AutoResponseRule",
+          "propriedades": [
+            {
+              "default": {
+                "estado": "desconhecido",
+                "forma": "nao_declarado_na_fonte"
+              },
+              "disponibilidade": {
+                "ate_versao": null,
+                "desde_versao": null,
+                "estado": "desconhecido"
+              },
+              "dominio": {
+                "estado": "verificado",
+                "evidencias": [
+                  {
+                    "fonte": "src:mdapi-autoresponserules"
+                  }
+                ],
+                "lista_completa": "sim",
+                "natureza": "booleano",
+                "valores": [
+                  {
+                    "valor": "true"
+                  },
+                  {
+                    "valor": "false"
+                  }
+                ]
+              },
+              "estado": "verificado",
+              "evidencias": [
+                {
+                  "fonte": "src:mdapi-autoresponserules"
+                }
+              ],
+              "explicacao": "explicada",
+              "id": "mdx:AutoResponseRule.active",
+              "nome": "active",
+              "o_que_e": "Indica se a regra está ativa.",
+              "obrigatoriedade": {
+                "condicao": "A documentação 68.0 não marca o campo como obrigatório; ausência de marcação não comprova opcionalidade (confirmar no WSDL).",
+                "estado": "desconhecido",
+                "valor": "nao"
+              },
+              "origem": {
+                "estado": "verificado",
+                "evidencias": [
+                  {
+                    "fonte": "src:mdapi-autoresponserules"
+                  }
+                ],
+                "nota": "Propriedade definida pelo schema da Metadata API.",
+                "valor": "padrao_plataforma"
+              },
+              "tipo_tecnico": "boolean"
+            },
+            {
+              "default": {
+                "estado": "desconhecido",
+                "forma": "nao_declarado_na_fonte"
+              },
+              "disponibilidade": {
+                "ate_versao": null,
+                "desde_versao": null,
+                "estado": "desconhecido"
+              },
+              "dominio": {
+                "contexto": "A fonte tipa como string sem lista de valores; não inventar valores.",
+                "estado": "verificado",
+                "evidencias": [
+                  {
+                    "fonte": "src:mdapi-autoresponserules"
+                  }
+                ],
+                "natureza": "texto_livre"
+              },
+              "estado": "verificado",
+              "evidencias": [
+                {
+                  "fonte": "src:mdapi-autoresponserules"
+                }
+              ],
+              "explicacao": "explicada",
+              "herdada_de": "Metadata",
+              "id": "mdx:AutoResponseRule.fullName",
+              "nome": "fullName",
+              "o_que_e": "Nome da regra; herdado do tipo Metadata. Deve ser informado ao criar, atualizar ou excluir.",
+              "obrigatoriedade": {
+                "estado": "desconhecido",
+                "valor": "desconhecida"
+              },
+              "origem": {
+                "estado": "verificado",
+                "evidencias": [
+                  {
+                    "fonte": "src:mdapi-autoresponserules"
+                  }
+                ],
+                "nota": "Propriedade definida pelo schema da Metadata API.",
+                "valor": "padrao_plataforma"
+              },
+              "tipo_tecnico": "string"
+            },
+            {
+              "cardinalidade": "0..n",
+              "default": {
+                "estado": "desconhecido",
+                "forma": "nao_declarado_na_fonte"
+              },
+              "disponibilidade": {
+                "ate_versao": null,
+                "desde_versao": null,
+                "estado": "desconhecido"
+              },
+              "dominio": {
+                "estado": "verificado",
+                "evidencias": [
+                  {
+                    "fonte": "src:mdapi-autoresponserules"
+                  }
+                ],
+                "natureza": "tipo_composto"
+              },
+              "estado": "verificado",
+              "estrutura_expandida": {
+                "id": "mdx:AutoResponseRules_RuleEntry",
+                "nome": "AutoResponseRules_RuleEntry",
+                "propriedades": [
+                  {
+                    "default": {
+                      "estado": "desconhecido",
+                      "forma": "nao_declarado_na_fonte"
+                    },
+                    "disponibilidade": {
+                      "ate_versao": null,
+                      "desde_versao": null,
+                      "estado": "desconhecido"
+                    },
+                    "dominio": {
+                      "contexto": "A fonte tipa como string sem lista de valores; não inventar valores.",
+                      "estado": "verificado",
+                      "evidencias": [
+                        {
+                          "fonte": "src:mdapi-autoresponserules"
+                        }
+                      ],
+                      "natureza": "texto_livre"
+                    },
+                    "estado": "verificado",
+                    "evidencias": [
+                      {
+                        "fonte": "src:mdapi-autoresponserules"
+                      }
+                    ],
+                    "explicacao": "pendente",
+                    "id": "mdx:AutoResponseRules_RuleEntry.assignedTo",
+                    "nome": "assignedTo",
+                    "o_que_e": "Explicação pendente: item listado a partir da fonte, ainda sem texto didático.",
+                    "obrigatoriedade": {
+                      "condicao": "A documentação 68.0 não marca o campo como obrigatório; ausência de marcação não comprova opcionalidade (confirmar no WSDL).",
+                      "estado": "desconhecido",
+                      "valor": "nao"
+                    },
+                    "origem": {
+                      "estado": "verificado",
+                      "evidencias": [
+                        {
+                          "fonte": "src:mdapi-autoresponserules"
+                        }
+                      ],
+                      "nota": "Propriedade definida pelo schema da Metadata API.",
+                      "valor": "padrao_plataforma"
+                    },
+                    "tipo_tecnico": "string"
+                  },
+                  {
+                    "default": {
+                      "estado": "desconhecido",
+                      "forma": "nao_declarado_na_fonte"
+                    },
+                    "disponibilidade": {
+                      "ate_versao": null,
+                      "desde_versao": null,
+                      "estado": "desconhecido"
+                    },
+                    "dominio": {
+                      "contexto": "A página de AutoResponseRules cita a enumeração AssignToLookupValueType, mas o texto lido não lista os valores.",
+                      "estado": "desconhecido",
+                      "natureza": "desconhecida"
+                    },
+                    "estado": "verificado",
+                    "evidencias": [
+                      {
+                        "fonte": "src:mdapi-autoresponserules"
+                      }
+                    ],
+                    "explicacao": "pendente",
+                    "id": "mdx:AutoResponseRules_RuleEntry.assignedToType",
+                    "nome": "assignedToType",
+                    "o_que_e": "Explicação pendente: item listado a partir da fonte, ainda sem texto didático.",
+                    "obrigatoriedade": {
+                      "condicao": "A documentação 68.0 não marca o campo como obrigatório; ausência de marcação não comprova opcionalidade (confirmar no WSDL).",
+                      "estado": "desconhecido",
+                      "valor": "nao"
+                    },
+                    "origem": {
+                      "estado": "verificado",
+                      "evidencias": [
+                        {
+                          "fonte": "src:mdapi-autoresponserules"
+                        }
+                      ],
+                      "nota": "Propriedade definida pelo schema da Metadata API.",
+                      "valor": "padrao_plataforma"
+                    },
+                    "tipo_tecnico": "AssignToLookupValueType"
+                  },
+                  {
+                    "default": {
+                      "estado": "desconhecido",
+                      "forma": "nao_declarado_na_fonte"
+                    },
+                    "disponibilidade": {
+                      "ate_versao": null,
+                      "desde_versao": null,
+                      "estado": "desconhecido"
+                    },
+                    "dominio": {
+                      "contexto": "A fonte tipa como string sem lista de valores; não inventar valores.",
+                      "estado": "verificado",
+                      "evidencias": [
+                        {
+                          "fonte": "src:mdapi-autoresponserules"
+                        }
+                      ],
+                      "natureza": "texto_livre"
+                    },
+                    "estado": "verificado",
+                    "evidencias": [
+                      {
+                        "fonte": "src:mdapi-autoresponserules"
+                      }
+                    ],
+                    "explicacao": "explicada",
+                    "id": "mdx:AutoResponseRules_RuleEntry.booleanFilter",
+                    "nome": "booleanFilter",
+                    "o_que_e": "Condições avançadas de filtro da entrada.",
+                    "obrigatoriedade": {
+                      "condicao": "A documentação 68.0 não marca o campo como obrigatório; ausência de marcação não comprova opcionalidade (confirmar no WSDL).",
+                      "estado": "desconhecido",
+                      "valor": "nao"
+                    },
+                    "origem": {
+                      "estado": "verificado",
+                      "evidencias": [
+                        {
+                          "fonte": "src:mdapi-autoresponserules"
+                        }
+                      ],
+                      "nota": "Propriedade definida pelo schema da Metadata API.",
+                      "valor": "padrao_plataforma"
+                    },
+                    "tipo_tecnico": "string"
+                  },
+                  {
+                    "default": {
+                      "estado": "desconhecido",
+                      "forma": "nao_declarado_na_fonte"
+                    },
+                    "disponibilidade": {
+                      "ate_versao": null,
+                      "desde_versao": null,
+                      "estado": "desconhecido"
+                    },
+                    "dominio": {
+                      "contexto": "A fonte tipa como string sem lista de valores; não inventar valores.",
+                      "estado": "verificado",
+                      "evidencias": [
+                        {
+                          "fonte": "src:mdapi-autoresponserules"
+                        }
+                      ],
+                      "natureza": "texto_livre"
+                    },
+                    "estado": "verificado",
+                    "evidencias": [
+                      {
+                        "fonte": "src:mdapi-autoresponserules"
+                      }
+                    ],
+                    "explicacao": "pendente",
+                    "id": "mdx:AutoResponseRules_RuleEntry.businessHours",
+                    "nome": "businessHours",
+                    "o_que_e": "Explicação pendente: item listado a partir da fonte, ainda sem texto didático.",
+                    "obrigatoriedade": {
+                      "condicao": "A documentação 68.0 não marca o campo como obrigatório; ausência de marcação não comprova opcionalidade (confirmar no WSDL).",
+                      "estado": "desconhecido",
+                      "valor": "nao"
+                    },
+                    "origem": {
+                      "estado": "verificado",
+                      "evidencias": [
+                        {
+                          "fonte": "src:mdapi-autoresponserules"
+                        }
+                      ],
+                      "nota": "Propriedade definida pelo schema da Metadata API.",
+                      "valor": "padrao_plataforma"
+                    },
+                    "tipo_tecnico": "string"
+                  },
+                  {
+                    "default": {
+                      "estado": "desconhecido",
+                      "forma": "nao_declarado_na_fonte"
+                    },
+                    "disponibilidade": {
+                      "ate_versao": null,
+                      "desde_versao": null,
+                      "estado": "desconhecido"
+                    },
+                    "dominio": {
+                      "contexto": "A página de AutoResponseRules cita a enumeração BusinessHoursSourceType, mas o texto lido não lista os valores.",
+                      "estado": "desconhecido",
+                      "natureza": "desconhecida"
+                    },
+                    "estado": "verificado",
+                    "evidencias": [
+                      {
+                        "fonte": "src:mdapi-autoresponserules"
+                      }
+                    ],
+                    "explicacao": "pendente",
+                    "id": "mdx:AutoResponseRules_RuleEntry.businessHoursSource",
+                    "nome": "businessHoursSource",
+                    "o_que_e": "Explicação pendente: item listado a partir da fonte, ainda sem texto didático.",
+                    "obrigatoriedade": {
+                      "condicao": "A documentação 68.0 não marca o campo como obrigatório; ausência de marcação não comprova opcionalidade (confirmar no WSDL).",
+                      "estado": "desconhecido",
+                      "valor": "nao"
+                    },
+                    "origem": {
+                      "estado": "verificado",
+                      "evidencias": [
+                        {
+                          "fonte": "src:mdapi-autoresponserules"
+                        }
+                      ],
+                      "nota": "Propriedade definida pelo schema da Metadata API.",
+                      "valor": "padrao_plataforma"
+                    },
+                    "tipo_tecnico": "BusinessHoursSourceType"
+                  },
+                  {
+                    "cardinalidade": "0..n",
+                    "default": {
+                      "estado": "desconhecido",
+                      "forma": "nao_declarado_na_fonte"
+                    },
+                    "disponibilidade": {
+                      "ate_versao": null,
+                      "desde_versao": null,
+                      "estado": "desconhecido"
+                    },
+                    "dominio": {
+                      "estado": "verificado",
+                      "evidencias": [
+                        {
+                          "fonte": "src:mdapi-autoresponserules"
+                        }
+                      ],
+                      "natureza": "tipo_composto"
+                    },
+                    "estado": "verificado",
+                    "estrutura_expandida": {
+                      "id": "mdx:FilterItem",
+                      "nome": "FilterItem",
+                      "propriedades": [
+                        {
+                          "default": {
+                            "estado": "desconhecido",
+                            "forma": "nao_declarado_na_fonte"
+                          },
+                          "disponibilidade": {
+                            "ate_versao": null,
+                            "desde_versao": null,
+                            "estado": "desconhecido"
+                          },
+                          "dominio": {
+                            "contexto": "A fonte tipa como string sem lista de valores; não inventar valores.",
+                            "estado": "verificado",
+                            "evidencias": [
+                              {
+                                "fonte": "src:mdapi-customfield"
+                              }
+                            ],
+                            "natureza": "texto_livre"
+                          },
+                          "estado": "verificado",
+                          "evidencias": [
+                            {
+                              "fonte": "src:mdapi-customfield"
+                            }
+                          ],
+                          "explicacao": "explicada",
+                          "id": "mdx:FilterItem.field",
+                          "nome": "field",
+                          "o_que_e": "Campo avaliado.",
+                          "obrigatoriedade": {
+                            "condicao": "A documentação 68.0 não marca o campo como obrigatório; ausência de marcação não comprova opcionalidade (confirmar no WSDL).",
+                            "estado": "desconhecido",
+                            "valor": "nao"
+                          },
+                          "origem": {
+                            "estado": "verificado",
+                            "evidencias": [
+                              {
+                                "fonte": "src:mdapi-customfield"
+                              }
+                            ],
+                            "nota": "Propriedade definida pelo schema da Metadata API.",
+                            "valor": "padrao_plataforma"
+                          },
+                          "tipo_tecnico": "string"
+                        },
+                        {
+                          "default": {
+                            "estado": "desconhecido",
+                            "forma": "nao_declarado_na_fonte"
+                          },
+                          "disponibilidade": {
+                            "ate_versao": null,
+                            "desde_versao": null,
+                            "estado": "desconhecido"
+                          },
+                          "dominio": {
+                            "contexto": "Valores de FilterOperation não extraídos.",
+                            "estado": "desconhecido",
+                            "lista_completa": "desconhecido",
+                            "natureza": "enum_fechado"
+                          },
+                          "estado": "verificado",
+                          "evidencias": [
+                            {
+                              "fonte": "src:mdapi-customfield"
+                            }
+                          ],
+                          "explicacao": "explicada",
+                          "id": "mdx:FilterItem.operation",
+                          "nome": "operation",
+                          "o_que_e": "Operador de comparação.",
+                          "obrigatoriedade": {
+                            "condicao": "A documentação 68.0 não marca o campo como obrigatório; ausência de marcação não comprova opcionalidade (confirmar no WSDL).",
+                            "estado": "desconhecido",
+                            "valor": "nao"
+                          },
+                          "origem": {
+                            "estado": "verificado",
+                            "evidencias": [
+                              {
+                                "fonte": "src:mdapi-customfield"
+                              }
+                            ],
+                            "nota": "Propriedade definida pelo schema da Metadata API.",
+                            "valor": "padrao_plataforma"
+                          },
+                          "tipo_tecnico": "FilterOperation"
+                        },
+                        {
+                          "default": {
+                            "estado": "desconhecido",
+                            "forma": "nao_declarado_na_fonte"
+                          },
+                          "disponibilidade": {
+                            "ate_versao": null,
+                            "desde_versao": null,
+                            "estado": "desconhecido"
+                          },
+                          "dominio": {
+                            "contexto": "A fonte tipa como string sem lista de valores; não inventar valores.",
+                            "estado": "verificado",
+                            "evidencias": [
+                              {
+                                "fonte": "src:mdapi-customfield"
+                              }
+                            ],
+                            "natureza": "texto_livre"
+                          },
+                          "estado": "verificado",
+                          "evidencias": [
+                            {
+                              "fonte": "src:mdapi-customfield"
+                            }
+                          ],
+                          "explicacao": "explicada",
+                          "id": "mdx:FilterItem.value",
+                          "nome": "value",
+                          "o_que_e": "Valor comparado.",
+                          "obrigatoriedade": {
+                            "condicao": "A documentação 68.0 não marca o campo como obrigatório; ausência de marcação não comprova opcionalidade (confirmar no WSDL).",
+                            "estado": "desconhecido",
+                            "valor": "nao"
+                          },
+                          "origem": {
+                            "estado": "verificado",
+                            "evidencias": [
+                              {
+                                "fonte": "src:mdapi-customfield"
+                              }
+                            ],
+                            "nota": "Propriedade definida pelo schema da Metadata API.",
+                            "valor": "padrao_plataforma"
+                          },
+                          "tipo_tecnico": "string"
+                        },
+                        {
+                          "default": {
+                            "estado": "desconhecido",
+                            "forma": "nao_declarado_na_fonte"
+                          },
+                          "disponibilidade": {
+                            "ate_versao": null,
+                            "desde_versao": null,
+                            "estado": "desconhecido"
+                          },
+                          "dominio": {
+                            "contexto": "A fonte tipa como string sem lista de valores; não inventar valores.",
+                            "estado": "verificado",
+                            "evidencias": [
+                              {
+                                "fonte": "src:mdapi-customfield"
+                              }
+                            ],
+                            "natureza": "texto_livre"
+                          },
+                          "estado": "verificado",
+                          "evidencias": [
+                            {
+                              "fonte": "src:mdapi-customfield"
+                            }
+                          ],
+                          "explicacao": "explicada",
+                          "id": "mdx:FilterItem.valueField",
+                          "nome": "valueField",
+                          "o_que_e": "Campo cujo valor é comparado.",
+                          "obrigatoriedade": {
+                            "condicao": "A documentação 68.0 não marca o campo como obrigatório; ausência de marcação não comprova opcionalidade (confirmar no WSDL).",
+                            "estado": "desconhecido",
+                            "valor": "nao"
+                          },
+                          "origem": {
+                            "estado": "verificado",
+                            "evidencias": [
+                              {
+                                "fonte": "src:mdapi-customfield"
+                              }
+                            ],
+                            "nota": "Propriedade definida pelo schema da Metadata API.",
+                            "valor": "padrao_plataforma"
+                          },
+                          "tipo_tecnico": "string"
+                        }
+                      ]
+                    },
+                    "estrutura_ref": "mdx:FilterItem",
+                    "evidencias": [
+                      {
+                        "fonte": "src:mdapi-autoresponserules"
+                      }
+                    ],
+                    "explicacao": "explicada",
+                    "id": "mdx:AutoResponseRules_RuleEntry.criteriaItems",
+                    "nome": "criteriaItems",
+                    "o_que_e": "Itens que definem o critério da entrada.",
+                    "obrigatoriedade": {
+                      "condicao": "A documentação 68.0 não marca o campo como obrigatório; ausência de marcação não comprova opcionalidade (confirmar no WSDL).",
+                      "estado": "desconhecido",
+                      "valor": "nao"
+                    },
+                    "origem": {
+                      "estado": "verificado",
+                      "evidencias": [
+                        {
+                          "fonte": "src:mdapi-autoresponserules"
+                        }
+                      ],
+                      "nota": "Propriedade definida pelo schema da Metadata API.",
+                      "valor": "padrao_plataforma"
+                    },
+                    "tipo_tecnico": "FilterItem[]"
+                  },
+                  {
+                    "default": {
+                      "estado": "desconhecido",
+                      "forma": "nao_declarado_na_fonte"
+                    },
+                    "disponibilidade": {
+                      "ate_versao": null,
+                      "desde_versao": null,
+                      "estado": "desconhecido"
+                    },
+                    "dominio": {
+                      "estado": "verificado",
+                      "evidencias": [
+                        {
+                          "fonte": "src:mdapi-autoresponserules"
+                        }
+                      ],
+                      "lista_completa": "sim",
+                      "natureza": "booleano",
+                      "valores": [
+                        {
+                          "valor": "true"
+                        },
+                        {
+                          "valor": "false"
+                        }
+                      ]
+                    },
+                    "estado": "verificado",
+                    "evidencias": [
+                      {
+                        "fonte": "src:mdapi-autoresponserules"
+                      }
+                    ],
+                    "explicacao": "pendente",
+                    "id": "mdx:AutoResponseRules_RuleEntry.disableEscalationWhenModified",
+                    "nome": "disableEscalationWhenModified",
+                    "o_que_e": "Explicação pendente: item listado a partir da fonte, ainda sem texto didático.",
+                    "obrigatoriedade": {
+                      "condicao": "A documentação 68.0 não marca o campo como obrigatório; ausência de marcação não comprova opcionalidade (confirmar no WSDL).",
+                      "estado": "desconhecido",
+                      "valor": "nao"
+                    },
+                    "origem": {
+                      "estado": "verificado",
+                      "evidencias": [
+                        {
+                          "fonte": "src:mdapi-autoresponserules"
+                        }
+                      ],
+                      "nota": "Propriedade definida pelo schema da Metadata API.",
+                      "valor": "padrao_plataforma"
+                    },
+                    "tipo_tecnico": "boolean"
+                  },
+                  {
+                    "cardinalidade": "0..n",
+                    "default": {
+                      "estado": "desconhecido",
+                      "forma": "nao_declarado_na_fonte"
+                    },
+                    "disponibilidade": {
+                      "ate_versao": null,
+                      "desde_versao": null,
+                      "estado": "desconhecido"
+                    },
+                    "dominio": {
+                      "estado": "verificado",
+                      "evidencias": [
+                        {
+                          "fonte": "src:mdapi-autoresponserules"
+                        }
+                      ],
+                      "natureza": "tipo_composto"
+                    },
+                    "estado": "verificado",
+                    "estrutura_expandida": {
+                      "id": "mdx:EscalationAction",
+                      "nome": "EscalationAction",
+                      "propriedades": [
+                        {
+                          "default": {
+                            "estado": "desconhecido",
+                            "forma": "nao_declarado_na_fonte"
+                          },
+                          "disponibilidade": {
+                            "ate_versao": null,
+                            "desde_versao": null,
+                            "estado": "desconhecido"
+                          },
+                          "dominio": {
+                            "contexto": "A fonte tipa como string sem lista de valores; não inventar valores.",
+                            "estado": "verificado",
+                            "evidencias": [
+                              {
+                                "fonte": "src:mdapi-escalationrules"
+                              }
+                            ],
+                            "natureza": "texto_livre"
+                          },
+                          "estado": "verificado",
+                          "evidencias": [
+                            {
+                              "fonte": "src:mdapi-escalationrules"
+                            }
+                          ],
+                          "explicacao": "explicada",
+                          "id": "mdx:EscalationAction.assignedTo",
+                          "nome": "assignedTo",
+                          "o_que_e": "Usuário ou fila que recebe o caso.",
+                          "obrigatoriedade": {
+                            "condicao": "A documentação 68.0 não marca o campo como obrigatório; ausência de marcação não comprova opcionalidade (confirmar no WSDL).",
+                            "estado": "desconhecido",
+                            "valor": "nao"
+                          },
+                          "origem": {
+                            "estado": "verificado",
+                            "evidencias": [
+                              {
+                                "fonte": "src:mdapi-escalationrules"
+                              }
+                            ],
+                            "nota": "Propriedade definida pelo schema da Metadata API.",
+                            "valor": "padrao_plataforma"
+                          },
+                          "tipo_tecnico": "string"
+                        },
+                        {
+                          "default": {
+                            "estado": "desconhecido",
+                            "forma": "nao_declarado_na_fonte"
+                          },
+                          "disponibilidade": {
+                            "ate_versao": null,
+                            "desde_versao": null,
+                            "estado": "desconhecido"
+                          },
+                          "dominio": {
+                            "contexto": "A fonte tipa como string sem lista de valores; não inventar valores.",
+                            "estado": "verificado",
+                            "evidencias": [
+                              {
+                                "fonte": "src:mdapi-escalationrules"
+                              }
+                            ],
+                            "natureza": "texto_livre"
+                          },
+                          "estado": "verificado",
+                          "evidencias": [
+                            {
+                              "fonte": "src:mdapi-escalationrules"
+                            }
+                          ],
+                          "explicacao": "explicada",
+                          "id": "mdx:EscalationAction.assignedToTemplate",
+                          "nome": "assignedToTemplate",
+                          "o_que_e": "Modelo de e-mail para o novo dono.",
+                          "obrigatoriedade": {
+                            "condicao": "A documentação 68.0 não marca o campo como obrigatório; ausência de marcação não comprova opcionalidade (confirmar no WSDL).",
+                            "estado": "desconhecido",
+                            "valor": "nao"
+                          },
+                          "origem": {
+                            "estado": "verificado",
+                            "evidencias": [
+                              {
+                                "fonte": "src:mdapi-escalationrules"
+                              }
+                            ],
+                            "nota": "Propriedade definida pelo schema da Metadata API.",
+                            "valor": "padrao_plataforma"
+                          },
+                          "tipo_tecnico": "string"
+                        },
+                        {
+                          "default": {
+                            "estado": "desconhecido",
+                            "forma": "nao_declarado_na_fonte"
+                          },
+                          "disponibilidade": {
+                            "ate_versao": null,
+                            "desde_versao": null,
+                            "estado": "desconhecido"
+                          },
+                          "dominio": {
+                            "estado": "verificado",
+                            "evidencias": [
+                              {
+                                "fonte": "src:mdapi-escalationrules"
+                              }
+                            ],
+                            "lista_completa": "sim",
+                            "natureza": "enum_fechado",
+                            "valores": [
+                              {
+                                "valor": "User"
+                              },
+                              {
+                                "valor": "Queue"
+                              }
+                            ]
+                          },
+                          "estado": "verificado",
+                          "evidencias": [
+                            {
+                              "fonte": "src:mdapi-escalationrules"
+                            }
+                          ],
+                          "explicacao": "explicada",
+                          "id": "mdx:EscalationAction.assignedToType",
+                          "nome": "assignedToType",
+                          "o_que_e": "Se o destino é usuário ou fila.",
+                          "obrigatoriedade": {
+                            "condicao": "A documentação 68.0 não marca o campo como obrigatório; ausência de marcação não comprova opcionalidade (confirmar no WSDL).",
+                            "estado": "desconhecido",
+                            "valor": "nao"
+                          },
+                          "origem": {
+                            "estado": "verificado",
+                            "evidencias": [
+                              {
+                                "fonte": "src:mdapi-escalationrules"
+                              }
+                            ],
+                            "nota": "Propriedade definida pelo schema da Metadata API.",
+                            "valor": "padrao_plataforma"
+                          },
+                          "tipo_tecnico": "string"
+                        },
+                        {
+                          "default": {
+                            "estado": "desconhecido",
+                            "forma": "nao_declarado_na_fonte"
+                          },
+                          "disponibilidade": {
+                            "ate_versao": null,
+                            "desde_versao": null,
+                            "estado": "desconhecido"
+                          },
+                          "dominio": {
+                            "estado": "verificado",
+                            "evidencias": [
+                              {
+                                "fonte": "src:mdapi-escalationrules"
+                              }
+                            ],
+                            "natureza": "numerico"
+                          },
+                          "estado": "verificado",
+                          "evidencias": [
+                            {
+                              "fonte": "src:mdapi-escalationrules"
+                            }
+                          ],
+                          "explicacao": "explicada",
+                          "id": "mdx:EscalationAction.minutesToEscalation",
+                          "nome": "minutesToEscalation",
+                          "o_que_e": "Minutos até o escalonamento.",
+                          "obrigatoriedade": {
+                            "condicao": "A documentação 68.0 não marca o campo como obrigatório; ausência de marcação não comprova opcionalidade (confirmar no WSDL).",
+                            "estado": "desconhecido",
+                            "valor": "nao"
+                          },
+                          "origem": {
+                            "estado": "verificado",
+                            "evidencias": [
+                              {
+                                "fonte": "src:mdapi-escalationrules"
+                              }
+                            ],
+                            "nota": "Propriedade definida pelo schema da Metadata API.",
+                            "valor": "padrao_plataforma"
+                          },
+                          "tipo_tecnico": "int"
+                        },
+                        {
+                          "default": {
+                            "estado": "desconhecido",
+                            "forma": "nao_declarado_na_fonte"
+                          },
+                          "disponibilidade": {
+                            "ate_versao": null,
+                            "desde_versao": null,
+                            "estado": "desconhecido"
+                          },
+                          "dominio": {
+                            "estado": "verificado",
+                            "evidencias": [
+                              {
+                                "fonte": "src:mdapi-escalationrules"
+                              }
+                            ],
+                            "lista_completa": "sim",
+                            "natureza": "booleano",
+                            "valores": [
+                              {
+                                "valor": "true"
+                              },
+                              {
+                                "valor": "false"
+                              }
+                            ]
+                          },
+                          "estado": "verificado",
+                          "evidencias": [
+                            {
+                              "fonte": "src:mdapi-escalationrules"
+                            }
+                          ],
+                          "explicacao": "explicada",
+                          "id": "mdx:EscalationAction.notifyCaseOwner",
+                          "nome": "notifyCaseOwner",
+                          "o_que_e": "Notifica o dono do caso.",
+                          "obrigatoriedade": {
+                            "condicao": "A documentação 68.0 não marca o campo como obrigatório; ausência de marcação não comprova opcionalidade (confirmar no WSDL).",
+                            "estado": "desconhecido",
+                            "valor": "nao"
+                          },
+                          "origem": {
+                            "estado": "verificado",
+                            "evidencias": [
+                              {
+                                "fonte": "src:mdapi-escalationrules"
+                              }
+                            ],
+                            "nota": "Propriedade definida pelo schema da Metadata API.",
+                            "valor": "padrao_plataforma"
+                          },
+                          "tipo_tecnico": "boolean"
+                        },
+                        {
+                          "default": {
+                            "estado": "desconhecido",
+                            "forma": "nao_declarado_na_fonte"
+                          },
+                          "disponibilidade": {
+                            "ate_versao": null,
+                            "desde_versao": null,
+                            "estado": "desconhecido"
+                          },
+                          "dominio": {
+                            "contexto": "A fonte tipa como string sem lista de valores; não inventar valores.",
+                            "estado": "verificado",
+                            "evidencias": [
+                              {
+                                "fonte": "src:mdapi-escalationrules"
+                              }
+                            ],
+                            "natureza": "texto_livre"
+                          },
+                          "estado": "verificado",
+                          "evidencias": [
+                            {
+                              "fonte": "src:mdapi-escalationrules"
+                            }
+                          ],
+                          "explicacao": "explicada",
+                          "id": "mdx:EscalationAction.notifyEmail",
+                          "nome": "notifyEmail",
+                          "o_que_e": "E-mail a notificar.",
+                          "obrigatoriedade": {
+                            "condicao": "A documentação 68.0 não marca o campo como obrigatório; ausência de marcação não comprova opcionalidade (confirmar no WSDL).",
+                            "estado": "desconhecido",
+                            "valor": "nao"
+                          },
+                          "origem": {
+                            "estado": "verificado",
+                            "evidencias": [
+                              {
+                                "fonte": "src:mdapi-escalationrules"
+                              }
+                            ],
+                            "nota": "Propriedade definida pelo schema da Metadata API.",
+                            "valor": "padrao_plataforma"
+                          },
+                          "tipo_tecnico": "string"
+                        },
+                        {
+                          "default": {
+                            "estado": "desconhecido",
+                            "forma": "nao_declarado_na_fonte"
+                          },
+                          "disponibilidade": {
+                            "ate_versao": null,
+                            "desde_versao": null,
+                            "estado": "desconhecido"
+                          },
+                          "dominio": {
+                            "contexto": "A fonte tipa como string sem lista de valores; não inventar valores.",
+                            "estado": "verificado",
+                            "evidencias": [
+                              {
+                                "fonte": "src:mdapi-escalationrules"
+                              }
+                            ],
+                            "natureza": "texto_livre"
+                          },
+                          "estado": "verificado",
+                          "evidencias": [
+                            {
+                              "fonte": "src:mdapi-escalationrules"
+                            }
+                          ],
+                          "explicacao": "explicada",
+                          "id": "mdx:EscalationAction.notifyTo",
+                          "nome": "notifyTo",
+                          "o_que_e": "Usuário a notificar.",
+                          "obrigatoriedade": {
+                            "condicao": "A documentação 68.0 não marca o campo como obrigatório; ausência de marcação não comprova opcionalidade (confirmar no WSDL).",
+                            "estado": "desconhecido",
+                            "valor": "nao"
+                          },
+                          "origem": {
+                            "estado": "verificado",
+                            "evidencias": [
+                              {
+                                "fonte": "src:mdapi-escalationrules"
+                              }
+                            ],
+                            "nota": "Propriedade definida pelo schema da Metadata API.",
+                            "valor": "padrao_plataforma"
+                          },
+                          "tipo_tecnico": "string"
+                        },
+                        {
+                          "default": {
+                            "estado": "desconhecido",
+                            "forma": "nao_declarado_na_fonte"
+                          },
+                          "disponibilidade": {
+                            "ate_versao": null,
+                            "desde_versao": null,
+                            "estado": "desconhecido"
+                          },
+                          "dominio": {
+                            "contexto": "A fonte tipa como string sem lista de valores; não inventar valores.",
+                            "estado": "verificado",
+                            "evidencias": [
+                              {
+                                "fonte": "src:mdapi-escalationrules"
+                              }
+                            ],
+                            "natureza": "texto_livre"
+                          },
+                          "estado": "verificado",
+                          "evidencias": [
+                            {
+                              "fonte": "src:mdapi-escalationrules"
+                            }
+                          ],
+                          "explicacao": "explicada",
+                          "id": "mdx:EscalationAction.notifyToTemplate",
+                          "nome": "notifyToTemplate",
+                          "o_que_e": "Modelo do e-mail de notificação.",
+                          "obrigatoriedade": {
+                            "condicao": "A documentação 68.0 não marca o campo como obrigatório; ausência de marcação não comprova opcionalidade (confirmar no WSDL).",
+                            "estado": "desconhecido",
+                            "valor": "nao"
+                          },
+                          "origem": {
+                            "estado": "verificado",
+                            "evidencias": [
+                              {
+                                "fonte": "src:mdapi-escalationrules"
+                              }
+                            ],
+                            "nota": "Propriedade definida pelo schema da Metadata API.",
+                            "valor": "padrao_plataforma"
+                          },
+                          "tipo_tecnico": "string"
+                        }
+                      ]
+                    },
+                    "estrutura_ref": "mdx:EscalationAction",
+                    "evidencias": [
+                      {
+                        "fonte": "src:mdapi-autoresponserules"
+                      }
+                    ],
+                    "explicacao": "pendente",
+                    "id": "mdx:AutoResponseRules_RuleEntry.escalationAction",
+                    "nome": "escalationAction",
+                    "o_que_e": "Explicação pendente: item listado a partir da fonte, ainda sem texto didático.",
+                    "obrigatoriedade": {
+                      "condicao": "A documentação 68.0 não marca o campo como obrigatório; ausência de marcação não comprova opcionalidade (confirmar no WSDL).",
+                      "estado": "desconhecido",
+                      "valor": "nao"
+                    },
+                    "origem": {
+                      "estado": "verificado",
+                      "evidencias": [
+                        {
+                          "fonte": "src:mdapi-autoresponserules"
+                        }
+                      ],
+                      "nota": "Propriedade definida pelo schema da Metadata API.",
+                      "valor": "padrao_plataforma"
+                    },
+                    "tipo_tecnico": "EscalationAction[]"
+                  },
+                  {
+                    "default": {
+                      "estado": "desconhecido",
+                      "forma": "nao_declarado_na_fonte"
+                    },
+                    "disponibilidade": {
+                      "ate_versao": null,
+                      "desde_versao": null,
+                      "estado": "desconhecido"
+                    },
+                    "dominio": {
+                      "contexto": "A página de AutoResponseRules cita a enumeração EscalationStartTimeType, mas o texto lido não lista os valores.",
+                      "estado": "desconhecido",
+                      "natureza": "desconhecida"
+                    },
+                    "estado": "verificado",
+                    "evidencias": [
+                      {
+                        "fonte": "src:mdapi-autoresponserules"
+                      }
+                    ],
+                    "explicacao": "pendente",
+                    "id": "mdx:AutoResponseRules_RuleEntry.escalationStartTime",
+                    "nome": "escalationStartTime",
+                    "o_que_e": "Explicação pendente: item listado a partir da fonte, ainda sem texto didático.",
+                    "obrigatoriedade": {
+                      "condicao": "A documentação 68.0 não marca o campo como obrigatório; ausência de marcação não comprova opcionalidade (confirmar no WSDL).",
+                      "estado": "desconhecido",
+                      "valor": "nao"
+                    },
+                    "origem": {
+                      "estado": "verificado",
+                      "evidencias": [
+                        {
+                          "fonte": "src:mdapi-autoresponserules"
+                        }
+                      ],
+                      "nota": "Propriedade definida pelo schema da Metadata API.",
+                      "valor": "padrao_plataforma"
+                    },
+                    "tipo_tecnico": "EscalationStartTimeType"
+                  },
+                  {
+                    "default": {
+                      "estado": "desconhecido",
+                      "forma": "nao_declarado_na_fonte"
+                    },
+                    "disponibilidade": {
+                      "ate_versao": null,
+                      "desde_versao": null,
+                      "estado": "desconhecido"
+                    },
+                    "dominio": {
+                      "contexto": "A fonte tipa como string sem lista de valores; não inventar valores.",
+                      "estado": "verificado",
+                      "evidencias": [
+                        {
+                          "fonte": "src:mdapi-autoresponserules"
+                        }
+                      ],
+                      "natureza": "texto_livre"
+                    },
+                    "estado": "verificado",
+                    "evidencias": [
+                      {
+                        "fonte": "src:mdapi-autoresponserules"
+                      }
+                    ],
+                    "explicacao": "explicada",
+                    "id": "mdx:AutoResponseRules_RuleEntry.formula",
+                    "nome": "formula",
+                    "o_que_e": "Fórmula da entrada. Use formula ou criteriaItems, não os dois.",
+                    "obrigatoriedade": {
+                      "condicao": "A documentação 68.0 não marca o campo como obrigatório; ausência de marcação não comprova opcionalidade (confirmar no WSDL).",
+                      "estado": "desconhecido",
+                      "valor": "nao"
+                    },
+                    "origem": {
+                      "estado": "verificado",
+                      "evidencias": [
+                        {
+                          "fonte": "src:mdapi-autoresponserules"
+                        }
+                      ],
+                      "nota": "Propriedade definida pelo schema da Metadata API.",
+                      "valor": "padrao_plataforma"
+                    },
+                    "tipo_tecnico": "string"
+                  },
+                  {
+                    "default": {
+                      "estado": "desconhecido",
+                      "forma": "nao_declarado_na_fonte"
+                    },
+                    "disponibilidade": {
+                      "ate_versao": null,
+                      "desde_versao": null,
+                      "estado": "desconhecido"
+                    },
+                    "dominio": {
+                      "estado": "verificado",
+                      "evidencias": [
+                        {
+                          "fonte": "src:mdapi-autoresponserules"
+                        }
+                      ],
+                      "lista_completa": "sim",
+                      "natureza": "booleano",
+                      "valores": [
+                        {
+                          "valor": "true"
+                        },
+                        {
+                          "valor": "false"
+                        }
+                      ]
+                    },
+                    "estado": "verificado",
+                    "evidencias": [
+                      {
+                        "fonte": "src:mdapi-autoresponserules"
+                      }
+                    ],
+                    "explicacao": "pendente",
+                    "id": "mdx:AutoResponseRules_RuleEntry.notifyCcRecipients",
+                    "nome": "notifyCcRecipients",
+                    "o_que_e": "Explicação pendente: item listado a partir da fonte, ainda sem texto didático.",
+                    "obrigatoriedade": {
+                      "condicao": "A documentação 68.0 não marca o campo como obrigatório; ausência de marcação não comprova opcionalidade (confirmar no WSDL).",
+                      "estado": "desconhecido",
+                      "valor": "nao"
+                    },
+                    "origem": {
+                      "estado": "verificado",
+                      "evidencias": [
+                        {
+                          "fonte": "src:mdapi-autoresponserules"
+                        }
+                      ],
+                      "nota": "Propriedade definida pelo schema da Metadata API.",
+                      "valor": "padrao_plataforma"
+                    },
+                    "tipo_tecnico": "boolean"
+                  },
+                  {
+                    "default": {
+                      "estado": "desconhecido",
+                      "forma": "nao_declarado_na_fonte"
+                    },
+                    "disponibilidade": {
+                      "ate_versao": null,
+                      "desde_versao": null,
+                      "estado": "desconhecido"
+                    },
+                    "dominio": {
+                      "estado": "verificado",
+                      "evidencias": [
+                        {
+                          "fonte": "src:mdapi-autoresponserules"
+                        }
+                      ],
+                      "lista_completa": "sim",
+                      "natureza": "booleano",
+                      "valores": [
+                        {
+                          "valor": "true"
+                        },
+                        {
+                          "valor": "false"
+                        }
+                      ]
+                    },
+                    "estado": "verificado",
+                    "evidencias": [
+                      {
+                        "fonte": "src:mdapi-autoresponserules"
+                      }
+                    ],
+                    "explicacao": "pendente",
+                    "id": "mdx:AutoResponseRules_RuleEntry.overrideExistingTeams",
+                    "nome": "overrideExistingTeams",
+                    "o_que_e": "Explicação pendente: item listado a partir da fonte, ainda sem texto didático.",
+                    "obrigatoriedade": {
+                      "condicao": "A documentação 68.0 não marca o campo como obrigatório; ausência de marcação não comprova opcionalidade (confirmar no WSDL).",
+                      "estado": "desconhecido",
+                      "valor": "nao"
+                    },
+                    "origem": {
+                      "estado": "verificado",
+                      "evidencias": [
+                        {
+                          "fonte": "src:mdapi-autoresponserules"
+                        }
+                      ],
+                      "nota": "Propriedade definida pelo schema da Metadata API.",
+                      "valor": "padrao_plataforma"
+                    },
+                    "tipo_tecnico": "boolean"
+                  },
+                  {
+                    "default": {
+                      "estado": "desconhecido",
+                      "forma": "nao_declarado_na_fonte"
+                    },
+                    "disponibilidade": {
+                      "ate_versao": null,
+                      "desde_versao": null,
+                      "estado": "desconhecido"
+                    },
+                    "dominio": {
+                      "contexto": "A fonte tipa como string sem lista de valores; não inventar valores.",
+                      "estado": "verificado",
+                      "evidencias": [
+                        {
+                          "fonte": "src:mdapi-autoresponserules"
+                        }
+                      ],
+                      "natureza": "texto_livre"
+                    },
+                    "estado": "verificado",
+                    "evidencias": [
+                      {
+                        "fonte": "src:mdapi-autoresponserules"
+                      }
+                    ],
+                    "explicacao": "explicada",
+                    "id": "mdx:AutoResponseRules_RuleEntry.replyToEmail",
+                    "nome": "replyToEmail",
+                    "o_que_e": "Endereço de e-mail que aparece no cabeçalho reply-to.",
+                    "obrigatoriedade": {
+                      "condicao": "A documentação 68.0 não marca o campo como obrigatório; ausência de marcação não comprova opcionalidade (confirmar no WSDL).",
+                      "estado": "desconhecido",
+                      "valor": "nao"
+                    },
+                    "origem": {
+                      "estado": "verificado",
+                      "evidencias": [
+                        {
+                          "fonte": "src:mdapi-autoresponserules"
+                        }
+                      ],
+                      "nota": "Propriedade definida pelo schema da Metadata API.",
+                      "valor": "padrao_plataforma"
+                    },
+                    "tipo_tecnico": "string"
+                  },
+                  {
+                    "default": {
+                      "estado": "desconhecido",
+                      "forma": "nao_declarado_na_fonte"
+                    },
+                    "disponibilidade": {
+                      "ate_versao": null,
+                      "desde_versao": null,
+                      "estado": "desconhecido"
+                    },
+                    "dominio": {
+                      "contexto": "A fonte tipa como string sem lista de valores; não inventar valores.",
+                      "estado": "verificado",
+                      "evidencias": [
+                        {
+                          "fonte": "src:mdapi-autoresponserules"
+                        }
+                      ],
+                      "natureza": "texto_livre"
+                    },
+                    "estado": "verificado",
+                    "evidencias": [
+                      {
+                        "fonte": "src:mdapi-autoresponserules"
+                      }
+                    ],
+                    "explicacao": "explicada",
+                    "id": "mdx:AutoResponseRules_RuleEntry.senderEmail",
+                    "nome": "senderEmail",
+                    "o_que_e": "Endereço de e-mail da pessoa ou fila que envia a resposta.",
+                    "obrigatoriedade": {
+                      "condicao": "A documentação 68.0 não marca o campo como obrigatório; ausência de marcação não comprova opcionalidade (confirmar no WSDL).",
+                      "estado": "desconhecido",
+                      "valor": "nao"
+                    },
+                    "origem": {
+                      "estado": "verificado",
+                      "evidencias": [
+                        {
+                          "fonte": "src:mdapi-autoresponserules"
+                        }
+                      ],
+                      "nota": "Propriedade definida pelo schema da Metadata API.",
+                      "valor": "padrao_plataforma"
+                    },
+                    "tipo_tecnico": "string"
+                  },
+                  {
+                    "default": {
+                      "estado": "desconhecido",
+                      "forma": "nao_declarado_na_fonte"
+                    },
+                    "disponibilidade": {
+                      "ate_versao": null,
+                      "desde_versao": null,
+                      "estado": "desconhecido"
+                    },
+                    "dominio": {
+                      "contexto": "A fonte tipa como string sem lista de valores; não inventar valores.",
+                      "estado": "verificado",
+                      "evidencias": [
+                        {
+                          "fonte": "src:mdapi-autoresponserules"
+                        }
+                      ],
+                      "natureza": "texto_livre"
+                    },
+                    "estado": "verificado",
+                    "evidencias": [
+                      {
+                        "fonte": "src:mdapi-autoresponserules"
+                      }
+                    ],
+                    "explicacao": "explicada",
+                    "id": "mdx:AutoResponseRules_RuleEntry.senderName",
+                    "nome": "senderName",
+                    "o_que_e": "Nome da pessoa ou fila que envia a resposta.",
+                    "obrigatoriedade": {
+                      "condicao": "A documentação 68.0 não marca o campo como obrigatório; ausência de marcação não comprova opcionalidade (confirmar no WSDL).",
+                      "estado": "desconhecido",
+                      "valor": "nao"
+                    },
+                    "origem": {
+                      "estado": "verificado",
+                      "evidencias": [
+                        {
+                          "fonte": "src:mdapi-autoresponserules"
+                        }
+                      ],
+                      "nota": "Propriedade definida pelo schema da Metadata API.",
+                      "valor": "padrao_plataforma"
+                    },
+                    "tipo_tecnico": "string"
+                  },
+                  {
+                    "cardinalidade": "0..n",
+                    "default": {
+                      "estado": "desconhecido",
+                      "forma": "nao_declarado_na_fonte"
+                    },
+                    "disponibilidade": {
+                      "ate_versao": null,
+                      "desde_versao": null,
+                      "estado": "desconhecido"
+                    },
+                    "dominio": {
+                      "contexto": "A fonte tipa como string sem lista de valores; não inventar valores.",
+                      "estado": "verificado",
+                      "evidencias": [
+                        {
+                          "fonte": "src:mdapi-autoresponserules"
+                        }
+                      ],
+                      "natureza": "texto_livre"
+                    },
+                    "estado": "verificado",
+                    "evidencias": [
+                      {
+                        "fonte": "src:mdapi-autoresponserules"
+                      }
+                    ],
+                    "explicacao": "pendente",
+                    "id": "mdx:AutoResponseRules_RuleEntry.team",
+                    "nome": "team",
+                    "o_que_e": "Explicação pendente: item listado a partir da fonte, ainda sem texto didático.",
+                    "obrigatoriedade": {
+                      "condicao": "A documentação 68.0 não marca o campo como obrigatório; ausência de marcação não comprova opcionalidade (confirmar no WSDL).",
+                      "estado": "desconhecido",
+                      "valor": "nao"
+                    },
+                    "origem": {
+                      "estado": "verificado",
+                      "evidencias": [
+                        {
+                          "fonte": "src:mdapi-autoresponserules"
+                        }
+                      ],
+                      "nota": "Propriedade definida pelo schema da Metadata API.",
+                      "valor": "padrao_plataforma"
+                    },
+                    "tipo_tecnico": "string[]"
+                  },
+                  {
+                    "default": {
+                      "estado": "desconhecido",
+                      "forma": "nao_declarado_na_fonte"
+                    },
+                    "disponibilidade": {
+                      "ate_versao": null,
+                      "desde_versao": null,
+                      "estado": "desconhecido"
+                    },
+                    "dominio": {
+                      "contexto": "A fonte tipa como string sem lista de valores; não inventar valores.",
+                      "estado": "verificado",
+                      "evidencias": [
+                        {
+                          "fonte": "src:mdapi-autoresponserules"
+                        }
+                      ],
+                      "natureza": "texto_livre"
+                    },
+                    "estado": "verificado",
+                    "evidencias": [
+                      {
+                        "fonte": "src:mdapi-autoresponserules"
+                      }
+                    ],
+                    "explicacao": "explicada",
+                    "id": "mdx:AutoResponseRules_RuleEntry.template",
+                    "nome": "template",
+                    "o_que_e": "Template de e-mail enviado automaticamente ao destinatário. A página recomenda templates Classic.",
+                    "obrigatoriedade": {
+                      "condicao": "A documentação 68.0 não marca o campo como obrigatório; ausência de marcação não comprova opcionalidade (confirmar no WSDL).",
+                      "estado": "desconhecido",
+                      "valor": "nao"
+                    },
+                    "origem": {
+                      "estado": "verificado",
+                      "evidencias": [
+                        {
+                          "fonte": "src:mdapi-autoresponserules"
+                        }
+                      ],
+                      "nota": "Propriedade definida pelo schema da Metadata API.",
+                      "valor": "padrao_plataforma"
+                    },
+                    "tipo_tecnico": "string"
+                  }
+                ]
+              },
+              "estrutura_ref": "mdx:AutoResponseRules_RuleEntry",
+              "evidencias": [
+                {
+                  "fonte": "src:mdapi-autoresponserules"
+                }
+              ],
+              "explicacao": "explicada",
+              "id": "mdx:AutoResponseRule.ruleEntry",
+              "nome": "ruleEntry",
+              "o_que_e": "Entradas da regra de resposta automática.",
+              "obrigatoriedade": {
+                "condicao": "A documentação 68.0 não marca o campo como obrigatório; ausência de marcação não comprova opcionalidade (confirmar no WSDL).",
+                "estado": "desconhecido",
+                "valor": "nao"
+              },
+              "origem": {
+                "estado": "verificado",
+                "evidencias": [
+                  {
+                    "fonte": "src:mdapi-autoresponserules"
+                  }
+                ],
+                "nota": "Propriedade definida pelo schema da Metadata API.",
+                "valor": "padrao_plataforma"
+              },
+              "tipo_tecnico": "RuleEntry[]"
+            }
+          ]
+        },
+        "estrutura_ref": "mdx:AutoResponseRule",
+        "evidencias": [
+          {
+            "fonte": "src:mdapi-autoresponserules"
+          }
+        ],
+        "explicacao": "explicada",
+        "id": "mdt:AutoResponseRules.autoResponseRule",
+        "nome": "autoResponseRule",
+        "o_que_e": "Definições das regras de resposta automática nomeadas.",
+        "obrigatoriedade": {
+          "condicao": "A documentação 68.0 não marca o campo como obrigatório; ausência de marcação não comprova opcionalidade (confirmar no WSDL).",
+          "estado": "desconhecido",
+          "valor": "nao"
+        },
+        "origem": {
+          "estado": "verificado",
+          "evidencias": [
+            {
+              "fonte": "src:mdapi-autoresponserules"
+            }
+          ],
+          "nota": "Propriedade definida pelo schema da Metadata API.",
+          "valor": "padrao_plataforma"
+        },
+        "tipo_tecnico": "AutoResponseRule[]"
+      }
+    ],
+    "recomendacoes": [],
+    "setup": {
+      "estado": "desconhecido",
+      "nota": "Caminho no Setup não validado nesta sessão."
+    },
+    "suporte_cli": {
+      "estado": "verificado",
+      "evidencias": [
+        {
+          "fonte": "src:sdr-metadata-support"
+        }
+      ],
+      "nota": "Suporte do Salesforce CLI (source-deploy-retrieve), não do Metadata API em geral.",
+      "valor": {
+        "nota_fonte": null,
+        "status": "suportado"
+      }
+    }
+  },
+  "nota": "Gerado deterministicamente a partir de catalogo/. Não editar à mão.",
+  "objetos_relacionados": [],
+  "relacionamentos": [],
+  "versao_base": {
+    "api_version": "68.0",
+    "data_referencia": "2026-11-07",
+    "escopo": "config/escopo.json",
+    "release": "Winter '27"
+  }
+}

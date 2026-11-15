@@ -4,30 +4,79 @@
   "sigla": "AUT-04",
   "classificacao": "cls:automacao-de-processos-e-regras-de-negocio",
   "natureza": "curadoria_didatica",
-  "descricao": "Triggers e classes Apex que automatizam processos.",
+  "descricao": "Triggers e classes Apex que automatizam o que as ferramentas declarativas não cobrem; o trigger roda antes ou depois de um registro ser inserido, alterado ou excluído.",
   "escopo": "Entram triggers e classes Apex usados para automatizar processos.",
   "fora_do_escopo": "Apex assíncrono fica em \"Execução assíncrona, lotes e agendamento\". Código como artefato de entrega fica em \"Código e bundles\".",
   "para_iniciantes": {
-    "explicacao": "Cobre triggers e classes Apex que automatizam processos quando as ferramentas declarativas não bastam.",
+    "explicacao": "Cobre triggers e classes Apex que automatizam processos quando as ferramentas declarativas não bastam. Um trigger é código Apex que roda antes ou depois de um registro ser inserido, alterado ou excluído.",
     "exemplo": "Um trigger grava o pedido e precisa avisar o ERP; a chamada externa tem de vir antes da gravação ou ir para um processo assíncrono.",
+    "por_onde_comecar": [
+      "func:apex-triggers"
+    ],
     "evidencias": [
       {
         "fonte": "src:apex-callout-limits"
       },
       {
         "fonte": "src:help-produtos-platform"
+      },
+      {
+        "fonte": "src:apex-triggers"
       }
     ]
   },
   "encadeamento": {
-    "texto": "Apex que roda depois, em fila ou agendado, fica em 'Execução assíncrona, lotes e agendamento'.",
+    "texto": "Triggers e record-triggered flows reagem à mesma gravação e têm posição definida na ordem de execução. Apex que roda depois, em fila ou agendado, fica em 'Execução assíncrona, lotes e agendamento'; testes e deploy ficam em 'Desenvolvimento, testes e entrega'.",
     "evidencias": [
       {
         "fonte": "src:apex-async-overview"
+      },
+      {
+        "fonte": "src:apex-triggers-order"
       }
     ]
   },
   "avancado": [
+    {
+      "tipo": "atencao",
+      "titulo": "Ordem de execução ao salvar",
+      "texto": "Ao salvar um registro, a plataforma segue uma ordem fixa: os record-triggered flows before-save rodam antes dos before triggers, e as workflow rules vêm mais adiante. Quem mistura flow, trigger e regra no mesmo objeto precisa conhecer essa ordem.",
+      "evidencias": [
+        {
+          "fonte": "src:apex-triggers-order"
+        }
+      ]
+    },
+    {
+      "tipo": "escala",
+      "titulo": "Todo trigger é em massa",
+      "texto": "Um trigger pode receber vários registros de uma vez, em importações, Bulk API e ações em massa. O código deve sempre ser escrito para mais de um registro.",
+      "evidencias": [
+        {
+          "fonte": "src:apex-triggers-bulk"
+        }
+      ]
+    },
+    {
+      "tipo": "implantacao",
+      "titulo": "Trigger exige teste",
+      "texto": "Para implantar, 75% do código Apex precisa de cobertura de testes, e todo trigger precisa de alguma cobertura. A recomendação é testar em massa, com pelo menos 20 registros.",
+      "evidencias": [
+        {
+          "fonte": "src:apex-testing-best-practices"
+        }
+      ]
+    },
+    {
+      "tipo": "implantacao",
+      "titulo": "Como metadado",
+      "texto": "Cada trigger é um componente ApexTrigger, com dois arquivos na pasta triggers: o código-fonte .trigger e o arquivo de metadado, que guarda a versão da API e o status (Active, Inactive ou Deleted).",
+      "evidencias": [
+        {
+          "fonte": "src:mdapi-apextrigger"
+        }
+      ]
+    },
     {
       "tipo": "limite",
       "titulo": "Callouts por transação",
@@ -49,7 +98,21 @@
       ]
     }
   ],
-  "funcionalidades": [],
+  "funcionalidades": [
+    "func:apex-triggers"
+  ],
   "estado": "desconhecido",
-  "nota_estado": "Agrupamento proposto na especificação; fronteira ainda não cruzada com a documentação oficial."
+  "nota_estado": "Tema criado pelo projeto (00-especificacao-grafo.md), não é nomenclatura oficial da Salesforce. Cruzado em 2026-11-10 com áreas da documentação oficial listadas nas referências; a correspondência é parcial e o recorte continua sendo do projeto.",
+  "referencias_oficiais": [
+    {
+      "fonte": "src:apex-triggers",
+      "secao": "Triggers",
+      "nota": "Cobre o tema: triggers Apex."
+    },
+    {
+      "fonte": "src:apex-triggers-order",
+      "secao": "Triggers and Order of Execution",
+      "nota": "Cobre parte do tema: ordem de execução ao salvar um registro."
+    }
+  ]
 }

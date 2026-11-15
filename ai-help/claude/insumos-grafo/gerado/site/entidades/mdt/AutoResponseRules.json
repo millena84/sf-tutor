@@ -1,0 +1,160 @@
+{
+  "alertas": [
+    "Há um arquivo por objeto (por exemplo Case.autoResponseRules). Para apontar uma regra específica no package.xml, a página usa o nome AutoResponseRule com o membro Objeto.regra.",
+    "Templates Lightning não são empacotáveis; a página recomenda templates Classic."
+  ],
+  "arquivos": {
+    "curinga_package_xml": {
+      "estado": "verificado",
+      "evidencias": [
+        {
+          "fonte": "src:mdapi-autoresponserules"
+        }
+      ],
+      "valor": true
+    },
+    "metadata_api_format": {
+      "estado": "verificado",
+      "evidencias": [
+        {
+          "fonte": "src:sdr-registry",
+          "nota": "types.autoresponserules"
+        }
+      ],
+      "valor": {
+        "arquivo": "<Nome>.autoResponseRules",
+        "pasta": "autoResponseRules/"
+      }
+    },
+    "source_format": {
+      "estado": "verificado",
+      "evidencias": [
+        {
+          "fonte": "src:sdr-registry",
+          "nota": "types.autoresponserules"
+        }
+      ],
+      "nota": "Pasta e sufixo do registro do Salesforce CLI; sufixo '-meta.xml' segue a convenção do source format.",
+      "valor": {
+        "arquivo": "<Nome>.autoResponseRules-meta.xml",
+        "pasta": "autoResponseRules/"
+      }
+    }
+  },
+  "cobertura": {
+    "estrutural": {
+      "esperado": null,
+      "estado": "parcial",
+      "nota": "Universo esperado = tabela Fields da página oficial lida em 2026-11-15. Parcial: três enumerações de RuleEntry não têm os valores listados no texto lido.",
+      "presente": 1
+    },
+    "explicativa": {
+      "esperado": 1,
+      "estado": "completa",
+      "presente": 1
+    },
+    "mapeamento": {
+      "estado": "parcial",
+      "nota": "Correspondências registradas apenas onde há evidência; demais pendentes."
+    }
+  },
+  "disponibilidade": {
+    "ate_versao": null,
+    "desde_versao": "27.0",
+    "estado": "verificado"
+  },
+  "divergencias_documentais": [],
+  "estado": "verificado",
+  "estende": "Metadata",
+  "estruturas": [
+    "mdx:AutoResponseRule"
+  ],
+  "evidencias": [
+    {
+      "fonte": "src:mdapi-autoresponserules"
+    },
+    {
+      "fonte": "src:sdr-registry"
+    },
+    {
+      "fonte": "src:sdr-metadata-support"
+    }
+  ],
+  "exemplo_xml": {
+    "natureza": "didatico_projeto",
+    "nota": "Exemplo escrito pelo projeto apenas com elementos documentados; sem dados reais.",
+    "xml": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<AutoResponseRules xmlns=\"http://soap.sforce.com/2006/04/metadata\">\n    <autoResponseRule>\n        <fullName>[nome da regra]</fullName>\n        <active>false</active>\n        <!-- As entradas são avaliadas em ordem; a regra para na primeira que casar -->\n        <ruleEntry>\n            <senderEmail>[e-mail do remetente]</senderEmail>\n            <senderName>[nome do remetente]</senderName>\n            <template>[pasta/nome do template de e-mail]</template>\n        </ruleEntry>\n    </autoResponseRule>\n</AutoResponseRules>"
+  },
+  "finalidade": "Versionar e implantar as regras que enviam o primeiro e-mail a quem abriu um caso ou enviou um lead.",
+  "id": "mdt:AutoResponseRules",
+  "nome": "AutoResponseRules",
+  "o_que_e": "As regras de resposta automática de um objeto (lead ou caso): cada regra tem entradas com critério e template de e-mail.",
+  "propriedades": [
+    {
+      "cardinalidade": "0..n",
+      "default": {
+        "estado": "desconhecido",
+        "forma": "nao_declarado_na_fonte"
+      },
+      "disponibilidade": {
+        "ate_versao": null,
+        "desde_versao": null,
+        "estado": "desconhecido"
+      },
+      "dominio": {
+        "estado": "verificado",
+        "evidencias": [
+          {
+            "fonte": "src:mdapi-autoresponserules"
+          }
+        ],
+        "natureza": "tipo_composto"
+      },
+      "estado": "verificado",
+      "estrutura_ref": "mdx:AutoResponseRule",
+      "evidencias": [
+        {
+          "fonte": "src:mdapi-autoresponserules"
+        }
+      ],
+      "explicacao": "explicada",
+      "id": "mdt:AutoResponseRules.autoResponseRule",
+      "nome": "autoResponseRule",
+      "o_que_e": "Definições das regras de resposta automática nomeadas.",
+      "obrigatoriedade": {
+        "condicao": "A documentação 68.0 não marca o campo como obrigatório; ausência de marcação não comprova opcionalidade (confirmar no WSDL).",
+        "estado": "desconhecido",
+        "valor": "nao"
+      },
+      "origem": {
+        "estado": "verificado",
+        "evidencias": [
+          {
+            "fonte": "src:mdapi-autoresponserules"
+          }
+        ],
+        "nota": "Propriedade definida pelo schema da Metadata API.",
+        "valor": "padrao_plataforma"
+      },
+      "tipo_tecnico": "AutoResponseRule[]"
+    }
+  ],
+  "recomendacoes": [],
+  "setup": {
+    "estado": "desconhecido",
+    "nota": "Caminho no Setup não validado nesta sessão."
+  },
+  "suporte_cli": {
+    "estado": "verificado",
+    "evidencias": [
+      {
+        "fonte": "src:sdr-metadata-support"
+      }
+    ],
+    "nota": "Suporte do Salesforce CLI (source-deploy-retrieve), não do Metadata API em geral.",
+    "valor": {
+      "nota_fonte": null,
+      "status": "suportado"
+    }
+  }
+}
