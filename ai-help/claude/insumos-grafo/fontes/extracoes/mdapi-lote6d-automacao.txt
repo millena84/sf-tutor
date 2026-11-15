@@ -1,0 +1,133 @@
+fonte: páginas da Metadata API (lote 6d, tema Automação de processos e regras de negócio) | URL base: https://developer.salesforce.com/docs/platform/api-metadata/references/meta-types/metadata-<tipo em minúsculas>.html
+obtido em 2026-11-15 via WebFetch (leitura aprovada pela autora); método: extração documental assistida por IA; descrições parafraseadas em português.
+alcance da leitura: caracteres 0 a 100000 de cada página (o artigo fica nesse trecho; o restante é índice de navegação, conferido no lote 6a em
+  metadata-mydomainsettings.html). versão: sem versão na URL; páginas da referência atual.
+convenção das linhas: nome | tipo | versão em que entrou (quando a página informa) | marcação "Required" (quando a página informa).
+
+[src:mdapi-approvalprocess] ApprovalProcess: sufixo .approvalProcess, pasta approvalProcesses; desde 28.0; estende Metadata (fullName herdado)
+  Representa um approval process, que automatiza como registros são aprovados e define cada passo. package.xml: * recupera todos os approval
+  processes de todos os objetos; curinga parcial (ex.: Lead.*) não é suportado.
+  ApprovalProcess (21): active | boolean | Required, allowedSubmitters | ApprovalSubmitter[], allowRecall | boolean,
+    approvalPageFields | ApprovalPageField, approvalStep | ApprovalStep[], description | string, emailTemplate | string,
+    enableMobileDeviceAccess | boolean, entryCriteria | ApprovalEntryCriteria, finalApprovalActions | ApprovalAction,
+    finalApprovalRecordLock | boolean, finalRejectionActions | ApprovalAction, finalRejectionRecordLock | boolean,
+    initialSubmissionActions | ApprovalAction, label | string | Required, nextAutomatedApprover | NextAutomatedApprover, postTemplate | string,
+    processOrder | int, recallActions | ApprovalAction, recordEditability | RecordEditabilityType | Required, showApprovalHistory | boolean
+    active: se o processo está ativo; depois de ativado, a estrutura dos passos e o comportamento de rejeição e de pulo ficam travados.
+    allowedSubmitters: quem pode submeter registros (a tabela marca não obrigatório; a descrição diz obrigatório).
+    allowRecall: se quem submeteu pode retirar (recall) o pedido; com false, só administradores.
+    approvalPageFields: campos mostrados na página de aprovação; o padrão inclui Name e Owner. approvalStep: definições dos passos.
+    emailTemplate: template Classic do e-mail de pedido; sem ele, vale o padrão. enableMobileDeviceAccess: aprovadores acessam a página de
+      aprovação por qualquer navegador, sem login; com true, aprovadores adhoc não são permitidos.
+    entryCriteria: que registros entram no processo; omitido, entram todos. finalApprovalActions / finalRejectionActions /
+      initialSubmissionActions / recallActions: ações de workflow na aprovação final, na rejeição final, na submissão e na retirada do pedido.
+    finalApprovalRecordLock / finalRejectionRecordLock: mantêm o registro bloqueado depois da aprovação / rejeição final; padrão false.
+    label: nome do processo. nextAutomatedApprover: campo de hierarquia usado para atribuir aprovadores automaticamente; omitido, desliga.
+    postTemplate: template de post do Chatter; exige objeto com feed tracking. processOrder: sem descrição na página.
+    recordEditability: quem edita registros em aprovação (AdminOnly, AdminOrCurrentApprover). showApprovalHistory: inclui a lista Approval History
+      na página de aprovação.
+  ApprovalAction: action | WorkflowActionReference[] (ações de workflow a executar)
+  ApprovalEntryCriteria: booleanFilter | string (lógica de filtro dos criteriaItems; omitir se usar formula), criteriaItems | FilterItem[]
+    (critérios; entradas valueField não são suportadas), formula | string (fórmula que precisa ser verdadeira; usar filtro ou fórmula, não os dois)
+  ApprovalPageField: field | string[] (campos exibidos ao aprovador)
+  ApprovalStep: allowDelegate | boolean, approvalActions | ApprovalAction, assignedApprover | ApprovalStepApprover | Required, description | string,
+    entryCriteria | ApprovalEntryCriteria, ifCriteriaNotMet | StepCriteriaNotMetType, label | string | Required, name | string | Required,
+    rejectBehavior | ApprovalStepRejectBehavior (obrigatório exceto no primeiro passo), rejectionActions | ApprovalAction
+    name: nome único do passo: letras, dígitos e sublinhados simples; começa com letra.
+    StepCriteriaNotMetType: ApproveRecord, RejectRecord (só no primeiro passo), GotoNextStep.
+  ApprovalStepApprover: approver | Approver[] (até 25 por passo), whenMultipleApprovers | RoutingType (Unanimous, padrão; FirstResponse)
+  ApprovalStepRejectBehavior: type | StepRejectBehaviorType | Required (RejectRequest, BackToPrevious); não permitido no primeiro passo
+  ApprovalSubmitter: submitter | string (obrigatório, salvo quando type é owner, creator ou allInternalUsers), type | ProcessSubmitterType | Required
+    ProcessSubmitterType: group, role, user, roleSubordinates, roleSubordinatesInternal, owner, creator, partnerUser, customerPortalUser,
+      portalRole, portalRoleSubordinates, allInternalUsers
+  Approver: name | string (ignorado para adhoc e userHierarchyField), type | NextOwnerType | Required (adhoc, user, userHierarchyField,
+    relatedUserField, queue)
+  NextAutomatedApprover: useApproverFieldOfRecordOwner | boolean | Required (se o primeiro passo usa o campo de hierarquia do dono do registro em vez
+    do de quem submeteu), userHierarchyField | string | Required (campo de hierarquia de usuário, padrão ou customizado)
+  Notas de uso: até 30 passos por processo; o metadado não inclui a ordem dos processos ativos (pode ser preciso reordenar depois do deploy);
+    send actions e approval processes de rascunhos de e-mail não são suportados; templates Lightning não são empacotáveis (recomenda-se
+    Classic); implantar um processo sem entry criteria sobre um que tem mantém os critérios existentes.
+  WorkflowActionReference não está detalhado nesta página; na página de Workflow, a leitura não devolveu os nomes dos campos (ver abaixo).
+
+[src:mdapi-customnotificationtype] CustomNotificationType: sufixo .notiftype, pasta notificationtypes; desde 46.0; estende Metadata (fullName herdado)
+  Metadado de um tipo de notificação customizada. O curinga * NÃO é suportado no package.xml.
+  CustomNotificationType (7): actionGroups | CustomNotificationActionGroup[] (Beta), customNotifTypeName | string | Required, description | string,
+    desktop | boolean | Required, masterLabel | string | Required, mobile | boolean | Required, slack | boolean
+    actionGroups: grupos de ações que deixam o usuário agir direto na notificação móvel. customNotifTypeName: nome do tipo, até 80 caracteres.
+    description: descrição geral, até 255 caracteres. desktop / mobile: liga ou desliga o canal de entrega. masterLabel: rótulo do tipo.
+    slack: reservado para uso futuro.
+  CustomNotificationActionGroup: actions | CustomNotificationActionDefinition[], groupName | string | Required (nome único do grupo)
+  CustomNotificationActionDefinition: actionLabel | string | Required (nome da ação mostrado na notificação push), actionName | string | Required
+    (identificador único da ação no grupo), actionTarget | string (classe Apex que implementa a ação), actionType | NotificationActionType | Required
+    NotificationActionType: NotificationApiAction (lado servidor; o cliente chama a API de ação), Share (lado cliente; o app compartilha o conteúdo)
+
+[src:mdapi-autoresponserules] AutoResponseRules: sufixo .autoResponseRules, pasta autoResponseRules; um arquivo por objeto (ex.: Case.autoResponseRules);
+  desde 27.0; estende Metadata. Define regras de resposta automática, que enviam e-mail a leads ou casos conforme os atributos do registro.
+  package.xml: * com AutoResponseRules recupera todas as regras de todos os objetos; Case cobre um objeto; Case.samplerule com o nome
+  AutoResponseRule aponta uma regra.
+  AutoResponseRules (1): autoResponseRule | AutoResponseRule[]
+  AutoResponseRule (estende Metadata): active | boolean, fullName | string (herdado; informar ao criar, atualizar ou excluir), ruleEntry | RuleEntry[]
+  RuleEntry (17): assignedTo | string, assignedToType | AssignToLookupValueType, booleanFilter | string, businessHours | string,
+    businessHoursSource | BusinessHoursSourceType, criteriaItems | FilterItem[], disableEscalationWhenModified | boolean,
+    escalationAction | EscalationAction[], escalationStartTime | EscalationStartTimeType, formula | string, notifyCcRecipients | boolean,
+    overrideExistingTeams | boolean, replyToEmail | string, senderEmail | string, senderName | string, team | string[], template | string
+    booleanFilter: condições avançadas de filtro. criteriaItems: itens do critério. formula: fórmula; usar formula ou criteriaItems, não os dois.
+    replyToEmail: endereço do cabeçalho reply-to. senderEmail / senderName: e-mail e nome de quem envia. template: template de e-mail enviado
+      (recomendam-se templates Classic).
+    sem descrição nesta página: assignedTo, businessHours, disableEscalationWhenModified, escalationAction, notifyCcRecipients,
+      overrideExistingTeams, team. Os valores das três enumerações não aparecem no texto lido.
+
+[src:mdapi-flowsettings] FlowSettings: arquivo settings/Flow.settings; desde 47.0; estende Metadata (fullName herdado)
+  Configurações de processos e flows da org, como o runtime Lightning. Curinga * não vale para um setting individual. Todos os campos são opcionais.
+  FlowSettings (31): canDebugFlowAsAnotherUser | boolean | 50.0, doesEnforceApexCpuTimeLimit | boolean | 51.0, doesFormulaEnforceDataAccess | boolean | 48.0,
+    doesFormulaGenerateHtmlOutput | boolean | 48.0, enableEmailSimpleRespectProfiles | boolean, enableEmailsimpleSecureProfiles | boolean,
+    enableFlowBREncodedFixEnabled | boolean, enableFlowCustomPropertyEditor | boolean | 48.0 a 50.0, enableFlowDeployAsActiveEnabled | boolean,
+    enableFlowFieldFilterEnabled | boolean, enableFlowFormulasFixEnabled | boolean, enableFlowInterviewSharingEnabled | boolean,
+    enableFlowListMetadataLargeCapEnabled | boolean, enableFlowNullPreviousValueFix | boolean, enableFlowPauseEnabled | boolean,
+    enableFlowReactiveChoiceOptions | boolean, enableFlowReactiveScreens | boolean, enableFlowsLightningApp | boolean | 68.0,
+    enableFlowUseApexExceptionEmail | boolean, enableFlowViaRestUsesUserCtxt | boolean | 54.0, enableInvocableFlowFixEnabled | boolean (removido na 50.0),
+    enableLightningRuntimeEnabled | boolean, flowOccurrenceLogging | boolean, isAccessToInvokedApexRequired | boolean | 47.0 a 58.0,
+    isApexPluginAccessModifierRespected | boolean | 48.0, isEnhancedFlowListViewVisible | boolean, isFlowApexContextRetired | boolean | 49.0 a 58.0,
+    isFlowBlockAccessToSessionIDEnabled | boolean, isManageFlowRequiredForAutomationCharts | boolean,
+    isSupportRollbackOnErrorForApexInvocableActionsEnabled | boolean, isTimeResumedInSameRunContext | boolean | 57.0 a 58.0
+    canDebugFlowAsAnotherUser: depurar flows como outro usuário. doesEnforceApexCpuTimeLimit: medir com precisão o tempo de CPU consumido por flows
+      e processos. doesFormulaEnforceDataAccess: fórmulas respeitam a segurança no nível do registro. doesFormulaGenerateHtmlOutput: fórmulas que
+      geram HTML, como BR(), incluem marcadores codificados. enableFlowBREncodedFixEnabled: BR() gera quebra de linha ou o literal _BR_ENCODED_.
+    enableFlowCustomPropertyEditor: custom property editors para ações e campos de tela; descontinuado na 50.0.
+    enableFlowDeployAsActiveEnabled: processos e flows podem ser implantados como ativos; padrão false em produção e true fora dela.
+    enableFlowFieldFilterEnabled: Create/Update Records gravam só campos editáveis em vez de falhar; padrão false.
+    enableFlowFormulasFixEnabled: fórmulas devolvem nulo, não exceção, para registro ou lookup nulo.
+    enableFlowInterviewSharingEnabled: usuários retomam entrevistas pausadas a que têm acesso de edição; padrão true.
+    enableFlowListMetadataLargeCapEnabled: reservado para uso interno. enableFlowNullPreviousValueFix: processos avaliam critérios com os valores
+      originais do registro. enableFlowPauseEnabled: telas podem mostrar o botão Pause; padrão false.
+    enableFlowReactiveScreens: componentes de tela reagem uns aos outros, só para API 57.0 e 58.0; padrão false.
+    enableFlowsLightningApp: uso do app Lightning Automation para gerir flows. enableFlowUseApexExceptionEmail: e-mails de erro vão para os
+      endereços de Apex Exception Email; padrão false. enableFlowViaRestUsesUserCtxt: flows rodados por REST usam perfil e permission sets do usuário.
+    enableInvocableFlowFixEnabled: todas as entrevistas autolaunched executam quando invocadas em massa; removido na 50.0.
+    enableLightningRuntimeEnabled: flows abertos por URL ou pelo Setup usam o runtime Lightning; padrão true.
+    isAccessToInvokedApexRequired: flows só invocam Apex se o usuário tem acesso à classe; descontinuado na 59.0.
+    isApexPluginAccessModifierRespected: flows respeitam modificadores public de ações Apex legadas. isEnhancedFlowListViewVisible: a list view
+      aprimorada de Flows substitui a Classic; padrão true. isFlowApexContextRetired: regras explícitas de acesso a classes Apex desligadas;
+      descontinuado na 59.0; padrão true na maioria das orgs. isFlowBlockAccessToSessionIDEnabled: a variável de session ID recebe um texto
+      substituto; padrão false. isManageFlowRequiredForAutomationCharts: exige Manage Flow para ver todos os gráficos do Automation Home; padrão
+      false. isTimeResumedInSameRunContext: flows autolaunched pausados retomam no mesmo contexto e acesso; removido na 59.0.
+    sem descrição na página: enableEmailSimpleRespectProfiles, enableEmailsimpleSecureProfiles, enableFlowReactiveChoiceOptions,
+      flowOccurrenceLogging, isSupportRollbackOnErrorForApexInvocableActionsEnabled.
+
+[src:mdapi-apextrigger] ApexTrigger: arquivo-fonte com sufixo .trigger e arquivo de metadado <Nome>-meta.xml, na pasta triggers; desde 10.0;
+  estende MetadataWithContent. Representa um trigger Apex, código que roda antes ou depois de eventos DML. Aceita o curinga * no package.xml.
+  Suportado por todas as chamadas da Metadata API, exceto as CRUD-based.
+  ApexTrigger (5): apiVersion | double | Required, content | base64Binary (herdado), fullName | string (herdado), packageVersions | PackageVersion[] | 16.0,
+    status | ApexCodeUnitStatus | Required
+    apiVersion: versão da API do trigger, definida na criação. content: a definição do trigger. fullName: nome do trigger; começa com letra, sem
+      sublinhado no fim nem dois seguidos. packageVersions: versões de pacotes gerenciados instalados que o trigger referencia.
+    status: Active (ativo), Inactive (inativo, não excluído), Deleted (marcado para exclusão; útil na atualização de pacotes gerenciados).
+    PackageVersion: a página remete à referência de ApexClass e não lista os campos aqui.
+
+[src:mdapi-workflow] Workflow: sufixo .workflow, pasta workflows; um arquivo por objeto com workflows; disponível desde a API 13.0; estende Metadata;
+  aceita o curinga *. Metadado das workflow rules, que disparam ações quando condições são atendidas.
+  A página documenta Workflow (10 campos) e os componentes WorkflowRule (10), WorkflowFieldUpdate (13), WorkflowAlert (8), WorkflowEmailRecipient (3),
+  WorkflowTask (11), WorkflowOutboundMessage (10), WorkflowActionReference (2) e WorkflowTimeTrigger (4).
+  NÃO cadastrado no catálogo: o texto devolvido pela leitura trouxe tipo e descrição, mas não o nome de boa parte dos elementos. Usado só como
+  fonte de texto. Notas de uso lidas: o piloto de flow triggers está encerrado; field updates podem reavaliar outras regras, até 5 vezes em
+  cascata; templates Lightning não são empacotáveis. Terceiro tipo com esse problema de leitura (antes: Translations e CaseSettings).

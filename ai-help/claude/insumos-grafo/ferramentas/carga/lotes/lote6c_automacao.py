@@ -3,10 +3,9 @@
 Cria seis funcionalidades: processos de aprovação, Flow Orchestration, regras de resposta automática, Apex triggers,
 notificações customizadas e Workflow Rules/Process Builder.
 
-NENHUM metadata type entra neste lote: em 2026-11-15 a leitura das páginas da Metadata API (WebFetch) ficou sem aprovação,
-e o resumo da busca não traz a tabela de campos. Os tipos correspondentes (ApprovalProcess, AutoResponseRules, ApexTrigger,
-CustomNotificationType, Workflow e filhos, FlowSettings, FlowDefinition) constam do inventário v68 e ficam registrados como
-ausência "desconhecido" em cada funcionalidade, para um lote seguinte.
+Este lote não cadastra metadata types: quando foi escrito, a leitura das páginas da Metadata API estava sem aprovação, e cada
+funcionalidade nasce com a ausência "desconhecido". As páginas foram lidas depois, no mesmo dia: os tipos e a ligação com as
+funcionalidades estão em lote6d_automacao_tipos.py, que deve rodar logo depois deste.
 
 Cita fontes registradas por conteudo_temas.py: rode este script e, em seguida, conteudo_temas.py e temas_internos.py.
 Reexecutável. Uso: python3 ferramentas/carga/lotes/lote6c_automacao.py

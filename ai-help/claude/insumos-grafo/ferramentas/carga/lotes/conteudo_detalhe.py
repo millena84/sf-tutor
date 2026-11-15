@@ -634,9 +634,7 @@ _f("src:help-flow-approvals-steps", "Approval Steps (Salesforce Help)", _H + "pl
    "Como funcionam os approval steps.", **AJ)
 _f("src:help-flow-approvals-considerations", "Considerations for Flow Approval Processes (Salesforce Help)",
    _H + "platform.automate_automated_approvals_considerations_orchestrations.htm&language=en_US&type=5", "Limites de requirements e de entradas.", **AJ)
-_f("src:mdapi-approvalprocess", "ApprovalProcess (Metadata API)",
-   "https://developer.salesforce.com/docs/platform/api-metadata/references/meta-types/metadata-approvalprocess.html",
-   "Sufixo, pasta, versão e notas de uso do tipo ApprovalProcess (tabela de campos não lida; tipo não cadastrado).", **DOC)
+# src:mdapi-approvalprocess é registrada pelo lote 6d (página lida por inteiro).
 _f("src:help-auto-response-setup", "Set Up Auto-Response Rules (Salesforce Help)", _H + "creating_auto-response_rules.htm&language=en_US&type=5",
    "Onde valem as regras de resposta automática e como as entradas são processadas.", **AJ)
 _f("src:help-auto-response-vs-workflow", "Differences Between Auto-Response Rules and Workflow Email Alerts (Salesforce Help)",

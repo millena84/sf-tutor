@@ -7,14 +7,17 @@ Gerado por `ferramentas/sftutor.py cobertura`. Cobertura estrutural, explicativa
 
 - Universo v68 (METADATA_SUPPORT.md): **993** tipos.
 - Classificados como incluídos no recorte Core: 12; pendentes de classificação: 981.
-- Cadastrados: **90** de 993. Estruturalmente completos (contra a página oficial): 78. Completos nas três dimensões: 0.
+- Cadastrados: **95** de 993. Estruturalmente completos (contra a página oficial): 80. Completos nas três dimensões: 0.
 - Porcentagem do recorte Core: não calculada, porque o denominador do recorte ainda não está definido (classificação item a item pendente).
 
 | Tipo | Estrutural | Esperadas | Presentes | Explicadas | Estruturas | Mapeamento | Completo |
 |---|---|---|---|---|---|---|---|
 | mdt:AccountSettings | completa | 9 | 9 | 9 | 0 | parcial | não |
+| mdt:ApexTrigger | parcial | n/d | 5 | 5 | 0 | parcial | não |
+| mdt:ApprovalProcess | parcial | n/d | 22 | 21 | 6 | parcial | não |
 | mdt:AssignmentRules | completa | 1 | 1 | 1 | 1 | parcial | não |
 | mdt:AuthProvider | completa | 34 | 34 | 34 | 1 | parcial | não |
+| mdt:AutoResponseRules | parcial | n/d | 1 | 1 | 1 | parcial | não |
 | mdt:BusinessHoursSettings | completa | 3 | 3 | 3 | 2 | parcial | não |
 | mdt:CampaignSettings | completa | 11 | 11 | 11 | 0 | parcial | não |
 | mdt:Certificate | completa | 8 | 8 | 8 | 0 | parcial | não |
@@ -29,6 +32,7 @@ Gerado por `ferramentas/sftutor.py cobertura`. Cobertura estrutural, explicativa
 | mdt:CustomField | parcial | 60 | 60 | 60 | 2 | parcial | não |
 | mdt:CustomLabels | completa | 2 | 2 | 2 | 1 | parcial | não |
 | mdt:CustomMetadata | completa | 5 | 5 | 5 | 1 | parcial | não |
+| mdt:CustomNotificationType | completa | 8 | 8 | 8 | 1 | parcial | não |
 | mdt:CustomObject | parcial | 55 | 55 | 55 | 0 | parcial | não |
 | mdt:CustomTab | parcial | 17 | 17 | 17 | 0 | parcial | não |
 | mdt:EntitlementProcess | parcial | 14 | 14 | 14 | 2 | parcial | não |
@@ -56,6 +60,7 @@ Gerado por `ferramentas/sftutor.py cobertura`. Cobertura estrutural, explicativa
 | mdt:FieldServiceSettings | completa | 55 | 55 | 41 | 1 | parcial | não |
 | mdt:FlexiPage | parcial | 12 | 12 | 12 | 0 | parcial | não |
 | mdt:Flow | parcial | 50 | 50 | 13 | 0 | parcial | não |
+| mdt:FlowSettings | completa | 32 | 32 | 27 | 0 | parcial | não |
 | mdt:ForecastingSettings | parcial | 10 | 10 | 10 | 0 | parcial | não |
 | mdt:InboundCertificate | completa | 4 | 4 | 4 | 0 | parcial | não |
 | mdt:InboundNetworkConnection | completa | 7 | 7 | 7 | 1 | parcial | não |
@@ -105,8 +110,8 @@ Gerado por `ferramentas/sftutor.py cobertura`. Cobertura estrutural, explicativa
 
 ## Propriedades XML
 
-- Em metadata types: 1137 listadas, 1076 explicadas.
-- Em estruturas auxiliares: 379 listadas, 379 explicadas.
+- Em metadata types: 1205 listadas, 1138 explicadas.
+- Em estruturas auxiliares: 429 listadas, 419 explicadas.
 - Universo total: Sem WSDL não há denominador confiável do total de propriedades do recorte.
 
 ## Objetos consultáveis via API

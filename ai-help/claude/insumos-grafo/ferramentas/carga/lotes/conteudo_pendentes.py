@@ -60,6 +60,9 @@ P["sub:mecanismos-legados-e-migracao"] = {
         av("atencao", "A ordem de execução muda na migração", "Workflow rules rodam num ponto da ordem de execução diferente do dos "
            "record-triggered flows. Um flow que substitui uma regra pode se comportar diferente por causa disso.",
            E("src:apex-triggers-order", "src:help-flow-record-triggered-considerations")),
+        av("implantacao", "Como metadado", "Workflow rules ficam no metadata type Workflow, com um arquivo .workflow por objeto, que reúne regras, "
+           "field updates, alertas, tarefas e outbound messages. Um field update pode reavaliar outras regras, até 5 vezes em cascata. O tipo "
+           "ainda não está cadastrado neste catálogo: a leitura da página não devolveu o nome de boa parte dos campos.", E("src:mdapi-workflow")),
         av("implantacao", "Migre na mesma org", "Migre o processo na mesma org do original, e não numa org intermediária para depois implantar: assim o flow trata as "
            "ações agendadas pendentes do processo antigo.", E("src:help-migrate-to-flow-considerations")),
         av("atencao", "O que a ferramenta não cobre", "A Migrate to Flow só aceita processos disparados por registro; processos com recursão avaliam o registro uma vez; "
@@ -79,6 +82,9 @@ P["sub:notificacoes"] = {
         av("atencao", "Passou do limite, a notificação se perde", "A org executa até 10.000 ações de notificação por hora. Passado o limite, as "
            "notificações daquela hora não são enviadas depois: são perdidas. Uma notificação alcança até 10.000 usuários, depois de expandir "
            "grupos, filas e equipes, e aceita só texto simples.", E("src:help-notif-considerations")),
+        av("implantacao", "Como metadado", "Cada tipo de notificação é um componente CustomNotificationType, com arquivo .notiftype na pasta "
+           "notificationtypes. O curinga * não vale para esse tipo no package.xml: cada tipo de notificação é listado pelo nome.",
+           E("src:mdapi-customnotificationtype")),
         av("seguranca", "Permissão para enviar", "Em orgs criadas no Winter '21 ou depois, a permissão Send Custom Notifications é exigida em flows no contexto do usuário, "
            "na REST API e no Apex; não é exigida em flows no contexto de sistema.", E("src:actions-custom-notification")),
         av("limite", "Destinatários e volume", "Cada envio aceita até 500 destinatários (usuários, equipes, grupos ou filas), com título de até 250 e corpo de até 750 "

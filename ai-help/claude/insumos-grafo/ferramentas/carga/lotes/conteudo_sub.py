@@ -237,6 +237,9 @@ S["sub:flow-e-orquestracao"] = {
         av("decisao", "Quando usar orquestração", "Uma orquestração tem stages, e cada stage tem steps. O interactive step atribui um screen "
            "flow a uma pessoa, grupo ou fila e gera um work item; o background step roda um autolaunched flow sem interação. Serve a "
            "processos longos, com várias pessoas e esperas.", E("src:help-orchestration-overview", "src:help-orchestration-steps", "src:help-orchestration-types")),
+        av("implantacao", "Como metadado", "Cada flow é um componente Flow. As opções gerais ficam em FlowSettings: por exemplo, "
+           "enableFlowDeployAsActiveEnabled decide se flows podem ser implantados já ativos, e o padrão é false em produção.",
+           E("src:mdapi-flow", "src:mdapi-flowsettings")),
     ],
 }
 S["sub:decisoes-e-aprovacoes"] = {
@@ -266,8 +269,8 @@ S["sub:decisoes-e-aprovacoes"] = {
            "relacionados vão num background step depois do approval step. Cada condição de início ou de conclusão aceita até 10 requirements.",
            E("src:help-flow-approvals-steps", "src:help-flow-approvals-considerations")),
         av("implantacao", "Como metadado", "O processo clássico é o metadata type ApprovalProcess: arquivos com sufixo .approvalProcess na pasta "
-           "approvalProcesses. O metadado não guarda a ordem dos processos ativos. O tipo consta do inventário, mas os campos ainda não foram "
-           "lidos nem cadastrados neste catálogo.", E("src:mdapi-approvalprocess")),
+           "approvalProcesses. O metadado não guarda a ordem dos processos ativos, então pode ser preciso reordená-los depois do deploy. "
+           "Implantar um processo sem entry criteria sobre um que já tem mantém os critérios antigos.", E("src:mdapi-approvalprocess")),
     ],
 }
 S["sub:acoes-e-regras"] = {
@@ -288,6 +291,9 @@ S["sub:acoes-e-regras"] = {
         av("decisao", "Resposta automática ou alerta de e-mail", "A regra de resposta automática roda só na criação e responde a quem abriu o caso "
            "ou enviou o lead. Para avisar outras pessoas, ou reagir a edições, o caminho é outro: alerta de e-mail de workflow, hoje feito em "
            "Flow.", E("src:help-auto-response-vs-workflow", "src:help-wf-pb-eos")),
+        av("implantacao", "Como metadado", "Cada tipo de regra é um metadata type com um arquivo por objeto: AssignmentRules, EscalationRules e "
+           "AutoResponseRules (por exemplo Case.autoResponseRules). Dentro do arquivo ficam as regras e, em cada regra, as entradas em ordem.",
+           E("src:mdapi-autoresponserules", "src:mdapi-assignmentrules", "src:mdapi-escalationrules")),
     ],
 }
 S["sub:automacao-apex"] = {
@@ -306,6 +312,8 @@ S["sub:automacao-apex"] = {
            "código deve sempre ser escrito para mais de um registro.", E("src:apex-triggers-bulk")),
         av("implantacao", "Trigger exige teste", "Para implantar, 75% do código Apex precisa de cobertura de testes, e todo trigger precisa de alguma "
            "cobertura. A recomendação é testar em massa, com pelo menos 20 registros.", E("src:apex-testing-best-practices")),
+        av("implantacao", "Como metadado", "Cada trigger é um componente ApexTrigger, com dois arquivos na pasta triggers: o código-fonte .trigger e "
+           "o arquivo de metadado, que guarda a versão da API e o status (Active, Inactive ou Deleted).", E("src:mdapi-apextrigger")),
         av("limite", "Callouts por transação", "Até 100 callouts por transação, e a soma dos timeouts não passa de 120 segundos.", E("src:apex-callout-limits")),
         av("atencao", "Ordem dentro da transação", "Não é possível fazer callout depois de DML, Apex assíncrono, Apex agendado ou envio de e-mail pendentes na mesma transação; antes deles, pode.",
            E("src:apex-callout-limits")),

@@ -1,0 +1,1240 @@
+{
+  "alertas": [
+    "O metadado não guarda a ordem dos processos ativos: pode ser preciso reordená-los depois do deploy.",
+    "Implantar um processo sem entry criteria sobre um que já tem mantém os critérios existentes.",
+    "No package.xml, o curinga parcial (por exemplo Lead.*) não é suportado; use * para todos.",
+    "Send actions e processos de aprovação de rascunhos de e-mail não são suportados pela Metadata API."
+  ],
+  "arquivos": {
+    "curinga_package_xml": {
+      "estado": "verificado",
+      "evidencias": [
+        {
+          "fonte": "src:mdapi-approvalprocess"
+        }
+      ],
+      "valor": true
+    },
+    "metadata_api_format": {
+      "estado": "verificado",
+      "evidencias": [
+        {
+          "fonte": "src:sdr-registry",
+          "nota": "types.approvalprocess"
+        }
+      ],
+      "valor": {
+        "arquivo": "<Nome>.approvalProcess",
+        "pasta": "approvalProcesses/"
+      }
+    },
+    "source_format": {
+      "estado": "verificado",
+      "evidencias": [
+        {
+          "fonte": "src:sdr-registry",
+          "nota": "types.approvalprocess"
+        }
+      ],
+      "nota": "Pasta e sufixo do registro do Salesforce CLI; sufixo '-meta.xml' segue a convenção do source format.",
+      "valor": {
+        "arquivo": "<Nome>.approvalProcess-meta.xml",
+        "pasta": "approvalProcesses/"
+      }
+    }
+  },
+  "cobertura": {
+    "estrutural": {
+      "esperado": null,
+      "estado": "parcial",
+      "nota": "Universo esperado = tabela Fields da página oficial lida em 2026-11-15 (mais fullName herdado). Parcial: WorkflowActionReference, usado em ApprovalAction.action, não está detalhado.",
+      "presente": 22
+    },
+    "explicativa": {
+      "esperado": 22,
+      "estado": "parcial",
+      "presente": 21
+    },
+    "mapeamento": {
+      "estado": "parcial",
+      "nota": "Correspondências registradas apenas onde há evidência; demais pendentes."
+    }
+  },
+  "disponibilidade": {
+    "ate_versao": null,
+    "desde_versao": "28.0",
+    "estado": "verificado"
+  },
+  "divergencias_documentais": [
+    "Na página (src:mdapi-approvalprocess), allowedSubmitters aparece como não obrigatório na tabela, mas a descrição diz que é obrigatório."
+  ],
+  "estado": "verificado",
+  "estende": "Metadata",
+  "estruturas": [
+    "mdx:ApprovalAction",
+    "mdx:ApprovalEntryCriteria",
+    "mdx:ApprovalPageField",
+    "mdx:ApprovalStep",
+    "mdx:ApprovalSubmitter",
+    "mdx:NextAutomatedApprover"
+  ],
+  "evidencias": [
+    {
+      "fonte": "src:mdapi-approvalprocess"
+    },
+    {
+      "fonte": "src:sdr-registry"
+    },
+    {
+      "fonte": "src:sdr-metadata-support"
+    }
+  ],
+  "exemplo_xml": {
+    "natureza": "didatico_projeto",
+    "nota": "Exemplo escrito pelo projeto apenas com elementos documentados; sem dados reais.",
+    "xml": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<ApprovalProcess xmlns=\"http://soap.sforce.com/2006/04/metadata\">\n    <active>false</active>\n    <allowedSubmitters>\n        <!-- Valores documentados incluem owner, creator, user, role, group -->\n        <type>owner</type>\n    </allowedSubmitters>\n    <approvalStep>\n        <assignedApprover>\n            <approver>\n                <name>[nome do usuário ou da fila]</name>\n                <type>user</type>\n            </approver>\n            <!-- Valores documentados: Unanimous, FirstResponse -->\n            <whenMultipleApprovers>Unanimous</whenMultipleApprovers>\n        </assignedApprover>\n        <label>[rótulo do passo]</label>\n        <name>[Nome_Do_Passo]</name>\n    </approvalStep>\n    <label>[rótulo do processo]</label>\n    <!-- Valores documentados: AdminOnly, AdminOrCurrentApprover -->\n    <recordEditability>AdminOnly</recordEditability>\n</ApprovalProcess>"
+  },
+  "finalidade": "Versionar e implantar processos de aprovação em vez de recriá-los à mão em cada ambiente.",
+  "id": "mdt:ApprovalProcess",
+  "nome": "ApprovalProcess",
+  "o_que_e": "Um processo de aprovação clássico: quem pode submeter, que registros entram, os passos com seus aprovadores e as ações de cada momento.",
+  "propriedades": [
+    {
+      "default": {
+        "estado": "desconhecido",
+        "forma": "nao_declarado_na_fonte"
+      },
+      "disponibilidade": {
+        "ate_versao": null,
+        "desde_versao": null,
+        "estado": "desconhecido"
+      },
+      "dominio": {
+        "estado": "verificado",
+        "evidencias": [
+          {
+            "fonte": "src:mdapi-approvalprocess"
+          }
+        ],
+        "lista_completa": "sim",
+        "natureza": "booleano",
+        "valores": [
+          {
+            "valor": "true"
+          },
+          {
+            "valor": "false"
+          }
+        ]
+      },
+      "estado": "verificado",
+      "evidencias": [
+        {
+          "fonte": "src:mdapi-approvalprocess"
+        }
+      ],
+      "explicacao": "explicada",
+      "id": "mdt:ApprovalProcess.active",
+      "nome": "active",
+      "o_que_e": "Indica se o processo está ativo. Depois de ativado, a estrutura dos passos e o comportamento de rejeição e de pulo ficam travados.",
+      "obrigatoriedade": {
+        "estado": "verificado",
+        "evidencias": [
+          {
+            "fonte": "src:mdapi-approvalprocess"
+          }
+        ],
+        "valor": "sim"
+      },
+      "origem": {
+        "estado": "verificado",
+        "evidencias": [
+          {
+            "fonte": "src:mdapi-approvalprocess"
+          }
+        ],
+        "nota": "Propriedade definida pelo schema da Metadata API.",
+        "valor": "padrao_plataforma"
+      },
+      "tipo_tecnico": "boolean"
+    },
+    {
+      "cardinalidade": "0..n",
+      "default": {
+        "estado": "desconhecido",
+        "forma": "nao_declarado_na_fonte"
+      },
+      "disponibilidade": {
+        "ate_versao": null,
+        "desde_versao": null,
+        "estado": "desconhecido"
+      },
+      "dominio": {
+        "estado": "verificado",
+        "evidencias": [
+          {
+            "fonte": "src:mdapi-approvalprocess"
+          }
+        ],
+        "natureza": "tipo_composto"
+      },
+      "estado": "verificado",
+      "estrutura_ref": "mdx:ApprovalSubmitter",
+      "evidencias": [
+        {
+          "fonte": "src:mdapi-approvalprocess"
+        }
+      ],
+      "explicacao": "explicada",
+      "id": "mdt:ApprovalProcess.allowedSubmitters",
+      "nome": "allowedSubmitters",
+      "notas": [
+        "A tabela marca o campo como não obrigatório, mas a descrição diz que ele é obrigatório."
+      ],
+      "o_que_e": "Usuários que podem submeter registros para aprovação.",
+      "obrigatoriedade": {
+        "estado": "desconhecido",
+        "valor": "desconhecida"
+      },
+      "origem": {
+        "estado": "verificado",
+        "evidencias": [
+          {
+            "fonte": "src:mdapi-approvalprocess"
+          }
+        ],
+        "nota": "Propriedade definida pelo schema da Metadata API.",
+        "valor": "padrao_plataforma"
+      },
+      "tipo_tecnico": "ApprovalSubmitter[]"
+    },
+    {
+      "default": {
+        "estado": "desconhecido",
+        "forma": "nao_declarado_na_fonte"
+      },
+      "disponibilidade": {
+        "ate_versao": null,
+        "desde_versao": null,
+        "estado": "desconhecido"
+      },
+      "dominio": {
+        "estado": "verificado",
+        "evidencias": [
+          {
+            "fonte": "src:mdapi-approvalprocess"
+          }
+        ],
+        "lista_completa": "sim",
+        "natureza": "booleano",
+        "valores": [
+          {
+            "valor": "true"
+          },
+          {
+            "valor": "false"
+          }
+        ]
+      },
+      "estado": "verificado",
+      "evidencias": [
+        {
+          "fonte": "src:mdapi-approvalprocess"
+        }
+      ],
+      "explicacao": "explicada",
+      "id": "mdt:ApprovalProcess.allowRecall",
+      "nome": "allowRecall",
+      "o_que_e": "Indica se quem submeteu pode retirar (recall) o pedido. Com false, só administradores podem.",
+      "obrigatoriedade": {
+        "condicao": "A documentação 68.0 não marca o campo como obrigatório; ausência de marcação não comprova opcionalidade (confirmar no WSDL).",
+        "estado": "desconhecido",
+        "valor": "nao"
+      },
+      "origem": {
+        "estado": "verificado",
+        "evidencias": [
+          {
+            "fonte": "src:mdapi-approvalprocess"
+          }
+        ],
+        "nota": "Propriedade definida pelo schema da Metadata API.",
+        "valor": "padrao_plataforma"
+      },
+      "tipo_tecnico": "boolean"
+    },
+    {
+      "default": {
+        "estado": "desconhecido",
+        "forma": "nao_declarado_na_fonte"
+      },
+      "disponibilidade": {
+        "ate_versao": null,
+        "desde_versao": null,
+        "estado": "desconhecido"
+      },
+      "dominio": {
+        "estado": "verificado",
+        "evidencias": [
+          {
+            "fonte": "src:mdapi-approvalprocess"
+          }
+        ],
+        "natureza": "tipo_composto"
+      },
+      "estado": "verificado",
+      "estrutura_ref": "mdx:ApprovalPageField",
+      "evidencias": [
+        {
+          "fonte": "src:mdapi-approvalprocess"
+        }
+      ],
+      "explicacao": "explicada",
+      "id": "mdt:ApprovalProcess.approvalPageFields",
+      "nome": "approvalPageFields",
+      "o_que_e": "Campos mostrados na página de aprovação. O padrão inclui Name e Owner.",
+      "obrigatoriedade": {
+        "condicao": "A documentação 68.0 não marca o campo como obrigatório; ausência de marcação não comprova opcionalidade (confirmar no WSDL).",
+        "estado": "desconhecido",
+        "valor": "nao"
+      },
+      "origem": {
+        "estado": "verificado",
+        "evidencias": [
+          {
+            "fonte": "src:mdapi-approvalprocess"
+          }
+        ],
+        "nota": "Propriedade definida pelo schema da Metadata API.",
+        "valor": "padrao_plataforma"
+      },
+      "tipo_tecnico": "ApprovalPageField"
+    },
+    {
+      "cardinalidade": "0..n",
+      "default": {
+        "estado": "desconhecido",
+        "forma": "nao_declarado_na_fonte"
+      },
+      "disponibilidade": {
+        "ate_versao": null,
+        "desde_versao": null,
+        "estado": "desconhecido"
+      },
+      "dominio": {
+        "estado": "verificado",
+        "evidencias": [
+          {
+            "fonte": "src:mdapi-approvalprocess"
+          }
+        ],
+        "natureza": "tipo_composto"
+      },
+      "estado": "verificado",
+      "estrutura_ref": "mdx:ApprovalStep",
+      "evidencias": [
+        {
+          "fonte": "src:mdapi-approvalprocess"
+        }
+      ],
+      "explicacao": "explicada",
+      "id": "mdt:ApprovalProcess.approvalStep",
+      "nome": "approvalStep",
+      "o_que_e": "Definições dos passos de aprovação.",
+      "obrigatoriedade": {
+        "condicao": "A documentação 68.0 não marca o campo como obrigatório; ausência de marcação não comprova opcionalidade (confirmar no WSDL).",
+        "estado": "desconhecido",
+        "valor": "nao"
+      },
+      "origem": {
+        "estado": "verificado",
+        "evidencias": [
+          {
+            "fonte": "src:mdapi-approvalprocess"
+          }
+        ],
+        "nota": "Propriedade definida pelo schema da Metadata API.",
+        "valor": "padrao_plataforma"
+      },
+      "tipo_tecnico": "ApprovalStep[]"
+    },
+    {
+      "default": {
+        "estado": "desconhecido",
+        "forma": "nao_declarado_na_fonte"
+      },
+      "disponibilidade": {
+        "ate_versao": null,
+        "desde_versao": null,
+        "estado": "desconhecido"
+      },
+      "dominio": {
+        "contexto": "A fonte tipa como string sem lista de valores; não inventar valores.",
+        "estado": "verificado",
+        "evidencias": [
+          {
+            "fonte": "src:mdapi-approvalprocess"
+          }
+        ],
+        "natureza": "texto_livre"
+      },
+      "estado": "verificado",
+      "evidencias": [
+        {
+          "fonte": "src:mdapi-approvalprocess"
+        }
+      ],
+      "explicacao": "explicada",
+      "id": "mdt:ApprovalProcess.description",
+      "nome": "description",
+      "o_que_e": "Descrição do processo de aprovação.",
+      "obrigatoriedade": {
+        "condicao": "A documentação 68.0 não marca o campo como obrigatório; ausência de marcação não comprova opcionalidade (confirmar no WSDL).",
+        "estado": "desconhecido",
+        "valor": "nao"
+      },
+      "origem": {
+        "estado": "verificado",
+        "evidencias": [
+          {
+            "fonte": "src:mdapi-approvalprocess"
+          }
+        ],
+        "nota": "Propriedade definida pelo schema da Metadata API.",
+        "valor": "padrao_plataforma"
+      },
+      "tipo_tecnico": "string"
+    },
+    {
+      "default": {
+        "estado": "desconhecido",
+        "forma": "nao_declarado_na_fonte"
+      },
+      "disponibilidade": {
+        "ate_versao": null,
+        "desde_versao": null,
+        "estado": "desconhecido"
+      },
+      "dominio": {
+        "contexto": "A fonte tipa como string sem lista de valores; não inventar valores.",
+        "estado": "verificado",
+        "evidencias": [
+          {
+            "fonte": "src:mdapi-approvalprocess"
+          }
+        ],
+        "natureza": "texto_livre"
+      },
+      "estado": "verificado",
+      "evidencias": [
+        {
+          "fonte": "src:mdapi-approvalprocess"
+        }
+      ],
+      "explicacao": "explicada",
+      "id": "mdt:ApprovalProcess.emailTemplate",
+      "nome": "emailTemplate",
+      "o_que_e": "Template Classic usado nos e-mails de pedido de aprovação. Sem ele, vale o template padrão.",
+      "obrigatoriedade": {
+        "condicao": "A documentação 68.0 não marca o campo como obrigatório; ausência de marcação não comprova opcionalidade (confirmar no WSDL).",
+        "estado": "desconhecido",
+        "valor": "nao"
+      },
+      "origem": {
+        "estado": "verificado",
+        "evidencias": [
+          {
+            "fonte": "src:mdapi-approvalprocess"
+          }
+        ],
+        "nota": "Propriedade definida pelo schema da Metadata API.",
+        "valor": "padrao_plataforma"
+      },
+      "tipo_tecnico": "string"
+    },
+    {
+      "default": {
+        "estado": "desconhecido",
+        "forma": "nao_declarado_na_fonte"
+      },
+      "disponibilidade": {
+        "ate_versao": null,
+        "desde_versao": null,
+        "estado": "desconhecido"
+      },
+      "dominio": {
+        "estado": "verificado",
+        "evidencias": [
+          {
+            "fonte": "src:mdapi-approvalprocess"
+          }
+        ],
+        "lista_completa": "sim",
+        "natureza": "booleano",
+        "valores": [
+          {
+            "valor": "true"
+          },
+          {
+            "valor": "false"
+          }
+        ]
+      },
+      "estado": "verificado",
+      "evidencias": [
+        {
+          "fonte": "src:mdapi-approvalprocess"
+        }
+      ],
+      "explicacao": "explicada",
+      "id": "mdt:ApprovalProcess.enableMobileDeviceAccess",
+      "nome": "enableMobileDeviceAccess",
+      "o_que_e": "Deixa os aprovadores acessarem a página de aprovação por qualquer navegador, sem login. Com true, aprovadores adhoc não são permitidos.",
+      "obrigatoriedade": {
+        "condicao": "A documentação 68.0 não marca o campo como obrigatório; ausência de marcação não comprova opcionalidade (confirmar no WSDL).",
+        "estado": "desconhecido",
+        "valor": "nao"
+      },
+      "origem": {
+        "estado": "verificado",
+        "evidencias": [
+          {
+            "fonte": "src:mdapi-approvalprocess"
+          }
+        ],
+        "nota": "Propriedade definida pelo schema da Metadata API.",
+        "valor": "padrao_plataforma"
+      },
+      "tipo_tecnico": "boolean"
+    },
+    {
+      "default": {
+        "estado": "desconhecido",
+        "forma": "nao_declarado_na_fonte"
+      },
+      "disponibilidade": {
+        "ate_versao": null,
+        "desde_versao": null,
+        "estado": "desconhecido"
+      },
+      "dominio": {
+        "estado": "verificado",
+        "evidencias": [
+          {
+            "fonte": "src:mdapi-approvalprocess"
+          }
+        ],
+        "natureza": "tipo_composto"
+      },
+      "estado": "verificado",
+      "estrutura_ref": "mdx:ApprovalEntryCriteria",
+      "evidencias": [
+        {
+          "fonte": "src:mdapi-approvalprocess"
+        }
+      ],
+      "explicacao": "explicada",
+      "id": "mdt:ApprovalProcess.entryCriteria",
+      "nome": "entryCriteria",
+      "o_que_e": "Define que registros entram no processo. Omitido, entram todos.",
+      "obrigatoriedade": {
+        "condicao": "A documentação 68.0 não marca o campo como obrigatório; ausência de marcação não comprova opcionalidade (confirmar no WSDL).",
+        "estado": "desconhecido",
+        "valor": "nao"
+      },
+      "origem": {
+        "estado": "verificado",
+        "evidencias": [
+          {
+            "fonte": "src:mdapi-approvalprocess"
+          }
+        ],
+        "nota": "Propriedade definida pelo schema da Metadata API.",
+        "valor": "padrao_plataforma"
+      },
+      "tipo_tecnico": "ApprovalEntryCriteria"
+    },
+    {
+      "default": {
+        "estado": "desconhecido",
+        "forma": "nao_declarado_na_fonte"
+      },
+      "disponibilidade": {
+        "ate_versao": null,
+        "desde_versao": null,
+        "estado": "desconhecido"
+      },
+      "dominio": {
+        "estado": "verificado",
+        "evidencias": [
+          {
+            "fonte": "src:mdapi-approvalprocess"
+          }
+        ],
+        "natureza": "tipo_composto"
+      },
+      "estado": "verificado",
+      "estrutura_ref": "mdx:ApprovalAction",
+      "evidencias": [
+        {
+          "fonte": "src:mdapi-approvalprocess"
+        }
+      ],
+      "explicacao": "explicada",
+      "id": "mdt:ApprovalProcess.finalApprovalActions",
+      "nome": "finalApprovalActions",
+      "o_que_e": "Ações de workflow executadas quando todas as aprovações exigidas são dadas.",
+      "obrigatoriedade": {
+        "condicao": "A documentação 68.0 não marca o campo como obrigatório; ausência de marcação não comprova opcionalidade (confirmar no WSDL).",
+        "estado": "desconhecido",
+        "valor": "nao"
+      },
+      "origem": {
+        "estado": "verificado",
+        "evidencias": [
+          {
+            "fonte": "src:mdapi-approvalprocess"
+          }
+        ],
+        "nota": "Propriedade definida pelo schema da Metadata API.",
+        "valor": "padrao_plataforma"
+      },
+      "tipo_tecnico": "ApprovalAction"
+    },
+    {
+      "default": {
+        "estado": "verificado",
+        "evidencias": [
+          {
+            "fonte": "src:mdapi-approvalprocess"
+          }
+        ],
+        "forma": "false",
+        "nota": "A página declara default false.",
+        "valor": false
+      },
+      "disponibilidade": {
+        "ate_versao": null,
+        "desde_versao": null,
+        "estado": "desconhecido"
+      },
+      "dominio": {
+        "estado": "verificado",
+        "evidencias": [
+          {
+            "fonte": "src:mdapi-approvalprocess"
+          }
+        ],
+        "lista_completa": "sim",
+        "natureza": "booleano",
+        "valores": [
+          {
+            "valor": "true"
+          },
+          {
+            "valor": "false"
+          }
+        ]
+      },
+      "estado": "verificado",
+      "evidencias": [
+        {
+          "fonte": "src:mdapi-approvalprocess"
+        }
+      ],
+      "explicacao": "explicada",
+      "id": "mdt:ApprovalProcess.finalApprovalRecordLock",
+      "nome": "finalApprovalRecordLock",
+      "o_que_e": "Mantém o registro bloqueado depois da aprovação final.",
+      "obrigatoriedade": {
+        "condicao": "A documentação 68.0 não marca o campo como obrigatório; ausência de marcação não comprova opcionalidade (confirmar no WSDL).",
+        "estado": "desconhecido",
+        "valor": "nao"
+      },
+      "origem": {
+        "estado": "verificado",
+        "evidencias": [
+          {
+            "fonte": "src:mdapi-approvalprocess"
+          }
+        ],
+        "nota": "Propriedade definida pelo schema da Metadata API.",
+        "valor": "padrao_plataforma"
+      },
+      "tipo_tecnico": "boolean"
+    },
+    {
+      "default": {
+        "estado": "desconhecido",
+        "forma": "nao_declarado_na_fonte"
+      },
+      "disponibilidade": {
+        "ate_versao": null,
+        "desde_versao": null,
+        "estado": "desconhecido"
+      },
+      "dominio": {
+        "estado": "verificado",
+        "evidencias": [
+          {
+            "fonte": "src:mdapi-approvalprocess"
+          }
+        ],
+        "natureza": "tipo_composto"
+      },
+      "estado": "verificado",
+      "estrutura_ref": "mdx:ApprovalAction",
+      "evidencias": [
+        {
+          "fonte": "src:mdapi-approvalprocess"
+        }
+      ],
+      "explicacao": "explicada",
+      "id": "mdt:ApprovalProcess.finalRejectionActions",
+      "nome": "finalRejectionActions",
+      "o_que_e": "Ações de workflow executadas quando o registro chega à rejeição final.",
+      "obrigatoriedade": {
+        "condicao": "A documentação 68.0 não marca o campo como obrigatório; ausência de marcação não comprova opcionalidade (confirmar no WSDL).",
+        "estado": "desconhecido",
+        "valor": "nao"
+      },
+      "origem": {
+        "estado": "verificado",
+        "evidencias": [
+          {
+            "fonte": "src:mdapi-approvalprocess"
+          }
+        ],
+        "nota": "Propriedade definida pelo schema da Metadata API.",
+        "valor": "padrao_plataforma"
+      },
+      "tipo_tecnico": "ApprovalAction"
+    },
+    {
+      "default": {
+        "estado": "verificado",
+        "evidencias": [
+          {
+            "fonte": "src:mdapi-approvalprocess"
+          }
+        ],
+        "forma": "false",
+        "nota": "A página declara default false.",
+        "valor": false
+      },
+      "disponibilidade": {
+        "ate_versao": null,
+        "desde_versao": null,
+        "estado": "desconhecido"
+      },
+      "dominio": {
+        "estado": "verificado",
+        "evidencias": [
+          {
+            "fonte": "src:mdapi-approvalprocess"
+          }
+        ],
+        "lista_completa": "sim",
+        "natureza": "booleano",
+        "valores": [
+          {
+            "valor": "true"
+          },
+          {
+            "valor": "false"
+          }
+        ]
+      },
+      "estado": "verificado",
+      "evidencias": [
+        {
+          "fonte": "src:mdapi-approvalprocess"
+        }
+      ],
+      "explicacao": "explicada",
+      "id": "mdt:ApprovalProcess.finalRejectionRecordLock",
+      "nome": "finalRejectionRecordLock",
+      "o_que_e": "Mantém o registro bloqueado depois da rejeição final.",
+      "obrigatoriedade": {
+        "condicao": "A documentação 68.0 não marca o campo como obrigatório; ausência de marcação não comprova opcionalidade (confirmar no WSDL).",
+        "estado": "desconhecido",
+        "valor": "nao"
+      },
+      "origem": {
+        "estado": "verificado",
+        "evidencias": [
+          {
+            "fonte": "src:mdapi-approvalprocess"
+          }
+        ],
+        "nota": "Propriedade definida pelo schema da Metadata API.",
+        "valor": "padrao_plataforma"
+      },
+      "tipo_tecnico": "boolean"
+    },
+    {
+      "default": {
+        "estado": "desconhecido",
+        "forma": "nao_declarado_na_fonte"
+      },
+      "disponibilidade": {
+        "ate_versao": null,
+        "desde_versao": null,
+        "estado": "desconhecido"
+      },
+      "dominio": {
+        "estado": "verificado",
+        "evidencias": [
+          {
+            "fonte": "src:mdapi-approvalprocess"
+          }
+        ],
+        "natureza": "tipo_composto"
+      },
+      "estado": "verificado",
+      "estrutura_ref": "mdx:ApprovalAction",
+      "evidencias": [
+        {
+          "fonte": "src:mdapi-approvalprocess"
+        }
+      ],
+      "explicacao": "explicada",
+      "id": "mdt:ApprovalProcess.initialSubmissionActions",
+      "nome": "initialSubmissionActions",
+      "o_que_e": "Ações de workflow executadas quando o registro é submetido pela primeira vez.",
+      "obrigatoriedade": {
+        "condicao": "A documentação 68.0 não marca o campo como obrigatório; ausência de marcação não comprova opcionalidade (confirmar no WSDL).",
+        "estado": "desconhecido",
+        "valor": "nao"
+      },
+      "origem": {
+        "estado": "verificado",
+        "evidencias": [
+          {
+            "fonte": "src:mdapi-approvalprocess"
+          }
+        ],
+        "nota": "Propriedade definida pelo schema da Metadata API.",
+        "valor": "padrao_plataforma"
+      },
+      "tipo_tecnico": "ApprovalAction"
+    },
+    {
+      "default": {
+        "estado": "desconhecido",
+        "forma": "nao_declarado_na_fonte"
+      },
+      "disponibilidade": {
+        "ate_versao": null,
+        "desde_versao": null,
+        "estado": "desconhecido"
+      },
+      "dominio": {
+        "contexto": "A fonte tipa como string sem lista de valores; não inventar valores.",
+        "estado": "verificado",
+        "evidencias": [
+          {
+            "fonte": "src:mdapi-approvalprocess"
+          }
+        ],
+        "natureza": "texto_livre"
+      },
+      "estado": "verificado",
+      "evidencias": [
+        {
+          "fonte": "src:mdapi-approvalprocess"
+        }
+      ],
+      "explicacao": "explicada",
+      "id": "mdt:ApprovalProcess.label",
+      "nome": "label",
+      "o_que_e": "Nome do processo de aprovação.",
+      "obrigatoriedade": {
+        "estado": "verificado",
+        "evidencias": [
+          {
+            "fonte": "src:mdapi-approvalprocess"
+          }
+        ],
+        "valor": "sim"
+      },
+      "origem": {
+        "estado": "verificado",
+        "evidencias": [
+          {
+            "fonte": "src:mdapi-approvalprocess"
+          }
+        ],
+        "nota": "Propriedade definida pelo schema da Metadata API.",
+        "valor": "padrao_plataforma"
+      },
+      "tipo_tecnico": "string"
+    },
+    {
+      "default": {
+        "estado": "desconhecido",
+        "forma": "nao_declarado_na_fonte"
+      },
+      "disponibilidade": {
+        "ate_versao": null,
+        "desde_versao": null,
+        "estado": "desconhecido"
+      },
+      "dominio": {
+        "estado": "verificado",
+        "evidencias": [
+          {
+            "fonte": "src:mdapi-approvalprocess"
+          }
+        ],
+        "natureza": "tipo_composto"
+      },
+      "estado": "verificado",
+      "estrutura_ref": "mdx:NextAutomatedApprover",
+      "evidencias": [
+        {
+          "fonte": "src:mdapi-approvalprocess"
+        }
+      ],
+      "explicacao": "explicada",
+      "id": "mdt:ApprovalProcess.nextAutomatedApprover",
+      "nome": "nextAutomatedApprover",
+      "o_que_e": "Campo de hierarquia usado para atribuir automaticamente os aprovadores dos passos. Omitido, a atribuição automática fica desligada.",
+      "obrigatoriedade": {
+        "condicao": "A documentação 68.0 não marca o campo como obrigatório; ausência de marcação não comprova opcionalidade (confirmar no WSDL).",
+        "estado": "desconhecido",
+        "valor": "nao"
+      },
+      "origem": {
+        "estado": "verificado",
+        "evidencias": [
+          {
+            "fonte": "src:mdapi-approvalprocess"
+          }
+        ],
+        "nota": "Propriedade definida pelo schema da Metadata API.",
+        "valor": "padrao_plataforma"
+      },
+      "tipo_tecnico": "NextAutomatedApprover"
+    },
+    {
+      "default": {
+        "estado": "desconhecido",
+        "forma": "nao_declarado_na_fonte"
+      },
+      "disponibilidade": {
+        "ate_versao": null,
+        "desde_versao": null,
+        "estado": "desconhecido"
+      },
+      "dominio": {
+        "contexto": "A fonte tipa como string sem lista de valores; não inventar valores.",
+        "estado": "verificado",
+        "evidencias": [
+          {
+            "fonte": "src:mdapi-approvalprocess"
+          }
+        ],
+        "natureza": "texto_livre"
+      },
+      "estado": "verificado",
+      "evidencias": [
+        {
+          "fonte": "src:mdapi-approvalprocess"
+        }
+      ],
+      "explicacao": "explicada",
+      "id": "mdt:ApprovalProcess.postTemplate",
+      "nome": "postTemplate",
+      "o_que_e": "Template de post do Chatter para aprovações. Exige objeto com feed tracking.",
+      "obrigatoriedade": {
+        "condicao": "A documentação 68.0 não marca o campo como obrigatório; ausência de marcação não comprova opcionalidade (confirmar no WSDL).",
+        "estado": "desconhecido",
+        "valor": "nao"
+      },
+      "origem": {
+        "estado": "verificado",
+        "evidencias": [
+          {
+            "fonte": "src:mdapi-approvalprocess"
+          }
+        ],
+        "nota": "Propriedade definida pelo schema da Metadata API.",
+        "valor": "padrao_plataforma"
+      },
+      "tipo_tecnico": "string"
+    },
+    {
+      "default": {
+        "estado": "desconhecido",
+        "forma": "nao_declarado_na_fonte"
+      },
+      "disponibilidade": {
+        "ate_versao": null,
+        "desde_versao": null,
+        "estado": "desconhecido"
+      },
+      "dominio": {
+        "estado": "verificado",
+        "evidencias": [
+          {
+            "fonte": "src:mdapi-approvalprocess"
+          }
+        ],
+        "natureza": "numerico"
+      },
+      "estado": "verificado",
+      "evidencias": [
+        {
+          "fonte": "src:mdapi-approvalprocess"
+        }
+      ],
+      "explicacao": "pendente",
+      "id": "mdt:ApprovalProcess.processOrder",
+      "nome": "processOrder",
+      "o_que_e": "Explicação pendente: item listado a partir da fonte, ainda sem texto didático.",
+      "obrigatoriedade": {
+        "condicao": "A documentação 68.0 não marca o campo como obrigatório; ausência de marcação não comprova opcionalidade (confirmar no WSDL).",
+        "estado": "desconhecido",
+        "valor": "nao"
+      },
+      "origem": {
+        "estado": "verificado",
+        "evidencias": [
+          {
+            "fonte": "src:mdapi-approvalprocess"
+          }
+        ],
+        "nota": "Propriedade definida pelo schema da Metadata API.",
+        "valor": "padrao_plataforma"
+      },
+      "tipo_tecnico": "int"
+    },
+    {
+      "default": {
+        "estado": "desconhecido",
+        "forma": "nao_declarado_na_fonte"
+      },
+      "disponibilidade": {
+        "ate_versao": null,
+        "desde_versao": null,
+        "estado": "desconhecido"
+      },
+      "dominio": {
+        "estado": "verificado",
+        "evidencias": [
+          {
+            "fonte": "src:mdapi-approvalprocess"
+          }
+        ],
+        "natureza": "tipo_composto"
+      },
+      "estado": "verificado",
+      "estrutura_ref": "mdx:ApprovalAction",
+      "evidencias": [
+        {
+          "fonte": "src:mdapi-approvalprocess"
+        }
+      ],
+      "explicacao": "explicada",
+      "id": "mdt:ApprovalProcess.recallActions",
+      "nome": "recallActions",
+      "o_que_e": "Ações de workflow executadas quando um pedido pendente é retirado.",
+      "obrigatoriedade": {
+        "condicao": "A documentação 68.0 não marca o campo como obrigatório; ausência de marcação não comprova opcionalidade (confirmar no WSDL).",
+        "estado": "desconhecido",
+        "valor": "nao"
+      },
+      "origem": {
+        "estado": "verificado",
+        "evidencias": [
+          {
+            "fonte": "src:mdapi-approvalprocess"
+          }
+        ],
+        "nota": "Propriedade definida pelo schema da Metadata API.",
+        "valor": "padrao_plataforma"
+      },
+      "tipo_tecnico": "ApprovalAction"
+    },
+    {
+      "default": {
+        "estado": "desconhecido",
+        "forma": "nao_declarado_na_fonte"
+      },
+      "disponibilidade": {
+        "ate_versao": null,
+        "desde_versao": null,
+        "estado": "desconhecido"
+      },
+      "dominio": {
+        "estado": "verificado",
+        "evidencias": [
+          {
+            "fonte": "src:mdapi-approvalprocess"
+          }
+        ],
+        "lista_completa": "sim",
+        "natureza": "enum_fechado",
+        "valores": [
+          {
+            "valor": "AdminOnly"
+          },
+          {
+            "valor": "AdminOrCurrentApprover"
+          }
+        ]
+      },
+      "estado": "verificado",
+      "evidencias": [
+        {
+          "fonte": "src:mdapi-approvalprocess"
+        }
+      ],
+      "explicacao": "explicada",
+      "id": "mdt:ApprovalProcess.recordEditability",
+      "nome": "recordEditability",
+      "o_que_e": "Quem pode editar registros que aguardam aprovação.",
+      "obrigatoriedade": {
+        "estado": "verificado",
+        "evidencias": [
+          {
+            "fonte": "src:mdapi-approvalprocess"
+          }
+        ],
+        "valor": "sim"
+      },
+      "origem": {
+        "estado": "verificado",
+        "evidencias": [
+          {
+            "fonte": "src:mdapi-approvalprocess"
+          }
+        ],
+        "nota": "Propriedade definida pelo schema da Metadata API.",
+        "valor": "padrao_plataforma"
+      },
+      "tipo_tecnico": "RecordEditabilityType"
+    },
+    {
+      "default": {
+        "estado": "desconhecido",
+        "forma": "nao_declarado_na_fonte"
+      },
+      "disponibilidade": {
+        "ate_versao": null,
+        "desde_versao": null,
+        "estado": "desconhecido"
+      },
+      "dominio": {
+        "estado": "verificado",
+        "evidencias": [
+          {
+            "fonte": "src:mdapi-approvalprocess"
+          }
+        ],
+        "lista_completa": "sim",
+        "natureza": "booleano",
+        "valores": [
+          {
+            "valor": "true"
+          },
+          {
+            "valor": "false"
+          }
+        ]
+      },
+      "estado": "verificado",
+      "evidencias": [
+        {
+          "fonte": "src:mdapi-approvalprocess"
+        }
+      ],
+      "explicacao": "explicada",
+      "id": "mdt:ApprovalProcess.showApprovalHistory",
+      "nome": "showApprovalHistory",
+      "o_que_e": "Inclui a lista relacionada Approval History na página de aprovação.",
+      "obrigatoriedade": {
+        "condicao": "A documentação 68.0 não marca o campo como obrigatório; ausência de marcação não comprova opcionalidade (confirmar no WSDL).",
+        "estado": "desconhecido",
+        "valor": "nao"
+      },
+      "origem": {
+        "estado": "verificado",
+        "evidencias": [
+          {
+            "fonte": "src:mdapi-approvalprocess"
+          }
+        ],
+        "nota": "Propriedade definida pelo schema da Metadata API.",
+        "valor": "padrao_plataforma"
+      },
+      "tipo_tecnico": "boolean"
+    },
+    {
+      "default": {
+        "estado": "desconhecido",
+        "forma": "nao_declarado_na_fonte"
+      },
+      "disponibilidade": {
+        "ate_versao": null,
+        "desde_versao": null,
+        "estado": "desconhecido"
+      },
+      "dominio": {
+        "contexto": "A fonte tipa como string sem lista de valores; não inventar valores.",
+        "estado": "verificado",
+        "evidencias": [
+          {
+            "fonte": "src:mdapi-approvalprocess"
+          }
+        ],
+        "natureza": "texto_livre"
+      },
+      "estado": "verificado",
+      "evidencias": [
+        {
+          "fonte": "src:mdapi-approvalprocess"
+        }
+      ],
+      "explicacao": "explicada",
+      "herdada_de": "Metadata",
+      "id": "mdt:ApprovalProcess.fullName",
+      "nome": "fullName",
+      "o_que_e": "Nome completo (API name) do componente; herdado do tipo Metadata.",
+      "obrigatoriedade": {
+        "estado": "desconhecido",
+        "valor": "desconhecida"
+      },
+      "origem": {
+        "estado": "verificado",
+        "evidencias": [
+          {
+            "fonte": "src:mdapi-approvalprocess"
+          }
+        ],
+        "nota": "Propriedade definida pelo schema da Metadata API.",
+        "valor": "padrao_plataforma"
+      },
+      "tipo_tecnico": "string"
+    }
+  ],
+  "recomendacoes": [],
+  "setup": {
+    "estado": "desconhecido",
+    "nota": "Caminho no Setup não validado nesta sessão."
+  },
+  "suporte_cli": {
+    "estado": "verificado",
+    "evidencias": [
+      {
+        "fonte": "src:sdr-metadata-support"
+      }
+    ],
+    "nota": "Suporte do Salesforce CLI (source-deploy-retrieve), não do Metadata API em geral.",
+    "valor": {
+      "nota_fonte": null,
+      "status": "suportado"
+    }
+  }
+}
