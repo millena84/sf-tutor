@@ -7,19 +7,20 @@ Gerado por `ferramentas/sftutor.py cobertura`. Cobertura estrutural, explicativa
 
 - Universo v68 (METADATA_SUPPORT.md): **993** tipos.
 - Classificados como incluídos no recorte Core: 12; pendentes de classificação: 981.
-- Cadastrados: **95** de 993. Estruturalmente completos (contra a página oficial): 80. Completos nas três dimensões: 0.
+- Cadastrados: **105** de 993. Estruturalmente completos (contra a página oficial): 90. Completos nas três dimensões: 0.
 - Porcentagem do recorte Core: não calculada, porque o denominador do recorte ainda não está definido (classificação item a item pendente).
 
 | Tipo | Estrutural | Esperadas | Presentes | Explicadas | Estruturas | Mapeamento | Completo |
 |---|---|---|---|---|---|---|---|
 | mdt:AccountSettings | completa | 9 | 9 | 9 | 0 | parcial | não |
 | mdt:ApexTrigger | parcial | n/d | 5 | 5 | 0 | parcial | não |
-| mdt:ApprovalProcess | parcial | n/d | 22 | 21 | 6 | parcial | não |
+| mdt:ApprovalProcess | completa | 22 | 22 | 21 | 6 | parcial | não |
 | mdt:AssignmentRules | completa | 1 | 1 | 1 | 1 | parcial | não |
 | mdt:AuthProvider | completa | 34 | 34 | 34 | 1 | parcial | não |
 | mdt:AutoResponseRules | parcial | n/d | 1 | 1 | 1 | parcial | não |
 | mdt:BusinessHoursSettings | completa | 3 | 3 | 3 | 2 | parcial | não |
 | mdt:CampaignSettings | completa | 11 | 11 | 11 | 0 | parcial | não |
+| mdt:CaseSettings | completa | 53 | 53 | 53 | 3 | parcial | não |
 | mdt:Certificate | completa | 8 | 8 | 8 | 0 | parcial | não |
 | mdt:CommunitiesSettings | completa | 26 | 26 | 23 | 0 | parcial | não |
 | mdt:CompanySettings | completa | 3 | 3 | 3 | 1 | parcial | não |
@@ -105,13 +106,22 @@ Gerado por `ferramentas/sftutor.py cobertura`. Cobertura estrutural, explicativa
 | mdt:Territory2Rule | completa | 6 | 6 | 6 | 1 | parcial | não |
 | mdt:Territory2Settings | completa | 12 | 12 | 12 | 2 | parcial | não |
 | mdt:Territory2Type | completa | 4 | 4 | 4 | 0 | parcial | não |
+| mdt:Translations | parcial | n/d | 33 | 33 | 32 | parcial | não |
 | mdt:UserAuthCertificate | completa | 6 | 6 | 6 | 0 | parcial | não |
 | mdt:ValidationRule | completa | 6 | 6 | 6 | 0 | parcial | não |
+| mdt:Workflow | completa | 8 | 8 | 8 | 0 | parcial | não |
+| mdt:WorkflowAlert | completa | 8 | 8 | 8 | 1 | parcial | não |
+| mdt:WorkflowFieldUpdate | completa | 13 | 13 | 13 | 0 | parcial | não |
+| mdt:WorkflowFlowAction | completa | 6 | 6 | 6 | 1 | parcial | não |
+| mdt:WorkflowKnowledgePublish | completa | 5 | 5 | 5 | 0 | parcial | não |
+| mdt:WorkflowOutboundMessage | completa | 10 | 10 | 10 | 0 | parcial | não |
+| mdt:WorkflowRule | completa | 10 | 10 | 10 | 3 | parcial | não |
+| mdt:WorkflowTask | completa | 11 | 11 | 11 | 0 | parcial | não |
 
 ## Propriedades XML
 
-- Em metadata types: 1205 listadas, 1138 explicadas.
-- Em estruturas auxiliares: 429 listadas, 419 explicadas.
+- Em metadata types: 1362 listadas, 1295 explicadas.
+- Em estruturas auxiliares: 670 listadas, 660 explicadas.
 - Universo total: Sem WSDL não há denominador confiável do total de propriedades do recorte.
 
 ## Objetos consultáveis via API

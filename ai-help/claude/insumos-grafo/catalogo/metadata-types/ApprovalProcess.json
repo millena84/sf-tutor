@@ -140,8 +140,13 @@
         ]
       },
       "obrigatoriedade": {
-        "valor": "desconhecida",
-        "estado": "desconhecido"
+        "valor": "sim",
+        "estado": "verificado",
+        "evidencias": [
+          {
+            "fonte": "src:mdapi-v68-approvalprocess"
+          }
+        ]
       },
       "default": {
         "forma": "nao_declarado_na_fonte",
@@ -170,7 +175,7 @@
       ],
       "cardinalidade": "0..n",
       "notas": [
-        "A tabela marca o campo como não obrigatório, mas a descrição diz que ele é obrigatório."
+        "O guia versionado 264.0 marca o campo como Required. Na referência nova, a tabela não marca, mas a descrição diz que é obrigatório."
       ],
       "estrutura_ref": "mdx:ApprovalSubmitter"
     },
@@ -966,7 +971,8 @@
       "disponibilidade": {
         "desde_versao": null,
         "ate_versao": null,
-        "estado": "desconhecido"
+        "estado": "desconhecido",
+        "nota": "Campo ausente do guia versionado 264.0 (API 68.0); versão de entrada não informada na fonte."
       },
       "explicacao": "pendente",
       "estado": "verificado",
@@ -974,6 +980,9 @@
         {
           "fonte": "src:mdapi-approvalprocess"
         }
+      ],
+      "notas": [
+        "Consta da referência nova da documentação, sem descrição, e não consta do guia versionado 264.0 (API 68.0), conferido em 2026-11-16. A disponibilidade na API 68.0 não está confirmada."
       ]
     },
     {
@@ -1195,10 +1204,10 @@
   ],
   "cobertura": {
     "estrutural": {
-      "estado": "parcial",
-      "esperado": null,
+      "estado": "completa",
+      "esperado": 22,
       "presente": 22,
-      "nota": "Universo esperado = tabela Fields da página oficial lida em 2026-11-15 (mais fullName herdado). Parcial: WorkflowActionReference, usado em ApprovalAction.action, não está detalhado."
+      "nota": "Universo esperado = tabela Fields da página oficial lida em 2026-11-15 (mais fullName herdado). Conferência com o guia versionado 264.0: 1 campo(s) só constam da referência nova e estão marcados como não confirmados na API 68.0."
     },
     "explicativa": {
       "estado": "parcial",
@@ -1218,7 +1227,8 @@
     "Send actions e processos de aprovação de rascunhos de e-mail não são suportados pela Metadata API."
   ],
   "divergencias_documentais": [
-    "Na página (src:mdapi-approvalprocess), allowedSubmitters aparece como não obrigatório na tabela, mas a descrição diz que é obrigatório."
+    "O guia versionado 264.0 (API 68.0) lista 20 campo(s) em ApprovalProcess; a referência nova, usada neste cadastro, lista 1 a mais, todos sem descrição: processOrder.",
+    "allowedSubmitters: a tabela da referência nova não marca o campo como obrigatório, embora a descrição diga que é; o guia versionado 264.0 marca como Required. O cadastro segue o guia versionado."
   ],
   "estado": "verificado",
   "evidencias": [
@@ -1230,6 +1240,10 @@
     },
     {
       "fonte": "src:sdr-metadata-support"
+    },
+    {
+      "fonte": "src:mdapi-v68-approvalprocess",
+      "nota": "Lista de campos conferida no guia versionado 264.0."
     }
   ],
   "exemplo_xml": {

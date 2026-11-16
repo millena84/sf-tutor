@@ -61,8 +61,8 @@ P["sub:mecanismos-legados-e-migracao"] = {
            "record-triggered flows. Um flow que substitui uma regra pode se comportar diferente por causa disso.",
            E("src:apex-triggers-order", "src:help-flow-record-triggered-considerations")),
         av("implantacao", "Como metadado", "Workflow rules ficam no metadata type Workflow, com um arquivo .workflow por objeto, que reúne regras, "
-           "field updates, alertas, tarefas e outbound messages. Um field update pode reavaliar outras regras, até 5 vezes em cascata. O tipo "
-           "ainda não está cadastrado neste catálogo: a leitura da página não devolveu o nome de boa parte dos campos.", E("src:mdapi-workflow")),
+           "field updates, alertas, tarefas e outbound messages. A regra aponta para cada ação pelo nome e pelo tipo. Um field update pode "
+           "reavaliar outras regras, até 5 vezes em cascata.", E("src:mdapi-workflow")),
         av("implantacao", "Migre na mesma org", "Migre o processo na mesma org do original, e não numa org intermediária para depois implantar: assim o flow trata as "
            "ações agendadas pendentes do processo antigo.", E("src:help-migrate-to-flow-considerations")),
         av("atencao", "O que a ferramenta não cobre", "A Migrate to Flow só aceita processos disparados por registro; processos com recursão avaliam o registro uma vez; "

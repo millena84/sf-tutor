@@ -452,8 +452,8 @@ D["sub:localizacao-idiomas-e-traducao"] = {
            "idioma de um label que já existe.", E("src:help-custom-labels", "src:help-custom-labels-edit")),
         av("implantacao", "Como metadado",
            "LanguageSettings guarda a seleção de idiomas e a ativação do Translation Workbench. CustomLabels guarda os textos. As "
-           "traduções viajam pelo tipo Translations, em arquivos nomeados pelo código de localidade; esse tipo ainda não está "
-           "cadastrado neste catálogo.", E("src:mdapi-languagesettings", "src:mdapi-customlabels", "src:mdapi-translations")),
+           "traduções viajam pelo tipo Translations, um arquivo por idioma, nomeado pelo código de localidade. Ao recuperar, só vêm as "
+           "traduções dos tipos listados no package.xml.", E("src:mdapi-languagesettings", "src:mdapi-customlabels", "src:mdapi-translations")),
     ],
 }
 D["sub:moedas-e-calendario-fiscal"] = {

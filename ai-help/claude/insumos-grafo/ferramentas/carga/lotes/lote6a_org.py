@@ -33,7 +33,7 @@ C.registrar_fontes([
     _f("custommetadata-tipo", "CustomMetadata", "Propriedades do tipo CustomMetadata e do subtipo CustomMetadataValue (leitura da página).",
        pagina="custommetadata"),
     _f("customlabels", "CustomLabels", "Arquivo, versão e propriedades dos tipos CustomLabels e CustomLabel."),
-    _f("translations", "Translations", "O que o tipo Translations cobre e como os arquivos de tradução são nomeados (tipo ainda não cadastrado)."),
+    # src:mdapi-translations é registrada pelo lote 7a, com a leitura do guia versionado.
 ])
 
 S_COMPANY, S_CURRENCY, S_LANG = "src:mdapi-companysettings", "src:mdapi-currencysettings", "src:mdapi-languagesettings"
@@ -309,7 +309,7 @@ M.mdt("CustomLabels", S_LABELS,
       alertas=["O tipo CustomLabels não recupera labels por nome: para labels específicos, a página manda usar o tipo CustomLabel com os nomes como "
                "membros no package.xml.", "Não é possível recuperar CustomLabels com namespace.",
                "As traduções dos labels não ficam neste arquivo: ficam na pasta translations, em arquivos <código de localidade>.translation "
-               "(tipo Translations, ainda não cadastrado no catálogo)."],
+               "(tipo Translations)."],
       divergencias=["Nas tabelas de CustomLabels e CustomLabel (src:mdapi-customlabels), fullName aparece como não obrigatório, mas a descrição diz Required.",
                     "A página trata CustomLabel como metadata type próprio; ele não consta do inventário v68 do projeto e foi cadastrado como estrutura."],
       cobertura_nota="Universo esperado = tabela Fields da página oficial lida em 2026-11-14.",
@@ -361,7 +361,7 @@ C.funcionalidade(
     setup("Setup > Quick Find: Translation Language Settings > Translation Language Settings", "src:help-translation-languages-add"),
     limitacoes=["Objetos padrão não estão no Translation Workbench; a Ajuda manda usar a tela de renomear abas e rótulos.",
                 "Não está disponível em orgs de idioma único.",
-                "As traduções viajam como metadado pelo tipo Translations, que consta do inventário v68 mas ainda não está cadastrado neste catálogo."],
+                "As traduções viajam como metadado pelo tipo Translations, um arquivo por idioma."],
     pre=["Manage Translation (para incluir idiomas e designar tradutores)."])
 
 C.funcionalidade(

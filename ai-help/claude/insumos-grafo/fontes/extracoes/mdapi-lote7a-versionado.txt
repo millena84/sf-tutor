@@ -1,0 +1,240 @@
+fonte: Metadata API Developer Guide, versão 264.0 (API 68.0), lida pelo endpoint de conteúdo da documentação
+URL lida: https://developer.salesforce.com/docs/get_document_content/api_meta/<página>.htm/en-us/264.0  (devolve o artigo em JSON com HTML)
+mesma página no navegador: https://developer.salesforce.com/docs/atlas.en-us.264.0.api_meta.meta/api_meta/<página>.htm
+obtido em 2026-11-16 via WebFetch; método: extração documental assistida por IA; descrições parafraseadas em português.
+alcance: artigos inteiros. meta_casesettings.htm coube numa leitura; meta_workflow.htm tem 114.905 caracteres (lidos 0-100000 e 100000 em diante, que é
+  só o exemplo XML); meta_translations.htm tem 243.955 caracteres (lidos em três partes: 0, 100000 e 200000).
+por que este caminho: as páginas da referência nova (docs/platform/api-metadata/references/meta-types/) não devolvem o nome dos campos de CaseSettings,
+  Workflow e Translations. O guia versionado devolve nomes, tipos e descrições, e corresponde à versão do inventário do projeto (v68).
+convenção das linhas: nome | tipo | versão em que entrou (quando a página informa) | marcação "Required" (quando a página informa).
+
+ids: src:mdapi-casesettings, src:mdapi-workflow e src:mdapi-translations já existiam como leitura da referência nova (só o texto geral). O lote 7a
+  regrava os três registros apontando para o guia versionado, que passa a ser a fonte do cadastro. As fontes src:mdapi-v68-* são só de conferência.
+
+ACHADO sobre a referência nova (lotes 6a, 6b e 6d): comparando as duas fontes, os campos que a referência nova lista SEM descrição não constam do guia
+  versionado 264.0. Conferido em sete tipos (só a lista de nomes foi lida; ver as entradas [src:mdapi-v68-*] no fim desta nota).
+
+[src:mdapi-casesettings] CaseSettings: arquivo settings/Case.settings; API 27.0 e posteriores; estende Metadata (fullName herdado); curinga * não vale
+  para um setting individual. Nenhum campo marcado Required. (A referência nova lista 69 campos de primeiro nível; o guia versionado, 52.)
+  CaseSettings (52): caseAssignNotificationTemplate | string, caseAutoProcUser | boolean, caseCloseNotificationTemplate | string,
+    caseCommentNotificationTemplate | string, caseCreateNotificationTemplate | string, caseFeedItemSettings | FeedItemSettings[] | 32.0,
+    caseFeedReadUnreadLtng | boolean, caseMergeInLightning | boolean, closeCaseThroughStatusChange | boolean, defaultCaseFeedLayoutOn | boolean,
+    defaultCaseOwner | string, defaultCaseOwnerType | string, defaultCaseUser | string, emailActionDefaultsHandlerClass | string,
+    emailToCase | EmailToCaseSettings, enableCaseFeed | boolean, enableCollapseEmailThread | boolean | 47.0, enableDraftEmails | boolean,
+    enableEarlyEscalationRuleTriggers | boolean, enableEmailActionDefaultsHandler | boolean, enableEmailContactOnCasePost | boolean,
+    enableEscalateQfiToCaseInternal | boolean, enableEscalateQfiToCaseNetworks | boolean, enableExtNetworksCaseFeedEnabled | boolean,
+    enableMultiLangSolnSrchCSS | boolean, enableMultiLangSolnSrchPKB | boolean, enableMultiLangSolution | boolean, enableNewEmailDefaultTemplate | boolean,
+    enableSolutionCategory | boolean, enableSolutionInlineCategory | boolean, enableSolutionShortSummary | boolean,
+    enableSuggestedArticlesApplication | boolean, enableSuggestedArticlesCustomerPortal | boolean, enableSuggestedArticlesPartnerPortal | boolean,
+    enableSuggestedSolutions | boolean, escalateCaseBefore | boolean, genericMessageEnabled | boolean, keepCaseMergeRecords | boolean,
+    keepRecordTypeOnAssignmentRule | boolean, newEmailDefaultTemplateClass | string, notifyContactOnCaseComment | boolean, notifyDefaultCaseOwner | boolean,
+    notifyOwnerOnCaseComment | boolean, notifyOwnerOnCaseOwnerChange | boolean, predictiveSupportEnabled | boolean,
+    showEmailAttachmentsInCaseAttachmentsRL | boolean | 40.0, showFewerCloseActions | boolean, systemUserEmail | string, useSystemEmailAddress | boolean,
+    useSystemUserAsDefaultCaseUser | boolean, visibleInCssCheckbox | boolean, webToCase | WebToCaseSettings
+    templates (caseAssign/Close/Comment/CreateNotificationTemplate): template de e-mail de cada notificação, no formato pasta/nomeDoTemplate.
+    caseAutoProcUser: cria um registro de resposta automática depois do primeiro e-mail do cliente. caseFeedItemSettings: itens de feed em layouts
+      de caso baseados em feed. caseFeedReadUnreadLtng: itens de feed não lidos em negrito no Lightning. caseMergeInLightning: Case Merge no Lightning.
+    closeCaseThroughStatusChange: Closed aparece no campo Status nas páginas de edição. defaultCaseFeedLayoutOn: layout padrão do Case Feed.
+    defaultCaseOwner: dono padrão quando as regras de atribuição não acham dono. defaultCaseOwnerType: se o dono padrão é usuário ou fila (valores
+      não listados). defaultCaseUser: usuário que aparece no Case History para mudanças automáticas.
+    emailActionDefaultsHandlerClass: classe Apex que dá os valores padrão da ação de e-mail. emailToCase / webToCase: configurações de Email-to-Case /
+      Web-to-Case. enableCaseFeed: Case Feed ligado. enableCollapseEmailThread: remove mensagens anteriores da thread nos itens de feed de e-mail.
+    enableDraftEmails: rascunhos de e-mail; exige Case Feed e Email-to-Case. enableEarlyEscalationRuleTriggers / escalateCaseBefore: gatilhos
+      antecipados em regras de escalonamento. enableEmailActionDefaultsHandler: configuração Email Action Default Handler ligada.
+    enableEmailContactOnCasePost: e-mail ao contato do caso em posts visíveis externamente em sites Experience Builder.
+    enableEscalateQfiToCaseInternal / ...Networks: moderadores criam casos a partir de perguntas do Chatter, na org / nos sites.
+    enableExtNetworksCaseFeedEnabled: membros do site veem e-mails, comentários e atualizações do caso no feed.
+    enableMultiLangSolnSrchCSS / ...PKB / enableMultiLangSolution: busca multilíngue de Solutions (portais self-service / públicas) e Solutions multilíngues.
+    enableNewEmailDefaultTemplate: templates padrão de e-mail; só com rascunhos ligados. enableSolutionCategory / InlineCategory / ShortSummary: navegação,
+      trilha de categorias e resumos de Solutions. enableSuggestedArticlesApplication / CustomerPortal / PartnerPortal: Suggested Articles nas páginas de
+      caso / portais; só valem com enableSuggestedSolutions em false. enableSuggestedSolutions: botão View Suggested Solutions ou Find Articles.
+    genericMessageEnabled: mensagens genéricas ligadas. keepCaseMergeRecords: casos duplicados não são excluídos depois do merge.
+    keepRecordTypeOnAssignmentRule: em registros criados à mão, mantém o record type em vez de usar o padrão de quem recebe.
+    newEmailDefaultTemplateClass: classe Apex do template padrão de novos e-mails do Case Feed. notifyContactOnCaseComment: avisa contatos fora do
+      portal sobre comentário novo. notifyDefaultCaseOwner: avisa o dono padrão ao receber caso. notifyOwnerOnCaseComment: avisa o dono sobre
+      comentário. notifyOwnerOnCaseOwnerChange: Send Notification Email já vem marcado ao trocar o dono para um usuário.
+    predictiveSupportEnabled: suporte preditivo ligado. showEmailAttachmentsInCaseAttachmentsRL: anexos de e-mail na lista Attachments do caso.
+    showFewerCloseActions: esconde o botão Save & Close e o link Cls. systemUserEmail: e-mail usado quando o usuário padrão do caso é o system user.
+    useSystemEmailAddress: notificações parecem vir de um endereço de sistema (true) ou de quem atualizou (false). useSystemUserAsDefaultCaseUser: o
+      system user é o usuário automático do caso; com false, defaultCaseUser precisa ser informado. visibleInCssCheckbox: visibilidade padrão do caso
+      no CSS (portal self-service); false quer dizer visível por padrão.
+  EmailToCaseSettings (20): enableEmailToCase | boolean, enableE2CAttachmentAsFile | boolean, enableE2CDeduplicateAttachments | boolean,
+    enableE2CExternalServer | boolean, enableE2CSourceTracking | boolean, enableHtmlEmail | boolean, enableNewtoReadTriggers | boolean,
+    enableOnDemandEmailToCase | boolean, enableThreadIDInBody | boolean, enableThreadIDInSubject | boolean, enableThreadTokenInBody | boolean,
+    enableThreadTokenInSubject | boolean, notifyOwnerOnNewCaseEmail | boolean, overEmailLimitAction | EmailToCaseOnFailureActionType,
+    preQuoteSignature | boolean, routingAddresses | EmailToCaseRoutingAddress[], replyWithNewContentOnly | boolean, showGeneratedEmailCheckbox | boolean,
+    unauthorizedSenderAction | EmailToCaseOnFailureActionType, useEmailHeadersForThreading | boolean
+    enableEmailToCase: liga o Email-to-Case; não pode ser desligado depois. enableE2CAttachmentAsFile: anexos viram Salesforce Files.
+    enableE2CDeduplicateAttachments: anexos já existentes são ligados ao e-mail novo, sem salvar de novo. enableE2CExternalServer: envio por serviços
+      externos como Gmail ou Outlook (só Lightning). enableE2CSourceTracking: Case Source = Email nos casos de Email-to-Case. enableHtmlEmail: e-mail HTML.
+    enableNewtoReadTriggers: mudança de status do e-mail dispara triggers ao abrir. enableOnDemandEmailToCase: On-Demand Email-to-Case.
+    enableThreadIDInBody / InSubject: Thread ID do caso no corpo / assunto (orgs sem Lightning Threading). enableThreadTokenInBody / InSubject: token de
+      threading no corpo / assunto pelo compositor Lightning (orgs com Lightning Threading). notifyOwnerOnNewCaseEmail: avisa o dono sobre e-mail novo.
+    overEmailLimitAction: o que fazer com e-mails recebidos acima do limite diário (Bounce, Discard, Requeue). preQuoteSignature: assinatura depois da
+      resposta e antes da thread (true) ou no fim (false). routingAddresses: endereços de roteamento; remover um o exclui na org de destino.
+    replyWithNewContentOnly: resposta sem o conteúdo anterior da thread. showGeneratedEmailCheckbox: remetente confirma que revisou e-mails escritos pelo
+      Einstein. unauthorizedSenderAction: o que fazer com e-mails de remetentes inválidos (Bounce, Discard). useEmailHeadersForThreading: usa os
+      cabeçalhos do e-mail para casar respostas quando o token falha. (A tabela tem duas linhas em branco, sem nome nem tipo, desconsideradas.)
+  EmailToCaseRoutingAddress (17): addressType | EmailToCaseRoutingAddressType, authorizedSenders | string, caseOrigin | string, caseOwner | string,
+    caseOwnerType | string, casePriority | string, createTask | boolean, emailAddress | string, emailServicesAddress | string, fallbackQueue | string | 56.0,
+    isPermsetControlled | boolean | 61.0, isVerified | boolean, newEntityRecordType | string, routingFlow | string | 56.0, routingName | string,
+    saveEmailHeaders | boolean, taskStatus | string
+    addressType: EmailToCase ou Outlook. authorizedSenders: endereços ou domínios aceitos pelo On-Demand, separados por vírgula. caseOrigin / casePriority:
+      origem / prioridade padrão. caseOwner: dono padrão (usuário ou fila), pelo username. caseOwnerType: se o dono é usuário ou fila.
+    createTask: cria tarefa para o dono quando o caso nasce de e-mail. emailAddress: endereço que roteia os e-mails. emailServicesAddress: endereço
+      gerado pela Salesforce para encaminhamento; somente leitura. fallbackQueue: fila usada quando o flow de Omni-Channel não roteia.
+    isPermsetControlled: só quem tem acesso por permission set envia por este endereço. isVerified: endereço verificado pelo cliente; somente leitura.
+    newEntityRecordType: record type dos casos criados. routingFlow: flow de Omni-Channel que roteia os casos. routingName: nome do endereço.
+    saveEmailHeaders: salva informações de roteamento e envelope. taskStatus: status padrão das tarefas; só com createTask true.
+  FeedItemSettings (4; 32.0 e posteriores): characterLimit | int, collapseThread | boolean (27.0 a 46.0; removido), displayFormat | FeedItemDisplayFormat
+    (Default, HideBlankLines), feedItemType | FeedItemType (só EmailMessageEvent é válido)
+  WebToCaseSettings (3): caseOrigin | string, defaultResponseTemplate | string, enableWebToCase | boolean (os dois primeiros só valem com enableWebToCase true)
+
+[src:mdapi-workflow] Workflow: sufixo .workflow, pasta workflows, um arquivo por objeto; workflow rules desde a API 13.0; estende Metadata; aceita o
+  curinga * (membro * com o nome Workflow recupera todos os componentes de workflow).
+  (A referência nova lista 10 campos de primeiro nível, incluindo listas WorkflowFlowAutomation[] e WorkflowSend[] sem descrição; o guia versionado, 8.)
+  Workflow (8): alerts | WorkflowAlert[], fieldUpdates | WorkflowFieldUpdate[], flowActions | WorkflowFlowAction[] | 30.0, fullName | string,
+    knowledgePublishes | WorkflowKnowledgePublish[] | 27.0, outboundMessages | WorkflowOutboundMessage[], rules | WorkflowRule[], tasks | WorkflowTask[]
+  WorkflowActionReference (2): name | string | Required, type | WorkflowActionType | Required (Alert, FieldUpdate, FlowAction (30.0+), OutboundMessage, Task)
+  WorkflowAlert (8): ccEmails | string[] (até 5; informar este ou recipients), description | string | 16.0 | Required, fullName | string | Required,
+    protected | boolean | Required, recipients | WorkflowEmailRecipient[], senderAddress | string (só com senderType OrgWideEmailAddress),
+    senderType | ActionEmailSenderType (CurrentUser, padrão; DefaultWorkflowUser; OrgWideEmailAddress), template | string | Required
+  WorkflowEmailRecipient (3): field | string, recipient | string, type | ActionEmailRecipientTypes (accountOwner, accountTeam,
+    campaignMemberDerivedOwner, contactLookup, creator, customerPortalOwner, email, group, opportunityTeam, owner, partnerUser, portalRole,
+    portalRoleSubordinates, role, roleSubordinates, roleSubordinatesInternal, user, userLookup)
+  WorkflowFieldUpdate (13): description | string, field | string | Required, formula | string, fullName | string | Required, literalValue | string,
+    lookupValue | string, lookupValueType | LookupValueType (Queue, RecordType, User), name | string | 16.0 | Required, notifyAssignee | boolean | Required,
+    operation | FieldUpdateOperation | Required (Formula, Literal, LookupValue, NextValue, Null, PreviousValue), protected | boolean | Required,
+    reevaluateOnChange | boolean (reavalia regras; cascata de até 5 vezes), targetObject | string (chave do filho para o pai; chamava-se sourceField antes da 14.0)
+  WorkflowFlowAction (6; desde 30.0): description | string, flow | string | Required, flowInputs | WorkflowFlowActionParameter[], label | string | Required,
+    language | string (reservado), protected | boolean (reservado)
+  WorkflowFlowActionParameter (2): name | string | Required, value | string | Required
+  WorkflowKnowledgePublish (5; desde 27.0): action | KnowledgeWorkflowAction | Required (PublishAsNew, Publish), description | string, label | string | Required,
+    language | string, protected | boolean | Required
+  WorkflowOutboundMessage (10): apiVersion | double | 18.0 | Required, description | string, endpointUrl | string | Required, fields | string[],
+    fullName | string | Required, includeSessionId | boolean | Required, integrationUser | string | Required, name | string | 16.0 | Required,
+    protected | boolean | Required, useDeadLetterQueue | boolean (só orgs com a permissão)
+  WorkflowRule (10): actions | WorkflowActionReference[], active | boolean | Required, booleanFilter | string, criteriaItems | FilterItem[],
+    description | string, failedMigrationToolVersion | string | 54.0, formula | string, fullName | string (herdado), triggerType | WorkflowTriggerTypes
+    (onAllChanges, onCreateOnly, onCreateOrTriggeringUpdate), workflowTimeTriggers | WorkflowTimeTrigger
+    criteriaItems ou formula precisa ser informado.
+  WorkflowTask (11): assignedTo | string, assignedToType | ActionTaskAssignedToTypes (accountCreator, accountOwner, accountTeam, creator, opportunityTeam,
+    owner, partnerUser, portalRole, role, user), description | string, dueDateOffset | int | Required, fullName | string | Required,
+    notifyAssignee | boolean | Required, offsetFromField | string, priority | string | Required, protected | boolean | Required, status | string | Required,
+    subject | string | 16.0 | Required
+  WorkflowTimeTrigger (4): actions | WorkflowActionReference[], offsetFromField | string, timeLength | string (negativo = antes), workflowTimeTriggerUnit |
+    WorkflowTimeUnits (Hours, Days)
+  Notas de uso: alerta de e-mail precisa de ccEmails, recipients ou os dois; flow triggers exigem API 30.0+ e o piloto está encerrado; test mode de flow
+    triggers não é suportado pela Metadata API; a apiVersion de uma outbound message só muda pela Metadata API.
+  Elementos do exemplo XML: alerts, recipients, field, type, template, fieldUpdates, fullName, description, name, notifyAssignee, operation, protected,
+    literalValue, formula, lookupValue, outboundMessages, endpointUrl, fields, includeSessionId, integrationUser, rules, active, booleanFilter,
+    criteriaItems, value, triggerType, actions, tasks, assignedTo, assignedToType, dueDateOffset, offsetFromField, priority, status, subject.
+
+[src:mdapi-translations] Translations: arquivo <código de localidade>.translation (ex.: de.translation); em pacote, namespace + sublinhados + código;
+  desde a API 14.0; estende Metadata; aceita o curinga *. Traduzir rótulos de componentes faz parte do Translation Workbench. Ao recuperar, só vêm
+  traduções dos metadata types listados no package.xml. Traduções de objetos customizados ficam na pasta objectTranslations.
+  Translations (33): aiCoachAgentScnrDefs | AiCoachAgentScnrDefTranslation[] | 64.0, botBlocks | BotBlockTranslation[] | 59.0,
+    botTemplates | BotTemplateTranslation[] | 59.0, bots | BotTranslation[] | 53.0, conversationMessageDefinitions | ConversationMessageDefinitionTranslation[] | 61.0,
+    contextDefinitions | ContextDefinitionTranslation[] | 62.0, customApplications | CustomApplicationTranslation[], customLabels | CustomLabelTranslation[],
+    customPageWebLinks | CustomPageWebLinkTranslation[], customTabs | CustomTabTranslation[], dataConnectors | DataConnectorTranslation[] | 64.0,
+    dashboardComponents | DashboardComponentTranslation[] | 67.0, dashboards | DashboardTranslation[] | 67.0,
+    desFieldTemplateMessages | ExplainabilityMsgTemplateFieldTranslation[], flowDefinitions | FlowDefinitionTranslation[] | 41.0 (só Flow e AutolaunchedFlow),
+    identityVerificationCustomFieldLabels | IdentityVerificationFieldTranslation | 54.0, fullName | string | Required (código do idioma, como de),
+    globalPicklists | GlobalPicklistTranslation[] | só 37.0, pipelineInspMetricConfigs | PipelineInspMetricConfigTranslation | 57.0,
+    productSpecificationTypes | ProductSpecificationTypeTranslation | 66.0, prompts | PromptTranslation | 48.0, quickActions | GlobalQuickActionTranslation[],
+    recordAlertCategories | RecordAlertCategoryTranslation[] | 66.0, recordAlertTemplates | RecordAlertTemplateTranslation[] | 66.0,
+    reportAggregates | ReportAggregateTranslation[] | 68.0, reportBucketFields | ReportBucketFieldTranslation[] | 68.0, reportCharts | ReportChartTranslation[] | 68.0,
+    reports | ReportTranslation[] | 67.0, reportTypes | ReportTypeTranslation[], scontrols | ScontrolTranslation[],
+    svcCatalogItemAttributes | ServiceProcessAttributeTranslation[] | 64.0, svcCatalogItemGroups | ServiceProcessItemGroupTranslation[] | 64.0,
+    timelineObjectDefinitions | TimelineObjectDefinitionTranslation[] | 66.0
+  Subtipos (59), com "R" para Required:
+    AiCoachAgentScnrDefTranslation (64.0+): description, label, name R, userGuidance
+    BotBlockTranslation: botBlockVersions BotBlockVersionTranslation[], fullName R | BotBlockVersionTranslation: botDialogs BotDialogTranslation[], fullName R
+    BotTemplateTranslation: botDialogs BotDialogTranslation[], fullName R | BotTranslation: botVersions BotVersionTranslation[], fullName R
+    BotVersionTranslation: botDialogs BotDialogTranslation[], fullName R | BotDialogTranslation: botSteps BotStepTranslation[], developerName R, label
+    BotStepTranslation: botMessages BotMessageTranslation[], botSteps BotStepTranslation[], botVariableOperation BotVariableOperationTranslation,
+      stepIdentifier R, type BotStepType R (Navigation, Invocation, VariableOperation, Message, Wait, Group, RecordLookup; RecordLookup exige 48.0+)
+    BotMessageTranslation: message, messageIdentifier R
+    BotVariableOperationTranslation: botMessages BotMessageTranslation[], botQuickReplyOptions BotQuickReplyOptionTranslation[], quickReplyOptionTemplate,
+      retryMessages BotMessageTranslation[], successMessages BotMessageTranslation[] (57.0+), type BotVariableOperationType R (Set, Unset, Collect,
+      SetConversationLanguage), variableOperationIdentifier R
+    BotQuickReplyOptionTranslation: literalValue, quickReplyOptionIdentifier R
+    ContextDefinitionTranslation: description, label R, name R
+    ConversationMessageDefinitionTranslation (61.0+): constantValueTranslations ConversationMessageConstantValueTranslation[], label R, name R
+    ConversationMessageConstantValueTranslation (61.0+): name R, value R
+    CustomApplicationTranslation: description, label, name R | CustomLabelTranslation: label R, name R
+      (label de CustomApplicationTranslation e de CustomLabelTranslation: até 765 caracteres)
+    CustomPageWebLinkTranslation: label R, name R | CustomTabTranslation: label R, name R
+    DashboardComponentTranslation: description, footer, label, name R | DashboardTranslation: description, label, name R
+    DataConnectorTranslation (64.0+): attributes DataConnectorAttributeTranslation[], description, errors DataConnectorErrorTranslation[], help, label,
+      language, name
+    DataConnectorAttributeTranslation (64.0+): errorMessage, infoMessage, inputLabel, label R, name R, options DataConnectorAttributeOptTranslation[]
+    DataConnectorAttributeOptTranslation (64.0+): label R, name R | DataConnectorErrorTranslation (64.0+): label R, name R
+    ExplainabilityMsgTemplateFieldTranslation: description, label, name R, templateMessage
+    FlowDefinitionTranslation (41.0+): flows FlowTranslation[], fullName R, label
+    FlowTranslation: choices FlowChoiceTranslation[], fullName, label, orchestrationStages FlowOrchestrationStageTranslation (63.0+),
+      orchestrationSteps FlowOrchestrationStepTranslation (63.0+), screens FlowScreenTranslation[], stages FlowStageTranslation[] (43.0+)
+      (a tabela de FlowTranslation não traz campo para FlowTextTemplateTranslation, embora esse subtipo esteja documentado)
+    FlowChoiceTranslation: choiceText, name R, userInput FlowChoiceUserInputTranslation
+    FlowChoiceUserInputTranslation: promptText, validationRule FlowInputValidationRuleTranslation | FlowInputValidationRuleTranslation: errorMessage
+    FlowOrchestrationStageTranslation (64.0+): name R, stageLabel | FlowOrchestrationStepTranslation (63.0+): name R, stepLabel
+    FlowScreenTranslation: backButtonLabel, fields FlowScreenFieldTranslation[], helpText, name R, nextOrFinishButtonLabel, pauseButtonLabel, pausedText
+      (backButtonLabel, nextOrFinishButtonLabel e pauseButtonLabel: 54.0+)
+    FlowScreenFieldTranslation: fieldText, helpText, inputParameters FlowInputParameterTranslation (reservado), name R, validationRule
+      FlowInputValidationRuleTranslation
+    FlowInputParameterTranslation (reservado): name, value FlowFerovTranslation | FlowFerovTranslation (reservado): complexValues
+      FlowComplexLiteralTranslation, stringValue | FlowComplexLiteralTranslation (reservado): customAspectKey, value
+    FlowStageTranslation (43.0+): label, name R | FlowTextTemplateTranslation (45.0+; só flows de Salesforce Surveys): name R, text
+    GlobalPicklistTranslation (só 37.0): name R, picklistValues PicklistValueTranslation[]
+    GlobalQuickActionTranslation: aspect (53.0+; Master ou InfoMessage), label R, name R
+    IdentityVerificationFieldTranslation (54.0+): customFieldLabel, description, label, name R
+    PipelineInspMetricConfigTranslation (57.0+): label R, name R | ProductSpecificationTypeTranslation (66.0+): description, label, name R
+    PromptTranslation (48.0+): description, label, name R, promptVersions PromptVersionTranslation
+    PromptVersionTranslation: actionButtonLabel, actionButtonLink, body, description, dismissButtonLabel, header, imageAltText (53.0+), imageLink (53.0+),
+      label, name R, title, videoLink
+    RecordAlertCategoryTranslation (66.0+): description, label R, name R | RecordAlertTemplateTranslation (66.0+): description, label, name R, subject
+    ReportAggregateTranslation: label, name R, reportName R | ReportBucketFieldTranslation: label, name R, reportName R
+    ReportChartTranslation: label, name R, reportName R | ReportTranslation: description, label, name R
+    ReportTypeTranslation: description, label, name R, sections ReportTypeSectionTranslation[]
+    ReportTypeSectionTranslation: columns ReportTypeColumnTranslation[], label, name R | ReportTypeColumnTranslation: label R, name R
+    ScontrolTranslation (legado): label R, name R
+    ServiceProcessAttributeTranslation (64.0+): label R, name R, serviceProcessName R
+    ServiceProcessItemGroupTranslation (64.0+): groupName R, name R, serviceProcessName R
+    TimelineObjectDefinitionTranslation (66.0+): label, name R
+  Elementos do exemplo XML: Translations, customApplications, label, name, customLabels. O package.xml do exemplo indica a versão 68.0.
+  Lacunas da leitura: PicklistValueTranslation (usado em GlobalPicklistTranslation.picklistValues) não está documentado neste artigo. Em dois pontos o
+    corte entre as partes lidas caiu no meio de uma linha (label de DashboardComponentTranslation e sections de ReportTypeTranslation); o nome e o tipo
+    foram confirmados pela parte vizinha.
+
+-- Conferência dos tipos cadastrados a partir da referência nova (só a lista de nomes foi lida no guia versionado)
+[src:mdapi-v68-fieldservicesettings] FieldServiceSettings (meta_fieldservicesettings.htm): 40 campos, todos com descrição; nome do arquivo não informado.
+  Não constam do guia versionado (14): advancedDataSyncOrgPreference, doesAvlCalcInclOvertime, doesAvlCalcInclPrimOnly, enableAdvancedDataSync,
+  enableBatchWindow, enableDataCaptureControlByParent, enableFieldServiceNotifications, enableGeolocationBasedActionControlByParent,
+  enableServiceAppointmentLifecycle, enableWorkStepsHideNotApplicable, enrouteStatus, useBundler, useLicenselessPermset, useWorkCapacity.
+[src:mdapi-v68-mydomainsettings] MyDomainSettings (meta_mydomainsettings.htm): 28 campos, todos com descrição; sem declaração de curinga.
+  Não constam (3): enableShareBrowserSessionAndroidForAuth, enableShareBrowserSessionIOSForAuth, isInstancedApiTrafficBlocked.
+[src:mdapi-v68-contractsettings] ContractSettings (meta_contractsettings.htm): 2 campos (autoCalculateEndDate, notifyOwnersOnContractExpiration).
+  Não constam (4): autoExpirationDelay, autoExpirationRecipient, autoExpireContracts, enableContractHistoryTracking.
+[src:mdapi-v68-communitiessettings] CommunitiesSettings (meta_communitiessettings.htm): 22 campos, todos com descrição.
+  Não constam (3): enableGuestPermDisOptOutCruc, enableGuestSecurityOptOutCruc, enableNameFieldsUserPIIEnabled.
+[src:mdapi-v68-flowsettings] FlowSettings (meta_flowsettings.htm): 26 campos, todos com descrição.
+  Não constam (5): enableEmailSimpleRespectProfiles, enableEmailsimpleSecureProfiles, enableFlowReactiveChoiceOptions, flowOccurrenceLogging,
+  isSupportRollbackOnErrorForApexInvocableActionsEnabled.
+[src:mdapi-v68-approvalprocess] ApprovalProcess (meta_approvalprocess.htm): 20 campos; allowedSubmitters está marcado Required.
+  Não consta (1): processOrder.
+[src:mdapi-v68-autoresponserules] AutoResponseRules (meta_autoresponserules.htm): RuleEntry tem 7 campos (booleanFilter, criteriaItems, formula,
+  replyToEmail, senderEmail, senderName, template), todos com descrição, e nenhuma enumeração. O guia versionado grafa autoresponseRule e fullname.
+  Não constam (10): assignedTo, assignedToType, businessHours, businessHoursSource, disableEscalationWhenModified, escalationAction,
+  escalationStartTime, notifyCcRecipients, overrideExistingTeams, team.
+
+-- Segunda leitura das mesmas páginas (2026-11-16), para as descrições de cada campo de Workflow e de Translations
+  Workflow.fullName e os fullName dos subtipos: nome único de API, com letras, dígitos e sublinhados simples, começando por letra.
+  WorkflowAlert.template: o template precisa existir na org, mas não precisa estar no mesmo arquivo zip. protected: componente protegido não pode
+    ser referenciado por componentes de outra org. WorkflowOutboundMessage.apiVersion: definida automaticamente; valores válidos 8.0 e 18.0 ou
+    posterior. includeSessionId: inclui o session ID, para o destino chamar a API sem usuário e senha. WorkflowFlowActionParameter.value: merge field,
+    campo de lookup ou literal, compatível com o tipo da variável. WorkflowTask.dueDateOffset: dias a partir da data do disparo ou de offsetFromField;
+    aceita negativo. WorkflowEmailRecipient.recipient: exigido conforme o type; field: nome do campo referenciado pelo type.
+  FlowDefinitionTranslation.label: depois de definido, deixa de herdar o rótulo da versão ativa. FlowTranslation.fullName: sem número de versão a
+    partir da 44.0. FlowScreenFieldTranslation: componentes de tela que exigem o runtime Lightning não são suportados. BotTranslation.fullName e os
+    identificadores de bot (developerName, stepIdentifier, messageIdentifier, variableOperationIdentifier, quickReplyOptionIdentifier, type) precisam
+    casar com o componente original. dashboards e reports: descobertos automaticamente (auto-discoverable), segundo a página.

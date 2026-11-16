@@ -701,7 +701,7 @@ CONTEUDO_CLS = {
             # Transversal
             av("implantacao", "Opções gerais como metadado",
                "As opções gerais de cada produto ficam em tipos Settings: por exemplo LeadConfigSettings, OrderSettings, ContractSettings, "
-               "FieldServiceSettings e CommunitiesSettings, detalhados neste catálogo. CaseSettings ainda não foi cadastrado.",
+               "FieldServiceSettings, CommunitiesSettings e CaseSettings, detalhados neste catálogo.",
                E("src:mdapi-leadconfigsettings", "src:mdapi-ordersettings", "src:mdapi-contractsettings", "src:mdapi-fieldservicesettings",
                  "src:mdapi-communitiessettings", "src:mdapi-casesettings")),
         ],

@@ -1,10 +1,11 @@
 """Lote 6d (issue #34, item 3): metadata types do tema Automação de processos e regras de negócio.
 
 Cadastra ApprovalProcess, CustomNotificationType, AutoResponseRules, FlowSettings e ApexTrigger, com 13 estruturas, e liga
-cada tipo à funcionalidade criada no lote 6c. Workflow NÃO entra: a leitura não devolveu o nome de boa parte dos elementos
-(ver fontes/extracoes/mdapi-lote6d-automacao.txt).
+cada tipo à funcionalidade criada no lote 6c. Workflow não entra aqui: a referência nova não devolveu o nome de boa parte dos
+elementos; o tipo é cadastrado pelo lote 7a, a partir do guia versionado. ApprovalAction.action já aponta para a estrutura
+WorkflowActionReference, criada no lote 7a.
 
-Ordem: rode lote6c_automacao.py, depois este script, depois conteudo_temas.py e temas_internos.py.
+Ordem: rode lote6c_automacao.py, depois este script, depois lote7a_tipos_destravados.py, conteudo_temas.py e temas_internos.py.
 Reexecutável. Uso: python3 ferramentas/carga/lotes/lote6d_automacao_tipos.py
 """
 import json, os, sys
@@ -37,8 +38,8 @@ def substituir_fontes(novas):
 
 
 substituir_fontes([_f(n, f"Arquivo, versão e propriedades do tipo {n}.") for n in
-                   ("ApprovalProcess", "CustomNotificationType", "AutoResponseRules", "FlowSettings", "ApexTrigger")]
-                  + [_f("Workflow", "O que o tipo Workflow e seus componentes cobrem (tipo não cadastrado: a leitura não devolveu os nomes de boa parte dos elementos).")])
+                   ("ApprovalProcess", "CustomNotificationType", "AutoResponseRules", "FlowSettings", "ApexTrigger")])
+# src:mdapi-workflow é registrada pelo lote 7a, com a leitura do guia versionado.
 
 S_AP, S_CNT, S_ARR = "src:mdapi-approvalprocess", "src:mdapi-customnotificationtype", "src:mdapi-autoresponserules"
 S_FS, S_TRG = "src:mdapi-flowsettings", "src:mdapi-apextrigger"
@@ -54,8 +55,8 @@ ACOES = "Ações de workflow executadas quando {}."
 # ---------------------------------------------------------------- estruturas de ApprovalProcess
 AP = ["mdt:ApprovalProcess"]
 M.struct("ApprovalAction", S_AP, AP + ["mdx:ApprovalStep"], [
-    P("action", "WorkflowActionReference[]", None, "Ações de workflow a executar.",
-      notas=["WorkflowActionReference não está detalhado nesta página; na página de Workflow, a leitura não devolveu os nomes dos campos."]),
+    P("action", "WorkflowActionReference[]", None, "Ações de workflow a executar, cada uma referenciada pelo nome e pelo tipo.",
+      estrutura="WorkflowActionReference"),
 ], "Lista de ações de workflow ligadas a um momento do processo de aprovação.")
 M.struct("ApprovalEntryCriteria", S_AP, AP + ["mdx:ApprovalStep"], [
     P("booleanFilter", "string", None, "Lógica de filtro aplicada aos criteriaItems. Omita se usar formula."),
@@ -200,13 +201,13 @@ M.mdt("ApprovalProcess", S_AP,
     <label>[rótulo do processo]</label>
     <!-- Valores documentados: AdminOnly, AdminOrCurrentApprover -->
     <recordEditability>AdminOnly</recordEditability>
-</ApprovalProcess>""", curinga=True, completa=False,
+</ApprovalProcess>""", curinga=True,
       alertas=["O metadado não guarda a ordem dos processos ativos: pode ser preciso reordená-los depois do deploy.",
                "Implantar um processo sem entry criteria sobre um que já tem mantém os critérios existentes.",
                "No package.xml, o curinga parcial (por exemplo Lead.*) não é suportado; use * para todos.",
                "Send actions e processos de aprovação de rascunhos de e-mail não são suportados pela Metadata API."],
       divergencias=["Na página (src:mdapi-approvalprocess), allowedSubmitters aparece como não obrigatório na tabela, mas a descrição diz que é obrigatório."],
-      cobertura_nota=NOTA_COB + " Parcial: WorkflowActionReference, usado em ApprovalAction.action, não está detalhado.")
+      cobertura_nota=NOTA_COB)
 
 M.mdt("CustomNotificationType", S_CNT,
       "Um tipo de notificação customizada: nome, descrição e em que canais ela é entregue (desktop e mobile).",
@@ -353,15 +354,5 @@ C.ampliar_funcionalidade("regras-de-resposta-automatica", mdts=[("AutoResponseRu
 C.ampliar_funcionalidade("apex-triggers", mdts=[("ApexTrigger", "Cada trigger Apex, com código e arquivo de metadado.")], srcs=[S_TRG],
                          remover_ausencia_de="metadata_type")
 C.ampliar_funcionalidade("flow", mdts=[("FlowSettings", "Configurações gerais de flows e processos da org.")], srcs=[S_FS])
-
-# Workflow: página lida, mas tipo não cadastrado; o motivo da ausência muda.
-f = ld("funcionalidades/workflow-rules-e-process-builder.json")
-for a in f["representacoes"]["ausencias"]:
-    if a["tipo"] == "metadata_type":
-        a["motivo"] = ("Workflow, WorkflowRule e os demais tipos Workflow* constam do inventário v68. A página de Workflow foi lida em "
-                       "2026-11-15, mas a leitura não devolveu o nome de boa parte dos elementos; por isso nenhum tipo foi cadastrado.")
-if not any(e["fonte"] == "src:mdapi-workflow" for e in f["evidencias"]):
-    f["evidencias"].append(ev("src:mdapi-workflow"))
-sv("funcionalidades/workflow-rules-e-process-builder.json", f)
 
 print("lote 6d: 5 metadata types e 13 estruturas gravados; 5 funcionalidades ligadas")
