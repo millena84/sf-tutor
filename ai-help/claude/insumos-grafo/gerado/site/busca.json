@@ -168,6 +168,23 @@
     "tipo": "funcionalidade"
   },
   {
+    "descricao": "Classe Apex que roda em horário definido. A classe implementa a interface Schedulable e é agendada pela tela Schedule Apex ou por código, com uma expressão cron.",
+    "id": "func:apex-agendado",
+    "rotulo": "Apex agendado",
+    "textos": [
+      "Apex agendado",
+      "Scheduled Apex",
+      "apex agendado",
+      "apex scheduler",
+      "cron expression",
+      "job agendado",
+      "schedulable",
+      "scheduled apex",
+      "system.schedule"
+    ],
+    "tipo": "funcionalidade"
+  },
+  {
     "descricao": "Código Apex que roda antes ou depois de um registro ser inserido, alterado, excluído, mesclado ou restaurado.",
     "id": "func:apex-triggers",
     "rotulo": "Apex triggers",
@@ -226,6 +243,21 @@
       "provedor de autenticação",
       "provedores de autenticação",
       "sso"
+    ],
+    "tipo": "funcionalidade"
+  },
+  {
+    "descricao": "Forma de processar um volume grande de registros em Apex: a classe coleta os registros e a plataforma os entrega em lotes, um de cada vez, cada lote com os próprios limites.",
+    "id": "func:batch-apex",
+    "rotulo": "Batch Apex",
+    "textos": [
+      "Batch Apex",
+      "apex flex queue",
+      "batch",
+      "batch apex",
+      "database.batchable",
+      "executebatch",
+      "job em lote"
     ],
     "tipo": "funcionalidade"
   },
@@ -710,6 +742,21 @@
     "tipo": "funcionalidade"
   },
   {
+    "descricao": "Métodos Apex marcados com a anotação Future, que rodam em segundo plano quando há recursos. A documentação diz que Queueable cobre os mesmos usos e oferece mais: Id do job, tipos não primitivos e encadeamento.",
+    "id": "func:future-methods",
+    "rotulo": "Future methods",
+    "textos": [
+      "@future",
+      "Future Methods",
+      "Future methods",
+      "future annotation",
+      "future method",
+      "future methods",
+      "método future"
+    ],
+    "tipo": "funcionalidade"
+  },
+  {
     "descricao": "Define os dias, horários e fuso em que o atendimento funciona.",
     "id": "func:horario-comercial",
     "rotulo": "Horário comercial",
@@ -859,6 +906,24 @@
       "mdapi",
       "metadata api",
       "retrieve"
+    ],
+    "tipo": "funcionalidade"
+  },
+  {
+    "descricao": "As telas do Setup e os objetos API que mostram os jobs assíncronos: Apex Jobs lista os jobs e o uso do limite de 24 horas; Apex Flex Queue, os batches em espera; Scheduled Jobs, os jobs agendados.",
+    "id": "func:monitoramento-de-jobs-apex",
+    "rotulo": "Monitoramento de jobs Apex",
+    "textos": [
+      "Apex Jobs, Apex Flex Queue and Scheduled Jobs",
+      "Monitoramento de jobs Apex",
+      "all scheduled jobs",
+      "apex flex queue",
+      "apex jobs",
+      "apex jobs, apex flex queue and scheduled jobs",
+      "async apex limit",
+      "fila de jobs",
+      "monitoramento de jobs apex",
+      "scheduled jobs"
     ],
     "tipo": "funcionalidade"
   },
@@ -1187,6 +1252,20 @@
       "pub/sub api",
       "publicar eventos",
       "pubsub"
+    ],
+    "tipo": "funcionalidade"
+  },
+  {
+    "descricao": "Forma de enfileirar um trabalho em Apex para rodar em segundo plano. Devolve o Id do job, aceita tipos complexos como parâmetro e permite encadear um job a outro.",
+    "id": "func:queueable-apex",
+    "rotulo": "Queueable Apex",
+    "textos": [
+      "Queueable Apex",
+      "encadeamento de jobs",
+      "job enfileirado",
+      "queueable",
+      "queueable apex",
+      "system.enqueuejob"
     ],
     "tipo": "funcionalidade"
   },
@@ -26932,6 +27011,145 @@
     "tipo": "campo_api"
   },
   {
+    "descricao": "O registro de um job Apex: batch, future method, Queueable, Apex agendado ou recálculo de sharing. Mostra o tipo, o estado e o andamento.",
+    "id": "obj:AsyncApexJob",
+    "rotulo": "AsyncApexJob",
+    "textos": [
+      "AsyncApexJob"
+    ],
+    "tipo": "objeto_api"
+  },
+  {
+    "descricao": "Id da classe Apex que executa o job.",
+    "id": "obj:AsyncApexJob.ApexClassId",
+    "pai": "obj:AsyncApexJob",
+    "rotulo": "ApexClassId",
+    "textos": [
+      "ApexClassId"
+    ],
+    "tipo": "campo_api"
+  },
+  {
+    "descricao": "Data e hora em que o job terminou.",
+    "id": "obj:AsyncApexJob.CompletedDate",
+    "pai": "obj:AsyncApexJob",
+    "rotulo": "CompletedDate",
+    "textos": [
+      "CompletedDate"
+    ],
+    "tipo": "campo_api"
+  },
+  {
+    "descricao": "Id do CronTrigger. Preenchido só em jobs de Apex agendado.",
+    "id": "obj:AsyncApexJob.CronTriggerId",
+    "pai": "obj:AsyncApexJob",
+    "rotulo": "CronTriggerId",
+    "textos": [
+      "CronTriggerId"
+    ],
+    "tipo": "campo_api"
+  },
+  {
+    "descricao": "Descrição curta do primeiro erro ocorrido no batch.",
+    "id": "obj:AsyncApexJob.ExtendedStatus",
+    "pai": "obj:AsyncApexJob",
+    "rotulo": "ExtendedStatus",
+    "textos": [
+      "ExtendedStatus"
+    ],
+    "tipo": "campo_api"
+  },
+  {
+    "descricao": "Quantos itens do job já foram processados (na tela, Batches Processed).",
+    "id": "obj:AsyncApexJob.JobItemsProcessed",
+    "pai": "obj:AsyncApexJob",
+    "rotulo": "JobItemsProcessed",
+    "textos": [
+      "JobItemsProcessed"
+    ],
+    "tipo": "campo_api"
+  },
+  {
+    "descricao": "Tipo do job.",
+    "id": "obj:AsyncApexJob.JobType",
+    "pai": "obj:AsyncApexJob",
+    "rotulo": "JobType",
+    "textos": [
+      "JobType"
+    ],
+    "tipo": "campo_api"
+  },
+  {
+    "descricao": "Último Id processado e confirmado.",
+    "id": "obj:AsyncApexJob.LastProcessed",
+    "pai": "obj:AsyncApexJob",
+    "rotulo": "LastProcessed",
+    "textos": [
+      "LastProcessed"
+    ],
+    "tipo": "campo_api"
+  },
+  {
+    "descricao": "Deslocamento do último Id processado e confirmado.",
+    "id": "obj:AsyncApexJob.LastProcessedOffset",
+    "pai": "obj:AsyncApexJob",
+    "rotulo": "LastProcessedOffset",
+    "textos": [
+      "LastProcessedOffset"
+    ],
+    "tipo": "campo_api"
+  },
+  {
+    "descricao": "Nome do método Apex em execução (na tela, Apex Method).",
+    "id": "obj:AsyncApexJob.MethodName",
+    "pai": "obj:AsyncApexJob",
+    "rotulo": "MethodName",
+    "textos": [
+      "MethodName"
+    ],
+    "tipo": "campo_api"
+  },
+  {
+    "descricao": "Número de lotes que falharam (na tela, Failures).",
+    "id": "obj:AsyncApexJob.NumberOfErrors",
+    "pai": "obj:AsyncApexJob",
+    "rotulo": "NumberOfErrors",
+    "textos": [
+      "NumberOfErrors"
+    ],
+    "tipo": "campo_api"
+  },
+  {
+    "descricao": "Id do job pai, nos jobs filhos de um batch dividido em chunks. Vazio nos demais.",
+    "id": "obj:AsyncApexJob.ParentJobId",
+    "pai": "obj:AsyncApexJob",
+    "rotulo": "ParentJobId",
+    "textos": [
+      "ParentJobId"
+    ],
+    "tipo": "campo_api"
+  },
+  {
+    "descricao": "Estado do job.",
+    "id": "obj:AsyncApexJob.Status",
+    "pai": "obj:AsyncApexJob",
+    "rotulo": "Status",
+    "textos": [
+      "Status"
+    ],
+    "tipo": "campo_api"
+  },
+  {
+    "descricao": "Total de lotes do job (na tela, Total Batches).",
+    "id": "obj:AsyncApexJob.TotalJobItems",
+    "pai": "obj:AsyncApexJob",
+    "rotulo": "TotalJobItems",
+    "textos": [
+      "TotalJobItems"
+    ],
+    "tipo": "campo_api"
+  },
+  {
     "descricao": "Expõe por API os provedores de autenticação (login por serviço externo), com criação e edição.",
     "id": "obj:AuthProvider",
     "rotulo": "AuthProvider",
@@ -29550,6 +29768,144 @@
     "rotulo": "IsEmailBounced",
     "textos": [
       "IsEmailBounced"
+    ],
+    "tipo": "campo_api"
+  },
+  {
+    "descricao": "Os detalhes de um job agendado: o nome e o tipo (Apex agendado, flow agendado, atualização de dashboard e outros).",
+    "id": "obj:CronJobDetail",
+    "rotulo": "CronJobDetail",
+    "textos": [
+      "CronJobDetail"
+    ],
+    "tipo": "objeto_api"
+  },
+  {
+    "descricao": "Tipo do job agendado, em código. Use o código para filtrar um tipo.",
+    "id": "obj:CronJobDetail.JobType",
+    "pai": "obj:CronJobDetail",
+    "rotulo": "JobType",
+    "textos": [
+      "JobType"
+    ],
+    "tipo": "campo_api"
+  },
+  {
+    "descricao": "Nome do job agendado.",
+    "id": "obj:CronJobDetail.Name",
+    "pai": "obj:CronJobDetail",
+    "rotulo": "Name",
+    "textos": [
+      "Name"
+    ],
+    "tipo": "campo_api"
+  },
+  {
+    "descricao": "A agenda de um job agendado: a expressão cron, a próxima e a última execução e o estado. Parecido com um cron job de UNIX.",
+    "id": "obj:CronTrigger",
+    "rotulo": "CronTrigger",
+    "textos": [
+      "CronTrigger"
+    ],
+    "tipo": "objeto_api"
+  },
+  {
+    "descricao": "Expressão cron que dispara a agenda, dos segundos até o ano (opcional).",
+    "id": "obj:CronTrigger.CronExpression",
+    "pai": "obj:CronTrigger",
+    "rotulo": "CronExpression",
+    "textos": [
+      "CronExpression"
+    ],
+    "tipo": "campo_api"
+  },
+  {
+    "descricao": "Id do CronJobDetail, que traz o nome e o tipo do job.",
+    "id": "obj:CronTrigger.CronJobDetailId",
+    "pai": "obj:CronTrigger",
+    "rotulo": "CronJobDetailId",
+    "textos": [
+      "CronJobDetailId"
+    ],
+    "tipo": "campo_api"
+  },
+  {
+    "descricao": "Quando o job terminou ou vai terminar.",
+    "id": "obj:CronTrigger.EndTime",
+    "pai": "obj:CronTrigger",
+    "rotulo": "EndTime",
+    "textos": [
+      "EndTime"
+    ],
+    "tipo": "campo_api"
+  },
+  {
+    "descricao": "Próxima execução agendada. Nulo se o job não vai rodar de novo.",
+    "id": "obj:CronTrigger.NextFireTime",
+    "pai": "obj:CronTrigger",
+    "rotulo": "NextFireTime",
+    "textos": [
+      "NextFireTime"
+    ],
+    "tipo": "campo_api"
+  },
+  {
+    "descricao": "Dono do job.",
+    "id": "obj:CronTrigger.OwnerId",
+    "pai": "obj:CronTrigger",
+    "rotulo": "OwnerId",
+    "textos": [
+      "OwnerId"
+    ],
+    "tipo": "campo_api"
+  },
+  {
+    "descricao": "Execução mais recente. Nulo se o job ainda não rodou.",
+    "id": "obj:CronTrigger.PreviousFireTime",
+    "pai": "obj:CronTrigger",
+    "rotulo": "PreviousFireTime",
+    "textos": [
+      "PreviousFireTime"
+    ],
+    "tipo": "campo_api"
+  },
+  {
+    "descricao": "Início da iteração mais recente do job.",
+    "id": "obj:CronTrigger.StartTime",
+    "pai": "obj:CronTrigger",
+    "rotulo": "StartTime",
+    "textos": [
+      "StartTime"
+    ],
+    "tipo": "campo_api"
+  },
+  {
+    "descricao": "Estado do job, gerido pelo sistema.",
+    "id": "obj:CronTrigger.State",
+    "pai": "obj:CronTrigger",
+    "rotulo": "State",
+    "textos": [
+      "State"
+    ],
+    "tipo": "campo_api"
+  },
+  {
+    "descricao": "Id do fuso horário do job, como America/Los_Angeles.",
+    "id": "obj:CronTrigger.TimeZoneSidKey",
+    "pai": "obj:CronTrigger",
+    "rotulo": "TimeZoneSidKey",
+    "textos": [
+      "TimeZoneSidKey"
+    ],
+    "tipo": "campo_api"
+  },
+  {
+    "descricao": "Quantas vezes o job foi disparado.",
+    "id": "obj:CronTrigger.TimesTriggered",
+    "pai": "obj:CronTrigger",
+    "rotulo": "TimesTriggered",
+    "textos": [
+      "TimesTriggered"
     ],
     "tipo": "campo_api"
   },

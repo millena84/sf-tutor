@@ -1,0 +1,107 @@
+{
+  "id": "func:monitoramento-de-jobs-apex",
+  "nome": "Monitoramento de jobs Apex",
+  "nome_tecnico": "Apex Jobs, Apex Flex Queue and Scheduled Jobs",
+  "aliases": [
+    "apex jobs",
+    "apex flex queue",
+    "scheduled jobs",
+    "all scheduled jobs",
+    "fila de jobs",
+    "async apex limit"
+  ],
+  "termos_busca": [
+    "all scheduled jobs",
+    "apex flex queue",
+    "apex jobs",
+    "apex jobs, apex flex queue and scheduled jobs",
+    "async apex limit",
+    "fila de jobs",
+    "monitoramento de jobs apex",
+    "scheduled jobs"
+  ],
+  "o_que_e": "As telas do Setup e os objetos API que mostram os jobs assíncronos: Apex Jobs lista os jobs e o uso do limite de 24 horas; Apex Flex Queue, os batches em espera; Scheduled Jobs, os jobs agendados.",
+  "finalidade": "Saber o que está rodando, o que falhou e quanto do limite diário já foi usado, antes que jobs novos sejam rejeitados.",
+  "exemplo": "O administrador vê na página Apex Jobs que um batch falhou em três lotes e que a org já usou boa parte do limite de 24 horas.",
+  "classificacao_principal": {
+    "classificacao": "cls:execucao-assincrona-lotes-e-agendamento",
+    "subclassificacao": "sub:monitoramento-de-jobs-e-limites"
+  },
+  "classificacoes_secundarias": [],
+  "representacoes": {
+    "metadata_types": [],
+    "objetos_api": [
+      {
+        "ref": "obj:AsyncApexJob",
+        "papel": "Os jobs Apex, com tipo, estado e andamento."
+      },
+      {
+        "ref": "obj:CronTrigger",
+        "papel": "As agendas dos jobs agendados."
+      },
+      {
+        "ref": "obj:CronJobDetail",
+        "papel": "Nome e tipo dos jobs agendados."
+      }
+    ],
+    "ausencias": [
+      {
+        "tipo": "metadata_type",
+        "estado": "nao_aplicavel",
+        "motivo": "São telas de acompanhamento e registros de execução, não configuração implantável."
+      }
+    ]
+  },
+  "setup": {
+    "estado": "verificado",
+    "valor": "Setup > Quick Find: Apex Jobs > Apex Jobs",
+    "nota": "Lista de jobs Apex. As outras duas telas são Apex Flex Queue e Scheduled Jobs. Rótulos em inglês, como na fonte; a tradução da interface em pt-BR não foi verificada.",
+    "evidencias": [
+      {
+        "fonte": "src:apex-batch-use"
+      }
+    ]
+  },
+  "recomendacoes": [],
+  "alertas": [
+    "Future methods e classes Queueable ainda não executados aparecem como Future na coluna Job Type.",
+    "Um job agendado aparece em Apex Jobs e em All Scheduled Jobs, mas conta uma vez só no limite.",
+    "Acima do limite de 24 horas de jobs assíncronos ou do limite de jobs agendados, jobs novos são rejeitados."
+  ],
+  "limitacoes": [
+    "A página Apex Jobs lista só os jobs submetidos nos últimos sete dias."
+  ],
+  "estado": "verificado",
+  "evidencias": [
+    {
+      "fonte": "src:help-apex-job-queue"
+    },
+    {
+      "fonte": "src:help-apex-flex-queue"
+    },
+    {
+      "fonte": "src:help-apex-code-overview"
+    },
+    {
+      "fonte": "src:help-org-health"
+    },
+    {
+      "fonte": "src:help-kb-asyncapexjob-types"
+    },
+    {
+      "fonte": "src:rest-limits"
+    },
+    {
+      "fonte": "src:apex-elastic-limits"
+    },
+    {
+      "fonte": "src:objref-asyncapexjob"
+    },
+    {
+      "fonte": "src:objref-crontrigger"
+    },
+    {
+      "fonte": "src:objref-cronjobdetail"
+    }
+  ]
+}

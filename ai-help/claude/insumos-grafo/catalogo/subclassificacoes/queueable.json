@@ -4,12 +4,15 @@
   "sigla": "ASY-02",
   "classificacao": "cls:execucao-assincrona-lotes-e-agendamento",
   "natureza": "curadoria_didatica",
-  "descricao": "Tarefas enfileiradas para execução posterior.",
+  "descricao": "Queueable Apex: tarefas enfileiradas para rodar em segundo plano, com identificador para acompanhar e encadeamento de jobs.",
   "escopo": "Entram as tarefas enfileiradas para execução posterior.",
   "fora_do_escopo": "Acompanhamento das filas fica em \"Monitoramento de jobs e limites\".",
   "para_iniciantes": {
     "explicacao": "Queueable Apex coloca uma tarefa na fila para rodar em segundo plano quando houver recursos. Devolve um identificador para acompanhar o job e permite encadear tarefas.",
     "exemplo": "Depois de salvar um pedido, a chamada ao ERP vai para a fila e roda em seguida, sem prender a tela.",
+    "por_onde_comecar": [
+      "func:queueable-apex"
+    ],
     "evidencias": [
       {
         "fonte": "src:apex-queueable"
@@ -20,10 +23,13 @@
     ]
   },
   "encadeamento": {
-    "texto": "É o caminho recomendado no lugar dos future methods.",
+    "texto": "É o caminho recomendado no lugar dos future methods. O acompanhamento fica em 'Monitoramento de jobs e limites'.",
     "evidencias": [
       {
         "fonte": "src:apex-queueable"
+      },
+      {
+        "fonte": "src:apex-future"
       }
     ]
   },
@@ -38,11 +44,74 @@
         },
         {
           "fonte": "src:apex-async-overview"
+        },
+        {
+          "fonte": "src:apex-future"
+        }
+      ]
+    },
+    {
+      "tipo": "limite",
+      "titulo": "Quantos jobs por transação",
+      "texto": "Uma transação síncrona enfileira até 50 jobs com System.enqueueJob; uma transação assíncrona, só 1. É por isso que, dentro de um job, o encadeamento é de um job por vez.",
+      "evidencias": [
+        {
+          "fonte": "src:apex-gov-limits"
+        }
+      ]
+    },
+    {
+      "tipo": "atencao",
+      "titulo": "Cadeias precisam de freio",
+      "texto": "Numa cadeia de jobs, a documentação pede um mecanismo para frear ou parar; sem ele, chega-se rápido ao limite diário de Apex assíncrono. Dá para definir a profundidade máxima da pilha; em orgs Developer Edition e Trial, o máximo é 5.",
+      "evidencias": [
+        {
+          "fonte": "src:apex-queueable"
+        },
+        {
+          "fonte": "src:apexref-system"
+        }
+      ]
+    },
+    {
+      "tipo": "implantacao",
+      "titulo": "Atraso ao enfileirar",
+      "texto": "System.enqueueJob aceita um atraso mínimo de 0 a 10 minutos, ignorado em testes. O metadata type ApexSettings guarda um atraso mínimo padrão da org para jobs enfileirados sem atraso próprio (DefaultQueueableDelay, de 1 a 600 segundos).",
+      "evidencias": [
+        {
+          "fonte": "src:apexref-system"
+        },
+        {
+          "fonte": "src:mdapi-apexsettings"
+        }
+      ]
+    },
+    {
+      "tipo": "escala",
+      "titulo": "Limites maiores",
+      "texto": "Alguns governor limits são maiores do que no Apex síncrono, como o de heap.",
+      "evidencias": [
+        {
+          "fonte": "src:apex-queueable"
         }
       ]
     }
   ],
-  "funcionalidades": [],
+  "funcionalidades": [
+    "func:queueable-apex"
+  ],
   "estado": "desconhecido",
-  "nota_estado": "Agrupamento proposto na especificação; fronteira ainda não cruzada com a documentação oficial."
+  "nota_estado": "Tema criado pelo projeto (00-especificacao-grafo.md), não é nomenclatura oficial da Salesforce. Cruzado em 2026-11-10 com áreas da documentação oficial listadas nas referências; a correspondência é parcial e o recorte continua sendo do projeto.",
+  "referencias_oficiais": [
+    {
+      "fonte": "src:apex-queueable",
+      "secao": "Queueable Apex",
+      "nota": "Cobre o tema: Queueable Apex."
+    },
+    {
+      "fonte": "src:apexref-system",
+      "secao": "System Class",
+      "nota": "Cobre parte do tema: método System.enqueueJob."
+    }
+  ]
 }

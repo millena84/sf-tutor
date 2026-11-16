@@ -4,18 +4,27 @@
   "sigla": "ASY-07",
   "classificacao": "cls:execucao-assincrona-lotes-e-agendamento",
   "natureza": "curadoria_didatica",
-  "descricao": "Acompanhamento de execuções assíncronas e seus limites.",
+  "descricao": "O acompanhamento das execuções assíncronas e dos limites: as telas Apex Jobs, Apex Flex Queue e Scheduled Jobs e os objetos AsyncApexJob, CronTrigger e CronJobDetail.",
   "escopo": "Entram o acompanhamento de execuções assíncronas e os limites que se aplicam a elas.",
   "fora_do_escopo": "Limites gerais da org e de API ficam em \"Limites e consumo\" e em \"Contratos, limites e tratamento de falhas\".",
   "para_iniciantes": {
-    "explicacao": "Acompanha as execuções assíncronas: em que estado está cada job e quanto dos limites já foi usado.",
+    "explicacao": "Acompanha as execuções assíncronas: em que estado está cada job e quanto dos limites já foi usado. Há três telas no Setup (Apex Jobs, Apex Flex Queue e Scheduled Jobs) e três objetos consultáveis por API.",
     "exemplo": "Um job enfileirado é acompanhado na tela Apex Jobs ou consultando AsyncApexJob pelo identificador devolvido.",
+    "por_onde_comecar": [
+      "func:monitoramento-de-jobs-apex"
+    ],
     "evidencias": [
       {
         "fonte": "src:apex-queueable"
       },
       {
         "fonte": "src:apex-async-overview"
+      },
+      {
+        "fonte": "src:help-apex-job-queue"
+      },
+      {
+        "fonte": "src:help-apex-flex-queue"
       }
     ]
   },
@@ -32,17 +41,116 @@
   },
   "avancado": [
     {
+      "tipo": "implantacao",
+      "titulo": "O que cada tela mostra",
+      "texto": "Apex Jobs lista os jobs dos últimos sete dias e o uso do limite de 24 horas de Apex assíncrono. Apex Flex Queue lista os batches em Holding e permite reordená-los. Scheduled Jobs lista os jobs agendados. Um job agendado aparece em duas telas, mas conta uma vez só no limite.",
+      "evidencias": [
+        {
+          "fonte": "src:help-apex-job-queue"
+        },
+        {
+          "fonte": "src:help-apex-flex-queue"
+        },
+        {
+          "fonte": "src:help-apex-code-overview"
+        }
+      ]
+    },
+    {
+      "tipo": "implantacao",
+      "titulo": "Os mesmos dados por API",
+      "texto": "AsyncApexJob guarda os jobs Apex, com tipo, estado e lotes processados; serve para consultar o que saiu da tela, que só mostra sete dias. CronTrigger guarda a agenda de cada job agendado, e CronJobDetail, o nome e o tipo. Pela REST API, o recurso de limites traz o rótulo DailyAsyncApexExecutions.",
+      "evidencias": [
+        {
+          "fonte": "src:objref-asyncapexjob"
+        },
+        {
+          "fonte": "src:objref-crontrigger"
+        },
+        {
+          "fonte": "src:objref-cronjobdetail"
+        },
+        {
+          "fonte": "src:rest-limits"
+        },
+        {
+          "fonte": "src:help-apex-job-queue"
+        }
+      ]
+    },
+    {
+      "tipo": "atencao",
+      "titulo": "Nomes que confundem na tela",
+      "texto": "Na coluna Job Type, future methods e classes Queueable ainda não executados aparecem como Future. Em AsyncApexJob, os tipos BatchApexWorker e TestWorker são de uso interno: ao consultar um batch, filtre BatchApexWorker.",
+      "evidencias": [
+        {
+          "fonte": "src:help-apex-job-queue"
+        },
+        {
+          "fonte": "src:help-kb-asyncapexjob-types"
+        }
+      ]
+    },
+    {
+      "tipo": "limite",
+      "titulo": "Quando o limite estoura",
+      "texto": "Acima do limite de 24 horas de jobs assíncronos ou do limite de jobs agendados, jobs novos são rejeitados. A opção de limites elásticos, em Beta, processa o excedente em ritmo reduzido; em ApexSettings, o campo é enableAsyncApexElasticExecutions.",
+      "evidencias": [
+        {
+          "fonte": "src:help-org-health"
+        },
+        {
+          "fonte": "src:apex-elastic-limits"
+        },
+        {
+          "fonte": "src:mdapi-apexsettings"
+        }
+      ]
+    },
+    {
       "tipo": "limite",
       "titulo": "Fila do Batch Apex",
-      "texto": "No máximo cinco jobs Batch Apex ativos, com uma Flex Queue de até 100 jobs adicionais.",
+      "texto": "No máximo cinco jobs de batch em fila ou ativos, com uma Apex flex queue de até 100 jobs adicionais.",
       "evidencias": [
         {
           "fonte": "src:apex-async-overview"
+        },
+        {
+          "fonte": "src:help-apex-flex-queue"
+        }
+      ]
+    },
+    {
+      "tipo": "seguranca",
+      "titulo": "Permissão para consultar",
+      "texto": "Fora do system mode, acessar AsyncApexJob exige a permissão View Setup and Configuration.",
+      "evidencias": [
+        {
+          "fonte": "src:objref-asyncapexjob"
         }
       ]
     }
   ],
-  "funcionalidades": [],
+  "funcionalidades": [
+    "func:monitoramento-de-jobs-apex"
+  ],
   "estado": "desconhecido",
-  "nota_estado": "Agrupamento proposto na especificação; fronteira ainda não cruzada com a documentação oficial."
+  "nota_estado": "Tema criado pelo projeto (00-especificacao-grafo.md), não é nomenclatura oficial da Salesforce. Cruzado em 2026-11-10 com áreas da documentação oficial listadas nas referências; a correspondência é parcial e o recorte continua sendo do projeto.",
+  "referencias_oficiais": [
+    {
+      "fonte": "src:help-apex-job-queue",
+      "secao": "Monitor the Apex Job Queue",
+      "nota": "Cobre parte do tema: página Apex Jobs."
+    },
+    {
+      "fonte": "src:help-apex-flex-queue",
+      "secao": "Monitoring the Apex Flex Queue",
+      "nota": "Cobre parte do tema: Apex flex queue."
+    },
+    {
+      "fonte": "src:objref-asyncapexjob",
+      "secao": "AsyncApexJob",
+      "nota": "Cobre parte do tema: objeto AsyncApexJob."
+    }
+  ]
 }

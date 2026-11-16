@@ -138,7 +138,7 @@ Gerado por `ferramentas/sftutor.py cobertura`. Cobertura estrutural, explicativa
 
 ## Objetos consultáveis via API
 
-- Catalogados: 68. Campos listados: 1557; explicados: 747.
+- Catalogados: 71. Campos listados: 1582; explicados: 772.
 - Universo: Universo de objetos da plataforma não enumerado.
 
 | Objeto | Estrutural | Esperados | Presentes | Explicados | APIs verificadas |
@@ -147,6 +147,7 @@ Gerado por `ferramentas/sftutor.py cobertura`. Cobertura estrutural, explicativa
 | obj:AccountTeamMember | completa | 11 | 11 | 11 | padrao |
 | obj:AgentWork | parcial | n/d | 41 | 3 | padrao |
 | obj:AssignmentRule | completa | 3 | 3 | 3 | padrao |
+| obj:AsyncApexJob | completa | 13 | 13 | 13 | padrao |
 | obj:AuthProvider | completa | 30 | 30 | 30 | padrao |
 | obj:BusinessHours | completa | 20 | 20 | 19 | padrao |
 | obj:Campaign | parcial | n/d | 45 | 4 | padrao |
@@ -155,6 +156,8 @@ Gerado por `ferramentas/sftutor.py cobertura`. Cobertura estrutural, explicativa
 | obj:CaseMilestone | completa | 20 | 20 | 20 | padrao |
 | obj:ConnectedApplication | completa | 15 | 15 | 15 | padrao |
 | obj:Contact | parcial | n/d | 37 | 3 | padrao |
+| obj:CronJobDetail | completa | 2 | 2 | 2 | padrao |
+| obj:CronTrigger | completa | 10 | 10 | 10 | padrao |
 | obj:CspTrustedSite | completa | 16 | 16 | 16 | padrao |
 | obj:CustomField | parcial | n/d | 6 | 6 | tooling |
 | obj:CustomObject | parcial | n/d | 10 | 10 | tooling |
@@ -214,10 +217,10 @@ Gerado por `ferramentas/sftutor.py cobertura`. Cobertura estrutural, explicativa
 
 ## Relacionamentos
 
-- Total: 126; verificados: 123.
-- Por tipo: correspondencia_xml_api: 11, referencia_campo: 97, representacao_comum: 18
+- Total: 128; verificados: 125.
+- Por tipo: correspondencia_xml_api: 11, referencia_campo: 99, representacao_comum: 18
 
 ## Taxonomia e funcionalidades
 
-- Classificações: 14; subclassificações: 92 (com funcionalidades: 52).
-- Funcionalidades cadastradas: 91 (universo de funcionalidades não definido).
+- Classificações: 14; subclassificações: 92 (com funcionalidades: 58).
+- Funcionalidades cadastradas: 96 (universo de funcionalidades não definido).

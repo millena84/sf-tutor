@@ -1,0 +1,101 @@
+{
+  "alertas": [
+    "O agendador roda como system: a classe executa, tenha ou não o usuário permissão para executá-la.",
+    "A execução real pode atrasar em relação ao horário agendado, conforme a disponibilidade do serviço.",
+    "Com um job agendado ativo, a classe e as que ela referencia não podem ser atualizadas pela interface."
+  ],
+  "aliases": [
+    "scheduled apex",
+    "apex scheduler",
+    "schedulable",
+    "system.schedule",
+    "cron expression",
+    "job agendado"
+  ],
+  "classificacao_principal": {
+    "classificacao": "cls:execucao-assincrona-lotes-e-agendamento",
+    "subclassificacao": "sub:agendamento"
+  },
+  "classificacoes_secundarias": [
+    {
+      "classificacao": "cls:desenvolvimento-testes-e-entrega",
+      "motivo": "É código Apex e segue as regras de teste e de implantação.",
+      "subclassificacao": "sub:codigo-e-bundles"
+    }
+  ],
+  "estado": "verificado",
+  "evidencias": [
+    {
+      "fonte": "src:apex-scheduler"
+    },
+    {
+      "fonte": "src:help-schedule-apex"
+    },
+    {
+      "fonte": "src:apexref-system"
+    },
+    {
+      "fonte": "src:apex-gov-limits"
+    },
+    {
+      "fonte": "src:objref-crontrigger"
+    },
+    {
+      "fonte": "src:objref-cronjobdetail"
+    }
+  ],
+  "exemplo": "Toda madrugada, uma classe agendada inicia o batch que recalcula a classificação das contas.",
+  "finalidade": "Rodar rotinas periódicas, como uma manutenção diária ou semanal, muitas vezes iniciando um batch.",
+  "id": "func:apex-agendado",
+  "limitacoes": [
+    "Até 100 jobs de Apex agendado ao mesmo tempo.",
+    "Em 24 horas: 250.000 execuções, ou licenças de usuário vezes 200, o que for maior.",
+    "Embora assíncrono, o Apex agendado usa os limites síncronos por transação."
+  ],
+  "nome": "Apex agendado",
+  "nome_tecnico": "Scheduled Apex",
+  "o_que_e": "Classe Apex que roda em horário definido. A classe implementa a interface Schedulable e é agendada pela tela Schedule Apex ou por código, com uma expressão cron.",
+  "recomendacoes": [],
+  "representacoes": {
+    "ausencias": [],
+    "metadata_types": [
+      {
+        "papel": "A classe que implementa Schedulable.",
+        "ref": "mdt:ApexClass"
+      }
+    ],
+    "objetos_api": [
+      {
+        "papel": "A agenda de cada job agendado.",
+        "ref": "obj:CronTrigger"
+      },
+      {
+        "papel": "Nome e tipo de cada job agendado.",
+        "ref": "obj:CronJobDetail"
+      },
+      {
+        "papel": "Registro do job de Apex agendado.",
+        "ref": "obj:AsyncApexJob"
+      }
+    ]
+  },
+  "setup": {
+    "estado": "verificado",
+    "evidencias": [
+      {
+        "fonte": "src:help-schedule-apex"
+      }
+    ],
+    "nota": "Tela para agendar uma classe. Rótulos em inglês, como na fonte; a tradução da interface em pt-BR não foi verificada.",
+    "valor": "Setup > Quick Find: Apex Classes > Apex Classes > Schedule Apex"
+  },
+  "termos_busca": [
+    "apex agendado",
+    "apex scheduler",
+    "cron expression",
+    "job agendado",
+    "schedulable",
+    "scheduled apex",
+    "system.schedule"
+  ]
+}

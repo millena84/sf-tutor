@@ -1,0 +1,75 @@
+{
+  "id": "func:future-methods",
+  "nome": "Future methods",
+  "nome_tecnico": "Future Methods",
+  "aliases": [
+    "@future",
+    "future method",
+    "método future",
+    "future annotation"
+  ],
+  "termos_busca": [
+    "@future",
+    "future annotation",
+    "future method",
+    "future methods",
+    "método future"
+  ],
+  "o_que_e": "Métodos Apex marcados com a anotação Future, que rodam em segundo plano quando há recursos. A documentação diz que Queueable cobre os mesmos usos e oferece mais: Id do job, tipos não primitivos e encadeamento.",
+  "finalidade": "Manter código que já usa o mecanismo; para código novo, a documentação indica Queueable.",
+  "exemplo": "Um método future faz um callout depois de um trigger, para não segurar a gravação do registro.",
+  "classificacao_principal": {
+    "classificacao": "cls:execucao-assincrona-lotes-e-agendamento",
+    "subclassificacao": "sub:future-e-mecanismos-legados"
+  },
+  "classificacoes_secundarias": [
+    {
+      "classificacao": "cls:desenvolvimento-testes-e-entrega",
+      "subclassificacao": "sub:codigo-e-bundles",
+      "motivo": "É código Apex e segue as regras de teste e de implantação."
+    }
+  ],
+  "representacoes": {
+    "metadata_types": [
+      {
+        "ref": "mdt:ApexClass",
+        "papel": "A classe que contém o método anotado."
+      }
+    ],
+    "objetos_api": [
+      {
+        "ref": "obj:AsyncApexJob",
+        "papel": "Registro de cada execução future."
+      }
+    ],
+    "ausencias": []
+  },
+  "setup": {
+    "estado": "nao_aplicavel",
+    "nota": "Não há tela de Setup para criar um future method: ele é declarado no código."
+  },
+  "recomendacoes": [],
+  "alertas": [
+    "Não aceita sObjects nem objetos como parâmetro."
+  ],
+  "limitacoes": [
+    "O método precisa ser static e void; os parâmetros são tipos primitivos, arrays ou coleções de primitivos.",
+    "Não se chama um future method a partir de um batch ou de outro future; em contexto queueable, até 50 por invocação.",
+    "Em 24 horas: 250.000 execuções, ou licenças de usuário vezes 200, o que for maior."
+  ],
+  "estado": "verificado",
+  "evidencias": [
+    {
+      "fonte": "src:apex-future"
+    },
+    {
+      "fonte": "src:apex-queueable"
+    },
+    {
+      "fonte": "src:apex-async-overview"
+    },
+    {
+      "fonte": "src:objref-asyncapexjob"
+    }
+  ]
+}

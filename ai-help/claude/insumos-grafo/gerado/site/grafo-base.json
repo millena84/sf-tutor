@@ -479,6 +479,30 @@
       "tipo": "representacao_xml"
     },
     {
+      "destino": "mdt:ApexClass",
+      "origem": "func:apex-agendado",
+      "papel": "A classe que implementa Schedulable.",
+      "tipo": "representacao_xml"
+    },
+    {
+      "destino": "obj:AsyncApexJob",
+      "origem": "func:apex-agendado",
+      "papel": "Registro do job de Apex agendado.",
+      "tipo": "representacao_objeto_api"
+    },
+    {
+      "destino": "obj:CronJobDetail",
+      "origem": "func:apex-agendado",
+      "papel": "Nome e tipo de cada job agendado.",
+      "tipo": "representacao_objeto_api"
+    },
+    {
+      "destino": "obj:CronTrigger",
+      "origem": "func:apex-agendado",
+      "papel": "A agenda de cada job agendado.",
+      "tipo": "representacao_objeto_api"
+    },
+    {
       "destino": "mdt:ApexSettings",
       "origem": "func:apex-triggers",
       "papel": "Opções gerais de Apex da org.",
@@ -506,6 +530,18 @@
       "destino": "obj:AuthProvider",
       "origem": "func:auth-providers",
       "papel": "Provedor exposto por API, com criação e edição.",
+      "tipo": "representacao_objeto_api"
+    },
+    {
+      "destino": "mdt:ApexClass",
+      "origem": "func:batch-apex",
+      "papel": "A classe que implementa Database.Batchable.",
+      "tipo": "representacao_xml"
+    },
+    {
+      "destino": "obj:AsyncApexJob",
+      "origem": "func:batch-apex",
+      "papel": "Registro de cada job de batch, com estado e andamento.",
       "tipo": "representacao_objeto_api"
     },
     {
@@ -615,6 +651,12 @@
       "origem": "func:classes-apex",
       "papel": "Opções gerais de Apex da org.",
       "tipo": "representacao_xml"
+    },
+    {
+      "destino": "obj:AsyncApexJob",
+      "origem": "func:classes-apex",
+      "papel": "Registro dos jobs assíncronos que executam classes Apex.",
+      "tipo": "representacao_objeto_api"
     },
     {
       "destino": "mdt:InboundNetworkConnection",
@@ -977,6 +1019,18 @@
       "tipo": "representacao_objeto_api"
     },
     {
+      "destino": "mdt:ApexClass",
+      "origem": "func:future-methods",
+      "papel": "A classe que contém o método anotado.",
+      "tipo": "representacao_xml"
+    },
+    {
+      "destino": "obj:AsyncApexJob",
+      "origem": "func:future-methods",
+      "papel": "Registro de cada execução future.",
+      "tipo": "representacao_objeto_api"
+    },
+    {
       "destino": "mdt:BusinessHoursSettings",
       "origem": "func:horario-comercial",
       "papel": "Horários comerciais e feriados implantáveis.",
@@ -1059,6 +1113,24 @@
       "origem": "func:metadata-api",
       "papel": "Opção de deploy da org: validação de Apex assíncrono.",
       "tipo": "representacao_xml"
+    },
+    {
+      "destino": "obj:AsyncApexJob",
+      "origem": "func:monitoramento-de-jobs-apex",
+      "papel": "Os jobs Apex, com tipo, estado e andamento.",
+      "tipo": "representacao_objeto_api"
+    },
+    {
+      "destino": "obj:CronJobDetail",
+      "origem": "func:monitoramento-de-jobs-apex",
+      "papel": "Nome e tipo dos jobs agendados.",
+      "tipo": "representacao_objeto_api"
+    },
+    {
+      "destino": "obj:CronTrigger",
+      "origem": "func:monitoramento-de-jobs-apex",
+      "papel": "As agendas dos jobs agendados.",
+      "tipo": "representacao_objeto_api"
     },
     {
       "destino": "mdt:CurrencySettings",
@@ -1418,6 +1490,24 @@
       "destino": "obj:PlatformEventUsageMetric",
       "origem": "func:pub-sub-api",
       "papel": "Uso de publicação e entrega; o cliente aparece como PUB_SUB_API.",
+      "tipo": "representacao_objeto_api"
+    },
+    {
+      "destino": "mdt:ApexClass",
+      "origem": "func:queueable-apex",
+      "papel": "A classe que implementa Queueable.",
+      "tipo": "representacao_xml"
+    },
+    {
+      "destino": "mdt:ApexSettings",
+      "origem": "func:queueable-apex",
+      "papel": "Opções da org para Apex assíncrono, como o atraso mínimo padrão dos jobs enfileirados (DefaultQueueableDelay).",
+      "tipo": "representacao_xml"
+    },
+    {
+      "destino": "obj:AsyncApexJob",
+      "origem": "func:queueable-apex",
+      "papel": "Registro de cada job enfileirado.",
       "tipo": "representacao_objeto_api"
     },
     {
@@ -3742,6 +3832,13 @@
       "tipo": "referencia_campo"
     },
     {
+      "destino": "obj:CronTrigger",
+      "estado": "verificado",
+      "origem": "obj:AsyncApexJob.CronTriggerId",
+      "rel_id": "rel:asyncapexjob-crontrigger",
+      "tipo": "referencia_campo"
+    },
+    {
       "destino": "obj:RecordType",
       "estado": "verificado",
       "origem": "obj:Campaign.CampaignMemberRecordTypeId",
@@ -3823,6 +3920,13 @@
       "estado": "verificado",
       "origem": "obj:Contact.AccountId",
       "rel_id": "rel:contact-account",
+      "tipo": "referencia_campo"
+    },
+    {
+      "destino": "obj:CronJobDetail",
+      "estado": "verificado",
+      "origem": "obj:CronTrigger.CronJobDetailId",
+      "rel_id": "rel:crontrigger-cronjobdetail",
       "tipo": "referencia_campo"
     },
     {
@@ -4320,6 +4424,17 @@
       "tipo": "classificacao_principal"
     },
     {
+      "destino": "func:apex-agendado",
+      "origem": "sub:agendamento",
+      "tipo": "classificacao_principal"
+    },
+    {
+      "destino": "func:flow",
+      "motivo": "Schedule-triggered flows e scheduled paths rodam em horário definido.",
+      "origem": "sub:agendamento",
+      "tipo": "classificacao_secundaria"
+    },
+    {
       "destino": "func:sandboxes",
       "origem": "sub:ambientes-e-sandboxes",
       "tipo": "classificacao_principal"
@@ -4476,6 +4591,17 @@
       "tipo": "classificacao_principal"
     },
     {
+      "destino": "func:batch-apex",
+      "origem": "sub:batch",
+      "tipo": "classificacao_principal"
+    },
+    {
+      "destino": "func:flow",
+      "motivo": "O caminho assíncrono de um record-triggered flow roda depois que a gravação é confirmada.",
+      "origem": "sub:caminhos-assincronos",
+      "tipo": "classificacao_secundaria"
+    },
+    {
       "destino": "func:campos-customizados",
       "origem": "sub:campos-e-tipos",
       "tipo": "classificacao_principal"
@@ -4518,6 +4644,12 @@
       "tipo": "classificacao_principal"
     },
     {
+      "destino": "func:apex-agendado",
+      "motivo": "É código Apex e segue as regras de teste e de implantação.",
+      "origem": "sub:codigo-e-bundles",
+      "tipo": "classificacao_secundaria"
+    },
+    {
       "destino": "func:apex-triggers",
       "motivo": "Trigger é código Apex e segue as regras de teste e implantação.",
       "origem": "sub:codigo-e-bundles",
@@ -4529,14 +4661,32 @@
       "tipo": "classificacao_principal"
     },
     {
+      "destino": "func:batch-apex",
+      "motivo": "É código Apex e segue as regras de teste e de implantação.",
+      "origem": "sub:codigo-e-bundles",
+      "tipo": "classificacao_secundaria"
+    },
+    {
       "destino": "func:classes-apex",
       "origem": "sub:codigo-e-bundles",
       "tipo": "classificacao_principal"
     },
     {
+      "destino": "func:future-methods",
+      "motivo": "É código Apex e segue as regras de teste e de implantação.",
+      "origem": "sub:codigo-e-bundles",
+      "tipo": "classificacao_secundaria"
+    },
+    {
       "destino": "func:lightning-web-components",
       "origem": "sub:codigo-e-bundles",
       "tipo": "classificacao_principal"
+    },
+    {
+      "destino": "func:queueable-apex",
+      "motivo": "É código Apex e segue as regras de teste e de implantação.",
+      "origem": "sub:codigo-e-bundles",
+      "tipo": "classificacao_secundaria"
     },
     {
       "destino": "func:static-resources",
@@ -4683,6 +4833,11 @@
       "tipo": "classificacao_principal"
     },
     {
+      "destino": "func:future-methods",
+      "origem": "sub:future-e-mecanismos-legados",
+      "tipo": "classificacao_principal"
+    },
+    {
       "destino": "func:estado-e-historico-de-login",
       "motivo": "O histórico de tentativas é usado em auditoria e operação.",
       "origem": "sub:historico-de-login",
@@ -4768,6 +4923,11 @@
       "tipo": "classificacao_principal"
     },
     {
+      "destino": "func:monitoramento-de-jobs-apex",
+      "origem": "sub:monitoramento-de-jobs-e-limites",
+      "tipo": "classificacao_principal"
+    },
+    {
       "destino": "func:notificacoes-customizadas",
       "origem": "sub:notificacoes",
       "tipo": "classificacao_principal"
@@ -4817,6 +4977,11 @@
       "motivo": "Triggers Apex e flows reagem aos eventos publicados.",
       "origem": "sub:processamento-orientado-a-eventos",
       "tipo": "classificacao_secundaria"
+    },
+    {
+      "destino": "func:queueable-apex",
+      "origem": "sub:queueable",
+      "tipo": "classificacao_principal"
     },
     {
       "destino": "func:pedidos",
@@ -5137,6 +5302,15 @@
     },
     {
       "estado": "verificado",
+      "grupo_cor": "cls:execucao-assincrona-lotes-e-agendamento",
+      "id": "func:apex-agendado",
+      "resumo": "Classe Apex que roda em horário definido. A classe implementa a interface Schedulable e é agendada pela tela Schedule Apex ou por código, com uma expressão cron.",
+      "rotulo": "Apex agendado",
+      "rotulo_tecnico": "Scheduled Apex",
+      "tipo": "funcionalidade"
+    },
+    {
+      "estado": "verificado",
       "grupo_cor": "cls:automacao-de-processos-e-regras-de-negocio",
       "id": "func:apex-triggers",
       "resumo": "Código Apex que roda antes ou depois de um registro ser inserido, alterado, excluído, mesclado ou restaurado.",
@@ -5169,6 +5343,15 @@
       "resumo": "Configura um provedor externo (OpenID Connect, Google, Microsoft, Salesforce etc.) para login único e para obter tokens.",
       "rotulo": "Provedores de autenticação",
       "rotulo_tecnico": "Auth Providers",
+      "tipo": "funcionalidade"
+    },
+    {
+      "estado": "verificado",
+      "grupo_cor": "cls:execucao-assincrona-lotes-e-agendamento",
+      "id": "func:batch-apex",
+      "resumo": "Forma de processar um volume grande de registros em Apex: a classe coleta os registros e a plataforma os entrega em lotes, um de cada vez, cada lote com os próprios limites.",
+      "rotulo": "Batch Apex",
+      "rotulo_tecnico": "Batch Apex",
       "tipo": "funcionalidade"
     },
     {
@@ -5452,6 +5635,15 @@
     },
     {
       "estado": "verificado",
+      "grupo_cor": "cls:execucao-assincrona-lotes-e-agendamento",
+      "id": "func:future-methods",
+      "resumo": "Métodos Apex marcados com a anotação Future, que rodam em segundo plano quando há recursos. A documentação diz que Queueable cobre os mesmos usos e oferece mais: Id do job, tipos não primitivos e encadeamento.",
+      "rotulo": "Future methods",
+      "rotulo_tecnico": "Future Methods",
+      "tipo": "funcionalidade"
+    },
+    {
+      "estado": "verificado",
       "grupo_cor": "cls:organizacao-e-configuracoes-base",
       "id": "func:horario-comercial",
       "resumo": "Define os dias, horários e fuso em que o atendimento funciona.",
@@ -5538,6 +5730,15 @@
       "resumo": "API que move metadados (a estrutura e a configuração da org) entre orgs. Trabalha com metadata types e seus componentes; não trata dados de negócio.",
       "rotulo": "Metadata API",
       "rotulo_tecnico": "Metadata API",
+      "tipo": "funcionalidade"
+    },
+    {
+      "estado": "verificado",
+      "grupo_cor": "cls:execucao-assincrona-lotes-e-agendamento",
+      "id": "func:monitoramento-de-jobs-apex",
+      "resumo": "As telas do Setup e os objetos API que mostram os jobs assíncronos: Apex Jobs lista os jobs e o uso do limite de 24 horas; Apex Flex Queue, os batches em espera; Scheduled Jobs, os jobs agendados.",
+      "rotulo": "Monitoramento de jobs Apex",
+      "rotulo_tecnico": "Apex Jobs, Apex Flex Queue and Scheduled Jobs",
       "tipo": "funcionalidade"
     },
     {
@@ -5727,6 +5928,15 @@
       "resumo": "Interface única para publicar e assinar eventos de plataforma, eventos de alteração e eventos de monitoramento em tempo real. Usa gRPC e HTTP/2, com mensagens em Avro.",
       "rotulo": "Pub/Sub API",
       "rotulo_tecnico": "Pub/Sub API",
+      "tipo": "funcionalidade"
+    },
+    {
+      "estado": "verificado",
+      "grupo_cor": "cls:execucao-assincrona-lotes-e-agendamento",
+      "id": "func:queueable-apex",
+      "resumo": "Forma de enfileirar um trabalho em Apex para rodar em segundo plano. Devolve o Id do job, aceita tipos complexos como parâmetro e permite encadear um job a outro.",
+      "rotulo": "Queueable Apex",
+      "rotulo_tecnico": "Queueable Apex",
       "tipo": "funcionalidade"
     },
     {
@@ -7950,6 +8160,16 @@
         "padrao"
       ],
       "estado": "verificado",
+      "id": "obj:AsyncApexJob",
+      "resumo": "O registro de um job Apex: batch, future method, Queueable, Apex agendado ou recálculo de sharing. Mostra o tipo, o estado e o andamento.",
+      "rotulo": "AsyncApexJob",
+      "tipo": "objeto_api"
+    },
+    {
+      "apis": [
+        "padrao"
+      ],
+      "estado": "verificado",
       "id": "obj:AuthProvider",
       "resumo": "Expõe por API os provedores de autenticação (login por serviço externo), com criação e edição.",
       "rotulo": "AuthProvider",
@@ -8023,6 +8243,26 @@
       "id": "obj:Contact",
       "resumo": "Representa uma pessoa, normalmente associada a uma conta.",
       "rotulo": "Contact",
+      "tipo": "objeto_api"
+    },
+    {
+      "apis": [
+        "padrao"
+      ],
+      "estado": "verificado",
+      "id": "obj:CronJobDetail",
+      "resumo": "Os detalhes de um job agendado: o nome e o tipo (Apex agendado, flow agendado, atualização de dashboard e outros).",
+      "rotulo": "CronJobDetail",
+      "tipo": "objeto_api"
+    },
+    {
+      "apis": [
+        "padrao"
+      ],
+      "estado": "verificado",
+      "id": "obj:CronTrigger",
+      "resumo": "A agenda de um job agendado: a expressão cron, a próxima e a última execução e o estado. Parecido com um cron job de UNIX.",
+      "rotulo": "CronTrigger",
       "tipo": "objeto_api"
     },
     {
@@ -8651,7 +8891,7 @@
       "estado": "desconhecido",
       "grupo_cor": "cls:execucao-assincrona-lotes-e-agendamento",
       "id": "sub:agendamento",
-      "recorte": "curadoria",
+      "recorte": "parcial",
       "rotulo": "Agendamento",
       "sigla": "ASY-04",
       "tipo": "subclassificacao"
@@ -8732,7 +8972,7 @@
       "estado": "desconhecido",
       "grupo_cor": "cls:execucao-assincrona-lotes-e-agendamento",
       "id": "sub:batch",
-      "recorte": "curadoria",
+      "recorte": "parcial",
       "rotulo": "Batch",
       "sigla": "ASY-01",
       "tipo": "subclassificacao"
@@ -8750,7 +8990,7 @@
       "estado": "desconhecido",
       "grupo_cor": "cls:execucao-assincrona-lotes-e-agendamento",
       "id": "sub:caminhos-assincronos",
-      "recorte": "curadoria",
+      "recorte": "parcial",
       "rotulo": "Caminhos assíncronos",
       "sigla": "ASY-05",
       "tipo": "subclassificacao"
@@ -8957,7 +9197,7 @@
       "estado": "desconhecido",
       "grupo_cor": "cls:execucao-assincrona-lotes-e-agendamento",
       "id": "sub:future-e-mecanismos-legados",
-      "recorte": "curadoria",
+      "recorte": "parcial",
       "rotulo": "Future e mecanismos legados quando aplicáveis",
       "sigla": "ASY-03",
       "tipo": "subclassificacao"
@@ -9137,7 +9377,7 @@
       "estado": "desconhecido",
       "grupo_cor": "cls:execucao-assincrona-lotes-e-agendamento",
       "id": "sub:monitoramento-de-jobs-e-limites",
-      "recorte": "curadoria",
+      "recorte": "parcial",
       "rotulo": "Monitoramento de jobs e limites",
       "sigla": "ASY-07",
       "tipo": "subclassificacao"
@@ -9218,7 +9458,7 @@
       "estado": "desconhecido",
       "grupo_cor": "cls:execucao-assincrona-lotes-e-agendamento",
       "id": "sub:processamento-orientado-a-eventos",
-      "recorte": "curadoria",
+      "recorte": "parcial",
       "rotulo": "Processamento orientado a eventos",
       "sigla": "ASY-06",
       "tipo": "subclassificacao"
@@ -9236,7 +9476,7 @@
       "estado": "desconhecido",
       "grupo_cor": "cls:execucao-assincrona-lotes-e-agendamento",
       "id": "sub:queueable",
-      "recorte": "curadoria",
+      "recorte": "parcial",
       "rotulo": "Queueable",
       "sigla": "ASY-02",
       "tipo": "subclassificacao"

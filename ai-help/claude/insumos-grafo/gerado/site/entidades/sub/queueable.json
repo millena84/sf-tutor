@@ -7,39 +7,147 @@
         },
         {
           "fonte": "src:apex-async-overview"
+        },
+        {
+          "fonte": "src:apex-future"
         }
       ],
       "texto": "A Salesforce recomenda Queueable Apex no lugar de future methods: aceita tipos complexos, encadeia jobs e devolve um Id para acompanhar o trabalho.",
       "tipo": "decisao",
       "titulo": "Queueable no lugar de future"
+    },
+    {
+      "evidencias": [
+        {
+          "fonte": "src:apex-gov-limits"
+        }
+      ],
+      "texto": "Uma transação síncrona enfileira até 50 jobs com System.enqueueJob; uma transação assíncrona, só 1. É por isso que, dentro de um job, o encadeamento é de um job por vez.",
+      "tipo": "limite",
+      "titulo": "Quantos jobs por transação"
+    },
+    {
+      "evidencias": [
+        {
+          "fonte": "src:apex-queueable"
+        },
+        {
+          "fonte": "src:apexref-system"
+        }
+      ],
+      "texto": "Numa cadeia de jobs, a documentação pede um mecanismo para frear ou parar; sem ele, chega-se rápido ao limite diário de Apex assíncrono. Dá para definir a profundidade máxima da pilha; em orgs Developer Edition e Trial, o máximo é 5.",
+      "tipo": "atencao",
+      "titulo": "Cadeias precisam de freio"
+    },
+    {
+      "evidencias": [
+        {
+          "fonte": "src:apexref-system"
+        },
+        {
+          "fonte": "src:mdapi-apexsettings"
+        }
+      ],
+      "texto": "System.enqueueJob aceita um atraso mínimo de 0 a 10 minutos, ignorado em testes. O metadata type ApexSettings guarda um atraso mínimo padrão da org para jobs enfileirados sem atraso próprio (DefaultQueueableDelay, de 1 a 600 segundos).",
+      "tipo": "implantacao",
+      "titulo": "Atraso ao enfileirar"
+    },
+    {
+      "evidencias": [
+        {
+          "fonte": "src:apex-queueable"
+        }
+      ],
+      "texto": "Alguns governor limits são maiores do que no Apex síncrono, como o de heap.",
+      "tipo": "escala",
+      "titulo": "Limites maiores"
     }
   ],
   "classificacao": "cls:execucao-assincrona-lotes-e-agendamento",
   "derivado": {
-    "dependencias": [],
-    "funcionalidades": [],
-    "metadata_types": [],
+    "dependencias": [
+      {
+        "destino": "obj:CronTrigger",
+        "destino_no_tema": false,
+        "estado": "verificado",
+        "origem": "obj:AsyncApexJob",
+        "rel": "rel:asyncapexjob-crontrigger",
+        "via": "CronTriggerId"
+      }
+    ],
+    "funcionalidades": [
+      {
+        "alertas": [
+          "Numa cadeia de jobs, crie um mecanismo para frear ou parar; sem ele, chega-se rápido ao limite diário de Apex assíncrono."
+        ],
+        "exemplo": "Depois de salvar um pedido, um job enfileirado chama o sistema de estoque; ao terminar, enfileira o job que avisa a transportadora.",
+        "id": "func:queueable-apex",
+        "principal": true
+      }
+    ],
+    "metadata_types": [
+      {
+        "estrutura": "completa",
+        "funcionalidades": [
+          "func:queueable-apex"
+        ],
+        "id": "mdt:ApexClass",
+        "nota_suporte": null,
+        "suporte_cli": "suportado"
+      },
+      {
+        "estrutura": "completa",
+        "funcionalidades": [
+          "func:queueable-apex"
+        ],
+        "id": "mdt:ApexSettings",
+        "nota_suporte": null,
+        "suporte_cli": "suportado"
+      }
+    ],
     "nota": "Calculado pelo gerador a partir do catálogo; não é cadastro.",
-    "objetos_api": [],
+    "objetos_api": [
+      {
+        "apis": [
+          {
+            "api": "padrao",
+            "estado": "verificado"
+          },
+          {
+            "api": "tooling",
+            "estado": "desconhecido"
+          }
+        ],
+        "funcionalidades": [
+          "func:queueable-apex"
+        ],
+        "id": "obj:AsyncApexJob"
+      }
+    ],
     "temas_sem_funcionalidade": []
   },
-  "descricao": "Tarefas enfileiradas para execução posterior.",
+  "descricao": "Queueable Apex: tarefas enfileiradas para rodar em segundo plano, com identificador para acompanhar e encadeamento de jobs.",
   "encadeamento": {
     "evidencias": [
       {
         "fonte": "src:apex-queueable"
+      },
+      {
+        "fonte": "src:apex-future"
       }
     ],
-    "texto": "É o caminho recomendado no lugar dos future methods."
+    "texto": "É o caminho recomendado no lugar dos future methods. O acompanhamento fica em 'Monitoramento de jobs e limites'."
   },
   "escopo": "Entram as tarefas enfileiradas para execução posterior.",
   "estado": "desconhecido",
   "fora_do_escopo": "Acompanhamento das filas fica em \"Monitoramento de jobs e limites\".",
-  "funcionalidades": [],
+  "funcionalidades": [
+    "func:queueable-apex"
+  ],
   "id": "sub:queueable",
   "natureza": "curadoria_didatica",
   "nome": "Queueable",
-  "nota_estado": "Agrupamento proposto na especificação; fronteira ainda não cruzada com a documentação oficial.",
+  "nota_estado": "Tema criado pelo projeto (00-especificacao-grafo.md), não é nomenclatura oficial da Salesforce. Cruzado em 2026-11-10 com áreas da documentação oficial listadas nas referências; a correspondência é parcial e o recorte continua sendo do projeto.",
   "para_iniciantes": {
     "evidencias": [
       {
@@ -50,7 +158,22 @@
       }
     ],
     "exemplo": "Depois de salvar um pedido, a chamada ao ERP vai para a fila e roda em seguida, sem prender a tela.",
-    "explicacao": "Queueable Apex coloca uma tarefa na fila para rodar em segundo plano quando houver recursos. Devolve um identificador para acompanhar o job e permite encadear tarefas."
+    "explicacao": "Queueable Apex coloca uma tarefa na fila para rodar em segundo plano quando houver recursos. Devolve um identificador para acompanhar o job e permite encadear tarefas.",
+    "por_onde_comecar": [
+      "func:queueable-apex"
+    ]
   },
+  "referencias_oficiais": [
+    {
+      "fonte": "src:apex-queueable",
+      "nota": "Cobre o tema: Queueable Apex.",
+      "secao": "Queueable Apex"
+    },
+    {
+      "fonte": "src:apexref-system",
+      "nota": "Cobre parte do tema: método System.enqueueJob.",
+      "secao": "System Class"
+    }
+  ],
   "sigla": "ASY-02"
 }

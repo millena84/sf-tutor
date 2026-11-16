@@ -1,0 +1,87 @@
+{
+  "alertas": [
+    "As execuções de start, execute e finish contam no limite de 24 horas.",
+    "Com a flex queue cheia, Database.executeBatch lança uma exceção de limite e o job não entra."
+  ],
+  "aliases": [
+    "batch",
+    "database.batchable",
+    "executebatch",
+    "job em lote",
+    "apex flex queue"
+  ],
+  "classificacao_principal": {
+    "classificacao": "cls:execucao-assincrona-lotes-e-agendamento",
+    "subclassificacao": "sub:batch"
+  },
+  "classificacoes_secundarias": [
+    {
+      "classificacao": "cls:desenvolvimento-testes-e-entrega",
+      "motivo": "É código Apex e segue as regras de teste e de implantação.",
+      "subclassificacao": "sub:codigo-e-bundles"
+    }
+  ],
+  "estado": "verificado",
+  "evidencias": [
+    {
+      "fonte": "src:apex-batch-use"
+    },
+    {
+      "fonte": "src:apex-batch"
+    },
+    {
+      "fonte": "src:apexref-database"
+    },
+    {
+      "fonte": "src:help-apex-flex-queue"
+    },
+    {
+      "fonte": "src:objref-asyncapexjob"
+    }
+  ],
+  "exemplo": "Um batch recalcula a classificação de todas as contas em lotes de 200; o registro do job mostra quantos lotes já rodaram e quantos falharam.",
+  "finalidade": "Processar o que não cabe numa transação só, como recalcular um campo em todas as contas.",
+  "id": "func:batch-apex",
+  "limitacoes": [
+    "Até cinco jobs de batch em fila ou ativos ao mesmo tempo; a Apex flex queue segura até 100 outros em Holding.",
+    "Tamanho do lote: 200 por padrão; até 2.000 quando o método start devolve um QueryLocator.",
+    "Em 24 horas: 250.000 execuções de método de batch, ou licenças de usuário vezes 200, o que for maior."
+  ],
+  "nome": "Batch Apex",
+  "nome_tecnico": "Batch Apex",
+  "o_que_e": "Forma de processar um volume grande de registros em Apex: a classe coleta os registros e a plataforma os entrega em lotes, um de cada vez, cada lote com os próprios limites.",
+  "recomendacoes": [],
+  "representacoes": {
+    "ausencias": [],
+    "metadata_types": [
+      {
+        "papel": "A classe que implementa Database.Batchable.",
+        "ref": "mdt:ApexClass"
+      }
+    ],
+    "objetos_api": [
+      {
+        "papel": "Registro de cada job de batch, com estado e andamento.",
+        "ref": "obj:AsyncApexJob"
+      }
+    ]
+  },
+  "setup": {
+    "estado": "verificado",
+    "evidencias": [
+      {
+        "fonte": "src:apex-batch-use"
+      }
+    ],
+    "nota": "Página para acompanhar ou parar um job de batch. Rótulos em inglês, como na fonte; a tradução da interface em pt-BR não foi verificada.",
+    "valor": "Setup > Quick Find: Apex Jobs > Apex Jobs"
+  },
+  "termos_busca": [
+    "apex flex queue",
+    "batch",
+    "batch apex",
+    "database.batchable",
+    "executebatch",
+    "job em lote"
+  ]
+}

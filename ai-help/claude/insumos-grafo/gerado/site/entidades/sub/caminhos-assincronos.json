@@ -19,18 +19,128 @@
       "texto": "Flows agendados têm teto de 250.000 entrevistas por 24 horas, ou licenças × 200, o que for maior; transações Apex síncronas chamadas por flows assíncronos contam nos limites síncronos.",
       "tipo": "limite",
       "titulo": "Flows agendados"
+    },
+    {
+      "evidencias": [
+        {
+          "fonte": "src:help-flow-scheduled-paths"
+        }
+      ],
+      "texto": "Um scheduled path processa os registros em lotes: o tamanho padrão e máximo é 200, e o mínimo, 1. Reduzir o lote ajuda a não bater nos limites por transação. Se a execução falha, sai um e-mail de erro e há nova tentativa 15 minutos depois, até 5 tentativas.",
+      "tipo": "escala",
+      "titulo": "Scheduled paths em lotes"
+    },
+    {
+      "evidencias": [
+        {
+          "fonte": "src:help-rtf-considerations"
+        },
+        {
+          "fonte": "src:help-flow-triggered"
+        }
+      ],
+      "texto": "O caminho assíncrono roda logo depois que a gravação é confirmada. O scheduled path roda parte do flow num deslocamento de tempo depois do evento.",
+      "tipo": "decisao",
+      "titulo": "Caminho assíncrono ou scheduled path"
     }
   ],
   "classificacao": "cls:execucao-assincrona-lotes-e-agendamento",
   "derivado": {
-    "dependencias": [],
-    "funcionalidades": [],
-    "metadata_types": [],
+    "dependencias": [
+      {
+        "destino": "obj:FlowDefinition",
+        "destino_no_tema": true,
+        "estado": "verificado",
+        "origem": "obj:Flow",
+        "rel": "rel:flow-flowdefinition",
+        "via": "DefinitionId"
+      },
+      {
+        "destino": "obj:Flow",
+        "destino_no_tema": true,
+        "estado": "verificado",
+        "origem": "obj:FlowDefinition",
+        "rel": "rel:flowdefinition-activeversion",
+        "via": "ActiveVersionId"
+      },
+      {
+        "destino": "obj:Flow",
+        "destino_no_tema": true,
+        "estado": "verificado",
+        "origem": "obj:FlowDefinition",
+        "rel": "rel:flowdefinition-latestversion",
+        "via": "LatestVersionId"
+      }
+    ],
+    "funcionalidades": [
+      {
+        "exemplo": "Atualizar o status do contrato quando a assinatura é registrada.",
+        "id": "func:flow",
+        "pre_requisitos": [
+          "Abrir, editar ou criar flows: Manage Flow."
+        ],
+        "principal": false,
+        "tema_principal": "sub:flow-e-orquestracao"
+      }
+    ],
+    "metadata_types": [
+      {
+        "estrutura": "parcial",
+        "funcionalidades": [
+          "func:flow"
+        ],
+        "id": "mdt:Flow",
+        "nota_suporte": null,
+        "suporte_cli": "suportado"
+      },
+      {
+        "estrutura": "completa",
+        "funcionalidades": [
+          "func:flow"
+        ],
+        "id": "mdt:FlowSettings",
+        "nota_suporte": null,
+        "suporte_cli": "suportado"
+      }
+    ],
     "nota": "Calculado pelo gerador a partir do catálogo; não é cadastro.",
-    "objetos_api": [],
+    "objetos_api": [
+      {
+        "apis": [
+          {
+            "api": "tooling",
+            "estado": "verificado"
+          },
+          {
+            "api": "padrao",
+            "estado": "desconhecido"
+          }
+        ],
+        "funcionalidades": [
+          "func:flow"
+        ],
+        "id": "obj:Flow"
+      },
+      {
+        "apis": [
+          {
+            "api": "tooling",
+            "estado": "verificado"
+          },
+          {
+            "api": "padrao",
+            "estado": "desconhecido"
+          }
+        ],
+        "funcionalidades": [
+          "func:flow"
+        ],
+        "id": "obj:FlowDefinition"
+      }
+    ],
     "temas_sem_funcionalidade": []
   },
-  "descricao": "Partes assíncronas de automações declarativas.",
+  "descricao": "As partes de um flow que rodam fora da gravação do registro: o caminho assíncrono e os scheduled paths.",
   "encadeamento": {
     "evidencias": [
       {
@@ -45,11 +155,13 @@
   "escopo": "Entram as partes assíncronas de automações declarativas.",
   "estado": "desconhecido",
   "fora_do_escopo": "O fluxo como um todo fica em \"Flow e orquestração\".",
-  "funcionalidades": [],
+  "funcionalidades": [
+    "func:flow"
+  ],
   "id": "sub:caminhos-assincronos",
   "natureza": "curadoria_didatica",
   "nome": "Caminhos assíncronos",
-  "nota_estado": "Agrupamento proposto na especificação; fronteira ainda não cruzada com a documentação oficial.",
+  "nota_estado": "Tema criado pelo projeto (00-especificacao-grafo.md), não é nomenclatura oficial da Salesforce. Cruzado em 2026-11-10 com áreas da documentação oficial listadas nas referências; a correspondência é parcial e o recorte continua sendo do projeto.",
   "para_iniciantes": {
     "evidencias": [
       {
@@ -57,7 +169,22 @@
       }
     ],
     "exemplo": "Ao criar um pedido, o caminho assíncrono do flow avisa o sistema de entregas sem prender a gravação.",
-    "explicacao": "Num flow disparado por registro, o caminho assíncrono roda em segundo plano depois que a gravação é confirmada. É ele que permite chamar sistemas externos, o que o caminho imediato não pode fazer."
+    "explicacao": "Num flow disparado por registro, o caminho assíncrono roda em segundo plano depois que a gravação é confirmada. É ele que permite chamar sistemas externos, o que o caminho imediato não pode fazer.",
+    "por_onde_comecar": [
+      "func:flow"
+    ]
   },
+  "referencias_oficiais": [
+    {
+      "fonte": "src:help-rtf-considerations",
+      "nota": "Cobre parte do tema: caminho assíncrono de record-triggered flows.",
+      "secao": "Record-Triggered Flow Considerations"
+    },
+    {
+      "fonte": "src:help-flow-scheduled-paths",
+      "nota": "Cobre parte do tema: scheduled paths.",
+      "secao": "Scheduled Paths"
+    }
+  ],
   "sigla": "ASY-05"
 }

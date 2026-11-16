@@ -7,6 +7,9 @@
         },
         {
           "fonte": "src:apex-queueable"
+        },
+        {
+          "fonte": "src:apex-future"
         }
       ],
       "texto": "Pelo guia de Apex: Queueable para operações longas com identificador, tipos complexos e encadeamento; Scheduled para rodar em horário definido; Batch para grandes volumes; Future para métodos longos sem atrasar a transação. A Salesforce recomenda Queueable no lugar de future methods.",
@@ -16,12 +19,72 @@
     {
       "evidencias": [
         {
-          "fonte": "src:apex-async-overview"
+          "fonte": "src:apex-batch-use"
+        },
+        {
+          "fonte": "src:apex-future"
+        },
+        {
+          "fonte": "src:apex-scheduler"
+        },
+        {
+          "fonte": "src:rest-limits"
+        },
+        {
+          "fonte": "src:help-org-health"
+        },
+        {
+          "fonte": "src:apex-elastic-limits"
         }
       ],
-      "texto": "O Batch Apex tem limite de cinco jobs ativos, com uma Flex Queue de até 100 jobs adicionais.",
+      "texto": "Batch, Queueable, future e Apex agendado dividem um limite de execuções por 24 horas: 250.000, ou o número de licenças de usuário vezes 200, o que for maior. No batch, contam as execuções de start, execute e finish. Acima do limite, jobs novos são rejeitados; a opção de limites elásticos, em Beta, permite processar o excedente em ritmo reduzido.",
       "tipo": "limite",
-      "titulo": "Fila do Batch Apex"
+      "titulo": "O limite de 24 horas"
+    },
+    {
+      "evidencias": [
+        {
+          "fonte": "src:apex-batch"
+        },
+        {
+          "fonte": "src:help-apex-flex-queue"
+        },
+        {
+          "fonte": "src:apex-scheduler"
+        },
+        {
+          "fonte": "src:apex-gov-limits"
+        }
+      ],
+      "texto": "Batch: cinco jobs em fila ou ativos, mais até 100 em espera na Apex flex queue. Apex agendado: 100 jobs ao mesmo tempo. Queueable: 50 jobs enfileirados por transação síncrona e 1 por transação assíncrona.",
+      "tipo": "limite",
+      "titulo": "Filas e quantidades"
+    },
+    {
+      "evidencias": [
+        {
+          "fonte": "src:apex-gov-limits"
+        },
+        {
+          "fonte": "src:apexref-database"
+        }
+      ],
+      "texto": "Alguns limites por transação são maiores no Apex assíncrono: por exemplo, 200 consultas SOQL em vez de 100. No batch, os limites recomeçam a cada lote. O Apex agendado é exceção: embora assíncrono, usa os limites síncronos.",
+      "tipo": "escala",
+      "titulo": "Limites por transação mudam no assíncrono"
+    },
+    {
+      "evidencias": [
+        {
+          "fonte": "src:apex-callout-limits"
+        },
+        {
+          "fonte": "src:apex-http-classes"
+        }
+      ],
+      "texto": "Não é possível fazer callout depois de Apex assíncrono ou agendado pendente na mesma transação; antes deles, pode. O mesmo vale para DML não confirmado: callouts ficam bloqueados enquanto há trabalho pendente na transação.",
+      "tipo": "atencao",
+      "titulo": "Callout depois de assíncrono pendente"
     },
     {
       "evidencias": [
@@ -36,16 +99,57 @@
     {
       "evidencias": [
         {
-          "fonte": "src:apex-callout-limits"
+          "fonte": "src:mdapi-apexclass"
+        },
+        {
+          "fonte": "src:mdapi-apexsettings"
+        },
+        {
+          "fonte": "src:objref-asyncapexjob"
+        },
+        {
+          "fonte": "src:objref-crontrigger"
+        },
+        {
+          "fonte": "src:objref-cronjobdetail"
         }
       ],
-      "texto": "Não é possível fazer callout depois de Apex assíncrono ou agendado pendente na mesma transação; antes deles, pode.",
-      "tipo": "atencao",
-      "titulo": "Callout depois de assíncrono pendente"
+      "texto": "Os mecanismos em Apex não têm metadata type próprio: o que se implanta é a classe (ApexClass). As opções da org ficam em ApexSettings. Os jobs são registros, consultáveis por API: AsyncApexJob para todos os jobs Apex, CronTrigger e CronJobDetail para os agendados.",
+      "tipo": "implantacao",
+      "titulo": "Como metadado e como dado"
+    },
+    {
+      "evidencias": [
+        {
+          "fonte": "src:help-schedule-apex"
+        },
+        {
+          "fonte": "src:objref-asyncapexjob"
+        }
+      ],
+      "texto": "O agendador roda como system: a classe agendada executa, tenha ou não o usuário permissão para executá-la. Para acessar AsyncApexJob e enfileirar jobs fora do system mode, é preciso a permissão View Setup and Configuration.",
+      "tipo": "seguranca",
+      "titulo": "Quem executa"
     }
   ],
   "derivado": {
     "dependencias": [
+      {
+        "destino": "obj:CronTrigger",
+        "destino_no_tema": true,
+        "estado": "verificado",
+        "origem": "obj:AsyncApexJob",
+        "rel": "rel:asyncapexjob-crontrigger",
+        "via": "CronTriggerId"
+      },
+      {
+        "destino": "obj:CronJobDetail",
+        "destino_no_tema": true,
+        "estado": "verificado",
+        "origem": "obj:CronTrigger",
+        "rel": "rel:crontrigger-cronjobdetail",
+        "via": "CronJobDetailId"
+      },
       {
         "destino": "mdt:ExternalDataSource",
         "destino_no_tema": false,
@@ -53,23 +157,140 @@
         "origem": "mdt:CustomObject",
         "rel": "rel:customobject-externaldatasource",
         "via": "externalDataSource"
+      },
+      {
+        "destino": "obj:FlowDefinition",
+        "destino_no_tema": true,
+        "estado": "verificado",
+        "origem": "obj:Flow",
+        "rel": "rel:flow-flowdefinition",
+        "via": "DefinitionId"
+      },
+      {
+        "destino": "obj:Flow",
+        "destino_no_tema": true,
+        "estado": "verificado",
+        "origem": "obj:FlowDefinition",
+        "rel": "rel:flowdefinition-activeversion",
+        "via": "ActiveVersionId"
+      },
+      {
+        "destino": "obj:Flow",
+        "destino_no_tema": true,
+        "estado": "verificado",
+        "origem": "obj:FlowDefinition",
+        "rel": "rel:flowdefinition-latestversion",
+        "via": "LatestVersionId"
       }
     ],
     "funcionalidades": [
+      {
+        "alertas": [
+          "As execuções de start, execute e finish contam no limite de 24 horas.",
+          "Com a flex queue cheia, Database.executeBatch lança uma exceção de limite e o job não entra."
+        ],
+        "exemplo": "Um batch recalcula a classificação de todas as contas em lotes de 200; o registro do job mostra quantos lotes já rodaram e quantos falharam.",
+        "id": "func:batch-apex",
+        "principal": true
+      },
+      {
+        "alertas": [
+          "Numa cadeia de jobs, crie um mecanismo para frear ou parar; sem ele, chega-se rápido ao limite diário de Apex assíncrono."
+        ],
+        "exemplo": "Depois de salvar um pedido, um job enfileirado chama o sistema de estoque; ao terminar, enfileira o job que avisa a transportadora.",
+        "id": "func:queueable-apex",
+        "principal": true
+      },
+      {
+        "alertas": [
+          "Não aceita sObjects nem objetos como parâmetro."
+        ],
+        "exemplo": "Um método future faz um callout depois de um trigger, para não segurar a gravação do registro.",
+        "id": "func:future-methods",
+        "principal": true
+      },
+      {
+        "alertas": [
+          "O agendador roda como system: a classe executa, tenha ou não o usuário permissão para executá-la.",
+          "A execução real pode atrasar em relação ao horário agendado, conforme a disponibilidade do serviço.",
+          "Com um job agendado ativo, a classe e as que ela referencia não podem ser atualizadas pela interface."
+        ],
+        "exemplo": "Toda madrugada, uma classe agendada inicia o batch que recalcula a classificação das contas.",
+        "id": "func:apex-agendado",
+        "principal": true
+      },
+      {
+        "exemplo": "Atualizar o status do contrato quando a assinatura é registrada.",
+        "id": "func:flow",
+        "pre_requisitos": [
+          "Abrir, editar ou criar flows: Manage Flow."
+        ],
+        "principal": false,
+        "tema_principal": "sub:flow-e-orquestracao"
+      },
       {
         "exemplo": "Um ERP publica PedidoFaturado__e; um trigger Apex assina o evento e atualiza a oportunidade.",
         "id": "func:platform-events",
         "principal": false,
         "tema_principal": "sub:eventos-e-mensageria"
+      },
+      {
+        "alertas": [
+          "Future methods e classes Queueable ainda não executados aparecem como Future na coluna Job Type.",
+          "Um job agendado aparece em Apex Jobs e em All Scheduled Jobs, mas conta uma vez só no limite.",
+          "Acima do limite de 24 horas de jobs assíncronos ou do limite de jobs agendados, jobs novos são rejeitados."
+        ],
+        "exemplo": "O administrador vê na página Apex Jobs que um batch falhou em três lotes e que a org já usou boa parte do limite de 24 horas.",
+        "id": "func:monitoramento-de-jobs-apex",
+        "principal": true
       }
     ],
     "metadata_types": [
+      {
+        "estrutura": "completa",
+        "funcionalidades": [
+          "func:apex-agendado",
+          "func:batch-apex",
+          "func:future-methods",
+          "func:queueable-apex"
+        ],
+        "id": "mdt:ApexClass",
+        "nota_suporte": null,
+        "suporte_cli": "suportado"
+      },
+      {
+        "estrutura": "completa",
+        "funcionalidades": [
+          "func:queueable-apex"
+        ],
+        "id": "mdt:ApexSettings",
+        "nota_suporte": null,
+        "suporte_cli": "suportado"
+      },
       {
         "estrutura": "parcial",
         "funcionalidades": [
           "func:platform-events"
         ],
         "id": "mdt:CustomObject",
+        "nota_suporte": null,
+        "suporte_cli": "suportado"
+      },
+      {
+        "estrutura": "parcial",
+        "funcionalidades": [
+          "func:flow"
+        ],
+        "id": "mdt:Flow",
+        "nota_suporte": null,
+        "suporte_cli": "suportado"
+      },
+      {
+        "estrutura": "completa",
+        "funcionalidades": [
+          "func:flow"
+        ],
+        "id": "mdt:FlowSettings",
         "nota_suporte": null,
         "suporte_cli": "suportado"
       },
@@ -111,15 +332,95 @@
       }
     ],
     "nota": "Calculado pelo gerador a partir do catálogo; não é cadastro.",
-    "objetos_api": [],
-    "temas_sem_funcionalidade": [
-      "sub:batch",
-      "sub:queueable",
-      "sub:future-e-mecanismos-legados",
-      "sub:agendamento",
-      "sub:caminhos-assincronos",
-      "sub:monitoramento-de-jobs-e-limites"
-    ]
+    "objetos_api": [
+      {
+        "apis": [
+          {
+            "api": "padrao",
+            "estado": "verificado"
+          },
+          {
+            "api": "tooling",
+            "estado": "desconhecido"
+          }
+        ],
+        "funcionalidades": [
+          "func:apex-agendado",
+          "func:batch-apex",
+          "func:future-methods",
+          "func:monitoramento-de-jobs-apex",
+          "func:queueable-apex"
+        ],
+        "id": "obj:AsyncApexJob"
+      },
+      {
+        "apis": [
+          {
+            "api": "padrao",
+            "estado": "verificado"
+          },
+          {
+            "api": "tooling",
+            "estado": "desconhecido"
+          }
+        ],
+        "funcionalidades": [
+          "func:apex-agendado",
+          "func:monitoramento-de-jobs-apex"
+        ],
+        "id": "obj:CronJobDetail"
+      },
+      {
+        "apis": [
+          {
+            "api": "padrao",
+            "estado": "verificado"
+          },
+          {
+            "api": "tooling",
+            "estado": "desconhecido"
+          }
+        ],
+        "funcionalidades": [
+          "func:apex-agendado",
+          "func:monitoramento-de-jobs-apex"
+        ],
+        "id": "obj:CronTrigger"
+      },
+      {
+        "apis": [
+          {
+            "api": "tooling",
+            "estado": "verificado"
+          },
+          {
+            "api": "padrao",
+            "estado": "desconhecido"
+          }
+        ],
+        "funcionalidades": [
+          "func:flow"
+        ],
+        "id": "obj:Flow"
+      },
+      {
+        "apis": [
+          {
+            "api": "tooling",
+            "estado": "verificado"
+          },
+          {
+            "api": "padrao",
+            "estado": "desconhecido"
+          }
+        ],
+        "funcionalidades": [
+          "func:flow"
+        ],
+        "id": "obj:FlowDefinition"
+      }
+    ],
+    "temas_sem_funcionalidade": []
   },
   "descricao": "Reúne o processamento que não acontece na hora do clique: lotes, filas, agendamentos e eventos.",
   "encadeamento": {
@@ -131,10 +432,22 @@
         "fonte": "src:apex-queueable"
       },
       {
+        "fonte": "src:apex-future"
+      },
+      {
+        "fonte": "src:apex-scheduler"
+      },
+      {
+        "fonte": "src:help-rtf-considerations"
+      },
+      {
         "fonte": "src:help-platform-events-define"
+      },
+      {
+        "fonte": "src:help-apex-job-queue"
       }
     ],
-    "texto": "Batch divide grandes volumes em partes; Queueable enfileira tarefas e permite encadeá-las; Future é o mecanismo mais antigo; o agendamento dispara execuções em horários definidos; caminhos assíncronos levam parte de uma automação declarativa para depois; eventos de plataforma disparam reações quando algo é publicado; e o monitoramento acompanha jobs e limites."
+    "texto": "Roteiro pelas sete seções do tema. 1) 'Batch': processa grandes volumes em lotes. 2) 'Queueable': enfileira uma tarefa e permite encadear outras. 3) 'Future e mecanismos legados': o mecanismo anterior, mantido em código existente. 4) 'Agendamento': roda em horário definido. 5) 'Caminhos assíncronos': a parte de um flow que roda depois da gravação. 6) 'Processamento orientado a eventos': reage a eventos publicados. 7) 'Monitoramento de jobs e limites': mostra o que rodou, o que falhou e quanto do limite diário foi usado."
   },
   "escopo": "Entra o processamento que não acontece no momento da ação da pessoa usuária: lotes, filas, agendamentos, reações a eventos e o acompanhamento dessas execuções.",
   "estado": "desconhecido",
@@ -152,12 +465,20 @@
     "evidencias": [
       {
         "fonte": "src:apex-async-overview"
+      },
+      {
+        "fonte": "src:apex-scheduler"
+      },
+      {
+        "fonte": "src:apex-batch"
       }
     ],
     "exemplo": "Toda madrugada, um job agendado inicia um processamento em lote que recalcula a classificação de milhares de contas.",
     "explicacao": "Reúne o processamento que não acontece na hora do clique: trabalhos em lote, tarefas em fila, execuções agendadas e reações a eventos. Serve para volumes grandes, chamadas demoradas e tarefas que podem esperar.",
     "por_onde_comecar": [
-      "func:platform-events"
+      "func:queueable-apex",
+      "func:batch-apex",
+      "func:monitoramento-de-jobs-apex"
     ]
   },
   "referencias_oficiais": [

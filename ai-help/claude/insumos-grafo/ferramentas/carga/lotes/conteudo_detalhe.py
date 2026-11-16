@@ -765,3 +765,42 @@ _f("src:help-devops-center-mp", "DevOps Center (Managed Package) (Salesforce Hel
    "O que um projeto do DevOps Center reúne e que ambientes de desenvolvimento aceita.", **AJ)
 _f("src:help-devops-setup", "Install and Configure DevOps Center (Managed Package) (Salesforce Help)", _H + "devops_center_setup.htm&type=5&language=en_US",
    "Sistemas de controle de versão suportados.", **AJ)
+
+
+# ====================================================================== Execução assíncrona, lotes e agendamento (rodada A2)
+# Só fontes: o conteúdo destes temas é editado no lugar (conteudo_cls.py e conteudo_sub.py).
+_EXT = "fontes/extracoes/temas-detalhe-assincrono.txt"
+_DATA = "2026-11-16"
+_AR = "https://developer.salesforce.com/docs/platform/apex-ref/references/apex-ref/"
+
+_f("src:apex-batch-use", "Use Batch Apex (Apex Developer Guide)", _AX + "apex-batch-interface.html",
+   "Interface Database.Batchable, tamanho do lote, flex queue e limite diário.", **DOC)
+_f("src:apex-batch", "Batch Apex (Apex Developer Guide)", _AX + "apex-batch.html", "O que é Batch Apex e o limite de cinco jobs.", **DOC)
+_f("src:apexref-database", "Database Class (Apex Reference Guide)", _AR + "apex-methods-system-database.html",
+   "Lotes de 200 por padrão e reinício dos governor limits a cada execute.", **DOC)
+_f("src:apexref-system", "System Class (Apex Reference Guide)", _AR + "apex-methods-system-system.html",
+   "Métodos enqueueJob, schedule e scheduleBatch.", **DOC)
+_f("src:apex-future", "Future Methods (Apex Developer Guide)", _AX + "apex-invoking-future-methods.html",
+   "Regras, usos e limites de future methods.", **DOC)
+_f("src:apex-gov-limits", "Execution Governors and Limits (Apex Developer Guide)",
+   "https://developer.salesforce.com/docs/atlas.en-us.apexcode.meta/apexcode/apex_gov_limits.htm",
+   "Limites por transação, síncronos e assíncronos.", **DOC)
+_f("src:apex-http-classes", "HTTP Classes (Apex Developer Guide)", _AX + "apex-classes-restful-http.html",
+   "Callouts bloqueados com trabalho pendente na transação.", **DOC)
+_f("src:apex-elastic-limits", "Elastic Limits for Asynchronous Apex Jobs (Beta) (Apex Developer Guide)",
+   "https://developer.salesforce.com/docs/atlas.en-us.apexcode.meta/apexcode/apex_limits_elastic_limits.htm",
+   "Processamento acima do limite de 24 horas, em ritmo reduzido.", **DOC)
+_f("src:apex-scheduler", "Apex Scheduler (Apex Developer Guide)", _AX + "apex-scheduler.html",
+   "Interface Schedulable, formas de agendar e limites.", **DOC)
+_f("src:help-schedule-apex", "Schedule Apex Jobs (Salesforce Help)", _H + "platform.code_schedule_batch_apex.htm&language=en_US",
+   "Caminho de Setup para agendar uma classe e como o agendador executa.", **AJ)
+_f("src:help-apex-job-queue", "Monitor the Apex Job Queue (Salesforce Help)", _H + "platform.code_apex_job.htm&language=en_US&type=5",
+   "O que a página Apex Jobs lista.", **AJ)
+_f("src:help-apex-flex-queue", "Monitoring the Apex Flex Queue (Salesforce Help)", _H + "platform.code_apex_flex_queue.htm&language=en_US",
+   "Como a Apex flex queue segura e libera jobs de batch.", **AJ)
+_f("src:help-apex-code-overview", "Apex Code Overview (Salesforce Help)", _H + "sf.code_about.htm&language=en_US&type=5",
+   "A página Apex Jobs mostra o uso do limite de Apex assíncrono.", **AJ)
+_f("src:help-org-health", "Monitor Org Health and Usage in Setup (Salesforce Help)", _H + "xcloud.setup_org_health_usage.htm&language=en_US&type=5",
+   "Limites de Apex acompanhados e o que acontece acima deles.", **AJ)
+_f("src:help-kb-asyncapexjob-types", "List of asynchronous Apex jobs as listed in SOAP API guide (KB)", _H + "000387766&language=en_US&type=1",
+   "Tipos de job de uso interno em AsyncApexJob.", **AJ)

@@ -4,18 +4,24 @@
   "sigla": "ASY-03",
   "classificacao": "cls:execucao-assincrona-lotes-e-agendamento",
   "natureza": "curadoria_didatica",
-  "descricao": "Métodos assíncronos antigos e quando ainda se aplicam.",
+  "descricao": "Future methods, o mecanismo assíncrono de Apex que a documentação recomenda trocar por Queueable, e as regras que ainda valem para o código existente.",
   "escopo": "Entram os métodos assíncronos mais antigos e os casos em que ainda se aplicam.",
   "fora_do_escopo": "Mecanismos legados de automação declarativa ficam em \"Mecanismos legados e migração\".",
   "para_iniciantes": {
     "explicacao": "Future methods rodam um método em segundo plano para não atrasar a transação. A Salesforce recomenda substituí-los por Queueable.",
     "exemplo": "Um método marcado como future faz uma chamada demorada sem atrasar a gravação que o disparou.",
+    "por_onde_comecar": [
+      "func:future-methods"
+    ],
     "evidencias": [
       {
         "fonte": "src:apex-async-overview"
       },
       {
         "fonte": "src:apex-queueable"
+      },
+      {
+        "fonte": "src:apex-future"
       }
     ]
   },
@@ -24,10 +30,64 @@
     "evidencias": [
       {
         "fonte": "src:apex-queueable"
+      },
+      {
+        "fonte": "src:apex-future"
       }
     ]
   },
-  "funcionalidades": [],
+  "avancado": [
+    {
+      "tipo": "limite",
+      "titulo": "Regras do método",
+      "texto": "O método precisa ser static e void. Os parâmetros são tipos primitivos, arrays ou coleções de primitivos: não aceita sObjects nem objetos.",
+      "evidencias": [
+        {
+          "fonte": "src:apex-future"
+        }
+      ]
+    },
+    {
+      "tipo": "atencao",
+      "titulo": "De onde não se chama",
+      "texto": "Não se chama um future method a partir de um batch ou de outro future. Em contexto queueable, o limite é de 50 chamadas por invocação; a documentação não recomenda abrir muitos future methods a partir de um job enfileirado.",
+      "evidencias": [
+        {
+          "fonte": "src:apex-future"
+        }
+      ]
+    },
+    {
+      "tipo": "decisao",
+      "titulo": "Para que ainda serve",
+      "texto": "Além de callouts, a documentação cita o uso para isolar operações DML em tipos diferentes de objeto e evitar o erro de mixed DML. Queueable cobre os mesmos usos.",
+      "evidencias": [
+        {
+          "fonte": "src:apex-future"
+        }
+      ]
+    },
+    {
+      "tipo": "limite",
+      "titulo": "Limite de 24 horas",
+      "texto": "250.000 execuções por 24 horas, ou licenças de usuário vezes 200, o que for maior.",
+      "evidencias": [
+        {
+          "fonte": "src:apex-future"
+        }
+      ]
+    }
+  ],
+  "funcionalidades": [
+    "func:future-methods"
+  ],
   "estado": "desconhecido",
-  "nota_estado": "Agrupamento proposto na especificação; fronteira ainda não cruzada com a documentação oficial."
+  "nota_estado": "Tema criado pelo projeto (00-especificacao-grafo.md), não é nomenclatura oficial da Salesforce. Cruzado em 2026-11-10 com áreas da documentação oficial listadas nas referências; a correspondência é parcial e o recorte continua sendo do projeto.",
+  "referencias_oficiais": [
+    {
+      "fonte": "src:apex-future",
+      "secao": "Future Methods",
+      "nota": "Cobre o tema: future methods."
+    }
+  ]
 }

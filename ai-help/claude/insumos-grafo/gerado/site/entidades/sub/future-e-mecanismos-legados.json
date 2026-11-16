@@ -1,18 +1,108 @@
 {
+  "avancado": [
+    {
+      "evidencias": [
+        {
+          "fonte": "src:apex-future"
+        }
+      ],
+      "texto": "O método precisa ser static e void. Os parâmetros são tipos primitivos, arrays ou coleções de primitivos: não aceita sObjects nem objetos.",
+      "tipo": "limite",
+      "titulo": "Regras do método"
+    },
+    {
+      "evidencias": [
+        {
+          "fonte": "src:apex-future"
+        }
+      ],
+      "texto": "Não se chama um future method a partir de um batch ou de outro future. Em contexto queueable, o limite é de 50 chamadas por invocação; a documentação não recomenda abrir muitos future methods a partir de um job enfileirado.",
+      "tipo": "atencao",
+      "titulo": "De onde não se chama"
+    },
+    {
+      "evidencias": [
+        {
+          "fonte": "src:apex-future"
+        }
+      ],
+      "texto": "Além de callouts, a documentação cita o uso para isolar operações DML em tipos diferentes de objeto e evitar o erro de mixed DML. Queueable cobre os mesmos usos.",
+      "tipo": "decisao",
+      "titulo": "Para que ainda serve"
+    },
+    {
+      "evidencias": [
+        {
+          "fonte": "src:apex-future"
+        }
+      ],
+      "texto": "250.000 execuções por 24 horas, ou licenças de usuário vezes 200, o que for maior.",
+      "tipo": "limite",
+      "titulo": "Limite de 24 horas"
+    }
+  ],
   "classificacao": "cls:execucao-assincrona-lotes-e-agendamento",
   "derivado": {
-    "dependencias": [],
-    "funcionalidades": [],
-    "metadata_types": [],
+    "dependencias": [
+      {
+        "destino": "obj:CronTrigger",
+        "destino_no_tema": false,
+        "estado": "verificado",
+        "origem": "obj:AsyncApexJob",
+        "rel": "rel:asyncapexjob-crontrigger",
+        "via": "CronTriggerId"
+      }
+    ],
+    "funcionalidades": [
+      {
+        "alertas": [
+          "Não aceita sObjects nem objetos como parâmetro."
+        ],
+        "exemplo": "Um método future faz um callout depois de um trigger, para não segurar a gravação do registro.",
+        "id": "func:future-methods",
+        "principal": true
+      }
+    ],
+    "metadata_types": [
+      {
+        "estrutura": "completa",
+        "funcionalidades": [
+          "func:future-methods"
+        ],
+        "id": "mdt:ApexClass",
+        "nota_suporte": null,
+        "suporte_cli": "suportado"
+      }
+    ],
     "nota": "Calculado pelo gerador a partir do catálogo; não é cadastro.",
-    "objetos_api": [],
+    "objetos_api": [
+      {
+        "apis": [
+          {
+            "api": "padrao",
+            "estado": "verificado"
+          },
+          {
+            "api": "tooling",
+            "estado": "desconhecido"
+          }
+        ],
+        "funcionalidades": [
+          "func:future-methods"
+        ],
+        "id": "obj:AsyncApexJob"
+      }
+    ],
     "temas_sem_funcionalidade": []
   },
-  "descricao": "Métodos assíncronos antigos e quando ainda se aplicam.",
+  "descricao": "Future methods, o mecanismo assíncrono de Apex que a documentação recomenda trocar por Queueable, e as regras que ainda valem para o código existente.",
   "encadeamento": {
     "evidencias": [
       {
         "fonte": "src:apex-queueable"
+      },
+      {
+        "fonte": "src:apex-future"
       }
     ],
     "texto": "Fica aqui para quem mantém código existente; para código novo, veja Queueable."
@@ -20,11 +110,13 @@
   "escopo": "Entram os métodos assíncronos mais antigos e os casos em que ainda se aplicam.",
   "estado": "desconhecido",
   "fora_do_escopo": "Mecanismos legados de automação declarativa ficam em \"Mecanismos legados e migração\".",
-  "funcionalidades": [],
+  "funcionalidades": [
+    "func:future-methods"
+  ],
   "id": "sub:future-e-mecanismos-legados",
   "natureza": "curadoria_didatica",
   "nome": "Future e mecanismos legados quando aplicáveis",
-  "nota_estado": "Agrupamento proposto na especificação; fronteira ainda não cruzada com a documentação oficial.",
+  "nota_estado": "Tema criado pelo projeto (00-especificacao-grafo.md), não é nomenclatura oficial da Salesforce. Cruzado em 2026-11-10 com áreas da documentação oficial listadas nas referências; a correspondência é parcial e o recorte continua sendo do projeto.",
   "para_iniciantes": {
     "evidencias": [
       {
@@ -32,10 +124,23 @@
       },
       {
         "fonte": "src:apex-queueable"
+      },
+      {
+        "fonte": "src:apex-future"
       }
     ],
     "exemplo": "Um método marcado como future faz uma chamada demorada sem atrasar a gravação que o disparou.",
-    "explicacao": "Future methods rodam um método em segundo plano para não atrasar a transação. A Salesforce recomenda substituí-los por Queueable."
+    "explicacao": "Future methods rodam um método em segundo plano para não atrasar a transação. A Salesforce recomenda substituí-los por Queueable.",
+    "por_onde_comecar": [
+      "func:future-methods"
+    ]
   },
+  "referencias_oficiais": [
+    {
+      "fonte": "src:apex-future",
+      "nota": "Cobre o tema: future methods.",
+      "secao": "Future Methods"
+    }
+  ],
   "sigla": "ASY-03"
 }

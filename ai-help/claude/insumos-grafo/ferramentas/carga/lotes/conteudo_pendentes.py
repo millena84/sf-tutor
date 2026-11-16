@@ -139,13 +139,18 @@ P["sub:caminhos-assincronos"] = {
     "para_iniciantes": ini("Num flow disparado por registro, o caminho assíncrono roda em segundo plano depois que a gravação é confirmada. É ele "
                            "que permite chamar sistemas externos, o que o caminho imediato não pode fazer.",
                            "Ao criar um pedido, o caminho assíncrono do flow avisa o sistema de entregas sem prender a gravação.",
-                           E("src:help-rtf-considerations")),
+                           E("src:help-rtf-considerations"), comece=["func:flow"]),
     "encadeamento": enc("É a parte assíncrona de 'Flow e orquestração'; o equivalente em código fica em Queueable e Future.", E("src:help-rtf-considerations", "src:apex-queueable")),
     "avancado": [
         av("atencao", "Callout só fora do caminho imediato", "Um record-triggered flow falha se tentar acessar dados externos no caminho síncrono, porque callouts não "
            "rodam enquanto o registro é salvo. Caminhos assíncronos não suportam o operador ISCHANGED.", E("src:help-rtf-considerations")),
         av("limite", "Flows agendados", "Flows agendados têm teto de 250.000 entrevistas por 24 horas, ou licenças × 200, o que for maior; transações Apex síncronas "
            "chamadas por flows assíncronos contam nos limites síncronos.", E("src:help-schedule-flow-considerations")),
+        av("escala", "Scheduled paths em lotes", "Um scheduled path processa os registros em lotes: o tamanho padrão e máximo é 200, e o mínimo, "
+           "1. Reduzir o lote ajuda a não bater nos limites por transação. Se a execução falha, sai um e-mail de erro e há nova tentativa 15 "
+           "minutos depois, até 5 tentativas.", E("src:help-flow-scheduled-paths")),
+        av("decisao", "Caminho assíncrono ou scheduled path", "O caminho assíncrono roda logo depois que a gravação é confirmada. O scheduled "
+           "path roda parte do flow num deslocamento de tempo depois do evento.", E("src:help-rtf-considerations", "src:help-flow-triggered")),
     ],
 }
 

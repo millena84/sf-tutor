@@ -97,8 +97,36 @@
   ],
   "classificacao": "cls:desenvolvimento-testes-e-entrega",
   "derivado": {
-    "dependencias": [],
+    "dependencias": [
+      {
+        "destino": "obj:CronTrigger",
+        "destino_no_tema": true,
+        "estado": "verificado",
+        "origem": "obj:AsyncApexJob",
+        "rel": "rel:asyncapexjob-crontrigger",
+        "via": "CronTriggerId"
+      },
+      {
+        "destino": "obj:CronJobDetail",
+        "destino_no_tema": true,
+        "estado": "verificado",
+        "origem": "obj:CronTrigger",
+        "rel": "rel:crontrigger-cronjobdetail",
+        "via": "CronJobDetailId"
+      }
+    ],
     "funcionalidades": [
+      {
+        "alertas": [
+          "O agendador roda como system: a classe executa, tenha ou não o usuário permissão para executá-la.",
+          "A execução real pode atrasar em relação ao horário agendado, conforme a disponibilidade do serviço.",
+          "Com um job agendado ativo, a classe e as que ela referencia não podem ser atualizadas pela interface."
+        ],
+        "exemplo": "Toda madrugada, uma classe agendada inicia o batch que recalcula a classificação das contas.",
+        "id": "func:apex-agendado",
+        "principal": false,
+        "tema_principal": "sub:agendamento"
+      },
       {
         "alertas": [
           "Um trigger pode receber vários registros de uma vez; o código deve ser escrito para mais de um registro."
@@ -119,6 +147,16 @@
       },
       {
         "alertas": [
+          "As execuções de start, execute e finish contam no limite de 24 horas.",
+          "Com a flex queue cheia, Database.executeBatch lança uma exceção de limite e o job não entra."
+        ],
+        "exemplo": "Um batch recalcula a classificação de todas as contas em lotes de 200; o registro do job mostra quantos lotes já rodaram e quantos falharam.",
+        "id": "func:batch-apex",
+        "principal": false,
+        "tema_principal": "sub:batch"
+      },
+      {
+        "alertas": [
           "Não se desenvolve Apex direto em produção: usa-se sandbox, scratch org ou Developer Edition.",
           "Por padrão, uma classe com jobs Apex ativos não pode ser atualizada por deploy."
         ],
@@ -128,11 +166,29 @@
       },
       {
         "alertas": [
+          "Não aceita sObjects nem objetos como parâmetro."
+        ],
+        "exemplo": "Um método future faz um callout depois de um trigger, para não segurar a gravação do registro.",
+        "id": "func:future-methods",
+        "principal": false,
+        "tema_principal": "sub:future-e-mecanismos-legados"
+      },
+      {
+        "alertas": [
           "Sem o arquivo de configuração .js-meta.xml, o envio do componente à org dá erro."
         ],
         "exemplo": "Um componente mostra o saldo do cliente na página de registro da conta; o arquivo de configuração o libera para record pages.",
         "id": "func:lightning-web-components",
         "principal": true
+      },
+      {
+        "alertas": [
+          "Numa cadeia de jobs, crie um mecanismo para frear ou parar; sem ele, chega-se rápido ao limite diário de Apex assíncrono."
+        ],
+        "exemplo": "Depois de salvar um pedido, um job enfileirado chama o sistema de estoque; ao terminar, enfileira o job que avisa a transportadora.",
+        "id": "func:queueable-apex",
+        "principal": false,
+        "tema_principal": "sub:queueable"
       },
       {
         "alertas": [
@@ -161,7 +217,11 @@
       {
         "estrutura": "completa",
         "funcionalidades": [
-          "func:classes-apex"
+          "func:apex-agendado",
+          "func:batch-apex",
+          "func:classes-apex",
+          "func:future-methods",
+          "func:queueable-apex"
         ],
         "id": "mdt:ApexClass",
         "nota_suporte": null,
@@ -189,7 +249,8 @@
         "estrutura": "completa",
         "funcionalidades": [
           "func:apex-triggers",
-          "func:classes-apex"
+          "func:classes-apex",
+          "func:queueable-apex"
         ],
         "id": "mdt:ApexSettings",
         "nota_suporte": null,
@@ -233,7 +294,60 @@
       }
     ],
     "nota": "Calculado pelo gerador a partir do catálogo; não é cadastro.",
-    "objetos_api": [],
+    "objetos_api": [
+      {
+        "apis": [
+          {
+            "api": "padrao",
+            "estado": "verificado"
+          },
+          {
+            "api": "tooling",
+            "estado": "desconhecido"
+          }
+        ],
+        "funcionalidades": [
+          "func:apex-agendado",
+          "func:batch-apex",
+          "func:classes-apex",
+          "func:future-methods",
+          "func:queueable-apex"
+        ],
+        "id": "obj:AsyncApexJob"
+      },
+      {
+        "apis": [
+          {
+            "api": "padrao",
+            "estado": "verificado"
+          },
+          {
+            "api": "tooling",
+            "estado": "desconhecido"
+          }
+        ],
+        "funcionalidades": [
+          "func:apex-agendado"
+        ],
+        "id": "obj:CronJobDetail"
+      },
+      {
+        "apis": [
+          {
+            "api": "padrao",
+            "estado": "verificado"
+          },
+          {
+            "api": "tooling",
+            "estado": "desconhecido"
+          }
+        ],
+        "funcionalidades": [
+          "func:apex-agendado"
+        ],
+        "id": "obj:CronTrigger"
+      }
+    ],
     "temas_sem_funcionalidade": []
   },
   "descricao": "Os componentes de código da org: classes Apex, Lightning web components, Aura components, páginas e componentes Visualforce e static resources.",
@@ -255,10 +369,14 @@
   "estado": "desconhecido",
   "fora_do_escopo": "O papel do código em uma automação fica em \"Automação Apex\".",
   "funcionalidades": [
+    "func:apex-agendado",
     "func:apex-triggers",
     "func:aura-components",
+    "func:batch-apex",
     "func:classes-apex",
+    "func:future-methods",
     "func:lightning-web-components",
+    "func:queueable-apex",
     "func:static-resources",
     "func:tooling-api",
     "func:visualforce"

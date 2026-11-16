@@ -1,0 +1,45 @@
+fonte: Object Reference for the Salesforce Platform, versão 264.0 (API 68.0), lida pelo endpoint de conteúdo da documentação
+URL lida: https://developer.salesforce.com/docs/get_document_content/object_reference/sforce_api_objects_<objeto>.htm/en-us/264.0
+mesma página no navegador: https://developer.salesforce.com/docs/atlas.en-us.264.0.object_reference.meta/object_reference/sforce_api_objects_<objeto>.htm
+obtido em 2026-11-16 via WebFetch; método: extração documental assistida por IA; descrições parafraseadas. Páginas inteiras, uma leitura cada.
+convenção: campo | tipo | propriedades como na página | descrição. O campo Id não consta das tabelas.
+
+[src:objref-asyncapexjob] AsyncApexJob: registro de um job Apex (batch, recálculo de sharing, future method, Queueable ou Schedulable); serve para
+  consultar os jobs Apex da org. A página não informa a versão de entrada do objeto. Chamadas: describeSObjects(), query(), retrieve().
+  Acesso: quando o Apex não roda em system mode, é preciso a permissão View Setup and Configuration para acessar o objeto e enfileirar jobs.
+  Campos (13):
+  ApexClassId | reference | Filter, Group, Nillable, Sort | Id da classe Apex que executa o job (rótulo Class ID); refere ApexClass, relacionamento ApexClass
+  CompletedDate | dateTime | Filter, Nillable, Sort | quando o job terminou
+  CronTriggerId | reference | Filter, Group, Nillable, Sort | Id do CronTrigger, só em jobs de Apex agendado; desde 53.0; refere CronTrigger, relacionamento CronTrigger
+  ExtendedStatus | string | Filter, Group, Nillable, Sort | descrição curta do primeiro erro do batch; desde 19.0
+  JobItemsProcessed | int | Filter, Group, Sort | itens do job já processados (rótulo Batches Processed)
+  JobType | picklist | Filter, Group, Restricted picklist, Sort | tipo do job: ApexToken, BatchApex, BatchApexWorker, Future, Queueable, ScheduledApex,
+    SharingRecalculation, TestRequest, TestWorker
+  LastProcessed | string | Filter, Group, Nillable, Sort | último Id processado e confirmado
+  LastProcessedOffset | int | Filter, Group, Nillable, Sort | deslocamento do último Id processado e confirmado
+  MethodName | string | Filter, Group, Nillable, Sort | nome do método Apex em execução (rótulo Apex Method)
+  NumberOfErrors | int | Filter, Group, Nillable, Sort | número de lotes que falharam (rótulo Failures)
+  ParentJobId | reference | Filter, Group, Nillable, Sort | Id do job pai, nos jobs filhos de um batch dividido em chunks; vazio nos demais; objeto referido não informado
+  Status | picklist | Filter, Group, Restricted picklist, Sort | Aborted, Completed, Failed, Holding (só batch na Apex flex queue), Preparing, Processing, Queued
+  TotalJobItems | int | Filter, Group, Nillable, Sort | total de lotes do job (rótulo Total Batches)
+
+[src:objref-crontrigger] CronTrigger: informação de agenda de um job agendado, parecido com um cron job de UNIX; serve para consultar os jobs
+  agendados da org. API 17.0 e posteriores. Chamadas: describeSObjects(), query(), retrieve(). Nenhuma regra especial de acesso na página.
+  Campos (10), sem versão por campo:
+  CronExpression | string | Filter, Group, Nillable, Sort | expressão cron que dispara a agenda (de segundos até o ano, que é opcional)
+  CronJobDetailId | reference | Filter, Group, Nillable, Sort | Id do CronJobDetail com mais detalhes do job; refere CronJobDetail, relacionamento CronJobDetail
+  EndTime | dateTime | Filter, Nillable, Sort | quando o job terminou ou vai terminar
+  NextFireTime | dateTime | Filter, Nillable, Sort | próxima execução agendada; nulo se o job não vai rodar de novo
+  OwnerId | reference | Filter, Group, Nillable, Sort | dono do job; objeto referido não informado
+  PreviousFireTime | dateTime | Filter, Nillable, Sort | execução mais recente; nulo se o job ainda não rodou
+  StartTime | dateTime | Filter, Nillable, Sort | início da iteração mais recente do job
+  State | string | Filter, Group, Nillable, Sort | estado do job, gerido pelo sistema: WAITING, ACQUIRED, EXECUTING, COMPLETE, ERROR, DELETED, PAUSED, BLOCKED, PAUSED_BLOCKED
+  TimesTriggered | int | Filter, Group, Nillable, Sort | quantas vezes o job foi disparado
+  TimeZoneSidKey | picklist | Filter, Group, Nillable, Restricted picklist, Sort | Id do fuso horário, como America/Los_Angeles
+
+[src:objref-cronjobdetail] CronJobDetail: detalhes de um job agendado, como nome e tipo. API 29.0 e posteriores. Chamadas: describeSObjects(),
+  query(), retrieve(). Nenhuma regra especial de acesso na página.
+  Campos (2):
+  JobType | picklist | Filter, Group, Nillable, Restricted picklist, Sort | tipo do job agendado: 1 Data Export; 3 Dashboard Refresh; 4 Reporting
+    Snapshot; 6 Scheduled Flow; 7 Scheduled Apex; 8 Report Run; 9 Batch Job; A Reporting Notification
+  Name | string | Filter, Group, idLookup, Sort | nome do job agendado

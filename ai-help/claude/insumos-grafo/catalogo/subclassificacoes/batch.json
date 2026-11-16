@@ -4,15 +4,24 @@
   "sigla": "ASY-01",
   "classificacao": "cls:execucao-assincrona-lotes-e-agendamento",
   "natureza": "curadoria_didatica",
-  "descricao": "Processamento de grandes volumes em lotes.",
+  "descricao": "Batch Apex: o processamento de grandes volumes de registros em lotes, com fila própria e limites por lote.",
   "escopo": "Entra o processamento de grandes volumes dividido em lotes.",
   "fora_do_escopo": "Carga de dados por API em lotes fica em \"APIs de dados e metadados\".",
   "para_iniciantes": {
-    "explicacao": "Batch Apex processa grandes volumes de registros dividindo o trabalho em partes.",
+    "explicacao": "Batch Apex processa grandes volumes de registros dividindo o trabalho em lotes. A classe tem três métodos: start coleta os registros, execute processa um lote de cada vez e finish roda no fim.",
     "exemplo": "Recalcular um campo em todas as contas da org durante a madrugada.",
+    "por_onde_comecar": [
+      "func:batch-apex"
+    ],
     "evidencias": [
       {
         "fonte": "src:apex-async-overview"
+      },
+      {
+        "fonte": "src:apex-batch-use"
+      },
+      {
+        "fonte": "src:apex-batch"
       }
     ]
   },
@@ -21,6 +30,9 @@
     "evidencias": [
       {
         "fonte": "src:apex-async-overview"
+      },
+      {
+        "fonte": "src:apex-batch-use"
       }
     ]
   },
@@ -28,15 +40,87 @@
     {
       "tipo": "limite",
       "titulo": "Fila do Batch Apex",
-      "texto": "No máximo cinco jobs Batch Apex ativos, com uma Flex Queue de até 100 jobs adicionais.",
+      "texto": "No máximo cinco jobs de batch em fila ou ativos ao mesmo tempo. A Apex flex queue segura até 100 outros em Holding; quando há recursos, eles saem do topo da fila e passam a Queued. Com a flex queue cheia, o envio de um job novo dá erro de limite.",
       "evidencias": [
         {
-          "fonte": "src:apex-async-overview"
+          "fonte": "src:apex-batch"
+        },
+        {
+          "fonte": "src:help-apex-flex-queue"
+        },
+        {
+          "fonte": "src:apex-batch-use"
+        }
+      ]
+    },
+    {
+      "tipo": "escala",
+      "titulo": "Tamanho do lote",
+      "texto": "Por padrão, os registros são entregues em lotes de 200. Quando start devolve um QueryLocator, o tamanho pode ir até 2.000. Os governor limits recomeçam a cada lote.",
+      "evidencias": [
+        {
+          "fonte": "src:apexref-database"
+        },
+        {
+          "fonte": "src:apex-batch-use"
+        },
+        {
+          "fonte": "src:apex-gov-limits"
+        }
+      ]
+    },
+    {
+      "tipo": "limite",
+      "titulo": "Limite de 24 horas",
+      "texto": "250.000 execuções de método de batch por 24 horas, ou licenças de usuário vezes 200, o que for maior. Contam as execuções de start, execute e finish.",
+      "evidencias": [
+        {
+          "fonte": "src:apex-batch-use"
+        }
+      ]
+    },
+    {
+      "tipo": "implantacao",
+      "titulo": "Como acompanhar",
+      "texto": "Database.executeBatch devolve o Id de um registro AsyncApexJob, que mostra o estado, os lotes processados e os que falharam. Na interface: Setup, Apex Jobs. Um batch também pode ser agendado para rodar uma vez, com System.scheduleBatch.",
+      "evidencias": [
+        {
+          "fonte": "src:apex-batch-use"
+        },
+        {
+          "fonte": "src:objref-asyncapexjob"
+        },
+        {
+          "fonte": "src:apexref-system"
+        }
+      ]
+    },
+    {
+      "tipo": "testes",
+      "titulo": "Em teste",
+      "texto": "Num teste em execução, dá para submeter no máximo 5 jobs de batch.",
+      "evidencias": [
+        {
+          "fonte": "src:apex-batch-use"
         }
       ]
     }
   ],
-  "funcionalidades": [],
+  "funcionalidades": [
+    "func:batch-apex"
+  ],
   "estado": "desconhecido",
-  "nota_estado": "Agrupamento proposto na especificação; fronteira ainda não cruzada com a documentação oficial."
+  "nota_estado": "Tema criado pelo projeto (00-especificacao-grafo.md), não é nomenclatura oficial da Salesforce. Cruzado em 2026-11-10 com áreas da documentação oficial listadas nas referências; a correspondência é parcial e o recorte continua sendo do projeto.",
+  "referencias_oficiais": [
+    {
+      "fonte": "src:apex-batch-use",
+      "secao": "Use Batch Apex",
+      "nota": "Cobre o tema: como usar Batch Apex."
+    },
+    {
+      "fonte": "src:help-apex-flex-queue",
+      "secao": "Monitoring the Apex Flex Queue",
+      "nota": "Cobre parte do tema: Apex flex queue."
+    }
+  ]
 }

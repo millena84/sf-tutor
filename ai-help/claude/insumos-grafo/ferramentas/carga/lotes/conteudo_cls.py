@@ -372,28 +372,52 @@ CONTEUDO_CLS = {
             "Reúne o processamento que não acontece na hora do clique: trabalhos em lote, tarefas em fila, execuções agendadas e reações "
             "a eventos. Serve para volumes grandes, chamadas demoradas e tarefas que podem esperar.",
             "Toda madrugada, um job agendado inicia um processamento em lote que recalcula a classificação de milhares de contas.",
-            E("src:apex-async-overview"),
-            comece=["func:platform-events"],
+            E("src:apex-async-overview", "src:apex-scheduler", "src:apex-batch"),
+            comece=["func:queueable-apex", "func:batch-apex", "func:monitoramento-de-jobs-apex"],
             analogia=("Como deixar a roupa na lavanderia: você entrega, segue o dia e busca depois.",
                       "Na lavanderia você sempre recebe um tíquete. No Apex, só alguns mecanismos devolvem um identificador para acompanhar o trabalho, como o Queueable.")),
         "encadeamento": enc(
-            "Batch divide grandes volumes em partes; Queueable enfileira tarefas e permite encadeá-las; Future é o mecanismo mais antigo; "
-            "o agendamento dispara execuções em horários definidos; caminhos assíncronos levam parte de uma automação declarativa para "
-            "depois; eventos de plataforma disparam reações quando algo é publicado; e o monitoramento acompanha jobs e limites.",
-            E("src:apex-async-overview", "src:apex-queueable", "src:help-platform-events-define")),
+            "Roteiro pelas sete seções do tema. 1) 'Batch': processa grandes volumes em lotes. 2) 'Queueable': enfileira uma tarefa e "
+            "permite encadear outras. 3) 'Future e mecanismos legados': o mecanismo anterior, mantido em código existente. "
+            "4) 'Agendamento': roda em horário definido. 5) 'Caminhos assíncronos': a parte de um flow que roda depois da gravação. "
+            "6) 'Processamento orientado a eventos': reage a eventos publicados. 7) 'Monitoramento de jobs e limites': mostra o que "
+            "rodou, o que falhou e quanto do limite diário foi usado.",
+            E("src:apex-async-overview", "src:apex-queueable", "src:apex-future", "src:apex-scheduler", "src:help-rtf-considerations",
+              "src:help-platform-events-define", "src:help-apex-job-queue")),
         "avancado": [
             av("decisao", "Qual mecanismo Apex",
                "Pelo guia de Apex: Queueable para operações longas com identificador, tipos complexos e encadeamento; Scheduled para rodar "
                "em horário definido; Batch para grandes volumes; Future para métodos longos sem atrasar a transação. A Salesforce recomenda "
-               "Queueable no lugar de future methods.", E("src:apex-async-overview", "src:apex-queueable")),
-            av("limite", "Fila do Batch Apex",
-               "O Batch Apex tem limite de cinco jobs ativos, com uma Flex Queue de até 100 jobs adicionais.", E("src:apex-async-overview")),
+               "Queueable no lugar de future methods.", E("src:apex-async-overview", "src:apex-queueable", "src:apex-future")),
+            av("limite", "O limite de 24 horas",
+               "Batch, Queueable, future e Apex agendado dividem um limite de execuções por 24 horas: 250.000, ou o número de licenças de "
+               "usuário vezes 200, o que for maior. No batch, contam as execuções de start, execute e finish. Acima do limite, jobs "
+               "novos são rejeitados; a opção de limites elásticos, em Beta, permite processar o excedente em ritmo reduzido.",
+               E("src:apex-batch-use", "src:apex-future", "src:apex-scheduler", "src:rest-limits", "src:help-org-health", "src:apex-elastic-limits")),
+            av("limite", "Filas e quantidades",
+               "Batch: cinco jobs em fila ou ativos, mais até 100 em espera na Apex flex queue. Apex agendado: 100 jobs ao mesmo tempo. "
+               "Queueable: 50 jobs enfileirados por transação síncrona e 1 por transação assíncrona.",
+               E("src:apex-batch", "src:help-apex-flex-queue", "src:apex-scheduler", "src:apex-gov-limits")),
+            av("escala", "Limites por transação mudam no assíncrono",
+               "Alguns limites por transação são maiores no Apex assíncrono: por exemplo, 200 consultas SOQL em vez de 100. No batch, "
+               "os limites recomeçam a cada lote. O Apex agendado é exceção: embora assíncrono, usa os limites síncronos.",
+               E("src:apex-gov-limits", "src:apexref-database")),
+            av("atencao", "Callout depois de assíncrono pendente",
+               "Não é possível fazer callout depois de Apex assíncrono ou agendado pendente na mesma transação; antes deles, pode. "
+               "O mesmo vale para DML não confirmado: callouts ficam bloqueados enquanto há trabalho pendente na transação.",
+               E("src:apex-callout-limits", "src:apex-http-classes")),
             av("atencao", "Retentativa em triggers de evento",
                "Um trigger de evento roda no máximo 10 vezes (a inicial e 9 retentativas). A retentativa reenvia o lote inteiro e desfaz o "
                "DML anterior. Limite as tentativas e tenha uma ação alternativa quando o limite chegar.", E("src:pe-retry-apex")),
-            av("atencao", "Callout depois de assíncrono pendente",
-               "Não é possível fazer callout depois de Apex assíncrono ou agendado pendente na mesma transação; antes deles, pode.",
-               E("src:apex-callout-limits")),
+            av("implantacao", "Como metadado e como dado",
+               "Os mecanismos em Apex não têm metadata type próprio: o que se implanta é a classe (ApexClass). As opções da org ficam em "
+               "ApexSettings. Os jobs são registros, consultáveis por API: AsyncApexJob para todos os jobs Apex, CronTrigger e "
+               "CronJobDetail para os agendados.",
+               E("src:mdapi-apexclass", "src:mdapi-apexsettings", "src:objref-asyncapexjob", "src:objref-crontrigger", "src:objref-cronjobdetail")),
+            av("seguranca", "Quem executa",
+               "O agendador roda como system: a classe agendada executa, tenha ou não o usuário permissão para executá-la. Para acessar "
+               "AsyncApexJob e enfileirar jobs fora do system mode, é preciso a permissão View Setup and Configuration.",
+               E("src:help-schedule-apex", "src:objref-asyncapexjob")),
         ],
     },
     "cls:integracao-apis-e-eventos": {
