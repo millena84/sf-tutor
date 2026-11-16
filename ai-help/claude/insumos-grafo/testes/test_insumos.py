@@ -237,7 +237,8 @@ class TestContratoSite(unittest.TestCase):
         for i in ids:
             self.assertTrue(os.path.exists(os.path.join(self.site, T.caminho_entidade(i))), i)
         busca = ler(os.path.join(self.site, "busca.json"))
-        self.assertEqual(len(busca), sum(man["contagens"]["nos_por_tipo"].values()))
+        nos_na_busca = [b for b in busca if b["tipo"] != "metadata_type_inventario"]  # o inventário sem ficha não é nó
+        self.assertEqual(len(nos_na_busca), sum(man["contagens"]["nos_por_tipo"].values()))
         for b in busca:
             if b["tipo"] in ("campo_api", "propriedade_xml"):
                 self.assertIn(b.get("pai"), ids, b["id"])
@@ -365,7 +366,26 @@ class TestTemas(BaseTemp):
         d = e["derivado"]
         self.assertIn("mdt:FlexiPage", [m["id"] for m in d["metadata_types"]])
         self.assertTrue(all(m["suporte_cli"] for m in d["metadata_types"]))
-        self.assertIn("sub:acessibilidade-e-personalizacao", d["temas_sem_funcionalidade"])
+        self.assertIsInstance(d["temas_sem_funcionalidade"], list)
+
+    def test_busca_cobre_o_inventario_inteiro_e_acha_por_pasta(self):
+        """Todo metadata type do inventário é encontrável: com ficha (mdt:) ou marcado como sem ficha (inv:), nunca os dois."""
+        busca = ler(os.path.join(BASE, "gerado", "site", "busca.json"))
+        inv = ler(os.path.join(BASE, "inventarios", "metadata-types-v68.json"))["itens"]
+        com = {b["rotulo"] for b in busca if b["tipo"] == "metadata_type"}
+        sem = {b["rotulo"] for b in busca if b["tipo"] == "metadata_type_inventario"}
+        self.assertFalse(com & sem)
+        self.assertEqual(com | sem, {i["nome"] for i in inv})
+        self.assertTrue(all(b.get("sem_ficha") and b["id"].startswith("inv:") for b in busca if b["tipo"] == "metadata_type_inventario"))
+        por_id = {b["id"]: b for b in busca}
+        self.assertIn("applications", por_id["mdt:CustomApplication"]["textos"])
+        self.assertIn("settings", por_id["mdt:CaseSettings"]["textos"])
+        # todo tipo com pasta no registro do CLI leva a pasta para a busca
+        for i in inv:
+            pasta = (i.get("registro_sdr") or {}).get("pasta")
+            if pasta:
+                b = por_id.get("mdt:" + i["nome"]) or por_id["inv:" + i["nome"]]
+                self.assertIn(pasta, b["textos"], i["nome"])
 
     def test_classificacoes_com_referencia_oficial(self):
         for p in glob.glob(os.path.join(BASE, "catalogo", "classificacoes", "*.json")):

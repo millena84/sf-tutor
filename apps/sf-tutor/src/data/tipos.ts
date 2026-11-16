@@ -39,13 +39,20 @@ export interface Aresta {
   via?: string[];
 }
 
+/** Tipo que só existe na busca: metadata type do inventário v68 ainda sem ficha no tutorial. */
+export type TipoBusca = TipoNo | 'metadata_type_inventario';
+
 export interface ItemBusca {
   id: string;
-  tipo: TipoNo;
+  tipo: TipoBusca;
   rotulo: string;
   textos: string[];
   pai?: string;
   descricao?: string;
+  /** pasta e sufixo do arquivo no projeto (só metadata types) */
+  local?: string;
+  /** true: o item não tem ficha para abrir; a descrição aparece no próprio resultado */
+  sem_ficha?: boolean;
 }
 
 export interface ArvoreVisao {

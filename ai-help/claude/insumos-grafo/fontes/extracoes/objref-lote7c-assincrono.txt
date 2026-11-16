@@ -43,3 +43,28 @@ convenção: campo | tipo | propriedades como na página | descrição. O campo 
   JobType | picklist | Filter, Group, Nillable, Restricted picklist, Sort | tipo do job agendado: 1 Data Export; 3 Dashboard Refresh; 4 Reporting
     Snapshot; 6 Scheduled Flow; 7 Scheduled Apex; 8 Report Run; 9 Batch Job; A Reporting Notification
   Name | string | Filter, Group, idLookup, Sort | nome do job agendado
+
+-- Rodada A4 (2026-11-16), mesma fonte e mesmo método
+[src:objref-setupaudittrail] SetupAuditTrail: mudanças feitas no Setup pelos administradores, por ao menos os últimos 180 dias. API 15.0 e
+  posteriores. Chamadas: query(), retrieve(). Notas: não serve de standard controller em Visualforce; não aceita consultas agregadas (SELECT count()
+  funciona, SELECT count(Id) falha); relacionamentos em SOQL, como CreatedBy.Name, trazem quem fez a mudança.
+  Campos (6): Action | string | Filter, Sort | categoria da mudança, como PermSetCreate (criação de permission set); os detalhes ficam em Display
+  CreatedByContext | string | Filter, Group, Nillable, Sort | contexto em que a mudança foi feita; desde 48.0
+  CreatedByIssuer | string | Filter, Group, Nillable, Sort | reservado para uso futuro
+  DelegateUser | string | Filter, Nillable, Sort | usuário de Login-As que fez a mudança; vazio se não houve; desde 35.0
+  Display | string | Nillable, Sort | descrição completa da mudança
+  Section | string | Nillable, Sort | seção do menu de Setup em que a ação ocorreu, como Manage Users
+[src:objref-eventlogfile] EventLogFile: arquivos de log de eventos do Event Monitoring, para analisar tendências de uso e comportamento. API 32.0 e
+  posteriores. Chamadas: describeSObjects(), query(), retrieve(). Acesso: permissões View Event Log Files e API Enabled (quem tem View All Data
+  também vê). Notas: apagar dados de log exige a opção Delete event monitoring data; clientes de Shield e de Event Monitoring têm um ano de
+  armazenamento por padrão; os arquivos não contam no armazenamento de dados nem de arquivos; o esquema de cada log pode mudar a cada release.
+  A introdução cita os campos Interval e Sequence (API 37.0), mas a tabela não traz linhas para eles.
+  Campos (8): ApiVersion | double | Filter, Sort | versão da API do arquivo de log; desde 30.0
+  EventType | picklist | Filter, Group, Restricted picklist, Sort | tipo de evento, que define o esquema do arquivo; exemplos: API, Login, Report, URI;
+    a lista completa fica em outra página
+  LogDate | dateTime | Filter, Sort | data do arquivo; arquivos diários cobrem 24 horas em UTC, e os horários, uma hora
+  LogFile | base64 | (nenhuma) | conteúdo do arquivo .csv, em base64
+  LogFileContentType | string | Filter, Group, Sort | tipo de conteúdo do arquivo; sempre .csv
+  LogFileFieldNames | string | Nillable | lista ordenada dos nomes dos campos do log; varia por EventType
+  LogFileFieldTypes | string | Nillable | lista ordenada dos tipos dos campos do log; varia por EventType
+  LogFileLength | double | Filter, Sort | tamanho do arquivo em bytes

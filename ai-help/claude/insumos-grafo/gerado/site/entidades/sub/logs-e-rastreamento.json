@@ -9,18 +9,81 @@
       "texto": "O conteúdo do log é definido por categoria (Database, Workflow, Validation, Callout, Apex Code, Apex Profiling, Visualforce, System) e por nível, de NONE a FINEST. Os níveis são cumulativos, e a maioria dos eventos começa a ser registrada no nível INFO.",
       "tipo": "decisao",
       "titulo": "Categoria e nível"
+    },
+    {
+      "evidencias": [
+        {
+          "fonte": "src:help-debug-logs"
+        },
+        {
+          "fonte": "src:apex-debug-log"
+        }
+      ],
+      "texto": "Um log de depuração nasce quando há uma trace flag de usuário ativa, quando se rodam testes Apex ou quando a requisição traz parâmetros ou cabeçalhos de depuração. Trace flags de classe e de trigger só mudam o nível de detalhe.",
+      "tipo": "implantacao",
+      "titulo": "Quando um log é gerado"
+    },
+    {
+      "evidencias": [
+        {
+          "fonte": "src:apex-debug-log"
+        },
+        {
+          "fonte": "src:help-debug-logs"
+        },
+        {
+          "fonte": "src:help-kb-traceflags-prod"
+        }
+      ],
+      "texto": "Cada log tem até 20 MB; ao chegar ao limite, entradas antigas são apagadas e as mais novas ficam. Logs de depuração do sistema ficam 24 horas. O armazenamento padrão de logs é de 1.000 MB.",
+      "tipo": "limite",
+      "titulo": "Tamanho e retenção"
+    },
+    {
+      "evidencias": [
+        {
+          "fonte": "src:help-devconsole-logs"
+        },
+        {
+          "fonte": "src:help-kb-traceflags-prod"
+        }
+      ],
+      "texto": "O nível de log define quanta informação é guardada. Reduzir o nível reduz o tamanho do log e facilita a leitura; em produção, evite trace flags em usuários de API e em código de alto volume.",
+      "tipo": "escala",
+      "titulo": "Nível de log"
+    },
+    {
+      "evidencias": [
+        {
+          "fonte": "src:help-debug-setup"
+        }
+      ],
+      "texto": "Ver, guardar e apagar logs de depuração exige View All Data.",
+      "tipo": "seguranca",
+      "titulo": "Permissão"
     }
   ],
   "classificacao": "cls:observabilidade-auditoria-e-operacao",
   "derivado": {
     "dependencias": [],
-    "funcionalidades": [],
+    "funcionalidades": [
+      {
+        "alertas": [
+          "Trace flags de classe e de trigger mudam o nível de detalhe, mas sozinhas não fazem um log ser gerado.",
+          "Apagar um debug level apaga as trace flags que o usam.",
+          "Em produção, evite trace flags em usuários de API e em código de alto volume."
+        ],
+        "exemplo": "Para entender um erro que só acontece com uma usuária, o administrador cria uma trace flag para ela, reproduz o erro e lê o log.",
+        "id": "func:debug-logs",
+        "principal": true
+      }
+    ],
     "metadata_types": [],
     "nota": "Calculado pelo gerador a partir do catálogo; não é cadastro.",
     "objetos_api": [],
     "temas_sem_funcionalidade": []
   },
-  "descricao": "Logs de depuração e rastreamento de execução.",
+  "descricao": "Logs de depuração: o registro detalhado do que a plataforma executou numa requisição, coletado por trace flags.",
   "encadeamento": {
     "evidencias": [
       {
@@ -35,11 +98,13 @@
   "escopo": "Entram logs de depuração e rastreamento de execução.",
   "estado": "desconhecido",
   "fora_do_escopo": "Eventos de uso e atividade ficam em \"Eventos de monitoramento\".",
-  "funcionalidades": [],
+  "funcionalidades": [
+    "func:debug-logs"
+  ],
   "id": "sub:logs-e-rastreamento",
   "natureza": "curadoria_didatica",
   "nome": "Logs e rastreamento",
-  "nota_estado": "Agrupamento proposto na especificação; fronteira ainda não cruzada com a documentação oficial.",
+  "nota_estado": "Tema criado pelo projeto (00-especificacao-grafo.md), não é nomenclatura oficial da Salesforce. Cruzado em 2026-11-10 com áreas da documentação oficial listadas nas referências; a correspondência é parcial e o recorte continua sendo do projeto.",
   "para_iniciantes": {
     "evidencias": [
       {
@@ -47,7 +112,22 @@
       }
     ],
     "exemplo": "Um desenvolvedor liga o log para um usuário, reproduz o erro e lê no log em que linha a gravação falhou.",
-    "explicacao": "Debug logs registram o que aconteceu numa execução: consultas, gravações, Apex, regras e chamadas externas. Serve para investigar por que algo não funcionou."
+    "explicacao": "Debug logs registram o que aconteceu numa execução: consultas, gravações, Apex, regras e chamadas externas. Serve para investigar por que algo não funcionou.",
+    "por_onde_comecar": [
+      "func:debug-logs"
+    ]
   },
+  "referencias_oficiais": [
+    {
+      "fonte": "src:help-debug-logs",
+      "nota": "Cobre o tema: logs de depuração.",
+      "secao": "Debug Logs"
+    },
+    {
+      "fonte": "src:help-debug-setup",
+      "nota": "Cobre parte do tema: trace flags e debug levels.",
+      "secao": "Set Up Debug Logging"
+    }
+  ],
   "sigla": "OBS-01"
 }

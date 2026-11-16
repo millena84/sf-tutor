@@ -1,5 +1,5 @@
 // Método, legenda, filtros e busca: blocos de interface fora do painel.
-import type { DadosBase } from '../data/tipos';
+import type { DadosBase, TipoNo } from '../data/tipos';
 import type { Indice } from '../model/adaptador';
 import type { IndiceBusca } from '../model/busca';
 import { filtrosAtivos, type Filtros } from '../model/filtros';
@@ -133,17 +133,22 @@ export function ligarBusca(input: HTMLInputElement, lista: HTMLElement, ctx: Ctx
     itens = [];
     if (input.value.trim().length < 2) { fechar(); return; }
     if (!rs.length) {
-      lista.append(h('li', { class: 'vazio', role: 'option', 'aria-disabled': 'true' }, 'Nada encontrado. Tente o nome técnico (ex.: ProfileId) ou um termo em português.'));
+      lista.append(h('li', { class: 'vazio', role: 'option', 'aria-disabled': 'true' }, 'Nada encontrado. Tente o nome técnico (ex.: ProfileId), a pasta do projeto (ex.: applications) ou um termo em português.'));
     }
     rs.forEach((r, i) => {
-      const n = ctx.ind.no(r.item.id);
-      const contexto = r.item.pai ? ctx.rotulo(r.item.pai) : (ctx.ind.funcionalidadesDe(r.item.id)[0] ? ctx.rotulo(ctx.ind.funcionalidadesDe(r.item.id)[0]) : '');
-      const oc = ctx.oculto(r.item.id);
-      const li = h('li', { role: 'option', id: `res-${i}`, class: 'resultado', 'aria-selected': 'false' },
-        h('span', { class: `ico ico-${r.item.tipo}`, 'aria-hidden': 'true' }, ICONE_TIPO[r.item.tipo] || n?.sigla?.slice(0, 3) || '•'),
+      // Tipo que só consta do inventário: não tem ficha nem nó no mapa; o resultado traz a informação que existe.
+      const semFicha = r.item.tipo === 'metadata_type_inventario';
+      const tipoNo = semFicha ? 'metadata_type' : (r.item.tipo as TipoNo);
+      const n = semFicha ? undefined : ctx.ind.no(r.item.id);
+      const contexto = semFicha ? '' : r.item.pai ? ctx.rotulo(r.item.pai) : (ctx.ind.funcionalidadesDe(r.item.id)[0] ? ctx.rotulo(ctx.ind.funcionalidadesDe(r.item.id)[0]) : '');
+      const oc = semFicha ? null : ctx.oculto(r.item.id);
+      const nomeTipo = semFicha ? 'Metadata type (XML) · ainda sem ficha' : NOME_TIPO[tipoNo];
+      const li = h('li', { role: 'option', id: `res-${i}`, class: semFicha ? 'resultado sem-ficha' : 'resultado', 'aria-selected': 'false', ...(semFicha ? { 'aria-disabled': 'true' } : {}) },
+        h('span', { class: `ico ico-${tipoNo}`, 'aria-hidden': 'true' }, ICONE_TIPO[tipoNo] || n?.sigla?.slice(0, 3) || '•'),
         h('span', { class: 'res-texto' },
           h('span', { class: 'res-rot' }, r.item.rotulo),
-          h('span', { class: 'res-meta' }, `${NOME_TIPO[r.item.tipo]}${contexto ? ` · ${contexto}` : ''} · casou por ${r.motivo}`),
+          h('span', { class: 'res-meta' }, `${nomeTipo}${contexto ? ` · ${contexto}` : ''}${r.item.local ? ` · ${r.item.local}` : ''} · casou por ${r.motivo}`),
+          semFicha && r.item.descricao ? h('span', { class: 'res-sem-ficha' }, r.item.descricao) : null,
           oc ? h('span', { class: 'res-oculto' }, `Esmaecido pelos filtros: ${oc}`) : null));
       li.addEventListener('mousedown', (ev) => { ev.preventDefault(); escolher(i); });
       itens.push(li);
@@ -156,6 +161,7 @@ export function ligarBusca(input: HTMLInputElement, lista: HTMLElement, ctx: Ctx
     const rs = ctx.indice.buscar(input.value);
     const r = rs[i];
     if (!r) return;
+    if (r.item.sem_ficha) return; // nada a abrir: a explicação já está no próprio resultado
     fechar();
     ctx.abrir(r.item.id);
   };

@@ -17,6 +17,7 @@ interface Preparado {
   textos: string[];
   descricao: string;
   nomeCurto: string; // para campos/propriedades: só o nome após o ponto
+  local: string; // pasta e sufixo, normalizados
 }
 
 export class IndiceBusca {
@@ -28,6 +29,7 @@ export class IndiceBusca {
       textos: item.textos.map(normalizar),
       descricao: normalizar(item.descricao ?? ''),
       nomeCurto: normalizar(item.id.includes('.') ? item.id.slice(item.id.lastIndexOf('.') + 1) : item.rotulo),
+      local: normalizar(item.local ?? ''),
     }));
   }
 
@@ -42,8 +44,11 @@ export class IndiceBusca {
       const idn = normalizar(p.item.id);
       if (p.rotulo === q || p.nomeCurto === q) { pontos = 100; motivo = 'nome'; }
       else if (idn === q || idn.endsWith(':' + q) || idn.endsWith('.' + q)) { pontos = 95; motivo = 'nome técnico'; }
+      // pasta ou sufixo do arquivo (mesmo só o começo, como "application" para a pasta applications) valem mais que um nome
+      // que só começa com o termo: é pela pasta do projeto que muita gente procura o metadata type
+      else if (p.local && p.local.includes(q) && p.textos.some((t) => t.startsWith(q))) { pontos = p.textos.some((t) => t === q) ? 92 : 88; motivo = 'pasta ou sufixo do arquivo'; }
+      else if (p.textos.some((t) => t === q)) { pontos = 85; motivo = 'alias'; }
       else if (p.rotulo.startsWith(q) || p.nomeCurto.startsWith(q)) { pontos = 80; motivo = 'nome'; }
-      else if (p.textos.some((t) => t === q)) { pontos = 75; motivo = 'alias'; }
       else if (p.textos.some((t) => t.startsWith(q))) { pontos = 65; motivo = 'alias'; }
       else if (termos.every((t) => p.rotulo.includes(t) || p.textos.some((x) => x.includes(t)) || idn.includes(t))) { pontos = 50; motivo = 'nome ou alias'; }
       else if (p.descricao && termos.every((t) => p.descricao.includes(t))) { pontos = 30; motivo = 'descrição'; }
@@ -59,5 +64,5 @@ export class IndiceBusca {
 
 const PESO_TIPO: Record<string, number> = {
   funcionalidade: 6, nuvem: 6, classificacao: 5, subclassificacao: 4, metadata_type: 4, objeto_api: 4, objeto_api_juncao: 4,
-  estrutura_auxiliar: 2, propriedade_xml: 1, campo_api: 1, salesforce: 6,
+  estrutura_auxiliar: 2, propriedade_xml: 1, campo_api: 1, salesforce: 6, metadata_type_inventario: 3,
 };

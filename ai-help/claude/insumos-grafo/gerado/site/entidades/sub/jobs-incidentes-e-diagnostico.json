@@ -1,14 +1,123 @@
 {
+  "avancado": [
+    {
+      "evidencias": [
+        {
+          "fonte": "src:help-apex-job-queue"
+        },
+        {
+          "fonte": "src:objref-asyncapexjob"
+        }
+      ],
+      "texto": "A página Apex Jobs lista os jobs Apex dos últimos sete dias e o uso do limite de 24 horas; Apex Flex Queue mostra os batches em espera; Scheduled Jobs, os agendados. Por API, os mesmos dados estão em AsyncApexJob, CronTrigger e CronJobDetail.",
+      "tipo": "implantacao",
+      "titulo": "Onde olhar os jobs"
+    },
+    {
+      "evidencias": [
+        {
+          "fonte": "src:objref-asyncapexjob"
+        },
+        {
+          "fonte": "src:help-debug-logs"
+        },
+        {
+          "fonte": "src:help-setup-audit-trail"
+        }
+      ],
+      "texto": "Para um erro numa execução: veja o job e o primeiro erro em AsyncApexJob; ligue uma trace flag e reproduza para obter o log de depuração; confira no Setup Audit Trail se alguma configuração mudou perto do horário.",
+      "tipo": "decisao",
+      "titulo": "Roteiro de investigação"
+    }
+  ],
   "classificacao": "cls:observabilidade-auditoria-e-operacao",
   "derivado": {
-    "dependencias": [],
-    "funcionalidades": [],
+    "dependencias": [
+      {
+        "destino": "obj:CronTrigger",
+        "destino_no_tema": true,
+        "estado": "verificado",
+        "origem": "obj:AsyncApexJob",
+        "rel": "rel:asyncapexjob-crontrigger",
+        "via": "CronTriggerId"
+      },
+      {
+        "destino": "obj:CronJobDetail",
+        "destino_no_tema": true,
+        "estado": "verificado",
+        "origem": "obj:CronTrigger",
+        "rel": "rel:crontrigger-cronjobdetail",
+        "via": "CronJobDetailId"
+      }
+    ],
+    "funcionalidades": [
+      {
+        "alertas": [
+          "Future methods e classes Queueable ainda não executados aparecem como Future na coluna Job Type.",
+          "Um job agendado aparece em Apex Jobs e em All Scheduled Jobs, mas conta uma vez só no limite.",
+          "Acima do limite de 24 horas de jobs assíncronos ou do limite de jobs agendados, jobs novos são rejeitados."
+        ],
+        "exemplo": "O administrador vê na página Apex Jobs que um batch falhou em três lotes e que a org já usou boa parte do limite de 24 horas.",
+        "id": "func:monitoramento-de-jobs-apex",
+        "principal": false,
+        "tema_principal": "sub:monitoramento-de-jobs-e-limites"
+      }
+    ],
     "metadata_types": [],
     "nota": "Calculado pelo gerador a partir do catálogo; não é cadastro.",
-    "objetos_api": [],
+    "objetos_api": [
+      {
+        "apis": [
+          {
+            "api": "padrao",
+            "estado": "verificado"
+          },
+          {
+            "api": "tooling",
+            "estado": "desconhecido"
+          }
+        ],
+        "funcionalidades": [
+          "func:monitoramento-de-jobs-apex"
+        ],
+        "id": "obj:AsyncApexJob"
+      },
+      {
+        "apis": [
+          {
+            "api": "padrao",
+            "estado": "verificado"
+          },
+          {
+            "api": "tooling",
+            "estado": "desconhecido"
+          }
+        ],
+        "funcionalidades": [
+          "func:monitoramento-de-jobs-apex"
+        ],
+        "id": "obj:CronJobDetail"
+      },
+      {
+        "apis": [
+          {
+            "api": "padrao",
+            "estado": "verificado"
+          },
+          {
+            "api": "tooling",
+            "estado": "desconhecido"
+          }
+        ],
+        "funcionalidades": [
+          "func:monitoramento-de-jobs-apex"
+        ],
+        "id": "obj:CronTrigger"
+      }
+    ],
     "temas_sem_funcionalidade": []
   },
-  "descricao": "Acompanhamento de jobs e investigação de problemas.",
+  "descricao": "O acompanhamento de execuções em segundo plano e a investigação de problemas, combinando jobs, logs e auditoria.",
   "encadeamento": {
     "evidencias": [
       {
@@ -20,11 +129,13 @@
   "escopo": "Entram o acompanhamento de jobs e a investigação de problemas na operação.",
   "estado": "desconhecido",
   "fora_do_escopo": "Limites de execuções assíncronas ficam em \"Monitoramento de jobs e limites\".",
-  "funcionalidades": [],
+  "funcionalidades": [
+    "func:monitoramento-de-jobs-apex"
+  ],
   "id": "sub:jobs-incidentes-e-diagnostico",
   "natureza": "curadoria_didatica",
   "nome": "Jobs, incidentes e diagnóstico",
-  "nota_estado": "Agrupamento proposto na especificação; fronteira ainda não cruzada com a documentação oficial.",
+  "nota_estado": "Tema criado pelo projeto (00-especificacao-grafo.md), não é nomenclatura oficial da Salesforce. Cruzado em 2026-11-10 com áreas da documentação oficial listadas nas referências; a correspondência é parcial e o recorte continua sendo do projeto.",
   "para_iniciantes": {
     "evidencias": [
       {
@@ -32,7 +143,22 @@
       }
     ],
     "exemplo": "A equipe localiza um job assíncrono parado consultando AsyncApexJob.",
-    "explicacao": "Reúne o acompanhamento de jobs e a investigação de problemas na operação."
+    "explicacao": "Reúne o acompanhamento de jobs e a investigação de problemas na operação.",
+    "por_onde_comecar": [
+      "func:monitoramento-de-jobs-apex"
+    ]
   },
+  "referencias_oficiais": [
+    {
+      "fonte": "src:help-apex-job-queue",
+      "nota": "Cobre parte do tema: página Apex Jobs.",
+      "secao": "Monitor the Apex Job Queue"
+    },
+    {
+      "fonte": "src:help-debug-logs",
+      "nota": "Cobre parte do tema: logs de depuração para diagnóstico.",
+      "secao": "Debug Logs"
+    }
+  ],
   "sigla": "OBS-06"
 }

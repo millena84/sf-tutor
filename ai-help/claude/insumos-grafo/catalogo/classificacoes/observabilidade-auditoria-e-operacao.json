@@ -11,7 +11,9 @@
     "explicacao": "Reúne o que mostra como a org está funcionando e o que foi feito nela: logins, alterações de configuração, eventos de uso, consumo de limites e investigação de problemas.",
     "exemplo": "Depois de uma tentativa de acesso suspeita, a equipe confere no histórico de login de qual IP veio a tentativa que falhou.",
     "por_onde_comecar": [
-      "func:estado-e-historico-de-login"
+      "func:setup-audit-trail",
+      "func:debug-logs",
+      "func:event-monitoring"
     ],
     "evidencias": [
       {
@@ -80,6 +82,76 @@
         },
         {
           "fonte": "src:limits-api-requests"
+        }
+      ]
+    },
+    {
+      "tipo": "decisao",
+      "titulo": "Qual registro responde a qual pergunta",
+      "texto": "O que o código fez numa requisição: log de depuração. Quem mudou uma configuração: Setup Audit Trail. Quem entrou e de onde: histórico de login. Como a org é usada e com que desempenho: Event Monitoring. O que rodou em segundo plano: Apex Jobs.",
+      "evidencias": [
+        {
+          "fonte": "src:help-debug-logs"
+        },
+        {
+          "fonte": "src:help-setup-audit-trail"
+        },
+        {
+          "fonte": "src:help-event-monitoring"
+        },
+        {
+          "fonte": "src:help-apex-job-queue"
+        }
+      ]
+    },
+    {
+      "tipo": "limite",
+      "titulo": "Por quanto tempo cada coisa fica",
+      "texto": "Logs de depuração do sistema: 24 horas. Setup Audit Trail: 180 dias. Arquivos de log de eventos: 1 dia sem o add-on; com ele, 30 dias por padrão, até 1 ano. Apex Jobs: a tela lista sete dias.",
+      "evidencias": [
+        {
+          "fonte": "src:apex-debug-log"
+        },
+        {
+          "fonte": "src:help-setup-audit-trail"
+        },
+        {
+          "fonte": "src:help-kb-em-faq"
+        },
+        {
+          "fonte": "src:help-apex-job-queue"
+        }
+      ]
+    },
+    {
+      "tipo": "implantacao",
+      "titulo": "É dado, não metadado",
+      "texto": "Quase nada deste tema é configuração implantável: logs, auditoria e eventos são registros, consultados por tela ou por API. Os objetos cadastrados aqui são SetupAuditTrail, EventLogFile, LoginHistory e AsyncApexJob.",
+      "evidencias": [
+        {
+          "fonte": "src:objref-setupaudittrail"
+        },
+        {
+          "fonte": "src:objref-eventlogfile"
+        },
+        {
+          "fonte": "src:objref-asyncapexjob"
+        }
+      ]
+    },
+    {
+      "tipo": "seguranca",
+      "titulo": "Quem pode ver",
+      "texto": "Setup Audit Trail exige View Setup and Configuration. Logs de depuração exigem View All Data. EventLogFile exige View Event Log Files e API Enabled.",
+      "evidencias": [
+        {
+          "fonte": "src:help-setup-audit-trail"
+        },
+        {
+          "fonte": "src:help-debug-setup"
+        },
+        {
+          "fonte": "src:objref-eventlogfile"
         }
       ]
     }

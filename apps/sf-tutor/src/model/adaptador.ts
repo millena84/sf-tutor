@@ -105,6 +105,7 @@ export class Indice {
   }
 
   private registrarBusca(b: ItemBusca): void {
+    if (b.tipo === 'metadata_type_inventario') return; // só existe na busca: não vira nó do mapa
     const ex = this.nos.get(b.id);
     if (ex) {
       ex.textos = b.textos;

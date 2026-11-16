@@ -23,6 +23,30 @@ describe('busca', () => {
     expect(busca.buscar('PermissionSet')[0].item.id).toMatch(/^(mdt|obj):PermissionSet$/);
   });
   it('consulta vazia não retorna nada', () => { expect(busca.buscar('  ')).toEqual([]); });
+  it('acha o metadata type pela pasta do projeto', () => {
+    const r = busca.buscar('applications')[0];
+    expect(r.item.id).toBe('mdt:CustomApplication');
+    expect(r.motivo).toBe('pasta ou sufixo do arquivo');
+    expect(r.item.local).toContain('pasta applications');
+  });
+  it('o começo do nome da pasta já traz o metadata type entre os primeiros', () => {
+    const ids = busca.buscar('application').slice(0, 6).map((x) => x.item.id);
+    expect(ids).toContain('mdt:CustomApplication');
+  });
+  it('acha pelo sufixo do arquivo, com ou sem ponto', () => {
+    expect(busca.buscar('.flexipage').map((x) => x.item.id)).toContain('mdt:FlexiPage');
+    expect(busca.buscar('flexipages').map((x) => x.item.id)).toContain('mdt:FlexiPage');
+  });
+  it('tipo que só consta do inventário aparece marcado, sem ficha', () => {
+    const r = busca.buscar('reports').find((x) => x.item.rotulo === 'Report');
+    expect(r?.item.tipo).toBe('metadata_type_inventario');
+    expect(r?.item.sem_ficha).toBe(true);
+    expect(r?.item.descricao).toContain('ainda não tem ficha');
+  });
+  it('nenhum metadata type aparece duas vezes (com ficha e sem ficha)', () => {
+    const nomes = busca.buscar('CustomApplication').filter((x) => x.item.rotulo === 'CustomApplication' && x.item.tipo.startsWith('metadata_type'));
+    expect(nomes).toHaveLength(1);
+  });
 });
 
 describe('filtros', () => {

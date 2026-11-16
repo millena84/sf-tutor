@@ -19,6 +19,70 @@
       "texto": "Page layout e segurança de campo se combinam e vale a configuração mais restritiva; a segurança de campo prevalece.",
       "tipo": "seguranca",
       "titulo": "Layout não é segurança"
+    },
+    {
+      "evidencias": [
+        {
+          "fonte": "src:help-layouts-lex"
+        },
+        {
+          "fonte": "src:help-layout-considerations"
+        },
+        {
+          "fonte": "src:help-lightning-std-components"
+        }
+      ],
+      "texto": "No Lightning Experience, o highlights panel é a única parte da página de registro que o page layout editor não configura: os campos dele vêm do compact layout, e as ações, de uma seção do page layout. Os dois layouts são independentes: tirar um campo de um não o tira do outro.",
+      "tipo": "decisao",
+      "titulo": "Quem controla cada parte da página"
+    },
+    {
+      "evidencias": [
+        {
+          "fonte": "src:help-compact-layout-notes"
+        },
+        {
+          "fonte": "src:help-compact-layout-create"
+        },
+        {
+          "fonte": "src:mdapi-compactlayout"
+        }
+      ],
+      "texto": "Até 10 campos; o highlights panel do Lightning Experience usa os sete primeiros, e o app móvel, até dez. Cada record type tem um só compact layout, e ele não é atribuído a perfis nem a usuários. Não aceita campos de texto longo nem multi-select picklist.",
+      "tipo": "limite",
+      "titulo": "Compact layout"
+    },
+    {
+      "evidencias": [
+        {
+          "fonte": "src:help-dynamic-forms"
+        },
+        {
+          "fonte": "src:help-lightning-std-components"
+        },
+        {
+          "fonte": "src:help-rn-dynamic-highlights"
+        }
+      ],
+      "texto": "Com Dynamic Forms, campos e seções viram componentes da Lightning page, distribuídos em colunas e abas e mostrados por regras de visibilidade. Nessas páginas, os campos de criar, editar e clonar vêm da página, não do page layout. Há limite de 100 campos por região, e o Dynamic Highlights Panel aceita até 12 campos.",
+      "tipo": "decisao",
+      "titulo": "Quando usar Dynamic Forms"
+    },
+    {
+      "evidencias": [
+        {
+          "fonte": "src:mdapi-layout"
+        },
+        {
+          "fonte": "src:mdapi-compactlayout"
+        },
+        {
+          "fonte": "src:mdapi-flexipage"
+        }
+      ],
+      "texto": "Layout guarda o page layout: seções (LayoutSection), itens (LayoutItem, com o comportamento Edit, Required ou Readonly), quick actions e related lists. CompactLayout fica dentro do arquivo do objeto. As páginas com Dynamic Forms são componentes FlexiPage.",
+      "tipo": "implantacao",
+      "titulo": "Como metadado"
     }
   ],
   "classificacao": "cls:interface-e-experiencia-do-usuario",
@@ -35,6 +99,22 @@
     ],
     "funcionalidades": [
       {
+        "alertas": [
+          "Não aceita campos text area, long text area, rich text area nem multi-select picklist."
+        ],
+        "exemplo": "No compact layout de Oportunidade ficam Nome, Valor, Data de fechamento e Fase; são eles que aparecem no topo da página.",
+        "id": "func:compact-layouts",
+        "principal": true
+      },
+      {
+        "alertas": [
+          "Em páginas com Dynamic Forms, os campos de criar, editar e clonar vêm da página, não do page layout."
+        ],
+        "exemplo": "Na página de Caso, a seção Reembolso só aparece quando o tipo do caso é Devolução.",
+        "id": "func:dynamic-forms",
+        "principal": true
+      },
+      {
         "exemplo": "Uma página de registro de Contrato com abas e um componente de histórico.",
         "id": "func:lightning-pages",
         "pre_requisitos": [
@@ -45,6 +125,16 @@
         "tema_principal": "sub:lightning-pages-e-componentes"
       },
       {
+        "alertas": [
+          "O highlights panel não é configurado pelo page layout: os campos dele vêm do compact layout.",
+          "Em páginas com Dynamic Forms, os campos vistos ao criar, editar ou clonar vêm da Lightning page, não do page layout.",
+          "Tirar um campo do layout não é controle de acesso: quem decide é a segurança em nível de campo."
+        ],
+        "exemplo": "No layout de Conta do time de vendas, o campo Segmento é obrigatório e a related list de Oportunidades vem antes da de Casos.",
+        "id": "func:page-layouts",
+        "principal": true
+      },
+      {
         "exemplo": "Contratos 'Manutenção' e 'Licenciamento' com listas de status diferentes.",
         "id": "func:tipos-de-registro",
         "principal": false,
@@ -53,11 +143,30 @@
     ],
     "metadata_types": [
       {
+        "estrutura": "completa",
+        "funcionalidades": [
+          "func:compact-layouts"
+        ],
+        "id": "mdt:CompactLayout",
+        "nota_suporte": null,
+        "suporte_cli": "suportado"
+      },
+      {
         "estrutura": "parcial",
         "funcionalidades": [
+          "func:dynamic-forms",
           "func:lightning-pages"
         ],
         "id": "mdt:FlexiPage",
+        "nota_suporte": null,
+        "suporte_cli": "suportado"
+      },
+      {
+        "estrutura": "parcial",
+        "funcionalidades": [
+          "func:page-layouts"
+        ],
+        "id": "mdt:Layout",
         "nota_suporte": null,
         "suporte_cli": "suportado"
       },
@@ -108,7 +217,7 @@
     ],
     "temas_sem_funcionalidade": []
   },
-  "descricao": "Organização dos campos e seções na página de um registro.",
+  "descricao": "O que aparece na página de um registro e quem controla cada parte: page layouts, compact layouts e Dynamic Forms.",
   "encadeamento": {
     "evidencias": [
       {
@@ -124,13 +233,16 @@
   "estado": "desconhecido",
   "fora_do_escopo": "A montagem de páginas com componentes no Lightning App Builder fica em \"Lightning pages e componentes\".",
   "funcionalidades": [
+    "func:compact-layouts",
+    "func:dynamic-forms",
     "func:lightning-pages",
+    "func:page-layouts",
     "func:tipos-de-registro"
   ],
   "id": "sub:layouts-e-paginas-de-registro",
   "natureza": "curadoria_didatica",
   "nome": "Layouts e páginas de registro",
-  "nota_estado": "Agrupamento proposto na especificação; fronteira ainda não cruzada com a documentação oficial.",
+  "nota_estado": "Tema criado pelo projeto (00-especificacao-grafo.md), não é nomenclatura oficial da Salesforce. Cruzado em 2026-11-10 com áreas da documentação oficial listadas nas referências; a correspondência é parcial e o recorte continua sendo do projeto.",
   "para_iniciantes": {
     "evidencias": [
       {
@@ -143,9 +255,27 @@
     "exemplo": "Na página de uma oportunidade, uma seção de campos só aparece quando faz sentido para a etapa atual.",
     "explicacao": "Define como a página de um registro se organiza: quais campos e seções aparecem e em que ordem. Pode ser feito pelo page layout ou, nos objetos que suportam, com Dynamic Forms na Lightning page.",
     "por_onde_comecar": [
-      "func:lightning-pages",
-      "func:tipos-de-registro"
+      "func:page-layouts",
+      "func:compact-layouts",
+      "func:dynamic-forms"
     ]
   },
+  "referencias_oficiais": [
+    {
+      "fonte": "src:help-layouts-lex",
+      "nota": "Cobre parte do tema: page layout no Lightning Experience.",
+      "secao": "How Page Layout Elements Display in Lightning Experience"
+    },
+    {
+      "fonte": "src:help-compact-layouts",
+      "nota": "Cobre parte do tema: compact layouts.",
+      "secao": "Compact Layouts"
+    },
+    {
+      "fonte": "src:help-dynamic-forms",
+      "nota": "Cobre parte do tema: Dynamic Forms.",
+      "secao": "Break Up Your Record Details with Dynamic Forms"
+    }
+  ],
   "sigla": "UIX-03"
 }

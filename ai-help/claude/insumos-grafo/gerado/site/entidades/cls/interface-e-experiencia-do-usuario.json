@@ -46,6 +46,73 @@
       "texto": "Dynamic Forms, Screen Flows e LWC podem ir por pacotes gerenciados (1GP e 2GP), pacotes desbloqueados, change sets e DevOps Center. Omnistudio usa o IDX Workbench e não aceita empacotamento, o que pesa na escolha quando a entrega é por pacote.",
       "tipo": "implantacao",
       "titulo": "Como levar entre ambientes"
+    },
+    {
+      "evidencias": [
+        {
+          "fonte": "src:help-layouts-lex"
+        },
+        {
+          "fonte": "src:help-compact-layouts"
+        },
+        {
+          "fonte": "src:help-dynamic-forms"
+        }
+      ],
+      "texto": "Três recursos decidem o que aparece no registro. O page layout define seções, campos, botões e related lists. O compact layout define os campos do highlights panel, no topo. Com Dynamic Forms, os campos saem do page layout e viram componentes da Lightning page, com regras de visibilidade.",
+      "tipo": "decisao",
+      "titulo": "Page layout, compact layout ou Dynamic Forms"
+    },
+    {
+      "evidencias": [
+        {
+          "fonte": "src:mdapi-customapplication"
+        },
+        {
+          "fonte": "src:mdapi-layout"
+        },
+        {
+          "fonte": "src:mdapi-compactlayout"
+        },
+        {
+          "fonte": "src:mdapi-flexipage"
+        },
+        {
+          "fonte": "src:mdapi-lightningexperiencetheme"
+        },
+        {
+          "fonte": "src:mdapi-brandingset"
+        },
+        {
+          "fonte": "src:mdapi-lightningcomponentbundle"
+        }
+      ],
+      "texto": "CustomApplication guarda cada app; Layout, cada page layout; CompactLayout, cada compact layout (dentro do objeto); FlexiPage, cada Lightning page; LightningExperienceTheme e BrandingSet, o tema e suas cores e imagens. O código de interface fica em LightningComponentBundle, AuraDefinitionBundle, ApexPage e ApexComponent.",
+      "tipo": "implantacao",
+      "titulo": "Como metadado"
+    },
+    {
+      "evidencias": [
+        {
+          "fonte": "src:help-layout-considerations"
+        }
+      ],
+      "texto": "Mudanças em page layouts, compact layouts e Lightning pages levam cerca de 15 minutos para aparecer no Lightning Experience ao recarregar a página; para outros usuários, até uma hora.",
+      "tipo": "atencao",
+      "titulo": "A mudança não aparece na hora"
+    },
+    {
+      "evidencias": [
+        {
+          "fonte": "src:mdapi-customapplication"
+        },
+        {
+          "fonte": "src:mdapi-layout"
+        }
+      ],
+      "texto": "Ao recuperar um app ou um page layout pela Metadata API, ele passa a aparecer também nos componentes Profile e PermissionSet recuperados no mesmo pacote.",
+      "tipo": "atencao",
+      "titulo": "Recuperar puxa perfis e permission sets"
     }
   ],
   "derivado": {
@@ -98,11 +165,36 @@
         "principal": true
       },
       {
+        "alertas": [
+          "O tipo de navegação (padrão ou console) é escolhido na criação e não pode ser alterado depois.",
+          "Uma utility bar só com itens de segundo plano não aparece: é preciso ao menos um item visível."
+        ],
+        "exemplo": "O app Financeiro mostra as abas Contas, Faturas e Relatórios, tem a cor da área e fica disponível só para os perfis do financeiro.",
+        "id": "func:lightning-apps",
+        "principal": true
+      },
+      {
         "exemplo": "A tab 'Contratos de Serviço' no app de Operações.",
         "id": "func:tabs",
         "pre_requisitos": [
           "Edições variam por tipo de tab (Ajuda); tabs de Lightning page: todas as edições exceto Database.com."
         ],
+        "principal": true
+      },
+      {
+        "alertas": [
+          "Não aceita campos text area, long text area, rich text area nem multi-select picklist."
+        ],
+        "exemplo": "No compact layout de Oportunidade ficam Nome, Valor, Data de fechamento e Fase; são eles que aparecem no topo da página.",
+        "id": "func:compact-layouts",
+        "principal": true
+      },
+      {
+        "alertas": [
+          "Em páginas com Dynamic Forms, os campos de criar, editar e clonar vêm da página, não do page layout."
+        ],
+        "exemplo": "Na página de Caso, a seção Reembolso só aparece quando o tipo do caso é Devolução.",
+        "id": "func:dynamic-forms",
         "principal": true
       },
       {
@@ -115,10 +207,48 @@
         "principal": true
       },
       {
+        "alertas": [
+          "O highlights panel não é configurado pelo page layout: os campos dele vêm do compact layout.",
+          "Em páginas com Dynamic Forms, os campos vistos ao criar, editar ou clonar vêm da Lightning page, não do page layout.",
+          "Tirar um campo do layout não é controle de acesso: quem decide é a segurança em nível de campo."
+        ],
+        "exemplo": "No layout de Conta do time de vendas, o campo Segmento é obrigatório e a related list de Oportunidades vem antes da de Casos.",
+        "id": "func:page-layouts",
+        "principal": true
+      },
+      {
         "exemplo": "Contratos 'Manutenção' e 'Licenciamento' com listas de status diferentes.",
         "id": "func:tipos-de-registro",
         "principal": false,
         "tema_principal": "sub:tipos-de-registro-e-processos-de-negocio"
+      },
+      {
+        "alertas": [
+          "Testes Jest não funcionam com Aura components.",
+          "Cada bundle aceita um só arquivo de cada tipo principal (.app, .cmp, .design, .evt, .intf, .tokens)."
+        ],
+        "exemplo": "Um bundle antigo tem sample.cmp, sampleController.js e sampleHelper.js; num LWC, a marcação vai para sample.html e os dois .js viram um só.",
+        "id": "func:aura-components",
+        "principal": false,
+        "tema_principal": "sub:codigo-e-bundles"
+      },
+      {
+        "alertas": [
+          "Sem o arquivo de configuração .js-meta.xml, o envio do componente à org dá erro."
+        ],
+        "exemplo": "Um componente mostra o saldo do cliente na página de registro da conta; o arquivo de configuração o libera para record pages.",
+        "id": "func:lightning-web-components",
+        "principal": false,
+        "tema_principal": "sub:codigo-e-bundles"
+      },
+      {
+        "alertas": [
+          "Abas de objeto padrão substituídas por página Visualforce não são suportadas no app móvel."
+        ],
+        "exemplo": "Uma página Visualforce antiga gera a proposta em formato de impressão a partir de uma oportunidade.",
+        "id": "func:visualforce",
+        "principal": false,
+        "tema_principal": "sub:codigo-e-bundles"
       },
       {
         "exemplo": "'Registrar renovação' a partir de um contrato, abrindo um flow.",
@@ -150,15 +280,80 @@
         ],
         "principal": false,
         "tema_principal": "sub:experiencias-externas"
+      },
+      {
+        "alertas": [
+          "Ativar um tema SLDS 2 liga o SLDS 2 para a org.",
+          "O dark mode vale para temas SLDS 2 e está em Beta, com disponibilidade por edição.",
+          "Cada app pode usar a própria cor e o próprio logo no lugar do tema da org."
+        ],
+        "exemplo": "A org ativa um tema com o logo e a cor da empresa; uma usuária prefere a densidade Compact e o dark mode.",
+        "id": "func:temas-e-branding",
+        "principal": true
       }
     ],
     "metadata_types": [
       {
         "estrutura": "completa",
         "funcionalidades": [
+          "func:visualforce"
+        ],
+        "id": "mdt:ApexComponent",
+        "nota_suporte": null,
+        "suporte_cli": "suportado"
+      },
+      {
+        "estrutura": "completa",
+        "funcionalidades": [
+          "func:visualforce"
+        ],
+        "id": "mdt:ApexPage",
+        "nota_suporte": null,
+        "suporte_cli": "suportado"
+      },
+      {
+        "estrutura": "completa",
+        "funcionalidades": [
+          "func:aura-components"
+        ],
+        "id": "mdt:AuraDefinitionBundle",
+        "nota_suporte": null,
+        "suporte_cli": "suportado"
+      },
+      {
+        "estrutura": "completa",
+        "funcionalidades": [
+          "func:temas-e-branding"
+        ],
+        "id": "mdt:BrandingSet",
+        "nota_suporte": null,
+        "suporte_cli": "suportado"
+      },
+      {
+        "estrutura": "completa",
+        "funcionalidades": [
           "func:digital-experiences"
         ],
         "id": "mdt:CommunitiesSettings",
+        "nota_suporte": null,
+        "suporte_cli": "suportado"
+      },
+      {
+        "estrutura": "completa",
+        "funcionalidades": [
+          "func:compact-layouts"
+        ],
+        "id": "mdt:CompactLayout",
+        "nota_suporte": null,
+        "suporte_cli": "suportado"
+      },
+      {
+        "estrutura": "completa",
+        "funcionalidades": [
+          "func:apps-de-console",
+          "func:lightning-apps"
+        ],
+        "id": "mdt:CustomApplication",
         "nota_suporte": null,
         "suporte_cli": "suportado"
       },
@@ -174,9 +369,37 @@
       {
         "estrutura": "parcial",
         "funcionalidades": [
+          "func:dynamic-forms",
           "func:lightning-pages"
         ],
         "id": "mdt:FlexiPage",
+        "nota_suporte": null,
+        "suporte_cli": "suportado"
+      },
+      {
+        "estrutura": "parcial",
+        "funcionalidades": [
+          "func:page-layouts"
+        ],
+        "id": "mdt:Layout",
+        "nota_suporte": null,
+        "suporte_cli": "suportado"
+      },
+      {
+        "estrutura": "completa",
+        "funcionalidades": [
+          "func:lightning-web-components"
+        ],
+        "id": "mdt:LightningComponentBundle",
+        "nota_suporte": null,
+        "suporte_cli": "suportado"
+      },
+      {
+        "estrutura": "completa",
+        "funcionalidades": [
+          "func:temas-e-branding"
+        ],
+        "id": "mdt:LightningExperienceTheme",
         "nota_suporte": null,
         "suporte_cli": "suportado"
       },
@@ -291,9 +514,7 @@
         "id": "obj:RecordType"
       }
     ],
-    "temas_sem_funcionalidade": [
-      "sub:acessibilidade-e-personalizacao"
-    ]
+    "temas_sem_funcionalidade": []
   },
   "descricao": "Reúne o que a pessoa usuária vê e usa: apps, navegação, páginas, ações e orientação visual.",
   "encadeamento": {
@@ -356,8 +577,9 @@
     "exemplo": "Uma vendedora abre o app de vendas, clica na aba Oportunidades e abre uma oportunidade. Na mesma página ela vê os campos principais, um botão de ação rápida e a barra com as etapas da venda.",
     "explicacao": "É o que a pessoa vê e usa ao trabalhar na Salesforce: o app aberto, as abas de navegação, a página de um registro com seus campos e componentes, os botões de ação e as etapas que guiam um processo. Configurar este tema é decidir o que aparece, onde e em que ordem, sem mudar os dados guardados por trás.",
     "por_onde_comecar": [
+      "func:lightning-apps",
       "func:lightning-pages",
-      "func:tabs"
+      "func:page-layouts"
     ]
   },
   "referencias_oficiais": [

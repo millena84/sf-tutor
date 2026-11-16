@@ -45,10 +45,96 @@
       "texto": "O recurso /limits mostra o consumo com precisão de até cinco minutos: evite consultá-lo em rajadas e configure notificações de uso de API.",
       "tipo": "atencao",
       "titulo": "Consumo de API"
+    },
+    {
+      "evidencias": [
+        {
+          "fonte": "src:help-debug-logs"
+        },
+        {
+          "fonte": "src:help-setup-audit-trail"
+        },
+        {
+          "fonte": "src:help-event-monitoring"
+        },
+        {
+          "fonte": "src:help-apex-job-queue"
+        }
+      ],
+      "texto": "O que o código fez numa requisição: log de depuração. Quem mudou uma configuração: Setup Audit Trail. Quem entrou e de onde: histórico de login. Como a org é usada e com que desempenho: Event Monitoring. O que rodou em segundo plano: Apex Jobs.",
+      "tipo": "decisao",
+      "titulo": "Qual registro responde a qual pergunta"
+    },
+    {
+      "evidencias": [
+        {
+          "fonte": "src:apex-debug-log"
+        },
+        {
+          "fonte": "src:help-setup-audit-trail"
+        },
+        {
+          "fonte": "src:help-kb-em-faq"
+        },
+        {
+          "fonte": "src:help-apex-job-queue"
+        }
+      ],
+      "texto": "Logs de depuração do sistema: 24 horas. Setup Audit Trail: 180 dias. Arquivos de log de eventos: 1 dia sem o add-on; com ele, 30 dias por padrão, até 1 ano. Apex Jobs: a tela lista sete dias.",
+      "tipo": "limite",
+      "titulo": "Por quanto tempo cada coisa fica"
+    },
+    {
+      "evidencias": [
+        {
+          "fonte": "src:objref-setupaudittrail"
+        },
+        {
+          "fonte": "src:objref-eventlogfile"
+        },
+        {
+          "fonte": "src:objref-asyncapexjob"
+        }
+      ],
+      "texto": "Quase nada deste tema é configuração implantável: logs, auditoria e eventos são registros, consultados por tela ou por API. Os objetos cadastrados aqui são SetupAuditTrail, EventLogFile, LoginHistory e AsyncApexJob.",
+      "tipo": "implantacao",
+      "titulo": "É dado, não metadado"
+    },
+    {
+      "evidencias": [
+        {
+          "fonte": "src:help-setup-audit-trail"
+        },
+        {
+          "fonte": "src:help-debug-setup"
+        },
+        {
+          "fonte": "src:objref-eventlogfile"
+        }
+      ],
+      "texto": "Setup Audit Trail exige View Setup and Configuration. Logs de depuração exigem View All Data. EventLogFile exige View Event Log Files e API Enabled.",
+      "tipo": "seguranca",
+      "titulo": "Quem pode ver"
     }
   ],
   "derivado": {
     "dependencias": [
+      {
+        "destino": "obj:CronTrigger",
+        "destino_no_tema": true,
+        "estado": "verificado",
+        "origem": "obj:AsyncApexJob",
+        "rel": "rel:asyncapexjob-crontrigger",
+        "via": "CronTriggerId"
+      },
+      {
+        "destino": "obj:CronJobDetail",
+        "destino_no_tema": true,
+        "estado": "verificado",
+        "origem": "obj:CronTrigger",
+        "rel": "rel:crontrigger-cronjobdetail",
+        "via": "CronJobDetailId"
+      },
       {
         "destino": "obj:User",
         "destino_no_tema": false,
@@ -69,6 +155,25 @@
     "funcionalidades": [
       {
         "alertas": [
+          "Trace flags de classe e de trigger mudam o nível de detalhe, mas sozinhas não fazem um log ser gerado.",
+          "Apagar um debug level apaga as trace flags que o usam.",
+          "Em produção, evite trace flags em usuários de API e em código de alto volume."
+        ],
+        "exemplo": "Para entender um erro que só acontece com uma usuária, o administrador cria uma trace flag para ela, reproduz o erro e lê o log.",
+        "id": "func:debug-logs",
+        "principal": true
+      },
+      {
+        "alertas": [
+          "Mudanças de permissões de usuário feitas por change set não são registradas.",
+          "Para ver o histórico, é preciso a permissão View Setup and Configuration."
+        ],
+        "exemplo": "Um perfil ganhou uma permissão inesperada; o Setup Audit Trail mostra que administrador a concedeu e em que dia.",
+        "id": "func:setup-audit-trail",
+        "principal": true
+      },
+      {
+        "alertas": [
           "Não existe um item 'IpLogin': restrições de IP por perfil estão em Profile.loginIpRanges; o IP de cada tentativa está em LoginHistory.SourceIp.",
           "A tela de Setup mostra até 20.000 registros dos últimos 6 meses; o download cobre os últimos 6 meses (Ajuda). Retenção do objeto LoginHistory na API não confirmada."
         ],
@@ -80,11 +185,95 @@
         ],
         "principal": false,
         "tema_principal": "sub:sessoes-e-politicas-de-login"
+      },
+      {
+        "alertas": [
+          "Event Monitoring e Real-Time Event Monitoring guardam coisas diferentes: o primeiro usa o objeto EventLogFile; o segundo, não.",
+          "O esquema de um arquivo de log pode mudar a cada release."
+        ],
+        "exemplo": "A equipe de segurança baixa os logs do tipo Report para ver quem exportou relatórios numa semana.",
+        "id": "func:event-monitoring",
+        "principal": true
+      },
+      {
+        "alertas": [
+          "Future methods e classes Queueable ainda não executados aparecem como Future na coluna Job Type.",
+          "Um job agendado aparece em Apex Jobs e em All Scheduled Jobs, mas conta uma vez só no limite.",
+          "Acima do limite de 24 horas de jobs assíncronos ou do limite de jobs agendados, jobs novos são rejeitados."
+        ],
+        "exemplo": "O administrador vê na página Apex Jobs que um batch falhou em três lotes e que a org já usou boa parte do limite de 24 horas.",
+        "id": "func:monitoramento-de-jobs-apex",
+        "principal": false,
+        "tema_principal": "sub:monitoramento-de-jobs-e-limites"
       }
     ],
     "metadata_types": [],
     "nota": "Calculado pelo gerador a partir do catálogo; não é cadastro.",
     "objetos_api": [
+      {
+        "apis": [
+          {
+            "api": "padrao",
+            "estado": "verificado"
+          },
+          {
+            "api": "tooling",
+            "estado": "desconhecido"
+          }
+        ],
+        "funcionalidades": [
+          "func:monitoramento-de-jobs-apex"
+        ],
+        "id": "obj:AsyncApexJob"
+      },
+      {
+        "apis": [
+          {
+            "api": "padrao",
+            "estado": "verificado"
+          },
+          {
+            "api": "tooling",
+            "estado": "desconhecido"
+          }
+        ],
+        "funcionalidades": [
+          "func:monitoramento-de-jobs-apex"
+        ],
+        "id": "obj:CronJobDetail"
+      },
+      {
+        "apis": [
+          {
+            "api": "padrao",
+            "estado": "verificado"
+          },
+          {
+            "api": "tooling",
+            "estado": "desconhecido"
+          }
+        ],
+        "funcionalidades": [
+          "func:monitoramento-de-jobs-apex"
+        ],
+        "id": "obj:CronTrigger"
+      },
+      {
+        "apis": [
+          {
+            "api": "padrao",
+            "estado": "verificado"
+          },
+          {
+            "api": "tooling",
+            "estado": "desconhecido"
+          }
+        ],
+        "funcionalidades": [
+          "func:event-monitoring"
+        ],
+        "id": "obj:EventLogFile"
+      },
       {
         "apis": [
           {
@@ -113,17 +302,29 @@
           }
         ],
         "funcionalidades": [
+          "func:setup-audit-trail"
+        ],
+        "id": "obj:SetupAuditTrail"
+      },
+      {
+        "apis": [
+          {
+            "api": "padrao",
+            "estado": "verificado"
+          },
+          {
+            "api": "tooling",
+            "estado": "desconhecido"
+          }
+        ],
+        "funcionalidades": [
           "func:estado-e-historico-de-login"
         ],
         "id": "obj:UserLogin"
       }
     ],
     "temas_sem_funcionalidade": [
-      "sub:logs-e-rastreamento",
-      "sub:auditoria-de-configuracao",
-      "sub:eventos-de-monitoramento",
-      "sub:limites-e-consumo",
-      "sub:jobs-incidentes-e-diagnostico"
+      "sub:limites-e-consumo"
     ]
   },
   "descricao": "Reúne como a operação da org é acompanhada: logs, auditoria, histórico de login, limites e diagnóstico.",
@@ -161,7 +362,9 @@
     "exemplo": "Depois de uma tentativa de acesso suspeita, a equipe confere no histórico de login de qual IP veio a tentativa que falhou.",
     "explicacao": "Reúne o que mostra como a org está funcionando e o que foi feito nela: logins, alterações de configuração, eventos de uso, consumo de limites e investigação de problemas.",
     "por_onde_comecar": [
-      "func:estado-e-historico-de-login"
+      "func:setup-audit-trail",
+      "func:debug-logs",
+      "func:event-monitoring"
     ]
   },
   "referencias_oficiais": [

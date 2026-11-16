@@ -4,7 +4,7 @@
   "sigla": "OBS-02",
   "classificacao": "cls:observabilidade-auditoria-e-operacao",
   "natureza": "curadoria_didatica",
-  "descricao": "Registro de alterações feitas no Setup.",
+  "descricao": "O histórico das mudanças feitas no Setup: o que mudou, quando e por quem.",
   "escopo": "Entra o registro de alterações feitas no Setup.",
   "fora_do_escopo": "Histórico de alterações de registros fica em \"Rastreabilidade e histórico\".",
   "para_iniciantes": {
@@ -14,6 +14,9 @@
       {
         "fonte": "src:security-guide"
       }
+    ],
+    "por_onde_comecar": [
+      "func:setup-audit-trail"
     ]
   },
   "encadeamento": {
@@ -24,7 +27,59 @@
       }
     ]
   },
-  "funcionalidades": [],
+  "avancado": [
+    {
+      "tipo": "limite",
+      "titulo": "O que a tela guarda",
+      "texto": "A tela View Setup Audit Trail mostra as 20 mudanças mais recentes; o botão Download baixa o histórico dos últimos 180 dias. Depois disso, os registros são apagados: para guardar mais, é preciso exportar com regularidade.",
+      "evidencias": [
+        {
+          "fonte": "src:help-setup-audit-trail"
+        },
+        {
+          "fonte": "src:objref-setupaudittrail"
+        }
+      ]
+    },
+    {
+      "tipo": "atencao",
+      "titulo": "O que fica de fora",
+      "texto": "Mudanças de permissões de usuário feitas por change set não são registradas no Setup Audit Trail. Mudanças em valores de campos de registros são outro recurso, o Field History Tracking.",
+      "evidencias": [
+        {
+          "fonte": "src:help-kb-audit-changesets"
+        },
+        {
+          "fonte": "src:help-security-audit"
+        }
+      ]
+    },
+    {
+      "tipo": "implantacao",
+      "titulo": "Por API",
+      "texto": "O objeto SetupAuditTrail traz a categoria da mudança (Action), a seção do Setup (Section), a descrição completa (Display) e, quando houve Login-As, o usuário delegado (DelegateUser). Não aceita consultas agregadas.",
+      "evidencias": [
+        {
+          "fonte": "src:objref-setupaudittrail"
+        }
+      ]
+    }
+  ],
+  "funcionalidades": [
+    "func:setup-audit-trail"
+  ],
   "estado": "desconhecido",
-  "nota_estado": "Agrupamento proposto na especificação; fronteira ainda não cruzada com a documentação oficial."
+  "nota_estado": "Tema criado pelo projeto (00-especificacao-grafo.md), não é nomenclatura oficial da Salesforce. Cruzado em 2026-11-10 com áreas da documentação oficial listadas nas referências; a correspondência é parcial e o recorte continua sendo do projeto.",
+  "referencias_oficiais": [
+    {
+      "fonte": "src:help-setup-audit-trail",
+      "secao": "Monitor Setup Changes with Setup Audit Trail",
+      "nota": "Cobre o tema: Setup Audit Trail."
+    },
+    {
+      "fonte": "src:objref-setupaudittrail",
+      "secao": "SetupAuditTrail",
+      "nota": "Cobre parte do tema: objeto SetupAuditTrail."
+    }
+  ]
 }
