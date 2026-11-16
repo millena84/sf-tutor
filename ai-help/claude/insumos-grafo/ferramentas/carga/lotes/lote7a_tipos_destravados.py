@@ -247,7 +247,9 @@ def arquivos_filho_workflow(nome):
 def filho(nome, o_que_e, finalidade, desde, rows, exemplo, alertas=None):
     el = M.REG["types"]["workflow"]["children"]["types"][nome.lower()]["xmlElementName"]
     ex = CAB + f"<!-- No arquivo .workflow do objeto, este conteúdo fica no elemento <{el}> -->\n<{nome} {NS}>\n{exemplo}\n</{nome}>"
-    M.mdt(nome, S_WF, o_que_e, finalidade, desde, rows, parent="Workflow", exemplo=ex, arquivos_prontos=arquivos_filho_workflow(nome),
+    # A página só diz o que o subtipo estende no caso de WorkflowRule (fullName herdado de Metadata).
+    estende = "Metadata" if nome == "WorkflowRule" else "não declarado na página"
+    M.mdt(nome, S_WF, o_que_e, finalidade, desde, rows, parent="Workflow", exemplo=ex, arquivos_prontos=arquivos_filho_workflow(nome), estende=estende,
           alertas=[f"No arquivo .workflow, cada componente deste tipo é um elemento <{el}> dentro de Workflow."] + (alertas or []),
           cobertura_nota=NOTA_COB + f" Contagem da seção {nome} da página de Workflow.")
     if desde is None:
