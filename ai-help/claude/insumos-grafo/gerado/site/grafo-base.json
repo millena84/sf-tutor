@@ -533,6 +533,12 @@
       "tipo": "representacao_objeto_api"
     },
     {
+      "destino": "mdt:CaseSettings",
+      "origem": "func:casos",
+      "papel": "Configurações gerais de casos: dono padrão, notificações, Email-to-Case e Web-to-Case.",
+      "tipo": "representacao_xml"
+    },
+    {
       "destino": "obj:Case",
       "origem": "func:casos",
       "papel": "Registro de cada caso.",
@@ -686,6 +692,12 @@
       "destino": "mdt:CustomLabels",
       "origem": "func:custom-labels",
       "papel": "Conjunto de custom labels implantável.",
+      "tipo": "representacao_xml"
+    },
+    {
+      "destino": "mdt:Translations",
+      "origem": "func:custom-labels",
+      "papel": "Guarda as traduções dos custom labels (customLabels), um arquivo por idioma.",
       "tipo": "representacao_xml"
     },
     {
@@ -1511,10 +1523,64 @@
       "tipo": "representacao_xml"
     },
     {
+      "destino": "mdt:Translations",
+      "origem": "func:translation-workbench",
+      "papel": "Arquivo por idioma com as traduções feitas no Translation Workbench.",
+      "tipo": "representacao_xml"
+    },
+    {
       "destino": "obj:User",
       "origem": "func:usuarios",
       "papel": "Registro de cada usuário.",
       "tipo": "representacao_objeto_api"
+    },
+    {
+      "destino": "mdt:Workflow",
+      "origem": "func:workflow-rules-e-process-builder",
+      "papel": "Arquivo por objeto que reúne as regras de workflow e suas ações.",
+      "tipo": "representacao_xml"
+    },
+    {
+      "destino": "mdt:WorkflowAlert",
+      "origem": "func:workflow-rules-e-process-builder",
+      "papel": "Ação que envia um alerta de e-mail.",
+      "tipo": "representacao_xml"
+    },
+    {
+      "destino": "mdt:WorkflowFieldUpdate",
+      "origem": "func:workflow-rules-e-process-builder",
+      "papel": "Ação que atualiza um campo.",
+      "tipo": "representacao_xml"
+    },
+    {
+      "destino": "mdt:WorkflowFlowAction",
+      "origem": "func:workflow-rules-e-process-builder",
+      "papel": "Ação que inicia um flow (flow trigger; piloto encerrado).",
+      "tipo": "representacao_xml"
+    },
+    {
+      "destino": "mdt:WorkflowKnowledgePublish",
+      "origem": "func:workflow-rules-e-process-builder",
+      "papel": "Ação que publica artigos do Knowledge.",
+      "tipo": "representacao_xml"
+    },
+    {
+      "destino": "mdt:WorkflowOutboundMessage",
+      "origem": "func:workflow-rules-e-process-builder",
+      "papel": "Ação que envia uma mensagem SOAP a um endpoint externo.",
+      "tipo": "representacao_xml"
+    },
+    {
+      "destino": "mdt:WorkflowRule",
+      "origem": "func:workflow-rules-e-process-builder",
+      "papel": "Cada regra de workflow: critério, momento de avaliação e ações.",
+      "tipo": "representacao_xml"
+    },
+    {
+      "destino": "mdt:WorkflowTask",
+      "origem": "func:workflow-rules-e-process-builder",
+      "papel": "Ação que cria uma tarefa.",
+      "tipo": "representacao_xml"
     },
     {
       "destino": "mdx:ApprovalSubmitter",
@@ -1598,6 +1664,21 @@
     {
       "destino": "mdx:Holidays",
       "origem": "mdt:BusinessHoursSettings.holidays",
+      "tipo": "tipo_composto"
+    },
+    {
+      "destino": "mdx:FeedItemSettings",
+      "origem": "mdt:CaseSettings.caseFeedItemSettings",
+      "tipo": "tipo_composto"
+    },
+    {
+      "destino": "mdx:EmailToCaseSettings",
+      "origem": "mdt:CaseSettings.emailToCase",
+      "tipo": "tipo_composto"
+    },
+    {
+      "destino": "mdx:WebToCaseSettings",
+      "origem": "mdt:CaseSettings.webToCase",
       "tipo": "tipo_composto"
     },
     {
@@ -2371,12 +2452,202 @@
       "tipo": "representacao_comum"
     },
     {
+      "destino": "mdx:AiCoachAgentScnrDefTranslation",
+      "origem": "mdt:Translations.aiCoachAgentScnrDefs",
+      "tipo": "tipo_composto"
+    },
+    {
+      "destino": "mdx:BotBlockTranslation",
+      "origem": "mdt:Translations.botBlocks",
+      "tipo": "tipo_composto"
+    },
+    {
+      "destino": "mdx:BotTemplateTranslation",
+      "origem": "mdt:Translations.botTemplates",
+      "tipo": "tipo_composto"
+    },
+    {
+      "destino": "mdx:BotTranslation",
+      "origem": "mdt:Translations.bots",
+      "tipo": "tipo_composto"
+    },
+    {
+      "destino": "mdx:ContextDefinitionTranslation",
+      "origem": "mdt:Translations.contextDefinitions",
+      "tipo": "tipo_composto"
+    },
+    {
+      "destino": "mdx:ConversationMessageDefinitionTranslation",
+      "origem": "mdt:Translations.conversationMessageDefinitions",
+      "tipo": "tipo_composto"
+    },
+    {
+      "destino": "mdx:CustomApplicationTranslation",
+      "origem": "mdt:Translations.customApplications",
+      "tipo": "tipo_composto"
+    },
+    {
+      "destino": "mdx:CustomLabelTranslation",
+      "origem": "mdt:Translations.customLabels",
+      "tipo": "tipo_composto"
+    },
+    {
+      "destino": "mdx:CustomPageWebLinkTranslation",
+      "origem": "mdt:Translations.customPageWebLinks",
+      "tipo": "tipo_composto"
+    },
+    {
+      "destino": "mdx:CustomTabTranslation",
+      "origem": "mdt:Translations.customTabs",
+      "tipo": "tipo_composto"
+    },
+    {
+      "destino": "mdx:DashboardComponentTranslation",
+      "origem": "mdt:Translations.dashboardComponents",
+      "tipo": "tipo_composto"
+    },
+    {
+      "destino": "mdx:DashboardTranslation",
+      "origem": "mdt:Translations.dashboards",
+      "tipo": "tipo_composto"
+    },
+    {
+      "destino": "mdx:DataConnectorTranslation",
+      "origem": "mdt:Translations.dataConnectors",
+      "tipo": "tipo_composto"
+    },
+    {
+      "destino": "mdx:ExplainabilityMsgTemplateFieldTranslation",
+      "origem": "mdt:Translations.desFieldTemplateMessages",
+      "tipo": "tipo_composto"
+    },
+    {
+      "destino": "mdx:FlowDefinitionTranslation",
+      "origem": "mdt:Translations.flowDefinitions",
+      "tipo": "tipo_composto"
+    },
+    {
+      "destino": "mdx:GlobalPicklistTranslation",
+      "origem": "mdt:Translations.globalPicklists",
+      "tipo": "tipo_composto"
+    },
+    {
+      "destino": "mdx:IdentityVerificationFieldTranslation",
+      "origem": "mdt:Translations.identityVerificationCustomFieldLabels",
+      "tipo": "tipo_composto"
+    },
+    {
+      "destino": "mdx:PipelineInspMetricConfigTranslation",
+      "origem": "mdt:Translations.pipelineInspMetricConfigs",
+      "tipo": "tipo_composto"
+    },
+    {
+      "destino": "mdx:ProductSpecificationTypeTranslation",
+      "origem": "mdt:Translations.productSpecificationTypes",
+      "tipo": "tipo_composto"
+    },
+    {
+      "destino": "mdx:PromptTranslation",
+      "origem": "mdt:Translations.prompts",
+      "tipo": "tipo_composto"
+    },
+    {
+      "destino": "mdx:GlobalQuickActionTranslation",
+      "origem": "mdt:Translations.quickActions",
+      "tipo": "tipo_composto"
+    },
+    {
+      "destino": "mdx:RecordAlertCategoryTranslation",
+      "origem": "mdt:Translations.recordAlertCategories",
+      "tipo": "tipo_composto"
+    },
+    {
+      "destino": "mdx:RecordAlertTemplateTranslation",
+      "origem": "mdt:Translations.recordAlertTemplates",
+      "tipo": "tipo_composto"
+    },
+    {
+      "destino": "mdx:ReportAggregateTranslation",
+      "origem": "mdt:Translations.reportAggregates",
+      "tipo": "tipo_composto"
+    },
+    {
+      "destino": "mdx:ReportBucketFieldTranslation",
+      "origem": "mdt:Translations.reportBucketFields",
+      "tipo": "tipo_composto"
+    },
+    {
+      "destino": "mdx:ReportChartTranslation",
+      "origem": "mdt:Translations.reportCharts",
+      "tipo": "tipo_composto"
+    },
+    {
+      "destino": "mdx:ReportTypeTranslation",
+      "origem": "mdt:Translations.reportTypes",
+      "tipo": "tipo_composto"
+    },
+    {
+      "destino": "mdx:ReportTranslation",
+      "origem": "mdt:Translations.reports",
+      "tipo": "tipo_composto"
+    },
+    {
+      "destino": "mdx:ScontrolTranslation",
+      "origem": "mdt:Translations.scontrols",
+      "tipo": "tipo_composto"
+    },
+    {
+      "destino": "mdx:ServiceProcessAttributeTranslation",
+      "origem": "mdt:Translations.svcCatalogItemAttributes",
+      "tipo": "tipo_composto"
+    },
+    {
+      "destino": "mdx:ServiceProcessItemGroupTranslation",
+      "origem": "mdt:Translations.svcCatalogItemGroups",
+      "tipo": "tipo_composto"
+    },
+    {
+      "destino": "mdx:TimelineObjectDefinitionTranslation",
+      "origem": "mdt:Translations.timelineObjectDefinitions",
+      "tipo": "tipo_composto"
+    },
+    {
       "destino": "obj:ValidationRule.Metadata",
       "estado": "verificado",
       "natureza": "transformada",
       "origem": "mdt:ValidationRule",
       "rel_id": "rel:cor-validationrule-tooling",
       "tipo": "correspondencia_xml_api"
+    },
+    {
+      "destino": "mdx:WorkflowEmailRecipient",
+      "origem": "mdt:WorkflowAlert.recipients",
+      "tipo": "tipo_composto"
+    },
+    {
+      "destino": "mdx:WorkflowFlowActionParameter",
+      "origem": "mdt:WorkflowFlowAction.flowInputs",
+      "tipo": "tipo_composto"
+    },
+    {
+      "destino": "mdx:WorkflowActionReference",
+      "origem": "mdt:WorkflowRule.actions",
+      "tipo": "tipo_composto"
+    },
+    {
+      "destino": "mdx:FilterItem",
+      "origem": "mdt:WorkflowRule.criteriaItems",
+      "tipo": "tipo_composto"
+    },
+    {
+      "destino": "mdx:WorkflowTimeTrigger",
+      "origem": "mdt:WorkflowRule.workflowTimeTriggers",
+      "tipo": "tipo_composto"
+    },
+    {
+      "destino": "mdx:WorkflowActionReference",
+      "origem": "mdx:ApprovalAction.action",
+      "tipo": "tipo_composto"
     },
     {
       "destino": "mdx:FilterItem",
@@ -2439,6 +2710,71 @@
       "tipo": "tipo_composto"
     },
     {
+      "destino": "mdx:BotBlockVersionTranslation",
+      "origem": "mdx:BotBlockTranslation.botBlockVersions",
+      "tipo": "tipo_composto"
+    },
+    {
+      "destino": "mdx:BotDialogTranslation",
+      "origem": "mdx:BotBlockVersionTranslation.botDialogs",
+      "tipo": "tipo_composto"
+    },
+    {
+      "destino": "mdx:BotStepTranslation",
+      "origem": "mdx:BotDialogTranslation.botSteps",
+      "tipo": "tipo_composto"
+    },
+    {
+      "destino": "mdx:BotMessageTranslation",
+      "origem": "mdx:BotStepTranslation.botMessages",
+      "tipo": "tipo_composto"
+    },
+    {
+      "destino": "mdx:BotStepTranslation",
+      "origem": "mdx:BotStepTranslation.botSteps",
+      "tipo": "tipo_composto"
+    },
+    {
+      "destino": "mdx:BotVariableOperationTranslation",
+      "origem": "mdx:BotStepTranslation.botVariableOperation",
+      "tipo": "tipo_composto"
+    },
+    {
+      "destino": "mdx:BotDialogTranslation",
+      "origem": "mdx:BotTemplateTranslation.botDialogs",
+      "tipo": "tipo_composto"
+    },
+    {
+      "destino": "mdx:BotVersionTranslation",
+      "origem": "mdx:BotTranslation.botVersions",
+      "tipo": "tipo_composto"
+    },
+    {
+      "destino": "mdx:BotMessageTranslation",
+      "origem": "mdx:BotVariableOperationTranslation.botMessages",
+      "tipo": "tipo_composto"
+    },
+    {
+      "destino": "mdx:BotQuickReplyOptionTranslation",
+      "origem": "mdx:BotVariableOperationTranslation.botQuickReplyOptions",
+      "tipo": "tipo_composto"
+    },
+    {
+      "destino": "mdx:BotMessageTranslation",
+      "origem": "mdx:BotVariableOperationTranslation.retryMessages",
+      "tipo": "tipo_composto"
+    },
+    {
+      "destino": "mdx:BotMessageTranslation",
+      "origem": "mdx:BotVariableOperationTranslation.successMessages",
+      "tipo": "tipo_composto"
+    },
+    {
+      "destino": "mdx:BotDialogTranslation",
+      "origem": "mdx:BotVersionTranslation.botDialogs",
+      "tipo": "tipo_composto"
+    },
+    {
       "destino": "mdx:ConnectedAppOauthAssetToken",
       "origem": "mdx:ConnectedAppOauthConfig.assetTokenConfig",
       "tipo": "tipo_composto"
@@ -2456,8 +2792,33 @@
       "tipo": "referencia_campo"
     },
     {
+      "destino": "mdx:ConversationMessageConstantValueTranslation",
+      "origem": "mdx:ConversationMessageDefinitionTranslation.constantValueTranslations",
+      "tipo": "tipo_composto"
+    },
+    {
       "destino": "mdx:CustomNotificationActionDefinition",
       "origem": "mdx:CustomNotificationActionGroup.actions",
+      "tipo": "tipo_composto"
+    },
+    {
+      "destino": "mdx:DataConnectorAttributeOptTranslation",
+      "origem": "mdx:DataConnectorAttributeTranslation.options",
+      "tipo": "tipo_composto"
+    },
+    {
+      "destino": "mdx:DataConnectorAttributeTranslation",
+      "origem": "mdx:DataConnectorTranslation.attributes",
+      "tipo": "tipo_composto"
+    },
+    {
+      "destino": "mdx:DataConnectorErrorTranslation",
+      "origem": "mdx:DataConnectorTranslation.errors",
+      "tipo": "tipo_composto"
+    },
+    {
+      "destino": "mdx:EmailToCaseRoutingAddress",
+      "origem": "mdx:EmailToCaseSettings.routingAddresses",
       "tipo": "tipo_composto"
     },
     {
@@ -2498,6 +2859,71 @@
       "origem": "mdx:ExternalCredentialParameter.externalAuthIdentityProvider",
       "rel_id": "rel:ecparam-extauthidp",
       "tipo": "referencia_campo"
+    },
+    {
+      "destino": "mdx:FlowChoiceUserInputTranslation",
+      "origem": "mdx:FlowChoiceTranslation.userInput",
+      "tipo": "tipo_composto"
+    },
+    {
+      "destino": "mdx:FlowInputValidationRuleTranslation",
+      "origem": "mdx:FlowChoiceUserInputTranslation.validationRule",
+      "tipo": "tipo_composto"
+    },
+    {
+      "destino": "mdx:FlowTranslation",
+      "origem": "mdx:FlowDefinitionTranslation.flows",
+      "tipo": "tipo_composto"
+    },
+    {
+      "destino": "mdx:FlowComplexLiteralTranslation",
+      "origem": "mdx:FlowFerovTranslation.complexValues",
+      "tipo": "tipo_composto"
+    },
+    {
+      "destino": "mdx:FlowFerovTranslation",
+      "origem": "mdx:FlowInputParameterTranslation.value",
+      "tipo": "tipo_composto"
+    },
+    {
+      "destino": "mdx:FlowInputParameterTranslation",
+      "origem": "mdx:FlowScreenFieldTranslation.inputParameters",
+      "tipo": "tipo_composto"
+    },
+    {
+      "destino": "mdx:FlowInputValidationRuleTranslation",
+      "origem": "mdx:FlowScreenFieldTranslation.validationRule",
+      "tipo": "tipo_composto"
+    },
+    {
+      "destino": "mdx:FlowScreenFieldTranslation",
+      "origem": "mdx:FlowScreenTranslation.fields",
+      "tipo": "tipo_composto"
+    },
+    {
+      "destino": "mdx:FlowChoiceTranslation",
+      "origem": "mdx:FlowTranslation.choices",
+      "tipo": "tipo_composto"
+    },
+    {
+      "destino": "mdx:FlowOrchestrationStageTranslation",
+      "origem": "mdx:FlowTranslation.orchestrationStages",
+      "tipo": "tipo_composto"
+    },
+    {
+      "destino": "mdx:FlowOrchestrationStepTranslation",
+      "origem": "mdx:FlowTranslation.orchestrationSteps",
+      "tipo": "tipo_composto"
+    },
+    {
+      "destino": "mdx:FlowScreenTranslation",
+      "origem": "mdx:FlowTranslation.screens",
+      "tipo": "tipo_composto"
+    },
+    {
+      "destino": "mdx:FlowStageTranslation",
+      "origem": "mdx:FlowTranslation.stages",
+      "tipo": "tipo_composto"
     },
     {
       "destino": "mdx:FilterItem",
@@ -2553,6 +2979,11 @@
       "tipo": "tipo_composto"
     },
     {
+      "destino": "mdx:PromptVersionTranslation",
+      "origem": "mdx:PromptTranslation.promptVersions",
+      "tipo": "tipo_composto"
+    },
+    {
       "destino": "mdt:PublicKeyCertificate",
       "estado": "verificado",
       "origem": "mdx:PublicKeyCertificateSetKey.publicKeyCertificate",
@@ -2560,8 +2991,23 @@
       "tipo": "referencia_campo"
     },
     {
+      "destino": "mdx:ReportTypeColumnTranslation",
+      "origem": "mdx:ReportTypeSectionTranslation.columns",
+      "tipo": "tipo_composto"
+    },
+    {
+      "destino": "mdx:ReportTypeSectionTranslation",
+      "origem": "mdx:ReportTypeTranslation.sections",
+      "tipo": "tipo_composto"
+    },
+    {
       "destino": "mdx:ValueSetValuesDefinition",
       "origem": "mdx:ValueSet.valueSetDefinition",
+      "tipo": "tipo_composto"
+    },
+    {
+      "destino": "mdx:WorkflowActionReference",
+      "origem": "mdx:WorkflowTimeTrigger.actions",
       "tipo": "tipo_composto"
     },
     {
@@ -5205,6 +5651,13 @@
     },
     {
       "estado": "verificado",
+      "id": "mdt:CaseSettings",
+      "resumo": "Configurações gerais de casos da org: dono e usuário padrão, templates de notificação, Case Feed, Email-to-Case e Web-to-Case.",
+      "rotulo": "CaseSettings",
+      "tipo": "metadata_type"
+    },
+    {
+      "estado": "verificado",
       "id": "mdt:Certificate",
       "resumo": "Certificado (e chave) guardado na org, autoassinado ou assinado por uma autoridade certificadora.",
       "rotulo": "Certificate",
@@ -5800,6 +6253,13 @@
     },
     {
       "estado": "verificado",
+      "id": "mdt:Translations",
+      "resumo": "As traduções de um idioma para componentes que não são de um objeto específico: apps, abas, custom labels, flows, relatórios, bots e outros.",
+      "rotulo": "Translations",
+      "tipo": "metadata_type"
+    },
+    {
+      "estado": "verificado",
       "id": "mdt:UserAuthCertificate",
       "resumo": "Certificado de usuário em PEM, enviado de fora e associado a um usuário.",
       "rotulo": "UserAuthCertificate",
@@ -5811,6 +6271,68 @@
       "resumo": "Definição de uma regra de validação: fórmula de erro e mensagem. É componente filho de CustomObject.",
       "rotulo": "ValidationRule",
       "tipo": "metadata_type"
+    },
+    {
+      "estado": "verificado",
+      "id": "mdt:Workflow",
+      "resumo": "O conjunto de workflow de um objeto: as regras e todas as ações (alertas, atualizações de campo, tarefas, outbound messages e outras).",
+      "rotulo": "Workflow",
+      "tipo": "metadata_type"
+    },
+    {
+      "estado": "verificado",
+      "id": "mdt:WorkflowAlert",
+      "resumo": "Um alerta de e-mail de workflow: o template enviado, os destinatários e o remetente.",
+      "rotulo": "WorkflowAlert",
+      "tipo": "metadata_type"
+    },
+    {
+      "estado": "verificado",
+      "id": "mdt:WorkflowFieldUpdate",
+      "resumo": "Uma atualização de campo de workflow: que campo muda e como o valor novo é calculado.",
+      "rotulo": "WorkflowFieldUpdate",
+      "tipo": "metadata_type"
+    },
+    {
+      "estado": "verificado",
+      "id": "mdt:WorkflowFlowAction",
+      "resumo": "Um flow trigger: uma ação de workflow que inicia um flow.",
+      "rotulo": "WorkflowFlowAction",
+      "tipo": "metadata_type"
+    },
+    {
+      "estado": "verificado",
+      "id": "mdt:WorkflowKnowledgePublish",
+      "resumo": "Uma ação de workflow que publica artigos do Salesforce Knowledge.",
+      "rotulo": "WorkflowKnowledgePublish",
+      "tipo": "metadata_type"
+    },
+    {
+      "estado": "verificado",
+      "id": "mdt:WorkflowOutboundMessage",
+      "resumo": "Uma outbound message: mensagem SOAP enviada a um endpoint externo quando a regra dispara.",
+      "rotulo": "WorkflowOutboundMessage",
+      "tipo": "metadata_type"
+    },
+    {
+      "estado": "verificado",
+      "id": "mdt:WorkflowRule",
+      "resumo": "Uma regra de workflow: o critério que a dispara, quando ela é avaliada e as ações que executa.",
+      "rotulo": "WorkflowRule",
+      "tipo": "metadata_type"
+    },
+    {
+      "estado": "verificado",
+      "id": "mdt:WorkflowTask",
+      "resumo": "Uma tarefa de workflow: a tarefa criada e atribuída a alguém quando a regra dispara.",
+      "rotulo": "WorkflowTask",
+      "tipo": "metadata_type"
+    },
+    {
+      "estado": "verificado",
+      "id": "mdx:AiCoachAgentScnrDefTranslation",
+      "rotulo": "AiCoachAgentScnrDefTranslation",
+      "tipo": "estrutura_auxiliar"
     },
     {
       "estado": "verificado",
@@ -5892,6 +6414,66 @@
     },
     {
       "estado": "verificado",
+      "id": "mdx:BotBlockTranslation",
+      "rotulo": "BotBlockTranslation",
+      "tipo": "estrutura_auxiliar"
+    },
+    {
+      "estado": "verificado",
+      "id": "mdx:BotBlockVersionTranslation",
+      "rotulo": "BotBlockVersionTranslation",
+      "tipo": "estrutura_auxiliar"
+    },
+    {
+      "estado": "verificado",
+      "id": "mdx:BotDialogTranslation",
+      "rotulo": "BotDialogTranslation",
+      "tipo": "estrutura_auxiliar"
+    },
+    {
+      "estado": "verificado",
+      "id": "mdx:BotMessageTranslation",
+      "rotulo": "BotMessageTranslation",
+      "tipo": "estrutura_auxiliar"
+    },
+    {
+      "estado": "verificado",
+      "id": "mdx:BotQuickReplyOptionTranslation",
+      "rotulo": "BotQuickReplyOptionTranslation",
+      "tipo": "estrutura_auxiliar"
+    },
+    {
+      "estado": "verificado",
+      "id": "mdx:BotStepTranslation",
+      "rotulo": "BotStepTranslation",
+      "tipo": "estrutura_auxiliar"
+    },
+    {
+      "estado": "verificado",
+      "id": "mdx:BotTemplateTranslation",
+      "rotulo": "BotTemplateTranslation",
+      "tipo": "estrutura_auxiliar"
+    },
+    {
+      "estado": "verificado",
+      "id": "mdx:BotTranslation",
+      "rotulo": "BotTranslation",
+      "tipo": "estrutura_auxiliar"
+    },
+    {
+      "estado": "verificado",
+      "id": "mdx:BotVariableOperationTranslation",
+      "rotulo": "BotVariableOperationTranslation",
+      "tipo": "estrutura_auxiliar"
+    },
+    {
+      "estado": "verificado",
+      "id": "mdx:BotVersionTranslation",
+      "rotulo": "BotVersionTranslation",
+      "tipo": "estrutura_auxiliar"
+    },
+    {
+      "estado": "verificado",
       "id": "mdx:BusinessHoursEntry",
       "rotulo": "BusinessHoursEntry",
       "tipo": "estrutura_auxiliar"
@@ -5952,8 +6534,32 @@
     },
     {
       "estado": "verificado",
+      "id": "mdx:ContextDefinitionTranslation",
+      "rotulo": "ContextDefinitionTranslation",
+      "tipo": "estrutura_auxiliar"
+    },
+    {
+      "estado": "verificado",
+      "id": "mdx:ConversationMessageConstantValueTranslation",
+      "rotulo": "ConversationMessageConstantValueTranslation",
+      "tipo": "estrutura_auxiliar"
+    },
+    {
+      "estado": "verificado",
+      "id": "mdx:ConversationMessageDefinitionTranslation",
+      "rotulo": "ConversationMessageDefinitionTranslation",
+      "tipo": "estrutura_auxiliar"
+    },
+    {
+      "estado": "verificado",
       "id": "mdx:Currency",
       "rotulo": "Currency",
+      "tipo": "estrutura_auxiliar"
+    },
+    {
+      "estado": "verificado",
+      "id": "mdx:CustomApplicationTranslation",
+      "rotulo": "CustomApplicationTranslation",
       "tipo": "estrutura_auxiliar"
     },
     {
@@ -5966,6 +6572,12 @@
       "estado": "verificado",
       "id": "mdx:CustomLabel",
       "rotulo": "CustomLabel",
+      "tipo": "estrutura_auxiliar"
+    },
+    {
+      "estado": "verificado",
+      "id": "mdx:CustomLabelTranslation",
+      "rotulo": "CustomLabelTranslation",
       "tipo": "estrutura_auxiliar"
     },
     {
@@ -5984,6 +6596,66 @@
       "estado": "verificado",
       "id": "mdx:CustomNotificationActionGroup",
       "rotulo": "CustomNotificationActionGroup",
+      "tipo": "estrutura_auxiliar"
+    },
+    {
+      "estado": "verificado",
+      "id": "mdx:CustomPageWebLinkTranslation",
+      "rotulo": "CustomPageWebLinkTranslation",
+      "tipo": "estrutura_auxiliar"
+    },
+    {
+      "estado": "verificado",
+      "id": "mdx:CustomTabTranslation",
+      "rotulo": "CustomTabTranslation",
+      "tipo": "estrutura_auxiliar"
+    },
+    {
+      "estado": "verificado",
+      "id": "mdx:DashboardComponentTranslation",
+      "rotulo": "DashboardComponentTranslation",
+      "tipo": "estrutura_auxiliar"
+    },
+    {
+      "estado": "verificado",
+      "id": "mdx:DashboardTranslation",
+      "rotulo": "DashboardTranslation",
+      "tipo": "estrutura_auxiliar"
+    },
+    {
+      "estado": "verificado",
+      "id": "mdx:DataConnectorAttributeOptTranslation",
+      "rotulo": "DataConnectorAttributeOptTranslation",
+      "tipo": "estrutura_auxiliar"
+    },
+    {
+      "estado": "verificado",
+      "id": "mdx:DataConnectorAttributeTranslation",
+      "rotulo": "DataConnectorAttributeTranslation",
+      "tipo": "estrutura_auxiliar"
+    },
+    {
+      "estado": "verificado",
+      "id": "mdx:DataConnectorErrorTranslation",
+      "rotulo": "DataConnectorErrorTranslation",
+      "tipo": "estrutura_auxiliar"
+    },
+    {
+      "estado": "verificado",
+      "id": "mdx:DataConnectorTranslation",
+      "rotulo": "DataConnectorTranslation",
+      "tipo": "estrutura_auxiliar"
+    },
+    {
+      "estado": "verificado",
+      "id": "mdx:EmailToCaseRoutingAddress",
+      "rotulo": "EmailToCaseRoutingAddress",
+      "tipo": "estrutura_auxiliar"
+    },
+    {
+      "estado": "verificado",
+      "id": "mdx:EmailToCaseSettings",
+      "rotulo": "EmailToCaseSettings",
       "tipo": "estrutura_auxiliar"
     },
     {
@@ -6020,6 +6692,12 @@
       "estado": "verificado",
       "id": "mdx:EscalationRules_RuleEntry",
       "rotulo": "RuleEntry",
+      "tipo": "estrutura_auxiliar"
+    },
+    {
+      "estado": "verificado",
+      "id": "mdx:ExplainabilityMsgTemplateFieldTranslation",
+      "rotulo": "ExplainabilityMsgTemplateFieldTranslation",
       "tipo": "estrutura_auxiliar"
     },
     {
@@ -6096,6 +6774,12 @@
     },
     {
       "estado": "verificado",
+      "id": "mdx:FeedItemSettings",
+      "rotulo": "FeedItemSettings",
+      "tipo": "estrutura_auxiliar"
+    },
+    {
+      "estado": "verificado",
       "id": "mdx:FieldValue",
       "rotulo": "FieldValue",
       "tipo": "estrutura_auxiliar"
@@ -6120,8 +6804,104 @@
     },
     {
       "estado": "verificado",
+      "id": "mdx:FlowChoiceTranslation",
+      "rotulo": "FlowChoiceTranslation",
+      "tipo": "estrutura_auxiliar"
+    },
+    {
+      "estado": "verificado",
+      "id": "mdx:FlowChoiceUserInputTranslation",
+      "rotulo": "FlowChoiceUserInputTranslation",
+      "tipo": "estrutura_auxiliar"
+    },
+    {
+      "estado": "verificado",
+      "id": "mdx:FlowComplexLiteralTranslation",
+      "rotulo": "FlowComplexLiteralTranslation",
+      "tipo": "estrutura_auxiliar"
+    },
+    {
+      "estado": "verificado",
+      "id": "mdx:FlowDefinitionTranslation",
+      "rotulo": "FlowDefinitionTranslation",
+      "tipo": "estrutura_auxiliar"
+    },
+    {
+      "estado": "verificado",
+      "id": "mdx:FlowFerovTranslation",
+      "rotulo": "FlowFerovTranslation",
+      "tipo": "estrutura_auxiliar"
+    },
+    {
+      "estado": "verificado",
+      "id": "mdx:FlowInputParameterTranslation",
+      "rotulo": "FlowInputParameterTranslation",
+      "tipo": "estrutura_auxiliar"
+    },
+    {
+      "estado": "verificado",
+      "id": "mdx:FlowInputValidationRuleTranslation",
+      "rotulo": "FlowInputValidationRuleTranslation",
+      "tipo": "estrutura_auxiliar"
+    },
+    {
+      "estado": "verificado",
+      "id": "mdx:FlowOrchestrationStageTranslation",
+      "rotulo": "FlowOrchestrationStageTranslation",
+      "tipo": "estrutura_auxiliar"
+    },
+    {
+      "estado": "verificado",
+      "id": "mdx:FlowOrchestrationStepTranslation",
+      "rotulo": "FlowOrchestrationStepTranslation",
+      "tipo": "estrutura_auxiliar"
+    },
+    {
+      "estado": "verificado",
+      "id": "mdx:FlowScreenFieldTranslation",
+      "rotulo": "FlowScreenFieldTranslation",
+      "tipo": "estrutura_auxiliar"
+    },
+    {
+      "estado": "verificado",
+      "id": "mdx:FlowScreenTranslation",
+      "rotulo": "FlowScreenTranslation",
+      "tipo": "estrutura_auxiliar"
+    },
+    {
+      "estado": "verificado",
+      "id": "mdx:FlowStageTranslation",
+      "rotulo": "FlowStageTranslation",
+      "tipo": "estrutura_auxiliar"
+    },
+    {
+      "estado": "verificado",
+      "id": "mdx:FlowTranslation",
+      "rotulo": "FlowTranslation",
+      "tipo": "estrutura_auxiliar"
+    },
+    {
+      "estado": "verificado",
+      "id": "mdx:GlobalPicklistTranslation",
+      "rotulo": "GlobalPicklistTranslation",
+      "tipo": "estrutura_auxiliar"
+    },
+    {
+      "estado": "verificado",
+      "id": "mdx:GlobalQuickActionTranslation",
+      "rotulo": "GlobalQuickActionTranslation",
+      "tipo": "estrutura_auxiliar"
+    },
+    {
+      "estado": "verificado",
       "id": "mdx:Holidays",
       "rotulo": "Holidays",
+      "tipo": "estrutura_auxiliar"
+    },
+    {
+      "estado": "verificado",
+      "id": "mdx:IdentityVerificationFieldTranslation",
+      "rotulo": "IdentityVerificationFieldTranslation",
       "tipo": "estrutura_auxiliar"
     },
     {
@@ -6294,6 +7074,12 @@
     },
     {
       "estado": "verificado",
+      "id": "mdx:PipelineInspMetricConfigTranslation",
+      "rotulo": "PipelineInspMetricConfigTranslation",
+      "tipo": "estrutura_auxiliar"
+    },
+    {
+      "estado": "verificado",
       "id": "mdx:PlatformEventChannelSelectedEntity",
       "rotulo": "PlatformEventChannelSelectedEntity",
       "tipo": "estrutura_auxiliar"
@@ -6314,6 +7100,12 @@
       "estado": "verificado",
       "id": "mdx:PresenceConfigUserAssignments",
       "rotulo": "PresenceConfigUserAssignments",
+      "tipo": "estrutura_auxiliar"
+    },
+    {
+      "estado": "verificado",
+      "id": "mdx:ProductSpecificationTypeTranslation",
+      "rotulo": "ProductSpecificationTypeTranslation",
       "tipo": "estrutura_auxiliar"
     },
     {
@@ -6414,6 +7206,18 @@
     },
     {
       "estado": "verificado",
+      "id": "mdx:PromptTranslation",
+      "rotulo": "PromptTranslation",
+      "tipo": "estrutura_auxiliar"
+    },
+    {
+      "estado": "verificado",
+      "id": "mdx:PromptVersionTranslation",
+      "rotulo": "PromptVersionTranslation",
+      "tipo": "estrutura_auxiliar"
+    },
+    {
+      "estado": "verificado",
       "id": "mdx:PublicKeyCertificateSetKey",
       "rotulo": "PublicKeyCertificateSetKey",
       "tipo": "estrutura_auxiliar"
@@ -6426,8 +7230,68 @@
     },
     {
       "estado": "verificado",
+      "id": "mdx:RecordAlertCategoryTranslation",
+      "rotulo": "RecordAlertCategoryTranslation",
+      "tipo": "estrutura_auxiliar"
+    },
+    {
+      "estado": "verificado",
+      "id": "mdx:RecordAlertTemplateTranslation",
+      "rotulo": "RecordAlertTemplateTranslation",
+      "tipo": "estrutura_auxiliar"
+    },
+    {
+      "estado": "verificado",
       "id": "mdx:RecordTypePicklistValue",
       "rotulo": "RecordTypePicklistValue",
+      "tipo": "estrutura_auxiliar"
+    },
+    {
+      "estado": "verificado",
+      "id": "mdx:ReportAggregateTranslation",
+      "rotulo": "ReportAggregateTranslation",
+      "tipo": "estrutura_auxiliar"
+    },
+    {
+      "estado": "verificado",
+      "id": "mdx:ReportBucketFieldTranslation",
+      "rotulo": "ReportBucketFieldTranslation",
+      "tipo": "estrutura_auxiliar"
+    },
+    {
+      "estado": "verificado",
+      "id": "mdx:ReportChartTranslation",
+      "rotulo": "ReportChartTranslation",
+      "tipo": "estrutura_auxiliar"
+    },
+    {
+      "estado": "verificado",
+      "id": "mdx:ReportTranslation",
+      "rotulo": "ReportTranslation",
+      "tipo": "estrutura_auxiliar"
+    },
+    {
+      "estado": "verificado",
+      "id": "mdx:ReportTypeColumnTranslation",
+      "rotulo": "ReportTypeColumnTranslation",
+      "tipo": "estrutura_auxiliar"
+    },
+    {
+      "estado": "verificado",
+      "id": "mdx:ReportTypeSectionTranslation",
+      "rotulo": "ReportTypeSectionTranslation",
+      "tipo": "estrutura_auxiliar"
+    },
+    {
+      "estado": "verificado",
+      "id": "mdx:ReportTypeTranslation",
+      "rotulo": "ReportTypeTranslation",
+      "tipo": "estrutura_auxiliar"
+    },
+    {
+      "estado": "verificado",
+      "id": "mdx:ScontrolTranslation",
+      "rotulo": "ScontrolTranslation",
       "tipo": "estrutura_auxiliar"
     },
     {
@@ -6440,6 +7304,18 @@
       "estado": "verificado",
       "id": "mdx:ServiceChannelStatus",
       "rotulo": "ServiceChannelStatus",
+      "tipo": "estrutura_auxiliar"
+    },
+    {
+      "estado": "verificado",
+      "id": "mdx:ServiceProcessAttributeTranslation",
+      "rotulo": "ServiceProcessAttributeTranslation",
+      "tipo": "estrutura_auxiliar"
+    },
+    {
+      "estado": "verificado",
+      "id": "mdx:ServiceProcessItemGroupTranslation",
+      "rotulo": "ServiceProcessItemGroupTranslation",
       "tipo": "estrutura_auxiliar"
     },
     {
@@ -6474,6 +7350,12 @@
     },
     {
       "estado": "verificado",
+      "id": "mdx:TimelineObjectDefinitionTranslation",
+      "rotulo": "TimelineObjectDefinitionTranslation",
+      "tipo": "estrutura_auxiliar"
+    },
+    {
+      "estado": "verificado",
       "id": "mdx:ValueSet",
       "rotulo": "ValueSet",
       "tipo": "estrutura_auxiliar"
@@ -6482,6 +7364,36 @@
       "estado": "verificado",
       "id": "mdx:ValueSetValuesDefinition",
       "rotulo": "ValueSetValuesDefinition",
+      "tipo": "estrutura_auxiliar"
+    },
+    {
+      "estado": "verificado",
+      "id": "mdx:WebToCaseSettings",
+      "rotulo": "WebToCaseSettings",
+      "tipo": "estrutura_auxiliar"
+    },
+    {
+      "estado": "verificado",
+      "id": "mdx:WorkflowActionReference",
+      "rotulo": "WorkflowActionReference",
+      "tipo": "estrutura_auxiliar"
+    },
+    {
+      "estado": "verificado",
+      "id": "mdx:WorkflowEmailRecipient",
+      "rotulo": "WorkflowEmailRecipient",
+      "tipo": "estrutura_auxiliar"
+    },
+    {
+      "estado": "verificado",
+      "id": "mdx:WorkflowFlowActionParameter",
+      "rotulo": "WorkflowFlowActionParameter",
+      "tipo": "estrutura_auxiliar"
+    },
+    {
+      "estado": "verificado",
+      "id": "mdx:WorkflowTimeTrigger",
+      "rotulo": "WorkflowTimeTrigger",
       "tipo": "estrutura_auxiliar"
     },
     {

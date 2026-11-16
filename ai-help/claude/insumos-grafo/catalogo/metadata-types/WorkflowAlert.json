@@ -1,0 +1,540 @@
+{
+  "id": "mdt:WorkflowAlert",
+  "nome": "WorkflowAlert",
+  "o_que_e": "Um alerta de e-mail de workflow: o template enviado, os destinatários e o remetente.",
+  "finalidade": "Versionar e implantar os alertas de e-mail usados por regras de workflow, processos de aprovação e flows.",
+  "estende": "Metadata",
+  "arquivos": {
+    "source_format": {
+      "estado": "verificado",
+      "valor": {
+        "pasta": "workflows/",
+        "arquivo": "<Objeto>.workflow-meta.xml",
+        "elemento": "alerts"
+      },
+      "nota": "No registro do Salesforce CLI, Workflow não declara estratégia de decomposição: o componente fica dentro do arquivo do tipo pai, no elemento <alerts>. O registro também traz pasta (workflowAlerts) e sufixo (workflowAlert) próprios do filho; quando eles são usados não foi verificado.",
+      "evidencias": [
+        {
+          "fonte": "src:sdr-registry",
+          "nota": "types.workflow"
+        },
+        {
+          "fonte": "src:sdr-registry",
+          "nota": "types.workflow.children.types.workflowalert"
+        }
+      ]
+    },
+    "metadata_api_format": {
+      "estado": "verificado",
+      "valor": {
+        "pasta": "workflows/",
+        "arquivo": "<Objeto>.workflow",
+        "elemento": "alerts"
+      },
+      "nota": "Definido dentro do arquivo do tipo pai (um por objeto), no elemento <alerts>.",
+      "evidencias": [
+        {
+          "fonte": "src:sdr-registry",
+          "nota": "types.workflow"
+        },
+        {
+          "fonte": "src:sdr-registry",
+          "nota": "types.workflow.children.types.workflowalert"
+        },
+        {
+          "fonte": "src:mdapi-workflow"
+        }
+      ]
+    }
+  },
+  "disponibilidade": {
+    "desde_versao": null,
+    "ate_versao": null,
+    "estado": "desconhecido",
+    "nota": "A página não informa a versão do subtipo; o tipo pai, Workflow, existe desde a API 13.0."
+  },
+  "suporte_cli": {
+    "estado": "verificado",
+    "valor": {
+      "status": "suportado",
+      "nota_fonte": null
+    },
+    "nota": "Suporte do Salesforce CLI (source-deploy-retrieve), não do Metadata API em geral.",
+    "evidencias": [
+      {
+        "fonte": "src:sdr-metadata-support"
+      }
+    ]
+  },
+  "setup": {
+    "estado": "desconhecido",
+    "nota": "Caminho no Setup não validado nesta sessão."
+  },
+  "propriedades": [
+    {
+      "id": "mdt:WorkflowAlert.ccEmails",
+      "nome": "ccEmails",
+      "tipo_tecnico": "string[]",
+      "o_que_e": "Endereços adicionais em cópia; até 5. O alerta precisa de ccEmails, de recipients ou dos dois.",
+      "origem": {
+        "estado": "verificado",
+        "valor": "padrao_plataforma",
+        "nota": "Propriedade definida pelo schema da Metadata API.",
+        "evidencias": [
+          {
+            "fonte": "src:mdapi-workflow"
+          }
+        ]
+      },
+      "obrigatoriedade": {
+        "valor": "nao",
+        "estado": "desconhecido",
+        "condicao": "A documentação 68.0 não marca o campo como obrigatório; ausência de marcação não comprova opcionalidade (confirmar no WSDL)."
+      },
+      "default": {
+        "forma": "nao_declarado_na_fonte",
+        "estado": "desconhecido"
+      },
+      "dominio": {
+        "natureza": "texto_livre",
+        "estado": "verificado",
+        "evidencias": [
+          {
+            "fonte": "src:mdapi-workflow"
+          }
+        ],
+        "contexto": "A fonte tipa como string sem lista de valores; não inventar valores."
+      },
+      "disponibilidade": {
+        "desde_versao": null,
+        "ate_versao": null,
+        "estado": "desconhecido"
+      },
+      "explicacao": "explicada",
+      "estado": "verificado",
+      "evidencias": [
+        {
+          "fonte": "src:mdapi-workflow"
+        }
+      ],
+      "cardinalidade": "0..n"
+    },
+    {
+      "id": "mdt:WorkflowAlert.description",
+      "nome": "description",
+      "tipo_tecnico": "string",
+      "o_que_e": "Descrição do alerta de e-mail.",
+      "origem": {
+        "estado": "verificado",
+        "valor": "padrao_plataforma",
+        "nota": "Propriedade definida pelo schema da Metadata API.",
+        "evidencias": [
+          {
+            "fonte": "src:mdapi-workflow"
+          }
+        ]
+      },
+      "obrigatoriedade": {
+        "valor": "sim",
+        "estado": "verificado",
+        "evidencias": [
+          {
+            "fonte": "src:mdapi-workflow"
+          }
+        ]
+      },
+      "default": {
+        "forma": "nao_declarado_na_fonte",
+        "estado": "desconhecido"
+      },
+      "dominio": {
+        "natureza": "texto_livre",
+        "estado": "verificado",
+        "evidencias": [
+          {
+            "fonte": "src:mdapi-workflow"
+          }
+        ],
+        "contexto": "A fonte tipa como string sem lista de valores; não inventar valores."
+      },
+      "disponibilidade": {
+        "desde_versao": "16.0",
+        "ate_versao": null,
+        "estado": "verificado"
+      },
+      "explicacao": "explicada",
+      "estado": "verificado",
+      "evidencias": [
+        {
+          "fonte": "src:mdapi-workflow"
+        }
+      ]
+    },
+    {
+      "id": "mdt:WorkflowAlert.fullName",
+      "nome": "fullName",
+      "tipo_tecnico": "string",
+      "o_que_e": "Nome único de API: letras, dígitos e sublinhados simples, começando por letra.",
+      "origem": {
+        "estado": "verificado",
+        "valor": "padrao_plataforma",
+        "nota": "Propriedade definida pelo schema da Metadata API.",
+        "evidencias": [
+          {
+            "fonte": "src:mdapi-workflow"
+          }
+        ]
+      },
+      "obrigatoriedade": {
+        "valor": "sim",
+        "estado": "verificado",
+        "evidencias": [
+          {
+            "fonte": "src:mdapi-workflow"
+          }
+        ]
+      },
+      "default": {
+        "forma": "nao_declarado_na_fonte",
+        "estado": "desconhecido"
+      },
+      "dominio": {
+        "natureza": "texto_livre",
+        "estado": "verificado",
+        "evidencias": [
+          {
+            "fonte": "src:mdapi-workflow"
+          }
+        ],
+        "contexto": "A fonte tipa como string sem lista de valores; não inventar valores."
+      },
+      "disponibilidade": {
+        "desde_versao": null,
+        "ate_versao": null,
+        "estado": "desconhecido"
+      },
+      "explicacao": "explicada",
+      "estado": "verificado",
+      "evidencias": [
+        {
+          "fonte": "src:mdapi-workflow"
+        }
+      ]
+    },
+    {
+      "id": "mdt:WorkflowAlert.protected",
+      "nome": "protected",
+      "tipo_tecnico": "boolean",
+      "o_que_e": "Indica se o componente é protegido: componentes protegidos não podem ser referenciados por componentes criados em outra org.",
+      "origem": {
+        "estado": "verificado",
+        "valor": "padrao_plataforma",
+        "nota": "Propriedade definida pelo schema da Metadata API.",
+        "evidencias": [
+          {
+            "fonte": "src:mdapi-workflow"
+          }
+        ]
+      },
+      "obrigatoriedade": {
+        "valor": "sim",
+        "estado": "verificado",
+        "evidencias": [
+          {
+            "fonte": "src:mdapi-workflow"
+          }
+        ]
+      },
+      "default": {
+        "forma": "nao_declarado_na_fonte",
+        "estado": "desconhecido"
+      },
+      "dominio": {
+        "natureza": "booleano",
+        "valores": [
+          {
+            "valor": "true"
+          },
+          {
+            "valor": "false"
+          }
+        ],
+        "lista_completa": "sim",
+        "estado": "verificado",
+        "evidencias": [
+          {
+            "fonte": "src:mdapi-workflow"
+          }
+        ]
+      },
+      "disponibilidade": {
+        "desde_versao": null,
+        "ate_versao": null,
+        "estado": "desconhecido"
+      },
+      "explicacao": "explicada",
+      "estado": "verificado",
+      "evidencias": [
+        {
+          "fonte": "src:mdapi-workflow"
+        }
+      ]
+    },
+    {
+      "id": "mdt:WorkflowAlert.recipients",
+      "nome": "recipients",
+      "tipo_tecnico": "WorkflowEmailRecipient[]",
+      "o_que_e": "Destinatários do alerta. O alerta precisa de recipients, de ccEmails ou dos dois.",
+      "origem": {
+        "estado": "verificado",
+        "valor": "padrao_plataforma",
+        "nota": "Propriedade definida pelo schema da Metadata API.",
+        "evidencias": [
+          {
+            "fonte": "src:mdapi-workflow"
+          }
+        ]
+      },
+      "obrigatoriedade": {
+        "valor": "nao",
+        "estado": "desconhecido",
+        "condicao": "A documentação 68.0 não marca o campo como obrigatório; ausência de marcação não comprova opcionalidade (confirmar no WSDL)."
+      },
+      "default": {
+        "forma": "nao_declarado_na_fonte",
+        "estado": "desconhecido"
+      },
+      "dominio": {
+        "natureza": "tipo_composto",
+        "estado": "verificado",
+        "evidencias": [
+          {
+            "fonte": "src:mdapi-workflow"
+          }
+        ]
+      },
+      "disponibilidade": {
+        "desde_versao": null,
+        "ate_versao": null,
+        "estado": "desconhecido"
+      },
+      "explicacao": "explicada",
+      "estado": "verificado",
+      "evidencias": [
+        {
+          "fonte": "src:mdapi-workflow"
+        }
+      ],
+      "cardinalidade": "0..n",
+      "estrutura_ref": "mdx:WorkflowEmailRecipient"
+    },
+    {
+      "id": "mdt:WorkflowAlert.senderAddress",
+      "nome": "senderAddress",
+      "tipo_tecnico": "string",
+      "o_que_e": "Endereço do remetente. Só vale quando senderType é OrgWideEmailAddress.",
+      "origem": {
+        "estado": "verificado",
+        "valor": "padrao_plataforma",
+        "nota": "Propriedade definida pelo schema da Metadata API.",
+        "evidencias": [
+          {
+            "fonte": "src:mdapi-workflow"
+          }
+        ]
+      },
+      "obrigatoriedade": {
+        "valor": "nao",
+        "estado": "desconhecido",
+        "condicao": "A documentação 68.0 não marca o campo como obrigatório; ausência de marcação não comprova opcionalidade (confirmar no WSDL)."
+      },
+      "default": {
+        "forma": "nao_declarado_na_fonte",
+        "estado": "desconhecido"
+      },
+      "dominio": {
+        "natureza": "texto_livre",
+        "estado": "verificado",
+        "evidencias": [
+          {
+            "fonte": "src:mdapi-workflow"
+          }
+        ],
+        "contexto": "A fonte tipa como string sem lista de valores; não inventar valores."
+      },
+      "disponibilidade": {
+        "desde_versao": null,
+        "ate_versao": null,
+        "estado": "desconhecido"
+      },
+      "explicacao": "explicada",
+      "estado": "verificado",
+      "evidencias": [
+        {
+          "fonte": "src:mdapi-workflow"
+        }
+      ]
+    },
+    {
+      "id": "mdt:WorkflowAlert.senderType",
+      "nome": "senderType",
+      "tipo_tecnico": "ActionEmailSenderType",
+      "o_que_e": "De quem são os campos From e Reply-To do e-mail.",
+      "origem": {
+        "estado": "verificado",
+        "valor": "padrao_plataforma",
+        "nota": "Propriedade definida pelo schema da Metadata API.",
+        "evidencias": [
+          {
+            "fonte": "src:mdapi-workflow"
+          }
+        ]
+      },
+      "obrigatoriedade": {
+        "valor": "nao",
+        "estado": "desconhecido",
+        "condicao": "A documentação 68.0 não marca o campo como obrigatório; ausência de marcação não comprova opcionalidade (confirmar no WSDL)."
+      },
+      "default": {
+        "forma": "valor",
+        "estado": "verificado",
+        "evidencias": [
+          {
+            "fonte": "src:mdapi-workflow"
+          }
+        ],
+        "valor": "CurrentUser"
+      },
+      "dominio": {
+        "natureza": "enum_fechado",
+        "valores": [
+          {
+            "valor": "CurrentUser",
+            "significado": "O usuário atual."
+          },
+          {
+            "valor": "DefaultWorkflowUser",
+            "significado": "O usuário padrão de workflow."
+          },
+          {
+            "valor": "OrgWideEmailAddress",
+            "significado": "Um endereço de e-mail de toda a org."
+          }
+        ],
+        "lista_completa": "sim",
+        "estado": "verificado",
+        "evidencias": [
+          {
+            "fonte": "src:mdapi-workflow"
+          }
+        ]
+      },
+      "disponibilidade": {
+        "desde_versao": null,
+        "ate_versao": null,
+        "estado": "desconhecido"
+      },
+      "explicacao": "explicada",
+      "estado": "verificado",
+      "evidencias": [
+        {
+          "fonte": "src:mdapi-workflow"
+        }
+      ]
+    },
+    {
+      "id": "mdt:WorkflowAlert.template",
+      "nome": "template",
+      "tipo_tecnico": "string",
+      "o_que_e": "Nome do template de e-mail. O template precisa existir na org, mas não precisa estar no mesmo arquivo zip.",
+      "origem": {
+        "estado": "verificado",
+        "valor": "padrao_plataforma",
+        "nota": "Propriedade definida pelo schema da Metadata API.",
+        "evidencias": [
+          {
+            "fonte": "src:mdapi-workflow"
+          }
+        ]
+      },
+      "obrigatoriedade": {
+        "valor": "sim",
+        "estado": "verificado",
+        "evidencias": [
+          {
+            "fonte": "src:mdapi-workflow"
+          }
+        ]
+      },
+      "default": {
+        "forma": "nao_declarado_na_fonte",
+        "estado": "desconhecido"
+      },
+      "dominio": {
+        "natureza": "texto_livre",
+        "estado": "verificado",
+        "evidencias": [
+          {
+            "fonte": "src:mdapi-workflow"
+          }
+        ],
+        "contexto": "A fonte tipa como string sem lista de valores; não inventar valores."
+      },
+      "disponibilidade": {
+        "desde_versao": null,
+        "ate_versao": null,
+        "estado": "desconhecido"
+      },
+      "explicacao": "explicada",
+      "estado": "verificado",
+      "evidencias": [
+        {
+          "fonte": "src:mdapi-workflow"
+        }
+      ]
+    }
+  ],
+  "estruturas": [
+    "mdx:WorkflowEmailRecipient"
+  ],
+  "cobertura": {
+    "estrutural": {
+      "estado": "completa",
+      "esperado": 8,
+      "presente": 8,
+      "nota": "Universo esperado = tabela Fields da página do guia versionado 264.0 (API 68.0), lida em 2026-11-16. Contagem da seção WorkflowAlert da página de Workflow."
+    },
+    "explicativa": {
+      "estado": "completa",
+      "esperado": 8,
+      "presente": 8
+    },
+    "mapeamento": {
+      "estado": "parcial",
+      "nota": "Correspondências registradas apenas onde há evidência; demais pendentes."
+    }
+  },
+  "recomendacoes": [],
+  "alertas": [
+    "No arquivo .workflow, cada componente deste tipo é um elemento <alerts> dentro de Workflow."
+  ],
+  "divergencias_documentais": [],
+  "estado": "verificado",
+  "evidencias": [
+    {
+      "fonte": "src:mdapi-workflow"
+    },
+    {
+      "fonte": "src:sdr-registry"
+    },
+    {
+      "fonte": "src:sdr-metadata-support"
+    }
+  ],
+  "componente_filho_de": "mdt:Workflow",
+  "exemplo_xml": {
+    "xml": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<!-- No arquivo .workflow do objeto, este conteúdo fica no elemento <alerts> -->\n<WorkflowAlert xmlns=\"http://soap.sforce.com/2006/04/metadata\">\n    <fullName>[Nome_Do_Alerta]</fullName>\n    <description>[descrição do alerta]</description>\n    <protected>false</protected>\n    <recipients>\n        <!-- Valores documentados incluem owner, creator, role, group, user -->\n        <type>owner</type>\n    </recipients>\n    <!-- Valores documentados: CurrentUser, DefaultWorkflowUser, OrgWideEmailAddress -->\n    <senderType>CurrentUser</senderType>\n    <template>[pasta/nome do template de e-mail]</template>\n</WorkflowAlert>",
+    "natureza": "didatico_projeto",
+    "nota": "Exemplo escrito pelo projeto apenas com elementos documentados; sem dados reais."
+  }
+}

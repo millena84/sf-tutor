@@ -1,0 +1,418 @@
+{
+  "alertas": [
+    "No arquivo .workflow, cada componente deste tipo é um elemento <flowActions> dentro de Workflow.",
+    "A página informa que o piloto de flow triggers está encerrado.",
+    "O test mode de flow triggers não é suportado pela Metadata API."
+  ],
+  "arquivos": {
+    "metadata_api_format": {
+      "estado": "verificado",
+      "evidencias": [
+        {
+          "fonte": "src:sdr-registry",
+          "nota": "types.workflow"
+        },
+        {
+          "fonte": "src:sdr-registry",
+          "nota": "types.workflow.children.types.workflowflowaction"
+        },
+        {
+          "fonte": "src:mdapi-workflow"
+        }
+      ],
+      "nota": "Definido dentro do arquivo do tipo pai (um por objeto), no elemento <flowActions>.",
+      "valor": {
+        "arquivo": "<Objeto>.workflow",
+        "elemento": "flowActions",
+        "pasta": "workflows/"
+      }
+    },
+    "source_format": {
+      "estado": "verificado",
+      "evidencias": [
+        {
+          "fonte": "src:sdr-registry",
+          "nota": "types.workflow"
+        },
+        {
+          "fonte": "src:sdr-registry",
+          "nota": "types.workflow.children.types.workflowflowaction"
+        }
+      ],
+      "nota": "No registro do Salesforce CLI, Workflow não declara estratégia de decomposição: o componente fica dentro do arquivo do tipo pai, no elemento <flowActions>. O registro também traz pasta (workflowFlowActions) e sufixo (workflowFlowAction) próprios do filho; quando eles são usados não foi verificado.",
+      "valor": {
+        "arquivo": "<Objeto>.workflow-meta.xml",
+        "elemento": "flowActions",
+        "pasta": "workflows/"
+      }
+    }
+  },
+  "cobertura": {
+    "estrutural": {
+      "esperado": 6,
+      "estado": "completa",
+      "nota": "Universo esperado = tabela Fields da página do guia versionado 264.0 (API 68.0), lida em 2026-11-16. Contagem da seção WorkflowFlowAction da página de Workflow.",
+      "presente": 6
+    },
+    "explicativa": {
+      "esperado": 6,
+      "estado": "completa",
+      "presente": 6
+    },
+    "mapeamento": {
+      "estado": "parcial",
+      "nota": "Correspondências registradas apenas onde há evidência; demais pendentes."
+    }
+  },
+  "componente_filho_de": "mdt:Workflow",
+  "disponibilidade": {
+    "ate_versao": null,
+    "desde_versao": "30.0",
+    "estado": "verificado"
+  },
+  "divergencias_documentais": [],
+  "estado": "verificado",
+  "estende": "Metadata",
+  "estruturas": [
+    "mdx:WorkflowFlowActionParameter"
+  ],
+  "evidencias": [
+    {
+      "fonte": "src:mdapi-workflow"
+    },
+    {
+      "fonte": "src:sdr-registry"
+    },
+    {
+      "fonte": "src:sdr-metadata-support"
+    }
+  ],
+  "exemplo_xml": {
+    "natureza": "didatico_projeto",
+    "nota": "Exemplo escrito pelo projeto apenas com elementos documentados; sem dados reais.",
+    "xml": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<!-- No arquivo .workflow do objeto, este conteúdo fica no elemento <flowActions> -->\n<WorkflowFlowAction xmlns=\"http://soap.sforce.com/2006/04/metadata\">\n    <flow>[Nome_De_API_Do_Flow]</flow>\n    <flowInputs>\n        <name>[variável de entrada do flow]</name>\n        <value>[merge field, campo de lookup ou literal]</value>\n    </flowInputs>\n    <label>[nome de exibição]</label>\n</WorkflowFlowAction>"
+  },
+  "finalidade": "Recuperar e implantar flow triggers que já existem na org.",
+  "id": "mdt:WorkflowFlowAction",
+  "nome": "WorkflowFlowAction",
+  "o_que_e": "Um flow trigger: uma ação de workflow que inicia um flow.",
+  "propriedades": [
+    {
+      "default": {
+        "estado": "desconhecido",
+        "forma": "nao_declarado_na_fonte"
+      },
+      "disponibilidade": {
+        "ate_versao": null,
+        "desde_versao": null,
+        "estado": "desconhecido"
+      },
+      "dominio": {
+        "contexto": "A fonte tipa como string sem lista de valores; não inventar valores.",
+        "estado": "verificado",
+        "evidencias": [
+          {
+            "fonte": "src:mdapi-workflow"
+          }
+        ],
+        "natureza": "texto_livre"
+      },
+      "estado": "verificado",
+      "evidencias": [
+        {
+          "fonte": "src:mdapi-workflow"
+        }
+      ],
+      "explicacao": "explicada",
+      "id": "mdt:WorkflowFlowAction.description",
+      "nome": "description",
+      "o_que_e": "Descrição do flow trigger.",
+      "obrigatoriedade": {
+        "condicao": "A documentação 68.0 não marca o campo como obrigatório; ausência de marcação não comprova opcionalidade (confirmar no WSDL).",
+        "estado": "desconhecido",
+        "valor": "nao"
+      },
+      "origem": {
+        "estado": "verificado",
+        "evidencias": [
+          {
+            "fonte": "src:mdapi-workflow"
+          }
+        ],
+        "nota": "Propriedade definida pelo schema da Metadata API.",
+        "valor": "padrao_plataforma"
+      },
+      "tipo_tecnico": "string"
+    },
+    {
+      "default": {
+        "estado": "desconhecido",
+        "forma": "nao_declarado_na_fonte"
+      },
+      "disponibilidade": {
+        "ate_versao": null,
+        "desde_versao": null,
+        "estado": "desconhecido"
+      },
+      "dominio": {
+        "contexto": "A fonte tipa como string sem lista de valores; não inventar valores.",
+        "estado": "verificado",
+        "evidencias": [
+          {
+            "fonte": "src:mdapi-workflow"
+          }
+        ],
+        "natureza": "texto_livre"
+      },
+      "estado": "verificado",
+      "evidencias": [
+        {
+          "fonte": "src:mdapi-workflow"
+        }
+      ],
+      "explicacao": "explicada",
+      "id": "mdt:WorkflowFlowAction.flow",
+      "nome": "flow",
+      "o_que_e": "Nome de API do flow que a ação inicia.",
+      "obrigatoriedade": {
+        "estado": "verificado",
+        "evidencias": [
+          {
+            "fonte": "src:mdapi-workflow"
+          }
+        ],
+        "valor": "sim"
+      },
+      "origem": {
+        "estado": "verificado",
+        "evidencias": [
+          {
+            "fonte": "src:mdapi-workflow"
+          }
+        ],
+        "nota": "Propriedade definida pelo schema da Metadata API.",
+        "valor": "padrao_plataforma"
+      },
+      "tipo_tecnico": "string"
+    },
+    {
+      "cardinalidade": "0..n",
+      "default": {
+        "estado": "desconhecido",
+        "forma": "nao_declarado_na_fonte"
+      },
+      "disponibilidade": {
+        "ate_versao": null,
+        "desde_versao": null,
+        "estado": "desconhecido"
+      },
+      "dominio": {
+        "estado": "verificado",
+        "evidencias": [
+          {
+            "fonte": "src:mdapi-workflow"
+          }
+        ],
+        "natureza": "tipo_composto"
+      },
+      "estado": "verificado",
+      "estrutura_ref": "mdx:WorkflowFlowActionParameter",
+      "evidencias": [
+        {
+          "fonte": "src:mdapi-workflow"
+        }
+      ],
+      "explicacao": "explicada",
+      "id": "mdt:WorkflowFlowAction.flowInputs",
+      "nome": "flowInputs",
+      "o_que_e": "Valores passados às variáveis do flow quando ele inicia.",
+      "obrigatoriedade": {
+        "condicao": "A documentação 68.0 não marca o campo como obrigatório; ausência de marcação não comprova opcionalidade (confirmar no WSDL).",
+        "estado": "desconhecido",
+        "valor": "nao"
+      },
+      "origem": {
+        "estado": "verificado",
+        "evidencias": [
+          {
+            "fonte": "src:mdapi-workflow"
+          }
+        ],
+        "nota": "Propriedade definida pelo schema da Metadata API.",
+        "valor": "padrao_plataforma"
+      },
+      "tipo_tecnico": "WorkflowFlowActionParameter[]"
+    },
+    {
+      "default": {
+        "estado": "desconhecido",
+        "forma": "nao_declarado_na_fonte"
+      },
+      "disponibilidade": {
+        "ate_versao": null,
+        "desde_versao": null,
+        "estado": "desconhecido"
+      },
+      "dominio": {
+        "contexto": "A fonte tipa como string sem lista de valores; não inventar valores.",
+        "estado": "verificado",
+        "evidencias": [
+          {
+            "fonte": "src:mdapi-workflow"
+          }
+        ],
+        "natureza": "texto_livre"
+      },
+      "estado": "verificado",
+      "evidencias": [
+        {
+          "fonte": "src:mdapi-workflow"
+        }
+      ],
+      "explicacao": "explicada",
+      "id": "mdt:WorkflowFlowAction.label",
+      "nome": "label",
+      "o_que_e": "Nome de exibição do flow trigger.",
+      "obrigatoriedade": {
+        "estado": "verificado",
+        "evidencias": [
+          {
+            "fonte": "src:mdapi-workflow"
+          }
+        ],
+        "valor": "sim"
+      },
+      "origem": {
+        "estado": "verificado",
+        "evidencias": [
+          {
+            "fonte": "src:mdapi-workflow"
+          }
+        ],
+        "nota": "Propriedade definida pelo schema da Metadata API.",
+        "valor": "padrao_plataforma"
+      },
+      "tipo_tecnico": "string"
+    },
+    {
+      "default": {
+        "estado": "desconhecido",
+        "forma": "nao_declarado_na_fonte"
+      },
+      "disponibilidade": {
+        "ate_versao": null,
+        "desde_versao": null,
+        "estado": "desconhecido"
+      },
+      "dominio": {
+        "contexto": "A fonte tipa como string sem lista de valores; não inventar valores.",
+        "estado": "verificado",
+        "evidencias": [
+          {
+            "fonte": "src:mdapi-workflow"
+          }
+        ],
+        "natureza": "texto_livre"
+      },
+      "estado": "verificado",
+      "evidencias": [
+        {
+          "fonte": "src:mdapi-workflow"
+        }
+      ],
+      "explicacao": "explicada",
+      "id": "mdt:WorkflowFlowAction.language",
+      "nome": "language",
+      "o_que_e": "Reservado para uso futuro.",
+      "obrigatoriedade": {
+        "condicao": "A documentação 68.0 não marca o campo como obrigatório; ausência de marcação não comprova opcionalidade (confirmar no WSDL).",
+        "estado": "desconhecido",
+        "valor": "nao"
+      },
+      "origem": {
+        "estado": "verificado",
+        "evidencias": [
+          {
+            "fonte": "src:mdapi-workflow"
+          }
+        ],
+        "nota": "Propriedade definida pelo schema da Metadata API.",
+        "valor": "padrao_plataforma"
+      },
+      "tipo_tecnico": "string"
+    },
+    {
+      "default": {
+        "estado": "desconhecido",
+        "forma": "nao_declarado_na_fonte"
+      },
+      "disponibilidade": {
+        "ate_versao": null,
+        "desde_versao": null,
+        "estado": "desconhecido"
+      },
+      "dominio": {
+        "estado": "verificado",
+        "evidencias": [
+          {
+            "fonte": "src:mdapi-workflow"
+          }
+        ],
+        "lista_completa": "sim",
+        "natureza": "booleano",
+        "valores": [
+          {
+            "valor": "true"
+          },
+          {
+            "valor": "false"
+          }
+        ]
+      },
+      "estado": "verificado",
+      "evidencias": [
+        {
+          "fonte": "src:mdapi-workflow"
+        }
+      ],
+      "explicacao": "explicada",
+      "id": "mdt:WorkflowFlowAction.protected",
+      "nome": "protected",
+      "o_que_e": "Reservado para uso futuro.",
+      "obrigatoriedade": {
+        "condicao": "A documentação 68.0 não marca o campo como obrigatório; ausência de marcação não comprova opcionalidade (confirmar no WSDL).",
+        "estado": "desconhecido",
+        "valor": "nao"
+      },
+      "origem": {
+        "estado": "verificado",
+        "evidencias": [
+          {
+            "fonte": "src:mdapi-workflow"
+          }
+        ],
+        "nota": "Propriedade definida pelo schema da Metadata API.",
+        "valor": "padrao_plataforma"
+      },
+      "tipo_tecnico": "boolean"
+    }
+  ],
+  "recomendacoes": [],
+  "setup": {
+    "estado": "desconhecido",
+    "nota": "Caminho no Setup não validado nesta sessão."
+  },
+  "suporte_cli": {
+    "estado": "verificado",
+    "evidencias": [
+      {
+        "fonte": "src:sdr-metadata-support"
+      }
+    ],
+    "nota": "Suporte do Salesforce CLI (source-deploy-retrieve), não do Metadata API em geral.",
+    "valor": {
+      "nota_fonte": null,
+      "status": "suportado"
+    }
+  }
+}

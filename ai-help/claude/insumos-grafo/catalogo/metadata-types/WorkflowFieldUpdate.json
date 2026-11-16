@@ -1,0 +1,810 @@
+{
+  "id": "mdt:WorkflowFieldUpdate",
+  "nome": "WorkflowFieldUpdate",
+  "o_que_e": "Uma atualização de campo de workflow: que campo muda e como o valor novo é calculado.",
+  "finalidade": "Versionar e implantar as atualizações de campo usadas por regras de workflow e processos de aprovação.",
+  "estende": "Metadata",
+  "arquivos": {
+    "source_format": {
+      "estado": "verificado",
+      "valor": {
+        "pasta": "workflows/",
+        "arquivo": "<Objeto>.workflow-meta.xml",
+        "elemento": "fieldUpdates"
+      },
+      "nota": "No registro do Salesforce CLI, Workflow não declara estratégia de decomposição: o componente fica dentro do arquivo do tipo pai, no elemento <fieldUpdates>. O registro também traz pasta (workflowFieldUpdates) e sufixo (workflowFieldUpdate) próprios do filho; quando eles são usados não foi verificado.",
+      "evidencias": [
+        {
+          "fonte": "src:sdr-registry",
+          "nota": "types.workflow"
+        },
+        {
+          "fonte": "src:sdr-registry",
+          "nota": "types.workflow.children.types.workflowfieldupdate"
+        }
+      ]
+    },
+    "metadata_api_format": {
+      "estado": "verificado",
+      "valor": {
+        "pasta": "workflows/",
+        "arquivo": "<Objeto>.workflow",
+        "elemento": "fieldUpdates"
+      },
+      "nota": "Definido dentro do arquivo do tipo pai (um por objeto), no elemento <fieldUpdates>.",
+      "evidencias": [
+        {
+          "fonte": "src:sdr-registry",
+          "nota": "types.workflow"
+        },
+        {
+          "fonte": "src:sdr-registry",
+          "nota": "types.workflow.children.types.workflowfieldupdate"
+        },
+        {
+          "fonte": "src:mdapi-workflow"
+        }
+      ]
+    }
+  },
+  "disponibilidade": {
+    "desde_versao": null,
+    "ate_versao": null,
+    "estado": "desconhecido",
+    "nota": "A página não informa a versão do subtipo; o tipo pai, Workflow, existe desde a API 13.0."
+  },
+  "suporte_cli": {
+    "estado": "verificado",
+    "valor": {
+      "status": "suportado",
+      "nota_fonte": null
+    },
+    "nota": "Suporte do Salesforce CLI (source-deploy-retrieve), não do Metadata API em geral.",
+    "evidencias": [
+      {
+        "fonte": "src:sdr-metadata-support"
+      }
+    ]
+  },
+  "setup": {
+    "estado": "desconhecido",
+    "nota": "Caminho no Setup não validado nesta sessão."
+  },
+  "propriedades": [
+    {
+      "id": "mdt:WorkflowFieldUpdate.description",
+      "nome": "description",
+      "tipo_tecnico": "string",
+      "o_que_e": "Descrição da atualização de campo: por que ela foi criada.",
+      "origem": {
+        "estado": "verificado",
+        "valor": "padrao_plataforma",
+        "nota": "Propriedade definida pelo schema da Metadata API.",
+        "evidencias": [
+          {
+            "fonte": "src:mdapi-workflow"
+          }
+        ]
+      },
+      "obrigatoriedade": {
+        "valor": "nao",
+        "estado": "desconhecido",
+        "condicao": "A documentação 68.0 não marca o campo como obrigatório; ausência de marcação não comprova opcionalidade (confirmar no WSDL)."
+      },
+      "default": {
+        "forma": "nao_declarado_na_fonte",
+        "estado": "desconhecido"
+      },
+      "dominio": {
+        "natureza": "texto_livre",
+        "estado": "verificado",
+        "evidencias": [
+          {
+            "fonte": "src:mdapi-workflow"
+          }
+        ],
+        "contexto": "A fonte tipa como string sem lista de valores; não inventar valores."
+      },
+      "disponibilidade": {
+        "desde_versao": null,
+        "ate_versao": null,
+        "estado": "desconhecido"
+      },
+      "explicacao": "explicada",
+      "estado": "verificado",
+      "evidencias": [
+        {
+          "fonte": "src:mdapi-workflow"
+        }
+      ]
+    },
+    {
+      "id": "mdt:WorkflowFieldUpdate.field",
+      "nome": "field",
+      "tipo_tecnico": "string",
+      "o_que_e": "Campo do objeto que será atualizado.",
+      "origem": {
+        "estado": "verificado",
+        "valor": "padrao_plataforma",
+        "nota": "Propriedade definida pelo schema da Metadata API.",
+        "evidencias": [
+          {
+            "fonte": "src:mdapi-workflow"
+          }
+        ]
+      },
+      "obrigatoriedade": {
+        "valor": "sim",
+        "estado": "verificado",
+        "evidencias": [
+          {
+            "fonte": "src:mdapi-workflow"
+          }
+        ]
+      },
+      "default": {
+        "forma": "nao_declarado_na_fonte",
+        "estado": "desconhecido"
+      },
+      "dominio": {
+        "natureza": "texto_livre",
+        "estado": "verificado",
+        "evidencias": [
+          {
+            "fonte": "src:mdapi-workflow"
+          }
+        ],
+        "contexto": "A fonte tipa como string sem lista de valores; não inventar valores."
+      },
+      "disponibilidade": {
+        "desde_versao": null,
+        "ate_versao": null,
+        "estado": "desconhecido"
+      },
+      "explicacao": "explicada",
+      "estado": "verificado",
+      "evidencias": [
+        {
+          "fonte": "src:mdapi-workflow"
+        }
+      ]
+    },
+    {
+      "id": "mdt:WorkflowFieldUpdate.formula",
+      "nome": "formula",
+      "tipo_tecnico": "string",
+      "o_que_e": "Fórmula que calcula o valor novo. Usada quando operation é Formula.",
+      "origem": {
+        "estado": "verificado",
+        "valor": "padrao_plataforma",
+        "nota": "Propriedade definida pelo schema da Metadata API.",
+        "evidencias": [
+          {
+            "fonte": "src:mdapi-workflow"
+          }
+        ]
+      },
+      "obrigatoriedade": {
+        "valor": "nao",
+        "estado": "desconhecido",
+        "condicao": "A documentação 68.0 não marca o campo como obrigatório; ausência de marcação não comprova opcionalidade (confirmar no WSDL)."
+      },
+      "default": {
+        "forma": "nao_declarado_na_fonte",
+        "estado": "desconhecido"
+      },
+      "dominio": {
+        "natureza": "texto_livre",
+        "estado": "verificado",
+        "evidencias": [
+          {
+            "fonte": "src:mdapi-workflow"
+          }
+        ],
+        "contexto": "A fonte tipa como string sem lista de valores; não inventar valores."
+      },
+      "disponibilidade": {
+        "desde_versao": null,
+        "ate_versao": null,
+        "estado": "desconhecido"
+      },
+      "explicacao": "explicada",
+      "estado": "verificado",
+      "evidencias": [
+        {
+          "fonte": "src:mdapi-workflow"
+        }
+      ]
+    },
+    {
+      "id": "mdt:WorkflowFieldUpdate.fullName",
+      "nome": "fullName",
+      "tipo_tecnico": "string",
+      "o_que_e": "Nome único de API: letras, dígitos e sublinhados simples, começando por letra.",
+      "origem": {
+        "estado": "verificado",
+        "valor": "padrao_plataforma",
+        "nota": "Propriedade definida pelo schema da Metadata API.",
+        "evidencias": [
+          {
+            "fonte": "src:mdapi-workflow"
+          }
+        ]
+      },
+      "obrigatoriedade": {
+        "valor": "sim",
+        "estado": "verificado",
+        "evidencias": [
+          {
+            "fonte": "src:mdapi-workflow"
+          }
+        ]
+      },
+      "default": {
+        "forma": "nao_declarado_na_fonte",
+        "estado": "desconhecido"
+      },
+      "dominio": {
+        "natureza": "texto_livre",
+        "estado": "verificado",
+        "evidencias": [
+          {
+            "fonte": "src:mdapi-workflow"
+          }
+        ],
+        "contexto": "A fonte tipa como string sem lista de valores; não inventar valores."
+      },
+      "disponibilidade": {
+        "desde_versao": null,
+        "ate_versao": null,
+        "estado": "desconhecido"
+      },
+      "explicacao": "explicada",
+      "estado": "verificado",
+      "evidencias": [
+        {
+          "fonte": "src:mdapi-workflow"
+        }
+      ]
+    },
+    {
+      "id": "mdt:WorkflowFieldUpdate.literalValue",
+      "nome": "literalValue",
+      "tipo_tecnico": "string",
+      "o_que_e": "Valor fixo a gravar. Usado quando operation é Literal.",
+      "origem": {
+        "estado": "verificado",
+        "valor": "padrao_plataforma",
+        "nota": "Propriedade definida pelo schema da Metadata API.",
+        "evidencias": [
+          {
+            "fonte": "src:mdapi-workflow"
+          }
+        ]
+      },
+      "obrigatoriedade": {
+        "valor": "nao",
+        "estado": "desconhecido",
+        "condicao": "A documentação 68.0 não marca o campo como obrigatório; ausência de marcação não comprova opcionalidade (confirmar no WSDL)."
+      },
+      "default": {
+        "forma": "nao_declarado_na_fonte",
+        "estado": "desconhecido"
+      },
+      "dominio": {
+        "natureza": "texto_livre",
+        "estado": "verificado",
+        "evidencias": [
+          {
+            "fonte": "src:mdapi-workflow"
+          }
+        ],
+        "contexto": "A fonte tipa como string sem lista de valores; não inventar valores."
+      },
+      "disponibilidade": {
+        "desde_versao": null,
+        "ate_versao": null,
+        "estado": "desconhecido"
+      },
+      "explicacao": "explicada",
+      "estado": "verificado",
+      "evidencias": [
+        {
+          "fonte": "src:mdapi-workflow"
+        }
+      ]
+    },
+    {
+      "id": "mdt:WorkflowFieldUpdate.lookupValue",
+      "nome": "lookupValue",
+      "tipo_tecnico": "string",
+      "o_que_e": "Valor de lookup a gravar. Usado quando operation é LookupValue.",
+      "origem": {
+        "estado": "verificado",
+        "valor": "padrao_plataforma",
+        "nota": "Propriedade definida pelo schema da Metadata API.",
+        "evidencias": [
+          {
+            "fonte": "src:mdapi-workflow"
+          }
+        ]
+      },
+      "obrigatoriedade": {
+        "valor": "nao",
+        "estado": "desconhecido",
+        "condicao": "A documentação 68.0 não marca o campo como obrigatório; ausência de marcação não comprova opcionalidade (confirmar no WSDL)."
+      },
+      "default": {
+        "forma": "nao_declarado_na_fonte",
+        "estado": "desconhecido"
+      },
+      "dominio": {
+        "natureza": "texto_livre",
+        "estado": "verificado",
+        "evidencias": [
+          {
+            "fonte": "src:mdapi-workflow"
+          }
+        ],
+        "contexto": "A fonte tipa como string sem lista de valores; não inventar valores."
+      },
+      "disponibilidade": {
+        "desde_versao": null,
+        "ate_versao": null,
+        "estado": "desconhecido"
+      },
+      "explicacao": "explicada",
+      "estado": "verificado",
+      "evidencias": [
+        {
+          "fonte": "src:mdapi-workflow"
+        }
+      ]
+    },
+    {
+      "id": "mdt:WorkflowFieldUpdate.lookupValueType",
+      "nome": "lookupValueType",
+      "tipo_tecnico": "LookupValueType",
+      "o_que_e": "Tipo do registro apontado por lookupValue.",
+      "origem": {
+        "estado": "verificado",
+        "valor": "padrao_plataforma",
+        "nota": "Propriedade definida pelo schema da Metadata API.",
+        "evidencias": [
+          {
+            "fonte": "src:mdapi-workflow"
+          }
+        ]
+      },
+      "obrigatoriedade": {
+        "valor": "nao",
+        "estado": "desconhecido",
+        "condicao": "A documentação 68.0 não marca o campo como obrigatório; ausência de marcação não comprova opcionalidade (confirmar no WSDL)."
+      },
+      "default": {
+        "forma": "nao_declarado_na_fonte",
+        "estado": "desconhecido"
+      },
+      "dominio": {
+        "natureza": "enum_fechado",
+        "valores": [
+          {
+            "valor": "Queue"
+          },
+          {
+            "valor": "RecordType"
+          },
+          {
+            "valor": "User"
+          }
+        ],
+        "lista_completa": "sim",
+        "estado": "verificado",
+        "evidencias": [
+          {
+            "fonte": "src:mdapi-workflow"
+          }
+        ]
+      },
+      "disponibilidade": {
+        "desde_versao": null,
+        "ate_versao": null,
+        "estado": "desconhecido"
+      },
+      "explicacao": "explicada",
+      "estado": "verificado",
+      "evidencias": [
+        {
+          "fonte": "src:mdapi-workflow"
+        }
+      ]
+    },
+    {
+      "id": "mdt:WorkflowFieldUpdate.name",
+      "nome": "name",
+      "tipo_tecnico": "string",
+      "o_que_e": "Nome do componente.",
+      "origem": {
+        "estado": "verificado",
+        "valor": "padrao_plataforma",
+        "nota": "Propriedade definida pelo schema da Metadata API.",
+        "evidencias": [
+          {
+            "fonte": "src:mdapi-workflow"
+          }
+        ]
+      },
+      "obrigatoriedade": {
+        "valor": "sim",
+        "estado": "verificado",
+        "evidencias": [
+          {
+            "fonte": "src:mdapi-workflow"
+          }
+        ]
+      },
+      "default": {
+        "forma": "nao_declarado_na_fonte",
+        "estado": "desconhecido"
+      },
+      "dominio": {
+        "natureza": "texto_livre",
+        "estado": "verificado",
+        "evidencias": [
+          {
+            "fonte": "src:mdapi-workflow"
+          }
+        ],
+        "contexto": "A fonte tipa como string sem lista de valores; não inventar valores."
+      },
+      "disponibilidade": {
+        "desde_versao": "16.0",
+        "ate_versao": null,
+        "estado": "verificado"
+      },
+      "explicacao": "explicada",
+      "estado": "verificado",
+      "evidencias": [
+        {
+          "fonte": "src:mdapi-workflow"
+        }
+      ]
+    },
+    {
+      "id": "mdt:WorkflowFieldUpdate.notifyAssignee",
+      "nome": "notifyAssignee",
+      "tipo_tecnico": "boolean",
+      "o_que_e": "Indica se o responsável é avisado quando o campo é atualizado.",
+      "origem": {
+        "estado": "verificado",
+        "valor": "padrao_plataforma",
+        "nota": "Propriedade definida pelo schema da Metadata API.",
+        "evidencias": [
+          {
+            "fonte": "src:mdapi-workflow"
+          }
+        ]
+      },
+      "obrigatoriedade": {
+        "valor": "sim",
+        "estado": "verificado",
+        "evidencias": [
+          {
+            "fonte": "src:mdapi-workflow"
+          }
+        ]
+      },
+      "default": {
+        "forma": "nao_declarado_na_fonte",
+        "estado": "desconhecido"
+      },
+      "dominio": {
+        "natureza": "booleano",
+        "valores": [
+          {
+            "valor": "true"
+          },
+          {
+            "valor": "false"
+          }
+        ],
+        "lista_completa": "sim",
+        "estado": "verificado",
+        "evidencias": [
+          {
+            "fonte": "src:mdapi-workflow"
+          }
+        ]
+      },
+      "disponibilidade": {
+        "desde_versao": null,
+        "ate_versao": null,
+        "estado": "desconhecido"
+      },
+      "explicacao": "explicada",
+      "estado": "verificado",
+      "evidencias": [
+        {
+          "fonte": "src:mdapi-workflow"
+        }
+      ]
+    },
+    {
+      "id": "mdt:WorkflowFieldUpdate.operation",
+      "nome": "operation",
+      "tipo_tecnico": "FieldUpdateOperation",
+      "o_que_e": "Como o valor novo é obtido.",
+      "origem": {
+        "estado": "verificado",
+        "valor": "padrao_plataforma",
+        "nota": "Propriedade definida pelo schema da Metadata API.",
+        "evidencias": [
+          {
+            "fonte": "src:mdapi-workflow"
+          }
+        ]
+      },
+      "obrigatoriedade": {
+        "valor": "sim",
+        "estado": "verificado",
+        "evidencias": [
+          {
+            "fonte": "src:mdapi-workflow"
+          }
+        ]
+      },
+      "default": {
+        "forma": "nao_declarado_na_fonte",
+        "estado": "desconhecido"
+      },
+      "dominio": {
+        "natureza": "enum_fechado",
+        "valores": [
+          {
+            "valor": "Formula"
+          },
+          {
+            "valor": "Literal"
+          },
+          {
+            "valor": "LookupValue"
+          },
+          {
+            "valor": "NextValue"
+          },
+          {
+            "valor": "Null"
+          },
+          {
+            "valor": "PreviousValue"
+          }
+        ],
+        "lista_completa": "sim",
+        "estado": "verificado",
+        "evidencias": [
+          {
+            "fonte": "src:mdapi-workflow"
+          }
+        ]
+      },
+      "disponibilidade": {
+        "desde_versao": null,
+        "ate_versao": null,
+        "estado": "desconhecido"
+      },
+      "explicacao": "explicada",
+      "estado": "verificado",
+      "evidencias": [
+        {
+          "fonte": "src:mdapi-workflow"
+        }
+      ]
+    },
+    {
+      "id": "mdt:WorkflowFieldUpdate.protected",
+      "nome": "protected",
+      "tipo_tecnico": "boolean",
+      "o_que_e": "Indica se o componente é protegido: componentes protegidos não podem ser referenciados por componentes criados em outra org.",
+      "origem": {
+        "estado": "verificado",
+        "valor": "padrao_plataforma",
+        "nota": "Propriedade definida pelo schema da Metadata API.",
+        "evidencias": [
+          {
+            "fonte": "src:mdapi-workflow"
+          }
+        ]
+      },
+      "obrigatoriedade": {
+        "valor": "sim",
+        "estado": "verificado",
+        "evidencias": [
+          {
+            "fonte": "src:mdapi-workflow"
+          }
+        ]
+      },
+      "default": {
+        "forma": "nao_declarado_na_fonte",
+        "estado": "desconhecido"
+      },
+      "dominio": {
+        "natureza": "booleano",
+        "valores": [
+          {
+            "valor": "true"
+          },
+          {
+            "valor": "false"
+          }
+        ],
+        "lista_completa": "sim",
+        "estado": "verificado",
+        "evidencias": [
+          {
+            "fonte": "src:mdapi-workflow"
+          }
+        ]
+      },
+      "disponibilidade": {
+        "desde_versao": null,
+        "ate_versao": null,
+        "estado": "desconhecido"
+      },
+      "explicacao": "explicada",
+      "estado": "verificado",
+      "evidencias": [
+        {
+          "fonte": "src:mdapi-workflow"
+        }
+      ]
+    },
+    {
+      "id": "mdt:WorkflowFieldUpdate.reevaluateOnChange",
+      "nome": "reevaluateOnChange",
+      "tipo_tecnico": "boolean",
+      "o_que_e": "Com true, se o valor mudar, as demais regras de workflow do objeto são reavaliadas, em cascata de até 5 vezes.",
+      "origem": {
+        "estado": "verificado",
+        "valor": "padrao_plataforma",
+        "nota": "Propriedade definida pelo schema da Metadata API.",
+        "evidencias": [
+          {
+            "fonte": "src:mdapi-workflow"
+          }
+        ]
+      },
+      "obrigatoriedade": {
+        "valor": "nao",
+        "estado": "desconhecido",
+        "condicao": "A documentação 68.0 não marca o campo como obrigatório; ausência de marcação não comprova opcionalidade (confirmar no WSDL)."
+      },
+      "default": {
+        "forma": "nao_declarado_na_fonte",
+        "estado": "desconhecido"
+      },
+      "dominio": {
+        "natureza": "booleano",
+        "valores": [
+          {
+            "valor": "true"
+          },
+          {
+            "valor": "false"
+          }
+        ],
+        "lista_completa": "sim",
+        "estado": "verificado",
+        "evidencias": [
+          {
+            "fonte": "src:mdapi-workflow"
+          }
+        ]
+      },
+      "disponibilidade": {
+        "desde_versao": null,
+        "ate_versao": null,
+        "estado": "desconhecido"
+      },
+      "explicacao": "explicada",
+      "estado": "verificado",
+      "evidencias": [
+        {
+          "fonte": "src:mdapi-workflow"
+        }
+      ]
+    },
+    {
+      "id": "mdt:WorkflowFieldUpdate.targetObject",
+      "nome": "targetObject",
+      "tipo_tecnico": "string",
+      "o_que_e": "Campo de chave estrangeira do registro filho que aponta para o pai.",
+      "origem": {
+        "estado": "verificado",
+        "valor": "padrao_plataforma",
+        "nota": "Propriedade definida pelo schema da Metadata API.",
+        "evidencias": [
+          {
+            "fonte": "src:mdapi-workflow"
+          }
+        ]
+      },
+      "obrigatoriedade": {
+        "valor": "nao",
+        "estado": "desconhecido",
+        "condicao": "A documentação 68.0 não marca o campo como obrigatório; ausência de marcação não comprova opcionalidade (confirmar no WSDL)."
+      },
+      "default": {
+        "forma": "nao_declarado_na_fonte",
+        "estado": "desconhecido"
+      },
+      "dominio": {
+        "natureza": "texto_livre",
+        "estado": "verificado",
+        "evidencias": [
+          {
+            "fonte": "src:mdapi-workflow"
+          }
+        ],
+        "contexto": "A fonte tipa como string sem lista de valores; não inventar valores."
+      },
+      "disponibilidade": {
+        "desde_versao": null,
+        "ate_versao": null,
+        "estado": "desconhecido"
+      },
+      "explicacao": "explicada",
+      "estado": "verificado",
+      "evidencias": [
+        {
+          "fonte": "src:mdapi-workflow"
+        }
+      ],
+      "notas": [
+        "Antes da API 14.0, o campo se chamava sourceField."
+      ]
+    }
+  ],
+  "estruturas": [],
+  "cobertura": {
+    "estrutural": {
+      "estado": "completa",
+      "esperado": 13,
+      "presente": 13,
+      "nota": "Universo esperado = tabela Fields da página do guia versionado 264.0 (API 68.0), lida em 2026-11-16. Contagem da seção WorkflowFieldUpdate da página de Workflow."
+    },
+    "explicativa": {
+      "estado": "completa",
+      "esperado": 13,
+      "presente": 13
+    },
+    "mapeamento": {
+      "estado": "parcial",
+      "nota": "Correspondências registradas apenas onde há evidência; demais pendentes."
+    }
+  },
+  "recomendacoes": [],
+  "alertas": [
+    "No arquivo .workflow, cada componente deste tipo é um elemento <fieldUpdates> dentro de Workflow.",
+    "reevaluateOnChange faz uma atualização de campo reavaliar outras regras, em cascata de até 5 vezes."
+  ],
+  "divergencias_documentais": [],
+  "estado": "verificado",
+  "evidencias": [
+    {
+      "fonte": "src:mdapi-workflow"
+    },
+    {
+      "fonte": "src:sdr-registry"
+    },
+    {
+      "fonte": "src:sdr-metadata-support"
+    }
+  ],
+  "componente_filho_de": "mdt:Workflow",
+  "exemplo_xml": {
+    "xml": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<!-- No arquivo .workflow do objeto, este conteúdo fica no elemento <fieldUpdates> -->\n<WorkflowFieldUpdate xmlns=\"http://soap.sforce.com/2006/04/metadata\">\n    <fullName>[Nome_Da_Atualizacao]</fullName>\n    <field>[campo a atualizar]</field>\n    <literalValue>[valor fixo]</literalValue>\n    <name>[nome do componente]</name>\n    <notifyAssignee>false</notifyAssignee>\n    <!-- Valores documentados: Formula, Literal, LookupValue, NextValue, Null, PreviousValue -->\n    <operation>Literal</operation>\n    <protected>false</protected>\n</WorkflowFieldUpdate>",
+    "natureza": "didatico_projeto",
+    "nota": "Exemplo escrito pelo projeto apenas com elementos documentados; sem dados reais."
+  }
+}

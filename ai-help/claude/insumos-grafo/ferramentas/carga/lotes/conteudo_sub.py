@@ -719,9 +719,8 @@ S["sub:atendimento"] = {
         av("atencao", "Nomes na configuração simplificada", "Na configuração simplificada, Entitlement Management se chama SLA Management e Entitlement Processes se chamam SLA Policies, sem versionamento.",
            E("src:help-ent-sla")),
         av("atencao", "IsClosed do caso", "IsClosed segue o Status do caso; não é definido diretamente.", E("src:objref-case")),
-        av("implantacao", "Como metadado", "OmniChannelSettings, EntitlementSettings e KnowledgeSettings estão detalhados neste catálogo. CaseSettings, "
-           "que guarda o dono padrão do caso e as configurações de Email-to-Case e Web-to-Case, consta do inventário mas ainda não foi "
-           "cadastrado: a leitura da página não devolveu os nomes dos campos.",
+        av("implantacao", "Como metadado", "CaseSettings guarda o dono padrão do caso, os templates de notificação e as configurações de Email-to-Case e "
+           "Web-to-Case. OmniChannelSettings, EntitlementSettings e KnowledgeSettings cobrem roteamento, entitlements e Knowledge.",
            E("src:mdapi-omnichannelsettings", "src:mdapi-entitlementsettings", "src:mdapi-knowledgesettings", "src:mdapi-casesettings")),
     ],
 }

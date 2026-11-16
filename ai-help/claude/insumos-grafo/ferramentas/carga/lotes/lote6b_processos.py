@@ -30,7 +30,7 @@ def _f(nome, pertinencia):
 
 C.registrar_fontes([_f(n, f"Arquivo, versão e propriedades do tipo {n}.") for n in
                     ("LeadConfigSettings", "ProductSettings", "OrderSettings", "ContractSettings", "FieldServiceSettings", "CommunitiesSettings")]
-                   + [_f("CaseSettings", "O que o tipo CaseSettings cobre (tipo ainda não cadastrado: a leitura não devolveu os nomes dos elementos).")])
+                   )  # src:mdapi-casesettings é registrada pelo lote 7a, com a leitura do guia versionado.
 
 S_LEAD, S_PROD, S_ORDER = "src:mdapi-leadconfigsettings", "src:mdapi-productsettings", "src:mdapi-ordersettings"
 S_CONTRACT, S_FS, S_COMM = "src:mdapi-contractsettings", "src:mdapi-fieldservicesettings", "src:mdapi-communitiessettings"

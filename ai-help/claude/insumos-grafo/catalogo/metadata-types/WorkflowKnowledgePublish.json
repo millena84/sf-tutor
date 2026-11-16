@@ -1,0 +1,380 @@
+{
+  "id": "mdt:WorkflowKnowledgePublish",
+  "nome": "WorkflowKnowledgePublish",
+  "o_que_e": "Uma ação de workflow que publica artigos do Salesforce Knowledge.",
+  "finalidade": "Versionar e implantar as ações de publicação de artigos usadas por regras de workflow e processos de aprovação.",
+  "estende": "Metadata",
+  "arquivos": {
+    "source_format": {
+      "estado": "verificado",
+      "valor": {
+        "pasta": "workflows/",
+        "arquivo": "<Objeto>.workflow-meta.xml",
+        "elemento": "knowledgePublishes"
+      },
+      "nota": "No registro do Salesforce CLI, Workflow não declara estratégia de decomposição: o componente fica dentro do arquivo do tipo pai, no elemento <knowledgePublishes>. O registro também traz pasta (workflowKnowledgePublishs) e sufixo (workflowKnowledgePublish) próprios do filho; quando eles são usados não foi verificado.",
+      "evidencias": [
+        {
+          "fonte": "src:sdr-registry",
+          "nota": "types.workflow"
+        },
+        {
+          "fonte": "src:sdr-registry",
+          "nota": "types.workflow.children.types.workflowknowledgepublish"
+        }
+      ]
+    },
+    "metadata_api_format": {
+      "estado": "verificado",
+      "valor": {
+        "pasta": "workflows/",
+        "arquivo": "<Objeto>.workflow",
+        "elemento": "knowledgePublishes"
+      },
+      "nota": "Definido dentro do arquivo do tipo pai (um por objeto), no elemento <knowledgePublishes>.",
+      "evidencias": [
+        {
+          "fonte": "src:sdr-registry",
+          "nota": "types.workflow"
+        },
+        {
+          "fonte": "src:sdr-registry",
+          "nota": "types.workflow.children.types.workflowknowledgepublish"
+        },
+        {
+          "fonte": "src:mdapi-workflow"
+        }
+      ]
+    }
+  },
+  "disponibilidade": {
+    "desde_versao": "27.0",
+    "ate_versao": null,
+    "estado": "verificado"
+  },
+  "suporte_cli": {
+    "estado": "verificado",
+    "valor": {
+      "status": "suportado",
+      "nota_fonte": null
+    },
+    "nota": "Suporte do Salesforce CLI (source-deploy-retrieve), não do Metadata API em geral.",
+    "evidencias": [
+      {
+        "fonte": "src:sdr-metadata-support"
+      }
+    ]
+  },
+  "setup": {
+    "estado": "desconhecido",
+    "nota": "Caminho no Setup não validado nesta sessão."
+  },
+  "propriedades": [
+    {
+      "id": "mdt:WorkflowKnowledgePublish.action",
+      "nome": "action",
+      "tipo_tecnico": "KnowledgeWorkflowAction",
+      "o_que_e": "Ação de publicação.",
+      "origem": {
+        "estado": "verificado",
+        "valor": "padrao_plataforma",
+        "nota": "Propriedade definida pelo schema da Metadata API.",
+        "evidencias": [
+          {
+            "fonte": "src:mdapi-workflow"
+          }
+        ]
+      },
+      "obrigatoriedade": {
+        "valor": "sim",
+        "estado": "verificado",
+        "evidencias": [
+          {
+            "fonte": "src:mdapi-workflow"
+          }
+        ]
+      },
+      "default": {
+        "forma": "nao_declarado_na_fonte",
+        "estado": "desconhecido"
+      },
+      "dominio": {
+        "natureza": "enum_fechado",
+        "valores": [
+          {
+            "valor": "PublishAsNew",
+            "significado": "Publica como artigo novo."
+          },
+          {
+            "valor": "Publish",
+            "significado": "Publica uma versão nova do artigo."
+          }
+        ],
+        "lista_completa": "sim",
+        "estado": "verificado",
+        "evidencias": [
+          {
+            "fonte": "src:mdapi-workflow"
+          }
+        ]
+      },
+      "disponibilidade": {
+        "desde_versao": null,
+        "ate_versao": null,
+        "estado": "desconhecido"
+      },
+      "explicacao": "explicada",
+      "estado": "verificado",
+      "evidencias": [
+        {
+          "fonte": "src:mdapi-workflow"
+        }
+      ]
+    },
+    {
+      "id": "mdt:WorkflowKnowledgePublish.description",
+      "nome": "description",
+      "tipo_tecnico": "string",
+      "o_que_e": "Descrição breve do artigo.",
+      "origem": {
+        "estado": "verificado",
+        "valor": "padrao_plataforma",
+        "nota": "Propriedade definida pelo schema da Metadata API.",
+        "evidencias": [
+          {
+            "fonte": "src:mdapi-workflow"
+          }
+        ]
+      },
+      "obrigatoriedade": {
+        "valor": "nao",
+        "estado": "desconhecido",
+        "condicao": "A documentação 68.0 não marca o campo como obrigatório; ausência de marcação não comprova opcionalidade (confirmar no WSDL)."
+      },
+      "default": {
+        "forma": "nao_declarado_na_fonte",
+        "estado": "desconhecido"
+      },
+      "dominio": {
+        "natureza": "texto_livre",
+        "estado": "verificado",
+        "evidencias": [
+          {
+            "fonte": "src:mdapi-workflow"
+          }
+        ],
+        "contexto": "A fonte tipa como string sem lista de valores; não inventar valores."
+      },
+      "disponibilidade": {
+        "desde_versao": null,
+        "ate_versao": null,
+        "estado": "desconhecido"
+      },
+      "explicacao": "explicada",
+      "estado": "verificado",
+      "evidencias": [
+        {
+          "fonte": "src:mdapi-workflow"
+        }
+      ]
+    },
+    {
+      "id": "mdt:WorkflowKnowledgePublish.label",
+      "nome": "label",
+      "tipo_tecnico": "string",
+      "o_que_e": "Rótulo que identifica o artigo na interface.",
+      "origem": {
+        "estado": "verificado",
+        "valor": "padrao_plataforma",
+        "nota": "Propriedade definida pelo schema da Metadata API.",
+        "evidencias": [
+          {
+            "fonte": "src:mdapi-workflow"
+          }
+        ]
+      },
+      "obrigatoriedade": {
+        "valor": "sim",
+        "estado": "verificado",
+        "evidencias": [
+          {
+            "fonte": "src:mdapi-workflow"
+          }
+        ]
+      },
+      "default": {
+        "forma": "nao_declarado_na_fonte",
+        "estado": "desconhecido"
+      },
+      "dominio": {
+        "natureza": "texto_livre",
+        "estado": "verificado",
+        "evidencias": [
+          {
+            "fonte": "src:mdapi-workflow"
+          }
+        ],
+        "contexto": "A fonte tipa como string sem lista de valores; não inventar valores."
+      },
+      "disponibilidade": {
+        "desde_versao": null,
+        "ate_versao": null,
+        "estado": "desconhecido"
+      },
+      "explicacao": "explicada",
+      "estado": "verificado",
+      "evidencias": [
+        {
+          "fonte": "src:mdapi-workflow"
+        }
+      ]
+    },
+    {
+      "id": "mdt:WorkflowKnowledgePublish.language",
+      "nome": "language",
+      "tipo_tecnico": "string",
+      "o_que_e": "Idioma do artigo.",
+      "origem": {
+        "estado": "verificado",
+        "valor": "padrao_plataforma",
+        "nota": "Propriedade definida pelo schema da Metadata API.",
+        "evidencias": [
+          {
+            "fonte": "src:mdapi-workflow"
+          }
+        ]
+      },
+      "obrigatoriedade": {
+        "valor": "nao",
+        "estado": "desconhecido",
+        "condicao": "A documentação 68.0 não marca o campo como obrigatório; ausência de marcação não comprova opcionalidade (confirmar no WSDL)."
+      },
+      "default": {
+        "forma": "nao_declarado_na_fonte",
+        "estado": "desconhecido"
+      },
+      "dominio": {
+        "natureza": "texto_livre",
+        "estado": "verificado",
+        "evidencias": [
+          {
+            "fonte": "src:mdapi-workflow"
+          }
+        ],
+        "contexto": "A fonte tipa como string sem lista de valores; não inventar valores."
+      },
+      "disponibilidade": {
+        "desde_versao": null,
+        "ate_versao": null,
+        "estado": "desconhecido"
+      },
+      "explicacao": "explicada",
+      "estado": "verificado",
+      "evidencias": [
+        {
+          "fonte": "src:mdapi-workflow"
+        }
+      ]
+    },
+    {
+      "id": "mdt:WorkflowKnowledgePublish.protected",
+      "nome": "protected",
+      "tipo_tecnico": "boolean",
+      "o_que_e": "Indica se o componente é protegido: componentes protegidos não podem ser referenciados por componentes criados em outra org.",
+      "origem": {
+        "estado": "verificado",
+        "valor": "padrao_plataforma",
+        "nota": "Propriedade definida pelo schema da Metadata API.",
+        "evidencias": [
+          {
+            "fonte": "src:mdapi-workflow"
+          }
+        ]
+      },
+      "obrigatoriedade": {
+        "valor": "sim",
+        "estado": "verificado",
+        "evidencias": [
+          {
+            "fonte": "src:mdapi-workflow"
+          }
+        ]
+      },
+      "default": {
+        "forma": "nao_declarado_na_fonte",
+        "estado": "desconhecido"
+      },
+      "dominio": {
+        "natureza": "booleano",
+        "valores": [
+          {
+            "valor": "true"
+          },
+          {
+            "valor": "false"
+          }
+        ],
+        "lista_completa": "sim",
+        "estado": "verificado",
+        "evidencias": [
+          {
+            "fonte": "src:mdapi-workflow"
+          }
+        ]
+      },
+      "disponibilidade": {
+        "desde_versao": null,
+        "ate_versao": null,
+        "estado": "desconhecido"
+      },
+      "explicacao": "explicada",
+      "estado": "verificado",
+      "evidencias": [
+        {
+          "fonte": "src:mdapi-workflow"
+        }
+      ]
+    }
+  ],
+  "estruturas": [],
+  "cobertura": {
+    "estrutural": {
+      "estado": "completa",
+      "esperado": 5,
+      "presente": 5,
+      "nota": "Universo esperado = tabela Fields da página do guia versionado 264.0 (API 68.0), lida em 2026-11-16. Contagem da seção WorkflowKnowledgePublish da página de Workflow."
+    },
+    "explicativa": {
+      "estado": "completa",
+      "esperado": 5,
+      "presente": 5
+    },
+    "mapeamento": {
+      "estado": "parcial",
+      "nota": "Correspondências registradas apenas onde há evidência; demais pendentes."
+    }
+  },
+  "recomendacoes": [],
+  "alertas": [
+    "No arquivo .workflow, cada componente deste tipo é um elemento <knowledgePublishes> dentro de Workflow."
+  ],
+  "divergencias_documentais": [],
+  "estado": "verificado",
+  "evidencias": [
+    {
+      "fonte": "src:mdapi-workflow"
+    },
+    {
+      "fonte": "src:sdr-registry"
+    },
+    {
+      "fonte": "src:sdr-metadata-support"
+    }
+  ],
+  "componente_filho_de": "mdt:Workflow",
+  "exemplo_xml": {
+    "xml": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<!-- No arquivo .workflow do objeto, este conteúdo fica no elemento <knowledgePublishes> -->\n<WorkflowKnowledgePublish xmlns=\"http://soap.sforce.com/2006/04/metadata\">\n    <!-- Valores documentados: PublishAsNew, Publish -->\n    <action>Publish</action>\n    <label>[rótulo]</label>\n    <protected>false</protected>\n</WorkflowKnowledgePublish>",
+    "natureza": "didatico_projeto",
+    "nota": "Exemplo escrito pelo projeto apenas com elementos documentados; sem dados reais."
+  }
+}

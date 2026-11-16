@@ -52,9 +52,9 @@
     },
     "cobertura": {
       "estrutural": {
-        "esperado": null,
-        "estado": "parcial",
-        "nota": "Universo esperado = tabela Fields da página oficial lida em 2026-11-15 (mais fullName herdado). Parcial: WorkflowActionReference, usado em ApprovalAction.action, não está detalhado.",
+        "esperado": 22,
+        "estado": "completa",
+        "nota": "Universo esperado = tabela Fields da página oficial lida em 2026-11-15 (mais fullName herdado). Conferência com o guia versionado 264.0: 1 campo(s) só constam da referência nova e estão marcados como não confirmados na API 68.0.",
         "presente": 22
       },
       "explicativa": {
@@ -73,7 +73,8 @@
       "estado": "verificado"
     },
     "divergencias_documentais": [
-      "Na página (src:mdapi-approvalprocess), allowedSubmitters aparece como não obrigatório na tabela, mas a descrição diz que é obrigatório."
+      "O guia versionado 264.0 (API 68.0) lista 20 campo(s) em ApprovalProcess; a referência nova, usada neste cadastro, lista 1 a mais, todos sem descrição: processOrder.",
+      "allowedSubmitters: a tabela da referência nova não marca o campo como obrigatório, embora a descrição diga que é; o guia versionado 264.0 marca como Required. O cadastro segue o guia versionado."
     ],
     "estado": "verificado",
     "estende": "Metadata",
@@ -94,6 +95,10 @@
       },
       {
         "fonte": "src:sdr-metadata-support"
+      },
+      {
+        "fonte": "src:mdapi-v68-approvalprocess",
+        "nota": "Lista de campos conferida no guia versionado 264.0."
       }
     ],
     "exemplo_xml": {
@@ -343,12 +348,17 @@
         "id": "mdt:ApprovalProcess.allowedSubmitters",
         "nome": "allowedSubmitters",
         "notas": [
-          "A tabela marca o campo como não obrigatório, mas a descrição diz que ele é obrigatório."
+          "O guia versionado 264.0 marca o campo como Required. Na referência nova, a tabela não marca, mas a descrição diz que é obrigatório."
         ],
         "o_que_e": "Usuários que podem submeter registros para aprovação.",
         "obrigatoriedade": {
-          "estado": "desconhecido",
-          "valor": "desconhecida"
+          "estado": "verificado",
+          "evidencias": [
+            {
+              "fonte": "src:mdapi-v68-approvalprocess"
+            }
+          ],
+          "valor": "sim"
         },
         "origem": {
           "estado": "verificado",
@@ -643,6 +653,133 @@
                       "natureza": "tipo_composto"
                     },
                     "estado": "verificado",
+                    "estrutura_expandida": {
+                      "id": "mdx:WorkflowActionReference",
+                      "nome": "WorkflowActionReference",
+                      "propriedades": [
+                        {
+                          "default": {
+                            "estado": "desconhecido",
+                            "forma": "nao_declarado_na_fonte"
+                          },
+                          "disponibilidade": {
+                            "ate_versao": null,
+                            "desde_versao": null,
+                            "estado": "desconhecido"
+                          },
+                          "dominio": {
+                            "contexto": "A fonte tipa como string sem lista de valores; não inventar valores.",
+                            "estado": "verificado",
+                            "evidencias": [
+                              {
+                                "fonte": "src:mdapi-workflow"
+                              }
+                            ],
+                            "natureza": "texto_livre"
+                          },
+                          "estado": "verificado",
+                          "evidencias": [
+                            {
+                              "fonte": "src:mdapi-workflow"
+                            }
+                          ],
+                          "explicacao": "explicada",
+                          "id": "mdx:WorkflowActionReference.name",
+                          "nome": "name",
+                          "o_que_e": "Nome da ação de workflow.",
+                          "obrigatoriedade": {
+                            "estado": "verificado",
+                            "evidencias": [
+                              {
+                                "fonte": "src:mdapi-workflow"
+                              }
+                            ],
+                            "valor": "sim"
+                          },
+                          "origem": {
+                            "estado": "verificado",
+                            "evidencias": [
+                              {
+                                "fonte": "src:mdapi-workflow"
+                              }
+                            ],
+                            "nota": "Propriedade definida pelo schema da Metadata API.",
+                            "valor": "padrao_plataforma"
+                          },
+                          "tipo_tecnico": "string"
+                        },
+                        {
+                          "default": {
+                            "estado": "desconhecido",
+                            "forma": "nao_declarado_na_fonte"
+                          },
+                          "disponibilidade": {
+                            "ate_versao": null,
+                            "desde_versao": null,
+                            "estado": "desconhecido"
+                          },
+                          "dominio": {
+                            "estado": "verificado",
+                            "evidencias": [
+                              {
+                                "fonte": "src:mdapi-workflow"
+                              }
+                            ],
+                            "lista_completa": "sim",
+                            "natureza": "enum_fechado",
+                            "valores": [
+                              {
+                                "valor": "Alert"
+                              },
+                              {
+                                "valor": "FieldUpdate"
+                              },
+                              {
+                                "significado": "Disponível a partir da API 30.0.",
+                                "valor": "FlowAction"
+                              },
+                              {
+                                "valor": "OutboundMessage"
+                              },
+                              {
+                                "valor": "Task"
+                              }
+                            ]
+                          },
+                          "estado": "verificado",
+                          "evidencias": [
+                            {
+                              "fonte": "src:mdapi-workflow"
+                            }
+                          ],
+                          "explicacao": "explicada",
+                          "id": "mdx:WorkflowActionReference.type",
+                          "nome": "type",
+                          "o_que_e": "Tipo da ação.",
+                          "obrigatoriedade": {
+                            "estado": "verificado",
+                            "evidencias": [
+                              {
+                                "fonte": "src:mdapi-workflow"
+                              }
+                            ],
+                            "valor": "sim"
+                          },
+                          "origem": {
+                            "estado": "verificado",
+                            "evidencias": [
+                              {
+                                "fonte": "src:mdapi-workflow"
+                              }
+                            ],
+                            "nota": "Propriedade definida pelo schema da Metadata API.",
+                            "valor": "padrao_plataforma"
+                          },
+                          "tipo_tecnico": "WorkflowActionType"
+                        }
+                      ]
+                    },
+                    "estrutura_ref": "mdx:WorkflowActionReference",
                     "evidencias": [
                       {
                         "fonte": "src:mdapi-approvalprocess"
@@ -651,10 +788,7 @@
                     "explicacao": "explicada",
                     "id": "mdx:ApprovalAction.action",
                     "nome": "action",
-                    "notas": [
-                      "WorkflowActionReference não está detalhado nesta página; na página de Workflow, a leitura não devolveu os nomes dos campos."
-                    ],
-                    "o_que_e": "Ações de workflow a executar.",
+                    "o_que_e": "Ações de workflow a executar, cada uma referenciada pelo nome e pelo tipo.",
                     "obrigatoriedade": {
                       "condicao": "A documentação 68.0 não marca o campo como obrigatório; ausência de marcação não comprova opcionalidade (confirmar no WSDL).",
                       "estado": "desconhecido",
@@ -1743,6 +1877,133 @@
                       "natureza": "tipo_composto"
                     },
                     "estado": "verificado",
+                    "estrutura_expandida": {
+                      "id": "mdx:WorkflowActionReference",
+                      "nome": "WorkflowActionReference",
+                      "propriedades": [
+                        {
+                          "default": {
+                            "estado": "desconhecido",
+                            "forma": "nao_declarado_na_fonte"
+                          },
+                          "disponibilidade": {
+                            "ate_versao": null,
+                            "desde_versao": null,
+                            "estado": "desconhecido"
+                          },
+                          "dominio": {
+                            "contexto": "A fonte tipa como string sem lista de valores; não inventar valores.",
+                            "estado": "verificado",
+                            "evidencias": [
+                              {
+                                "fonte": "src:mdapi-workflow"
+                              }
+                            ],
+                            "natureza": "texto_livre"
+                          },
+                          "estado": "verificado",
+                          "evidencias": [
+                            {
+                              "fonte": "src:mdapi-workflow"
+                            }
+                          ],
+                          "explicacao": "explicada",
+                          "id": "mdx:WorkflowActionReference.name",
+                          "nome": "name",
+                          "o_que_e": "Nome da ação de workflow.",
+                          "obrigatoriedade": {
+                            "estado": "verificado",
+                            "evidencias": [
+                              {
+                                "fonte": "src:mdapi-workflow"
+                              }
+                            ],
+                            "valor": "sim"
+                          },
+                          "origem": {
+                            "estado": "verificado",
+                            "evidencias": [
+                              {
+                                "fonte": "src:mdapi-workflow"
+                              }
+                            ],
+                            "nota": "Propriedade definida pelo schema da Metadata API.",
+                            "valor": "padrao_plataforma"
+                          },
+                          "tipo_tecnico": "string"
+                        },
+                        {
+                          "default": {
+                            "estado": "desconhecido",
+                            "forma": "nao_declarado_na_fonte"
+                          },
+                          "disponibilidade": {
+                            "ate_versao": null,
+                            "desde_versao": null,
+                            "estado": "desconhecido"
+                          },
+                          "dominio": {
+                            "estado": "verificado",
+                            "evidencias": [
+                              {
+                                "fonte": "src:mdapi-workflow"
+                              }
+                            ],
+                            "lista_completa": "sim",
+                            "natureza": "enum_fechado",
+                            "valores": [
+                              {
+                                "valor": "Alert"
+                              },
+                              {
+                                "valor": "FieldUpdate"
+                              },
+                              {
+                                "significado": "Disponível a partir da API 30.0.",
+                                "valor": "FlowAction"
+                              },
+                              {
+                                "valor": "OutboundMessage"
+                              },
+                              {
+                                "valor": "Task"
+                              }
+                            ]
+                          },
+                          "estado": "verificado",
+                          "evidencias": [
+                            {
+                              "fonte": "src:mdapi-workflow"
+                            }
+                          ],
+                          "explicacao": "explicada",
+                          "id": "mdx:WorkflowActionReference.type",
+                          "nome": "type",
+                          "o_que_e": "Tipo da ação.",
+                          "obrigatoriedade": {
+                            "estado": "verificado",
+                            "evidencias": [
+                              {
+                                "fonte": "src:mdapi-workflow"
+                              }
+                            ],
+                            "valor": "sim"
+                          },
+                          "origem": {
+                            "estado": "verificado",
+                            "evidencias": [
+                              {
+                                "fonte": "src:mdapi-workflow"
+                              }
+                            ],
+                            "nota": "Propriedade definida pelo schema da Metadata API.",
+                            "valor": "padrao_plataforma"
+                          },
+                          "tipo_tecnico": "WorkflowActionType"
+                        }
+                      ]
+                    },
+                    "estrutura_ref": "mdx:WorkflowActionReference",
                     "evidencias": [
                       {
                         "fonte": "src:mdapi-approvalprocess"
@@ -1751,10 +2012,7 @@
                     "explicacao": "explicada",
                     "id": "mdx:ApprovalAction.action",
                     "nome": "action",
-                    "notas": [
-                      "WorkflowActionReference não está detalhado nesta página; na página de Workflow, a leitura não devolveu os nomes dos campos."
-                    ],
-                    "o_que_e": "Ações de workflow a executar.",
+                    "o_que_e": "Ações de workflow a executar, cada uma referenciada pelo nome e pelo tipo.",
                     "obrigatoriedade": {
                       "condicao": "A documentação 68.0 não marca o campo como obrigatório; ausência de marcação não comprova opcionalidade (confirmar no WSDL).",
                       "estado": "desconhecido",
@@ -2409,6 +2667,133 @@
                 "natureza": "tipo_composto"
               },
               "estado": "verificado",
+              "estrutura_expandida": {
+                "id": "mdx:WorkflowActionReference",
+                "nome": "WorkflowActionReference",
+                "propriedades": [
+                  {
+                    "default": {
+                      "estado": "desconhecido",
+                      "forma": "nao_declarado_na_fonte"
+                    },
+                    "disponibilidade": {
+                      "ate_versao": null,
+                      "desde_versao": null,
+                      "estado": "desconhecido"
+                    },
+                    "dominio": {
+                      "contexto": "A fonte tipa como string sem lista de valores; não inventar valores.",
+                      "estado": "verificado",
+                      "evidencias": [
+                        {
+                          "fonte": "src:mdapi-workflow"
+                        }
+                      ],
+                      "natureza": "texto_livre"
+                    },
+                    "estado": "verificado",
+                    "evidencias": [
+                      {
+                        "fonte": "src:mdapi-workflow"
+                      }
+                    ],
+                    "explicacao": "explicada",
+                    "id": "mdx:WorkflowActionReference.name",
+                    "nome": "name",
+                    "o_que_e": "Nome da ação de workflow.",
+                    "obrigatoriedade": {
+                      "estado": "verificado",
+                      "evidencias": [
+                        {
+                          "fonte": "src:mdapi-workflow"
+                        }
+                      ],
+                      "valor": "sim"
+                    },
+                    "origem": {
+                      "estado": "verificado",
+                      "evidencias": [
+                        {
+                          "fonte": "src:mdapi-workflow"
+                        }
+                      ],
+                      "nota": "Propriedade definida pelo schema da Metadata API.",
+                      "valor": "padrao_plataforma"
+                    },
+                    "tipo_tecnico": "string"
+                  },
+                  {
+                    "default": {
+                      "estado": "desconhecido",
+                      "forma": "nao_declarado_na_fonte"
+                    },
+                    "disponibilidade": {
+                      "ate_versao": null,
+                      "desde_versao": null,
+                      "estado": "desconhecido"
+                    },
+                    "dominio": {
+                      "estado": "verificado",
+                      "evidencias": [
+                        {
+                          "fonte": "src:mdapi-workflow"
+                        }
+                      ],
+                      "lista_completa": "sim",
+                      "natureza": "enum_fechado",
+                      "valores": [
+                        {
+                          "valor": "Alert"
+                        },
+                        {
+                          "valor": "FieldUpdate"
+                        },
+                        {
+                          "significado": "Disponível a partir da API 30.0.",
+                          "valor": "FlowAction"
+                        },
+                        {
+                          "valor": "OutboundMessage"
+                        },
+                        {
+                          "valor": "Task"
+                        }
+                      ]
+                    },
+                    "estado": "verificado",
+                    "evidencias": [
+                      {
+                        "fonte": "src:mdapi-workflow"
+                      }
+                    ],
+                    "explicacao": "explicada",
+                    "id": "mdx:WorkflowActionReference.type",
+                    "nome": "type",
+                    "o_que_e": "Tipo da ação.",
+                    "obrigatoriedade": {
+                      "estado": "verificado",
+                      "evidencias": [
+                        {
+                          "fonte": "src:mdapi-workflow"
+                        }
+                      ],
+                      "valor": "sim"
+                    },
+                    "origem": {
+                      "estado": "verificado",
+                      "evidencias": [
+                        {
+                          "fonte": "src:mdapi-workflow"
+                        }
+                      ],
+                      "nota": "Propriedade definida pelo schema da Metadata API.",
+                      "valor": "padrao_plataforma"
+                    },
+                    "tipo_tecnico": "WorkflowActionType"
+                  }
+                ]
+              },
+              "estrutura_ref": "mdx:WorkflowActionReference",
               "evidencias": [
                 {
                   "fonte": "src:mdapi-approvalprocess"
@@ -2417,10 +2802,7 @@
               "explicacao": "explicada",
               "id": "mdx:ApprovalAction.action",
               "nome": "action",
-              "notas": [
-                "WorkflowActionReference não está detalhado nesta página; na página de Workflow, a leitura não devolveu os nomes dos campos."
-              ],
-              "o_que_e": "Ações de workflow a executar.",
+              "o_que_e": "Ações de workflow a executar, cada uma referenciada pelo nome e pelo tipo.",
               "obrigatoriedade": {
                 "condicao": "A documentação 68.0 não marca o campo como obrigatório; ausência de marcação não comprova opcionalidade (confirmar no WSDL).",
                 "estado": "desconhecido",
@@ -2574,6 +2956,133 @@
                 "natureza": "tipo_composto"
               },
               "estado": "verificado",
+              "estrutura_expandida": {
+                "id": "mdx:WorkflowActionReference",
+                "nome": "WorkflowActionReference",
+                "propriedades": [
+                  {
+                    "default": {
+                      "estado": "desconhecido",
+                      "forma": "nao_declarado_na_fonte"
+                    },
+                    "disponibilidade": {
+                      "ate_versao": null,
+                      "desde_versao": null,
+                      "estado": "desconhecido"
+                    },
+                    "dominio": {
+                      "contexto": "A fonte tipa como string sem lista de valores; não inventar valores.",
+                      "estado": "verificado",
+                      "evidencias": [
+                        {
+                          "fonte": "src:mdapi-workflow"
+                        }
+                      ],
+                      "natureza": "texto_livre"
+                    },
+                    "estado": "verificado",
+                    "evidencias": [
+                      {
+                        "fonte": "src:mdapi-workflow"
+                      }
+                    ],
+                    "explicacao": "explicada",
+                    "id": "mdx:WorkflowActionReference.name",
+                    "nome": "name",
+                    "o_que_e": "Nome da ação de workflow.",
+                    "obrigatoriedade": {
+                      "estado": "verificado",
+                      "evidencias": [
+                        {
+                          "fonte": "src:mdapi-workflow"
+                        }
+                      ],
+                      "valor": "sim"
+                    },
+                    "origem": {
+                      "estado": "verificado",
+                      "evidencias": [
+                        {
+                          "fonte": "src:mdapi-workflow"
+                        }
+                      ],
+                      "nota": "Propriedade definida pelo schema da Metadata API.",
+                      "valor": "padrao_plataforma"
+                    },
+                    "tipo_tecnico": "string"
+                  },
+                  {
+                    "default": {
+                      "estado": "desconhecido",
+                      "forma": "nao_declarado_na_fonte"
+                    },
+                    "disponibilidade": {
+                      "ate_versao": null,
+                      "desde_versao": null,
+                      "estado": "desconhecido"
+                    },
+                    "dominio": {
+                      "estado": "verificado",
+                      "evidencias": [
+                        {
+                          "fonte": "src:mdapi-workflow"
+                        }
+                      ],
+                      "lista_completa": "sim",
+                      "natureza": "enum_fechado",
+                      "valores": [
+                        {
+                          "valor": "Alert"
+                        },
+                        {
+                          "valor": "FieldUpdate"
+                        },
+                        {
+                          "significado": "Disponível a partir da API 30.0.",
+                          "valor": "FlowAction"
+                        },
+                        {
+                          "valor": "OutboundMessage"
+                        },
+                        {
+                          "valor": "Task"
+                        }
+                      ]
+                    },
+                    "estado": "verificado",
+                    "evidencias": [
+                      {
+                        "fonte": "src:mdapi-workflow"
+                      }
+                    ],
+                    "explicacao": "explicada",
+                    "id": "mdx:WorkflowActionReference.type",
+                    "nome": "type",
+                    "o_que_e": "Tipo da ação.",
+                    "obrigatoriedade": {
+                      "estado": "verificado",
+                      "evidencias": [
+                        {
+                          "fonte": "src:mdapi-workflow"
+                        }
+                      ],
+                      "valor": "sim"
+                    },
+                    "origem": {
+                      "estado": "verificado",
+                      "evidencias": [
+                        {
+                          "fonte": "src:mdapi-workflow"
+                        }
+                      ],
+                      "nota": "Propriedade definida pelo schema da Metadata API.",
+                      "valor": "padrao_plataforma"
+                    },
+                    "tipo_tecnico": "WorkflowActionType"
+                  }
+                ]
+              },
+              "estrutura_ref": "mdx:WorkflowActionReference",
               "evidencias": [
                 {
                   "fonte": "src:mdapi-approvalprocess"
@@ -2582,10 +3091,7 @@
               "explicacao": "explicada",
               "id": "mdx:ApprovalAction.action",
               "nome": "action",
-              "notas": [
-                "WorkflowActionReference não está detalhado nesta página; na página de Workflow, a leitura não devolveu os nomes dos campos."
-              ],
-              "o_que_e": "Ações de workflow a executar.",
+              "o_que_e": "Ações de workflow a executar, cada uma referenciada pelo nome e pelo tipo.",
               "obrigatoriedade": {
                 "condicao": "A documentação 68.0 não marca o campo como obrigatório; ausência de marcação não comprova opcionalidade (confirmar no WSDL).",
                 "estado": "desconhecido",
@@ -2739,6 +3245,133 @@
                 "natureza": "tipo_composto"
               },
               "estado": "verificado",
+              "estrutura_expandida": {
+                "id": "mdx:WorkflowActionReference",
+                "nome": "WorkflowActionReference",
+                "propriedades": [
+                  {
+                    "default": {
+                      "estado": "desconhecido",
+                      "forma": "nao_declarado_na_fonte"
+                    },
+                    "disponibilidade": {
+                      "ate_versao": null,
+                      "desde_versao": null,
+                      "estado": "desconhecido"
+                    },
+                    "dominio": {
+                      "contexto": "A fonte tipa como string sem lista de valores; não inventar valores.",
+                      "estado": "verificado",
+                      "evidencias": [
+                        {
+                          "fonte": "src:mdapi-workflow"
+                        }
+                      ],
+                      "natureza": "texto_livre"
+                    },
+                    "estado": "verificado",
+                    "evidencias": [
+                      {
+                        "fonte": "src:mdapi-workflow"
+                      }
+                    ],
+                    "explicacao": "explicada",
+                    "id": "mdx:WorkflowActionReference.name",
+                    "nome": "name",
+                    "o_que_e": "Nome da ação de workflow.",
+                    "obrigatoriedade": {
+                      "estado": "verificado",
+                      "evidencias": [
+                        {
+                          "fonte": "src:mdapi-workflow"
+                        }
+                      ],
+                      "valor": "sim"
+                    },
+                    "origem": {
+                      "estado": "verificado",
+                      "evidencias": [
+                        {
+                          "fonte": "src:mdapi-workflow"
+                        }
+                      ],
+                      "nota": "Propriedade definida pelo schema da Metadata API.",
+                      "valor": "padrao_plataforma"
+                    },
+                    "tipo_tecnico": "string"
+                  },
+                  {
+                    "default": {
+                      "estado": "desconhecido",
+                      "forma": "nao_declarado_na_fonte"
+                    },
+                    "disponibilidade": {
+                      "ate_versao": null,
+                      "desde_versao": null,
+                      "estado": "desconhecido"
+                    },
+                    "dominio": {
+                      "estado": "verificado",
+                      "evidencias": [
+                        {
+                          "fonte": "src:mdapi-workflow"
+                        }
+                      ],
+                      "lista_completa": "sim",
+                      "natureza": "enum_fechado",
+                      "valores": [
+                        {
+                          "valor": "Alert"
+                        },
+                        {
+                          "valor": "FieldUpdate"
+                        },
+                        {
+                          "significado": "Disponível a partir da API 30.0.",
+                          "valor": "FlowAction"
+                        },
+                        {
+                          "valor": "OutboundMessage"
+                        },
+                        {
+                          "valor": "Task"
+                        }
+                      ]
+                    },
+                    "estado": "verificado",
+                    "evidencias": [
+                      {
+                        "fonte": "src:mdapi-workflow"
+                      }
+                    ],
+                    "explicacao": "explicada",
+                    "id": "mdx:WorkflowActionReference.type",
+                    "nome": "type",
+                    "o_que_e": "Tipo da ação.",
+                    "obrigatoriedade": {
+                      "estado": "verificado",
+                      "evidencias": [
+                        {
+                          "fonte": "src:mdapi-workflow"
+                        }
+                      ],
+                      "valor": "sim"
+                    },
+                    "origem": {
+                      "estado": "verificado",
+                      "evidencias": [
+                        {
+                          "fonte": "src:mdapi-workflow"
+                        }
+                      ],
+                      "nota": "Propriedade definida pelo schema da Metadata API.",
+                      "valor": "padrao_plataforma"
+                    },
+                    "tipo_tecnico": "WorkflowActionType"
+                  }
+                ]
+              },
+              "estrutura_ref": "mdx:WorkflowActionReference",
               "evidencias": [
                 {
                   "fonte": "src:mdapi-approvalprocess"
@@ -2747,10 +3380,7 @@
               "explicacao": "explicada",
               "id": "mdx:ApprovalAction.action",
               "nome": "action",
-              "notas": [
-                "WorkflowActionReference não está detalhado nesta página; na página de Workflow, a leitura não devolveu os nomes dos campos."
-              ],
-              "o_que_e": "Ações de workflow a executar.",
+              "o_que_e": "Ações de workflow a executar, cada uma referenciada pelo nome e pelo tipo.",
               "obrigatoriedade": {
                 "condicao": "A documentação 68.0 não marca o campo como obrigatório; ausência de marcação não comprova opcionalidade (confirmar no WSDL).",
                 "estado": "desconhecido",
@@ -3066,7 +3696,8 @@
         "disponibilidade": {
           "ate_versao": null,
           "desde_versao": null,
-          "estado": "desconhecido"
+          "estado": "desconhecido",
+          "nota": "Campo ausente do guia versionado 264.0 (API 68.0); versão de entrada não informada na fonte."
         },
         "dominio": {
           "estado": "verificado",
@@ -3086,6 +3717,9 @@
         "explicacao": "pendente",
         "id": "mdt:ApprovalProcess.processOrder",
         "nome": "processOrder",
+        "notas": [
+          "Consta da referência nova da documentação, sem descrição, e não consta do guia versionado 264.0 (API 68.0), conferido em 2026-11-16. A disponibilidade na API 68.0 não está confirmada."
+        ],
         "o_que_e": "Explicação pendente: item listado a partir da fonte, ainda sem texto didático.",
         "obrigatoriedade": {
           "condicao": "A documentação 68.0 não marca o campo como obrigatório; ausência de marcação não comprova opcionalidade (confirmar no WSDL).",
@@ -3149,6 +3783,133 @@
                 "natureza": "tipo_composto"
               },
               "estado": "verificado",
+              "estrutura_expandida": {
+                "id": "mdx:WorkflowActionReference",
+                "nome": "WorkflowActionReference",
+                "propriedades": [
+                  {
+                    "default": {
+                      "estado": "desconhecido",
+                      "forma": "nao_declarado_na_fonte"
+                    },
+                    "disponibilidade": {
+                      "ate_versao": null,
+                      "desde_versao": null,
+                      "estado": "desconhecido"
+                    },
+                    "dominio": {
+                      "contexto": "A fonte tipa como string sem lista de valores; não inventar valores.",
+                      "estado": "verificado",
+                      "evidencias": [
+                        {
+                          "fonte": "src:mdapi-workflow"
+                        }
+                      ],
+                      "natureza": "texto_livre"
+                    },
+                    "estado": "verificado",
+                    "evidencias": [
+                      {
+                        "fonte": "src:mdapi-workflow"
+                      }
+                    ],
+                    "explicacao": "explicada",
+                    "id": "mdx:WorkflowActionReference.name",
+                    "nome": "name",
+                    "o_que_e": "Nome da ação de workflow.",
+                    "obrigatoriedade": {
+                      "estado": "verificado",
+                      "evidencias": [
+                        {
+                          "fonte": "src:mdapi-workflow"
+                        }
+                      ],
+                      "valor": "sim"
+                    },
+                    "origem": {
+                      "estado": "verificado",
+                      "evidencias": [
+                        {
+                          "fonte": "src:mdapi-workflow"
+                        }
+                      ],
+                      "nota": "Propriedade definida pelo schema da Metadata API.",
+                      "valor": "padrao_plataforma"
+                    },
+                    "tipo_tecnico": "string"
+                  },
+                  {
+                    "default": {
+                      "estado": "desconhecido",
+                      "forma": "nao_declarado_na_fonte"
+                    },
+                    "disponibilidade": {
+                      "ate_versao": null,
+                      "desde_versao": null,
+                      "estado": "desconhecido"
+                    },
+                    "dominio": {
+                      "estado": "verificado",
+                      "evidencias": [
+                        {
+                          "fonte": "src:mdapi-workflow"
+                        }
+                      ],
+                      "lista_completa": "sim",
+                      "natureza": "enum_fechado",
+                      "valores": [
+                        {
+                          "valor": "Alert"
+                        },
+                        {
+                          "valor": "FieldUpdate"
+                        },
+                        {
+                          "significado": "Disponível a partir da API 30.0.",
+                          "valor": "FlowAction"
+                        },
+                        {
+                          "valor": "OutboundMessage"
+                        },
+                        {
+                          "valor": "Task"
+                        }
+                      ]
+                    },
+                    "estado": "verificado",
+                    "evidencias": [
+                      {
+                        "fonte": "src:mdapi-workflow"
+                      }
+                    ],
+                    "explicacao": "explicada",
+                    "id": "mdx:WorkflowActionReference.type",
+                    "nome": "type",
+                    "o_que_e": "Tipo da ação.",
+                    "obrigatoriedade": {
+                      "estado": "verificado",
+                      "evidencias": [
+                        {
+                          "fonte": "src:mdapi-workflow"
+                        }
+                      ],
+                      "valor": "sim"
+                    },
+                    "origem": {
+                      "estado": "verificado",
+                      "evidencias": [
+                        {
+                          "fonte": "src:mdapi-workflow"
+                        }
+                      ],
+                      "nota": "Propriedade definida pelo schema da Metadata API.",
+                      "valor": "padrao_plataforma"
+                    },
+                    "tipo_tecnico": "WorkflowActionType"
+                  }
+                ]
+              },
+              "estrutura_ref": "mdx:WorkflowActionReference",
               "evidencias": [
                 {
                   "fonte": "src:mdapi-approvalprocess"
@@ -3157,10 +3918,7 @@
               "explicacao": "explicada",
               "id": "mdx:ApprovalAction.action",
               "nome": "action",
-              "notas": [
-                "WorkflowActionReference não está detalhado nesta página; na página de Workflow, a leitura não devolveu os nomes dos campos."
-              ],
-              "o_que_e": "Ações de workflow a executar.",
+              "o_que_e": "Ações de workflow a executar, cada uma referenciada pelo nome e pelo tipo.",
               "obrigatoriedade": {
                 "condicao": "A documentação 68.0 não marca o campo como obrigatório; ausência de marcação não comprova opcionalidade (confirmar no WSDL).",
                 "estado": "desconhecido",

@@ -1,0 +1,616 @@
+{
+  "id": "mdt:WorkflowRule",
+  "nome": "WorkflowRule",
+  "o_que_e": "Uma regra de workflow: o critério que a dispara, quando ela é avaliada e as ações que executa.",
+  "finalidade": "Versionar e implantar regras de workflow que ainda existem na org.",
+  "estende": "Metadata",
+  "arquivos": {
+    "source_format": {
+      "estado": "verificado",
+      "valor": {
+        "pasta": "workflows/",
+        "arquivo": "<Objeto>.workflow-meta.xml",
+        "elemento": "rules"
+      },
+      "nota": "No registro do Salesforce CLI, Workflow não declara estratégia de decomposição: o componente fica dentro do arquivo do tipo pai, no elemento <rules>. O registro também traz pasta (workflowRules) e sufixo (workflowRule) próprios do filho; quando eles são usados não foi verificado.",
+      "evidencias": [
+        {
+          "fonte": "src:sdr-registry",
+          "nota": "types.workflow"
+        },
+        {
+          "fonte": "src:sdr-registry",
+          "nota": "types.workflow.children.types.workflowrule"
+        }
+      ]
+    },
+    "metadata_api_format": {
+      "estado": "verificado",
+      "valor": {
+        "pasta": "workflows/",
+        "arquivo": "<Objeto>.workflow",
+        "elemento": "rules"
+      },
+      "nota": "Definido dentro do arquivo do tipo pai (um por objeto), no elemento <rules>.",
+      "evidencias": [
+        {
+          "fonte": "src:sdr-registry",
+          "nota": "types.workflow"
+        },
+        {
+          "fonte": "src:sdr-registry",
+          "nota": "types.workflow.children.types.workflowrule"
+        },
+        {
+          "fonte": "src:mdapi-workflow"
+        }
+      ]
+    }
+  },
+  "disponibilidade": {
+    "desde_versao": null,
+    "ate_versao": null,
+    "estado": "desconhecido",
+    "nota": "A página não informa a versão do subtipo; o tipo pai, Workflow, existe desde a API 13.0."
+  },
+  "suporte_cli": {
+    "estado": "verificado",
+    "valor": {
+      "status": "suportado",
+      "nota_fonte": null
+    },
+    "nota": "Suporte do Salesforce CLI (source-deploy-retrieve), não do Metadata API em geral.",
+    "evidencias": [
+      {
+        "fonte": "src:sdr-metadata-support"
+      }
+    ]
+  },
+  "setup": {
+    "estado": "desconhecido",
+    "nota": "Caminho no Setup não validado nesta sessão."
+  },
+  "propriedades": [
+    {
+      "id": "mdt:WorkflowRule.actions",
+      "nome": "actions",
+      "tipo_tecnico": "WorkflowActionReference[]",
+      "o_que_e": "Ações executadas quando a regra dispara.",
+      "origem": {
+        "estado": "verificado",
+        "valor": "padrao_plataforma",
+        "nota": "Propriedade definida pelo schema da Metadata API.",
+        "evidencias": [
+          {
+            "fonte": "src:mdapi-workflow"
+          }
+        ]
+      },
+      "obrigatoriedade": {
+        "valor": "nao",
+        "estado": "desconhecido",
+        "condicao": "A documentação 68.0 não marca o campo como obrigatório; ausência de marcação não comprova opcionalidade (confirmar no WSDL)."
+      },
+      "default": {
+        "forma": "nao_declarado_na_fonte",
+        "estado": "desconhecido"
+      },
+      "dominio": {
+        "natureza": "tipo_composto",
+        "estado": "verificado",
+        "evidencias": [
+          {
+            "fonte": "src:mdapi-workflow"
+          }
+        ]
+      },
+      "disponibilidade": {
+        "desde_versao": null,
+        "ate_versao": null,
+        "estado": "desconhecido"
+      },
+      "explicacao": "explicada",
+      "estado": "verificado",
+      "evidencias": [
+        {
+          "fonte": "src:mdapi-workflow"
+        }
+      ],
+      "cardinalidade": "0..n",
+      "estrutura_ref": "mdx:WorkflowActionReference"
+    },
+    {
+      "id": "mdt:WorkflowRule.active",
+      "nome": "active",
+      "tipo_tecnico": "boolean",
+      "o_que_e": "Indica se a regra está ativa.",
+      "origem": {
+        "estado": "verificado",
+        "valor": "padrao_plataforma",
+        "nota": "Propriedade definida pelo schema da Metadata API.",
+        "evidencias": [
+          {
+            "fonte": "src:mdapi-workflow"
+          }
+        ]
+      },
+      "obrigatoriedade": {
+        "valor": "sim",
+        "estado": "verificado",
+        "evidencias": [
+          {
+            "fonte": "src:mdapi-workflow"
+          }
+        ]
+      },
+      "default": {
+        "forma": "nao_declarado_na_fonte",
+        "estado": "desconhecido"
+      },
+      "dominio": {
+        "natureza": "booleano",
+        "valores": [
+          {
+            "valor": "true"
+          },
+          {
+            "valor": "false"
+          }
+        ],
+        "lista_completa": "sim",
+        "estado": "verificado",
+        "evidencias": [
+          {
+            "fonte": "src:mdapi-workflow"
+          }
+        ]
+      },
+      "disponibilidade": {
+        "desde_versao": null,
+        "ate_versao": null,
+        "estado": "desconhecido"
+      },
+      "explicacao": "explicada",
+      "estado": "verificado",
+      "evidencias": [
+        {
+          "fonte": "src:mdapi-workflow"
+        }
+      ]
+    },
+    {
+      "id": "mdt:WorkflowRule.booleanFilter",
+      "nome": "booleanFilter",
+      "tipo_tecnico": "string",
+      "o_que_e": "Lógica que combina os criteriaItems, como (1 AND 2) OR 3.",
+      "origem": {
+        "estado": "verificado",
+        "valor": "padrao_plataforma",
+        "nota": "Propriedade definida pelo schema da Metadata API.",
+        "evidencias": [
+          {
+            "fonte": "src:mdapi-workflow"
+          }
+        ]
+      },
+      "obrigatoriedade": {
+        "valor": "nao",
+        "estado": "desconhecido",
+        "condicao": "A documentação 68.0 não marca o campo como obrigatório; ausência de marcação não comprova opcionalidade (confirmar no WSDL)."
+      },
+      "default": {
+        "forma": "nao_declarado_na_fonte",
+        "estado": "desconhecido"
+      },
+      "dominio": {
+        "natureza": "texto_livre",
+        "estado": "verificado",
+        "evidencias": [
+          {
+            "fonte": "src:mdapi-workflow"
+          }
+        ],
+        "contexto": "A fonte tipa como string sem lista de valores; não inventar valores."
+      },
+      "disponibilidade": {
+        "desde_versao": null,
+        "ate_versao": null,
+        "estado": "desconhecido"
+      },
+      "explicacao": "explicada",
+      "estado": "verificado",
+      "evidencias": [
+        {
+          "fonte": "src:mdapi-workflow"
+        }
+      ]
+    },
+    {
+      "id": "mdt:WorkflowRule.criteriaItems",
+      "nome": "criteriaItems",
+      "tipo_tecnico": "FilterItem[]",
+      "o_que_e": "Critérios que disparam a regra. Informe criteriaItems ou formula.",
+      "origem": {
+        "estado": "verificado",
+        "valor": "padrao_plataforma",
+        "nota": "Propriedade definida pelo schema da Metadata API.",
+        "evidencias": [
+          {
+            "fonte": "src:mdapi-workflow"
+          }
+        ]
+      },
+      "obrigatoriedade": {
+        "valor": "nao",
+        "estado": "desconhecido",
+        "condicao": "A documentação 68.0 não marca o campo como obrigatório; ausência de marcação não comprova opcionalidade (confirmar no WSDL)."
+      },
+      "default": {
+        "forma": "nao_declarado_na_fonte",
+        "estado": "desconhecido"
+      },
+      "dominio": {
+        "natureza": "tipo_composto",
+        "estado": "verificado",
+        "evidencias": [
+          {
+            "fonte": "src:mdapi-workflow"
+          }
+        ]
+      },
+      "disponibilidade": {
+        "desde_versao": null,
+        "ate_versao": null,
+        "estado": "desconhecido"
+      },
+      "explicacao": "explicada",
+      "estado": "verificado",
+      "evidencias": [
+        {
+          "fonte": "src:mdapi-workflow"
+        }
+      ],
+      "cardinalidade": "0..n",
+      "estrutura_ref": "mdx:FilterItem"
+    },
+    {
+      "id": "mdt:WorkflowRule.description",
+      "nome": "description",
+      "tipo_tecnico": "string",
+      "o_que_e": "Descrição da regra.",
+      "origem": {
+        "estado": "verificado",
+        "valor": "padrao_plataforma",
+        "nota": "Propriedade definida pelo schema da Metadata API.",
+        "evidencias": [
+          {
+            "fonte": "src:mdapi-workflow"
+          }
+        ]
+      },
+      "obrigatoriedade": {
+        "valor": "nao",
+        "estado": "desconhecido",
+        "condicao": "A documentação 68.0 não marca o campo como obrigatório; ausência de marcação não comprova opcionalidade (confirmar no WSDL)."
+      },
+      "default": {
+        "forma": "nao_declarado_na_fonte",
+        "estado": "desconhecido"
+      },
+      "dominio": {
+        "natureza": "texto_livre",
+        "estado": "verificado",
+        "evidencias": [
+          {
+            "fonte": "src:mdapi-workflow"
+          }
+        ],
+        "contexto": "A fonte tipa como string sem lista de valores; não inventar valores."
+      },
+      "disponibilidade": {
+        "desde_versao": null,
+        "ate_versao": null,
+        "estado": "desconhecido"
+      },
+      "explicacao": "explicada",
+      "estado": "verificado",
+      "evidencias": [
+        {
+          "fonte": "src:mdapi-workflow"
+        }
+      ]
+    },
+    {
+      "id": "mdt:WorkflowRule.failedMigrationToolVersion",
+      "nome": "failedMigrationToolVersion",
+      "tipo_tecnico": "string",
+      "o_que_e": "Versão da API em que uma migração da regra falhou, para tentar de novo depois.",
+      "origem": {
+        "estado": "verificado",
+        "valor": "padrao_plataforma",
+        "nota": "Propriedade definida pelo schema da Metadata API.",
+        "evidencias": [
+          {
+            "fonte": "src:mdapi-workflow"
+          }
+        ]
+      },
+      "obrigatoriedade": {
+        "valor": "nao",
+        "estado": "desconhecido",
+        "condicao": "A documentação 68.0 não marca o campo como obrigatório; ausência de marcação não comprova opcionalidade (confirmar no WSDL)."
+      },
+      "default": {
+        "forma": "nao_declarado_na_fonte",
+        "estado": "desconhecido"
+      },
+      "dominio": {
+        "natureza": "texto_livre",
+        "estado": "verificado",
+        "evidencias": [
+          {
+            "fonte": "src:mdapi-workflow"
+          }
+        ],
+        "contexto": "A fonte tipa como string sem lista de valores; não inventar valores."
+      },
+      "disponibilidade": {
+        "desde_versao": "54.0",
+        "ate_versao": null,
+        "estado": "verificado"
+      },
+      "explicacao": "explicada",
+      "estado": "verificado",
+      "evidencias": [
+        {
+          "fonte": "src:mdapi-workflow"
+        }
+      ]
+    },
+    {
+      "id": "mdt:WorkflowRule.formula",
+      "nome": "formula",
+      "tipo_tecnico": "string",
+      "o_que_e": "Fórmula que dispara a regra quando resulta em verdadeiro. Informe formula ou criteriaItems.",
+      "origem": {
+        "estado": "verificado",
+        "valor": "padrao_plataforma",
+        "nota": "Propriedade definida pelo schema da Metadata API.",
+        "evidencias": [
+          {
+            "fonte": "src:mdapi-workflow"
+          }
+        ]
+      },
+      "obrigatoriedade": {
+        "valor": "nao",
+        "estado": "desconhecido",
+        "condicao": "A documentação 68.0 não marca o campo como obrigatório; ausência de marcação não comprova opcionalidade (confirmar no WSDL)."
+      },
+      "default": {
+        "forma": "nao_declarado_na_fonte",
+        "estado": "desconhecido"
+      },
+      "dominio": {
+        "natureza": "texto_livre",
+        "estado": "verificado",
+        "evidencias": [
+          {
+            "fonte": "src:mdapi-workflow"
+          }
+        ],
+        "contexto": "A fonte tipa como string sem lista de valores; não inventar valores."
+      },
+      "disponibilidade": {
+        "desde_versao": null,
+        "ate_versao": null,
+        "estado": "desconhecido"
+      },
+      "explicacao": "explicada",
+      "estado": "verificado",
+      "evidencias": [
+        {
+          "fonte": "src:mdapi-workflow"
+        }
+      ]
+    },
+    {
+      "id": "mdt:WorkflowRule.fullName",
+      "nome": "fullName",
+      "tipo_tecnico": "string",
+      "o_que_e": "Nome único de API da regra; herdado do tipo Metadata.",
+      "origem": {
+        "estado": "verificado",
+        "valor": "padrao_plataforma",
+        "nota": "Propriedade definida pelo schema da Metadata API.",
+        "evidencias": [
+          {
+            "fonte": "src:mdapi-workflow"
+          }
+        ]
+      },
+      "obrigatoriedade": {
+        "valor": "desconhecida",
+        "estado": "desconhecido"
+      },
+      "default": {
+        "forma": "nao_declarado_na_fonte",
+        "estado": "desconhecido"
+      },
+      "dominio": {
+        "natureza": "texto_livre",
+        "estado": "verificado",
+        "evidencias": [
+          {
+            "fonte": "src:mdapi-workflow"
+          }
+        ],
+        "contexto": "A fonte tipa como string sem lista de valores; não inventar valores."
+      },
+      "disponibilidade": {
+        "desde_versao": null,
+        "ate_versao": null,
+        "estado": "desconhecido"
+      },
+      "explicacao": "explicada",
+      "estado": "verificado",
+      "evidencias": [
+        {
+          "fonte": "src:mdapi-workflow"
+        }
+      ],
+      "herdada_de": "Metadata"
+    },
+    {
+      "id": "mdt:WorkflowRule.triggerType",
+      "nome": "triggerType",
+      "tipo_tecnico": "WorkflowTriggerTypes",
+      "o_que_e": "Quando a regra é avaliada.",
+      "origem": {
+        "estado": "verificado",
+        "valor": "padrao_plataforma",
+        "nota": "Propriedade definida pelo schema da Metadata API.",
+        "evidencias": [
+          {
+            "fonte": "src:mdapi-workflow"
+          }
+        ]
+      },
+      "obrigatoriedade": {
+        "valor": "nao",
+        "estado": "desconhecido",
+        "condicao": "A documentação 68.0 não marca o campo como obrigatório; ausência de marcação não comprova opcionalidade (confirmar no WSDL)."
+      },
+      "default": {
+        "forma": "nao_declarado_na_fonte",
+        "estado": "desconhecido"
+      },
+      "dominio": {
+        "natureza": "enum_fechado",
+        "valores": [
+          {
+            "valor": "onAllChanges"
+          },
+          {
+            "valor": "onCreateOnly"
+          },
+          {
+            "valor": "onCreateOrTriggeringUpdate"
+          }
+        ],
+        "lista_completa": "sim",
+        "estado": "verificado",
+        "evidencias": [
+          {
+            "fonte": "src:mdapi-workflow"
+          }
+        ]
+      },
+      "disponibilidade": {
+        "desde_versao": null,
+        "ate_versao": null,
+        "estado": "desconhecido"
+      },
+      "explicacao": "explicada",
+      "estado": "verificado",
+      "evidencias": [
+        {
+          "fonte": "src:mdapi-workflow"
+        }
+      ]
+    },
+    {
+      "id": "mdt:WorkflowRule.workflowTimeTriggers",
+      "nome": "workflowTimeTriggers",
+      "tipo_tecnico": "WorkflowTimeTrigger",
+      "o_que_e": "Ações que rodam um tempo antes ou depois de uma data.",
+      "origem": {
+        "estado": "verificado",
+        "valor": "padrao_plataforma",
+        "nota": "Propriedade definida pelo schema da Metadata API.",
+        "evidencias": [
+          {
+            "fonte": "src:mdapi-workflow"
+          }
+        ]
+      },
+      "obrigatoriedade": {
+        "valor": "nao",
+        "estado": "desconhecido",
+        "condicao": "A documentação 68.0 não marca o campo como obrigatório; ausência de marcação não comprova opcionalidade (confirmar no WSDL)."
+      },
+      "default": {
+        "forma": "nao_declarado_na_fonte",
+        "estado": "desconhecido"
+      },
+      "dominio": {
+        "natureza": "tipo_composto",
+        "estado": "verificado",
+        "evidencias": [
+          {
+            "fonte": "src:mdapi-workflow"
+          }
+        ]
+      },
+      "disponibilidade": {
+        "desde_versao": null,
+        "ate_versao": null,
+        "estado": "desconhecido"
+      },
+      "explicacao": "explicada",
+      "estado": "verificado",
+      "evidencias": [
+        {
+          "fonte": "src:mdapi-workflow"
+        }
+      ],
+      "estrutura_ref": "mdx:WorkflowTimeTrigger"
+    }
+  ],
+  "estruturas": [
+    "mdx:FilterItem",
+    "mdx:WorkflowActionReference",
+    "mdx:WorkflowTimeTrigger"
+  ],
+  "cobertura": {
+    "estrutural": {
+      "estado": "completa",
+      "esperado": 10,
+      "presente": 10,
+      "nota": "Universo esperado = tabela Fields da página do guia versionado 264.0 (API 68.0), lida em 2026-11-16. Contagem da seção WorkflowRule da página de Workflow."
+    },
+    "explicativa": {
+      "estado": "completa",
+      "esperado": 10,
+      "presente": 10
+    },
+    "mapeamento": {
+      "estado": "parcial",
+      "nota": "Correspondências registradas apenas onde há evidência; demais pendentes."
+    }
+  },
+  "recomendacoes": [],
+  "alertas": [
+    "No arquivo .workflow, cada componente deste tipo é um elemento <rules> dentro de Workflow.",
+    "Informe criteriaItems ou formula como critério da regra."
+  ],
+  "divergencias_documentais": [],
+  "estado": "verificado",
+  "evidencias": [
+    {
+      "fonte": "src:mdapi-workflow"
+    },
+    {
+      "fonte": "src:sdr-registry"
+    },
+    {
+      "fonte": "src:sdr-metadata-support"
+    }
+  ],
+  "componente_filho_de": "mdt:Workflow",
+  "exemplo_xml": {
+    "xml": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<!-- No arquivo .workflow do objeto, este conteúdo fica no elemento <rules> -->\n<WorkflowRule xmlns=\"http://soap.sforce.com/2006/04/metadata\">\n    <fullName>[Nome_Da_Regra]</fullName>\n    <actions>\n        <name>[nome da ação]</name>\n        <!-- Valores documentados: Alert, FieldUpdate, FlowAction, OutboundMessage, Task -->\n        <type>FieldUpdate</type>\n    </actions>\n    <active>false</active>\n    <formula>[fórmula que resulta em verdadeiro]</formula>\n    <!-- Valores documentados: onAllChanges, onCreateOnly, onCreateOrTriggeringUpdate -->\n    <triggerType>onCreateOnly</triggerType>\n</WorkflowRule>",
+    "natureza": "didatico_projeto",
+    "nota": "Exemplo escrito pelo projeto apenas com elementos documentados; sem dados reais."
+  }
+}
