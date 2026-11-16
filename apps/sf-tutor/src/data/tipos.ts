@@ -79,6 +79,8 @@ export interface Fonte {
 
 export interface InfoBuild {
   commit: string | null;
+  /** Último commit que mudou a projeção do site (gerado/site); nulo quando o histórico não permite saber. */
+  commit_insumos?: string | null;
   data_build: string;
   origem: string;
   sintetico?: boolean;
