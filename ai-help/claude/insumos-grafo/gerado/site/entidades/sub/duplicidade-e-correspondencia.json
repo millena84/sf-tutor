@@ -74,10 +74,13 @@
     {
       "evidencias": [
         {
-          "fonte": "src:sdr-metadata-support"
+          "fonte": "src:mdapi-duplicaterule"
+        },
+        {
+          "fonte": "src:mdapi-matchingrules"
         }
       ],
-      "texto": "DuplicateRule e MatchingRules constam da lista oficial de metadata types da versão 68; as propriedades deles ainda não estão detalhadas neste catálogo.",
+      "texto": "DuplicateRule guarda cada duplicate rule, num arquivo cujo nome começa pelo objeto: a ação na criação e na edição (Allow ou Block), o texto do alerta, o filtro e as matching rules usadas. MatchingRules guarda, num arquivo por objeto, todas as matching rules dele, cada uma com os campos comparados e o método (exato ou aproximado). Ao implantar, o estado de uma matching rule só pode ser Active ou Inactive.",
       "tipo": "implantacao",
       "titulo": "Como metadado"
     }
@@ -85,8 +88,39 @@
   "classificacao": "cls:qualidade-governanca-e-ciclo-de-vida-dos-dados",
   "derivado": {
     "dependencias": [],
-    "funcionalidades": [],
-    "metadata_types": [],
+    "funcionalidades": [
+      {
+        "alertas": [
+          "Uma duplicate rule só pode ser ativada se todas as matching rules associadas estiverem ativas.",
+          "As matching rules padrão não podem ser editadas; é possível criar regras customizadas.",
+          "Em Web-to-Lead, um envio que bate com o critério de duplicidade é sempre bloqueado, mesmo com a regra em Allow com alerta.",
+          "Criar, editar e ativar regras exige a permissão Customize Application."
+        ],
+        "exemplo": "Ao criar um lead com o mesmo e-mail de um contato, o usuário vê um alerta com o possível duplicado e decide se salva mesmo assim.",
+        "id": "func:duplicate-management",
+        "principal": true
+      }
+    ],
+    "metadata_types": [
+      {
+        "estrutura": "parcial",
+        "funcionalidades": [
+          "func:duplicate-management"
+        ],
+        "id": "mdt:DuplicateRule",
+        "nota_suporte": null,
+        "suporte_cli": "suportado"
+      },
+      {
+        "estrutura": "completa",
+        "funcionalidades": [
+          "func:duplicate-management"
+        ],
+        "id": "mdt:MatchingRules",
+        "nota_suporte": null,
+        "suporte_cli": "suportado"
+      }
+    ],
     "nota": "Calculado pelo gerador a partir do catálogo; não é cadastro.",
     "objetos_api": [],
     "temas_sem_funcionalidade": []
@@ -106,7 +140,9 @@
   "escopo": "Entram a detecção e o tratamento de registros duplicados.",
   "estado": "desconhecido",
   "fora_do_escopo": "Validação de formato de um campo fica em \"Validação\".",
-  "funcionalidades": [],
+  "funcionalidades": [
+    "func:duplicate-management"
+  ],
   "id": "sub:duplicidade-e-correspondencia",
   "natureza": "curadoria_didatica",
   "nome": "Duplicidade e correspondência",
@@ -121,7 +157,10 @@
       }
     ],
     "exemplo": "Ao cadastrar um lead com o mesmo e-mail de um contato existente, a vendedora vê o alerta com o possível duplicado antes de salvar.",
-    "explicacao": "Duas regras trabalham juntas contra registros repetidos. A matching rule define como reconhecer um duplicado (quais campos comparar e com que rigor). A duplicate rule define o que fazer quando ele aparece: avisar, bloquear ou só registrar para relatório."
+    "explicacao": "Duas regras trabalham juntas contra registros repetidos. A matching rule define como reconhecer um duplicado (quais campos comparar e com que rigor). A duplicate rule define o que fazer quando ele aparece: avisar, bloquear ou só registrar para relatório.",
+    "por_onde_comecar": [
+      "func:duplicate-management"
+    ]
   },
   "referencias_oficiais": [
     {

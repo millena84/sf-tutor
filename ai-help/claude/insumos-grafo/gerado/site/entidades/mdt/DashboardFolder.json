@@ -1,0 +1,388 @@
+{
+  "alertas": [
+    "A página Folder é comum aos cinco tipos de pasta (documentos, e-mail, email templates, relatórios e dashboards); o exemplo XML dela é de DocumentFolder.",
+    "O curinga (*) não funciona no package.xml.",
+    "Para implantar ou recuperar só uma pasta aninhada, o nome completo precisa terminar com barra."
+  ],
+  "arquivos": {
+    "curinga_package_xml": {
+      "estado": "verificado",
+      "evidencias": [
+        {
+          "fonte": "src:mdapi-folder"
+        }
+      ],
+      "valor": false
+    },
+    "metadata_api_format": {
+      "estado": "verificado",
+      "evidencias": [
+        {
+          "fonte": "src:sdr-registry",
+          "nota": "types.dashboardfolder"
+        },
+        {
+          "fonte": "src:mdapi-folder"
+        }
+      ],
+      "nota": "A pasta não tem arquivo de conteúdo: só o arquivo de metadado, no mesmo diretório dos componentes. O sufixo vem do registro do Salesforce CLI.",
+      "valor": {
+        "arquivo": "<Pasta>.dashboardFolder-meta.xml",
+        "pasta": "dashboards/"
+      }
+    },
+    "source_format": {
+      "estado": "verificado",
+      "evidencias": [
+        {
+          "fonte": "src:sdr-registry",
+          "nota": "types.dashboardfolder"
+        },
+        {
+          "fonte": "src:mdapi-folder"
+        }
+      ],
+      "nota": "A pasta não tem arquivo de conteúdo: só o arquivo de metadado, no mesmo diretório dos componentes. O sufixo vem do registro do Salesforce CLI.",
+      "valor": {
+        "arquivo": "<Pasta>.dashboardFolder-meta.xml",
+        "pasta": "dashboards/"
+      }
+    }
+  },
+  "cobertura": {
+    "estrutural": {
+      "esperado": 5,
+      "estado": "parcial",
+      "nota": "Universo esperado = tabelas Fields da página do guia versionado 264.0 (API 68.0), lida em 2026-11-16. O subtipo SharedTo tem página própria, não lida. Primeiro nível completo; 1 propriedade(s) de tipo composto ainda sem estrutura detalhada: sharedTo.",
+      "presente": 5
+    },
+    "explicativa": {
+      "esperado": 5,
+      "estado": "completa",
+      "presente": 5
+    },
+    "mapeamento": {
+      "estado": "parcial",
+      "nota": "Correspondências registradas apenas onde há evidência; demais pendentes."
+    }
+  },
+  "disponibilidade": {
+    "ate_versao": null,
+    "desde_versao": "11.0",
+    "estado": "verificado"
+  },
+  "divergencias_documentais": [],
+  "estado": "verificado",
+  "estende": "Folder",
+  "estruturas": [],
+  "evidencias": [
+    {
+      "fonte": "src:mdapi-folder"
+    },
+    {
+      "fonte": "src:sdr-registry"
+    },
+    {
+      "fonte": "src:sdr-metadata-support"
+    }
+  ],
+  "exemplo_xml": {
+    "natureza": "didatico_projeto",
+    "nota": "Exemplo escrito pelo projeto apenas com elementos documentados; sem dados reais.",
+    "xml": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<DashboardFolder xmlns=\"http://soap.sforce.com/2006/04/metadata\">\n    <!-- Valores documentados: Shared, Public, PublicInternal, Hidden -->\n    <accessType>Public</accessType>\n    <name>[nome da pasta]</name>\n    <!-- Valores documentados: ReadOnly, ReadWrite -->\n    <publicFolderAccess>ReadOnly</publicFolderAccess>\n</DashboardFolder>"
+  },
+  "finalidade": "Versionar e implantar as pastas de dashboards e o acesso a elas.",
+  "id": "mdt:DashboardFolder",
+  "nome": "DashboardFolder",
+  "o_que_e": "Uma pasta de dashboards: o nome e o modo de acesso. O conteúdo fica nos componentes que a pasta contém.",
+  "propriedades": [
+    {
+      "default": {
+        "estado": "desconhecido",
+        "forma": "nao_declarado_na_fonte"
+      },
+      "disponibilidade": {
+        "ate_versao": null,
+        "desde_versao": null,
+        "estado": "desconhecido"
+      },
+      "dominio": {
+        "estado": "verificado",
+        "evidencias": [
+          {
+            "fonte": "src:mdapi-folder"
+          }
+        ],
+        "lista_completa": "sim",
+        "natureza": "enum_fechado",
+        "valores": [
+          {
+            "significado": "Visível só a um conjunto de usuários.",
+            "valor": "Shared"
+          },
+          {
+            "significado": "Visível a todos, inclusive usuários de portal.",
+            "valor": "Public"
+          },
+          {
+            "significado": "Visível a todos, menos usuários de portal; só em pastas de relatórios e dashboards.",
+            "valor": "PublicInternal"
+          },
+          {
+            "significado": "Oculta de todos.",
+            "valor": "Hidden"
+          }
+        ]
+      },
+      "estado": "verificado",
+      "evidencias": [
+        {
+          "fonte": "src:mdapi-folder"
+        }
+      ],
+      "explicacao": "explicada",
+      "id": "mdt:DashboardFolder.accessType",
+      "nome": "accessType",
+      "o_que_e": "Tipo de acesso da pasta.",
+      "obrigatoriedade": {
+        "estado": "verificado",
+        "evidencias": [
+          {
+            "fonte": "src:mdapi-folder"
+          }
+        ],
+        "valor": "sim"
+      },
+      "origem": {
+        "estado": "verificado",
+        "evidencias": [
+          {
+            "fonte": "src:mdapi-folder"
+          }
+        ],
+        "nota": "Propriedade definida pelo schema da Metadata API.",
+        "valor": "padrao_plataforma"
+      },
+      "tipo_tecnico": "FolderAccessTypes"
+    },
+    {
+      "default": {
+        "estado": "desconhecido",
+        "forma": "nao_declarado_na_fonte"
+      },
+      "disponibilidade": {
+        "ate_versao": null,
+        "desde_versao": null,
+        "estado": "desconhecido"
+      },
+      "dominio": {
+        "contexto": "A fonte tipa como string sem lista de valores; não inventar valores.",
+        "estado": "verificado",
+        "evidencias": [
+          {
+            "fonte": "src:mdapi-folder"
+          }
+        ],
+        "natureza": "texto_livre"
+      },
+      "estado": "verificado",
+      "evidencias": [
+        {
+          "fonte": "src:mdapi-folder"
+        }
+      ],
+      "explicacao": "explicada",
+      "herdada_de": "Metadata",
+      "id": "mdt:DashboardFolder.fullName",
+      "nome": "fullName",
+      "o_que_e": "Nome único de API: letras, números e sublinhados, começando por letra. Herdado.",
+      "obrigatoriedade": {
+        "estado": "desconhecido",
+        "valor": "desconhecida"
+      },
+      "origem": {
+        "estado": "verificado",
+        "evidencias": [
+          {
+            "fonte": "src:mdapi-folder"
+          }
+        ],
+        "nota": "Propriedade definida pelo schema da Metadata API.",
+        "valor": "padrao_plataforma"
+      },
+      "tipo_tecnico": "string"
+    },
+    {
+      "default": {
+        "estado": "desconhecido",
+        "forma": "nao_declarado_na_fonte"
+      },
+      "disponibilidade": {
+        "ate_versao": null,
+        "desde_versao": null,
+        "estado": "desconhecido"
+      },
+      "dominio": {
+        "contexto": "A fonte tipa como string sem lista de valores; não inventar valores.",
+        "estado": "verificado",
+        "evidencias": [
+          {
+            "fonte": "src:mdapi-folder"
+          }
+        ],
+        "natureza": "texto_livre"
+      },
+      "estado": "verificado",
+      "evidencias": [
+        {
+          "fonte": "src:mdapi-folder"
+        }
+      ],
+      "explicacao": "explicada",
+      "id": "mdt:DashboardFolder.name",
+      "nome": "name",
+      "o_que_e": "Nome da pasta.",
+      "obrigatoriedade": {
+        "estado": "verificado",
+        "evidencias": [
+          {
+            "fonte": "src:mdapi-folder"
+          }
+        ],
+        "valor": "sim"
+      },
+      "origem": {
+        "estado": "verificado",
+        "evidencias": [
+          {
+            "fonte": "src:mdapi-folder"
+          }
+        ],
+        "nota": "Propriedade definida pelo schema da Metadata API.",
+        "valor": "padrao_plataforma"
+      },
+      "tipo_tecnico": "string"
+    },
+    {
+      "default": {
+        "estado": "desconhecido",
+        "forma": "nao_declarado_na_fonte"
+      },
+      "disponibilidade": {
+        "ate_versao": null,
+        "desde_versao": null,
+        "estado": "desconhecido"
+      },
+      "dominio": {
+        "estado": "verificado",
+        "evidencias": [
+          {
+            "fonte": "src:mdapi-folder"
+          }
+        ],
+        "lista_completa": "sim",
+        "natureza": "enum_fechado",
+        "valores": [
+          {
+            "significado": "Todos leem; ninguém altera.",
+            "valor": "ReadOnly"
+          },
+          {
+            "significado": "Todos leem e alteram.",
+            "valor": "ReadWrite"
+          }
+        ]
+      },
+      "estado": "verificado",
+      "evidencias": [
+        {
+          "fonte": "src:mdapi-folder"
+        }
+      ],
+      "explicacao": "explicada",
+      "id": "mdt:DashboardFolder.publicFolderAccess",
+      "nome": "publicFolderAccess",
+      "o_que_e": "Acesso ao conteúdo quando accessType é Public.",
+      "obrigatoriedade": {
+        "condicao": "A documentação 68.0 não marca o campo como obrigatório; ausência de marcação não comprova opcionalidade (confirmar no WSDL).",
+        "estado": "desconhecido",
+        "valor": "nao"
+      },
+      "origem": {
+        "estado": "verificado",
+        "evidencias": [
+          {
+            "fonte": "src:mdapi-folder"
+          }
+        ],
+        "nota": "Propriedade definida pelo schema da Metadata API.",
+        "valor": "padrao_plataforma"
+      },
+      "tipo_tecnico": "PublicFolderAccess"
+    },
+    {
+      "default": {
+        "estado": "desconhecido",
+        "forma": "nao_declarado_na_fonte"
+      },
+      "disponibilidade": {
+        "ate_versao": null,
+        "desde_versao": null,
+        "estado": "desconhecido"
+      },
+      "dominio": {
+        "estado": "verificado",
+        "evidencias": [
+          {
+            "fonte": "src:mdapi-folder"
+          }
+        ],
+        "natureza": "tipo_composto"
+      },
+      "estado": "verificado",
+      "evidencias": [
+        {
+          "fonte": "src:mdapi-folder"
+        }
+      ],
+      "explicacao": "explicada",
+      "id": "mdt:DashboardFolder.sharedTo",
+      "nome": "sharedTo",
+      "o_que_e": "Com quem a pasta é compartilhada.",
+      "obrigatoriedade": {
+        "condicao": "A documentação 68.0 não marca o campo como obrigatório; ausência de marcação não comprova opcionalidade (confirmar no WSDL).",
+        "estado": "desconhecido",
+        "valor": "nao"
+      },
+      "origem": {
+        "estado": "verificado",
+        "evidencias": [
+          {
+            "fonte": "src:mdapi-folder"
+          }
+        ],
+        "nota": "Propriedade definida pelo schema da Metadata API.",
+        "valor": "padrao_plataforma"
+      },
+      "tipo_tecnico": "SharedTo"
+    }
+  ],
+  "recomendacoes": [],
+  "setup": {
+    "estado": "desconhecido",
+    "nota": "Caminho no Setup não validado nesta sessão."
+  },
+  "suporte_cli": {
+    "estado": "verificado",
+    "evidencias": [
+      {
+        "fonte": "src:sdr-metadata-support"
+      }
+    ],
+    "nota": "Suporte do Salesforce CLI (source-deploy-retrieve), não do Metadata API em geral.",
+    "valor": {
+      "nota_fonte": null,
+      "status": "suportado"
+    }
+  }
+}

@@ -19,13 +19,43 @@
       "texto": "Até 60 referências de objeto por tipo, até 1.000 campos e erro se o relatório tiver colunas de mais de 20 objetos. Campos de histórico não podem ser incluídos. A quantidade de tipos customizados varia por edição (300 em Enterprise).",
       "tipo": "limite",
       "titulo": "Limites do tipo customizado"
+    },
+    {
+      "evidencias": [
+        {
+          "fonte": "src:mdapi-reporttype"
+        }
+      ],
+      "texto": "Cada custom report type é um ReportType, na pasta reportTypes: o objeto principal (baseObject), a junção com os objetos relacionados (join, com outerJoin dizendo se entram os registros sem relacionado) e as seções de colunas. O campo deployed diz se o tipo já está disponível aos usuários. A junção encadeia até quatro objetos.",
+      "tipo": "implantacao",
+      "titulo": "Como metadado"
     }
   ],
   "classificacao": "cls:relatorios-analytics-e-exploracao",
   "derivado": {
     "dependencias": [],
-    "funcionalidades": [],
-    "metadata_types": [],
+    "funcionalidades": [
+      {
+        "alertas": [
+          "O objeto principal não pode ser trocado depois de o tipo ser salvo.",
+          "Enquanto deployed é false, o tipo está em desenvolvimento e não aparece para os usuários."
+        ],
+        "exemplo": "O tipo Contas com ou sem Projetos une Account ao objeto customizado de projetos e expõe campos dos dois.",
+        "id": "func:custom-report-types",
+        "principal": true
+      }
+    ],
+    "metadata_types": [
+      {
+        "estrutura": "completa",
+        "funcionalidades": [
+          "func:custom-report-types"
+        ],
+        "id": "mdt:ReportType",
+        "nota_suporte": null,
+        "suporte_cli": "suportado"
+      }
+    ],
     "nota": "Calculado pelo gerador a partir do catálogo; não é cadastro.",
     "objetos_api": [],
     "temas_sem_funcionalidade": []
@@ -42,7 +72,9 @@
   "escopo": "Entra a definição de quais objetos e campos um relatório pode usar.",
   "estado": "desconhecido",
   "fora_do_escopo": "Os relatórios em si ficam em \"Reports\".",
-  "funcionalidades": [],
+  "funcionalidades": [
+    "func:custom-report-types"
+  ],
   "id": "sub:tipos-de-relatorio",
   "natureza": "curadoria_didatica",
   "nome": "Tipos de relatório",
@@ -54,7 +86,10 @@
       }
     ],
     "exemplo": "Um tipo 'Contas com oportunidades' permite montar relatórios que juntam dados das duas.",
-    "explicacao": "Um tipo de relatório define quais registros e campos um relatório pode usar, a partir de um objeto principal e dos objetos relacionados a ele. Tipos customizados acrescentam objetos e campos que não vêm prontos."
+    "explicacao": "Um tipo de relatório define quais registros e campos um relatório pode usar, a partir de um objeto principal e dos objetos relacionados a ele. Tipos customizados acrescentam objetos e campos que não vêm prontos.",
+    "por_onde_comecar": [
+      "func:custom-report-types"
+    ]
   },
   "referencias_oficiais": [
     {

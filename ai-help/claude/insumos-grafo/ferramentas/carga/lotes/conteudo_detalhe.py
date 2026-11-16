@@ -117,8 +117,10 @@ D["sub:duplicidade-e-correspondencia"] = {
            "findDuplicates() aplica as duplicate rules a até 50 registros por chamada.",
            E("src:help-duplicate-jobs-considerations", "src:soap-findduplicates")),
         av("implantacao", "Como metadado",
-           "DuplicateRule e MatchingRules constam da lista oficial de metadata types da versão 68; as propriedades deles ainda não estão "
-           "detalhadas neste catálogo.", E("src:sdr-metadata-support")),
+           "DuplicateRule guarda cada duplicate rule, num arquivo cujo nome começa pelo objeto: a ação na criação e na edição (Allow ou "
+           "Block), o texto do alerta, o filtro e as matching rules usadas. MatchingRules guarda, num arquivo por objeto, todas as matching "
+           "rules dele, cada uma com os campos comparados e o método (exato ou aproximado). Ao implantar, o estado de uma matching rule só "
+           "pode ser Active ou Inactive.", E("src:mdapi-duplicaterule", "src:mdapi-matchingrules")),
     ],
 }
 D["sub:rastreabilidade-e-historico"] = {
@@ -200,8 +202,10 @@ D["sub:reports"] = {
            "No app móvel não há joined reports nem criação, edição ou exclusão de relatórios. Um relatório é atualizado cada vez que é "
            "aberto, diferente de um componente de dashboard.", E("src:help-reports-mobile-differences")),
         av("implantacao", "Como metadado",
-           "Report, ReportType e ReportFolder constam da lista oficial de metadata types da versão 68; as propriedades deles ainda não "
-           "estão detalhadas neste catálogo.", E("src:sdr-metadata-support")),
+           "Report guarda cada relatório customizado, numa subpasta da pasta reports; relatórios padrão não são suportados e o curinga do "
+           "package.xml não funciona. ReportType guarda cada custom report type e ReportFolder, cada pasta. Neste catálogo, Report está "
+           "detalhado só no primeiro nível: os subtipos (colunas, filtros, agrupamentos, gráfico) ainda não foram cadastrados.",
+           E("src:mdapi-report", "src:mdapi-reporttype", "src:mdapi-folder")),
     ],
 }
 D["sub:dashboards"] = {
@@ -230,8 +234,10 @@ D["sub:dashboards"] = {
            "Uma Lightning table mostra até 200 registros e 10 colunas. No app móvel não dá para criar, editar ou excluir dashboards.",
            E("src:help-dashboards-build-lex", "src:help-reports-mobile-differences")),
         av("implantacao", "Como metadado",
-           "Dashboard e DashboardFolder constam da lista oficial de metadata types da versão 68; as propriedades deles ainda não estão "
-           "detalhadas neste catálogo.", E("src:sdr-metadata-support")),
+           "Dashboard guarda cada dashboard, numa subpasta da pasta dashboards, e DashboardFolder, cada pasta; o curinga do package.xml não "
+           "funciona. Se runningUser faltar ou for inválido na implantação, entra o usuário que está implantando. Neste catálogo, Dashboard "
+           "está detalhado só no primeiro nível: os subtipos (componentes, filtros, grade) ainda não foram cadastrados.",
+           E("src:mdapi-dashboard", "src:mdapi-folder")),
     ],
 }
 D["sub:recursos-analiticos-de-produto"] = {

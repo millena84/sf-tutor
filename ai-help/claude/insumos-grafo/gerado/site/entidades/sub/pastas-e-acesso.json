@@ -42,13 +42,54 @@
       "texto": "O compartilhamento das pastas pode ser recuperado e implantado pela Metadata API, editando accessLevel em FolderShare, com os valores View, EditAllContents e Manage.",
       "tipo": "implantacao",
       "titulo": "Compartilhamento como metadado"
+    },
+    {
+      "evidencias": [
+        {
+          "fonte": "src:mdapi-folder"
+        }
+      ],
+      "texto": "ReportFolder e DashboardFolder guardam o nome da pasta e o tipo de acesso (accessType: Shared, Public, PublicInternal ou Hidden). A pasta não tem arquivo de conteúdo, só o de metadado. Para implantar ou recuperar só uma pasta aninhada, o nome precisa terminar com barra.",
+      "tipo": "implantacao",
+      "titulo": "A pasta como metadado"
     }
   ],
   "classificacao": "cls:relatorios-analytics-e-exploracao",
   "derivado": {
     "dependencias": [],
-    "funcionalidades": [],
-    "metadata_types": [],
+    "funcionalidades": [
+      {
+        "alertas": [
+          "O nível na pasta não decide sozinho: as permissões do usuário sobre relatórios e dashboards também contam.",
+          "Uma pasta nova só é acessível a quem a criou e a administradores, até ser compartilhada.",
+          "Se o usuário aparece em mais de uma entrada de compartilhamento, vale o maior nível.",
+          "Um artigo da Ajuda descreve o compartilhamento de pastas por Metadata API com accessLevel em FolderShare; esse subtipo não foi lido no guia."
+        ],
+        "exemplo": "A pasta Diretoria é compartilhada só com o papel de diretores, como Viewer; os analistas que a mantêm são Editors.",
+        "id": "func:pastas-de-relatorios-e-dashboards",
+        "principal": true
+      }
+    ],
+    "metadata_types": [
+      {
+        "estrutura": "parcial",
+        "funcionalidades": [
+          "func:pastas-de-relatorios-e-dashboards"
+        ],
+        "id": "mdt:DashboardFolder",
+        "nota_suporte": null,
+        "suporte_cli": "suportado"
+      },
+      {
+        "estrutura": "parcial",
+        "funcionalidades": [
+          "func:pastas-de-relatorios-e-dashboards"
+        ],
+        "id": "mdt:ReportFolder",
+        "nota_suporte": null,
+        "suporte_cli": "suportado"
+      }
+    ],
     "nota": "Calculado pelo gerador a partir do catálogo; não é cadastro.",
     "objetos_api": [],
     "temas_sem_funcionalidade": []
@@ -65,7 +106,9 @@
   "escopo": "Entram a organização e o compartilhamento de relatórios e dashboards.",
   "estado": "desconhecido",
   "fora_do_escopo": "Acesso aos registros que aparecem no relatório fica em \"Acesso a registros e hierarquias\".",
-  "funcionalidades": [],
+  "funcionalidades": [
+    "func:pastas-de-relatorios-e-dashboards"
+  ],
   "id": "sub:pastas-e-acesso",
   "natureza": "curadoria_didatica",
   "nome": "Pastas e acesso",
@@ -77,7 +120,10 @@
       }
     ],
     "exemplo": "O gerente cria a pasta 'Relatórios regionais', dá Viewer ao grupo de vendedores e Manager à gerente de vendas.",
-    "explicacao": "Relatórios e dashboards ficam em pastas, e é a pasta que se compartilha. Cada pessoa, grupo ou papel recebe um nível na pasta: Viewer vê, Editor salva e altera os itens e Manager também controla quem tem acesso."
+    "explicacao": "Relatórios e dashboards ficam em pastas, e é a pasta que se compartilha. Cada pessoa, grupo ou papel recebe um nível na pasta: Viewer vê, Editor salva e altera os itens e Manager também controla quem tem acesso.",
+    "por_onde_comecar": [
+      "func:pastas-de-relatorios-e-dashboards"
+    ]
   },
   "referencias_oficiais": [
     {

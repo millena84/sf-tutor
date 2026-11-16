@@ -42,10 +42,16 @@
     {
       "evidencias": [
         {
-          "fonte": "src:sdr-metadata-support"
+          "fonte": "src:mdapi-report"
+        },
+        {
+          "fonte": "src:mdapi-reporttype"
+        },
+        {
+          "fonte": "src:mdapi-folder"
         }
       ],
-      "texto": "Report, ReportType e ReportFolder constam da lista oficial de metadata types da versão 68; as propriedades deles ainda não estão detalhadas neste catálogo.",
+      "texto": "Report guarda cada relatório customizado, numa subpasta da pasta reports; relatórios padrão não são suportados e o curinga do package.xml não funciona. ReportType guarda cada custom report type e ReportFolder, cada pasta. Neste catálogo, Report está detalhado só no primeiro nível: os subtipos (colunas, filtros, agrupamentos, gráfico) ainda não foram cadastrados.",
       "tipo": "implantacao",
       "titulo": "Como metadado"
     }
@@ -53,8 +59,28 @@
   "classificacao": "cls:relatorios-analytics-e-exploracao",
   "derivado": {
     "dependencias": [],
-    "funcionalidades": [],
-    "metadata_types": [],
+    "funcionalidades": [
+      {
+        "alertas": [
+          "Como metadado, só relatórios customizados são suportados, e o curinga do package.xml não funciona.",
+          "Num joined report, os tipos de relatório dos blocos precisam ter relação com o mesmo objeto."
+        ],
+        "exemplo": "Um relatório de oportunidades agrupado por fase mostra o valor total em cada fase e um gráfico.",
+        "id": "func:relatorios",
+        "principal": true
+      }
+    ],
+    "metadata_types": [
+      {
+        "estrutura": "parcial",
+        "funcionalidades": [
+          "func:relatorios"
+        ],
+        "id": "mdt:Report",
+        "nota_suporte": null,
+        "suporte_cli": "suportado"
+      }
+    ],
     "nota": "Calculado pelo gerador a partir do catálogo; não é cadastro.",
     "objetos_api": [],
     "temas_sem_funcionalidade": []
@@ -74,7 +100,9 @@
   "escopo": "Entram os relatórios sobre os registros da org.",
   "estado": "desconhecido",
   "fora_do_escopo": "A definição de quais objetos um relatório usa fica em \"Tipos de relatório\".",
-  "funcionalidades": [],
+  "funcionalidades": [
+    "func:relatorios"
+  ],
   "id": "sub:reports",
   "natureza": "curadoria_didatica",
   "nome": "Reports",
@@ -89,7 +117,10 @@
       }
     ],
     "exemplo": "Um relatório de oportunidades agrupado por etapa, com a soma do valor de cada grupo.",
-    "explicacao": "Um relatório responde uma pergunta sobre os registros da org, como quantas oportunidades estão em cada etapa. Ele é montado no report builder, onde se escolhem o tipo de relatório, o formato e os campos, e depois se agrupa, filtra e resume."
+    "explicacao": "Um relatório responde uma pergunta sobre os registros da org, como quantas oportunidades estão em cada etapa. Ele é montado no report builder, onde se escolhem o tipo de relatório, o formato e os campos, e depois se agrupa, filtra e resume.",
+    "por_onde_comecar": [
+      "func:relatorios"
+    ]
   },
   "referencias_oficiais": [
     {

@@ -116,16 +116,97 @@
   ],
   "derivado": {
     "dependencias": [],
-    "funcionalidades": [],
-    "metadata_types": [],
+    "funcionalidades": [
+      {
+        "alertas": [
+          "Como metadado, só relatórios customizados são suportados, e o curinga do package.xml não funciona.",
+          "Num joined report, os tipos de relatório dos blocos precisam ter relação com o mesmo objeto."
+        ],
+        "exemplo": "Um relatório de oportunidades agrupado por fase mostra o valor total em cada fase e um gráfico.",
+        "id": "func:relatorios",
+        "principal": true
+      },
+      {
+        "alertas": [
+          "Com running user fixo, todos veem os dados conforme o acesso daquela pessoa, não o próprio.",
+          "Dashboards na Lixeira contam no limite de dynamic dashboards até a exclusão definitiva.",
+          "Criar, editar e excluir dynamic dashboards exige a permissão Manage Dynamic Dashboards."
+        ],
+        "exemplo": "O dashboard de vendas tem um gráfico de pipeline por fase e uma tabela das maiores oportunidades, cada um ligado a um relatório.",
+        "id": "func:dashboards",
+        "principal": true
+      },
+      {
+        "alertas": [
+          "O objeto principal não pode ser trocado depois de o tipo ser salvo.",
+          "Enquanto deployed é false, o tipo está em desenvolvimento e não aparece para os usuários."
+        ],
+        "exemplo": "O tipo Contas com ou sem Projetos une Account ao objeto customizado de projetos e expõe campos dos dois.",
+        "id": "func:custom-report-types",
+        "principal": true
+      },
+      {
+        "alertas": [
+          "O nível na pasta não decide sozinho: as permissões do usuário sobre relatórios e dashboards também contam.",
+          "Uma pasta nova só é acessível a quem a criou e a administradores, até ser compartilhada.",
+          "Se o usuário aparece em mais de uma entrada de compartilhamento, vale o maior nível.",
+          "Um artigo da Ajuda descreve o compartilhamento de pastas por Metadata API com accessLevel em FolderShare; esse subtipo não foi lido no guia."
+        ],
+        "exemplo": "A pasta Diretoria é compartilhada só com o papel de diretores, como Viewer; os analistas que a mantêm são Editors.",
+        "id": "func:pastas-de-relatorios-e-dashboards",
+        "principal": true
+      }
+    ],
+    "metadata_types": [
+      {
+        "estrutura": "parcial",
+        "funcionalidades": [
+          "func:dashboards"
+        ],
+        "id": "mdt:Dashboard",
+        "nota_suporte": null,
+        "suporte_cli": "suportado"
+      },
+      {
+        "estrutura": "parcial",
+        "funcionalidades": [
+          "func:pastas-de-relatorios-e-dashboards"
+        ],
+        "id": "mdt:DashboardFolder",
+        "nota_suporte": null,
+        "suporte_cli": "suportado"
+      },
+      {
+        "estrutura": "parcial",
+        "funcionalidades": [
+          "func:relatorios"
+        ],
+        "id": "mdt:Report",
+        "nota_suporte": null,
+        "suporte_cli": "suportado"
+      },
+      {
+        "estrutura": "parcial",
+        "funcionalidades": [
+          "func:pastas-de-relatorios-e-dashboards"
+        ],
+        "id": "mdt:ReportFolder",
+        "nota_suporte": null,
+        "suporte_cli": "suportado"
+      },
+      {
+        "estrutura": "completa",
+        "funcionalidades": [
+          "func:custom-report-types"
+        ],
+        "id": "mdt:ReportType",
+        "nota_suporte": null,
+        "suporte_cli": "suportado"
+      }
+    ],
     "nota": "Calculado pelo gerador a partir do catálogo; não é cadastro.",
     "objetos_api": [],
     "temas_sem_funcionalidade": [
-      "sub:reports",
-      "sub:dashboards",
-      "sub:tipos-de-relatorio",
-      "sub:pastas-e-acesso",
-      "sub:metricas-e-agregacoes",
       "sub:recursos-analiticos-de-produto"
     ]
   },
@@ -178,7 +259,12 @@
       }
     ],
     "exemplo": "Uma gerente acompanha num dashboard o resultado de um relatório de oportunidades por etapa.",
-    "explicacao": "Reúne como os dados da org viram respostas: relatórios e dashboards nativos para analisar e compartilhar resultados e, para análises maiores, produtos analíticos como CRM Analytics e Tableau."
+    "explicacao": "Reúne como os dados da org viram respostas: relatórios e dashboards nativos para analisar e compartilhar resultados e, para análises maiores, produtos analíticos como CRM Analytics e Tableau.",
+    "por_onde_comecar": [
+      "func:relatorios",
+      "func:dashboards",
+      "func:custom-report-types"
+    ]
   },
   "referencias_oficiais": [
     {

@@ -259,4 +259,22 @@ X["sub:seguranca-avaliacao-e-governanca-de-ia"] = {"comece": ["func:einstein-tru
     av("seguranca", "Permissões continuam valendo", "Agentes respeitam os controles de acesso padrão do Salesforce.", E("src:help-agentforce-trust")),
 ]}
 
+# ------------------------------------------------------------------ Relatórios e Qualidade (B2 e B3): por onde começar e metadado
+X["cls:relatorios-analytics-e-exploracao"] = {"comece": ["func:relatorios", "func:dashboards", "func:custom-report-types"]}
+X["sub:reports"] = {"comece": ["func:relatorios"]}
+X["sub:dashboards"] = {"comece": ["func:dashboards"]}
+X["sub:metricas-e-agregacoes"] = {"comece": ["func:relatorios"]}
+X["sub:tipos-de-relatorio"] = {"comece": ["func:custom-report-types"], "avancado": [
+    av("implantacao", "Como metadado", "Cada custom report type é um ReportType, na pasta reportTypes: o objeto principal (baseObject), a "
+       "junção com os objetos relacionados (join, com outerJoin dizendo se entram os registros sem relacionado) e as seções de colunas. "
+       "O campo deployed diz se o tipo já está disponível aos usuários. A junção encadeia até quatro objetos.", E("src:mdapi-reporttype")),
+]}
+X["sub:pastas-e-acesso"] = {"comece": ["func:pastas-de-relatorios-e-dashboards"], "avancado": [
+    av("implantacao", "A pasta como metadado", "ReportFolder e DashboardFolder guardam o nome da pasta e o tipo de acesso (accessType: "
+       "Shared, Public, PublicInternal ou Hidden). A pasta não tem arquivo de conteúdo, só o de metadado. Para implantar ou recuperar só "
+       "uma pasta aninhada, o nome precisa terminar com barra.", E("src:mdapi-folder")),
+]}
+X["cls:qualidade-governanca-e-ciclo-de-vida-dos-dados"] = {"comece": ["func:regras-de-validacao", "func:duplicate-management"]}
+X["sub:duplicidade-e-correspondencia"] = {"comece": ["func:duplicate-management"]}
+
 EXTRAS = X

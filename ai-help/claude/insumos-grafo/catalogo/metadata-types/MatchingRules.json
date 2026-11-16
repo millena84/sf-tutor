@@ -1,0 +1,218 @@
+{
+  "id": "mdt:MatchingRules",
+  "nome": "MatchingRules",
+  "o_que_e": "O conjunto de matching rules de um objeto, padrão ou customizado: as regras que dizem como reconhecer registros duplicados.",
+  "finalidade": "Versionar e implantar as matching rules de cada objeto.",
+  "estende": "Metadata",
+  "arquivos": {
+    "source_format": {
+      "estado": "verificado",
+      "valor": {
+        "pasta": "matchingRules/",
+        "arquivo": "<Objeto>.matchingRule"
+      },
+      "nota": "Um arquivo por objeto, com todas as matching rules dele. No source format, o arquivo recebe o sufixo -meta.xml.",
+      "evidencias": [
+        {
+          "fonte": "src:sdr-registry",
+          "nota": "types.matchingrules"
+        },
+        {
+          "fonte": "src:mdapi-matchingrules"
+        }
+      ]
+    },
+    "metadata_api_format": {
+      "estado": "verificado",
+      "valor": {
+        "pasta": "matchingRules/",
+        "arquivo": "<Objeto>.matchingRule"
+      },
+      "nota": "Um arquivo por objeto, com todas as matching rules dele. No source format, o arquivo recebe o sufixo -meta.xml.",
+      "evidencias": [
+        {
+          "fonte": "src:sdr-registry",
+          "nota": "types.matchingrules"
+        },
+        {
+          "fonte": "src:mdapi-matchingrules"
+        }
+      ]
+    },
+    "curinga_package_xml": {
+      "estado": "verificado",
+      "valor": true,
+      "evidencias": [
+        {
+          "fonte": "src:mdapi-matchingrules"
+        }
+      ]
+    }
+  },
+  "disponibilidade": {
+    "desde_versao": "33.0",
+    "ate_versao": null,
+    "estado": "verificado"
+  },
+  "suporte_cli": {
+    "estado": "verificado",
+    "valor": {
+      "status": "suportado",
+      "nota_fonte": null
+    },
+    "nota": "Suporte do Salesforce CLI (source-deploy-retrieve), não do Metadata API em geral.",
+    "evidencias": [
+      {
+        "fonte": "src:sdr-metadata-support"
+      }
+    ]
+  },
+  "setup": {
+    "estado": "desconhecido",
+    "nota": "Caminho no Setup não validado nesta sessão."
+  },
+  "propriedades": [
+    {
+      "id": "mdt:MatchingRules.matchingRules",
+      "nome": "matchingRules",
+      "tipo_tecnico": "MatchingRule[]",
+      "o_que_e": "Cada matching rule do objeto.",
+      "origem": {
+        "estado": "verificado",
+        "valor": "padrao_plataforma",
+        "nota": "Propriedade definida pelo schema da Metadata API.",
+        "evidencias": [
+          {
+            "fonte": "src:mdapi-matchingrules"
+          }
+        ]
+      },
+      "obrigatoriedade": {
+        "valor": "nao",
+        "estado": "desconhecido",
+        "condicao": "A documentação 68.0 não marca o campo como obrigatório; ausência de marcação não comprova opcionalidade (confirmar no WSDL)."
+      },
+      "default": {
+        "forma": "nao_declarado_na_fonte",
+        "estado": "desconhecido"
+      },
+      "dominio": {
+        "natureza": "tipo_composto",
+        "estado": "verificado",
+        "evidencias": [
+          {
+            "fonte": "src:mdapi-matchingrules"
+          }
+        ]
+      },
+      "disponibilidade": {
+        "desde_versao": null,
+        "ate_versao": null,
+        "estado": "desconhecido"
+      },
+      "explicacao": "explicada",
+      "estado": "verificado",
+      "evidencias": [
+        {
+          "fonte": "src:mdapi-matchingrules"
+        }
+      ],
+      "cardinalidade": "0..n",
+      "notas": [
+        "O elemento vem do exemplo XML da página; as tabelas documentam os campos de MatchingRule."
+      ],
+      "estrutura_ref": "mdx:MatchingRule"
+    },
+    {
+      "id": "mdt:MatchingRules.fullName",
+      "nome": "fullName",
+      "tipo_tecnico": "string",
+      "o_que_e": "Nome do objeto a que as regras pertencem; herdado do tipo Metadata.",
+      "origem": {
+        "estado": "verificado",
+        "valor": "padrao_plataforma",
+        "nota": "Propriedade definida pelo schema da Metadata API.",
+        "evidencias": [
+          {
+            "fonte": "src:mdapi-matchingrules"
+          }
+        ]
+      },
+      "obrigatoriedade": {
+        "valor": "desconhecida",
+        "estado": "desconhecido"
+      },
+      "default": {
+        "forma": "nao_declarado_na_fonte",
+        "estado": "desconhecido"
+      },
+      "dominio": {
+        "natureza": "texto_livre",
+        "estado": "verificado",
+        "evidencias": [
+          {
+            "fonte": "src:mdapi-matchingrules"
+          }
+        ],
+        "contexto": "A fonte tipa como string sem lista de valores; não inventar valores."
+      },
+      "disponibilidade": {
+        "desde_versao": null,
+        "ate_versao": null,
+        "estado": "desconhecido"
+      },
+      "explicacao": "explicada",
+      "estado": "verificado",
+      "evidencias": [
+        {
+          "fonte": "src:mdapi-matchingrules"
+        }
+      ],
+      "herdada_de": "Metadata"
+    }
+  ],
+  "estruturas": [
+    "mdx:MatchingRule"
+  ],
+  "cobertura": {
+    "estrutural": {
+      "estado": "completa",
+      "esperado": 2,
+      "presente": 2,
+      "nota": "Universo esperado = tabelas Fields da página do guia versionado 264.0 (API 68.0), lida em 2026-11-16."
+    },
+    "explicativa": {
+      "estado": "completa",
+      "esperado": 2,
+      "presente": 2
+    },
+    "mapeamento": {
+      "estado": "parcial",
+      "nota": "Correspondências registradas apenas onde há evidência; demais pendentes."
+    }
+  },
+  "recomendacoes": [],
+  "alertas": [
+    "Um arquivo reúne todas as matching rules do objeto; o nome do arquivo é o nome do objeto.",
+    "Ao implantar, ruleStatus só aceita Active e Inactive.",
+    "Person accounts são suportadas desde a API 39.0."
+  ],
+  "divergencias_documentais": [],
+  "estado": "verificado",
+  "evidencias": [
+    {
+      "fonte": "src:mdapi-matchingrules"
+    },
+    {
+      "fonte": "src:sdr-registry"
+    },
+    {
+      "fonte": "src:sdr-metadata-support"
+    }
+  ],
+  "exemplo_xml": {
+    "xml": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<MatchingRules xmlns=\"http://soap.sforce.com/2006/04/metadata\">\n    <matchingRules>\n        <fullName>[Nome_Da_Matching_Rule]</fullName>\n        <label>[nome da matching rule]</label>\n        <matchingRuleItems>\n            <!-- Valores documentados: MatchBlanks, NullNotAllowed -->\n            <blankValueBehavior>NullNotAllowed</blankValueBehavior>\n            <fieldName>Name</fieldName>\n            <!-- Valores documentados incluem: Exact, CompanyName -->\n            <matchingMethod>Exact</matchingMethod>\n        </matchingRuleItems>\n        <!-- Na implantação, só Active e Inactive -->\n        <ruleStatus>Inactive</ruleStatus>\n    </matchingRules>\n</MatchingRules>",
+    "natureza": "didatico_projeto",
+    "nota": "Exemplo escrito pelo projeto apenas com elementos documentados; sem dados reais."
+  }
+}

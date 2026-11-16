@@ -1,0 +1,56 @@
+fonte: Metadata API Developer Guide, versão 264.0 (API 68.0), lida pelo endpoint de conteúdo da documentação
+URL lida: https://developer.salesforce.com/docs/get_document_content/api_meta/<página>.htm/en-us/264.0
+mesma página no navegador: https://developer.salesforce.com/docs/atlas.en-us.264.0.api_meta.meta/api_meta/<página>.htm
+obtido em 2026-11-16 via WebFetch; método: extração documental assistida por IA; descrições parafraseadas em português.
+alcance: meta_report.htm (238.060 caracteres) e meta_dashboard.htm (173.302) tiveram SÓ os primeiros 100.000 caracteres lidos: a tabela do tipo
+  principal veio inteira; os subtipos não foram transcritos. As demais páginas foram lidas por inteiro.
+
+[src:mdapi-report] Report (meta_report.htm): arquivo <título>.report na pasta reports; API 14.0 e posteriores; estende Metadata (fullName
+  herdado); só relatórios customizados; NÃO aceita o curinga *. Pastas: listMetadata() com o tipo ReportFolder; ReportFolder não é devolvido por
+  describeMetadata(); pasta aninhada sozinha exige barra no fim do nome. Reimplantar um fullName excluído restaura o relatório original (Id,
+  CreatedDate, CreatedById). Tabela do tipo: 40 campos. Subtipos vistos no trecho lido (não cadastrados): ReportAggregateFilter,
+  ReportAggregate, ReportBlockInfo, ReportAggregateReference, ReportBucketField, ReportBucketFieldValue, ReportGrouping,
+  ReportHistoricalSelector, CustomDetailFormulas, ReportColorRange; o corte caiu na tabela de ReportColorRange. ReportChart, ReportColumn,
+  ReportFilter, ReportParam, ReportTimeFrameFilter e ReportCrossFilter ficam depois do corte. Valores de ReportFormat não aparecem na linha do campo.
+[src:mdapi-dashboard] Dashboard (meta_dashboard.htm): sufixo .dashboard, pasta dashboards; API 14.0 e posteriores; estende Metadata; NÃO aceita o
+  curinga *. Pastas: listMetadata() com DashboardFolder; usar developer names. Tabela do tipo: 26 campos. runningUser ausente ou inválido no
+  deploy recebe o usuário que implanta. Subtipos vistos (não cadastrados): DashboardFilter, DashboardFilterOption, DashboardGridLayout,
+  DashboardGridComponent, DashboardComponent, DashboardComponentContent, DashboardDynamicValue; o corte caiu em DashboardDynamicValue.
+  DashboardComponentSection e outros ficam depois do corte.
+[src:mdapi-reporttype] ReportType (meta_reporttype.htm): sufixo .reportType, pasta reportTypes; API 14.0 e posteriores; estende Metadata; aceita o
+  curinga *. Subtipos ObjectRelationship, ReportLayoutSection e ReportTypeColumn. Junção: até quatro objetos; sem inner join depois de outer
+  join. Campos históricos usam hst no nome de API. Reimplantar um fullName excluído restaura o tipo original.
+[src:mdapi-folder] Folder (meta_folder.htm): cobre cinco tipos de pasta (documentos, e-mail, email templates, relatórios e dashboards); os nomes
+  dos tipos terminam em Folder; a página cita DocumentFolder, ReportFolder e EmailTemplateFolder. Folder estende Metadata. Sem arquivo de
+  conteúdo: só um arquivo de metadado no mesmo diretório. API 11.0 e posteriores. NÃO aceita o curinga *. Campos: accessType, fullName, name,
+  publicFolderAccess, sharedTo (subtipo SharedTo, com página própria, não lida). Pasta aninhada sozinha exige barra no fim. ReportFolder usa o
+  tipo Report no manifesto. O exemplo XML é de DocumentFolder (accessType, name, publicFolderAccess). DashboardFolder é citado na página de
+  Dashboard.
+[src:mdapi-duplicaterule] DuplicateRule (meta_duplicaterule.htm): sufixo .duplicateRule, pasta duplicateRules; nome do arquivo começa pelo objeto
+  (Account.Standard_Account_Duplicate_Rule.duplicateRule); estende Metadata; aceita o curinga *. A leitura devolveu "API 68.0 e posteriores",
+  mas o package.xml de exemplo usa 38.0: versão inicial NÃO confirmada. Subtipos DuplicateRuleMatchRule, DuplicateRuleFilter,
+  DuplicateRuleFilterItem (estende FilterItem; o exemplo usa field, operation e value herdados), ObjectMapping e ObjectMappingField. alertText
+  só com Allow; com Allow e alerta, a API exige allowSave true em DuplicateRuleHeader.
+[src:mdapi-matchingrules] MatchingRules (meta_matchingrule.htm): sufixo .matchingRule, pasta matchingRules; um arquivo por objeto
+  (PersonAccount.matchingRule); API 33.0 e posteriores (person accounts, 39.0); estende Metadata; aceita o curinga *. Raiz do exemplo:
+  MatchingRules, com o elemento matchingRules para cada regra (fullName, label, description, ruleStatus, matchingRuleItems). Subtipos
+  MatchingRule e MatchingRuleItem. No deploy, ruleStatus só aceita Active e Inactive.
+
+-- Lista de campos transcrita da leitura (gerada por lote7g_relatorios_qualidade.py; nome | tipo | desde)
+[src:mdapi-report] Report: aggregateFilters | ReportAggregateFilter[] | -, aggregates | ReportAggregate[] | -, block | Report[] | -, blockInfo | ReportBlockInfo | -, buckets | ReportBucketField[] | -, chart | ReportChart | -, colorRanges | ReportColorRange[] | -, columns | ReportColumn[] | -, crossFilters | ReportCrossFilter[] | -, currency | CurrencyIsoCode | -, dataCategoryFilters | string | -, description | string | -, division | string | -, filter | ReportFilter | -, folderName | string | -, format | ReportFormat | -, formattingRules | ReportFormattingRule[] | -, groupingsAcross | ReportGrouping[] | -, groupingsDown | ReportGrouping[] | -, historicalSelector | ReportHistoricalSelector | -, isSmartTotalDisabled | boolean | -, name | string | -, numSubscriptions | int | -, params | ReportParam[] | -, customDetailFormulas | CustomDetailFormulas | -, reportType | string | -, reportTypeApiName | string | -, roleHierarchyFilter | string | -, rowLimit | int | -, scope | string | -, showCommonRowsOnly | boolean | -, showCurrentDate | boolean | -, showDetails | boolean | -, showGrandTotal | boolean | -, showSubTotals | boolean | -, sortColumn | string | -, sortOrder | SortOrder | -, territoryHierarchyFilter | string | -, timeFrameFilter | ReportTimeFrameFilter | -, userFilter | string | -, fullName | string | -
+[src:mdapi-dashboard] Dashboard: backgroundEndColor | string | -, backgroundFadeDirection | ChartBackgroundDirection | -, backgroundStartColor | string | -, chartTheme | ChartTheme | -, colorPalette | ChartColorPalettes | -, dashboardChartTheme | ChartTheme | -, dashboardColorPalette | ChartColorPalettes | -, dashboardFilters | DashboardFilter[] | -, dashboardGridLayout | DashboardGridLayout | -, dashboardType | DashboardType | -, description | string | -, folderName | string | -, fullName | string | -, isGridLayout | boolean | -, dashboardResultRefreshedDate | string | -, dashboardResultRunningUser | string | -, leftSection | DashboardComponentSection | -, middleSection | DashboardComponentSection | -, numSubscriptions | int | -, owner | string | -, rightSection | DashboardComponentSection | -, runningUser | string | -, textColor | string | -, title | string | -, titleColor | string | -, titleSize | int | -
+[src:mdapi-reporttype] ObjectRelationship: join | ObjectRelationship | -, outerJoin | boolean | -, relationship | string | -
+[src:mdapi-reporttype] ReportTypeColumn: checkedByDefault | boolean | -, displayNameOverride | string | -, field | string | -, table | string | -
+[src:mdapi-reporttype] ReportLayoutSection: columns | ReportTypeColumn[] | -, masterLabel | string | -
+[src:mdapi-reporttype] ReportType: autogenerated | boolean | -, baseObject | string | -, category | ReportTypeCategory | -, deployed | boolean | -, description | string | -, fullName | string | -, join | ObjectRelationship | -, label | string | -, sections | ReportLayoutSection[] | -
+[src:mdapi-folder] ReportFolder: accessType | FolderAccessTypes | -, fullName | string | -, name | string | -, publicFolderAccess | PublicFolderAccess | -, sharedTo | SharedTo | -
+[src:mdapi-folder] DashboardFolder: accessType | FolderAccessTypes | -, fullName | string | -, name | string | -, publicFolderAccess | PublicFolderAccess | -, sharedTo | SharedTo | -
+[src:mdapi-duplicaterule] ObjectMappingField: inputField | string | -, outputField | string | -
+[src:mdapi-duplicaterule] ObjectMapping: inputObject | string | -, mappingFields | ObjectMappingField[] | -, outputObject | string | -
+[src:mdapi-duplicaterule] DuplicateRuleMatchRule: matchRuleSObjectType | string | -, matchingRule | string | -, objectMapping | ObjectMapping | -
+[src:mdapi-duplicaterule] DuplicateRuleFilterItem: sortOrder | int | -, table | string | -
+[src:mdapi-duplicaterule] DuplicateRuleFilter: booleanFilter | string | -, duplicateRuleFilterItems | DuplicateRuleFilterItem[] | -
+[src:mdapi-duplicaterule] DuplicateRule: actionOnInsert | DupeActionType | -, actionOnUpdate | DupeActionType | -, alertText | string | -, description | string | -, duplicateRuleFilter | DuplicateRuleFilter | -, duplicateRuleMatchRules | DuplicateRuleMatchRule[] | -, isActive | boolean | -, masterLabel | string | -, operationsOnInsert | string[] | -, operationsOnUpdate | string[] | -, securityOption | DupeSecurityOptionType | -, sortOrder | int | -, fullName | string | -
+[src:mdapi-matchingrules] MatchingRuleItem: blankValueBehavior | BlankValueBehavior | -, fieldName | string | -, matchingMethod | MatchingMethod | -
+[src:mdapi-matchingrules] MatchingRule: booleanFilter | string | -, description | string | -, fullName | string | -, label | string | -, matchingRuleItems | MatchingRuleItem[] | -, ruleStatus | MatchingRuleStatus | -
+[src:mdapi-matchingrules] MatchingRules: matchingRules | MatchingRule[] | -, fullName | string | -
