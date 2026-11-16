@@ -7,7 +7,7 @@ Gerado por `ferramentas/sftutor.py cobertura`. Cobertura estrutural, explicativa
 
 - Universo v68 (METADATA_SUPPORT.md): **993** tipos.
 - Classificados como incluídos no recorte Core: 12; pendentes de classificação: 981.
-- Cadastrados: **131** de 993. Estruturalmente completos (contra a página oficial): 115. Completos nas três dimensões: 0.
+- Cadastrados: **138** de 993. Estruturalmente completos (contra a página oficial): 117. Completos nas três dimensões: 0.
 - Porcentagem do recorte Core: não calculada, porque o denominador do recorte ainda não está definido (classificação item a item pendente).
 
 | Tipo | Estrutural | Esperadas | Presentes | Explicadas | Estruturas | Mapeamento | Completo |
@@ -47,9 +47,12 @@ Gerado por `ferramentas/sftutor.py cobertura`. Cobertura estrutural, explicativa
 | mdt:CustomNotificationType | completa | 8 | 8 | 8 | 1 | parcial | não |
 | mdt:CustomObject | parcial | 55 | 55 | 55 | 0 | parcial | não |
 | mdt:CustomTab | parcial | 17 | 17 | 17 | 0 | parcial | não |
+| mdt:Dashboard | parcial | 26 | 26 | 26 | 0 | parcial | não |
+| mdt:DashboardFolder | parcial | 5 | 5 | 5 | 0 | parcial | não |
 | mdt:DeploymentSettings | completa | 2 | 2 | 2 | 0 | parcial | não |
 | mdt:DevHubSettings | completa | 10 | 10 | 10 | 0 | parcial | não |
 | mdt:Document | completa | 7 | 7 | 7 | 0 | parcial | não |
+| mdt:DuplicateRule | parcial | n/d | 13 | 13 | 2 | parcial | não |
 | mdt:EinsteinGptSettings | completa | 11 | 11 | 11 | 0 | parcial | não |
 | mdt:EmailTemplate | completa | 17 | 17 | 17 | 2 | parcial | não |
 | mdt:EntitlementProcess | parcial | 14 | 14 | 14 | 2 | parcial | não |
@@ -94,6 +97,7 @@ Gerado por `ferramentas/sftutor.py cobertura`. Cobertura estrutural, explicativa
 | mdt:LightningComponentBundle | completa | 10 | 10 | 10 | 3 | parcial | não |
 | mdt:LightningExperienceTheme | completa | 6 | 6 | 6 | 0 | parcial | não |
 | mdt:ManagedEventSubscription | completa | 7 | 7 | 7 | 0 | parcial | não |
+| mdt:MatchingRules | completa | 2 | 2 | 2 | 1 | parcial | não |
 | mdt:MilestoneType | completa | 3 | 3 | 3 | 0 | parcial | não |
 | mdt:MyDomainSettings | completa | 32 | 32 | 29 | 0 | parcial | não |
 | mdt:NamedCredential | completa | 31 | 31 | 31 | 1 | parcial | não |
@@ -122,6 +126,9 @@ Gerado por `ferramentas/sftutor.py cobertura`. Cobertura estrutural, explicativa
 | mdt:RecordType | parcial | 7 | 7 | 7 | 1 | parcial | não |
 | mdt:RegisteredExternalService | completa | 11 | 11 | 11 | 0 | parcial | não |
 | mdt:RemoteSiteSetting | completa | 5 | 5 | 5 | 0 | parcial | não |
+| mdt:Report | parcial | 41 | 41 | 41 | 0 | parcial | não |
+| mdt:ReportFolder | parcial | 5 | 5 | 5 | 0 | parcial | não |
+| mdt:ReportType | completa | 9 | 9 | 9 | 2 | parcial | não |
 | mdt:SamlSsoConfig | completa | 26 | 26 | 26 | 0 | parcial | não |
 | mdt:ServiceChannel | completa | 19 | 19 | 19 | 1 | parcial | não |
 | mdt:ServicePresenceStatus | completa | 3 | 3 | 3 | 1 | parcial | não |
@@ -146,8 +153,8 @@ Gerado por `ferramentas/sftutor.py cobertura`. Cobertura estrutural, explicativa
 
 ## Propriedades XML
 
-- Em metadata types: 1618 listadas, 1551 explicadas.
-- Em estruturas auxiliares: 921 listadas, 911 explicadas.
+- Em metadata types: 1719 listadas, 1652 explicadas.
+- Em estruturas auxiliares: 946 listadas, 936 explicadas.
 - Universo total: Sem WSDL não há denominador confiável do total de propriedades do recorte.
 
 ## Objetos consultáveis via API
@@ -233,10 +240,10 @@ Gerado por `ferramentas/sftutor.py cobertura`. Cobertura estrutural, explicativa
 
 ## Relacionamentos
 
-- Total: 130; verificados: 127.
-- Por tipo: correspondencia_xml_api: 11, referencia_campo: 101, representacao_comum: 18
+- Total: 131; verificados: 128.
+- Por tipo: correspondencia_xml_api: 11, referencia_campo: 102, representacao_comum: 18
 
 ## Taxonomia e funcionalidades
 
-- Classificações: 14; subclassificações: 92 (com funcionalidades: 73).
-- Funcionalidades cadastradas: 113 (universo de funcionalidades não definido).
+- Classificações: 14; subclassificações: 92 (com funcionalidades: 79).
+- Funcionalidades cadastradas: 118 (universo de funcionalidades não definido).

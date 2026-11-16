@@ -292,9 +292,10 @@ test('busca pela pasta do projeto acha o metadata type; tipo sem ficha aparece m
   const primeiro = page.locator('#resultados .resultado').first();
   await expect(primeiro).toContainText('CustomApplication');
   await expect(primeiro).toContainText('pasta applications');
-  await page.locator('#busca').fill('reportTypes');
-  const semFicha = page.locator('#resultados .resultado.sem-ficha').first();
-  await expect(semFicha).toContainText('ReportType');
+  // ModerationRule é um tipo do inventário, sem ficha no catálogo; se ganhar ficha, troque por outro tipo sem ficha.
+  await page.locator('#busca').fill('moderation');
+  const semFicha = page.locator('#resultados .resultado.sem-ficha', { hasText: 'ModerationRule' }).first();
+  await expect(semFicha).toContainText('ModerationRule');
   await expect(semFicha).toContainText('ainda não tem ficha');
   const antes = page.url();
   await semFicha.dispatchEvent('mousedown');

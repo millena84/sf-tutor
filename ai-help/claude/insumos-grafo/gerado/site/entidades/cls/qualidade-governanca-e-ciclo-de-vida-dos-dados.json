@@ -153,9 +153,38 @@
         "exemplo": "Impedir salvar um contrato com valor negativo.",
         "id": "func:regras-de-validacao",
         "principal": true
+      },
+      {
+        "alertas": [
+          "Uma duplicate rule só pode ser ativada se todas as matching rules associadas estiverem ativas.",
+          "As matching rules padrão não podem ser editadas; é possível criar regras customizadas.",
+          "Em Web-to-Lead, um envio que bate com o critério de duplicidade é sempre bloqueado, mesmo com a regra em Allow com alerta.",
+          "Criar, editar e ativar regras exige a permissão Customize Application."
+        ],
+        "exemplo": "Ao criar um lead com o mesmo e-mail de um contato, o usuário vê um alerta com o possível duplicado e decide se salva mesmo assim.",
+        "id": "func:duplicate-management",
+        "principal": true
       }
     ],
     "metadata_types": [
+      {
+        "estrutura": "parcial",
+        "funcionalidades": [
+          "func:duplicate-management"
+        ],
+        "id": "mdt:DuplicateRule",
+        "nota_suporte": null,
+        "suporte_cli": "suportado"
+      },
+      {
+        "estrutura": "completa",
+        "funcionalidades": [
+          "func:duplicate-management"
+        ],
+        "id": "mdt:MatchingRules",
+        "nota_suporte": null,
+        "suporte_cli": "suportado"
+      },
       {
         "estrutura": "completa",
         "funcionalidades": [
@@ -186,7 +215,6 @@
       }
     ],
     "temas_sem_funcionalidade": [
-      "sub:duplicidade-e-correspondencia",
       "sub:classificacao-e-sensibilidade",
       "sub:retencao-arquivamento-e-exclusao",
       "sub:rastreabilidade-e-historico",
@@ -253,7 +281,8 @@
     "exemplo": "Uma regra de validação impede salvar um contrato com valor negativo; a detecção de duplicados avisa quando alguém tenta criar um registro que já existe.",
     "explicacao": "Reúne o que protege a qualidade dos dados ao longo do tempo: regras que impedem gravar dados errados, detecção de duplicados, marcação de dados sensíveis, retenção, histórico de alterações e registro do consentimento das pessoas.",
     "por_onde_comecar": [
-      "func:regras-de-validacao"
+      "func:regras-de-validacao",
+      "func:duplicate-management"
     ]
   },
   "referencias_oficiais": [

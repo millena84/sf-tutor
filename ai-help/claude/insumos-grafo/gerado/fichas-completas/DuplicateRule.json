@@ -1,0 +1,1498 @@
+{
+  "funcionalidades": [
+    {
+      "id": "func:duplicate-management",
+      "nome": "Duplicate Management"
+    }
+  ],
+  "metadata_type": {
+    "alertas": [
+      "alertText só pode ser definido quando a ação na criação ou na edição é Allow; fora disso, a validação falha.",
+      "Com Allow e alerta, salvar pela API exige allowSave igual a true no cabeçalho DuplicateRuleHeader."
+    ],
+    "arquivos": {
+      "curinga_package_xml": {
+        "estado": "verificado",
+        "evidencias": [
+          {
+            "fonte": "src:mdapi-duplicaterule"
+          }
+        ],
+        "valor": true
+      },
+      "metadata_api_format": {
+        "estado": "verificado",
+        "evidencias": [
+          {
+            "fonte": "src:sdr-registry",
+            "nota": "types.duplicaterule"
+          },
+          {
+            "fonte": "src:mdapi-duplicaterule"
+          }
+        ],
+        "nota": "O nome do arquivo começa pelo objeto da regra. No source format, o arquivo recebe o sufixo -meta.xml.",
+        "valor": {
+          "arquivo": "<Objeto>.<Nome_Da_Regra>.duplicateRule",
+          "pasta": "duplicateRules/"
+        }
+      },
+      "source_format": {
+        "estado": "verificado",
+        "evidencias": [
+          {
+            "fonte": "src:sdr-registry",
+            "nota": "types.duplicaterule"
+          },
+          {
+            "fonte": "src:mdapi-duplicaterule"
+          }
+        ],
+        "nota": "O nome do arquivo começa pelo objeto da regra. No source format, o arquivo recebe o sufixo -meta.xml.",
+        "valor": {
+          "arquivo": "<Objeto>.<Nome_Da_Regra>.duplicateRule",
+          "pasta": "duplicateRules/"
+        }
+      }
+    },
+    "cobertura": {
+      "estrutural": {
+        "esperado": null,
+        "estado": "parcial",
+        "nota": "Universo esperado = tabelas Fields da página do guia versionado 264.0 (API 68.0), lida em 2026-11-16. Os campos herdados de FilterItem por DuplicateRuleFilterItem não estão listados na página.",
+        "presente": 13
+      },
+      "explicativa": {
+        "esperado": 13,
+        "estado": "completa",
+        "presente": 13
+      },
+      "mapeamento": {
+        "estado": "parcial",
+        "nota": "Correspondências registradas apenas onde há evidência; demais pendentes."
+      }
+    },
+    "disponibilidade": {
+      "ate_versao": null,
+      "desde_versao": null,
+      "estado": "desconhecido",
+      "nota": "A leitura da página devolveu 68.0; o package.xml de exemplo da mesma página usa 38.0. Não confirmado."
+    },
+    "divergencias_documentais": [
+      "A leitura da página devolveu disponibilidade a partir da API 68.0, mas o package.xml de exemplo da própria página usa a versão 38.0. A versão inicial ficou registrada como desconhecida."
+    ],
+    "estado": "verificado",
+    "estende": "Metadata",
+    "estruturas": [
+      "mdx:DuplicateRuleFilter",
+      "mdx:DuplicateRuleMatchRule"
+    ],
+    "evidencias": [
+      {
+        "fonte": "src:mdapi-duplicaterule"
+      },
+      {
+        "fonte": "src:sdr-registry"
+      },
+      {
+        "fonte": "src:sdr-metadata-support"
+      }
+    ],
+    "exemplo_xml": {
+      "natureza": "didatico_projeto",
+      "nota": "Exemplo escrito pelo projeto apenas com elementos documentados; sem dados reais.",
+      "xml": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<DuplicateRule xmlns=\"http://soap.sforce.com/2006/04/metadata\">\n    <!-- Valores documentados: Allow, Block -->\n    <actionOnInsert>Allow</actionOnInsert>\n    <actionOnUpdate>Allow</actionOnUpdate>\n    <alertText>[mensagem mostrada ao usuário]</alertText>\n    <description>[descrição da regra]</description>\n    <duplicateRuleMatchRules>\n        <matchRuleSObjectType>Account</matchRuleSObjectType>\n        <matchingRule>[developer name da matching rule]</matchingRule>\n    </duplicateRuleMatchRules>\n    <isActive>true</isActive>\n    <masterLabel>[rótulo da regra]</masterLabel>\n    <!-- Valores documentados: alert, report -->\n    <operationsOnInsert>alert</operationsOnInsert>\n    <operationsOnUpdate>alert</operationsOnUpdate>\n    <!-- Valores documentados: EnforceSharingRules, BypassSharingRules -->\n    <securityOption>EnforceSharingRules</securityOption>\n    <sortOrder>1</sortOrder>\n</DuplicateRule>"
+    },
+    "finalidade": "Versionar e implantar as regras de duplicidade de cada objeto.",
+    "id": "mdt:DuplicateRule",
+    "nome": "DuplicateRule",
+    "o_que_e": "Uma duplicate rule: o que acontece quando um registro criado ou editado é identificado como duplicado, e com que matching rules se compara.",
+    "propriedades": [
+      {
+        "default": {
+          "estado": "desconhecido",
+          "forma": "nao_declarado_na_fonte"
+        },
+        "disponibilidade": {
+          "ate_versao": null,
+          "desde_versao": null,
+          "estado": "desconhecido"
+        },
+        "dominio": {
+          "estado": "verificado",
+          "evidencias": [
+            {
+              "fonte": "src:mdapi-duplicaterule"
+            }
+          ],
+          "lista_completa": "sim",
+          "natureza": "enum_fechado",
+          "valores": [
+            {
+              "significado": "Deixa o usuário prosseguir depois do alerta.",
+              "valor": "Allow"
+            },
+            {
+              "significado": "Impede a criação.",
+              "valor": "Block"
+            }
+          ]
+        },
+        "estado": "verificado",
+        "evidencias": [
+          {
+            "fonte": "src:mdapi-duplicaterule"
+          }
+        ],
+        "explicacao": "explicada",
+        "id": "mdt:DuplicateRule.actionOnInsert",
+        "nome": "actionOnInsert",
+        "o_que_e": "O que fazer ao criar um duplicado.",
+        "obrigatoriedade": {
+          "estado": "verificado",
+          "evidencias": [
+            {
+              "fonte": "src:mdapi-duplicaterule"
+            }
+          ],
+          "valor": "sim"
+        },
+        "origem": {
+          "estado": "verificado",
+          "evidencias": [
+            {
+              "fonte": "src:mdapi-duplicaterule"
+            }
+          ],
+          "nota": "Propriedade definida pelo schema da Metadata API.",
+          "valor": "padrao_plataforma"
+        },
+        "tipo_tecnico": "DupeActionType"
+      },
+      {
+        "default": {
+          "estado": "desconhecido",
+          "forma": "nao_declarado_na_fonte"
+        },
+        "disponibilidade": {
+          "ate_versao": null,
+          "desde_versao": null,
+          "estado": "desconhecido"
+        },
+        "dominio": {
+          "estado": "verificado",
+          "evidencias": [
+            {
+              "fonte": "src:mdapi-duplicaterule"
+            }
+          ],
+          "lista_completa": "sim",
+          "natureza": "enum_fechado",
+          "valores": [
+            {
+              "valor": "Allow"
+            },
+            {
+              "valor": "Block"
+            }
+          ]
+        },
+        "estado": "verificado",
+        "evidencias": [
+          {
+            "fonte": "src:mdapi-duplicaterule"
+          }
+        ],
+        "explicacao": "explicada",
+        "id": "mdt:DuplicateRule.actionOnUpdate",
+        "nome": "actionOnUpdate",
+        "o_que_e": "O que fazer quando uma edição gera um duplicado.",
+        "obrigatoriedade": {
+          "estado": "verificado",
+          "evidencias": [
+            {
+              "fonte": "src:mdapi-duplicaterule"
+            }
+          ],
+          "valor": "sim"
+        },
+        "origem": {
+          "estado": "verificado",
+          "evidencias": [
+            {
+              "fonte": "src:mdapi-duplicaterule"
+            }
+          ],
+          "nota": "Propriedade definida pelo schema da Metadata API.",
+          "valor": "padrao_plataforma"
+        },
+        "tipo_tecnico": "DupeActionType"
+      },
+      {
+        "default": {
+          "estado": "desconhecido",
+          "forma": "nao_declarado_na_fonte"
+        },
+        "disponibilidade": {
+          "ate_versao": null,
+          "desde_versao": null,
+          "estado": "desconhecido"
+        },
+        "dominio": {
+          "contexto": "A fonte tipa como string sem lista de valores; não inventar valores.",
+          "estado": "verificado",
+          "evidencias": [
+            {
+              "fonte": "src:mdapi-duplicaterule"
+            }
+          ],
+          "natureza": "texto_livre"
+        },
+        "estado": "verificado",
+        "evidencias": [
+          {
+            "fonte": "src:mdapi-duplicaterule"
+          }
+        ],
+        "explicacao": "explicada",
+        "id": "mdt:DuplicateRule.alertText",
+        "nome": "alertText",
+        "o_que_e": "Mensagem mostrada ou devolvida quando a regra dispara. Só é enviada com a regra ativa e exige Allow na criação ou na edição.",
+        "obrigatoriedade": {
+          "condicao": "A documentação 68.0 não marca o campo como obrigatório; ausência de marcação não comprova opcionalidade (confirmar no WSDL).",
+          "estado": "desconhecido",
+          "valor": "nao"
+        },
+        "origem": {
+          "estado": "verificado",
+          "evidencias": [
+            {
+              "fonte": "src:mdapi-duplicaterule"
+            }
+          ],
+          "nota": "Propriedade definida pelo schema da Metadata API.",
+          "valor": "padrao_plataforma"
+        },
+        "tipo_tecnico": "string"
+      },
+      {
+        "default": {
+          "estado": "desconhecido",
+          "forma": "nao_declarado_na_fonte"
+        },
+        "disponibilidade": {
+          "ate_versao": null,
+          "desde_versao": null,
+          "estado": "desconhecido"
+        },
+        "dominio": {
+          "contexto": "A fonte tipa como string sem lista de valores; não inventar valores.",
+          "estado": "verificado",
+          "evidencias": [
+            {
+              "fonte": "src:mdapi-duplicaterule"
+            }
+          ],
+          "natureza": "texto_livre"
+        },
+        "estado": "verificado",
+        "evidencias": [
+          {
+            "fonte": "src:mdapi-duplicaterule"
+          }
+        ],
+        "explicacao": "explicada",
+        "id": "mdt:DuplicateRule.description",
+        "nome": "description",
+        "o_que_e": "Descrição da regra; não aparece na interface.",
+        "obrigatoriedade": {
+          "estado": "verificado",
+          "evidencias": [
+            {
+              "fonte": "src:mdapi-duplicaterule"
+            }
+          ],
+          "valor": "sim"
+        },
+        "origem": {
+          "estado": "verificado",
+          "evidencias": [
+            {
+              "fonte": "src:mdapi-duplicaterule"
+            }
+          ],
+          "nota": "Propriedade definida pelo schema da Metadata API.",
+          "valor": "padrao_plataforma"
+        },
+        "tipo_tecnico": "string"
+      },
+      {
+        "default": {
+          "estado": "desconhecido",
+          "forma": "nao_declarado_na_fonte"
+        },
+        "disponibilidade": {
+          "ate_versao": null,
+          "desde_versao": null,
+          "estado": "desconhecido"
+        },
+        "dominio": {
+          "estado": "verificado",
+          "evidencias": [
+            {
+              "fonte": "src:mdapi-duplicaterule"
+            }
+          ],
+          "natureza": "tipo_composto"
+        },
+        "estado": "verificado",
+        "estrutura_expandida": {
+          "id": "mdx:DuplicateRuleFilter",
+          "nome": "DuplicateRuleFilter",
+          "propriedades": [
+            {
+              "default": {
+                "estado": "desconhecido",
+                "forma": "nao_declarado_na_fonte"
+              },
+              "disponibilidade": {
+                "ate_versao": null,
+                "desde_versao": null,
+                "estado": "desconhecido"
+              },
+              "dominio": {
+                "contexto": "A fonte tipa como string sem lista de valores; não inventar valores.",
+                "estado": "verificado",
+                "evidencias": [
+                  {
+                    "fonte": "src:mdapi-duplicaterule"
+                  }
+                ],
+                "natureza": "texto_livre"
+              },
+              "estado": "verificado",
+              "evidencias": [
+                {
+                  "fonte": "src:mdapi-duplicaterule"
+                }
+              ],
+              "explicacao": "explicada",
+              "id": "mdx:DuplicateRuleFilter.booleanFilter",
+              "nome": "booleanFilter",
+              "o_que_e": "Lógica que combina os itens do filtro.",
+              "obrigatoriedade": {
+                "estado": "verificado",
+                "evidencias": [
+                  {
+                    "fonte": "src:mdapi-duplicaterule"
+                  }
+                ],
+                "valor": "sim"
+              },
+              "origem": {
+                "estado": "verificado",
+                "evidencias": [
+                  {
+                    "fonte": "src:mdapi-duplicaterule"
+                  }
+                ],
+                "nota": "Propriedade definida pelo schema da Metadata API.",
+                "valor": "padrao_plataforma"
+              },
+              "tipo_tecnico": "string"
+            },
+            {
+              "cardinalidade": "0..n",
+              "default": {
+                "estado": "desconhecido",
+                "forma": "nao_declarado_na_fonte"
+              },
+              "disponibilidade": {
+                "ate_versao": null,
+                "desde_versao": null,
+                "estado": "desconhecido"
+              },
+              "dominio": {
+                "estado": "verificado",
+                "evidencias": [
+                  {
+                    "fonte": "src:mdapi-duplicaterule"
+                  }
+                ],
+                "natureza": "tipo_composto"
+              },
+              "estado": "verificado",
+              "estrutura_expandida": {
+                "id": "mdx:DuplicateRuleFilterItem",
+                "nome": "DuplicateRuleFilterItem",
+                "propriedades": [
+                  {
+                    "default": {
+                      "estado": "desconhecido",
+                      "forma": "nao_declarado_na_fonte"
+                    },
+                    "disponibilidade": {
+                      "ate_versao": null,
+                      "desde_versao": null,
+                      "estado": "desconhecido"
+                    },
+                    "dominio": {
+                      "estado": "verificado",
+                      "evidencias": [
+                        {
+                          "fonte": "src:mdapi-duplicaterule"
+                        }
+                      ],
+                      "natureza": "numerico"
+                    },
+                    "estado": "verificado",
+                    "evidencias": [
+                      {
+                        "fonte": "src:mdapi-duplicaterule"
+                      }
+                    ],
+                    "explicacao": "explicada",
+                    "id": "mdx:DuplicateRuleFilterItem.sortOrder",
+                    "nome": "sortOrder",
+                    "o_que_e": "Posição do item no filtro.",
+                    "obrigatoriedade": {
+                      "estado": "verificado",
+                      "evidencias": [
+                        {
+                          "fonte": "src:mdapi-duplicaterule"
+                        }
+                      ],
+                      "valor": "sim"
+                    },
+                    "origem": {
+                      "estado": "verificado",
+                      "evidencias": [
+                        {
+                          "fonte": "src:mdapi-duplicaterule"
+                        }
+                      ],
+                      "nota": "Propriedade definida pelo schema da Metadata API.",
+                      "valor": "padrao_plataforma"
+                    },
+                    "tipo_tecnico": "int"
+                  },
+                  {
+                    "default": {
+                      "estado": "desconhecido",
+                      "forma": "nao_declarado_na_fonte"
+                    },
+                    "disponibilidade": {
+                      "ate_versao": null,
+                      "desde_versao": null,
+                      "estado": "desconhecido"
+                    },
+                    "dominio": {
+                      "contexto": "A fonte tipa como string sem lista de valores; não inventar valores.",
+                      "estado": "verificado",
+                      "evidencias": [
+                        {
+                          "fonte": "src:mdapi-duplicaterule"
+                        }
+                      ],
+                      "natureza": "texto_livre"
+                    },
+                    "estado": "verificado",
+                    "evidencias": [
+                      {
+                        "fonte": "src:mdapi-duplicaterule"
+                      }
+                    ],
+                    "explicacao": "explicada",
+                    "id": "mdx:DuplicateRuleFilterItem.table",
+                    "nome": "table",
+                    "o_que_e": "Objeto que contém o campo indicado em field.",
+                    "obrigatoriedade": {
+                      "estado": "verificado",
+                      "evidencias": [
+                        {
+                          "fonte": "src:mdapi-duplicaterule"
+                        }
+                      ],
+                      "valor": "sim"
+                    },
+                    "origem": {
+                      "estado": "verificado",
+                      "evidencias": [
+                        {
+                          "fonte": "src:mdapi-duplicaterule"
+                        }
+                      ],
+                      "nota": "Propriedade definida pelo schema da Metadata API.",
+                      "valor": "padrao_plataforma"
+                    },
+                    "tipo_tecnico": "string"
+                  }
+                ]
+              },
+              "estrutura_ref": "mdx:DuplicateRuleFilterItem",
+              "evidencias": [
+                {
+                  "fonte": "src:mdapi-duplicaterule"
+                }
+              ],
+              "explicacao": "explicada",
+              "id": "mdx:DuplicateRuleFilter.duplicateRuleFilterItems",
+              "nome": "duplicateRuleFilterItems",
+              "o_que_e": "Itens do filtro.",
+              "obrigatoriedade": {
+                "estado": "verificado",
+                "evidencias": [
+                  {
+                    "fonte": "src:mdapi-duplicaterule"
+                  }
+                ],
+                "valor": "sim"
+              },
+              "origem": {
+                "estado": "verificado",
+                "evidencias": [
+                  {
+                    "fonte": "src:mdapi-duplicaterule"
+                  }
+                ],
+                "nota": "Propriedade definida pelo schema da Metadata API.",
+                "valor": "padrao_plataforma"
+              },
+              "tipo_tecnico": "DuplicateRuleFilterItem[]"
+            }
+          ]
+        },
+        "estrutura_ref": "mdx:DuplicateRuleFilter",
+        "evidencias": [
+          {
+            "fonte": "src:mdapi-duplicaterule"
+          }
+        ],
+        "explicacao": "explicada",
+        "id": "mdt:DuplicateRule.duplicateRuleFilter",
+        "nome": "duplicateRuleFilter",
+        "o_que_e": "Critério que limita os registros considerados.",
+        "obrigatoriedade": {
+          "estado": "verificado",
+          "evidencias": [
+            {
+              "fonte": "src:mdapi-duplicaterule"
+            }
+          ],
+          "valor": "sim"
+        },
+        "origem": {
+          "estado": "verificado",
+          "evidencias": [
+            {
+              "fonte": "src:mdapi-duplicaterule"
+            }
+          ],
+          "nota": "Propriedade definida pelo schema da Metadata API.",
+          "valor": "padrao_plataforma"
+        },
+        "tipo_tecnico": "DuplicateRuleFilter"
+      },
+      {
+        "cardinalidade": "0..n",
+        "default": {
+          "estado": "desconhecido",
+          "forma": "nao_declarado_na_fonte"
+        },
+        "disponibilidade": {
+          "ate_versao": null,
+          "desde_versao": null,
+          "estado": "desconhecido"
+        },
+        "dominio": {
+          "estado": "verificado",
+          "evidencias": [
+            {
+              "fonte": "src:mdapi-duplicaterule"
+            }
+          ],
+          "natureza": "tipo_composto"
+        },
+        "estado": "verificado",
+        "estrutura_expandida": {
+          "id": "mdx:DuplicateRuleMatchRule",
+          "nome": "DuplicateRuleMatchRule",
+          "propriedades": [
+            {
+              "default": {
+                "estado": "desconhecido",
+                "forma": "nao_declarado_na_fonte"
+              },
+              "disponibilidade": {
+                "ate_versao": null,
+                "desde_versao": null,
+                "estado": "desconhecido"
+              },
+              "dominio": {
+                "contexto": "A fonte tipa como string sem lista de valores; não inventar valores.",
+                "estado": "verificado",
+                "evidencias": [
+                  {
+                    "fonte": "src:mdapi-duplicaterule"
+                  }
+                ],
+                "natureza": "texto_livre"
+              },
+              "estado": "verificado",
+              "evidencias": [
+                {
+                  "fonte": "src:mdapi-duplicaterule"
+                }
+              ],
+              "explicacao": "explicada",
+              "id": "mdx:DuplicateRuleMatchRule.matchRuleSObjectType",
+              "nome": "matchRuleSObjectType",
+              "o_que_e": "Objeto em que a matching rule procura, como Lead numa regra de Contact.",
+              "obrigatoriedade": {
+                "estado": "verificado",
+                "evidencias": [
+                  {
+                    "fonte": "src:mdapi-duplicaterule"
+                  }
+                ],
+                "valor": "sim"
+              },
+              "origem": {
+                "estado": "verificado",
+                "evidencias": [
+                  {
+                    "fonte": "src:mdapi-duplicaterule"
+                  }
+                ],
+                "nota": "Propriedade definida pelo schema da Metadata API.",
+                "valor": "padrao_plataforma"
+              },
+              "tipo_tecnico": "string"
+            },
+            {
+              "default": {
+                "estado": "desconhecido",
+                "forma": "nao_declarado_na_fonte"
+              },
+              "disponibilidade": {
+                "ate_versao": null,
+                "desde_versao": null,
+                "estado": "desconhecido"
+              },
+              "dominio": {
+                "contexto": "A fonte tipa como string sem lista de valores; não inventar valores.",
+                "estado": "verificado",
+                "evidencias": [
+                  {
+                    "fonte": "src:mdapi-duplicaterule"
+                  }
+                ],
+                "natureza": "texto_livre"
+              },
+              "estado": "verificado",
+              "evidencias": [
+                {
+                  "fonte": "src:mdapi-duplicaterule"
+                }
+              ],
+              "explicacao": "explicada",
+              "id": "mdx:DuplicateRuleMatchRule.matchingRule",
+              "nome": "matchingRule",
+              "o_que_e": "Developer name da matching rule associada.",
+              "obrigatoriedade": {
+                "estado": "verificado",
+                "evidencias": [
+                  {
+                    "fonte": "src:mdapi-duplicaterule"
+                  }
+                ],
+                "valor": "sim"
+              },
+              "origem": {
+                "estado": "verificado",
+                "evidencias": [
+                  {
+                    "fonte": "src:mdapi-duplicaterule"
+                  }
+                ],
+                "nota": "Propriedade definida pelo schema da Metadata API.",
+                "valor": "padrao_plataforma"
+              },
+              "referencia": {
+                "alvos": [
+                  "mdt:MatchingRules"
+                ],
+                "nota": "Referência pelo nome do componente no XML."
+              },
+              "tipo_tecnico": "string"
+            },
+            {
+              "default": {
+                "estado": "desconhecido",
+                "forma": "nao_declarado_na_fonte"
+              },
+              "disponibilidade": {
+                "ate_versao": null,
+                "desde_versao": null,
+                "estado": "desconhecido"
+              },
+              "dominio": {
+                "estado": "verificado",
+                "evidencias": [
+                  {
+                    "fonte": "src:mdapi-duplicaterule"
+                  }
+                ],
+                "natureza": "tipo_composto"
+              },
+              "estado": "verificado",
+              "estrutura_expandida": {
+                "id": "mdx:ObjectMapping",
+                "nome": "ObjectMapping",
+                "propriedades": [
+                  {
+                    "default": {
+                      "estado": "desconhecido",
+                      "forma": "nao_declarado_na_fonte"
+                    },
+                    "disponibilidade": {
+                      "ate_versao": null,
+                      "desde_versao": null,
+                      "estado": "desconhecido"
+                    },
+                    "dominio": {
+                      "contexto": "A fonte tipa como string sem lista de valores; não inventar valores.",
+                      "estado": "verificado",
+                      "evidencias": [
+                        {
+                          "fonte": "src:mdapi-duplicaterule"
+                        }
+                      ],
+                      "natureza": "texto_livre"
+                    },
+                    "estado": "verificado",
+                    "evidencias": [
+                      {
+                        "fonte": "src:mdapi-duplicaterule"
+                      }
+                    ],
+                    "explicacao": "explicada",
+                    "id": "mdx:ObjectMapping.inputObject",
+                    "nome": "inputObject",
+                    "o_que_e": "O objeto da duplicate rule, usado como entrada.",
+                    "obrigatoriedade": {
+                      "estado": "verificado",
+                      "evidencias": [
+                        {
+                          "fonte": "src:mdapi-duplicaterule"
+                        }
+                      ],
+                      "valor": "sim"
+                    },
+                    "origem": {
+                      "estado": "verificado",
+                      "evidencias": [
+                        {
+                          "fonte": "src:mdapi-duplicaterule"
+                        }
+                      ],
+                      "nota": "Propriedade definida pelo schema da Metadata API.",
+                      "valor": "padrao_plataforma"
+                    },
+                    "tipo_tecnico": "string"
+                  },
+                  {
+                    "cardinalidade": "0..n",
+                    "default": {
+                      "estado": "desconhecido",
+                      "forma": "nao_declarado_na_fonte"
+                    },
+                    "disponibilidade": {
+                      "ate_versao": null,
+                      "desde_versao": null,
+                      "estado": "desconhecido"
+                    },
+                    "dominio": {
+                      "estado": "verificado",
+                      "evidencias": [
+                        {
+                          "fonte": "src:mdapi-duplicaterule"
+                        }
+                      ],
+                      "natureza": "tipo_composto"
+                    },
+                    "estado": "verificado",
+                    "estrutura_expandida": {
+                      "id": "mdx:ObjectMappingField",
+                      "nome": "ObjectMappingField",
+                      "propriedades": [
+                        {
+                          "default": {
+                            "estado": "desconhecido",
+                            "forma": "nao_declarado_na_fonte"
+                          },
+                          "disponibilidade": {
+                            "ate_versao": null,
+                            "desde_versao": null,
+                            "estado": "desconhecido"
+                          },
+                          "dominio": {
+                            "contexto": "A fonte tipa como string sem lista de valores; não inventar valores.",
+                            "estado": "verificado",
+                            "evidencias": [
+                              {
+                                "fonte": "src:mdapi-duplicaterule"
+                              }
+                            ],
+                            "natureza": "texto_livre"
+                          },
+                          "estado": "verificado",
+                          "evidencias": [
+                            {
+                              "fonte": "src:mdapi-duplicaterule"
+                            }
+                          ],
+                          "explicacao": "explicada",
+                          "id": "mdx:ObjectMappingField.inputField",
+                          "nome": "inputField",
+                          "o_que_e": "Campo do objeto de entrada mapeado ao campo de saída.",
+                          "obrigatoriedade": {
+                            "estado": "verificado",
+                            "evidencias": [
+                              {
+                                "fonte": "src:mdapi-duplicaterule"
+                              }
+                            ],
+                            "valor": "sim"
+                          },
+                          "origem": {
+                            "estado": "verificado",
+                            "evidencias": [
+                              {
+                                "fonte": "src:mdapi-duplicaterule"
+                              }
+                            ],
+                            "nota": "Propriedade definida pelo schema da Metadata API.",
+                            "valor": "padrao_plataforma"
+                          },
+                          "tipo_tecnico": "string"
+                        },
+                        {
+                          "default": {
+                            "estado": "desconhecido",
+                            "forma": "nao_declarado_na_fonte"
+                          },
+                          "disponibilidade": {
+                            "ate_versao": null,
+                            "desde_versao": null,
+                            "estado": "desconhecido"
+                          },
+                          "dominio": {
+                            "contexto": "A fonte tipa como string sem lista de valores; não inventar valores.",
+                            "estado": "verificado",
+                            "evidencias": [
+                              {
+                                "fonte": "src:mdapi-duplicaterule"
+                              }
+                            ],
+                            "natureza": "texto_livre"
+                          },
+                          "estado": "verificado",
+                          "evidencias": [
+                            {
+                              "fonte": "src:mdapi-duplicaterule"
+                            }
+                          ],
+                          "explicacao": "explicada",
+                          "id": "mdx:ObjectMappingField.outputField",
+                          "nome": "outputField",
+                          "o_que_e": "Campo do objeto de saída que recebe o mapeamento.",
+                          "obrigatoriedade": {
+                            "estado": "verificado",
+                            "evidencias": [
+                              {
+                                "fonte": "src:mdapi-duplicaterule"
+                              }
+                            ],
+                            "valor": "sim"
+                          },
+                          "origem": {
+                            "estado": "verificado",
+                            "evidencias": [
+                              {
+                                "fonte": "src:mdapi-duplicaterule"
+                              }
+                            ],
+                            "nota": "Propriedade definida pelo schema da Metadata API.",
+                            "valor": "padrao_plataforma"
+                          },
+                          "tipo_tecnico": "string"
+                        }
+                      ]
+                    },
+                    "estrutura_ref": "mdx:ObjectMappingField",
+                    "evidencias": [
+                      {
+                        "fonte": "src:mdapi-duplicaterule"
+                      }
+                    ],
+                    "explicacao": "explicada",
+                    "id": "mdx:ObjectMapping.mappingFields",
+                    "nome": "mappingFields",
+                    "o_que_e": "Mapeamentos de campos do objeto de origem para o de destino.",
+                    "obrigatoriedade": {
+                      "estado": "verificado",
+                      "evidencias": [
+                        {
+                          "fonte": "src:mdapi-duplicaterule"
+                        }
+                      ],
+                      "valor": "sim"
+                    },
+                    "origem": {
+                      "estado": "verificado",
+                      "evidencias": [
+                        {
+                          "fonte": "src:mdapi-duplicaterule"
+                        }
+                      ],
+                      "nota": "Propriedade definida pelo schema da Metadata API.",
+                      "valor": "padrao_plataforma"
+                    },
+                    "tipo_tecnico": "ObjectMappingField[]"
+                  },
+                  {
+                    "default": {
+                      "estado": "desconhecido",
+                      "forma": "nao_declarado_na_fonte"
+                    },
+                    "disponibilidade": {
+                      "ate_versao": null,
+                      "desde_versao": null,
+                      "estado": "desconhecido"
+                    },
+                    "dominio": {
+                      "contexto": "A fonte tipa como string sem lista de valores; não inventar valores.",
+                      "estado": "verificado",
+                      "evidencias": [
+                        {
+                          "fonte": "src:mdapi-duplicaterule"
+                        }
+                      ],
+                      "natureza": "texto_livre"
+                    },
+                    "estado": "verificado",
+                    "evidencias": [
+                      {
+                        "fonte": "src:mdapi-duplicaterule"
+                      }
+                    ],
+                    "explicacao": "explicada",
+                    "id": "mdx:ObjectMapping.outputObject",
+                    "nome": "outputObject",
+                    "o_que_e": "Objeto de destino; o mesmo de matchRuleSObjectType. As duplicate rules dele são ignoradas.",
+                    "obrigatoriedade": {
+                      "estado": "verificado",
+                      "evidencias": [
+                        {
+                          "fonte": "src:mdapi-duplicaterule"
+                        }
+                      ],
+                      "valor": "sim"
+                    },
+                    "origem": {
+                      "estado": "verificado",
+                      "evidencias": [
+                        {
+                          "fonte": "src:mdapi-duplicaterule"
+                        }
+                      ],
+                      "nota": "Propriedade definida pelo schema da Metadata API.",
+                      "valor": "padrao_plataforma"
+                    },
+                    "tipo_tecnico": "string"
+                  }
+                ]
+              },
+              "estrutura_ref": "mdx:ObjectMapping",
+              "evidencias": [
+                {
+                  "fonte": "src:mdapi-duplicaterule"
+                }
+              ],
+              "explicacao": "explicada",
+              "id": "mdx:DuplicateRuleMatchRule.objectMapping",
+              "nome": "objectMapping",
+              "o_que_e": "Mapeamento de campos entre o objeto de entrada e o de saída.",
+              "obrigatoriedade": {
+                "estado": "verificado",
+                "evidencias": [
+                  {
+                    "fonte": "src:mdapi-duplicaterule"
+                  }
+                ],
+                "valor": "sim"
+              },
+              "origem": {
+                "estado": "verificado",
+                "evidencias": [
+                  {
+                    "fonte": "src:mdapi-duplicaterule"
+                  }
+                ],
+                "nota": "Propriedade definida pelo schema da Metadata API.",
+                "valor": "padrao_plataforma"
+              },
+              "tipo_tecnico": "ObjectMapping"
+            }
+          ]
+        },
+        "estrutura_ref": "mdx:DuplicateRuleMatchRule",
+        "evidencias": [
+          {
+            "fonte": "src:mdapi-duplicaterule"
+          }
+        ],
+        "explicacao": "explicada",
+        "id": "mdt:DuplicateRule.duplicateRuleMatchRules",
+        "nome": "duplicateRuleMatchRules",
+        "o_que_e": "Uma ou mais matching rules que definem o que é um duplicado.",
+        "obrigatoriedade": {
+          "estado": "verificado",
+          "evidencias": [
+            {
+              "fonte": "src:mdapi-duplicaterule"
+            }
+          ],
+          "valor": "sim"
+        },
+        "origem": {
+          "estado": "verificado",
+          "evidencias": [
+            {
+              "fonte": "src:mdapi-duplicaterule"
+            }
+          ],
+          "nota": "Propriedade definida pelo schema da Metadata API.",
+          "valor": "padrao_plataforma"
+        },
+        "tipo_tecnico": "DuplicateRuleMatchRule[]"
+      },
+      {
+        "default": {
+          "estado": "desconhecido",
+          "forma": "nao_declarado_na_fonte"
+        },
+        "disponibilidade": {
+          "ate_versao": null,
+          "desde_versao": null,
+          "estado": "desconhecido"
+        },
+        "dominio": {
+          "estado": "verificado",
+          "evidencias": [
+            {
+              "fonte": "src:mdapi-duplicaterule"
+            }
+          ],
+          "lista_completa": "sim",
+          "natureza": "booleano",
+          "valores": [
+            {
+              "valor": "true"
+            },
+            {
+              "valor": "false"
+            }
+          ]
+        },
+        "estado": "verificado",
+        "evidencias": [
+          {
+            "fonte": "src:mdapi-duplicaterule"
+          }
+        ],
+        "explicacao": "explicada",
+        "id": "mdt:DuplicateRule.isActive",
+        "nome": "isActive",
+        "o_que_e": "Com true, a regra detecta duplicados; com false, não tem efeito.",
+        "obrigatoriedade": {
+          "estado": "verificado",
+          "evidencias": [
+            {
+              "fonte": "src:mdapi-duplicaterule"
+            }
+          ],
+          "valor": "sim"
+        },
+        "origem": {
+          "estado": "verificado",
+          "evidencias": [
+            {
+              "fonte": "src:mdapi-duplicaterule"
+            }
+          ],
+          "nota": "Propriedade definida pelo schema da Metadata API.",
+          "valor": "padrao_plataforma"
+        },
+        "tipo_tecnico": "boolean"
+      },
+      {
+        "default": {
+          "estado": "desconhecido",
+          "forma": "nao_declarado_na_fonte"
+        },
+        "disponibilidade": {
+          "ate_versao": null,
+          "desde_versao": null,
+          "estado": "desconhecido"
+        },
+        "dominio": {
+          "contexto": "A fonte tipa como string sem lista de valores; não inventar valores.",
+          "estado": "verificado",
+          "evidencias": [
+            {
+              "fonte": "src:mdapi-duplicaterule"
+            }
+          ],
+          "natureza": "texto_livre"
+        },
+        "estado": "verificado",
+        "evidencias": [
+          {
+            "fonte": "src:mdapi-duplicaterule"
+          }
+        ],
+        "explicacao": "explicada",
+        "id": "mdt:DuplicateRule.masterLabel",
+        "nome": "masterLabel",
+        "o_que_e": "Rótulo interno da regra.",
+        "obrigatoriedade": {
+          "estado": "verificado",
+          "evidencias": [
+            {
+              "fonte": "src:mdapi-duplicaterule"
+            }
+          ],
+          "valor": "sim"
+        },
+        "origem": {
+          "estado": "verificado",
+          "evidencias": [
+            {
+              "fonte": "src:mdapi-duplicaterule"
+            }
+          ],
+          "nota": "Propriedade definida pelo schema da Metadata API.",
+          "valor": "padrao_plataforma"
+        },
+        "tipo_tecnico": "string"
+      },
+      {
+        "cardinalidade": "0..n",
+        "default": {
+          "estado": "desconhecido",
+          "forma": "nao_declarado_na_fonte"
+        },
+        "disponibilidade": {
+          "ate_versao": null,
+          "desde_versao": null,
+          "estado": "desconhecido"
+        },
+        "dominio": {
+          "contexto": "A página lista estes valores para um campo do tipo string.",
+          "estado": "verificado",
+          "evidencias": [
+            {
+              "fonte": "src:mdapi-duplicaterule"
+            }
+          ],
+          "lista_completa": "sim",
+          "natureza": "enum_fechado",
+          "valores": [
+            {
+              "valor": "alert"
+            },
+            {
+              "valor": "report"
+            }
+          ]
+        },
+        "estado": "verificado",
+        "evidencias": [
+          {
+            "fonte": "src:mdapi-duplicaterule"
+          }
+        ],
+        "explicacao": "explicada",
+        "id": "mdt:DuplicateRule.operationsOnInsert",
+        "nome": "operationsOnInsert",
+        "o_que_e": "Usado quando actionOnInsert é Allow.",
+        "obrigatoriedade": {
+          "estado": "verificado",
+          "evidencias": [
+            {
+              "fonte": "src:mdapi-duplicaterule"
+            }
+          ],
+          "valor": "sim"
+        },
+        "origem": {
+          "estado": "verificado",
+          "evidencias": [
+            {
+              "fonte": "src:mdapi-duplicaterule"
+            }
+          ],
+          "nota": "Propriedade definida pelo schema da Metadata API.",
+          "valor": "padrao_plataforma"
+        },
+        "tipo_tecnico": "string[]"
+      },
+      {
+        "cardinalidade": "0..n",
+        "default": {
+          "estado": "desconhecido",
+          "forma": "nao_declarado_na_fonte"
+        },
+        "disponibilidade": {
+          "ate_versao": null,
+          "desde_versao": null,
+          "estado": "desconhecido"
+        },
+        "dominio": {
+          "contexto": "A página lista estes valores para um campo do tipo string.",
+          "estado": "verificado",
+          "evidencias": [
+            {
+              "fonte": "src:mdapi-duplicaterule"
+            }
+          ],
+          "lista_completa": "sim",
+          "natureza": "enum_fechado",
+          "valores": [
+            {
+              "valor": "alert"
+            },
+            {
+              "valor": "report"
+            }
+          ]
+        },
+        "estado": "verificado",
+        "evidencias": [
+          {
+            "fonte": "src:mdapi-duplicaterule"
+          }
+        ],
+        "explicacao": "explicada",
+        "id": "mdt:DuplicateRule.operationsOnUpdate",
+        "nome": "operationsOnUpdate",
+        "o_que_e": "Usado quando actionOnUpdate é Allow.",
+        "obrigatoriedade": {
+          "estado": "verificado",
+          "evidencias": [
+            {
+              "fonte": "src:mdapi-duplicaterule"
+            }
+          ],
+          "valor": "sim"
+        },
+        "origem": {
+          "estado": "verificado",
+          "evidencias": [
+            {
+              "fonte": "src:mdapi-duplicaterule"
+            }
+          ],
+          "nota": "Propriedade definida pelo schema da Metadata API.",
+          "valor": "padrao_plataforma"
+        },
+        "tipo_tecnico": "string[]"
+      },
+      {
+        "default": {
+          "estado": "desconhecido",
+          "forma": "nao_declarado_na_fonte"
+        },
+        "disponibilidade": {
+          "ate_versao": null,
+          "desde_versao": null,
+          "estado": "desconhecido"
+        },
+        "dominio": {
+          "estado": "verificado",
+          "evidencias": [
+            {
+              "fonte": "src:mdapi-duplicaterule"
+            }
+          ],
+          "lista_completa": "sim",
+          "natureza": "enum_fechado",
+          "valores": [
+            {
+              "valor": "EnforceSharingRules"
+            },
+            {
+              "valor": "BypassSharingRules"
+            }
+          ]
+        },
+        "estado": "verificado",
+        "evidencias": [
+          {
+            "fonte": "src:mdapi-duplicaterule"
+          }
+        ],
+        "explicacao": "explicada",
+        "id": "mdt:DuplicateRule.securityOption",
+        "nome": "securityOption",
+        "o_que_e": "Define se as sharing rules valem na busca por duplicados.",
+        "obrigatoriedade": {
+          "estado": "verificado",
+          "evidencias": [
+            {
+              "fonte": "src:mdapi-duplicaterule"
+            }
+          ],
+          "valor": "sim"
+        },
+        "origem": {
+          "estado": "verificado",
+          "evidencias": [
+            {
+              "fonte": "src:mdapi-duplicaterule"
+            }
+          ],
+          "nota": "Propriedade definida pelo schema da Metadata API.",
+          "valor": "padrao_plataforma"
+        },
+        "tipo_tecnico": "DupeSecurityOptionType"
+      },
+      {
+        "default": {
+          "estado": "desconhecido",
+          "forma": "nao_declarado_na_fonte"
+        },
+        "disponibilidade": {
+          "ate_versao": null,
+          "desde_versao": null,
+          "estado": "desconhecido"
+        },
+        "dominio": {
+          "estado": "verificado",
+          "evidencias": [
+            {
+              "fonte": "src:mdapi-duplicaterule"
+            }
+          ],
+          "natureza": "numerico"
+        },
+        "estado": "verificado",
+        "evidencias": [
+          {
+            "fonte": "src:mdapi-duplicaterule"
+          }
+        ],
+        "explicacao": "explicada",
+        "id": "mdt:DuplicateRule.sortOrder",
+        "nome": "sortOrder",
+        "o_que_e": "Ordem em que as duplicate rules são aplicadas.",
+        "obrigatoriedade": {
+          "estado": "verificado",
+          "evidencias": [
+            {
+              "fonte": "src:mdapi-duplicaterule"
+            }
+          ],
+          "valor": "sim"
+        },
+        "origem": {
+          "estado": "verificado",
+          "evidencias": [
+            {
+              "fonte": "src:mdapi-duplicaterule"
+            }
+          ],
+          "nota": "Propriedade definida pelo schema da Metadata API.",
+          "valor": "padrao_plataforma"
+        },
+        "tipo_tecnico": "int"
+      },
+      {
+        "default": {
+          "estado": "desconhecido",
+          "forma": "nao_declarado_na_fonte"
+        },
+        "disponibilidade": {
+          "ate_versao": null,
+          "desde_versao": null,
+          "estado": "desconhecido"
+        },
+        "dominio": {
+          "contexto": "A fonte tipa como string sem lista de valores; não inventar valores.",
+          "estado": "verificado",
+          "evidencias": [
+            {
+              "fonte": "src:mdapi-duplicaterule"
+            }
+          ],
+          "natureza": "texto_livre"
+        },
+        "estado": "verificado",
+        "evidencias": [
+          {
+            "fonte": "src:mdapi-duplicaterule"
+          }
+        ],
+        "explicacao": "explicada",
+        "herdada_de": "Metadata",
+        "id": "mdt:DuplicateRule.fullName",
+        "nome": "fullName",
+        "o_que_e": "Nome completo (API name) do componente; herdado do tipo Metadata.",
+        "obrigatoriedade": {
+          "estado": "desconhecido",
+          "valor": "desconhecida"
+        },
+        "origem": {
+          "estado": "verificado",
+          "evidencias": [
+            {
+              "fonte": "src:mdapi-duplicaterule"
+            }
+          ],
+          "nota": "Propriedade definida pelo schema da Metadata API.",
+          "valor": "padrao_plataforma"
+        },
+        "tipo_tecnico": "string"
+      }
+    ],
+    "recomendacoes": [],
+    "setup": {
+      "estado": "desconhecido",
+      "nota": "Caminho no Setup não validado nesta sessão."
+    },
+    "suporte_cli": {
+      "estado": "verificado",
+      "evidencias": [
+        {
+          "fonte": "src:sdr-metadata-support"
+        }
+      ],
+      "nota": "Suporte do Salesforce CLI (source-deploy-retrieve), não do Metadata API em geral.",
+      "valor": {
+        "nota_fonte": null,
+        "status": "suportado"
+      }
+    }
+  },
+  "nota": "Gerado deterministicamente a partir de catalogo/. Não editar à mão.",
+  "objetos_relacionados": [],
+  "relacionamentos": [],
+  "versao_base": {
+    "api_version": "68.0",
+    "data_referencia": "2026-11-07",
+    "escopo": "config/escopo.json",
+    "release": "Winter '27"
+  }
+}

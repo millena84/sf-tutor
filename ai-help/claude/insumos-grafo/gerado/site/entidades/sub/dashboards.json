@@ -55,10 +55,13 @@
     {
       "evidencias": [
         {
-          "fonte": "src:sdr-metadata-support"
+          "fonte": "src:mdapi-dashboard"
+        },
+        {
+          "fonte": "src:mdapi-folder"
         }
       ],
-      "texto": "Dashboard e DashboardFolder constam da lista oficial de metadata types da versão 68; as propriedades deles ainda não estão detalhadas neste catálogo.",
+      "texto": "Dashboard guarda cada dashboard, numa subpasta da pasta dashboards, e DashboardFolder, cada pasta; o curinga do package.xml não funciona. Se runningUser faltar ou for inválido na implantação, entra o usuário que está implantando. Neste catálogo, Dashboard está detalhado só no primeiro nível: os subtipos (componentes, filtros, grade) ainda não foram cadastrados.",
       "tipo": "implantacao",
       "titulo": "Como metadado"
     }
@@ -66,8 +69,29 @@
   "classificacao": "cls:relatorios-analytics-e-exploracao",
   "derivado": {
     "dependencias": [],
-    "funcionalidades": [],
-    "metadata_types": [],
+    "funcionalidades": [
+      {
+        "alertas": [
+          "Com running user fixo, todos veem os dados conforme o acesso daquela pessoa, não o próprio.",
+          "Dashboards na Lixeira contam no limite de dynamic dashboards até a exclusão definitiva.",
+          "Criar, editar e excluir dynamic dashboards exige a permissão Manage Dynamic Dashboards."
+        ],
+        "exemplo": "O dashboard de vendas tem um gráfico de pipeline por fase e uma tabela das maiores oportunidades, cada um ligado a um relatório.",
+        "id": "func:dashboards",
+        "principal": true
+      }
+    ],
+    "metadata_types": [
+      {
+        "estrutura": "parcial",
+        "funcionalidades": [
+          "func:dashboards"
+        ],
+        "id": "mdt:Dashboard",
+        "nota_suporte": null,
+        "suporte_cli": "suportado"
+      }
+    ],
     "nota": "Calculado pelo gerador a partir do catálogo; não é cadastro.",
     "objetos_api": [],
     "temas_sem_funcionalidade": []
@@ -87,7 +111,9 @@
   "escopo": "Entram os painéis visuais construídos sobre relatórios.",
   "estado": "desconhecido",
   "fora_do_escopo": "Compartilhamento dos painéis fica em \"Pastas e acesso\".",
-  "funcionalidades": [],
+  "funcionalidades": [
+    "func:dashboards"
+  ],
   "id": "sub:dashboards",
   "natureza": "curadoria_didatica",
   "nome": "Dashboards",
@@ -102,7 +128,10 @@
       }
     ],
     "exemplo": "Uma gerente acompanha num painel o funil de oportunidades e os casos abertos por prioridade, cada gráfico vindo de um relatório.",
-    "explicacao": "Um dashboard mostra, em gráficos e tabelas, os resultados de relatórios. Cada peça do painel (widget) tem um relatório de origem. O painel mostra os dados da última atualização, não necessariamente os de agora."
+    "explicacao": "Um dashboard mostra, em gráficos e tabelas, os resultados de relatórios. Cada peça do painel (widget) tem um relatório de origem. O painel mostra os dados da última atualização, não necessariamente os de agora.",
+    "por_onde_comecar": [
+      "func:dashboards"
+    ]
   },
   "referencias_oficiais": [
     {

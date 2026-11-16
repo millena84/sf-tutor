@@ -2,24 +2,23 @@
   "id": "mdx:ObjectMapping",
   "nome": "ObjectMapping",
   "natureza": "estrutura_auxiliar",
-  "o_que_e": "Mapeamento de campos de lead para um objeto na conversão.",
+  "o_que_e": "O mapeamento de campos entre o objeto da regra e o objeto em que a matching rule procura.",
   "usada_por": [
-    "mdt:FieldServiceSettings",
-    "mdt:LeadConvertSettings"
+    "mdx:DuplicateRuleMatchRule"
   ],
   "propriedades": [
     {
       "id": "mdx:ObjectMapping.inputObject",
       "nome": "inputObject",
       "tipo_tecnico": "string",
-      "o_que_e": "Objeto de origem (sempre Lead).",
+      "o_que_e": "O objeto da duplicate rule, usado como entrada.",
       "origem": {
         "estado": "verificado",
         "valor": "padrao_plataforma",
         "nota": "Propriedade definida pelo schema da Metadata API.",
         "evidencias": [
           {
-            "fonte": "src:mdapi-leadconvertsettings"
+            "fonte": "src:mdapi-duplicaterule"
           }
         ]
       },
@@ -28,7 +27,7 @@
         "estado": "verificado",
         "evidencias": [
           {
-            "fonte": "src:mdapi-leadconvertsettings"
+            "fonte": "src:mdapi-duplicaterule"
           }
         ]
       },
@@ -41,7 +40,7 @@
         "estado": "verificado",
         "evidencias": [
           {
-            "fonte": "src:mdapi-leadconvertsettings"
+            "fonte": "src:mdapi-duplicaterule"
           }
         ],
         "contexto": "A fonte tipa como string sem lista de valores; não inventar valores."
@@ -55,7 +54,7 @@
       "estado": "verificado",
       "evidencias": [
         {
-          "fonte": "src:mdapi-leadconvertsettings"
+          "fonte": "src:mdapi-duplicaterule"
         }
       ]
     },
@@ -63,21 +62,25 @@
       "id": "mdx:ObjectMapping.mappingFields",
       "nome": "mappingFields",
       "tipo_tecnico": "ObjectMappingField[]",
-      "o_que_e": "Pares de campos de origem e destino.",
+      "o_que_e": "Mapeamentos de campos do objeto de origem para o de destino.",
       "origem": {
         "estado": "verificado",
         "valor": "padrao_plataforma",
         "nota": "Propriedade definida pelo schema da Metadata API.",
         "evidencias": [
           {
-            "fonte": "src:mdapi-leadconvertsettings"
+            "fonte": "src:mdapi-duplicaterule"
           }
         ]
       },
       "obrigatoriedade": {
-        "valor": "nao",
-        "estado": "desconhecido",
-        "condicao": "A documentação 68.0 não marca o campo como obrigatório; ausência de marcação não comprova opcionalidade (confirmar no WSDL)."
+        "valor": "sim",
+        "estado": "verificado",
+        "evidencias": [
+          {
+            "fonte": "src:mdapi-duplicaterule"
+          }
+        ]
       },
       "default": {
         "forma": "nao_declarado_na_fonte",
@@ -88,7 +91,7 @@
         "estado": "verificado",
         "evidencias": [
           {
-            "fonte": "src:mdapi-leadconvertsettings"
+            "fonte": "src:mdapi-duplicaterule"
           }
         ]
       },
@@ -101,7 +104,7 @@
       "estado": "verificado",
       "evidencias": [
         {
-          "fonte": "src:mdapi-leadconvertsettings"
+          "fonte": "src:mdapi-duplicaterule"
         }
       ],
       "cardinalidade": "0..n",
@@ -111,14 +114,14 @@
       "id": "mdx:ObjectMapping.outputObject",
       "nome": "outputObject",
       "tipo_tecnico": "string",
-      "o_que_e": "Objeto de destino.",
+      "o_que_e": "Objeto de destino; o mesmo de matchRuleSObjectType. As duplicate rules dele são ignoradas.",
       "origem": {
         "estado": "verificado",
         "valor": "padrao_plataforma",
         "nota": "Propriedade definida pelo schema da Metadata API.",
         "evidencias": [
           {
-            "fonte": "src:mdapi-leadconvertsettings"
+            "fonte": "src:mdapi-duplicaterule"
           }
         ]
       },
@@ -127,7 +130,7 @@
         "estado": "verificado",
         "evidencias": [
           {
-            "fonte": "src:mdapi-leadconvertsettings"
+            "fonte": "src:mdapi-duplicaterule"
           }
         ]
       },
@@ -136,25 +139,14 @@
         "estado": "desconhecido"
       },
       "dominio": {
-        "natureza": "enum_fechado",
-        "valores": [
-          {
-            "valor": "Account"
-          },
-          {
-            "valor": "Contact"
-          },
-          {
-            "valor": "Opportunity"
-          }
-        ],
-        "lista_completa": "sim",
+        "natureza": "texto_livre",
         "estado": "verificado",
         "evidencias": [
           {
-            "fonte": "src:mdapi-leadconvertsettings"
+            "fonte": "src:mdapi-duplicaterule"
           }
-        ]
+        ],
+        "contexto": "A fonte tipa como string sem lista de valores; não inventar valores."
       },
       "disponibilidade": {
         "desde_versao": null,
@@ -165,7 +157,7 @@
       "estado": "verificado",
       "evidencias": [
         {
-          "fonte": "src:mdapi-leadconvertsettings"
+          "fonte": "src:mdapi-duplicaterule"
         }
       ]
     }
@@ -190,11 +182,7 @@
   "estado": "verificado",
   "evidencias": [
     {
-      "fonte": "src:mdapi-leadconvertsettings"
-    },
-    {
-      "fonte": "src:mdapi-fieldservicesettings",
-      "nota": "Mesma estrutura, usada em FieldServiceSettings por ObjectMappingItem.objectMapping."
+      "fonte": "src:mdapi-duplicaterule"
     }
   ]
 }

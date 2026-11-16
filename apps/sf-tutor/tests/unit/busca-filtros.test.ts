@@ -38,7 +38,8 @@ describe('busca', () => {
     expect(busca.buscar('flexipages').map((x) => x.item.id)).toContain('mdt:FlexiPage');
   });
   it('tipo que só consta do inventário aparece marcado, sem ficha', () => {
-    const r = busca.buscar('reports').find((x) => x.item.rotulo === 'Report');
+    // ModerationRule é um tipo do inventário, sem ficha no catálogo; se ganhar ficha, troque por outro tipo sem ficha.
+    const r = busca.buscar('moderation').find((x) => x.item.rotulo === 'ModerationRule');
     expect(r?.item.tipo).toBe('metadata_type_inventario');
     expect(r?.item.sem_ficha).toBe(true);
     expect(r?.item.descricao).toContain('ainda não tem ficha');

@@ -1,0 +1,785 @@
+{
+  "funcionalidades": [
+    {
+      "id": "func:duplicate-management",
+      "nome": "Duplicate Management"
+    }
+  ],
+  "metadata_type": {
+    "alertas": [
+      "Um arquivo reúne todas as matching rules do objeto; o nome do arquivo é o nome do objeto.",
+      "Ao implantar, ruleStatus só aceita Active e Inactive.",
+      "Person accounts são suportadas desde a API 39.0."
+    ],
+    "arquivos": {
+      "curinga_package_xml": {
+        "estado": "verificado",
+        "evidencias": [
+          {
+            "fonte": "src:mdapi-matchingrules"
+          }
+        ],
+        "valor": true
+      },
+      "metadata_api_format": {
+        "estado": "verificado",
+        "evidencias": [
+          {
+            "fonte": "src:sdr-registry",
+            "nota": "types.matchingrules"
+          },
+          {
+            "fonte": "src:mdapi-matchingrules"
+          }
+        ],
+        "nota": "Um arquivo por objeto, com todas as matching rules dele. No source format, o arquivo recebe o sufixo -meta.xml.",
+        "valor": {
+          "arquivo": "<Objeto>.matchingRule",
+          "pasta": "matchingRules/"
+        }
+      },
+      "source_format": {
+        "estado": "verificado",
+        "evidencias": [
+          {
+            "fonte": "src:sdr-registry",
+            "nota": "types.matchingrules"
+          },
+          {
+            "fonte": "src:mdapi-matchingrules"
+          }
+        ],
+        "nota": "Um arquivo por objeto, com todas as matching rules dele. No source format, o arquivo recebe o sufixo -meta.xml.",
+        "valor": {
+          "arquivo": "<Objeto>.matchingRule",
+          "pasta": "matchingRules/"
+        }
+      }
+    },
+    "cobertura": {
+      "estrutural": {
+        "esperado": 2,
+        "estado": "completa",
+        "nota": "Universo esperado = tabelas Fields da página do guia versionado 264.0 (API 68.0), lida em 2026-11-16.",
+        "presente": 2
+      },
+      "explicativa": {
+        "esperado": 2,
+        "estado": "completa",
+        "presente": 2
+      },
+      "mapeamento": {
+        "estado": "parcial",
+        "nota": "Correspondências registradas apenas onde há evidência; demais pendentes."
+      }
+    },
+    "disponibilidade": {
+      "ate_versao": null,
+      "desde_versao": "33.0",
+      "estado": "verificado"
+    },
+    "divergencias_documentais": [],
+    "estado": "verificado",
+    "estende": "Metadata",
+    "estruturas": [
+      "mdx:MatchingRule"
+    ],
+    "evidencias": [
+      {
+        "fonte": "src:mdapi-matchingrules"
+      },
+      {
+        "fonte": "src:sdr-registry"
+      },
+      {
+        "fonte": "src:sdr-metadata-support"
+      }
+    ],
+    "exemplo_xml": {
+      "natureza": "didatico_projeto",
+      "nota": "Exemplo escrito pelo projeto apenas com elementos documentados; sem dados reais.",
+      "xml": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<MatchingRules xmlns=\"http://soap.sforce.com/2006/04/metadata\">\n    <matchingRules>\n        <fullName>[Nome_Da_Matching_Rule]</fullName>\n        <label>[nome da matching rule]</label>\n        <matchingRuleItems>\n            <!-- Valores documentados: MatchBlanks, NullNotAllowed -->\n            <blankValueBehavior>NullNotAllowed</blankValueBehavior>\n            <fieldName>Name</fieldName>\n            <!-- Valores documentados incluem: Exact, CompanyName -->\n            <matchingMethod>Exact</matchingMethod>\n        </matchingRuleItems>\n        <!-- Na implantação, só Active e Inactive -->\n        <ruleStatus>Inactive</ruleStatus>\n    </matchingRules>\n</MatchingRules>"
+    },
+    "finalidade": "Versionar e implantar as matching rules de cada objeto.",
+    "id": "mdt:MatchingRules",
+    "nome": "MatchingRules",
+    "o_que_e": "O conjunto de matching rules de um objeto, padrão ou customizado: as regras que dizem como reconhecer registros duplicados.",
+    "propriedades": [
+      {
+        "cardinalidade": "0..n",
+        "default": {
+          "estado": "desconhecido",
+          "forma": "nao_declarado_na_fonte"
+        },
+        "disponibilidade": {
+          "ate_versao": null,
+          "desde_versao": null,
+          "estado": "desconhecido"
+        },
+        "dominio": {
+          "estado": "verificado",
+          "evidencias": [
+            {
+              "fonte": "src:mdapi-matchingrules"
+            }
+          ],
+          "natureza": "tipo_composto"
+        },
+        "estado": "verificado",
+        "estrutura_expandida": {
+          "id": "mdx:MatchingRule",
+          "nome": "MatchingRule",
+          "propriedades": [
+            {
+              "default": {
+                "estado": "desconhecido",
+                "forma": "nao_declarado_na_fonte"
+              },
+              "disponibilidade": {
+                "ate_versao": null,
+                "desde_versao": null,
+                "estado": "desconhecido"
+              },
+              "dominio": {
+                "contexto": "A fonte tipa como string sem lista de valores; não inventar valores.",
+                "estado": "verificado",
+                "evidencias": [
+                  {
+                    "fonte": "src:mdapi-matchingrules"
+                  }
+                ],
+                "natureza": "texto_livre"
+              },
+              "estado": "verificado",
+              "evidencias": [
+                {
+                  "fonte": "src:mdapi-matchingrules"
+                }
+              ],
+              "explicacao": "explicada",
+              "id": "mdx:MatchingRule.booleanFilter",
+              "nome": "booleanFilter",
+              "o_que_e": "Lógica que combina os critérios.",
+              "obrigatoriedade": {
+                "condicao": "A documentação 68.0 não marca o campo como obrigatório; ausência de marcação não comprova opcionalidade (confirmar no WSDL).",
+                "estado": "desconhecido",
+                "valor": "nao"
+              },
+              "origem": {
+                "estado": "verificado",
+                "evidencias": [
+                  {
+                    "fonte": "src:mdapi-matchingrules"
+                  }
+                ],
+                "nota": "Propriedade definida pelo schema da Metadata API.",
+                "valor": "padrao_plataforma"
+              },
+              "tipo_tecnico": "string"
+            },
+            {
+              "default": {
+                "estado": "desconhecido",
+                "forma": "nao_declarado_na_fonte"
+              },
+              "disponibilidade": {
+                "ate_versao": null,
+                "desde_versao": null,
+                "estado": "desconhecido"
+              },
+              "dominio": {
+                "contexto": "A fonte tipa como string sem lista de valores; não inventar valores.",
+                "estado": "verificado",
+                "evidencias": [
+                  {
+                    "fonte": "src:mdapi-matchingrules"
+                  }
+                ],
+                "natureza": "texto_livre"
+              },
+              "estado": "verificado",
+              "evidencias": [
+                {
+                  "fonte": "src:mdapi-matchingrules"
+                }
+              ],
+              "explicacao": "explicada",
+              "id": "mdx:MatchingRule.description",
+              "nome": "description",
+              "o_que_e": "Para que serve a regra.",
+              "obrigatoriedade": {
+                "condicao": "A documentação 68.0 não marca o campo como obrigatório; ausência de marcação não comprova opcionalidade (confirmar no WSDL).",
+                "estado": "desconhecido",
+                "valor": "nao"
+              },
+              "origem": {
+                "estado": "verificado",
+                "evidencias": [
+                  {
+                    "fonte": "src:mdapi-matchingrules"
+                  }
+                ],
+                "nota": "Propriedade definida pelo schema da Metadata API.",
+                "valor": "padrao_plataforma"
+              },
+              "tipo_tecnico": "string"
+            },
+            {
+              "default": {
+                "estado": "desconhecido",
+                "forma": "nao_declarado_na_fonte"
+              },
+              "disponibilidade": {
+                "ate_versao": null,
+                "desde_versao": null,
+                "estado": "desconhecido"
+              },
+              "dominio": {
+                "contexto": "A fonte tipa como string sem lista de valores; não inventar valores.",
+                "estado": "verificado",
+                "evidencias": [
+                  {
+                    "fonte": "src:mdapi-matchingrules"
+                  }
+                ],
+                "natureza": "texto_livre"
+              },
+              "estado": "verificado",
+              "evidencias": [
+                {
+                  "fonte": "src:mdapi-matchingrules"
+                }
+              ],
+              "explicacao": "explicada",
+              "id": "mdx:MatchingRule.fullName",
+              "nome": "fullName",
+              "o_que_e": "Nome de API da matching rule; aparece no exemplo XML da página.",
+              "obrigatoriedade": {
+                "condicao": "A documentação 68.0 não marca o campo como obrigatório; ausência de marcação não comprova opcionalidade (confirmar no WSDL).",
+                "estado": "desconhecido",
+                "valor": "nao"
+              },
+              "origem": {
+                "estado": "verificado",
+                "evidencias": [
+                  {
+                    "fonte": "src:mdapi-matchingrules"
+                  }
+                ],
+                "nota": "Propriedade definida pelo schema da Metadata API.",
+                "valor": "padrao_plataforma"
+              },
+              "tipo_tecnico": "string"
+            },
+            {
+              "default": {
+                "estado": "desconhecido",
+                "forma": "nao_declarado_na_fonte"
+              },
+              "disponibilidade": {
+                "ate_versao": null,
+                "desde_versao": null,
+                "estado": "desconhecido"
+              },
+              "dominio": {
+                "contexto": "A fonte tipa como string sem lista de valores; não inventar valores.",
+                "estado": "verificado",
+                "evidencias": [
+                  {
+                    "fonte": "src:mdapi-matchingrules"
+                  }
+                ],
+                "natureza": "texto_livre"
+              },
+              "estado": "verificado",
+              "evidencias": [
+                {
+                  "fonte": "src:mdapi-matchingrules"
+                }
+              ],
+              "explicacao": "explicada",
+              "id": "mdx:MatchingRule.label",
+              "nome": "label",
+              "o_que_e": "Nome da matching rule.",
+              "obrigatoriedade": {
+                "estado": "verificado",
+                "evidencias": [
+                  {
+                    "fonte": "src:mdapi-matchingrules"
+                  }
+                ],
+                "valor": "sim"
+              },
+              "origem": {
+                "estado": "verificado",
+                "evidencias": [
+                  {
+                    "fonte": "src:mdapi-matchingrules"
+                  }
+                ],
+                "nota": "Propriedade definida pelo schema da Metadata API.",
+                "valor": "padrao_plataforma"
+              },
+              "tipo_tecnico": "string"
+            },
+            {
+              "cardinalidade": "0..n",
+              "default": {
+                "estado": "desconhecido",
+                "forma": "nao_declarado_na_fonte"
+              },
+              "disponibilidade": {
+                "ate_versao": null,
+                "desde_versao": null,
+                "estado": "desconhecido"
+              },
+              "dominio": {
+                "estado": "verificado",
+                "evidencias": [
+                  {
+                    "fonte": "src:mdapi-matchingrules"
+                  }
+                ],
+                "natureza": "tipo_composto"
+              },
+              "estado": "verificado",
+              "estrutura_expandida": {
+                "id": "mdx:MatchingRuleItem",
+                "nome": "MatchingRuleItem",
+                "propriedades": [
+                  {
+                    "default": {
+                      "estado": "verificado",
+                      "evidencias": [
+                        {
+                          "fonte": "src:mdapi-matchingrules"
+                        }
+                      ],
+                      "forma": "valor",
+                      "nota": "A página indica NullNotAllowed como padrão.",
+                      "valor": "NullNotAllowed"
+                    },
+                    "disponibilidade": {
+                      "ate_versao": null,
+                      "desde_versao": null,
+                      "estado": "desconhecido"
+                    },
+                    "dominio": {
+                      "estado": "verificado",
+                      "evidencias": [
+                        {
+                          "fonte": "src:mdapi-matchingrules"
+                        }
+                      ],
+                      "lista_completa": "sim",
+                      "natureza": "enum_fechado",
+                      "valores": [
+                        {
+                          "valor": "MatchBlanks"
+                        },
+                        {
+                          "valor": "NullNotAllowed"
+                        }
+                      ]
+                    },
+                    "estado": "verificado",
+                    "evidencias": [
+                      {
+                        "fonte": "src:mdapi-matchingrules"
+                      }
+                    ],
+                    "explicacao": "explicada",
+                    "id": "mdx:MatchingRuleItem.blankValueBehavior",
+                    "nome": "blankValueBehavior",
+                    "o_que_e": "Define se campos em branco podem ser considerados iguais.",
+                    "obrigatoriedade": {
+                      "condicao": "A documentação 68.0 não marca o campo como obrigatório; ausência de marcação não comprova opcionalidade (confirmar no WSDL).",
+                      "estado": "desconhecido",
+                      "valor": "nao"
+                    },
+                    "origem": {
+                      "estado": "verificado",
+                      "evidencias": [
+                        {
+                          "fonte": "src:mdapi-matchingrules"
+                        }
+                      ],
+                      "nota": "Propriedade definida pelo schema da Metadata API.",
+                      "valor": "padrao_plataforma"
+                    },
+                    "tipo_tecnico": "BlankValueBehavior"
+                  },
+                  {
+                    "default": {
+                      "estado": "desconhecido",
+                      "forma": "nao_declarado_na_fonte"
+                    },
+                    "disponibilidade": {
+                      "ate_versao": null,
+                      "desde_versao": null,
+                      "estado": "desconhecido"
+                    },
+                    "dominio": {
+                      "contexto": "A fonte tipa como string sem lista de valores; não inventar valores.",
+                      "estado": "verificado",
+                      "evidencias": [
+                        {
+                          "fonte": "src:mdapi-matchingrules"
+                        }
+                      ],
+                      "natureza": "texto_livre"
+                    },
+                    "estado": "verificado",
+                    "evidencias": [
+                      {
+                        "fonte": "src:mdapi-matchingrules"
+                      }
+                    ],
+                    "explicacao": "explicada",
+                    "id": "mdx:MatchingRuleItem.fieldName",
+                    "nome": "fieldName",
+                    "o_que_e": "Campo comparado para decidir se os registros correspondem.",
+                    "obrigatoriedade": {
+                      "estado": "verificado",
+                      "evidencias": [
+                        {
+                          "fonte": "src:mdapi-matchingrules"
+                        }
+                      ],
+                      "valor": "sim"
+                    },
+                    "origem": {
+                      "estado": "verificado",
+                      "evidencias": [
+                        {
+                          "fonte": "src:mdapi-matchingrules"
+                        }
+                      ],
+                      "nota": "Propriedade definida pelo schema da Metadata API.",
+                      "valor": "padrao_plataforma"
+                    },
+                    "tipo_tecnico": "string"
+                  },
+                  {
+                    "default": {
+                      "estado": "desconhecido",
+                      "forma": "nao_declarado_na_fonte"
+                    },
+                    "disponibilidade": {
+                      "ate_versao": null,
+                      "desde_versao": null,
+                      "estado": "desconhecido"
+                    },
+                    "dominio": {
+                      "estado": "verificado",
+                      "evidencias": [
+                        {
+                          "fonte": "src:mdapi-matchingrules"
+                        }
+                      ],
+                      "lista_completa": "sim",
+                      "natureza": "enum_fechado",
+                      "valores": [
+                        {
+                          "significado": "Comparação exata.",
+                          "valor": "Exact"
+                        },
+                        {
+                          "significado": "Comparação aproximada (fuzzy).",
+                          "valor": "FirstName"
+                        },
+                        {
+                          "significado": "Comparação aproximada (fuzzy).",
+                          "valor": "LastName"
+                        },
+                        {
+                          "significado": "Comparação aproximada (fuzzy).",
+                          "valor": "CompanyName"
+                        },
+                        {
+                          "significado": "Comparação aproximada (fuzzy).",
+                          "valor": "Phone"
+                        },
+                        {
+                          "significado": "Comparação aproximada (fuzzy).",
+                          "valor": "City"
+                        },
+                        {
+                          "significado": "Comparação aproximada (fuzzy).",
+                          "valor": "Street"
+                        },
+                        {
+                          "significado": "Comparação aproximada (fuzzy).",
+                          "valor": "Zip"
+                        },
+                        {
+                          "significado": "Comparação aproximada (fuzzy).",
+                          "valor": "Title"
+                        }
+                      ]
+                    },
+                    "estado": "verificado",
+                    "evidencias": [
+                      {
+                        "fonte": "src:mdapi-matchingrules"
+                      }
+                    ],
+                    "explicacao": "explicada",
+                    "id": "mdx:MatchingRuleItem.matchingMethod",
+                    "nome": "matchingMethod",
+                    "o_que_e": "Como o campo é comparado.",
+                    "obrigatoriedade": {
+                      "estado": "verificado",
+                      "evidencias": [
+                        {
+                          "fonte": "src:mdapi-matchingrules"
+                        }
+                      ],
+                      "valor": "sim"
+                    },
+                    "origem": {
+                      "estado": "verificado",
+                      "evidencias": [
+                        {
+                          "fonte": "src:mdapi-matchingrules"
+                        }
+                      ],
+                      "nota": "Propriedade definida pelo schema da Metadata API.",
+                      "valor": "padrao_plataforma"
+                    },
+                    "tipo_tecnico": "MatchingMethod"
+                  }
+                ]
+              },
+              "estrutura_ref": "mdx:MatchingRuleItem",
+              "evidencias": [
+                {
+                  "fonte": "src:mdapi-matchingrules"
+                }
+              ],
+              "explicacao": "explicada",
+              "id": "mdx:MatchingRule.matchingRuleItems",
+              "nome": "matchingRuleItems",
+              "notas": [
+                "A tabela tipa o campo como MatchingRuleItem; o elemento se repete, um por critério."
+              ],
+              "o_que_e": "Os critérios da regra.",
+              "obrigatoriedade": {
+                "condicao": "A documentação 68.0 não marca o campo como obrigatório; ausência de marcação não comprova opcionalidade (confirmar no WSDL).",
+                "estado": "desconhecido",
+                "valor": "nao"
+              },
+              "origem": {
+                "estado": "verificado",
+                "evidencias": [
+                  {
+                    "fonte": "src:mdapi-matchingrules"
+                  }
+                ],
+                "nota": "Propriedade definida pelo schema da Metadata API.",
+                "valor": "padrao_plataforma"
+              },
+              "tipo_tecnico": "MatchingRuleItem[]"
+            },
+            {
+              "default": {
+                "estado": "desconhecido",
+                "forma": "nao_declarado_na_fonte"
+              },
+              "disponibilidade": {
+                "ate_versao": null,
+                "desde_versao": null,
+                "estado": "desconhecido"
+              },
+              "dominio": {
+                "estado": "verificado",
+                "evidencias": [
+                  {
+                    "fonte": "src:mdapi-matchingrules"
+                  }
+                ],
+                "lista_completa": "sim",
+                "natureza": "enum_fechado",
+                "valores": [
+                  {
+                    "valor": "Inactive"
+                  },
+                  {
+                    "valor": "Deactivating"
+                  },
+                  {
+                    "valor": "DeactivationFailed"
+                  },
+                  {
+                    "valor": "Active"
+                  },
+                  {
+                    "valor": "Activating"
+                  },
+                  {
+                    "valor": "ActivationFailed"
+                  }
+                ]
+              },
+              "estado": "verificado",
+              "evidencias": [
+                {
+                  "fonte": "src:mdapi-matchingrules"
+                }
+              ],
+              "explicacao": "explicada",
+              "id": "mdx:MatchingRule.ruleStatus",
+              "nome": "ruleStatus",
+              "notas": [
+                "Num pacote implantado, só Active e Inactive podem ser declarados."
+              ],
+              "o_que_e": "Estado de ativação da regra.",
+              "obrigatoriedade": {
+                "estado": "verificado",
+                "evidencias": [
+                  {
+                    "fonte": "src:mdapi-matchingrules"
+                  }
+                ],
+                "valor": "sim"
+              },
+              "origem": {
+                "estado": "verificado",
+                "evidencias": [
+                  {
+                    "fonte": "src:mdapi-matchingrules"
+                  }
+                ],
+                "nota": "Propriedade definida pelo schema da Metadata API.",
+                "valor": "padrao_plataforma"
+              },
+              "tipo_tecnico": "MatchingRuleStatus"
+            }
+          ]
+        },
+        "estrutura_ref": "mdx:MatchingRule",
+        "evidencias": [
+          {
+            "fonte": "src:mdapi-matchingrules"
+          }
+        ],
+        "explicacao": "explicada",
+        "id": "mdt:MatchingRules.matchingRules",
+        "nome": "matchingRules",
+        "notas": [
+          "O elemento vem do exemplo XML da página; as tabelas documentam os campos de MatchingRule."
+        ],
+        "o_que_e": "Cada matching rule do objeto.",
+        "obrigatoriedade": {
+          "condicao": "A documentação 68.0 não marca o campo como obrigatório; ausência de marcação não comprova opcionalidade (confirmar no WSDL).",
+          "estado": "desconhecido",
+          "valor": "nao"
+        },
+        "origem": {
+          "estado": "verificado",
+          "evidencias": [
+            {
+              "fonte": "src:mdapi-matchingrules"
+            }
+          ],
+          "nota": "Propriedade definida pelo schema da Metadata API.",
+          "valor": "padrao_plataforma"
+        },
+        "tipo_tecnico": "MatchingRule[]"
+      },
+      {
+        "default": {
+          "estado": "desconhecido",
+          "forma": "nao_declarado_na_fonte"
+        },
+        "disponibilidade": {
+          "ate_versao": null,
+          "desde_versao": null,
+          "estado": "desconhecido"
+        },
+        "dominio": {
+          "contexto": "A fonte tipa como string sem lista de valores; não inventar valores.",
+          "estado": "verificado",
+          "evidencias": [
+            {
+              "fonte": "src:mdapi-matchingrules"
+            }
+          ],
+          "natureza": "texto_livre"
+        },
+        "estado": "verificado",
+        "evidencias": [
+          {
+            "fonte": "src:mdapi-matchingrules"
+          }
+        ],
+        "explicacao": "explicada",
+        "herdada_de": "Metadata",
+        "id": "mdt:MatchingRules.fullName",
+        "nome": "fullName",
+        "o_que_e": "Nome do objeto a que as regras pertencem; herdado do tipo Metadata.",
+        "obrigatoriedade": {
+          "estado": "desconhecido",
+          "valor": "desconhecida"
+        },
+        "origem": {
+          "estado": "verificado",
+          "evidencias": [
+            {
+              "fonte": "src:mdapi-matchingrules"
+            }
+          ],
+          "nota": "Propriedade definida pelo schema da Metadata API.",
+          "valor": "padrao_plataforma"
+        },
+        "tipo_tecnico": "string"
+      }
+    ],
+    "recomendacoes": [],
+    "setup": {
+      "estado": "desconhecido",
+      "nota": "Caminho no Setup não validado nesta sessão."
+    },
+    "suporte_cli": {
+      "estado": "verificado",
+      "evidencias": [
+        {
+          "fonte": "src:sdr-metadata-support"
+        }
+      ],
+      "nota": "Suporte do Salesforce CLI (source-deploy-retrieve), não do Metadata API em geral.",
+      "valor": {
+        "nota_fonte": null,
+        "status": "suportado"
+      }
+    }
+  },
+  "nota": "Gerado deterministicamente a partir de catalogo/. Não editar à mão.",
+  "objetos_relacionados": [],
+  "relacionamentos": [
+    {
+      "destino": {
+        "entidade": "mdt:MatchingRules"
+      },
+      "estado": "verificado",
+      "evidencias": [
+        {
+          "fonte": "src:mdapi-duplicaterule"
+        }
+      ],
+      "explicacao": "Uma duplicate rule cita, pelo developer name, as matching rules que usa. A referência é pelo nome do componente, no XML (não é um lookup entre registros).",
+      "id": "rel:duplicaterule-matchingrule",
+      "origem": {
+        "campo": "matchingRule",
+        "entidade": "mdx:DuplicateRuleMatchRule"
+      },
+      "tipo": "referencia_campo"
+    }
+  ],
+  "versao_base": {
+    "api_version": "68.0",
+    "data_referencia": "2026-11-07",
+    "escopo": "config/escopo.json",
+    "release": "Winter '27"
+  }
+}
