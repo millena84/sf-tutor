@@ -365,6 +365,50 @@ TEMAS = {
             "Salesforce Workflow Rules & Process Builder End of Support"),
          ev("src:help-migrate-to-flow-considerations", "Cobre parte do tema: ferramenta Migrate to Flow.", "Migrate to Flow Tool Considerations")],
     ),
+    # ------------------------------------------------------------------ Desenvolvimento, testes e entrega
+    "sub:codigo-e-bundles": (
+        "Os componentes de código da org: classes Apex, Lightning web components, Aura components, páginas e componentes Visualforce "
+        "e static resources.",
+        [ev("src:mdapi-apexclass", "Cobre parte do tema: classes Apex como metadado.", "ApexClass"),
+         ev("src:lwc-config-file", "Cobre parte do tema: arquivo de configuração de Lightning web components.", "Component Configuration File"),
+         ev("src:mdapi-auradefinitionbundle", "Cobre parte do tema: bundles Aura.", "AuraDefinitionBundle")],
+    ),
+    "sub:testes": (
+        "Testes automatizados: testes unitários Apex, com a cobertura mínima exigida para implantar, e testes Jest de Lightning web components.",
+        [ev("src:apex-code-coverage", "Cobre parte do tema: cobertura de testes Apex.", "Testing and Code Coverage"),
+         ev("src:apex-writing-tests", "Cobre parte do tema: como escrever testes Apex.", "Writing Tests"),
+         ev("src:lwc-testing", "Cobre parte do tema: testes Jest de Lightning web components.", "Test Lightning Web Components"),
+         ev("src:migration-running-tests", "Cobre parte do tema: testes executados num deploy.", "Running Tests in a Deployment")],
+    ),
+    "sub:pacotes-e-dependencias": (
+        "Pacotes, que agrupam metadados em unidades instaláveis e versionadas: pacotes desbloqueados, pacotes gerenciados e as "
+        "dependências entre pacotes.",
+        [ev("src:sfdx-unlocked-intro", "Cobre parte do tema: pacotes desbloqueados.", "Unlocked Packages"),
+         ev("src:pkg2-intro", "Cobre parte do tema: pacotes gerenciados de segunda geração.", "Second-Generation Managed Packages"),
+         ev("src:sfdx-package-dev-model", "Cobre parte do tema: modelo de desenvolvimento baseado em pacotes e dependências.",
+            "Package-Based Development Model")],
+    ),
+    "sub:source-format-e-metadata-api-format": (
+        "Os dois formatos de arquivo dos metadados (source format, do projeto Salesforce DX, e Metadata API format), a conversão entre "
+        "eles e o manifesto package.xml.",
+        [ev("src:sfdx-project-setup", "Cobre parte do tema: projeto Salesforce DX.", "Project Setup"),
+         ev("src:sfdx-decomposed", "Cobre parte do tema: decomposição de metadata types no source format.", "Decomposed Metadata Types"),
+         ev("src:mdapi-zip-file", "Cobre parte do tema: arquivo .zip e manifesto package.xml da Metadata API.",
+            "Deploying and Retrieving Metadata with the Zip File")],
+    ),
+    "sub:ambientes-e-sandboxes": (
+        "Os ambientes separados da produção: sandboxes, em quatro tipos, e scratch orgs, criadas a partir de um Dev Hub.",
+        [ev("src:help-sandbox-types", "Cobre parte do tema: tipos de sandbox.", "Sandbox Types and Templates"),
+         ev("src:sfdx-scratch-orgs", "Cobre parte do tema: scratch orgs.", "Scratch Orgs"),
+         ev("src:sfdx-devhub-enable", "Cobre parte do tema: Dev Hub.", "Select and Enable a Dev Hub Org")],
+    ),
+    "sub:versionamento-deploy-e-recuperacao": (
+        "Como as mudanças são versionadas e levadas de uma org a outra: deploy e retrieve pela Metadata API, change sets e DevOps Center.",
+        [ev("src:mdapi-intro", "Cobre parte do tema: deploy e retrieve pela Metadata API.", "Understanding Metadata API"),
+         ev("src:help-change-sets", "Cobre parte do tema: change sets.", "Change Sets"),
+         ev("src:help-lifecycle-center", "Cobre parte do tema: Lifecycle Center e DevOps Center.",
+            "Govern, Manage, and Release Changes with Lifecycle Center")],
+    ),
 }
 
 

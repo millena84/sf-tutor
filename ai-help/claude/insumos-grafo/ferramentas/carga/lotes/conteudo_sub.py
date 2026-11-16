@@ -562,54 +562,175 @@ S["sub:knowledge-e-categorias"] = {
 
 # ------------------------------------------------------------------ Desenvolvimento
 S["sub:codigo-e-bundles"] = {
-    "para_iniciantes": ini("Cobre classes, componentes e outros artefatos de código vistos como itens a construir e entregar.",
-                           "Um editor de código consulta, pela Tooling API, só a classe Apex que o desenvolvedor abriu, em vez de recuperar todos os metadados.",
-                           E("src:tooling-intro"), comece=["func:tooling-api"]),
-    "encadeamento": enc("O formato dos arquivos fica em 'Source format e Metadata API format'; a entrega, em 'Versionamento, deploy e recuperação'.",
-                        E("src:sdr-registry", "src:mdapi-intro")),
-    "avancado": [av("decisao", "Tooling API ou Metadata API", "A Tooling API serve a ferramentas que leem e alteram pedaços pequenos de metadados; a Metadata "
-                    "API move o modelo completo.", E("src:tooling-intro", "src:mdapi-intro"))],
+    "para_iniciantes": ini("Reúne os componentes de código da org: classes Apex, Lightning web components, Aura components, páginas e "
+                           "componentes Visualforce e static resources. Cada um é um componente de metadado com arquivos próprios.",
+                           "Um Lightning web component é uma pasta com o HTML, o JavaScript e o arquivo .js-meta.xml, que diz em que páginas ele pode ser usado.",
+                           E("src:mdapi-apexclass", "src:mdapi-lightningcomponentbundle", "src:lwc-config-file", "src:lwc-migrate-bundles"),
+                           comece=["func:classes-apex", "func:lightning-web-components"]),
+    "encadeamento": enc("Triggers Apex também são código, mas ficam em 'Automação Apex'. O formato dos arquivos fica em 'Source format e "
+                        "Metadata API format'; os testes, em 'Testes'; a entrega, em 'Versionamento, deploy e recuperação'.",
+                        E("src:mdapi-apextrigger", "src:sdr-registry", "src:mdapi-intro")),
+    "avancado": [
+        av("implantacao", "Código tem dois arquivos", "Classes Apex, triggers, páginas e componentes Visualforce e static resources estendem "
+           "MetadataWithContent: cada componente tem o arquivo de conteúdo e, ao lado, um arquivo de metadado. ApexClass é suportado por "
+           "todas as chamadas da Metadata API, exceto as CRUD-based.", E("src:mdapi-apexclass", "src:mdapi-apexpage", "src:mdapi-staticresource")),
+        av("implantacao", "Bundles são pastas", "LightningComponentBundle e AuraDefinitionBundle são pastas com vários arquivos. No LWC, o "
+           "arquivo .js-meta.xml é obrigatório. Num bundle Aura, controller, helper e renderer são arquivos .js separados; no LWC, viram um só.",
+           E("src:mdapi-lightningcomponentbundle", "src:mdapi-auradefinitionbundle", "src:lwc-config-file", "src:lwc-migrate-bundles")),
+        av("decisao", "Tooling API ou Metadata API", "A Tooling API serve a ferramentas que leem e alteram pedaços pequenos de metadados; a Metadata "
+           "API move o modelo completo.", E("src:tooling-intro", "src:mdapi-intro")),
+        av("atencao", "Classe com jobs ativos", "Por padrão, o deploy não atualiza uma classe que tem jobs Apex ativos. As saídas são cancelar os "
+           "jobs ou liberar a opção em Deployment Settings. O metadata type DeploymentSettings guarda a opção que pula a validação de Apex "
+           "assíncrono.", E("src:mdapi-apexclass", "src:mdapi-deploymentsettings")),
+        av("limite", "Tamanhos", "Um static resource tem até 5 MB, e a org, até 250 MB de static resources. O arquivo JavaScript de um "
+           "Lightning web component tem até 1 MB.", E("src:lwc-third-party")),
+        av("seguranca", "Opções de segurança de Apex", "ApexSettings guarda opções que afetam a segurança: por exemplo, impedir usuários guest "
+           "de rodar Apex anônimo (ligado por padrão) e permitir que classes Apex acessem metadados pelo namespace Metadata (desligado por padrão).",
+           E("src:mdapi-apexsettings")),
+        av("implantacao", "Dependência de pacote registrada no código", "Classes, triggers, páginas e componentes Visualforce e bundles Aura "
+           "registram, em packageVersions, as versões de pacotes gerenciados instalados que referenciam.",
+           E("src:mdapi-apexclass", "src:mdapi-auradefinitionbundle")),
+    ],
 }
 S["sub:testes"] = {
-    "para_iniciantes": ini("Cobre os testes automatizados: como conferir que a mudança funciona antes de chegar à produção.",
-                           "Os testes rodam automaticamente a cada mudança, num pipeline de integração contínua.", E("src:sfdx-dev-guide", AF)),
-    "encadeamento": enc("Fazem parte da entrega; os ambientes isolados ficam em 'Ambientes e sandboxes'.", E("src:sfdx-dev-guide")),
-    "avancado": [av("testes", "Unitário ou de interface", "Só LWC permite testes unitários escritos, por exemplo com Jest; Dynamic Forms e Screen Flow "
-                    "dependem de automação de interface de ponta a ponta, que não verifica saídas de métodos.", E(AF))],
+    "para_iniciantes": ini("Cobre os testes automatizados. Testes Apex são métodos de classes anotadas com @IsTest; a plataforma mede a "
+                           "cobertura e exige um mínimo para implantar. Testes Jest conferem Lightning web components fora da org.",
+                           "Um deploy para produção roda os testes locais; se um falha, nada é implantado.",
+                           E("src:apex-writing-tests", "src:apex-code-coverage", "src:lwc-testing", "src:migration-running-tests"),
+                           comece=["func:testes-apex", "func:testes-jest-de-lwc"]),
+    "encadeamento": enc("Os testes rodam nos ambientes de 'Ambientes e sandboxes' e fazem parte do deploy, em 'Versionamento, deploy e recuperação'.",
+                        E("src:migration-running-tests", "src:sfdx-dev-guide")),
+    "avancado": [
+        av("limite", "75% de cobertura", "Para implantar ou empacotar Apex, os testes precisam cobrir ao menos 75% do código Apex da org e "
+           "passar. Chamadas a System.debug e as próprias classes e métodos de teste não contam. Cobertura indica, mas não garante, que o "
+           "teste é eficaz.", E("src:apex-code-coverage", "src:apex-testing-best-practices", "src:sfdx-run-apex-tests")),
+        av("testes", "Que testes rodam num deploy", "Sem nível de teste informado, um deploy para produção com classes ou triggers Apex roda "
+           "todos os testes locais; sem componentes Apex, nenhum. Fora de produção, por padrão nenhum teste roda. Os níveis são NoTestRun, "
+           "RunSpecifiedTests, RunLocalTests e RunAllTestsInOrg; NoTestRun só vale em ambientes de desenvolvimento.",
+           E("src:migration-running-tests", "src:migration-run-local-tests", "src:cli-deploy-validate")),
+        av("testes", "Unitário ou de interface", "Só LWC permite testes unitários escritos, com Jest; Dynamic Forms e Screen Flow dependem de "
+           "automação de interface de ponta a ponta. Testes que dependem do HTML e do DOM do Lightning Experience pedem manutenção contínua, "
+           "porque essa estrutura pode mudar.", E(AF, "src:lwc-testing", "src:lwc-e2e")),
+        av("implantacao", "Como metadado", "ApexTestSuite agrupa classes de teste para rodar juntas. ApexSettings guarda opções de execução, "
+           "como rodar os testes em série (enableDisableParallelApexTesting, em que true quer dizer em série). Os testes Jest ficam na pasta "
+           "__tests__ do componente, no controle de versão, e não vão para a org.",
+           E("src:mdapi-apextestsuite", "src:mdapi-apexsettings", "src:lwc-component-tests", "src:lwc-jest-create")),
+        av("escala", "Execuções grandes", "Em orgs com muitas classes, a opção Store Only Aggregate Code Coverage (Setup, Apex Test Execution, "
+           "Options) desliga a cobertura por classe e acelera a coleta. Os testes de um deploy sempre rodam em série.",
+           E("src:sfdx-run-apex-tests", "src:mdapi-apexsettings")),
+    ],
 }
 S["sub:pacotes-e-dependencias"] = {
-    "para_iniciantes": ini("Pacotes agrupam componentes para distribuir e implantar juntos, registrando as dependências entre eles.",
-                           "Uma equipe publica seus componentes como pacote desbloqueado e o instala em outra org.", E("src:sfdx-dev-guide", AF)),
-    "encadeamento": enc("É uma das formas de entrega; as outras ficam em 'Versionamento, deploy e recuperação'.", E(AF)),
-    "avancado": [av("implantacao", "O que pode ir em pacote", "Dynamic Forms, Screen Flows e LWC podem ir por pacotes gerenciados (1GP e 2GP), pacotes "
-                    "desbloqueados, change sets e DevOps Center; Omnistudio não aceita empacotamento.", E(AF))],
+    "para_iniciantes": ini("Um pacote é um contêiner de metadados relacionados, instalado e atualizado como uma unidade. Cada mudança no "
+                           "conteúdo gera uma nova versão. Um pacote pode declarar dependência de outros pacotes.",
+                           "Uma equipe publica as customizações de atendimento como pacote desbloqueado; cada entrega é uma versão nova, instalada na sandbox e depois em produção.",
+                           E("src:sfdx-unlocked-whats", "src:pkg2-key-concepts", "src:sfdx-package-dev-model", "src:sfdx-unlocked-intro"),
+                           comece=["func:pacotes-desbloqueados", "func:pacotes-gerenciados"]),
+    "encadeamento": enc("É uma das formas de entrega; as outras ficam em 'Versionamento, deploy e recuperação'. O empacotamento de segunda "
+                        "geração é ligado no Dev Hub, descrito em 'Ambientes e sandboxes'.", E("src:sfdx-devhub-enable", AF)),
+    "avancado": [
+        av("decisao", "Desbloqueado ou gerenciado", "Para quem não distribui a vários clientes, a documentação indica pacotes desbloqueados. "
+           "Pacotes gerenciados de segunda geração atendem parceiros que distribuem apps: usam o controle de versão como fonte da verdade e "
+           "dispensam packaging org e patch org.", E("src:pkg2-intro", "src:sfdx-unlocked-intro")),
+        av("implantacao", "O que pode ir em pacote", "Dynamic Forms, Screen Flows e LWC podem ir por pacotes gerenciados (1GP e 2GP), pacotes "
+           "desbloqueados, change sets e DevOps Center; Omnistudio não aceita empacotamento.", E(AF)),
+        av("implantacao", "Como metadado", "InstalledPackage instala ou atualiza, por deploy, pacotes gerenciados de primeira geração: precisa "
+           "ser o único tipo do manifesto, e um deploy instala até 20 pacotes. Pacotes desbloqueados e gerenciados de segunda geração são "
+           "instalados pelo Salesforce CLI. DevHubSettings liga o empacotamento de segunda geração.",
+           E("src:mdapi-installedpackage", "src:mdapi-devhubsettings")),
+        av("atencao", "Ligar não tem volta", "Depois de ligados, o Dev Hub e o empacotamento de segunda geração não podem ser desligados.",
+           E("src:pkg2-enable-devhub")),
+        av("atencao", "Mudança direta em produção", "No pacote desbloqueado, o metadado instalado pode ser alterado direto em produção. Um "
+           "upgrade do pacote pode sobrescrever essas mudanças; a documentação pede que quem altera avise a equipe de desenvolvimento.",
+           E("src:sfdx-unlocked-whats")),
+    ],
 }
 S["sub:source-format-e-metadata-api-format"] = {
     "para_iniciantes": ini("Os metadados podem ser guardados em dois formatos de arquivo: o source format, usado em projetos do Salesforce CLI, e "
-                           "o Metadata API format, usado pela Metadata API.",
+                           "o Metadata API format, usado pela Metadata API, que recebe e devolve um .zip com um manifesto package.xml.",
                            "Uma Lightning page fica em flexipages/<Nome>.flexipage no Metadata API format e ganha o sufixo -meta.xml no source format.",
-                           E("src:sdr-registry", "src:sfdx-dev-guide")),
-    "encadeamento": enc("Cada ficha de metadata type mostra a pasta e o sufixo nos dois formatos.", E("src:sdr-registry")),
+                           E("src:sdr-registry", "src:sfdx-dev-guide", "src:sfdx-project-setup", "src:mdapi-zip-file"),
+                           comece=["func:projeto-salesforce-dx"]),
+    "encadeamento": enc("Cada ficha de metadata type mostra a pasta e o sufixo nos dois formatos. O deploy que usa esses arquivos fica em "
+                        "'Versionamento, deploy e recuperação'.", E("src:sdr-registry")),
+    "avancado": [
+        av("implantacao", "Decomposição", "Decompor é dividir um XML grande em arquivos menores, por subtipo. Por padrão, o projeto sempre "
+           "decompõe custom objects e custom object translations; outros tipos, como permission sets e custom labels, são opcionais e "
+           "configurados em sfdx-project.json.", E("src:sfdx-decomposed")),
+        av("implantacao", "Conversão entre formatos", "O Salesforce CLI converte nos dois sentidos: project convert mdapi leva de Metadata API "
+           "format para source format, e project convert source faz o caminho inverso, para implantar pela Metadata API. O arquivo "
+           ".forceignore lista o que fica fora.", E("src:sfdx-convert-mdapi", "src:cli-convert-source")),
+        av("decisao", "Por que source format", "O source format é otimizado para trabalhar com controle de versão. As extensões do VS Code "
+           "supõem esse formato, e o deploy pelo CLI o usa por padrão.", E("src:vscode-source-format", "src:cli-project-deploy-start")),
+        av("atencao", "A versão da API do projeto", "O sourceApiVersion, em sfdx-project.json, define que campos de cada metadata type são "
+           "recuperados e implantados. Confira esse valor antes de trabalhar com tipos que mudaram de uma versão para outra.",
+           E("src:sfdx-project-config")),
+        av("implantacao", "O que entra no deploy", "O manifesto package.xml lista o que recuperar ou implantar. Pelo CLI, também se indica por "
+           "nomes de componentes ou por caminhos de arquivos.", E("src:mdapi-zip-file", "src:sfdx-develop-any-org")),
+    ],
 }
 S["sub:ambientes-e-sandboxes"] = {
-    "para_iniciantes": ini("São ambientes separados da produção para desenvolver, testar e treinar: sandboxes e scratch orgs.",
+    "para_iniciantes": ini("São os ambientes separados da produção para desenvolver, testar e treinar. Sandboxes são cópias da org de "
+                           "produção, em quatro tipos. Scratch orgs são orgs temporárias, criadas vazias e configuradas por um arquivo de definição.",
                            "Uma mudança é feita numa scratch org, testada numa sandbox e só depois vai para produção.",
-                           E("src:help-produtos-platform", "src:sfdx-dev-guide")),
-    "encadeamento": enc("É onde as mudanças nascem, antes da entrega.", E("src:sfdx-dev-guide")),
-    "avancado": [av("implantacao", "Source tracking em sandbox", "Com o source tracking habilitado em sandboxes Developer e Developer Pro, as ferramentas do "
-                    "Salesforce DX rastreiam automaticamente componentes novos, alterados e excluídos.", E("src:sfdx-dev-guide"))],
+                           E("src:help-sandbox-licenses", "src:help-sandbox-types", "src:sfdx-scratch-orgs", "src:sfdx-dev-guide"),
+                           comece=["func:sandboxes", "func:scratch-orgs-e-dev-hub"]),
+    "encadeamento": enc("É onde as mudanças nascem e são testadas, antes da entrega descrita em 'Versionamento, deploy e recuperação'.",
+                        E("src:sfdx-dev-guide")),
+    "avancado": [
+        av("decisao", "Qual sandbox para quê", "Developer e Developer Pro: desenvolvimento e teste isolados, com a configuração de produção; a "
+           "Developer Pro comporta mais dados e serve também a testes de integração e treinamento. Partial Copy: ambiente de teste, com "
+           "dados definidos por um sandbox template. Full: réplica de produção; o intervalo de refresh longo dificulta usá-la para desenvolver.",
+           E("src:help-sandbox-types", "src:help-sandbox-refresh")),
+        av("limite", "Intervalo de refresh", "Developer e Developer Pro: 1 dia. Partial Copy: 5 dias. Full: 29 dias. O intervalo conta a partir "
+           "do pedido de criação ou de refresh.", E("src:help-sandbox-refresh")),
+        av("limite", "Scratch org", "Dura de 1 a 30 dias (padrão 7) e tem 500 MB de dados e 50 MB de arquivos. A edição do Dev Hub define "
+           "quantas podem ser criadas por dia e quantas ficam ativas.", E("src:sfdx-scratch-orgs", "src:sfdx-scratch-editions")),
+        av("decisao", "Sandbox ou scratch org", "A sandbox é uma cópia da org de produção. A scratch org nasce vazia e é descartável. A "
+           "documentação diz que snapshots e scratch orgs não substituem sandboxes no teste de aceitação.",
+           E("src:help-sandbox-licenses", "src:sfdx-scratch-orgs", "src:sfdx-snapshots")),
+        av("implantacao", "Source tracking em sandbox", "Com o source tracking habilitado em sandboxes Developer e Developer Pro, as ferramentas do "
+           "Salesforce DX rastreiam automaticamente componentes novos, alterados e excluídos. A opção fica no metadata type "
+           "SourceTrackingSettings, só vale em produção e se aplica quando a sandbox é criada ou atualizada.",
+           E("src:sfdx-dev-guide", "src:mdapi-sourcetrackingsettings")),
+        av("seguranca", "Permissões", "Criar, atualizar e excluir sandboxes exige Manage Dev Sandboxes (só Developer e Developer Pro) ou Manage "
+           "Sandboxes (todos os tipos).", E("src:help-sandbox-refresh")),
+        av("atencao", "Onde não se desenvolve", "Apex não é desenvolvido direto em produção. Uma org Developer Edition não tem source tracking "
+           "e não serve de ambiente de desenvolvimento no DevOps Center.", E("src:apex-choose-org")),
+        av("implantacao", "Como metadado", "DevHubSettings liga o Dev Hub, o Org Shape e os snapshots de scratch org.", E("src:mdapi-devhubsettings")),
+    ],
 }
 S["sub:versionamento-deploy-e-recuperacao"] = {
-    "para_iniciantes": ini("Cobre como as mudanças são versionadas, implantadas e, se preciso, revertidas.",
+    "para_iniciantes": ini("Cobre como as mudanças são versionadas e levadas de uma org a outra: pela Metadata API (direto ou pelo Salesforce "
+                           "CLI), por change sets ou pelo DevOps Center.",
                            "Um objeto customizado e o seu layout são recuperados da sandbox com retrieve() e implantados em produção com deploy().",
-                           E("src:mdapi-intro", "src:help-produtos-platform"), comece=["func:metadata-api"]),
+                           E("src:mdapi-intro", "src:help-produtos-platform", "src:help-change-sets", "src:help-lifecycle-center"),
+                           comece=["func:metadata-api", "func:change-sets", "func:devops-center"]),
     "encadeamento": enc("Usa os formatos de arquivo e os pacotes do tema; o Lifecycle Center recomenda o controle de versão como fonte única de configuração e código.",
-                        E("src:help-produtos-platform")),
+                        E("src:help-produtos-platform", "src:help-lifecycle-center")),
     "avancado": [
         av("decisao", "deploy/retrieve ou source tracking", "deploy() e retrieve() nas fases finais; source push/pull com source tracking nas intermediárias, "
            "porque movem só o que mudou.", E("src:mdapi-intro")),
+        av("decisao", "Change set, CLI ou DevOps Center", "Change sets enviam pelo Setup, só entre orgs ligadas à mesma produção. O Salesforce "
+           "CLI implanta a partir do projeto local. O Lifecycle Center registra as mudanças no controle de versão e é apresentado como "
+           "alternativa aos change sets.",
+           E("src:help-change-sets", "src:help-change-sets-connections", "src:cli-project-deploy-start", "src:help-lifecycle-center")),
         av("atencao", "O que não vai no deploy", "A Metadata API não move dados de negócio: registros e atribuições de permission set precisam de outro caminho.",
            E("src:mdapi-intro", "src:objref-permissionsetassignment")),
+        av("limite", "Tamanho de um deploy", "Pela Metadata API: até 10.000 arquivos e .zip de até 39 MB (600 MB descompactado). Num change "
+           "set: até 10.000 arquivos e 400 MB, com a recomendação de não passar de cerca de 5.000 componentes.",
+           E("src:mdapi-zip-file", "src:limits-metadata", "src:help-change-sets-outbound")),
+        av("testes", "Testes no deploy", "Em produção, um deploy com Apex roda os testes locais por padrão; se um falha, o deploy inteiro é "
+           "revertido. Uma validação roda os testes sem implantar, para implantar depois sem rodá-los de novo.",
+           E("src:migration-running-tests", "src:cli-deploy-validate")),
+        av("atencao", "Change sets", "Enviar um change set não implanta: o destino precisa fazer o deploy. Inclua os componentes dependentes que "
+           "faltam no destino. A org de origem fica bloqueada durante a validação, e a de destino durante o deploy.",
+           E("src:help-change-sets-outbound", "src:help-change-sets-best")),
+        av("implantacao", "Pipeline do DevOps Center", "Cada estágio do pipeline corresponde a uma org e a um branch. Promover um work item "
+           "mescla o branch do estágio atual no do próximo e implanta na org do próximo. O pipeline não pode ser alterado depois que alguma "
+           "mudança é promovida.", E("src:help-devops-promote", "src:help-devops-pipeline-plan")),
+        av("atencao", "--ignore-errors nunca em produção", "A flag --ignore-errors do deploy pelo CLI implanta o que não deu erro e pula o "
+           "resto, sem reverter. A documentação diz para nunca usá-la em produção.", E("src:cli-project-deploy-start")),
     ],
 }
 

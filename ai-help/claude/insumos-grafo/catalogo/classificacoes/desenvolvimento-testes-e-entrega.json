@@ -15,8 +15,9 @@
       "limite": "Na maquete, tudo vai junto. Aqui, a planta são arquivos de metadados; o que não é metadado, como registros e atribuições de permissão, não vai no deploy."
     },
     "por_onde_comecar": [
-      "func:metadata-api",
-      "func:tooling-api"
+      "func:classes-apex",
+      "func:sandboxes",
+      "func:metadata-api"
     ],
     "evidencias": [
       {
@@ -31,30 +32,60 @@
     ]
   },
   "encadeamento": {
-    "texto": "Código e componentes vivem como metadados em dois formatos: o source format, usado no projeto, e o Metadata API format. Testes garantem que funcionam; sandboxes e scratch orgs isolam o trabalho; pacotes agrupam componentes e dependências; e a implantação leva tudo para produção, com versionamento e caminho de volta.",
+    "texto": "Roteiro pelas seis seções do tema. 1) 'Código e bundles': o que é construído, como classes Apex, Lightning web components, Aura components, Visualforce e static resources. 2) 'Testes': como se confere que funciona, com testes Apex (e a cobertura mínima para implantar) e testes Jest de LWC. 3) 'Pacotes e dependências': como agrupar o metadado em partes instaláveis. 4) 'Source format e Metadata API format': os dois formatos de arquivo e o projeto Salesforce DX. 5) 'Ambientes e sandboxes': onde se desenvolve e testa. 6) 'Versionamento, deploy e recuperação': como a mudança chega à produção, pela Metadata API, por change sets ou pelo DevOps Center.",
     "evidencias": [
       {
-        "fonte": "src:sfdx-dev-guide"
+        "fonte": "src:mdapi-apexclass"
       },
       {
-        "fonte": "src:sdr-registry"
+        "fonte": "src:apex-code-coverage"
+      },
+      {
+        "fonte": "src:sfdx-unlocked-whats"
+      },
+      {
+        "fonte": "src:sfdx-project-setup"
+      },
+      {
+        "fonte": "src:help-sandbox-types"
+      },
+      {
+        "fonte": "src:help-change-sets"
       },
       {
         "fonte": "src:mdapi-intro"
-      },
-      {
-        "fonte": "src:help-produtos-platform"
       }
     ]
   },
   "avancado": [
     {
-      "tipo": "decisao",
-      "titulo": "deploy/retrieve ou source tracking",
-      "texto": "A Metadata API indica deploy() e retrieve() para as fases finais, como implantar em produção, e source push/pull com source tracking nas fases intermediárias, que movem só o que mudou.",
+      "tipo": "implantacao",
+      "titulo": "Como metadado",
+      "texto": "Código: ApexClass, ApexTrigger, ApexPage, ApexComponent, LightningComponentBundle, AuraDefinitionBundle e StaticResource. Testes: ApexTestSuite. Pacotes: InstalledPackage. Opções da org: ApexSettings, DevHubSettings, SourceTrackingSettings e DeploymentSettings. Todos estão detalhados neste catálogo.",
       "evidencias": [
         {
-          "fonte": "src:mdapi-intro"
+          "fonte": "src:mdapi-apexclass"
+        },
+        {
+          "fonte": "src:mdapi-lightningcomponentbundle"
+        },
+        {
+          "fonte": "src:mdapi-apextestsuite"
+        },
+        {
+          "fonte": "src:mdapi-installedpackage"
+        },
+        {
+          "fonte": "src:mdapi-apexsettings"
+        },
+        {
+          "fonte": "src:mdapi-devhubsettings"
+        },
+        {
+          "fonte": "src:mdapi-sourcetrackingsettings"
+        },
+        {
+          "fonte": "src:mdapi-deploymentsettings"
         }
       ]
     },
@@ -72,12 +103,31 @@
       ]
     },
     {
-      "tipo": "atencao",
-      "titulo": "Nem todo tipo tem source tracking",
-      "texto": "A lista de suporte do Salesforce CLI marca, para cada metadata type, se há deploy, retrieve e source tracking; alguns tipos só têm deploy e retrieve. Confira antes de contar com o rastreamento automático.",
+      "tipo": "limite",
+      "titulo": "75% de cobertura para implantar Apex",
+      "texto": "Para implantar Apex ou empacotá-lo, os testes unitários precisam cobrir ao menos 75% do código Apex e passar. Chamadas a System.debug e as próprias classes de teste não contam. A cobertura é um piso, não o objetivo: o teste precisa verificar o comportamento.",
       "evidencias": [
         {
-          "fonte": "src:sdr-metadata-support"
+          "fonte": "src:apex-code-coverage"
+        },
+        {
+          "fonte": "src:apex-testing-best-practices"
+        }
+      ]
+    },
+    {
+      "tipo": "testes",
+      "titulo": "Que testes rodam num deploy",
+      "texto": "Sem nível de teste informado, um deploy para produção que traz classes ou triggers Apex roda todos os testes locais (os de pacotes gerenciados não); sem componentes Apex, não roda nenhum. Fora de produção, por padrão nenhum teste roda. Os níveis são NoTestRun, RunSpecifiedTests, RunLocalTests e RunAllTestsInOrg. Se um teste falha, o deploy inteiro é revertido.",
+      "evidencias": [
+        {
+          "fonte": "src:migration-running-tests"
+        },
+        {
+          "fonte": "src:migration-run-local-tests"
+        },
+        {
+          "fonte": "src:cli-deploy-validate"
         }
       ]
     },
@@ -88,6 +138,93 @@
       "evidencias": [
         {
           "fonte": "src:architect-build-forms"
+        },
+        {
+          "fonte": "src:lwc-testing"
+        }
+      ]
+    },
+    {
+      "tipo": "decisao",
+      "titulo": "Pacote desbloqueado ou gerenciado",
+      "texto": "Para quem não distribui a vários clientes, a documentação indica pacotes desbloqueados; os pacotes gerenciados de segunda geração atendem parceiros que distribuem apps. No desbloqueado, o metadado instalado pode ser alterado direto na org, o que pede governança.",
+      "evidencias": [
+        {
+          "fonte": "src:pkg2-intro"
+        },
+        {
+          "fonte": "src:sfdx-unlocked-whats"
+        }
+      ]
+    },
+    {
+      "tipo": "atencao",
+      "titulo": "Nem todo tipo tem source tracking",
+      "texto": "A lista de suporte do Salesforce CLI marca, para cada metadata type, se há deploy, retrieve e source tracking; alguns tipos só têm deploy e retrieve. Confira antes de contar com o rastreamento automático.",
+      "evidencias": [
+        {
+          "fonte": "src:sdr-metadata-support"
+        }
+      ]
+    },
+    {
+      "tipo": "decisao",
+      "titulo": "Sandbox ou scratch org",
+      "texto": "A sandbox é uma cópia da org de produção. A scratch org nasce vazia, é configurada por um arquivo de definição e expira em até 30 dias. A documentação diz que snapshots e scratch orgs não substituem sandboxes no teste de aceitação.",
+      "evidencias": [
+        {
+          "fonte": "src:help-sandbox-licenses"
+        },
+        {
+          "fonte": "src:sfdx-scratch-orgs"
+        },
+        {
+          "fonte": "src:sfdx-snapshots"
+        }
+      ]
+    },
+    {
+      "tipo": "decisao",
+      "titulo": "deploy/retrieve ou source tracking",
+      "texto": "A Metadata API indica deploy() e retrieve() para as fases finais, como implantar em produção, e source push/pull com source tracking nas fases intermediárias, que movem só o que mudou.",
+      "evidencias": [
+        {
+          "fonte": "src:mdapi-intro"
+        }
+      ]
+    },
+    {
+      "tipo": "decisao",
+      "titulo": "Change set, CLI ou DevOps Center",
+      "texto": "Change sets enviam pelo Setup, só entre orgs ligadas à mesma produção, e só o que se altera pelo Setup. O Salesforce CLI implanta a partir do projeto local, em source format por padrão. O Lifecycle Center registra as mudanças no controle de versão e é apresentado como alternativa aos change sets.",
+      "evidencias": [
+        {
+          "fonte": "src:help-change-sets"
+        },
+        {
+          "fonte": "src:help-change-sets-connections"
+        },
+        {
+          "fonte": "src:cli-project-deploy-start"
+        },
+        {
+          "fonte": "src:help-lifecycle-center"
+        }
+      ]
+    },
+    {
+      "tipo": "limite",
+      "titulo": "Tamanho de um deploy",
+      "texto": "Um deploy ou retrieve pela Metadata API aceita até 10.000 arquivos e um .zip de até 39 MB (600 MB descompactado). Os 39 MB vêm da codificação em base64 dentro de uma mensagem SOAP de até 50 MB. Um change set tem até 10.000 arquivos e 400 MB.",
+      "evidencias": [
+        {
+          "fonte": "src:mdapi-zip-file"
+        },
+        {
+          "fonte": "src:limits-metadata"
+        },
+        {
+          "fonte": "src:help-change-sets-outbound"
         }
       ]
     }

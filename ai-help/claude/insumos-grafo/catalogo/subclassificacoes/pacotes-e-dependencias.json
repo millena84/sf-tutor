@@ -4,30 +4,56 @@
   "sigla": "DEV-03",
   "classificacao": "cls:desenvolvimento-testes-e-entrega",
   "natureza": "curadoria_didatica",
-  "descricao": "Empacotamento e dependências entre componentes.",
+  "descricao": "Pacotes, que agrupam metadados em unidades instaláveis e versionadas: pacotes desbloqueados, pacotes gerenciados e as dependências entre pacotes.",
   "escopo": "Entram o empacotamento e as dependências entre componentes.",
   "fora_do_escopo": "O processo de implantação fica em \"Versionamento, deploy e recuperação\".",
   "para_iniciantes": {
-    "explicacao": "Pacotes agrupam componentes para distribuir e implantar juntos, registrando as dependências entre eles.",
-    "exemplo": "Uma equipe publica seus componentes como pacote desbloqueado e o instala em outra org.",
+    "explicacao": "Um pacote é um contêiner de metadados relacionados, instalado e atualizado como uma unidade. Cada mudança no conteúdo gera uma nova versão. Um pacote pode declarar dependência de outros pacotes.",
+    "exemplo": "Uma equipe publica as customizações de atendimento como pacote desbloqueado; cada entrega é uma versão nova, instalada na sandbox e depois em produção.",
+    "por_onde_comecar": [
+      "func:pacotes-desbloqueados",
+      "func:pacotes-gerenciados"
+    ],
     "evidencias": [
       {
-        "fonte": "src:sfdx-dev-guide"
+        "fonte": "src:sfdx-unlocked-whats"
+      },
+      {
+        "fonte": "src:pkg2-key-concepts"
+      },
+      {
+        "fonte": "src:sfdx-package-dev-model"
+      },
+      {
+        "fonte": "src:sfdx-unlocked-intro"
+      }
+    ]
+  },
+  "encadeamento": {
+    "texto": "É uma das formas de entrega; as outras ficam em 'Versionamento, deploy e recuperação'. O empacotamento de segunda geração é ligado no Dev Hub, descrito em 'Ambientes e sandboxes'.",
+    "evidencias": [
+      {
+        "fonte": "src:sfdx-devhub-enable"
       },
       {
         "fonte": "src:architect-build-forms"
       }
     ]
   },
-  "encadeamento": {
-    "texto": "É uma das formas de entrega; as outras ficam em 'Versionamento, deploy e recuperação'.",
-    "evidencias": [
-      {
-        "fonte": "src:architect-build-forms"
-      }
-    ]
-  },
   "avancado": [
+    {
+      "tipo": "decisao",
+      "titulo": "Desbloqueado ou gerenciado",
+      "texto": "Para quem não distribui a vários clientes, a documentação indica pacotes desbloqueados. Pacotes gerenciados de segunda geração atendem parceiros que distribuem apps: usam o controle de versão como fonte da verdade e dispensam packaging org e patch org.",
+      "evidencias": [
+        {
+          "fonte": "src:pkg2-intro"
+        },
+        {
+          "fonte": "src:sfdx-unlocked-intro"
+        }
+      ]
+    },
     {
       "tipo": "implantacao",
       "titulo": "O que pode ir em pacote",
@@ -37,9 +63,62 @@
           "fonte": "src:architect-build-forms"
         }
       ]
+    },
+    {
+      "tipo": "implantacao",
+      "titulo": "Como metadado",
+      "texto": "InstalledPackage instala ou atualiza, por deploy, pacotes gerenciados de primeira geração: precisa ser o único tipo do manifesto, e um deploy instala até 20 pacotes. Pacotes desbloqueados e gerenciados de segunda geração são instalados pelo Salesforce CLI. DevHubSettings liga o empacotamento de segunda geração.",
+      "evidencias": [
+        {
+          "fonte": "src:mdapi-installedpackage"
+        },
+        {
+          "fonte": "src:mdapi-devhubsettings"
+        }
+      ]
+    },
+    {
+      "tipo": "atencao",
+      "titulo": "Ligar não tem volta",
+      "texto": "Depois de ligados, o Dev Hub e o empacotamento de segunda geração não podem ser desligados.",
+      "evidencias": [
+        {
+          "fonte": "src:pkg2-enable-devhub"
+        }
+      ]
+    },
+    {
+      "tipo": "atencao",
+      "titulo": "Mudança direta em produção",
+      "texto": "No pacote desbloqueado, o metadado instalado pode ser alterado direto em produção. Um upgrade do pacote pode sobrescrever essas mudanças; a documentação pede que quem altera avise a equipe de desenvolvimento.",
+      "evidencias": [
+        {
+          "fonte": "src:sfdx-unlocked-whats"
+        }
+      ]
     }
   ],
-  "funcionalidades": [],
+  "funcionalidades": [
+    "func:pacotes-desbloqueados",
+    "func:pacotes-gerenciados"
+  ],
   "estado": "desconhecido",
-  "nota_estado": "Agrupamento proposto na especificação; fronteira ainda não cruzada com a documentação oficial."
+  "nota_estado": "Tema criado pelo projeto (00-especificacao-grafo.md), não é nomenclatura oficial da Salesforce. Cruzado em 2026-11-10 com áreas da documentação oficial listadas nas referências; a correspondência é parcial e o recorte continua sendo do projeto.",
+  "referencias_oficiais": [
+    {
+      "fonte": "src:sfdx-unlocked-intro",
+      "secao": "Unlocked Packages",
+      "nota": "Cobre parte do tema: pacotes desbloqueados."
+    },
+    {
+      "fonte": "src:pkg2-intro",
+      "secao": "Second-Generation Managed Packages",
+      "nota": "Cobre parte do tema: pacotes gerenciados de segunda geração."
+    },
+    {
+      "fonte": "src:sfdx-package-dev-model",
+      "secao": "Package-Based Development Model",
+      "nota": "Cobre parte do tema: modelo de desenvolvimento baseado em pacotes e dependências."
+    }
+  ]
 }

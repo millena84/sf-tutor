@@ -1,0 +1,136 @@
+fonte: Metadata API Developer Guide, versão 264.0 (API 68.0), lida pelo endpoint de conteúdo da documentação
+URL lida: https://developer.salesforce.com/docs/get_document_content/api_meta/<página>.htm/en-us/264.0
+mesma página no navegador: https://developer.salesforce.com/docs/atlas.en-us.264.0.api_meta.meta/api_meta/<página>.htm
+obtido em 2026-11-16 via WebFetch; método: extração documental assistida por IA; descrições parafraseadas em português.
+alcance: artigos inteiros (nenhuma página passou do limite de uma leitura). Cada página foi lida uma vez.
+convenção das linhas: nome | tipo | versão em que entrou (quando a página informa) | "Required" (quando a página marca).
+
+[src:mdapi-apexclass] ApexClass (meta_classes.htm): arquivo .cls na pasta classes, com o arquivo de metadado NomeDaClasse.cls-meta.xml; API 10.0 e
+  posteriores; estende MetadataWithContent (herda content e fullName); aceita o curinga *. A página não marca campos como obrigatórios.
+  ApexClass (5): apiVersion | double (versão da API da classe, definida na criação), content | base64 (definição da classe; herdado de
+    MetadataWithContent), fullName | string (nome da classe: letras, dígitos e sublinhados; começa com letra; sem sublinhado final ou duplo; herdado
+    de Metadata), packageVersions | PackageVersion[] | 16.0 (versões de pacotes gerenciados instalados que a classe referencia),
+    status | ApexCodeUnitStatus (Active = ativa; Deleted = marcada para exclusão, útil em atualização de pacote gerenciado; Inactive só vale para
+    ApexTrigger)
+  PackageVersion (3; desde 16.0): namespace | string | Required (prefixo de 1 a 15 caracteres alfanuméricos, sem distinção de maiúsculas, único),
+    majorNumber | int | Required, minorNumber | int | Required (partes do formato majorNumber.minorNumber da versão do pacote)
+  Exemplo XML: ApexClass, apiVersion. Notas: suportado por todas as chamadas da Metadata API, exceto as CRUD-based; por padrão não se implanta
+    atualização de uma classe com jobs Apex ativos (cancele os jobs ou libere em Deployment Settings).
+
+[src:mdapi-apexpage] ApexPage (meta_pages.htm): representa uma página Visualforce; arquivo .page na pasta pages, com arquivo de metadado
+  (o exemplo usa SampleApexPage.page-meta.xml); API 11.0 e posteriores; estende MetadataWithContent; aceita o curinga *.
+  ApexPage (8): apiVersion | double | Required (versão da API da página, definida na criação; valores abaixo de 15.0 passam a 15.0; campo desde 15.0),
+    content | base64Binary (conteúdo da página; herdado), description | string, fullName | string (nome único de API; herdado),
+    availableInTouch | boolean | 27.0 (abas Visualforce ligadas à página aparecem no app móvel; descontinuado para Salesforce Touch),
+    confirmationTokenRequired | boolean | 28.0 (requisições GET exigem token de confirmação CSRF), label | string | Required,
+    packageVersions | PackageVersion[] | 16.0
+  Exemplo XML: ApexPage, description, label. Notas: mudar confirmationTokenRequired de false para true exige token CSRF nos links para a página, ou
+    ela fica inacessível; abas de objeto padrão substituídas por página Visualforce não são suportadas no app móvel.
+
+[src:mdapi-apexcomponent] ApexComponent (meta_component.htm): representa um componente Visualforce; arquivo .component na pasta components, com
+  arquivo de metadado; API 12.0 e posteriores; herda content de MetadataWithContent e fullName de Metadata; aceita o curinga *.
+  ApexComponent (6): apiVersion | double | 16.0, content | base64Binary (herdado), description | string, fullName | string (herdado; alfanuméricos e
+    sublinhados, começa com letra), label | string | Required, packageVersions | PackageVersion[] | 16.0
+  A página não traz exemplo XML. Nota: componente Visualforce não é o mesmo que componente de pacote.
+
+[src:mdapi-staticresource] StaticResource (meta_staticresource.htm): arquivo .resource na pasta staticresources, com arquivo de metadado
+  (resource-meta.xml); API 12.0 e posteriores; estende MetadataWithContent; aceita o curinga *.
+  StaticResource (5): cacheControl | StaticResourceCacheControl | 14.0 | Required (Private, Public: se clientes de terceiros podem guardar o conteúdo
+    em cache), content | base64Binary (herdado), contentType | string | Required (tipo de conteúdo, como text/plain), description | string,
+    fullName | string (herdado; deve ser informado ao criar, atualizar ou excluir)
+  Exemplo XML: StaticResource, contentType, description. Nota: o recurso só pode ser usado dentro da org; não hospeda conteúdo para outros sites.
+    A página não informa limite de tamanho.
+
+[src:mdapi-lightningcomponentbundle] LightningComponentBundle (meta_lightningcomponentbundle.htm): no zip recuperado, cada componente fica numa
+  subpasta própria dentro da pasta lwc; o exemplo de arquivo de configuração é hello.js-meta.xml; aceita o curinga *. O artigo versionado não informa
+  a versão de entrada do tipo nem o que ele estende. A página não marca campos como obrigatórios no tipo principal.
+  LightningComponentBundle (10): ai | base64Binary | 66.0 (descrição interna para IA; só em orgs com Setup with Agentforce ligado),
+    apiVersion | double (prende o componente a uma versão da API), capabilities | Capabilities[] | 48.0 (o que o componente pode fazer, diferente de
+    targets), description | string (descrição mostrada em list views e como dica nos builders), isExplicitImport | boolean (true: imports entre
+    arquivos escritos pelo desenvolvedor; false: feitos pelo framework), isExposed | boolean (true: disponível a outros namespaces e, com targets, aos
+    builders; false: escondido dos dois), lwcResources | LwcResources[] (recursos do bundle), masterLabel | string (título em list views),
+    targetConfigs | base64Binary (configuração por target, por exemplo restringir a páginas de registro de Contact), targets | Targets[] (onde o
+    componente pode ser usado, como App Builder ou sites do Experience Builder)
+  Capabilities (1): capability | string (lightningCommunity__RelaxedCSP, lightning__dynamicComponent, lightning__ServerRenderable,
+    lightning__ServerRenderableWithHydration, lightning__ServiceCloudVoiceToolkitApi)
+  LwcResources (1): lwcResource | LwcResource
+  LwcResource (2): filePath | string | Required, source | base64Binary | Required (conteúdo do recurso)
+  Targets (1): target | string (tipo de página em que o componente aparece nos builders; os valores ficam numa referência ligada, não na página)
+  Exemplo XML (hello.js-meta.xml): LightningComponentBundle, apiVersion, isExposed, targets, target. Notas: componentes só podem ser criados em orgs
+    com namespace definido; desde Summer '20, só usuários internos da org acessam o tipo.
+
+[src:mdapi-auradefinitionbundle] AuraDefinitionBundle (meta_auradefinitionbundle.htm): o bundle é uma pasta própria dentro da pasta aura; os nomes
+  dos arquivos começam com o nome do bundle; sufixos: .app, .cmp, .design, .evt, .intf, .js (controller, helper ou renderer), .svg, .css, .auradoc,
+  .tokens. API 32.0 e posteriores (design e SVG desde 33.0); desde a 45.0 o tipo descreve Aura components, um dos dois tipos de Lightning component.
+  Aceita o curinga *. A página não informa o que o tipo estende nem marca campos como obrigatórios.
+  AuraDefinitionBundle (15): apiVersion | double | 35.0, auraDefinitions | AuraDefinitions (uso interno da Salesforce; tipo não descrito),
+    controllerContent | base64Binary (controller JavaScript do lado do cliente), description | string | 35.0,
+    designContent | base64Binary (definição de design; só em bundles de componente), documentationContent | base64Binary,
+    helperContent | base64Binary, markup | base64Binary, modelContent | base64Binary (descontinuado), packageVersions | PackageVersion[] | 35.0,
+    rendererContent | base64Binary, styleContent | base64Binary (CSS), SVGContent | base64Binary, testsuiteContent | base64Binary (uso interno),
+    type | AuraBundleType (Application, Component, Event, Interface, Tokens)
+  A página não traz exemplo XML de metadado (o exemplo é um arquivo .cmp). Notas: definições só podem ser criadas em orgs com namespace definido; cada
+    bundle aceita um só arquivo de cada um destes: .app, .cmp, .design, .evt, .intf, .tokens.
+
+[src:mdapi-apextestsuite] ApexTestSuite (meta_apextestsuite.htm): conjunto de classes de teste Apex a incluir numa execução; sufixo .testSuite, pasta
+  testSuites; API 38.0 e posteriores; aceita o curinga *. A página não informa o que o tipo estende.
+  ApexTestSuite (1): testClassName | string[] (nomes das classes de teste da suíte)
+  Exemplo XML: ApexTestSuite, testClassName. Notas: testes com namespace são listados por namespace; testes locais são todos os que não vêm de pacote
+    gerenciado; se as classes já existem na org de destino, ApexClass pode ficar fora do package.xml.
+
+[src:mdapi-installedpackage] InstalledPackage (meta_installedpackage.htm): arquivo .installedPackage na pasta installedPackages, nomeado pelo
+  namespace do pacote; API 28.0 e posteriores; aceita o curinga *. A página não informa o que o tipo estende.
+  InstalledPackage (4): activateRSS | boolean | 43.0 | Required (true mantém o estado ativo dos remote site settings e CSP do pacote; false os força a
+    inativos; padrão false), password | string (senha do pacote), securityType | string | 57.0 (AdminsOnly ou AllUsers; padrão AllUsers),
+    versionNumber | string | Required (versão no formato major.minor.patch)
+  Exemplo XML: InstalledPackage, versionNumber, password, securityType, activateRSS. Notas: não se implanta um pacote junto com outros metadata types
+    (InstalledPackage precisa ser o único tipo do manifesto); implantar uma versão mais nova atualiza o pacote; um deploy instala até 20 pacotes
+    gerenciados de primeira geração; pacotes desbloqueados e gerenciados de segunda geração usam o comando sf package install.
+
+[src:mdapi-apexsettings] ApexSettings (meta_apexsettings.htm): arquivo Apex.settings na pasta settings; API 47.0 e posteriores; estende Metadata
+  (fullName herdado); o curinga * não vale para um setting individual. A página não marca campos como obrigatórios.
+  ApexSettings (21): asyncApexExecutionsOverride | integer | 68.0 (reduz o limite licenciado de Apex assíncrono em 24 horas; só orgs que não são de
+    produção), DefaultQueueableDelay | integer (atraso mínimo, em segundos, para jobs enfileirados sem atraso; de 1 a 600),
+    enableAggregateCodeCoverageOnly | boolean (guarda só o total agregado de cobertura; padrão false), enableApexAccessRightsPref | boolean
+    (descontinuado), enableApexApprovalLockUnlock | boolean (Apex pode bloquear e desbloquear registros em aprovação; padrão false),
+    enableApexCtrlImplicitWithSharingPref | boolean, enableApexPropertyGetterPref | boolean, enableAuraApexCtrlAuthUserAccessCheckPref | boolean,
+    enableAuraApexCtrlGuestUserAccessCheckPref | boolean, enableMngdCtrlActionAccessPref | boolean (os cinco ativam critical updates do Winter '20),
+    enableAsyncApexElasticExecutions | boolean | 67.0 (limites elásticos de Apex assíncrono, Beta; padrão false),
+    enableBlockPackagedApexExecAnon | boolean | 67.0 (release update que bloqueia Apex anônimo vindo de pacote gerenciado; padrão false),
+    enableCompileOnDeploy | boolean (recompila o Apex em deploys, instalações e upgrades; padrão true em produção e em sandbox Full; não pode ser
+    desligado em produção), enableDisableParallelApexTesting | boolean (true = testes em série; padrão false; testes de deploy sempre rodam em série),
+    enableDebugLogsDuringDeployment | boolean (logs de depuração durante o deploy só com trace flag ativa; padrão false),
+    enableEnforceSummer26ApexHeapLimit | boolean | 68.0 (limita orgs que não são de produção ao heap menor do Summer '26; padrão false),
+    enableGaplessTestAutoNum | boolean (testes não avançam campos autonumber de registros que não são de teste; padrão true),
+    enableNonCertifiedApexMdCrud | boolean (classes Apex acessam metadados pelo namespace Metadata; padrão false),
+    enableRestrictCommunityExecAnon | boolean (usuários guest não rodam Apex anônimo; padrão true), enableSecureNoArgConstructorPref | boolean (não
+    usado), enableTestSetupSkipTestResults | boolean | 61.0 (false gera resultados de teste para métodos @TestSetup; true não gera)
+  Exemplo XML: ApexSettings, enableDisableParallelApexTesting. No package.xml do exemplo: tipo Settings, membro Apex.
+
+[src:mdapi-devhubsettings] DevHubSettings (meta_devhubsettings.htm): arquivo DevHub.settings na pasta settings; API 47.0 e posteriores; estende
+  Metadata (fullName herdado); o curinga * não vale para um setting individual. Sem campos marcados como obrigatórios nem defaults.
+  DevHubSettings (9): enableALMDevopsCorePref | boolean | 65.0 (liga o DevOps Center de nova geração), enableDevOpsCenterGA | boolean | 56.0 (liga o
+    pacote gerenciado DevOps Center, versão anterior), enableALMSimpleDeployDataPref | boolean | 65.0 (migração de dados de configuração para uma org
+    de destino; exige enableALMSimpleDeployPref), enableALMSimpleDeployPref | boolean | 65.0 (deploy de metadados de uma org para uma org de destino),
+    enableDevopsCenterMigrationPref | boolean | 67.0 (migra projetos do pacote gerenciado para a nova geração; developer preview),
+    enablePackaging2 | boolean (liga pacotes desbloqueados e gerenciados de segunda geração; exige enableScratchOrgManagementPref),
+    enableScratchOrgManagementPref | boolean (liga o Dev Hub, que cria e gerencia scratch orgs), enableScratchOrgSnapshotPref | boolean | 61.0
+    (snapshots de scratch orgs), enableShapeExportPref | boolean | 55.0 (Org Shape, base para criar scratch orgs)
+  Exemplo XML: DevHubSettings, enablePackaging2, enableScratchOrgManagementPref.
+
+[src:mdapi-sourcetrackingsettings] SourceTrackingSettings (meta_sourcetrackingsettings.htm; a página marca o tipo como Beta): arquivo
+  SourceTracking.settings na pasta settings; API 49.0 e posteriores; estende Metadata (fullName herdado); curinga * não vale para setting individual.
+  SourceTrackingSettings (1): enableSourceTrackingSandboxes | boolean (liga o source tracking automático quando sandboxes Developer ou Developer Pro
+    são criadas ou atualizadas; padrão false)
+  Exemplo XML: SourceTrackingSettings, enableSourceTrackingSandboxes. Notas: voltar a false não para o rastreamento numa sandbox que já rastreia (só no
+    próximo refresh); o campo só vale em orgs de produção; não exige Dev Hub na mesma org.
+
+[src:mdapi-deploymentsettings] DeploymentSettings (meta_deploymentsettings.htm): arquivo Deployment.settings na pasta settings; API 47.0 e posteriores;
+  estende Metadata (fullName herdado); curinga * não vale para setting individual.
+  DeploymentSettings (1): doesSkipAsyncApexValidation | boolean (deploys pulam a validação de Apex assíncrono; padrão true; use false se um job em
+    lote em execução usa as classes do pacote)
+  Exemplo XML: DeploymentSettings, doesSkipAsyncApexValidation. No package.xml do exemplo: tipo Settings, membro Deployment.
+
+[src:mdapi-ref-lightningcomponentbundle] LightningComponentBundle na referência nova (docs/platform/api-metadata/references/meta-types/
+  metadata-lightningcomponentbundle.html), lida só pelo resultado de busca em 2026-11-16: a página diz que o tipo representa um bundle de Lightning
+  web component e que estende Metadata, herdando os campos. Usada só para o campo "estende", que o artigo versionado não informa.

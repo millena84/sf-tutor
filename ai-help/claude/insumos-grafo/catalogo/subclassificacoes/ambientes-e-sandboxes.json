@@ -4,15 +4,25 @@
   "sigla": "DEV-05",
   "classificacao": "cls:desenvolvimento-testes-e-entrega",
   "natureza": "curadoria_didatica",
-  "descricao": "Orgs de desenvolvimento, teste e produção.",
+  "descricao": "Os ambientes separados da produção: sandboxes, em quatro tipos, e scratch orgs, criadas a partir de um Dev Hub.",
   "escopo": "Entram as orgs usadas para desenvolvimento, teste e produção.",
   "fora_do_escopo": "Os dados que identificam uma org ficam em \"Identificação e configuração da org\".",
   "para_iniciantes": {
-    "explicacao": "São ambientes separados da produção para desenvolver, testar e treinar: sandboxes e scratch orgs.",
+    "explicacao": "São os ambientes separados da produção para desenvolver, testar e treinar. Sandboxes são cópias da org de produção, em quatro tipos. Scratch orgs são orgs temporárias, criadas vazias e configuradas por um arquivo de definição.",
     "exemplo": "Uma mudança é feita numa scratch org, testada numa sandbox e só depois vai para produção.",
+    "por_onde_comecar": [
+      "func:sandboxes",
+      "func:scratch-orgs-e-dev-hub"
+    ],
     "evidencias": [
       {
-        "fonte": "src:help-produtos-platform"
+        "fonte": "src:help-sandbox-licenses"
+      },
+      {
+        "fonte": "src:help-sandbox-types"
+      },
+      {
+        "fonte": "src:sfdx-scratch-orgs"
       },
       {
         "fonte": "src:sfdx-dev-guide"
@@ -20,7 +30,7 @@
     ]
   },
   "encadeamento": {
-    "texto": "É onde as mudanças nascem, antes da entrega.",
+    "texto": "É onde as mudanças nascem e são testadas, antes da entrega descrita em 'Versionamento, deploy e recuperação'.",
     "evidencias": [
       {
         "fonte": "src:sfdx-dev-guide"
@@ -29,17 +39,122 @@
   },
   "avancado": [
     {
+      "tipo": "decisao",
+      "titulo": "Qual sandbox para quê",
+      "texto": "Developer e Developer Pro: desenvolvimento e teste isolados, com a configuração de produção; a Developer Pro comporta mais dados e serve também a testes de integração e treinamento. Partial Copy: ambiente de teste, com dados definidos por um sandbox template. Full: réplica de produção; o intervalo de refresh longo dificulta usá-la para desenvolver.",
+      "evidencias": [
+        {
+          "fonte": "src:help-sandbox-types"
+        },
+        {
+          "fonte": "src:help-sandbox-refresh"
+        }
+      ]
+    },
+    {
+      "tipo": "limite",
+      "titulo": "Intervalo de refresh",
+      "texto": "Developer e Developer Pro: 1 dia. Partial Copy: 5 dias. Full: 29 dias. O intervalo conta a partir do pedido de criação ou de refresh.",
+      "evidencias": [
+        {
+          "fonte": "src:help-sandbox-refresh"
+        }
+      ]
+    },
+    {
+      "tipo": "limite",
+      "titulo": "Scratch org",
+      "texto": "Dura de 1 a 30 dias (padrão 7) e tem 500 MB de dados e 50 MB de arquivos. A edição do Dev Hub define quantas podem ser criadas por dia e quantas ficam ativas.",
+      "evidencias": [
+        {
+          "fonte": "src:sfdx-scratch-orgs"
+        },
+        {
+          "fonte": "src:sfdx-scratch-editions"
+        }
+      ]
+    },
+    {
+      "tipo": "decisao",
+      "titulo": "Sandbox ou scratch org",
+      "texto": "A sandbox é uma cópia da org de produção. A scratch org nasce vazia e é descartável. A documentação diz que snapshots e scratch orgs não substituem sandboxes no teste de aceitação.",
+      "evidencias": [
+        {
+          "fonte": "src:help-sandbox-licenses"
+        },
+        {
+          "fonte": "src:sfdx-scratch-orgs"
+        },
+        {
+          "fonte": "src:sfdx-snapshots"
+        }
+      ]
+    },
+    {
       "tipo": "implantacao",
       "titulo": "Source tracking em sandbox",
-      "texto": "Com o source tracking habilitado em sandboxes Developer e Developer Pro, as ferramentas do Salesforce DX rastreiam automaticamente componentes novos, alterados e excluídos.",
+      "texto": "Com o source tracking habilitado em sandboxes Developer e Developer Pro, as ferramentas do Salesforce DX rastreiam automaticamente componentes novos, alterados e excluídos. A opção fica no metadata type SourceTrackingSettings, só vale em produção e se aplica quando a sandbox é criada ou atualizada.",
       "evidencias": [
         {
           "fonte": "src:sfdx-dev-guide"
+        },
+        {
+          "fonte": "src:mdapi-sourcetrackingsettings"
+        }
+      ]
+    },
+    {
+      "tipo": "seguranca",
+      "titulo": "Permissões",
+      "texto": "Criar, atualizar e excluir sandboxes exige Manage Dev Sandboxes (só Developer e Developer Pro) ou Manage Sandboxes (todos os tipos).",
+      "evidencias": [
+        {
+          "fonte": "src:help-sandbox-refresh"
+        }
+      ]
+    },
+    {
+      "tipo": "atencao",
+      "titulo": "Onde não se desenvolve",
+      "texto": "Apex não é desenvolvido direto em produção. Uma org Developer Edition não tem source tracking e não serve de ambiente de desenvolvimento no DevOps Center.",
+      "evidencias": [
+        {
+          "fonte": "src:apex-choose-org"
+        }
+      ]
+    },
+    {
+      "tipo": "implantacao",
+      "titulo": "Como metadado",
+      "texto": "DevHubSettings liga o Dev Hub, o Org Shape e os snapshots de scratch org.",
+      "evidencias": [
+        {
+          "fonte": "src:mdapi-devhubsettings"
         }
       ]
     }
   ],
-  "funcionalidades": [],
+  "funcionalidades": [
+    "func:sandboxes",
+    "func:scratch-orgs-e-dev-hub"
+  ],
   "estado": "desconhecido",
-  "nota_estado": "Agrupamento proposto na especificação; fronteira ainda não cruzada com a documentação oficial."
+  "nota_estado": "Tema criado pelo projeto (00-especificacao-grafo.md), não é nomenclatura oficial da Salesforce. Cruzado em 2026-11-10 com áreas da documentação oficial listadas nas referências; a correspondência é parcial e o recorte continua sendo do projeto.",
+  "referencias_oficiais": [
+    {
+      "fonte": "src:help-sandbox-types",
+      "secao": "Sandbox Types and Templates",
+      "nota": "Cobre parte do tema: tipos de sandbox."
+    },
+    {
+      "fonte": "src:sfdx-scratch-orgs",
+      "secao": "Scratch Orgs",
+      "nota": "Cobre parte do tema: scratch orgs."
+    },
+    {
+      "fonte": "src:sfdx-devhub-enable",
+      "secao": "Select and Enable a Dev Hub Org",
+      "nota": "Cobre parte do tema: Dev Hub."
+    }
+  ]
 }

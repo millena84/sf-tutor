@@ -1,0 +1,338 @@
+{
+  "id": "mdt:InstalledPackage",
+  "nome": "InstalledPackage",
+  "o_que_e": "Um pacote instalado: a versão de um pacote gerenciado a instalar ou atualizar na org, identificado pelo namespace.",
+  "finalidade": "Instalar ou atualizar pacotes gerenciados de primeira geração por deploy.",
+  "estende": "não declarado na página",
+  "arquivos": {
+    "source_format": {
+      "estado": "verificado",
+      "valor": {
+        "pasta": "installedPackages/",
+        "arquivo": "<Nome>.installedPackage-meta.xml"
+      },
+      "nota": "Pasta e sufixo do registro do Salesforce CLI; sufixo '-meta.xml' segue a convenção do source format.",
+      "evidencias": [
+        {
+          "fonte": "src:sdr-registry",
+          "nota": "types.installedpackage"
+        }
+      ]
+    },
+    "metadata_api_format": {
+      "estado": "verificado",
+      "valor": {
+        "pasta": "installedPackages/",
+        "arquivo": "<Nome>.installedPackage"
+      },
+      "evidencias": [
+        {
+          "fonte": "src:sdr-registry",
+          "nota": "types.installedpackage"
+        }
+      ]
+    },
+    "curinga_package_xml": {
+      "estado": "verificado",
+      "valor": true,
+      "evidencias": [
+        {
+          "fonte": "src:mdapi-installedpackage"
+        }
+      ]
+    }
+  },
+  "disponibilidade": {
+    "desde_versao": "28.0",
+    "ate_versao": null,
+    "estado": "verificado"
+  },
+  "suporte_cli": {
+    "estado": "verificado",
+    "valor": {
+      "status": "suportado_com_ressalvas",
+      "nota_fonte": "Supports deploy/retrieve but not source tracking"
+    },
+    "nota": "Suporte do Salesforce CLI (source-deploy-retrieve), não do Metadata API em geral.",
+    "evidencias": [
+      {
+        "fonte": "src:sdr-metadata-support"
+      }
+    ]
+  },
+  "setup": {
+    "estado": "desconhecido",
+    "nota": "Caminho no Setup não validado nesta sessão."
+  },
+  "propriedades": [
+    {
+      "id": "mdt:InstalledPackage.activateRSS",
+      "nome": "activateRSS",
+      "tipo_tecnico": "boolean",
+      "o_que_e": "Com true, mantém o estado ativo dos remote site settings e das configurações de CSP do pacote; com false, força-os a inativos.",
+      "origem": {
+        "estado": "verificado",
+        "valor": "padrao_plataforma",
+        "nota": "Propriedade definida pelo schema da Metadata API.",
+        "evidencias": [
+          {
+            "fonte": "src:mdapi-installedpackage"
+          }
+        ]
+      },
+      "obrigatoriedade": {
+        "valor": "sim",
+        "estado": "verificado",
+        "evidencias": [
+          {
+            "fonte": "src:mdapi-installedpackage"
+          }
+        ]
+      },
+      "default": {
+        "forma": "false",
+        "estado": "verificado",
+        "evidencias": [
+          {
+            "fonte": "src:mdapi-installedpackage"
+          }
+        ],
+        "valor": false,
+        "nota": "A página declara default false."
+      },
+      "dominio": {
+        "natureza": "booleano",
+        "valores": [
+          {
+            "valor": "true"
+          },
+          {
+            "valor": "false"
+          }
+        ],
+        "lista_completa": "sim",
+        "estado": "verificado",
+        "evidencias": [
+          {
+            "fonte": "src:mdapi-installedpackage"
+          }
+        ]
+      },
+      "disponibilidade": {
+        "desde_versao": "43.0",
+        "ate_versao": null,
+        "estado": "verificado"
+      },
+      "explicacao": "explicada",
+      "estado": "verificado",
+      "evidencias": [
+        {
+          "fonte": "src:mdapi-installedpackage"
+        }
+      ]
+    },
+    {
+      "id": "mdt:InstalledPackage.password",
+      "nome": "password",
+      "tipo_tecnico": "string",
+      "o_que_e": "Senha do pacote.",
+      "origem": {
+        "estado": "verificado",
+        "valor": "padrao_plataforma",
+        "nota": "Propriedade definida pelo schema da Metadata API.",
+        "evidencias": [
+          {
+            "fonte": "src:mdapi-installedpackage"
+          }
+        ]
+      },
+      "obrigatoriedade": {
+        "valor": "nao",
+        "estado": "desconhecido",
+        "condicao": "A documentação 68.0 não marca o campo como obrigatório; ausência de marcação não comprova opcionalidade (confirmar no WSDL)."
+      },
+      "default": {
+        "forma": "nao_declarado_na_fonte",
+        "estado": "desconhecido"
+      },
+      "dominio": {
+        "natureza": "texto_livre",
+        "estado": "verificado",
+        "evidencias": [
+          {
+            "fonte": "src:mdapi-installedpackage"
+          }
+        ],
+        "contexto": "A fonte tipa como string sem lista de valores; não inventar valores."
+      },
+      "disponibilidade": {
+        "desde_versao": null,
+        "ate_versao": null,
+        "estado": "desconhecido"
+      },
+      "explicacao": "explicada",
+      "estado": "verificado",
+      "evidencias": [
+        {
+          "fonte": "src:mdapi-installedpackage"
+        }
+      ]
+    },
+    {
+      "id": "mdt:InstalledPackage.securityType",
+      "nome": "securityType",
+      "tipo_tecnico": "string",
+      "o_que_e": "Quem tem acesso ao pacote instalado.",
+      "origem": {
+        "estado": "verificado",
+        "valor": "padrao_plataforma",
+        "nota": "Propriedade definida pelo schema da Metadata API.",
+        "evidencias": [
+          {
+            "fonte": "src:mdapi-installedpackage"
+          }
+        ]
+      },
+      "obrigatoriedade": {
+        "valor": "nao",
+        "estado": "desconhecido",
+        "condicao": "A documentação 68.0 não marca o campo como obrigatório; ausência de marcação não comprova opcionalidade (confirmar no WSDL)."
+      },
+      "default": {
+        "forma": "valor",
+        "estado": "verificado",
+        "evidencias": [
+          {
+            "fonte": "src:mdapi-installedpackage"
+          }
+        ],
+        "valor": "AllUsers"
+      },
+      "dominio": {
+        "natureza": "enum_fechado",
+        "valores": [
+          {
+            "valor": "AdminsOnly"
+          },
+          {
+            "valor": "AllUsers"
+          }
+        ],
+        "lista_completa": "sim",
+        "estado": "verificado",
+        "evidencias": [
+          {
+            "fonte": "src:mdapi-installedpackage"
+          }
+        ],
+        "contexto": "A página lista estes dois valores para um campo do tipo string."
+      },
+      "disponibilidade": {
+        "desde_versao": "57.0",
+        "ate_versao": null,
+        "estado": "verificado"
+      },
+      "explicacao": "explicada",
+      "estado": "verificado",
+      "evidencias": [
+        {
+          "fonte": "src:mdapi-installedpackage"
+        }
+      ]
+    },
+    {
+      "id": "mdt:InstalledPackage.versionNumber",
+      "nome": "versionNumber",
+      "tipo_tecnico": "string",
+      "o_que_e": "Versão do pacote, no formato major.minor.patch, como 2.1.3.",
+      "origem": {
+        "estado": "verificado",
+        "valor": "padrao_plataforma",
+        "nota": "Propriedade definida pelo schema da Metadata API.",
+        "evidencias": [
+          {
+            "fonte": "src:mdapi-installedpackage"
+          }
+        ]
+      },
+      "obrigatoriedade": {
+        "valor": "sim",
+        "estado": "verificado",
+        "evidencias": [
+          {
+            "fonte": "src:mdapi-installedpackage"
+          }
+        ]
+      },
+      "default": {
+        "forma": "nao_declarado_na_fonte",
+        "estado": "desconhecido"
+      },
+      "dominio": {
+        "natureza": "texto_livre",
+        "estado": "verificado",
+        "evidencias": [
+          {
+            "fonte": "src:mdapi-installedpackage"
+          }
+        ],
+        "contexto": "A fonte tipa como string sem lista de valores; não inventar valores."
+      },
+      "disponibilidade": {
+        "desde_versao": null,
+        "ate_versao": null,
+        "estado": "desconhecido"
+      },
+      "explicacao": "explicada",
+      "estado": "verificado",
+      "evidencias": [
+        {
+          "fonte": "src:mdapi-installedpackage"
+        }
+      ]
+    }
+  ],
+  "estruturas": [],
+  "cobertura": {
+    "estrutural": {
+      "estado": "completa",
+      "esperado": 4,
+      "presente": 4,
+      "nota": "Universo esperado = tabela Fields da página do guia versionado 264.0 (API 68.0), lida em 2026-11-16."
+    },
+    "explicativa": {
+      "estado": "completa",
+      "esperado": 4,
+      "presente": 4
+    },
+    "mapeamento": {
+      "estado": "parcial",
+      "nota": "Correspondências registradas apenas onde há evidência; demais pendentes."
+    }
+  },
+  "recomendacoes": [],
+  "alertas": [
+    "InstalledPackage precisa ser o único tipo do manifesto: não se implanta um pacote junto com outros metadata types.",
+    "Implantar uma versão mais nova de um pacote instalado faz o upgrade.",
+    "Um deploy instala até 20 pacotes gerenciados de primeira geração.",
+    "Pacotes desbloqueados e gerenciados de segunda geração não usam este tipo: são instalados pelo comando sf package install."
+  ],
+  "divergencias_documentais": [],
+  "estado": "verificado",
+  "evidencias": [
+    {
+      "fonte": "src:mdapi-installedpackage"
+    },
+    {
+      "fonte": "src:sdr-registry"
+    },
+    {
+      "fonte": "src:sdr-metadata-support"
+    }
+  ],
+  "exemplo_xml": {
+    "xml": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<!-- O arquivo leva o nome do namespace do pacote -->\n<InstalledPackage xmlns=\"http://soap.sforce.com/2006/04/metadata\">\n    <activateRSS>false</activateRSS>\n    <!-- Valores documentados: AdminsOnly, AllUsers -->\n    <securityType>AllUsers</securityType>\n    <versionNumber>[major.minor.patch]</versionNumber>\n</InstalledPackage>",
+    "natureza": "didatico_projeto",
+    "nota": "Exemplo escrito pelo projeto apenas com elementos documentados; sem dados reais."
+  }
+}

@@ -5,7 +5,8 @@ cada tipo à funcionalidade criada no lote 6c. Workflow não entra aqui: a refer
 elementos; o tipo é cadastrado pelo lote 7a, a partir do guia versionado. ApprovalAction.action já aponta para a estrutura
 WorkflowActionReference, criada no lote 7a.
 
-Ordem: rode lote6c_automacao.py, depois este script, depois lote7a_tipos_destravados.py, conteudo_temas.py e temas_internos.py.
+Ordem: rode lote6c_automacao.py, depois este script, depois lote7a_tipos_destravados.py, lote7b_desenvolvimento.py, conteudo_temas.py e
+temas_internos.py.
 Reexecutável. Uso: python3 ferramentas/carga/lotes/lote6d_automacao_tipos.py
 """
 import json, os, sys
@@ -320,7 +321,7 @@ M.mdt("ApexTrigger", S_TRG,
           P("fullName", "string", None,
             "Nome do trigger; herdado. Começa com letra e não pode terminar com sublinhado nem ter dois sublinhados seguidos.", "?", herdada="Metadata"),
           P("packageVersions", "PackageVersion[]", "16.0", "Versões de pacotes gerenciados instalados que o trigger referencia.",
-            notas=["A página remete à referência de ApexClass para os campos de PackageVersion; a estrutura não foi lida."]),
+            estrutura="PackageVersion"),  # estrutura criada no lote 7b, a partir da página de ApexClass
           P("status", "ApexCodeUnitStatus", None, "Estado do trigger.", "S", vals=[
               ("Active", "O trigger está ativo."), ("Inactive", "O trigger está inativo, mas não foi excluído."),
               ("Deleted", "O trigger está marcado para exclusão; útil na atualização de pacotes gerenciados.")]),
@@ -329,10 +330,10 @@ M.mdt("ApexTrigger", S_TRG,
     <apiVersion>68.0</apiVersion>
     <!-- Valores documentados: Active, Inactive, Deleted -->
     <status>Active</status>
-</ApexTrigger>""", estende="MetadataWithContent", curinga=True, completa=False,
+</ApexTrigger>""", estende="MetadataWithContent", curinga=True,
       alertas=["O componente tem dois arquivos: o código-fonte .trigger e o arquivo de metadado que o acompanha.",
                "É suportado por todas as chamadas da Metadata API, exceto as CRUD-based."],
-      cobertura_nota="Universo esperado = tabela Fields da página oficial lida em 2026-11-15. Parcial: PackageVersion não foi detalhado.",
+      cobertura_nota="Universo esperado = tabela Fields da página oficial lida em 2026-11-15.",
       setup=af("verificado", "Object management settings do objeto > Triggers", "Lista de triggers do objeto. " + C.UI_EN, [ev("src:apex-triggers-defining")]))
 
 M.emit_structs()

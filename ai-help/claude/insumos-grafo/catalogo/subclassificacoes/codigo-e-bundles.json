@@ -4,24 +4,37 @@
   "sigla": "DEV-01",
   "classificacao": "cls:desenvolvimento-testes-e-entrega",
   "natureza": "curadoria_didatica",
-  "descricao": "Classes, componentes e pacotes de código.",
+  "descricao": "Os componentes de código da org: classes Apex, Lightning web components, Aura components, páginas e componentes Visualforce e static resources.",
   "escopo": "Entram classes, componentes e outros artefatos de código vistos como itens a construir e entregar.",
   "fora_do_escopo": "O papel do código em uma automação fica em \"Automação Apex\".",
   "para_iniciantes": {
-    "explicacao": "Cobre classes, componentes e outros artefatos de código vistos como itens a construir e entregar.",
-    "exemplo": "Um editor de código consulta, pela Tooling API, só a classe Apex que o desenvolvedor abriu, em vez de recuperar todos os metadados.",
+    "explicacao": "Reúne os componentes de código da org: classes Apex, Lightning web components, Aura components, páginas e componentes Visualforce e static resources. Cada um é um componente de metadado com arquivos próprios.",
+    "exemplo": "Um Lightning web component é uma pasta com o HTML, o JavaScript e o arquivo .js-meta.xml, que diz em que páginas ele pode ser usado.",
     "por_onde_comecar": [
-      "func:tooling-api"
+      "func:classes-apex",
+      "func:lightning-web-components"
     ],
     "evidencias": [
       {
-        "fonte": "src:tooling-intro"
+        "fonte": "src:mdapi-apexclass"
+      },
+      {
+        "fonte": "src:mdapi-lightningcomponentbundle"
+      },
+      {
+        "fonte": "src:lwc-config-file"
+      },
+      {
+        "fonte": "src:lwc-migrate-bundles"
       }
     ]
   },
   "encadeamento": {
-    "texto": "O formato dos arquivos fica em 'Source format e Metadata API format'; a entrega, em 'Versionamento, deploy e recuperação'.",
+    "texto": "Triggers Apex também são código, mas ficam em 'Automação Apex'. O formato dos arquivos fica em 'Source format e Metadata API format'; os testes, em 'Testes'; a entrega, em 'Versionamento, deploy e recuperação'.",
     "evidencias": [
+      {
+        "fonte": "src:mdapi-apextrigger"
+      },
       {
         "fonte": "src:sdr-registry"
       },
@@ -31,6 +44,41 @@
     ]
   },
   "avancado": [
+    {
+      "tipo": "implantacao",
+      "titulo": "Código tem dois arquivos",
+      "texto": "Classes Apex, triggers, páginas e componentes Visualforce e static resources estendem MetadataWithContent: cada componente tem o arquivo de conteúdo e, ao lado, um arquivo de metadado. ApexClass é suportado por todas as chamadas da Metadata API, exceto as CRUD-based.",
+      "evidencias": [
+        {
+          "fonte": "src:mdapi-apexclass"
+        },
+        {
+          "fonte": "src:mdapi-apexpage"
+        },
+        {
+          "fonte": "src:mdapi-staticresource"
+        }
+      ]
+    },
+    {
+      "tipo": "implantacao",
+      "titulo": "Bundles são pastas",
+      "texto": "LightningComponentBundle e AuraDefinitionBundle são pastas com vários arquivos. No LWC, o arquivo .js-meta.xml é obrigatório. Num bundle Aura, controller, helper e renderer são arquivos .js separados; no LWC, viram um só.",
+      "evidencias": [
+        {
+          "fonte": "src:mdapi-lightningcomponentbundle"
+        },
+        {
+          "fonte": "src:mdapi-auradefinitionbundle"
+        },
+        {
+          "fonte": "src:lwc-config-file"
+        },
+        {
+          "fonte": "src:lwc-migrate-bundles"
+        }
+      ]
+    },
     {
       "tipo": "decisao",
       "titulo": "Tooling API ou Metadata API",
@@ -43,12 +91,80 @@
           "fonte": "src:mdapi-intro"
         }
       ]
+    },
+    {
+      "tipo": "atencao",
+      "titulo": "Classe com jobs ativos",
+      "texto": "Por padrão, o deploy não atualiza uma classe que tem jobs Apex ativos. As saídas são cancelar os jobs ou liberar a opção em Deployment Settings. O metadata type DeploymentSettings guarda a opção que pula a validação de Apex assíncrono.",
+      "evidencias": [
+        {
+          "fonte": "src:mdapi-apexclass"
+        },
+        {
+          "fonte": "src:mdapi-deploymentsettings"
+        }
+      ]
+    },
+    {
+      "tipo": "limite",
+      "titulo": "Tamanhos",
+      "texto": "Um static resource tem até 5 MB, e a org, até 250 MB de static resources. O arquivo JavaScript de um Lightning web component tem até 1 MB.",
+      "evidencias": [
+        {
+          "fonte": "src:lwc-third-party"
+        }
+      ]
+    },
+    {
+      "tipo": "seguranca",
+      "titulo": "Opções de segurança de Apex",
+      "texto": "ApexSettings guarda opções que afetam a segurança: por exemplo, impedir usuários guest de rodar Apex anônimo (ligado por padrão) e permitir que classes Apex acessem metadados pelo namespace Metadata (desligado por padrão).",
+      "evidencias": [
+        {
+          "fonte": "src:mdapi-apexsettings"
+        }
+      ]
+    },
+    {
+      "tipo": "implantacao",
+      "titulo": "Dependência de pacote registrada no código",
+      "texto": "Classes, triggers, páginas e componentes Visualforce e bundles Aura registram, em packageVersions, as versões de pacotes gerenciados instalados que referenciam.",
+      "evidencias": [
+        {
+          "fonte": "src:mdapi-apexclass"
+        },
+        {
+          "fonte": "src:mdapi-auradefinitionbundle"
+        }
+      ]
     }
   ],
   "funcionalidades": [
     "func:apex-triggers",
-    "func:tooling-api"
+    "func:aura-components",
+    "func:classes-apex",
+    "func:lightning-web-components",
+    "func:static-resources",
+    "func:tooling-api",
+    "func:visualforce"
   ],
   "estado": "desconhecido",
-  "nota_estado": "Agrupamento proposto na especificação; fronteira ainda não cruzada com a documentação oficial."
+  "nota_estado": "Tema criado pelo projeto (00-especificacao-grafo.md), não é nomenclatura oficial da Salesforce. Cruzado em 2026-11-10 com áreas da documentação oficial listadas nas referências; a correspondência é parcial e o recorte continua sendo do projeto.",
+  "referencias_oficiais": [
+    {
+      "fonte": "src:mdapi-apexclass",
+      "secao": "ApexClass",
+      "nota": "Cobre parte do tema: classes Apex como metadado."
+    },
+    {
+      "fonte": "src:lwc-config-file",
+      "secao": "Component Configuration File",
+      "nota": "Cobre parte do tema: arquivo de configuração de Lightning web components."
+    },
+    {
+      "fonte": "src:mdapi-auradefinitionbundle",
+      "secao": "AuraDefinitionBundle",
+      "nota": "Cobre parte do tema: bundles Aura."
+    }
+  ]
 }

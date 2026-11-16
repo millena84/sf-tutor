@@ -563,28 +563,69 @@ CONTEUDO_CLS = {
             "formatos de arquivo dos metadados, sandboxes e a implantação.",
             "Um desenvolvedor cria uma classe numa scratch org, recupera a mudança para o projeto, roda os testes e implanta em produção pela Metadata API.",
             E("src:sfdx-dev-guide", "src:mdapi-intro", "src:help-produtos-platform"),
-            comece=["func:metadata-api", "func:tooling-api"],
+            comece=["func:classes-apex", "func:sandboxes", "func:metadata-api"],
             analogia=("Como reformar uma casa com planta: testa-se na maquete antes de mexer na obra.",
                       "Na maquete, tudo vai junto. Aqui, a planta são arquivos de metadados; o que não é metadado, como registros e atribuições de permissão, não vai no deploy.")),
         "encadeamento": enc(
-            "Código e componentes vivem como metadados em dois formatos: o source format, usado no projeto, e o Metadata API format. Testes "
-            "garantem que funcionam; sandboxes e scratch orgs isolam o trabalho; pacotes agrupam componentes e dependências; e a "
-            "implantação leva tudo para produção, com versionamento e caminho de volta.",
-            E("src:sfdx-dev-guide", "src:sdr-registry", "src:mdapi-intro", "src:help-produtos-platform")),
+            "Roteiro pelas seis seções do tema. 1) 'Código e bundles': o que é construído, como classes Apex, Lightning web components, "
+            "Aura components, Visualforce e static resources. 2) 'Testes': como se confere que funciona, com testes Apex (e a cobertura "
+            "mínima para implantar) e testes Jest de LWC. 3) 'Pacotes e dependências': como agrupar o metadado em partes instaláveis. "
+            "4) 'Source format e Metadata API format': os dois formatos de arquivo e o projeto Salesforce DX. 5) 'Ambientes e sandboxes': "
+            "onde se desenvolve e testa. 6) 'Versionamento, deploy e recuperação': como a mudança chega à produção, pela Metadata API, "
+            "por change sets ou pelo DevOps Center.",
+            E("src:mdapi-apexclass", "src:apex-code-coverage", "src:sfdx-unlocked-whats", "src:sfdx-project-setup", "src:help-sandbox-types",
+              "src:help-change-sets", "src:mdapi-intro")),
         "avancado": [
-            av("decisao", "deploy/retrieve ou source tracking",
-               "A Metadata API indica deploy() e retrieve() para as fases finais, como implantar em produção, e source push/pull com source "
-               "tracking nas fases intermediárias, que movem só o que mudou.", E("src:mdapi-intro")),
+            # Código e bundles
+            av("implantacao", "Como metadado",
+               "Código: ApexClass, ApexTrigger, ApexPage, ApexComponent, LightningComponentBundle, AuraDefinitionBundle e StaticResource. "
+               "Testes: ApexTestSuite. Pacotes: InstalledPackage. Opções da org: ApexSettings, DevHubSettings, SourceTrackingSettings e "
+               "DeploymentSettings. Todos estão detalhados neste catálogo.",
+               E("src:mdapi-apexclass", "src:mdapi-lightningcomponentbundle", "src:mdapi-apextestsuite", "src:mdapi-installedpackage",
+                 "src:mdapi-apexsettings", "src:mdapi-devhubsettings", "src:mdapi-sourcetrackingsettings", "src:mdapi-deploymentsettings")),
             av("decisao", "Metadata API ou Tooling API",
                "A Tooling API expõe metadados como objetos consultáveis e serve a ferramentas que leem e alteram pedaços pequenos com "
                "rapidez; a Metadata API move o modelo completo. A exposição de cada objeto é própria de cada API.",
                E("src:tooling-intro", "src:mdapi-intro")),
+            # Testes
+            av("limite", "75% de cobertura para implantar Apex",
+               "Para implantar Apex ou empacotá-lo, os testes unitários precisam cobrir ao menos 75% do código Apex e passar. Chamadas a "
+               "System.debug e as próprias classes de teste não contam. A cobertura é um piso, não o objetivo: o teste precisa verificar "
+               "o comportamento.", E("src:apex-code-coverage", "src:apex-testing-best-practices")),
+            av("testes", "Que testes rodam num deploy",
+               "Sem nível de teste informado, um deploy para produção que traz classes ou triggers Apex roda todos os testes locais (os "
+               "de pacotes gerenciados não); sem componentes Apex, não roda nenhum. Fora de produção, por padrão nenhum teste roda. Os "
+               "níveis são NoTestRun, RunSpecifiedTests, RunLocalTests e RunAllTestsInOrg. Se um teste falha, o deploy inteiro é revertido.",
+               E("src:migration-running-tests", "src:migration-run-local-tests", "src:cli-deploy-validate")),
+            av("testes", "Teste unitário só no pro-code",
+               "Só LWC permite testes unitários escritos, por exemplo com Jest; Dynamic Forms e Screen Flow dependem de automação de "
+               "interface de ponta a ponta.", E(AF, "src:lwc-testing")),
+            # Pacotes
+            av("decisao", "Pacote desbloqueado ou gerenciado",
+               "Para quem não distribui a vários clientes, a documentação indica pacotes desbloqueados; os pacotes gerenciados de segunda "
+               "geração atendem parceiros que distribuem apps. No desbloqueado, o metadado instalado pode ser alterado direto na org, o "
+               "que pede governança.", E("src:pkg2-intro", "src:sfdx-unlocked-whats")),
+            # Formatos e ambientes
             av("atencao", "Nem todo tipo tem source tracking",
                "A lista de suporte do Salesforce CLI marca, para cada metadata type, se há deploy, retrieve e source tracking; alguns tipos "
                "só têm deploy e retrieve. Confira antes de contar com o rastreamento automático.", E("src:sdr-metadata-support")),
-            av("testes", "Teste unitário só no pro-code",
-               "Só LWC permite testes unitários escritos, por exemplo com Jest; Dynamic Forms e Screen Flow dependem de automação de "
-               "interface de ponta a ponta.", E(AF)),
+            av("decisao", "Sandbox ou scratch org",
+               "A sandbox é uma cópia da org de produção. A scratch org nasce vazia, é configurada por um arquivo de definição e expira "
+               "em até 30 dias. A documentação diz que snapshots e scratch orgs não substituem sandboxes no teste de aceitação.",
+               E("src:help-sandbox-licenses", "src:sfdx-scratch-orgs", "src:sfdx-snapshots")),
+            # Deploy
+            av("decisao", "deploy/retrieve ou source tracking",
+               "A Metadata API indica deploy() e retrieve() para as fases finais, como implantar em produção, e source push/pull com source "
+               "tracking nas fases intermediárias, que movem só o que mudou.", E("src:mdapi-intro")),
+            av("decisao", "Change set, CLI ou DevOps Center",
+               "Change sets enviam pelo Setup, só entre orgs ligadas à mesma produção, e só o que se altera pelo Setup. O Salesforce CLI "
+               "implanta a partir do projeto local, em source format por padrão. O Lifecycle Center registra as mudanças no controle de "
+               "versão e é apresentado como alternativa aos change sets.",
+               E("src:help-change-sets", "src:help-change-sets-connections", "src:cli-project-deploy-start", "src:help-lifecycle-center")),
+            av("limite", "Tamanho de um deploy",
+               "Um deploy ou retrieve pela Metadata API aceita até 10.000 arquivos e um .zip de até 39 MB (600 MB descompactado). Os 39 MB "
+               "vêm da codificação em base64 dentro de uma mensagem SOAP de até 50 MB. Um change set tem até 10.000 arquivos e 400 MB.",
+               E("src:mdapi-zip-file", "src:limits-metadata", "src:help-change-sets-outbound")),
         ],
     },
     "cls:observabilidade-auditoria-e-operacao": {

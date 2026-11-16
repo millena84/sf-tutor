@@ -1,0 +1,137 @@
+tema: Desenvolvimento, testes e entrega (rodada A1)
+obtido em 2026-11-16 por busca restrita a help.salesforce.com e developer.salesforce.com (WebSearch).
+método: leitura_resultado_busca. As páginas NÃO foram abertas por inteiro: só o trecho devolvido pela busca foi lido. Paráfrases em português.
+versão: páginas sem versão na URL (Ajuda e guias de desenvolvedor), salvo indicação.
+
+-- Ambientes
+[src:help-sandbox-types] Sandbox Types and Templates (help, platform.create_test_instance.htm): quatro tipos. Developer: desenvolvimento e teste em
+  ambiente isolado, com cópia da configuração (metadados) de produção. Developer Pro: o mesmo, com mais espaço para dados; serve também a testes de
+  integração e treinamento. Partial Copy: ambiente de teste. Full: réplica de produção, com todos os dados e metadados; o intervalo de refresh longo
+  dificulta usá-la para desenvolvimento.
+[src:help-sandbox-refresh] Refresh Your Sandbox (help, platform.data_sandbox_refresh.htm): intervalo de refresh por tipo: Developer 1 dia, Developer
+  Pro 1 dia, Partial Copy 5 dias, Full 29 dias, contado a partir do pedido de criação ou de refresh. Permissões: Manage Dev Sandboxes (só Developer e
+  Developer Pro) ou Manage Sandboxes (todos os tipos). Partial Copy pede um sandbox template. Sandbox clonada faz refresh a partir da org de origem.
+[src:help-sandbox-licenses] Sandbox Licenses and Storage Limits by Type (help, sf.data_sandbox_environments.htm): sandbox é uma cópia da org num
+  ambiente separado, isolada da produção, para teste e treinamento. A quantidade incluída varia por edição (tabela por tipo e edição); é possível
+  comprar sandboxes adicionais.
+[src:sfdx-scratch-orgs] Scratch Orgs (Salesforce DX Developer Guide, sfdx-dev-scratch-orgs.html): scratch org vive no máximo 30 dias; a duração é
+  escolhida na criação, de 1 a 30 dias, com padrão de 7. Por padrão vem vazia (sem objetos customizados, dados de exemplo, perfis e permission sets,
+  classes Apex etc.). Antes de criar, configura-se o "shape": features, settings, edição, licenças e limites; isso se faz com um scratch org
+  definition file ou com Org Shape.
+[src:sfdx-scratch-editions] Supported Scratch Org Editions and Allocations (sfdx-dev-scratch-orgs-editions-and-allocations.html): o Dev Hub pode ser
+  ligado nas edições Developer, Enterprise, Unlimited e Performance; a edição do Dev Hub define quantas scratch orgs se pode criar por dia e quantas
+  ficam ativas. Edições de scratch org: Developer, Enterprise, Group, Professional. Armazenamento: 500 MB de dados e 50 MB de arquivos.
+[src:sfdx-devhub-enable] Select and Enable a Dev Hub Org (sfdx-setup-enable-devhub.html): o Dev Hub cria scratch orgs, pacotes desbloqueados e
+  pacotes gerenciados de segunda geração, e é onde se gerenciam scratch orgs, pacotes e namespaces. Caminho: Setup, Quick Find "Dev Hub", Dev Hub.
+  Para pacote desbloqueado que vai para outras orgs, a página manda ligar o Dev Hub numa org de produção ativa.
+[src:sfdx-snapshots] Scratch Org Snapshots (sfdx-dev-snapshots-intro.html): snapshot é a cópia de uma scratch org num ponto do tempo (pacotes
+  instalados, features, limites, licenças, metadados e dados), usada para criar outras scratch orgs; expira em 90 dias; não substitui sandbox em teste
+  de aceitação.
+[src:apex-choose-org] Choose a Salesforce Org for Apex Development (Apex Developer Guide, apex-intro-get-dev-account.html): desenvolve-se Apex em
+  sandbox, scratch org ou Developer Edition, não direto em produção. Developer Edition não tem source tracking e não serve de ambiente de
+  desenvolvimento no DevOps Center.
+
+-- Testes
+[src:apex-code-coverage] Testing and Code Coverage (Apex Developer Guide, atlas apexcode, apex_code_coverage_intro.htm): para implantar Apex ou
+  empacotá-lo para o AppExchange, os testes unitários precisam cobrir ao menos 75% do código Apex e passar. Cobertura indica, mas não garante, a
+  eficácia dos testes; os testes devem verificar o comportamento.
+[src:apex-testing-best-practices] (já registrada) Testing Best Practices: chamadas a System.debug e os próprios métodos e classes de teste não contam
+  na cobertura; ao implantar em produção, por padrão roda cada teste unitário do namespace da org.
+[src:apex-writing-tests] Writing Tests (Apex Developer Guide, apex-intro-writing-tests.html): testes unitários são métodos de classe que conferem se
+  um trecho de código funciona; ficam em classes de teste, anotadas com @IsTest; a página recomenda @IsTest em vez de testMethod.
+[src:sfdx-run-apex-tests] Run Apex Tests (Salesforce DX Developer Guide, sfdx-dev-testing.html): 75% do total de código Apex da org; a cobertura
+  atual sai do Salesforce CLI (flag --code-coverage do comando apex run test) ou do VS Code. Para execuções grandes: Setup | Apex Test Execution |
+  Options, opção Store Only Aggregate Code Coverage, que desliga a cobertura por classe.
+[src:migration-running-tests] Running Tests in a Deployment (Ant Migration Tool Guide, meta-deploy-running-tests.html): sem nível de teste informado,
+  o padrão depende do conteúdo do pacote. Em produção, se o pacote tem classes ou triggers Apex, rodam todos os testes locais (os de pacotes
+  gerenciados não); sem componentes Apex, nenhum teste roda por padrão. Se um teste falha, o deploy inteiro é revertido. Até a API 33.0, os testes
+  também rodavam para outros componentes, como objetos customizados.
+[src:migration-run-local-tests] Run the Same Tests in Sandbox and Production Deployments (forcemigrationtool-deploy-run-local-tests.html): por padrão
+  nenhum teste roda em deploy para org que não é de produção; desde a API 34.0 dá para escolher o nível (testLevel), por exemplo RunLocalTests, que
+  vale qualquer que seja o conteúdo do pacote.
+[src:cli-deploy-validate] project deploy pipeline validate (Beta) (Salesforce CLI Command Reference): níveis de teste do deploy: NoTestRun,
+  RunSpecifiedTests, RunLocalTests, RunAllTestsInOrg. NoTestRun só vale para ambientes de desenvolvimento (sandbox, Developer Edition, trial) e é o
+  padrão neles. Uma validação roda os testes sem implantar, para implantar depois sem rodá-los de novo.
+[src:lwc-testing] Test Lightning Web Components (LWC Developer Guide, testing.html): testes unitários de LWC são escritos com Jest; não rodam em
+  navegador nem se conectam a uma org; só funcionam com LWC, não com Aura.
+[src:lwc-component-tests] Component Tests (create-components-tests.html): os testes ficam numa pasta __tests__ no topo da pasta do componente; os
+  arquivos terminam em .js (recomendado .test.js).
+[src:lwc-jest-create] Write Jest Tests (unit-testing-using-jest-create-tests.html): a pasta __tests__ vai para o controle de versão; a página manda
+  configurar o projeto para que ela nunca seja salva na Salesforce.
+[src:lwc-e2e] End-to-End Tests / DOM Inspection Tests Are Subject to Change (testing-dom-api.html): HTML, CSS e DOM do Lightning Experience podem
+  mudar e não são API estável; testes de interface (por exemplo Selenium WebDriver) ficam para ponta a ponta e pedem manutenção contínua.
+
+-- Código e bundles
+[src:lwc-config-file] Component Configuration File (create-components-meta-file.html): todo Lightning web component precisa de um arquivo de
+  configuração componentName.js-meta.xml, que define os metadados do componente (targets e configuração de design); sem ele, o push dá erro.
+[src:lwc-migrate-bundles] Migrate Component Bundle Files (migrate-bundles.html): correspondência Aura → LWC: sample.cmp → sample.html;
+  controller, helper e renderer (.js) → um único sample.js; sample.design → sample.js-meta.xml.
+[src:lwc-third-party] Use Third-Party Web Components in LWC (create-use-third-party-components.html): static resource: até 5 MB cada e 250 MB por org;
+  arquivo JavaScript de um componente: até 1 MB.
+
+-- Pacotes
+[src:sfdx-unlocked-intro] Unlocked Packages (sfdx-dev-unlocked-pkg-intro.html): modelo source-driven, em que a fonte da verdade é o controle de
+  versão, não a org; parceiros que distribuem pelo AppExchange usam pacotes gerenciados de segunda geração.
+[src:sfdx-unlocked-whats] What's an Unlocked Package? (sfdx-dev-unlocked-pkg-whats-a-package.html): pacote é um contêiner de metadados (features,
+  customizações e schema relacionados). Diferente do gerenciado, o metadado de um pacote desbloqueado pode ser alterado direto em produção; por isso
+  a página pede governança, para um upgrade não sobrescrever mudanças feitas à mão. Acrescentar metadados cria uma nova versão do pacote.
+[src:sfdx-package-dev-model] Package-Based Development Model (sfdx-dev-unlocked-pkg-pkg-dev.html): pacotes desbloqueados declaram dependências, em
+  vários níveis, de pacotes gerenciados e desbloqueados; o modelo organiza em pacotes o metadado solto da org.
+[src:pkg2-intro] Second-Generation Managed Packages (pkg2-dev, sfdx-dev-dev2gp.html): voltados a parceiros ISV; controle de versão como fonte da
+  verdade, sem packaging org nem patch org; operações pelo Salesforce CLI. Para clientes e integradores que não distribuem a vários clientes, a
+  página indica pacotes desbloqueados.
+[src:pkg2-key-concepts] Key Concepts in Second-Generation Managed Packaging (sfdx-dev2gp-key-concepts.html): app = conjunto de features; metadado =
+  representação técnica; pacote = contêiner do metadado do app; instalar o pacote implanta o metadado na org; cada mudança gera nova versão.
+[src:pkg2-enable-devhub] Enable Dev Hub and Second-Generation Managed Packaging (sfdx-pkg-enable-devhub.html): depois de ligados, nem o Dev Hub nem
+  a opção de pacotes desbloqueados e gerenciados 2GP podem ser desligados.
+
+-- Formatos de arquivo e projeto
+[src:sfdx-project-setup] Project Setup (sfdx-dev-workspace-setup.html): um projeto Salesforce DX reúne metadados (código e configuração), templates
+  de org, dados de exemplo e testes; o que o define é o arquivo sfdx-project.json. Metadado recuperado direto pela Metadata API vem em metadata format.
+[src:sfdx-project-config] Salesforce DX Project Configuration (sfdx-dev-ws-config.html): sfdx-project.json diz onde ficam os arquivos e facilita
+  autorizar orgs e criar pacotes 2GP; sourceApiVersion define os campos recuperados de cada metadata type em deploy, retrieve e convert.
+[src:sfdx-decomposed] Decomposed Metadata Types (sfdx-dev-ws-decomposed-md-types.html): decompor é dividir um XML grande em arquivos menores por
+  subtipo; o resultado é o source format. Por padrão, o projeto sempre decompõe custom objects e custom object translations; outros tipos, como
+  permission sets e custom labels, são opcionais e configurados em sfdx-project.json pelo comando project convert source-behavior.
+[src:sfdx-convert-mdapi] Convert Files in Metadata Format to Source Format (sfdx-dev-ws-convert-mdapi.html): comando project convert mdapi; arquivos
+  a ignorar vão em .forceignore.
+[src:cli-convert-source] project convert source (CLI Command Reference): converte source format em metadata format, para implantar pela Metadata API.
+[src:vscode-source-format] Source Format (Salesforce Extensions for VS Code, source-format.html): as extensões supõem source format, que é otimizado
+  para controle de versão.
+[src:cli-project-deploy-start] project deploy start (CLI Command Reference): implanta do projeto local para a org; por padrão em source format;
+  --metadata-dir implanta metadata format; --ignore-errors nunca deve ser usado em produção.
+[src:sfdx-develop-any-org] Develop Against Any Org (sfdx-dev-develop-any-org.html): project retrieve start e project deploy start servem a orgs sem
+  source tracking; o que implantar se indica por package.xml, por nomes de componentes ou por caminhos de arquivos.
+
+-- Deploy
+[src:mdapi-zip-file] Deploying and Retrieving Metadata with the Zip File (Metadata API Developer Guide, file_based_zip_file.htm): deploy() e
+  retrieve() trabalham com um .zip que traz o manifesto package.xml (o que recuperar ou implantar) e os componentes em pastas. Limites: até 10.000
+  arquivos por vez; .zip de até 39 MB; descompactado, até 600 MB.
+[src:limits-metadata] Metadata Limits (Salesforce Developer Limits and Allocations Quick Reference): os mesmos limites; o motivo dos 39 MB é que a
+  Metadata API codifica o .zip em base64 e a mensagem SOAP não passa de 50 MB.
+[src:help-change-sets] Change Sets (help, sf.changesets.htm): enviam customizações de uma org a outra; só contêm o que se altera pelo Setup; não
+  levam dados (registros). Outbound change set: criado na org em que se está, para enviar a outra. Permissões: Create and Upload Change Sets; Deploy
+  Change Sets e Modify Metadata Through Metadata API Functions.
+[src:help-change-sets-connections] Deployment Connections for Change Sets (help, changesets_about_connection.htm): só há deployment connection entre
+  orgs ligadas à mesma produção (produção e suas sandboxes, e as sandboxes entre si); cada org precisa ser autorizada a enviar e receber.
+[src:help-change-sets-outbound] Outbound Change Sets (help, sf.changesets_about_outbound.htm): até 10.000 arquivos e 400 MB; a página recomenda não
+  passar de cerca de 5.000 componentes. Enviar não implanta: a org de destino precisa fazer o deploy.
+[src:help-change-sets-best] Change Sets Best Practices (help, changesets_best_practices.htm): inclua os componentes dependentes que não existem no
+  destino; a org de origem fica bloqueada durante a validação do outbound e a de destino durante o deploy do inbound.
+[src:help-change-sets-deploy] Deploy Using Change Sets (help, code_tools_changesets.htm): caminho: Setup, Quick Find "Outbound Change Sets".
+[src:help-lifecycle-center] Govern, Manage, and Release Changes with Lifecycle Center (help, platform.devops_center_overview.htm): o Lifecycle Center
+  registra mudanças de configuração e de código num sistema de controle de versão, como fonte única da verdade, e gerencia os branches; a página o
+  apresenta como alternativa aos change sets.
+[src:help-devops-pipeline-plan] Plan Your Pipeline (help, platform.devops_center_pipeline_plan.htm): pipeline é a sequência de estágios pelos quais
+  os work items passam; cada estágio tem um branch; o pipeline não pode ser alterado depois de alguma mudança ser promovida; só o ambiente final de
+  release é obrigatório.
+[src:help-devops-promote] Promote Work Items Through Your Pipeline (help, platform.devops_center_work_items_promote.htm): cada estágio corresponde a
+  um ambiente (uma org) e a um branch; promover faz merge do branch do estágio atual no do próximo e implanta na org do próximo. Recomendação: ao
+  menos um estágio de teste e um de produção; cerca de 50 work items ou menos por estágio sem bundle.
+[src:help-devops-center-mp] DevOps Center (Managed Package) (help, sf.devops_center_get_started.htm): um projeto reúne work items, o ponteiro para o
+  repositório e os ambientes de desenvolvimento, que são sandboxes Developer ou Developer Pro com source tracking, ou scratch orgs.
+[src:help-devops-setup] Install and Configure DevOps Center (Managed Package) (help, devops_center_setup.htm): repositórios suportados: GitHub na
+  nuvem (GitHub Enterprise Server não); Bitbucket Cloud em beta.
+
+Não lido nesta rodada: caminho de Setup de sandboxes; limites de scratch orgs por edição do Dev Hub (a tabela não veio no trecho); valores de
+  targets de LWC; quick deploy; referência de Apex (linguagem); AppExchange e security review; pacotes gerenciados de primeira geração (1GP).
