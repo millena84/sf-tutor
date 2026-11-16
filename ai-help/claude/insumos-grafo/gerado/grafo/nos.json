@@ -159,6 +159,15 @@
   },
   {
     "estado": "verificado",
+    "grupo_cor": "cls:execucao-assincrona-lotes-e-agendamento",
+    "id": "func:apex-agendado",
+    "resumo": "Classe Apex que roda em horário definido. A classe implementa a interface Schedulable e é agendada pela tela Schedule Apex ou por código, com uma expressão cron.",
+    "rotulo": "Apex agendado",
+    "rotulo_tecnico": "Scheduled Apex",
+    "tipo": "funcionalidade"
+  },
+  {
+    "estado": "verificado",
     "grupo_cor": "cls:automacao-de-processos-e-regras-de-negocio",
     "id": "func:apex-triggers",
     "resumo": "Código Apex que roda antes ou depois de um registro ser inserido, alterado, excluído, mesclado ou restaurado.",
@@ -191,6 +200,15 @@
     "resumo": "Configura um provedor externo (OpenID Connect, Google, Microsoft, Salesforce etc.) para login único e para obter tokens.",
     "rotulo": "Provedores de autenticação",
     "rotulo_tecnico": "Auth Providers",
+    "tipo": "funcionalidade"
+  },
+  {
+    "estado": "verificado",
+    "grupo_cor": "cls:execucao-assincrona-lotes-e-agendamento",
+    "id": "func:batch-apex",
+    "resumo": "Forma de processar um volume grande de registros em Apex: a classe coleta os registros e a plataforma os entrega em lotes, um de cada vez, cada lote com os próprios limites.",
+    "rotulo": "Batch Apex",
+    "rotulo_tecnico": "Batch Apex",
     "tipo": "funcionalidade"
   },
   {
@@ -474,6 +492,15 @@
   },
   {
     "estado": "verificado",
+    "grupo_cor": "cls:execucao-assincrona-lotes-e-agendamento",
+    "id": "func:future-methods",
+    "resumo": "Métodos Apex marcados com a anotação Future, que rodam em segundo plano quando há recursos. A documentação diz que Queueable cobre os mesmos usos e oferece mais: Id do job, tipos não primitivos e encadeamento.",
+    "rotulo": "Future methods",
+    "rotulo_tecnico": "Future Methods",
+    "tipo": "funcionalidade"
+  },
+  {
+    "estado": "verificado",
     "grupo_cor": "cls:organizacao-e-configuracoes-base",
     "id": "func:horario-comercial",
     "resumo": "Define os dias, horários e fuso em que o atendimento funciona.",
@@ -560,6 +587,15 @@
     "resumo": "API que move metadados (a estrutura e a configuração da org) entre orgs. Trabalha com metadata types e seus componentes; não trata dados de negócio.",
     "rotulo": "Metadata API",
     "rotulo_tecnico": "Metadata API",
+    "tipo": "funcionalidade"
+  },
+  {
+    "estado": "verificado",
+    "grupo_cor": "cls:execucao-assincrona-lotes-e-agendamento",
+    "id": "func:monitoramento-de-jobs-apex",
+    "resumo": "As telas do Setup e os objetos API que mostram os jobs assíncronos: Apex Jobs lista os jobs e o uso do limite de 24 horas; Apex Flex Queue, os batches em espera; Scheduled Jobs, os jobs agendados.",
+    "rotulo": "Monitoramento de jobs Apex",
+    "rotulo_tecnico": "Apex Jobs, Apex Flex Queue and Scheduled Jobs",
     "tipo": "funcionalidade"
   },
   {
@@ -749,6 +785,15 @@
     "resumo": "Interface única para publicar e assinar eventos de plataforma, eventos de alteração e eventos de monitoramento em tempo real. Usa gRPC e HTTP/2, com mensagens em Avro.",
     "rotulo": "Pub/Sub API",
     "rotulo_tecnico": "Pub/Sub API",
+    "tipo": "funcionalidade"
+  },
+  {
+    "estado": "verificado",
+    "grupo_cor": "cls:execucao-assincrona-lotes-e-agendamento",
+    "id": "func:queueable-apex",
+    "resumo": "Forma de enfileirar um trabalho em Apex para rodar em segundo plano. Devolve o Id do job, aceita tipos complexos como parâmetro e permite encadear um job a outro.",
+    "rotulo": "Queueable Apex",
+    "rotulo_tecnico": "Queueable Apex",
     "tipo": "funcionalidade"
   },
   {
@@ -21433,6 +21478,159 @@
       "padrao"
     ],
     "estado": "verificado",
+    "id": "obj:AsyncApexJob",
+    "resumo": "O registro de um job Apex: batch, future method, Queueable, Apex agendado ou recálculo de sharing. Mostra o tipo, o estado e o andamento.",
+    "rotulo": "AsyncApexJob",
+    "tipo": "objeto_api"
+  },
+  {
+    "apis": [
+      "padrao"
+    ],
+    "estado": "verificado",
+    "explicacao": "explicada",
+    "id": "obj:AsyncApexJob.ApexClassId",
+    "rotulo": "ApexClassId",
+    "tipo": "campo_api",
+    "tipo_tecnico": "reference"
+  },
+  {
+    "apis": [
+      "padrao"
+    ],
+    "estado": "verificado",
+    "explicacao": "explicada",
+    "id": "obj:AsyncApexJob.CompletedDate",
+    "rotulo": "CompletedDate",
+    "tipo": "campo_api",
+    "tipo_tecnico": "dateTime"
+  },
+  {
+    "apis": [
+      "padrao"
+    ],
+    "estado": "verificado",
+    "explicacao": "explicada",
+    "id": "obj:AsyncApexJob.CronTriggerId",
+    "rotulo": "CronTriggerId",
+    "tipo": "campo_api",
+    "tipo_tecnico": "reference"
+  },
+  {
+    "apis": [
+      "padrao"
+    ],
+    "estado": "verificado",
+    "explicacao": "explicada",
+    "id": "obj:AsyncApexJob.ExtendedStatus",
+    "rotulo": "ExtendedStatus",
+    "tipo": "campo_api",
+    "tipo_tecnico": "string"
+  },
+  {
+    "apis": [
+      "padrao"
+    ],
+    "estado": "verificado",
+    "explicacao": "explicada",
+    "id": "obj:AsyncApexJob.JobItemsProcessed",
+    "rotulo": "JobItemsProcessed",
+    "tipo": "campo_api",
+    "tipo_tecnico": "int"
+  },
+  {
+    "apis": [
+      "padrao"
+    ],
+    "estado": "verificado",
+    "explicacao": "explicada",
+    "id": "obj:AsyncApexJob.JobType",
+    "rotulo": "JobType",
+    "tipo": "campo_api",
+    "tipo_tecnico": "picklist"
+  },
+  {
+    "apis": [
+      "padrao"
+    ],
+    "estado": "verificado",
+    "explicacao": "explicada",
+    "id": "obj:AsyncApexJob.LastProcessed",
+    "rotulo": "LastProcessed",
+    "tipo": "campo_api",
+    "tipo_tecnico": "string"
+  },
+  {
+    "apis": [
+      "padrao"
+    ],
+    "estado": "verificado",
+    "explicacao": "explicada",
+    "id": "obj:AsyncApexJob.LastProcessedOffset",
+    "rotulo": "LastProcessedOffset",
+    "tipo": "campo_api",
+    "tipo_tecnico": "int"
+  },
+  {
+    "apis": [
+      "padrao"
+    ],
+    "estado": "verificado",
+    "explicacao": "explicada",
+    "id": "obj:AsyncApexJob.MethodName",
+    "rotulo": "MethodName",
+    "tipo": "campo_api",
+    "tipo_tecnico": "string"
+  },
+  {
+    "apis": [
+      "padrao"
+    ],
+    "estado": "verificado",
+    "explicacao": "explicada",
+    "id": "obj:AsyncApexJob.NumberOfErrors",
+    "rotulo": "NumberOfErrors",
+    "tipo": "campo_api",
+    "tipo_tecnico": "int"
+  },
+  {
+    "apis": [
+      "padrao"
+    ],
+    "estado": "verificado",
+    "explicacao": "explicada",
+    "id": "obj:AsyncApexJob.ParentJobId",
+    "rotulo": "ParentJobId",
+    "tipo": "campo_api",
+    "tipo_tecnico": "reference"
+  },
+  {
+    "apis": [
+      "padrao"
+    ],
+    "estado": "verificado",
+    "explicacao": "explicada",
+    "id": "obj:AsyncApexJob.Status",
+    "rotulo": "Status",
+    "tipo": "campo_api",
+    "tipo_tecnico": "picklist"
+  },
+  {
+    "apis": [
+      "padrao"
+    ],
+    "estado": "verificado",
+    "explicacao": "explicada",
+    "id": "obj:AsyncApexJob.TotalJobItems",
+    "rotulo": "TotalJobItems",
+    "tipo": "campo_api",
+    "tipo_tecnico": "int"
+  },
+  {
+    "apis": [
+      "padrao"
+    ],
+    "estado": "verificado",
     "id": "obj:AuthProvider",
     "resumo": "Expõe por API os provedores de autenticação (login por serviço externo), com criação e edição.",
     "rotulo": "AuthProvider",
@@ -24312,6 +24510,158 @@
     "rotulo": "IsEmailBounced",
     "tipo": "campo_api",
     "tipo_tecnico": "(a extrair)"
+  },
+  {
+    "apis": [
+      "padrao"
+    ],
+    "estado": "verificado",
+    "id": "obj:CronJobDetail",
+    "resumo": "Os detalhes de um job agendado: o nome e o tipo (Apex agendado, flow agendado, atualização de dashboard e outros).",
+    "rotulo": "CronJobDetail",
+    "tipo": "objeto_api"
+  },
+  {
+    "apis": [
+      "padrao"
+    ],
+    "estado": "verificado",
+    "explicacao": "explicada",
+    "id": "obj:CronJobDetail.JobType",
+    "rotulo": "JobType",
+    "tipo": "campo_api",
+    "tipo_tecnico": "picklist"
+  },
+  {
+    "apis": [
+      "padrao"
+    ],
+    "estado": "verificado",
+    "explicacao": "explicada",
+    "id": "obj:CronJobDetail.Name",
+    "rotulo": "Name",
+    "tipo": "campo_api",
+    "tipo_tecnico": "string"
+  },
+  {
+    "apis": [
+      "padrao"
+    ],
+    "estado": "verificado",
+    "id": "obj:CronTrigger",
+    "resumo": "A agenda de um job agendado: a expressão cron, a próxima e a última execução e o estado. Parecido com um cron job de UNIX.",
+    "rotulo": "CronTrigger",
+    "tipo": "objeto_api"
+  },
+  {
+    "apis": [
+      "padrao"
+    ],
+    "estado": "verificado",
+    "explicacao": "explicada",
+    "id": "obj:CronTrigger.CronExpression",
+    "rotulo": "CronExpression",
+    "tipo": "campo_api",
+    "tipo_tecnico": "string"
+  },
+  {
+    "apis": [
+      "padrao"
+    ],
+    "estado": "verificado",
+    "explicacao": "explicada",
+    "id": "obj:CronTrigger.CronJobDetailId",
+    "rotulo": "CronJobDetailId",
+    "tipo": "campo_api",
+    "tipo_tecnico": "reference"
+  },
+  {
+    "apis": [
+      "padrao"
+    ],
+    "estado": "verificado",
+    "explicacao": "explicada",
+    "id": "obj:CronTrigger.EndTime",
+    "rotulo": "EndTime",
+    "tipo": "campo_api",
+    "tipo_tecnico": "dateTime"
+  },
+  {
+    "apis": [
+      "padrao"
+    ],
+    "estado": "verificado",
+    "explicacao": "explicada",
+    "id": "obj:CronTrigger.NextFireTime",
+    "rotulo": "NextFireTime",
+    "tipo": "campo_api",
+    "tipo_tecnico": "dateTime"
+  },
+  {
+    "apis": [
+      "padrao"
+    ],
+    "estado": "verificado",
+    "explicacao": "explicada",
+    "id": "obj:CronTrigger.OwnerId",
+    "rotulo": "OwnerId",
+    "tipo": "campo_api",
+    "tipo_tecnico": "reference"
+  },
+  {
+    "apis": [
+      "padrao"
+    ],
+    "estado": "verificado",
+    "explicacao": "explicada",
+    "id": "obj:CronTrigger.PreviousFireTime",
+    "rotulo": "PreviousFireTime",
+    "tipo": "campo_api",
+    "tipo_tecnico": "dateTime"
+  },
+  {
+    "apis": [
+      "padrao"
+    ],
+    "estado": "verificado",
+    "explicacao": "explicada",
+    "id": "obj:CronTrigger.StartTime",
+    "rotulo": "StartTime",
+    "tipo": "campo_api",
+    "tipo_tecnico": "dateTime"
+  },
+  {
+    "apis": [
+      "padrao"
+    ],
+    "estado": "verificado",
+    "explicacao": "explicada",
+    "id": "obj:CronTrigger.State",
+    "rotulo": "State",
+    "tipo": "campo_api",
+    "tipo_tecnico": "string"
+  },
+  {
+    "apis": [
+      "padrao"
+    ],
+    "estado": "verificado",
+    "explicacao": "explicada",
+    "id": "obj:CronTrigger.TimeZoneSidKey",
+    "rotulo": "TimeZoneSidKey",
+    "tipo": "campo_api",
+    "tipo_tecnico": "picklist"
+  },
+  {
+    "apis": [
+      "padrao"
+    ],
+    "estado": "verificado",
+    "explicacao": "explicada",
+    "id": "obj:CronTrigger.TimesTriggered",
+    "rotulo": "TimesTriggered",
+    "tipo": "campo_api",
+    "tipo_tecnico": "int"
   },
   {
     "apis": [
@@ -37815,7 +38165,7 @@
     "estado": "desconhecido",
     "grupo_cor": "cls:execucao-assincrona-lotes-e-agendamento",
     "id": "sub:agendamento",
-    "recorte": "curadoria",
+    "recorte": "parcial",
     "rotulo": "Agendamento",
     "sigla": "ASY-04",
     "tipo": "subclassificacao"
@@ -37896,7 +38246,7 @@
     "estado": "desconhecido",
     "grupo_cor": "cls:execucao-assincrona-lotes-e-agendamento",
     "id": "sub:batch",
-    "recorte": "curadoria",
+    "recorte": "parcial",
     "rotulo": "Batch",
     "sigla": "ASY-01",
     "tipo": "subclassificacao"
@@ -37914,7 +38264,7 @@
     "estado": "desconhecido",
     "grupo_cor": "cls:execucao-assincrona-lotes-e-agendamento",
     "id": "sub:caminhos-assincronos",
-    "recorte": "curadoria",
+    "recorte": "parcial",
     "rotulo": "Caminhos assíncronos",
     "sigla": "ASY-05",
     "tipo": "subclassificacao"
@@ -38121,7 +38471,7 @@
     "estado": "desconhecido",
     "grupo_cor": "cls:execucao-assincrona-lotes-e-agendamento",
     "id": "sub:future-e-mecanismos-legados",
-    "recorte": "curadoria",
+    "recorte": "parcial",
     "rotulo": "Future e mecanismos legados quando aplicáveis",
     "sigla": "ASY-03",
     "tipo": "subclassificacao"
@@ -38301,7 +38651,7 @@
     "estado": "desconhecido",
     "grupo_cor": "cls:execucao-assincrona-lotes-e-agendamento",
     "id": "sub:monitoramento-de-jobs-e-limites",
-    "recorte": "curadoria",
+    "recorte": "parcial",
     "rotulo": "Monitoramento de jobs e limites",
     "sigla": "ASY-07",
     "tipo": "subclassificacao"
@@ -38382,7 +38732,7 @@
     "estado": "desconhecido",
     "grupo_cor": "cls:execucao-assincrona-lotes-e-agendamento",
     "id": "sub:processamento-orientado-a-eventos",
-    "recorte": "curadoria",
+    "recorte": "parcial",
     "rotulo": "Processamento orientado a eventos",
     "sigla": "ASY-06",
     "tipo": "subclassificacao"
@@ -38400,7 +38750,7 @@
     "estado": "desconhecido",
     "grupo_cor": "cls:execucao-assincrona-lotes-e-agendamento",
     "id": "sub:queueable",
-    "recorte": "curadoria",
+    "recorte": "parcial",
     "rotulo": "Queueable",
     "sigla": "ASY-02",
     "tipo": "subclassificacao"

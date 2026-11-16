@@ -373,30 +373,86 @@ S["sub:acessibilidade-e-personalizacao"] = {
 
 # ------------------------------------------------------------------ Execução assíncrona
 S["sub:batch"] = {
-    "para_iniciantes": ini("Batch Apex processa grandes volumes de registros dividindo o trabalho em partes.",
-                           "Recalcular um campo em todas as contas da org durante a madrugada.", E("src:apex-async-overview")),
-    "encadeamento": enc("O agendamento dispara execuções em horário definido, e o andamento fica em 'Monitoramento de jobs e limites'.", E("src:apex-async-overview")),
-    "avancado": [av("limite", "Fila do Batch Apex", "No máximo cinco jobs Batch Apex ativos, com uma Flex Queue de até 100 jobs adicionais.", E("src:apex-async-overview"))],
+    "para_iniciantes": ini("Batch Apex processa grandes volumes de registros dividindo o trabalho em lotes. A classe tem três métodos: start "
+                           "coleta os registros, execute processa um lote de cada vez e finish roda no fim.",
+                           "Recalcular um campo em todas as contas da org durante a madrugada.",
+                           E("src:apex-async-overview", "src:apex-batch-use", "src:apex-batch"), comece=["func:batch-apex"]),
+    "encadeamento": enc("O agendamento dispara execuções em horário definido, e o andamento fica em 'Monitoramento de jobs e limites'.",
+                        E("src:apex-async-overview", "src:apex-batch-use")),
+    "avancado": [
+        av("limite", "Fila do Batch Apex", "No máximo cinco jobs de batch em fila ou ativos ao mesmo tempo. A Apex flex queue segura até 100 "
+           "outros em Holding; quando há recursos, eles saem do topo da fila e passam a Queued. Com a flex queue cheia, o envio de um job "
+           "novo dá erro de limite.", E("src:apex-batch", "src:help-apex-flex-queue", "src:apex-batch-use")),
+        av("escala", "Tamanho do lote", "Por padrão, os registros são entregues em lotes de 200. Quando start devolve um QueryLocator, o "
+           "tamanho pode ir até 2.000. Os governor limits recomeçam a cada lote.", E("src:apexref-database", "src:apex-batch-use", "src:apex-gov-limits")),
+        av("limite", "Limite de 24 horas", "250.000 execuções de método de batch por 24 horas, ou licenças de usuário vezes 200, o que for "
+           "maior. Contam as execuções de start, execute e finish.", E("src:apex-batch-use")),
+        av("implantacao", "Como acompanhar", "Database.executeBatch devolve o Id de um registro AsyncApexJob, que mostra o estado, os lotes "
+           "processados e os que falharam. Na interface: Setup, Apex Jobs. Um batch também pode ser agendado para rodar uma vez, com "
+           "System.scheduleBatch.", E("src:apex-batch-use", "src:objref-asyncapexjob", "src:apexref-system")),
+        av("testes", "Em teste", "Num teste em execução, dá para submeter no máximo 5 jobs de batch.", E("src:apex-batch-use")),
+    ],
 }
 S["sub:queueable"] = {
     "para_iniciantes": ini("Queueable Apex coloca uma tarefa na fila para rodar em segundo plano quando houver recursos. Devolve um identificador "
                            "para acompanhar o job e permite encadear tarefas.",
                            "Depois de salvar um pedido, a chamada ao ERP vai para a fila e roda em seguida, sem prender a tela.",
-                           E("src:apex-queueable", "src:apex-async-overview")),
-    "encadeamento": enc("É o caminho recomendado no lugar dos future methods.", E("src:apex-queueable")),
-    "avancado": [av("decisao", "Queueable no lugar de future", "A Salesforce recomenda Queueable Apex no lugar de future methods: aceita tipos complexos, "
-                    "encadeia jobs e devolve um Id para acompanhar o trabalho.", E("src:apex-queueable", "src:apex-async-overview"))],
+                           E("src:apex-queueable", "src:apex-async-overview"), comece=["func:queueable-apex"]),
+    "encadeamento": enc("É o caminho recomendado no lugar dos future methods. O acompanhamento fica em 'Monitoramento de jobs e limites'.",
+                        E("src:apex-queueable", "src:apex-future")),
+    "avancado": [
+        av("decisao", "Queueable no lugar de future", "A Salesforce recomenda Queueable Apex no lugar de future methods: aceita tipos complexos, "
+           "encadeia jobs e devolve um Id para acompanhar o trabalho.", E("src:apex-queueable", "src:apex-async-overview", "src:apex-future")),
+        av("limite", "Quantos jobs por transação", "Uma transação síncrona enfileira até 50 jobs com System.enqueueJob; uma transação "
+           "assíncrona, só 1. É por isso que, dentro de um job, o encadeamento é de um job por vez.", E("src:apex-gov-limits")),
+        av("atencao", "Cadeias precisam de freio", "Numa cadeia de jobs, a documentação pede um mecanismo para frear ou parar; sem ele, "
+           "chega-se rápido ao limite diário de Apex assíncrono. Dá para definir a profundidade máxima da pilha; em orgs Developer Edition e "
+           "Trial, o máximo é 5.", E("src:apex-queueable", "src:apexref-system")),
+        av("implantacao", "Atraso ao enfileirar", "System.enqueueJob aceita um atraso mínimo de 0 a 10 minutos, ignorado em testes. O "
+           "metadata type ApexSettings guarda um atraso mínimo padrão da org para jobs enfileirados sem atraso próprio (DefaultQueueableDelay, "
+           "de 1 a 600 segundos).", E("src:apexref-system", "src:mdapi-apexsettings")),
+        av("escala", "Limites maiores", "Alguns governor limits são maiores do que no Apex síncrono, como o de heap.", E("src:apex-queueable")),
+    ],
 }
 S["sub:future-e-mecanismos-legados"] = {
     "para_iniciantes": ini("Future methods rodam um método em segundo plano para não atrasar a transação. A Salesforce recomenda substituí-los por Queueable.",
                            "Um método marcado como future faz uma chamada demorada sem atrasar a gravação que o disparou.",
-                           E("src:apex-async-overview", "src:apex-queueable")),
-    "encadeamento": enc("Fica aqui para quem mantém código existente; para código novo, veja Queueable.", E("src:apex-queueable")),
+                           E("src:apex-async-overview", "src:apex-queueable", "src:apex-future"), comece=["func:future-methods"]),
+    "encadeamento": enc("Fica aqui para quem mantém código existente; para código novo, veja Queueable.", E("src:apex-queueable", "src:apex-future")),
+    "avancado": [
+        av("limite", "Regras do método", "O método precisa ser static e void. Os parâmetros são tipos primitivos, arrays ou coleções de "
+           "primitivos: não aceita sObjects nem objetos.", E("src:apex-future")),
+        av("atencao", "De onde não se chama", "Não se chama um future method a partir de um batch ou de outro future. Em contexto queueable, o "
+           "limite é de 50 chamadas por invocação; a documentação não recomenda abrir muitos future methods a partir de um job enfileirado.",
+           E("src:apex-future")),
+        av("decisao", "Para que ainda serve", "Além de callouts, a documentação cita o uso para isolar operações DML em tipos diferentes de "
+           "objeto e evitar o erro de mixed DML. Queueable cobre os mesmos usos.", E("src:apex-future")),
+        av("limite", "Limite de 24 horas", "250.000 execuções por 24 horas, ou licenças de usuário vezes 200, o que for maior.", E("src:apex-future")),
+    ],
 }
 S["sub:agendamento"] = {
     "para_iniciantes": ini("Scheduled Apex roda uma classe em horário definido, como uma rotina diária ou semanal. Flows também podem ser disparados por agendamento.",
-                           "Todo domingo, uma rotina gera os lembretes da semana.", E("src:apex-async-overview", "src:mdapi-flow")),
+                           "Todo domingo, uma rotina gera os lembretes da semana.",
+                           E("src:apex-async-overview", "src:mdapi-flow", "src:apex-scheduler"), comece=["func:apex-agendado", "func:flow"]),
     "encadeamento": enc("Horários comerciais, que contam prazos de atendimento, são outro assunto, em Organização.", E("src:help-bh")),
+    "avancado": [
+        av("implantacao", "Duas formas de agendar", "A classe implementa a interface Schedulable. Agenda-se pela tela Schedule Apex (Setup, Apex "
+           "Classes) ou por código, com System.schedule, que recebe o nome do job, uma expressão cron e a classe.",
+           E("src:apex-scheduler", "src:help-schedule-apex", "src:apexref-system")),
+        av("limite", "Quantos jobs", "Só pode haver 100 jobs de Apex agendado ao mesmo tempo. A contagem se vê na página Scheduled Jobs ou "
+           "consultando CronTrigger e CronJobDetail.", E("src:apex-scheduler", "src:objref-cronjobdetail")),
+        av("atencao", "O horário não é garantia", "A plataforma agenda a classe para o horário pedido, mas a execução real pode atrasar "
+           "conforme a disponibilidade do serviço.", E("src:apex-scheduler", "src:help-schedule-apex")),
+        av("seguranca", "Roda como system", "O agendador roda como system: a classe executa, tenha ou não o usuário permissão para executá-la.",
+           E("src:help-schedule-apex")),
+        av("atencao", "Classe presa por job ativo", "Com um job agendado ativo, a classe e as classes que ela referencia não podem ser "
+           "atualizadas pela interface; há uma opção para liberar a atualização por deploy.", E("src:apex-scheduler")),
+        av("escala", "Limites síncronos", "Embora assíncrono, o Apex agendado usa os limites síncronos por transação. É comum a classe agendada "
+           "apenas iniciar um batch: a documentação cita o agendamento como ideal para manutenção diária ou semanal com Batch Apex.",
+           E("src:apex-gov-limits", "src:apex-scheduler")),
+        av("limite", "Flows agendados", "Schedule-triggered flows têm teto de 250.000 entrevistas por 24 horas, ou licenças de usuário vezes "
+           "200, o que for maior; cada registro devolvido pela consulta do flow cria uma entrevista.", E("src:help-flow-schedule-triggered")),
+    ],
 }
 S["sub:processamento-orientado-a-eventos"] = {
     "para_iniciantes": ini("Reage, dentro da org, a eventos publicados no barramento: um trigger ou automação assina o evento e faz o trabalho quando ele chega.",
@@ -407,11 +463,32 @@ S["sub:processamento-orientado-a-eventos"] = {
                     "desfaz o DML anterior. Limite as tentativas a menos de nove e tenha uma ação alternativa.", E("src:pe-retry-apex"))],
 }
 S["sub:monitoramento-de-jobs-e-limites"] = {
-    "para_iniciantes": ini("Acompanha as execuções assíncronas: em que estado está cada job e quanto dos limites já foi usado.",
+    "para_iniciantes": ini("Acompanha as execuções assíncronas: em que estado está cada job e quanto dos limites já foi usado. Há três telas no "
+                           "Setup (Apex Jobs, Apex Flex Queue e Scheduled Jobs) e três objetos consultáveis por API.",
                            "Um job enfileirado é acompanhado na tela Apex Jobs ou consultando AsyncApexJob pelo identificador devolvido.",
-                           E("src:apex-queueable", "src:apex-async-overview")),
+                           E("src:apex-queueable", "src:apex-async-overview", "src:help-apex-job-queue", "src:help-apex-flex-queue"),
+                           comece=["func:monitoramento-de-jobs-apex"]),
     "encadeamento": enc("Completa os mecanismos do tema; o consumo geral da org fica em Observabilidade.", E("src:apex-async-overview", "src:rest-limits")),
-    "avancado": [av("limite", "Fila do Batch Apex", "No máximo cinco jobs Batch Apex ativos, com uma Flex Queue de até 100 jobs adicionais.", E("src:apex-async-overview"))],
+    "avancado": [
+        av("implantacao", "O que cada tela mostra", "Apex Jobs lista os jobs dos últimos sete dias e o uso do limite de 24 horas de Apex "
+           "assíncrono. Apex Flex Queue lista os batches em Holding e permite reordená-los. Scheduled Jobs lista os jobs agendados. Um job "
+           "agendado aparece em duas telas, mas conta uma vez só no limite.",
+           E("src:help-apex-job-queue", "src:help-apex-flex-queue", "src:help-apex-code-overview")),
+        av("implantacao", "Os mesmos dados por API", "AsyncApexJob guarda os jobs Apex, com tipo, estado e lotes processados; serve para "
+           "consultar o que saiu da tela, que só mostra sete dias. CronTrigger guarda a agenda de cada job agendado, e CronJobDetail, o "
+           "nome e o tipo. Pela REST API, o recurso de limites traz o rótulo DailyAsyncApexExecutions.",
+           E("src:objref-asyncapexjob", "src:objref-crontrigger", "src:objref-cronjobdetail", "src:rest-limits", "src:help-apex-job-queue")),
+        av("atencao", "Nomes que confundem na tela", "Na coluna Job Type, future methods e classes Queueable ainda não executados aparecem como "
+           "Future. Em AsyncApexJob, os tipos BatchApexWorker e TestWorker são de uso interno: ao consultar um batch, filtre BatchApexWorker.",
+           E("src:help-apex-job-queue", "src:help-kb-asyncapexjob-types")),
+        av("limite", "Quando o limite estoura", "Acima do limite de 24 horas de jobs assíncronos ou do limite de jobs agendados, jobs novos são "
+           "rejeitados. A opção de limites elásticos, em Beta, processa o excedente em ritmo reduzido; em ApexSettings, o campo é "
+           "enableAsyncApexElasticExecutions.", E("src:help-org-health", "src:apex-elastic-limits", "src:mdapi-apexsettings")),
+        av("limite", "Fila do Batch Apex", "No máximo cinco jobs de batch em fila ou ativos, com uma Apex flex queue de até 100 jobs adicionais.",
+           E("src:apex-async-overview", "src:help-apex-flex-queue")),
+        av("seguranca", "Permissão para consultar", "Fora do system mode, acessar AsyncApexJob exige a permissão View Setup and Configuration.",
+           E("src:objref-asyncapexjob")),
+    ],
 }
 
 # ------------------------------------------------------------------ Integração

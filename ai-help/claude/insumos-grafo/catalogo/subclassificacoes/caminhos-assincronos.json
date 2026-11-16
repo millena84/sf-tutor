@@ -4,12 +4,15 @@
   "sigla": "ASY-05",
   "classificacao": "cls:execucao-assincrona-lotes-e-agendamento",
   "natureza": "curadoria_didatica",
-  "descricao": "Partes assíncronas de automações declarativas.",
+  "descricao": "As partes de um flow que rodam fora da gravação do registro: o caminho assíncrono e os scheduled paths.",
   "escopo": "Entram as partes assíncronas de automações declarativas.",
   "fora_do_escopo": "O fluxo como um todo fica em \"Flow e orquestração\".",
   "para_iniciantes": {
     "explicacao": "Num flow disparado por registro, o caminho assíncrono roda em segundo plano depois que a gravação é confirmada. É ele que permite chamar sistemas externos, o que o caminho imediato não pode fazer.",
     "exemplo": "Ao criar um pedido, o caminho assíncrono do flow avisa o sistema de entregas sem prender a gravação.",
+    "por_onde_comecar": [
+      "func:flow"
+    ],
     "evidencias": [
       {
         "fonte": "src:help-rtf-considerations"
@@ -47,9 +50,46 @@
           "fonte": "src:help-schedule-flow-considerations"
         }
       ]
+    },
+    {
+      "tipo": "escala",
+      "titulo": "Scheduled paths em lotes",
+      "texto": "Um scheduled path processa os registros em lotes: o tamanho padrão e máximo é 200, e o mínimo, 1. Reduzir o lote ajuda a não bater nos limites por transação. Se a execução falha, sai um e-mail de erro e há nova tentativa 15 minutos depois, até 5 tentativas.",
+      "evidencias": [
+        {
+          "fonte": "src:help-flow-scheduled-paths"
+        }
+      ]
+    },
+    {
+      "tipo": "decisao",
+      "titulo": "Caminho assíncrono ou scheduled path",
+      "texto": "O caminho assíncrono roda logo depois que a gravação é confirmada. O scheduled path roda parte do flow num deslocamento de tempo depois do evento.",
+      "evidencias": [
+        {
+          "fonte": "src:help-rtf-considerations"
+        },
+        {
+          "fonte": "src:help-flow-triggered"
+        }
+      ]
     }
   ],
-  "funcionalidades": [],
+  "funcionalidades": [
+    "func:flow"
+  ],
   "estado": "desconhecido",
-  "nota_estado": "Agrupamento proposto na especificação; fronteira ainda não cruzada com a documentação oficial."
+  "nota_estado": "Tema criado pelo projeto (00-especificacao-grafo.md), não é nomenclatura oficial da Salesforce. Cruzado em 2026-11-10 com áreas da documentação oficial listadas nas referências; a correspondência é parcial e o recorte continua sendo do projeto.",
+  "referencias_oficiais": [
+    {
+      "fonte": "src:help-rtf-considerations",
+      "secao": "Record-Triggered Flow Considerations",
+      "nota": "Cobre parte do tema: caminho assíncrono de record-triggered flows."
+    },
+    {
+      "fonte": "src:help-flow-scheduled-paths",
+      "secao": "Scheduled Paths",
+      "nota": "Cobre parte do tema: scheduled paths."
+    }
+  ]
 }

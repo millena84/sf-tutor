@@ -1,0 +1,241 @@
+{
+  "id": "obj:CronJobDetail",
+  "nome": "CronJobDetail",
+  "o_que_e": "Os detalhes de um job agendado: o nome e o tipo (Apex agendado, flow agendado, atualização de dashboard e outros).",
+  "papel": "Distinguir os tipos de job agendado ao consultar CronTrigger: por exemplo, contar quantos jobs de Apex agendado existem.",
+  "exposicoes": [
+    {
+      "api": "padrao",
+      "estado": "verificado",
+      "chamadas": [
+        "describeSObjects()",
+        "query()",
+        "retrieve()"
+      ],
+      "desde_versao": "29.0",
+      "evidencias": [
+        {
+          "fonte": "src:objref-cronjobdetail"
+        }
+      ]
+    },
+    {
+      "api": "tooling",
+      "estado": "desconhecido",
+      "nota": "Exposição na Tooling API não verificada.",
+      "desde_versao": null
+    }
+  ],
+  "campos": [
+    {
+      "id": "obj:CronJobDetail.JobType",
+      "nome": "JobType",
+      "tipo_tecnico": "picklist",
+      "o_que_e": "Tipo do job agendado, em código. Use o código para filtrar um tipo.",
+      "apis": [
+        "padrao"
+      ],
+      "propriedades_api": {
+        "estado": "verificado",
+        "create": false,
+        "defaulted_on_create": false,
+        "filter": true,
+        "group": true,
+        "nillable": true,
+        "restricted_picklist": true,
+        "sort": true,
+        "update": false,
+        "id_lookup": false,
+        "evidencias": [
+          {
+            "fonte": "src:objref-cronjobdetail"
+          }
+        ]
+      },
+      "somente_leitura": true,
+      "origem": {
+        "estado": "verificado",
+        "valor": "padrao_plataforma",
+        "nota": "Campo padrão do objeto documentado.",
+        "evidencias": [
+          {
+            "fonte": "src:objref-cronjobdetail"
+          }
+        ]
+      },
+      "obrigatoriedade": {
+        "valor": "desconhecida",
+        "estado": "desconhecido"
+      },
+      "default": {
+        "forma": "nao_declarado_na_fonte",
+        "estado": "desconhecido"
+      },
+      "dominio": {
+        "natureza": "enum_fechado",
+        "valores": [
+          {
+            "valor": "1"
+          },
+          {
+            "valor": "3"
+          },
+          {
+            "valor": "4"
+          },
+          {
+            "valor": "6"
+          },
+          {
+            "valor": "7"
+          },
+          {
+            "valor": "8"
+          },
+          {
+            "valor": "9"
+          },
+          {
+            "valor": "A"
+          }
+        ],
+        "lista_completa": "sim",
+        "estado": "verificado",
+        "evidencias": [
+          {
+            "fonte": "src:objref-cronjobdetail"
+          }
+        ],
+        "contexto": "Códigos e significados na página: 1 Data Export; 3 Dashboard Refresh; 4 Reporting Snapshot; 6 Scheduled Flow; 7 Scheduled Apex; 8 Report Run; 9 Batch Job; A Reporting Notification."
+      },
+      "disponibilidade": {
+        "desde_versao": null,
+        "ate_versao": null,
+        "estado": "desconhecido"
+      },
+      "explicacao": "explicada",
+      "estado": "verificado",
+      "evidencias": [
+        {
+          "fonte": "src:objref-cronjobdetail"
+        }
+      ]
+    },
+    {
+      "id": "obj:CronJobDetail.Name",
+      "nome": "Name",
+      "tipo_tecnico": "string",
+      "o_que_e": "Nome do job agendado.",
+      "apis": [
+        "padrao"
+      ],
+      "propriedades_api": {
+        "estado": "verificado",
+        "create": false,
+        "defaulted_on_create": false,
+        "filter": true,
+        "group": true,
+        "nillable": false,
+        "restricted_picklist": false,
+        "sort": true,
+        "update": false,
+        "id_lookup": true,
+        "evidencias": [
+          {
+            "fonte": "src:objref-cronjobdetail"
+          }
+        ]
+      },
+      "somente_leitura": true,
+      "origem": {
+        "estado": "verificado",
+        "valor": "padrao_plataforma",
+        "nota": "Campo padrão do objeto documentado.",
+        "evidencias": [
+          {
+            "fonte": "src:objref-cronjobdetail"
+          }
+        ]
+      },
+      "obrigatoriedade": {
+        "valor": "desconhecida",
+        "estado": "desconhecido"
+      },
+      "default": {
+        "forma": "nao_declarado_na_fonte",
+        "estado": "desconhecido"
+      },
+      "dominio": {
+        "natureza": "texto_livre",
+        "estado": "verificado",
+        "evidencias": [
+          {
+            "fonte": "src:objref-cronjobdetail"
+          }
+        ]
+      },
+      "disponibilidade": {
+        "desde_versao": null,
+        "ate_versao": null,
+        "estado": "desconhecido"
+      },
+      "explicacao": "explicada",
+      "estado": "verificado",
+      "evidencias": [
+        {
+          "fonte": "src:objref-cronjobdetail"
+        }
+      ]
+    }
+  ],
+  "consultas": [
+    {
+      "api": "padrao",
+      "soql": "SELECT Name, JobType FROM CronJobDetail WHERE JobType = '7'",
+      "contexto": "API padrão. O código 7 corresponde a Scheduled Apex.",
+      "validacao": "documental"
+    }
+  ],
+  "apex": {
+    "consulta_soql_direta": {
+      "estado": "verificado",
+      "valor": true,
+      "nota": "Objeto da API padrão: consultável por SOQL em Apex, sujeito a permissões.",
+      "evidencias": [
+        {
+          "fonte": "src:objref-cronjobdetail"
+        }
+      ]
+    },
+    "nota": "Exemplo Apex não fornecido nesta fase."
+  },
+  "juncao": false,
+  "setup": {
+    "estado": "nao_aplicavel",
+    "nota": "Objeto consultável via API; não é tela do Setup."
+  },
+  "cobertura": {
+    "estrutural": {
+      "estado": "completa",
+      "esperado": 2,
+      "presente": 2,
+      "nota": "Tabela de campos lida completa (2); Id não consta."
+    },
+    "explicativa": {
+      "estado": "completa",
+      "esperado": 2,
+      "presente": 2
+    },
+    "mapeamento": {
+      "estado": "parcial",
+      "nota": "Ver relacionamentos registrados."
+    }
+  },
+  "alertas": [],
+  "estado": "verificado",
+  "evidencias": [
+    {
+      "fonte": "src:objref-cronjobdetail"
+    }
+  ]
+}

@@ -1,14 +1,271 @@
 {
+  "avancado": [
+    {
+      "evidencias": [
+        {
+          "fonte": "src:apex-scheduler"
+        },
+        {
+          "fonte": "src:help-schedule-apex"
+        },
+        {
+          "fonte": "src:apexref-system"
+        }
+      ],
+      "texto": "A classe implementa a interface Schedulable. Agenda-se pela tela Schedule Apex (Setup, Apex Classes) ou por código, com System.schedule, que recebe o nome do job, uma expressão cron e a classe.",
+      "tipo": "implantacao",
+      "titulo": "Duas formas de agendar"
+    },
+    {
+      "evidencias": [
+        {
+          "fonte": "src:apex-scheduler"
+        },
+        {
+          "fonte": "src:objref-cronjobdetail"
+        }
+      ],
+      "texto": "Só pode haver 100 jobs de Apex agendado ao mesmo tempo. A contagem se vê na página Scheduled Jobs ou consultando CronTrigger e CronJobDetail.",
+      "tipo": "limite",
+      "titulo": "Quantos jobs"
+    },
+    {
+      "evidencias": [
+        {
+          "fonte": "src:apex-scheduler"
+        },
+        {
+          "fonte": "src:help-schedule-apex"
+        }
+      ],
+      "texto": "A plataforma agenda a classe para o horário pedido, mas a execução real pode atrasar conforme a disponibilidade do serviço.",
+      "tipo": "atencao",
+      "titulo": "O horário não é garantia"
+    },
+    {
+      "evidencias": [
+        {
+          "fonte": "src:help-schedule-apex"
+        }
+      ],
+      "texto": "O agendador roda como system: a classe executa, tenha ou não o usuário permissão para executá-la.",
+      "tipo": "seguranca",
+      "titulo": "Roda como system"
+    },
+    {
+      "evidencias": [
+        {
+          "fonte": "src:apex-scheduler"
+        }
+      ],
+      "texto": "Com um job agendado ativo, a classe e as classes que ela referencia não podem ser atualizadas pela interface; há uma opção para liberar a atualização por deploy.",
+      "tipo": "atencao",
+      "titulo": "Classe presa por job ativo"
+    },
+    {
+      "evidencias": [
+        {
+          "fonte": "src:apex-gov-limits"
+        },
+        {
+          "fonte": "src:apex-scheduler"
+        }
+      ],
+      "texto": "Embora assíncrono, o Apex agendado usa os limites síncronos por transação. É comum a classe agendada apenas iniciar um batch: a documentação cita o agendamento como ideal para manutenção diária ou semanal com Batch Apex.",
+      "tipo": "escala",
+      "titulo": "Limites síncronos"
+    },
+    {
+      "evidencias": [
+        {
+          "fonte": "src:help-flow-schedule-triggered"
+        }
+      ],
+      "texto": "Schedule-triggered flows têm teto de 250.000 entrevistas por 24 horas, ou licenças de usuário vezes 200, o que for maior; cada registro devolvido pela consulta do flow cria uma entrevista.",
+      "tipo": "limite",
+      "titulo": "Flows agendados"
+    }
+  ],
   "classificacao": "cls:execucao-assincrona-lotes-e-agendamento",
   "derivado": {
-    "dependencias": [],
-    "funcionalidades": [],
-    "metadata_types": [],
+    "dependencias": [
+      {
+        "destino": "obj:CronTrigger",
+        "destino_no_tema": true,
+        "estado": "verificado",
+        "origem": "obj:AsyncApexJob",
+        "rel": "rel:asyncapexjob-crontrigger",
+        "via": "CronTriggerId"
+      },
+      {
+        "destino": "obj:CronJobDetail",
+        "destino_no_tema": true,
+        "estado": "verificado",
+        "origem": "obj:CronTrigger",
+        "rel": "rel:crontrigger-cronjobdetail",
+        "via": "CronJobDetailId"
+      },
+      {
+        "destino": "obj:FlowDefinition",
+        "destino_no_tema": true,
+        "estado": "verificado",
+        "origem": "obj:Flow",
+        "rel": "rel:flow-flowdefinition",
+        "via": "DefinitionId"
+      },
+      {
+        "destino": "obj:Flow",
+        "destino_no_tema": true,
+        "estado": "verificado",
+        "origem": "obj:FlowDefinition",
+        "rel": "rel:flowdefinition-activeversion",
+        "via": "ActiveVersionId"
+      },
+      {
+        "destino": "obj:Flow",
+        "destino_no_tema": true,
+        "estado": "verificado",
+        "origem": "obj:FlowDefinition",
+        "rel": "rel:flowdefinition-latestversion",
+        "via": "LatestVersionId"
+      }
+    ],
+    "funcionalidades": [
+      {
+        "alertas": [
+          "O agendador roda como system: a classe executa, tenha ou não o usuário permissão para executá-la.",
+          "A execução real pode atrasar em relação ao horário agendado, conforme a disponibilidade do serviço.",
+          "Com um job agendado ativo, a classe e as que ela referencia não podem ser atualizadas pela interface."
+        ],
+        "exemplo": "Toda madrugada, uma classe agendada inicia o batch que recalcula a classificação das contas.",
+        "id": "func:apex-agendado",
+        "principal": true
+      },
+      {
+        "exemplo": "Atualizar o status do contrato quando a assinatura é registrada.",
+        "id": "func:flow",
+        "pre_requisitos": [
+          "Abrir, editar ou criar flows: Manage Flow."
+        ],
+        "principal": false,
+        "tema_principal": "sub:flow-e-orquestracao"
+      }
+    ],
+    "metadata_types": [
+      {
+        "estrutura": "completa",
+        "funcionalidades": [
+          "func:apex-agendado"
+        ],
+        "id": "mdt:ApexClass",
+        "nota_suporte": null,
+        "suporte_cli": "suportado"
+      },
+      {
+        "estrutura": "parcial",
+        "funcionalidades": [
+          "func:flow"
+        ],
+        "id": "mdt:Flow",
+        "nota_suporte": null,
+        "suporte_cli": "suportado"
+      },
+      {
+        "estrutura": "completa",
+        "funcionalidades": [
+          "func:flow"
+        ],
+        "id": "mdt:FlowSettings",
+        "nota_suporte": null,
+        "suporte_cli": "suportado"
+      }
+    ],
     "nota": "Calculado pelo gerador a partir do catálogo; não é cadastro.",
-    "objetos_api": [],
+    "objetos_api": [
+      {
+        "apis": [
+          {
+            "api": "padrao",
+            "estado": "verificado"
+          },
+          {
+            "api": "tooling",
+            "estado": "desconhecido"
+          }
+        ],
+        "funcionalidades": [
+          "func:apex-agendado"
+        ],
+        "id": "obj:AsyncApexJob"
+      },
+      {
+        "apis": [
+          {
+            "api": "padrao",
+            "estado": "verificado"
+          },
+          {
+            "api": "tooling",
+            "estado": "desconhecido"
+          }
+        ],
+        "funcionalidades": [
+          "func:apex-agendado"
+        ],
+        "id": "obj:CronJobDetail"
+      },
+      {
+        "apis": [
+          {
+            "api": "padrao",
+            "estado": "verificado"
+          },
+          {
+            "api": "tooling",
+            "estado": "desconhecido"
+          }
+        ],
+        "funcionalidades": [
+          "func:apex-agendado"
+        ],
+        "id": "obj:CronTrigger"
+      },
+      {
+        "apis": [
+          {
+            "api": "tooling",
+            "estado": "verificado"
+          },
+          {
+            "api": "padrao",
+            "estado": "desconhecido"
+          }
+        ],
+        "funcionalidades": [
+          "func:flow"
+        ],
+        "id": "obj:Flow"
+      },
+      {
+        "apis": [
+          {
+            "api": "tooling",
+            "estado": "verificado"
+          },
+          {
+            "api": "padrao",
+            "estado": "desconhecido"
+          }
+        ],
+        "funcionalidades": [
+          "func:flow"
+        ],
+        "id": "obj:FlowDefinition"
+      }
+    ],
     "temas_sem_funcionalidade": []
   },
-  "descricao": "Execução em horários definidos.",
+  "descricao": "Execução em horário definido: classes Apex agendadas e flows disparados por agendamento.",
   "encadeamento": {
     "evidencias": [
       {
@@ -20,11 +277,14 @@
   "escopo": "Entra a execução em horários definidos.",
   "estado": "desconhecido",
   "fora_do_escopo": "Horários comerciais usados em prazos ficam em \"Horários comerciais e feriados\".",
-  "funcionalidades": [],
+  "funcionalidades": [
+    "func:apex-agendado",
+    "func:flow"
+  ],
   "id": "sub:agendamento",
   "natureza": "curadoria_didatica",
   "nome": "Agendamento",
-  "nota_estado": "Agrupamento proposto na especificação; fronteira ainda não cruzada com a documentação oficial.",
+  "nota_estado": "Tema criado pelo projeto (00-especificacao-grafo.md), não é nomenclatura oficial da Salesforce. Cruzado em 2026-11-10 com áreas da documentação oficial listadas nas referências; a correspondência é parcial e o recorte continua sendo do projeto.",
   "para_iniciantes": {
     "evidencias": [
       {
@@ -32,10 +292,34 @@
       },
       {
         "fonte": "src:mdapi-flow"
+      },
+      {
+        "fonte": "src:apex-scheduler"
       }
     ],
     "exemplo": "Todo domingo, uma rotina gera os lembretes da semana.",
-    "explicacao": "Scheduled Apex roda uma classe em horário definido, como uma rotina diária ou semanal. Flows também podem ser disparados por agendamento."
+    "explicacao": "Scheduled Apex roda uma classe em horário definido, como uma rotina diária ou semanal. Flows também podem ser disparados por agendamento.",
+    "por_onde_comecar": [
+      "func:apex-agendado",
+      "func:flow"
+    ]
   },
+  "referencias_oficiais": [
+    {
+      "fonte": "src:apex-scheduler",
+      "nota": "Cobre parte do tema: Apex agendado.",
+      "secao": "Apex Scheduler"
+    },
+    {
+      "fonte": "src:help-schedule-apex",
+      "nota": "Cobre parte do tema: tela Schedule Apex.",
+      "secao": "Schedule Apex Jobs"
+    },
+    {
+      "fonte": "src:help-flow-schedule-triggered",
+      "nota": "Cobre parte do tema: schedule-triggered flows.",
+      "secao": "Schedule-Triggered Flow Limits and Considerations"
+    }
+  ],
   "sigla": "ASY-04"
 }

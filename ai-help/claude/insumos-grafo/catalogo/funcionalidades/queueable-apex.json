@@ -1,0 +1,85 @@
+{
+  "id": "func:queueable-apex",
+  "nome": "Queueable Apex",
+  "nome_tecnico": "Queueable Apex",
+  "aliases": [
+    "queueable",
+    "system.enqueuejob",
+    "job enfileirado",
+    "encadeamento de jobs"
+  ],
+  "termos_busca": [
+    "encadeamento de jobs",
+    "job enfileirado",
+    "queueable",
+    "queueable apex",
+    "system.enqueuejob"
+  ],
+  "o_que_e": "Forma de enfileirar um trabalho em Apex para rodar em segundo plano. Devolve o Id do job, aceita tipos complexos como parâmetro e permite encadear um job a outro.",
+  "finalidade": "Tirar da transação principal uma operação demorada, como um callout, com como acompanhá-la.",
+  "exemplo": "Depois de salvar um pedido, um job enfileirado chama o sistema de estoque; ao terminar, enfileira o job que avisa a transportadora.",
+  "classificacao_principal": {
+    "classificacao": "cls:execucao-assincrona-lotes-e-agendamento",
+    "subclassificacao": "sub:queueable"
+  },
+  "classificacoes_secundarias": [
+    {
+      "classificacao": "cls:desenvolvimento-testes-e-entrega",
+      "subclassificacao": "sub:codigo-e-bundles",
+      "motivo": "É código Apex e segue as regras de teste e de implantação."
+    }
+  ],
+  "representacoes": {
+    "metadata_types": [
+      {
+        "ref": "mdt:ApexClass",
+        "papel": "A classe que implementa Queueable."
+      },
+      {
+        "ref": "mdt:ApexSettings",
+        "papel": "Opções da org para Apex assíncrono, como o atraso mínimo padrão dos jobs enfileirados (DefaultQueueableDelay)."
+      }
+    ],
+    "objetos_api": [
+      {
+        "ref": "obj:AsyncApexJob",
+        "papel": "Registro de cada job enfileirado."
+      }
+    ],
+    "ausencias": []
+  },
+  "setup": {
+    "estado": "desconhecido",
+    "nota": "Caminho de Setup do atraso padrão não confirmado nas fontes lidas."
+  },
+  "recomendacoes": [],
+  "alertas": [
+    "Numa cadeia de jobs, crie um mecanismo para frear ou parar; sem ele, chega-se rápido ao limite diário de Apex assíncrono."
+  ],
+  "limitacoes": [
+    "Jobs adicionados com System.enqueueJob por transação: 50 no contexto síncrono e 1 no assíncrono.",
+    "Atraso mínimo ao enfileirar: de 0 a 10 minutos.",
+    "Em orgs Developer Edition e Trial, a profundidade máxima da pilha de jobs encadeados é 5."
+  ],
+  "estado": "verificado",
+  "evidencias": [
+    {
+      "fonte": "src:apex-queueable"
+    },
+    {
+      "fonte": "src:apexref-system"
+    },
+    {
+      "fonte": "src:apex-gov-limits"
+    },
+    {
+      "fonte": "src:apex-async-overview"
+    },
+    {
+      "fonte": "src:mdapi-apexsettings"
+    },
+    {
+      "fonte": "src:objref-asyncapexjob"
+    }
+  ]
+}

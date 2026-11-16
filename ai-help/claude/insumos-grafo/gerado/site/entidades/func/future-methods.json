@@ -1,0 +1,75 @@
+{
+  "alertas": [
+    "Não aceita sObjects nem objetos como parâmetro."
+  ],
+  "aliases": [
+    "@future",
+    "future method",
+    "método future",
+    "future annotation"
+  ],
+  "classificacao_principal": {
+    "classificacao": "cls:execucao-assincrona-lotes-e-agendamento",
+    "subclassificacao": "sub:future-e-mecanismos-legados"
+  },
+  "classificacoes_secundarias": [
+    {
+      "classificacao": "cls:desenvolvimento-testes-e-entrega",
+      "motivo": "É código Apex e segue as regras de teste e de implantação.",
+      "subclassificacao": "sub:codigo-e-bundles"
+    }
+  ],
+  "estado": "verificado",
+  "evidencias": [
+    {
+      "fonte": "src:apex-future"
+    },
+    {
+      "fonte": "src:apex-queueable"
+    },
+    {
+      "fonte": "src:apex-async-overview"
+    },
+    {
+      "fonte": "src:objref-asyncapexjob"
+    }
+  ],
+  "exemplo": "Um método future faz um callout depois de um trigger, para não segurar a gravação do registro.",
+  "finalidade": "Manter código que já usa o mecanismo; para código novo, a documentação indica Queueable.",
+  "id": "func:future-methods",
+  "limitacoes": [
+    "O método precisa ser static e void; os parâmetros são tipos primitivos, arrays ou coleções de primitivos.",
+    "Não se chama um future method a partir de um batch ou de outro future; em contexto queueable, até 50 por invocação.",
+    "Em 24 horas: 250.000 execuções, ou licenças de usuário vezes 200, o que for maior."
+  ],
+  "nome": "Future methods",
+  "nome_tecnico": "Future Methods",
+  "o_que_e": "Métodos Apex marcados com a anotação Future, que rodam em segundo plano quando há recursos. A documentação diz que Queueable cobre os mesmos usos e oferece mais: Id do job, tipos não primitivos e encadeamento.",
+  "recomendacoes": [],
+  "representacoes": {
+    "ausencias": [],
+    "metadata_types": [
+      {
+        "papel": "A classe que contém o método anotado.",
+        "ref": "mdt:ApexClass"
+      }
+    ],
+    "objetos_api": [
+      {
+        "papel": "Registro de cada execução future.",
+        "ref": "obj:AsyncApexJob"
+      }
+    ]
+  },
+  "setup": {
+    "estado": "nao_aplicavel",
+    "nota": "Não há tela de Setup para criar um future method: ele é declarado no código."
+  },
+  "termos_busca": [
+    "@future",
+    "future annotation",
+    "future method",
+    "future methods",
+    "método future"
+  ]
+}

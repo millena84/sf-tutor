@@ -1,0 +1,76 @@
+tema: Execução assíncrona, lotes e agendamento (rodada A2)
+obtido em 2026-11-16 por busca restrita a developer.salesforce.com e help.salesforce.com (WebSearch).
+método: leitura_resultado_busca. As páginas NÃO foram abertas por inteiro: só o trecho devolvido pela busca foi lido. Paráfrases em português.
+versão: páginas sem versão na URL.
+
+-- Batch
+[src:apex-batch-use] Use Batch Apex (Apex Developer Guide, apex-batch-interface.html): a classe implementa Database.Batchable, com três métodos:
+  start (coleta os registros; devolve um Database.QueryLocator ou um iterable), execute (processa um lote) e finish. O parâmetro scope de
+  Database.executeBatch vai até 2.000 quando start devolve um QueryLocator. Database.executeBatch devolve o Id do AsyncApexJob, usado para
+  acompanhar o job. Com a Apex flex queue: até 100 jobs em Holding; se a fila está cheia, executeBatch lança LimitException. System.scheduleBatch
+  agenda um batch e devolve o Id do job agendado (CronTrigger). Limite em 24 horas: 250.000 execuções de método de batch, ou licenças de usuário x
+  200, o que for maior; contam as execuções de start, execute e finish. Em teste, no máximo 5 jobs de batch. Para acompanhar ou parar um job:
+  Setup, Quick Find "Apex Jobs", Apex Jobs.
+[src:apex-batch] Batch Apex (apex-batch.html): processos longos sobre milhares de registros, em lotes pequenos; só pode haver cinco jobs de batch
+  em fila ou ativos ao mesmo tempo.
+[src:apexref-database] Database Class (Apex Reference Guide, apex-methods-system-database.html): executeBatch divide os registros devolvidos por
+  start em lotes de 200 e passa cada um a execute; os governor limits são reiniciados a cada execução de execute.
+
+-- Queueable e future
+[src:apex-queueable] (já registrada; segunda leitura) Queueable Apex: operações longas, como muito acesso ao banco ou callouts, rodam em segundo
+  plano, em thread própria, quando houver recursos; alguns governor limits são maiores que os do Apex síncrono, como o de heap. Jobs encadeados: em
+  orgs Developer Edition e Trial, a profundidade máxima da pilha é 5 (quatro encadeamentos); dá para definir uma profundidade máxima. Com atraso 0,
+  o job roda o quanto antes; em cadeias, a página pede um mecanismo para frear ou parar, senão se chega rápido ao limite diário de Apex assíncrono.
+[src:apexref-system] System Class (Apex Reference Guide, apex-methods-system-system.html): enqueueJob(queueable) devolve o Id do job;
+  enqueueJob(queueable, delay) aceita atraso mínimo de 0 a 10 minutos, ignorado em testes; enqueueJob(queueable, asyncOptions) recebe assinatura
+  única do job, profundidade máxima da pilha ou atraso mínimo. schedule(jobName, cronExpression, schedulableClass) agenda uma classe Schedulable e
+  devolve o Id do CronTrigger; scheduleBatch agenda um batch para rodar uma vez.
+[src:apex-future] Future Methods (Apex Developer Guide, apex-invoking-future-methods.html): método future roda de forma assíncrona, em thread
+  própria, quando houver recursos; serve a callouts e a isolar DML em tipos diferentes de sObject (erro de mixed DML). Precisa ser static e void;
+  os parâmetros são tipos primitivos, arrays ou coleções de primitivos (não aceita sObjects nem objetos). Queueable cobre os mesmos usos e ainda dá
+  Id do job, tipos não primitivos e encadeamento. Limites: nenhuma chamada future em contexto de batch ou de future; 50 por invocação em contexto
+  queueable; em 24 horas, 250.000 ou licenças x 200, o que for maior.
+[src:apex-gov-limits] Execution Governors and Limits (Apex Developer Guide, atlas apexcode, apex_gov_limits.htm): limites por transação Apex; no
+  Batch Apex são reiniciados a cada execução de execute. Tabela com limite síncrono e assíncrono quando diferem: consultas SOQL 100 e 200. O Apex
+  agendado, embora assíncrono, usa os limites síncronos. Jobs adicionados com System.enqueueJob: 50 no contexto síncrono e 1 no assíncrono.
+[src:apex-http-classes] HTTP Classes (Apex Developer Guide, apex-classes-restful-http.html): callouts são bloqueados quando há trabalho pendente não
+  confirmado na transação: DML, jobs enfileirados com System.enqueueJob, Database.executeBatch ou future methods.
+[src:apex-elastic-limits] Elastic Limits for Asynchronous Apex Jobs (Beta) (atlas apexcode, apex_limits_elastic_limits.htm): a opção permite
+  processar, em ritmo reduzido, jobs assíncronos acima do limite móvel de 24 horas, evitando falhas e exceções de limite.
+
+-- Agendamento
+[src:apex-scheduler] Apex Scheduler (Apex Developer Guide, apex-scheduler.html): a classe implementa Schedulable; agenda-se pela página Schedule
+  Apex ou por System.schedule (nome do job, expressão cron, classe). A execução real pode atrasar conforme a disponibilidade do serviço. Com job
+  agendado ativo, a classe e as que ela referencia não podem ser atualizadas pela interface (há opção para liberar por deploy). Só pode haver 100
+  jobs de Apex agendado ao mesmo tempo; a contagem se vê na página Scheduled Jobs ou consultando CronTrigger e CronJobDetail. Em 24 horas: 250.000
+  execuções ou licenças x 200. Em teste, os processos assíncronos chamados depois de startTest rodam de forma síncrona em stopTest.
+  A versão da mesma página em atlas (apex_scheduler.htm) acrescenta: ideal para manutenção diária ou semanal com Batch Apex.
+[src:help-schedule-apex] Schedule Apex Jobs (help, platform.code_schedule_batch_apex.htm): o agendador roda como system: a classe executa, tenha ou
+  não o usuário permissão para executá-la. Caminho: Setup, Quick Find "Apex Classes", Apex Classes, botão Schedule Apex; escolhe-se Schedule Builder
+  ou Cron Expression. Depois de agendar, dá para reagendar, pausar, retomar ou excluir; o andamento se vê na página All Scheduled Jobs.
+
+-- Monitoramento
+[src:help-apex-job-queue] Monitor the Apex Job Queue (help, platform.code_apex_job.htm): a fila lista os jobs Apex submetidos nos últimos sete
+  dias; os mais antigos se veem em All Scheduled Jobs (agendados) ou por AsyncApexJob. Lista os terminados e os pendentes: future methods e classes
+  Queueable ainda não executados aparecem como Future na coluna Job Type, sem valores em Total Batches e Batches Processed. Um job agendado aparece
+  em Apex Jobs e em All Scheduled Jobs, mas conta uma vez só no limite de execuções assíncronas.
+[src:help-apex-flex-queue] Monitoring the Apex Flex Queue (help, platform.code_apex_flex_queue.htm): até 100 jobs de batch em Holding; quando há
+  recursos, saem do topo da flex queue para a fila de batch; até cinco jobs em fila ou ativos são processados ao mesmo tempo por org; ao sair, o
+  status passa de Holding a Queued. A página Apex Flex Queue lista os jobs em Holding e permite reordená-los.
+[src:help-apex-code-overview] Apex Code Overview (help, sf.code_about.htm): a página Apex Jobs do Setup mostra a porcentagem de uso de Apex
+  assíncrono e quantas operações já foram usadas do limite de 24 horas da org.
+[src:help-org-health] Monitor Org Health and Usage in Setup (help, xcloud.setup_org_health_usage.htm): o cartão Apex acompanha o uso dos limites,
+  entre eles o limite móvel de 24 horas de jobs assíncronos e o limite de jobs agendados; acima deles, jobs novos são rejeitados.
+[src:help-kb-asyncapexjob-types] List of asynchronous Apex jobs as listed in SOAP API guide (artigo de conhecimento 000387766): AsyncApexJob guarda
+  todos os jobs de Apex assíncrono; BatchApexWorker e TestWorker são de uso interno; ao consultar o status de um batch, filtre BatchApexWorker
+  para não ver entradas repetidas.
+[src:rest-limits] (já registrada; segunda leitura pelo resultado de busca) Limits (REST API Developer Guide): o rótulo DailyAsyncApexExecutions é o
+  máximo de execuções de método de Apex assíncrono (batch, future, Queueable e agendado) em 24 horas; DailyAsyncApexElasticExecutions é o total de
+  execuções de Queueable e future que podem ser enfileiradas em 24 horas, incluídas as elásticas.
+
+Fontes já registradas e usadas de novo, sem leitura nova: src:apex-async-overview, src:help-rtf-considerations, src:help-flow-scheduled-paths,
+  src:help-flow-schedule-triggered, src:help-flow-triggered, src:pe-retry-apex, src:apex-callout-limits, src:help-platform-events-define.
+
+Não lido nesta rodada: caminho assíncrono (Run Asynchronously) e entrevistas pausadas de flow em página própria; Platform Event triggers (tamanho
+  de lote, configuração do assinante); tabela completa de governor limits; Finalizers de Queueable; Apex Cursors; Background Jobs e Bulk Data
+  Load Jobs; objetos FlowInterview e ApexClass.

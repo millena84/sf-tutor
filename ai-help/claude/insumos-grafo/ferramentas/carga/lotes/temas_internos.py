@@ -409,6 +409,45 @@ TEMAS = {
          ev("src:help-lifecycle-center", "Cobre parte do tema: Lifecycle Center e DevOps Center.",
             "Govern, Manage, and Release Changes with Lifecycle Center")],
     ),
+    # ------------------------------------------------------------------ Execução assíncrona, lotes e agendamento
+    "sub:batch": (
+        "Batch Apex: o processamento de grandes volumes de registros em lotes, com fila própria e limites por lote.",
+        [ev("src:apex-batch-use", "Cobre o tema: como usar Batch Apex.", "Use Batch Apex"),
+         ev("src:help-apex-flex-queue", "Cobre parte do tema: Apex flex queue.", "Monitoring the Apex Flex Queue")],
+    ),
+    "sub:queueable": (
+        "Queueable Apex: tarefas enfileiradas para rodar em segundo plano, com identificador para acompanhar e encadeamento de jobs.",
+        [ev("src:apex-queueable", "Cobre o tema: Queueable Apex.", "Queueable Apex"),
+         ev("src:apexref-system", "Cobre parte do tema: método System.enqueueJob.", "System Class")],
+    ),
+    "sub:future-e-mecanismos-legados": (
+        "Future methods, o mecanismo assíncrono de Apex que a documentação recomenda trocar por Queueable, e as regras que ainda valem "
+        "para o código existente.",
+        [ev("src:apex-future", "Cobre o tema: future methods.", "Future Methods")],
+    ),
+    "sub:agendamento": (
+        "Execução em horário definido: classes Apex agendadas e flows disparados por agendamento.",
+        [ev("src:apex-scheduler", "Cobre parte do tema: Apex agendado.", "Apex Scheduler"),
+         ev("src:help-schedule-apex", "Cobre parte do tema: tela Schedule Apex.", "Schedule Apex Jobs"),
+         ev("src:help-flow-schedule-triggered", "Cobre parte do tema: schedule-triggered flows.", "Schedule-Triggered Flow Limits and Considerations")],
+    ),
+    "sub:caminhos-assincronos": (
+        "As partes de um flow que rodam fora da gravação do registro: o caminho assíncrono e os scheduled paths.",
+        [ev("src:help-rtf-considerations", "Cobre parte do tema: caminho assíncrono de record-triggered flows.", "Record-Triggered Flow Considerations"),
+         ev("src:help-flow-scheduled-paths", "Cobre parte do tema: scheduled paths.", "Scheduled Paths")],
+    ),
+    "sub:processamento-orientado-a-eventos": (
+        "As reações, dentro da org, a eventos publicados na plataforma: triggers e automações que assinam um evento.",
+        [ev("src:help-platform-events-define", "Mais ampla que o tema: definição e gestão de platform events.", "Define and Manage Platform Events"),
+         ev("src:pe-retry-apex", "Cobre parte do tema: retentativa de triggers de evento.", "Retry Event Triggers with EventBus.RetryableException")],
+    ),
+    "sub:monitoramento-de-jobs-e-limites": (
+        "O acompanhamento das execuções assíncronas e dos limites: as telas Apex Jobs, Apex Flex Queue e Scheduled Jobs e os objetos "
+        "AsyncApexJob, CronTrigger e CronJobDetail.",
+        [ev("src:help-apex-job-queue", "Cobre parte do tema: página Apex Jobs.", "Monitor the Apex Job Queue"),
+         ev("src:help-apex-flex-queue", "Cobre parte do tema: Apex flex queue.", "Monitoring the Apex Flex Queue"),
+         ev("src:objref-asyncapexjob", "Cobre parte do tema: objeto AsyncApexJob.", "AsyncApexJob")],
+    ),
 }
 
 

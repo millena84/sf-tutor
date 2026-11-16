@@ -4,18 +4,25 @@
   "sigla": "ASY-04",
   "classificacao": "cls:execucao-assincrona-lotes-e-agendamento",
   "natureza": "curadoria_didatica",
-  "descricao": "Execução em horários definidos.",
+  "descricao": "Execução em horário definido: classes Apex agendadas e flows disparados por agendamento.",
   "escopo": "Entra a execução em horários definidos.",
   "fora_do_escopo": "Horários comerciais usados em prazos ficam em \"Horários comerciais e feriados\".",
   "para_iniciantes": {
     "explicacao": "Scheduled Apex roda uma classe em horário definido, como uma rotina diária ou semanal. Flows também podem ser disparados por agendamento.",
     "exemplo": "Todo domingo, uma rotina gera os lembretes da semana.",
+    "por_onde_comecar": [
+      "func:apex-agendado",
+      "func:flow"
+    ],
     "evidencias": [
       {
         "fonte": "src:apex-async-overview"
       },
       {
         "fonte": "src:mdapi-flow"
+      },
+      {
+        "fonte": "src:apex-scheduler"
       }
     ]
   },
@@ -27,7 +34,114 @@
       }
     ]
   },
-  "funcionalidades": [],
+  "avancado": [
+    {
+      "tipo": "implantacao",
+      "titulo": "Duas formas de agendar",
+      "texto": "A classe implementa a interface Schedulable. Agenda-se pela tela Schedule Apex (Setup, Apex Classes) ou por código, com System.schedule, que recebe o nome do job, uma expressão cron e a classe.",
+      "evidencias": [
+        {
+          "fonte": "src:apex-scheduler"
+        },
+        {
+          "fonte": "src:help-schedule-apex"
+        },
+        {
+          "fonte": "src:apexref-system"
+        }
+      ]
+    },
+    {
+      "tipo": "limite",
+      "titulo": "Quantos jobs",
+      "texto": "Só pode haver 100 jobs de Apex agendado ao mesmo tempo. A contagem se vê na página Scheduled Jobs ou consultando CronTrigger e CronJobDetail.",
+      "evidencias": [
+        {
+          "fonte": "src:apex-scheduler"
+        },
+        {
+          "fonte": "src:objref-cronjobdetail"
+        }
+      ]
+    },
+    {
+      "tipo": "atencao",
+      "titulo": "O horário não é garantia",
+      "texto": "A plataforma agenda a classe para o horário pedido, mas a execução real pode atrasar conforme a disponibilidade do serviço.",
+      "evidencias": [
+        {
+          "fonte": "src:apex-scheduler"
+        },
+        {
+          "fonte": "src:help-schedule-apex"
+        }
+      ]
+    },
+    {
+      "tipo": "seguranca",
+      "titulo": "Roda como system",
+      "texto": "O agendador roda como system: a classe executa, tenha ou não o usuário permissão para executá-la.",
+      "evidencias": [
+        {
+          "fonte": "src:help-schedule-apex"
+        }
+      ]
+    },
+    {
+      "tipo": "atencao",
+      "titulo": "Classe presa por job ativo",
+      "texto": "Com um job agendado ativo, a classe e as classes que ela referencia não podem ser atualizadas pela interface; há uma opção para liberar a atualização por deploy.",
+      "evidencias": [
+        {
+          "fonte": "src:apex-scheduler"
+        }
+      ]
+    },
+    {
+      "tipo": "escala",
+      "titulo": "Limites síncronos",
+      "texto": "Embora assíncrono, o Apex agendado usa os limites síncronos por transação. É comum a classe agendada apenas iniciar um batch: a documentação cita o agendamento como ideal para manutenção diária ou semanal com Batch Apex.",
+      "evidencias": [
+        {
+          "fonte": "src:apex-gov-limits"
+        },
+        {
+          "fonte": "src:apex-scheduler"
+        }
+      ]
+    },
+    {
+      "tipo": "limite",
+      "titulo": "Flows agendados",
+      "texto": "Schedule-triggered flows têm teto de 250.000 entrevistas por 24 horas, ou licenças de usuário vezes 200, o que for maior; cada registro devolvido pela consulta do flow cria uma entrevista.",
+      "evidencias": [
+        {
+          "fonte": "src:help-flow-schedule-triggered"
+        }
+      ]
+    }
+  ],
+  "funcionalidades": [
+    "func:apex-agendado",
+    "func:flow"
+  ],
   "estado": "desconhecido",
-  "nota_estado": "Agrupamento proposto na especificação; fronteira ainda não cruzada com a documentação oficial."
+  "nota_estado": "Tema criado pelo projeto (00-especificacao-grafo.md), não é nomenclatura oficial da Salesforce. Cruzado em 2026-11-10 com áreas da documentação oficial listadas nas referências; a correspondência é parcial e o recorte continua sendo do projeto.",
+  "referencias_oficiais": [
+    {
+      "fonte": "src:apex-scheduler",
+      "secao": "Apex Scheduler",
+      "nota": "Cobre parte do tema: Apex agendado."
+    },
+    {
+      "fonte": "src:help-schedule-apex",
+      "secao": "Schedule Apex Jobs",
+      "nota": "Cobre parte do tema: tela Schedule Apex."
+    },
+    {
+      "fonte": "src:help-flow-schedule-triggered",
+      "secao": "Schedule-Triggered Flow Limits and Considerations",
+      "nota": "Cobre parte do tema: schedule-triggered flows."
+    }
+  ]
 }
