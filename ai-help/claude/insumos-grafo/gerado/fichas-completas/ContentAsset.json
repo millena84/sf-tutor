@@ -1,0 +1,1956 @@
+{
+  "funcionalidades": [
+    {
+      "id": "func:asset-files",
+      "nome": "Asset files"
+    }
+  ],
+  "metadata_type": {
+    "alertas": [
+      "A recuperação falha se o conteúdo total dos asset files passar de 30 MB.",
+      "Valem os limites de empacotamento já existentes para arquivos."
+    ],
+    "arquivos": {
+      "curinga_package_xml": {
+        "estado": "verificado",
+        "evidencias": [
+          {
+            "fonte": "src:mdapi-contentasset"
+          }
+        ],
+        "valor": true
+      },
+      "metadata_api_format": {
+        "estado": "verificado",
+        "evidencias": [
+          {
+            "fonte": "src:sdr-registry",
+            "nota": "types.contentasset"
+          }
+        ],
+        "valor": {
+          "arquivo": "<Nome>.asset",
+          "pasta": "contentassets/"
+        }
+      },
+      "source_format": {
+        "estado": "verificado",
+        "evidencias": [
+          {
+            "fonte": "src:sdr-registry",
+            "nota": "types.contentasset"
+          }
+        ],
+        "nota": "Pasta e sufixo do registro do Salesforce CLI; sufixo '-meta.xml' segue a convenção do source format.",
+        "valor": {
+          "arquivo": "<Nome>.asset-meta.xml",
+          "pasta": "contentassets/"
+        }
+      }
+    },
+    "cobertura": {
+      "estrutural": {
+        "esperado": 9,
+        "estado": "completa",
+        "nota": "Universo esperado = tabelas Fields da página do guia versionado 264.0 (API 68.0), lida em 2026-11-16.",
+        "presente": 9
+      },
+      "explicativa": {
+        "esperado": 9,
+        "estado": "completa",
+        "presente": 9
+      },
+      "mapeamento": {
+        "estado": "parcial",
+        "nota": "Correspondências registradas apenas onde há evidência; demais pendentes."
+      }
+    },
+    "disponibilidade": {
+      "ate_versao": null,
+      "desde_versao": "38.0",
+      "estado": "verificado"
+    },
+    "divergencias_documentais": [
+      "Os campos de ContentAssetRelationships aparecem tipados como ContentAsset[], mas o conteúdo documentado deles é o da seção ContentAssetLink; foram cadastrados como ContentAssetLink[]."
+    ],
+    "estado": "verificado",
+    "estende": "MetadataWithContent",
+    "estruturas": [
+      "mdx:ContentAssetRelationships",
+      "mdx:ContentAssetVersions"
+    ],
+    "evidencias": [
+      {
+        "fonte": "src:mdapi-contentasset"
+      },
+      {
+        "fonte": "src:sdr-registry"
+      },
+      {
+        "fonte": "src:sdr-metadata-support"
+      }
+    ],
+    "exemplo_xml": {
+      "natureza": "didatico_projeto",
+      "nota": "Exemplo escrito pelo projeto apenas com elementos documentados; sem dados reais.",
+      "xml": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<!-- Arquivo -meta.xml que acompanha o arquivo .asset -->\n<ContentAsset xmlns=\"http://soap.sforce.com/2006/04/metadata\">\n    <language>[idioma do rótulo]</language>\n    <masterLabel>[rótulo do asset]</masterLabel>\n    <relationships>\n        <organization>\n            <!-- Valores documentados: VIEWER, COLLABORATOR, INFERRED -->\n            <access>VIEWER</access>\n        </organization>\n    </relationships>\n    <versions>\n        <version>\n            <number>1</number>\n            <pathOnClient>[nome original do arquivo]</pathOnClient>\n        </version>\n    </versions>\n</ContentAsset>"
+    },
+    "finalidade": "Versionar e implantar os arquivos de marca e design que apps, temas e sites referenciam.",
+    "id": "mdt:ContentAsset",
+    "nome": "ContentAsset",
+    "o_que_e": "Um asset file: um arquivo do Salesforce Files preparado para uso em configuração, como logos e imagens de marca.",
+    "propriedades": [
+      {
+        "default": {
+          "estado": "desconhecido",
+          "forma": "nao_declarado_na_fonte"
+        },
+        "disponibilidade": {
+          "ate_versao": null,
+          "desde_versao": null,
+          "estado": "desconhecido"
+        },
+        "dominio": {
+          "contexto": "Na API, o conteúdo trafega em base64; no projeto, é o conteúdo do arquivo correspondente.",
+          "estado": "verificado",
+          "evidencias": [
+            {
+              "fonte": "src:mdapi-contentasset"
+            }
+          ],
+          "natureza": "texto_livre"
+        },
+        "estado": "verificado",
+        "evidencias": [
+          {
+            "fonte": "src:mdapi-contentasset"
+          }
+        ],
+        "explicacao": "explicada",
+        "herdada_de": "MetadataWithContent",
+        "id": "mdt:ContentAsset.content",
+        "nome": "content",
+        "o_que_e": "O conteúdo do arquivo. Herdado de MetadataWithContent.",
+        "obrigatoriedade": {
+          "condicao": "A documentação 68.0 não marca o campo como obrigatório; ausência de marcação não comprova opcionalidade (confirmar no WSDL).",
+          "estado": "desconhecido",
+          "valor": "nao"
+        },
+        "origem": {
+          "estado": "verificado",
+          "evidencias": [
+            {
+              "fonte": "src:mdapi-contentasset"
+            }
+          ],
+          "nota": "Propriedade definida pelo schema da Metadata API.",
+          "valor": "padrao_plataforma"
+        },
+        "tipo_tecnico": "base64Binary"
+      },
+      {
+        "default": {
+          "estado": "desconhecido",
+          "forma": "nao_declarado_na_fonte"
+        },
+        "disponibilidade": {
+          "ate_versao": null,
+          "desde_versao": null,
+          "estado": "desconhecido"
+        },
+        "dominio": {
+          "estado": "verificado",
+          "evidencias": [
+            {
+              "fonte": "src:mdapi-contentasset"
+            }
+          ],
+          "lista_completa": "sim",
+          "natureza": "enum_fechado",
+          "valores": [
+            {
+              "significado": "Uma única versão.",
+              "valor": "Original"
+            },
+            {
+              "significado": "Várias versões, compactadas.",
+              "valor": "ZippedVersions"
+            }
+          ]
+        },
+        "estado": "verificado",
+        "evidencias": [
+          {
+            "fonte": "src:mdapi-contentasset"
+          }
+        ],
+        "explicacao": "explicada",
+        "id": "mdt:ContentAsset.format",
+        "nome": "format",
+        "notas": [
+          "Com uma só versão, o campo pode ser omitido."
+        ],
+        "o_que_e": "Formato do arquivo do asset.",
+        "obrigatoriedade": {
+          "condicao": "A documentação 68.0 não marca o campo como obrigatório; ausência de marcação não comprova opcionalidade (confirmar no WSDL).",
+          "estado": "desconhecido",
+          "valor": "nao"
+        },
+        "origem": {
+          "estado": "verificado",
+          "evidencias": [
+            {
+              "fonte": "src:mdapi-contentasset"
+            }
+          ],
+          "nota": "Propriedade definida pelo schema da Metadata API.",
+          "valor": "padrao_plataforma"
+        },
+        "tipo_tecnico": "ContentAssetFormat"
+      },
+      {
+        "default": {
+          "estado": "desconhecido",
+          "forma": "nao_declarado_na_fonte"
+        },
+        "disponibilidade": {
+          "ate_versao": null,
+          "desde_versao": null,
+          "estado": "desconhecido"
+        },
+        "dominio": {
+          "contexto": "A fonte tipa como string sem lista de valores; não inventar valores.",
+          "estado": "verificado",
+          "evidencias": [
+            {
+              "fonte": "src:mdapi-contentasset"
+            }
+          ],
+          "natureza": "texto_livre"
+        },
+        "estado": "verificado",
+        "evidencias": [
+          {
+            "fonte": "src:mdapi-contentasset"
+          }
+        ],
+        "explicacao": "explicada",
+        "herdada_de": "Metadata",
+        "id": "mdt:ContentAsset.fullName",
+        "nome": "fullName",
+        "o_que_e": "Nome de API do asset. Herdado do tipo Metadata.",
+        "obrigatoriedade": {
+          "estado": "desconhecido",
+          "valor": "desconhecida"
+        },
+        "origem": {
+          "estado": "verificado",
+          "evidencias": [
+            {
+              "fonte": "src:mdapi-contentasset"
+            }
+          ],
+          "nota": "Propriedade definida pelo schema da Metadata API.",
+          "valor": "padrao_plataforma"
+        },
+        "tipo_tecnico": "string"
+      },
+      {
+        "default": {
+          "estado": "verificado",
+          "evidencias": [
+            {
+              "fonte": "src:mdapi-contentasset"
+            }
+          ],
+          "forma": "false",
+          "nota": "A página declara default false.",
+          "valor": false
+        },
+        "disponibilidade": {
+          "ate_versao": null,
+          "desde_versao": "44.0",
+          "estado": "verificado"
+        },
+        "dominio": {
+          "estado": "verificado",
+          "evidencias": [
+            {
+              "fonte": "src:mdapi-contentasset"
+            }
+          ],
+          "lista_completa": "sim",
+          "natureza": "booleano",
+          "valores": [
+            {
+              "valor": "true"
+            },
+            {
+              "valor": "false"
+            }
+          ]
+        },
+        "estado": "verificado",
+        "evidencias": [
+          {
+            "fonte": "src:mdapi-contentasset"
+          }
+        ],
+        "explicacao": "explicada",
+        "id": "mdt:ContentAsset.isVisibleByExternalUsers",
+        "nome": "isVisibleByExternalUsers",
+        "o_que_e": "Indica se usuários não autenticados podem ver o arquivo.",
+        "obrigatoriedade": {
+          "condicao": "A documentação 68.0 não marca o campo como obrigatório; ausência de marcação não comprova opcionalidade (confirmar no WSDL).",
+          "estado": "desconhecido",
+          "valor": "nao"
+        },
+        "origem": {
+          "estado": "verificado",
+          "evidencias": [
+            {
+              "fonte": "src:mdapi-contentasset"
+            }
+          ],
+          "nota": "Propriedade definida pelo schema da Metadata API.",
+          "valor": "padrao_plataforma"
+        },
+        "tipo_tecnico": "boolean"
+      },
+      {
+        "default": {
+          "estado": "desconhecido",
+          "forma": "nao_declarado_na_fonte"
+        },
+        "disponibilidade": {
+          "ate_versao": null,
+          "desde_versao": null,
+          "estado": "desconhecido"
+        },
+        "dominio": {
+          "contexto": "A fonte tipa como string sem lista de valores; não inventar valores.",
+          "estado": "verificado",
+          "evidencias": [
+            {
+              "fonte": "src:mdapi-contentasset"
+            }
+          ],
+          "natureza": "texto_livre"
+        },
+        "estado": "verificado",
+        "evidencias": [
+          {
+            "fonte": "src:mdapi-contentasset"
+          }
+        ],
+        "explicacao": "explicada",
+        "id": "mdt:ContentAsset.language",
+        "nome": "language",
+        "o_que_e": "Idioma do rótulo do asset.",
+        "obrigatoriedade": {
+          "estado": "verificado",
+          "evidencias": [
+            {
+              "fonte": "src:mdapi-contentasset"
+            }
+          ],
+          "valor": "sim"
+        },
+        "origem": {
+          "estado": "verificado",
+          "evidencias": [
+            {
+              "fonte": "src:mdapi-contentasset"
+            }
+          ],
+          "nota": "Propriedade definida pelo schema da Metadata API.",
+          "valor": "padrao_plataforma"
+        },
+        "tipo_tecnico": "string"
+      },
+      {
+        "default": {
+          "estado": "desconhecido",
+          "forma": "nao_declarado_na_fonte"
+        },
+        "disponibilidade": {
+          "ate_versao": null,
+          "desde_versao": null,
+          "estado": "desconhecido"
+        },
+        "dominio": {
+          "contexto": "A fonte tipa como string sem lista de valores; não inventar valores.",
+          "estado": "verificado",
+          "evidencias": [
+            {
+              "fonte": "src:mdapi-contentasset"
+            }
+          ],
+          "natureza": "texto_livre"
+        },
+        "estado": "verificado",
+        "evidencias": [
+          {
+            "fonte": "src:mdapi-contentasset"
+          }
+        ],
+        "explicacao": "explicada",
+        "id": "mdt:ContentAsset.masterLabel",
+        "nome": "masterLabel",
+        "o_que_e": "Rótulo do asset, mostrado no Setup.",
+        "obrigatoriedade": {
+          "estado": "verificado",
+          "evidencias": [
+            {
+              "fonte": "src:mdapi-contentasset"
+            }
+          ],
+          "valor": "sim"
+        },
+        "origem": {
+          "estado": "verificado",
+          "evidencias": [
+            {
+              "fonte": "src:mdapi-contentasset"
+            }
+          ],
+          "nota": "Propriedade definida pelo schema da Metadata API.",
+          "valor": "padrao_plataforma"
+        },
+        "tipo_tecnico": "string"
+      },
+      {
+        "default": {
+          "estado": "desconhecido",
+          "forma": "nao_declarado_na_fonte"
+        },
+        "disponibilidade": {
+          "ate_versao": null,
+          "desde_versao": null,
+          "estado": "desconhecido"
+        },
+        "dominio": {
+          "contexto": "A fonte tipa como string sem lista de valores; não inventar valores.",
+          "estado": "verificado",
+          "evidencias": [
+            {
+              "fonte": "src:mdapi-contentasset"
+            }
+          ],
+          "natureza": "texto_livre"
+        },
+        "estado": "verificado",
+        "evidencias": [
+          {
+            "fonte": "src:mdapi-contentasset"
+          }
+        ],
+        "explicacao": "explicada",
+        "id": "mdt:ContentAsset.originNetwork",
+        "nome": "originNetwork",
+        "o_que_e": "Site do Experience Cloud atribuído ao implantar ou recuperar; nulo se não houver.",
+        "obrigatoriedade": {
+          "condicao": "A documentação 68.0 não marca o campo como obrigatório; ausência de marcação não comprova opcionalidade (confirmar no WSDL).",
+          "estado": "desconhecido",
+          "valor": "nao"
+        },
+        "origem": {
+          "estado": "verificado",
+          "evidencias": [
+            {
+              "fonte": "src:mdapi-contentasset"
+            }
+          ],
+          "nota": "Propriedade definida pelo schema da Metadata API.",
+          "valor": "padrao_plataforma"
+        },
+        "tipo_tecnico": "string"
+      },
+      {
+        "default": {
+          "estado": "desconhecido",
+          "forma": "nao_declarado_na_fonte"
+        },
+        "disponibilidade": {
+          "ate_versao": null,
+          "desde_versao": null,
+          "estado": "desconhecido"
+        },
+        "dominio": {
+          "estado": "verificado",
+          "evidencias": [
+            {
+              "fonte": "src:mdapi-contentasset"
+            }
+          ],
+          "natureza": "tipo_composto"
+        },
+        "estado": "verificado",
+        "estrutura_expandida": {
+          "id": "mdx:ContentAssetRelationships",
+          "nome": "ContentAssetRelationships",
+          "propriedades": [
+            {
+              "cardinalidade": "0..n",
+              "default": {
+                "estado": "desconhecido",
+                "forma": "nao_declarado_na_fonte"
+              },
+              "disponibilidade": {
+                "ate_versao": null,
+                "desde_versao": "51.0",
+                "estado": "verificado"
+              },
+              "dominio": {
+                "estado": "verificado",
+                "evidencias": [
+                  {
+                    "fonte": "src:mdapi-contentasset"
+                  }
+                ],
+                "natureza": "tipo_composto"
+              },
+              "estado": "verificado",
+              "estrutura_expandida": {
+                "id": "mdx:ContentAssetLink",
+                "nome": "ContentAssetLink",
+                "propriedades": [
+                  {
+                    "default": {
+                      "estado": "desconhecido",
+                      "forma": "nao_declarado_na_fonte"
+                    },
+                    "disponibilidade": {
+                      "ate_versao": null,
+                      "desde_versao": null,
+                      "estado": "desconhecido"
+                    },
+                    "dominio": {
+                      "estado": "verificado",
+                      "evidencias": [
+                        {
+                          "fonte": "src:mdapi-contentasset"
+                        }
+                      ],
+                      "lista_completa": "sim",
+                      "natureza": "enum_fechado",
+                      "valores": [
+                        {
+                          "valor": "VIEWER"
+                        },
+                        {
+                          "valor": "COLLABORATOR"
+                        },
+                        {
+                          "significado": "A permissão vem da que o usuário já tem.",
+                          "valor": "INFERRED"
+                        }
+                      ]
+                    },
+                    "estado": "verificado",
+                    "evidencias": [
+                      {
+                        "fonte": "src:mdapi-contentasset"
+                      }
+                    ],
+                    "explicacao": "explicada",
+                    "id": "mdx:ContentAssetLink.access",
+                    "nome": "access",
+                    "o_que_e": "Permissão dada sobre o arquivo compartilhado.",
+                    "obrigatoriedade": {
+                      "estado": "verificado",
+                      "evidencias": [
+                        {
+                          "fonte": "src:mdapi-contentasset"
+                        }
+                      ],
+                      "valor": "sim"
+                    },
+                    "origem": {
+                      "estado": "verificado",
+                      "evidencias": [
+                        {
+                          "fonte": "src:mdapi-contentasset"
+                        }
+                      ],
+                      "nota": "Propriedade definida pelo schema da Metadata API.",
+                      "valor": "padrao_plataforma"
+                    },
+                    "tipo_tecnico": "ContentAssetAccess"
+                  },
+                  {
+                    "default": {
+                      "estado": "verificado",
+                      "evidencias": [
+                        {
+                          "fonte": "src:mdapi-contentasset"
+                        }
+                      ],
+                      "forma": "false",
+                      "nota": "A página declara default false.",
+                      "valor": false
+                    },
+                    "disponibilidade": {
+                      "ate_versao": null,
+                      "desde_versao": "39.0",
+                      "estado": "verificado"
+                    },
+                    "dominio": {
+                      "estado": "verificado",
+                      "evidencias": [
+                        {
+                          "fonte": "src:mdapi-contentasset"
+                        }
+                      ],
+                      "lista_completa": "sim",
+                      "natureza": "booleano",
+                      "valores": [
+                        {
+                          "valor": "true"
+                        },
+                        {
+                          "valor": "false"
+                        }
+                      ]
+                    },
+                    "estado": "verificado",
+                    "evidencias": [
+                      {
+                        "fonte": "src:mdapi-contentasset"
+                      }
+                    ],
+                    "explicacao": "explicada",
+                    "id": "mdx:ContentAssetLink.isManagingWorkspace",
+                    "nome": "isManagingWorkspace",
+                    "o_que_e": "Indica se o asset reside no workspace.",
+                    "obrigatoriedade": {
+                      "condicao": "A documentação 68.0 não marca o campo como obrigatório; ausência de marcação não comprova opcionalidade (confirmar no WSDL).",
+                      "estado": "desconhecido",
+                      "valor": "nao"
+                    },
+                    "origem": {
+                      "estado": "verificado",
+                      "evidencias": [
+                        {
+                          "fonte": "src:mdapi-contentasset"
+                        }
+                      ],
+                      "nota": "Propriedade definida pelo schema da Metadata API.",
+                      "valor": "padrao_plataforma"
+                    },
+                    "tipo_tecnico": "boolean"
+                  },
+                  {
+                    "default": {
+                      "estado": "desconhecido",
+                      "forma": "nao_declarado_na_fonte"
+                    },
+                    "disponibilidade": {
+                      "ate_versao": null,
+                      "desde_versao": null,
+                      "estado": "desconhecido"
+                    },
+                    "dominio": {
+                      "contexto": "A fonte tipa como string sem lista de valores; não inventar valores.",
+                      "estado": "verificado",
+                      "evidencias": [
+                        {
+                          "fonte": "src:mdapi-contentasset"
+                        }
+                      ],
+                      "natureza": "texto_livre"
+                    },
+                    "estado": "verificado",
+                    "evidencias": [
+                      {
+                        "fonte": "src:mdapi-contentasset"
+                      }
+                    ],
+                    "explicacao": "explicada",
+                    "id": "mdx:ContentAssetLink.name",
+                    "nome": "name",
+                    "o_que_e": "Reservado para uso futuro.",
+                    "obrigatoriedade": {
+                      "condicao": "A documentação 68.0 não marca o campo como obrigatório; ausência de marcação não comprova opcionalidade (confirmar no WSDL).",
+                      "estado": "desconhecido",
+                      "valor": "nao"
+                    },
+                    "origem": {
+                      "estado": "verificado",
+                      "evidencias": [
+                        {
+                          "fonte": "src:mdapi-contentasset"
+                        }
+                      ],
+                      "nota": "Propriedade definida pelo schema da Metadata API.",
+                      "valor": "padrao_plataforma"
+                    },
+                    "tipo_tecnico": "string"
+                  }
+                ]
+              },
+              "estrutura_ref": "mdx:ContentAssetLink",
+              "evidencias": [
+                {
+                  "fonte": "src:mdapi-contentasset"
+                }
+              ],
+              "explicacao": "explicada",
+              "id": "mdx:ContentAssetRelationships.emailTemplate",
+              "nome": "emailTemplate",
+              "notas": [
+                "A tabela da página tipa o campo como ContentAsset[]; o exemplo XML usa dentro dele o elemento access, da seção ContentAssetLink."
+              ],
+              "o_que_e": "Email templates relacionados ao asset.",
+              "obrigatoriedade": {
+                "condicao": "A documentação 68.0 não marca o campo como obrigatório; ausência de marcação não comprova opcionalidade (confirmar no WSDL).",
+                "estado": "desconhecido",
+                "valor": "nao"
+              },
+              "origem": {
+                "estado": "verificado",
+                "evidencias": [
+                  {
+                    "fonte": "src:mdapi-contentasset"
+                  }
+                ],
+                "nota": "Propriedade definida pelo schema da Metadata API.",
+                "valor": "padrao_plataforma"
+              },
+              "tipo_tecnico": "ContentAssetLink[]"
+            },
+            {
+              "cardinalidade": "0..n",
+              "default": {
+                "estado": "desconhecido",
+                "forma": "nao_declarado_na_fonte"
+              },
+              "disponibilidade": {
+                "ate_versao": null,
+                "desde_versao": "39.0",
+                "estado": "verificado"
+              },
+              "dominio": {
+                "estado": "verificado",
+                "evidencias": [
+                  {
+                    "fonte": "src:mdapi-contentasset"
+                  }
+                ],
+                "natureza": "tipo_composto"
+              },
+              "estado": "verificado",
+              "estrutura_expandida": {
+                "id": "mdx:ContentAssetLink",
+                "nome": "ContentAssetLink",
+                "propriedades": [
+                  {
+                    "default": {
+                      "estado": "desconhecido",
+                      "forma": "nao_declarado_na_fonte"
+                    },
+                    "disponibilidade": {
+                      "ate_versao": null,
+                      "desde_versao": null,
+                      "estado": "desconhecido"
+                    },
+                    "dominio": {
+                      "estado": "verificado",
+                      "evidencias": [
+                        {
+                          "fonte": "src:mdapi-contentasset"
+                        }
+                      ],
+                      "lista_completa": "sim",
+                      "natureza": "enum_fechado",
+                      "valores": [
+                        {
+                          "valor": "VIEWER"
+                        },
+                        {
+                          "valor": "COLLABORATOR"
+                        },
+                        {
+                          "significado": "A permissão vem da que o usuário já tem.",
+                          "valor": "INFERRED"
+                        }
+                      ]
+                    },
+                    "estado": "verificado",
+                    "evidencias": [
+                      {
+                        "fonte": "src:mdapi-contentasset"
+                      }
+                    ],
+                    "explicacao": "explicada",
+                    "id": "mdx:ContentAssetLink.access",
+                    "nome": "access",
+                    "o_que_e": "Permissão dada sobre o arquivo compartilhado.",
+                    "obrigatoriedade": {
+                      "estado": "verificado",
+                      "evidencias": [
+                        {
+                          "fonte": "src:mdapi-contentasset"
+                        }
+                      ],
+                      "valor": "sim"
+                    },
+                    "origem": {
+                      "estado": "verificado",
+                      "evidencias": [
+                        {
+                          "fonte": "src:mdapi-contentasset"
+                        }
+                      ],
+                      "nota": "Propriedade definida pelo schema da Metadata API.",
+                      "valor": "padrao_plataforma"
+                    },
+                    "tipo_tecnico": "ContentAssetAccess"
+                  },
+                  {
+                    "default": {
+                      "estado": "verificado",
+                      "evidencias": [
+                        {
+                          "fonte": "src:mdapi-contentasset"
+                        }
+                      ],
+                      "forma": "false",
+                      "nota": "A página declara default false.",
+                      "valor": false
+                    },
+                    "disponibilidade": {
+                      "ate_versao": null,
+                      "desde_versao": "39.0",
+                      "estado": "verificado"
+                    },
+                    "dominio": {
+                      "estado": "verificado",
+                      "evidencias": [
+                        {
+                          "fonte": "src:mdapi-contentasset"
+                        }
+                      ],
+                      "lista_completa": "sim",
+                      "natureza": "booleano",
+                      "valores": [
+                        {
+                          "valor": "true"
+                        },
+                        {
+                          "valor": "false"
+                        }
+                      ]
+                    },
+                    "estado": "verificado",
+                    "evidencias": [
+                      {
+                        "fonte": "src:mdapi-contentasset"
+                      }
+                    ],
+                    "explicacao": "explicada",
+                    "id": "mdx:ContentAssetLink.isManagingWorkspace",
+                    "nome": "isManagingWorkspace",
+                    "o_que_e": "Indica se o asset reside no workspace.",
+                    "obrigatoriedade": {
+                      "condicao": "A documentação 68.0 não marca o campo como obrigatório; ausência de marcação não comprova opcionalidade (confirmar no WSDL).",
+                      "estado": "desconhecido",
+                      "valor": "nao"
+                    },
+                    "origem": {
+                      "estado": "verificado",
+                      "evidencias": [
+                        {
+                          "fonte": "src:mdapi-contentasset"
+                        }
+                      ],
+                      "nota": "Propriedade definida pelo schema da Metadata API.",
+                      "valor": "padrao_plataforma"
+                    },
+                    "tipo_tecnico": "boolean"
+                  },
+                  {
+                    "default": {
+                      "estado": "desconhecido",
+                      "forma": "nao_declarado_na_fonte"
+                    },
+                    "disponibilidade": {
+                      "ate_versao": null,
+                      "desde_versao": null,
+                      "estado": "desconhecido"
+                    },
+                    "dominio": {
+                      "contexto": "A fonte tipa como string sem lista de valores; não inventar valores.",
+                      "estado": "verificado",
+                      "evidencias": [
+                        {
+                          "fonte": "src:mdapi-contentasset"
+                        }
+                      ],
+                      "natureza": "texto_livre"
+                    },
+                    "estado": "verificado",
+                    "evidencias": [
+                      {
+                        "fonte": "src:mdapi-contentasset"
+                      }
+                    ],
+                    "explicacao": "explicada",
+                    "id": "mdx:ContentAssetLink.name",
+                    "nome": "name",
+                    "o_que_e": "Reservado para uso futuro.",
+                    "obrigatoriedade": {
+                      "condicao": "A documentação 68.0 não marca o campo como obrigatório; ausência de marcação não comprova opcionalidade (confirmar no WSDL).",
+                      "estado": "desconhecido",
+                      "valor": "nao"
+                    },
+                    "origem": {
+                      "estado": "verificado",
+                      "evidencias": [
+                        {
+                          "fonte": "src:mdapi-contentasset"
+                        }
+                      ],
+                      "nota": "Propriedade definida pelo schema da Metadata API.",
+                      "valor": "padrao_plataforma"
+                    },
+                    "tipo_tecnico": "string"
+                  }
+                ]
+              },
+              "estrutura_ref": "mdx:ContentAssetLink",
+              "evidencias": [
+                {
+                  "fonte": "src:mdapi-contentasset"
+                }
+              ],
+              "explicacao": "explicada",
+              "id": "mdx:ContentAssetRelationships.insightsApplication",
+              "nome": "insightsApplication",
+              "notas": [
+                "A tabela da página tipa o campo como ContentAsset[]; o exemplo XML usa dentro dele o elemento access, da seção ContentAssetLink."
+              ],
+              "o_que_e": "Apps do Insights que usam o asset.",
+              "obrigatoriedade": {
+                "condicao": "A documentação 68.0 não marca o campo como obrigatório; ausência de marcação não comprova opcionalidade (confirmar no WSDL).",
+                "estado": "desconhecido",
+                "valor": "nao"
+              },
+              "origem": {
+                "estado": "verificado",
+                "evidencias": [
+                  {
+                    "fonte": "src:mdapi-contentasset"
+                  }
+                ],
+                "nota": "Propriedade definida pelo schema da Metadata API.",
+                "valor": "padrao_plataforma"
+              },
+              "tipo_tecnico": "ContentAssetLink[]"
+            },
+            {
+              "cardinalidade": "0..n",
+              "default": {
+                "estado": "desconhecido",
+                "forma": "nao_declarado_na_fonte"
+              },
+              "disponibilidade": {
+                "ate_versao": null,
+                "desde_versao": "39.0",
+                "estado": "verificado"
+              },
+              "dominio": {
+                "estado": "verificado",
+                "evidencias": [
+                  {
+                    "fonte": "src:mdapi-contentasset"
+                  }
+                ],
+                "natureza": "tipo_composto"
+              },
+              "estado": "verificado",
+              "estrutura_expandida": {
+                "id": "mdx:ContentAssetLink",
+                "nome": "ContentAssetLink",
+                "propriedades": [
+                  {
+                    "default": {
+                      "estado": "desconhecido",
+                      "forma": "nao_declarado_na_fonte"
+                    },
+                    "disponibilidade": {
+                      "ate_versao": null,
+                      "desde_versao": null,
+                      "estado": "desconhecido"
+                    },
+                    "dominio": {
+                      "estado": "verificado",
+                      "evidencias": [
+                        {
+                          "fonte": "src:mdapi-contentasset"
+                        }
+                      ],
+                      "lista_completa": "sim",
+                      "natureza": "enum_fechado",
+                      "valores": [
+                        {
+                          "valor": "VIEWER"
+                        },
+                        {
+                          "valor": "COLLABORATOR"
+                        },
+                        {
+                          "significado": "A permissão vem da que o usuário já tem.",
+                          "valor": "INFERRED"
+                        }
+                      ]
+                    },
+                    "estado": "verificado",
+                    "evidencias": [
+                      {
+                        "fonte": "src:mdapi-contentasset"
+                      }
+                    ],
+                    "explicacao": "explicada",
+                    "id": "mdx:ContentAssetLink.access",
+                    "nome": "access",
+                    "o_que_e": "Permissão dada sobre o arquivo compartilhado.",
+                    "obrigatoriedade": {
+                      "estado": "verificado",
+                      "evidencias": [
+                        {
+                          "fonte": "src:mdapi-contentasset"
+                        }
+                      ],
+                      "valor": "sim"
+                    },
+                    "origem": {
+                      "estado": "verificado",
+                      "evidencias": [
+                        {
+                          "fonte": "src:mdapi-contentasset"
+                        }
+                      ],
+                      "nota": "Propriedade definida pelo schema da Metadata API.",
+                      "valor": "padrao_plataforma"
+                    },
+                    "tipo_tecnico": "ContentAssetAccess"
+                  },
+                  {
+                    "default": {
+                      "estado": "verificado",
+                      "evidencias": [
+                        {
+                          "fonte": "src:mdapi-contentasset"
+                        }
+                      ],
+                      "forma": "false",
+                      "nota": "A página declara default false.",
+                      "valor": false
+                    },
+                    "disponibilidade": {
+                      "ate_versao": null,
+                      "desde_versao": "39.0",
+                      "estado": "verificado"
+                    },
+                    "dominio": {
+                      "estado": "verificado",
+                      "evidencias": [
+                        {
+                          "fonte": "src:mdapi-contentasset"
+                        }
+                      ],
+                      "lista_completa": "sim",
+                      "natureza": "booleano",
+                      "valores": [
+                        {
+                          "valor": "true"
+                        },
+                        {
+                          "valor": "false"
+                        }
+                      ]
+                    },
+                    "estado": "verificado",
+                    "evidencias": [
+                      {
+                        "fonte": "src:mdapi-contentasset"
+                      }
+                    ],
+                    "explicacao": "explicada",
+                    "id": "mdx:ContentAssetLink.isManagingWorkspace",
+                    "nome": "isManagingWorkspace",
+                    "o_que_e": "Indica se o asset reside no workspace.",
+                    "obrigatoriedade": {
+                      "condicao": "A documentação 68.0 não marca o campo como obrigatório; ausência de marcação não comprova opcionalidade (confirmar no WSDL).",
+                      "estado": "desconhecido",
+                      "valor": "nao"
+                    },
+                    "origem": {
+                      "estado": "verificado",
+                      "evidencias": [
+                        {
+                          "fonte": "src:mdapi-contentasset"
+                        }
+                      ],
+                      "nota": "Propriedade definida pelo schema da Metadata API.",
+                      "valor": "padrao_plataforma"
+                    },
+                    "tipo_tecnico": "boolean"
+                  },
+                  {
+                    "default": {
+                      "estado": "desconhecido",
+                      "forma": "nao_declarado_na_fonte"
+                    },
+                    "disponibilidade": {
+                      "ate_versao": null,
+                      "desde_versao": null,
+                      "estado": "desconhecido"
+                    },
+                    "dominio": {
+                      "contexto": "A fonte tipa como string sem lista de valores; não inventar valores.",
+                      "estado": "verificado",
+                      "evidencias": [
+                        {
+                          "fonte": "src:mdapi-contentasset"
+                        }
+                      ],
+                      "natureza": "texto_livre"
+                    },
+                    "estado": "verificado",
+                    "evidencias": [
+                      {
+                        "fonte": "src:mdapi-contentasset"
+                      }
+                    ],
+                    "explicacao": "explicada",
+                    "id": "mdx:ContentAssetLink.name",
+                    "nome": "name",
+                    "o_que_e": "Reservado para uso futuro.",
+                    "obrigatoriedade": {
+                      "condicao": "A documentação 68.0 não marca o campo como obrigatório; ausência de marcação não comprova opcionalidade (confirmar no WSDL).",
+                      "estado": "desconhecido",
+                      "valor": "nao"
+                    },
+                    "origem": {
+                      "estado": "verificado",
+                      "evidencias": [
+                        {
+                          "fonte": "src:mdapi-contentasset"
+                        }
+                      ],
+                      "nota": "Propriedade definida pelo schema da Metadata API.",
+                      "valor": "padrao_plataforma"
+                    },
+                    "tipo_tecnico": "string"
+                  }
+                ]
+              },
+              "estrutura_ref": "mdx:ContentAssetLink",
+              "evidencias": [
+                {
+                  "fonte": "src:mdapi-contentasset"
+                }
+              ],
+              "explicacao": "explicada",
+              "id": "mdx:ContentAssetRelationships.network",
+              "nome": "network",
+              "notas": [
+                "A tabela da página tipa o campo como ContentAsset[]; o exemplo XML usa dentro dele o elemento access, da seção ContentAssetLink."
+              ],
+              "o_que_e": "Networks (sites) que usam o asset.",
+              "obrigatoriedade": {
+                "condicao": "A documentação 68.0 não marca o campo como obrigatório; ausência de marcação não comprova opcionalidade (confirmar no WSDL).",
+                "estado": "desconhecido",
+                "valor": "nao"
+              },
+              "origem": {
+                "estado": "verificado",
+                "evidencias": [
+                  {
+                    "fonte": "src:mdapi-contentasset"
+                  }
+                ],
+                "nota": "Propriedade definida pelo schema da Metadata API.",
+                "valor": "padrao_plataforma"
+              },
+              "tipo_tecnico": "ContentAssetLink[]"
+            },
+            {
+              "cardinalidade": "0..n",
+              "default": {
+                "estado": "desconhecido",
+                "forma": "nao_declarado_na_fonte"
+              },
+              "disponibilidade": {
+                "ate_versao": null,
+                "desde_versao": "39.0",
+                "estado": "verificado"
+              },
+              "dominio": {
+                "estado": "verificado",
+                "evidencias": [
+                  {
+                    "fonte": "src:mdapi-contentasset"
+                  }
+                ],
+                "natureza": "tipo_composto"
+              },
+              "estado": "verificado",
+              "estrutura_expandida": {
+                "id": "mdx:ContentAssetLink",
+                "nome": "ContentAssetLink",
+                "propriedades": [
+                  {
+                    "default": {
+                      "estado": "desconhecido",
+                      "forma": "nao_declarado_na_fonte"
+                    },
+                    "disponibilidade": {
+                      "ate_versao": null,
+                      "desde_versao": null,
+                      "estado": "desconhecido"
+                    },
+                    "dominio": {
+                      "estado": "verificado",
+                      "evidencias": [
+                        {
+                          "fonte": "src:mdapi-contentasset"
+                        }
+                      ],
+                      "lista_completa": "sim",
+                      "natureza": "enum_fechado",
+                      "valores": [
+                        {
+                          "valor": "VIEWER"
+                        },
+                        {
+                          "valor": "COLLABORATOR"
+                        },
+                        {
+                          "significado": "A permissão vem da que o usuário já tem.",
+                          "valor": "INFERRED"
+                        }
+                      ]
+                    },
+                    "estado": "verificado",
+                    "evidencias": [
+                      {
+                        "fonte": "src:mdapi-contentasset"
+                      }
+                    ],
+                    "explicacao": "explicada",
+                    "id": "mdx:ContentAssetLink.access",
+                    "nome": "access",
+                    "o_que_e": "Permissão dada sobre o arquivo compartilhado.",
+                    "obrigatoriedade": {
+                      "estado": "verificado",
+                      "evidencias": [
+                        {
+                          "fonte": "src:mdapi-contentasset"
+                        }
+                      ],
+                      "valor": "sim"
+                    },
+                    "origem": {
+                      "estado": "verificado",
+                      "evidencias": [
+                        {
+                          "fonte": "src:mdapi-contentasset"
+                        }
+                      ],
+                      "nota": "Propriedade definida pelo schema da Metadata API.",
+                      "valor": "padrao_plataforma"
+                    },
+                    "tipo_tecnico": "ContentAssetAccess"
+                  },
+                  {
+                    "default": {
+                      "estado": "verificado",
+                      "evidencias": [
+                        {
+                          "fonte": "src:mdapi-contentasset"
+                        }
+                      ],
+                      "forma": "false",
+                      "nota": "A página declara default false.",
+                      "valor": false
+                    },
+                    "disponibilidade": {
+                      "ate_versao": null,
+                      "desde_versao": "39.0",
+                      "estado": "verificado"
+                    },
+                    "dominio": {
+                      "estado": "verificado",
+                      "evidencias": [
+                        {
+                          "fonte": "src:mdapi-contentasset"
+                        }
+                      ],
+                      "lista_completa": "sim",
+                      "natureza": "booleano",
+                      "valores": [
+                        {
+                          "valor": "true"
+                        },
+                        {
+                          "valor": "false"
+                        }
+                      ]
+                    },
+                    "estado": "verificado",
+                    "evidencias": [
+                      {
+                        "fonte": "src:mdapi-contentasset"
+                      }
+                    ],
+                    "explicacao": "explicada",
+                    "id": "mdx:ContentAssetLink.isManagingWorkspace",
+                    "nome": "isManagingWorkspace",
+                    "o_que_e": "Indica se o asset reside no workspace.",
+                    "obrigatoriedade": {
+                      "condicao": "A documentação 68.0 não marca o campo como obrigatório; ausência de marcação não comprova opcionalidade (confirmar no WSDL).",
+                      "estado": "desconhecido",
+                      "valor": "nao"
+                    },
+                    "origem": {
+                      "estado": "verificado",
+                      "evidencias": [
+                        {
+                          "fonte": "src:mdapi-contentasset"
+                        }
+                      ],
+                      "nota": "Propriedade definida pelo schema da Metadata API.",
+                      "valor": "padrao_plataforma"
+                    },
+                    "tipo_tecnico": "boolean"
+                  },
+                  {
+                    "default": {
+                      "estado": "desconhecido",
+                      "forma": "nao_declarado_na_fonte"
+                    },
+                    "disponibilidade": {
+                      "ate_versao": null,
+                      "desde_versao": null,
+                      "estado": "desconhecido"
+                    },
+                    "dominio": {
+                      "contexto": "A fonte tipa como string sem lista de valores; não inventar valores.",
+                      "estado": "verificado",
+                      "evidencias": [
+                        {
+                          "fonte": "src:mdapi-contentasset"
+                        }
+                      ],
+                      "natureza": "texto_livre"
+                    },
+                    "estado": "verificado",
+                    "evidencias": [
+                      {
+                        "fonte": "src:mdapi-contentasset"
+                      }
+                    ],
+                    "explicacao": "explicada",
+                    "id": "mdx:ContentAssetLink.name",
+                    "nome": "name",
+                    "o_que_e": "Reservado para uso futuro.",
+                    "obrigatoriedade": {
+                      "condicao": "A documentação 68.0 não marca o campo como obrigatório; ausência de marcação não comprova opcionalidade (confirmar no WSDL).",
+                      "estado": "desconhecido",
+                      "valor": "nao"
+                    },
+                    "origem": {
+                      "estado": "verificado",
+                      "evidencias": [
+                        {
+                          "fonte": "src:mdapi-contentasset"
+                        }
+                      ],
+                      "nota": "Propriedade definida pelo schema da Metadata API.",
+                      "valor": "padrao_plataforma"
+                    },
+                    "tipo_tecnico": "string"
+                  }
+                ]
+              },
+              "estrutura_ref": "mdx:ContentAssetLink",
+              "evidencias": [
+                {
+                  "fonte": "src:mdapi-contentasset"
+                }
+              ],
+              "explicacao": "explicada",
+              "id": "mdx:ContentAssetRelationships.organization",
+              "nome": "organization",
+              "notas": [
+                "A tabela da página tipa o campo como ContentAsset[]; o exemplo XML usa dentro dele o elemento access, da seção ContentAssetLink."
+              ],
+              "o_que_e": "Compartilhamento com a org; corresponde a ContentDocumentLink.",
+              "obrigatoriedade": {
+                "condicao": "A documentação 68.0 não marca o campo como obrigatório; ausência de marcação não comprova opcionalidade (confirmar no WSDL).",
+                "estado": "desconhecido",
+                "valor": "nao"
+              },
+              "origem": {
+                "estado": "verificado",
+                "evidencias": [
+                  {
+                    "fonte": "src:mdapi-contentasset"
+                  }
+                ],
+                "nota": "Propriedade definida pelo schema da Metadata API.",
+                "valor": "padrao_plataforma"
+              },
+              "tipo_tecnico": "ContentAssetLink[]"
+            },
+            {
+              "cardinalidade": "0..n",
+              "default": {
+                "estado": "desconhecido",
+                "forma": "nao_declarado_na_fonte"
+              },
+              "disponibilidade": {
+                "ate_versao": null,
+                "desde_versao": "39.0",
+                "estado": "verificado"
+              },
+              "dominio": {
+                "estado": "verificado",
+                "evidencias": [
+                  {
+                    "fonte": "src:mdapi-contentasset"
+                  }
+                ],
+                "natureza": "tipo_composto"
+              },
+              "estado": "verificado",
+              "estrutura_expandida": {
+                "id": "mdx:ContentAssetLink",
+                "nome": "ContentAssetLink",
+                "propriedades": [
+                  {
+                    "default": {
+                      "estado": "desconhecido",
+                      "forma": "nao_declarado_na_fonte"
+                    },
+                    "disponibilidade": {
+                      "ate_versao": null,
+                      "desde_versao": null,
+                      "estado": "desconhecido"
+                    },
+                    "dominio": {
+                      "estado": "verificado",
+                      "evidencias": [
+                        {
+                          "fonte": "src:mdapi-contentasset"
+                        }
+                      ],
+                      "lista_completa": "sim",
+                      "natureza": "enum_fechado",
+                      "valores": [
+                        {
+                          "valor": "VIEWER"
+                        },
+                        {
+                          "valor": "COLLABORATOR"
+                        },
+                        {
+                          "significado": "A permissão vem da que o usuário já tem.",
+                          "valor": "INFERRED"
+                        }
+                      ]
+                    },
+                    "estado": "verificado",
+                    "evidencias": [
+                      {
+                        "fonte": "src:mdapi-contentasset"
+                      }
+                    ],
+                    "explicacao": "explicada",
+                    "id": "mdx:ContentAssetLink.access",
+                    "nome": "access",
+                    "o_que_e": "Permissão dada sobre o arquivo compartilhado.",
+                    "obrigatoriedade": {
+                      "estado": "verificado",
+                      "evidencias": [
+                        {
+                          "fonte": "src:mdapi-contentasset"
+                        }
+                      ],
+                      "valor": "sim"
+                    },
+                    "origem": {
+                      "estado": "verificado",
+                      "evidencias": [
+                        {
+                          "fonte": "src:mdapi-contentasset"
+                        }
+                      ],
+                      "nota": "Propriedade definida pelo schema da Metadata API.",
+                      "valor": "padrao_plataforma"
+                    },
+                    "tipo_tecnico": "ContentAssetAccess"
+                  },
+                  {
+                    "default": {
+                      "estado": "verificado",
+                      "evidencias": [
+                        {
+                          "fonte": "src:mdapi-contentasset"
+                        }
+                      ],
+                      "forma": "false",
+                      "nota": "A página declara default false.",
+                      "valor": false
+                    },
+                    "disponibilidade": {
+                      "ate_versao": null,
+                      "desde_versao": "39.0",
+                      "estado": "verificado"
+                    },
+                    "dominio": {
+                      "estado": "verificado",
+                      "evidencias": [
+                        {
+                          "fonte": "src:mdapi-contentasset"
+                        }
+                      ],
+                      "lista_completa": "sim",
+                      "natureza": "booleano",
+                      "valores": [
+                        {
+                          "valor": "true"
+                        },
+                        {
+                          "valor": "false"
+                        }
+                      ]
+                    },
+                    "estado": "verificado",
+                    "evidencias": [
+                      {
+                        "fonte": "src:mdapi-contentasset"
+                      }
+                    ],
+                    "explicacao": "explicada",
+                    "id": "mdx:ContentAssetLink.isManagingWorkspace",
+                    "nome": "isManagingWorkspace",
+                    "o_que_e": "Indica se o asset reside no workspace.",
+                    "obrigatoriedade": {
+                      "condicao": "A documentação 68.0 não marca o campo como obrigatório; ausência de marcação não comprova opcionalidade (confirmar no WSDL).",
+                      "estado": "desconhecido",
+                      "valor": "nao"
+                    },
+                    "origem": {
+                      "estado": "verificado",
+                      "evidencias": [
+                        {
+                          "fonte": "src:mdapi-contentasset"
+                        }
+                      ],
+                      "nota": "Propriedade definida pelo schema da Metadata API.",
+                      "valor": "padrao_plataforma"
+                    },
+                    "tipo_tecnico": "boolean"
+                  },
+                  {
+                    "default": {
+                      "estado": "desconhecido",
+                      "forma": "nao_declarado_na_fonte"
+                    },
+                    "disponibilidade": {
+                      "ate_versao": null,
+                      "desde_versao": null,
+                      "estado": "desconhecido"
+                    },
+                    "dominio": {
+                      "contexto": "A fonte tipa como string sem lista de valores; não inventar valores.",
+                      "estado": "verificado",
+                      "evidencias": [
+                        {
+                          "fonte": "src:mdapi-contentasset"
+                        }
+                      ],
+                      "natureza": "texto_livre"
+                    },
+                    "estado": "verificado",
+                    "evidencias": [
+                      {
+                        "fonte": "src:mdapi-contentasset"
+                      }
+                    ],
+                    "explicacao": "explicada",
+                    "id": "mdx:ContentAssetLink.name",
+                    "nome": "name",
+                    "o_que_e": "Reservado para uso futuro.",
+                    "obrigatoriedade": {
+                      "condicao": "A documentação 68.0 não marca o campo como obrigatório; ausência de marcação não comprova opcionalidade (confirmar no WSDL).",
+                      "estado": "desconhecido",
+                      "valor": "nao"
+                    },
+                    "origem": {
+                      "estado": "verificado",
+                      "evidencias": [
+                        {
+                          "fonte": "src:mdapi-contentasset"
+                        }
+                      ],
+                      "nota": "Propriedade definida pelo schema da Metadata API.",
+                      "valor": "padrao_plataforma"
+                    },
+                    "tipo_tecnico": "string"
+                  }
+                ]
+              },
+              "estrutura_ref": "mdx:ContentAssetLink",
+              "evidencias": [
+                {
+                  "fonte": "src:mdapi-contentasset"
+                }
+              ],
+              "explicacao": "explicada",
+              "id": "mdx:ContentAssetRelationships.workspace",
+              "nome": "workspace",
+              "notas": [
+                "A tabela da página tipa o campo como ContentAsset[]; o exemplo XML usa dentro dele o elemento access, da seção ContentAssetLink."
+              ],
+              "o_que_e": "Workspaces e bibliotecas donos do asset ou com quem ele é compartilhado.",
+              "obrigatoriedade": {
+                "condicao": "A documentação 68.0 não marca o campo como obrigatório; ausência de marcação não comprova opcionalidade (confirmar no WSDL).",
+                "estado": "desconhecido",
+                "valor": "nao"
+              },
+              "origem": {
+                "estado": "verificado",
+                "evidencias": [
+                  {
+                    "fonte": "src:mdapi-contentasset"
+                  }
+                ],
+                "nota": "Propriedade definida pelo schema da Metadata API.",
+                "valor": "padrao_plataforma"
+              },
+              "tipo_tecnico": "ContentAssetLink[]"
+            }
+          ]
+        },
+        "estrutura_ref": "mdx:ContentAssetRelationships",
+        "evidencias": [
+          {
+            "fonte": "src:mdapi-contentasset"
+          }
+        ],
+        "explicacao": "explicada",
+        "id": "mdt:ContentAsset.relationships",
+        "nome": "relationships",
+        "o_que_e": "Com quem o arquivo é compartilhado.",
+        "obrigatoriedade": {
+          "condicao": "A documentação 68.0 não marca o campo como obrigatório; ausência de marcação não comprova opcionalidade (confirmar no WSDL).",
+          "estado": "desconhecido",
+          "valor": "nao"
+        },
+        "origem": {
+          "estado": "verificado",
+          "evidencias": [
+            {
+              "fonte": "src:mdapi-contentasset"
+            }
+          ],
+          "nota": "Propriedade definida pelo schema da Metadata API.",
+          "valor": "padrao_plataforma"
+        },
+        "tipo_tecnico": "ContentAssetRelationships"
+      },
+      {
+        "default": {
+          "estado": "desconhecido",
+          "forma": "nao_declarado_na_fonte"
+        },
+        "disponibilidade": {
+          "ate_versao": null,
+          "desde_versao": null,
+          "estado": "desconhecido"
+        },
+        "dominio": {
+          "estado": "verificado",
+          "evidencias": [
+            {
+              "fonte": "src:mdapi-contentasset"
+            }
+          ],
+          "natureza": "tipo_composto"
+        },
+        "estado": "verificado",
+        "estrutura_expandida": {
+          "id": "mdx:ContentAssetVersions",
+          "nome": "ContentAssetVersions",
+          "propriedades": [
+            {
+              "cardinalidade": "0..n",
+              "default": {
+                "estado": "desconhecido",
+                "forma": "nao_declarado_na_fonte"
+              },
+              "disponibilidade": {
+                "ate_versao": null,
+                "desde_versao": null,
+                "estado": "desconhecido"
+              },
+              "dominio": {
+                "estado": "verificado",
+                "evidencias": [
+                  {
+                    "fonte": "src:mdapi-contentasset"
+                  }
+                ],
+                "natureza": "tipo_composto"
+              },
+              "estado": "verificado",
+              "estrutura_expandida": {
+                "id": "mdx:ContentAssetVersion",
+                "nome": "ContentAssetVersion",
+                "propriedades": [
+                  {
+                    "default": {
+                      "estado": "desconhecido",
+                      "forma": "nao_declarado_na_fonte"
+                    },
+                    "disponibilidade": {
+                      "ate_versao": null,
+                      "desde_versao": null,
+                      "estado": "desconhecido"
+                    },
+                    "dominio": {
+                      "contexto": "A fonte tipa como string sem lista de valores; não inventar valores.",
+                      "estado": "verificado",
+                      "evidencias": [
+                        {
+                          "fonte": "src:mdapi-contentasset"
+                        }
+                      ],
+                      "natureza": "texto_livre"
+                    },
+                    "estado": "verificado",
+                    "evidencias": [
+                      {
+                        "fonte": "src:mdapi-contentasset"
+                      }
+                    ],
+                    "explicacao": "explicada",
+                    "id": "mdx:ContentAssetVersion.number",
+                    "nome": "number",
+                    "o_que_e": "Número da versão; reflete ou define o do ContentVersion.",
+                    "obrigatoriedade": {
+                      "estado": "verificado",
+                      "evidencias": [
+                        {
+                          "fonte": "src:mdapi-contentasset"
+                        }
+                      ],
+                      "valor": "sim"
+                    },
+                    "origem": {
+                      "estado": "verificado",
+                      "evidencias": [
+                        {
+                          "fonte": "src:mdapi-contentasset"
+                        }
+                      ],
+                      "nota": "Propriedade definida pelo schema da Metadata API.",
+                      "valor": "padrao_plataforma"
+                    },
+                    "tipo_tecnico": "string"
+                  },
+                  {
+                    "default": {
+                      "estado": "desconhecido",
+                      "forma": "nao_declarado_na_fonte"
+                    },
+                    "disponibilidade": {
+                      "ate_versao": null,
+                      "desde_versao": null,
+                      "estado": "desconhecido"
+                    },
+                    "dominio": {
+                      "contexto": "A fonte tipa como string sem lista de valores; não inventar valores.",
+                      "estado": "verificado",
+                      "evidencias": [
+                        {
+                          "fonte": "src:mdapi-contentasset"
+                        }
+                      ],
+                      "natureza": "texto_livre"
+                    },
+                    "estado": "verificado",
+                    "evidencias": [
+                      {
+                        "fonte": "src:mdapi-contentasset"
+                      }
+                    ],
+                    "explicacao": "explicada",
+                    "id": "mdx:ContentAssetVersion.pathOnClient",
+                    "nome": "pathOnClient",
+                    "o_que_e": "Nome original do arquivo; corresponde a ContentVersion.PathOnClient e dá origem ao título.",
+                    "obrigatoriedade": {
+                      "estado": "verificado",
+                      "evidencias": [
+                        {
+                          "fonte": "src:mdapi-contentasset"
+                        }
+                      ],
+                      "valor": "sim"
+                    },
+                    "origem": {
+                      "estado": "verificado",
+                      "evidencias": [
+                        {
+                          "fonte": "src:mdapi-contentasset"
+                        }
+                      ],
+                      "nota": "Propriedade definida pelo schema da Metadata API.",
+                      "valor": "padrao_plataforma"
+                    },
+                    "tipo_tecnico": "string"
+                  },
+                  {
+                    "default": {
+                      "estado": "desconhecido",
+                      "forma": "nao_declarado_na_fonte"
+                    },
+                    "disponibilidade": {
+                      "ate_versao": null,
+                      "desde_versao": null,
+                      "estado": "desconhecido"
+                    },
+                    "dominio": {
+                      "contexto": "A fonte tipa como string sem lista de valores; não inventar valores.",
+                      "estado": "verificado",
+                      "evidencias": [
+                        {
+                          "fonte": "src:mdapi-contentasset"
+                        }
+                      ],
+                      "natureza": "texto_livre"
+                    },
+                    "estado": "verificado",
+                    "evidencias": [
+                      {
+                        "fonte": "src:mdapi-contentasset"
+                      }
+                    ],
+                    "explicacao": "explicada",
+                    "id": "mdx:ContentAssetVersion.zipEntry",
+                    "nome": "zipEntry",
+                    "o_que_e": "Nome do arquivo dentro do zip quando há várias versões; vazio quando há uma só.",
+                    "obrigatoriedade": {
+                      "condicao": "A documentação 68.0 não marca o campo como obrigatório; ausência de marcação não comprova opcionalidade (confirmar no WSDL).",
+                      "estado": "desconhecido",
+                      "valor": "nao"
+                    },
+                    "origem": {
+                      "estado": "verificado",
+                      "evidencias": [
+                        {
+                          "fonte": "src:mdapi-contentasset"
+                        }
+                      ],
+                      "nota": "Propriedade definida pelo schema da Metadata API.",
+                      "valor": "padrao_plataforma"
+                    },
+                    "tipo_tecnico": "string"
+                  }
+                ]
+              },
+              "estrutura_ref": "mdx:ContentAssetVersion",
+              "evidencias": [
+                {
+                  "fonte": "src:mdapi-contentasset"
+                }
+              ],
+              "explicacao": "explicada",
+              "id": "mdx:ContentAssetVersions.version",
+              "nome": "version",
+              "o_que_e": "Versões do arquivo.",
+              "obrigatoriedade": {
+                "condicao": "A documentação 68.0 não marca o campo como obrigatório; ausência de marcação não comprova opcionalidade (confirmar no WSDL).",
+                "estado": "desconhecido",
+                "valor": "nao"
+              },
+              "origem": {
+                "estado": "verificado",
+                "evidencias": [
+                  {
+                    "fonte": "src:mdapi-contentasset"
+                  }
+                ],
+                "nota": "Propriedade definida pelo schema da Metadata API.",
+                "valor": "padrao_plataforma"
+              },
+              "tipo_tecnico": "ContentAssetVersion[]"
+            }
+          ]
+        },
+        "estrutura_ref": "mdx:ContentAssetVersions",
+        "evidencias": [
+          {
+            "fonte": "src:mdapi-contentasset"
+          }
+        ],
+        "explicacao": "explicada",
+        "id": "mdt:ContentAsset.versions",
+        "nome": "versions",
+        "o_que_e": "Dados básicos das versões do arquivo; normalmente uma.",
+        "obrigatoriedade": {
+          "estado": "verificado",
+          "evidencias": [
+            {
+              "fonte": "src:mdapi-contentasset"
+            }
+          ],
+          "valor": "sim"
+        },
+        "origem": {
+          "estado": "verificado",
+          "evidencias": [
+            {
+              "fonte": "src:mdapi-contentasset"
+            }
+          ],
+          "nota": "Propriedade definida pelo schema da Metadata API.",
+          "valor": "padrao_plataforma"
+        },
+        "tipo_tecnico": "ContentAssetVersions"
+      }
+    ],
+    "recomendacoes": [],
+    "setup": {
+      "estado": "desconhecido",
+      "nota": "Caminho no Setup não validado nesta sessão."
+    },
+    "suporte_cli": {
+      "estado": "verificado",
+      "evidencias": [
+        {
+          "fonte": "src:sdr-metadata-support"
+        }
+      ],
+      "nota": "Suporte do Salesforce CLI (source-deploy-retrieve), não do Metadata API em geral.",
+      "valor": {
+        "nota_fonte": null,
+        "status": "suportado"
+      }
+    }
+  },
+  "nota": "Gerado deterministicamente a partir de catalogo/. Não editar à mão.",
+  "objetos_relacionados": [],
+  "relacionamentos": [],
+  "versao_base": {
+    "api_version": "68.0",
+    "data_referencia": "2026-11-07",
+    "escopo": "config/escopo.json",
+    "release": "Winter '27"
+  }
+}

@@ -19,22 +19,203 @@
       "texto": "Para desenvolvimento, a documentação oferece Agent Script, a linguagem para construir agentes no Agentforce Builder, e Agentforce DX, com ferramentas para Salesforce CLI e VS Code.",
       "tipo": "implantacao",
       "titulo": "Ferramentas pro-code"
+    },
+    {
+      "evidencias": [
+        {
+          "fonte": "src:help-agentforce-glossary"
+        },
+        {
+          "fonte": "src:help-prompt-concepts"
+        },
+        {
+          "fonte": "src:help-data-library"
+        },
+        {
+          "fonte": "src:help-trust-layer"
+        }
+      ],
+      "texto": "O agente é formado por subagents (antes topics); cada subagent tem instruções e ações; uma ação chama um recurso da plataforma, como um flow, uma classe Apex ou um prompt template. O prompt template recebe dados da org por grounding, e uma data library permite buscar trechos de conteúdo da empresa. O Einstein Trust Layer protege os dados no caminho até o modelo.",
+      "tipo": "decisao",
+      "titulo": "Como as peças se encaixam"
+    },
+    {
+      "evidencias": [
+        {
+          "fonte": "src:mdapi-genaiprompttemplate"
+        },
+        {
+          "fonte": "src:mdapi-genaiplugin"
+        },
+        {
+          "fonte": "src:mdapi-genaifunction"
+        },
+        {
+          "fonte": "src:mdapi-einsteingptsettings"
+        }
+      ],
+      "texto": "GenAiPromptTemplate guarda cada prompt template; GenAiPlugin, cada tópico (subagent) da biblioteca de assets; GenAiFunction, cada agent action; EinsteinGptSettings, as opções de IA generativa da org. As páginas dos tipos avisam que, em orgs Winter '26 ou posteriores, o que é criado dentro de um agente sai em GenAiPlannerBundle.",
+      "tipo": "implantacao",
+      "titulo": "Como metadado"
     }
   ],
   "derivado": {
-    "dependencias": [],
-    "funcionalidades": [],
-    "metadata_types": [],
+    "dependencias": [
+      {
+        "destino": "obj:KnowledgeArticle",
+        "destino_no_tema": true,
+        "estado": "verificado",
+        "origem": "obj:KnowledgeArticleVersion",
+        "rel": "rel:knowledgearticleversion-knowledgearticle",
+        "via": "KnowledgeArticleId"
+      }
+    ],
+    "funcionalidades": [
+      {
+        "alertas": [
+          "A Ajuda atual tem dois construtores: o Agentforce Builder, que usa Agent Script, e o Legacy Agentforce Builder.",
+          "Agentes de atendimento rodam como um agent user: um usuário com exatamente as permissões de que o agente precisa.",
+          "As licenças exigidas variam conforme o tipo de agente."
+        ],
+        "exemplo": "Um agente de atendimento consulta o pedido do cliente e abre a devolução, seguindo as instruções do subagent de devoluções.",
+        "id": "func:agentes-agentforce",
+        "principal": true
+      },
+      {
+        "alertas": [
+          "O nome mudou: a Ajuda atual diz subagent; o metadado GenAiPlugin, na API 68.0, ainda diz topic.",
+          "O agente escolhe a ação pelo nome e pelas instruções dela: descreva em linguagem natural o que a ação faz.",
+          "Subagents e ações criados dentro de um agente saem em outro tipo de metadado (GenAiPlannerBundle), segundo as páginas dos tipos."
+        ],
+        "exemplo": "O subagent Devoluções tem a instrução de sempre confirmar o número do pedido e a ação que roda o flow de devolução.",
+        "id": "func:subagents-e-agent-actions",
+        "principal": true
+      },
+      {
+        "alertas": [
+          "Para pôr um template Field Generation numa página de registro, a página precisa usar Dynamic Forms.",
+          "Templates publicados não podem ser editados, nem pela interface nem pela Metadata API.",
+          "Criar e gerenciar templates exige permissão própria; a Ajuda cita o permission set Prompt Template Manager."
+        ],
+        "exemplo": "Um template Field Generation preenche o campo Resumo do caso: o usuário clica num botão e o texto gerado entra no campo.",
+        "id": "func:prompt-builder",
+        "principal": true
+      },
+      {
+        "alertas": [
+          "Exige o Data 360 configurado.",
+          "Em prompt templates, os retrievers buscam no conhecimento indexado no Data 360."
+        ],
+        "exemplo": "O agente de atendimento responde uma dúvida sobre garantia citando o artigo de Knowledge que trata do assunto.",
+        "id": "func:agentforce-data-library",
+        "principal": true
+      },
+      {
+        "alertas": [
+          "Habilitar Lightning Knowledge é irreversível e muda o modelo de dados para record types; exige ao menos um article type."
+        ],
+        "exemplo": "Um artigo de 'Como trocar a senha' é sugerido ao atendente e publicado no portal.",
+        "id": "func:lightning-knowledge",
+        "pre_requisitos": [
+          "Ver Knowledge Settings: licença Knowledge User."
+        ],
+        "principal": false,
+        "tema_principal": "sub:knowledge-e-categorias"
+      },
+      {
+        "alertas": [
+          "O mascaramento não vale igual em todo lugar: a Ajuda informa que ele fica desligado no Agentforce Employee Agent.",
+          "A trilha de auditoria e os dados de feedback ficam guardados no Data 360.",
+          "Agentes respeitam os controles de acesso normais do Salesforce; o Trust Layer não substitui permissões e compartilhamento."
+        ],
+        "exemplo": "O nome e o e-mail do cliente são trocados por marcadores antes de o prompt ir ao modelo externo; a resposta volta com os dados no lugar.",
+        "id": "func:einstein-trust-layer",
+        "principal": true
+      }
+    ],
+    "metadata_types": [
+      {
+        "estrutura": "completa",
+        "funcionalidades": [
+          "func:prompt-builder"
+        ],
+        "id": "mdt:EinsteinGptSettings",
+        "nota_suporte": null,
+        "suporte_cli": "suportado"
+      },
+      {
+        "estrutura": "completa",
+        "funcionalidades": [
+          "func:subagents-e-agent-actions"
+        ],
+        "id": "mdt:GenAiFunction",
+        "nota_suporte": null,
+        "suporte_cli": "suportado"
+      },
+      {
+        "estrutura": "parcial",
+        "funcionalidades": [
+          "func:subagents-e-agent-actions"
+        ],
+        "id": "mdt:GenAiPlugin",
+        "nota_suporte": null,
+        "suporte_cli": "suportado"
+      },
+      {
+        "estrutura": "completa",
+        "funcionalidades": [
+          "func:prompt-builder"
+        ],
+        "id": "mdt:GenAiPromptTemplate",
+        "nota_suporte": null,
+        "suporte_cli": "suportado"
+      },
+      {
+        "estrutura": "parcial",
+        "funcionalidades": [
+          "func:lightning-knowledge"
+        ],
+        "id": "mdt:KnowledgeSettings",
+        "nota_suporte": null,
+        "suporte_cli": "suportado"
+      }
+    ],
     "nota": "Calculado pelo gerador a partir do catálogo; não é cadastro.",
-    "objetos_api": [],
-    "temas_sem_funcionalidade": [
-      "sub:configuracao-de-agentes",
-      "sub:acoes-e-topicos",
-      "sub:prompts",
-      "sub:modelos-e-grounding",
-      "sub:recuperacao-de-conhecimento",
-      "sub:seguranca-avaliacao-e-governanca-de-ia"
-    ]
+    "objetos_api": [
+      {
+        "apis": [
+          {
+            "api": "padrao",
+            "estado": "verificado"
+          },
+          {
+            "api": "tooling",
+            "estado": "desconhecido"
+          }
+        ],
+        "funcionalidades": [
+          "func:lightning-knowledge"
+        ],
+        "id": "obj:KnowledgeArticle"
+      },
+      {
+        "apis": [
+          {
+            "api": "padrao",
+            "estado": "verificado"
+          },
+          {
+            "api": "tooling",
+            "estado": "desconhecido"
+          }
+        ],
+        "funcionalidades": [
+          "func:lightning-knowledge"
+        ],
+        "id": "obj:KnowledgeArticleVersion"
+      }
+    ],
+    "temas_sem_funcionalidade": []
   },
   "descricao": "Reúne configuração de agentes, prompts, modelos e governança de recursos de IA.",
   "encadeamento": {
@@ -60,7 +241,12 @@
       }
     ],
     "exemplo": "Um agente de atendimento responde dúvidas sobre pedidos usando artigos de conhecimento e executa uma ação que consulta o status do pedido.",
-    "explicacao": "Reúne a configuração de agentes e recursos de IA da plataforma: o que o agente faz, sobre quais assuntos, que instruções e modelos usa, de onde tira conhecimento e como é controlado."
+    "explicacao": "Reúne a configuração de agentes e recursos de IA da plataforma: o que o agente faz, sobre quais assuntos, que instruções e modelos usa, de onde tira conhecimento e como é controlado.",
+    "por_onde_comecar": [
+      "func:agentes-agentforce",
+      "func:subagents-e-agent-actions",
+      "func:prompt-builder"
+    ]
   },
   "referencias_oficiais": [
     {

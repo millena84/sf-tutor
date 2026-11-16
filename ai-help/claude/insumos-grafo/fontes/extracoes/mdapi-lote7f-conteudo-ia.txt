@@ -1,0 +1,70 @@
+fonte: Metadata API Developer Guide, versão 264.0 (API 68.0), lida pelo endpoint de conteúdo da documentação
+URL lida: https://developer.salesforce.com/docs/get_document_content/api_meta/<página>.htm/en-us/264.0
+mesma página no navegador: https://developer.salesforce.com/docs/atlas.en-us.264.0.api_meta.meta/api_meta/<página>.htm
+obtido em 2026-11-16 via WebFetch; método: extração documental assistida por IA; descrições parafraseadas em português.
+alcance: cada página foi lida numa só leitura; nenhuma veio cortada.
+
+[src:mdapi-emailtemplate] EmailTemplate (meta_emailtemplate.htm): sufixo .email, pasta email, com subpastas; arquivo de metadado com -meta.xml; API
+  12.0 e posteriores; estende MetadataWithContent (content e fullName herdados); NÃO aceita o curinga *: usa-se listMetadata() para obter os
+  nomes. Só em pacotes gerenciados de primeira geração. Templates do Lightning ignoram encodingKey. Subtipo Attachment (content, name).
+  Exemplo XML: available, description, encodingKey, name, style, subject, textOnly, type.
+[src:mdapi-letterhead] Letterhead (meta_letterhead.htm): sufixo .letter, pasta letterhead; API 12.0 e posteriores; estende Metadata; NÃO aceita o
+  curinga *. A introdução diz que todos os campos são obrigatórios, exceto logo e os dois alinhamentos. Subtipos LetterheadHeaderFooter e
+  LetterheadLine. A tabela tipa height (cabeçalho/rodapé) como DashboardComponent[] e bottomLine como enumeração de string com valores color e
+  height: prováveis erros da página. fullName não aparece no exemplo.
+[src:mdapi-document] Document (meta_document.htm): arquivo <nome do arquivo>-meta.xml na pasta do documento (exemplo: documents/sampleFolder); API
+  10.0 e posteriores; estende MetadataWithContent; NÃO aceita o curinga *. listMetadata() com DocumentFolder devolve a lista. public e
+  internalUseOnly são mutuamente exclusivos. public deve ser false para logo de app customizado e ícone de aba. Desde a API 17.0, excluir a pasta
+  exclui de vez os documentos dela que estão na Lixeira. Exemplo XML: internalUseOnly, name, public, description.
+[src:mdapi-contentasset] ContentAsset (meta_contentasset.htm): sufixo .asset, pasta contentassets; API 38.0 e posteriores; estende
+  MetadataWithContent; aceita o curinga *. Subtipos ContentAssetRelationships, ContentAssetLink, ContentAssetVersions e ContentAssetVersion. Os
+  campos de ContentAssetRelationships vêm tipados como ContentAsset[]; o exemplo usa access dentro de organization. Recuperação bloqueada acima
+  de 30 MB de conteúdo total. Exemplo XML: masterLabel, relationships, organization, access, versions, version, number, pathOnClient.
+[src:mdapi-chattersettings] ChatterSettings (meta_chattersettings.htm): arquivo Chatter.settings, pasta settings; API 47.0 e posteriores; estende
+  Metadata (fullName herdado); o curinga não vale para um settings isolado. A página não informa obrigatoriedade. A descrição de
+  enableCaseFeedRelativeTimestamps usa true para as duas opções; a linha de enableChatterEmoticons cita enableChatter no mapeamento de Setup.
+[src:mdapi-genaiprompttemplate] GenAiPromptTemplate (meta_genaiprompttemplate.htm): sufixo .genAiPromptTemplate, pasta genAiPromptTemplates; API
+  60.0 e posteriores; estende Metadata (fullName herdado); aceita o curinga *. Acesso: Prompt Builder ligado e permissão Prompt Template Manager.
+  activeVersion e versionNumber descontinuados na 63.0 e sem funcionar na 64.0. Templates publicados não são editáveis pela interface nem pela
+  Metadata API. Subtipos: GenAiPromptTemplateVersion, GenAiPromptTemplateGenerationConfig, GenAiPromptTemplateInput,
+  GenAiPromptTemplateDataProvider e GenAiPromptTemplateDataProviderParam.
+[src:mdapi-genaifunction] GenAiFunction (meta_genaifunction.htm): sufixo .genAiFunction, pasta genAiFunctions; pode conter pastas input e output,
+  com schema.json; API 60.0 e posteriores; estende Metadata (fullName herdado); aceita o curinga *. Só com Agents ligado na org. Subtipo
+  GenAiPlannerAttr. As tabelas de schema.json (title, description, lightning:type, lightning:isPII, copilotAction:isUserInput,
+  copilotAction:isDisplayable, copilotAction:isUsedByPlanner) descrevem JSON e não foram cadastradas. Winter '26+: GenAiPlannerBundle recupera
+  ações criadas dentro de um agente; GenAiFunction, as da biblioteca de assets.
+[src:mdapi-genaiplugin] GenAiPlugin (meta_genaiplugin.htm): representa um tópico de agente; sufixo .genAiPlugin, pasta genAiPlugins; API 62.0 e
+  posteriores; estende Metadata (fullName herdado); aceita o curinga *. Só com Agents ligado. Subtipo GenAiPluginFunctionDef (functionName).
+  AiPluginUtteranceDef e GenAiPluginInstructionDef são citados sem tabela de campos. Winter '26+: GenAiPlannerBundle para tópicos criados dentro
+  de um agente. Para org Summer '25 (API 64.0), recuperar com a 64.0; Winter '26 em diante, 65.0 ou posterior.
+[src:mdapi-einsteingptsettings] EinsteinGptSettings (meta_einsteingptsettings.htm): arquivo EinsteinGpt.settings, pasta settings; API 61.0 e
+  posteriores; estende Metadata (fullName herdado); a página não trata do curinga nem de obrigatoriedade. No exemplo, as tags de fechamento não
+  batem com as de abertura; o package.xml de exemplo usa a versão 63.0.
+
+Lidas e NÃO cadastradas nesta rodada: Group (meta_group.htm; public groups, tema de acesso) e EinsteinAgentSettings (meta_einsteinagentsettings.htm;
+  Einstein Case Classification, tema de atendimento).
+
+-- Lista de campos transcrita da leitura (gerada por lote7f_conteudo_ia.py; nome | tipo | desde | obrigatoriedade)
+[src:mdapi-emailtemplate] Attachment: content | base64Binary | -, name | string | -
+[src:mdapi-emailtemplate] EmailTemplate: apiVersion | double | -, attachedDocuments | string[] | -, attachments | Attachment[] | -, available | boolean | -, content | base64Binary | -, description | string | -, encodingKey | Encoding | -, fullName | string | -, letterhead | string | -, name | string | -, packageVersions | PackageVersion[] | -, relatedEntityType | string | -, style | EmailTemplateStyle | -, subject | string | -, textOnly | string | -, type | EmailTemplateType | -, UiType | EmailTemplateUiType | -
+[src:mdapi-letterhead] LetterheadHeaderFooter: backgroundColor | string | -, height | DashboardComponent[] | -, horizontalAlignment | LetterheadHorizontalAlignment | -, logo | string | -, verticalAlignment | LetterheadVerticalAlignment | -
+[src:mdapi-letterhead] LetterheadLine: color | string | -, height | int | -
+[src:mdapi-letterhead] Letterhead: available | boolean | -, backgroundColor | string | -, bodyColor | string | -, bottomLine | LetterheadLine | -, description | string | -, fullName | string | -, footer | LetterheadHeaderFooter | -, header | LetterheadHeaderFooter | -, middleLine | LetterheadLine | -, name | string | -, topLine | LetterheadLine | -
+[src:mdapi-document] Document: content | base64Binary | -, description | string | -, fullName | string | -, internalUseOnly | boolean | -, keywords | string | -, name | string | -, public | boolean | -
+[src:mdapi-contentasset] ContentAssetLink: access | ContentAssetAccess | -, isManagingWorkspace | boolean | -, name | string | -
+[src:mdapi-contentasset] ContentAssetRelationships: emailTemplate | ContentAssetLink[] | -, insightsApplication | ContentAssetLink[] | -, network | ContentAssetLink[] | -, organization | ContentAssetLink[] | -, workspace | ContentAssetLink[] | -
+[src:mdapi-contentasset] ContentAssetVersion: number | string | -, pathOnClient | string | -, zipEntry | string | -
+[src:mdapi-contentasset] ContentAssetVersions: version | ContentAssetVersion[] | -
+[src:mdapi-contentasset] ContentAsset: content | base64Binary | -, format | ContentAssetFormat | -, fullName | string | -, isVisibleByExternalUsers | boolean | -, language | string | -, masterLabel | string | -, originNetwork | string | -, relationships | ContentAssetRelationships | -, versions | ContentAssetVersions | -
+[src:mdapi-chattersettings] ChatterSettings: allowChatterGroupArchiving | boolean | -, allowRecordsInChatterGroup | boolean | -, allowSharingInChatterGroup | boolean | -, enableApprovalRequest | boolean | -, enableCaseFeedRelativeTimestamps | boolean | -, enableChatter | boolean | -, enableChatterEmoticons | boolean | -, enableFeedEdit | boolean | -, enableFeedPinning | boolean | -, enableFeedsDraftPosts | boolean | -, enableFeedsRichText | boolean | -, enableInviteCsnUsers | boolean | -, enableOutOfOfficeEnabledPref | boolean | -, enableRichLinkPreviewsInFeed | boolean | -, enableTodayRecsInFeed | boolean | -, unlistedGroupsEnabled | boolean | -, fullName | string | -
+[src:mdapi-genaiprompttemplate] GenAiPromptTemplateGenerationConfig: generationConfigDeveloperName | string | -
+[src:mdapi-genaiprompttemplate] GenAiPromptTemplateInput: apiName | string | -, definition | string | -, description | string | -, masterLabel | string | -, referenceName | string | -, required | boolean | -
+[src:mdapi-genaiprompttemplate] GenAiPromptTemplateDataProviderParam: definition | string | -, isRequired | boolean | -, parameterName | string | -, valueExpression | string | -
+[src:mdapi-genaiprompttemplate] GenAiPromptTemplateDataProvider: definition | string | -, description | string | -, label | string | -, parameters | GenAiPromptTemplateDataProviderParam[] | -, referenceName | string | -
+[src:mdapi-genaiprompttemplate] GenAiPromptTemplateVersion: content | string | -, description | string | -, fileDroppingStrategy | string | -, generationTemplateConfigs | GenAiPromptTemplateGenerationConfig[] | -, inputs | GenAiPromptTemplateInput[] | -, isCitationEnabled | boolean | -, outputSchema | string | -, primaryModel | string | -, responseFormat | GenAiPromptTemplateResponseFormat | -, status | GenAiPromptTemplateStatus | -, templateDataProviders | GenAiPromptTemplateDataProvider[] | -, versionNumber | int | -, versionIdentifier | string | -
+[src:mdapi-genaiprompttemplate] GenAiPromptTemplate: activeVersion | int | -, activeVersionIdentifier | string | -, description | string | -, masterLabel | string | -, overridable | boolean | -, relatedEntity | string | -, relatedField | string | -, templateVersions | GenAiPromptTemplateVersion[] | -, type | string | -, visibility | GenAiPromptTemplateVisibilityType | -, fullName | string | -
+[src:mdapi-genaifunction] GenAiPlannerAttr: description | string | -, label | string | -, name | string | -, parameterName | string | -, parameterType | PlannerAttrMappingType | -
+[src:mdapi-genaifunction] GenAiFunction: description | string | -, invocationTarget | string | -, invocationTargetType | PlannerFunctionInvocableTargetType | -, isConfirmationRequired | boolean | -, isIncludeInProgressIndicator | boolean | -, mappingAttributes | GenAiPlannerAttr[] | -, masterLabel | string | -, pluginField | string | -, progressIndicatorMessage | string | -, fullName | string | -
+[src:mdapi-genaiplugin] GenAiPluginFunctionDef: functionName | string | -
+[src:mdapi-genaiplugin] GenAiPlugin: aiPluginUtterances | AiPluginUtteranceDef[] | -, canEscalate | boolean | -, description | string | -, developerName | string | -, genAiFunctions | GenAiPluginFunctionDef[] | -, genAiPluginInstructions | GenAiPluginInstructionDef[] | -, language | string | -, masterLabel | string | -, plannerField | string | -, pluginType | PluginType | -, scope | string | -, fullName | string | -
+[src:mdapi-einsteingptsettings] EinsteinGptSettings: disableAIProvAWSBedrock | boolean | -, disableAIProvAzureOpenAI | boolean | -, disableAIProvOpenAI | boolean | -, disableAIProvVertexGemini | boolean | -, disableAIProviderRegionFallback | boolean | -, enableAIModelBeta | boolean | -, enableEinsteinGptAllowUnsafePTInputChanges | boolean | -, enableEinsteinGPTDeployPromptTemplatesAsActive | boolean | -, enableEinsteinGptGlobalLangSupport | boolean | -, enableEinsteinGptPlatform | boolean | -, fullName | string | -

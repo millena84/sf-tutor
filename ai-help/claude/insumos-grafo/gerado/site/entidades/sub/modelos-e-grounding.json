@@ -1,14 +1,86 @@
 {
+  "avancado": [
+    {
+      "evidencias": [
+        {
+          "fonte": "src:help-prompt-concepts"
+        },
+        {
+          "fonte": "src:help-prompt-rag"
+        },
+        {
+          "fonte": "src:help-agentforce-glossary"
+        }
+      ],
+      "texto": "Grounding é acrescentar ao prompt os dados de que o modelo precisa. No Prompt Builder, isso é feito por merge fields que referenciam campos de registro, flows, Apex e arquivos. Com RAG, um retriever busca trechos relevantes em conteúdo indexado no Data 360.",
+      "tipo": "decisao",
+      "titulo": "Duas formas de grounding"
+    },
+    {
+      "evidencias": [
+        {
+          "fonte": "src:mdapi-einsteingptsettings"
+        },
+        {
+          "fonte": "src:mdapi-genaiprompttemplate"
+        }
+      ],
+      "texto": "EinsteinGptSettings tem opções para desligar provedores de modelo (AWS Bedrock, Azure OpenAI, OpenAI e Vertex AI) e para ligar modelos em beta. Em cada versão de prompt template, primaryModel aponta o modelo usado.",
+      "tipo": "implantacao",
+      "titulo": "Provedores de modelo como metadado"
+    }
+  ],
   "classificacao": "cls:ia-agentes-e-decisoes-assistidas",
   "derivado": {
     "dependencias": [],
-    "funcionalidades": [],
-    "metadata_types": [],
+    "funcionalidades": [
+      {
+        "alertas": [
+          "Exige o Data 360 configurado.",
+          "Em prompt templates, os retrievers buscam no conhecimento indexado no Data 360."
+        ],
+        "exemplo": "O agente de atendimento responde uma dúvida sobre garantia citando o artigo de Knowledge que trata do assunto.",
+        "id": "func:agentforce-data-library",
+        "principal": false,
+        "tema_principal": "sub:recuperacao-de-conhecimento"
+      },
+      {
+        "alertas": [
+          "Para pôr um template Field Generation numa página de registro, a página precisa usar Dynamic Forms.",
+          "Templates publicados não podem ser editados, nem pela interface nem pela Metadata API.",
+          "Criar e gerenciar templates exige permissão própria; a Ajuda cita o permission set Prompt Template Manager."
+        ],
+        "exemplo": "Um template Field Generation preenche o campo Resumo do caso: o usuário clica num botão e o texto gerado entra no campo.",
+        "id": "func:prompt-builder",
+        "principal": false,
+        "tema_principal": "sub:prompts"
+      }
+    ],
+    "metadata_types": [
+      {
+        "estrutura": "completa",
+        "funcionalidades": [
+          "func:prompt-builder"
+        ],
+        "id": "mdt:EinsteinGptSettings",
+        "nota_suporte": null,
+        "suporte_cli": "suportado"
+      },
+      {
+        "estrutura": "completa",
+        "funcionalidades": [
+          "func:prompt-builder"
+        ],
+        "id": "mdt:GenAiPromptTemplate",
+        "nota_suporte": null,
+        "suporte_cli": "suportado"
+      }
+    ],
     "nota": "Calculado pelo gerador a partir do catálogo; não é cadastro.",
     "objetos_api": [],
     "temas_sem_funcionalidade": []
   },
-  "descricao": "Modelos usados e dados que fundamentam as respostas.",
+  "descricao": "Os modelos de IA usados e o grounding: os dados acrescentados ao prompt para fundamentar a resposta.",
   "encadeamento": {
     "evidencias": [
       {
@@ -20,11 +92,14 @@
   "escopo": "Entram os modelos usados e os dados que fundamentam as respostas.",
   "estado": "desconhecido",
   "fora_do_escopo": "A busca de conteúdo para as respostas fica em \"Recursos de recuperação de conhecimento\".",
-  "funcionalidades": [],
+  "funcionalidades": [
+    "func:agentforce-data-library",
+    "func:prompt-builder"
+  ],
   "id": "sub:modelos-e-grounding",
   "natureza": "curadoria_didatica",
   "nome": "Modelos e grounding",
-  "nota_estado": "Agrupamento proposto na especificação; fronteira ainda não cruzada com a documentação oficial.",
+  "nota_estado": "Tema criado pelo projeto (00-especificacao-grafo.md), não é nomenclatura oficial da Salesforce. Cruzado em 2026-11-10 com áreas da documentação oficial listadas nas referências; a correspondência é parcial e o recorte continua sendo do projeto.",
   "para_iniciantes": {
     "evidencias": [
       {
@@ -32,7 +107,23 @@
       }
     ],
     "exemplo": "Uma resposta do agente usa dados do registro do cliente para não ficar genérica.",
-    "explicacao": "Cobre os modelos de IA usados e os dados que fundamentam as respostas."
+    "explicacao": "Cobre os modelos de IA usados e os dados que fundamentam as respostas.",
+    "por_onde_comecar": [
+      "func:prompt-builder",
+      "func:agentforce-data-library"
+    ]
   },
+  "referencias_oficiais": [
+    {
+      "fonte": "src:help-prompt-concepts",
+      "nota": "Cobre parte do tema: grounding no Prompt Builder.",
+      "secao": "Prompt Builder Key Concepts"
+    },
+    {
+      "fonte": "src:mdapi-einsteingptsettings",
+      "nota": "Cobre parte do tema: opções de provedores de modelo.",
+      "secao": "EinsteinGptSettings"
+    }
+  ],
   "sigla": "IA-04"
 }

@@ -9,18 +9,61 @@
       "texto": "O arquivo (Content Document) tem versões (Content Version) e se liga a registros por Content Document Link. Isso importa em migrações e em consultas por API.",
       "tipo": "decisao",
       "titulo": "Documento, versão e vínculo"
+    },
+    {
+      "evidencias": [
+        {
+          "fonte": "src:objref-contentdocument-nota"
+        }
+      ],
+      "texto": "Até 30.000.000 de documentos publicados, contando os arquivados, e até 200.000 novas versões a cada 24 horas (2.500 em Developer Edition e em trials).",
+      "tipo": "limite",
+      "titulo": "Limites de publicação"
+    },
+    {
+      "evidencias": [
+        {
+          "fonte": "src:objref-contentversion-nota"
+        }
+      ],
+      "texto": "Consultar ContentDocument ou ContentVersion sem informar um ID não devolve todos os arquivos que o usuário pode ver: ficam de fora os que ele só acessa por ter acesso a um registro com o qual o arquivo é compartilhado.",
+      "tipo": "atencao",
+      "titulo": "Consulta sem ID não traz tudo"
+    },
+    {
+      "evidencias": [
+        {
+          "fonte": "src:mdapi-document"
+        },
+        {
+          "fonte": "src:mdapi-letterhead"
+        }
+      ],
+      "texto": "A aba Documents, do Salesforce Classic, é outro recurso: guarda documentos em pastas e tem o metadata type Document. É dela que saem, por exemplo, as imagens de logo dos Classic letterheads.",
+      "tipo": "decisao",
+      "titulo": "Files não é Documents"
     }
   ],
   "classificacao": "cls:conteudo-conhecimento-e-colaboracao",
   "derivado": {
     "dependencias": [],
-    "funcionalidades": [],
+    "funcionalidades": [
+      {
+        "alertas": [
+          "Consultas a ContentDocument e ContentVersion sem informar um ID não devolvem todos os arquivos a que o usuário tem acesso: os que ele só vê por ter acesso a um registro ficam de fora.",
+          "Um arquivo privado compartilhado com um grupo privado ou unlisted passa a ser visto pelos membros do grupo."
+        ],
+        "exemplo": "A proposta em PDF é anexada à oportunidade; ao subir uma versão corrigida, a anterior continua guardada.",
+        "id": "func:salesforce-files",
+        "principal": true
+      }
+    ],
     "metadata_types": [],
     "nota": "Calculado pelo gerador a partir do catálogo; não é cadastro.",
     "objetos_api": [],
     "temas_sem_funcionalidade": []
   },
-  "descricao": "Arquivos anexados e documentos.",
+  "descricao": "Salesforce Files: arquivos com versões, compartilhados com pessoas, grupos, registros e bibliotecas.",
   "encadeamento": {
     "evidencias": [
       {
@@ -32,11 +75,13 @@
   "escopo": "Entram arquivos anexados e documentos.",
   "estado": "desconhecido",
   "fora_do_escopo": "Recursos estáticos e bibliotecas ficam em \"Bibliotecas e assets\".",
-  "funcionalidades": [],
+  "funcionalidades": [
+    "func:salesforce-files"
+  ],
   "id": "sub:files-e-documentos",
   "natureza": "curadoria_didatica",
   "nome": "Files e documentos",
-  "nota_estado": "Agrupamento proposto na especificação; fronteira ainda não cruzada com a documentação oficial.",
+  "nota_estado": "Tema criado pelo projeto (00-especificacao-grafo.md), não é nomenclatura oficial da Salesforce. Cruzado em 2026-11-10 com áreas da documentação oficial listadas nas referências; a correspondência é parcial e o recorte continua sendo do projeto.",
   "para_iniciantes": {
     "evidencias": [
       {
@@ -44,7 +89,22 @@
       }
     ],
     "exemplo": "O contrato assinado é ligado à conta e, quando revisado, ganha uma nova versão.",
-    "explicacao": "São os arquivos ligados a registros. Cada arquivo tem versões e pode ser ligado a vários registros."
+    "explicacao": "São os arquivos ligados a registros. Cada arquivo tem versões e pode ser ligado a vários registros.",
+    "por_onde_comecar": [
+      "func:salesforce-files"
+    ]
   },
+  "referencias_oficiais": [
+    {
+      "fonte": "src:help-kb-files-data-model",
+      "nota": "Cobre parte do tema: modelo de objetos dos arquivos.",
+      "secao": "Understanding Salesforce Files"
+    },
+    {
+      "fonte": "src:mdapi-document",
+      "nota": "Cobre parte do tema: documentos da aba Documents, do Classic.",
+      "secao": "Document"
+    }
+  ],
   "sigla": "CON-01"
 }

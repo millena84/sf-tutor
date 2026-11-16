@@ -19,10 +19,62 @@
       "texto": "No modelo de dados de Files, o arquivo (Content Document) tem versões (Content Version) e se liga a registros por Content Document Link; bibliotecas e pastas organizam o acesso. Isso importa em migrações e em consultas por API.",
       "tipo": "decisao",
       "titulo": "Arquivo é documento, versão e vínculo"
+    },
+    {
+      "evidencias": [
+        {
+          "fonte": "src:mdapi-emailtemplate"
+        },
+        {
+          "fonte": "src:mdapi-letterhead"
+        },
+        {
+          "fonte": "src:mdapi-document"
+        },
+        {
+          "fonte": "src:mdapi-contentasset"
+        },
+        {
+          "fonte": "src:mdapi-chattersettings"
+        },
+        {
+          "fonte": "src:mdapi-knowledgesettings"
+        },
+        {
+          "fonte": "src:help-kb-files-data-model"
+        }
+      ],
+      "texto": "EmailTemplate guarda cada email template; Letterhead, o letterhead do Classic; Document, os documentos da aba Documents; ContentAsset, cada asset file; ChatterSettings e KnowledgeSettings, as opções do Chatter e do Knowledge. Os arquivos do Salesforce Files são registros (ContentDocument e ContentVersion), não metadado.",
+      "tipo": "implantacao",
+      "titulo": "Como metadado"
+    },
+    {
+      "evidencias": [
+        {
+          "fonte": "src:mdapi-emailtemplate"
+        },
+        {
+          "fonte": "src:mdapi-letterhead"
+        },
+        {
+          "fonte": "src:mdapi-document"
+        }
+      ],
+      "texto": "EmailTemplate, Letterhead e Document não aceitam o curinga (*): cada componente precisa ser listado pelo nome, e templates e documentos levam a pasta no nome.",
+      "tipo": "atencao",
+      "titulo": "Sem curinga no package.xml"
     }
   ],
   "derivado": {
     "dependencias": [
+      {
+        "destino": "mdt:Letterhead",
+        "destino_no_tema": true,
+        "estado": "verificado",
+        "origem": "mdt:EmailTemplate",
+        "rel": "rel:emailtemplate-letterhead",
+        "via": "letterhead"
+      },
       {
         "destino": "obj:KnowledgeArticle",
         "destino_no_tema": true,
@@ -35,6 +87,34 @@
     "funcionalidades": [
       {
         "alertas": [
+          "Consultas a ContentDocument e ContentVersion sem informar um ID não devolvem todos os arquivos a que o usuário tem acesso: os que ele só vê por ter acesso a um registro ficam de fora.",
+          "Um arquivo privado compartilhado com um grupo privado ou unlisted passa a ser visto pelos membros do grupo."
+        ],
+        "exemplo": "A proposta em PDF é anexada à oportunidade; ao subir uma versão corrigida, a anterior continua guardada.",
+        "id": "func:salesforce-files",
+        "principal": true
+      },
+      {
+        "alertas": [
+          "Não é preciso criar asset files para o uso comum e colaborativo de arquivos: só para usos de configuração.",
+          "Asset files são uma alternativa a static resources para deixar arquivos públicos.",
+          "A recuperação por Metadata API falha se o conteúdo total dos asset files passar de 30 MB."
+        ],
+        "exemplo": "O logo da empresa vira um asset file e é usado no tema da org e no site do Experience Cloud.",
+        "id": "func:asset-files",
+        "principal": true
+      },
+      {
+        "alertas": [
+          "O static resource só pode ser usado dentro da org."
+        ],
+        "exemplo": "Uma biblioteca JavaScript de gráficos é enviada como static resource e carregada por um Lightning web component.",
+        "id": "func:static-resources",
+        "principal": false,
+        "tema_principal": "sub:codigo-e-bundles"
+      },
+      {
+        "alertas": [
           "Habilitar Lightning Knowledge é irreversível e muda o modelo de dados para record types; exige ao menos um article type."
         ],
         "exemplo": "Um artigo de 'Como trocar a senha' é sugerido ao atendente e publicado no portal.",
@@ -43,15 +123,90 @@
           "Ver Knowledge Settings: licença Knowledge User."
         ],
         "principal": true
+      },
+      {
+        "alertas": [
+          "Grupo privado não é invisível: quem não é membro ainda vê nome, foto, descrição e membros. Para esconder o grupo, use unlisted.",
+          "Grupos unlisted vêm desligados por padrão.",
+          "Num broadcast group, só donos e gerentes do grupo publicam; os membros leem e comentam.",
+          "O tipo de metadado Group é outra coisa: representa public groups, usados em compartilhamento, não grupos do Chatter."
+        ],
+        "exemplo": "O time de um projeto cria um grupo privado; só os membros veem os posts e os arquivos.",
+        "id": "func:chatter",
+        "principal": true
+      },
+      {
+        "alertas": [
+          "Há duas linguagens de merge fields: os templates do Lightning Experience criados desde o Summer '18 usam HML, com três chaves; os do Classic usam SML.",
+          "Classic letterheads e enhanced letterheads são recursos diferentes; um template do Lightning precisa usar HML para ter um enhanced letterhead.",
+          "Templates do Lightning Experience nascem privados; para outros usarem, vão para uma pasta pública."
+        ],
+        "exemplo": "A equipe de vendas usa um template de boas-vindas: ao enviar, o nome do contato e o da conta entram sozinhos no texto.",
+        "id": "func:email-templates",
+        "principal": true
       }
     ],
     "metadata_types": [
+      {
+        "estrutura": "completa",
+        "funcionalidades": [
+          "func:chatter"
+        ],
+        "id": "mdt:ChatterSettings",
+        "nota_suporte": null,
+        "suporte_cli": "suportado"
+      },
+      {
+        "estrutura": "completa",
+        "funcionalidades": [
+          "func:asset-files"
+        ],
+        "id": "mdt:ContentAsset",
+        "nota_suporte": null,
+        "suporte_cli": "suportado"
+      },
+      {
+        "estrutura": "completa",
+        "funcionalidades": [
+          "func:email-templates"
+        ],
+        "id": "mdt:Document",
+        "nota_suporte": null,
+        "suporte_cli": "suportado"
+      },
+      {
+        "estrutura": "completa",
+        "funcionalidades": [
+          "func:email-templates"
+        ],
+        "id": "mdt:EmailTemplate",
+        "nota_suporte": null,
+        "suporte_cli": "suportado"
+      },
       {
         "estrutura": "parcial",
         "funcionalidades": [
           "func:lightning-knowledge"
         ],
         "id": "mdt:KnowledgeSettings",
+        "nota_suporte": null,
+        "suporte_cli": "suportado"
+      },
+      {
+        "estrutura": "completa",
+        "funcionalidades": [
+          "func:email-templates"
+        ],
+        "id": "mdt:Letterhead",
+        "nota_suporte": null,
+        "suporte_cli": "suportado"
+      },
+      {
+        "estrutura": "completa",
+        "funcionalidades": [
+          "func:static-resources"
+        ],
+        "id": "mdt:StaticResource",
         "nota_suporte": null,
         "suporte_cli": "suportado"
       }
@@ -91,12 +246,7 @@
         "id": "obj:KnowledgeArticleVersion"
       }
     ],
-    "temas_sem_funcionalidade": [
-      "sub:files-e-documentos",
-      "sub:bibliotecas-e-assets",
-      "sub:colaboracao",
-      "sub:templates-e-comunicacao"
-    ]
+    "temas_sem_funcionalidade": []
   },
   "descricao": "Reúne arquivos, bases de conhecimento, colaboração e modelos de comunicação.",
   "encadeamento": {
@@ -130,7 +280,9 @@
     "exemplo": "Um artigo 'Como trocar a senha' é sugerido ao atendente e publicado no portal; o contrato assinado fica ligado à conta como arquivo.",
     "explicacao": "Reúne o conteúdo que as pessoas usam e compartilham: arquivos ligados a registros, bibliotecas, artigos de conhecimento e modelos de comunicação.",
     "por_onde_comecar": [
-      "func:lightning-knowledge"
+      "func:salesforce-files",
+      "func:chatter",
+      "func:email-templates"
     ]
   },
   "referencias_oficiais": [
