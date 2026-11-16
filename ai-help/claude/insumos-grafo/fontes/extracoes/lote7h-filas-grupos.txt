@@ -1,0 +1,73 @@
+assunto: filas (queues) e public groups; metadata types Queue e Group; objetos API Group, GroupMember e QueueSobject
+obtido em 2026-11-16.
+
+-- Guia versionado 264.0 (API 68.0), lido por inteiro pelo endpoint de conteúdo (WebFetch); método: extração documental assistida por IA
+URL lida (Metadata API): https://developer.salesforce.com/docs/get_document_content/api_meta/<página>.htm/en-us/264.0
+URL lida (Object Reference): https://developer.salesforce.com/docs/get_document_content/object_reference/sforce_api_objects_<objeto>.htm/en-us/264.0
+
+[src:mdapi-queue] Queue (meta_queue.htm): sufixo .queue, pasta queues; API 24.0 e posteriores; a página não diz o que o tipo estende; aceita o
+  curinga *. Aceita casos, leads, service contracts (com Entitlements) e objetos customizados. Desde o Summer '20, só usuários autenticados.
+  Subtipos: QueueMembers, PublicGroups, RoleAndSubordinates, RoleAndSubordinatesInternal, Roles, Users, QueueSobject. O primeiro exemplo usa
+  fullName, que não está na tabela. O segundo exemplo usa queueRoleAndSubordinates e queueRoleAndSubordinate (a tabela diz roleAndSubordinates
+  e roleAndSubordinate) e fecha publicGroups com tag de abertura. Valores de sobjectType: Case, ContactRequest, Lead, ServiceContract, Task
+  (API 48.0) e objetos customizados.
+[src:mdapi-group] Group (meta_group.htm): representa public groups, que podem ter usuários, papéis e outros grupos; sufixo .group, pasta groups;
+  API 24.0 e posteriores; estende Metadata (fullName herdado); aceita o curinga *. Os membros do public group NÃO são migrados na implantação.
+  Desde o Spring '20, só usuários autenticados. doesIncludeBosses corresponde a Grant Access Using Hierarchies; name, ao Label; fullName, a
+  Group Name. Exemplo XML: doesIncludeBosses, fullName, name.
+[src:objref-group] Group (objeto): um conjunto de registros de User; pode conter usuários, outros grupos, usuários de um papel ou território, com
+  ou sem os que ficam abaixo na hierarquia. Chamadas: create(), delete(), describeSObjects(), getDeleted(), getUpdated(), query(), search(),
+  retrieve(), update(), upsert(). A página não informa a versão de entrada. Type tem 17 valores descritos; ao criar, só Personal, Regular e
+  Queue (a página é inconsistente nesse ponto). Só public groups são acessíveis pela API. Related.Name consultável desde a API 34.0.
+  QueueRoutingConfigId vem com propriedades Create, Delete, Query, Retrieve, Update. OwnerId refere Organization e User; RelatedId, User e
+  UserRole.
+[src:objref-groupmember] GroupMember (objeto): um User ou Group membro de um public group. Chamadas: create(), delete(), describeSObjects(),
+  getDeleted(), getUpdated(), query(), retrieve(). Só há registro para membros diretos de public groups com Type Regular. Criar um registro
+  igual a um existente devolve o existente. Para grupos com mais de 10.000 membros, recomenda gerir por este objeto.
+[src:objref-queuesobject] QueueSobject (objeto): liga uma fila (Group com Type Queue) aos tipos de objeto associados, inclusive customizados.
+  Chamadas: create(), delete(), describeSObjects(), getDeleted(), getUpdated(), query(), retrieve(). Desde o Summer '20, só usuários
+  autenticados. Criar um Group exige Manage Users. Bulk API: no máximo 18 filas por inserção ou atualização. Valores de SobjectType não listados.
+
+-- Ajuda (busca restrita a help.salesforce.com; método leitura_resultado_busca: páginas NÃO abertas por inteiro)
+[src:help-queues-create] Create Queues (service.setting_up_queues.htm): permissões Customize Application e Manage Public List Views (mais Manage
+  Users para filas de outros). Caminho: Setup, Quick Find "Queues", New. O rótulo é o nome da list view em que os usuários trabalham. Membros:
+  indivíduos, papéis, public groups, territórios, connections ou usuários parceiros.
+[src:help-queues-omni] Associate Routing Configurations and Service Reps with Queues: filas ajudam times a gerir leads, casos, contact requests e
+  objetos customizados; o Omni-Channel roteia itens das filas aos atendentes em tempo real. Nomes de fila não podem conter vírgulas.
+[src:help-queues-action-plans] Assign Action Plan Tasks to Queues (fsc_action_plans_queues.htm): uma fila deixa um time dividir a carga; os itens
+  aparecem numa lista e qualquer membro pode assumir. Membros: usuários, papéis, public groups ou usuários parceiros.
+[src:help-queues-lead-distribution] Create a Queue for Lead Distribution: fila compartilhada de leads; criar uma fila cria automaticamente uma
+  list view.
+[src:help-sharing-rule-categories] Sharing Rule Categories: Queues = registros cujo dono é a fila, sem os dos membros; Public Groups = os grupos
+  definidos pelo administrador. Usuários de alto volume do Experience Cloud não entram em public groups.
+[src:help-public-groups] Public and Personal Groups (platform.user_groups.htm): dois tipos de grupo. Public groups são criados por
+  administradores e administradores delegados e servem para compartilhar registros com usuários de partes diferentes da empresa que não
+  correspondem a um só papel; um grupo com papéis e usuários vira o alvo de uma sharing rule.
+[src:help-public-groups-create] Create and Edit Public Groups: permissão Manage Users. Campos: Description, Label, Group Name (único, usado pela
+  API e por pacotes), Grant Access Using Hierarchies (o que é compartilhado com o grupo chega a quem está acima na hierarquia). Editar grupos,
+  papéis e territórios recalcula sharing rules.
+[src:help-group-member-types] Group Member Types: tabela de tipos de membro; os disponíveis variam por edição e configuração.
+[src:help-public-groups-considerations] Public Group Considerations: acima de 10.000 membros, a edição pela página pode ter problemas; usar o
+  access summary, user access policies ou a API de GroupMember. Evitar mais de cinco níveis de grupos aninhados.
+[src:help-public-group-summary] View the Public Group Access Summary: Setup, Quick Find "Public Groups"; View Summary mostra sharing rules por
+  dono e por critério, pastas de relatórios e dashboards e list views compartilhadas com o grupo.
+[src:help-sharing-rules] Sharing Rules: estendem o acesso a usuários de public groups, papéis ou territórios, como exceções automáticas aos
+  padrões de acesso da org.
+[src:help-public-groups-knowledge] Create Public Groups for Knowledge: caminho: Setup, Quick Find "Public Groups", New.
+
+Não lido: CollaborationGroup e CollaborationGroupMember (grupos do Chatter), UserRole, SharingRules (metadata type), personal groups em detalhe,
+  delegated groups, lista completa de Group Member Types.
+
+-- Lista de campos transcrita da leitura (gerada por lote7h_filas_grupos.py; nome | tipo | desde)
+[src:mdapi-queue] PublicGroups: publicGroup | string | -
+[src:mdapi-queue] RoleAndSubordinates: roleAndSubordinate | string | -
+[src:mdapi-queue] RoleAndSubordinatesInternal: roleAndSubordinateInternal | string | -
+[src:mdapi-queue] Roles: role | string | -
+[src:mdapi-queue] Users: user | string | -
+[src:mdapi-queue] QueueMembers: publicGroups | PublicGroups[] | -, roleAndSubordinates | RoleAndSubordinates[] | -, roleAndSubordinatesInternal | RoleAndSubordinatesInternal[] | -, roles | Roles[] | -, users | Users[] | -
+[src:mdapi-queue] QueueSobject: sobjectType | string | -
+[src:mdapi-queue] Queue: doesIncludeBosses | boolean | -, doesSendEmailToMembers | boolean | -, email | string | -, fullName | string | -, name | string | -, queueMembers | QueueMembers[] | -, queueRoutingConfig | string | -, queueSobject | QueueSobject[] | -
+[src:mdapi-group] Group: description | string | -, doesIncludeBosses | boolean | -, fullName | string | -, name | string | -
+[src:objref-group] objeto Group: Description | textarea, DefaultDivision | picklist, DeveloperName | string, DoesIncludeBosses | boolean, DoesSendEmailToMembers | boolean, Email | email, Name | string, OwnerId | reference, QueueRoutingConfigId | reference, RelatedId | reference, Type | picklist
+[src:objref-groupmember] objeto GroupMember: GroupId | reference, UserOrGroupId | reference
+[src:objref-queuesobject] objeto QueueSobject: QueueId | reference, SobjectType | picklist

@@ -11,6 +11,8 @@
     "explicacao": "Decide quais registros cada usuário enxerga: os padrões de acesso da org, o compartilhamento e as equipes.",
     "exemplo": "Na conta ACME, o executivo de contas é o dono e o engenheiro de pré-venda entra na equipe com acesso de leitura.",
     "por_onde_comecar": [
+      "func:filas",
+      "func:public-groups",
       "func:equipes-de-conta-e-oportunidade"
     ],
     "evidencias": [
@@ -43,10 +45,70 @@
           "fonte": "src:objref-opportunityteammember"
         }
       ]
+    },
+    {
+      "tipo": "decisao",
+      "titulo": "Fila ou public group",
+      "texto": "Uma fila é dona de registros: guarda o que ainda não tem dono individual, e qualquer membro pode assumir. Um public group não é dono de nada: é um conjunto de pessoas que recebe acesso, por exemplo como alvo de uma sharing rule. Um public group pode ser membro de uma fila.",
+      "evidencias": [
+        {
+          "fonte": "src:help-queues-action-plans"
+        },
+        {
+          "fonte": "src:help-public-groups"
+        },
+        {
+          "fonte": "src:help-queues-create"
+        }
+      ]
+    },
+    {
+      "tipo": "atencao",
+      "titulo": "Nos dados, é o mesmo objeto",
+      "texto": "Filas e public groups ficam no objeto Group; o campo Type diz qual é qual (Queue ou Regular). O mesmo objeto guarda os grupos que a plataforma cria para papéis, territórios e gerentes, e os grupos do Chatter. Os objetos que uma fila aceita ficam em QueueSobject; os membros diretos de um public group, em GroupMember.",
+      "evidencias": [
+        {
+          "fonte": "src:objref-group"
+        },
+        {
+          "fonte": "src:objref-queuesobject"
+        },
+        {
+          "fonte": "src:objref-groupmember"
+        }
+      ]
+    },
+    {
+      "tipo": "implantacao",
+      "titulo": "Como metadado",
+      "texto": "Queue guarda a fila com os objetos aceitos e os membros (usuários, papéis e public groups). Group guarda só a definição do public group: os membros não são migrados na implantação.",
+      "evidencias": [
+        {
+          "fonte": "src:mdapi-queue"
+        },
+        {
+          "fonte": "src:mdapi-group"
+        }
+      ]
+    },
+    {
+      "tipo": "atencao",
+      "titulo": "Queues em sharing rules",
+      "texto": "Numa sharing rule, a categoria Queues cobre os registros cujo dono é a fila, sem incluir os registros que pertencem aos membros dela.",
+      "evidencias": [
+        {
+          "fonte": "src:help-sharing-rule-categories"
+        },
+        {
+          "fonte": "src:help-sharing-rules"
+        }
+      ]
     }
   ],
   "funcionalidades": [
-    "func:equipes-de-conta-e-oportunidade"
+    "func:equipes-de-conta-e-oportunidade",
+    "func:filas",
+    "func:public-groups"
   ],
   "estado": "desconhecido",
   "nota_estado": "Tema criado pelo projeto (00-especificacao-grafo.md), não é nomenclatura oficial da Salesforce. Cruzado em 2026-11-10 com áreas da documentação oficial listadas nas referências; a correspondência é parcial e o recorte continua sendo do projeto.",

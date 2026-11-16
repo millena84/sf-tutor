@@ -28,11 +28,85 @@
       "texto": "A atribuição é um registro de PermissionSetAssignment, não parte do XML; usuários guest, de integração e de sistema só podem receber grupos por esse objeto, e só grupos com status Updated podem ser atribuídos.",
       "tipo": "implantacao",
       "titulo": "Atribuição não vai no deploy"
+    },
+    {
+      "evidencias": [
+        {
+          "fonte": "src:help-public-groups"
+        },
+        {
+          "fonte": "src:help-public-group-summary"
+        }
+      ],
+      "texto": "Um public group junta pessoas de partes diferentes da empresa que não cabem num único papel. Em vez de uma sharing rule para cada papel e pessoa, cria-se um grupo com todos e ele vira o alvo da regra. O access summary do grupo mostra onde ele é usado: sharing rules, pastas de relatórios e dashboards e list views.",
+      "tipo": "decisao",
+      "titulo": "Para que serve um public group"
+    },
+    {
+      "evidencias": [
+        {
+          "fonte": "src:help-public-groups-considerations"
+        },
+        {
+          "fonte": "src:objref-groupmember"
+        }
+      ],
+      "texto": "Com mais de 10.000 membros, editar o grupo pela página de edição pode ficar lento ou perder membros; a Ajuda manda usar o access summary, user access policies ou a API de GroupMember. Ela também recomenda não passar de cinco níveis de grupos dentro de grupos.",
+      "tipo": "escala",
+      "titulo": "Grupos grandes e aninhados"
+    },
+    {
+      "evidencias": [
+        {
+          "fonte": "src:mdapi-group"
+        },
+        {
+          "fonte": "src:help-public-groups-create"
+        },
+        {
+          "fonte": "src:help-group-member-types"
+        }
+      ],
+      "texto": "O metadata type Group leva o nome e a opção Grant Access Using Hierarchies, mas não os membros. Depois de implantar, os membros precisam ser incluídos no destino.",
+      "tipo": "atencao",
+      "titulo": "Membros de grupo não vão no deploy"
     }
   ],
   "classificacao": "cls:acesso-identidade-e-seguranca",
   "derivado": {
     "dependencias": [
+      {
+        "destino": "obj:QueueRoutingConfig",
+        "destino_no_tema": false,
+        "estado": "verificado",
+        "origem": "obj:Group",
+        "rel": "rel:group-queueroutingconfig",
+        "via": "QueueRoutingConfigId"
+      },
+      {
+        "destino": "obj:Group",
+        "destino_no_tema": true,
+        "estado": "verificado",
+        "origem": "obj:GroupMember",
+        "rel": "rel:groupmember-group",
+        "via": "GroupId"
+      },
+      {
+        "destino": "obj:Group",
+        "destino_no_tema": true,
+        "estado": "verificado",
+        "origem": "obj:GroupMember",
+        "rel": "rel:groupmember-membro-grupo",
+        "via": "UserOrGroupId"
+      },
+      {
+        "destino": "obj:User",
+        "destino_no_tema": false,
+        "estado": "verificado",
+        "origem": "obj:GroupMember",
+        "rel": "rel:groupmember-membro-usuario",
+        "via": "UserOrGroupId"
+      },
       {
         "destino": "obj:PermissionSetGroup",
         "destino_no_tema": true,
@@ -103,9 +177,31 @@
           "Criar: Manage Profiles and Permission Sets; atribuir: Assign Permission Sets."
         ],
         "principal": true
+      },
+      {
+        "alertas": [
+          "Implantar o metadata type Group NÃO leva os membros: eles precisam ser carregados à parte (objeto GroupMember).",
+          "Criar ou editar um public group exige a permissão Manage Users.",
+          "Com Grant Access Using Hierarchies marcado, o que é compartilhado com o grupo também chega a quem está acima na hierarquia de papéis.",
+          "Editar grupos, papéis e territórios faz as sharing rules serem recalculadas.",
+          "Há dois tipos de grupo: public groups, criados por administradores, e personal groups; só os public groups são acessíveis pela API.",
+          "Grupo do Chatter é outro recurso: no objeto Group, aparece com Type igual a CollaborationGroup."
+        ],
+        "exemplo": "O grupo Comitê de Preços reúne dois papéis de vendas e três pessoas do financeiro; uma sharing rule dá a ele acesso às oportunidades grandes.",
+        "id": "func:public-groups",
+        "principal": true
       }
     ],
     "metadata_types": [
+      {
+        "estrutura": "completa",
+        "funcionalidades": [
+          "func:public-groups"
+        ],
+        "id": "mdt:Group",
+        "nota_suporte": null,
+        "suporte_cli": "suportado"
+      },
       {
         "estrutura": "completa",
         "funcionalidades": [
@@ -136,6 +232,38 @@
     ],
     "nota": "Calculado pelo gerador a partir do catálogo; não é cadastro.",
     "objetos_api": [
+      {
+        "apis": [
+          {
+            "api": "padrao",
+            "estado": "verificado"
+          },
+          {
+            "api": "tooling",
+            "estado": "desconhecido"
+          }
+        ],
+        "funcionalidades": [
+          "func:public-groups"
+        ],
+        "id": "obj:Group"
+      },
+      {
+        "apis": [
+          {
+            "api": "padrao",
+            "estado": "verificado"
+          },
+          {
+            "api": "tooling",
+            "estado": "desconhecido"
+          }
+        ],
+        "funcionalidades": [
+          "func:public-groups"
+        ],
+        "id": "obj:GroupMember"
+      },
       {
         "apis": [
           {
@@ -222,7 +350,8 @@
   "funcionalidades": [
     "func:perfis",
     "func:permission-set-groups",
-    "func:permission-sets"
+    "func:permission-sets",
+    "func:public-groups"
   ],
   "id": "sub:permissoes-perfis-e-grupos",
   "natureza": "curadoria_didatica",
@@ -244,7 +373,8 @@
     "explicacao": "Define o que cada usuário pode fazer. Todo usuário tem exatamente um perfil, com o acesso básico; permission sets somam acessos extras; e permission set groups juntam vários permission sets para atribuir de uma vez.",
     "por_onde_comecar": [
       "func:permission-sets",
-      "func:permission-set-groups"
+      "func:permission-set-groups",
+      "func:public-groups"
     ]
   },
   "referencias_oficiais": [

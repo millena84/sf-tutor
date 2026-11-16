@@ -591,6 +591,15 @@
   },
   {
     "estado": "verificado",
+    "grupo_cor": "cls:acesso-identidade-e-seguranca",
+    "id": "func:filas",
+    "resumo": "Uma fila guarda registros que ainda não têm um dono individual, para que um time divida o trabalho: os registros aparecem numa lista e qualquer membro pode assumir um deles. Cada fila diz quais objetos aceita e quem são os membros: usuários, papéis, public groups e outros.",
+    "rotulo": "Filas (queues)",
+    "rotulo_tecnico": "Queues",
+    "tipo": "funcionalidade"
+  },
+  {
+    "estado": "verificado",
     "grupo_cor": "cls:automacao-de-processos-e-regras-de-negocio",
     "id": "func:flow",
     "resumo": "Automação declarativa construída no Flow Builder, com elementos, variáveis e decisões.",
@@ -938,6 +947,15 @@
     "resumo": "Interface única para publicar e assinar eventos de plataforma, eventos de alteração e eventos de monitoramento em tempo real. Usa gRPC e HTTP/2, com mensagens em Avro.",
     "rotulo": "Pub/Sub API",
     "rotulo_tecnico": "Pub/Sub API",
+    "tipo": "funcionalidade"
+  },
+  {
+    "estado": "verificado",
+    "grupo_cor": "cls:acesso-identidade-e-seguranca",
+    "id": "func:public-groups",
+    "resumo": "Um public group reúne usuários, papéis, outros grupos e demais tipos de membro, para que um conjunto de pessoas que não cabe num único papel receba o mesmo acesso. Serve de alvo para sharing rules, pastas de relatórios e dashboards, list views e membros de filas.",
+    "rotulo": "Public groups",
+    "rotulo_tecnico": "Public Groups",
     "tipo": "funcionalidade"
   },
   {
@@ -9802,6 +9820,45 @@
   },
   {
     "estado": "verificado",
+    "id": "mdt:Group",
+    "resumo": "Um public group: um conjunto que pode reunir usuários, papéis e outros grupos, usado para compartilhar registros e dar acesso.",
+    "rotulo": "Group",
+    "tipo": "metadata_type"
+  },
+  {
+    "estado": "verificado",
+    "explicacao": "explicada",
+    "id": "mdt:Group.description",
+    "rotulo": "description",
+    "tipo": "propriedade_xml",
+    "tipo_tecnico": "string"
+  },
+  {
+    "estado": "verificado",
+    "explicacao": "explicada",
+    "id": "mdt:Group.doesIncludeBosses",
+    "rotulo": "doesIncludeBosses",
+    "tipo": "propriedade_xml",
+    "tipo_tecnico": "boolean"
+  },
+  {
+    "estado": "verificado",
+    "explicacao": "explicada",
+    "id": "mdt:Group.fullName",
+    "rotulo": "fullName",
+    "tipo": "propriedade_xml",
+    "tipo_tecnico": "string"
+  },
+  {
+    "estado": "verificado",
+    "explicacao": "explicada",
+    "id": "mdt:Group.name",
+    "rotulo": "name",
+    "tipo": "propriedade_xml",
+    "tipo_tecnico": "string"
+  },
+  {
+    "estado": "verificado",
     "id": "mdt:InboundCertificate",
     "resumo": "Certificado de autenticação mútua (mTLS) importado para a org.",
     "rotulo": "InboundCertificate",
@@ -13108,6 +13165,77 @@
     "rotulo": "type",
     "tipo": "propriedade_xml",
     "tipo_tecnico": "string"
+  },
+  {
+    "estado": "verificado",
+    "id": "mdt:Queue",
+    "resumo": "Uma fila (queue): um lugar para guardar registros que ainda não têm um dono individual, com os objetos que ela aceita e os membros que podem assumi-los.",
+    "rotulo": "Queue",
+    "tipo": "metadata_type"
+  },
+  {
+    "estado": "verificado",
+    "explicacao": "explicada",
+    "id": "mdt:Queue.doesIncludeBosses",
+    "rotulo": "doesIncludeBosses",
+    "tipo": "propriedade_xml",
+    "tipo_tecnico": "boolean"
+  },
+  {
+    "estado": "verificado",
+    "explicacao": "explicada",
+    "id": "mdt:Queue.doesSendEmailToMembers",
+    "rotulo": "doesSendEmailToMembers",
+    "tipo": "propriedade_xml",
+    "tipo_tecnico": "boolean"
+  },
+  {
+    "estado": "verificado",
+    "explicacao": "explicada",
+    "id": "mdt:Queue.email",
+    "rotulo": "email",
+    "tipo": "propriedade_xml",
+    "tipo_tecnico": "string"
+  },
+  {
+    "estado": "verificado",
+    "explicacao": "explicada",
+    "id": "mdt:Queue.fullName",
+    "rotulo": "fullName",
+    "tipo": "propriedade_xml",
+    "tipo_tecnico": "string"
+  },
+  {
+    "estado": "verificado",
+    "explicacao": "explicada",
+    "id": "mdt:Queue.name",
+    "rotulo": "name",
+    "tipo": "propriedade_xml",
+    "tipo_tecnico": "string"
+  },
+  {
+    "estado": "verificado",
+    "explicacao": "explicada",
+    "id": "mdt:Queue.queueMembers",
+    "rotulo": "queueMembers",
+    "tipo": "propriedade_xml",
+    "tipo_tecnico": "QueueMembers[]"
+  },
+  {
+    "estado": "verificado",
+    "explicacao": "explicada",
+    "id": "mdt:Queue.queueRoutingConfig",
+    "rotulo": "queueRoutingConfig",
+    "tipo": "propriedade_xml",
+    "tipo_tecnico": "string"
+  },
+  {
+    "estado": "verificado",
+    "explicacao": "explicada",
+    "id": "mdt:Queue.queueSobject",
+    "rotulo": "queueSobject",
+    "tipo": "propriedade_xml",
+    "tipo_tecnico": "QueueSobject[]"
   },
   {
     "estado": "verificado",
@@ -23469,6 +23597,20 @@
   },
   {
     "estado": "verificado",
+    "id": "mdx:PublicGroups",
+    "rotulo": "PublicGroups",
+    "tipo": "estrutura_auxiliar"
+  },
+  {
+    "estado": "verificado",
+    "explicacao": "explicada",
+    "id": "mdx:PublicGroups.publicGroup",
+    "rotulo": "publicGroup",
+    "tipo": "propriedade_xml",
+    "tipo_tecnico": "string"
+  },
+  {
+    "estado": "verificado",
     "id": "mdx:PublicKeyCertificateSetKey",
     "rotulo": "PublicKeyCertificateSetKey",
     "tipo": "estrutura_auxiliar"
@@ -23505,6 +23647,52 @@
   },
   {
     "estado": "verificado",
+    "id": "mdx:QueueMembers",
+    "rotulo": "QueueMembers",
+    "tipo": "estrutura_auxiliar"
+  },
+  {
+    "estado": "verificado",
+    "explicacao": "explicada",
+    "id": "mdx:QueueMembers.publicGroups",
+    "rotulo": "publicGroups",
+    "tipo": "propriedade_xml",
+    "tipo_tecnico": "PublicGroups[]"
+  },
+  {
+    "estado": "verificado",
+    "explicacao": "explicada",
+    "id": "mdx:QueueMembers.roleAndSubordinates",
+    "rotulo": "roleAndSubordinates",
+    "tipo": "propriedade_xml",
+    "tipo_tecnico": "RoleAndSubordinates[]"
+  },
+  {
+    "estado": "verificado",
+    "explicacao": "explicada",
+    "id": "mdx:QueueMembers.roleAndSubordinatesInternal",
+    "rotulo": "roleAndSubordinatesInternal",
+    "tipo": "propriedade_xml",
+    "tipo_tecnico": "RoleAndSubordinatesInternal[]"
+  },
+  {
+    "estado": "verificado",
+    "explicacao": "explicada",
+    "id": "mdx:QueueMembers.roles",
+    "rotulo": "roles",
+    "tipo": "propriedade_xml",
+    "tipo_tecnico": "Roles[]"
+  },
+  {
+    "estado": "verificado",
+    "explicacao": "explicada",
+    "id": "mdx:QueueMembers.users",
+    "rotulo": "users",
+    "tipo": "propriedade_xml",
+    "tipo_tecnico": "Users[]"
+  },
+  {
+    "estado": "verificado",
     "id": "mdx:QueueRoutingConfigSkill",
     "rotulo": "QueueRoutingConfigSkill",
     "tipo": "estrutura_auxiliar"
@@ -23514,6 +23702,20 @@
     "explicacao": "explicada",
     "id": "mdx:QueueRoutingConfigSkill.skill",
     "rotulo": "skill",
+    "tipo": "propriedade_xml",
+    "tipo_tecnico": "string"
+  },
+  {
+    "estado": "verificado",
+    "id": "mdx:QueueSobject",
+    "rotulo": "QueueSobject",
+    "tipo": "estrutura_auxiliar"
+  },
+  {
+    "estado": "verificado",
+    "explicacao": "explicada",
+    "id": "mdx:QueueSobject.sobjectType",
+    "rotulo": "sobjectType",
     "tipo": "propriedade_xml",
     "tipo_tecnico": "string"
   },
@@ -24086,6 +24288,48 @@
     "rotulo": "sections",
     "tipo": "propriedade_xml",
     "tipo_tecnico": "ReportTypeSectionTranslation[]"
+  },
+  {
+    "estado": "verificado",
+    "id": "mdx:RoleAndSubordinates",
+    "rotulo": "RoleAndSubordinates",
+    "tipo": "estrutura_auxiliar"
+  },
+  {
+    "estado": "verificado",
+    "explicacao": "explicada",
+    "id": "mdx:RoleAndSubordinates.roleAndSubordinate",
+    "rotulo": "roleAndSubordinate",
+    "tipo": "propriedade_xml",
+    "tipo_tecnico": "string"
+  },
+  {
+    "estado": "verificado",
+    "id": "mdx:RoleAndSubordinatesInternal",
+    "rotulo": "RoleAndSubordinatesInternal",
+    "tipo": "estrutura_auxiliar"
+  },
+  {
+    "estado": "verificado",
+    "explicacao": "explicada",
+    "id": "mdx:RoleAndSubordinatesInternal.roleAndSubordinateInternal",
+    "rotulo": "roleAndSubordinateInternal",
+    "tipo": "propriedade_xml",
+    "tipo_tecnico": "string"
+  },
+  {
+    "estado": "verificado",
+    "id": "mdx:Roles",
+    "rotulo": "Roles",
+    "tipo": "estrutura_auxiliar"
+  },
+  {
+    "estado": "verificado",
+    "explicacao": "explicada",
+    "id": "mdx:Roles.role",
+    "rotulo": "role",
+    "tipo": "propriedade_xml",
+    "tipo_tecnico": "string"
   },
   {
     "estado": "verificado",
@@ -24728,6 +24972,20 @@
     "explicacao": "explicada",
     "id": "mdx:TimelineObjectDefinitionTranslation.name",
     "rotulo": "name",
+    "tipo": "propriedade_xml",
+    "tipo_tecnico": "string"
+  },
+  {
+    "estado": "verificado",
+    "id": "mdx:Users",
+    "rotulo": "Users",
+    "tipo": "estrutura_auxiliar"
+  },
+  {
+    "estado": "verificado",
+    "explicacao": "explicada",
+    "id": "mdx:Users.user",
+    "rotulo": "user",
     "tipo": "propriedade_xml",
     "tipo_tecnico": "string"
   },
@@ -32710,6 +32968,169 @@
       "padrao"
     ],
     "estado": "verificado",
+    "id": "obj:Group",
+    "resumo": "Um conjunto de usuários. O mesmo objeto guarda public groups, filas e os grupos que a plataforma cria para papéis, territórios e gerentes; o campo Type diz qual é qual.",
+    "rotulo": "Group",
+    "tipo": "objeto_api"
+  },
+  {
+    "apis": [
+      "padrao"
+    ],
+    "estado": "verificado",
+    "explicacao": "explicada",
+    "id": "obj:Group.DefaultDivision",
+    "rotulo": "DefaultDivision",
+    "tipo": "campo_api",
+    "tipo_tecnico": "picklist"
+  },
+  {
+    "apis": [
+      "padrao"
+    ],
+    "estado": "verificado",
+    "explicacao": "explicada",
+    "id": "obj:Group.Description",
+    "rotulo": "Description",
+    "tipo": "campo_api",
+    "tipo_tecnico": "textarea"
+  },
+  {
+    "apis": [
+      "padrao"
+    ],
+    "estado": "verificado",
+    "explicacao": "explicada",
+    "id": "obj:Group.DeveloperName",
+    "rotulo": "DeveloperName",
+    "tipo": "campo_api",
+    "tipo_tecnico": "string"
+  },
+  {
+    "apis": [
+      "padrao"
+    ],
+    "estado": "verificado",
+    "explicacao": "explicada",
+    "id": "obj:Group.DoesIncludeBosses",
+    "rotulo": "DoesIncludeBosses",
+    "tipo": "campo_api",
+    "tipo_tecnico": "boolean"
+  },
+  {
+    "apis": [
+      "padrao"
+    ],
+    "estado": "verificado",
+    "explicacao": "explicada",
+    "id": "obj:Group.DoesSendEmailToMembers",
+    "rotulo": "DoesSendEmailToMembers",
+    "tipo": "campo_api",
+    "tipo_tecnico": "boolean"
+  },
+  {
+    "apis": [
+      "padrao"
+    ],
+    "estado": "verificado",
+    "explicacao": "explicada",
+    "id": "obj:Group.Email",
+    "rotulo": "Email",
+    "tipo": "campo_api",
+    "tipo_tecnico": "email"
+  },
+  {
+    "apis": [
+      "padrao"
+    ],
+    "estado": "verificado",
+    "explicacao": "explicada",
+    "id": "obj:Group.Name",
+    "rotulo": "Name",
+    "tipo": "campo_api",
+    "tipo_tecnico": "string"
+  },
+  {
+    "apis": [
+      "padrao"
+    ],
+    "estado": "verificado",
+    "explicacao": "explicada",
+    "id": "obj:Group.OwnerId",
+    "rotulo": "OwnerId",
+    "tipo": "campo_api",
+    "tipo_tecnico": "reference"
+  },
+  {
+    "apis": [
+      "padrao"
+    ],
+    "estado": "verificado",
+    "explicacao": "explicada",
+    "id": "obj:Group.QueueRoutingConfigId",
+    "rotulo": "QueueRoutingConfigId",
+    "tipo": "campo_api",
+    "tipo_tecnico": "reference"
+  },
+  {
+    "apis": [
+      "padrao"
+    ],
+    "estado": "verificado",
+    "explicacao": "explicada",
+    "id": "obj:Group.RelatedId",
+    "rotulo": "RelatedId",
+    "tipo": "campo_api",
+    "tipo_tecnico": "reference"
+  },
+  {
+    "apis": [
+      "padrao"
+    ],
+    "estado": "verificado",
+    "explicacao": "explicada",
+    "id": "obj:Group.Type",
+    "rotulo": "Type",
+    "tipo": "campo_api",
+    "tipo_tecnico": "picklist"
+  },
+  {
+    "apis": [
+      "padrao"
+    ],
+    "estado": "verificado",
+    "id": "obj:GroupMember",
+    "resumo": "Um membro direto de um public group: um usuário ou outro grupo. Cada registro liga um grupo a um membro.",
+    "rotulo": "GroupMember",
+    "tipo": "objeto_api_juncao"
+  },
+  {
+    "apis": [
+      "padrao"
+    ],
+    "estado": "verificado",
+    "explicacao": "explicada",
+    "id": "obj:GroupMember.GroupId",
+    "rotulo": "GroupId",
+    "tipo": "campo_api",
+    "tipo_tecnico": "reference"
+  },
+  {
+    "apis": [
+      "padrao"
+    ],
+    "estado": "verificado",
+    "explicacao": "explicada",
+    "id": "obj:GroupMember.UserOrGroupId",
+    "rotulo": "UserOrGroupId",
+    "tipo": "campo_api",
+    "tipo_tecnico": "reference"
+  },
+  {
+    "apis": [
+      "padrao"
+    ],
+    "estado": "verificado",
     "id": "obj:KnowledgeArticle",
     "resumo": "Representa um artigo de conhecimento, independente da versão.",
     "rotulo": "KnowledgeArticle",
@@ -38052,6 +38473,38 @@
     "rotulo": "ServiceChannelId",
     "tipo": "campo_api",
     "tipo_tecnico": "reference"
+  },
+  {
+    "apis": [
+      "padrao"
+    ],
+    "estado": "verificado",
+    "id": "obj:QueueSobject",
+    "resumo": "A ligação entre uma fila e um tipo de objeto que ela aceita, inclusive objetos customizados. Cada registro é um par fila e objeto.",
+    "rotulo": "QueueSobject",
+    "tipo": "objeto_api_juncao"
+  },
+  {
+    "apis": [
+      "padrao"
+    ],
+    "estado": "verificado",
+    "explicacao": "explicada",
+    "id": "obj:QueueSobject.QueueId",
+    "rotulo": "QueueId",
+    "tipo": "campo_api",
+    "tipo_tecnico": "reference"
+  },
+  {
+    "apis": [
+      "padrao"
+    ],
+    "estado": "verificado",
+    "explicacao": "explicada",
+    "id": "obj:QueueSobject.SobjectType",
+    "rotulo": "SobjectType",
+    "tipo": "campo_api",
+    "tipo_tecnico": "picklist"
   },
   {
     "apis": [

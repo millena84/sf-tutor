@@ -1,0 +1,248 @@
+{
+  "alertas": [
+    "Só há registro para membros DIRETOS de public groups do tipo Regular; membros indiretos não aparecem.",
+    "Não há update(): para trocar um membro, exclui-se o registro e cria-se outro.",
+    "Criar um registro igual a um existente devolve o existente, sem erro.",
+    "Para grupos com mais de 10.000 membros, a página recomenda gerir os membros por este objeto."
+  ],
+  "apex": {
+    "consulta_soql_direta": {
+      "estado": "verificado",
+      "evidencias": [
+        {
+          "fonte": "src:objref-groupmember"
+        }
+      ],
+      "nota": "Objeto da API padrão: consultável por SOQL em Apex, sujeito a permissões.",
+      "valor": true
+    },
+    "nota": "Exemplo Apex não fornecido nesta fase."
+  },
+  "campos": [
+    {
+      "apis": [
+        "padrao"
+      ],
+      "default": {
+        "estado": "desconhecido",
+        "forma": "nao_declarado_na_fonte"
+      },
+      "disponibilidade": {
+        "ate_versao": null,
+        "desde_versao": null,
+        "estado": "desconhecido"
+      },
+      "dominio": {
+        "contexto": "Id de registro do(s) objeto(s) referenciado(s).",
+        "estado": "verificado",
+        "evidencias": [
+          {
+            "fonte": "src:objref-groupmember"
+          }
+        ],
+        "natureza": "referencia"
+      },
+      "estado": "verificado",
+      "evidencias": [
+        {
+          "fonte": "src:objref-groupmember"
+        }
+      ],
+      "explicacao": "explicada",
+      "id": "obj:GroupMember.GroupId",
+      "nome": "GroupId",
+      "o_que_e": "O grupo.",
+      "obrigatoriedade": {
+        "estado": "verificado",
+        "evidencias": [
+          {
+            "fonte": "src:objref-groupmember"
+          }
+        ],
+        "valor": "sim"
+      },
+      "origem": {
+        "estado": "verificado",
+        "evidencias": [
+          {
+            "fonte": "src:objref-groupmember"
+          }
+        ],
+        "nota": "Campo padrão do objeto documentado.",
+        "valor": "padrao_plataforma"
+      },
+      "propriedades_api": {
+        "create": true,
+        "defaulted_on_create": false,
+        "estado": "verificado",
+        "evidencias": [
+          {
+            "fonte": "src:objref-groupmember"
+          }
+        ],
+        "filter": true,
+        "group": true,
+        "id_lookup": false,
+        "nillable": false,
+        "restricted_picklist": false,
+        "sort": true,
+        "update": false
+      },
+      "referencia": {
+        "alvos": [
+          "obj:Group"
+        ],
+        "nome_relacionamento": "Group"
+      },
+      "somente_leitura": false,
+      "tipo_tecnico": "reference"
+    },
+    {
+      "apis": [
+        "padrao"
+      ],
+      "default": {
+        "estado": "desconhecido",
+        "forma": "nao_declarado_na_fonte"
+      },
+      "disponibilidade": {
+        "ate_versao": null,
+        "desde_versao": null,
+        "estado": "desconhecido"
+      },
+      "dominio": {
+        "contexto": "Id de registro do(s) objeto(s) referenciado(s).",
+        "estado": "verificado",
+        "evidencias": [
+          {
+            "fonte": "src:objref-groupmember"
+          }
+        ],
+        "natureza": "referencia"
+      },
+      "estado": "verificado",
+      "evidencias": [
+        {
+          "fonte": "src:objref-groupmember"
+        }
+      ],
+      "explicacao": "explicada",
+      "id": "obj:GroupMember.UserOrGroupId",
+      "nome": "UserOrGroupId",
+      "o_que_e": "O membro direto: um usuário ou outro grupo.",
+      "obrigatoriedade": {
+        "estado": "verificado",
+        "evidencias": [
+          {
+            "fonte": "src:objref-groupmember"
+          }
+        ],
+        "valor": "sim"
+      },
+      "origem": {
+        "estado": "verificado",
+        "evidencias": [
+          {
+            "fonte": "src:objref-groupmember"
+          }
+        ],
+        "nota": "Campo padrão do objeto documentado.",
+        "valor": "padrao_plataforma"
+      },
+      "propriedades_api": {
+        "create": true,
+        "defaulted_on_create": false,
+        "estado": "verificado",
+        "evidencias": [
+          {
+            "fonte": "src:objref-groupmember"
+          }
+        ],
+        "filter": true,
+        "group": true,
+        "id_lookup": false,
+        "nillable": false,
+        "restricted_picklist": false,
+        "sort": true,
+        "update": false
+      },
+      "referencia": {
+        "alvos": [
+          "obj:Group",
+          "obj:User"
+        ],
+        "nome_relacionamento": "UserOrGroup"
+      },
+      "somente_leitura": false,
+      "tipo_tecnico": "reference"
+    }
+  ],
+  "cobertura": {
+    "estrutural": {
+      "esperado": 2,
+      "estado": "completa",
+      "nota": "Tabela de campos lida completa (2); Id não consta.",
+      "presente": 2
+    },
+    "explicativa": {
+      "esperado": 2,
+      "estado": "completa",
+      "presente": 2
+    },
+    "mapeamento": {
+      "estado": "parcial",
+      "nota": "Ver relacionamentos registrados."
+    }
+  },
+  "consultas": [
+    {
+      "api": "padrao",
+      "contexto": "API padrão. Lista os membros diretos dos grupos.",
+      "soql": "SELECT GroupId, UserOrGroupId FROM GroupMember",
+      "validacao": "documental"
+    }
+  ],
+  "estado": "verificado",
+  "evidencias": [
+    {
+      "fonte": "src:objref-groupmember"
+    }
+  ],
+  "exposicoes": [
+    {
+      "api": "padrao",
+      "chamadas": [
+        "create()",
+        "delete()",
+        "describeSObjects()",
+        "getDeleted()",
+        "getUpdated()",
+        "query()",
+        "retrieve()"
+      ],
+      "desde_versao": null,
+      "estado": "verificado",
+      "evidencias": [
+        {
+          "fonte": "src:objref-groupmember"
+        }
+      ],
+      "nota": "A página não informa a versão de entrada do objeto."
+    },
+    {
+      "api": "tooling",
+      "desde_versao": null,
+      "estado": "desconhecido",
+      "nota": "Exposição na Tooling API não verificada."
+    }
+  ],
+  "id": "obj:GroupMember",
+  "juncao": true,
+  "nome": "GroupMember",
+  "o_que_e": "Um membro direto de um public group: um usuário ou outro grupo. Cada registro liga um grupo a um membro.",
+  "papel": "Consultar e alterar por API quem participa de cada public group.",
+  "setup": {
+    "estado": "nao_aplicavel",
+    "nota": "Objeto consultável via API; não é tela do Setup."
+  }
+}

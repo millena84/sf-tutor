@@ -1,0 +1,518 @@
+{
+  "id": "mdt:Queue",
+  "nome": "Queue",
+  "o_que_e": "Uma fila (queue): um lugar para guardar registros que ainda não têm um dono individual, com os objetos que ela aceita e os membros que podem assumi-los.",
+  "finalidade": "Versionar e implantar as filas da org, com objetos e membros.",
+  "estende": "não declarado na página",
+  "arquivos": {
+    "source_format": {
+      "estado": "verificado",
+      "valor": {
+        "pasta": "queues/",
+        "arquivo": "<Nome>.queue-meta.xml"
+      },
+      "nota": "Pasta e sufixo do registro do Salesforce CLI; sufixo '-meta.xml' segue a convenção do source format.",
+      "evidencias": [
+        {
+          "fonte": "src:sdr-registry",
+          "nota": "types.queue"
+        }
+      ]
+    },
+    "metadata_api_format": {
+      "estado": "verificado",
+      "valor": {
+        "pasta": "queues/",
+        "arquivo": "<Nome>.queue"
+      },
+      "evidencias": [
+        {
+          "fonte": "src:sdr-registry",
+          "nota": "types.queue"
+        }
+      ]
+    },
+    "curinga_package_xml": {
+      "estado": "verificado",
+      "valor": true,
+      "evidencias": [
+        {
+          "fonte": "src:mdapi-queue"
+        }
+      ]
+    }
+  },
+  "disponibilidade": {
+    "desde_versao": "24.0",
+    "ate_versao": null,
+    "estado": "verificado"
+  },
+  "suporte_cli": {
+    "estado": "verificado",
+    "valor": {
+      "status": "suportado",
+      "nota_fonte": null
+    },
+    "nota": "Suporte do Salesforce CLI (source-deploy-retrieve), não do Metadata API em geral.",
+    "evidencias": [
+      {
+        "fonte": "src:sdr-metadata-support"
+      }
+    ]
+  },
+  "setup": {
+    "estado": "desconhecido",
+    "nota": "Caminho no Setup não validado nesta sessão."
+  },
+  "propriedades": [
+    {
+      "id": "mdt:Queue.doesIncludeBosses",
+      "nome": "doesIncludeBosses",
+      "tipo_tecnico": "boolean",
+      "o_que_e": "Indica se os registros da fila também são compartilhados com os papéis acima na hierarquia.",
+      "origem": {
+        "estado": "verificado",
+        "valor": "padrao_plataforma",
+        "nota": "Propriedade definida pelo schema da Metadata API.",
+        "evidencias": [
+          {
+            "fonte": "src:mdapi-queue"
+          }
+        ]
+      },
+      "obrigatoriedade": {
+        "valor": "sim",
+        "estado": "verificado",
+        "evidencias": [
+          {
+            "fonte": "src:mdapi-queue"
+          }
+        ]
+      },
+      "default": {
+        "forma": "nao_declarado_na_fonte",
+        "estado": "desconhecido"
+      },
+      "dominio": {
+        "natureza": "booleano",
+        "valores": [
+          {
+            "valor": "true"
+          },
+          {
+            "valor": "false"
+          }
+        ],
+        "lista_completa": "sim",
+        "estado": "verificado",
+        "evidencias": [
+          {
+            "fonte": "src:mdapi-queue"
+          }
+        ]
+      },
+      "disponibilidade": {
+        "desde_versao": "67.0",
+        "ate_versao": null,
+        "estado": "verificado"
+      },
+      "explicacao": "explicada",
+      "estado": "verificado",
+      "evidencias": [
+        {
+          "fonte": "src:mdapi-queue"
+        }
+      ]
+    },
+    {
+      "id": "mdt:Queue.doesSendEmailToMembers",
+      "nome": "doesSendEmailToMembers",
+      "tipo_tecnico": "boolean",
+      "o_que_e": "Indica se os membros recebem e-mail quando um registro entra na fila.",
+      "origem": {
+        "estado": "verificado",
+        "valor": "padrao_plataforma",
+        "nota": "Propriedade definida pelo schema da Metadata API.",
+        "evidencias": [
+          {
+            "fonte": "src:mdapi-queue"
+          }
+        ]
+      },
+      "obrigatoriedade": {
+        "valor": "nao",
+        "estado": "desconhecido",
+        "condicao": "A documentação 68.0 não marca o campo como obrigatório; ausência de marcação não comprova opcionalidade (confirmar no WSDL)."
+      },
+      "default": {
+        "forma": "nao_declarado_na_fonte",
+        "estado": "desconhecido"
+      },
+      "dominio": {
+        "natureza": "booleano",
+        "valores": [
+          {
+            "valor": "true"
+          },
+          {
+            "valor": "false"
+          }
+        ],
+        "lista_completa": "sim",
+        "estado": "verificado",
+        "evidencias": [
+          {
+            "fonte": "src:mdapi-queue"
+          }
+        ]
+      },
+      "disponibilidade": {
+        "desde_versao": null,
+        "ate_versao": null,
+        "estado": "desconhecido"
+      },
+      "explicacao": "explicada",
+      "estado": "verificado",
+      "evidencias": [
+        {
+          "fonte": "src:mdapi-queue"
+        }
+      ]
+    },
+    {
+      "id": "mdt:Queue.email",
+      "nome": "email",
+      "tipo_tecnico": "string",
+      "o_que_e": "Endereço de e-mail do dono da fila.",
+      "origem": {
+        "estado": "verificado",
+        "valor": "padrao_plataforma",
+        "nota": "Propriedade definida pelo schema da Metadata API.",
+        "evidencias": [
+          {
+            "fonte": "src:mdapi-queue"
+          }
+        ]
+      },
+      "obrigatoriedade": {
+        "valor": "nao",
+        "estado": "desconhecido",
+        "condicao": "A documentação 68.0 não marca o campo como obrigatório; ausência de marcação não comprova opcionalidade (confirmar no WSDL)."
+      },
+      "default": {
+        "forma": "nao_declarado_na_fonte",
+        "estado": "desconhecido"
+      },
+      "dominio": {
+        "natureza": "texto_livre",
+        "estado": "verificado",
+        "evidencias": [
+          {
+            "fonte": "src:mdapi-queue"
+          }
+        ],
+        "contexto": "A fonte tipa como string sem lista de valores; não inventar valores."
+      },
+      "disponibilidade": {
+        "desde_versao": null,
+        "ate_versao": null,
+        "estado": "desconhecido"
+      },
+      "explicacao": "explicada",
+      "estado": "verificado",
+      "evidencias": [
+        {
+          "fonte": "src:mdapi-queue"
+        }
+      ]
+    },
+    {
+      "id": "mdt:Queue.fullName",
+      "nome": "fullName",
+      "tipo_tecnico": "string",
+      "o_que_e": "Nome de API da fila; aparece no primeiro exemplo XML da página, não na tabela de campos.",
+      "origem": {
+        "estado": "verificado",
+        "valor": "padrao_plataforma",
+        "nota": "Propriedade definida pelo schema da Metadata API.",
+        "evidencias": [
+          {
+            "fonte": "src:mdapi-queue"
+          }
+        ]
+      },
+      "obrigatoriedade": {
+        "valor": "desconhecida",
+        "estado": "desconhecido"
+      },
+      "default": {
+        "forma": "nao_declarado_na_fonte",
+        "estado": "desconhecido"
+      },
+      "dominio": {
+        "natureza": "texto_livre",
+        "estado": "verificado",
+        "evidencias": [
+          {
+            "fonte": "src:mdapi-queue"
+          }
+        ],
+        "contexto": "A fonte tipa como string sem lista de valores; não inventar valores."
+      },
+      "disponibilidade": {
+        "desde_versao": null,
+        "ate_versao": null,
+        "estado": "desconhecido"
+      },
+      "explicacao": "explicada",
+      "estado": "verificado",
+      "evidencias": [
+        {
+          "fonte": "src:mdapi-queue"
+        }
+      ]
+    },
+    {
+      "id": "mdt:Queue.name",
+      "nome": "name",
+      "tipo_tecnico": "string",
+      "o_que_e": "Nome da fila; na interface, é o Label.",
+      "origem": {
+        "estado": "verificado",
+        "valor": "padrao_plataforma",
+        "nota": "Propriedade definida pelo schema da Metadata API.",
+        "evidencias": [
+          {
+            "fonte": "src:mdapi-queue"
+          }
+        ]
+      },
+      "obrigatoriedade": {
+        "valor": "sim",
+        "estado": "verificado",
+        "evidencias": [
+          {
+            "fonte": "src:mdapi-queue"
+          }
+        ]
+      },
+      "default": {
+        "forma": "nao_declarado_na_fonte",
+        "estado": "desconhecido"
+      },
+      "dominio": {
+        "natureza": "texto_livre",
+        "estado": "verificado",
+        "evidencias": [
+          {
+            "fonte": "src:mdapi-queue"
+          }
+        ],
+        "contexto": "A fonte tipa como string sem lista de valores; não inventar valores."
+      },
+      "disponibilidade": {
+        "desde_versao": null,
+        "ate_versao": null,
+        "estado": "desconhecido"
+      },
+      "explicacao": "explicada",
+      "estado": "verificado",
+      "evidencias": [
+        {
+          "fonte": "src:mdapi-queue"
+        }
+      ]
+    },
+    {
+      "id": "mdt:Queue.queueMembers",
+      "nome": "queueMembers",
+      "tipo_tecnico": "QueueMembers[]",
+      "o_que_e": "Membros da fila, incluídos diretamente ou por papéis e public groups.",
+      "origem": {
+        "estado": "verificado",
+        "valor": "padrao_plataforma",
+        "nota": "Propriedade definida pelo schema da Metadata API.",
+        "evidencias": [
+          {
+            "fonte": "src:mdapi-queue"
+          }
+        ]
+      },
+      "obrigatoriedade": {
+        "valor": "nao",
+        "estado": "desconhecido",
+        "condicao": "A documentação 68.0 não marca o campo como obrigatório; ausência de marcação não comprova opcionalidade (confirmar no WSDL)."
+      },
+      "default": {
+        "forma": "nao_declarado_na_fonte",
+        "estado": "desconhecido"
+      },
+      "dominio": {
+        "natureza": "tipo_composto",
+        "estado": "verificado",
+        "evidencias": [
+          {
+            "fonte": "src:mdapi-queue"
+          }
+        ]
+      },
+      "disponibilidade": {
+        "desde_versao": "42.0",
+        "ate_versao": null,
+        "estado": "verificado"
+      },
+      "explicacao": "explicada",
+      "estado": "verificado",
+      "evidencias": [
+        {
+          "fonte": "src:mdapi-queue"
+        }
+      ],
+      "cardinalidade": "0..n",
+      "estrutura_ref": "mdx:QueueMembers"
+    },
+    {
+      "id": "mdt:Queue.queueRoutingConfig",
+      "nome": "queueRoutingConfig",
+      "tipo_tecnico": "string",
+      "o_que_e": "Nome da routing configuration, em orgs com Omni-Channel.",
+      "origem": {
+        "estado": "verificado",
+        "valor": "padrao_plataforma",
+        "nota": "Propriedade definida pelo schema da Metadata API.",
+        "evidencias": [
+          {
+            "fonte": "src:mdapi-queue"
+          }
+        ]
+      },
+      "obrigatoriedade": {
+        "valor": "nao",
+        "estado": "desconhecido",
+        "condicao": "A documentação 68.0 não marca o campo como obrigatório; ausência de marcação não comprova opcionalidade (confirmar no WSDL)."
+      },
+      "default": {
+        "forma": "nao_declarado_na_fonte",
+        "estado": "desconhecido"
+      },
+      "dominio": {
+        "natureza": "texto_livre",
+        "estado": "verificado",
+        "evidencias": [
+          {
+            "fonte": "src:mdapi-queue"
+          }
+        ],
+        "contexto": "A fonte tipa como string sem lista de valores; não inventar valores."
+      },
+      "disponibilidade": {
+        "desde_versao": "42.0",
+        "ate_versao": null,
+        "estado": "verificado"
+      },
+      "explicacao": "explicada",
+      "estado": "verificado",
+      "evidencias": [
+        {
+          "fonte": "src:mdapi-queue"
+        }
+      ]
+    },
+    {
+      "id": "mdt:Queue.queueSobject",
+      "nome": "queueSobject",
+      "tipo_tecnico": "QueueSobject[]",
+      "o_que_e": "Objetos que a fila aceita.",
+      "origem": {
+        "estado": "verificado",
+        "valor": "padrao_plataforma",
+        "nota": "Propriedade definida pelo schema da Metadata API.",
+        "evidencias": [
+          {
+            "fonte": "src:mdapi-queue"
+          }
+        ]
+      },
+      "obrigatoriedade": {
+        "valor": "nao",
+        "estado": "desconhecido",
+        "condicao": "A documentação 68.0 não marca o campo como obrigatório; ausência de marcação não comprova opcionalidade (confirmar no WSDL)."
+      },
+      "default": {
+        "forma": "nao_declarado_na_fonte",
+        "estado": "desconhecido"
+      },
+      "dominio": {
+        "natureza": "tipo_composto",
+        "estado": "verificado",
+        "evidencias": [
+          {
+            "fonte": "src:mdapi-queue"
+          }
+        ]
+      },
+      "disponibilidade": {
+        "desde_versao": null,
+        "ate_versao": null,
+        "estado": "desconhecido"
+      },
+      "explicacao": "explicada",
+      "estado": "verificado",
+      "evidencias": [
+        {
+          "fonte": "src:mdapi-queue"
+        }
+      ],
+      "cardinalidade": "0..n",
+      "estrutura_ref": "mdx:QueueSobject"
+    }
+  ],
+  "estruturas": [
+    "mdx:QueueMembers",
+    "mdx:QueueSobject"
+  ],
+  "cobertura": {
+    "estrutural": {
+      "estado": "completa",
+      "esperado": 8,
+      "presente": 8,
+      "nota": "Universo esperado = tabelas Fields da página do guia versionado 264.0 (API 68.0), lida em 2026-11-16. A página não informa obrigatoriedade para a maioria dos campos."
+    },
+    "explicativa": {
+      "estado": "completa",
+      "esperado": 8,
+      "presente": 8
+    },
+    "mapeamento": {
+      "estado": "parcial",
+      "nota": "Correspondências registradas apenas onde há evidência; demais pendentes."
+    }
+  },
+  "recomendacoes": [],
+  "alertas": [
+    "Segundo a página, a fila aceita casos, leads, service contracts (com Entitlements habilitado) e objetos customizados; a lista de valores de sobjectType traz ainda ContactRequest e Task.",
+    "Desde o Summer '20, só usuários autenticados, internos e externos, acessam este tipo.",
+    "doesIncludeBosses existe para filas só desde a API 67.0."
+  ],
+  "divergencias_documentais": [
+    "O segundo exemplo XML da página usa os elementos queueRoleAndSubordinates e queueRoleAndSubordinate; a tabela documenta roleAndSubordinates e roleAndSubordinate. Foram cadastrados os nomes da tabela.",
+    "O mesmo exemplo fecha o elemento publicGroups com uma tag de abertura."
+  ],
+  "estado": "verificado",
+  "evidencias": [
+    {
+      "fonte": "src:mdapi-queue"
+    },
+    {
+      "fonte": "src:sdr-registry"
+    },
+    {
+      "fonte": "src:sdr-metadata-support"
+    }
+  ],
+  "exemplo_xml": {
+    "xml": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<Queue xmlns=\"http://soap.sforce.com/2006/04/metadata\">\n    <doesIncludeBosses>false</doesIncludeBosses>\n    <doesSendEmailToMembers>true</doesSendEmailToMembers>\n    <email>[endereço de e-mail da fila]</email>\n    <name>[nome da fila]</name>\n    <queueMembers>\n        <publicGroups>\n            <publicGroup>[nome de um public group]</publicGroup>\n        </publicGroups>\n        <roles>\n            <role>[nome de um papel]</role>\n        </roles>\n        <users>\n            <user>[username]</user>\n        </users>\n    </queueMembers>\n    <queueSobject>\n        <!-- Valores documentados: Case, ContactRequest, Lead, ServiceContract, Task e objetos customizados -->\n        <sobjectType>Case</sobjectType>\n    </queueSobject>\n</Queue>",
+    "natureza": "didatico_projeto",
+    "nota": "Exemplo escrito pelo projeto apenas com elementos documentados; sem dados reais."
+  }
+}

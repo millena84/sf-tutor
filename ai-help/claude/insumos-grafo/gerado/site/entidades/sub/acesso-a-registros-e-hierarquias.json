@@ -12,6 +12,64 @@
       "texto": "Equipes de conta e de oportunidade dão acesso e responsabilidade compartilhada sem mudar o dono do registro.",
       "tipo": "decisao",
       "titulo": "Equipe em vez de trocar o dono"
+    },
+    {
+      "evidencias": [
+        {
+          "fonte": "src:help-queues-action-plans"
+        },
+        {
+          "fonte": "src:help-public-groups"
+        },
+        {
+          "fonte": "src:help-queues-create"
+        }
+      ],
+      "texto": "Uma fila é dona de registros: guarda o que ainda não tem dono individual, e qualquer membro pode assumir. Um public group não é dono de nada: é um conjunto de pessoas que recebe acesso, por exemplo como alvo de uma sharing rule. Um public group pode ser membro de uma fila.",
+      "tipo": "decisao",
+      "titulo": "Fila ou public group"
+    },
+    {
+      "evidencias": [
+        {
+          "fonte": "src:objref-group"
+        },
+        {
+          "fonte": "src:objref-queuesobject"
+        },
+        {
+          "fonte": "src:objref-groupmember"
+        }
+      ],
+      "texto": "Filas e public groups ficam no objeto Group; o campo Type diz qual é qual (Queue ou Regular). O mesmo objeto guarda os grupos que a plataforma cria para papéis, territórios e gerentes, e os grupos do Chatter. Os objetos que uma fila aceita ficam em QueueSobject; os membros diretos de um public group, em GroupMember.",
+      "tipo": "atencao",
+      "titulo": "Nos dados, é o mesmo objeto"
+    },
+    {
+      "evidencias": [
+        {
+          "fonte": "src:mdapi-queue"
+        },
+        {
+          "fonte": "src:mdapi-group"
+        }
+      ],
+      "texto": "Queue guarda a fila com os objetos aceitos e os membros (usuários, papéis e public groups). Group guarda só a definição do public group: os membros não são migrados na implantação.",
+      "tipo": "implantacao",
+      "titulo": "Como metadado"
+    },
+    {
+      "evidencias": [
+        {
+          "fonte": "src:help-sharing-rule-categories"
+        },
+        {
+          "fonte": "src:help-sharing-rules"
+        }
+      ],
+      "texto": "Numa sharing rule, a categoria Queues cobre os registros cujo dono é a fila, sem incluir os registros que pertencem aos membros dela.",
+      "tipo": "atencao",
+      "titulo": "Queues em sharing rules"
     }
   ],
   "classificacao": "cls:acesso-identidade-e-seguranca",
@@ -34,6 +92,38 @@
         "via": "UserId"
       },
       {
+        "destino": "obj:QueueRoutingConfig",
+        "destino_no_tema": false,
+        "estado": "verificado",
+        "origem": "obj:Group",
+        "rel": "rel:group-queueroutingconfig",
+        "via": "QueueRoutingConfigId"
+      },
+      {
+        "destino": "obj:Group",
+        "destino_no_tema": true,
+        "estado": "verificado",
+        "origem": "obj:GroupMember",
+        "rel": "rel:groupmember-group",
+        "via": "GroupId"
+      },
+      {
+        "destino": "obj:Group",
+        "destino_no_tema": true,
+        "estado": "verificado",
+        "origem": "obj:GroupMember",
+        "rel": "rel:groupmember-membro-grupo",
+        "via": "UserOrGroupId"
+      },
+      {
+        "destino": "obj:User",
+        "destino_no_tema": false,
+        "estado": "verificado",
+        "origem": "obj:GroupMember",
+        "rel": "rel:groupmember-membro-usuario",
+        "via": "UserOrGroupId"
+      },
+      {
         "destino": "obj:Opportunity",
         "destino_no_tema": false,
         "estado": "verificado",
@@ -48,6 +138,14 @@
         "origem": "obj:OpportunityTeamMember",
         "rel": "rel:otm-user",
         "via": "UserId"
+      },
+      {
+        "destino": "obj:Group",
+        "destino_no_tema": true,
+        "estado": "verificado",
+        "origem": "obj:QueueSobject",
+        "rel": "rel:queuesobject-group",
+        "via": "QueueId"
       }
     ],
     "funcionalidades": [
@@ -60,6 +158,32 @@
         ],
         "principal": false,
         "tema_principal": "sub:vendas"
+      },
+      {
+        "alertas": [
+          "Criar ou alterar filas exige as permissões Customize Application e Manage Public List Views.",
+          "Criar uma fila cria junto uma list view; o rótulo da fila é o nome da list view em que os usuários trabalham.",
+          "O nome de uma fila não pode conter vírgulas.",
+          "Em sharing rules, a categoria Queues cobre os registros cujo dono é a fila, não os registros dos membros dela.",
+          "Fila e public group são o mesmo objeto nos dados (Group); o campo Type os distingue."
+        ],
+        "exemplo": "Os casos novos vão para a fila Suporte Nível 2; um atendente do time abre a lista da fila e assume o próximo caso.",
+        "id": "func:filas",
+        "principal": true
+      },
+      {
+        "alertas": [
+          "Implantar o metadata type Group NÃO leva os membros: eles precisam ser carregados à parte (objeto GroupMember).",
+          "Criar ou editar um public group exige a permissão Manage Users.",
+          "Com Grant Access Using Hierarchies marcado, o que é compartilhado com o grupo também chega a quem está acima na hierarquia de papéis.",
+          "Editar grupos, papéis e territórios faz as sharing rules serem recalculadas.",
+          "Há dois tipos de grupo: public groups, criados por administradores, e personal groups; só os public groups são acessíveis pela API.",
+          "Grupo do Chatter é outro recurso: no objeto Group, aparece com Type igual a CollaborationGroup."
+        ],
+        "exemplo": "O grupo Comitê de Preços reúne dois papéis de vendas e três pessoas do financeiro; uma sharing rule dá a ele acesso às oportunidades grandes.",
+        "id": "func:public-groups",
+        "principal": false,
+        "tema_principal": "sub:permissoes-perfis-e-grupos"
       }
     ],
     "metadata_types": [
@@ -75,9 +199,27 @@
       {
         "estrutura": "completa",
         "funcionalidades": [
+          "func:public-groups"
+        ],
+        "id": "mdt:Group",
+        "nota_suporte": null,
+        "suporte_cli": "suportado"
+      },
+      {
+        "estrutura": "completa",
+        "funcionalidades": [
           "func:equipes-de-conta-e-oportunidade"
         ],
         "id": "mdt:OpportunitySettings",
+        "nota_suporte": null,
+        "suporte_cli": "suportado"
+      },
+      {
+        "estrutura": "completa",
+        "funcionalidades": [
+          "func:filas"
+        ],
+        "id": "mdt:Queue",
         "nota_suporte": null,
         "suporte_cli": "suportado"
       }
@@ -112,9 +254,59 @@
           }
         ],
         "funcionalidades": [
+          "func:filas",
+          "func:public-groups"
+        ],
+        "id": "obj:Group"
+      },
+      {
+        "apis": [
+          {
+            "api": "padrao",
+            "estado": "verificado"
+          },
+          {
+            "api": "tooling",
+            "estado": "desconhecido"
+          }
+        ],
+        "funcionalidades": [
+          "func:filas",
+          "func:public-groups"
+        ],
+        "id": "obj:GroupMember"
+      },
+      {
+        "apis": [
+          {
+            "api": "padrao",
+            "estado": "verificado"
+          },
+          {
+            "api": "tooling",
+            "estado": "desconhecido"
+          }
+        ],
+        "funcionalidades": [
           "func:equipes-de-conta-e-oportunidade"
         ],
         "id": "obj:OpportunityTeamMember"
+      },
+      {
+        "apis": [
+          {
+            "api": "padrao",
+            "estado": "verificado"
+          },
+          {
+            "api": "tooling",
+            "estado": "desconhecido"
+          }
+        ],
+        "funcionalidades": [
+          "func:filas"
+        ],
+        "id": "obj:QueueSobject"
       }
     ],
     "temas_sem_funcionalidade": []
@@ -132,7 +324,9 @@
   "estado": "desconhecido",
   "fora_do_escopo": "Permissão sobre o objeto inteiro (ler, criar, editar) fica em \"Permissões, perfis e grupos\".",
   "funcionalidades": [
-    "func:equipes-de-conta-e-oportunidade"
+    "func:equipes-de-conta-e-oportunidade",
+    "func:filas",
+    "func:public-groups"
   ],
   "id": "sub:acesso-a-registros-e-hierarquias",
   "natureza": "curadoria_didatica",
@@ -150,6 +344,8 @@
     "exemplo": "Na conta ACME, o executivo de contas é o dono e o engenheiro de pré-venda entra na equipe com acesso de leitura.",
     "explicacao": "Decide quais registros cada usuário enxerga: os padrões de acesso da org, o compartilhamento e as equipes.",
     "por_onde_comecar": [
+      "func:filas",
+      "func:public-groups",
       "func:equipes-de-conta-e-oportunidade"
     ]
   },

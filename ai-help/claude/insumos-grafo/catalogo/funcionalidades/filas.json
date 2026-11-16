@@ -1,0 +1,115 @@
+{
+  "id": "func:filas",
+  "nome": "Filas (queues)",
+  "nome_tecnico": "Queues",
+  "aliases": [
+    "queue",
+    "fila",
+    "queues",
+    "queue members",
+    "fila de casos",
+    "fila de leads",
+    "dono do registro"
+  ],
+  "termos_busca": [
+    "dono do registro",
+    "fila",
+    "fila de casos",
+    "fila de leads",
+    "filas (queues)",
+    "queue",
+    "queue members",
+    "queues"
+  ],
+  "o_que_e": "Uma fila guarda registros que ainda não têm um dono individual, para que um time divida o trabalho: os registros aparecem numa lista e qualquer membro pode assumir um deles. Cada fila diz quais objetos aceita e quem são os membros: usuários, papéis, public groups e outros.",
+  "finalidade": "Distribuir trabalho a um time sem atribuir cada registro a uma pessoa na entrada.",
+  "exemplo": "Os casos novos vão para a fila Suporte Nível 2; um atendente do time abre a lista da fila e assume o próximo caso.",
+  "classificacao_principal": {
+    "classificacao": "cls:acesso-identidade-e-seguranca",
+    "subclassificacao": "sub:acesso-a-registros-e-hierarquias"
+  },
+  "classificacoes_secundarias": [
+    {
+      "classificacao": "cls:processos-de-negocio-especificos-de-produto",
+      "subclassificacao": "sub:atendimento",
+      "motivo": "Casos são distribuídos por filas, e o Omni-Channel roteia o trabalho a partir delas."
+    },
+    {
+      "classificacao": "cls:processos-de-negocio-especificos-de-produto",
+      "subclassificacao": "sub:vendas",
+      "motivo": "Leads podem ficar numa fila até alguém assumi-los."
+    }
+  ],
+  "representacoes": {
+    "metadata_types": [
+      {
+        "ref": "mdt:Queue",
+        "papel": "Cada fila, com os objetos aceitos e os membros."
+      }
+    ],
+    "objetos_api": [
+      {
+        "ref": "obj:Group",
+        "papel": "A fila nos dados: um Group com Type igual a Queue."
+      },
+      {
+        "ref": "obj:QueueSobject",
+        "papel": "Os objetos que cada fila aceita."
+      },
+      {
+        "ref": "obj:GroupMember",
+        "papel": "Membros diretos de grupos; a página documenta o registro para public groups do tipo Regular."
+      }
+    ],
+    "ausencias": []
+  },
+  "setup": {
+    "estado": "verificado",
+    "valor": "Setup > Quick Find: Queues > Queues",
+    "nota": "Lista das filas; New cria uma fila. Rótulos em inglês, como na fonte; a tradução da interface em pt-BR não foi verificada.",
+    "evidencias": [
+      {
+        "fonte": "src:help-queues-create"
+      }
+    ]
+  },
+  "recomendacoes": [],
+  "alertas": [
+    "Criar ou alterar filas exige as permissões Customize Application e Manage Public List Views.",
+    "Criar uma fila cria junto uma list view; o rótulo da fila é o nome da list view em que os usuários trabalham.",
+    "O nome de uma fila não pode conter vírgulas.",
+    "Em sharing rules, a categoria Queues cobre os registros cujo dono é a fila, não os registros dos membros dela.",
+    "Fila e public group são o mesmo objeto nos dados (Group); o campo Type os distingue."
+  ],
+  "limitacoes": [],
+  "estado": "verificado",
+  "evidencias": [
+    {
+      "fonte": "src:mdapi-queue"
+    },
+    {
+      "fonte": "src:objref-group"
+    },
+    {
+      "fonte": "src:objref-queuesobject"
+    },
+    {
+      "fonte": "src:objref-groupmember"
+    },
+    {
+      "fonte": "src:help-queues-create"
+    },
+    {
+      "fonte": "src:help-queues-omni"
+    },
+    {
+      "fonte": "src:help-queues-action-plans"
+    },
+    {
+      "fonte": "src:help-queues-lead-distribution"
+    },
+    {
+      "fonte": "src:help-sharing-rule-categories"
+    }
+  ]
+}
