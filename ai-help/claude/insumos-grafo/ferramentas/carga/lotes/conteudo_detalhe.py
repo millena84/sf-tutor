@@ -897,3 +897,20 @@ _f("src:objref-contentdocument-nota", "ContentDocument (Object Reference)",
 _f("src:objref-contentversion-nota", "ContentVersion (Object Reference)",
    "https://developer.salesforce.com/docs/atlas.en-us.object_reference.meta/object_reference/sforce_api_objects_contentversion.htm",
    "Comportamento de consultas sem ID.", **DOC)
+
+_EXT = "fontes/extracoes/lote7h-filas-grupos.txt"
+for _id, _tit, _art, _pert in (
+    ("src:help-queues-create", "Create Queues", "service.setting_up_queues.htm", "Caminho de Setup, permissões e passos para criar uma fila."),
+    ("src:help-queues-omni", "Associate Routing Configurations and Service Reps with Queues", "sf.service_presence_associate_routing_configuration_with_queue.htm", "Filas no Omni-Channel."),
+    ("src:help-queues-action-plans", "Assign Action Plan Tasks to Queues", "fsc_action_plans_queues.htm", "O que é uma fila e quem pode ser membro."),
+    ("src:help-queues-lead-distribution", "Create a Queue for Lead Distribution", "sf.networks_lead_distribution_queue_setup.htm", "Fila como list view compartilhada."),
+    ("src:help-sharing-rule-categories", "Sharing Rule Categories", "security_sharing_data_set_categories.htm", "Categorias Queues e Public Groups em sharing rules."),
+    ("src:help-public-groups", "Public and Personal Groups", "platform.user_groups.htm", "Os dois tipos de grupo e o uso de public groups."),
+    ("src:help-public-groups-create", "Create and Edit Public Groups", "platform.creating_and_editing_groups.htm", "Campos e permissão para criar um public group."),
+    ("src:help-group-member-types", "Group Member Types", "sf.users_group_member_types.htm", "Tipos de membro de um grupo."),
+    ("src:help-public-groups-considerations", "Public Group Considerations", "sf.user_groups_considerations.htm", "Limites práticos de public groups."),
+    ("src:help-public-group-summary", "View the Public Group Access Summary", "platform.public_group_access_summary.htm", "Onde um public group é usado."),
+    ("src:help-sharing-rules", "Sharing Rules", "platform.security_about_sharing_rules.htm", "O que uma sharing rule faz e a quem dá acesso."),
+    ("src:help-public-groups-knowledge", "Create Public Groups for Knowledge", "service.knowledge_setup_assign_users.htm", "Caminho de Setup de Public Groups."),
+):
+    _f(_id, _tit + " (Salesforce Help)", _H + _art + _L, _pert, **AJ)

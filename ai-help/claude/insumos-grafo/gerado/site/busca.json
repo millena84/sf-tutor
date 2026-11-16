@@ -925,6 +925,24 @@
     "tipo": "funcionalidade"
   },
   {
+    "descricao": "Uma fila guarda registros que ainda não têm um dono individual, para que um time divida o trabalho: os registros aparecem numa lista e qualquer membro pode assumir um deles. Cada fila diz quais objetos aceita e quem são os membros: usuários, papéis, public groups e outros.",
+    "id": "func:filas",
+    "rotulo": "Filas (queues)",
+    "textos": [
+      "Filas (queues)",
+      "Queues",
+      "dono do registro",
+      "fila",
+      "fila de casos",
+      "fila de leads",
+      "filas (queues)",
+      "queue",
+      "queue members",
+      "queues"
+    ],
+    "tipo": "funcionalidade"
+  },
+  {
     "descricao": "Automação declarativa construída no Flow Builder, com elementos, variáveis e decisões.",
     "id": "func:flow",
     "rotulo": "Flow",
@@ -1531,6 +1549,24 @@
       "pub/sub api",
       "publicar eventos",
       "pubsub"
+    ],
+    "tipo": "funcionalidade"
+  },
+  {
+    "descricao": "Um public group reúne usuários, papéis, outros grupos e demais tipos de membro, para que um conjunto de pessoas que não cabe num único papel receba o mesmo acesso. Serve de alvo para sharing rules, pastas de relatórios e dashboards, list views e membros de filas.",
+    "id": "func:public-groups",
+    "rotulo": "Public groups",
+    "textos": [
+      "Public Groups",
+      "Public groups",
+      "grant access using hierarchies",
+      "group",
+      "group member",
+      "grupo",
+      "grupo público",
+      "personal group",
+      "public group",
+      "public groups"
     ],
     "tipo": "funcionalidade"
   },
@@ -13151,6 +13187,61 @@
     "tipo": "propriedade_xml"
   },
   {
+    "descricao": "Um public group: um conjunto que pode reunir usuários, papéis e outros grupos, usado para compartilhar registros e dar acesso.",
+    "id": "mdt:Group",
+    "local": "pasta groups, sufixo .group",
+    "rotulo": "Group",
+    "textos": [
+      ".group",
+      "<Nome>.group",
+      "<Nome>.group-meta.xml",
+      "Group",
+      "group",
+      "groups"
+    ],
+    "tipo": "metadata_type"
+  },
+  {
+    "descricao": "Texto que descreve o grupo.",
+    "id": "mdt:Group.description",
+    "pai": "mdt:Group",
+    "rotulo": "description",
+    "textos": [
+      "description"
+    ],
+    "tipo": "propriedade_xml"
+  },
+  {
+    "descricao": "Indica se o acesso dado ao grupo sobe pela hierarquia de papéis. Corresponde à caixa Grant Access Using Hierarchies.",
+    "id": "mdt:Group.doesIncludeBosses",
+    "pai": "mdt:Group",
+    "rotulo": "doesIncludeBosses",
+    "textos": [
+      "doesIncludeBosses"
+    ],
+    "tipo": "propriedade_xml"
+  },
+  {
+    "descricao": "Nome único de API: letras, números e sublinhados, começando por letra. Corresponde a Group Name. Herdado.",
+    "id": "mdt:Group.fullName",
+    "pai": "mdt:Group",
+    "rotulo": "fullName",
+    "textos": [
+      "fullName"
+    ],
+    "tipo": "propriedade_xml"
+  },
+  {
+    "descricao": "Nome do grupo; na interface, é o Label.",
+    "id": "mdt:Group.name",
+    "pai": "mdt:Group",
+    "rotulo": "name",
+    "textos": [
+      "name"
+    ],
+    "tipo": "propriedade_xml"
+  },
+  {
     "descricao": "Certificado de autenticação mútua (mTLS) importado para a org.",
     "id": "mdt:InboundCertificate",
     "local": "pasta inboundCertificates, sufixo .inboundCertificate",
@@ -17474,6 +17565,101 @@
     "rotulo": "type",
     "textos": [
       "type"
+    ],
+    "tipo": "propriedade_xml"
+  },
+  {
+    "descricao": "Uma fila (queue): um lugar para guardar registros que ainda não têm um dono individual, com os objetos que ela aceita e os membros que podem assumi-los.",
+    "id": "mdt:Queue",
+    "local": "pasta queues, sufixo .queue",
+    "rotulo": "Queue",
+    "textos": [
+      ".queue",
+      "<Nome>.queue",
+      "<Nome>.queue-meta.xml",
+      "Queue",
+      "queue",
+      "queues"
+    ],
+    "tipo": "metadata_type"
+  },
+  {
+    "descricao": "Indica se os registros da fila também são compartilhados com os papéis acima na hierarquia.",
+    "id": "mdt:Queue.doesIncludeBosses",
+    "pai": "mdt:Queue",
+    "rotulo": "doesIncludeBosses",
+    "textos": [
+      "doesIncludeBosses"
+    ],
+    "tipo": "propriedade_xml"
+  },
+  {
+    "descricao": "Indica se os membros recebem e-mail quando um registro entra na fila.",
+    "id": "mdt:Queue.doesSendEmailToMembers",
+    "pai": "mdt:Queue",
+    "rotulo": "doesSendEmailToMembers",
+    "textos": [
+      "doesSendEmailToMembers"
+    ],
+    "tipo": "propriedade_xml"
+  },
+  {
+    "descricao": "Endereço de e-mail do dono da fila.",
+    "id": "mdt:Queue.email",
+    "pai": "mdt:Queue",
+    "rotulo": "email",
+    "textos": [
+      "email"
+    ],
+    "tipo": "propriedade_xml"
+  },
+  {
+    "descricao": "Nome de API da fila; aparece no primeiro exemplo XML da página, não na tabela de campos.",
+    "id": "mdt:Queue.fullName",
+    "pai": "mdt:Queue",
+    "rotulo": "fullName",
+    "textos": [
+      "fullName"
+    ],
+    "tipo": "propriedade_xml"
+  },
+  {
+    "descricao": "Nome da fila; na interface, é o Label.",
+    "id": "mdt:Queue.name",
+    "pai": "mdt:Queue",
+    "rotulo": "name",
+    "textos": [
+      "name"
+    ],
+    "tipo": "propriedade_xml"
+  },
+  {
+    "descricao": "Membros da fila, incluídos diretamente ou por papéis e public groups.",
+    "id": "mdt:Queue.queueMembers",
+    "pai": "mdt:Queue",
+    "rotulo": "queueMembers",
+    "textos": [
+      "queueMembers"
+    ],
+    "tipo": "propriedade_xml"
+  },
+  {
+    "descricao": "Nome da routing configuration, em orgs com Omni-Channel.",
+    "id": "mdt:Queue.queueRoutingConfig",
+    "pai": "mdt:Queue",
+    "rotulo": "queueRoutingConfig",
+    "textos": [
+      "queueRoutingConfig"
+    ],
+    "tipo": "propriedade_xml"
+  },
+  {
+    "descricao": "Objetos que a fila aceita.",
+    "id": "mdt:Queue.queueSobject",
+    "pai": "mdt:Queue",
+    "rotulo": "queueSobject",
+    "textos": [
+      "queueSobject"
     ],
     "tipo": "propriedade_xml"
   },
@@ -30914,6 +31100,25 @@
     "tipo": "propriedade_xml"
   },
   {
+    "descricao": "Public groups usados para dar membros a uma fila.",
+    "id": "mdx:PublicGroups",
+    "rotulo": "PublicGroups",
+    "textos": [
+      "PublicGroups"
+    ],
+    "tipo": "estrutura_auxiliar"
+  },
+  {
+    "descricao": "Um public group.",
+    "id": "mdx:PublicGroups.publicGroup",
+    "pai": "mdx:PublicGroups",
+    "rotulo": "publicGroup",
+    "textos": [
+      "publicGroup"
+    ],
+    "tipo": "propriedade_xml"
+  },
+  {
     "descricao": "Uma chave do conjunto.",
     "id": "mdx:PublicKeyCertificateSetKey",
     "rotulo": "PublicKeyCertificateSetKey",
@@ -30962,6 +31167,65 @@
     "tipo": "propriedade_xml"
   },
   {
+    "descricao": "Os membros de uma fila: incluídos diretamente ou por papéis e public groups.",
+    "id": "mdx:QueueMembers",
+    "rotulo": "QueueMembers",
+    "textos": [
+      "QueueMembers"
+    ],
+    "tipo": "estrutura_auxiliar"
+  },
+  {
+    "descricao": "Public groups cujos membros entram na fila.",
+    "id": "mdx:QueueMembers.publicGroups",
+    "pai": "mdx:QueueMembers",
+    "rotulo": "publicGroups",
+    "textos": [
+      "publicGroups"
+    ],
+    "tipo": "propriedade_xml"
+  },
+  {
+    "descricao": "Papéis e subordinados, inclusive papéis de clientes e parceiros.",
+    "id": "mdx:QueueMembers.roleAndSubordinates",
+    "pai": "mdx:QueueMembers",
+    "rotulo": "roleAndSubordinates",
+    "textos": [
+      "roleAndSubordinates"
+    ],
+    "tipo": "propriedade_xml"
+  },
+  {
+    "descricao": "Papéis internos e subordinados, sem papéis de clientes e parceiros.",
+    "id": "mdx:QueueMembers.roleAndSubordinatesInternal",
+    "pai": "mdx:QueueMembers",
+    "rotulo": "roleAndSubordinatesInternal",
+    "textos": [
+      "roleAndSubordinatesInternal"
+    ],
+    "tipo": "propriedade_xml"
+  },
+  {
+    "descricao": "Papéis cujos usuários entram na fila.",
+    "id": "mdx:QueueMembers.roles",
+    "pai": "mdx:QueueMembers",
+    "rotulo": "roles",
+    "textos": [
+      "roles"
+    ],
+    "tipo": "propriedade_xml"
+  },
+  {
+    "descricao": "Usuários incluídos diretamente.",
+    "id": "mdx:QueueMembers.users",
+    "pai": "mdx:QueueMembers",
+    "rotulo": "users",
+    "textos": [
+      "users"
+    ],
+    "tipo": "propriedade_xml"
+  },
+  {
     "descricao": "Habilidade padrão de roteamento.",
     "id": "mdx:QueueRoutingConfigSkill",
     "rotulo": "QueueRoutingConfigSkill",
@@ -30977,6 +31241,25 @@
     "rotulo": "skill",
     "textos": [
       "skill"
+    ],
+    "tipo": "propriedade_xml"
+  },
+  {
+    "descricao": "Um objeto cujos registros a fila pode receber.",
+    "id": "mdx:QueueSobject",
+    "rotulo": "QueueSobject",
+    "textos": [
+      "QueueSobject"
+    ],
+    "tipo": "estrutura_auxiliar"
+  },
+  {
+    "descricao": "Objeto que a fila aceita.",
+    "id": "mdx:QueueSobject.sobjectType",
+    "pai": "mdx:QueueSobject",
+    "rotulo": "sobjectType",
+    "textos": [
+      "sobjectType"
     ],
     "tipo": "propriedade_xml"
   },
@@ -31718,6 +32001,63 @@
     "rotulo": "sections",
     "textos": [
       "sections"
+    ],
+    "tipo": "propriedade_xml"
+  },
+  {
+    "descricao": "Papéis com subordinados (inclusive de clientes e parceiros) usados para dar membros a uma fila.",
+    "id": "mdx:RoleAndSubordinates",
+    "rotulo": "RoleAndSubordinates",
+    "textos": [
+      "RoleAndSubordinates"
+    ],
+    "tipo": "estrutura_auxiliar"
+  },
+  {
+    "descricao": "Um papel com os subordinados, incluindo papéis de clientes e parceiros. Exige digital experiences.",
+    "id": "mdx:RoleAndSubordinates.roleAndSubordinate",
+    "pai": "mdx:RoleAndSubordinates",
+    "rotulo": "roleAndSubordinate",
+    "textos": [
+      "roleAndSubordinate"
+    ],
+    "tipo": "propriedade_xml"
+  },
+  {
+    "descricao": "Papéis internos com subordinados usados para dar membros a uma fila.",
+    "id": "mdx:RoleAndSubordinatesInternal",
+    "rotulo": "RoleAndSubordinatesInternal",
+    "textos": [
+      "RoleAndSubordinatesInternal"
+    ],
+    "tipo": "estrutura_auxiliar"
+  },
+  {
+    "descricao": "Um papel com os subordinados, sem papéis de clientes e parceiros.",
+    "id": "mdx:RoleAndSubordinatesInternal.roleAndSubordinateInternal",
+    "pai": "mdx:RoleAndSubordinatesInternal",
+    "rotulo": "roleAndSubordinateInternal",
+    "textos": [
+      "roleAndSubordinateInternal"
+    ],
+    "tipo": "propriedade_xml"
+  },
+  {
+    "descricao": "Papéis usados para dar membros a uma fila.",
+    "id": "mdx:Roles",
+    "rotulo": "Roles",
+    "textos": [
+      "Roles"
+    ],
+    "tipo": "estrutura_auxiliar"
+  },
+  {
+    "descricao": "Um papel.",
+    "id": "mdx:Roles.role",
+    "pai": "mdx:Roles",
+    "rotulo": "role",
+    "textos": [
+      "role"
     ],
     "tipo": "propriedade_xml"
   },
@@ -32550,6 +32890,25 @@
     "rotulo": "name",
     "textos": [
       "name"
+    ],
+    "tipo": "propriedade_xml"
+  },
+  {
+    "descricao": "Usuários incluídos diretamente como membros de uma fila.",
+    "id": "mdx:Users",
+    "rotulo": "Users",
+    "textos": [
+      "Users"
+    ],
+    "tipo": "estrutura_auxiliar"
+  },
+  {
+    "descricao": "Um usuário, indicado pelo username.",
+    "id": "mdx:Users.user",
+    "pai": "mdx:Users",
+    "rotulo": "user",
+    "textos": [
+      "user"
     ],
     "tipo": "propriedade_xml"
   },
@@ -39898,6 +40257,154 @@
     "tipo": "campo_api"
   },
   {
+    "descricao": "Um conjunto de usuários. O mesmo objeto guarda public groups, filas e os grupos que a plataforma cria para papéis, territórios e gerentes; o campo Type diz qual é qual.",
+    "id": "obj:Group",
+    "rotulo": "Group",
+    "textos": [
+      "Group"
+    ],
+    "tipo": "objeto_api"
+  },
+  {
+    "descricao": "Division padrão do registro; só vale com divisions habilitadas.",
+    "id": "obj:Group.DefaultDivision",
+    "pai": "obj:Group",
+    "rotulo": "DefaultDivision",
+    "textos": [
+      "DefaultDivision"
+    ],
+    "tipo": "campo_api"
+  },
+  {
+    "descricao": "Descrição do grupo.",
+    "id": "obj:Group.Description",
+    "pai": "obj:Group",
+    "rotulo": "Description",
+    "textos": [
+      "Description"
+    ],
+    "tipo": "campo_api"
+  },
+  {
+    "descricao": "Nome único de API do grupo. Visível só a usuários internos.",
+    "id": "obj:Group.DeveloperName",
+    "pai": "obj:Group",
+    "rotulo": "DeveloperName",
+    "textos": [
+      "DeveloperName"
+    ],
+    "tipo": "campo_api"
+  },
+  {
+    "descricao": "Indica se o acesso sobe para os papéis acima na hierarquia (Grant Access Using Hierarchies). Em filas, existe desde a API 67.0.",
+    "id": "obj:Group.DoesIncludeBosses",
+    "pai": "obj:Group",
+    "rotulo": "DoesIncludeBosses",
+    "textos": [
+      "DoesIncludeBosses"
+    ],
+    "tipo": "campo_api"
+  },
+  {
+    "descricao": "Indica se os membros do grupo recebem e-mail; vale também para membros de filas.",
+    "id": "obj:Group.DoesSendEmailToMembers",
+    "pai": "obj:Group",
+    "rotulo": "DoesSendEmailToMembers",
+    "textos": [
+      "DoesSendEmailToMembers"
+    ],
+    "tipo": "campo_api"
+  },
+  {
+    "descricao": "Endereço de e-mail do grupo; só se aplica a filas de casos.",
+    "id": "obj:Group.Email",
+    "pai": "obj:Group",
+    "rotulo": "Email",
+    "textos": [
+      "Email"
+    ],
+    "tipo": "campo_api"
+  },
+  {
+    "descricao": "Nome do grupo; na interface, é o Label.",
+    "id": "obj:Group.Name",
+    "pai": "obj:Group",
+    "rotulo": "Name",
+    "textos": [
+      "Name"
+    ],
+    "tipo": "campo_api"
+  },
+  {
+    "descricao": "Usuário dono do grupo.",
+    "id": "obj:Group.OwnerId",
+    "pai": "obj:Group",
+    "rotulo": "OwnerId",
+    "textos": [
+      "OwnerId"
+    ],
+    "tipo": "campo_api"
+  },
+  {
+    "descricao": "Routing configuration ligada à fila.",
+    "id": "obj:Group.QueueRoutingConfigId",
+    "pai": "obj:Group",
+    "rotulo": "QueueRoutingConfigId",
+    "textos": [
+      "QueueRoutingConfigId"
+    ],
+    "tipo": "campo_api"
+  },
+  {
+    "descricao": "Registro associado ao grupo; num grupo do tipo Role, é o Id do UserRole.",
+    "id": "obj:Group.RelatedId",
+    "pai": "obj:Group",
+    "rotulo": "RelatedId",
+    "textos": [
+      "RelatedId"
+    ],
+    "tipo": "campo_api"
+  },
+  {
+    "descricao": "Tipo do grupo. É este campo que distingue um public group (Regular) de uma fila (Queue) e dos grupos criados pela plataforma.",
+    "id": "obj:Group.Type",
+    "pai": "obj:Group",
+    "rotulo": "Type",
+    "textos": [
+      "Type"
+    ],
+    "tipo": "campo_api"
+  },
+  {
+    "descricao": "Um membro direto de um public group: um usuário ou outro grupo. Cada registro liga um grupo a um membro.",
+    "id": "obj:GroupMember",
+    "rotulo": "GroupMember",
+    "textos": [
+      "GroupMember"
+    ],
+    "tipo": "objeto_api_juncao"
+  },
+  {
+    "descricao": "O grupo.",
+    "id": "obj:GroupMember.GroupId",
+    "pai": "obj:GroupMember",
+    "rotulo": "GroupId",
+    "textos": [
+      "GroupId"
+    ],
+    "tipo": "campo_api"
+  },
+  {
+    "descricao": "O membro direto: um usuário ou outro grupo.",
+    "id": "obj:GroupMember.UserOrGroupId",
+    "pai": "obj:GroupMember",
+    "rotulo": "UserOrGroupId",
+    "textos": [
+      "UserOrGroupId"
+    ],
+    "tipo": "campo_api"
+  },
+  {
     "descricao": "Representa um artigo de conhecimento, independente da versão.",
     "id": "obj:KnowledgeArticle",
     "rotulo": "KnowledgeArticle",
@@ -44750,6 +45257,35 @@
     "rotulo": "ServiceChannelId",
     "textos": [
       "ServiceChannelId"
+    ],
+    "tipo": "campo_api"
+  },
+  {
+    "descricao": "A ligação entre uma fila e um tipo de objeto que ela aceita, inclusive objetos customizados. Cada registro é um par fila e objeto.",
+    "id": "obj:QueueSobject",
+    "rotulo": "QueueSobject",
+    "textos": [
+      "QueueSobject"
+    ],
+    "tipo": "objeto_api_juncao"
+  },
+  {
+    "descricao": "A fila (um Group com Type igual a Queue).",
+    "id": "obj:QueueSobject.QueueId",
+    "pai": "obj:QueueSobject",
+    "rotulo": "QueueId",
+    "textos": [
+      "QueueId"
+    ],
+    "tipo": "campo_api"
+  },
+  {
+    "descricao": "Tipo de objeto que pode ser ligado à fila.",
+    "id": "obj:QueueSobject.SobjectType",
+    "pai": "obj:QueueSobject",
+    "rotulo": "SobjectType",
+    "textos": [
+      "SobjectType"
     ],
     "tipo": "campo_api"
   },
@@ -55306,20 +55842,6 @@
     "tipo": "metadata_type_inventario"
   },
   {
-    "descricao": "Consta do inventário de metadata types da API 68.0, mas ainda não tem ficha neste tutorial. No projeto: pasta groups, sufixo .group. Salesforce CLI: suportado.",
-    "id": "inv:Group",
-    "local": "pasta groups, sufixo .group",
-    "rotulo": "Group",
-    "sem_ficha": true,
-    "textos": [
-      ".group",
-      "Group",
-      "group",
-      "groups"
-    ],
-    "tipo": "metadata_type_inventario"
-  },
-  {
     "descricao": "Consta do inventário de metadata types da API 68.0, mas ainda não tem ficha neste tutorial. Salesforce CLI: não suportado.",
     "id": "inv:HealthInsDataSyncDefn",
     "rotulo": "HealthInsDataSyncDefn",
@@ -58005,20 +58527,6 @@
     "sem_ficha": true,
     "textos": [
       "QualityManagementSettings"
-    ],
-    "tipo": "metadata_type_inventario"
-  },
-  {
-    "descricao": "Consta do inventário de metadata types da API 68.0, mas ainda não tem ficha neste tutorial. No projeto: pasta queues, sufixo .queue. Salesforce CLI: suportado.",
-    "id": "inv:Queue",
-    "local": "pasta queues, sufixo .queue",
-    "rotulo": "Queue",
-    "sem_ficha": true,
-    "textos": [
-      ".queue",
-      "Queue",
-      "queue",
-      "queues"
     ],
     "tipo": "metadata_type_inventario"
   },

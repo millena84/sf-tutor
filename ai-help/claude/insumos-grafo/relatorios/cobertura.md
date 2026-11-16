@@ -7,7 +7,7 @@ Gerado por `ferramentas/sftutor.py cobertura`. Cobertura estrutural, explicativa
 
 - Universo v68 (METADATA_SUPPORT.md): **993** tipos.
 - Classificados como incluídos no recorte Core: 12; pendentes de classificação: 981.
-- Cadastrados: **138** de 993. Estruturalmente completos (contra a página oficial): 117. Completos nas três dimensões: 0.
+- Cadastrados: **140** de 993. Estruturalmente completos (contra a página oficial): 119. Completos nas três dimensões: 0.
 - Porcentagem do recorte Core: não calculada, porque o denominador do recorte ainda não está definido (classificação item a item pendente).
 
 | Tipo | Estrutural | Esperadas | Presentes | Explicadas | Estruturas | Mapeamento | Completo |
@@ -85,6 +85,7 @@ Gerado por `ferramentas/sftutor.py cobertura`. Cobertura estrutural, explicativa
 | mdt:GenAiFunction | completa | 10 | 10 | 10 | 1 | parcial | não |
 | mdt:GenAiPlugin | parcial | 12 | 12 | 12 | 1 | parcial | não |
 | mdt:GenAiPromptTemplate | completa | 11 | 11 | 11 | 1 | parcial | não |
+| mdt:Group | completa | 4 | 4 | 4 | 0 | parcial | não |
 | mdt:InboundCertificate | completa | 4 | 4 | 4 | 0 | parcial | não |
 | mdt:InboundNetworkConnection | completa | 7 | 7 | 7 | 1 | parcial | não |
 | mdt:InstalledPackage | completa | 4 | 4 | 4 | 0 | parcial | não |
@@ -120,6 +121,7 @@ Gerado por `ferramentas/sftutor.py cobertura`. Cobertura estrutural, explicativa
 | mdt:Profile | parcial | 27 | 27 | 27 | 16 | parcial | não |
 | mdt:PublicKeyCertificate | completa | 5 | 5 | 5 | 0 | parcial | não |
 | mdt:PublicKeyCertificateSet | completa | 7 | 7 | 7 | 1 | parcial | não |
+| mdt:Queue | completa | 8 | 8 | 8 | 2 | parcial | não |
 | mdt:QueueRoutingConfig | completa | 15 | 15 | 15 | 1 | parcial | não |
 | mdt:QuickAction | parcial | 22 | 22 | 22 | 0 | parcial | não |
 | mdt:QuoteSettings | completa | 2 | 2 | 2 | 0 | parcial | não |
@@ -153,13 +155,13 @@ Gerado por `ferramentas/sftutor.py cobertura`. Cobertura estrutural, explicativa
 
 ## Propriedades XML
 
-- Em metadata types: 1719 listadas, 1652 explicadas.
-- Em estruturas auxiliares: 946 listadas, 936 explicadas.
+- Em metadata types: 1731 listadas, 1664 explicadas.
+- Em estruturas auxiliares: 957 listadas, 947 explicadas.
 - Universo total: Sem WSDL não há denominador confiável do total de propriedades do recorte.
 
 ## Objetos consultáveis via API
 
-- Catalogados: 73. Campos listados: 1596; explicados: 786.
+- Catalogados: 76. Campos listados: 1611; explicados: 801.
 - Universo: Universo de objetos da plataforma não enumerado.
 
 | Objeto | Estrutural | Esperados | Presentes | Explicados | APIs verificadas |
@@ -198,6 +200,8 @@ Gerado por `ferramentas/sftutor.py cobertura`. Cobertura estrutural, explicativa
 | obj:ForecastingOwnerAdjustment | completa | 16 | 16 | 16 | padrao |
 | obj:ForecastingQuota | completa | 12 | 12 | 12 | padrao |
 | obj:ForecastingType | completa | 18 | 18 | 18 | padrao |
+| obj:Group | completa | 11 | 11 | 11 | padrao |
+| obj:GroupMember | completa | 2 | 2 | 2 | padrao |
 | obj:KnowledgeArticle | completa | 12 | 12 | 12 | padrao |
 | obj:KnowledgeArticleVersion | parcial | n/d | 41 | 6 | padrao |
 | obj:Lead | parcial | n/d | 74 | 14 | padrao |
@@ -222,6 +226,7 @@ Gerado por `ferramentas/sftutor.py cobertura`. Cobertura estrutural, explicativa
 | obj:Product2 | parcial | n/d | 37 | 4 | padrao |
 | obj:Profile | parcial | n/d | 7 | 7 | padrao, tooling |
 | obj:QueueRoutingConfig | parcial | 15 | 14 | 14 | padrao |
+| obj:QueueSobject | completa | 2 | 2 | 2 | padrao |
 | obj:QuickActionDefinition | completa | 22 | 22 | 22 | tooling |
 | obj:Quote | parcial | n/d | 44 | 5 | padrao |
 | obj:QuoteLineItem | completa | 84 | 84 | 6 | padrao |
@@ -240,10 +245,10 @@ Gerado por `ferramentas/sftutor.py cobertura`. Cobertura estrutural, explicativa
 
 ## Relacionamentos
 
-- Total: 131; verificados: 128.
-- Por tipo: correspondencia_xml_api: 11, referencia_campo: 102, representacao_comum: 18
+- Total: 139; verificados: 136.
+- Por tipo: correspondencia_xml_api: 11, referencia_campo: 108, representacao_comum: 20
 
 ## Taxonomia e funcionalidades
 
 - Classificações: 14; subclassificações: 92 (com funcionalidades: 79).
-- Funcionalidades cadastradas: 118 (universo de funcionalidades não definido).
+- Funcionalidades cadastradas: 120 (universo de funcionalidades não definido).

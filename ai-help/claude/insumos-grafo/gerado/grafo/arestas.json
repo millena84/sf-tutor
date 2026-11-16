@@ -658,6 +658,12 @@
     "tipo": "representacao_xml"
   },
   {
+    "destino": "obj:Group",
+    "origem": "func:chatter",
+    "papel": "Um grupo do Chatter aparece no objeto Group com Type igual a CollaborationGroup.",
+    "tipo": "representacao_objeto_api"
+  },
+  {
     "destino": "mdt:ApexClass",
     "origem": "func:classes-apex",
     "papel": "Cada classe Apex, com código e arquivo de metadado.",
@@ -1072,6 +1078,30 @@
     "tipo": "representacao_xml"
   },
   {
+    "destino": "mdt:Queue",
+    "origem": "func:filas",
+    "papel": "Cada fila, com os objetos aceitos e os membros.",
+    "tipo": "representacao_xml"
+  },
+  {
+    "destino": "obj:Group",
+    "origem": "func:filas",
+    "papel": "A fila nos dados: um Group com Type igual a Queue.",
+    "tipo": "representacao_objeto_api"
+  },
+  {
+    "destino": "obj:GroupMember",
+    "origem": "func:filas",
+    "papel": "Membros diretos de grupos; a página documenta o registro para public groups do tipo Regular.",
+    "tipo": "representacao_objeto_api"
+  },
+  {
+    "destino": "obj:QueueSobject",
+    "origem": "func:filas",
+    "papel": "Os objetos que cada fila aceita.",
+    "tipo": "representacao_objeto_api"
+  },
+  {
     "destino": "mdt:Flow",
     "origem": "func:flow",
     "papel": "Definição implantável de uma versão de flow.",
@@ -1306,6 +1336,12 @@
     "tipo": "representacao_xml"
   },
   {
+    "destino": "mdt:Queue",
+    "origem": "func:omni-channel",
+    "papel": "A fila de onde o Omni-Channel roteia o trabalho; aponta a routing configuration.",
+    "tipo": "representacao_xml"
+  },
+  {
     "destino": "mdt:QueueRoutingConfig",
     "origem": "func:omni-channel",
     "papel": "Configuração de roteamento implantável.",
@@ -1327,6 +1363,12 @@
     "destino": "obj:AgentWork",
     "origem": "func:omni-channel",
     "papel": "Trabalho atribuído a um atendente.",
+    "tipo": "representacao_objeto_api"
+  },
+  {
+    "destino": "obj:Group",
+    "origem": "func:omni-channel",
+    "papel": "A fila, com QueueRoutingConfigId.",
     "tipo": "representacao_objeto_api"
   },
   {
@@ -1603,6 +1645,24 @@
     "destino": "obj:PlatformEventUsageMetric",
     "origem": "func:pub-sub-api",
     "papel": "Uso de publicação e entrega; o cliente aparece como PUB_SUB_API.",
+    "tipo": "representacao_objeto_api"
+  },
+  {
+    "destino": "mdt:Group",
+    "origem": "func:public-groups",
+    "papel": "A definição de cada public group (sem os membros).",
+    "tipo": "representacao_xml"
+  },
+  {
+    "destino": "obj:Group",
+    "origem": "func:public-groups",
+    "papel": "O public group nos dados: um Group com Type igual a Regular.",
+    "tipo": "representacao_objeto_api"
+  },
+  {
+    "destino": "obj:GroupMember",
+    "origem": "func:public-groups",
+    "papel": "Os membros diretos de cada public group.",
     "tipo": "representacao_objeto_api"
   },
   {
@@ -7548,6 +7608,33 @@
     "tipo": "tipo_composto"
   },
   {
+    "destino": "mdt:Group.description",
+    "origem": "mdt:Group",
+    "tipo": "propriedade"
+  },
+  {
+    "destino": "mdt:Group.doesIncludeBosses",
+    "origem": "mdt:Group",
+    "tipo": "propriedade"
+  },
+  {
+    "destino": "mdt:Group.fullName",
+    "origem": "mdt:Group",
+    "tipo": "propriedade"
+  },
+  {
+    "destino": "mdt:Group.name",
+    "origem": "mdt:Group",
+    "tipo": "propriedade"
+  },
+  {
+    "destino": "obj:Group",
+    "estado": "verificado",
+    "origem": "mdt:Group",
+    "rel_id": "rel:group-group",
+    "tipo": "representacao_comum"
+  },
+  {
     "destino": "mdt:InboundCertificate.expirationDate",
     "origem": "mdt:InboundCertificate",
     "tipo": "propriedade"
@@ -9852,6 +9939,63 @@
   {
     "destino": "mdx:PublicKeyCertificateSetKey",
     "origem": "mdt:PublicKeyCertificateSet.publicKeyCertificateSetKeys",
+    "tipo": "tipo_composto"
+  },
+  {
+    "destino": "mdt:Queue.doesIncludeBosses",
+    "origem": "mdt:Queue",
+    "tipo": "propriedade"
+  },
+  {
+    "destino": "mdt:Queue.doesSendEmailToMembers",
+    "origem": "mdt:Queue",
+    "tipo": "propriedade"
+  },
+  {
+    "destino": "mdt:Queue.email",
+    "origem": "mdt:Queue",
+    "tipo": "propriedade"
+  },
+  {
+    "destino": "mdt:Queue.fullName",
+    "origem": "mdt:Queue",
+    "tipo": "propriedade"
+  },
+  {
+    "destino": "mdt:Queue.name",
+    "origem": "mdt:Queue",
+    "tipo": "propriedade"
+  },
+  {
+    "destino": "mdt:Queue.queueMembers",
+    "origem": "mdt:Queue",
+    "tipo": "propriedade"
+  },
+  {
+    "destino": "mdt:Queue.queueRoutingConfig",
+    "origem": "mdt:Queue",
+    "tipo": "propriedade"
+  },
+  {
+    "destino": "mdt:Queue.queueSobject",
+    "origem": "mdt:Queue",
+    "tipo": "propriedade"
+  },
+  {
+    "destino": "obj:Group",
+    "estado": "verificado",
+    "origem": "mdt:Queue",
+    "rel_id": "rel:queue-group",
+    "tipo": "representacao_comum"
+  },
+  {
+    "destino": "mdx:QueueMembers",
+    "origem": "mdt:Queue.queueMembers",
+    "tipo": "tipo_composto"
+  },
+  {
+    "destino": "mdx:QueueSobject",
+    "origem": "mdt:Queue.queueSobject",
     "tipo": "tipo_composto"
   },
   {
@@ -16281,6 +16425,18 @@
     "tipo": "propriedade"
   },
   {
+    "destino": "mdx:PublicGroups.publicGroup",
+    "origem": "mdx:PublicGroups",
+    "tipo": "propriedade"
+  },
+  {
+    "destino": "mdt:Group",
+    "estado": "verificado",
+    "origem": "mdx:PublicGroups.publicGroup",
+    "rel_id": "rel:queue-group-membros",
+    "tipo": "referencia_campo"
+  },
+  {
     "destino": "mdx:PublicKeyCertificateSetKey.publicKeyCertificate",
     "origem": "mdx:PublicKeyCertificateSetKey",
     "tipo": "propriedade"
@@ -16303,8 +16459,63 @@
     "tipo": "propriedade"
   },
   {
+    "destino": "mdx:QueueMembers.publicGroups",
+    "origem": "mdx:QueueMembers",
+    "tipo": "propriedade"
+  },
+  {
+    "destino": "mdx:QueueMembers.roleAndSubordinates",
+    "origem": "mdx:QueueMembers",
+    "tipo": "propriedade"
+  },
+  {
+    "destino": "mdx:QueueMembers.roleAndSubordinatesInternal",
+    "origem": "mdx:QueueMembers",
+    "tipo": "propriedade"
+  },
+  {
+    "destino": "mdx:QueueMembers.roles",
+    "origem": "mdx:QueueMembers",
+    "tipo": "propriedade"
+  },
+  {
+    "destino": "mdx:QueueMembers.users",
+    "origem": "mdx:QueueMembers",
+    "tipo": "propriedade"
+  },
+  {
+    "destino": "mdx:PublicGroups",
+    "origem": "mdx:QueueMembers.publicGroups",
+    "tipo": "tipo_composto"
+  },
+  {
+    "destino": "mdx:RoleAndSubordinates",
+    "origem": "mdx:QueueMembers.roleAndSubordinates",
+    "tipo": "tipo_composto"
+  },
+  {
+    "destino": "mdx:RoleAndSubordinatesInternal",
+    "origem": "mdx:QueueMembers.roleAndSubordinatesInternal",
+    "tipo": "tipo_composto"
+  },
+  {
+    "destino": "mdx:Roles",
+    "origem": "mdx:QueueMembers.roles",
+    "tipo": "tipo_composto"
+  },
+  {
+    "destino": "mdx:Users",
+    "origem": "mdx:QueueMembers.users",
+    "tipo": "tipo_composto"
+  },
+  {
     "destino": "mdx:QueueRoutingConfigSkill.skill",
     "origem": "mdx:QueueRoutingConfigSkill",
+    "tipo": "propriedade"
+  },
+  {
+    "destino": "mdx:QueueSobject.sobjectType",
+    "origem": "mdx:QueueSobject",
     "tipo": "propriedade"
   },
   {
@@ -16621,6 +16832,21 @@
     "destino": "mdx:ReportTypeSectionTranslation",
     "origem": "mdx:ReportTypeTranslation.sections",
     "tipo": "tipo_composto"
+  },
+  {
+    "destino": "mdx:RoleAndSubordinates.roleAndSubordinate",
+    "origem": "mdx:RoleAndSubordinates",
+    "tipo": "propriedade"
+  },
+  {
+    "destino": "mdx:RoleAndSubordinatesInternal.roleAndSubordinateInternal",
+    "origem": "mdx:RoleAndSubordinatesInternal",
+    "tipo": "propriedade"
+  },
+  {
+    "destino": "mdx:Roles.role",
+    "origem": "mdx:Roles",
+    "tipo": "propriedade"
   },
   {
     "destino": "mdx:ScontrolTranslation.label",
@@ -17005,6 +17231,11 @@
   {
     "destino": "mdx:TimelineObjectDefinitionTranslation.name",
     "origem": "mdx:TimelineObjectDefinitionTranslation",
+    "tipo": "propriedade"
+  },
+  {
+    "destino": "mdx:Users.user",
+    "origem": "mdx:Users",
     "tipo": "propriedade"
   },
   {
@@ -21249,6 +21480,99 @@
     "tipo": "campo"
   },
   {
+    "destino": "obj:Group.DefaultDivision",
+    "origem": "obj:Group",
+    "tipo": "campo"
+  },
+  {
+    "destino": "obj:Group.Description",
+    "origem": "obj:Group",
+    "tipo": "campo"
+  },
+  {
+    "destino": "obj:Group.DeveloperName",
+    "origem": "obj:Group",
+    "tipo": "campo"
+  },
+  {
+    "destino": "obj:Group.DoesIncludeBosses",
+    "origem": "obj:Group",
+    "tipo": "campo"
+  },
+  {
+    "destino": "obj:Group.DoesSendEmailToMembers",
+    "origem": "obj:Group",
+    "tipo": "campo"
+  },
+  {
+    "destino": "obj:Group.Email",
+    "origem": "obj:Group",
+    "tipo": "campo"
+  },
+  {
+    "destino": "obj:Group.Name",
+    "origem": "obj:Group",
+    "tipo": "campo"
+  },
+  {
+    "destino": "obj:Group.OwnerId",
+    "origem": "obj:Group",
+    "tipo": "campo"
+  },
+  {
+    "destino": "obj:Group.QueueRoutingConfigId",
+    "origem": "obj:Group",
+    "tipo": "campo"
+  },
+  {
+    "destino": "obj:Group.RelatedId",
+    "origem": "obj:Group",
+    "tipo": "campo"
+  },
+  {
+    "destino": "obj:Group.Type",
+    "origem": "obj:Group",
+    "tipo": "campo"
+  },
+  {
+    "destino": "obj:QueueRoutingConfig",
+    "estado": "verificado",
+    "origem": "obj:Group.QueueRoutingConfigId",
+    "rel_id": "rel:group-queueroutingconfig",
+    "tipo": "referencia_campo"
+  },
+  {
+    "destino": "obj:GroupMember.GroupId",
+    "origem": "obj:GroupMember",
+    "tipo": "campo"
+  },
+  {
+    "destino": "obj:GroupMember.UserOrGroupId",
+    "origem": "obj:GroupMember",
+    "tipo": "campo"
+  },
+  {
+    "destino": "obj:Group",
+    "estado": "verificado",
+    "origem": "obj:GroupMember.GroupId",
+    "rel_id": "rel:groupmember-group",
+    "tipo": "referencia_campo"
+  },
+  {
+    "destino": "obj:Group",
+    "estado": "verificado",
+    "origem": "obj:GroupMember.UserOrGroupId",
+    "rel_id": "rel:groupmember-membro-grupo",
+    "tipo": "referencia_campo"
+  },
+  {
+    "destino": "obj:User",
+    "estado": "verificado",
+    "origem": "obj:GroupMember.UserOrGroupId",
+    "rel_id": "rel:groupmember-membro-usuario",
+    "tipo": "referencia_campo"
+  },
+  {
     "destino": "obj:KnowledgeArticle.ArchivedById",
     "origem": "obj:KnowledgeArticle",
     "tipo": "campo"
@@ -23749,6 +24073,23 @@
     "destino": "obj:QueueRoutingConfig.ServiceChannelId",
     "origem": "obj:QueueRoutingConfig",
     "tipo": "campo"
+  },
+  {
+    "destino": "obj:QueueSobject.QueueId",
+    "origem": "obj:QueueSobject",
+    "tipo": "campo"
+  },
+  {
+    "destino": "obj:QueueSobject.SobjectType",
+    "origem": "obj:QueueSobject",
+    "tipo": "campo"
+  },
+  {
+    "destino": "obj:Group",
+    "estado": "verificado",
+    "origem": "obj:QueueSobject.QueueId",
+    "rel_id": "rel:queuesobject-group",
+    "tipo": "referencia_campo"
   },
   {
     "destino": "obj:QuickActionDefinition.ActionSubtype",
@@ -26267,6 +26608,17 @@
     "tipo": "classificacao_secundaria"
   },
   {
+    "destino": "func:filas",
+    "origem": "sub:acesso-a-registros-e-hierarquias",
+    "tipo": "classificacao_principal"
+  },
+  {
+    "destino": "func:public-groups",
+    "motivo": "Public groups são alvo de sharing rules.",
+    "origem": "sub:acesso-a-registros-e-hierarquias",
+    "tipo": "classificacao_secundaria"
+  },
+  {
     "destino": "func:acoes-rapidas",
     "motivo": "Uma ação do tipo Flow invoca um flow (flowDefinition).",
     "origem": "sub:acoes-e-regras",
@@ -26384,6 +26736,12 @@
   {
     "destino": "func:feriados",
     "motivo": "Suspende regras de escalonamento e marcos de entitlement durante o feriado.",
+    "origem": "sub:atendimento",
+    "tipo": "classificacao_secundaria"
+  },
+  {
+    "destino": "func:filas",
+    "motivo": "Casos são distribuídos por filas, e o Omni-Channel roteia o trabalho a partir delas.",
     "origem": "sub:atendimento",
     "tipo": "classificacao_secundaria"
   },
@@ -26957,6 +27315,12 @@
     "tipo": "classificacao_principal"
   },
   {
+    "destino": "func:public-groups",
+    "motivo": "Pastas de relatórios e dashboards são compartilhadas com public groups.",
+    "origem": "sub:pastas-e-acesso",
+    "tipo": "classificacao_secundaria"
+  },
+  {
     "destino": "func:perfis",
     "origem": "sub:permissoes-perfis-e-grupos",
     "tipo": "classificacao_principal"
@@ -26968,6 +27332,11 @@
   },
   {
     "destino": "func:permission-sets",
+    "origem": "sub:permissoes-perfis-e-grupos",
+    "tipo": "classificacao_principal"
+  },
+  {
+    "destino": "func:public-groups",
     "origem": "sub:permissoes-perfis-e-grupos",
     "tipo": "classificacao_principal"
   },
@@ -27109,6 +27478,12 @@
     "destino": "func:equipes-de-conta-e-oportunidade",
     "origem": "sub:vendas",
     "tipo": "classificacao_principal"
+  },
+  {
+    "destino": "func:filas",
+    "motivo": "Leads podem ficar numa fila até alguém assumi-los.",
+    "origem": "sub:vendas",
+    "tipo": "classificacao_secundaria"
   },
   {
     "destino": "func:leads",

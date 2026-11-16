@@ -192,6 +192,38 @@
         "via": "ForecastedSubObjectId"
       },
       {
+        "destino": "obj:QueueRoutingConfig",
+        "destino_no_tema": false,
+        "estado": "verificado",
+        "origem": "obj:Group",
+        "rel": "rel:group-queueroutingconfig",
+        "via": "QueueRoutingConfigId"
+      },
+      {
+        "destino": "obj:Group",
+        "destino_no_tema": true,
+        "estado": "verificado",
+        "origem": "obj:GroupMember",
+        "rel": "rel:groupmember-group",
+        "via": "GroupId"
+      },
+      {
+        "destino": "obj:Group",
+        "destino_no_tema": true,
+        "estado": "verificado",
+        "origem": "obj:GroupMember",
+        "rel": "rel:groupmember-membro-grupo",
+        "via": "UserOrGroupId"
+      },
+      {
+        "destino": "obj:User",
+        "destino_no_tema": false,
+        "estado": "verificado",
+        "origem": "obj:GroupMember",
+        "rel": "rel:groupmember-membro-usuario",
+        "via": "UserOrGroupId"
+      },
+      {
         "destino": "obj:Account",
         "destino_no_tema": true,
         "estado": "verificado",
@@ -320,6 +352,14 @@
         "via": "QuoteId"
       },
       {
+        "destino": "obj:Group",
+        "destino_no_tema": true,
+        "estado": "verificado",
+        "origem": "obj:QueueSobject",
+        "rel": "rel:queuesobject-group",
+        "via": "QueueId"
+      },
+      {
         "destino": "obj:Account",
         "destino_no_tema": true,
         "estado": "verificado",
@@ -389,6 +429,19 @@
           "Equipes de oportunidade: team selling habilitado."
         ],
         "principal": true
+      },
+      {
+        "alertas": [
+          "Criar ou alterar filas exige as permissões Customize Application e Manage Public List Views.",
+          "Criar uma fila cria junto uma list view; o rótulo da fila é o nome da list view em que os usuários trabalham.",
+          "O nome de uma fila não pode conter vírgulas.",
+          "Em sharing rules, a categoria Queues cobre os registros cujo dono é a fila, não os registros dos membros dela.",
+          "Fila e public group são o mesmo objeto nos dados (Group); o campo Type os distingue."
+        ],
+        "exemplo": "Os casos novos vão para a fila Suporte Nível 2; um atendente do time abre a lista da fila e assume o próximo caso.",
+        "id": "func:filas",
+        "principal": false,
+        "tema_principal": "sub:acesso-a-registros-e-hierarquias"
       },
       {
         "alertas": [
@@ -565,6 +618,15 @@
           "func:produtos-e-catalogos-de-preco"
         ],
         "id": "mdt:ProductSettings",
+        "nota_suporte": null,
+        "suporte_cli": "suportado"
+      },
+      {
+        "estrutura": "completa",
+        "funcionalidades": [
+          "func:filas"
+        ],
+        "id": "mdt:Queue",
         "nota_suporte": null,
         "suporte_cli": "suportado"
       },
@@ -829,6 +891,38 @@
           }
         ],
         "funcionalidades": [
+          "func:filas"
+        ],
+        "id": "obj:Group"
+      },
+      {
+        "apis": [
+          {
+            "api": "padrao",
+            "estado": "verificado"
+          },
+          {
+            "api": "tooling",
+            "estado": "desconhecido"
+          }
+        ],
+        "funcionalidades": [
+          "func:filas"
+        ],
+        "id": "obj:GroupMember"
+      },
+      {
+        "apis": [
+          {
+            "api": "padrao",
+            "estado": "verificado"
+          },
+          {
+            "api": "tooling",
+            "estado": "desconhecido"
+          }
+        ],
+        "funcionalidades": [
           "func:leads"
         ],
         "id": "obj:Lead"
@@ -973,6 +1067,22 @@
           }
         ],
         "funcionalidades": [
+          "func:filas"
+        ],
+        "id": "obj:QueueSobject"
+      },
+      {
+        "apis": [
+          {
+            "api": "padrao",
+            "estado": "verificado"
+          },
+          {
+            "api": "tooling",
+            "estado": "desconhecido"
+          }
+        ],
+        "funcionalidades": [
           "func:cotacoes"
         ],
         "id": "obj:Quote"
@@ -1069,6 +1179,7 @@
     "func:contratos",
     "func:cotacoes",
     "func:equipes-de-conta-e-oportunidade",
+    "func:filas",
     "func:leads",
     "func:oportunidades",
     "func:pedidos",

@@ -206,6 +206,38 @@
         "via": "profileName"
       },
       {
+        "destino": "obj:QueueRoutingConfig",
+        "destino_no_tema": false,
+        "estado": "verificado",
+        "origem": "obj:Group",
+        "rel": "rel:group-queueroutingconfig",
+        "via": "QueueRoutingConfigId"
+      },
+      {
+        "destino": "obj:Group",
+        "destino_no_tema": true,
+        "estado": "verificado",
+        "origem": "obj:GroupMember",
+        "rel": "rel:groupmember-group",
+        "via": "GroupId"
+      },
+      {
+        "destino": "obj:Group",
+        "destino_no_tema": true,
+        "estado": "verificado",
+        "origem": "obj:GroupMember",
+        "rel": "rel:groupmember-membro-grupo",
+        "via": "UserOrGroupId"
+      },
+      {
+        "destino": "obj:User",
+        "destino_no_tema": true,
+        "estado": "verificado",
+        "origem": "obj:GroupMember",
+        "rel": "rel:groupmember-membro-usuario",
+        "via": "UserOrGroupId"
+      },
+      {
         "destino": "obj:User",
         "destino_no_tema": true,
         "estado": "verificado",
@@ -292,6 +324,14 @@
         "origem": "obj:PermissionSetAssignment",
         "rel": "rel:psa-permissionsetgroup",
         "via": "PermissionSetGroupId"
+      },
+      {
+        "destino": "obj:Group",
+        "destino_no_tema": true,
+        "estado": "verificado",
+        "origem": "obj:QueueSobject",
+        "rel": "rel:queuesobject-group",
+        "via": "QueueId"
       },
       {
         "destino": "obj:Profile",
@@ -395,6 +435,19 @@
         "principal": true
       },
       {
+        "alertas": [
+          "Implantar o metadata type Group NÃO leva os membros: eles precisam ser carregados à parte (objeto GroupMember).",
+          "Criar ou editar um public group exige a permissão Manage Users.",
+          "Com Grant Access Using Hierarchies marcado, o que é compartilhado com o grupo também chega a quem está acima na hierarquia de papéis.",
+          "Editar grupos, papéis e territórios faz as sharing rules serem recalculadas.",
+          "Há dois tipos de grupo: public groups, criados por administradores, e personal groups; só os public groups são acessíveis pela API.",
+          "Grupo do Chatter é outro recurso: no objeto Group, aparece com Type igual a CollaborationGroup."
+        ],
+        "exemplo": "O grupo Comitê de Preços reúne dois papéis de vendas e três pessoas do financeiro; uma sharing rule dá a ele acesso às oportunidades grandes.",
+        "id": "func:public-groups",
+        "principal": true
+      },
+      {
         "exemplo": "Na conta ACME, o executivo de contas é dono e o engenheiro de pré-venda entra na equipe com acesso de leitura.",
         "id": "func:equipes-de-conta-e-oportunidade",
         "pre_requisitos": [
@@ -403,6 +456,18 @@
         ],
         "principal": false,
         "tema_principal": "sub:vendas"
+      },
+      {
+        "alertas": [
+          "Criar ou alterar filas exige as permissões Customize Application e Manage Public List Views.",
+          "Criar uma fila cria junto uma list view; o rótulo da fila é o nome da list view em que os usuários trabalham.",
+          "O nome de uma fila não pode conter vírgulas.",
+          "Em sharing rules, a categoria Queues cobre os registros cujo dono é a fila, não os registros dos membros dela.",
+          "Fila e public group são o mesmo objeto nos dados (Group); o campo Type os distingue."
+        ],
+        "exemplo": "Os casos novos vão para a fila Suporte Nível 2; um atendente do time abre a lista da fila e assume o próximo caso.",
+        "id": "func:filas",
+        "principal": true
       },
       {
         "alertas": [
@@ -483,6 +548,15 @@
           "func:named-credentials"
         ],
         "id": "mdt:ExternalCredential",
+        "nota_suporte": null,
+        "suporte_cli": "suportado"
+      },
+      {
+        "estrutura": "completa",
+        "funcionalidades": [
+          "func:public-groups"
+        ],
+        "id": "mdt:Group",
         "nota_suporte": null,
         "suporte_cli": "suportado"
       },
@@ -588,6 +662,15 @@
       {
         "estrutura": "completa",
         "funcionalidades": [
+          "func:filas"
+        ],
+        "id": "mdt:Queue",
+        "nota_suporte": null,
+        "suporte_cli": "suportado"
+      },
+      {
+        "estrutura": "completa",
+        "funcionalidades": [
           "func:sso-saml"
         ],
         "id": "mdt:SamlSsoConfig",
@@ -653,6 +736,40 @@
           "func:connected-apps"
         ],
         "id": "obj:ConnectedApplication"
+      },
+      {
+        "apis": [
+          {
+            "api": "padrao",
+            "estado": "verificado"
+          },
+          {
+            "api": "tooling",
+            "estado": "desconhecido"
+          }
+        ],
+        "funcionalidades": [
+          "func:filas",
+          "func:public-groups"
+        ],
+        "id": "obj:Group"
+      },
+      {
+        "apis": [
+          {
+            "api": "padrao",
+            "estado": "verificado"
+          },
+          {
+            "api": "tooling",
+            "estado": "desconhecido"
+          }
+        ],
+        "funcionalidades": [
+          "func:filas",
+          "func:public-groups"
+        ],
+        "id": "obj:GroupMember"
       },
       {
         "apis": [
@@ -782,6 +899,22 @@
           "func:perfis"
         ],
         "id": "obj:Profile"
+      },
+      {
+        "apis": [
+          {
+            "api": "padrao",
+            "estado": "verificado"
+          },
+          {
+            "api": "tooling",
+            "estado": "desconhecido"
+          }
+        ],
+        "funcionalidades": [
+          "func:filas"
+        ],
+        "id": "obj:QueueSobject"
       },
       {
         "apis": [

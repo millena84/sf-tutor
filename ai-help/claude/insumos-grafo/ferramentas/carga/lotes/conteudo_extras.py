@@ -277,4 +277,31 @@ X["sub:pastas-e-acesso"] = {"comece": ["func:pastas-de-relatorios-e-dashboards"]
 X["cls:qualidade-governanca-e-ciclo-de-vida-dos-dados"] = {"comece": ["func:regras-de-validacao", "func:duplicate-management"]}
 X["sub:duplicidade-e-correspondencia"] = {"comece": ["func:duplicate-management"]}
 
+# ------------------------------------------------------------------ Filas e public groups (pedido da autora, 2026-11-16)
+X["sub:acesso-a-registros-e-hierarquias"] = {"comece": ["func:filas", "func:public-groups", "func:equipes-de-conta-e-oportunidade"], "avancado": [
+    av("decisao", "Fila ou public group", "Uma fila é dona de registros: guarda o que ainda não tem dono individual, e qualquer membro pode "
+       "assumir. Um public group não é dono de nada: é um conjunto de pessoas que recebe acesso, por exemplo como alvo de uma sharing rule. "
+       "Um public group pode ser membro de uma fila.", E("src:help-queues-action-plans", "src:help-public-groups", "src:help-queues-create")),
+    av("atencao", "Nos dados, é o mesmo objeto", "Filas e public groups ficam no objeto Group; o campo Type diz qual é qual (Queue ou Regular). "
+       "O mesmo objeto guarda os grupos que a plataforma cria para papéis, territórios e gerentes, e os grupos do Chatter. Os objetos que uma "
+       "fila aceita ficam em QueueSobject; os membros diretos de um public group, em GroupMember.",
+       E("src:objref-group", "src:objref-queuesobject", "src:objref-groupmember")),
+    av("implantacao", "Como metadado", "Queue guarda a fila com os objetos aceitos e os membros (usuários, papéis e public groups). Group guarda "
+       "só a definição do public group: os membros não são migrados na implantação.", E("src:mdapi-queue", "src:mdapi-group")),
+    av("atencao", "Queues em sharing rules", "Numa sharing rule, a categoria Queues cobre os registros cujo dono é a fila, sem incluir os "
+       "registros que pertencem aos membros dela.", E("src:help-sharing-rule-categories", "src:help-sharing-rules")),
+]}
+X["sub:permissoes-perfis-e-grupos"] = {"comece": ["func:permission-sets", "func:permission-set-groups", "func:public-groups"], "avancado": [
+    av("decisao", "Para que serve um public group", "Um public group junta pessoas de partes diferentes da empresa que não cabem num único "
+       "papel. Em vez de uma sharing rule para cada papel e pessoa, cria-se um grupo com todos e ele vira o alvo da regra. O access summary "
+       "do grupo mostra onde ele é usado: sharing rules, pastas de relatórios e dashboards e list views.",
+       E("src:help-public-groups", "src:help-public-group-summary")),
+    av("escala", "Grupos grandes e aninhados", "Com mais de 10.000 membros, editar o grupo pela página de edição pode ficar lento ou perder "
+       "membros; a Ajuda manda usar o access summary, user access policies ou a API de GroupMember. Ela também recomenda não passar de "
+       "cinco níveis de grupos dentro de grupos.", E("src:help-public-groups-considerations", "src:objref-groupmember")),
+    av("atencao", "Membros de grupo não vão no deploy", "O metadata type Group leva o nome e a opção Grant Access Using Hierarchies, mas não "
+       "os membros. Depois de implantar, os membros precisam ser incluídos no destino.", E("src:mdapi-group", "src:help-public-groups-create",
+                                                                                     "src:help-group-member-types")),
+]}
+
 EXTRAS = X

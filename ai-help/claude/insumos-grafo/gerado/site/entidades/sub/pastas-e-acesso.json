@@ -56,18 +56,66 @@
   ],
   "classificacao": "cls:relatorios-analytics-e-exploracao",
   "derivado": {
-    "dependencias": [],
+    "dependencias": [
+      {
+        "destino": "obj:QueueRoutingConfig",
+        "destino_no_tema": false,
+        "estado": "verificado",
+        "origem": "obj:Group",
+        "rel": "rel:group-queueroutingconfig",
+        "via": "QueueRoutingConfigId"
+      },
+      {
+        "destino": "obj:Group",
+        "destino_no_tema": true,
+        "estado": "verificado",
+        "origem": "obj:GroupMember",
+        "rel": "rel:groupmember-group",
+        "via": "GroupId"
+      },
+      {
+        "destino": "obj:Group",
+        "destino_no_tema": true,
+        "estado": "verificado",
+        "origem": "obj:GroupMember",
+        "rel": "rel:groupmember-membro-grupo",
+        "via": "UserOrGroupId"
+      },
+      {
+        "destino": "obj:User",
+        "destino_no_tema": false,
+        "estado": "verificado",
+        "origem": "obj:GroupMember",
+        "rel": "rel:groupmember-membro-usuario",
+        "via": "UserOrGroupId"
+      }
+    ],
     "funcionalidades": [
       {
         "alertas": [
           "O nível na pasta não decide sozinho: as permissões do usuário sobre relatórios e dashboards também contam.",
           "Uma pasta nova só é acessível a quem a criou e a administradores, até ser compartilhada.",
           "Se o usuário aparece em mais de uma entrada de compartilhamento, vale o maior nível.",
-          "Um artigo da Ajuda descreve o compartilhamento de pastas por Metadata API com accessLevel em FolderShare; esse subtipo não foi lido no guia."
+          "Um artigo da Ajuda descreve o compartilhamento de pastas por Metadata API com accessLevel em FolderShare; esse subtipo não foi lido no guia.",
+          "O access summary de um public group mostra as pastas de relatórios e dashboards compartilhadas com ele."
         ],
         "exemplo": "A pasta Diretoria é compartilhada só com o papel de diretores, como Viewer; os analistas que a mantêm são Editors.",
         "id": "func:pastas-de-relatorios-e-dashboards",
         "principal": true
+      },
+      {
+        "alertas": [
+          "Implantar o metadata type Group NÃO leva os membros: eles precisam ser carregados à parte (objeto GroupMember).",
+          "Criar ou editar um public group exige a permissão Manage Users.",
+          "Com Grant Access Using Hierarchies marcado, o que é compartilhado com o grupo também chega a quem está acima na hierarquia de papéis.",
+          "Editar grupos, papéis e territórios faz as sharing rules serem recalculadas.",
+          "Há dois tipos de grupo: public groups, criados por administradores, e personal groups; só os public groups são acessíveis pela API.",
+          "Grupo do Chatter é outro recurso: no objeto Group, aparece com Type igual a CollaborationGroup."
+        ],
+        "exemplo": "O grupo Comitê de Preços reúne dois papéis de vendas e três pessoas do financeiro; uma sharing rule dá a ele acesso às oportunidades grandes.",
+        "id": "func:public-groups",
+        "principal": false,
+        "tema_principal": "sub:permissoes-perfis-e-grupos"
       }
     ],
     "metadata_types": [
@@ -77,6 +125,15 @@
           "func:pastas-de-relatorios-e-dashboards"
         ],
         "id": "mdt:DashboardFolder",
+        "nota_suporte": null,
+        "suporte_cli": "suportado"
+      },
+      {
+        "estrutura": "completa",
+        "funcionalidades": [
+          "func:public-groups"
+        ],
+        "id": "mdt:Group",
         "nota_suporte": null,
         "suporte_cli": "suportado"
       },
@@ -91,7 +148,40 @@
       }
     ],
     "nota": "Calculado pelo gerador a partir do catálogo; não é cadastro.",
-    "objetos_api": [],
+    "objetos_api": [
+      {
+        "apis": [
+          {
+            "api": "padrao",
+            "estado": "verificado"
+          },
+          {
+            "api": "tooling",
+            "estado": "desconhecido"
+          }
+        ],
+        "funcionalidades": [
+          "func:public-groups"
+        ],
+        "id": "obj:Group"
+      },
+      {
+        "apis": [
+          {
+            "api": "padrao",
+            "estado": "verificado"
+          },
+          {
+            "api": "tooling",
+            "estado": "desconhecido"
+          }
+        ],
+        "funcionalidades": [
+          "func:public-groups"
+        ],
+        "id": "obj:GroupMember"
+      }
+    ],
     "temas_sem_funcionalidade": []
   },
   "descricao": "As pastas onde relatórios e dashboards ficam e os níveis de acesso (Viewer, Editor, Manager) dados a cada usuário, grupo ou papel.",
@@ -107,7 +197,8 @@
   "estado": "desconhecido",
   "fora_do_escopo": "Acesso aos registros que aparecem no relatório fica em \"Acesso a registros e hierarquias\".",
   "funcionalidades": [
-    "func:pastas-de-relatorios-e-dashboards"
+    "func:pastas-de-relatorios-e-dashboards",
+    "func:public-groups"
   ],
   "id": "sub:pastas-e-acesso",
   "natureza": "curadoria_didatica",

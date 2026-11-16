@@ -10,45 +10,2332 @@
     "Objetos de API não são tabelas físicas; nenhuma correspondência XML/campo é presumida pelo nome."
   ],
   "metadata_type": {
+    "id": "mdt:Queue",
     "nome": "Queue",
-    "estado": "parcial",
+    "o_que_e": "Uma fila (queue): um lugar para guardar registros que ainda não têm um dono individual, com os objetos que ela aceita e os membros que podem assumi-los.",
+    "finalidade": "Versionar e implantar as filas da org, com objetos e membros.",
+    "estende": "não declarado na página",
     "arquivos": {
       "source_format": {
-        "pasta": "queues/",
-        "arquivo": "<Nome>.queue-meta.xml"
+        "estado": "verificado",
+        "valor": {
+          "pasta": "queues/",
+          "arquivo": "<Nome>.queue-meta.xml"
+        },
+        "nota": "Pasta e sufixo do registro do Salesforce CLI; sufixo '-meta.xml' segue a convenção do source format.",
+        "evidencias": [
+          {
+            "fonte": "src:sdr-registry",
+            "nota": "types.queue"
+          }
+        ]
       },
       "metadata_api_format": {
-        "pasta": "queues/",
-        "arquivo": "<Nome>.queue"
+        "estado": "verificado",
+        "valor": {
+          "pasta": "queues/",
+          "arquivo": "<Nome>.queue"
+        },
+        "evidencias": [
+          {
+            "fonte": "src:sdr-registry",
+            "nota": "types.queue"
+          }
+        ]
+      },
+      "curinga_package_xml": {
+        "estado": "verificado",
+        "valor": true,
+        "evidencias": [
+          {
+            "fonte": "src:mdapi-queue"
+          }
+        ]
       }
     },
-    "propriedades": null,
-    "nota": "As propriedades XML não foram levantadas no catálogo.",
+    "disponibilidade": {
+      "desde_versao": "24.0",
+      "ate_versao": null,
+      "estado": "verificado"
+    },
+    "suporte_cli": {
+      "estado": "verificado",
+      "valor": {
+        "status": "suportado",
+        "nota_fonte": null
+      },
+      "nota": "Suporte do Salesforce CLI (source-deploy-retrieve), não do Metadata API em geral.",
+      "evidencias": [
+        {
+          "fonte": "src:sdr-metadata-support"
+        }
+      ]
+    },
+    "setup": {
+      "estado": "desconhecido",
+      "nota": "Caminho no Setup não validado nesta sessão."
+    },
+    "propriedades": [
+      {
+        "id": "mdt:Queue.doesIncludeBosses",
+        "nome": "doesIncludeBosses",
+        "tipo_tecnico": "boolean",
+        "o_que_e": "Indica se os registros da fila também são compartilhados com os papéis acima na hierarquia.",
+        "origem": {
+          "estado": "verificado",
+          "valor": "padrao_plataforma",
+          "nota": "Propriedade definida pelo schema da Metadata API.",
+          "evidencias": [
+            {
+              "fonte": "src:mdapi-queue"
+            }
+          ]
+        },
+        "obrigatoriedade": {
+          "valor": "sim",
+          "estado": "verificado",
+          "evidencias": [
+            {
+              "fonte": "src:mdapi-queue"
+            }
+          ]
+        },
+        "default": {
+          "forma": "nao_declarado_na_fonte",
+          "estado": "desconhecido"
+        },
+        "dominio": {
+          "natureza": "booleano",
+          "valores": [
+            {
+              "valor": "true"
+            },
+            {
+              "valor": "false"
+            }
+          ],
+          "lista_completa": "sim",
+          "estado": "verificado",
+          "evidencias": [
+            {
+              "fonte": "src:mdapi-queue"
+            }
+          ]
+        },
+        "disponibilidade": {
+          "desde_versao": "67.0",
+          "ate_versao": null,
+          "estado": "verificado"
+        },
+        "explicacao": "explicada",
+        "estado": "verificado",
+        "evidencias": [
+          {
+            "fonte": "src:mdapi-queue"
+          }
+        ]
+      },
+      {
+        "id": "mdt:Queue.doesSendEmailToMembers",
+        "nome": "doesSendEmailToMembers",
+        "tipo_tecnico": "boolean",
+        "o_que_e": "Indica se os membros recebem e-mail quando um registro entra na fila.",
+        "origem": {
+          "estado": "verificado",
+          "valor": "padrao_plataforma",
+          "nota": "Propriedade definida pelo schema da Metadata API.",
+          "evidencias": [
+            {
+              "fonte": "src:mdapi-queue"
+            }
+          ]
+        },
+        "obrigatoriedade": {
+          "valor": "nao",
+          "estado": "desconhecido",
+          "condicao": "A documentação 68.0 não marca o campo como obrigatório; ausência de marcação não comprova opcionalidade (confirmar no WSDL)."
+        },
+        "default": {
+          "forma": "nao_declarado_na_fonte",
+          "estado": "desconhecido"
+        },
+        "dominio": {
+          "natureza": "booleano",
+          "valores": [
+            {
+              "valor": "true"
+            },
+            {
+              "valor": "false"
+            }
+          ],
+          "lista_completa": "sim",
+          "estado": "verificado",
+          "evidencias": [
+            {
+              "fonte": "src:mdapi-queue"
+            }
+          ]
+        },
+        "disponibilidade": {
+          "desde_versao": null,
+          "ate_versao": null,
+          "estado": "desconhecido"
+        },
+        "explicacao": "explicada",
+        "estado": "verificado",
+        "evidencias": [
+          {
+            "fonte": "src:mdapi-queue"
+          }
+        ]
+      },
+      {
+        "id": "mdt:Queue.email",
+        "nome": "email",
+        "tipo_tecnico": "string",
+        "o_que_e": "Endereço de e-mail do dono da fila.",
+        "origem": {
+          "estado": "verificado",
+          "valor": "padrao_plataforma",
+          "nota": "Propriedade definida pelo schema da Metadata API.",
+          "evidencias": [
+            {
+              "fonte": "src:mdapi-queue"
+            }
+          ]
+        },
+        "obrigatoriedade": {
+          "valor": "nao",
+          "estado": "desconhecido",
+          "condicao": "A documentação 68.0 não marca o campo como obrigatório; ausência de marcação não comprova opcionalidade (confirmar no WSDL)."
+        },
+        "default": {
+          "forma": "nao_declarado_na_fonte",
+          "estado": "desconhecido"
+        },
+        "dominio": {
+          "natureza": "texto_livre",
+          "estado": "verificado",
+          "evidencias": [
+            {
+              "fonte": "src:mdapi-queue"
+            }
+          ],
+          "contexto": "A fonte tipa como string sem lista de valores; não inventar valores."
+        },
+        "disponibilidade": {
+          "desde_versao": null,
+          "ate_versao": null,
+          "estado": "desconhecido"
+        },
+        "explicacao": "explicada",
+        "estado": "verificado",
+        "evidencias": [
+          {
+            "fonte": "src:mdapi-queue"
+          }
+        ]
+      },
+      {
+        "id": "mdt:Queue.fullName",
+        "nome": "fullName",
+        "tipo_tecnico": "string",
+        "o_que_e": "Nome de API da fila; aparece no primeiro exemplo XML da página, não na tabela de campos.",
+        "origem": {
+          "estado": "verificado",
+          "valor": "padrao_plataforma",
+          "nota": "Propriedade definida pelo schema da Metadata API.",
+          "evidencias": [
+            {
+              "fonte": "src:mdapi-queue"
+            }
+          ]
+        },
+        "obrigatoriedade": {
+          "valor": "desconhecida",
+          "estado": "desconhecido"
+        },
+        "default": {
+          "forma": "nao_declarado_na_fonte",
+          "estado": "desconhecido"
+        },
+        "dominio": {
+          "natureza": "texto_livre",
+          "estado": "verificado",
+          "evidencias": [
+            {
+              "fonte": "src:mdapi-queue"
+            }
+          ],
+          "contexto": "A fonte tipa como string sem lista de valores; não inventar valores."
+        },
+        "disponibilidade": {
+          "desde_versao": null,
+          "ate_versao": null,
+          "estado": "desconhecido"
+        },
+        "explicacao": "explicada",
+        "estado": "verificado",
+        "evidencias": [
+          {
+            "fonte": "src:mdapi-queue"
+          }
+        ]
+      },
+      {
+        "id": "mdt:Queue.name",
+        "nome": "name",
+        "tipo_tecnico": "string",
+        "o_que_e": "Nome da fila; na interface, é o Label.",
+        "origem": {
+          "estado": "verificado",
+          "valor": "padrao_plataforma",
+          "nota": "Propriedade definida pelo schema da Metadata API.",
+          "evidencias": [
+            {
+              "fonte": "src:mdapi-queue"
+            }
+          ]
+        },
+        "obrigatoriedade": {
+          "valor": "sim",
+          "estado": "verificado",
+          "evidencias": [
+            {
+              "fonte": "src:mdapi-queue"
+            }
+          ]
+        },
+        "default": {
+          "forma": "nao_declarado_na_fonte",
+          "estado": "desconhecido"
+        },
+        "dominio": {
+          "natureza": "texto_livre",
+          "estado": "verificado",
+          "evidencias": [
+            {
+              "fonte": "src:mdapi-queue"
+            }
+          ],
+          "contexto": "A fonte tipa como string sem lista de valores; não inventar valores."
+        },
+        "disponibilidade": {
+          "desde_versao": null,
+          "ate_versao": null,
+          "estado": "desconhecido"
+        },
+        "explicacao": "explicada",
+        "estado": "verificado",
+        "evidencias": [
+          {
+            "fonte": "src:mdapi-queue"
+          }
+        ]
+      },
+      {
+        "id": "mdt:Queue.queueMembers",
+        "nome": "queueMembers",
+        "tipo_tecnico": "QueueMembers[]",
+        "o_que_e": "Membros da fila, incluídos diretamente ou por papéis e public groups.",
+        "origem": {
+          "estado": "verificado",
+          "valor": "padrao_plataforma",
+          "nota": "Propriedade definida pelo schema da Metadata API.",
+          "evidencias": [
+            {
+              "fonte": "src:mdapi-queue"
+            }
+          ]
+        },
+        "obrigatoriedade": {
+          "valor": "nao",
+          "estado": "desconhecido",
+          "condicao": "A documentação 68.0 não marca o campo como obrigatório; ausência de marcação não comprova opcionalidade (confirmar no WSDL)."
+        },
+        "default": {
+          "forma": "nao_declarado_na_fonte",
+          "estado": "desconhecido"
+        },
+        "dominio": {
+          "natureza": "tipo_composto",
+          "estado": "verificado",
+          "evidencias": [
+            {
+              "fonte": "src:mdapi-queue"
+            }
+          ]
+        },
+        "disponibilidade": {
+          "desde_versao": "42.0",
+          "ate_versao": null,
+          "estado": "verificado"
+        },
+        "explicacao": "explicada",
+        "estado": "verificado",
+        "evidencias": [
+          {
+            "fonte": "src:mdapi-queue"
+          }
+        ],
+        "cardinalidade": "0..n",
+        "estrutura_ref": "mdx:QueueMembers"
+      },
+      {
+        "id": "mdt:Queue.queueRoutingConfig",
+        "nome": "queueRoutingConfig",
+        "tipo_tecnico": "string",
+        "o_que_e": "Nome da routing configuration, em orgs com Omni-Channel.",
+        "origem": {
+          "estado": "verificado",
+          "valor": "padrao_plataforma",
+          "nota": "Propriedade definida pelo schema da Metadata API.",
+          "evidencias": [
+            {
+              "fonte": "src:mdapi-queue"
+            }
+          ]
+        },
+        "obrigatoriedade": {
+          "valor": "nao",
+          "estado": "desconhecido",
+          "condicao": "A documentação 68.0 não marca o campo como obrigatório; ausência de marcação não comprova opcionalidade (confirmar no WSDL)."
+        },
+        "default": {
+          "forma": "nao_declarado_na_fonte",
+          "estado": "desconhecido"
+        },
+        "dominio": {
+          "natureza": "texto_livre",
+          "estado": "verificado",
+          "evidencias": [
+            {
+              "fonte": "src:mdapi-queue"
+            }
+          ],
+          "contexto": "A fonte tipa como string sem lista de valores; não inventar valores."
+        },
+        "disponibilidade": {
+          "desde_versao": "42.0",
+          "ate_versao": null,
+          "estado": "verificado"
+        },
+        "explicacao": "explicada",
+        "estado": "verificado",
+        "evidencias": [
+          {
+            "fonte": "src:mdapi-queue"
+          }
+        ]
+      },
+      {
+        "id": "mdt:Queue.queueSobject",
+        "nome": "queueSobject",
+        "tipo_tecnico": "QueueSobject[]",
+        "o_que_e": "Objetos que a fila aceita.",
+        "origem": {
+          "estado": "verificado",
+          "valor": "padrao_plataforma",
+          "nota": "Propriedade definida pelo schema da Metadata API.",
+          "evidencias": [
+            {
+              "fonte": "src:mdapi-queue"
+            }
+          ]
+        },
+        "obrigatoriedade": {
+          "valor": "nao",
+          "estado": "desconhecido",
+          "condicao": "A documentação 68.0 não marca o campo como obrigatório; ausência de marcação não comprova opcionalidade (confirmar no WSDL)."
+        },
+        "default": {
+          "forma": "nao_declarado_na_fonte",
+          "estado": "desconhecido"
+        },
+        "dominio": {
+          "natureza": "tipo_composto",
+          "estado": "verificado",
+          "evidencias": [
+            {
+              "fonte": "src:mdapi-queue"
+            }
+          ]
+        },
+        "disponibilidade": {
+          "desde_versao": null,
+          "ate_versao": null,
+          "estado": "desconhecido"
+        },
+        "explicacao": "explicada",
+        "estado": "verificado",
+        "evidencias": [
+          {
+            "fonte": "src:mdapi-queue"
+          }
+        ],
+        "cardinalidade": "0..n",
+        "estrutura_ref": "mdx:QueueSobject"
+      }
+    ],
+    "estruturas": [
+      "mdx:QueueMembers",
+      "mdx:QueueSobject"
+    ],
+    "cobertura": {
+      "estrutural": {
+        "estado": "completa",
+        "esperado": 8,
+        "presente": 8,
+        "nota": "Universo esperado = tabelas Fields da página do guia versionado 264.0 (API 68.0), lida em 2026-11-16. A página não informa obrigatoriedade para a maioria dos campos."
+      },
+      "explicativa": {
+        "estado": "completa",
+        "esperado": 8,
+        "presente": 8
+      },
+      "mapeamento": {
+        "estado": "parcial",
+        "nota": "Correspondências registradas apenas onde há evidência; demais pendentes."
+      }
+    },
+    "recomendacoes": [],
+    "alertas": [
+      "Segundo a página, a fila aceita casos, leads, service contracts (com Entitlements habilitado) e objetos customizados; a lista de valores de sobjectType traz ainda ContactRequest e Task.",
+      "Desde o Summer '20, só usuários autenticados, internos e externos, acessam este tipo.",
+      "doesIncludeBosses existe para filas só desde a API 67.0."
+    ],
+    "divergencias_documentais": [
+      "O segundo exemplo XML da página usa os elementos queueRoleAndSubordinates e queueRoleAndSubordinate; a tabela documenta roleAndSubordinates e roleAndSubordinate. Foram cadastrados os nomes da tabela.",
+      "O mesmo exemplo fecha o elemento publicGroups com uma tag de abertura."
+    ],
+    "estado": "verificado",
     "evidencias": [
       {
+        "fonte": "src:mdapi-queue"
+      },
+      {
         "fonte": "src:sdr-registry"
+      },
+      {
+        "fonte": "src:sdr-metadata-support"
       }
-    ]
+    ],
+    "exemplo_xml": {
+      "xml": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<Queue xmlns=\"http://soap.sforce.com/2006/04/metadata\">\n    <doesIncludeBosses>false</doesIncludeBosses>\n    <doesSendEmailToMembers>true</doesSendEmailToMembers>\n    <email>[endereço de e-mail da fila]</email>\n    <name>[nome da fila]</name>\n    <queueMembers>\n        <publicGroups>\n            <publicGroup>[nome de um public group]</publicGroup>\n        </publicGroups>\n        <roles>\n            <role>[nome de um papel]</role>\n        </roles>\n        <users>\n            <user>[username]</user>\n        </users>\n    </queueMembers>\n    <queueSobject>\n        <!-- Valores documentados: Case, ContactRequest, Lead, ServiceContract, Task e objetos customizados -->\n        <sobjectType>Case</sobjectType>\n    </queueSobject>\n</Queue>",
+      "natureza": "didatico_projeto",
+      "nota": "Exemplo escrito pelo projeto apenas com elementos documentados; sem dados reais."
+    }
   },
-  "estruturas_xml": [],
+  "estruturas_xml": [
+    {
+      "id": "mdx:QueueMembers",
+      "nome": "QueueMembers",
+      "natureza": "estrutura_auxiliar",
+      "o_que_e": "Os membros de uma fila: incluídos diretamente ou por papéis e public groups.",
+      "usada_por": [
+        "mdt:Queue"
+      ],
+      "propriedades": [
+        {
+          "id": "mdx:QueueMembers.publicGroups",
+          "nome": "publicGroups",
+          "tipo_tecnico": "PublicGroups[]",
+          "o_que_e": "Public groups cujos membros entram na fila.",
+          "origem": {
+            "estado": "verificado",
+            "valor": "padrao_plataforma",
+            "nota": "Propriedade definida pelo schema da Metadata API.",
+            "evidencias": [
+              {
+                "fonte": "src:mdapi-queue"
+              }
+            ]
+          },
+          "obrigatoriedade": {
+            "valor": "nao",
+            "estado": "desconhecido",
+            "condicao": "A documentação 68.0 não marca o campo como obrigatório; ausência de marcação não comprova opcionalidade (confirmar no WSDL)."
+          },
+          "default": {
+            "forma": "nao_declarado_na_fonte",
+            "estado": "desconhecido"
+          },
+          "dominio": {
+            "natureza": "tipo_composto",
+            "estado": "verificado",
+            "evidencias": [
+              {
+                "fonte": "src:mdapi-queue"
+              }
+            ]
+          },
+          "disponibilidade": {
+            "desde_versao": null,
+            "ate_versao": null,
+            "estado": "desconhecido"
+          },
+          "explicacao": "explicada",
+          "estado": "verificado",
+          "evidencias": [
+            {
+              "fonte": "src:mdapi-queue"
+            }
+          ],
+          "cardinalidade": "0..n",
+          "estrutura_ref": "mdx:PublicGroups"
+        },
+        {
+          "id": "mdx:QueueMembers.roleAndSubordinates",
+          "nome": "roleAndSubordinates",
+          "tipo_tecnico": "RoleAndSubordinates[]",
+          "o_que_e": "Papéis e subordinados, inclusive papéis de clientes e parceiros.",
+          "origem": {
+            "estado": "verificado",
+            "valor": "padrao_plataforma",
+            "nota": "Propriedade definida pelo schema da Metadata API.",
+            "evidencias": [
+              {
+                "fonte": "src:mdapi-queue"
+              }
+            ]
+          },
+          "obrigatoriedade": {
+            "valor": "nao",
+            "estado": "desconhecido",
+            "condicao": "A documentação 68.0 não marca o campo como obrigatório; ausência de marcação não comprova opcionalidade (confirmar no WSDL)."
+          },
+          "default": {
+            "forma": "nao_declarado_na_fonte",
+            "estado": "desconhecido"
+          },
+          "dominio": {
+            "natureza": "tipo_composto",
+            "estado": "verificado",
+            "evidencias": [
+              {
+                "fonte": "src:mdapi-queue"
+              }
+            ]
+          },
+          "disponibilidade": {
+            "desde_versao": null,
+            "ate_versao": null,
+            "estado": "desconhecido"
+          },
+          "explicacao": "explicada",
+          "estado": "verificado",
+          "evidencias": [
+            {
+              "fonte": "src:mdapi-queue"
+            }
+          ],
+          "cardinalidade": "0..n",
+          "notas": [
+            "O segundo exemplo XML da página usa queueRoleAndSubordinates e queueRoleAndSubordinate, nomes que não constam da tabela."
+          ],
+          "estrutura_ref": "mdx:RoleAndSubordinates"
+        },
+        {
+          "id": "mdx:QueueMembers.roleAndSubordinatesInternal",
+          "nome": "roleAndSubordinatesInternal",
+          "tipo_tecnico": "RoleAndSubordinatesInternal[]",
+          "o_que_e": "Papéis internos e subordinados, sem papéis de clientes e parceiros.",
+          "origem": {
+            "estado": "verificado",
+            "valor": "padrao_plataforma",
+            "nota": "Propriedade definida pelo schema da Metadata API.",
+            "evidencias": [
+              {
+                "fonte": "src:mdapi-queue"
+              }
+            ]
+          },
+          "obrigatoriedade": {
+            "valor": "nao",
+            "estado": "desconhecido",
+            "condicao": "A documentação 68.0 não marca o campo como obrigatório; ausência de marcação não comprova opcionalidade (confirmar no WSDL)."
+          },
+          "default": {
+            "forma": "nao_declarado_na_fonte",
+            "estado": "desconhecido"
+          },
+          "dominio": {
+            "natureza": "tipo_composto",
+            "estado": "verificado",
+            "evidencias": [
+              {
+                "fonte": "src:mdapi-queue"
+              }
+            ]
+          },
+          "disponibilidade": {
+            "desde_versao": null,
+            "ate_versao": null,
+            "estado": "desconhecido"
+          },
+          "explicacao": "explicada",
+          "estado": "verificado",
+          "evidencias": [
+            {
+              "fonte": "src:mdapi-queue"
+            }
+          ],
+          "cardinalidade": "0..n",
+          "estrutura_ref": "mdx:RoleAndSubordinatesInternal"
+        },
+        {
+          "id": "mdx:QueueMembers.roles",
+          "nome": "roles",
+          "tipo_tecnico": "Roles[]",
+          "o_que_e": "Papéis cujos usuários entram na fila.",
+          "origem": {
+            "estado": "verificado",
+            "valor": "padrao_plataforma",
+            "nota": "Propriedade definida pelo schema da Metadata API.",
+            "evidencias": [
+              {
+                "fonte": "src:mdapi-queue"
+              }
+            ]
+          },
+          "obrigatoriedade": {
+            "valor": "nao",
+            "estado": "desconhecido",
+            "condicao": "A documentação 68.0 não marca o campo como obrigatório; ausência de marcação não comprova opcionalidade (confirmar no WSDL)."
+          },
+          "default": {
+            "forma": "nao_declarado_na_fonte",
+            "estado": "desconhecido"
+          },
+          "dominio": {
+            "natureza": "tipo_composto",
+            "estado": "verificado",
+            "evidencias": [
+              {
+                "fonte": "src:mdapi-queue"
+              }
+            ]
+          },
+          "disponibilidade": {
+            "desde_versao": null,
+            "ate_versao": null,
+            "estado": "desconhecido"
+          },
+          "explicacao": "explicada",
+          "estado": "verificado",
+          "evidencias": [
+            {
+              "fonte": "src:mdapi-queue"
+            }
+          ],
+          "cardinalidade": "0..n",
+          "estrutura_ref": "mdx:Roles"
+        },
+        {
+          "id": "mdx:QueueMembers.users",
+          "nome": "users",
+          "tipo_tecnico": "Users[]",
+          "o_que_e": "Usuários incluídos diretamente.",
+          "origem": {
+            "estado": "verificado",
+            "valor": "padrao_plataforma",
+            "nota": "Propriedade definida pelo schema da Metadata API.",
+            "evidencias": [
+              {
+                "fonte": "src:mdapi-queue"
+              }
+            ]
+          },
+          "obrigatoriedade": {
+            "valor": "nao",
+            "estado": "desconhecido",
+            "condicao": "A documentação 68.0 não marca o campo como obrigatório; ausência de marcação não comprova opcionalidade (confirmar no WSDL)."
+          },
+          "default": {
+            "forma": "nao_declarado_na_fonte",
+            "estado": "desconhecido"
+          },
+          "dominio": {
+            "natureza": "tipo_composto",
+            "estado": "verificado",
+            "evidencias": [
+              {
+                "fonte": "src:mdapi-queue"
+              }
+            ]
+          },
+          "disponibilidade": {
+            "desde_versao": null,
+            "ate_versao": null,
+            "estado": "desconhecido"
+          },
+          "explicacao": "explicada",
+          "estado": "verificado",
+          "evidencias": [
+            {
+              "fonte": "src:mdapi-queue"
+            }
+          ],
+          "cardinalidade": "0..n",
+          "estrutura_ref": "mdx:Users"
+        }
+      ],
+      "cobertura": {
+        "estrutural": {
+          "estado": "completa",
+          "esperado": 5,
+          "presente": 5,
+          "nota": "Contagem conforme a seção do subtipo na página oficial; tipos compostos internos sem detalhe tornam a cobertura parcial."
+        },
+        "explicativa": {
+          "estado": "completa",
+          "esperado": 5,
+          "presente": 5
+        },
+        "mapeamento": {
+          "estado": "nao_iniciada",
+          "nota": "Correspondências com campos API não investigadas."
+        }
+      },
+      "estado": "verificado",
+      "evidencias": [
+        {
+          "fonte": "src:mdapi-queue"
+        }
+      ]
+    },
+    {
+      "id": "mdx:QueueSobject",
+      "nome": "QueueSobject",
+      "natureza": "estrutura_auxiliar",
+      "o_que_e": "Um objeto cujos registros a fila pode receber.",
+      "usada_por": [
+        "mdt:Queue"
+      ],
+      "propriedades": [
+        {
+          "id": "mdx:QueueSobject.sobjectType",
+          "nome": "sobjectType",
+          "tipo_tecnico": "string",
+          "o_que_e": "Objeto que a fila aceita.",
+          "origem": {
+            "estado": "verificado",
+            "valor": "padrao_plataforma",
+            "nota": "Propriedade definida pelo schema da Metadata API.",
+            "evidencias": [
+              {
+                "fonte": "src:mdapi-queue"
+              }
+            ]
+          },
+          "obrigatoriedade": {
+            "valor": "nao",
+            "estado": "desconhecido",
+            "condicao": "A documentação 68.0 não marca o campo como obrigatório; ausência de marcação não comprova opcionalidade (confirmar no WSDL)."
+          },
+          "default": {
+            "forma": "nao_declarado_na_fonte",
+            "estado": "desconhecido"
+          },
+          "dominio": {
+            "natureza": "enum_fechado",
+            "valores": [
+              {
+                "valor": "Case"
+              },
+              {
+                "valor": "ContactRequest"
+              },
+              {
+                "valor": "Lead"
+              },
+              {
+                "valor": "ServiceContract",
+                "significado": "Só com Entitlements habilitado."
+              },
+              {
+                "valor": "Task",
+                "significado": "Desde a API 48.0."
+              }
+            ],
+            "lista_completa": "nao",
+            "estado": "verificado",
+            "evidencias": [
+              {
+                "fonte": "src:mdapi-queue"
+              }
+            ],
+            "contexto": "A página lista estes valores e aceita também objetos customizados."
+          },
+          "disponibilidade": {
+            "desde_versao": null,
+            "ate_versao": null,
+            "estado": "desconhecido"
+          },
+          "explicacao": "explicada",
+          "estado": "verificado",
+          "evidencias": [
+            {
+              "fonte": "src:mdapi-queue"
+            }
+          ]
+        }
+      ],
+      "cobertura": {
+        "estrutural": {
+          "estado": "completa",
+          "esperado": 1,
+          "presente": 1,
+          "nota": "Contagem conforme a seção do subtipo na página oficial; tipos compostos internos sem detalhe tornam a cobertura parcial."
+        },
+        "explicativa": {
+          "estado": "completa",
+          "esperado": 1,
+          "presente": 1
+        },
+        "mapeamento": {
+          "estado": "nao_iniciada",
+          "nota": "Correspondências com campos API não investigadas."
+        }
+      },
+      "estado": "verificado",
+      "evidencias": [
+        {
+          "fonte": "src:mdapi-queue"
+        }
+      ]
+    }
+  ],
   "objetos_api_relacionados": [
     {
+      "id": "obj:Group",
       "nome": "Group",
-      "estado": "desconhecido",
-      "campos": null,
-      "nota": "Objeto relacionado ainda não levantado no catálogo; campos, acesso e correspondência precisam de verificação."
+      "o_que_e": "Um conjunto de usuários. O mesmo objeto guarda public groups, filas e os grupos que a plataforma cria para papéis, territórios e gerentes; o campo Type diz qual é qual.",
+      "papel": "Consultar por API os public groups e as filas da org, e criar ou alterar os dois.",
+      "exposicoes": [
+        {
+          "api": "padrao",
+          "estado": "verificado",
+          "chamadas": [
+            "create()",
+            "delete()",
+            "describeSObjects()",
+            "getDeleted()",
+            "getUpdated()",
+            "query()",
+            "search()",
+            "retrieve()",
+            "update()",
+            "upsert()"
+          ],
+          "acesso_especial": "Usuários autenticados, internos e externos, acessam o objeto.",
+          "nota": "A página não informa a versão de entrada do objeto.",
+          "desde_versao": null,
+          "evidencias": [
+            {
+              "fonte": "src:objref-group"
+            }
+          ]
+        },
+        {
+          "api": "tooling",
+          "estado": "desconhecido",
+          "nota": "Exposição na Tooling API não verificada.",
+          "desde_versao": null
+        }
+      ],
+      "campos": [
+        {
+          "id": "obj:Group.Description",
+          "nome": "Description",
+          "tipo_tecnico": "textarea",
+          "o_que_e": "Descrição do grupo.",
+          "apis": [
+            "padrao"
+          ],
+          "propriedades_api": {
+            "estado": "verificado",
+            "create": true,
+            "defaulted_on_create": false,
+            "filter": true,
+            "group": false,
+            "nillable": true,
+            "restricted_picklist": false,
+            "sort": true,
+            "update": true,
+            "id_lookup": false,
+            "evidencias": [
+              {
+                "fonte": "src:objref-group"
+              }
+            ]
+          },
+          "somente_leitura": false,
+          "origem": {
+            "estado": "verificado",
+            "valor": "padrao_plataforma",
+            "nota": "Campo padrão do objeto documentado.",
+            "evidencias": [
+              {
+                "fonte": "src:objref-group"
+              }
+            ]
+          },
+          "obrigatoriedade": {
+            "valor": "desconhecida",
+            "estado": "desconhecido"
+          },
+          "default": {
+            "forma": "nao_declarado_na_fonte",
+            "estado": "desconhecido"
+          },
+          "dominio": {
+            "natureza": "texto_livre",
+            "estado": "verificado",
+            "evidencias": [
+              {
+                "fonte": "src:objref-group"
+              }
+            ]
+          },
+          "disponibilidade": {
+            "desde_versao": "62.0",
+            "ate_versao": null,
+            "estado": "verificado"
+          },
+          "explicacao": "explicada",
+          "estado": "verificado",
+          "evidencias": [
+            {
+              "fonte": "src:objref-group"
+            }
+          ]
+        },
+        {
+          "id": "obj:Group.DefaultDivision",
+          "nome": "DefaultDivision",
+          "tipo_tecnico": "picklist",
+          "o_que_e": "Division padrão do registro; só vale com divisions habilitadas.",
+          "apis": [
+            "padrao"
+          ],
+          "propriedades_api": {
+            "estado": "verificado",
+            "create": true,
+            "defaulted_on_create": true,
+            "filter": true,
+            "group": true,
+            "nillable": false,
+            "restricted_picklist": true,
+            "sort": true,
+            "update": true,
+            "id_lookup": false,
+            "evidencias": [
+              {
+                "fonte": "src:objref-group"
+              }
+            ]
+          },
+          "somente_leitura": false,
+          "origem": {
+            "estado": "verificado",
+            "valor": "padrao_plataforma",
+            "nota": "Campo padrão do objeto documentado.",
+            "evidencias": [
+              {
+                "fonte": "src:objref-group"
+              }
+            ]
+          },
+          "obrigatoriedade": {
+            "valor": "desconhecida",
+            "estado": "desconhecido"
+          },
+          "default": {
+            "forma": "desconhecido",
+            "estado": "desconhecido",
+            "nota": "A API marca o campo como 'defaulted on create', mas o valor não foi declarado na extração."
+          },
+          "dominio": {
+            "natureza": "lista_dinamica",
+            "estado": "desconhecido",
+            "contexto": "Valores não extraídos; podem depender de org, idioma ou recurso."
+          },
+          "disponibilidade": {
+            "desde_versao": null,
+            "ate_versao": null,
+            "estado": "desconhecido"
+          },
+          "explicacao": "explicada",
+          "estado": "verificado",
+          "evidencias": [
+            {
+              "fonte": "src:objref-group"
+            }
+          ]
+        },
+        {
+          "id": "obj:Group.DeveloperName",
+          "nome": "DeveloperName",
+          "tipo_tecnico": "string",
+          "o_que_e": "Nome único de API do grupo. Visível só a usuários internos.",
+          "apis": [
+            "padrao"
+          ],
+          "propriedades_api": {
+            "estado": "verificado",
+            "create": true,
+            "defaulted_on_create": false,
+            "filter": true,
+            "group": true,
+            "nillable": true,
+            "restricted_picklist": false,
+            "sort": true,
+            "update": true,
+            "id_lookup": false,
+            "evidencias": [
+              {
+                "fonte": "src:objref-group"
+              }
+            ]
+          },
+          "somente_leitura": false,
+          "origem": {
+            "estado": "verificado",
+            "valor": "padrao_plataforma",
+            "nota": "Campo padrão do objeto documentado.",
+            "evidencias": [
+              {
+                "fonte": "src:objref-group"
+              }
+            ]
+          },
+          "obrigatoriedade": {
+            "valor": "desconhecida",
+            "estado": "desconhecido"
+          },
+          "default": {
+            "forma": "nao_declarado_na_fonte",
+            "estado": "desconhecido"
+          },
+          "dominio": {
+            "natureza": "texto_livre",
+            "estado": "verificado",
+            "evidencias": [
+              {
+                "fonte": "src:objref-group"
+              }
+            ]
+          },
+          "disponibilidade": {
+            "desde_versao": "24.0",
+            "ate_versao": null,
+            "estado": "verificado"
+          },
+          "explicacao": "explicada",
+          "estado": "verificado",
+          "evidencias": [
+            {
+              "fonte": "src:objref-group"
+            }
+          ],
+          "notas": [
+            "A página recomenda informá-lo em cargas grandes de dados, para evitar lentidão."
+          ]
+        },
+        {
+          "id": "obj:Group.DoesIncludeBosses",
+          "nome": "DoesIncludeBosses",
+          "tipo_tecnico": "boolean",
+          "o_que_e": "Indica se o acesso sobe para os papéis acima na hierarquia (Grant Access Using Hierarchies). Em filas, existe desde a API 67.0.",
+          "apis": [
+            "padrao"
+          ],
+          "propriedades_api": {
+            "estado": "verificado",
+            "create": true,
+            "defaulted_on_create": true,
+            "filter": true,
+            "group": true,
+            "nillable": false,
+            "restricted_picklist": false,
+            "sort": true,
+            "update": true,
+            "id_lookup": false,
+            "evidencias": [
+              {
+                "fonte": "src:objref-group"
+              }
+            ]
+          },
+          "somente_leitura": false,
+          "origem": {
+            "estado": "verificado",
+            "valor": "padrao_plataforma",
+            "nota": "Campo padrão do objeto documentado.",
+            "evidencias": [
+              {
+                "fonte": "src:objref-group"
+              }
+            ]
+          },
+          "obrigatoriedade": {
+            "valor": "desconhecida",
+            "estado": "desconhecido"
+          },
+          "default": {
+            "forma": "desconhecido",
+            "estado": "desconhecido",
+            "nota": "A API marca o campo como 'defaulted on create', mas o valor não foi declarado na extração."
+          },
+          "dominio": {
+            "natureza": "booleano",
+            "valores": [
+              {
+                "valor": "true"
+              },
+              {
+                "valor": "false"
+              }
+            ],
+            "lista_completa": "sim",
+            "estado": "verificado",
+            "evidencias": [
+              {
+                "fonte": "src:objref-group"
+              }
+            ]
+          },
+          "disponibilidade": {
+            "desde_versao": "18.0",
+            "ate_versao": null,
+            "estado": "verificado"
+          },
+          "explicacao": "explicada",
+          "estado": "verificado",
+          "evidencias": [
+            {
+              "fonte": "src:objref-group"
+            }
+          ],
+          "notas": [
+            "Em grupos comuns, o padrão é true; em filas, o padrão depende de uma configuração da org."
+          ]
+        },
+        {
+          "id": "obj:Group.DoesSendEmailToMembers",
+          "nome": "DoesSendEmailToMembers",
+          "tipo_tecnico": "boolean",
+          "o_que_e": "Indica se os membros do grupo recebem e-mail; vale também para membros de filas.",
+          "apis": [
+            "padrao"
+          ],
+          "propriedades_api": {
+            "estado": "verificado",
+            "create": true,
+            "defaulted_on_create": true,
+            "filter": true,
+            "group": true,
+            "nillable": false,
+            "restricted_picklist": false,
+            "sort": true,
+            "update": true,
+            "id_lookup": false,
+            "evidencias": [
+              {
+                "fonte": "src:objref-group"
+              }
+            ]
+          },
+          "somente_leitura": false,
+          "origem": {
+            "estado": "verificado",
+            "valor": "padrao_plataforma",
+            "nota": "Campo padrão do objeto documentado.",
+            "evidencias": [
+              {
+                "fonte": "src:objref-group"
+              }
+            ]
+          },
+          "obrigatoriedade": {
+            "valor": "desconhecida",
+            "estado": "desconhecido"
+          },
+          "default": {
+            "forma": "desconhecido",
+            "estado": "desconhecido",
+            "nota": "A API marca o campo como 'defaulted on create', mas o valor não foi declarado na extração."
+          },
+          "dominio": {
+            "natureza": "booleano",
+            "valores": [
+              {
+                "valor": "true"
+              },
+              {
+                "valor": "false"
+              }
+            ],
+            "lista_completa": "sim",
+            "estado": "verificado",
+            "evidencias": [
+              {
+                "fonte": "src:objref-group"
+              }
+            ]
+          },
+          "disponibilidade": {
+            "desde_versao": null,
+            "ate_versao": null,
+            "estado": "desconhecido"
+          },
+          "explicacao": "explicada",
+          "estado": "verificado",
+          "evidencias": [
+            {
+              "fonte": "src:objref-group"
+            }
+          ]
+        },
+        {
+          "id": "obj:Group.Email",
+          "nome": "Email",
+          "tipo_tecnico": "email",
+          "o_que_e": "Endereço de e-mail do grupo; só se aplica a filas de casos.",
+          "apis": [
+            "padrao"
+          ],
+          "propriedades_api": {
+            "estado": "verificado",
+            "create": true,
+            "defaulted_on_create": false,
+            "filter": true,
+            "group": true,
+            "nillable": true,
+            "restricted_picklist": false,
+            "sort": true,
+            "update": true,
+            "id_lookup": false,
+            "evidencias": [
+              {
+                "fonte": "src:objref-group"
+              }
+            ]
+          },
+          "somente_leitura": false,
+          "origem": {
+            "estado": "verificado",
+            "valor": "padrao_plataforma",
+            "nota": "Campo padrão do objeto documentado.",
+            "evidencias": [
+              {
+                "fonte": "src:objref-group"
+              }
+            ]
+          },
+          "obrigatoriedade": {
+            "valor": "desconhecida",
+            "estado": "desconhecido"
+          },
+          "default": {
+            "forma": "nao_declarado_na_fonte",
+            "estado": "desconhecido"
+          },
+          "dominio": {
+            "natureza": "texto_livre",
+            "estado": "verificado",
+            "evidencias": [
+              {
+                "fonte": "src:objref-group"
+              }
+            ]
+          },
+          "disponibilidade": {
+            "desde_versao": null,
+            "ate_versao": null,
+            "estado": "desconhecido"
+          },
+          "explicacao": "explicada",
+          "estado": "verificado",
+          "evidencias": [
+            {
+              "fonte": "src:objref-group"
+            }
+          ]
+        },
+        {
+          "id": "obj:Group.Name",
+          "nome": "Name",
+          "tipo_tecnico": "string",
+          "o_que_e": "Nome do grupo; na interface, é o Label.",
+          "apis": [
+            "padrao"
+          ],
+          "propriedades_api": {
+            "estado": "verificado",
+            "create": true,
+            "defaulted_on_create": false,
+            "filter": true,
+            "group": true,
+            "nillable": false,
+            "restricted_picklist": false,
+            "sort": true,
+            "update": true,
+            "id_lookup": true,
+            "evidencias": [
+              {
+                "fonte": "src:objref-group"
+              }
+            ]
+          },
+          "somente_leitura": false,
+          "origem": {
+            "estado": "verificado",
+            "valor": "padrao_plataforma",
+            "nota": "Campo padrão do objeto documentado.",
+            "evidencias": [
+              {
+                "fonte": "src:objref-group"
+              }
+            ]
+          },
+          "obrigatoriedade": {
+            "valor": "sim",
+            "estado": "verificado",
+            "evidencias": [
+              {
+                "fonte": "src:objref-group"
+              }
+            ]
+          },
+          "default": {
+            "forma": "nao_declarado_na_fonte",
+            "estado": "desconhecido"
+          },
+          "dominio": {
+            "natureza": "texto_livre",
+            "estado": "verificado",
+            "evidencias": [
+              {
+                "fonte": "src:objref-group"
+              }
+            ]
+          },
+          "disponibilidade": {
+            "desde_versao": null,
+            "ate_versao": null,
+            "estado": "desconhecido"
+          },
+          "explicacao": "explicada",
+          "estado": "verificado",
+          "evidencias": [
+            {
+              "fonte": "src:objref-group"
+            }
+          ]
+        },
+        {
+          "id": "obj:Group.OwnerId",
+          "nome": "OwnerId",
+          "tipo_tecnico": "reference",
+          "o_que_e": "Usuário dono do grupo.",
+          "apis": [
+            "padrao"
+          ],
+          "propriedades_api": {
+            "estado": "verificado",
+            "create": false,
+            "defaulted_on_create": false,
+            "filter": true,
+            "group": true,
+            "nillable": false,
+            "restricted_picklist": false,
+            "sort": true,
+            "update": false,
+            "id_lookup": false,
+            "evidencias": [
+              {
+                "fonte": "src:objref-group"
+              }
+            ]
+          },
+          "somente_leitura": true,
+          "origem": {
+            "estado": "verificado",
+            "valor": "padrao_plataforma",
+            "nota": "Campo padrão do objeto documentado.",
+            "evidencias": [
+              {
+                "fonte": "src:objref-group"
+              }
+            ]
+          },
+          "obrigatoriedade": {
+            "valor": "desconhecida",
+            "estado": "desconhecido"
+          },
+          "default": {
+            "forma": "nao_declarado_na_fonte",
+            "estado": "desconhecido"
+          },
+          "dominio": {
+            "natureza": "referencia",
+            "estado": "verificado",
+            "evidencias": [
+              {
+                "fonte": "src:objref-group"
+              }
+            ],
+            "contexto": "Id de registro do(s) objeto(s) referenciado(s)."
+          },
+          "disponibilidade": {
+            "desde_versao": null,
+            "ate_versao": null,
+            "estado": "desconhecido"
+          },
+          "explicacao": "explicada",
+          "estado": "verificado",
+          "evidencias": [
+            {
+              "fonte": "src:objref-group"
+            }
+          ],
+          "referencia": {
+            "alvos": [
+              "Organization",
+              "obj:User"
+            ],
+            "nome_relacionamento": "Owner"
+          }
+        },
+        {
+          "id": "obj:Group.QueueRoutingConfigId",
+          "nome": "QueueRoutingConfigId",
+          "tipo_tecnico": "reference",
+          "o_que_e": "Routing configuration ligada à fila.",
+          "apis": [
+            "padrao"
+          ],
+          "propriedades_api": {
+            "estado": "verificado",
+            "create": true,
+            "defaulted_on_create": false,
+            "filter": false,
+            "group": false,
+            "nillable": false,
+            "restricted_picklist": false,
+            "sort": false,
+            "update": true,
+            "id_lookup": false,
+            "evidencias": [
+              {
+                "fonte": "src:objref-group"
+              }
+            ]
+          },
+          "somente_leitura": false,
+          "origem": {
+            "estado": "verificado",
+            "valor": "padrao_plataforma",
+            "nota": "Campo padrão do objeto documentado.",
+            "evidencias": [
+              {
+                "fonte": "src:objref-group"
+              }
+            ]
+          },
+          "obrigatoriedade": {
+            "valor": "desconhecida",
+            "estado": "desconhecido"
+          },
+          "default": {
+            "forma": "nao_declarado_na_fonte",
+            "estado": "desconhecido"
+          },
+          "dominio": {
+            "natureza": "referencia",
+            "estado": "verificado",
+            "evidencias": [
+              {
+                "fonte": "src:objref-group"
+              }
+            ],
+            "contexto": "Id de registro do(s) objeto(s) referenciado(s)."
+          },
+          "disponibilidade": {
+            "desde_versao": null,
+            "ate_versao": null,
+            "estado": "desconhecido"
+          },
+          "explicacao": "explicada",
+          "estado": "verificado",
+          "evidencias": [
+            {
+              "fonte": "src:objref-group"
+            }
+          ],
+          "referencia": {
+            "alvos": [
+              "obj:QueueRoutingConfig"
+            ],
+            "nome_relacionamento": null
+          },
+          "notas": [
+            "A página lista para este campo as propriedades Create, Delete, Query, Retrieve e Update; só Create e Update foram mapeadas."
+          ]
+        },
+        {
+          "id": "obj:Group.RelatedId",
+          "nome": "RelatedId",
+          "tipo_tecnico": "reference",
+          "o_que_e": "Registro associado ao grupo; num grupo do tipo Role, é o Id do UserRole.",
+          "apis": [
+            "padrao"
+          ],
+          "propriedades_api": {
+            "estado": "verificado",
+            "create": false,
+            "defaulted_on_create": false,
+            "filter": true,
+            "group": true,
+            "nillable": true,
+            "restricted_picklist": false,
+            "sort": true,
+            "update": false,
+            "id_lookup": false,
+            "evidencias": [
+              {
+                "fonte": "src:objref-group"
+              }
+            ]
+          },
+          "somente_leitura": true,
+          "origem": {
+            "estado": "verificado",
+            "valor": "padrao_plataforma",
+            "nota": "Campo padrão do objeto documentado.",
+            "evidencias": [
+              {
+                "fonte": "src:objref-group"
+              }
+            ]
+          },
+          "obrigatoriedade": {
+            "valor": "desconhecida",
+            "estado": "desconhecido"
+          },
+          "default": {
+            "forma": "nao_declarado_na_fonte",
+            "estado": "desconhecido"
+          },
+          "dominio": {
+            "natureza": "referencia",
+            "estado": "verificado",
+            "evidencias": [
+              {
+                "fonte": "src:objref-group"
+              }
+            ],
+            "contexto": "Id de registro do(s) objeto(s) referenciado(s)."
+          },
+          "disponibilidade": {
+            "desde_versao": null,
+            "ate_versao": null,
+            "estado": "desconhecido"
+          },
+          "explicacao": "explicada",
+          "estado": "verificado",
+          "evidencias": [
+            {
+              "fonte": "src:objref-group"
+            }
+          ],
+          "referencia": {
+            "alvos": [
+              "obj:User",
+              "UserRole"
+            ],
+            "nome_relacionamento": "Related"
+          }
+        },
+        {
+          "id": "obj:Group.Type",
+          "nome": "Type",
+          "tipo_tecnico": "picklist",
+          "o_que_e": "Tipo do grupo. É este campo que distingue um public group (Regular) de uma fila (Queue) e dos grupos criados pela plataforma.",
+          "apis": [
+            "padrao"
+          ],
+          "propriedades_api": {
+            "estado": "verificado",
+            "create": true,
+            "defaulted_on_create": false,
+            "filter": true,
+            "group": true,
+            "nillable": false,
+            "restricted_picklist": true,
+            "sort": true,
+            "update": false,
+            "id_lookup": false,
+            "evidencias": [
+              {
+                "fonte": "src:objref-group"
+              }
+            ]
+          },
+          "somente_leitura": false,
+          "origem": {
+            "estado": "verificado",
+            "valor": "padrao_plataforma",
+            "nota": "Campo padrão do objeto documentado.",
+            "evidencias": [
+              {
+                "fonte": "src:objref-group"
+              }
+            ]
+          },
+          "obrigatoriedade": {
+            "valor": "sim",
+            "estado": "verificado",
+            "evidencias": [
+              {
+                "fonte": "src:objref-group"
+              }
+            ]
+          },
+          "default": {
+            "forma": "nao_declarado_na_fonte",
+            "estado": "desconhecido"
+          },
+          "dominio": {
+            "natureza": "enum_fechado",
+            "valores": [
+              {
+                "valor": "AllCustomerPortal"
+              },
+              {
+                "valor": "ChannelProgramGroup"
+              },
+              {
+                "valor": "CollaborationGroup"
+              },
+              {
+                "valor": "DataAnalytics"
+              },
+              {
+                "valor": "Manager"
+              },
+              {
+                "valor": "ManagerAndSubordinatesInternal"
+              },
+              {
+                "valor": "Organization"
+              },
+              {
+                "valor": "Participant"
+              },
+              {
+                "valor": "PRMOrganization"
+              },
+              {
+                "valor": "Queue"
+              },
+              {
+                "valor": "Regular"
+              },
+              {
+                "valor": "Role"
+              },
+              {
+                "valor": "RoleAndSubordinates"
+              },
+              {
+                "valor": "RoleAndSubordinatesInternal"
+              },
+              {
+                "valor": "SharingRecordCollGroup"
+              },
+              {
+                "valor": "Territory"
+              },
+              {
+                "valor": "TerritoryAndSubordinates"
+              }
+            ],
+            "lista_completa": "desconhecido",
+            "estado": "verificado",
+            "evidencias": [
+              {
+                "fonte": "src:objref-group"
+              }
+            ],
+            "contexto": "Valores da página. Ao criar um grupo, só Regular e Queue (e Personal, citado sem descrição) podem ser usados; os demais são reservados."
+          },
+          "disponibilidade": {
+            "desde_versao": null,
+            "ate_versao": null,
+            "estado": "desconhecido"
+          },
+          "explicacao": "explicada",
+          "estado": "verificado",
+          "evidencias": [
+            {
+              "fonte": "src:objref-group"
+            }
+          ],
+          "notas": [
+            "AllCustomerPortal: Todos os usuários de Customer Portal ou Customer Community Plus.",
+            "ChannelProgramGroup: Parceiros de um channel program.",
+            "CollaborationGroup: Grupo do Chatter.",
+            "DataAnalytics: Usuários de Tableau Next e Data 360.",
+            "Manager: Gerentes diretos e indiretos de um usuário; somente leitura.",
+            "ManagerAndSubordinatesInternal: Um usuário e seus subordinados diretos e indiretos; somente leitura.",
+            "Organization: Todos os usuários da org; somente leitura.",
+            "Participant: Grupo do Compliant Data Sharing.",
+            "PRMOrganization: Todos os parceiros, em org com site ou portal de parceiros.",
+            "Queue: Os usuários membros de uma fila.",
+            "Regular: Public group comum.",
+            "Role: Os usuários de um papel (UserRole).",
+            "RoleAndSubordinates: Os usuários de um papel e dos papéis abaixo dele.",
+            "RoleAndSubordinatesInternal: Os usuários de um papel interno e dos papéis internos abaixo dele.",
+            "SharingRecordCollGroup: Grupo com acesso a uma SharingRecordCollection.",
+            "Territory: Os usuários de um território.",
+            "TerritoryAndSubordinates: Os usuários de um território e dos que ficam abaixo dele."
+          ]
+        }
+      ],
+      "consultas": [
+        {
+          "api": "padrao",
+          "soql": "SELECT Name, DeveloperName, Type FROM Group WHERE Type = 'Queue'",
+          "contexto": "API padrão. Lista as filas da org; com Type = 'Regular', lista os public groups.",
+          "validacao": "documental"
+        }
+      ],
+      "apex": {
+        "consulta_soql_direta": {
+          "estado": "verificado",
+          "valor": true,
+          "nota": "Objeto da API padrão: consultável por SOQL em Apex, sujeito a permissões.",
+          "evidencias": [
+            {
+              "fonte": "src:objref-group"
+            }
+          ]
+        },
+        "nota": "Exemplo Apex não fornecido nesta fase."
+      },
+      "juncao": false,
+      "setup": {
+        "estado": "nao_aplicavel",
+        "nota": "Objeto consultável via API; não é tela do Setup."
+      },
+      "cobertura": {
+        "estrutural": {
+          "estado": "completa",
+          "esperado": 11,
+          "presente": 11,
+          "nota": "Tabela de campos lida completa (11); Id e campos de sistema não constam."
+        },
+        "explicativa": {
+          "estado": "completa",
+          "esperado": 11,
+          "presente": 11
+        },
+        "mapeamento": {
+          "estado": "parcial",
+          "nota": "Ver relacionamentos registrados."
+        }
+      },
+      "alertas": [
+        "Só public groups são acessíveis pela API; personal groups, não.",
+        "Excluir um public group funciona mesmo que ele seja usado em compartilhamento (desde a API 13.0).",
+        "A página é inconsistente sobre quais valores de Type podem ser usados ao criar um grupo."
+      ],
+      "estado": "verificado",
+      "evidencias": [
+        {
+          "fonte": "src:objref-group"
+        }
+      ]
     },
     {
+      "id": "obj:GroupMember",
       "nome": "GroupMember",
-      "estado": "desconhecido",
-      "campos": null,
-      "nota": "Objeto relacionado ainda não levantado no catálogo; campos, acesso e correspondência precisam de verificação."
+      "o_que_e": "Um membro direto de um public group: um usuário ou outro grupo. Cada registro liga um grupo a um membro.",
+      "papel": "Consultar e alterar por API quem participa de cada public group.",
+      "exposicoes": [
+        {
+          "api": "padrao",
+          "estado": "verificado",
+          "chamadas": [
+            "create()",
+            "delete()",
+            "describeSObjects()",
+            "getDeleted()",
+            "getUpdated()",
+            "query()",
+            "retrieve()"
+          ],
+          "nota": "A página não informa a versão de entrada do objeto.",
+          "desde_versao": null,
+          "evidencias": [
+            {
+              "fonte": "src:objref-groupmember"
+            }
+          ]
+        },
+        {
+          "api": "tooling",
+          "estado": "desconhecido",
+          "nota": "Exposição na Tooling API não verificada.",
+          "desde_versao": null
+        }
+      ],
+      "campos": [
+        {
+          "id": "obj:GroupMember.GroupId",
+          "nome": "GroupId",
+          "tipo_tecnico": "reference",
+          "o_que_e": "O grupo.",
+          "apis": [
+            "padrao"
+          ],
+          "propriedades_api": {
+            "estado": "verificado",
+            "create": true,
+            "defaulted_on_create": false,
+            "filter": true,
+            "group": true,
+            "nillable": false,
+            "restricted_picklist": false,
+            "sort": true,
+            "update": false,
+            "id_lookup": false,
+            "evidencias": [
+              {
+                "fonte": "src:objref-groupmember"
+              }
+            ]
+          },
+          "somente_leitura": false,
+          "origem": {
+            "estado": "verificado",
+            "valor": "padrao_plataforma",
+            "nota": "Campo padrão do objeto documentado.",
+            "evidencias": [
+              {
+                "fonte": "src:objref-groupmember"
+              }
+            ]
+          },
+          "obrigatoriedade": {
+            "valor": "sim",
+            "estado": "verificado",
+            "evidencias": [
+              {
+                "fonte": "src:objref-groupmember"
+              }
+            ]
+          },
+          "default": {
+            "forma": "nao_declarado_na_fonte",
+            "estado": "desconhecido"
+          },
+          "dominio": {
+            "natureza": "referencia",
+            "estado": "verificado",
+            "evidencias": [
+              {
+                "fonte": "src:objref-groupmember"
+              }
+            ],
+            "contexto": "Id de registro do(s) objeto(s) referenciado(s)."
+          },
+          "disponibilidade": {
+            "desde_versao": null,
+            "ate_versao": null,
+            "estado": "desconhecido"
+          },
+          "explicacao": "explicada",
+          "estado": "verificado",
+          "evidencias": [
+            {
+              "fonte": "src:objref-groupmember"
+            }
+          ],
+          "referencia": {
+            "alvos": [
+              "obj:Group"
+            ],
+            "nome_relacionamento": "Group"
+          }
+        },
+        {
+          "id": "obj:GroupMember.UserOrGroupId",
+          "nome": "UserOrGroupId",
+          "tipo_tecnico": "reference",
+          "o_que_e": "O membro direto: um usuário ou outro grupo.",
+          "apis": [
+            "padrao"
+          ],
+          "propriedades_api": {
+            "estado": "verificado",
+            "create": true,
+            "defaulted_on_create": false,
+            "filter": true,
+            "group": true,
+            "nillable": false,
+            "restricted_picklist": false,
+            "sort": true,
+            "update": false,
+            "id_lookup": false,
+            "evidencias": [
+              {
+                "fonte": "src:objref-groupmember"
+              }
+            ]
+          },
+          "somente_leitura": false,
+          "origem": {
+            "estado": "verificado",
+            "valor": "padrao_plataforma",
+            "nota": "Campo padrão do objeto documentado.",
+            "evidencias": [
+              {
+                "fonte": "src:objref-groupmember"
+              }
+            ]
+          },
+          "obrigatoriedade": {
+            "valor": "sim",
+            "estado": "verificado",
+            "evidencias": [
+              {
+                "fonte": "src:objref-groupmember"
+              }
+            ]
+          },
+          "default": {
+            "forma": "nao_declarado_na_fonte",
+            "estado": "desconhecido"
+          },
+          "dominio": {
+            "natureza": "referencia",
+            "estado": "verificado",
+            "evidencias": [
+              {
+                "fonte": "src:objref-groupmember"
+              }
+            ],
+            "contexto": "Id de registro do(s) objeto(s) referenciado(s)."
+          },
+          "disponibilidade": {
+            "desde_versao": null,
+            "ate_versao": null,
+            "estado": "desconhecido"
+          },
+          "explicacao": "explicada",
+          "estado": "verificado",
+          "evidencias": [
+            {
+              "fonte": "src:objref-groupmember"
+            }
+          ],
+          "referencia": {
+            "alvos": [
+              "obj:Group",
+              "obj:User"
+            ],
+            "nome_relacionamento": "UserOrGroup"
+          }
+        }
+      ],
+      "consultas": [
+        {
+          "api": "padrao",
+          "soql": "SELECT GroupId, UserOrGroupId FROM GroupMember",
+          "contexto": "API padrão. Lista os membros diretos dos grupos.",
+          "validacao": "documental"
+        }
+      ],
+      "apex": {
+        "consulta_soql_direta": {
+          "estado": "verificado",
+          "valor": true,
+          "nota": "Objeto da API padrão: consultável por SOQL em Apex, sujeito a permissões.",
+          "evidencias": [
+            {
+              "fonte": "src:objref-groupmember"
+            }
+          ]
+        },
+        "nota": "Exemplo Apex não fornecido nesta fase."
+      },
+      "juncao": true,
+      "setup": {
+        "estado": "nao_aplicavel",
+        "nota": "Objeto consultável via API; não é tela do Setup."
+      },
+      "cobertura": {
+        "estrutural": {
+          "estado": "completa",
+          "esperado": 2,
+          "presente": 2,
+          "nota": "Tabela de campos lida completa (2); Id não consta."
+        },
+        "explicativa": {
+          "estado": "completa",
+          "esperado": 2,
+          "presente": 2
+        },
+        "mapeamento": {
+          "estado": "parcial",
+          "nota": "Ver relacionamentos registrados."
+        }
+      },
+      "alertas": [
+        "Só há registro para membros DIRETOS de public groups do tipo Regular; membros indiretos não aparecem.",
+        "Não há update(): para trocar um membro, exclui-se o registro e cria-se outro.",
+        "Criar um registro igual a um existente devolve o existente, sem erro.",
+        "Para grupos com mais de 10.000 membros, a página recomenda gerir os membros por este objeto."
+      ],
+      "estado": "verificado",
+      "evidencias": [
+        {
+          "fonte": "src:objref-groupmember"
+        }
+      ]
     },
     {
+      "id": "obj:QueueSobject",
       "nome": "QueueSobject",
-      "estado": "desconhecido",
-      "campos": null,
-      "nota": "Objeto relacionado ainda não levantado no catálogo; campos, acesso e correspondência precisam de verificação."
+      "o_que_e": "A ligação entre uma fila e um tipo de objeto que ela aceita, inclusive objetos customizados. Cada registro é um par fila e objeto.",
+      "papel": "Consultar e alterar por API quais objetos cada fila aceita.",
+      "exposicoes": [
+        {
+          "api": "padrao",
+          "estado": "verificado",
+          "chamadas": [
+            "create()",
+            "delete()",
+            "describeSObjects()",
+            "getDeleted()",
+            "getUpdated()",
+            "query()",
+            "retrieve()"
+          ],
+          "acesso_especial": "Desde o Summer '20, só usuários autenticados, internos e externos. Criar um Group exige a permissão Manage Users.",
+          "restricoes_consulta": [
+            "Pela Bulk API, não é possível inserir ou atualizar mais de 18 filas de uma vez."
+          ],
+          "nota": "A página não informa a versão de entrada do objeto.",
+          "desde_versao": null,
+          "evidencias": [
+            {
+              "fonte": "src:objref-queuesobject"
+            }
+          ]
+        },
+        {
+          "api": "tooling",
+          "estado": "desconhecido",
+          "nota": "Exposição na Tooling API não verificada.",
+          "desde_versao": null
+        }
+      ],
+      "campos": [
+        {
+          "id": "obj:QueueSobject.QueueId",
+          "nome": "QueueId",
+          "tipo_tecnico": "reference",
+          "o_que_e": "A fila (um Group com Type igual a Queue).",
+          "apis": [
+            "padrao"
+          ],
+          "propriedades_api": {
+            "estado": "verificado",
+            "create": true,
+            "defaulted_on_create": false,
+            "filter": true,
+            "group": true,
+            "nillable": false,
+            "restricted_picklist": false,
+            "sort": true,
+            "update": false,
+            "id_lookup": false,
+            "evidencias": [
+              {
+                "fonte": "src:objref-queuesobject"
+              }
+            ]
+          },
+          "somente_leitura": false,
+          "origem": {
+            "estado": "verificado",
+            "valor": "padrao_plataforma",
+            "nota": "Campo padrão do objeto documentado.",
+            "evidencias": [
+              {
+                "fonte": "src:objref-queuesobject"
+              }
+            ]
+          },
+          "obrigatoriedade": {
+            "valor": "desconhecida",
+            "estado": "desconhecido"
+          },
+          "default": {
+            "forma": "nao_declarado_na_fonte",
+            "estado": "desconhecido"
+          },
+          "dominio": {
+            "natureza": "referencia",
+            "estado": "verificado",
+            "evidencias": [
+              {
+                "fonte": "src:objref-queuesobject"
+              }
+            ],
+            "contexto": "Id de registro do(s) objeto(s) referenciado(s)."
+          },
+          "disponibilidade": {
+            "desde_versao": null,
+            "ate_versao": null,
+            "estado": "desconhecido"
+          },
+          "explicacao": "explicada",
+          "estado": "verificado",
+          "evidencias": [
+            {
+              "fonte": "src:objref-queuesobject"
+            }
+          ],
+          "referencia": {
+            "alvos": [
+              "obj:Group"
+            ],
+            "nome_relacionamento": "Queue"
+          }
+        },
+        {
+          "id": "obj:QueueSobject.SobjectType",
+          "nome": "SobjectType",
+          "tipo_tecnico": "picklist",
+          "o_que_e": "Tipo de objeto que pode ser ligado à fila.",
+          "apis": [
+            "padrao"
+          ],
+          "propriedades_api": {
+            "estado": "verificado",
+            "create": true,
+            "defaulted_on_create": false,
+            "filter": true,
+            "group": true,
+            "nillable": false,
+            "restricted_picklist": true,
+            "sort": true,
+            "update": false,
+            "id_lookup": false,
+            "evidencias": [
+              {
+                "fonte": "src:objref-queuesobject"
+              }
+            ]
+          },
+          "somente_leitura": false,
+          "origem": {
+            "estado": "verificado",
+            "valor": "padrao_plataforma",
+            "nota": "Campo padrão do objeto documentado.",
+            "evidencias": [
+              {
+                "fonte": "src:objref-queuesobject"
+              }
+            ]
+          },
+          "obrigatoriedade": {
+            "valor": "desconhecida",
+            "estado": "desconhecido"
+          },
+          "default": {
+            "forma": "nao_declarado_na_fonte",
+            "estado": "desconhecido"
+          },
+          "dominio": {
+            "natureza": "lista_dinamica",
+            "estado": "desconhecido",
+            "contexto": "Valores não extraídos; podem depender de org, idioma ou recurso."
+          },
+          "disponibilidade": {
+            "desde_versao": null,
+            "ate_versao": null,
+            "estado": "desconhecido"
+          },
+          "explicacao": "explicada",
+          "estado": "verificado",
+          "evidencias": [
+            {
+              "fonte": "src:objref-queuesobject"
+            }
+          ],
+          "notas": [
+            "A página do objeto não lista os valores."
+          ]
+        }
+      ],
+      "consultas": [
+        {
+          "api": "padrao",
+          "soql": "SELECT QueueId, SobjectType FROM QueueSobject WHERE SobjectType = 'Case'",
+          "contexto": "API padrão. Lista as filas que aceitam casos.",
+          "validacao": "documental"
+        }
+      ],
+      "apex": {
+        "consulta_soql_direta": {
+          "estado": "verificado",
+          "valor": true,
+          "nota": "Objeto da API padrão: consultável por SOQL em Apex, sujeito a permissões.",
+          "evidencias": [
+            {
+              "fonte": "src:objref-queuesobject"
+            }
+          ]
+        },
+        "nota": "Exemplo Apex não fornecido nesta fase."
+      },
+      "juncao": true,
+      "setup": {
+        "estado": "nao_aplicavel",
+        "nota": "Objeto consultável via API; não é tela do Setup."
+      },
+      "cobertura": {
+        "estrutural": {
+          "estado": "completa",
+          "esperado": 2,
+          "presente": 2,
+          "nota": "Tabela de campos lida completa (2); Id não consta."
+        },
+        "explicativa": {
+          "estado": "completa",
+          "esperado": 2,
+          "presente": 2
+        },
+        "mapeamento": {
+          "estado": "parcial",
+          "nota": "Ver relacionamentos registrados."
+        }
+      },
+      "alertas": [],
+      "estado": "verificado",
+      "evidencias": [
+        {
+          "fonte": "src:objref-queuesobject"
+        }
+      ]
     }
   ]
 }

@@ -659,6 +659,12 @@
       "tipo": "representacao_xml"
     },
     {
+      "destino": "obj:Group",
+      "origem": "func:chatter",
+      "papel": "Um grupo do Chatter aparece no objeto Group com Type igual a CollaborationGroup.",
+      "tipo": "representacao_objeto_api"
+    },
+    {
       "destino": "mdt:ApexClass",
       "origem": "func:classes-apex",
       "papel": "Cada classe Apex, com código e arquivo de metadado.",
@@ -1073,6 +1079,30 @@
       "tipo": "representacao_xml"
     },
     {
+      "destino": "mdt:Queue",
+      "origem": "func:filas",
+      "papel": "Cada fila, com os objetos aceitos e os membros.",
+      "tipo": "representacao_xml"
+    },
+    {
+      "destino": "obj:Group",
+      "origem": "func:filas",
+      "papel": "A fila nos dados: um Group com Type igual a Queue.",
+      "tipo": "representacao_objeto_api"
+    },
+    {
+      "destino": "obj:GroupMember",
+      "origem": "func:filas",
+      "papel": "Membros diretos de grupos; a página documenta o registro para public groups do tipo Regular.",
+      "tipo": "representacao_objeto_api"
+    },
+    {
+      "destino": "obj:QueueSobject",
+      "origem": "func:filas",
+      "papel": "Os objetos que cada fila aceita.",
+      "tipo": "representacao_objeto_api"
+    },
+    {
       "destino": "mdt:Flow",
       "origem": "func:flow",
       "papel": "Definição implantável de uma versão de flow.",
@@ -1307,6 +1337,12 @@
       "tipo": "representacao_xml"
     },
     {
+      "destino": "mdt:Queue",
+      "origem": "func:omni-channel",
+      "papel": "A fila de onde o Omni-Channel roteia o trabalho; aponta a routing configuration.",
+      "tipo": "representacao_xml"
+    },
+    {
       "destino": "mdt:QueueRoutingConfig",
       "origem": "func:omni-channel",
       "papel": "Configuração de roteamento implantável.",
@@ -1328,6 +1364,12 @@
       "destino": "obj:AgentWork",
       "origem": "func:omni-channel",
       "papel": "Trabalho atribuído a um atendente.",
+      "tipo": "representacao_objeto_api"
+    },
+    {
+      "destino": "obj:Group",
+      "origem": "func:omni-channel",
+      "papel": "A fila, com QueueRoutingConfigId.",
       "tipo": "representacao_objeto_api"
     },
     {
@@ -1604,6 +1646,24 @@
       "destino": "obj:PlatformEventUsageMetric",
       "origem": "func:pub-sub-api",
       "papel": "Uso de publicação e entrega; o cliente aparece como PUB_SUB_API.",
+      "tipo": "representacao_objeto_api"
+    },
+    {
+      "destino": "mdt:Group",
+      "origem": "func:public-groups",
+      "papel": "A definição de cada public group (sem os membros).",
+      "tipo": "representacao_xml"
+    },
+    {
+      "destino": "obj:Group",
+      "origem": "func:public-groups",
+      "papel": "O public group nos dados: um Group com Type igual a Regular.",
+      "tipo": "representacao_objeto_api"
+    },
+    {
+      "destino": "obj:GroupMember",
+      "origem": "func:public-groups",
+      "papel": "Os membros diretos de cada public group.",
       "tipo": "representacao_objeto_api"
     },
     {
@@ -2494,6 +2554,13 @@
       "tipo": "tipo_composto"
     },
     {
+      "destino": "obj:Group",
+      "estado": "verificado",
+      "origem": "mdt:Group",
+      "rel_id": "rel:group-group",
+      "tipo": "representacao_comum"
+    },
+    {
       "destino": "mdx:InboundNetworkConnProperty",
       "origem": "mdt:InboundNetworkConnection.inboundNetworkConnProperties",
       "tipo": "tipo_composto"
@@ -2883,6 +2950,23 @@
     {
       "destino": "mdx:PublicKeyCertificateSetKey",
       "origem": "mdt:PublicKeyCertificateSet.publicKeyCertificateSetKeys",
+      "tipo": "tipo_composto"
+    },
+    {
+      "destino": "obj:Group",
+      "estado": "verificado",
+      "origem": "mdt:Queue",
+      "rel_id": "rel:queue-group",
+      "tipo": "representacao_comum"
+    },
+    {
+      "destino": "mdx:QueueMembers",
+      "origem": "mdt:Queue.queueMembers",
+      "tipo": "tipo_composto"
+    },
+    {
+      "destino": "mdx:QueueSobject",
+      "origem": "mdt:Queue.queueSobject",
       "tipo": "tipo_composto"
     },
     {
@@ -3712,11 +3796,43 @@
       "tipo": "tipo_composto"
     },
     {
+      "destino": "mdt:Group",
+      "estado": "verificado",
+      "origem": "mdx:PublicGroups.publicGroup",
+      "rel_id": "rel:queue-group-membros",
+      "tipo": "referencia_campo"
+    },
+    {
       "destino": "mdt:PublicKeyCertificate",
       "estado": "verificado",
       "origem": "mdx:PublicKeyCertificateSetKey.publicKeyCertificate",
       "rel_id": "rel:pkcsetkey-pkc",
       "tipo": "referencia_campo"
+    },
+    {
+      "destino": "mdx:PublicGroups",
+      "origem": "mdx:QueueMembers.publicGroups",
+      "tipo": "tipo_composto"
+    },
+    {
+      "destino": "mdx:RoleAndSubordinates",
+      "origem": "mdx:QueueMembers.roleAndSubordinates",
+      "tipo": "tipo_composto"
+    },
+    {
+      "destino": "mdx:RoleAndSubordinatesInternal",
+      "origem": "mdx:QueueMembers.roleAndSubordinatesInternal",
+      "tipo": "tipo_composto"
+    },
+    {
+      "destino": "mdx:Roles",
+      "origem": "mdx:QueueMembers.roles",
+      "tipo": "tipo_composto"
+    },
+    {
+      "destino": "mdx:Users",
+      "origem": "mdx:QueueMembers.users",
+      "tipo": "tipo_composto"
     },
     {
       "destino": "mdx:QuickActionListItem",
@@ -4575,6 +4691,34 @@
       "tipo": "referencia_campo"
     },
     {
+      "destino": "obj:QueueRoutingConfig",
+      "estado": "verificado",
+      "origem": "obj:Group.QueueRoutingConfigId",
+      "rel_id": "rel:group-queueroutingconfig",
+      "tipo": "referencia_campo"
+    },
+    {
+      "destino": "obj:Group",
+      "estado": "verificado",
+      "origem": "obj:GroupMember.GroupId",
+      "rel_id": "rel:groupmember-group",
+      "tipo": "referencia_campo"
+    },
+    {
+      "destino": "obj:Group",
+      "estado": "verificado",
+      "origem": "obj:GroupMember.UserOrGroupId",
+      "rel_id": "rel:groupmember-membro-grupo",
+      "tipo": "referencia_campo"
+    },
+    {
+      "destino": "obj:User",
+      "estado": "verificado",
+      "origem": "obj:GroupMember.UserOrGroupId",
+      "rel_id": "rel:groupmember-membro-usuario",
+      "tipo": "referencia_campo"
+    },
+    {
       "destino": "obj:KnowledgeArticle",
       "estado": "verificado",
       "origem": "obj:KnowledgeArticleVersion.KnowledgeArticleId",
@@ -4754,6 +4898,13 @@
       "estado": "verificado",
       "origem": "obj:PricebookEntry.Product2Id",
       "rel_id": "rel:pricebookentry-product2",
+      "tipo": "referencia_campo"
+    },
+    {
+      "destino": "obj:Group",
+      "estado": "verificado",
+      "origem": "obj:QueueSobject.QueueId",
+      "rel_id": "rel:queuesobject-group",
       "tipo": "referencia_campo"
     },
     {
@@ -4963,6 +5114,17 @@
       "tipo": "classificacao_secundaria"
     },
     {
+      "destino": "func:filas",
+      "origem": "sub:acesso-a-registros-e-hierarquias",
+      "tipo": "classificacao_principal"
+    },
+    {
+      "destino": "func:public-groups",
+      "motivo": "Public groups são alvo de sharing rules.",
+      "origem": "sub:acesso-a-registros-e-hierarquias",
+      "tipo": "classificacao_secundaria"
+    },
+    {
       "destino": "func:acoes-rapidas",
       "motivo": "Uma ação do tipo Flow invoca um flow (flowDefinition).",
       "origem": "sub:acoes-e-regras",
@@ -5080,6 +5242,12 @@
     {
       "destino": "func:feriados",
       "motivo": "Suspende regras de escalonamento e marcos de entitlement durante o feriado.",
+      "origem": "sub:atendimento",
+      "tipo": "classificacao_secundaria"
+    },
+    {
+      "destino": "func:filas",
+      "motivo": "Casos são distribuídos por filas, e o Omni-Channel roteia o trabalho a partir delas.",
       "origem": "sub:atendimento",
       "tipo": "classificacao_secundaria"
     },
@@ -5653,6 +5821,12 @@
       "tipo": "classificacao_principal"
     },
     {
+      "destino": "func:public-groups",
+      "motivo": "Pastas de relatórios e dashboards são compartilhadas com public groups.",
+      "origem": "sub:pastas-e-acesso",
+      "tipo": "classificacao_secundaria"
+    },
+    {
       "destino": "func:perfis",
       "origem": "sub:permissoes-perfis-e-grupos",
       "tipo": "classificacao_principal"
@@ -5664,6 +5838,11 @@
     },
     {
       "destino": "func:permission-sets",
+      "origem": "sub:permissoes-perfis-e-grupos",
+      "tipo": "classificacao_principal"
+    },
+    {
+      "destino": "func:public-groups",
       "origem": "sub:permissoes-perfis-e-grupos",
       "tipo": "classificacao_principal"
     },
@@ -5805,6 +5984,12 @@
       "destino": "func:equipes-de-conta-e-oportunidade",
       "origem": "sub:vendas",
       "tipo": "classificacao_principal"
+    },
+    {
+      "destino": "func:filas",
+      "motivo": "Leads podem ficar numa fila até alguém assumi-los.",
+      "origem": "sub:vendas",
+      "tipo": "classificacao_secundaria"
     },
     {
       "destino": "func:leads",
@@ -6465,6 +6650,15 @@
     },
     {
       "estado": "verificado",
+      "grupo_cor": "cls:acesso-identidade-e-seguranca",
+      "id": "func:filas",
+      "resumo": "Uma fila guarda registros que ainda não têm um dono individual, para que um time divida o trabalho: os registros aparecem numa lista e qualquer membro pode assumir um deles. Cada fila diz quais objetos aceita e quem são os membros: usuários, papéis, public groups e outros.",
+      "rotulo": "Filas (queues)",
+      "rotulo_tecnico": "Queues",
+      "tipo": "funcionalidade"
+    },
+    {
+      "estado": "verificado",
       "grupo_cor": "cls:automacao-de-processos-e-regras-de-negocio",
       "id": "func:flow",
       "resumo": "Automação declarativa construída no Flow Builder, com elementos, variáveis e decisões.",
@@ -6812,6 +7006,15 @@
       "resumo": "Interface única para publicar e assinar eventos de plataforma, eventos de alteração e eventos de monitoramento em tempo real. Usa gRPC e HTTP/2, com mensagens em Avro.",
       "rotulo": "Pub/Sub API",
       "rotulo_tecnico": "Pub/Sub API",
+      "tipo": "funcionalidade"
+    },
+    {
+      "estado": "verificado",
+      "grupo_cor": "cls:acesso-identidade-e-seguranca",
+      "id": "func:public-groups",
+      "resumo": "Um public group reúne usuários, papéis, outros grupos e demais tipos de membro, para que um conjunto de pessoas que não cabe num único papel receba o mesmo acesso. Serve de alvo para sharing rules, pastas de relatórios e dashboards, list views e membros de filas.",
+      "rotulo": "Public groups",
+      "rotulo_tecnico": "Public Groups",
       "tipo": "funcionalidade"
     },
     {
@@ -7588,6 +7791,13 @@
     },
     {
       "estado": "verificado",
+      "id": "mdt:Group",
+      "resumo": "Um public group: um conjunto que pode reunir usuários, papéis e outros grupos, usado para compartilhar registros e dar acesso.",
+      "rotulo": "Group",
+      "tipo": "metadata_type"
+    },
+    {
+      "estado": "verificado",
       "id": "mdt:InboundCertificate",
       "resumo": "Certificado de autenticação mútua (mTLS) importado para a org.",
       "rotulo": "InboundCertificate",
@@ -7829,6 +8039,13 @@
       "id": "mdt:PublicKeyCertificateSet",
       "resumo": "Conjunto de chaves públicas (certificados ou JWKs), informadas uma a uma ou buscadas de um endpoint JWKS.",
       "rotulo": "PublicKeyCertificateSet",
+      "tipo": "metadata_type"
+    },
+    {
+      "estado": "verificado",
+      "id": "mdt:Queue",
+      "resumo": "Uma fila (queue): um lugar para guardar registros que ainda não têm um dono individual, com os objetos que ela aceita e os membros que podem assumi-los.",
+      "rotulo": "Queue",
       "tipo": "metadata_type"
     },
     {
@@ -9231,6 +9448,12 @@
     },
     {
       "estado": "verificado",
+      "id": "mdx:PublicGroups",
+      "rotulo": "PublicGroups",
+      "tipo": "estrutura_auxiliar"
+    },
+    {
+      "estado": "verificado",
       "id": "mdx:PublicKeyCertificateSetKey",
       "rotulo": "PublicKeyCertificateSetKey",
       "tipo": "estrutura_auxiliar"
@@ -9243,8 +9466,20 @@
     },
     {
       "estado": "verificado",
+      "id": "mdx:QueueMembers",
+      "rotulo": "QueueMembers",
+      "tipo": "estrutura_auxiliar"
+    },
+    {
+      "estado": "verificado",
       "id": "mdx:QueueRoutingConfigSkill",
       "rotulo": "QueueRoutingConfigSkill",
+      "tipo": "estrutura_auxiliar"
+    },
+    {
+      "estado": "verificado",
+      "id": "mdx:QueueSobject",
+      "rotulo": "QueueSobject",
       "tipo": "estrutura_auxiliar"
     },
     {
@@ -9363,6 +9598,24 @@
     },
     {
       "estado": "verificado",
+      "id": "mdx:RoleAndSubordinates",
+      "rotulo": "RoleAndSubordinates",
+      "tipo": "estrutura_auxiliar"
+    },
+    {
+      "estado": "verificado",
+      "id": "mdx:RoleAndSubordinatesInternal",
+      "rotulo": "RoleAndSubordinatesInternal",
+      "tipo": "estrutura_auxiliar"
+    },
+    {
+      "estado": "verificado",
+      "id": "mdx:Roles",
+      "rotulo": "Roles",
+      "tipo": "estrutura_auxiliar"
+    },
+    {
+      "estado": "verificado",
       "id": "mdx:ScontrolTranslation",
       "rotulo": "ScontrolTranslation",
       "tipo": "estrutura_auxiliar"
@@ -9467,6 +9720,12 @@
       "estado": "verificado",
       "id": "mdx:TimelineObjectDefinitionTranslation",
       "rotulo": "TimelineObjectDefinitionTranslation",
+      "tipo": "estrutura_auxiliar"
+    },
+    {
+      "estado": "verificado",
+      "id": "mdx:Users",
+      "rotulo": "Users",
       "tipo": "estrutura_auxiliar"
     },
     {
@@ -9914,6 +10173,26 @@
         "padrao"
       ],
       "estado": "verificado",
+      "id": "obj:Group",
+      "resumo": "Um conjunto de usuários. O mesmo objeto guarda public groups, filas e os grupos que a plataforma cria para papéis, territórios e gerentes; o campo Type diz qual é qual.",
+      "rotulo": "Group",
+      "tipo": "objeto_api"
+    },
+    {
+      "apis": [
+        "padrao"
+      ],
+      "estado": "verificado",
+      "id": "obj:GroupMember",
+      "resumo": "Um membro direto de um public group: um usuário ou outro grupo. Cada registro liga um grupo a um membro.",
+      "rotulo": "GroupMember",
+      "tipo": "objeto_api_juncao"
+    },
+    {
+      "apis": [
+        "padrao"
+      ],
+      "estado": "verificado",
       "id": "obj:KnowledgeArticle",
       "resumo": "Representa um artigo de conhecimento, independente da versão.",
       "rotulo": "KnowledgeArticle",
@@ -10152,6 +10431,16 @@
       "resumo": "Configuração de roteamento de uma fila do Omni-Channel.",
       "rotulo": "QueueRoutingConfig",
       "tipo": "objeto_api"
+    },
+    {
+      "apis": [
+        "padrao"
+      ],
+      "estado": "verificado",
+      "id": "obj:QueueSobject",
+      "resumo": "A ligação entre uma fila e um tipo de objeto que ela aceita, inclusive objetos customizados. Cada registro é um par fila e objeto.",
+      "rotulo": "QueueSobject",
+      "tipo": "objeto_api_juncao"
     },
     {
       "apis": [

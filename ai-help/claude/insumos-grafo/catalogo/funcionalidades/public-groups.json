@@ -1,0 +1,121 @@
+{
+  "id": "func:public-groups",
+  "nome": "Public groups",
+  "nome_tecnico": "Public Groups",
+  "aliases": [
+    "public group",
+    "grupo público",
+    "group",
+    "grupo",
+    "group member",
+    "personal group",
+    "grant access using hierarchies"
+  ],
+  "termos_busca": [
+    "grant access using hierarchies",
+    "group",
+    "group member",
+    "grupo",
+    "grupo público",
+    "personal group",
+    "public group",
+    "public groups"
+  ],
+  "o_que_e": "Um public group reúne usuários, papéis, outros grupos e demais tipos de membro, para que um conjunto de pessoas que não cabe num único papel receba o mesmo acesso. Serve de alvo para sharing rules, pastas de relatórios e dashboards, list views e membros de filas.",
+  "finalidade": "Compartilhar registros e recursos com um conjunto de pessoas sem criar uma regra para cada uma.",
+  "exemplo": "O grupo Comitê de Preços reúne dois papéis de vendas e três pessoas do financeiro; uma sharing rule dá a ele acesso às oportunidades grandes.",
+  "classificacao_principal": {
+    "classificacao": "cls:acesso-identidade-e-seguranca",
+    "subclassificacao": "sub:permissoes-perfis-e-grupos"
+  },
+  "classificacoes_secundarias": [
+    {
+      "classificacao": "cls:acesso-identidade-e-seguranca",
+      "subclassificacao": "sub:acesso-a-registros-e-hierarquias",
+      "motivo": "Public groups são alvo de sharing rules."
+    },
+    {
+      "classificacao": "cls:relatorios-analytics-e-exploracao",
+      "subclassificacao": "sub:pastas-e-acesso",
+      "motivo": "Pastas de relatórios e dashboards são compartilhadas com public groups."
+    }
+  ],
+  "representacoes": {
+    "metadata_types": [
+      {
+        "ref": "mdt:Group",
+        "papel": "A definição de cada public group (sem os membros)."
+      }
+    ],
+    "objetos_api": [
+      {
+        "ref": "obj:Group",
+        "papel": "O public group nos dados: um Group com Type igual a Regular."
+      },
+      {
+        "ref": "obj:GroupMember",
+        "papel": "Os membros diretos de cada public group."
+      }
+    ],
+    "ausencias": []
+  },
+  "setup": {
+    "estado": "verificado",
+    "valor": "Setup > Quick Find: Public Groups > Public Groups",
+    "nota": "Lista dos public groups; New cria um grupo. Rótulos em inglês, como na fonte; a tradução da interface em pt-BR não foi verificada.",
+    "evidencias": [
+      {
+        "fonte": "src:help-public-groups-knowledge"
+      }
+    ]
+  },
+  "recomendacoes": [],
+  "alertas": [
+    "Implantar o metadata type Group NÃO leva os membros: eles precisam ser carregados à parte (objeto GroupMember).",
+    "Criar ou editar um public group exige a permissão Manage Users.",
+    "Com Grant Access Using Hierarchies marcado, o que é compartilhado com o grupo também chega a quem está acima na hierarquia de papéis.",
+    "Editar grupos, papéis e territórios faz as sharing rules serem recalculadas.",
+    "Há dois tipos de grupo: public groups, criados por administradores, e personal groups; só os public groups são acessíveis pela API.",
+    "Grupo do Chatter é outro recurso: no objeto Group, aparece com Type igual a CollaborationGroup."
+  ],
+  "limitacoes": [
+    "Com mais de 10.000 membros, editar o grupo pela página de criação ou edição pode ficar lento ou perder membros; a Ajuda manda usar o access summary do grupo, user access policies ou a API de GroupMember.",
+    "A Ajuda recomenda não passar de cinco níveis de grupos dentro de grupos."
+  ],
+  "estado": "verificado",
+  "evidencias": [
+    {
+      "fonte": "src:mdapi-group"
+    },
+    {
+      "fonte": "src:objref-group"
+    },
+    {
+      "fonte": "src:objref-groupmember"
+    },
+    {
+      "fonte": "src:help-public-groups"
+    },
+    {
+      "fonte": "src:help-public-groups-create"
+    },
+    {
+      "fonte": "src:help-group-member-types"
+    },
+    {
+      "fonte": "src:help-public-groups-considerations"
+    },
+    {
+      "fonte": "src:help-public-group-summary"
+    },
+    {
+      "fonte": "src:help-sharing-rules"
+    },
+    {
+      "fonte": "src:help-sharing-rule-categories"
+    },
+    {
+      "fonte": "src:help-public-groups-knowledge"
+    }
+  ]
+}
