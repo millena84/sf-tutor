@@ -1,0 +1,140 @@
+# Publicação automática (issue #15): quando a main do sf-tutor muda o site ou a projeção dos insumos,
+# verifica o site e abre (ou atualiza) um PR de publicação em millena84/tutorial-sf-grafo.
+#
+# - Nunca faz push na main do repositório público: só no ramo publicar/automatico, e a publicação entra por PR.
+# - Há no máximo um PR automático aberto; cada merge na main do sf-tutor atualiza esse mesmo PR.
+# - Precisa do secret TUTORIAL_SF_GRAFO_TOKEN: token fine-grained restrito ao repositório público, com
+#   Contents: Read and write e Pull requests: Read and write. Sem o secret, o workflow verifica o site,
+#   avisa que não publicou e termina sem erro.
+name: Publicar site
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'apps/sf-tutor/**'
+      - 'ai-help/claude/insumos-grafo/gerado/site/**'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: publicar-site
+  cancel-in-progress: false
+
+env:
+  REPO_PUBLICO: millena84/tutorial-sf-grafo
+  RAMO_PUBLICACAO: publicar/automatico
+
+jobs:
+  publicar:
+    name: Verificar e abrir PR de publicação
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    defaults:
+      run:
+        shell: bash
+    steps:
+      # Histórico completo: o build registra em build-info.json o último commit que mudou gerado/site.
+      - uses: actions/checkout@v7
+        with:
+          fetch-depth: 0
+
+      - uses: actions/setup-python@v7
+        with:
+          python-version: '3.13'
+          cache: pip
+          cache-dependency-path: ai-help/claude/insumos-grafo/requirements.txt
+
+      - name: Instalar dependências dos insumos
+        run: python -m pip install -r ai-help/claude/insumos-grafo/requirements.txt
+
+      - uses: actions/setup-node@v7
+        with:
+          node-version: '22'
+          cache: npm
+          cache-dependency-path: apps/sf-tutor/package-lock.json
+
+      - name: Instalar dependências do site
+        working-directory: apps/sf-tutor
+        run: npm ci
+
+      - name: Instalar o Chromium do Playwright
+        working-directory: apps/sf-tutor
+        run: npx playwright install --with-deps chromium
+
+      - name: Verificar o site
+        working-directory: apps/sf-tutor
+        run: npm run verificar
+
+      # O teste de performance acrescenta a fixture sintética ao dist/: o build final a remove.
+      - name: Build final para publicação
+        working-directory: apps/sf-tutor
+        run: npm run build
+
+      - name: Conferir o token de publicação
+        id: token
+        env:
+          TOKEN: ${{ secrets.TUTORIAL_SF_GRAFO_TOKEN }}
+        run: |
+          if [ -z "$TOKEN" ]; then
+            echo "tem=nao" >> "$GITHUB_OUTPUT"
+            echo "::warning::Secret TUTORIAL_SF_GRAFO_TOKEN não configurado: o site foi verificado, mas nenhum PR de publicação foi aberto."
+          else
+            echo "tem=sim" >> "$GITHUB_OUTPUT"
+          fi
+
+      - name: Baixar o repositório público
+        if: steps.token.outputs.tem == 'sim'
+        uses: actions/checkout@v7
+        with:
+          repository: ${{ env.REPO_PUBLICO }}
+          ref: main
+          token: ${{ secrets.TUTORIAL_SF_GRAFO_TOKEN }}
+          path: publico
+
+      - name: Preparar docs/
+        id: docs
+        if: steps.token.outputs.tem == 'sim'
+        run: apps/sf-tutor/scripts/publicar-docs.sh "$GITHUB_WORKSPACE/publico"
+
+      - name: Abrir ou atualizar o PR de publicação
+        if: steps.token.outputs.tem == 'sim' && steps.docs.outputs.mudou == 'sim'
+        env:
+          GH_TOKEN: ${{ secrets.TUTORIAL_SF_GRAFO_TOKEN }}
+          ORIGEM: ${{ github.repository }}
+          SHA: ${{ github.sha }}
+          RUN_URL: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
+        run: |
+          curto="${SHA:0:7}"
+          cd publico
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git checkout -q -B "$RAMO_PUBLICACAO"
+          git commit -q -m "Publicação: sf-tutor $curto" \
+            -m "docs/ = apps/sf-tutor/dist gerado no commit $ORIGEM@$SHA. Site verificado em $RUN_URL."
+          git push -q --force origin "$RAMO_PUBLICACAO"
+
+          {
+            echo "Publicação automática do site a partir de $ORIGEM@$SHA."
+            echo
+            echo "- \`docs/\` = \`apps/sf-tutor/dist\` desse commit (ver \`docs/data/build-info.json\`)."
+            echo "- \`docs/__teste-sintetico\` removido; \`docs/.nojekyll\` criado."
+            echo "- Site verificado antes de publicar (build, lint, Vitest, e2e e perf): $RUN_URL"
+            echo
+            echo "Este PR é reaproveitado: cada merge na \`main\` do sf-tutor que muda o site atualiza o ramo \`$RAMO_PUBLICACAO\`."
+          } > "$RUNNER_TEMP/corpo.md"
+
+          numero="$(gh pr list --repo "$REPO_PUBLICO" --head "$RAMO_PUBLICACAO" --base main --state open --json number --jq '.[0].number // empty')"
+          if [ -n "$numero" ]; then
+            gh pr edit "$numero" --repo "$REPO_PUBLICO" --title "Publicação: sf-tutor $curto" --body-file "$RUNNER_TEMP/corpo.md"
+            echo "PR de publicação atualizado: #$numero"
+          else
+            gh pr create --repo "$REPO_PUBLICO" --base main --head "$RAMO_PUBLICACAO" \
+              --title "Publicação: sf-tutor $curto" --body-file "$RUNNER_TEMP/corpo.md"
+          fi
+
+      - name: Nada a publicar
+        if: steps.token.outputs.tem == 'sim' && steps.docs.outputs.mudou != 'sim'
+        run: echo "::notice::O conteúdo de docs/ já está igual ao da main do repositório público (só o build-info mudaria). Nenhum PR aberto."

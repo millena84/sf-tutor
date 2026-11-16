@@ -19,6 +19,19 @@ Site estático: HTML, CSS e TypeScript, sem servidor e sem chamadas à org. Ele 
 | `npm run verificar` | todos os anteriores, em ordem |
 | `npm run dados:sem-validar` | copia os dados sem validar a base (só para depurar a interface) |
 
+## CI e publicação
+
+Dois workflows em `.github/workflows/`:
+
+- **`ci.yml`** roda em todo PR. O job de insumos exige `sftutor.py tudo` com 0 erros e 0 avisos, confere que os arquivos gerados estão no commit e roda os testes. O job do site roda `npm run verificar`, na ordem build → lint → Vitest → e2e → perf, com o Chromium do Playwright. Os resultados (e2e, capturas, `perf-*.json`) ficam anexados ao run.
+- **`publicar.yml`** roda quando a `main` muda `apps/sf-tutor/` ou `gerado/site/`. Verifica o site, faz o build final e abre ou atualiza **um** PR de publicação em `millena84/tutorial-sf-grafo`, no ramo `publicar/automatico`. Nunca escreve na `main` do repositório público: a publicação continua entrando por PR revisado.
+
+A parte local da publicação fica em `scripts/publicar-docs.sh <clone do repositório público>`: copia `dist/` para `docs/`, remove `docs/__teste-sintetico` e cria `docs/.nojekyll`. O script recusa um build com alterações locais nos insumos ou com a fixture de performance, e avisa quando só o `build-info.json` mudaria. Serve também para publicar à mão.
+
+Para a publicação automática funcionar, o repositório precisa do secret `TUTORIAL_SF_GRAFO_TOKEN`: um token fine-grained restrito a `millena84/tutorial-sf-grafo`, com `Contents: Read and write` e `Pull requests: Read and write`. Sem o secret, o workflow verifica o site, avisa e não publica.
+
+O `build-info.json` registra `commit` (HEAD do build) e `commit_insumos` (último commit que mudou `gerado/site`; fica nulo em clone raso).
+
 ## Fluxo de dados
 
 ```

@@ -57,15 +57,22 @@ function copiar(de, para) {
 copiar(origem, destino);
 
 let commit = null;
+// commit_insumos: último commit que mudou a projeção do site (gerado/site). Fica nulo em clone raso, onde o histórico não permite saber.
+let commitInsumos = null;
 try {
-  commit = execFileSync('git', ['rev-parse', '--short', 'HEAD'], { cwd: insumos }).toString().trim();
-  const sujo = execFileSync('git', ['status', '--porcelain', '--', '.'], { cwd: insumos }).toString().trim();
+  const git = (...args) => execFileSync('git', args, { cwd: insumos }).toString().trim();
+  commit = git('rev-parse', '--short', 'HEAD');
+  if (git('rev-parse', '--is-shallow-repository') !== 'true') {
+    commitInsumos = git('log', '-1', '--format=%h', '--', 'gerado/site') || null;
+  }
+  const sujo = git('status', '--porcelain', '--', '.');
   if (sujo) commit += '+alterações-locais';
 } catch {
   /* fora de um repositório git */
 }
 writeFileSync(join(destino, 'build-info.json'), JSON.stringify({
   commit,
+  commit_insumos: commitInsumos,
   data_build: new Date().toISOString(),
   origem: 'ai-help/claude/insumos-grafo/gerado/site',
 }));
