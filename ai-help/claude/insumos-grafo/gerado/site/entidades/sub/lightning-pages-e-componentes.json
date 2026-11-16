@@ -48,6 +48,22 @@
       "texto": "Componentes vêm de três origens: os padrão da Salesforce, os customizados e os de terceiros (AppExchange). Os customizados podem precisar de configuração para funcionar no Lightning App Builder.",
       "tipo": "atencao",
       "titulo": "Componentes customizados"
+    },
+    {
+      "evidencias": [
+        {
+          "fonte": "src:mdapi-lightningcomponentbundle"
+        },
+        {
+          "fonte": "src:mdapi-auradefinitionbundle"
+        },
+        {
+          "fonte": "src:lwc-config-file"
+        }
+      ],
+      "texto": "Componentes customizados de página vêm de Lightning web components (LightningComponentBundle) ou de Aura components (AuraDefinitionBundle). No LWC, é o arquivo de configuração que diz em que tipos de página o componente pode ser usado.",
+      "tipo": "implantacao",
+      "titulo": "Componentes customizados como metadado"
     }
   ],
   "classificacao": "cls:interface-e-experiencia-do-usuario",
@@ -64,6 +80,25 @@
     ],
     "funcionalidades": [
       {
+        "alertas": [
+          "Testes Jest não funcionam com Aura components.",
+          "Cada bundle aceita um só arquivo de cada tipo principal (.app, .cmp, .design, .evt, .intf, .tokens)."
+        ],
+        "exemplo": "Um bundle antigo tem sample.cmp, sampleController.js e sampleHelper.js; num LWC, a marcação vai para sample.html e os dois .js viram um só.",
+        "id": "func:aura-components",
+        "principal": false,
+        "tema_principal": "sub:codigo-e-bundles"
+      },
+      {
+        "alertas": [
+          "Em páginas com Dynamic Forms, os campos de criar, editar e clonar vêm da página, não do page layout."
+        ],
+        "exemplo": "Na página de Caso, a seção Reembolso só aparece quando o tipo do caso é Devolução.",
+        "id": "func:dynamic-forms",
+        "principal": false,
+        "tema_principal": "sub:layouts-e-paginas-de-registro"
+      },
+      {
         "exemplo": "Uma página de registro de Contrato com abas e um componente de histórico.",
         "id": "func:lightning-pages",
         "pre_requisitos": [
@@ -71,15 +106,70 @@
           "Customize Application."
         ],
         "principal": true
+      },
+      {
+        "alertas": [
+          "Sem o arquivo de configuração .js-meta.xml, o envio do componente à org dá erro."
+        ],
+        "exemplo": "Um componente mostra o saldo do cliente na página de registro da conta; o arquivo de configuração o libera para record pages.",
+        "id": "func:lightning-web-components",
+        "principal": false,
+        "tema_principal": "sub:codigo-e-bundles"
+      },
+      {
+        "alertas": [
+          "Abas de objeto padrão substituídas por página Visualforce não são suportadas no app móvel."
+        ],
+        "exemplo": "Uma página Visualforce antiga gera a proposta em formato de impressão a partir de uma oportunidade.",
+        "id": "func:visualforce",
+        "principal": false,
+        "tema_principal": "sub:codigo-e-bundles"
       }
     ],
     "metadata_types": [
       {
+        "estrutura": "completa",
+        "funcionalidades": [
+          "func:visualforce"
+        ],
+        "id": "mdt:ApexComponent",
+        "nota_suporte": null,
+        "suporte_cli": "suportado"
+      },
+      {
+        "estrutura": "completa",
+        "funcionalidades": [
+          "func:visualforce"
+        ],
+        "id": "mdt:ApexPage",
+        "nota_suporte": null,
+        "suporte_cli": "suportado"
+      },
+      {
+        "estrutura": "completa",
+        "funcionalidades": [
+          "func:aura-components"
+        ],
+        "id": "mdt:AuraDefinitionBundle",
+        "nota_suporte": null,
+        "suporte_cli": "suportado"
+      },
+      {
         "estrutura": "parcial",
         "funcionalidades": [
+          "func:dynamic-forms",
           "func:lightning-pages"
         ],
         "id": "mdt:FlexiPage",
+        "nota_suporte": null,
+        "suporte_cli": "suportado"
+      },
+      {
+        "estrutura": "completa",
+        "funcionalidades": [
+          "func:lightning-web-components"
+        ],
+        "id": "mdt:LightningComponentBundle",
         "nota_suporte": null,
         "suporte_cli": "suportado"
       }
@@ -121,7 +211,11 @@
   "estado": "desconhecido",
   "fora_do_escopo": "O código dos componentes como artefato de entrega fica em \"Código e bundles\".",
   "funcionalidades": [
-    "func:lightning-pages"
+    "func:aura-components",
+    "func:dynamic-forms",
+    "func:lightning-pages",
+    "func:lightning-web-components",
+    "func:visualforce"
   ],
   "id": "sub:lightning-pages-e-componentes",
   "natureza": "curadoria_didatica",

@@ -4,7 +4,7 @@
   "sigla": "OBS-06",
   "classificacao": "cls:observabilidade-auditoria-e-operacao",
   "natureza": "curadoria_didatica",
-  "descricao": "Acompanhamento de jobs e investigação de problemas.",
+  "descricao": "O acompanhamento de execuções em segundo plano e a investigação de problemas, combinando jobs, logs e auditoria.",
   "escopo": "Entram o acompanhamento de jobs e a investigação de problemas na operação.",
   "fora_do_escopo": "Limites de execuções assíncronas ficam em \"Monitoramento de jobs e limites\".",
   "para_iniciantes": {
@@ -14,6 +14,9 @@
       {
         "fonte": "src:apex-queueable"
       }
+    ],
+    "por_onde_comecar": [
+      "func:monitoramento-de-jobs-apex"
     ]
   },
   "encadeamento": {
@@ -24,7 +27,52 @@
       }
     ]
   },
-  "funcionalidades": [],
+  "avancado": [
+    {
+      "tipo": "implantacao",
+      "titulo": "Onde olhar os jobs",
+      "texto": "A página Apex Jobs lista os jobs Apex dos últimos sete dias e o uso do limite de 24 horas; Apex Flex Queue mostra os batches em espera; Scheduled Jobs, os agendados. Por API, os mesmos dados estão em AsyncApexJob, CronTrigger e CronJobDetail.",
+      "evidencias": [
+        {
+          "fonte": "src:help-apex-job-queue"
+        },
+        {
+          "fonte": "src:objref-asyncapexjob"
+        }
+      ]
+    },
+    {
+      "tipo": "decisao",
+      "titulo": "Roteiro de investigação",
+      "texto": "Para um erro numa execução: veja o job e o primeiro erro em AsyncApexJob; ligue uma trace flag e reproduza para obter o log de depuração; confira no Setup Audit Trail se alguma configuração mudou perto do horário.",
+      "evidencias": [
+        {
+          "fonte": "src:objref-asyncapexjob"
+        },
+        {
+          "fonte": "src:help-debug-logs"
+        },
+        {
+          "fonte": "src:help-setup-audit-trail"
+        }
+      ]
+    }
+  ],
+  "funcionalidades": [
+    "func:monitoramento-de-jobs-apex"
+  ],
   "estado": "desconhecido",
-  "nota_estado": "Agrupamento proposto na especificação; fronteira ainda não cruzada com a documentação oficial."
+  "nota_estado": "Tema criado pelo projeto (00-especificacao-grafo.md), não é nomenclatura oficial da Salesforce. Cruzado em 2026-11-10 com áreas da documentação oficial listadas nas referências; a correspondência é parcial e o recorte continua sendo do projeto.",
+  "referencias_oficiais": [
+    {
+      "fonte": "src:help-apex-job-queue",
+      "secao": "Monitor the Apex Job Queue",
+      "nota": "Cobre parte do tema: página Apex Jobs."
+    },
+    {
+      "fonte": "src:help-debug-logs",
+      "secao": "Debug Logs",
+      "nota": "Cobre parte do tema: logs de depuração para diagnóstico."
+    }
+  ]
 }

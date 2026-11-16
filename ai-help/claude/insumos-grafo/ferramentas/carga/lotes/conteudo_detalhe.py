@@ -804,3 +804,46 @@ _f("src:help-org-health", "Monitor Org Health and Usage in Setup (Salesforce Hel
    "Limites de Apex acompanhados e o que acontece acima deles.", **AJ)
 _f("src:help-kb-asyncapexjob-types", "List of asynchronous Apex jobs as listed in SOAP API guide (KB)", _H + "000387766&language=en_US&type=1",
    "Tipos de job de uso interno em AsyncApexJob.", **AJ)
+
+
+# ====================================================================== Interface (rodada A3) e Observabilidade (rodada A4)
+# Só fontes: o conteúdo novo destes temas fica em conteudo_extras.py, que acrescenta itens ao que já existe.
+_EXT = "fontes/extracoes/temas-detalhe-interface.txt"
+_DATA = "2026-11-16"
+_L = "&language=en_US&type=5"
+for _id, _tit, _art, _pert in (
+    ("src:help-lightning-apps-create", "Create Lightning Apps", "sf.apps_lightning_create.htm", "Como criar um Lightning app e o que se escolhe."),
+    ("src:help-build-app", "Build Your Own Salesforce App", "dev_def.htm", "O que é um app e os dois tipos."),
+    ("src:help-app-builder-apps", "Customize Lightning Apps with the Lightning App Builder", "platform.apps_lightning_customize.htm", "O que se ajusta num Lightning app."),
+    ("src:help-utility-bar", "Add a Utility Bar to Lightning Apps", "platform.apps_lightning_utilities.htm", "Itens de segundo plano na utility bar."),
+    ("src:help-layouts-lex", "How Page Layout Elements Display in Lightning Experience", "platform.layouts_in_lex.htm", "O que o page layout controla no Lightning Experience."),
+    ("src:help-layout-considerations", "Page Layout Considerations", "sf.layouts_considerations.htm", "Tempo para a mudança aparecer; independência do compact layout."),
+    ("src:help-compact-layouts", "Compact Layouts", "platform.compact_layout_overview.htm", "O que é um compact layout e onde aparece."),
+    ("src:help-compact-layout-notes", "Compact Layout Limitations and Considerations", "platform.compact_layout_notes.htm", "Limites e atribuição de compact layouts."),
+    ("src:help-compact-layout-create", "Create Compact Layouts", "platform.compact_layout_create.htm", "Como criar um compact layout."),
+    ("src:help-dynamic-forms", "Break Up Your Record Details with Dynamic Forms", "platform.dynamic_forms_overview.htm", "O que Dynamic Forms muda na página de registro."),
+    ("src:help-lightning-std-components", "Standard Lightning Page Components", "sf.lightning_page_components.htm", "Origem dos campos e ações do highlights panel; limite de campos."),
+    ("src:help-rn-dynamic-highlights", "Configure Record Highlights in Lightning App Builder (Release Notes)", "release-notes.rn_lab_dynamic_highlights_panel.htm&release=252", "Dynamic Highlights Panel."),
+    ("src:help-themes", "Personalize Your Org with Themes and Branding", "sf.brand_your_org_in_lightning_experience.htm", "O que é um tema e os temas SLDS."),
+    ("src:help-rn-dark-mode", "Use Dark Mode in More Editions (Beta) (Release Notes)", "release-notes.rn_slds_dark_mode_beta.htm&release=260", "Dark mode e caminho de Themes and Branding."),
+    ("src:help-personalize-display", "Personalize Lightning Experience Display", "user_overview_lex.htm", "Densidade e tema claro ou escuro por usuário."),
+):
+    _f(_id, _tit + " (Salesforce Help)", _H + _art + _L, _pert, **AJ)
+
+_EXT = "fontes/extracoes/temas-detalhe-observabilidade.txt"
+_f("src:apex-debug-log", "Debug Log (Apex Developer Guide)", _AX + "apex-debugging-debug-log.html", "Tamanho e retenção de logs de depuração; trace flags.", **DOC)
+for _id, _tit, _art, _pert in (
+    ("src:help-debug-logs", "Debug Logs", "platform.code_debug_log.htm", "Quando um log de depuração é gerado e como é truncado."),
+    ("src:help-debug-setup", "Set Up Debug Logging", "sf.code_add_users_debug_log.htm", "Permissão e configuração de trace flags e debug levels."),
+    ("src:help-devconsole-logs", "Logs Tab", "sf.code_dev_console_tab_browser_logs.htm", "Caminho de Setup dos logs e papel do nível de log."),
+    ("src:help-kb-traceflags-prod", "Best practices for using debug logs with trace flags in Production (KB)", "000395769", "Armazenamento de logs e cuidado em produção."),
+    ("src:help-setup-audit-trail", "Monitor Setup Changes with Setup Audit Trail", "sf.admin_monitorsetup.htm", "O que a tela mostra, por quanto tempo e como baixar."),
+    ("src:help-security-audit", "Monitor and Audit Security in Salesforce", "xcloud.security_audit.htm", "Recursos de auditoria: Setup Audit Trail e Field History Tracking."),
+    ("src:help-kb-audit-changesets", "Unable to track gained or lost User permission in Profile (KB)", "000386467", "Mudanças por change set fora do Setup Audit Trail."),
+    ("src:help-event-monitoring", "Event Monitoring", "xcloud.real_time_event_monitoring_overview.htm", "O que o Event Monitoring oferece."),
+    ("src:help-em-enable", "Enable Access to Event Monitoring", "xcloud.real_time_event_monitoring_enable.htm", "Licença e permissão do Event Monitoring."),
+    ("src:help-kb-em-faq", "Salesforce Event Monitoring Frequently Asked Questions (KB)", "000396295", "Retenção dos arquivos de log por edição."),
+    ("src:help-kb-rtem-faq", "FAQs for Salesforce Real-time Event Monitoring (KB)", "000396594", "Diferença entre Event Monitoring e Real-Time Event Monitoring."),
+    ("src:help-rn-elf-browser", "Access and Download Event Log File Data with the Event Log File Browser (Release Notes)", "release-notes.rn_security_em_elf_browser.htm&release=250", "Caminho do Event Log File Browser."),
+):
+    _f(_id, _tit + ("" if "(" in _tit else " (Salesforce Help)"), _H + _art + _L, _pert, **AJ)

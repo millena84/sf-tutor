@@ -21,6 +21,7 @@ from conteudo_pendentes2 import CONTEUDO_PENDENTES2, FONTES_PENDENTES2  # noqa: 
 from conteudo_pendentes3 import CONTEUDO_PENDENTES3, FONTES_PENDENTES3  # noqa: E402
 from conteudo_pendentes4 import CONTEUDO_PENDENTES4, FONTES_PENDENTES4  # noqa: E402
 from conteudo_detalhe import D as CONTEUDO_DETALHE, FONTES_DETALHE  # noqa: E402
+from conteudo_extras import EXTRAS  # noqa: E402
 
 DATA = "2026-11-09"
 EXT = "fontes/extracoes/temas-piloto-interface.txt"
@@ -146,6 +147,17 @@ def aplicar():
     novos = registrar_fontes(FONTES + FONTES_PENDENTES + FONTES_PENDENTES2 + FONTES_PENDENTES3 + FONTES_PENDENTES4 + FONTES_DETALHE)
     todos = {**CONTEUDO, **CONTEUDO_CLS, **CONTEUDO_SUB, **CONTEUDO_PENDENTES, **CONTEUDO_PENDENTES2, **CONTEUDO_PENDENTES3, **CONTEUDO_PENDENTES4, **CONTEUDO_DETALHE}
     assert not set(todos) & set(PENDENTES), "tema pendente com conteúdo"
+    # Acréscimos (conteudo_extras.py): somam itens ao conteúdo que o tema já tem, sem substituir.
+    for tid, extra in EXTRAS.items():
+        assert tid in todos, f"{tid}: acréscimo para tema sem conteúdo"
+        cont = json.loads(json.dumps(todos[tid]))
+        titulos = {i["titulo"] for i in cont.get("avancado", [])}
+        cont["avancado"] = cont.get("avancado", []) + [i for i in extra.get("avancado", []) if i["titulo"] not in titulos]
+        if extra.get("comece"):
+            cont["para_iniciantes"]["por_onde_comecar"] = extra["comece"]
+        if extra.get("encadeamento"):
+            cont["encadeamento"] = extra["encadeamento"]
+        todos[tid] = cont
     for tid, cont in todos.items():
         pasta = "classificacoes" if tid.startswith("cls:") else "subclassificacoes"
         nome = tid.split(":", 1)[1]

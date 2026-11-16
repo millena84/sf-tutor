@@ -830,11 +830,53 @@ def gerar_site(C, base, out, nos, arestas, visoes, cob):
     for o in C["objetos-api"].values():
         descr[o["id"]] = o["o_que_e"]
         for c in o["campos"]: descr[c["id"]] = c.get("o_que_e")
+    # Pasta e sufixo de arquivo de cada metadata type (registro do Salesforce CLI, via inventário): entram na busca,
+    # porque é pelo nome da pasta do projeto que muita gente procura o tipo.
+    inv_path = os.path.join(BASE, "inventarios", "metadata-types-v68.json")
+    inventario = json.load(open(inv_path, encoding="utf-8"))["itens"] if os.path.exists(inv_path) else []
+
+    def local_de(it):
+        r = it.get("registro_sdr") or {}
+        termos, partes = [], []
+        if r.get("pasta"):
+            termos.append(r["pasta"]); partes.append("pasta " + r["pasta"])
+        if r.get("sufixo"):
+            termos += [r["sufixo"], "." + r["sufixo"]]; partes.append("sufixo ." + r["sufixo"])
+        return termos, ", ".join(partes)
+
+    inv_por_id = {"mdt:" + it["nome"]: it for it in inventario}
+    mdt_por_id = {m["id"]: m for m in C["metadata-types"].values()}
     busca = []
     for n in nos:
         item = {"id": n["id"], "tipo": n["tipo"], "rotulo": n["rotulo"], "textos": textos.get(n["id"], [n["rotulo"]])}
         if n["id"] in pai_de: item["pai"] = pai_de[n["id"]]
         if descr.get(n["id"]): item["descricao"] = descr[n["id"]]
+        if n["id"] in inv_por_id:
+            termos, local = local_de(inv_por_id[n["id"]])
+            arq = (mdt_por_id.get(n["id"]) or {}).get("arquivos", {})
+            for fmt in ("source_format", "metadata_api_format"):
+                v = (arq.get(fmt) or {}).get("valor") or {}
+                termos += [str(v[k]).strip("/") for k in ("pasta", "arquivo") if v.get(k)]
+            item["textos"] = sorted(set(item["textos"]) | set(termos))
+            if not local:   # tipos Settings: o registro não traz pasta própria; a ficha traz
+                v = (arq.get("metadata_api_format") or {}).get("valor") or {}
+                local = ", ".join(f"{k} {str(v[k]).strip('/')}" for k in ("pasta", "arquivo") if v.get(k))
+            if local: item["local"] = local
+        busca.append(item)
+    # Tipos do inventário ainda sem ficha: aparecem na busca, marcados, para ninguém concluir que o tipo não existe.
+    com_ficha = {m["id"] for m in C["metadata-types"].values()}
+    CLI = {"suportado": "suportado", "suportado_com_ressalvas": "suportado com ressalvas", "nao_suportado_pelo_cli": "não suportado"}
+    for it in inventario:
+        if "mdt:" + it["nome"] in com_ficha:
+            continue
+        termos, local = local_de(it)
+        partes = ["Consta do inventário de metadata types da API 68.0, mas ainda não tem ficha neste tutorial."]
+        if it.get("filho_de"): partes.append(f"É um tipo filho de {it['filho_de']}.")
+        if local: partes.append(f"No projeto: {local}.")
+        partes.append(f"Salesforce CLI: {CLI.get(it.get('suporte_cli'), 'não informado')}.")
+        item = {"id": "inv:" + it["nome"], "tipo": "metadata_type_inventario", "rotulo": it["nome"],
+                "textos": sorted({it["nome"], *termos}), "descricao": " ".join(partes), "sem_ficha": True}
+        if local: item["local"] = local
         busca.append(item)
     # logos por referência (config/marcas.json): só no centro e nas nuvens catalogadas
     logos = {it["alvo"]: it for it in (C.get("marcas") or {}).get("itens", []) if it.get("alvo")}

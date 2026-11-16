@@ -1,0 +1,262 @@
+{
+  "alertas": [
+    "Aceita todos os tipos de campo, exceto text area, long text area, rich text area e multi-select picklist.",
+    "O compact layout é independente do page layout: tirar um campo de um não o tira do outro.",
+    "Para external objects, o tipo existe desde a API 42.0."
+  ],
+  "arquivos": {
+    "curinga_package_xml": {
+      "estado": "verificado",
+      "evidencias": [
+        {
+          "fonte": "src:mdapi-compactlayout"
+        }
+      ],
+      "valor": true
+    },
+    "metadata_api_format": {
+      "estado": "verificado",
+      "evidencias": [
+        {
+          "fonte": "src:sdr-registry",
+          "nota": "types.customobject"
+        }
+      ],
+      "valor": {
+        "arquivo": "<Objeto>.object",
+        "elemento": "definido dentro do arquivo do tipo pai",
+        "pasta": "objects/"
+      }
+    },
+    "source_format": {
+      "estado": "verificado",
+      "evidencias": [
+        {
+          "fonte": "src:sdr-registry",
+          "nota": "types.customobject.children.types.compactlayout"
+        }
+      ],
+      "nota": "Componente filho decomposto pelo Salesforce CLI (estratégia folderPerType do tipo pai). Sufixo '-meta.xml' segue a convenção do source format.",
+      "valor": {
+        "arquivo": "<Nome>.compactLayout-meta.xml",
+        "pasta": "objects/<Objeto>/compactLayouts/"
+      }
+    }
+  },
+  "cobertura": {
+    "estrutural": {
+      "esperado": 3,
+      "estado": "completa",
+      "nota": "Universo esperado = tabela Fields da página do guia versionado 264.0 (API 68.0), lida em 2026-11-16. A página não marca campos como obrigatórios no tipo principal.",
+      "presente": 3
+    },
+    "explicativa": {
+      "esperado": 3,
+      "estado": "completa",
+      "presente": 3
+    },
+    "mapeamento": {
+      "estado": "parcial",
+      "nota": "Correspondências registradas apenas onde há evidência; demais pendentes."
+    }
+  },
+  "componente_filho_de": "mdt:CustomObject",
+  "disponibilidade": {
+    "ate_versao": null,
+    "desde_versao": "29.0",
+    "estado": "verificado"
+  },
+  "divergencias_documentais": [],
+  "estado": "verificado",
+  "estende": "Metadata",
+  "estruturas": [],
+  "evidencias": [
+    {
+      "fonte": "src:mdapi-compactlayout"
+    },
+    {
+      "fonte": "src:sdr-registry"
+    },
+    {
+      "fonte": "src:sdr-metadata-support"
+    },
+    {
+      "fonte": "src:help-layout-considerations",
+      "nota": "Independência entre page layout e compact layout."
+    }
+  ],
+  "exemplo_xml": {
+    "natureza": "didatico_projeto",
+    "nota": "Exemplo escrito pelo projeto apenas com elementos documentados; sem dados reais.",
+    "xml": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<!-- No arquivo .object do objeto, este conteúdo fica no elemento <compactLayouts> -->\n<CompactLayout xmlns=\"http://soap.sforce.com/2006/04/metadata\">\n    <fullName>[Nome_Do_Compact_Layout]</fullName>\n    <fields>Name</fields>\n    <fields>[Outro_Campo__c]</fields>\n    <label>[rótulo]</label>\n</CompactLayout>"
+  },
+  "finalidade": "Versionar e implantar os compact layouts de um objeto, junto com a definição do objeto.",
+  "id": "mdt:CompactLayout",
+  "nome": "CompactLayout",
+  "o_que_e": "Um compact layout: a lista ordenada dos campos-chave de um registro, mostrada no highlights panel e no app móvel.",
+  "propriedades": [
+    {
+      "cardinalidade": "0..n",
+      "default": {
+        "estado": "desconhecido",
+        "forma": "nao_declarado_na_fonte"
+      },
+      "disponibilidade": {
+        "ate_versao": null,
+        "desde_versao": null,
+        "estado": "desconhecido"
+      },
+      "dominio": {
+        "contexto": "A fonte tipa como string sem lista de valores; não inventar valores.",
+        "estado": "verificado",
+        "evidencias": [
+          {
+            "fonte": "src:mdapi-compactlayout"
+          }
+        ],
+        "natureza": "texto_livre"
+      },
+      "estado": "verificado",
+      "evidencias": [
+        {
+          "fonte": "src:mdapi-compactlayout"
+        }
+      ],
+      "explicacao": "explicada",
+      "id": "mdt:CompactLayout.fields",
+      "nome": "fields",
+      "notas": [
+        "A tabela da página tipa o campo como string; o exemplo repete o elemento, um por campo."
+      ],
+      "o_que_e": "Campos do compact layout; a ordem define a prioridade de exibição.",
+      "obrigatoriedade": {
+        "condicao": "A documentação 68.0 não marca o campo como obrigatório; ausência de marcação não comprova opcionalidade (confirmar no WSDL).",
+        "estado": "desconhecido",
+        "valor": "nao"
+      },
+      "origem": {
+        "estado": "verificado",
+        "evidencias": [
+          {
+            "fonte": "src:mdapi-compactlayout"
+          }
+        ],
+        "nota": "Propriedade definida pelo schema da Metadata API.",
+        "valor": "padrao_plataforma"
+      },
+      "tipo_tecnico": "string[]"
+    },
+    {
+      "default": {
+        "estado": "desconhecido",
+        "forma": "nao_declarado_na_fonte"
+      },
+      "disponibilidade": {
+        "ate_versao": null,
+        "desde_versao": null,
+        "estado": "desconhecido"
+      },
+      "dominio": {
+        "contexto": "A fonte tipa como string sem lista de valores; não inventar valores.",
+        "estado": "verificado",
+        "evidencias": [
+          {
+            "fonte": "src:mdapi-compactlayout"
+          }
+        ],
+        "natureza": "texto_livre"
+      },
+      "estado": "verificado",
+      "evidencias": [
+        {
+          "fonte": "src:mdapi-compactlayout"
+        }
+      ],
+      "explicacao": "explicada",
+      "id": "mdt:CompactLayout.label",
+      "nome": "label",
+      "o_que_e": "Rótulo do compact layout.",
+      "obrigatoriedade": {
+        "condicao": "A documentação 68.0 não marca o campo como obrigatório; ausência de marcação não comprova opcionalidade (confirmar no WSDL).",
+        "estado": "desconhecido",
+        "valor": "nao"
+      },
+      "origem": {
+        "estado": "verificado",
+        "evidencias": [
+          {
+            "fonte": "src:mdapi-compactlayout"
+          }
+        ],
+        "nota": "Propriedade definida pelo schema da Metadata API.",
+        "valor": "padrao_plataforma"
+      },
+      "tipo_tecnico": "string"
+    },
+    {
+      "default": {
+        "estado": "desconhecido",
+        "forma": "nao_declarado_na_fonte"
+      },
+      "disponibilidade": {
+        "ate_versao": null,
+        "desde_versao": null,
+        "estado": "desconhecido"
+      },
+      "dominio": {
+        "contexto": "A fonte tipa como string sem lista de valores; não inventar valores.",
+        "estado": "verificado",
+        "evidencias": [
+          {
+            "fonte": "src:mdapi-compactlayout"
+          }
+        ],
+        "natureza": "texto_livre"
+      },
+      "estado": "verificado",
+      "evidencias": [
+        {
+          "fonte": "src:mdapi-compactlayout"
+        }
+      ],
+      "explicacao": "explicada",
+      "herdada_de": "Metadata",
+      "id": "mdt:CompactLayout.fullName",
+      "nome": "fullName",
+      "o_que_e": "Nome completo (API name) do componente; herdado do tipo Metadata.",
+      "obrigatoriedade": {
+        "estado": "desconhecido",
+        "valor": "desconhecida"
+      },
+      "origem": {
+        "estado": "verificado",
+        "evidencias": [
+          {
+            "fonte": "src:mdapi-compactlayout"
+          }
+        ],
+        "nota": "Propriedade definida pelo schema da Metadata API.",
+        "valor": "padrao_plataforma"
+      },
+      "tipo_tecnico": "string"
+    }
+  ],
+  "recomendacoes": [],
+  "setup": {
+    "estado": "desconhecido",
+    "nota": "Caminho no Setup não validado nesta sessão."
+  },
+  "suporte_cli": {
+    "estado": "verificado",
+    "evidencias": [
+      {
+        "fonte": "src:sdr-metadata-support"
+      }
+    ],
+    "nota": "Suporte do Salesforce CLI (source-deploy-retrieve), não do Metadata API em geral.",
+    "valor": {
+      "nota_fonte": null,
+      "status": "suportado"
+    }
+  }
+}

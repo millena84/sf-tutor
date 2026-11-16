@@ -264,12 +264,12 @@ test('tema com conteúdo próprio: exemplo, comece por, encadeamento e decisões
   const c1 = sobre.locator('.camada').nth(0);
   await expect(c1).toContainText('Exemplo:');
   await expect(c1.locator('.analogia')).toContainText('Onde a analogia para');
-  await expect(c1.locator('.comece-por button')).toHaveText(['Lightning pages', 'Tabs']);
+  await expect(c1.locator('.comece-por button')).toHaveText(['Lightning apps', 'Lightning pages', 'Page layouts']);
   const c2 = sobre.locator('.camada').nth(1);
   await expect(c2.locator('h5').first()).toHaveText('Como as partes se ligam');
   await expect(c2).toContainText('FlexiPage');
-  // tema interno ainda sem funcionalidade, listado no fim da camada
-  await expect(c2).toContainText('Acessibilidade e personalização');
+  // metadata types alcançados pelas funcionalidades do tema, inclusive os cadastrados na rodada A3
+  await expect(c2).toContainText('CustomApplication');
   const avancado = sobre.locator('details.camada-avancada');
   await avancado.locator('summary').first().click();
   await expect(avancado.locator('.item-avancado h5')).toContainText(['Decisão: Qual ferramenta usar para um formulário', 'Segurança: A página não é controle de acesso']);
@@ -284,4 +284,19 @@ test('tema com conteúdo próprio: exemplo, comece por, encadeamento e decisões
   await expect(s2.locator('.camada').nth(1).locator('h5').first()).toHaveText('Como se encaixa no tema de cima');
   await s2.locator('.comece-por button').first().click();
   await expect(titulo(page)).toHaveText('Lightning pages');
+});
+
+test('busca pela pasta do projeto acha o metadata type; tipo sem ficha aparece marcado e não abre nada', async ({ page }) => {
+  await page.goto('/');
+  await page.locator('#busca').fill('applications');
+  const primeiro = page.locator('#resultados .resultado').first();
+  await expect(primeiro).toContainText('CustomApplication');
+  await expect(primeiro).toContainText('pasta applications');
+  await page.locator('#busca').fill('reportTypes');
+  const semFicha = page.locator('#resultados .resultado.sem-ficha').first();
+  await expect(semFicha).toContainText('ReportType');
+  await expect(semFicha).toContainText('ainda não tem ficha');
+  const antes = page.url();
+  await semFicha.dispatchEvent('mousedown');
+  expect(page.url()).toBe(antes);
 });

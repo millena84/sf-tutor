@@ -12,7 +12,8 @@ describe('índice e ids canônicos', () => {
     const d = dadosReais();
     const ids = d.busca.map((b) => b.id);
     expect(new Set(ids).size).toBe(ids.length);
-    expect(ind.nos.size).toBe(ids.length);
+    // tipos que só constam do inventário aparecem na busca, mas não viram nó
+    expect(ind.nos.size).toBe(d.busca.filter((b) => b.tipo !== 'metadata_type_inventario').length);
   });
   it('toda folha (campo/propriedade) tem pai existente', () => {
     for (const n of ind.nos.values()) {

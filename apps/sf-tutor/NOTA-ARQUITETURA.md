@@ -77,3 +77,9 @@ apps/sf-tutor/dist/                (site publicável)
 - **Rótulos no mapa:** em ramos muito densos podem se sobrepor quando o zoom está afastado. O painel e o modo lista mostram o texto completo.
 - **Ganchos de teste:** `window.__sfTutor` expõe apenas leitura (contagens, seleção, coordenada de um nó/aresta para o clique dos testes) e não altera o estado.
 - **Fixture sintética:** existe só para medir volume. É rotulada "SINT…", e a interface mostra a faixa "DADOS SINTÉTICOS DE TESTE". Ela vai para `dist/__teste-sintetico` apenas durante `npm run perf`, e o próximo build a remove.
+
+## Busca por pasta e tipos sem ficha
+
+- `busca.json` traz, para cada metadata type, a pasta e o sufixo do arquivo (campo `local`, além de entrarem em `textos`). A origem é o registro do Salesforce CLI, via inventário.
+- Os tipos do inventário v68 que ainda não têm ficha entram na busca com `tipo: metadata_type_inventario`, id `inv:<Nome>` e `sem_ficha: true`. Eles não viram nó do mapa nem abrem painel: a descrição aparece no próprio resultado.
+- Na pontuação, casar pela pasta ou pelo sufixo vale mais do que um nome que só começa com o termo.

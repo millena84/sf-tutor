@@ -448,6 +448,44 @@ TEMAS = {
          ev("src:help-apex-flex-queue", "Cobre parte do tema: Apex flex queue.", "Monitoring the Apex Flex Queue"),
          ev("src:objref-asyncapexjob", "Cobre parte do tema: objeto AsyncApexJob.", "AsyncApexJob")],
     ),
+    # ------------------------------------------------------------------ Interface e experiência do usuário
+    "sub:aplicativos-e-navegacao": (
+        "Os apps e a navegação: o conjunto de abas e itens que o usuário abre pelo App Launcher, com a marca e o tipo de navegação de cada app.",
+        [ev("src:help-lightning-apps-create", "Cobre o tema: criação de Lightning apps.", "Create Lightning Apps"),
+         ev("src:help-build-app", "Cobre parte do tema: o que é um app.", "Build Your Own Salesforce App")],
+    ),
+    "sub:layouts-e-paginas-de-registro": (
+        "O que aparece na página de um registro e quem controla cada parte: page layouts, compact layouts e Dynamic Forms.",
+        [ev("src:help-layouts-lex", "Cobre parte do tema: page layout no Lightning Experience.", "How Page Layout Elements Display in Lightning Experience"),
+         ev("src:help-compact-layouts", "Cobre parte do tema: compact layouts.", "Compact Layouts"),
+         ev("src:help-dynamic-forms", "Cobre parte do tema: Dynamic Forms.", "Break Up Your Record Details with Dynamic Forms")],
+    ),
+    "sub:acessibilidade-e-personalizacao": (
+        "A aparência da interface: o tema e a marca da org, e os ajustes que cada usuário faz, como densidade e dark mode.",
+        [ev("src:help-themes", "Cobre parte do tema: temas e branding.", "Personalize Your Org with Themes and Branding"),
+         ev("src:help-personalize-display", "Cobre parte do tema: ajustes de exibição por usuário.", "Personalize Lightning Experience Display")],
+    ),
+    # ------------------------------------------------------------------ Observabilidade, auditoria e operação
+    "sub:logs-e-rastreamento": (
+        "Logs de depuração: o registro detalhado do que a plataforma executou numa requisição, coletado por trace flags.",
+        [ev("src:help-debug-logs", "Cobre o tema: logs de depuração.", "Debug Logs"),
+         ev("src:help-debug-setup", "Cobre parte do tema: trace flags e debug levels.", "Set Up Debug Logging")],
+    ),
+    "sub:auditoria-de-configuracao": (
+        "O histórico das mudanças feitas no Setup: o que mudou, quando e por quem.",
+        [ev("src:help-setup-audit-trail", "Cobre o tema: Setup Audit Trail.", "Monitor Setup Changes with Setup Audit Trail"),
+         ev("src:objref-setupaudittrail", "Cobre parte do tema: objeto SetupAuditTrail.", "SetupAuditTrail")],
+    ),
+    "sub:eventos-de-monitoramento": (
+        "Os eventos que registram uso, desempenho e segurança da org: arquivos de log de eventos e eventos em tempo real.",
+        [ev("src:help-event-monitoring", "Cobre o tema: Event Monitoring.", "Event Monitoring"),
+         ev("src:objref-eventlogfile", "Cobre parte do tema: objeto EventLogFile.", "EventLogFile")],
+    ),
+    "sub:jobs-incidentes-e-diagnostico": (
+        "O acompanhamento de execuções em segundo plano e a investigação de problemas, combinando jobs, logs e auditoria.",
+        [ev("src:help-apex-job-queue", "Cobre parte do tema: página Apex Jobs.", "Monitor the Apex Job Queue"),
+         ev("src:help-debug-logs", "Cobre parte do tema: logs de depuração para diagnóstico.", "Debug Logs")],
+    ),
 }
 
 

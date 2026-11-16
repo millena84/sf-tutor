@@ -1,14 +1,92 @@
 {
+  "avancado": [
+    {
+      "evidencias": [
+        {
+          "fonte": "src:help-kb-rtem-faq"
+        },
+        {
+          "fonte": "src:help-event-monitoring"
+        }
+      ],
+      "texto": "Event Monitoring guarda logs de ocorrência, erro e desempenho em arquivos, no objeto EventLogFile. Real-Time Event Monitoring publica eventos de acesso e de segurança no momento em que acontecem, fora do EventLogFile.",
+      "tipo": "decisao",
+      "titulo": "Arquivos de log ou eventos em tempo real"
+    },
+    {
+      "evidencias": [
+        {
+          "fonte": "src:help-em-enable"
+        },
+        {
+          "fonte": "src:help-kb-em-faq"
+        }
+      ],
+      "texto": "O conjunto completo exige Salesforce Shield ou o add-on Event Monitoring. Sem o add-on, os tipos de evento são limitados e os arquivos ficam 1 dia; com ele, 30 dias por padrão, extensíveis a 1 ano.",
+      "tipo": "limite",
+      "titulo": "Licença e retenção"
+    },
+    {
+      "evidencias": [
+        {
+          "fonte": "src:help-rn-elf-browser"
+        },
+        {
+          "fonte": "src:objref-eventlogfile"
+        }
+      ],
+      "texto": "Pelo Setup, o Event Log File Browser lista os arquivos por período e baixa em CSV. Por API, consulta-se EventLogFile: cada registro é um arquivo de um tipo de evento, com a lista dos campos do log.",
+      "tipo": "implantacao",
+      "titulo": "Como baixar"
+    },
+    {
+      "evidencias": [
+        {
+          "fonte": "src:objref-eventlogfile"
+        }
+      ],
+      "texto": "O esquema de cada tipo de log pode mudar a cada release. Quem processa os arquivos deve conferir os campos LogFileFieldNames e LogFileFieldTypes depois de cada atualização.",
+      "tipo": "atencao",
+      "titulo": "O esquema muda"
+    }
+  ],
   "classificacao": "cls:observabilidade-auditoria-e-operacao",
   "derivado": {
     "dependencias": [],
-    "funcionalidades": [],
+    "funcionalidades": [
+      {
+        "alertas": [
+          "Event Monitoring e Real-Time Event Monitoring guardam coisas diferentes: o primeiro usa o objeto EventLogFile; o segundo, não.",
+          "O esquema de um arquivo de log pode mudar a cada release."
+        ],
+        "exemplo": "A equipe de segurança baixa os logs do tipo Report para ver quem exportou relatórios numa semana.",
+        "id": "func:event-monitoring",
+        "principal": true
+      }
+    ],
     "metadata_types": [],
     "nota": "Calculado pelo gerador a partir do catálogo; não é cadastro.",
-    "objetos_api": [],
+    "objetos_api": [
+      {
+        "apis": [
+          {
+            "api": "padrao",
+            "estado": "verificado"
+          },
+          {
+            "api": "tooling",
+            "estado": "desconhecido"
+          }
+        ],
+        "funcionalidades": [
+          "func:event-monitoring"
+        ],
+        "id": "obj:EventLogFile"
+      }
+    ],
     "temas_sem_funcionalidade": []
   },
-  "descricao": "Eventos que registram uso e atividade.",
+  "descricao": "Os eventos que registram uso, desempenho e segurança da org: arquivos de log de eventos e eventos em tempo real.",
   "encadeamento": {
     "evidencias": [
       {
@@ -20,11 +98,13 @@
   "escopo": "Entram os eventos que registram uso e atividade na org.",
   "estado": "desconhecido",
   "fora_do_escopo": "Eventos de negócio publicados para integrações ficam em \"Eventos e mensageria\".",
-  "funcionalidades": [],
+  "funcionalidades": [
+    "func:event-monitoring"
+  ],
   "id": "sub:eventos-de-monitoramento",
   "natureza": "curadoria_didatica",
   "nome": "Eventos de monitoramento",
-  "nota_estado": "Agrupamento proposto na especificação; fronteira ainda não cruzada com a documentação oficial.",
+  "nota_estado": "Tema criado pelo projeto (00-especificacao-grafo.md), não é nomenclatura oficial da Salesforce. Cruzado em 2026-11-10 com áreas da documentação oficial listadas nas referências; a correspondência é parcial e o recorte continua sendo do projeto.",
   "para_iniciantes": {
     "evidencias": [
       {
@@ -32,7 +112,22 @@
       }
     ],
     "exemplo": "Uma política de segurança de transação reage quando um evento monitorado acontece.",
-    "explicacao": "São eventos que registram uso e atividade na org, para auditoria e detecção quase em tempo real."
+    "explicacao": "São eventos que registram uso e atividade na org, para auditoria e detecção quase em tempo real.",
+    "por_onde_comecar": [
+      "func:event-monitoring"
+    ]
   },
+  "referencias_oficiais": [
+    {
+      "fonte": "src:help-event-monitoring",
+      "nota": "Cobre o tema: Event Monitoring.",
+      "secao": "Event Monitoring"
+    },
+    {
+      "fonte": "src:objref-eventlogfile",
+      "nota": "Cobre parte do tema: objeto EventLogFile.",
+      "secao": "EventLogFile"
+    }
+  ],
   "sigla": "OBS-04"
 }

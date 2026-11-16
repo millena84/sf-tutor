@@ -1,0 +1,84 @@
+fonte: Metadata API Developer Guide, versão 264.0 (API 68.0), lida pelo endpoint de conteúdo da documentação
+URL lida: https://developer.salesforce.com/docs/get_document_content/api_meta/<página>.htm/en-us/264.0
+mesma página no navegador: https://developer.salesforce.com/docs/atlas.en-us.264.0.api_meta.meta/api_meta/<página>.htm
+obtido em 2026-11-16 via WebFetch; método: extração documental assistida por IA; descrições parafraseadas em português.
+alcance: meta_customapplication.htm (130.839 caracteres) e meta_layouts.htm (172.375) foram lidas em duas partes (0 e 100000); as demais, numa leitura.
+
+[src:mdapi-customapplication] CustomApplication: sufixo .app, pasta applications; apps customizados desde a API 10.0 e apps padrão desde a 30.0;
+  estende Metadata (fullName herdado); aceita o curinga * (até a API 29.0, só devolvia apps customizados). As tabelas não têm coluna Required: a
+  obrigatoriedade vem das descrições. Apps padrão usam o prefixo standard__; apps de pacote, namespace__Nome. navType e uiType não são atualizáveis.
+  Recuperar o app o inclui nos componentes Profile e PermissionSet do mesmo pacote. Uma substituição flexipage que é o padrão do app não pode ser
+  excluída pela Metadata API. Renomeações na API 42.0: tab para tabs, WorkspaceMappings para AppWorkspaceConfig, customShortcut para customShortcuts,
+  defaultShortcut para defaultShortcuts, customApplicationComponent para components. O corte entre as duas partes caiu no início da tabela de
+  TabLimitConfig; os dois campos vieram na segunda parte. A descrição de workspaceConfig veio truncada na leitura.
+  Exemplos XML: app do Lightning Experience (actionOverrides, brand, formFactors, label, navType, tabs, uiType e outros), app padrão e app de console.
+
+[src:mdapi-layout] Layout (meta_layouts.htm): sufixo .layout, pasta layouts; API 13.0 e posteriores; estende Metadata (fullName herdado); aceita o
+  curinga *. Recuperar o layout o inclui nos componentes Profile e PermissionSet do mesmo pacote. Um item de layout traz um só destes: component,
+  customLink, field, scontrol, page, analyticsCloudComponent ou reportChartComponent. O corte entre as duas partes caiu na linha scontrol de
+  LayoutItem. Enumerações não transcritas valor a valor: FeedItemType (29 valores), PlatformActionListContext (19 valores) e os valores de quick
+  action de SummaryLayoutStyle. O exemplo XML usa miniLayoutFields e miniRelatedLists, que não constam das tabelas. A descrição de
+  FeedLayoutFilter cita standardFilter, que não está na tabela.
+
+[src:mdapi-compactlayout] CompactLayout: definido dentro de um CustomObject, objeto padrão ou external object (a página não dá sufixo nem pasta);
+  API 29.0 e posteriores (external objects, 42.0); estende Metadata (fullName herdado); aceita o curinga *. Mostra os campos-chave de um registro no
+  app móvel, no Lightning Experience e nas integrações com Outlook e Gmail. Aceita todos os tipos de campo, exceto text area, long text area, rich
+  text area e multi-select picklist. No exemplo, compactLayouts fica dentro de CustomObject, com fullName, fields (repetido) e label.
+
+[src:mdapi-lightningexperiencetheme] LightningExperienceTheme: sufixo .lightningExperienceTheme, pasta lightningExperienceThemes; API 42.0 e
+  posteriores; a página não diz o que o tipo estende; aceita o curinga *. Para ativar um tema pela Metadata API, define-se activeThemeField em
+  LightningExperienceSettings. Acesso especial: disponível quando a permissão S1DesktopAllowed está ligada. description: até 1000 caracteres;
+  masterLabel: até 70; designSystemVersion: SLDS_v1 (padrão) ou SLDS_v2, desde 64.0; isDarkModeEnabled: padrão false, desde 65.0.
+
+[src:mdapi-brandingset] BrandingSet: sufixo brandingSet, pasta brandingSets; API 40.0 e posteriores; estende Metadata (fullName herdado); aceita o
+  curinga *. Disponível com Digital Experiences, Surveys ou Lightning Experience ligados; todos os usuários, inclusive guest, acessam. A página lista
+  34 nomes de propriedade para temas do Lightning Experience (por exemplo BRAND_COLOR, BRAND_IMAGE, HEADER_BACKGROUND_COLOR, ACCENT_COLOR_1), todos em
+  maiúsculas; parte só vale em SLDS 1 e parte só em SLDS 2. Imagens precisam ser asset files já existentes.
+
+-- Lista de campos transcrita da leitura (gerada por lote7d_interface.py --nota; nome | tipo | desde | obrigatoriedade)
+[src:mdapi-customapplication] CustomApplication: actionOverrides | AppActionOverride[] | 38.0 | N, brand | AppBrand | 38.0 | N, consoleConfig | ServiceCloudConsoleConfig | 42.0 | N, defaultLandingTab | string | - | N, description | string | - | N, formFactors | FormFactor | 38.0 | N, isNavAutoTempTabsDisabled | boolean | 43.0 | N, isNavPersonalizationDisabled | boolean | 43.0 | N, isNavTabPersistenceDisabled | boolean | 54.0 | N, isServiceCloudConsole | boolean | - | N, label | string | - | N, logo | string | - | N, navType | NavType | 38.0 | N, preferences | AppPreferences | 42.0 | N, profileActionOverrides | AppProfileActionOverride[] | 39.0 | N, setupExperience | string | 39.0 | N, subscriberTabs | string[] | 41.0 | N, tabs | string[] | - | N, uiBundle | string[] | 67.0 | N, uiType | UiType | 38.0 | N, utilityBar | string | 38.0 | N, workspaceConfig | AppWorkspaceConfig | - | C:ligado a isServiceCloudConsole, segundo a página, fullName | string | - | ?
+[src:mdapi-customapplication] AppActionOverride: actionName | string | - | N, comment | string | - | N, content | string | - | N, formFactor | FormFactor | 37.0 | N, pageOrSobjectType | string | - | N, skipRecordTypeSelect | boolean | - | N, type | ActionOverrideType | - | S
+[src:mdapi-customapplication] AppBrand: footerColor | string | - | N, headerColor | string | - | N, logo | string | - | N, logoVersion | int | - | N, shouldOverrideOrgTheme | boolean | - | N
+[src:mdapi-customapplication] AppComponentList: alignment | string | - | S, components | string[] | - | N
+[src:mdapi-customapplication] AppPreferences: enableCustomizeMyTabs | boolean | - | S, enableKeyboardShortcuts | boolean | - | S, enableListViewHover | boolean | - | S, enableListViewReskin | boolean | - | S, enableMultiMonitorComponents | boolean | - | S, enablePinTabs | boolean | - | S, enableTabHover | boolean | - | S, enableTabLimits | boolean | - | S, saveUserSessions | boolean | - | S
+[src:mdapi-customapplication] AppProfileActionOverride: actionName | string | - | S, content | string | - | N, formFactor | FormFactor | - | S, pageOrSobjectType | string | - | S, profile | string | - | N, recordType | string | - | C:obrigatório quando actionName é View, type | ActionOverrideType | - | S
+[src:mdapi-customapplication] AppWorkspaceConfig: mappings | WorkspaceMappingSingle[] | - | S
+[src:mdapi-customapplication] WorkspaceMapping: fieldName | string | - | N, tab | string | - | S
+[src:mdapi-customapplication] CustomShortcut: action | string | - | S, active | boolean | - | S, keyCommand | string | - | S, description | string | - | N, eventName | string | - | S
+[src:mdapi-customapplication] DefaultShortcut: action | string | - | S, active | boolean | - | S, keyCommand | string | - | N
+[src:mdapi-customapplication] KeyboardShortcuts: customShortcuts | CustomShortcut[] | - | N, defaultShortcuts | DefaultShortcut[] | - | N
+[src:mdapi-customapplication] ListPlacement: height | int | - | C:obrigatório quando location é top, location | string | - | S, units | string | - | S, width | int | - | C:obrigatório quando location é left
+[src:mdapi-customapplication] LiveAgentConfig: enableLiveChat | boolean | - | N, openNewAccountSubtab | boolean | - | N, openNewCaseSubtab | boolean | - | N, openNewContactSubtab | boolean | - | N, openNewLeadSubtab | boolean | - | N, openNewVFPageSubtab | boolean | - | N, pageNamesToOpen | string[] | 42.0 | N, showKnowledgeArticles | boolean | - | N
+[src:mdapi-customapplication] PushNotification: fieldNames | string[] | - | N, objectName | string | - | S
+[src:mdapi-customapplication] ServiceCloudConsoleConfig: componentList | AppComponentList | - | N, detailPageRefreshMethod | string | - | C:obrigatório quando isServiceCloudConsole é true, footerColor | string | - | N, headerColor | string | - | N, keyboardShortcuts | KeyboardShortcuts | - | N, listPlacement | ListPlacement | - | C:obrigatório quando isServiceCloudConsole é true, listRefreshMethod | string | - | C:obrigatório quando isServiceCloudConsole é true, liveAgentConfig | LiveAgentConfig | - | N, primaryTabColor | string | - | N, pushNotifications | PushNotification[] | - | N, tabLimitConfig | TabLimitConfig | - | C:obrigatório quando enableTabLimits é true, whiteListedDomains | string[] | - | N
+[src:mdapi-customapplication] TabLimitConfig: maxNumberOfPrimaryTabs | string | - | N, maxNumberOfSubTabs | string | - | N
+[src:mdapi-layout] Layout: customButtons | string[] | - | N, customConsoleComponents | CustomConsoleComponents | - | N, emailDefault | boolean | - | N, excludeButtons | string[] | - | N, feedLayout | FeedLayout | - | N, headers | LayoutHeader[] | - | N, layoutSections | LayoutSection[] | - | N, miniLayout | MiniLayout | - | N, multilineLayoutFields | string[] | - | N, platformActionList | PlatformActionList | 34.0 | N, quickActionList | QuickActionList | 28.0 | N, relatedContent | RelatedContent | 29.0 | N, relatedLists | RelatedListItem[] | - | N, relatedObjects | string[] | - | N, runAssignmentRulesDefault | boolean | - | N, showEmailCheckbox | boolean | - | N, showHighlightsPanel | boolean | 22.0 | N, showInteractionLogPanel | boolean | 22.0 | N, showKnowledgeComponent | boolean | 20.0 | N, showRunAssignmentRulesCheckbox | boolean | - | N, showSolutionSection | boolean | - | N, showSubmitAndAttachButton | boolean | - | N, summaryLayout | SummaryLayout | 18.0 | N, fullName | string | - | ?
+[src:mdapi-layout] CustomConsoleComponents: primaryTabComponents | PrimaryTabComponents | 25.0 | N, subtabComponents | SubtabComponents | 25.0 | N
+[src:mdapi-layout] PrimaryTabComponents: component | ConsoleComponent[] | - | N, containers | Container[] | 30.0 | N
+[src:mdapi-layout] SubtabComponents: component | ConsoleComponent[] | - | N, containers | Container[] | 30.0 | N
+[src:mdapi-layout] ConsoleComponent: height | int | - | C:quando location é top ou bottom, location | string | - | S, visualforcePage | string | - | S, width | int | - | C:quando location é left ou right
+[src:mdapi-layout] Container: height | int | - | C:quando region é top ou bottom, isContainerAutoSizeEnabled | boolean | 32.0 | S, region | string | - | S, sidebarComponents | SidebarComponent[] | - | N, style | string | - | S, unit | string | - | S, width | int | - | C:quando region é left ou right
+[src:mdapi-layout] SidebarComponent: componentType | string | 31.0 | N, createAction | string | 42.0 | N, enableLinking | boolean | 42.0 | N, height | int | - | C:quando a área fica em top ou bottom, label | string | - | N, lookup | string | - | N, page | string | - | N, relatedlists | RelatedList[] | 31.0 | N, unit | string | - | N, updateAction | string | 42.0 | N, width | int | - | C:quando a área fica em left ou right
+[src:mdapi-layout] RelatedList: hideOnDetail | boolean | - | N, name | string | - | N
+[src:mdapi-layout] FeedLayout: autocollapsePublisher | boolean | - | N, compactFeed | boolean | - | N, feedFilterPosition | FeedLayoutFilterPosition | - | N, feedFilters | FeedLayoutFilter[] | - | N, fullWidthFeed | boolean | - | N, hideSidebar | boolean | - | N, leftComponents | FeedLayoutComponent[] | - | N, rightComponents | FeedLayoutComponent[] | - | N
+[src:mdapi-layout] FeedLayoutComponent: componentType | FeedLayoutComponentType | - | S, height | int | - | N, page | string | - | N
+[src:mdapi-layout] FeedLayoutFilter: feedFilterName | string | - | N, feedFilterType | FeedLayoutFilterType | - | N, feedItemType | FeedItemType | - | N
+[src:mdapi-layout] MiniLayout: fields | string[] | - | N, relatedLists | RelatedListItem[] | - | N
+[src:mdapi-layout] LayoutSection: customLabel | boolean | - | N, detailHeading | boolean | - | N, editHeading | boolean | - | N, label | string | - | N, layoutColumns | LayoutColumn[] | - | N, style | LayoutSectionStyle | - | N
+[src:mdapi-layout] LayoutColumn: layoutItems | LayoutItem[] | - | N, reserved | string | - | N
+[src:mdapi-layout] LayoutItem: behavior | UiBehavior | - | N, canvas | string | 31.0 | N, component | string | 30.0 | N, customLink | string | - | N, emptySpace | boolean | - | N, field | string | - | N, height | int | - | N, page | string | - | N, analyticsCloudComponent | AnalyticsCloudComponentLayoutItem | 34.0 | N, reportChartComponent | ReportChartComponentLayoutItem | - | N, scontrol | string | - | N, showLabel | boolean | - | N, showScrollbars | boolean | - | N, width | string | - | N
+[src:mdapi-layout] AnalyticsCloudComponentLayoutItem: assetType | string | - | S, devName | string | - | S, error | string | - | N, filter | string | - | N, height | int | - | N, hideOnError | boolean | - | N, showSharing | boolean | 37.0 | N, showTitle | boolean | - | N, width | string | - | N
+[src:mdapi-layout] ReportChartComponentLayoutItem: cacheData | boolean | 29.0 | N, contextFilterableField | string | - | N, error | string | 31.0 | N, hideOnError | boolean | 29.0 | N, includeContext | boolean | - | N, reportName | string | - | N, showTitle | boolean | - | N, size | ReportChartComponentSize | - | N
+[src:mdapi-layout] PlatformActionList: actionListContext | PlatformActionListContext | - | S, platformActionListItems | PlatformActionListItem[] | - | N, relatedSourceEntity | string | - | N
+[src:mdapi-layout] PlatformActionListItem: actionName | string | - | N, actionType | PlatformActionType | - | N, sortOrder | int | - | N, subtype | string | - | N
+[src:mdapi-layout] QuickActionList: quickActionListItems | QuickActionListItem[] | - | N
+[src:mdapi-layout] QuickActionListItem: quickActionName | string | - | N
+[src:mdapi-layout] RelatedContent: relatedContentItems | RelatedContentItem[] | - | N
+[src:mdapi-layout] RelatedContentItem: layoutItem | LayoutItem | - | N
+[src:mdapi-layout] RelatedListItem: customButtons | string[] | - | N, excludeButtons | string[] | - | N, fields | string[] | - | N, quickActions | string[] | - | N, relatedList | string | - | S, sortField | string | - | N, sortOrder | SortOrder | - | N
+[src:mdapi-layout] SummaryLayout: masterLabel | string | - | S, sizeX | int | - | S, sizeY | int | - | S, sizeZ | int | - | N, summaryLayoutItems | SummaryLayoutItem[] | - | N, summaryLayoutStyle | SummaryLayoutStyle | - | N
+[src:mdapi-layout] SummaryLayoutItem: customLink | string | - | N, field | string | - | N, posX | int | - | S, posY | int | - | S, posZ | int | - | N
+[src:mdapi-brandingset] BrandingSetProperty: propertyName, propertyValue
+[src:mdapi-compactlayout] CompactLayout: fields, label, fullName
+[src:mdapi-lightningexperiencetheme] LightningExperienceTheme: defaultBrandingSet, description, designSystemVersion, isDarkModeEnabled, masterLabel, shouldOverrideLoadingImage
+[src:mdapi-brandingset] BrandingSet: brandingSetProperty, description, masterLabel, type, fullName
