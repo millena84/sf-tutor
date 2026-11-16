@@ -1,0 +1,661 @@
+{
+  "alertas": [
+    "Além do XML, a ação pode ter pastas input e output com um schema.json cada: neles ficam título, descrição e tipo de cada parâmetro. Esses campos de JSON não são propriedades do XML e não foram cadastrados aqui.",
+    "Em orgs Winter '26 ou posteriores, a página manda usar GenAiPlannerBundle para recuperar ações criadas dentro de um agente; GenAiFunction fica para as ações da biblioteca de assets.",
+    "A página informa acesso especial: o tipo só fica disponível com Agents ligado na org."
+  ],
+  "arquivos": {
+    "curinga_package_xml": {
+      "estado": "verificado",
+      "evidencias": [
+        {
+          "fonte": "src:mdapi-genaifunction"
+        }
+      ],
+      "valor": true
+    },
+    "metadata_api_format": {
+      "estado": "verificado",
+      "evidencias": [
+        {
+          "fonte": "src:mdapi-genaifunction"
+        }
+      ],
+      "nota": "Sufixo e pasta informados na página do tipo; a ação pode trazer pastas input e output, cada uma com um schema.json.",
+      "valor": {
+        "arquivo": "<Nome>.genAiFunction",
+        "pasta": "genAiFunctions/"
+      }
+    },
+    "source_format": {
+      "estado": "desconhecido",
+      "evidencias": [
+        {
+          "fonte": "src:sdr-registry",
+          "nota": "types.genaifunction"
+        }
+      ],
+      "nota": "O registro do Salesforce CLI trata o tipo como bundle (uma pasta por ação); o nome do arquivo dentro da pasta não foi confirmado.",
+      "valor": {
+        "pasta": "genAiFunctions/<nome da ação>/"
+      }
+    }
+  },
+  "cobertura": {
+    "estrutural": {
+      "esperado": 10,
+      "estado": "completa",
+      "nota": "Universo esperado = tabelas Fields da página do guia versionado 264.0 (API 68.0), lida em 2026-11-16. As tabelas de schema.json (pastas input e output) descrevem arquivos JSON e ficaram fora do universo de propriedades XML.",
+      "presente": 10
+    },
+    "explicativa": {
+      "esperado": 10,
+      "estado": "completa",
+      "presente": 10
+    },
+    "mapeamento": {
+      "estado": "parcial",
+      "nota": "Correspondências registradas apenas onde há evidência; demais pendentes."
+    }
+  },
+  "disponibilidade": {
+    "ate_versao": null,
+    "desde_versao": "60.0",
+    "estado": "verificado"
+  },
+  "divergencias_documentais": [],
+  "estado": "verificado",
+  "estende": "Metadata",
+  "estruturas": [
+    "mdx:GenAiPlannerAttr"
+  ],
+  "evidencias": [
+    {
+      "fonte": "src:mdapi-genaifunction"
+    },
+    {
+      "fonte": "src:sdr-registry"
+    },
+    {
+      "fonte": "src:sdr-metadata-support"
+    }
+  ],
+  "exemplo_xml": {
+    "natureza": "didatico_projeto",
+    "nota": "Exemplo escrito pelo projeto apenas com elementos documentados; sem dados reais.",
+    "xml": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<GenAiFunction xmlns=\"http://soap.sforce.com/2006/04/metadata\">\n    <description>[o que a ação faz, em linguagem natural]</description>\n    <invocationTarget>[nome do flow, da classe ou de outro alvo]</invocationTarget>\n    <!-- Valores documentados incluem: flow, apex, generatePromptResponse, standardInvocableAction -->\n    <invocationTargetType>flow</invocationTargetType>\n    <isConfirmationRequired>false</isConfirmationRequired>\n    <masterLabel>[rótulo da ação]</masterLabel>\n</GenAiFunction>"
+  },
+  "finalidade": "Versionar e implantar as agent actions da biblioteca de assets.",
+  "id": "mdt:GenAiFunction",
+  "nome": "GenAiFunction",
+  "o_que_e": "Uma agent action: a ação que pode ser adicionada a um agente de IA, com o alvo que ela invoca (um flow, uma classe Apex, um prompt template e outros).",
+  "propriedades": [
+    {
+      "default": {
+        "estado": "desconhecido",
+        "forma": "nao_declarado_na_fonte"
+      },
+      "disponibilidade": {
+        "ate_versao": null,
+        "desde_versao": null,
+        "estado": "desconhecido"
+      },
+      "dominio": {
+        "contexto": "A fonte tipa como string sem lista de valores; não inventar valores.",
+        "estado": "verificado",
+        "evidencias": [
+          {
+            "fonte": "src:mdapi-genaifunction"
+          }
+        ],
+        "natureza": "texto_livre"
+      },
+      "estado": "verificado",
+      "evidencias": [
+        {
+          "fonte": "src:mdapi-genaifunction"
+        }
+      ],
+      "explicacao": "explicada",
+      "id": "mdt:GenAiFunction.description",
+      "nome": "description",
+      "o_que_e": "Explica o propósito geral e o domínio da ação.",
+      "obrigatoriedade": {
+        "condicao": "A documentação 68.0 não marca o campo como obrigatório; ausência de marcação não comprova opcionalidade (confirmar no WSDL).",
+        "estado": "desconhecido",
+        "valor": "nao"
+      },
+      "origem": {
+        "estado": "verificado",
+        "evidencias": [
+          {
+            "fonte": "src:mdapi-genaifunction"
+          }
+        ],
+        "nota": "Propriedade definida pelo schema da Metadata API.",
+        "valor": "padrao_plataforma"
+      },
+      "tipo_tecnico": "string"
+    },
+    {
+      "default": {
+        "estado": "desconhecido",
+        "forma": "nao_declarado_na_fonte"
+      },
+      "disponibilidade": {
+        "ate_versao": null,
+        "desde_versao": null,
+        "estado": "desconhecido"
+      },
+      "dominio": {
+        "contexto": "A fonte tipa como string sem lista de valores; não inventar valores.",
+        "estado": "verificado",
+        "evidencias": [
+          {
+            "fonte": "src:mdapi-genaifunction"
+          }
+        ],
+        "natureza": "texto_livre"
+      },
+      "estado": "verificado",
+      "evidencias": [
+        {
+          "fonte": "src:mdapi-genaifunction"
+        }
+      ],
+      "explicacao": "explicada",
+      "id": "mdt:GenAiFunction.invocationTarget",
+      "nome": "invocationTarget",
+      "o_que_e": "O alvo invocado pela ação.",
+      "obrigatoriedade": {
+        "estado": "verificado",
+        "evidencias": [
+          {
+            "fonte": "src:mdapi-genaifunction"
+          }
+        ],
+        "valor": "sim"
+      },
+      "origem": {
+        "estado": "verificado",
+        "evidencias": [
+          {
+            "fonte": "src:mdapi-genaifunction"
+          }
+        ],
+        "nota": "Propriedade definida pelo schema da Metadata API.",
+        "valor": "padrao_plataforma"
+      },
+      "tipo_tecnico": "string"
+    },
+    {
+      "default": {
+        "estado": "desconhecido",
+        "forma": "nao_declarado_na_fonte"
+      },
+      "disponibilidade": {
+        "ate_versao": null,
+        "desde_versao": null,
+        "estado": "desconhecido"
+      },
+      "dominio": {
+        "estado": "verificado",
+        "evidencias": [
+          {
+            "fonte": "src:mdapi-genaifunction"
+          }
+        ],
+        "lista_completa": "sim",
+        "natureza": "enum_fechado",
+        "valores": [
+          {
+            "valor": "api"
+          },
+          {
+            "valor": "apex"
+          },
+          {
+            "valor": "auraEnabled"
+          },
+          {
+            "valor": "createCatalogItemRequest"
+          },
+          {
+            "valor": "executeIntegrationProcedure"
+          },
+          {
+            "valor": "externalService"
+          },
+          {
+            "valor": "flow"
+          },
+          {
+            "valor": "generatePromptResponse"
+          },
+          {
+            "valor": "mcpTool"
+          },
+          {
+            "valor": "namedQuery"
+          },
+          {
+            "valor": "quickAction"
+          },
+          {
+            "valor": "retriever"
+          },
+          {
+            "valor": "runExpressionSet"
+          },
+          {
+            "valor": "slack"
+          },
+          {
+            "valor": "standardInvocableAction"
+          },
+          {
+            "valor": "stub"
+          }
+        ]
+      },
+      "estado": "verificado",
+      "evidencias": [
+        {
+          "fonte": "src:mdapi-genaifunction"
+        }
+      ],
+      "explicacao": "explicada",
+      "id": "mdt:GenAiFunction.invocationTargetType",
+      "nome": "invocationTargetType",
+      "o_que_e": "Tipo da ação invocável.",
+      "obrigatoriedade": {
+        "estado": "verificado",
+        "evidencias": [
+          {
+            "fonte": "src:mdapi-genaifunction"
+          }
+        ],
+        "valor": "sim"
+      },
+      "origem": {
+        "estado": "verificado",
+        "evidencias": [
+          {
+            "fonte": "src:mdapi-genaifunction"
+          }
+        ],
+        "nota": "Propriedade definida pelo schema da Metadata API.",
+        "valor": "padrao_plataforma"
+      },
+      "tipo_tecnico": "PlannerFunctionInvocableTargetType"
+    },
+    {
+      "default": {
+        "estado": "desconhecido",
+        "forma": "nao_declarado_na_fonte"
+      },
+      "disponibilidade": {
+        "ate_versao": null,
+        "desde_versao": null,
+        "estado": "desconhecido"
+      },
+      "dominio": {
+        "estado": "verificado",
+        "evidencias": [
+          {
+            "fonte": "src:mdapi-genaifunction"
+          }
+        ],
+        "lista_completa": "sim",
+        "natureza": "booleano",
+        "valores": [
+          {
+            "valor": "true"
+          },
+          {
+            "valor": "false"
+          }
+        ]
+      },
+      "estado": "verificado",
+      "evidencias": [
+        {
+          "fonte": "src:mdapi-genaifunction"
+        }
+      ],
+      "explicacao": "explicada",
+      "id": "mdt:GenAiFunction.isConfirmationRequired",
+      "nome": "isConfirmationRequired",
+      "o_que_e": "Indica se a ação pede confirmação.",
+      "obrigatoriedade": {
+        "condicao": "A documentação 68.0 não marca o campo como obrigatório; ausência de marcação não comprova opcionalidade (confirmar no WSDL).",
+        "estado": "desconhecido",
+        "valor": "nao"
+      },
+      "origem": {
+        "estado": "verificado",
+        "evidencias": [
+          {
+            "fonte": "src:mdapi-genaifunction"
+          }
+        ],
+        "nota": "Propriedade definida pelo schema da Metadata API.",
+        "valor": "padrao_plataforma"
+      },
+      "tipo_tecnico": "boolean"
+    },
+    {
+      "default": {
+        "estado": "desconhecido",
+        "forma": "nao_declarado_na_fonte"
+      },
+      "disponibilidade": {
+        "ate_versao": null,
+        "desde_versao": null,
+        "estado": "desconhecido"
+      },
+      "dominio": {
+        "estado": "verificado",
+        "evidencias": [
+          {
+            "fonte": "src:mdapi-genaifunction"
+          }
+        ],
+        "lista_completa": "sim",
+        "natureza": "booleano",
+        "valores": [
+          {
+            "valor": "true"
+          },
+          {
+            "valor": "false"
+          }
+        ]
+      },
+      "estado": "verificado",
+      "evidencias": [
+        {
+          "fonte": "src:mdapi-genaifunction"
+        }
+      ],
+      "explicacao": "explicada",
+      "id": "mdt:GenAiFunction.isIncludeInProgressIndicator",
+      "nome": "isIncludeInProgressIndicator",
+      "o_que_e": "Indica se um indicador de progresso é mostrado.",
+      "obrigatoriedade": {
+        "condicao": "A documentação 68.0 não marca o campo como obrigatório; ausência de marcação não comprova opcionalidade (confirmar no WSDL).",
+        "estado": "desconhecido",
+        "valor": "nao"
+      },
+      "origem": {
+        "estado": "verificado",
+        "evidencias": [
+          {
+            "fonte": "src:mdapi-genaifunction"
+          }
+        ],
+        "nota": "Propriedade definida pelo schema da Metadata API.",
+        "valor": "padrao_plataforma"
+      },
+      "tipo_tecnico": "boolean"
+    },
+    {
+      "cardinalidade": "0..n",
+      "default": {
+        "estado": "desconhecido",
+        "forma": "nao_declarado_na_fonte"
+      },
+      "disponibilidade": {
+        "ate_versao": null,
+        "desde_versao": null,
+        "estado": "desconhecido"
+      },
+      "dominio": {
+        "estado": "verificado",
+        "evidencias": [
+          {
+            "fonte": "src:mdapi-genaifunction"
+          }
+        ],
+        "natureza": "tipo_composto"
+      },
+      "estado": "verificado",
+      "estrutura_ref": "mdx:GenAiPlannerAttr",
+      "evidencias": [
+        {
+          "fonte": "src:mdapi-genaifunction"
+        }
+      ],
+      "explicacao": "explicada",
+      "id": "mdt:GenAiFunction.mappingAttributes",
+      "nome": "mappingAttributes",
+      "o_que_e": "Atributos do planner mapeados a parâmetros.",
+      "obrigatoriedade": {
+        "condicao": "A documentação 68.0 não marca o campo como obrigatório; ausência de marcação não comprova opcionalidade (confirmar no WSDL).",
+        "estado": "desconhecido",
+        "valor": "nao"
+      },
+      "origem": {
+        "estado": "verificado",
+        "evidencias": [
+          {
+            "fonte": "src:mdapi-genaifunction"
+          }
+        ],
+        "nota": "Propriedade definida pelo schema da Metadata API.",
+        "valor": "padrao_plataforma"
+      },
+      "tipo_tecnico": "GenAiPlannerAttr[]"
+    },
+    {
+      "default": {
+        "estado": "desconhecido",
+        "forma": "nao_declarado_na_fonte"
+      },
+      "disponibilidade": {
+        "ate_versao": null,
+        "desde_versao": null,
+        "estado": "desconhecido"
+      },
+      "dominio": {
+        "contexto": "A fonte tipa como string sem lista de valores; não inventar valores.",
+        "estado": "verificado",
+        "evidencias": [
+          {
+            "fonte": "src:mdapi-genaifunction"
+          }
+        ],
+        "natureza": "texto_livre"
+      },
+      "estado": "verificado",
+      "evidencias": [
+        {
+          "fonte": "src:mdapi-genaifunction"
+        }
+      ],
+      "explicacao": "explicada",
+      "id": "mdt:GenAiFunction.masterLabel",
+      "nome": "masterLabel",
+      "o_que_e": "Rótulo da ação.",
+      "obrigatoriedade": {
+        "estado": "verificado",
+        "evidencias": [
+          {
+            "fonte": "src:mdapi-genaifunction"
+          }
+        ],
+        "valor": "sim"
+      },
+      "origem": {
+        "estado": "verificado",
+        "evidencias": [
+          {
+            "fonte": "src:mdapi-genaifunction"
+          }
+        ],
+        "nota": "Propriedade definida pelo schema da Metadata API.",
+        "valor": "padrao_plataforma"
+      },
+      "tipo_tecnico": "string"
+    },
+    {
+      "default": {
+        "estado": "desconhecido",
+        "forma": "nao_declarado_na_fonte"
+      },
+      "disponibilidade": {
+        "ate_versao": null,
+        "desde_versao": null,
+        "estado": "desconhecido"
+      },
+      "dominio": {
+        "contexto": "A fonte tipa como string sem lista de valores; não inventar valores.",
+        "estado": "verificado",
+        "evidencias": [
+          {
+            "fonte": "src:mdapi-genaifunction"
+          }
+        ],
+        "natureza": "texto_livre"
+      },
+      "estado": "verificado",
+      "evidencias": [
+        {
+          "fonte": "src:mdapi-genaifunction"
+        }
+      ],
+      "explicacao": "explicada",
+      "id": "mdt:GenAiFunction.pluginField",
+      "nome": "pluginField",
+      "o_que_e": "O tópico pai da ação.",
+      "obrigatoriedade": {
+        "condicao": "A documentação 68.0 não marca o campo como obrigatório; ausência de marcação não comprova opcionalidade (confirmar no WSDL).",
+        "estado": "desconhecido",
+        "valor": "nao"
+      },
+      "origem": {
+        "estado": "verificado",
+        "evidencias": [
+          {
+            "fonte": "src:mdapi-genaifunction"
+          }
+        ],
+        "nota": "Propriedade definida pelo schema da Metadata API.",
+        "valor": "padrao_plataforma"
+      },
+      "tipo_tecnico": "string"
+    },
+    {
+      "default": {
+        "estado": "desconhecido",
+        "forma": "nao_declarado_na_fonte"
+      },
+      "disponibilidade": {
+        "ate_versao": null,
+        "desde_versao": null,
+        "estado": "desconhecido"
+      },
+      "dominio": {
+        "contexto": "A fonte tipa como string sem lista de valores; não inventar valores.",
+        "estado": "verificado",
+        "evidencias": [
+          {
+            "fonte": "src:mdapi-genaifunction"
+          }
+        ],
+        "natureza": "texto_livre"
+      },
+      "estado": "verificado",
+      "evidencias": [
+        {
+          "fonte": "src:mdapi-genaifunction"
+        }
+      ],
+      "explicacao": "explicada",
+      "id": "mdt:GenAiFunction.progressIndicatorMessage",
+      "nome": "progressIndicatorMessage",
+      "o_que_e": "Texto da mensagem de progresso.",
+      "obrigatoriedade": {
+        "condicao": "A documentação 68.0 não marca o campo como obrigatório; ausência de marcação não comprova opcionalidade (confirmar no WSDL).",
+        "estado": "desconhecido",
+        "valor": "nao"
+      },
+      "origem": {
+        "estado": "verificado",
+        "evidencias": [
+          {
+            "fonte": "src:mdapi-genaifunction"
+          }
+        ],
+        "nota": "Propriedade definida pelo schema da Metadata API.",
+        "valor": "padrao_plataforma"
+      },
+      "tipo_tecnico": "string"
+    },
+    {
+      "default": {
+        "estado": "desconhecido",
+        "forma": "nao_declarado_na_fonte"
+      },
+      "disponibilidade": {
+        "ate_versao": null,
+        "desde_versao": null,
+        "estado": "desconhecido"
+      },
+      "dominio": {
+        "contexto": "A fonte tipa como string sem lista de valores; não inventar valores.",
+        "estado": "verificado",
+        "evidencias": [
+          {
+            "fonte": "src:mdapi-genaifunction"
+          }
+        ],
+        "natureza": "texto_livre"
+      },
+      "estado": "verificado",
+      "evidencias": [
+        {
+          "fonte": "src:mdapi-genaifunction"
+        }
+      ],
+      "explicacao": "explicada",
+      "herdada_de": "Metadata",
+      "id": "mdt:GenAiFunction.fullName",
+      "nome": "fullName",
+      "o_que_e": "Nome completo (API name) do componente; herdado do tipo Metadata.",
+      "obrigatoriedade": {
+        "estado": "desconhecido",
+        "valor": "desconhecida"
+      },
+      "origem": {
+        "estado": "verificado",
+        "evidencias": [
+          {
+            "fonte": "src:mdapi-genaifunction"
+          }
+        ],
+        "nota": "Propriedade definida pelo schema da Metadata API.",
+        "valor": "padrao_plataforma"
+      },
+      "tipo_tecnico": "string"
+    }
+  ],
+  "recomendacoes": [],
+  "setup": {
+    "estado": "desconhecido",
+    "nota": "Caminho no Setup não validado nesta sessão."
+  },
+  "suporte_cli": {
+    "estado": "verificado",
+    "evidencias": [
+      {
+        "fonte": "src:sdr-metadata-support"
+      }
+    ],
+    "nota": "Suporte do Salesforce CLI (source-deploy-retrieve), não do Metadata API em geral.",
+    "valor": {
+      "nota_fonte": null,
+      "status": "suportado"
+    }
+  }
+}

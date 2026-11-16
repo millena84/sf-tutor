@@ -486,6 +486,65 @@ TEMAS = {
         [ev("src:help-apex-job-queue", "Cobre parte do tema: página Apex Jobs.", "Monitor the Apex Job Queue"),
          ev("src:help-debug-logs", "Cobre parte do tema: logs de depuração para diagnóstico.", "Debug Logs")],
     ),
+    # ------------------------------------------------------------------ Conteúdo, conhecimento e colaboração
+    "sub:files-e-documentos": (
+        "Salesforce Files: arquivos com versões, compartilhados com pessoas, grupos, registros e bibliotecas.",
+        [ev("src:help-kb-files-data-model", "Cobre parte do tema: modelo de objetos dos arquivos.", "Understanding Salesforce Files"),
+         ev("src:mdapi-document", "Cobre parte do tema: documentos da aba Documents, do Classic.", "Document")],
+    ),
+    "sub:bibliotecas-e-assets": (
+        "Arquivos preparados para reuso e configuração: asset files, static resources e bibliotecas de conteúdo.",
+        [ev("src:help-asset-files", "Cobre parte do tema: asset files.", "Asset Files"),
+         ev("src:mdapi-contentasset", "Cobre parte do tema: metadado dos asset files.", "ContentAsset")],
+    ),
+    "sub:colaboracao": (
+        "Chatter: feeds em perfis, registros e grupos, com posts, comentários e arquivos.",
+        [ev("src:help-chatter-groups", "Cobre parte do tema: grupos do Chatter.", "Chatter Groups"),
+         ev("src:mdapi-chattersettings", "Cobre parte do tema: opções do Chatter na org.", "ChatterSettings")],
+    ),
+    "sub:templates-e-comunicacao": (
+        "Email templates e letterheads: os modelos de e-mail reutilizáveis e o papel timbrado deles.",
+        [ev("src:help-email-templates-lex", "Cobre parte do tema: templates do Lightning Experience.", "Email Templates in Lightning Experience"),
+         ev("src:help-email-merge-fields", "Cobre parte do tema: merge fields e uso entre Classic e Lightning.", "Merge Fields and Templates in Emails"),
+         ev("src:mdapi-emailtemplate", "Cobre parte do tema: metadado dos templates.", "EmailTemplate")],
+    ),
+    "sub:knowledge-e-categorias": (
+        "Lightning Knowledge: a base de artigos de conhecimento para atendentes e clientes.",
+        [ev("src:help-lk-enable", "Cobre parte do tema: habilitar o Lightning Knowledge.", "Enable Lightning Knowledge"),
+         ev("src:mdapi-knowledgesettings", "Cobre parte do tema: opções do Knowledge na org.", "KnowledgeSettings")],
+    ),
+    # ------------------------------------------------------------------ IA, agentes e decisões assistidas
+    "sub:configuracao-de-agentes": (
+        "Agentes do Agentforce: o que o agente é, para quem trabalha e com que usuário e ferramentas.",
+        [ev("src:help-agentforce-glossary", "Mais ampla que o tema: glossário de todo o Agentforce.", "Agentforce Glossary of Terms"),
+         ev("src:help-agent-script", "Cobre parte do tema: a linguagem de construção de agentes.", "Agent Script")],
+    ),
+    "sub:acoes-e-topicos": (
+        "Subagents (antes topics) e agent actions: os trabalhos que o agente sabe fazer e o que ele executa em cada um.",
+        [ev("src:help-agentforce-glossary", "Mais ampla que o tema: glossário de todo o Agentforce.", "Agentforce Glossary of Terms"),
+         ev("src:mdapi-genaiplugin", "Cobre parte do tema: metadado dos tópicos.", "GenAiPlugin"),
+         ev("src:mdapi-genaifunction", "Cobre parte do tema: metadado das agent actions.", "GenAiFunction")],
+    ),
+    "sub:prompts": (
+        "Prompt templates: prompts reutilizáveis, criados e geridos no Prompt Builder, preenchidos com dados da org.",
+        [ev("src:help-prompt-builder", "Cobre o tema: Prompt Builder.", "Prompt Builder"),
+         ev("src:mdapi-genaiprompttemplate", "Cobre parte do tema: metadado dos prompt templates.", "GenAiPromptTemplate")],
+    ),
+    "sub:modelos-e-grounding": (
+        "Os modelos de IA usados e o grounding: os dados acrescentados ao prompt para fundamentar a resposta.",
+        [ev("src:help-prompt-concepts", "Cobre parte do tema: grounding no Prompt Builder.", "Prompt Builder Key Concepts"),
+         ev("src:mdapi-einsteingptsettings", "Cobre parte do tema: opções de provedores de modelo.", "EinsteinGptSettings")],
+    ),
+    "sub:recuperacao-de-conhecimento": (
+        "Data libraries e retrievers: a indexação e a busca de conteúdo da empresa para fundamentar respostas (RAG).",
+        [ev("src:help-data-library", "Cobre o tema: Agentforce Data Library.", "Agentforce Data Library"),
+         ev("src:help-prompt-rag", "Cobre parte do tema: retrievers em prompt templates.", "Ground with Knowledge Using Retrieval Augmented Generation")],
+    ),
+    "sub:seguranca-avaliacao-e-governanca-de-ia": (
+        "Einstein Trust Layer e auditoria de IA: retenção zero, mascaramento, detecção de toxicidade e trilha de auditoria.",
+        [ev("src:help-trust-layer", "Cobre parte do tema: Trust Layer (não cobre testes e avaliação de agentes).", "Einstein Trust Layer"),
+         ev("src:help-trust-audit", "Cobre parte do tema: dados de auditoria.", "Audit Trail")],
+    ),
 }
 
 

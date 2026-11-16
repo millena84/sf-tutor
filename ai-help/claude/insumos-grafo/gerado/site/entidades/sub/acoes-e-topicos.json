@@ -9,18 +9,71 @@
       "texto": "Desde abril de 2026, agent topics se chamam subagents, sem mudança de funcionamento.",
       "tipo": "atencao",
       "titulo": "Mudança de nome"
+    },
+    {
+      "evidencias": [
+        {
+          "fonte": "src:mdapi-genaiplugin"
+        },
+        {
+          "fonte": "src:mdapi-genaifunction"
+        }
+      ],
+      "texto": "GenAiPlugin guarda o tópico: rótulo, escopo, instruções e a lista de ações, citadas pelo nome de API. GenAiFunction guarda a ação: o alvo invocado (invocationTarget) e o tipo dele (invocationTargetType), como flow, apex ou generatePromptResponse. A ação pode trazer pastas input e output, com um schema.json que descreve os parâmetros.",
+      "tipo": "implantacao",
+      "titulo": "Como metadado"
+    },
+    {
+      "evidencias": [
+        {
+          "fonte": "src:help-agent-action-custom"
+        }
+      ],
+      "texto": "As ações da org ficam em Agentforce Assets, no Setup. Ao criar uma, escolhe-se o tipo de recurso que ela chama (Reference Action Type), como um flow ou um prompt template.",
+      "tipo": "atencao",
+      "titulo": "Onde criar uma ação"
     }
   ],
   "classificacao": "cls:ia-agentes-e-decisoes-assistidas",
   "derivado": {
     "dependencias": [],
-    "funcionalidades": [],
-    "metadata_types": [],
+    "funcionalidades": [
+      {
+        "alertas": [
+          "O nome mudou: a Ajuda atual diz subagent; o metadado GenAiPlugin, na API 68.0, ainda diz topic.",
+          "O agente escolhe a ação pelo nome e pelas instruções dela: descreva em linguagem natural o que a ação faz.",
+          "Subagents e ações criados dentro de um agente saem em outro tipo de metadado (GenAiPlannerBundle), segundo as páginas dos tipos."
+        ],
+        "exemplo": "O subagent Devoluções tem a instrução de sempre confirmar o número do pedido e a ação que roda o flow de devolução.",
+        "id": "func:subagents-e-agent-actions",
+        "principal": true
+      }
+    ],
+    "metadata_types": [
+      {
+        "estrutura": "completa",
+        "funcionalidades": [
+          "func:subagents-e-agent-actions"
+        ],
+        "id": "mdt:GenAiFunction",
+        "nota_suporte": null,
+        "suporte_cli": "suportado"
+      },
+      {
+        "estrutura": "parcial",
+        "funcionalidades": [
+          "func:subagents-e-agent-actions"
+        ],
+        "id": "mdt:GenAiPlugin",
+        "nota_suporte": null,
+        "suporte_cli": "suportado"
+      }
+    ],
     "nota": "Calculado pelo gerador a partir do catálogo; não é cadastro.",
     "objetos_api": [],
     "temas_sem_funcionalidade": []
   },
-  "descricao": "O que um agente pode fazer e sobre quais assuntos.",
+  "descricao": "Subagents (antes topics) e agent actions: os trabalhos que o agente sabe fazer e o que ele executa em cada um.",
   "encadeamento": {
     "evidencias": [
       {
@@ -35,11 +88,13 @@
   "escopo": "Entram as ações que um agente pode executar e os assuntos que ele atende.",
   "estado": "desconhecido",
   "fora_do_escopo": "Ações rápidas da interface ficam em \"Ações rápidas\".",
-  "funcionalidades": [],
+  "funcionalidades": [
+    "func:subagents-e-agent-actions"
+  ],
   "id": "sub:acoes-e-topicos",
   "natureza": "curadoria_didatica",
   "nome": "Ações e tópicos",
-  "nota_estado": "Agrupamento proposto na especificação; fronteira ainda não cruzada com a documentação oficial.",
+  "nota_estado": "Tema criado pelo projeto (00-especificacao-grafo.md), não é nomenclatura oficial da Salesforce. Cruzado em 2026-11-10 com áreas da documentação oficial listadas nas referências; a correspondência é parcial e o recorte continua sendo do projeto.",
   "para_iniciantes": {
     "evidencias": [
       {
@@ -47,7 +102,27 @@
       }
     ],
     "exemplo": "Uma ação consulta o status do pedido quando o cliente pergunta onde está a entrega.",
-    "explicacao": "Ações são o que o agente executa; tópicos, chamados de subagents desde abril de 2026, agrupam os assuntos que ele atende."
+    "explicacao": "Ações são o que o agente executa; tópicos, chamados de subagents desde abril de 2026, agrupam os assuntos que ele atende.",
+    "por_onde_comecar": [
+      "func:subagents-e-agent-actions"
+    ]
   },
+  "referencias_oficiais": [
+    {
+      "fonte": "src:help-agentforce-glossary",
+      "nota": "Mais ampla que o tema: glossário de todo o Agentforce.",
+      "secao": "Agentforce Glossary of Terms"
+    },
+    {
+      "fonte": "src:mdapi-genaiplugin",
+      "nota": "Cobre parte do tema: metadado dos tópicos.",
+      "secao": "GenAiPlugin"
+    },
+    {
+      "fonte": "src:mdapi-genaifunction",
+      "nota": "Cobre parte do tema: metadado das agent actions.",
+      "secao": "GenAiFunction"
+    }
+  ],
   "sigla": "IA-02"
 }

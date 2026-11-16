@@ -4,7 +4,7 @@
   "sigla": "IA-03",
   "classificacao": "cls:ia-agentes-e-decisoes-assistidas",
   "natureza": "curadoria_didatica",
-  "descricao": "Modelos de instrução usados por recursos de IA.",
+  "descricao": "Prompt templates: prompts reutilizáveis, criados e geridos no Prompt Builder, preenchidos com dados da org.",
   "escopo": "Entram os modelos de instrução usados por recursos de IA.",
   "fora_do_escopo": "Modelos de e-mail ficam em \"Templates e comunicação\".",
   "para_iniciantes": {
@@ -14,6 +14,9 @@
       {
         "fonte": "src:agentforce-dev-guide"
       }
+    ],
+    "por_onde_comecar": [
+      "func:prompt-builder"
     ]
   },
   "encadeamento": {
@@ -24,7 +27,62 @@
       }
     ]
   },
-  "funcionalidades": [],
+  "avancado": [
+    {
+      "tipo": "decisao",
+      "titulo": "Tipo do template",
+      "texto": "O tipo é escolhido ao criar o template. Field Generation gera conteúdo para um campo de registro, acionado por um botão; Flex serve para casos que os outros tipos não cobrem. A Ajuda traz a tabela completa de tipos.",
+      "evidencias": [
+        {
+          "fonte": "src:help-prompt-template-types"
+        },
+        {
+          "fonte": "src:help-prompt-flex"
+        },
+        {
+          "fonte": "src:help-prompt-field-gen"
+        }
+      ]
+    },
+    {
+      "tipo": "implantacao",
+      "titulo": "Como metadado",
+      "texto": "Cada prompt template é um GenAiPromptTemplate, com uma lista de versões. Cada versão tem o texto, as entradas, os provedores de dados (por exemplo, um flow) e o estado: Draft ou Published. activeVersionIdentifier aponta a versão ativa.",
+      "evidencias": [
+        {
+          "fonte": "src:mdapi-genaiprompttemplate"
+        }
+      ]
+    },
+    {
+      "tipo": "atencao",
+      "titulo": "Publicado não se edita",
+      "texto": "Um template publicado não pode ser editado, nem pela interface nem pela Metadata API. Em EinsteinGptSettings, uma opção faz a implantação levar só as versões ativas; nesse caso, ela falha se não houver versão ativa.",
+      "evidencias": [
+        {
+          "fonte": "src:mdapi-genaiprompttemplate"
+        },
+        {
+          "fonte": "src:mdapi-einsteingptsettings"
+        }
+      ]
+    }
+  ],
+  "funcionalidades": [
+    "func:prompt-builder"
+  ],
   "estado": "desconhecido",
-  "nota_estado": "Agrupamento proposto na especificação; fronteira ainda não cruzada com a documentação oficial."
+  "nota_estado": "Tema criado pelo projeto (00-especificacao-grafo.md), não é nomenclatura oficial da Salesforce. Cruzado em 2026-11-10 com áreas da documentação oficial listadas nas referências; a correspondência é parcial e o recorte continua sendo do projeto.",
+  "referencias_oficiais": [
+    {
+      "fonte": "src:help-prompt-builder",
+      "secao": "Prompt Builder",
+      "nota": "Cobre o tema: Prompt Builder."
+    },
+    {
+      "fonte": "src:mdapi-genaiprompttemplate",
+      "secao": "GenAiPromptTemplate",
+      "nota": "Cobre parte do tema: metadado dos prompt templates."
+    }
+  ]
 }

@@ -1,14 +1,78 @@
 {
+  "avancado": [
+    {
+      "evidencias": [
+        {
+          "fonte": "src:help-asset-files"
+        },
+        {
+          "fonte": "src:help-kb-files-public"
+        }
+      ],
+      "texto": "Asset files são versões empacotáveis de arquivos do Salesforce Files, para marca e design: logos, cabeçalhos e arquivos referenciados por componentes. A Ajuda os apresenta como alternativa a static resources para deixar arquivos públicos. Para o uso comum e colaborativo de arquivos, não é preciso criar asset files.",
+      "tipo": "decisao",
+      "titulo": "Asset file ou static resource"
+    },
+    {
+      "evidencias": [
+        {
+          "fonte": "src:mdapi-contentasset"
+        }
+      ],
+      "texto": "Cada asset file é um ContentAsset, na pasta contentassets, com sufixo .asset. O metadado guarda o rótulo, o idioma, as versões e com quem o arquivo é compartilhado. A recuperação falha se o conteúdo total passar de 30 MB.",
+      "tipo": "implantacao",
+      "titulo": "Como metadado"
+    }
+  ],
   "classificacao": "cls:conteudo-conhecimento-e-colaboracao",
   "derivado": {
     "dependencias": [],
-    "funcionalidades": [],
-    "metadata_types": [],
+    "funcionalidades": [
+      {
+        "alertas": [
+          "Não é preciso criar asset files para o uso comum e colaborativo de arquivos: só para usos de configuração.",
+          "Asset files são uma alternativa a static resources para deixar arquivos públicos.",
+          "A recuperação por Metadata API falha se o conteúdo total dos asset files passar de 30 MB."
+        ],
+        "exemplo": "O logo da empresa vira um asset file e é usado no tema da org e no site do Experience Cloud.",
+        "id": "func:asset-files",
+        "principal": true
+      },
+      {
+        "alertas": [
+          "O static resource só pode ser usado dentro da org."
+        ],
+        "exemplo": "Uma biblioteca JavaScript de gráficos é enviada como static resource e carregada por um Lightning web component.",
+        "id": "func:static-resources",
+        "principal": false,
+        "tema_principal": "sub:codigo-e-bundles"
+      }
+    ],
+    "metadata_types": [
+      {
+        "estrutura": "completa",
+        "funcionalidades": [
+          "func:asset-files"
+        ],
+        "id": "mdt:ContentAsset",
+        "nota_suporte": null,
+        "suporte_cli": "suportado"
+      },
+      {
+        "estrutura": "completa",
+        "funcionalidades": [
+          "func:static-resources"
+        ],
+        "id": "mdt:StaticResource",
+        "nota_suporte": null,
+        "suporte_cli": "suportado"
+      }
+    ],
     "nota": "Calculado pelo gerador a partir do catálogo; não é cadastro.",
     "objetos_api": [],
     "temas_sem_funcionalidade": []
   },
-  "descricao": "Bibliotecas de conteúdo e recursos estáticos.",
+  "descricao": "Arquivos preparados para reuso e configuração: asset files, static resources e bibliotecas de conteúdo.",
   "encadeamento": {
     "evidencias": [
       {
@@ -20,11 +84,14 @@
   "escopo": "Entram bibliotecas de conteúdo e recursos estáticos.",
   "estado": "desconhecido",
   "fora_do_escopo": "Arquivos ligados a registros ficam em \"Files e documentos\".",
-  "funcionalidades": [],
+  "funcionalidades": [
+    "func:asset-files",
+    "func:static-resources"
+  ],
   "id": "sub:bibliotecas-e-assets",
   "natureza": "curadoria_didatica",
   "nome": "Bibliotecas e assets",
-  "nota_estado": "Agrupamento proposto na especificação; fronteira ainda não cruzada com a documentação oficial.",
+  "nota_estado": "Tema criado pelo projeto (00-especificacao-grafo.md), não é nomenclatura oficial da Salesforce. Cruzado em 2026-11-10 com áreas da documentação oficial listadas nas referências; a correspondência é parcial e o recorte continua sendo do projeto.",
   "para_iniciantes": {
     "evidencias": [
       {
@@ -32,7 +99,23 @@
       }
     ],
     "exemplo": "Uma biblioteca de materiais de venda fica disponível só para o time comercial.",
-    "explicacao": "Bibliotecas e pastas organizam arquivos e controlam quem tem acesso a eles."
+    "explicacao": "Bibliotecas e pastas organizam arquivos e controlam quem tem acesso a eles.",
+    "por_onde_comecar": [
+      "func:asset-files",
+      "func:static-resources"
+    ]
   },
+  "referencias_oficiais": [
+    {
+      "fonte": "src:help-asset-files",
+      "nota": "Cobre parte do tema: asset files.",
+      "secao": "Asset Files"
+    },
+    {
+      "fonte": "src:mdapi-contentasset",
+      "nota": "Cobre parte do tema: metadado dos asset files.",
+      "secao": "ContentAsset"
+    }
+  ],
   "sigla": "CON-02"
 }

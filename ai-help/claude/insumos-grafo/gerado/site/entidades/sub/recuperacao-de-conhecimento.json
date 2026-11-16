@@ -46,14 +46,88 @@
   ],
   "classificacao": "cls:ia-agentes-e-decisoes-assistidas",
   "derivado": {
-    "dependencias": [],
-    "funcionalidades": [],
-    "metadata_types": [],
+    "dependencias": [
+      {
+        "destino": "obj:KnowledgeArticle",
+        "destino_no_tema": true,
+        "estado": "verificado",
+        "origem": "obj:KnowledgeArticleVersion",
+        "rel": "rel:knowledgearticleversion-knowledgearticle",
+        "via": "KnowledgeArticleId"
+      }
+    ],
+    "funcionalidades": [
+      {
+        "alertas": [
+          "Exige o Data 360 configurado.",
+          "Em prompt templates, os retrievers buscam no conhecimento indexado no Data 360."
+        ],
+        "exemplo": "O agente de atendimento responde uma dúvida sobre garantia citando o artigo de Knowledge que trata do assunto.",
+        "id": "func:agentforce-data-library",
+        "principal": true
+      },
+      {
+        "alertas": [
+          "Habilitar Lightning Knowledge é irreversível e muda o modelo de dados para record types; exige ao menos um article type."
+        ],
+        "exemplo": "Um artigo de 'Como trocar a senha' é sugerido ao atendente e publicado no portal.",
+        "id": "func:lightning-knowledge",
+        "pre_requisitos": [
+          "Ver Knowledge Settings: licença Knowledge User."
+        ],
+        "principal": false,
+        "tema_principal": "sub:knowledge-e-categorias"
+      }
+    ],
+    "metadata_types": [
+      {
+        "estrutura": "parcial",
+        "funcionalidades": [
+          "func:lightning-knowledge"
+        ],
+        "id": "mdt:KnowledgeSettings",
+        "nota_suporte": null,
+        "suporte_cli": "suportado"
+      }
+    ],
     "nota": "Calculado pelo gerador a partir do catálogo; não é cadastro.",
-    "objetos_api": [],
+    "objetos_api": [
+      {
+        "apis": [
+          {
+            "api": "padrao",
+            "estado": "verificado"
+          },
+          {
+            "api": "tooling",
+            "estado": "desconhecido"
+          }
+        ],
+        "funcionalidades": [
+          "func:lightning-knowledge"
+        ],
+        "id": "obj:KnowledgeArticle"
+      },
+      {
+        "apis": [
+          {
+            "api": "padrao",
+            "estado": "verificado"
+          },
+          {
+            "api": "tooling",
+            "estado": "desconhecido"
+          }
+        ],
+        "funcionalidades": [
+          "func:lightning-knowledge"
+        ],
+        "id": "obj:KnowledgeArticleVersion"
+      }
+    ],
     "temas_sem_funcionalidade": []
   },
-  "descricao": "Busca de conteúdo para alimentar respostas.",
+  "descricao": "Data libraries e retrievers: a indexação e a busca de conteúdo da empresa para fundamentar respostas (RAG).",
   "encadeamento": {
     "evidencias": [
       {
@@ -68,11 +142,14 @@
   "escopo": "Entra a busca de conteúdo para alimentar respostas de IA.",
   "estado": "desconhecido",
   "fora_do_escopo": "Os artigos de conhecimento em si ficam em \"Knowledge e categorias\".",
-  "funcionalidades": [],
+  "funcionalidades": [
+    "func:agentforce-data-library",
+    "func:lightning-knowledge"
+  ],
   "id": "sub:recuperacao-de-conhecimento",
   "natureza": "curadoria_didatica",
   "nome": "Recursos de recuperação de conhecimento",
-  "nota_estado": "Agrupamento proposto na especificação; fronteira ainda não cruzada com a documentação oficial.",
+  "nota_estado": "Tema criado pelo projeto (00-especificacao-grafo.md), não é nomenclatura oficial da Salesforce. Cruzado em 2026-11-10 com áreas da documentação oficial listadas nas referências; a correspondência é parcial e o recorte continua sendo do projeto.",
   "para_iniciantes": {
     "analogia": {
       "limite": "O bibliotecário não escreve a resposta: quem redige é o modelo, e ele pode errar se os trechos trazidos forem ruins.",
@@ -87,7 +164,23 @@
       }
     ],
     "exemplo": "Um cliente pergunta como trocar a senha; o retriever acha o trecho do artigo de ajuda e o agente responde com base nele.",
-    "explicacao": "Para um agente de IA responder com base no conteúdo da empresa, esse conteúdo precisa ser encontrável. A Agentforce Data Library indexa artigos do Knowledge, arquivos ou páginas web, e um retriever busca os trechos mais relevantes para cada pergunta e os entrega ao modelo."
+    "explicacao": "Para um agente de IA responder com base no conteúdo da empresa, esse conteúdo precisa ser encontrável. A Agentforce Data Library indexa artigos do Knowledge, arquivos ou páginas web, e um retriever busca os trechos mais relevantes para cada pergunta e os entrega ao modelo.",
+    "por_onde_comecar": [
+      "func:agentforce-data-library",
+      "func:lightning-knowledge"
+    ]
   },
+  "referencias_oficiais": [
+    {
+      "fonte": "src:help-data-library",
+      "nota": "Cobre o tema: Agentforce Data Library.",
+      "secao": "Agentforce Data Library"
+    },
+    {
+      "fonte": "src:help-prompt-rag",
+      "nota": "Cobre parte do tema: retrievers em prompt templates.",
+      "secao": "Ground with Knowledge Using Retrieval Augmented Generation"
+    }
+  ],
   "sigla": "IA-05"
 }

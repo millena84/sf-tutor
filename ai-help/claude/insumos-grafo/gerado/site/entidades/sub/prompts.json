@@ -1,14 +1,85 @@
 {
+  "avancado": [
+    {
+      "evidencias": [
+        {
+          "fonte": "src:help-prompt-template-types"
+        },
+        {
+          "fonte": "src:help-prompt-flex"
+        },
+        {
+          "fonte": "src:help-prompt-field-gen"
+        }
+      ],
+      "texto": "O tipo é escolhido ao criar o template. Field Generation gera conteúdo para um campo de registro, acionado por um botão; Flex serve para casos que os outros tipos não cobrem. A Ajuda traz a tabela completa de tipos.",
+      "tipo": "decisao",
+      "titulo": "Tipo do template"
+    },
+    {
+      "evidencias": [
+        {
+          "fonte": "src:mdapi-genaiprompttemplate"
+        }
+      ],
+      "texto": "Cada prompt template é um GenAiPromptTemplate, com uma lista de versões. Cada versão tem o texto, as entradas, os provedores de dados (por exemplo, um flow) e o estado: Draft ou Published. activeVersionIdentifier aponta a versão ativa.",
+      "tipo": "implantacao",
+      "titulo": "Como metadado"
+    },
+    {
+      "evidencias": [
+        {
+          "fonte": "src:mdapi-genaiprompttemplate"
+        },
+        {
+          "fonte": "src:mdapi-einsteingptsettings"
+        }
+      ],
+      "texto": "Um template publicado não pode ser editado, nem pela interface nem pela Metadata API. Em EinsteinGptSettings, uma opção faz a implantação levar só as versões ativas; nesse caso, ela falha se não houver versão ativa.",
+      "tipo": "atencao",
+      "titulo": "Publicado não se edita"
+    }
+  ],
   "classificacao": "cls:ia-agentes-e-decisoes-assistidas",
   "derivado": {
     "dependencias": [],
-    "funcionalidades": [],
-    "metadata_types": [],
+    "funcionalidades": [
+      {
+        "alertas": [
+          "Para pôr um template Field Generation numa página de registro, a página precisa usar Dynamic Forms.",
+          "Templates publicados não podem ser editados, nem pela interface nem pela Metadata API.",
+          "Criar e gerenciar templates exige permissão própria; a Ajuda cita o permission set Prompt Template Manager."
+        ],
+        "exemplo": "Um template Field Generation preenche o campo Resumo do caso: o usuário clica num botão e o texto gerado entra no campo.",
+        "id": "func:prompt-builder",
+        "principal": true
+      }
+    ],
+    "metadata_types": [
+      {
+        "estrutura": "completa",
+        "funcionalidades": [
+          "func:prompt-builder"
+        ],
+        "id": "mdt:EinsteinGptSettings",
+        "nota_suporte": null,
+        "suporte_cli": "suportado"
+      },
+      {
+        "estrutura": "completa",
+        "funcionalidades": [
+          "func:prompt-builder"
+        ],
+        "id": "mdt:GenAiPromptTemplate",
+        "nota_suporte": null,
+        "suporte_cli": "suportado"
+      }
+    ],
     "nota": "Calculado pelo gerador a partir do catálogo; não é cadastro.",
     "objetos_api": [],
     "temas_sem_funcionalidade": []
   },
-  "descricao": "Modelos de instrução usados por recursos de IA.",
+  "descricao": "Prompt templates: prompts reutilizáveis, criados e geridos no Prompt Builder, preenchidos com dados da org.",
   "encadeamento": {
     "evidencias": [
       {
@@ -20,11 +91,13 @@
   "escopo": "Entram os modelos de instrução usados por recursos de IA.",
   "estado": "desconhecido",
   "fora_do_escopo": "Modelos de e-mail ficam em \"Templates e comunicação\".",
-  "funcionalidades": [],
+  "funcionalidades": [
+    "func:prompt-builder"
+  ],
   "id": "sub:prompts",
   "natureza": "curadoria_didatica",
   "nome": "Prompts",
-  "nota_estado": "Agrupamento proposto na especificação; fronteira ainda não cruzada com a documentação oficial.",
+  "nota_estado": "Tema criado pelo projeto (00-especificacao-grafo.md), não é nomenclatura oficial da Salesforce. Cruzado em 2026-11-10 com áreas da documentação oficial listadas nas referências; a correspondência é parcial e o recorte continua sendo do projeto.",
   "para_iniciantes": {
     "evidencias": [
       {
@@ -32,7 +105,22 @@
       }
     ],
     "exemplo": "Um modelo de prompt pede ao modelo um resumo do caso antes de transferi-lo para outra pessoa.",
-    "explicacao": "Prompts são as instruções enviadas aos modelos de IA."
+    "explicacao": "Prompts são as instruções enviadas aos modelos de IA.",
+    "por_onde_comecar": [
+      "func:prompt-builder"
+    ]
   },
+  "referencias_oficiais": [
+    {
+      "fonte": "src:help-prompt-builder",
+      "nota": "Cobre o tema: Prompt Builder.",
+      "secao": "Prompt Builder"
+    },
+    {
+      "fonte": "src:mdapi-genaiprompttemplate",
+      "nota": "Cobre parte do tema: metadado dos prompt templates.",
+      "secao": "GenAiPromptTemplate"
+    }
+  ],
   "sigla": "IA-03"
 }

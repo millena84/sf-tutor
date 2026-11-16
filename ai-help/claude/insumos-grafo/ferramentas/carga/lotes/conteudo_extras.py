@@ -150,4 +150,113 @@ X["sub:limites-e-consumo"] = {"avancado": [
        "DailyAsyncApexExecutions.", E("src:help-org-health", "src:rest-limits")),
 ]}
 
+# ------------------------------------------------------------------ Conteúdo, conhecimento e colaboração (A5)
+CON, IA = "cls:conteudo-conhecimento-e-colaboracao", "cls:ia-agentes-e-decisoes-assistidas"
+X[CON] = {"comece": ["func:salesforce-files", "func:chatter", "func:email-templates"], "avancado": [
+    av("implantacao", "Como metadado", "EmailTemplate guarda cada email template; Letterhead, o letterhead do Classic; Document, os documentos "
+       "da aba Documents; ContentAsset, cada asset file; ChatterSettings e KnowledgeSettings, as opções do Chatter e do Knowledge. Os arquivos "
+       "do Salesforce Files são registros (ContentDocument e ContentVersion), não metadado.",
+       E("src:mdapi-emailtemplate", "src:mdapi-letterhead", "src:mdapi-document", "src:mdapi-contentasset", "src:mdapi-chattersettings",
+         "src:mdapi-knowledgesettings", "src:help-kb-files-data-model")),
+    av("atencao", "Sem curinga no package.xml", "EmailTemplate, Letterhead e Document não aceitam o curinga (*): cada componente precisa ser "
+       "listado pelo nome, e templates e documentos levam a pasta no nome.",
+       E("src:mdapi-emailtemplate", "src:mdapi-letterhead", "src:mdapi-document")),
+]}
+X["sub:files-e-documentos"] = {"comece": ["func:salesforce-files"], "avancado": [
+    av("limite", "Limites de publicação", "Até 30.000.000 de documentos publicados, contando os arquivados, e até 200.000 novas versões a cada "
+       "24 horas (2.500 em Developer Edition e em trials).", E("src:objref-contentdocument-nota")),
+    av("atencao", "Consulta sem ID não traz tudo", "Consultar ContentDocument ou ContentVersion sem informar um ID não devolve todos os arquivos "
+       "que o usuário pode ver: ficam de fora os que ele só acessa por ter acesso a um registro com o qual o arquivo é compartilhado.",
+       E("src:objref-contentversion-nota")),
+    av("decisao", "Files não é Documents", "A aba Documents, do Salesforce Classic, é outro recurso: guarda documentos em pastas e tem o metadata "
+       "type Document. É dela que saem, por exemplo, as imagens de logo dos Classic letterheads.", E("src:mdapi-document", "src:mdapi-letterhead")),
+]}
+X["sub:bibliotecas-e-assets"] = {"comece": ["func:asset-files", "func:static-resources"], "avancado": [
+    av("decisao", "Asset file ou static resource", "Asset files são versões empacotáveis de arquivos do Salesforce Files, para marca e design: "
+       "logos, cabeçalhos e arquivos referenciados por componentes. A Ajuda os apresenta como alternativa a static resources para deixar "
+       "arquivos públicos. Para o uso comum e colaborativo de arquivos, não é preciso criar asset files.",
+       E("src:help-asset-files", "src:help-kb-files-public")),
+    av("implantacao", "Como metadado", "Cada asset file é um ContentAsset, na pasta contentassets, com sufixo .asset. O metadado guarda o rótulo, "
+       "o idioma, as versões e com quem o arquivo é compartilhado. A recuperação falha se o conteúdo total passar de 30 MB.",
+       E("src:mdapi-contentasset")),
+]}
+X["sub:colaboracao"] = {"comece": ["func:chatter"], "avancado": [
+    av("limite", "Quantos grupos", "Cada usuário participa de até 300 grupos; a org pode ter até 30.000.", E("src:help-chatter-groups")),
+    av("decisao", "Broadcast group", "Qualquer grupo (público, privado ou unlisted) pode ser posto em modo broadcast: só donos e gerentes "
+       "publicam; os membros leem e comentam.", E("src:help-chatter-broadcast")),
+    av("implantacao", "Como metadado", "As opções do Chatter ficam em ChatterSettings (arquivo Chatter.settings): ligar o Chatter, grupos "
+       "unlisted, registros em grupos, edição e fixação de posts, rascunhos e prévias de links. O metadata type Group é outra coisa: "
+       "representa public groups, usados em compartilhamento.", E("src:mdapi-chattersettings")),
+]}
+X["sub:templates-e-comunicacao"] = {"comece": ["func:email-templates"], "avancado": [
+    av("implantacao", "Como metadado", "Cada template é um EmailTemplate, numa subpasta da pasta email: um arquivo .email com o corpo e um "
+       "arquivo de metadado. O campo type diz o tipo (text, html, custom ou visualforce) e UiType, a interface (Aloha para o Classic, SFX para "
+       "o Lightning Experience). O letterhead do Classic é o tipo Letterhead.", E("src:mdapi-emailtemplate", "src:mdapi-letterhead")),
+    av("atencao", "Dois letterheads diferentes", "Classic letterheads valem para templates HTML do Classic e são geridos em Classic Letterheads, "
+       "no Setup. Enhanced letterheads são do Lightning Experience, públicos por padrão, e exigem Modify All Data para criar.",
+       E("src:help-classic-letterheads", "src:help-enhanced-letterheads")),
+    av("atencao", "Templates do Classic no Lightning", "Os templates do Classic podem ser usados no Lightning Experience, mas são editados no "
+       "Setup, em Classic Email Templates. Ao enviar, os anexos do template são somente leitura.",
+       E("src:help-classic-templates-in-lex", "src:help-classic-html-templates")),
+]}
+
+# ------------------------------------------------------------------ IA, agentes e decisões assistidas (A6)
+X[IA] = {"comece": ["func:agentes-agentforce", "func:subagents-e-agent-actions", "func:prompt-builder"], "avancado": [
+    av("decisao", "Como as peças se encaixam", "O agente é formado por subagents (antes topics); cada subagent tem instruções e ações; uma ação "
+       "chama um recurso da plataforma, como um flow, uma classe Apex ou um prompt template. O prompt template recebe dados da org por "
+       "grounding, e uma data library permite buscar trechos de conteúdo da empresa. O Einstein Trust Layer protege os dados no caminho até o "
+       "modelo.", E("src:help-agentforce-glossary", "src:help-prompt-concepts", "src:help-data-library", "src:help-trust-layer")),
+    av("implantacao", "Como metadado", "GenAiPromptTemplate guarda cada prompt template; GenAiPlugin, cada tópico (subagent) da biblioteca de "
+       "assets; GenAiFunction, cada agent action; EinsteinGptSettings, as opções de IA generativa da org. As páginas dos tipos avisam que, em "
+       "orgs Winter '26 ou posteriores, o que é criado dentro de um agente sai em GenAiPlannerBundle.",
+       E("src:mdapi-genaiprompttemplate", "src:mdapi-genaiplugin", "src:mdapi-genaifunction", "src:mdapi-einsteingptsettings")),
+]}
+X["sub:configuracao-de-agentes"] = {"comece": ["func:agentes-agentforce"], "avancado": [
+    av("seguranca", "O agente tem um usuário", "Agentes de atendimento operam como um agent user: um usuário com as permissões de que o agente "
+       "precisa para acessar dados e executar ações.", E("src:help-agent-service-template")),
+    av("decisao", "Dois construtores", "A Ajuda atual descreve o Agentforce Builder, que usa a linguagem Agent Script, e o Legacy Agentforce "
+       "Builder, um espaço visual. Agent Script combina instruções em linguagem natural com expressões programáticas, como condições e variáveis.",
+       E("src:help-agent-script", "src:help-agentforce-builder-legacy")),
+]}
+X["sub:acoes-e-topicos"] = {"comece": ["func:subagents-e-agent-actions"], "avancado": [
+    av("implantacao", "Como metadado", "GenAiPlugin guarda o tópico: rótulo, escopo, instruções e a lista de ações, citadas pelo nome de API. "
+       "GenAiFunction guarda a ação: o alvo invocado (invocationTarget) e o tipo dele (invocationTargetType), como flow, apex ou "
+       "generatePromptResponse. A ação pode trazer pastas input e output, com um schema.json que descreve os parâmetros.",
+       E("src:mdapi-genaiplugin", "src:mdapi-genaifunction")),
+    av("atencao", "Onde criar uma ação", "As ações da org ficam em Agentforce Assets, no Setup. Ao criar uma, escolhe-se o tipo de recurso que "
+       "ela chama (Reference Action Type), como um flow ou um prompt template.", E("src:help-agent-action-custom")),
+]}
+X["sub:prompts"] = {"comece": ["func:prompt-builder"], "avancado": [
+    av("decisao", "Tipo do template", "O tipo é escolhido ao criar o template. Field Generation gera conteúdo para um campo de registro, "
+       "acionado por um botão; Flex serve para casos que os outros tipos não cobrem. A Ajuda traz a tabela completa de tipos.",
+       E("src:help-prompt-template-types", "src:help-prompt-flex", "src:help-prompt-field-gen")),
+    av("implantacao", "Como metadado", "Cada prompt template é um GenAiPromptTemplate, com uma lista de versões. Cada versão tem o texto, as "
+       "entradas, os provedores de dados (por exemplo, um flow) e o estado: Draft ou Published. activeVersionIdentifier aponta a versão ativa.",
+       E("src:mdapi-genaiprompttemplate")),
+    av("atencao", "Publicado não se edita", "Um template publicado não pode ser editado, nem pela interface nem pela Metadata API. Em "
+       "EinsteinGptSettings, uma opção faz a implantação levar só as versões ativas; nesse caso, ela falha se não houver versão ativa.",
+       E("src:mdapi-genaiprompttemplate", "src:mdapi-einsteingptsettings")),
+]}
+X["sub:modelos-e-grounding"] = {"comece": ["func:prompt-builder", "func:agentforce-data-library"], "avancado": [
+    av("decisao", "Duas formas de grounding", "Grounding é acrescentar ao prompt os dados de que o modelo precisa. No Prompt Builder, isso é "
+       "feito por merge fields que referenciam campos de registro, flows, Apex e arquivos. Com RAG, um retriever busca trechos relevantes em "
+       "conteúdo indexado no Data 360.", E("src:help-prompt-concepts", "src:help-prompt-rag", "src:help-agentforce-glossary")),
+    av("implantacao", "Provedores de modelo como metadado", "EinsteinGptSettings tem opções para desligar provedores de modelo (AWS Bedrock, "
+       "Azure OpenAI, OpenAI e Vertex AI) e para ligar modelos em beta. Em cada versão de prompt template, primaryModel aponta o modelo usado.",
+       E("src:mdapi-einsteingptsettings", "src:mdapi-genaiprompttemplate")),
+]}
+X["sub:recuperacao-de-conhecimento"] = {"comece": ["func:agentforce-data-library", "func:lightning-knowledge"]}
+X["sub:seguranca-avaliacao-e-governanca-de-ia"] = {"comece": ["func:einstein-trust-layer"], "avancado": [
+    av("seguranca", "O que o Trust Layer faz", "Retenção zero: os provedores externos de modelo não guardam os dados nem os usam em treinamento. "
+       "Mascaramento: dados sensíveis são identificados e trocados por marcadores antes do envio ao modelo. Detecção de toxicidade: respostas "
+       "potencialmente nocivas são sinalizadas. Auditoria: prompts, respostas e sinais de confiança ficam registrados.",
+       E("src:help-trust-layer", "src:help-trust-masking", "src:help-employee-agent-considerations")),
+    av("atencao", "Mascaramento tem exceções", "No Agentforce Employee Agent, o mascaramento fica desligado. Quando o modelo é hospedado dentro "
+       "do limite de confiança da Salesforce, os dados não saem desse limite.",
+       E("src:help-employee-agent-considerations", "src:help-agent-masking-limits")),
+    av("seguranca", "Onde fica a auditoria", "Os dados de auditoria de IA generativa (como o mascaramento aplicado e as pontuações de "
+       "toxicidade) e os dados de feedback ficam guardados no Data 360.", E("src:help-trust-audit")),
+    av("seguranca", "Permissões continuam valendo", "Agentes respeitam os controles de acesso padrão do Salesforce.", E("src:help-agentforce-trust")),
+]}
+
 EXTRAS = X

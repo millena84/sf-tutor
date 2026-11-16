@@ -1,0 +1,1589 @@
+{
+  "funcionalidades": [
+    {
+      "id": "func:email-templates",
+      "nome": "Email templates"
+    }
+  ],
+  "metadata_type": {
+    "alertas": [
+      "O curinga (*) não funciona no package.xml para este tipo.",
+      "A introdução da página diz que todos os campos são obrigatórios, menos logo e os dois alinhamentos.",
+      "Este tipo é o letterhead do Salesforce Classic; a Ajuda trata os enhanced letterheads do Lightning Experience em separado."
+    ],
+    "arquivos": {
+      "curinga_package_xml": {
+        "estado": "verificado",
+        "evidencias": [
+          {
+            "fonte": "src:mdapi-letterhead"
+          }
+        ],
+        "valor": false
+      },
+      "metadata_api_format": {
+        "estado": "verificado",
+        "evidencias": [
+          {
+            "fonte": "src:sdr-registry",
+            "nota": "types.letterhead"
+          }
+        ],
+        "valor": {
+          "arquivo": "<Nome>.letter",
+          "pasta": "letterhead/"
+        }
+      },
+      "source_format": {
+        "estado": "verificado",
+        "evidencias": [
+          {
+            "fonte": "src:sdr-registry",
+            "nota": "types.letterhead"
+          }
+        ],
+        "nota": "Pasta e sufixo do registro do Salesforce CLI; sufixo '-meta.xml' segue a convenção do source format.",
+        "valor": {
+          "arquivo": "<Nome>.letter-meta.xml",
+          "pasta": "letterhead/"
+        }
+      }
+    },
+    "cobertura": {
+      "estrutural": {
+        "esperado": 11,
+        "estado": "completa",
+        "nota": "Universo esperado = tabelas Fields da página do guia versionado 264.0 (API 68.0), lida em 2026-11-16.",
+        "presente": 11
+      },
+      "explicativa": {
+        "esperado": 11,
+        "estado": "completa",
+        "presente": 11
+      },
+      "mapeamento": {
+        "estado": "parcial",
+        "nota": "Correspondências registradas apenas onde há evidência; demais pendentes."
+      }
+    },
+    "disponibilidade": {
+      "ate_versao": null,
+      "desde_versao": "12.0",
+      "estado": "verificado"
+    },
+    "divergencias_documentais": [
+      "A tabela tipa height (cabeçalho e rodapé) como DashboardComponent[], e bottomLine como enumeração de string com os valores color e height; os dois casos parecem erros da página. bottomLine foi cadastrado como LetterheadLine, igual às outras linhas."
+    ],
+    "estado": "verificado",
+    "estende": "Metadata",
+    "estruturas": [
+      "mdx:LetterheadHeaderFooter",
+      "mdx:LetterheadLine"
+    ],
+    "evidencias": [
+      {
+        "fonte": "src:mdapi-letterhead"
+      },
+      {
+        "fonte": "src:sdr-registry"
+      },
+      {
+        "fonte": "src:sdr-metadata-support"
+      }
+    ],
+    "exemplo_xml": {
+      "natureza": "didatico_projeto",
+      "nota": "Exemplo escrito pelo projeto apenas com elementos documentados; sem dados reais.",
+      "xml": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<Letterhead xmlns=\"http://soap.sforce.com/2006/04/metadata\">\n    <available>true</available>\n    <backgroundColor>[cor em hexadecimal]</backgroundColor>\n    <bodyColor>[cor em hexadecimal]</bodyColor>\n    <bottomLine>\n        <color>[cor em hexadecimal]</color>\n        <height>[altura]</height>\n    </bottomLine>\n    <description>[descrição do letterhead]</description>\n    <footer>\n        <backgroundColor>[cor em hexadecimal]</backgroundColor>\n        <height>[altura]</height>\n    </footer>\n    <header>\n        <backgroundColor>[cor em hexadecimal]</backgroundColor>\n        <height>[altura]</height>\n    </header>\n    <middleLine>\n        <color>[cor em hexadecimal]</color>\n        <height>[altura]</height>\n    </middleLine>\n    <name>[nome do letterhead]</name>\n    <topLine>\n        <color>[cor em hexadecimal]</color>\n        <height>[altura]</height>\n    </topLine>\n</Letterhead>"
+    },
+    "finalidade": "Versionar e implantar o papel timbrado usado pelos email templates HTML.",
+    "id": "mdt:Letterhead",
+    "nome": "Letterhead",
+    "o_que_e": "Um letterhead (do Salesforce Classic): as opções de formatação de email templates, como logo, cor da página e linhas.",
+    "propriedades": [
+      {
+        "default": {
+          "estado": "desconhecido",
+          "forma": "nao_declarado_na_fonte"
+        },
+        "disponibilidade": {
+          "ate_versao": null,
+          "desde_versao": null,
+          "estado": "desconhecido"
+        },
+        "dominio": {
+          "estado": "verificado",
+          "evidencias": [
+            {
+              "fonte": "src:mdapi-letterhead"
+            }
+          ],
+          "lista_completa": "sim",
+          "natureza": "booleano",
+          "valores": [
+            {
+              "valor": "true"
+            },
+            {
+              "valor": "false"
+            }
+          ]
+        },
+        "estado": "verificado",
+        "evidencias": [
+          {
+            "fonte": "src:mdapi-letterhead"
+          }
+        ],
+        "explicacao": "explicada",
+        "id": "mdt:Letterhead.available",
+        "nome": "available",
+        "o_que_e": "Indica se o letterhead pode ser usado, por exemplo em email templates.",
+        "obrigatoriedade": {
+          "estado": "verificado",
+          "evidencias": [
+            {
+              "fonte": "src:mdapi-letterhead"
+            }
+          ],
+          "valor": "sim"
+        },
+        "origem": {
+          "estado": "verificado",
+          "evidencias": [
+            {
+              "fonte": "src:mdapi-letterhead"
+            }
+          ],
+          "nota": "Propriedade definida pelo schema da Metadata API.",
+          "valor": "padrao_plataforma"
+        },
+        "tipo_tecnico": "boolean"
+      },
+      {
+        "default": {
+          "estado": "desconhecido",
+          "forma": "nao_declarado_na_fonte"
+        },
+        "disponibilidade": {
+          "ate_versao": null,
+          "desde_versao": null,
+          "estado": "desconhecido"
+        },
+        "dominio": {
+          "contexto": "A fonte tipa como string sem lista de valores; não inventar valores.",
+          "estado": "verificado",
+          "evidencias": [
+            {
+              "fonte": "src:mdapi-letterhead"
+            }
+          ],
+          "natureza": "texto_livre"
+        },
+        "estado": "verificado",
+        "evidencias": [
+          {
+            "fonte": "src:mdapi-letterhead"
+          }
+        ],
+        "explicacao": "explicada",
+        "id": "mdt:Letterhead.backgroundColor",
+        "nome": "backgroundColor",
+        "o_que_e": "Cor de fundo. Cor em código hexadecimal.",
+        "obrigatoriedade": {
+          "estado": "verificado",
+          "evidencias": [
+            {
+              "fonte": "src:mdapi-letterhead"
+            }
+          ],
+          "valor": "sim"
+        },
+        "origem": {
+          "estado": "verificado",
+          "evidencias": [
+            {
+              "fonte": "src:mdapi-letterhead"
+            }
+          ],
+          "nota": "Propriedade definida pelo schema da Metadata API.",
+          "valor": "padrao_plataforma"
+        },
+        "tipo_tecnico": "string"
+      },
+      {
+        "default": {
+          "estado": "desconhecido",
+          "forma": "nao_declarado_na_fonte"
+        },
+        "disponibilidade": {
+          "ate_versao": null,
+          "desde_versao": null,
+          "estado": "desconhecido"
+        },
+        "dominio": {
+          "contexto": "A fonte tipa como string sem lista de valores; não inventar valores.",
+          "estado": "verificado",
+          "evidencias": [
+            {
+              "fonte": "src:mdapi-letterhead"
+            }
+          ],
+          "natureza": "texto_livre"
+        },
+        "estado": "verificado",
+        "evidencias": [
+          {
+            "fonte": "src:mdapi-letterhead"
+          }
+        ],
+        "explicacao": "explicada",
+        "id": "mdt:Letterhead.bodyColor",
+        "nome": "bodyColor",
+        "o_que_e": "Cor do corpo. Cor em código hexadecimal.",
+        "obrigatoriedade": {
+          "estado": "verificado",
+          "evidencias": [
+            {
+              "fonte": "src:mdapi-letterhead"
+            }
+          ],
+          "valor": "sim"
+        },
+        "origem": {
+          "estado": "verificado",
+          "evidencias": [
+            {
+              "fonte": "src:mdapi-letterhead"
+            }
+          ],
+          "nota": "Propriedade definida pelo schema da Metadata API.",
+          "valor": "padrao_plataforma"
+        },
+        "tipo_tecnico": "string"
+      },
+      {
+        "default": {
+          "estado": "desconhecido",
+          "forma": "nao_declarado_na_fonte"
+        },
+        "disponibilidade": {
+          "ate_versao": null,
+          "desde_versao": null,
+          "estado": "desconhecido"
+        },
+        "dominio": {
+          "estado": "verificado",
+          "evidencias": [
+            {
+              "fonte": "src:mdapi-letterhead"
+            }
+          ],
+          "natureza": "tipo_composto"
+        },
+        "estado": "verificado",
+        "estrutura_expandida": {
+          "id": "mdx:LetterheadLine",
+          "nome": "LetterheadLine",
+          "propriedades": [
+            {
+              "default": {
+                "estado": "desconhecido",
+                "forma": "nao_declarado_na_fonte"
+              },
+              "disponibilidade": {
+                "ate_versao": null,
+                "desde_versao": null,
+                "estado": "desconhecido"
+              },
+              "dominio": {
+                "contexto": "A fonte tipa como string sem lista de valores; não inventar valores.",
+                "estado": "verificado",
+                "evidencias": [
+                  {
+                    "fonte": "src:mdapi-letterhead"
+                  }
+                ],
+                "natureza": "texto_livre"
+              },
+              "estado": "verificado",
+              "evidencias": [
+                {
+                  "fonte": "src:mdapi-letterhead"
+                }
+              ],
+              "explicacao": "explicada",
+              "id": "mdx:LetterheadLine.color",
+              "nome": "color",
+              "o_que_e": "Cor da linha. Cor em código hexadecimal.",
+              "obrigatoriedade": {
+                "estado": "verificado",
+                "evidencias": [
+                  {
+                    "fonte": "src:mdapi-letterhead"
+                  }
+                ],
+                "valor": "sim"
+              },
+              "origem": {
+                "estado": "verificado",
+                "evidencias": [
+                  {
+                    "fonte": "src:mdapi-letterhead"
+                  }
+                ],
+                "nota": "Propriedade definida pelo schema da Metadata API.",
+                "valor": "padrao_plataforma"
+              },
+              "tipo_tecnico": "string"
+            },
+            {
+              "default": {
+                "estado": "desconhecido",
+                "forma": "nao_declarado_na_fonte"
+              },
+              "disponibilidade": {
+                "ate_versao": null,
+                "desde_versao": null,
+                "estado": "desconhecido"
+              },
+              "dominio": {
+                "estado": "verificado",
+                "evidencias": [
+                  {
+                    "fonte": "src:mdapi-letterhead"
+                  }
+                ],
+                "natureza": "numerico"
+              },
+              "estado": "verificado",
+              "evidencias": [
+                {
+                  "fonte": "src:mdapi-letterhead"
+                }
+              ],
+              "explicacao": "explicada",
+              "id": "mdx:LetterheadLine.height",
+              "nome": "height",
+              "o_que_e": "Altura da linha.",
+              "obrigatoriedade": {
+                "estado": "verificado",
+                "evidencias": [
+                  {
+                    "fonte": "src:mdapi-letterhead"
+                  }
+                ],
+                "valor": "sim"
+              },
+              "origem": {
+                "estado": "verificado",
+                "evidencias": [
+                  {
+                    "fonte": "src:mdapi-letterhead"
+                  }
+                ],
+                "nota": "Propriedade definida pelo schema da Metadata API.",
+                "valor": "padrao_plataforma"
+              },
+              "tipo_tecnico": "int"
+            }
+          ]
+        },
+        "estrutura_ref": "mdx:LetterheadLine",
+        "evidencias": [
+          {
+            "fonte": "src:mdapi-letterhead"
+          }
+        ],
+        "explicacao": "explicada",
+        "id": "mdt:Letterhead.bottomLine",
+        "nome": "bottomLine",
+        "o_que_e": "Estilo da linha inferior.",
+        "obrigatoriedade": {
+          "estado": "verificado",
+          "evidencias": [
+            {
+              "fonte": "src:mdapi-letterhead"
+            }
+          ],
+          "valor": "sim"
+        },
+        "origem": {
+          "estado": "verificado",
+          "evidencias": [
+            {
+              "fonte": "src:mdapi-letterhead"
+            }
+          ],
+          "nota": "Propriedade definida pelo schema da Metadata API.",
+          "valor": "padrao_plataforma"
+        },
+        "tipo_tecnico": "LetterheadLine"
+      },
+      {
+        "default": {
+          "estado": "desconhecido",
+          "forma": "nao_declarado_na_fonte"
+        },
+        "disponibilidade": {
+          "ate_versao": null,
+          "desde_versao": null,
+          "estado": "desconhecido"
+        },
+        "dominio": {
+          "contexto": "A fonte tipa como string sem lista de valores; não inventar valores.",
+          "estado": "verificado",
+          "evidencias": [
+            {
+              "fonte": "src:mdapi-letterhead"
+            }
+          ],
+          "natureza": "texto_livre"
+        },
+        "estado": "verificado",
+        "evidencias": [
+          {
+            "fonte": "src:mdapi-letterhead"
+          }
+        ],
+        "explicacao": "explicada",
+        "id": "mdt:Letterhead.description",
+        "nome": "description",
+        "o_que_e": "Texto que diferencia este letterhead dos demais.",
+        "obrigatoriedade": {
+          "estado": "verificado",
+          "evidencias": [
+            {
+              "fonte": "src:mdapi-letterhead"
+            }
+          ],
+          "valor": "sim"
+        },
+        "origem": {
+          "estado": "verificado",
+          "evidencias": [
+            {
+              "fonte": "src:mdapi-letterhead"
+            }
+          ],
+          "nota": "Propriedade definida pelo schema da Metadata API.",
+          "valor": "padrao_plataforma"
+        },
+        "tipo_tecnico": "string"
+      },
+      {
+        "default": {
+          "estado": "desconhecido",
+          "forma": "nao_declarado_na_fonte"
+        },
+        "disponibilidade": {
+          "ate_versao": null,
+          "desde_versao": null,
+          "estado": "desconhecido"
+        },
+        "dominio": {
+          "contexto": "A fonte tipa como string sem lista de valores; não inventar valores.",
+          "estado": "verificado",
+          "evidencias": [
+            {
+              "fonte": "src:mdapi-letterhead"
+            }
+          ],
+          "natureza": "texto_livre"
+        },
+        "estado": "verificado",
+        "evidencias": [
+          {
+            "fonte": "src:mdapi-letterhead"
+          }
+        ],
+        "explicacao": "explicada",
+        "herdada_de": "Metadata",
+        "id": "mdt:Letterhead.fullName",
+        "nome": "fullName",
+        "o_que_e": "Nome interno, derivado de name. Herdado do tipo Metadata.",
+        "obrigatoriedade": {
+          "estado": "verificado",
+          "evidencias": [
+            {
+              "fonte": "src:mdapi-letterhead"
+            }
+          ],
+          "valor": "sim"
+        },
+        "origem": {
+          "estado": "verificado",
+          "evidencias": [
+            {
+              "fonte": "src:mdapi-letterhead"
+            }
+          ],
+          "nota": "Propriedade definida pelo schema da Metadata API.",
+          "valor": "padrao_plataforma"
+        },
+        "tipo_tecnico": "string"
+      },
+      {
+        "default": {
+          "estado": "desconhecido",
+          "forma": "nao_declarado_na_fonte"
+        },
+        "disponibilidade": {
+          "ate_versao": null,
+          "desde_versao": null,
+          "estado": "desconhecido"
+        },
+        "dominio": {
+          "estado": "verificado",
+          "evidencias": [
+            {
+              "fonte": "src:mdapi-letterhead"
+            }
+          ],
+          "natureza": "tipo_composto"
+        },
+        "estado": "verificado",
+        "estrutura_expandida": {
+          "id": "mdx:LetterheadHeaderFooter",
+          "nome": "LetterheadHeaderFooter",
+          "propriedades": [
+            {
+              "default": {
+                "estado": "desconhecido",
+                "forma": "nao_declarado_na_fonte"
+              },
+              "disponibilidade": {
+                "ate_versao": null,
+                "desde_versao": null,
+                "estado": "desconhecido"
+              },
+              "dominio": {
+                "contexto": "A fonte tipa como string sem lista de valores; não inventar valores.",
+                "estado": "verificado",
+                "evidencias": [
+                  {
+                    "fonte": "src:mdapi-letterhead"
+                  }
+                ],
+                "natureza": "texto_livre"
+              },
+              "estado": "verificado",
+              "evidencias": [
+                {
+                  "fonte": "src:mdapi-letterhead"
+                }
+              ],
+              "explicacao": "explicada",
+              "id": "mdx:LetterheadHeaderFooter.backgroundColor",
+              "nome": "backgroundColor",
+              "o_que_e": "Cor de fundo do cabeçalho ou do rodapé. Cor em código hexadecimal.",
+              "obrigatoriedade": {
+                "estado": "verificado",
+                "evidencias": [
+                  {
+                    "fonte": "src:mdapi-letterhead"
+                  }
+                ],
+                "valor": "sim"
+              },
+              "origem": {
+                "estado": "verificado",
+                "evidencias": [
+                  {
+                    "fonte": "src:mdapi-letterhead"
+                  }
+                ],
+                "nota": "Propriedade definida pelo schema da Metadata API.",
+                "valor": "padrao_plataforma"
+              },
+              "tipo_tecnico": "string"
+            },
+            {
+              "cardinalidade": "0..n",
+              "default": {
+                "estado": "desconhecido",
+                "forma": "nao_declarado_na_fonte"
+              },
+              "disponibilidade": {
+                "ate_versao": null,
+                "desde_versao": null,
+                "estado": "desconhecido"
+              },
+              "dominio": {
+                "contexto": "A tabela da página tipa o campo como DashboardComponent[], o que parece um erro da própria página; o tipo real não foi confirmado.",
+                "estado": "desconhecido",
+                "natureza": "desconhecida"
+              },
+              "estado": "verificado",
+              "evidencias": [
+                {
+                  "fonte": "src:mdapi-letterhead"
+                }
+              ],
+              "explicacao": "explicada",
+              "id": "mdx:LetterheadHeaderFooter.height",
+              "nome": "height",
+              "o_que_e": "Altura do cabeçalho ou do rodapé.",
+              "obrigatoriedade": {
+                "estado": "verificado",
+                "evidencias": [
+                  {
+                    "fonte": "src:mdapi-letterhead"
+                  }
+                ],
+                "valor": "sim"
+              },
+              "origem": {
+                "estado": "verificado",
+                "evidencias": [
+                  {
+                    "fonte": "src:mdapi-letterhead"
+                  }
+                ],
+                "nota": "Propriedade definida pelo schema da Metadata API.",
+                "valor": "padrao_plataforma"
+              },
+              "tipo_tecnico": "DashboardComponent[]"
+            },
+            {
+              "default": {
+                "estado": "desconhecido",
+                "forma": "nao_declarado_na_fonte"
+              },
+              "disponibilidade": {
+                "ate_versao": null,
+                "desde_versao": null,
+                "estado": "desconhecido"
+              },
+              "dominio": {
+                "estado": "verificado",
+                "evidencias": [
+                  {
+                    "fonte": "src:mdapi-letterhead"
+                  }
+                ],
+                "lista_completa": "sim",
+                "natureza": "enum_fechado",
+                "valores": [
+                  {
+                    "valor": "None"
+                  },
+                  {
+                    "valor": "Left"
+                  },
+                  {
+                    "valor": "Center"
+                  },
+                  {
+                    "valor": "Right"
+                  }
+                ]
+              },
+              "estado": "verificado",
+              "evidencias": [
+                {
+                  "fonte": "src:mdapi-letterhead"
+                }
+              ],
+              "explicacao": "explicada",
+              "id": "mdx:LetterheadHeaderFooter.horizontalAlignment",
+              "nome": "horizontalAlignment",
+              "o_que_e": "Alinhamento horizontal.",
+              "obrigatoriedade": {
+                "condicao": "A documentação 68.0 não marca o campo como obrigatório; ausência de marcação não comprova opcionalidade (confirmar no WSDL).",
+                "estado": "desconhecido",
+                "valor": "nao"
+              },
+              "origem": {
+                "estado": "verificado",
+                "evidencias": [
+                  {
+                    "fonte": "src:mdapi-letterhead"
+                  }
+                ],
+                "nota": "Propriedade definida pelo schema da Metadata API.",
+                "valor": "padrao_plataforma"
+              },
+              "tipo_tecnico": "LetterheadHorizontalAlignment"
+            },
+            {
+              "default": {
+                "estado": "desconhecido",
+                "forma": "nao_declarado_na_fonte"
+              },
+              "disponibilidade": {
+                "ate_versao": null,
+                "desde_versao": null,
+                "estado": "desconhecido"
+              },
+              "dominio": {
+                "contexto": "A fonte tipa como string sem lista de valores; não inventar valores.",
+                "estado": "verificado",
+                "evidencias": [
+                  {
+                    "fonte": "src:mdapi-letterhead"
+                  }
+                ],
+                "natureza": "texto_livre"
+              },
+              "estado": "verificado",
+              "evidencias": [
+                {
+                  "fonte": "src:mdapi-letterhead"
+                }
+              ],
+              "explicacao": "explicada",
+              "id": "mdx:LetterheadHeaderFooter.logo",
+              "nome": "logo",
+              "o_que_e": "Referência a um documento usado como logo, no formato Pasta/Documento.",
+              "obrigatoriedade": {
+                "condicao": "A documentação 68.0 não marca o campo como obrigatório; ausência de marcação não comprova opcionalidade (confirmar no WSDL).",
+                "estado": "desconhecido",
+                "valor": "nao"
+              },
+              "origem": {
+                "estado": "verificado",
+                "evidencias": [
+                  {
+                    "fonte": "src:mdapi-letterhead"
+                  }
+                ],
+                "nota": "Propriedade definida pelo schema da Metadata API.",
+                "valor": "padrao_plataforma"
+              },
+              "tipo_tecnico": "string"
+            },
+            {
+              "default": {
+                "estado": "desconhecido",
+                "forma": "nao_declarado_na_fonte"
+              },
+              "disponibilidade": {
+                "ate_versao": null,
+                "desde_versao": null,
+                "estado": "desconhecido"
+              },
+              "dominio": {
+                "estado": "verificado",
+                "evidencias": [
+                  {
+                    "fonte": "src:mdapi-letterhead"
+                  }
+                ],
+                "lista_completa": "sim",
+                "natureza": "enum_fechado",
+                "valores": [
+                  {
+                    "valor": "None"
+                  },
+                  {
+                    "valor": "Top"
+                  },
+                  {
+                    "valor": "Middle"
+                  },
+                  {
+                    "valor": "Bottom"
+                  }
+                ]
+              },
+              "estado": "verificado",
+              "evidencias": [
+                {
+                  "fonte": "src:mdapi-letterhead"
+                }
+              ],
+              "explicacao": "explicada",
+              "id": "mdx:LetterheadHeaderFooter.verticalAlignment",
+              "nome": "verticalAlignment",
+              "o_que_e": "Alinhamento vertical.",
+              "obrigatoriedade": {
+                "condicao": "A documentação 68.0 não marca o campo como obrigatório; ausência de marcação não comprova opcionalidade (confirmar no WSDL).",
+                "estado": "desconhecido",
+                "valor": "nao"
+              },
+              "origem": {
+                "estado": "verificado",
+                "evidencias": [
+                  {
+                    "fonte": "src:mdapi-letterhead"
+                  }
+                ],
+                "nota": "Propriedade definida pelo schema da Metadata API.",
+                "valor": "padrao_plataforma"
+              },
+              "tipo_tecnico": "LetterheadVerticalAlignment"
+            }
+          ]
+        },
+        "estrutura_ref": "mdx:LetterheadHeaderFooter",
+        "evidencias": [
+          {
+            "fonte": "src:mdapi-letterhead"
+          }
+        ],
+        "explicacao": "explicada",
+        "id": "mdt:Letterhead.footer",
+        "nome": "footer",
+        "o_que_e": "Estilo do rodapé.",
+        "obrigatoriedade": {
+          "estado": "verificado",
+          "evidencias": [
+            {
+              "fonte": "src:mdapi-letterhead"
+            }
+          ],
+          "valor": "sim"
+        },
+        "origem": {
+          "estado": "verificado",
+          "evidencias": [
+            {
+              "fonte": "src:mdapi-letterhead"
+            }
+          ],
+          "nota": "Propriedade definida pelo schema da Metadata API.",
+          "valor": "padrao_plataforma"
+        },
+        "tipo_tecnico": "LetterheadHeaderFooter"
+      },
+      {
+        "default": {
+          "estado": "desconhecido",
+          "forma": "nao_declarado_na_fonte"
+        },
+        "disponibilidade": {
+          "ate_versao": null,
+          "desde_versao": null,
+          "estado": "desconhecido"
+        },
+        "dominio": {
+          "estado": "verificado",
+          "evidencias": [
+            {
+              "fonte": "src:mdapi-letterhead"
+            }
+          ],
+          "natureza": "tipo_composto"
+        },
+        "estado": "verificado",
+        "estrutura_expandida": {
+          "id": "mdx:LetterheadHeaderFooter",
+          "nome": "LetterheadHeaderFooter",
+          "propriedades": [
+            {
+              "default": {
+                "estado": "desconhecido",
+                "forma": "nao_declarado_na_fonte"
+              },
+              "disponibilidade": {
+                "ate_versao": null,
+                "desde_versao": null,
+                "estado": "desconhecido"
+              },
+              "dominio": {
+                "contexto": "A fonte tipa como string sem lista de valores; não inventar valores.",
+                "estado": "verificado",
+                "evidencias": [
+                  {
+                    "fonte": "src:mdapi-letterhead"
+                  }
+                ],
+                "natureza": "texto_livre"
+              },
+              "estado": "verificado",
+              "evidencias": [
+                {
+                  "fonte": "src:mdapi-letterhead"
+                }
+              ],
+              "explicacao": "explicada",
+              "id": "mdx:LetterheadHeaderFooter.backgroundColor",
+              "nome": "backgroundColor",
+              "o_que_e": "Cor de fundo do cabeçalho ou do rodapé. Cor em código hexadecimal.",
+              "obrigatoriedade": {
+                "estado": "verificado",
+                "evidencias": [
+                  {
+                    "fonte": "src:mdapi-letterhead"
+                  }
+                ],
+                "valor": "sim"
+              },
+              "origem": {
+                "estado": "verificado",
+                "evidencias": [
+                  {
+                    "fonte": "src:mdapi-letterhead"
+                  }
+                ],
+                "nota": "Propriedade definida pelo schema da Metadata API.",
+                "valor": "padrao_plataforma"
+              },
+              "tipo_tecnico": "string"
+            },
+            {
+              "cardinalidade": "0..n",
+              "default": {
+                "estado": "desconhecido",
+                "forma": "nao_declarado_na_fonte"
+              },
+              "disponibilidade": {
+                "ate_versao": null,
+                "desde_versao": null,
+                "estado": "desconhecido"
+              },
+              "dominio": {
+                "contexto": "A tabela da página tipa o campo como DashboardComponent[], o que parece um erro da própria página; o tipo real não foi confirmado.",
+                "estado": "desconhecido",
+                "natureza": "desconhecida"
+              },
+              "estado": "verificado",
+              "evidencias": [
+                {
+                  "fonte": "src:mdapi-letterhead"
+                }
+              ],
+              "explicacao": "explicada",
+              "id": "mdx:LetterheadHeaderFooter.height",
+              "nome": "height",
+              "o_que_e": "Altura do cabeçalho ou do rodapé.",
+              "obrigatoriedade": {
+                "estado": "verificado",
+                "evidencias": [
+                  {
+                    "fonte": "src:mdapi-letterhead"
+                  }
+                ],
+                "valor": "sim"
+              },
+              "origem": {
+                "estado": "verificado",
+                "evidencias": [
+                  {
+                    "fonte": "src:mdapi-letterhead"
+                  }
+                ],
+                "nota": "Propriedade definida pelo schema da Metadata API.",
+                "valor": "padrao_plataforma"
+              },
+              "tipo_tecnico": "DashboardComponent[]"
+            },
+            {
+              "default": {
+                "estado": "desconhecido",
+                "forma": "nao_declarado_na_fonte"
+              },
+              "disponibilidade": {
+                "ate_versao": null,
+                "desde_versao": null,
+                "estado": "desconhecido"
+              },
+              "dominio": {
+                "estado": "verificado",
+                "evidencias": [
+                  {
+                    "fonte": "src:mdapi-letterhead"
+                  }
+                ],
+                "lista_completa": "sim",
+                "natureza": "enum_fechado",
+                "valores": [
+                  {
+                    "valor": "None"
+                  },
+                  {
+                    "valor": "Left"
+                  },
+                  {
+                    "valor": "Center"
+                  },
+                  {
+                    "valor": "Right"
+                  }
+                ]
+              },
+              "estado": "verificado",
+              "evidencias": [
+                {
+                  "fonte": "src:mdapi-letterhead"
+                }
+              ],
+              "explicacao": "explicada",
+              "id": "mdx:LetterheadHeaderFooter.horizontalAlignment",
+              "nome": "horizontalAlignment",
+              "o_que_e": "Alinhamento horizontal.",
+              "obrigatoriedade": {
+                "condicao": "A documentação 68.0 não marca o campo como obrigatório; ausência de marcação não comprova opcionalidade (confirmar no WSDL).",
+                "estado": "desconhecido",
+                "valor": "nao"
+              },
+              "origem": {
+                "estado": "verificado",
+                "evidencias": [
+                  {
+                    "fonte": "src:mdapi-letterhead"
+                  }
+                ],
+                "nota": "Propriedade definida pelo schema da Metadata API.",
+                "valor": "padrao_plataforma"
+              },
+              "tipo_tecnico": "LetterheadHorizontalAlignment"
+            },
+            {
+              "default": {
+                "estado": "desconhecido",
+                "forma": "nao_declarado_na_fonte"
+              },
+              "disponibilidade": {
+                "ate_versao": null,
+                "desde_versao": null,
+                "estado": "desconhecido"
+              },
+              "dominio": {
+                "contexto": "A fonte tipa como string sem lista de valores; não inventar valores.",
+                "estado": "verificado",
+                "evidencias": [
+                  {
+                    "fonte": "src:mdapi-letterhead"
+                  }
+                ],
+                "natureza": "texto_livre"
+              },
+              "estado": "verificado",
+              "evidencias": [
+                {
+                  "fonte": "src:mdapi-letterhead"
+                }
+              ],
+              "explicacao": "explicada",
+              "id": "mdx:LetterheadHeaderFooter.logo",
+              "nome": "logo",
+              "o_que_e": "Referência a um documento usado como logo, no formato Pasta/Documento.",
+              "obrigatoriedade": {
+                "condicao": "A documentação 68.0 não marca o campo como obrigatório; ausência de marcação não comprova opcionalidade (confirmar no WSDL).",
+                "estado": "desconhecido",
+                "valor": "nao"
+              },
+              "origem": {
+                "estado": "verificado",
+                "evidencias": [
+                  {
+                    "fonte": "src:mdapi-letterhead"
+                  }
+                ],
+                "nota": "Propriedade definida pelo schema da Metadata API.",
+                "valor": "padrao_plataforma"
+              },
+              "tipo_tecnico": "string"
+            },
+            {
+              "default": {
+                "estado": "desconhecido",
+                "forma": "nao_declarado_na_fonte"
+              },
+              "disponibilidade": {
+                "ate_versao": null,
+                "desde_versao": null,
+                "estado": "desconhecido"
+              },
+              "dominio": {
+                "estado": "verificado",
+                "evidencias": [
+                  {
+                    "fonte": "src:mdapi-letterhead"
+                  }
+                ],
+                "lista_completa": "sim",
+                "natureza": "enum_fechado",
+                "valores": [
+                  {
+                    "valor": "None"
+                  },
+                  {
+                    "valor": "Top"
+                  },
+                  {
+                    "valor": "Middle"
+                  },
+                  {
+                    "valor": "Bottom"
+                  }
+                ]
+              },
+              "estado": "verificado",
+              "evidencias": [
+                {
+                  "fonte": "src:mdapi-letterhead"
+                }
+              ],
+              "explicacao": "explicada",
+              "id": "mdx:LetterheadHeaderFooter.verticalAlignment",
+              "nome": "verticalAlignment",
+              "o_que_e": "Alinhamento vertical.",
+              "obrigatoriedade": {
+                "condicao": "A documentação 68.0 não marca o campo como obrigatório; ausência de marcação não comprova opcionalidade (confirmar no WSDL).",
+                "estado": "desconhecido",
+                "valor": "nao"
+              },
+              "origem": {
+                "estado": "verificado",
+                "evidencias": [
+                  {
+                    "fonte": "src:mdapi-letterhead"
+                  }
+                ],
+                "nota": "Propriedade definida pelo schema da Metadata API.",
+                "valor": "padrao_plataforma"
+              },
+              "tipo_tecnico": "LetterheadVerticalAlignment"
+            }
+          ]
+        },
+        "estrutura_ref": "mdx:LetterheadHeaderFooter",
+        "evidencias": [
+          {
+            "fonte": "src:mdapi-letterhead"
+          }
+        ],
+        "explicacao": "explicada",
+        "id": "mdt:Letterhead.header",
+        "nome": "header",
+        "o_que_e": "Estilo do cabeçalho.",
+        "obrigatoriedade": {
+          "estado": "verificado",
+          "evidencias": [
+            {
+              "fonte": "src:mdapi-letterhead"
+            }
+          ],
+          "valor": "sim"
+        },
+        "origem": {
+          "estado": "verificado",
+          "evidencias": [
+            {
+              "fonte": "src:mdapi-letterhead"
+            }
+          ],
+          "nota": "Propriedade definida pelo schema da Metadata API.",
+          "valor": "padrao_plataforma"
+        },
+        "tipo_tecnico": "LetterheadHeaderFooter"
+      },
+      {
+        "default": {
+          "estado": "desconhecido",
+          "forma": "nao_declarado_na_fonte"
+        },
+        "disponibilidade": {
+          "ate_versao": null,
+          "desde_versao": null,
+          "estado": "desconhecido"
+        },
+        "dominio": {
+          "estado": "verificado",
+          "evidencias": [
+            {
+              "fonte": "src:mdapi-letterhead"
+            }
+          ],
+          "natureza": "tipo_composto"
+        },
+        "estado": "verificado",
+        "estrutura_expandida": {
+          "id": "mdx:LetterheadLine",
+          "nome": "LetterheadLine",
+          "propriedades": [
+            {
+              "default": {
+                "estado": "desconhecido",
+                "forma": "nao_declarado_na_fonte"
+              },
+              "disponibilidade": {
+                "ate_versao": null,
+                "desde_versao": null,
+                "estado": "desconhecido"
+              },
+              "dominio": {
+                "contexto": "A fonte tipa como string sem lista de valores; não inventar valores.",
+                "estado": "verificado",
+                "evidencias": [
+                  {
+                    "fonte": "src:mdapi-letterhead"
+                  }
+                ],
+                "natureza": "texto_livre"
+              },
+              "estado": "verificado",
+              "evidencias": [
+                {
+                  "fonte": "src:mdapi-letterhead"
+                }
+              ],
+              "explicacao": "explicada",
+              "id": "mdx:LetterheadLine.color",
+              "nome": "color",
+              "o_que_e": "Cor da linha. Cor em código hexadecimal.",
+              "obrigatoriedade": {
+                "estado": "verificado",
+                "evidencias": [
+                  {
+                    "fonte": "src:mdapi-letterhead"
+                  }
+                ],
+                "valor": "sim"
+              },
+              "origem": {
+                "estado": "verificado",
+                "evidencias": [
+                  {
+                    "fonte": "src:mdapi-letterhead"
+                  }
+                ],
+                "nota": "Propriedade definida pelo schema da Metadata API.",
+                "valor": "padrao_plataforma"
+              },
+              "tipo_tecnico": "string"
+            },
+            {
+              "default": {
+                "estado": "desconhecido",
+                "forma": "nao_declarado_na_fonte"
+              },
+              "disponibilidade": {
+                "ate_versao": null,
+                "desde_versao": null,
+                "estado": "desconhecido"
+              },
+              "dominio": {
+                "estado": "verificado",
+                "evidencias": [
+                  {
+                    "fonte": "src:mdapi-letterhead"
+                  }
+                ],
+                "natureza": "numerico"
+              },
+              "estado": "verificado",
+              "evidencias": [
+                {
+                  "fonte": "src:mdapi-letterhead"
+                }
+              ],
+              "explicacao": "explicada",
+              "id": "mdx:LetterheadLine.height",
+              "nome": "height",
+              "o_que_e": "Altura da linha.",
+              "obrigatoriedade": {
+                "estado": "verificado",
+                "evidencias": [
+                  {
+                    "fonte": "src:mdapi-letterhead"
+                  }
+                ],
+                "valor": "sim"
+              },
+              "origem": {
+                "estado": "verificado",
+                "evidencias": [
+                  {
+                    "fonte": "src:mdapi-letterhead"
+                  }
+                ],
+                "nota": "Propriedade definida pelo schema da Metadata API.",
+                "valor": "padrao_plataforma"
+              },
+              "tipo_tecnico": "int"
+            }
+          ]
+        },
+        "estrutura_ref": "mdx:LetterheadLine",
+        "evidencias": [
+          {
+            "fonte": "src:mdapi-letterhead"
+          }
+        ],
+        "explicacao": "explicada",
+        "id": "mdt:Letterhead.middleLine",
+        "nome": "middleLine",
+        "o_que_e": "Estilo da linha do meio.",
+        "obrigatoriedade": {
+          "estado": "verificado",
+          "evidencias": [
+            {
+              "fonte": "src:mdapi-letterhead"
+            }
+          ],
+          "valor": "sim"
+        },
+        "origem": {
+          "estado": "verificado",
+          "evidencias": [
+            {
+              "fonte": "src:mdapi-letterhead"
+            }
+          ],
+          "nota": "Propriedade definida pelo schema da Metadata API.",
+          "valor": "padrao_plataforma"
+        },
+        "tipo_tecnico": "LetterheadLine"
+      },
+      {
+        "default": {
+          "estado": "desconhecido",
+          "forma": "nao_declarado_na_fonte"
+        },
+        "disponibilidade": {
+          "ate_versao": null,
+          "desde_versao": null,
+          "estado": "desconhecido"
+        },
+        "dominio": {
+          "contexto": "A fonte tipa como string sem lista de valores; não inventar valores.",
+          "estado": "verificado",
+          "evidencias": [
+            {
+              "fonte": "src:mdapi-letterhead"
+            }
+          ],
+          "natureza": "texto_livre"
+        },
+        "estado": "verificado",
+        "evidencias": [
+          {
+            "fonte": "src:mdapi-letterhead"
+          }
+        ],
+        "explicacao": "explicada",
+        "id": "mdt:Letterhead.name",
+        "nome": "name",
+        "o_que_e": "Nome do letterhead.",
+        "obrigatoriedade": {
+          "estado": "verificado",
+          "evidencias": [
+            {
+              "fonte": "src:mdapi-letterhead"
+            }
+          ],
+          "valor": "sim"
+        },
+        "origem": {
+          "estado": "verificado",
+          "evidencias": [
+            {
+              "fonte": "src:mdapi-letterhead"
+            }
+          ],
+          "nota": "Propriedade definida pelo schema da Metadata API.",
+          "valor": "padrao_plataforma"
+        },
+        "tipo_tecnico": "string"
+      },
+      {
+        "default": {
+          "estado": "desconhecido",
+          "forma": "nao_declarado_na_fonte"
+        },
+        "disponibilidade": {
+          "ate_versao": null,
+          "desde_versao": null,
+          "estado": "desconhecido"
+        },
+        "dominio": {
+          "estado": "verificado",
+          "evidencias": [
+            {
+              "fonte": "src:mdapi-letterhead"
+            }
+          ],
+          "natureza": "tipo_composto"
+        },
+        "estado": "verificado",
+        "estrutura_expandida": {
+          "id": "mdx:LetterheadLine",
+          "nome": "LetterheadLine",
+          "propriedades": [
+            {
+              "default": {
+                "estado": "desconhecido",
+                "forma": "nao_declarado_na_fonte"
+              },
+              "disponibilidade": {
+                "ate_versao": null,
+                "desde_versao": null,
+                "estado": "desconhecido"
+              },
+              "dominio": {
+                "contexto": "A fonte tipa como string sem lista de valores; não inventar valores.",
+                "estado": "verificado",
+                "evidencias": [
+                  {
+                    "fonte": "src:mdapi-letterhead"
+                  }
+                ],
+                "natureza": "texto_livre"
+              },
+              "estado": "verificado",
+              "evidencias": [
+                {
+                  "fonte": "src:mdapi-letterhead"
+                }
+              ],
+              "explicacao": "explicada",
+              "id": "mdx:LetterheadLine.color",
+              "nome": "color",
+              "o_que_e": "Cor da linha. Cor em código hexadecimal.",
+              "obrigatoriedade": {
+                "estado": "verificado",
+                "evidencias": [
+                  {
+                    "fonte": "src:mdapi-letterhead"
+                  }
+                ],
+                "valor": "sim"
+              },
+              "origem": {
+                "estado": "verificado",
+                "evidencias": [
+                  {
+                    "fonte": "src:mdapi-letterhead"
+                  }
+                ],
+                "nota": "Propriedade definida pelo schema da Metadata API.",
+                "valor": "padrao_plataforma"
+              },
+              "tipo_tecnico": "string"
+            },
+            {
+              "default": {
+                "estado": "desconhecido",
+                "forma": "nao_declarado_na_fonte"
+              },
+              "disponibilidade": {
+                "ate_versao": null,
+                "desde_versao": null,
+                "estado": "desconhecido"
+              },
+              "dominio": {
+                "estado": "verificado",
+                "evidencias": [
+                  {
+                    "fonte": "src:mdapi-letterhead"
+                  }
+                ],
+                "natureza": "numerico"
+              },
+              "estado": "verificado",
+              "evidencias": [
+                {
+                  "fonte": "src:mdapi-letterhead"
+                }
+              ],
+              "explicacao": "explicada",
+              "id": "mdx:LetterheadLine.height",
+              "nome": "height",
+              "o_que_e": "Altura da linha.",
+              "obrigatoriedade": {
+                "estado": "verificado",
+                "evidencias": [
+                  {
+                    "fonte": "src:mdapi-letterhead"
+                  }
+                ],
+                "valor": "sim"
+              },
+              "origem": {
+                "estado": "verificado",
+                "evidencias": [
+                  {
+                    "fonte": "src:mdapi-letterhead"
+                  }
+                ],
+                "nota": "Propriedade definida pelo schema da Metadata API.",
+                "valor": "padrao_plataforma"
+              },
+              "tipo_tecnico": "int"
+            }
+          ]
+        },
+        "estrutura_ref": "mdx:LetterheadLine",
+        "evidencias": [
+          {
+            "fonte": "src:mdapi-letterhead"
+          }
+        ],
+        "explicacao": "explicada",
+        "id": "mdt:Letterhead.topLine",
+        "nome": "topLine",
+        "o_que_e": "Estilo da linha horizontal logo abaixo do cabeçalho.",
+        "obrigatoriedade": {
+          "estado": "verificado",
+          "evidencias": [
+            {
+              "fonte": "src:mdapi-letterhead"
+            }
+          ],
+          "valor": "sim"
+        },
+        "origem": {
+          "estado": "verificado",
+          "evidencias": [
+            {
+              "fonte": "src:mdapi-letterhead"
+            }
+          ],
+          "nota": "Propriedade definida pelo schema da Metadata API.",
+          "valor": "padrao_plataforma"
+        },
+        "tipo_tecnico": "LetterheadLine"
+      }
+    ],
+    "recomendacoes": [],
+    "setup": {
+      "estado": "desconhecido",
+      "nota": "Caminho no Setup não validado nesta sessão."
+    },
+    "suporte_cli": {
+      "estado": "verificado",
+      "evidencias": [
+        {
+          "fonte": "src:sdr-metadata-support"
+        }
+      ],
+      "nota": "Suporte do Salesforce CLI (source-deploy-retrieve), não do Metadata API em geral.",
+      "valor": {
+        "nota_fonte": null,
+        "status": "suportado"
+      }
+    }
+  },
+  "nota": "Gerado deterministicamente a partir de catalogo/. Não editar à mão.",
+  "objetos_relacionados": [],
+  "relacionamentos": [
+    {
+      "destino": {
+        "entidade": "mdt:Letterhead"
+      },
+      "estado": "verificado",
+      "evidencias": [
+        {
+          "fonte": "src:mdapi-emailtemplate"
+        }
+      ],
+      "explicacao": "Um email template do tipo html aponta o letterhead que define logo, cores e linhas. A referência é pelo nome do componente, no XML (não é um lookup entre registros).",
+      "id": "rel:emailtemplate-letterhead",
+      "origem": {
+        "campo": "letterhead",
+        "entidade": "mdt:EmailTemplate"
+      },
+      "tipo": "referencia_campo"
+    }
+  ],
+  "versao_base": {
+    "api_version": "68.0",
+    "data_referencia": "2026-11-07",
+    "escopo": "config/escopo.json",
+    "release": "Winter '27"
+  }
+}

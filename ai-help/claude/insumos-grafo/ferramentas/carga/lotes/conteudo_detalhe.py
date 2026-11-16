@@ -847,3 +847,47 @@ for _id, _tit, _art, _pert in (
     ("src:help-rn-elf-browser", "Access and Download Event Log File Data with the Event Log File Browser (Release Notes)", "release-notes.rn_security_em_elf_browser.htm&release=250", "Caminho do Event Log File Browser."),
 ):
     _f(_id, _tit + ("" if "(" in _tit else " (Salesforce Help)"), _H + _art + _L, _pert, **AJ)
+
+_EXT = "fontes/extracoes/temas-detalhe-conteudo-ia.txt"
+for _id, _tit, _art, _pert in (
+    ("src:help-email-templates-lex", "Email Templates in Lightning Experience", "sales.email_templates_lightning_parent.htm", "Templates privados e públicos; enhanced letterheads."),
+    ("src:help-email-template-create", "Create an Email Template in Lightning Experience", "sales.email_create_a_template.htm", "Passos de criação, Related Entity Type e letterhead."),
+    ("src:help-email-merge-fields", "Merge Fields and Templates in Emails", "sales.access_sharing_merge_fields.htm", "HML e SML; uso de templates do Classic no Lightning Experience."),
+    ("src:help-classic-letterheads", "Create Classic Letterheads for Email Templates", "sf.creating_letterheads.htm", "Caminho de Setup e permissão dos Classic letterheads."),
+    ("src:help-classic-templates-in-lex", "Considerations for Using Your Classic Email Templates in Lightning Experience", "sf.classic_templates_in_lightning_considerations.htm", "Limites do uso de templates do Classic no Lightning Experience."),
+    ("src:help-enhanced-letterheads", "Create Enhanced Letterheads in Lightning Experience", "sales.enhanced_letterheads_create.htm", "Permissão e visibilidade dos enhanced letterheads."),
+    ("src:help-classic-html-templates", "Create HTML Classic Letterhead Email Templates in Salesforce Classic", "creating_html_email_templates.htm", "Caminho de Setup e permissões dos templates do Classic."),
+    ("src:help-kb-files-data-model", "Understanding Salesforce Files - ContentDocument, ContentVersion & ContentDocumentLink (KB)", "005314319", "Os três objetos do modelo de arquivos."),
+    ("src:help-chatter-files-groups", "Share Files with Groups", "sf.collab_files_sharing_groups.htm", "Quem vê um arquivo compartilhado com um grupo."),
+    ("src:help-asset-files", "Asset Files", "sf.admin_files_asset_files.htm", "O que é um asset file e onde fica."),
+    ("src:help-kb-files-public", "Making Salesforce Files Publicly Accessible: Content Deliveries, Asset Files, and Experience Cloud (KB)", "004652690", "Asset files como alternativa a static resources."),
+    ("src:help-chatter-groups", "Chatter Groups", "experience.collab_group_about.htm", "Tipos de grupo e limites."),
+    ("src:help-chatter-unlisted", "Unlisted Chatter Groups", "collab_unlisted_groups_overview.htm", "Diferença entre grupo privado e unlisted."),
+    ("src:help-chatter-unlisted-enable", "Enable Unlisted Chatter Groups", "experience.collab_unlisted_groups_enabling_for_org.htm", "Caminho de Chatter Settings."),
+    ("src:help-chatter-broadcast", "Broadcast Groups", "experience.collab_groups_broadcast_about.htm", "Grupos em que só donos e gerentes publicam."),
+    ("src:help-prompt-builder", "Prompt Builder", "sf.prompt_builder_about.htm", "O que é o Prompt Builder e os tipos de template."),
+    ("src:help-prompt-concepts", "Prompt Builder Key Concepts", "ai.prompt_builder_key_concepts.htm", "Prompt template e grounding."),
+    ("src:help-prompt-template-types", "Prompt Template Types", "ai.prompt_builder_standard_template_types.htm", "Tipos de prompt template e o que cada um gera."),
+    ("src:help-prompt-flex", "Create a Flex Prompt Template", "ai.prompt_builder_create_flex_prompt_template.htm", "Caminho de Setup, permissões e tipo Flex."),
+    ("src:help-prompt-field-gen", "Create a Field Generation Prompt Template", "sf.prompt_builder_create_field_gen_prompt_template.htm", "Tipo Field Generation e dependência de Dynamic Forms."),
+    ("src:help-prompt-rag", "Ground with Knowledge Using Retrieval Augmented Generation", "sf.prompt_builder_ground_rag.htm", "Retrievers em prompt templates."),
+    ("src:help-agentforce-glossary", "Agentforce Glossary of Terms", "ai.copilot_glossary.htm", "Definições de agent action, subagent, data library, grounding e RAG."),
+    ("src:help-agentforce-builder-legacy", "Explore the Legacy Agentforce Builder", "ai.agent_builder_explore.htm", "O construtor legado e o papel dos subagents."),
+    ("src:help-agent-action-custom", "Create a Custom Agent Action in the Legacy Builder", "ai.copilot_actions_custom.htm", "Caminho de Agentforce Assets e criação de ação."),
+    ("src:help-agent-script", "Agent Script", "ai.agent_script.htm", "A linguagem de construção de agentes no Agentforce Builder."),
+    ("src:help-agent-service-template", "Create an Agent from an Agentforce Service Agent Template", "ai.service_agent_setup.htm", "Agentforce Studio e agent user."),
+    ("src:help-trust-layer", "Einstein Trust Layer", "sf.generative_ai_trust_layer.htm", "O que é o Trust Layer e a política de retenção zero."),
+    ("src:help-trust-masking", "Large Language Model Data Masking", "sf.generative_ai_mask_data.htm", "Os dois tipos de mascaramento."),
+    ("src:help-trust-audit", "Audit Trail", "sf.generative_ai_audit_trail.htm", "Dados de auditoria de IA generativa."),
+    ("src:help-agentforce-trust", "Trust and Agentforce", "ai.copilot_trust.htm", "Integração do Agentforce com o Trust Layer e controles de acesso."),
+    ("src:help-employee-agent-considerations", "Considerations for Agentforce Employee Agent", "ai.agent_employee_agent_considerations.htm", "Serviços do Trust Layer no Employee Agent."),
+    ("src:help-agent-masking-limits", "Data Masking Limitations in Agentforce", "ai.agent_trust_data_masking.htm", "Retenção zero e modelos dentro do limite de confiança."),
+    ("src:help-data-library", "Agentforce Data Library", "ai.data_library_parent.htm", "O que uma data library indexa e o que exige."),
+):
+    _f(_id, _tit + ("" if "(" in _tit else " (Salesforce Help)"), _H + _art + _L, _pert, **AJ)
+_f("src:objref-contentdocument-nota", "ContentDocument (Object Reference)",
+   "https://developer.salesforce.com/docs/platform/object-reference/references/standard-objects/object-contentdocument.html",
+   "Limites de documentos e de versões publicadas.", **DOC)
+_f("src:objref-contentversion-nota", "ContentVersion (Object Reference)",
+   "https://developer.salesforce.com/docs/atlas.en-us.object_reference.meta/object_reference/sforce_api_objects_contentversion.htm",
+   "Comportamento de consultas sem ID.", **DOC)

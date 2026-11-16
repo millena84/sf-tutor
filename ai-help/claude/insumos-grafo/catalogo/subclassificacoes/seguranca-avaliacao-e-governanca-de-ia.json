@@ -4,7 +4,7 @@
   "sigla": "IA-06",
   "classificacao": "cls:ia-agentes-e-decisoes-assistidas",
   "natureza": "curadoria_didatica",
-  "descricao": "Controles, testes e auditoria de IA.",
+  "descricao": "Einstein Trust Layer e auditoria de IA: retenção zero, mascaramento, detecção de toxicidade e trilha de auditoria.",
   "escopo": "Entram controles, testes e auditoria específicos de recursos de IA.",
   "fora_do_escopo": "Segurança geral da org fica em \"Acesso, identidade e segurança\".",
   "para_iniciantes": {
@@ -14,6 +14,9 @@
       {
         "fonte": "src:agentforce-dev-guide"
       }
+    ],
+    "por_onde_comecar": [
+      "func:einstein-trust-layer"
     ]
   },
   "encadeamento": {
@@ -24,7 +27,72 @@
       }
     ]
   },
-  "funcionalidades": [],
+  "avancado": [
+    {
+      "tipo": "seguranca",
+      "titulo": "O que o Trust Layer faz",
+      "texto": "Retenção zero: os provedores externos de modelo não guardam os dados nem os usam em treinamento. Mascaramento: dados sensíveis são identificados e trocados por marcadores antes do envio ao modelo. Detecção de toxicidade: respostas potencialmente nocivas são sinalizadas. Auditoria: prompts, respostas e sinais de confiança ficam registrados.",
+      "evidencias": [
+        {
+          "fonte": "src:help-trust-layer"
+        },
+        {
+          "fonte": "src:help-trust-masking"
+        },
+        {
+          "fonte": "src:help-employee-agent-considerations"
+        }
+      ]
+    },
+    {
+      "tipo": "atencao",
+      "titulo": "Mascaramento tem exceções",
+      "texto": "No Agentforce Employee Agent, o mascaramento fica desligado. Quando o modelo é hospedado dentro do limite de confiança da Salesforce, os dados não saem desse limite.",
+      "evidencias": [
+        {
+          "fonte": "src:help-employee-agent-considerations"
+        },
+        {
+          "fonte": "src:help-agent-masking-limits"
+        }
+      ]
+    },
+    {
+      "tipo": "seguranca",
+      "titulo": "Onde fica a auditoria",
+      "texto": "Os dados de auditoria de IA generativa (como o mascaramento aplicado e as pontuações de toxicidade) e os dados de feedback ficam guardados no Data 360.",
+      "evidencias": [
+        {
+          "fonte": "src:help-trust-audit"
+        }
+      ]
+    },
+    {
+      "tipo": "seguranca",
+      "titulo": "Permissões continuam valendo",
+      "texto": "Agentes respeitam os controles de acesso padrão do Salesforce.",
+      "evidencias": [
+        {
+          "fonte": "src:help-agentforce-trust"
+        }
+      ]
+    }
+  ],
+  "funcionalidades": [
+    "func:einstein-trust-layer"
+  ],
   "estado": "desconhecido",
-  "nota_estado": "Agrupamento proposto na especificação; fronteira ainda não cruzada com a documentação oficial."
+  "nota_estado": "Tema criado pelo projeto (00-especificacao-grafo.md), não é nomenclatura oficial da Salesforce. Cruzado em 2026-11-10 com áreas da documentação oficial listadas nas referências; a correspondência é parcial e o recorte continua sendo do projeto.",
+  "referencias_oficiais": [
+    {
+      "fonte": "src:help-trust-layer",
+      "secao": "Einstein Trust Layer",
+      "nota": "Cobre parte do tema: Trust Layer (não cobre testes e avaliação de agentes)."
+    },
+    {
+      "fonte": "src:help-trust-audit",
+      "secao": "Audit Trail",
+      "nota": "Cobre parte do tema: dados de auditoria."
+    }
+  ]
 }

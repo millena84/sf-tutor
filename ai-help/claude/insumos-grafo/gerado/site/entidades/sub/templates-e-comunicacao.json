@@ -64,18 +64,105 @@
       "texto": "No objeto EmailTemplate, o letterhead clássico vem pela referência ao BrandTemplate e o enhanced pela relação EnhancedLetterhead. Ao empacotar ou pôr num change set, só alguns tipos de anexo acompanham o template.",
       "tipo": "implantacao",
       "titulo": "Template no modelo de dados"
+    },
+    {
+      "evidencias": [
+        {
+          "fonte": "src:mdapi-emailtemplate"
+        },
+        {
+          "fonte": "src:mdapi-letterhead"
+        }
+      ],
+      "texto": "Cada template é um EmailTemplate, numa subpasta da pasta email: um arquivo .email com o corpo e um arquivo de metadado. O campo type diz o tipo (text, html, custom ou visualforce) e UiType, a interface (Aloha para o Classic, SFX para o Lightning Experience). O letterhead do Classic é o tipo Letterhead.",
+      "tipo": "implantacao",
+      "titulo": "Como metadado"
+    },
+    {
+      "evidencias": [
+        {
+          "fonte": "src:help-classic-letterheads"
+        },
+        {
+          "fonte": "src:help-enhanced-letterheads"
+        }
+      ],
+      "texto": "Classic letterheads valem para templates HTML do Classic e são geridos em Classic Letterheads, no Setup. Enhanced letterheads são do Lightning Experience, públicos por padrão, e exigem Modify All Data para criar.",
+      "tipo": "atencao",
+      "titulo": "Dois letterheads diferentes"
+    },
+    {
+      "evidencias": [
+        {
+          "fonte": "src:help-classic-templates-in-lex"
+        },
+        {
+          "fonte": "src:help-classic-html-templates"
+        }
+      ],
+      "texto": "Os templates do Classic podem ser usados no Lightning Experience, mas são editados no Setup, em Classic Email Templates. Ao enviar, os anexos do template são somente leitura.",
+      "tipo": "atencao",
+      "titulo": "Templates do Classic no Lightning"
     }
   ],
   "classificacao": "cls:conteudo-conhecimento-e-colaboracao",
   "derivado": {
-    "dependencias": [],
-    "funcionalidades": [],
-    "metadata_types": [],
+    "dependencias": [
+      {
+        "destino": "mdt:Letterhead",
+        "destino_no_tema": true,
+        "estado": "verificado",
+        "origem": "mdt:EmailTemplate",
+        "rel": "rel:emailtemplate-letterhead",
+        "via": "letterhead"
+      }
+    ],
+    "funcionalidades": [
+      {
+        "alertas": [
+          "Há duas linguagens de merge fields: os templates do Lightning Experience criados desde o Summer '18 usam HML, com três chaves; os do Classic usam SML.",
+          "Classic letterheads e enhanced letterheads são recursos diferentes; um template do Lightning precisa usar HML para ter um enhanced letterhead.",
+          "Templates do Lightning Experience nascem privados; para outros usarem, vão para uma pasta pública."
+        ],
+        "exemplo": "A equipe de vendas usa um template de boas-vindas: ao enviar, o nome do contato e o da conta entram sozinhos no texto.",
+        "id": "func:email-templates",
+        "principal": true
+      }
+    ],
+    "metadata_types": [
+      {
+        "estrutura": "completa",
+        "funcionalidades": [
+          "func:email-templates"
+        ],
+        "id": "mdt:Document",
+        "nota_suporte": null,
+        "suporte_cli": "suportado"
+      },
+      {
+        "estrutura": "completa",
+        "funcionalidades": [
+          "func:email-templates"
+        ],
+        "id": "mdt:EmailTemplate",
+        "nota_suporte": null,
+        "suporte_cli": "suportado"
+      },
+      {
+        "estrutura": "completa",
+        "funcionalidades": [
+          "func:email-templates"
+        ],
+        "id": "mdt:Letterhead",
+        "nota_suporte": null,
+        "suporte_cli": "suportado"
+      }
+    ],
     "nota": "Calculado pelo gerador a partir do catálogo; não é cadastro.",
     "objetos_api": [],
     "temas_sem_funcionalidade": []
   },
-  "descricao": "Modelos de e-mail e de comunicação.",
+  "descricao": "Email templates e letterheads: os modelos de e-mail reutilizáveis e o papel timbrado deles.",
   "encadeamento": {
     "evidencias": [
       {
@@ -87,11 +174,13 @@
   "escopo": "Entram modelos de e-mail e de outras comunicações.",
   "estado": "desconhecido",
   "fora_do_escopo": "Prompts usados por IA ficam em \"Prompts\".",
-  "funcionalidades": [],
+  "funcionalidades": [
+    "func:email-templates"
+  ],
   "id": "sub:templates-e-comunicacao",
   "natureza": "curadoria_didatica",
   "nome": "Templates e comunicação",
-  "nota_estado": "Agrupamento proposto na especificação; fronteira ainda não cruzada com a documentação oficial.",
+  "nota_estado": "Tema criado pelo projeto (00-especificacao-grafo.md), não é nomenclatura oficial da Salesforce. Cruzado em 2026-11-10 com áreas da documentação oficial listadas nas referências; a correspondência é parcial e o recorte continua sendo do projeto.",
   "para_iniciantes": {
     "evidencias": [
       {
@@ -102,7 +191,27 @@
       }
     ],
     "exemplo": "O template de boas-vindas usa {{{Recipient.FirstName}}}; ao enviar para a contato Ana, o texto sai 'Olá, Ana'.",
-    "explicacao": "Um email template é um e-mail pronto para reaproveitar, com merge fields que trocam marcadores pelos dados do registro na hora do envio. Um letterhead padroniza cabeçalho e rodapé, como logo e contato da empresa."
+    "explicacao": "Um email template é um e-mail pronto para reaproveitar, com merge fields que trocam marcadores pelos dados do registro na hora do envio. Um letterhead padroniza cabeçalho e rodapé, como logo e contato da empresa.",
+    "por_onde_comecar": [
+      "func:email-templates"
+    ]
   },
+  "referencias_oficiais": [
+    {
+      "fonte": "src:help-email-templates-lex",
+      "nota": "Cobre parte do tema: templates do Lightning Experience.",
+      "secao": "Email Templates in Lightning Experience"
+    },
+    {
+      "fonte": "src:help-email-merge-fields",
+      "nota": "Cobre parte do tema: merge fields e uso entre Classic e Lightning.",
+      "secao": "Merge Fields and Templates in Emails"
+    },
+    {
+      "fonte": "src:mdapi-emailtemplate",
+      "nota": "Cobre parte do tema: metadado dos templates.",
+      "secao": "EmailTemplate"
+    }
+  ],
   "sigla": "CON-05"
 }

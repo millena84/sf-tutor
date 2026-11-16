@@ -1,0 +1,711 @@
+{
+  "id": "mdt:GenAiPlugin",
+  "nome": "GenAiPlugin",
+  "o_que_e": "Um tópico de agente: uma categoria de ações ligada a um trabalho que o agente de IA faz, com escopo e instruções.",
+  "finalidade": "Versionar e implantar os tópicos da biblioteca de assets.",
+  "estende": "Metadata",
+  "arquivos": {
+    "source_format": {
+      "estado": "verificado",
+      "valor": {
+        "pasta": "genAiPlugins/",
+        "arquivo": "<Nome>.genAiPlugin-meta.xml"
+      },
+      "nota": "Pasta e sufixo do registro do Salesforce CLI; sufixo '-meta.xml' segue a convenção do source format.",
+      "evidencias": [
+        {
+          "fonte": "src:sdr-registry",
+          "nota": "types.genaiplugin"
+        }
+      ]
+    },
+    "metadata_api_format": {
+      "estado": "verificado",
+      "valor": {
+        "pasta": "genAiPlugins/",
+        "arquivo": "<Nome>.genAiPlugin"
+      },
+      "evidencias": [
+        {
+          "fonte": "src:sdr-registry",
+          "nota": "types.genaiplugin"
+        }
+      ]
+    },
+    "curinga_package_xml": {
+      "estado": "verificado",
+      "valor": true,
+      "evidencias": [
+        {
+          "fonte": "src:mdapi-genaiplugin"
+        }
+      ]
+    }
+  },
+  "disponibilidade": {
+    "desde_versao": "62.0",
+    "ate_versao": null,
+    "estado": "verificado"
+  },
+  "suporte_cli": {
+    "estado": "verificado",
+    "valor": {
+      "status": "suportado",
+      "nota_fonte": null
+    },
+    "nota": "Suporte do Salesforce CLI (source-deploy-retrieve), não do Metadata API em geral.",
+    "evidencias": [
+      {
+        "fonte": "src:sdr-metadata-support"
+      }
+    ]
+  },
+  "setup": {
+    "estado": "desconhecido",
+    "nota": "Caminho no Setup não validado nesta sessão."
+  },
+  "propriedades": [
+    {
+      "id": "mdt:GenAiPlugin.aiPluginUtterances",
+      "nome": "aiPluginUtterances",
+      "tipo_tecnico": "AiPluginUtteranceDef[]",
+      "o_que_e": "Frases de exemplo usadas para escolher o tópico em tempo de execução.",
+      "origem": {
+        "estado": "verificado",
+        "valor": "padrao_plataforma",
+        "nota": "Propriedade definida pelo schema da Metadata API.",
+        "evidencias": [
+          {
+            "fonte": "src:mdapi-genaiplugin"
+          }
+        ]
+      },
+      "obrigatoriedade": {
+        "valor": "nao",
+        "estado": "desconhecido",
+        "condicao": "A documentação 68.0 não marca o campo como obrigatório; ausência de marcação não comprova opcionalidade (confirmar no WSDL)."
+      },
+      "default": {
+        "forma": "nao_declarado_na_fonte",
+        "estado": "desconhecido"
+      },
+      "dominio": {
+        "natureza": "tipo_composto",
+        "estado": "verificado",
+        "evidencias": [
+          {
+            "fonte": "src:mdapi-genaiplugin"
+          }
+        ]
+      },
+      "disponibilidade": {
+        "desde_versao": null,
+        "ate_versao": null,
+        "estado": "desconhecido"
+      },
+      "explicacao": "explicada",
+      "estado": "verificado",
+      "evidencias": [
+        {
+          "fonte": "src:mdapi-genaiplugin"
+        }
+      ],
+      "cardinalidade": "0..n"
+    },
+    {
+      "id": "mdt:GenAiPlugin.canEscalate",
+      "nome": "canEscalate",
+      "tipo_tecnico": "boolean",
+      "o_que_e": "Indica se o tópico pode ser escalado para um atendente.",
+      "origem": {
+        "estado": "verificado",
+        "valor": "padrao_plataforma",
+        "nota": "Propriedade definida pelo schema da Metadata API.",
+        "evidencias": [
+          {
+            "fonte": "src:mdapi-genaiplugin"
+          }
+        ]
+      },
+      "obrigatoriedade": {
+        "valor": "nao",
+        "estado": "desconhecido",
+        "condicao": "A documentação 68.0 não marca o campo como obrigatório; ausência de marcação não comprova opcionalidade (confirmar no WSDL)."
+      },
+      "default": {
+        "forma": "nao_declarado_na_fonte",
+        "estado": "desconhecido"
+      },
+      "dominio": {
+        "natureza": "booleano",
+        "valores": [
+          {
+            "valor": "true"
+          },
+          {
+            "valor": "false"
+          }
+        ],
+        "lista_completa": "sim",
+        "estado": "verificado",
+        "evidencias": [
+          {
+            "fonte": "src:mdapi-genaiplugin"
+          }
+        ]
+      },
+      "disponibilidade": {
+        "desde_versao": null,
+        "ate_versao": null,
+        "estado": "desconhecido"
+      },
+      "explicacao": "explicada",
+      "estado": "verificado",
+      "evidencias": [
+        {
+          "fonte": "src:mdapi-genaiplugin"
+        }
+      ]
+    },
+    {
+      "id": "mdt:GenAiPlugin.description",
+      "nome": "description",
+      "tipo_tecnico": "string",
+      "o_que_e": "Descrição do tópico.",
+      "origem": {
+        "estado": "verificado",
+        "valor": "padrao_plataforma",
+        "nota": "Propriedade definida pelo schema da Metadata API.",
+        "evidencias": [
+          {
+            "fonte": "src:mdapi-genaiplugin"
+          }
+        ]
+      },
+      "obrigatoriedade": {
+        "valor": "nao",
+        "estado": "desconhecido",
+        "condicao": "A documentação 68.0 não marca o campo como obrigatório; ausência de marcação não comprova opcionalidade (confirmar no WSDL)."
+      },
+      "default": {
+        "forma": "nao_declarado_na_fonte",
+        "estado": "desconhecido"
+      },
+      "dominio": {
+        "natureza": "texto_livre",
+        "estado": "verificado",
+        "evidencias": [
+          {
+            "fonte": "src:mdapi-genaiplugin"
+          }
+        ],
+        "contexto": "A fonte tipa como string sem lista de valores; não inventar valores."
+      },
+      "disponibilidade": {
+        "desde_versao": null,
+        "ate_versao": null,
+        "estado": "desconhecido"
+      },
+      "explicacao": "explicada",
+      "estado": "verificado",
+      "evidencias": [
+        {
+          "fonte": "src:mdapi-genaiplugin"
+        }
+      ]
+    },
+    {
+      "id": "mdt:GenAiPlugin.developerName",
+      "nome": "developerName",
+      "tipo_tecnico": "string",
+      "o_que_e": "Nome único de API do tópico: letras, números e sublinhados, sem dois sublinhados seguidos.",
+      "origem": {
+        "estado": "verificado",
+        "valor": "padrao_plataforma",
+        "nota": "Propriedade definida pelo schema da Metadata API.",
+        "evidencias": [
+          {
+            "fonte": "src:mdapi-genaiplugin"
+          }
+        ]
+      },
+      "obrigatoriedade": {
+        "valor": "sim",
+        "estado": "verificado",
+        "evidencias": [
+          {
+            "fonte": "src:mdapi-genaiplugin"
+          }
+        ]
+      },
+      "default": {
+        "forma": "nao_declarado_na_fonte",
+        "estado": "desconhecido"
+      },
+      "dominio": {
+        "natureza": "texto_livre",
+        "estado": "verificado",
+        "evidencias": [
+          {
+            "fonte": "src:mdapi-genaiplugin"
+          }
+        ],
+        "contexto": "A fonte tipa como string sem lista de valores; não inventar valores."
+      },
+      "disponibilidade": {
+        "desde_versao": null,
+        "ate_versao": null,
+        "estado": "desconhecido"
+      },
+      "explicacao": "explicada",
+      "estado": "verificado",
+      "evidencias": [
+        {
+          "fonte": "src:mdapi-genaiplugin"
+        }
+      ]
+    },
+    {
+      "id": "mdt:GenAiPlugin.genAiFunctions",
+      "nome": "genAiFunctions",
+      "tipo_tecnico": "GenAiPluginFunctionDef[]",
+      "o_que_e": "As funções (agent actions) do tópico.",
+      "origem": {
+        "estado": "verificado",
+        "valor": "padrao_plataforma",
+        "nota": "Propriedade definida pelo schema da Metadata API.",
+        "evidencias": [
+          {
+            "fonte": "src:mdapi-genaiplugin"
+          }
+        ]
+      },
+      "obrigatoriedade": {
+        "valor": "nao",
+        "estado": "desconhecido",
+        "condicao": "A documentação 68.0 não marca o campo como obrigatório; ausência de marcação não comprova opcionalidade (confirmar no WSDL)."
+      },
+      "default": {
+        "forma": "nao_declarado_na_fonte",
+        "estado": "desconhecido"
+      },
+      "dominio": {
+        "natureza": "tipo_composto",
+        "estado": "verificado",
+        "evidencias": [
+          {
+            "fonte": "src:mdapi-genaiplugin"
+          }
+        ]
+      },
+      "disponibilidade": {
+        "desde_versao": null,
+        "ate_versao": null,
+        "estado": "desconhecido"
+      },
+      "explicacao": "explicada",
+      "estado": "verificado",
+      "evidencias": [
+        {
+          "fonte": "src:mdapi-genaiplugin"
+        }
+      ],
+      "cardinalidade": "0..n",
+      "estrutura_ref": "mdx:GenAiPluginFunctionDef"
+    },
+    {
+      "id": "mdt:GenAiPlugin.genAiPluginInstructions",
+      "nome": "genAiPluginInstructions",
+      "tipo_tecnico": "GenAiPluginInstructionDef[]",
+      "o_que_e": "As instruções do tópico.",
+      "origem": {
+        "estado": "verificado",
+        "valor": "padrao_plataforma",
+        "nota": "Propriedade definida pelo schema da Metadata API.",
+        "evidencias": [
+          {
+            "fonte": "src:mdapi-genaiplugin"
+          }
+        ]
+      },
+      "obrigatoriedade": {
+        "valor": "nao",
+        "estado": "desconhecido",
+        "condicao": "A documentação 68.0 não marca o campo como obrigatório; ausência de marcação não comprova opcionalidade (confirmar no WSDL)."
+      },
+      "default": {
+        "forma": "nao_declarado_na_fonte",
+        "estado": "desconhecido"
+      },
+      "dominio": {
+        "natureza": "tipo_composto",
+        "estado": "verificado",
+        "evidencias": [
+          {
+            "fonte": "src:mdapi-genaiplugin"
+          }
+        ]
+      },
+      "disponibilidade": {
+        "desde_versao": null,
+        "ate_versao": null,
+        "estado": "desconhecido"
+      },
+      "explicacao": "explicada",
+      "estado": "verificado",
+      "evidencias": [
+        {
+          "fonte": "src:mdapi-genaiplugin"
+        }
+      ],
+      "cardinalidade": "0..n"
+    },
+    {
+      "id": "mdt:GenAiPlugin.language",
+      "nome": "language",
+      "tipo_tecnico": "string",
+      "o_que_e": "Idioma do tópico.",
+      "origem": {
+        "estado": "verificado",
+        "valor": "padrao_plataforma",
+        "nota": "Propriedade definida pelo schema da Metadata API.",
+        "evidencias": [
+          {
+            "fonte": "src:mdapi-genaiplugin"
+          }
+        ]
+      },
+      "obrigatoriedade": {
+        "valor": "sim",
+        "estado": "verificado",
+        "evidencias": [
+          {
+            "fonte": "src:mdapi-genaiplugin"
+          }
+        ]
+      },
+      "default": {
+        "forma": "nao_declarado_na_fonte",
+        "estado": "desconhecido"
+      },
+      "dominio": {
+        "natureza": "texto_livre",
+        "estado": "verificado",
+        "evidencias": [
+          {
+            "fonte": "src:mdapi-genaiplugin"
+          }
+        ],
+        "contexto": "A fonte tipa como string sem lista de valores; não inventar valores."
+      },
+      "disponibilidade": {
+        "desde_versao": null,
+        "ate_versao": null,
+        "estado": "desconhecido"
+      },
+      "explicacao": "explicada",
+      "estado": "verificado",
+      "evidencias": [
+        {
+          "fonte": "src:mdapi-genaiplugin"
+        }
+      ]
+    },
+    {
+      "id": "mdt:GenAiPlugin.masterLabel",
+      "nome": "masterLabel",
+      "tipo_tecnico": "string",
+      "o_que_e": "Rótulo do tópico.",
+      "origem": {
+        "estado": "verificado",
+        "valor": "padrao_plataforma",
+        "nota": "Propriedade definida pelo schema da Metadata API.",
+        "evidencias": [
+          {
+            "fonte": "src:mdapi-genaiplugin"
+          }
+        ]
+      },
+      "obrigatoriedade": {
+        "valor": "sim",
+        "estado": "verificado",
+        "evidencias": [
+          {
+            "fonte": "src:mdapi-genaiplugin"
+          }
+        ]
+      },
+      "default": {
+        "forma": "nao_declarado_na_fonte",
+        "estado": "desconhecido"
+      },
+      "dominio": {
+        "natureza": "texto_livre",
+        "estado": "verificado",
+        "evidencias": [
+          {
+            "fonte": "src:mdapi-genaiplugin"
+          }
+        ],
+        "contexto": "A fonte tipa como string sem lista de valores; não inventar valores."
+      },
+      "disponibilidade": {
+        "desde_versao": null,
+        "ate_versao": null,
+        "estado": "desconhecido"
+      },
+      "explicacao": "explicada",
+      "estado": "verificado",
+      "evidencias": [
+        {
+          "fonte": "src:mdapi-genaiplugin"
+        }
+      ]
+    },
+    {
+      "id": "mdt:GenAiPlugin.plannerField",
+      "nome": "plannerField",
+      "tipo_tecnico": "string",
+      "o_que_e": "O planner pai do tópico.",
+      "origem": {
+        "estado": "verificado",
+        "valor": "padrao_plataforma",
+        "nota": "Propriedade definida pelo schema da Metadata API.",
+        "evidencias": [
+          {
+            "fonte": "src:mdapi-genaiplugin"
+          }
+        ]
+      },
+      "obrigatoriedade": {
+        "valor": "nao",
+        "estado": "desconhecido",
+        "condicao": "A documentação 68.0 não marca o campo como obrigatório; ausência de marcação não comprova opcionalidade (confirmar no WSDL)."
+      },
+      "default": {
+        "forma": "nao_declarado_na_fonte",
+        "estado": "desconhecido"
+      },
+      "dominio": {
+        "natureza": "texto_livre",
+        "estado": "verificado",
+        "evidencias": [
+          {
+            "fonte": "src:mdapi-genaiplugin"
+          }
+        ],
+        "contexto": "A fonte tipa como string sem lista de valores; não inventar valores."
+      },
+      "disponibilidade": {
+        "desde_versao": null,
+        "ate_versao": null,
+        "estado": "desconhecido"
+      },
+      "explicacao": "explicada",
+      "estado": "verificado",
+      "evidencias": [
+        {
+          "fonte": "src:mdapi-genaiplugin"
+        }
+      ]
+    },
+    {
+      "id": "mdt:GenAiPlugin.pluginType",
+      "nome": "pluginType",
+      "tipo_tecnico": "PluginType",
+      "o_que_e": "Tipo do plugin.",
+      "origem": {
+        "estado": "verificado",
+        "valor": "padrao_plataforma",
+        "nota": "Propriedade definida pelo schema da Metadata API.",
+        "evidencias": [
+          {
+            "fonte": "src:mdapi-genaiplugin"
+          }
+        ]
+      },
+      "obrigatoriedade": {
+        "valor": "sim",
+        "estado": "verificado",
+        "evidencias": [
+          {
+            "fonte": "src:mdapi-genaiplugin"
+          }
+        ]
+      },
+      "default": {
+        "forma": "nao_declarado_na_fonte",
+        "estado": "desconhecido"
+      },
+      "dominio": {
+        "natureza": "enum_fechado",
+        "valores": [
+          {
+            "valor": "Topic"
+          },
+          {
+            "valor": "APICustomTopic"
+          }
+        ],
+        "lista_completa": "sim",
+        "estado": "verificado",
+        "evidencias": [
+          {
+            "fonte": "src:mdapi-genaiplugin"
+          }
+        ]
+      },
+      "disponibilidade": {
+        "desde_versao": null,
+        "ate_versao": null,
+        "estado": "desconhecido"
+      },
+      "explicacao": "explicada",
+      "estado": "verificado",
+      "evidencias": [
+        {
+          "fonte": "src:mdapi-genaiplugin"
+        }
+      ]
+    },
+    {
+      "id": "mdt:GenAiPlugin.scope",
+      "nome": "scope",
+      "tipo_tecnico": "string",
+      "o_que_e": "Descrição específica do trabalho coberto pelo tópico.",
+      "origem": {
+        "estado": "verificado",
+        "valor": "padrao_plataforma",
+        "nota": "Propriedade definida pelo schema da Metadata API.",
+        "evidencias": [
+          {
+            "fonte": "src:mdapi-genaiplugin"
+          }
+        ]
+      },
+      "obrigatoriedade": {
+        "valor": "nao",
+        "estado": "desconhecido",
+        "condicao": "A documentação 68.0 não marca o campo como obrigatório; ausência de marcação não comprova opcionalidade (confirmar no WSDL)."
+      },
+      "default": {
+        "forma": "nao_declarado_na_fonte",
+        "estado": "desconhecido"
+      },
+      "dominio": {
+        "natureza": "texto_livre",
+        "estado": "verificado",
+        "evidencias": [
+          {
+            "fonte": "src:mdapi-genaiplugin"
+          }
+        ],
+        "contexto": "A fonte tipa como string sem lista de valores; não inventar valores."
+      },
+      "disponibilidade": {
+        "desde_versao": null,
+        "ate_versao": null,
+        "estado": "desconhecido"
+      },
+      "explicacao": "explicada",
+      "estado": "verificado",
+      "evidencias": [
+        {
+          "fonte": "src:mdapi-genaiplugin"
+        }
+      ]
+    },
+    {
+      "id": "mdt:GenAiPlugin.fullName",
+      "nome": "fullName",
+      "tipo_tecnico": "string",
+      "o_que_e": "Nome completo (API name) do componente; herdado do tipo Metadata.",
+      "origem": {
+        "estado": "verificado",
+        "valor": "padrao_plataforma",
+        "nota": "Propriedade definida pelo schema da Metadata API.",
+        "evidencias": [
+          {
+            "fonte": "src:mdapi-genaiplugin"
+          }
+        ]
+      },
+      "obrigatoriedade": {
+        "valor": "desconhecida",
+        "estado": "desconhecido"
+      },
+      "default": {
+        "forma": "nao_declarado_na_fonte",
+        "estado": "desconhecido"
+      },
+      "dominio": {
+        "natureza": "texto_livre",
+        "estado": "verificado",
+        "evidencias": [
+          {
+            "fonte": "src:mdapi-genaiplugin"
+          }
+        ],
+        "contexto": "A fonte tipa como string sem lista de valores; não inventar valores."
+      },
+      "disponibilidade": {
+        "desde_versao": null,
+        "ate_versao": null,
+        "estado": "desconhecido"
+      },
+      "explicacao": "explicada",
+      "estado": "verificado",
+      "evidencias": [
+        {
+          "fonte": "src:mdapi-genaiplugin"
+        }
+      ],
+      "herdada_de": "Metadata"
+    }
+  ],
+  "estruturas": [
+    "mdx:GenAiPluginFunctionDef"
+  ],
+  "cobertura": {
+    "estrutural": {
+      "estado": "parcial",
+      "esperado": 12,
+      "presente": 12,
+      "nota": "Universo esperado = tabelas Fields da página do guia versionado 264.0 (API 68.0), lida em 2026-11-16. Os subtipos AiPluginUtteranceDef e GenAiPluginInstructionDef são citados, mas a página não traz os campos deles. Primeiro nível completo; 2 propriedade(s) de tipo composto ainda sem estrutura detalhada: aiPluginUtterances, genAiPluginInstructions."
+    },
+    "explicativa": {
+      "estado": "completa",
+      "esperado": 12,
+      "presente": 12
+    },
+    "mapeamento": {
+      "estado": "parcial",
+      "nota": "Correspondências registradas apenas onde há evidência; demais pendentes."
+    }
+  },
+  "recomendacoes": [],
+  "alertas": [
+    "Em orgs Winter '26 ou posteriores, a página manda usar GenAiPlannerBundle para recuperar tópicos criados dentro de um agente; GenAiPlugin fica para os tópicos da biblioteca de assets.",
+    "Para implantar numa org Summer '25 (API 64.0), recupere com a API 64.0; para Winter '26 em diante, use a 65.0 ou posterior.",
+    "A Ajuda atual chama o tópico de subagent; a página do tipo na API 68.0 ainda usa topic.",
+    "A página informa acesso especial: o tipo só fica disponível com Agents ligado na org."
+  ],
+  "divergencias_documentais": [],
+  "estado": "verificado",
+  "evidencias": [
+    {
+      "fonte": "src:mdapi-genaiplugin"
+    },
+    {
+      "fonte": "src:sdr-registry"
+    },
+    {
+      "fonte": "src:sdr-metadata-support"
+    }
+  ],
+  "exemplo_xml": {
+    "xml": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<GenAiPlugin xmlns=\"http://soap.sforce.com/2006/04/metadata\">\n    <description>[descrição do tópico]</description>\n    <developerName>[Nome_Do_Topico]</developerName>\n    <genAiFunctions>\n        <functionName>[nome de API de uma agent action]</functionName>\n    </genAiFunctions>\n    <language>[idioma]</language>\n    <masterLabel>[rótulo do tópico]</masterLabel>\n    <!-- Valores documentados: Topic, APICustomTopic -->\n    <pluginType>Topic</pluginType>\n    <scope>[o que o tópico cobre]</scope>\n</GenAiPlugin>",
+    "natureza": "didatico_projeto",
+    "nota": "Exemplo escrito pelo projeto apenas com elementos documentados; sem dados reais."
+  }
+}

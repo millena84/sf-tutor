@@ -4,7 +4,7 @@
   "sigla": "CON-01",
   "classificacao": "cls:conteudo-conhecimento-e-colaboracao",
   "natureza": "curadoria_didatica",
-  "descricao": "Arquivos anexados e documentos.",
+  "descricao": "Salesforce Files: arquivos com versões, compartilhados com pessoas, grupos, registros e bibliotecas.",
   "escopo": "Entram arquivos anexados e documentos.",
   "fora_do_escopo": "Recursos estáticos e bibliotecas ficam em \"Bibliotecas e assets\".",
   "para_iniciantes": {
@@ -14,6 +14,9 @@
       {
         "fonte": "src:data-model-files"
       }
+    ],
+    "por_onde_comecar": [
+      "func:salesforce-files"
     ]
   },
   "encadeamento": {
@@ -34,9 +37,56 @@
           "fonte": "src:data-model-files"
         }
       ]
+    },
+    {
+      "tipo": "limite",
+      "titulo": "Limites de publicação",
+      "texto": "Até 30.000.000 de documentos publicados, contando os arquivados, e até 200.000 novas versões a cada 24 horas (2.500 em Developer Edition e em trials).",
+      "evidencias": [
+        {
+          "fonte": "src:objref-contentdocument-nota"
+        }
+      ]
+    },
+    {
+      "tipo": "atencao",
+      "titulo": "Consulta sem ID não traz tudo",
+      "texto": "Consultar ContentDocument ou ContentVersion sem informar um ID não devolve todos os arquivos que o usuário pode ver: ficam de fora os que ele só acessa por ter acesso a um registro com o qual o arquivo é compartilhado.",
+      "evidencias": [
+        {
+          "fonte": "src:objref-contentversion-nota"
+        }
+      ]
+    },
+    {
+      "tipo": "decisao",
+      "titulo": "Files não é Documents",
+      "texto": "A aba Documents, do Salesforce Classic, é outro recurso: guarda documentos em pastas e tem o metadata type Document. É dela que saem, por exemplo, as imagens de logo dos Classic letterheads.",
+      "evidencias": [
+        {
+          "fonte": "src:mdapi-document"
+        },
+        {
+          "fonte": "src:mdapi-letterhead"
+        }
+      ]
     }
   ],
-  "funcionalidades": [],
+  "funcionalidades": [
+    "func:salesforce-files"
+  ],
   "estado": "desconhecido",
-  "nota_estado": "Agrupamento proposto na especificação; fronteira ainda não cruzada com a documentação oficial."
+  "nota_estado": "Tema criado pelo projeto (00-especificacao-grafo.md), não é nomenclatura oficial da Salesforce. Cruzado em 2026-11-10 com áreas da documentação oficial listadas nas referências; a correspondência é parcial e o recorte continua sendo do projeto.",
+  "referencias_oficiais": [
+    {
+      "fonte": "src:help-kb-files-data-model",
+      "secao": "Understanding Salesforce Files",
+      "nota": "Cobre parte do tema: modelo de objetos dos arquivos."
+    },
+    {
+      "fonte": "src:mdapi-document",
+      "secao": "Document",
+      "nota": "Cobre parte do tema: documentos da aba Documents, do Classic."
+    }
+  ]
 }

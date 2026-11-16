@@ -521,6 +521,12 @@
       "tipo": "representacao_xml"
     },
     {
+      "destino": "mdt:ContentAsset",
+      "origem": "func:asset-files",
+      "papel": "Cada asset file, com o arquivo, as versões e o compartilhamento.",
+      "tipo": "representacao_xml"
+    },
+    {
       "destino": "mdt:AuraDefinitionBundle",
       "origem": "func:aura-components",
       "papel": "O bundle Aura, com suas definições.",
@@ -644,6 +650,12 @@
       "destino": "mdt:PlatformEventChannelMember",
       "origem": "func:change-data-capture",
       "papel": "Seleciona a entidade (e filtros e campos extras) num canal.",
+      "tipo": "representacao_xml"
+    },
+    {
+      "destino": "mdt:ChatterSettings",
+      "origem": "func:chatter",
+      "papel": "As opções do Chatter na org.",
       "tipo": "representacao_xml"
     },
     {
@@ -800,6 +812,24 @@
       "destino": "mdt:FlexiPage",
       "origem": "func:dynamic-forms",
       "papel": "A Lightning page que passa a conter os campos e as seções.",
+      "tipo": "representacao_xml"
+    },
+    {
+      "destino": "mdt:Document",
+      "origem": "func:email-templates",
+      "papel": "Documentos do Classic usados como imagem ou logo em templates e letterheads.",
+      "tipo": "representacao_xml"
+    },
+    {
+      "destino": "mdt:EmailTemplate",
+      "origem": "func:email-templates",
+      "papel": "Cada email template, com o corpo e o metadado.",
+      "tipo": "representacao_xml"
+    },
+    {
+      "destino": "mdt:Letterhead",
+      "origem": "func:email-templates",
+      "papel": "O letterhead do Classic usado por templates HTML.",
       "tipo": "representacao_xml"
     },
     {
@@ -1517,6 +1547,18 @@
       "tipo": "representacao_objeto_api"
     },
     {
+      "destino": "mdt:EinsteinGptSettings",
+      "origem": "func:prompt-builder",
+      "papel": "Liga a IA generativa na org, desliga provedores de modelo e controla a implantação de templates.",
+      "tipo": "representacao_xml"
+    },
+    {
+      "destino": "mdt:GenAiPromptTemplate",
+      "origem": "func:prompt-builder",
+      "papel": "Cada prompt template, com versões, entradas e provedores de dados.",
+      "tipo": "representacao_xml"
+    },
+    {
       "destino": "mdt:ManagedEventSubscription",
       "origem": "func:pub-sub-api",
       "papel": "Assinatura gerenciada, consumida pelo ManagedSubscribe.",
@@ -1646,6 +1688,18 @@
       "destino": "mdt:StaticResource",
       "origem": "func:static-resources",
       "papel": "Cada static resource, com o arquivo e o metadado.",
+      "tipo": "representacao_xml"
+    },
+    {
+      "destino": "mdt:GenAiFunction",
+      "origem": "func:subagents-e-agent-actions",
+      "papel": "Cada agent action da biblioteca de assets.",
+      "tipo": "representacao_xml"
+    },
+    {
+      "destino": "mdt:GenAiPlugin",
+      "origem": "func:subagents-e-agent-actions",
+      "papel": "Cada tópico (subagent) da biblioteca de assets.",
       "tipo": "representacao_xml"
     },
     {
@@ -2019,6 +2073,16 @@
       "tipo": "tipo_composto"
     },
     {
+      "destino": "mdx:ContentAssetRelationships",
+      "origem": "mdt:ContentAsset.relationships",
+      "tipo": "tipo_composto"
+    },
+    {
+      "destino": "mdx:ContentAssetVersions",
+      "origem": "mdt:ContentAsset.versions",
+      "tipo": "tipo_composto"
+    },
+    {
       "destino": "obj:CspTrustedSite",
       "estado": "verificado",
       "origem": "mdt:CspTrustedSite",
@@ -2131,6 +2195,23 @@
       "origem": "mdt:CustomTab",
       "rel_id": "rel:cor-customtab-tooling",
       "tipo": "correspondencia_xml_api"
+    },
+    {
+      "destino": "mdx:Attachment",
+      "origem": "mdt:EmailTemplate.attachments",
+      "tipo": "tipo_composto"
+    },
+    {
+      "destino": "mdt:Letterhead",
+      "estado": "verificado",
+      "origem": "mdt:EmailTemplate.letterhead",
+      "rel_id": "rel:emailtemplate-letterhead",
+      "tipo": "referencia_campo"
+    },
+    {
+      "destino": "mdx:PackageVersion",
+      "origem": "mdt:EmailTemplate.packageVersions",
+      "tipo": "tipo_composto"
     },
     {
       "destino": "obj:SlaProcess",
@@ -2346,6 +2427,21 @@
       "tipo": "correspondencia_xml_api"
     },
     {
+      "destino": "mdx:GenAiPlannerAttr",
+      "origem": "mdt:GenAiFunction.mappingAttributes",
+      "tipo": "tipo_composto"
+    },
+    {
+      "destino": "mdx:GenAiPluginFunctionDef",
+      "origem": "mdt:GenAiPlugin.genAiFunctions",
+      "tipo": "tipo_composto"
+    },
+    {
+      "destino": "mdx:GenAiPromptTemplateVersion",
+      "origem": "mdt:GenAiPromptTemplate.templateVersions",
+      "tipo": "tipo_composto"
+    },
+    {
       "destino": "mdx:InboundNetworkConnProperty",
       "origem": "mdt:InboundNetworkConnection.inboundNetworkConnProperties",
       "tipo": "tipo_composto"
@@ -2398,6 +2494,31 @@
     {
       "destino": "mdx:ObjectMapping",
       "origem": "mdt:LeadConvertSettings.objectMapping",
+      "tipo": "tipo_composto"
+    },
+    {
+      "destino": "mdx:LetterheadLine",
+      "origem": "mdt:Letterhead.bottomLine",
+      "tipo": "tipo_composto"
+    },
+    {
+      "destino": "mdx:LetterheadHeaderFooter",
+      "origem": "mdt:Letterhead.footer",
+      "tipo": "tipo_composto"
+    },
+    {
+      "destino": "mdx:LetterheadHeaderFooter",
+      "origem": "mdt:Letterhead.header",
+      "tipo": "tipo_composto"
+    },
+    {
+      "destino": "mdx:LetterheadLine",
+      "origem": "mdt:Letterhead.middleLine",
+      "tipo": "tipo_composto"
+    },
+    {
+      "destino": "mdx:LetterheadLine",
+      "origem": "mdt:Letterhead.topLine",
       "tipo": "tipo_composto"
     },
     {
@@ -3168,6 +3289,36 @@
       "tipo": "tipo_composto"
     },
     {
+      "destino": "mdx:ContentAssetLink",
+      "origem": "mdx:ContentAssetRelationships.emailTemplate",
+      "tipo": "tipo_composto"
+    },
+    {
+      "destino": "mdx:ContentAssetLink",
+      "origem": "mdx:ContentAssetRelationships.insightsApplication",
+      "tipo": "tipo_composto"
+    },
+    {
+      "destino": "mdx:ContentAssetLink",
+      "origem": "mdx:ContentAssetRelationships.network",
+      "tipo": "tipo_composto"
+    },
+    {
+      "destino": "mdx:ContentAssetLink",
+      "origem": "mdx:ContentAssetRelationships.organization",
+      "tipo": "tipo_composto"
+    },
+    {
+      "destino": "mdx:ContentAssetLink",
+      "origem": "mdx:ContentAssetRelationships.workspace",
+      "tipo": "tipo_composto"
+    },
+    {
+      "destino": "mdx:ContentAssetVersion",
+      "origem": "mdx:ContentAssetVersions.version",
+      "tipo": "tipo_composto"
+    },
+    {
       "destino": "mdx:ConversationMessageConstantValueTranslation",
       "origem": "mdx:ConversationMessageDefinitionTranslation.constantValueTranslations",
       "tipo": "tipo_composto"
@@ -3324,6 +3475,33 @@
     {
       "destino": "mdx:FlowStageTranslation",
       "origem": "mdx:FlowTranslation.stages",
+      "tipo": "tipo_composto"
+    },
+    {
+      "destino": "mdt:GenAiFunction",
+      "estado": "verificado",
+      "origem": "mdx:GenAiPluginFunctionDef.functionName",
+      "rel_id": "rel:genaiplugin-genaifunction",
+      "tipo": "referencia_campo"
+    },
+    {
+      "destino": "mdx:GenAiPromptTemplateDataProviderParam",
+      "origem": "mdx:GenAiPromptTemplateDataProvider.parameters",
+      "tipo": "tipo_composto"
+    },
+    {
+      "destino": "mdx:GenAiPromptTemplateGenerationConfig",
+      "origem": "mdx:GenAiPromptTemplateVersion.generationTemplateConfigs",
+      "tipo": "tipo_composto"
+    },
+    {
+      "destino": "mdx:GenAiPromptTemplateInput",
+      "origem": "mdx:GenAiPromptTemplateVersion.inputs",
+      "tipo": "tipo_composto"
+    },
+    {
+      "destino": "mdx:GenAiPromptTemplateDataProvider",
+      "origem": "mdx:GenAiPromptTemplateVersion.templateDataProviders",
       "tipo": "tipo_composto"
     },
     {
@@ -4708,6 +4886,11 @@
       "tipo": "classificacao_secundaria"
     },
     {
+      "destino": "func:subagents-e-agent-actions",
+      "origem": "sub:acoes-e-topicos",
+      "tipo": "classificacao_principal"
+    },
+    {
       "destino": "func:acoes-rapidas",
       "origem": "sub:acoes-rapidas",
       "tipo": "classificacao_principal"
@@ -4895,6 +5078,17 @@
       "tipo": "classificacao_principal"
     },
     {
+      "destino": "func:asset-files",
+      "origem": "sub:bibliotecas-e-assets",
+      "tipo": "classificacao_principal"
+    },
+    {
+      "destino": "func:static-resources",
+      "motivo": "Static resources são os arquivos estáticos que o código da org usa.",
+      "origem": "sub:bibliotecas-e-assets",
+      "tipo": "classificacao_secundaria"
+    },
+    {
       "destino": "func:flow",
       "motivo": "O caminho assíncrono de um record-triggered flow roda depois que a gravação é confirmada.",
       "origem": "sub:caminhos-assincronos",
@@ -5004,8 +5198,18 @@
       "tipo": "classificacao_principal"
     },
     {
+      "destino": "func:chatter",
+      "origem": "sub:colaboracao",
+      "tipo": "classificacao_principal"
+    },
+    {
       "destino": "func:external-objects",
       "origem": "sub:conectividade-e-virtualizacao-de-dados",
+      "tipo": "classificacao_principal"
+    },
+    {
+      "destino": "func:agentes-agentforce",
+      "origem": "sub:configuracao-de-agentes",
       "tipo": "classificacao_principal"
     },
     {
@@ -5125,6 +5329,11 @@
       "motivo": "É o ponto de partida para montar sites e portais.",
       "origem": "sub:experiencias-web-portais-e-mobile",
       "tipo": "classificacao_secundaria"
+    },
+    {
+      "destino": "func:salesforce-files",
+      "origem": "sub:files-e-documentos",
+      "tipo": "classificacao_principal"
     },
     {
       "destino": "func:flow",
@@ -5267,6 +5476,18 @@
       "tipo": "classificacao_principal"
     },
     {
+      "destino": "func:agentforce-data-library",
+      "motivo": "RAG é uma forma de grounding.",
+      "origem": "sub:modelos-e-grounding",
+      "tipo": "classificacao_secundaria"
+    },
+    {
+      "destino": "func:prompt-builder",
+      "motivo": "O grounding liga o prompt aos dados; cada versão do template aponta o modelo usado.",
+      "origem": "sub:modelos-e-grounding",
+      "tipo": "classificacao_secundaria"
+    },
+    {
       "destino": "func:ano-fiscal",
       "origem": "sub:moedas-e-calendario-fiscal",
       "tipo": "classificacao_principal"
@@ -5333,6 +5554,11 @@
       "tipo": "classificacao_secundaria"
     },
     {
+      "destino": "func:prompt-builder",
+      "origem": "sub:prompts",
+      "tipo": "classificacao_principal"
+    },
+    {
       "destino": "func:queueable-apex",
       "origem": "sub:queueable",
       "tipo": "classificacao_principal"
@@ -5343,10 +5569,26 @@
       "tipo": "classificacao_principal"
     },
     {
+      "destino": "func:agentforce-data-library",
+      "origem": "sub:recuperacao-de-conhecimento",
+      "tipo": "classificacao_principal"
+    },
+    {
+      "destino": "func:lightning-knowledge",
+      "motivo": "Artigos de Knowledge são uma das fontes que uma data library indexa.",
+      "origem": "sub:recuperacao-de-conhecimento",
+      "tipo": "classificacao_secundaria"
+    },
+    {
       "destino": "func:campos-customizados",
       "motivo": "Campos de lookup e master-detail criam relacionamentos e objetos de junção.",
       "origem": "sub:relacionamentos-e-juncoes",
       "tipo": "classificacao_secundaria"
+    },
+    {
+      "destino": "func:einstein-trust-layer",
+      "origem": "sub:seguranca-avaliacao-e-governanca-de-ia",
+      "tipo": "classificacao_principal"
     },
     {
       "destino": "func:field-service",
@@ -5372,6 +5614,11 @@
     {
       "destino": "func:tabs",
       "origem": "sub:tabs",
+      "tipo": "classificacao_principal"
+    },
+    {
+      "destino": "func:email-templates",
+      "origem": "sub:templates-e-comunicacao",
       "tipo": "classificacao_principal"
     },
     {
@@ -5647,6 +5894,24 @@
     },
     {
       "estado": "verificado",
+      "grupo_cor": "cls:ia-agentes-e-decisoes-assistidas",
+      "id": "func:agentes-agentforce",
+      "resumo": "Um agente do Agentforce é um assistente de IA que responde perguntas e executa tarefas, para clientes ou para funcionários. Ele é montado com subagents (antes chamados topics), que agrupam instruções e ações.",
+      "rotulo": "Agentes do Agentforce",
+      "rotulo_tecnico": "Agentforce Agents",
+      "tipo": "funcionalidade"
+    },
+    {
+      "estado": "verificado",
+      "grupo_cor": "cls:ia-agentes-e-decisoes-assistidas",
+      "id": "func:agentforce-data-library",
+      "resumo": "Uma data library indexa conteúdo (artigos de Knowledge, arquivos enviados ou fontes da web) para que agentes e prompt templates baseiem as respostas nele. A busca do trecho relevante é feita por um retriever; essa forma de grounding se chama RAG (retrieval augmented generation).",
+      "rotulo": "Agentforce Data Library",
+      "rotulo_tecnico": "Agentforce Data Library",
+      "tipo": "funcionalidade"
+    },
+    {
+      "estado": "verificado",
       "grupo_cor": "cls:organizacao-e-configuracoes-base",
       "id": "func:ano-fiscal",
       "resumo": "Define como a org conta o ano fiscal: padrão (calendário gregoriano, com o mês de início à escolha) ou customizado (períodos definidos pela empresa).",
@@ -5679,6 +5944,15 @@
       "resumo": "Apps com navegação em abas e subabas para trabalhar vários registros ao mesmo tempo.",
       "rotulo": "Apps de console Lightning",
       "rotulo_tecnico": "Lightning Console Apps",
+      "tipo": "funcionalidade"
+    },
+    {
+      "estado": "verificado",
+      "grupo_cor": "cls:conteudo-conhecimento-e-colaboracao",
+      "id": "func:asset-files",
+      "resumo": "Um asset file é a versão empacotável de um arquivo do Salesforce Files, usada em marca e design: logos, imagens de cabeçalho e arquivos referenciados por componentes. Fica na Asset Library, em Files.",
+      "rotulo": "Asset files",
+      "rotulo_tecnico": "Asset Files",
       "tipo": "funcionalidade"
     },
     {
@@ -5769,6 +6043,15 @@
       "resumo": "Forma de enviar customizações de uma org a outra pela interface do Setup: monta-se um outbound change set na origem e faz-se o deploy do inbound change set no destino. Só funciona entre orgs ligadas à mesma produção.",
       "rotulo": "Change sets",
       "rotulo_tecnico": "Change Sets",
+      "tipo": "funcionalidade"
+    },
+    {
+      "estado": "verificado",
+      "grupo_cor": "cls:conteudo-conhecimento-e-colaboracao",
+      "id": "func:chatter",
+      "resumo": "Chatter é o recurso de colaboração: feeds em perfis, registros e grupos, com posts, comentários e arquivos. Os grupos podem ser públicos, privados ou unlisted, e ainda arquivados.",
+      "rotulo": "Chatter",
+      "rotulo_tecnico": "Chatter",
       "tipo": "funcionalidade"
     },
     {
@@ -5913,6 +6196,24 @@
       "resumo": "Com Dynamic Forms, os campos e as seções saem do page layout e viram componentes individuais na Lightning page: podem ser postos em colunas e abas, e mostrados ou escondidos por regras de visibilidade.",
       "rotulo": "Dynamic Forms",
       "rotulo_tecnico": "Dynamic Forms",
+      "tipo": "funcionalidade"
+    },
+    {
+      "estado": "verificado",
+      "grupo_cor": "cls:ia-agentes-e-decisoes-assistidas",
+      "id": "func:einstein-trust-layer",
+      "resumo": "O Einstein Trust Layer é a arquitetura de segurança da IA generativa na plataforma: um conjunto de acordos, tecnologia de segurança e controles de dados e privacidade. Inclui a política de retenção zero com os provedores de modelo, o mascaramento de dados sensíveis antes do envio ao modelo, a detecção de toxicidade e a trilha de auditoria.",
+      "rotulo": "Einstein Trust Layer",
+      "rotulo_tecnico": "Einstein Trust Layer",
+      "tipo": "funcionalidade"
+    },
+    {
+      "estado": "verificado",
+      "grupo_cor": "cls:conteudo-conhecimento-e-colaboracao",
+      "id": "func:email-templates",
+      "resumo": "Um email template é um modelo de e-mail reutilizável, com campos de mesclagem (merge fields) que são trocados pelos dados do registro. Há templates do Salesforce Classic (texto, HTML com letterhead, HTML customizado e Visualforce) e templates do Lightning Experience.",
+      "rotulo": "Email templates",
+      "rotulo_tecnico": "Email Templates",
       "tipo": "funcionalidade"
     },
     {
@@ -6331,6 +6632,15 @@
     },
     {
       "estado": "verificado",
+      "grupo_cor": "cls:ia-agentes-e-decisoes-assistidas",
+      "id": "func:prompt-builder",
+      "resumo": "Prompt Builder é a ferramenta para criar, testar e gerenciar prompt templates: prompts reutilizáveis, com espaços reservados que são preenchidos com dados da org (campos de registro, flows, Apex, arquivos) antes de irem ao modelo. Esse preenchimento se chama grounding.",
+      "rotulo": "Prompt Builder",
+      "rotulo_tecnico": "Prompt Builder",
+      "tipo": "funcionalidade"
+    },
+    {
+      "estado": "verificado",
       "grupo_cor": "cls:integracao-apis-e-eventos",
       "id": "func:pub-sub-api",
       "resumo": "Interface única para publicar e assinar eventos de plataforma, eventos de alteração e eventos de monitoramento em tempo real. Usa gRPC e HTTP/2, com mensagens em Avro.",
@@ -6403,6 +6713,15 @@
     },
     {
       "estado": "verificado",
+      "grupo_cor": "cls:conteudo-conhecimento-e-colaboracao",
+      "id": "func:salesforce-files",
+      "resumo": "Salesforce Files é o recurso de arquivos da plataforma: enviar, versionar e compartilhar arquivos com pessoas, grupos, registros e bibliotecas. Não existe um objeto chamado File: o modelo usa ContentDocument (o arquivo), ContentVersion (cada versão) e ContentDocumentLink (com quem o arquivo é compartilhado).",
+      "rotulo": "Salesforce Files",
+      "rotulo_tecnico": "Salesforce Files",
+      "tipo": "funcionalidade"
+    },
+    {
+      "estado": "verificado",
       "grupo_cor": "cls:desenvolvimento-testes-e-entrega",
       "id": "func:sandboxes",
       "resumo": "Cópias da org de produção em ambientes separados e isolados, para desenvolver, testar e treinar. Há quatro tipos: Developer e Developer Pro copiam a configuração (metadados); Partial Copy é um ambiente de teste cujos dados vêm de um sandbox template; Full é uma réplica com todos os dados e metadados.",
@@ -6462,6 +6781,15 @@
       "resumo": "Arquivos guardados na org para uso por páginas e componentes, como uma biblioteca JavaScript carregada por um Lightning web component.",
       "rotulo": "Static resources",
       "rotulo_tecnico": "Static Resources",
+      "tipo": "funcionalidade"
+    },
+    {
+      "estado": "verificado",
+      "grupo_cor": "cls:ia-agentes-e-decisoes-assistidas",
+      "id": "func:subagents-e-agent-actions",
+      "resumo": "Um subagent (antes chamado topic) é um trabalho específico que o agente sabe fazer: reúne instruções, que orientam as decisões, e ações. Uma agent action é o que o agente executa para buscar informação ou fazer uma tarefa; ela chama um recurso da plataforma, como um flow, uma classe Apex ou um prompt template.",
+      "rotulo": "Subagents (topics) e agent actions",
+      "rotulo_tecnico": "Subagents and Agent Actions",
       "tipo": "funcionalidade"
     },
     {
@@ -6693,6 +7021,13 @@
     },
     {
       "estado": "verificado",
+      "id": "mdt:ChatterSettings",
+      "resumo": "Configurações do Chatter na org: ligar o recurso, grupos, edição e fixação de posts, rascunhos e prévias de links.",
+      "rotulo": "ChatterSettings",
+      "tipo": "metadata_type"
+    },
+    {
+      "estado": "verificado",
       "id": "mdt:CommunitiesSettings",
       "resumo": "Configurações de sites Experience Cloud (antes communities) da org: ativação de digital experiences e workspaces, moderação, usuário convidado (guest) e parceiros.",
       "rotulo": "CommunitiesSettings",
@@ -6724,6 +7059,13 @@
       "id": "mdt:ConnectedAppSettings",
       "resumo": "Configurações da org para connected apps.",
       "rotulo": "ConnectedAppSettings",
+      "tipo": "metadata_type"
+    },
+    {
+      "estado": "verificado",
+      "id": "mdt:ContentAsset",
+      "resumo": "Um asset file: um arquivo do Salesforce Files preparado para uso em configuração, como logos e imagens de marca.",
+      "rotulo": "ContentAsset",
       "tipo": "metadata_type"
     },
     {
@@ -6815,6 +7157,27 @@
       "id": "mdt:DevHubSettings",
       "resumo": "Configurações do Dev Hub: ligam scratch orgs, empacotamento de segunda geração, Org Shape, snapshots e o DevOps Center.",
       "rotulo": "DevHubSettings",
+      "tipo": "metadata_type"
+    },
+    {
+      "estado": "verificado",
+      "id": "mdt:Document",
+      "resumo": "Um documento da aba Documents (do Salesforce Classic): um arquivo guardado numa pasta de documentos, com seu metadado.",
+      "rotulo": "Document",
+      "tipo": "metadata_type"
+    },
+    {
+      "estado": "verificado",
+      "id": "mdt:EinsteinGptSettings",
+      "resumo": "Configurações de IA generativa da org: ligar os recursos, desligar provedores de modelo e controlar a implantação de prompt templates.",
+      "rotulo": "EinsteinGptSettings",
+      "tipo": "metadata_type"
+    },
+    {
+      "estado": "verificado",
+      "id": "mdt:EmailTemplate",
+      "resumo": "Um email template: o modelo de e-mail usado em envios individuais, em massa, de lista e do Sales Engagement.",
+      "rotulo": "EmailTemplate",
       "tipo": "metadata_type"
     },
     {
@@ -7008,6 +7371,27 @@
     },
     {
       "estado": "verificado",
+      "id": "mdt:GenAiFunction",
+      "resumo": "Uma agent action: a ação que pode ser adicionada a um agente de IA, com o alvo que ela invoca (um flow, uma classe Apex, um prompt template e outros).",
+      "rotulo": "GenAiFunction",
+      "tipo": "metadata_type"
+    },
+    {
+      "estado": "verificado",
+      "id": "mdt:GenAiPlugin",
+      "resumo": "Um tópico de agente: uma categoria de ações ligada a um trabalho que o agente de IA faz, com escopo e instruções.",
+      "rotulo": "GenAiPlugin",
+      "tipo": "metadata_type"
+    },
+    {
+      "estado": "verificado",
+      "id": "mdt:GenAiPromptTemplate",
+      "resumo": "Um prompt template: o modelo de instrução, com versões, que o Prompt Builder gerencia e que recursos de IA generativa usam.",
+      "rotulo": "GenAiPromptTemplate",
+      "tipo": "metadata_type"
+    },
+    {
+      "estado": "verificado",
       "id": "mdt:InboundCertificate",
       "resumo": "Certificado de autenticação mútua (mTLS) importado para a org.",
       "rotulo": "InboundCertificate",
@@ -7060,6 +7444,13 @@
       "id": "mdt:LeadConvertSettings",
       "resumo": "Define as configurações de conversão de leads, incluindo o mapeamento de campos customizados.",
       "rotulo": "LeadConvertSettings",
+      "tipo": "metadata_type"
+    },
+    {
+      "estado": "verificado",
+      "id": "mdt:Letterhead",
+      "resumo": "Um letterhead (do Salesforce Classic): as opções de formatação de email templates, como logo, cor da página e linhas.",
+      "rotulo": "Letterhead",
       "tipo": "metadata_type"
     },
     {
@@ -7536,6 +7927,12 @@
     },
     {
       "estado": "verificado",
+      "id": "mdx:Attachment",
+      "rotulo": "Attachment",
+      "tipo": "estrutura_auxiliar"
+    },
+    {
+      "estado": "verificado",
       "id": "mdx:AuthProvParamFwdAllowlist",
       "rotulo": "AuthProvParamFwdAllowlist",
       "tipo": "estrutura_auxiliar"
@@ -7694,6 +8091,30 @@
       "estado": "verificado",
       "id": "mdx:Container",
       "rotulo": "Container",
+      "tipo": "estrutura_auxiliar"
+    },
+    {
+      "estado": "verificado",
+      "id": "mdx:ContentAssetLink",
+      "rotulo": "ContentAssetLink",
+      "tipo": "estrutura_auxiliar"
+    },
+    {
+      "estado": "verificado",
+      "id": "mdx:ContentAssetRelationships",
+      "rotulo": "ContentAssetRelationships",
+      "tipo": "estrutura_auxiliar"
+    },
+    {
+      "estado": "verificado",
+      "id": "mdx:ContentAssetVersion",
+      "rotulo": "ContentAssetVersion",
+      "tipo": "estrutura_auxiliar"
+    },
+    {
+      "estado": "verificado",
+      "id": "mdx:ContentAssetVersions",
+      "rotulo": "ContentAssetVersions",
       "tipo": "estrutura_auxiliar"
     },
     {
@@ -8082,6 +8503,48 @@
     },
     {
       "estado": "verificado",
+      "id": "mdx:GenAiPlannerAttr",
+      "rotulo": "GenAiPlannerAttr",
+      "tipo": "estrutura_auxiliar"
+    },
+    {
+      "estado": "verificado",
+      "id": "mdx:GenAiPluginFunctionDef",
+      "rotulo": "GenAiPluginFunctionDef",
+      "tipo": "estrutura_auxiliar"
+    },
+    {
+      "estado": "verificado",
+      "id": "mdx:GenAiPromptTemplateDataProvider",
+      "rotulo": "GenAiPromptTemplateDataProvider",
+      "tipo": "estrutura_auxiliar"
+    },
+    {
+      "estado": "verificado",
+      "id": "mdx:GenAiPromptTemplateDataProviderParam",
+      "rotulo": "GenAiPromptTemplateDataProviderParam",
+      "tipo": "estrutura_auxiliar"
+    },
+    {
+      "estado": "verificado",
+      "id": "mdx:GenAiPromptTemplateGenerationConfig",
+      "rotulo": "GenAiPromptTemplateGenerationConfig",
+      "tipo": "estrutura_auxiliar"
+    },
+    {
+      "estado": "verificado",
+      "id": "mdx:GenAiPromptTemplateInput",
+      "rotulo": "GenAiPromptTemplateInput",
+      "tipo": "estrutura_auxiliar"
+    },
+    {
+      "estado": "verificado",
+      "id": "mdx:GenAiPromptTemplateVersion",
+      "rotulo": "GenAiPromptTemplateVersion",
+      "tipo": "estrutura_auxiliar"
+    },
+    {
+      "estado": "verificado",
       "id": "mdx:GlobalPicklistTranslation",
       "rotulo": "GlobalPicklistTranslation",
       "tipo": "estrutura_auxiliar"
@@ -8132,6 +8595,18 @@
       "estado": "verificado",
       "id": "mdx:LayoutSection",
       "rotulo": "LayoutSection",
+      "tipo": "estrutura_auxiliar"
+    },
+    {
+      "estado": "verificado",
+      "id": "mdx:LetterheadHeaderFooter",
+      "rotulo": "LetterheadHeaderFooter",
+      "tipo": "estrutura_auxiliar"
+    },
+    {
+      "estado": "verificado",
+      "id": "mdx:LetterheadLine",
+      "rotulo": "LetterheadLine",
       "tipo": "estrutura_auxiliar"
     },
     {
@@ -9600,7 +10075,7 @@
       "estado": "desconhecido",
       "grupo_cor": "cls:ia-agentes-e-decisoes-assistidas",
       "id": "sub:acoes-e-topicos",
-      "recorte": "curadoria",
+      "recorte": "parcial",
       "rotulo": "Ações e tópicos",
       "sigla": "IA-02",
       "tipo": "subclassificacao"
@@ -9708,7 +10183,7 @@
       "estado": "desconhecido",
       "grupo_cor": "cls:conteudo-conhecimento-e-colaboracao",
       "id": "sub:bibliotecas-e-assets",
-      "recorte": "curadoria",
+      "recorte": "parcial",
       "rotulo": "Bibliotecas e assets",
       "sigla": "CON-02",
       "tipo": "subclassificacao"
@@ -9771,7 +10246,7 @@
       "estado": "desconhecido",
       "grupo_cor": "cls:conteudo-conhecimento-e-colaboracao",
       "id": "sub:colaboracao",
-      "recorte": "curadoria",
+      "recorte": "parcial",
       "rotulo": "Colaboração",
       "sigla": "CON-04",
       "tipo": "subclassificacao"
@@ -9789,7 +10264,7 @@
       "estado": "desconhecido",
       "grupo_cor": "cls:ia-agentes-e-decisoes-assistidas",
       "id": "sub:configuracao-de-agentes",
-      "recorte": "curadoria",
+      "recorte": "parcial",
       "rotulo": "Configuração de agentes",
       "sigla": "IA-01",
       "tipo": "subclassificacao"
@@ -9906,7 +10381,7 @@
       "estado": "desconhecido",
       "grupo_cor": "cls:conteudo-conhecimento-e-colaboracao",
       "id": "sub:files-e-documentos",
-      "recorte": "curadoria",
+      "recorte": "parcial",
       "rotulo": "Files e documentos",
       "sigla": "CON-01",
       "tipo": "subclassificacao"
@@ -9978,7 +10453,7 @@
       "estado": "desconhecido",
       "grupo_cor": "cls:conteudo-conhecimento-e-colaboracao",
       "id": "sub:knowledge-e-categorias",
-      "recorte": "curadoria",
+      "recorte": "parcial",
       "rotulo": "Knowledge e categorias",
       "sigla": "CON-03",
       "tipo": "subclassificacao"
@@ -10077,7 +10552,7 @@
       "estado": "desconhecido",
       "grupo_cor": "cls:ia-agentes-e-decisoes-assistidas",
       "id": "sub:modelos-e-grounding",
-      "recorte": "curadoria",
+      "recorte": "parcial",
       "rotulo": "Modelos e grounding",
       "sigla": "IA-04",
       "tipo": "subclassificacao"
@@ -10194,7 +10669,7 @@
       "estado": "desconhecido",
       "grupo_cor": "cls:ia-agentes-e-decisoes-assistidas",
       "id": "sub:prompts",
-      "recorte": "curadoria",
+      "recorte": "parcial",
       "rotulo": "Prompts",
       "sigla": "IA-03",
       "tipo": "subclassificacao"
@@ -10230,7 +10705,7 @@
       "estado": "desconhecido",
       "grupo_cor": "cls:ia-agentes-e-decisoes-assistidas",
       "id": "sub:recuperacao-de-conhecimento",
-      "recorte": "curadoria",
+      "recorte": "parcial",
       "rotulo": "Recursos de recuperação de conhecimento",
       "sigla": "IA-05",
       "tipo": "subclassificacao"
@@ -10275,7 +10750,7 @@
       "estado": "desconhecido",
       "grupo_cor": "cls:ia-agentes-e-decisoes-assistidas",
       "id": "sub:seguranca-avaliacao-e-governanca-de-ia",
-      "recorte": "curadoria",
+      "recorte": "parcial",
       "rotulo": "Segurança, avaliação e governança de IA",
       "sigla": "IA-06",
       "tipo": "subclassificacao"
@@ -10329,7 +10804,7 @@
       "estado": "desconhecido",
       "grupo_cor": "cls:conteudo-conhecimento-e-colaboracao",
       "id": "sub:templates-e-comunicacao",
-      "recorte": "curadoria",
+      "recorte": "parcial",
       "rotulo": "Templates e comunicação",
       "sigla": "CON-05",
       "tipo": "subclassificacao"

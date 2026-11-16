@@ -222,12 +222,12 @@ test('desktop: "Mostrar no mapa" só aparece no modo leitura e volta ao mapa com
 });
 
 test('"Sobre este tema" mostra as três camadas na mesma ordem em tema e tema interno (#34)', async ({ page }) => {
-  // [id, tem referências oficiais próprias]. 'sub:prompts' é do último tema da fila de detalhamento (IA e agentes):
-  // quando ele ganhar referências, troque por outro tema interno sem referências ou remova o caso.
+  // [id, tem referências oficiais próprias]. 'sub:limites-e-consumo' ainda não tem referências nem funcionalidades:
+  // quando ganhar, troque por outro tema interno sem referências ou remova o caso.
   const casos: [string, boolean][] = [
     ['cls:integracao-apis-e-eventos', true],
     ['sub:acoes-e-regras', true],
-    ['sub:prompts', false],
+    ['sub:limites-e-consumo', false],
     ['cls:interface-e-experiencia-do-usuario', true],
   ];
   for (const [id, comReferencias] of casos) {
@@ -238,7 +238,7 @@ test('"Sobre este tema" mostra as três camadas na mesma ordem em tema e tema in
     await expect(painel(page).locator('.linha-selos .selo-recorte')).toHaveText(comReferencias ? 'Parcialmente conferido' : 'Curadoria do projeto');
     const sobre = await secao(page, /^Sobre este tema$/);
     await expect(sobre.locator('.camada > h4')).toHaveText(['Para quem está começando', 'Para quem já conhece Salesforce']);
-    if (id !== 'sub:prompts') await expect(sobre).toContainText(/Funcionalidades \(\d+\)/);
+    if (id !== 'sub:limites-e-consumo') await expect(sobre).toContainText(/Funcionalidades \(\d+\)/);
     const avancado = sobre.locator('details.camada-avancada');
     await expect(avancado.locator('summary').first()).toHaveText('Nível avançado');
     expect(await avancado.evaluate((d) => (d as HTMLDetailsElement).open)).toBe(false);

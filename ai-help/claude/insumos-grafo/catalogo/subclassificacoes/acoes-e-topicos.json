@@ -4,7 +4,7 @@
   "sigla": "IA-02",
   "classificacao": "cls:ia-agentes-e-decisoes-assistidas",
   "natureza": "curadoria_didatica",
-  "descricao": "O que um agente pode fazer e sobre quais assuntos.",
+  "descricao": "Subagents (antes topics) e agent actions: os trabalhos que o agente sabe fazer e o que ele executa em cada um.",
   "escopo": "Entram as ações que um agente pode executar e os assuntos que ele atende.",
   "fora_do_escopo": "Ações rápidas da interface ficam em \"Ações rápidas\".",
   "para_iniciantes": {
@@ -14,6 +14,9 @@
       {
         "fonte": "src:agentforce-dev-guide"
       }
+    ],
+    "por_onde_comecar": [
+      "func:subagents-e-agent-actions"
     ]
   },
   "encadeamento": {
@@ -37,9 +40,51 @@
           "fonte": "src:agentforce-dev-guide"
         }
       ]
+    },
+    {
+      "tipo": "implantacao",
+      "titulo": "Como metadado",
+      "texto": "GenAiPlugin guarda o tópico: rótulo, escopo, instruções e a lista de ações, citadas pelo nome de API. GenAiFunction guarda a ação: o alvo invocado (invocationTarget) e o tipo dele (invocationTargetType), como flow, apex ou generatePromptResponse. A ação pode trazer pastas input e output, com um schema.json que descreve os parâmetros.",
+      "evidencias": [
+        {
+          "fonte": "src:mdapi-genaiplugin"
+        },
+        {
+          "fonte": "src:mdapi-genaifunction"
+        }
+      ]
+    },
+    {
+      "tipo": "atencao",
+      "titulo": "Onde criar uma ação",
+      "texto": "As ações da org ficam em Agentforce Assets, no Setup. Ao criar uma, escolhe-se o tipo de recurso que ela chama (Reference Action Type), como um flow ou um prompt template.",
+      "evidencias": [
+        {
+          "fonte": "src:help-agent-action-custom"
+        }
+      ]
     }
   ],
-  "funcionalidades": [],
+  "funcionalidades": [
+    "func:subagents-e-agent-actions"
+  ],
   "estado": "desconhecido",
-  "nota_estado": "Agrupamento proposto na especificação; fronteira ainda não cruzada com a documentação oficial."
+  "nota_estado": "Tema criado pelo projeto (00-especificacao-grafo.md), não é nomenclatura oficial da Salesforce. Cruzado em 2026-11-10 com áreas da documentação oficial listadas nas referências; a correspondência é parcial e o recorte continua sendo do projeto.",
+  "referencias_oficiais": [
+    {
+      "fonte": "src:help-agentforce-glossary",
+      "secao": "Agentforce Glossary of Terms",
+      "nota": "Mais ampla que o tema: glossário de todo o Agentforce."
+    },
+    {
+      "fonte": "src:mdapi-genaiplugin",
+      "secao": "GenAiPlugin",
+      "nota": "Cobre parte do tema: metadado dos tópicos."
+    },
+    {
+      "fonte": "src:mdapi-genaifunction",
+      "secao": "GenAiFunction",
+      "nota": "Cobre parte do tema: metadado das agent actions."
+    }
+  ]
 }

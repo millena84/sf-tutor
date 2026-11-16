@@ -4,7 +4,7 @@
   "sigla": "IA-04",
   "classificacao": "cls:ia-agentes-e-decisoes-assistidas",
   "natureza": "curadoria_didatica",
-  "descricao": "Modelos usados e dados que fundamentam as respostas.",
+  "descricao": "Os modelos de IA usados e o grounding: os dados acrescentados ao prompt para fundamentar a resposta.",
   "escopo": "Entram os modelos usados e os dados que fundamentam as respostas.",
   "fora_do_escopo": "A busca de conteúdo para as respostas fica em \"Recursos de recuperação de conhecimento\".",
   "para_iniciantes": {
@@ -14,6 +14,10 @@
       {
         "fonte": "src:agentforce-dev-guide"
       }
+    ],
+    "por_onde_comecar": [
+      "func:prompt-builder",
+      "func:agentforce-data-library"
     ]
   },
   "encadeamento": {
@@ -24,7 +28,53 @@
       }
     ]
   },
-  "funcionalidades": [],
+  "avancado": [
+    {
+      "tipo": "decisao",
+      "titulo": "Duas formas de grounding",
+      "texto": "Grounding é acrescentar ao prompt os dados de que o modelo precisa. No Prompt Builder, isso é feito por merge fields que referenciam campos de registro, flows, Apex e arquivos. Com RAG, um retriever busca trechos relevantes em conteúdo indexado no Data 360.",
+      "evidencias": [
+        {
+          "fonte": "src:help-prompt-concepts"
+        },
+        {
+          "fonte": "src:help-prompt-rag"
+        },
+        {
+          "fonte": "src:help-agentforce-glossary"
+        }
+      ]
+    },
+    {
+      "tipo": "implantacao",
+      "titulo": "Provedores de modelo como metadado",
+      "texto": "EinsteinGptSettings tem opções para desligar provedores de modelo (AWS Bedrock, Azure OpenAI, OpenAI e Vertex AI) e para ligar modelos em beta. Em cada versão de prompt template, primaryModel aponta o modelo usado.",
+      "evidencias": [
+        {
+          "fonte": "src:mdapi-einsteingptsettings"
+        },
+        {
+          "fonte": "src:mdapi-genaiprompttemplate"
+        }
+      ]
+    }
+  ],
+  "funcionalidades": [
+    "func:agentforce-data-library",
+    "func:prompt-builder"
+  ],
   "estado": "desconhecido",
-  "nota_estado": "Agrupamento proposto na especificação; fronteira ainda não cruzada com a documentação oficial."
+  "nota_estado": "Tema criado pelo projeto (00-especificacao-grafo.md), não é nomenclatura oficial da Salesforce. Cruzado em 2026-11-10 com áreas da documentação oficial listadas nas referências; a correspondência é parcial e o recorte continua sendo do projeto.",
+  "referencias_oficiais": [
+    {
+      "fonte": "src:help-prompt-concepts",
+      "secao": "Prompt Builder Key Concepts",
+      "nota": "Cobre parte do tema: grounding no Prompt Builder."
+    },
+    {
+      "fonte": "src:mdapi-einsteingptsettings",
+      "secao": "EinsteinGptSettings",
+      "nota": "Cobre parte do tema: opções de provedores de modelo."
+    }
+  ]
 }
