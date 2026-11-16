@@ -1,8 +1,9 @@
 import { defineConfig } from '@playwright/test';
 import { existsSync } from 'node:fs';
 
-// Usa o Chrome instalado na máquina quando existir (o ambiente de desenvolvimento não baixa navegadores).
-const chrome = ['/usr/bin/google-chrome', '/usr/bin/google-chrome-stable'].find((p) => existsSync(p));
+// Fora do CI, usa o Chrome instalado na máquina quando existir (o ambiente de desenvolvimento não baixa navegadores).
+// No CI (variável CI definida), usa o Chromium que o Playwright instala, para o resultado não depender do Chrome do runner.
+const chrome = process.env.CI ? undefined : ['/usr/bin/google-chrome', '/usr/bin/google-chrome-stable'].find((p) => existsSync(p));
 const launchOptions = chrome ? { executablePath: chrome } : {};
 
 export default defineConfig({
