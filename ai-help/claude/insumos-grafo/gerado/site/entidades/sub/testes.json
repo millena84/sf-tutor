@@ -3,51 +3,196 @@
     {
       "evidencias": [
         {
-          "fonte": "src:architect-build-forms"
+          "fonte": "src:apex-code-coverage"
+        },
+        {
+          "fonte": "src:apex-testing-best-practices"
+        },
+        {
+          "fonte": "src:sfdx-run-apex-tests"
         }
       ],
-      "texto": "Só LWC permite testes unitários escritos, por exemplo com Jest; Dynamic Forms e Screen Flow dependem de automação de interface de ponta a ponta, que não verifica saídas de métodos.",
+      "texto": "Para implantar ou empacotar Apex, os testes precisam cobrir ao menos 75% do código Apex da org e passar. Chamadas a System.debug e as próprias classes e métodos de teste não contam. Cobertura indica, mas não garante, que o teste é eficaz.",
+      "tipo": "limite",
+      "titulo": "75% de cobertura"
+    },
+    {
+      "evidencias": [
+        {
+          "fonte": "src:migration-running-tests"
+        },
+        {
+          "fonte": "src:migration-run-local-tests"
+        },
+        {
+          "fonte": "src:cli-deploy-validate"
+        }
+      ],
+      "texto": "Sem nível de teste informado, um deploy para produção com classes ou triggers Apex roda todos os testes locais; sem componentes Apex, nenhum. Fora de produção, por padrão nenhum teste roda. Os níveis são NoTestRun, RunSpecifiedTests, RunLocalTests e RunAllTestsInOrg; NoTestRun só vale em ambientes de desenvolvimento.",
+      "tipo": "testes",
+      "titulo": "Que testes rodam num deploy"
+    },
+    {
+      "evidencias": [
+        {
+          "fonte": "src:architect-build-forms"
+        },
+        {
+          "fonte": "src:lwc-testing"
+        },
+        {
+          "fonte": "src:lwc-e2e"
+        }
+      ],
+      "texto": "Só LWC permite testes unitários escritos, com Jest; Dynamic Forms e Screen Flow dependem de automação de interface de ponta a ponta. Testes que dependem do HTML e do DOM do Lightning Experience pedem manutenção contínua, porque essa estrutura pode mudar.",
       "tipo": "testes",
       "titulo": "Unitário ou de interface"
+    },
+    {
+      "evidencias": [
+        {
+          "fonte": "src:mdapi-apextestsuite"
+        },
+        {
+          "fonte": "src:mdapi-apexsettings"
+        },
+        {
+          "fonte": "src:lwc-component-tests"
+        },
+        {
+          "fonte": "src:lwc-jest-create"
+        }
+      ],
+      "texto": "ApexTestSuite agrupa classes de teste para rodar juntas. ApexSettings guarda opções de execução, como rodar os testes em série (enableDisableParallelApexTesting, em que true quer dizer em série). Os testes Jest ficam na pasta __tests__ do componente, no controle de versão, e não vão para a org.",
+      "tipo": "implantacao",
+      "titulo": "Como metadado"
+    },
+    {
+      "evidencias": [
+        {
+          "fonte": "src:sfdx-run-apex-tests"
+        },
+        {
+          "fonte": "src:mdapi-apexsettings"
+        }
+      ],
+      "texto": "Em orgs com muitas classes, a opção Store Only Aggregate Code Coverage (Setup, Apex Test Execution, Options) desliga a cobertura por classe e acelera a coleta. Os testes de um deploy sempre rodam em série.",
+      "tipo": "escala",
+      "titulo": "Execuções grandes"
     }
   ],
   "classificacao": "cls:desenvolvimento-testes-e-entrega",
   "derivado": {
     "dependencias": [],
-    "funcionalidades": [],
-    "metadata_types": [],
+    "funcionalidades": [
+      {
+        "alertas": [
+          "Cobertura indica, mas não garante, que os testes são eficazes: o teste precisa verificar o comportamento."
+        ],
+        "exemplo": "Antes do deploy, os testes locais rodam; se um falha, o deploy inteiro é revertido.",
+        "id": "func:testes-apex",
+        "principal": true
+      },
+      {
+        "alertas": [
+          "Só funcionam com Lightning web components, não com Aura.",
+          "Testes de interface que dependem do HTML e do DOM do Lightning Experience quebram com mudanças da plataforma; ficam para ponta a ponta."
+        ],
+        "exemplo": "A pasta __tests__ do componente tem um arquivo .test.js que confere o que o componente mostra depois de um clique.",
+        "id": "func:testes-jest-de-lwc",
+        "principal": true
+      }
+    ],
+    "metadata_types": [
+      {
+        "estrutura": "completa",
+        "funcionalidades": [
+          "func:testes-apex"
+        ],
+        "id": "mdt:ApexSettings",
+        "nota_suporte": null,
+        "suporte_cli": "suportado"
+      },
+      {
+        "estrutura": "completa",
+        "funcionalidades": [
+          "func:testes-apex"
+        ],
+        "id": "mdt:ApexTestSuite",
+        "nota_suporte": null,
+        "suporte_cli": "suportado"
+      }
+    ],
     "nota": "Calculado pelo gerador a partir do catálogo; não é cadastro.",
     "objetos_api": [],
     "temas_sem_funcionalidade": []
   },
-  "descricao": "Testes automatizados e cobertura.",
+  "descricao": "Testes automatizados: testes unitários Apex, com a cobertura mínima exigida para implantar, e testes Jest de Lightning web components.",
   "encadeamento": {
     "evidencias": [
+      {
+        "fonte": "src:migration-running-tests"
+      },
       {
         "fonte": "src:sfdx-dev-guide"
       }
     ],
-    "texto": "Fazem parte da entrega; os ambientes isolados ficam em 'Ambientes e sandboxes'."
+    "texto": "Os testes rodam nos ambientes de 'Ambientes e sandboxes' e fazem parte do deploy, em 'Versionamento, deploy e recuperação'."
   },
   "escopo": "Entram testes automatizados e cobertura.",
   "estado": "desconhecido",
   "fora_do_escopo": "Avaliação de agentes de IA fica em \"Segurança, avaliação e governança de IA\".",
-  "funcionalidades": [],
+  "funcionalidades": [
+    "func:testes-apex",
+    "func:testes-jest-de-lwc"
+  ],
   "id": "sub:testes",
   "natureza": "curadoria_didatica",
   "nome": "Testes",
-  "nota_estado": "Agrupamento proposto na especificação; fronteira ainda não cruzada com a documentação oficial.",
+  "nota_estado": "Tema criado pelo projeto (00-especificacao-grafo.md), não é nomenclatura oficial da Salesforce. Cruzado em 2026-11-10 com áreas da documentação oficial listadas nas referências; a correspondência é parcial e o recorte continua sendo do projeto.",
   "para_iniciantes": {
     "evidencias": [
       {
-        "fonte": "src:sfdx-dev-guide"
+        "fonte": "src:apex-writing-tests"
       },
       {
-        "fonte": "src:architect-build-forms"
+        "fonte": "src:apex-code-coverage"
+      },
+      {
+        "fonte": "src:lwc-testing"
+      },
+      {
+        "fonte": "src:migration-running-tests"
       }
     ],
-    "exemplo": "Os testes rodam automaticamente a cada mudança, num pipeline de integração contínua.",
-    "explicacao": "Cobre os testes automatizados: como conferir que a mudança funciona antes de chegar à produção."
+    "exemplo": "Um deploy para produção roda os testes locais; se um falha, nada é implantado.",
+    "explicacao": "Cobre os testes automatizados. Testes Apex são métodos de classes anotadas com @IsTest; a plataforma mede a cobertura e exige um mínimo para implantar. Testes Jest conferem Lightning web components fora da org.",
+    "por_onde_comecar": [
+      "func:testes-apex",
+      "func:testes-jest-de-lwc"
+    ]
   },
+  "referencias_oficiais": [
+    {
+      "fonte": "src:apex-code-coverage",
+      "nota": "Cobre parte do tema: cobertura de testes Apex.",
+      "secao": "Testing and Code Coverage"
+    },
+    {
+      "fonte": "src:apex-writing-tests",
+      "nota": "Cobre parte do tema: como escrever testes Apex.",
+      "secao": "Writing Tests"
+    },
+    {
+      "fonte": "src:lwc-testing",
+      "nota": "Cobre parte do tema: testes Jest de Lightning web components.",
+      "secao": "Test Lightning Web Components"
+    },
+    {
+      "fonte": "src:migration-running-tests",
+      "nota": "Cobre parte do tema: testes executados num deploy.",
+      "secao": "Running Tests in a Deployment"
+    }
+  ],
   "sigla": "DEV-02"
 }

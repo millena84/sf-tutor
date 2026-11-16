@@ -4,14 +4,16 @@
   "sigla": "DEV-06",
   "classificacao": "cls:desenvolvimento-testes-e-entrega",
   "natureza": "curadoria_didatica",
-  "descricao": "Versões de componentes, implantação e retorno.",
+  "descricao": "Como as mudanças são versionadas e levadas de uma org a outra: deploy e retrieve pela Metadata API, change sets e DevOps Center.",
   "escopo": "Entram as versões de componentes, a implantação e o retorno a uma versão anterior.",
   "fora_do_escopo": "Retenção e exclusão de dados de negócio ficam em \"Retenção, arquivamento e exclusão\".",
   "para_iniciantes": {
-    "explicacao": "Cobre como as mudanças são versionadas, implantadas e, se preciso, revertidas.",
+    "explicacao": "Cobre como as mudanças são versionadas e levadas de uma org a outra: pela Metadata API (direto ou pelo Salesforce CLI), por change sets ou pelo DevOps Center.",
     "exemplo": "Um objeto customizado e o seu layout são recuperados da sandbox com retrieve() e implantados em produção com deploy().",
     "por_onde_comecar": [
-      "func:metadata-api"
+      "func:metadata-api",
+      "func:change-sets",
+      "func:devops-center"
     ],
     "evidencias": [
       {
@@ -19,6 +21,12 @@
       },
       {
         "fonte": "src:help-produtos-platform"
+      },
+      {
+        "fonte": "src:help-change-sets"
+      },
+      {
+        "fonte": "src:help-lifecycle-center"
       }
     ]
   },
@@ -27,6 +35,9 @@
     "evidencias": [
       {
         "fonte": "src:help-produtos-platform"
+      },
+      {
+        "fonte": "src:help-lifecycle-center"
       }
     ]
   },
@@ -42,6 +53,25 @@
       ]
     },
     {
+      "tipo": "decisao",
+      "titulo": "Change set, CLI ou DevOps Center",
+      "texto": "Change sets enviam pelo Setup, só entre orgs ligadas à mesma produção. O Salesforce CLI implanta a partir do projeto local. O Lifecycle Center registra as mudanças no controle de versão e é apresentado como alternativa aos change sets.",
+      "evidencias": [
+        {
+          "fonte": "src:help-change-sets"
+        },
+        {
+          "fonte": "src:help-change-sets-connections"
+        },
+        {
+          "fonte": "src:cli-project-deploy-start"
+        },
+        {
+          "fonte": "src:help-lifecycle-center"
+        }
+      ]
+    },
+    {
       "tipo": "atencao",
       "titulo": "O que não vai no deploy",
       "texto": "A Metadata API não move dados de negócio: registros e atribuições de permission set precisam de outro caminho.",
@@ -53,12 +83,96 @@
           "fonte": "src:objref-permissionsetassignment"
         }
       ]
+    },
+    {
+      "tipo": "limite",
+      "titulo": "Tamanho de um deploy",
+      "texto": "Pela Metadata API: até 10.000 arquivos e .zip de até 39 MB (600 MB descompactado). Num change set: até 10.000 arquivos e 400 MB, com a recomendação de não passar de cerca de 5.000 componentes.",
+      "evidencias": [
+        {
+          "fonte": "src:mdapi-zip-file"
+        },
+        {
+          "fonte": "src:limits-metadata"
+        },
+        {
+          "fonte": "src:help-change-sets-outbound"
+        }
+      ]
+    },
+    {
+      "tipo": "testes",
+      "titulo": "Testes no deploy",
+      "texto": "Em produção, um deploy com Apex roda os testes locais por padrão; se um falha, o deploy inteiro é revertido. Uma validação roda os testes sem implantar, para implantar depois sem rodá-los de novo.",
+      "evidencias": [
+        {
+          "fonte": "src:migration-running-tests"
+        },
+        {
+          "fonte": "src:cli-deploy-validate"
+        }
+      ]
+    },
+    {
+      "tipo": "atencao",
+      "titulo": "Change sets",
+      "texto": "Enviar um change set não implanta: o destino precisa fazer o deploy. Inclua os componentes dependentes que faltam no destino. A org de origem fica bloqueada durante a validação, e a de destino durante o deploy.",
+      "evidencias": [
+        {
+          "fonte": "src:help-change-sets-outbound"
+        },
+        {
+          "fonte": "src:help-change-sets-best"
+        }
+      ]
+    },
+    {
+      "tipo": "implantacao",
+      "titulo": "Pipeline do DevOps Center",
+      "texto": "Cada estágio do pipeline corresponde a uma org e a um branch. Promover um work item mescla o branch do estágio atual no do próximo e implanta na org do próximo. O pipeline não pode ser alterado depois que alguma mudança é promovida.",
+      "evidencias": [
+        {
+          "fonte": "src:help-devops-promote"
+        },
+        {
+          "fonte": "src:help-devops-pipeline-plan"
+        }
+      ]
+    },
+    {
+      "tipo": "atencao",
+      "titulo": "--ignore-errors nunca em produção",
+      "texto": "A flag --ignore-errors do deploy pelo CLI implanta o que não deu erro e pula o resto, sem reverter. A documentação diz para nunca usá-la em produção.",
+      "evidencias": [
+        {
+          "fonte": "src:cli-project-deploy-start"
+        }
+      ]
     }
   ],
   "funcionalidades": [
+    "func:change-sets",
+    "func:devops-center",
     "func:flow",
     "func:metadata-api"
   ],
   "estado": "desconhecido",
-  "nota_estado": "Agrupamento proposto na especificação; fronteira ainda não cruzada com a documentação oficial."
+  "nota_estado": "Tema criado pelo projeto (00-especificacao-grafo.md), não é nomenclatura oficial da Salesforce. Cruzado em 2026-11-10 com áreas da documentação oficial listadas nas referências; a correspondência é parcial e o recorte continua sendo do projeto.",
+  "referencias_oficiais": [
+    {
+      "fonte": "src:mdapi-intro",
+      "secao": "Understanding Metadata API",
+      "nota": "Cobre parte do tema: deploy e retrieve pela Metadata API."
+    },
+    {
+      "fonte": "src:help-change-sets",
+      "secao": "Change Sets",
+      "nota": "Cobre parte do tema: change sets."
+    },
+    {
+      "fonte": "src:help-lifecycle-center",
+      "secao": "Govern, Manage, and Release Changes with Lifecycle Center",
+      "nota": "Cobre parte do tema: Lifecycle Center e DevOps Center."
+    }
+  ]
 }

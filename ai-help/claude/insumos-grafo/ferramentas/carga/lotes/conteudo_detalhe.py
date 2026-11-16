@@ -657,3 +657,111 @@ _f("src:help-notif-considerations", "Considerations for Notifications (Salesforc
    "Limites de tipos, destinatários e ações por hora.", **AJ)
 _f("src:help-notif-builder", "Manage Your Notifications with Notification Builder (Salesforce Help)", _H + "platform.notif_builder.htm&language=en_US&type=5",
    "O que o Notification Builder reúne.", **AJ)
+
+
+# ====================================================================== Desenvolvimento, testes e entrega (rodada A1)
+# Só fontes: o conteúdo destes temas é editado no lugar (conteudo_cls.py e conteudo_sub.py).
+_EXT = "fontes/extracoes/temas-detalhe-desenvolvimento.txt"
+_DATA = "2026-11-16"
+_DX = "https://developer.salesforce.com/docs/platform/sfdx-dev/guide/"
+_LWC = "https://developer.salesforce.com/docs/platform/lwc/guide/"
+_PKG = "https://developer.salesforce.com/docs/platform/pkg2-dev/guide/"
+_CLI = "https://developer.salesforce.com/docs/platform/salesforce-cli-reference/guide/"
+_MIG = "https://developer.salesforce.com/docs/platform/salesforce-migration-guide/guide/"
+
+_f("src:help-sandbox-types", "Sandbox Types and Templates (Salesforce Help)", _H + "platform.create_test_instance.htm&language=en_US&type=5",
+   "Os quatro tipos de sandbox e para que serve cada um.", **AJ)
+_f("src:help-sandbox-refresh", "Refresh Your Sandbox (Salesforce Help)", _H + "platform.data_sandbox_refresh.htm&language=en_US&type=5",
+   "Intervalo de refresh por tipo de sandbox e permissões.", **AJ)
+_f("src:help-sandbox-licenses", "Sandbox Licenses and Storage Limits by Type (Salesforce Help)", _H + "sf.data_sandbox_environments.htm&language=en_US",
+   "O que é uma sandbox e a disponibilidade por edição.", **AJ)
+_f("src:sfdx-scratch-orgs", "Scratch Orgs (Salesforce DX Developer Guide)", _DX + "sfdx-dev-scratch-orgs.html",
+   "Duração, conteúdo inicial e shape de uma scratch org.", **DOC)
+_f("src:sfdx-scratch-editions", "Supported Scratch Org Editions and Allocations (Salesforce DX Developer Guide)",
+   _DX + "sfdx-dev-scratch-orgs-editions-and-allocations.html", "Edições do Dev Hub e das scratch orgs; armazenamento.", **DOC)
+_f("src:sfdx-devhub-enable", "Select and Enable a Dev Hub Org (Salesforce DX Developer Guide)", _DX + "sfdx-setup-enable-devhub.html",
+   "O que o Dev Hub faz e onde é ligado.", **DOC)
+_f("src:sfdx-snapshots", "Scratch Org Snapshots (Salesforce DX Developer Guide)", _DX + "sfdx-dev-snapshots-intro.html",
+   "O que é um snapshot de scratch org e quando expira.", **DOC)
+_f("src:apex-choose-org", "Choose a Salesforce Org for Apex Development (Apex Developer Guide)", _AX + "apex-intro-get-dev-account.html",
+   "Em que orgs se desenvolve Apex.", **DOC)
+_f("src:apex-code-coverage", "Testing and Code Coverage (Apex Developer Guide)",
+   "https://developer.salesforce.com/docs/atlas.en-us.apexcode.meta/apexcode/apex_code_coverage_intro.htm",
+   "Exigência de 75% de cobertura e o que a cobertura não garante.", **DOC)
+_f("src:apex-writing-tests", "Writing Tests (Apex Developer Guide)", _AX + "apex-intro-writing-tests.html",
+   "O que é um teste unitário Apex e a anotação @IsTest.", **DOC)
+_f("src:sfdx-run-apex-tests", "Run Apex Tests (Salesforce DX Developer Guide)", _DX + "sfdx-dev-testing.html",
+   "Como obter a cobertura e a opção Store Only Aggregate Code Coverage.", **DOC)
+_f("src:migration-running-tests", "Running Tests in a Deployment (Ant Migration Tool Guide)", _MIG + "meta-deploy-running-tests.html",
+   "Que testes rodam por padrão num deploy e o que acontece quando um falha.", **DOC)
+_f("src:migration-run-local-tests", "Run the Same Tests in Sandbox and Production Deployments (Ant Migration Tool Guide)",
+   _MIG + "forcemigrationtool-deploy-run-local-tests.html", "Padrão de testes fora de produção e o nível RunLocalTests.", **DOC)
+_f("src:cli-deploy-validate", "project deploy pipeline validate (Beta) (Salesforce CLI Command Reference)",
+   _CLI + "cli_reference_project_deploy_pipeline_validate.html", "Lista dos níveis de teste de um deploy e o que é uma validação.", **DOC)
+_f("src:lwc-testing", "Test Lightning Web Components (Lightning Web Components Developer Guide)", _LWC + "testing.html",
+   "Testes unitários de LWC com Jest.", **DOC)
+_f("src:lwc-component-tests", "Component Tests (Lightning Web Components Developer Guide)", _LWC + "create-components-tests.html",
+   "Onde ficam os testes Jest de um componente.", **DOC)
+_f("src:lwc-jest-create", "Write Jest Tests (Lightning Web Components Developer Guide)", _LWC + "unit-testing-using-jest-create-tests.html",
+   "A pasta __tests__ fica no controle de versão e fora da org.", **DOC)
+_f("src:lwc-e2e", "End-to-End Tests (Lightning Web Components Developer Guide)", _LWC + "testing-dom-api.html",
+   "Fragilidade de testes de interface que dependem do DOM.", **DOC)
+_f("src:lwc-config-file", "Component Configuration File (Lightning Web Components Developer Guide)", _LWC + "create-components-meta-file.html",
+   "Arquivo de configuração obrigatório de um Lightning web component.", **DOC)
+_f("src:lwc-migrate-bundles", "Migrate Component Bundle Files (Lightning Web Components Developer Guide)", _LWC + "migrate-bundles.html",
+   "Correspondência entre os arquivos de um bundle Aura e os de um LWC.", **DOC)
+_f("src:lwc-third-party", "Use Third-Party Web Components in LWC (Lightning Web Components Developer Guide)",
+   _LWC + "create-use-third-party-components.html", "Limites de tamanho de static resources e de arquivos JavaScript de componente.", **DOC)
+_f("src:sfdx-unlocked-intro", "Unlocked Packages (Salesforce DX Developer Guide)", _DX + "sfdx-dev-unlocked-pkg-intro.html",
+   "Modelo source-driven dos pacotes desbloqueados.", **DOC)
+_f("src:sfdx-unlocked-whats", "What's an Unlocked Package? (Salesforce DX Developer Guide)", _DX + "sfdx-dev-unlocked-pkg-whats-a-package.html",
+   "O que é um pacote e o que muda no desbloqueado.", **DOC)
+_f("src:sfdx-package-dev-model", "Package-Based Development Model (Salesforce DX Developer Guide)", _DX + "sfdx-dev-unlocked-pkg-pkg-dev.html",
+   "Dependências entre pacotes e organização do metadado solto.", **DOC)
+_f("src:pkg2-intro", "Second-Generation Managed Packages (Second-Generation Managed Packaging Developer Guide)", _PKG + "sfdx-dev-dev2gp.html",
+   "Para quem são os pacotes gerenciados de segunda geração.", **DOC)
+_f("src:pkg2-key-concepts", "Key Concepts in Second-Generation Managed Packaging", _PKG + "sfdx-dev2gp-key-concepts.html",
+   "Diferença entre app, pacote, metadado e versão de pacote.", **DOC)
+_f("src:pkg2-enable-devhub", "Enable Dev Hub and Second-Generation Managed Packaging", _PKG + "sfdx-pkg-enable-devhub.html",
+   "Dev Hub e empacotamento 2GP não podem ser desligados depois de ligados.", **DOC)
+_f("src:sfdx-project-setup", "Project Setup (Salesforce DX Developer Guide)", _DX + "sfdx-dev-workspace-setup.html",
+   "O que é um projeto Salesforce DX.", **DOC)
+_f("src:sfdx-project-config", "Salesforce DX Project Configuration (Salesforce DX Developer Guide)", _DX + "sfdx-dev-ws-config.html",
+   "Papel do arquivo sfdx-project.json e do sourceApiVersion.", **DOC)
+_f("src:sfdx-decomposed", "Decomposed Metadata Types (Salesforce DX Developer Guide)", _DX + "sfdx-dev-ws-decomposed-md-types.html",
+   "O que é decomposição e que tipos são decompostos por padrão.", **DOC)
+_f("src:sfdx-convert-mdapi", "Convert Files in Metadata Format to Source Format (Salesforce DX Developer Guide)", _DX + "sfdx-dev-ws-convert-mdapi.html",
+   "Conversão de metadata format para source format.", **DOC)
+_f("src:cli-convert-source", "project convert source (Salesforce CLI Command Reference)", _CLI + "cli_reference_project_convert_source.html",
+   "Conversão de source format para metadata format.", **DOC)
+_f("src:vscode-source-format", "Source Format (Salesforce Extensions for Visual Studio Code)",
+   "https://developer.salesforce.com/docs/platform/sfvscode-extensions/guide/source-format.html", "Source format é otimizado para controle de versão.", **DOC)
+_f("src:cli-project-deploy-start", "project deploy start (Salesforce CLI Command Reference)", _CLI + "cli_reference_project_deploy_start.html",
+   "Formato padrão do deploy pelo CLI e a flag --ignore-errors.", **DOC)
+_f("src:sfdx-develop-any-org", "Develop Against Any Org (Salesforce DX Developer Guide)", _DX + "sfdx-dev-develop-any-org.html",
+   "Retrieve e deploy em orgs sem source tracking.", **DOC)
+_f("src:mdapi-zip-file", "Deploying and Retrieving Metadata with the Zip File (Metadata API Developer Guide)",
+   "https://developer.salesforce.com/docs/atlas.en-us.api_meta.meta/api_meta/file_based_zip_file.htm", "Manifesto package.xml e limites de deploy e retrieve.", **DOC)
+_f("src:limits-metadata", "Metadata Limits (Salesforce Developer Limits and Allocations Quick Reference)",
+   "https://developer.salesforce.com/docs/platform/salesforce-app-limits-cheatsheet/guide/salesforce-app-limits-platform-metadata.html",
+   "Motivo do limite de 39 MB do arquivo .zip.", **DOC)
+_f("src:help-change-sets", "Change Sets (Salesforce Help)", _H + "sf.changesets.htm&type=5&language=en_US",
+   "O que um change set leva e o que não leva; permissões.", **AJ)
+_f("src:help-change-sets-connections", "Deployment Connections for Change Sets (Salesforce Help)", _H + "changesets_about_connection.htm&language=en_US&type=5",
+   "Entre que orgs existe deployment connection.", **AJ)
+_f("src:help-change-sets-outbound", "Outbound Change Sets (Salesforce Help)", _H + "sf.changesets_about_outbound.htm&language=en_US",
+   "Limites de um change set e o que acontece depois do envio.", **AJ)
+_f("src:help-change-sets-best", "Change Sets Best Practices (Salesforce Help)", _H + "changesets_best_practices.htm&language=en_US&type=5",
+   "Dependências e bloqueio das orgs durante validação e deploy.", **AJ)
+_f("src:help-change-sets-deploy", "Deploy Using Change Sets (Salesforce Help)", _H + "code_tools_changesets.htm&language=en_US&type=5",
+   "Caminho de Setup dos outbound change sets.", **AJ)
+_f("src:help-lifecycle-center", "Govern, Manage, and Release Changes with Lifecycle Center (Salesforce Help)",
+   _H + "platform.devops_center_overview.htm&language=en_US&type=5", "O que o Lifecycle Center faz e a relação com change sets.", **AJ)
+_f("src:help-devops-pipeline-plan", "Plan Your Pipeline (Salesforce Help)", _H + "platform.devops_center_pipeline_plan.htm&language=en_US&type=5",
+   "Estágios de pipeline, branches e restrição de alteração.", **AJ)
+_f("src:help-devops-promote", "Promote Work Items Through Your Pipeline (Salesforce Help)",
+   _H + "platform.devops_center_work_items_promote.htm&language=en_US&type=5", "O que acontece ao promover work items.", **AJ)
+_f("src:help-devops-center-mp", "DevOps Center (Managed Package) (Salesforce Help)", _H + "sf.devops_center_get_started.htm&language=en_US",
+   "O que um projeto do DevOps Center reúne e que ambientes de desenvolvimento aceita.", **AJ)
+_f("src:help-devops-setup", "Install and Configure DevOps Center (Managed Package) (Salesforce Help)", _H + "devops_center_setup.htm&type=5&language=en_US",
+   "Sistemas de controle de versão suportados.", **AJ)

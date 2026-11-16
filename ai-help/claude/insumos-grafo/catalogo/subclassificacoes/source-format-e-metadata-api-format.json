@@ -4,30 +4,119 @@
   "sigla": "DEV-04",
   "classificacao": "cls:desenvolvimento-testes-e-entrega",
   "natureza": "curadoria_didatica",
-  "descricao": "Os dois formatos de arquivo de metadados e suas diferenças.",
+  "descricao": "Os dois formatos de arquivo dos metadados (source format, do projeto Salesforce DX, e Metadata API format), a conversão entre eles e o manifesto package.xml.",
   "escopo": "Entram os dois formatos de arquivo de metadados e as diferenças entre eles.",
   "fora_do_escopo": "A API que implanta e recupera os arquivos fica em \"APIs de dados e metadados\".",
   "para_iniciantes": {
-    "explicacao": "Os metadados podem ser guardados em dois formatos de arquivo: o source format, usado em projetos do Salesforce CLI, e o Metadata API format, usado pela Metadata API.",
+    "explicacao": "Os metadados podem ser guardados em dois formatos de arquivo: o source format, usado em projetos do Salesforce CLI, e o Metadata API format, usado pela Metadata API, que recebe e devolve um .zip com um manifesto package.xml.",
     "exemplo": "Uma Lightning page fica em flexipages/<Nome>.flexipage no Metadata API format e ganha o sufixo -meta.xml no source format.",
+    "por_onde_comecar": [
+      "func:projeto-salesforce-dx"
+    ],
     "evidencias": [
       {
         "fonte": "src:sdr-registry"
       },
       {
         "fonte": "src:sfdx-dev-guide"
+      },
+      {
+        "fonte": "src:sfdx-project-setup"
+      },
+      {
+        "fonte": "src:mdapi-zip-file"
       }
     ]
   },
   "encadeamento": {
-    "texto": "Cada ficha de metadata type mostra a pasta e o sufixo nos dois formatos.",
+    "texto": "Cada ficha de metadata type mostra a pasta e o sufixo nos dois formatos. O deploy que usa esses arquivos fica em 'Versionamento, deploy e recuperação'.",
     "evidencias": [
       {
         "fonte": "src:sdr-registry"
       }
     ]
   },
-  "funcionalidades": [],
+  "avancado": [
+    {
+      "tipo": "implantacao",
+      "titulo": "Decomposição",
+      "texto": "Decompor é dividir um XML grande em arquivos menores, por subtipo. Por padrão, o projeto sempre decompõe custom objects e custom object translations; outros tipos, como permission sets e custom labels, são opcionais e configurados em sfdx-project.json.",
+      "evidencias": [
+        {
+          "fonte": "src:sfdx-decomposed"
+        }
+      ]
+    },
+    {
+      "tipo": "implantacao",
+      "titulo": "Conversão entre formatos",
+      "texto": "O Salesforce CLI converte nos dois sentidos: project convert mdapi leva de Metadata API format para source format, e project convert source faz o caminho inverso, para implantar pela Metadata API. O arquivo .forceignore lista o que fica fora.",
+      "evidencias": [
+        {
+          "fonte": "src:sfdx-convert-mdapi"
+        },
+        {
+          "fonte": "src:cli-convert-source"
+        }
+      ]
+    },
+    {
+      "tipo": "decisao",
+      "titulo": "Por que source format",
+      "texto": "O source format é otimizado para trabalhar com controle de versão. As extensões do VS Code supõem esse formato, e o deploy pelo CLI o usa por padrão.",
+      "evidencias": [
+        {
+          "fonte": "src:vscode-source-format"
+        },
+        {
+          "fonte": "src:cli-project-deploy-start"
+        }
+      ]
+    },
+    {
+      "tipo": "atencao",
+      "titulo": "A versão da API do projeto",
+      "texto": "O sourceApiVersion, em sfdx-project.json, define que campos de cada metadata type são recuperados e implantados. Confira esse valor antes de trabalhar com tipos que mudaram de uma versão para outra.",
+      "evidencias": [
+        {
+          "fonte": "src:sfdx-project-config"
+        }
+      ]
+    },
+    {
+      "tipo": "implantacao",
+      "titulo": "O que entra no deploy",
+      "texto": "O manifesto package.xml lista o que recuperar ou implantar. Pelo CLI, também se indica por nomes de componentes ou por caminhos de arquivos.",
+      "evidencias": [
+        {
+          "fonte": "src:mdapi-zip-file"
+        },
+        {
+          "fonte": "src:sfdx-develop-any-org"
+        }
+      ]
+    }
+  ],
+  "funcionalidades": [
+    "func:projeto-salesforce-dx"
+  ],
   "estado": "desconhecido",
-  "nota_estado": "Agrupamento proposto na especificação; fronteira ainda não cruzada com a documentação oficial."
+  "nota_estado": "Tema criado pelo projeto (00-especificacao-grafo.md), não é nomenclatura oficial da Salesforce. Cruzado em 2026-11-10 com áreas da documentação oficial listadas nas referências; a correspondência é parcial e o recorte continua sendo do projeto.",
+  "referencias_oficiais": [
+    {
+      "fonte": "src:sfdx-project-setup",
+      "secao": "Project Setup",
+      "nota": "Cobre parte do tema: projeto Salesforce DX."
+    },
+    {
+      "fonte": "src:sfdx-decomposed",
+      "secao": "Decomposed Metadata Types",
+      "nota": "Cobre parte do tema: decomposição de metadata types no source format."
+    },
+    {
+      "fonte": "src:mdapi-zip-file",
+      "secao": "Deploying and Retrieving Metadata with the Zip File",
+      "nota": "Cobre parte do tema: arquivo .zip e manifesto package.xml da Metadata API."
+    }
+  ]
 }
