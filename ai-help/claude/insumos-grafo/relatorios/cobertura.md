@@ -7,7 +7,7 @@ Gerado por `ferramentas/sftutor.py cobertura`. Cobertura estrutural, explicativa
 
 - Universo v68 (METADATA_SUPPORT.md): **993** tipos.
 - Classificados como incluídos no recorte Core: 12; pendentes de classificação: 981.
-- Cadastrados: **159** de 993. Estruturalmente completos (contra a página oficial): 139. Completos nas três dimensões: 0.
+- Cadastrados: **161** de 993. Estruturalmente completos (contra a página oficial): 160. Completos nas três dimensões: 0.
 - Porcentagem do recorte Core: não calculada, porque o denominador do recorte ainda não está definido (classificação item a item pendente).
 
 | Tipo | Estrutural | Esperadas | Presentes | Explicadas | Estruturas | Mapeamento | Completo |
@@ -23,10 +23,10 @@ Gerado por `ferramentas/sftutor.py cobertura`. Cobertura estrutural, explicativa
 | mdt:AssignmentRules | completa | 1 | 1 | 1 | 1 | parcial | não |
 | mdt:AuraDefinitionBundle | completa | 15 | 15 | 15 | 1 | parcial | não |
 | mdt:AuthProvider | completa | 34 | 34 | 34 | 1 | parcial | não |
-| mdt:AutoResponseRules | parcial | n/d | 1 | 1 | 1 | parcial | não |
+| mdt:AutoResponseRules | completa | 1 | 1 | 1 | 1 | parcial | não |
 | mdt:BrandingSet | completa | 5 | 5 | 5 | 1 | parcial | não |
 | mdt:BusinessHoursSettings | completa | 3 | 3 | 3 | 2 | parcial | não |
-| mdt:BusinessProcess | parcial | 5 | 5 | 5 | 0 | parcial | não |
+| mdt:BusinessProcess | completa | 5 | 5 | 5 | 0 | parcial | não |
 | mdt:CampaignSettings | completa | 11 | 11 | 11 | 0 | parcial | não |
 | mdt:CaseSettings | completa | 53 | 53 | 53 | 3 | parcial | não |
 | mdt:Certificate | completa | 8 | 8 | 8 | 0 | parcial | não |
@@ -42,22 +42,22 @@ Gerado por `ferramentas/sftutor.py cobertura`. Cobertura estrutural, explicativa
 | mdt:CspTrustedSite | completa | 14 | 14 | 14 | 0 | parcial | não |
 | mdt:CurrencySettings | completa | 8 | 8 | 8 | 1 | parcial | não |
 | mdt:CustomApplication | completa | 23 | 23 | 23 | 6 | parcial | não |
-| mdt:CustomField | parcial | 60 | 60 | 60 | 4 | parcial | não |
+| mdt:CustomField | completa | 60 | 60 | 60 | 4 | parcial | não |
 | mdt:CustomLabels | completa | 2 | 2 | 2 | 1 | parcial | não |
 | mdt:CustomMetadata | completa | 5 | 5 | 5 | 1 | parcial | não |
 | mdt:CustomNotificationType | completa | 8 | 8 | 8 | 1 | parcial | não |
-| mdt:CustomObject | parcial | 55 | 55 | 55 | 3 | parcial | não |
+| mdt:CustomObject | completa | 55 | 55 | 55 | 6 | parcial | não |
 | mdt:CustomSite | completa | 51 | 51 | 51 | 3 | parcial | não |
-| mdt:CustomTab | parcial | 17 | 17 | 17 | 0 | parcial | não |
+| mdt:CustomTab | completa | 17 | 17 | 17 | 1 | parcial | não |
 | mdt:Dashboard | completa | 26 | 26 | 26 | 3 | parcial | não |
-| mdt:DashboardFolder | parcial | 5 | 5 | 5 | 0 | parcial | não |
+| mdt:DashboardFolder | completa | 5 | 5 | 5 | 1 | parcial | não |
 | mdt:DeploymentSettings | completa | 2 | 2 | 2 | 0 | parcial | não |
 | mdt:DevHubSettings | completa | 10 | 10 | 10 | 0 | parcial | não |
 | mdt:Document | completa | 7 | 7 | 7 | 0 | parcial | não |
-| mdt:DuplicateRule | parcial | n/d | 13 | 13 | 2 | parcial | não |
+| mdt:DuplicateRule | completa | 13 | 13 | 13 | 2 | parcial | não |
 | mdt:EinsteinGptSettings | completa | 11 | 11 | 11 | 0 | parcial | não |
 | mdt:EmailTemplate | completa | 17 | 17 | 17 | 2 | parcial | não |
-| mdt:EntitlementProcess | parcial | 14 | 14 | 14 | 2 | parcial | não |
+| mdt:EntitlementProcess | completa | 14 | 14 | 14 | 2 | parcial | não |
 | mdt:EntitlementSettings | completa | 13 | 13 | 13 | 0 | parcial | não |
 | mdt:EntitlementTemplate | completa | 7 | 7 | 7 | 0 | parcial | não |
 | mdt:EscalationRules | completa | 1 | 1 | 1 | 1 | parcial | não |
@@ -81,12 +81,12 @@ Gerado por `ferramentas/sftutor.py cobertura`. Cobertura estrutural, explicativa
 | mdt:ExtlClntAppSamlConfigurablePolicies | completa | 19 | 19 | 19 | 1 | parcial | não |
 | mdt:FieldServiceSettings | completa | 55 | 55 | 41 | 1 | parcial | não |
 | mdt:FieldSet | completa | 5 | 5 | 5 | 1 | parcial | não |
-| mdt:FlexiPage | parcial | 12 | 12 | 12 | 0 | parcial | não |
+| mdt:FlexiPage | completa | 12 | 12 | 12 | 5 | parcial | não |
 | mdt:Flow | parcial | 50 | 50 | 13 | 0 | parcial | não |
 | mdt:FlowSettings | completa | 32 | 32 | 27 | 0 | parcial | não |
 | mdt:ForecastingSettings | completa | 10 | 10 | 10 | 7 | parcial | não |
 | mdt:GenAiFunction | completa | 10 | 10 | 10 | 1 | parcial | não |
-| mdt:GenAiPlugin | parcial | 12 | 12 | 12 | 1 | parcial | não |
+| mdt:GenAiPlugin | completa | 12 | 12 | 12 | 3 | parcial | não |
 | mdt:GenAiPromptTemplate | completa | 11 | 11 | 11 | 1 | parcial | não |
 | mdt:Group | completa | 4 | 4 | 4 | 0 | parcial | não |
 | mdt:InboundCertificate | completa | 4 | 4 | 4 | 0 | parcial | não |
@@ -96,21 +96,21 @@ Gerado por `ferramentas/sftutor.py cobertura`. Cobertura estrutural, explicativa
 | mdt:InstalledPackage | completa | 4 | 4 | 4 | 0 | parcial | não |
 | mdt:KnowledgeSettings | completa | 23 | 23 | 23 | 4 | parcial | não |
 | mdt:LanguageSettings | completa | 13 | 13 | 13 | 0 | parcial | não |
-| mdt:Layout | parcial | n/d | 24 | 24 | 9 | parcial | não |
+| mdt:Layout | completa | 24 | 24 | 24 | 9 | parcial | não |
 | mdt:LeadConfigSettings | completa | 11 | 11 | 11 | 0 | parcial | não |
 | mdt:LeadConvertSettings | completa | 3 | 3 | 3 | 1 | parcial | não |
 | mdt:Letterhead | completa | 11 | 11 | 11 | 2 | parcial | não |
 | mdt:LightningComponentBundle | completa | 10 | 10 | 10 | 3 | parcial | não |
 | mdt:LightningExperienceSettings | completa | 42 | 42 | 42 | 0 | parcial | não |
 | mdt:LightningExperienceTheme | completa | 6 | 6 | 6 | 0 | parcial | não |
-| mdt:ListView | parcial | 10 | 10 | 10 | 1 | parcial | não |
+| mdt:ListView | completa | 10 | 10 | 10 | 2 | parcial | não |
 | mdt:ManagedEventSubscription | completa | 7 | 7 | 7 | 0 | parcial | não |
 | mdt:MatchingRules | completa | 2 | 2 | 2 | 1 | parcial | não |
 | mdt:MilestoneType | completa | 3 | 3 | 3 | 0 | parcial | não |
 | mdt:MyDomainSettings | completa | 32 | 32 | 29 | 0 | parcial | não |
 | mdt:NamedCredential | completa | 31 | 31 | 31 | 1 | parcial | não |
 | mdt:NavigationMenu | completa | 5 | 5 | 5 | 1 | parcial | não |
-| mdt:Network | parcial | 71 | 71 | 71 | 1 | parcial | não |
+| mdt:Network | completa | 71 | 71 | 71 | 11 | parcial | não |
 | mdt:OauthCustomScope | completa | 7 | 7 | 7 | 0 | parcial | não |
 | mdt:OauthOidcSettings | completa | 6 | 6 | 6 | 0 | parcial | não |
 | mdt:OauthTokenExchangeHandler | completa | 15 | 15 | 15 | 1 | parcial | não |
@@ -122,25 +122,26 @@ Gerado por `ferramentas/sftutor.py cobertura`. Cobertura estrutural, explicativa
 | mdt:PathAssistantSettings | completa | 4 | 4 | 4 | 0 | parcial | não |
 | mdt:PermissionSet | completa | 24 | 24 | 24 | 18 | parcial | não |
 | mdt:PermissionSetGroup | completa | 7 | 7 | 7 | 0 | parcial | não |
+| mdt:PicklistValue | completa | 15 | 15 | 15 | 0 | parcial | não |
 | mdt:PlatformEventChannel | completa | 5 | 5 | 5 | 1 | parcial | não |
 | mdt:PlatformEventChannelMember | completa | 5 | 5 | 5 | 1 | parcial | não |
 | mdt:PlatformEventSettings | completa | 1 | 1 | 1 | 0 | parcial | não |
 | mdt:PlatformEventSubscriberConfig | completa | 8 | 8 | 8 | 0 | parcial | não |
-| mdt:PresenceUserConfig | parcial | n/d | 18 | 18 | 1 | parcial | não |
+| mdt:PresenceUserConfig | completa | 18 | 18 | 18 | 1 | parcial | não |
 | mdt:PrivacySettings | completa | 14 | 14 | 14 | 0 | parcial | não |
 | mdt:ProductSettings | completa | 5 | 5 | 5 | 0 | parcial | não |
-| mdt:Profile | parcial | 27 | 27 | 27 | 18 | parcial | não |
+| mdt:Profile | completa | 27 | 27 | 27 | 22 | parcial | não |
 | mdt:PublicKeyCertificate | completa | 5 | 5 | 5 | 0 | parcial | não |
 | mdt:PublicKeyCertificateSet | completa | 7 | 7 | 7 | 1 | parcial | não |
 | mdt:Queue | completa | 8 | 8 | 8 | 2 | parcial | não |
 | mdt:QueueRoutingConfig | completa | 15 | 15 | 15 | 1 | parcial | não |
-| mdt:QuickAction | parcial | 22 | 22 | 22 | 0 | parcial | não |
+| mdt:QuickAction | completa | 22 | 22 | 22 | 3 | parcial | não |
 | mdt:QuoteSettings | completa | 2 | 2 | 2 | 0 | parcial | não |
-| mdt:RecordType | parcial | 7 | 7 | 7 | 1 | parcial | não |
+| mdt:RecordType | completa | 7 | 7 | 7 | 1 | parcial | não |
 | mdt:RegisteredExternalService | completa | 11 | 11 | 11 | 0 | parcial | não |
 | mdt:RemoteSiteSetting | completa | 5 | 5 | 5 | 0 | parcial | não |
 | mdt:Report | completa | 41 | 41 | 41 | 15 | parcial | não |
-| mdt:ReportFolder | parcial | 5 | 5 | 5 | 0 | parcial | não |
+| mdt:ReportFolder | completa | 5 | 5 | 5 | 1 | parcial | não |
 | mdt:ReportType | completa | 9 | 9 | 9 | 2 | parcial | não |
 | mdt:RevenueManagementSettings | completa | 20 | 20 | 20 | 0 | parcial | não |
 | mdt:Role | completa | 8 | 8 | 8 | 0 | parcial | não |
@@ -150,6 +151,7 @@ Gerado por `ferramentas/sftutor.py cobertura`. Cobertura estrutural, explicativa
 | mdt:SharingCriteriaRule | completa | 9 | 9 | 9 | 3 | parcial | não |
 | mdt:SharingGuestRule | completa | 8 | 8 | 8 | 2 | parcial | não |
 | mdt:SharingOwnerRule | completa | 7 | 7 | 7 | 2 | parcial | não |
+| mdt:SharingReason | completa | 2 | 2 | 2 | 0 | parcial | não |
 | mdt:SharingRules | completa | 5 | 5 | 5 | 0 | parcial | não |
 | mdt:SharingTerritoryRule | completa | 7 | 7 | 7 | 2 | parcial | não |
 | mdt:SourceTrackingSettings | completa | 2 | 2 | 2 | 0 | parcial | não |
@@ -159,7 +161,7 @@ Gerado por `ferramentas/sftutor.py cobertura`. Cobertura estrutural, explicativa
 | mdt:Territory2Rule | completa | 6 | 6 | 6 | 1 | parcial | não |
 | mdt:Territory2Settings | completa | 12 | 12 | 12 | 2 | parcial | não |
 | mdt:Territory2Type | completa | 4 | 4 | 4 | 0 | parcial | não |
-| mdt:Translations | parcial | n/d | 33 | 33 | 32 | parcial | não |
+| mdt:Translations | completa | 33 | 33 | 33 | 32 | parcial | não |
 | mdt:UserAuthCertificate | completa | 6 | 6 | 6 | 0 | parcial | não |
 | mdt:ValidationRule | completa | 6 | 6 | 6 | 0 | parcial | não |
 | mdt:WebLink | completa | 22 | 22 | 22 | 0 | parcial | não |
@@ -174,8 +176,8 @@ Gerado por `ferramentas/sftutor.py cobertura`. Cobertura estrutural, explicativa
 
 ## Propriedades XML
 
-- Em metadata types: 2218 listadas, 2151 explicadas.
-- Em estruturas auxiliares: 1321 listadas, 1311 explicadas.
+- Em metadata types: 2235 listadas, 2168 explicadas.
+- Em estruturas auxiliares: 1516 listadas, 1506 explicadas.
 - Universo total: Sem WSDL não há denominador confiável do total de propriedades do recorte.
 
 ## Objetos consultáveis via API
