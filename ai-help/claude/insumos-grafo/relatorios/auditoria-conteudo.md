@@ -20,7 +20,7 @@ Mede sinais de texto genérico ou incompleto; não julga se o conteúdo está co
 - Campos que só repetem o nome do nó: 0
 - Campos com frase-modelo de preenchimento: 0
 - Textos idênticos em mais de um nó: 0
-- Nós com propriedades ou campos sem explicação: 29 (887 itens de 1536 nesses nós)
+- Nós com propriedades ou campos sem explicação: 26 (509 itens de 1261 nesses nós)
 
 ## Campos vazios
 
@@ -122,20 +122,15 @@ Nenhum.
 
 ## Propriedades ou campos sem explicação (vazia ou marcada como pendente), por nó
 
-- `objetos-api/User`: 160 de 206
 - `objetos-api/QuoteLineItem`: 78 de 84
-- `objetos-api/Account`: 67 de 117
-- `objetos-api/Lead`: 60 de 74
-- `objetos-api/Opportunity`: 47 de 63
-- `objetos-api/Case`: 44 de 57
 - `objetos-api/Campaign`: 41 de 69
 - `objetos-api/Quote`: 39 de 76
 - `objetos-api/AgentWork`: 38 de 48
 - `objetos-api/ServiceContract`: 38 de 46
 - `metadata-types/Flow`: 37 de 50
 - `objetos-api/KnowledgeArticleVersion`: 35 de 42
-- `objetos-api/Contact`: 34 de 84
 - `objetos-api/Product2`: 33 de 37
+- `objetos-api/User`: 31 de 206
 - `objetos-api/PendingServiceRouting`: 28 de 33
 - `objetos-api/CampaignMember`: 25 de 32
 - `objetos-api/OpportunityLineItem`: 20 de 27
@@ -147,7 +142,9 @@ Nenhum.
 - `metadata-types/ContractSettings`: 4 de 7
 - `metadata-types/CommunitiesSettings`: 3 de 26
 - `metadata-types/MyDomainSettings`: 3 de 32
+- `objetos-api/Opportunity`: 2 de 63
 - `metadata-types/ApprovalProcess`: 1 de 22
 - `objetos-api/BusinessHours`: 1 de 20
+- `objetos-api/Case`: 1 de 57
 - `objetos-api/FieldDefinition`: 1 de 59
 - `objetos-api/PermissionSet`: 1 de 13

@@ -182,12 +182,12 @@ Gerado por `ferramentas/sftutor.py cobertura`. Cobertura estrutural, explicativa
 
 ## Objetos consultáveis via API
 
-- Catalogados: 84. Campos listados: 2035; explicados: 1225.
+- Catalogados: 84. Campos listados: 2035; explicados: 1603.
 - Universo: Universo de objetos da plataforma não enumerado.
 
 | Objeto | Estrutural | Esperados | Presentes | Explicados | APIs verificadas |
 |---|---|---|---|---|---|
-| obj:Account | completa | 117 | 117 | 50 | padrao |
+| obj:Account | completa | 117 | 117 | 117 | padrao |
 | obj:AccountTeamMember | completa | 11 | 11 | 11 | padrao |
 | obj:AgentWork | completa | 48 | 48 | 10 | padrao |
 | obj:ApexLog | completa | 10 | 10 | 10 | tooling |
@@ -197,10 +197,10 @@ Gerado por `ferramentas/sftutor.py cobertura`. Cobertura estrutural, explicativa
 | obj:BusinessHours | completa | 20 | 20 | 19 | padrao |
 | obj:Campaign | completa | 69 | 69 | 28 | padrao |
 | obj:CampaignMember | completa | 32 | 32 | 7 | padrao |
-| obj:Case | completa | 57 | 57 | 13 | padrao |
+| obj:Case | completa | 57 | 57 | 56 | padrao |
 | obj:CaseMilestone | completa | 20 | 20 | 20 | padrao |
 | obj:ConnectedApplication | completa | 15 | 15 | 15 | padrao |
-| obj:Contact | completa | 84 | 84 | 50 | padrao |
+| obj:Contact | completa | 84 | 84 | 84 | padrao |
 | obj:ContactPointTypeConsent | completa | 17 | 17 | 17 | padrao |
 | obj:CronJobDetail | completa | 2 | 2 | 2 | padrao |
 | obj:CronTrigger | completa | 10 | 10 | 10 | padrao |
@@ -231,14 +231,14 @@ Gerado por `ferramentas/sftutor.py cobertura`. Cobertura estrutural, explicativa
 | obj:Individual | completa | 28 | 28 | 28 | padrao |
 | obj:KnowledgeArticle | completa | 12 | 12 | 12 | padrao |
 | obj:KnowledgeArticleVersion | completa | 42 | 42 | 7 | padrao |
-| obj:Lead | completa | 74 | 74 | 14 | padrao |
+| obj:Lead | completa | 74 | 74 | 74 | padrao |
 | obj:LeadStatus | completa | 5 | 5 | 5 | padrao |
 | obj:LoginHistory | completa | 24 | 24 | 24 | padrao |
 | obj:MilestoneType | completa | 3 | 3 | 3 | padrao |
 | obj:NamedCredential | completa | 16 | 16 | 16 | padrao |
 | obj:OauthToken | completa | 9 | 9 | 9 | padrao |
 | obj:ObjectTerritory2Association | completa | 4 | 4 | 4 | padrao |
-| obj:Opportunity | completa | 63 | 63 | 16 | padrao |
+| obj:Opportunity | completa | 63 | 63 | 61 | padrao |
 | obj:OpportunityLineItem | completa | 27 | 27 | 7 | padrao |
 | obj:OpportunityTeamMember | completa | 8 | 8 | 8 | padrao |
 | obj:PathAssistant | completa | 13 | 13 | 13 | tooling |
@@ -266,7 +266,7 @@ Gerado por `ferramentas/sftutor.py cobertura`. Cobertura estrutural, explicativa
 | obj:Territory2 | completa | 11 | 11 | 11 | padrao |
 | obj:Territory2Type | completa | 5 | 5 | 5 | padrao |
 | obj:TraceFlag | completa | 14 | 14 | 14 | tooling |
-| obj:User | completa | 206 | 206 | 46 | padrao, tooling |
+| obj:User | completa | 206 | 206 | 175 | padrao, tooling |
 | obj:UserLogin | completa | 3 | 3 | 3 | padrao |
 | obj:UserRole | completa | 13 | 13 | 13 | padrao |
 | obj:UserTerritory2Association | completa | 4 | 4 | 4 | padrao |
