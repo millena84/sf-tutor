@@ -2,7 +2,7 @@
 
 Este guia explica a gravação como um pipeline transacional, não como uma lista para decorar. A ordem define quando cada mecanismo participa; os governor limits definem o orçamento compartilhado pelo trabalho da transação ([ordem oficial](https://developer.salesforce.com/docs/platform/apex-dev/references/apex-dev/apex-triggers-order-of-execution.html), [limites Apex](https://developer.salesforce.com/docs/platform/apex-dev/references/apex-dev/apex-gov-limits.html)).
 
-Revisão técnica: 11 de novembro de 2026, referência Winter ’27. Para a apresentação em blocos de até dez minutos, use o bloco 6 do [roteiro principal](roteiro-sf-para-techs/roteiro-salesforce-backend.md); aqui fica o aprofundamento.
+Revisão técnica: 17 de novembro de 2026, referência Winter ’27. Para a apresentação em blocos de até dez minutos, use o bloco 6 do [roteiro principal](roteiro-sf-para-techs/roteiro-salesforce-backend.md); aqui fica o aprofundamento.
 
 ## Escopo e analogia
 
@@ -12,24 +12,35 @@ Analogia back-end: uma requisição abre uma unidade transacional que atravessa 
 
 ![Recorte didático da fronteira transacional](svg/bloco-06-transacao.svg)
 
-## Visão resumida
+## Diagrama completo
 
-```text
-Requisição e validações iniciais aplicáveis
-  → before-save Flow
-  → before trigger
-  → validações de sistema e regras customizadas
-  → duplicate rules
-  → gravação SEM commit
-  → after trigger
-  → regras intermediárias e possíveis reentradas
-  → caminho imediato de after-save Flow
-  → entitlement, roll-ups e sharing aplicáveis
-  → COMMIT
-  → execução posterior: Queueable e caminhos assíncronos
-```
+O desenho abaixo mostra as 20 etapas oficiais, as interrupções e as reentradas em uma única página. Ele complementa a tabela da próxima seção, que continua sendo a referência linha a linha ([sequência oficial](https://developer.salesforce.com/docs/platform/apex-dev/references/apex-dev/apex-triggers-order-of-execution.html)).
 
-Esse desenho omite etapas para tornar visível a fronteira de commit. A tabela seguinte preserva a numeração oficial, inclusive Escalation Rules, e deve ser consultada quando a ordem intermediária importa ([sequência oficial](https://developer.salesforce.com/docs/platform/apex-dev/references/apex-dev/apex-triggers-order-of-execution.html)).
+[![Order of Execution completo: 20 etapas, fases, reentradas e fronteira de commit](svg/order-of-execution-completo.svg)](svg/order-of-execution-completo.svg)
+
+Em telas pequenas, abra a imagem em tamanho original pelo link do próprio desenho.
+
+### Como ler o desenho
+
+- **Coluna central:** uma caixa por etapa, com a numeração oficial de 1 a 20. Antes delas, a validação JavaScript no navegador, que só existe na UI com picklist dependente.
+- **Mecanismo:** a faixa lateral e a etiqueta indicam quem age em cada etapa: Sistema, Apex, Flow, Regra declarativa ou Commit. A cor nunca aparece sozinha; o nome está sempre escrito.
+- **Legado:** borda tracejada marca Workflow Rules e Process Builder, cujo suporte terminou em 31/12/2025, mas que podem continuar ativos em uma org.
+- **Anotações à direita:** bloqueio por duplicate rule, reexecução por workflow field update, nova entrada no save por DML de process ou flow, cascata para pai e avô e trabalho fora da transação de origem.
+- **Chaves à esquerda:** a linha escura reúne as etapas 1 a 19 na mesma transação; a chave rosa marca as etapas 9 a 17, puladas em save recursivo.
+
+### As cinco fases
+
+As fases são um agrupamento didático deste material, não nomenclatura oficial da Salesforce.
+
+| Fase | Etapas | Ideia central |
+|---|---:|---|
+| 1 · Antes de salvar | 1–6 | Prepara e valida o registro; uma duplicate rule com bloqueio encerra aqui. |
+| 2 · Salvo, sem commit | 7–15 | O registro já foi gravado e tem ID, mas tudo ainda pode ser desfeito. |
+| 3 · Propagação | 16–18 | Roll-ups e sharing afetam outros registros; pai e avô passam pelo próprio save. |
+| 4 · Confirmação | 19 | Commit de todas as operações DML da transação. |
+| 5 · Depois do commit | 20 | E-mails, Apex enfileirado e caminhos assíncronos de Flow, em outra transação. |
+
+O SVG é gerado por [`gerar_svg_order_of_execution.py`](gerar_svg_order_of_execution.py). Para corrigir o desenho, altere o script e gere o arquivo de novo; não edite o SVG à mão, para que texto e imagem continuem coerentes.
 
 ## Sequência oficial de salvamento
 
@@ -48,7 +59,7 @@ Todas as linhas desta tabela seguem [Triggers and Order of Execution](https://de
 | 9 | Executa assignment rules. | Aplicabilidade depende do objeto e da configuração ([guia](https://developer.salesforce.com/docs/platform/apex-dev/references/apex-dev/apex-triggers-order-of-execution.html)). |
 | 10 | Executa auto-response rules. | Não confundir e-mail automático com uma chamada Apex a `Messaging.sendEmail` ([guia](https://developer.salesforce.com/docs/platform/apex-dev/references/apex-dev/apex-triggers-order-of-execution.html), [limites Apex](https://developer.salesforce.com/docs/platform/apex-dev/references/apex-dev/apex-gov-limits.html)). |
 | 11 | Executa workflow rules. | Field update tem uma reexecução específica de before/after update, descrita adiante ([guia](https://developer.salesforce.com/docs/platform/apex-dev/references/apex-dev/apex-triggers-order-of-execution.html)). |
-| 12 | Executa escalation rules. | Etapa omitida na versão anterior deste arquivo ([guia](https://developer.salesforce.com/docs/platform/apex-dev/references/apex-dev/apex-triggers-order-of-execution.html)). |
+| 12 | Executa escalation rules. | Recurso de escalonamento de casos; a versão 1.x deste arquivo omitia esta etapa ([guia](https://developer.salesforce.com/docs/platform/apex-dev/references/apex-dev/apex-triggers-order-of-execution.html)). |
 | 13 | Executa Process Builder e flows lançados por workflow. | Sem ordem garantida entre esses mecanismos; DML pode iniciar outro ciclo no registro afetado ([guia](https://developer.salesforce.com/docs/platform/apex-dev/references/apex-dev/apex-triggers-order-of-execution.html)). |
 | 14 | Executa record-triggered Flows after-save. | O caminho imediato ainda está antes do commit ([guia](https://developer.salesforce.com/docs/platform/apex-dev/references/apex-dev/apex-triggers-order-of-execution.html)). |
 | 15 | Executa entitlement rules. | O guia registra posição diferente para after-save Flow em API 53.0 e anteriores; observar legado ao investigar ([guia](https://developer.salesforce.com/docs/platform/apex-dev/references/apex-dev/apex-triggers-order-of-execution.html)). |
@@ -59,6 +70,8 @@ Todas as linhas desta tabela seguem [Triggers and Order of Execution](https://de
 | 20 | Executa lógica pós-commit. | Exemplos: envio de e-mail, jobs Apex enfileirados e caminhos assíncronos de Flow; não há ordem garantida entre esses exemplos ([guia](https://developer.salesforce.com/docs/platform/apex-dev/references/apex-dev/apex-triggers-order-of-execution.html)). |
 
 ## Reentrada não é uma regra única
+
+No diagrama, estes casos aparecem como anotações à direita da coluna central. Cada um tem regras próprias:
 
 - **Workflow field update:** na reexecução específica dessa etapa, rodam novamente validações de sistema e before/after update uma única vez adicional. Não rodam novamente regras customizadas, flows, duplicate rules, processos de Process Builder e escalation rules por esse mecanismo específico; isso não proíbe que outro DML inicie outro ciclo ([documentação da etapa 11](https://developer.salesforce.com/docs/platform/apex-dev/references/apex-dev/apex-triggers-order-of-execution.html)).
 - **Save recursivo documentado:** o guia diz que as etapas oficiais 9 a 17 são puladas durante um save recursivo. Não aplicar essa frase indiscriminadamente a todo segundo DML nem usar a numeração diferente de uma tabela local ([observação oficial sobre recursão](https://developer.salesforce.com/docs/platform/apex-dev/references/apex-dev/apex-triggers-order-of-execution.html)).
@@ -152,4 +165,4 @@ Esses métodos expõem consumo e limites da execução, não demonstram que todo
 - **Pergunta de integração:** falha de um job posterior desfaz automaticamente o pedido confirmado? Não; o job é trabalho posterior e requer tratamento próprio ([ordem oficial](https://developer.salesforce.com/docs/platform/apex-dev/references/apex-dev/apex-triggers-order-of-execution.html)).
 - **Pergunta de evidência:** um arquivo de Flow prova que aquela versão está ativa e executou? Não usar inventário estático como prova operacional; verificar estado implantado, critérios e observação.
 
-Versão editorial: 2.0.0. Exemplos são de leitura e discussão; compilar, executar testes e verificar permissões, API e comportamento em uma org permanecem etapas separadas.
+Versão editorial: 2.1.0 (diagrama completo). Exemplos são de leitura e discussão; compilar, executar testes e verificar permissões, API e comportamento em uma org permanecem etapas separadas.

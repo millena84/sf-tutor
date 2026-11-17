@@ -29,7 +29,7 @@ Material de letramento técnico para quem já desenvolve back-end e está começ
 
 ## Diagramas e identidade visual
 
-Os [onze SVGs](svg/) ficam em uma pasta irmã de `roteiro-sf-para-techs/`; por isso o roteiro usa caminhos `../svg/`. Os arquivos de [marca](marca/) são recursos visuais, não documentação da arquitetura Salesforce.
+Os [onze SVGs](svg/) ficam em uma pasta irmã de `roteiro-sf-para-techs/`; por isso o roteiro usa caminhos `../svg/`. A mesma pasta guarda o [diagrama completo do Order of Execution](svg/order-of-execution-completo.svg), usado em `orderOfExecution.md` e gerado por `gerar_svg_order_of_execution.py`; altere o script, não o SVG. Os arquivos de [marca](marca/) são recursos visuais, não documentação da arquitetura Salesforce.
 
 A revisão preserva a identidade Desbugando e usa texto escuro opaco sobre o fundo claro dos diagramas. As cores decorativas não devem tornar avisos ou setas difíceis de perceber.
 

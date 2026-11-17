@@ -1,0 +1,326 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1080 1796" width="1080" height="1796" role="img" aria-labelledby="title desc">
+<title id="title">Order of Execution no Salesforce · salvamento completo</title>
+<desc id="desc">Sequência oficial de 20 etapas ao salvar um registro com insert, update ou upsert: carga, validações, before-save Flow, before triggers, duplicate rules, gravação sem commit, after triggers, assignment, auto-response, workflow, escalation, processes, after-save Flow, entitlement, roll-ups no pai e no avô, criteria-based sharing, commit e lógica pós-commit. Inclui reentradas e interrupções. Referência técnica: https://developer.salesforce.com/docs/platform/apex-dev/references/apex-dev/apex-triggers-order-of-execution.html. Esquema didático.</desc>
+<defs><marker id="arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M1 1 L8 5 L1 9" fill="none" stroke="#1C1440" stroke-width="1.5"/></marker><marker id="arrowRosa" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M1 1 L8 5 L1 9" fill="none" stroke="#FF4FB8" stroke-width="1.5"/></marker><marker id="arrowRoxo" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M1 1 L8 5 L1 9" fill="none" stroke="#9B6BFF" stroke-width="1.5"/></marker></defs>
+<rect width="1080" height="1744" fill="#F5F7FF"/>
+<g font-family="Arial, DejaVu Sans, sans-serif">
+<text x="30" y="38" text-anchor="start" font-size="22" fill="#0B0F2A" font-weight="700">Order of Execution no Salesforce · salvamento completo</text>
+<text x="30" y="62" text-anchor="start" font-size="13" fill="#1C1440">insert, update e upsert de um registro · numeração oficial do Apex Developer Guide (1–20)</text>
+<rect x="250" y="92" width="470" height="44" rx="6" fill="#1C1440" fill-opacity="0.05" stroke="#1C1440" stroke-width="1" stroke-dasharray="4 3"/>
+<text x="264" y="111" text-anchor="start" font-size="13" fill="#0B0F2A" font-weight="700">No navegador (só UI, se houver picklist dependente)</text>
+<text x="264" y="128" text-anchor="start" font-size="12" fill="#1C1440">Validação JavaScript dos valores da picklist dependente</text>
+<text x="232" y="119" text-anchor="end" font-size="13" fill="#0B0F2A" font-weight="700">Cliente</text>
+<path d="M485.0 136 V158" fill="none" stroke="#1C1440" stroke-width="1.6" marker-end="url(#arrow)"/>
+<text x="232" y="164" text-anchor="end" font-size="13" fill="#0B0F2A" font-weight="700">Servidor</text>
+<rect x="250" y="174" width="470" height="52" rx="6" fill="#FFFFFF" fill-opacity="1" stroke="#1C1440" stroke-width="1.3"/>
+<rect x="251" y="175" width="6" height="50" fill="#1C1440" fill-opacity="0.85"/>
+<circle cx="282" cy="194" r="13" fill="#1C1440" fill-opacity="0.22" stroke="#1C1440"/>
+<text x="282" y="198.5" text-anchor="middle" font-size="13" fill="#0B0F2A" font-weight="700">1</text>
+<text x="304" y="199" text-anchor="start" font-size="14" fill="#0B0F2A" font-weight="700">Carrega o registro</text>
+<text x="304" y="217" text-anchor="start" font-size="12" fill="#1C1440">Original do banco ou inicializado para upsert</text>
+<rect x="657.8" y="165" width="54.199999999999996" height="18" rx="9" fill="#1C1440" fill-opacity="0.95" stroke="#1C1440" stroke-width="1"/>
+<rect x="657.8" y="165" width="54.199999999999996" height="18" rx="9" fill="#FFFFFF" fill-opacity="0.55"/>
+<text x="684.9" y="178" text-anchor="middle" font-size="11" fill="#0B0F2A" font-weight="700">Sistema</text>
+<path d="M485.0 226 V238" fill="none" stroke="#1C1440" stroke-width="1.6" marker-end="url(#arrow)"/>
+<rect x="250" y="240" width="470" height="84" rx="6" fill="#FFFFFF" fill-opacity="1" stroke="#1C1440" stroke-width="1.3"/>
+<rect x="251" y="241" width="6" height="82" fill="#1C1440" fill-opacity="0.85"/>
+<circle cx="282" cy="260" r="13" fill="#1C1440" fill-opacity="0.22" stroke="#1C1440"/>
+<text x="282" y="264.5" text-anchor="middle" font-size="13" fill="#0B0F2A" font-weight="700">2</text>
+<text x="304" y="265" text-anchor="start" font-size="14" fill="#0B0F2A" font-weight="700">Aplica os novos valores e valida conforme a origem</text>
+<text x="304" y="283" text-anchor="start" font-size="12" fill="#1C1440">UI padrão: regras do layout, obrigatórios, formato, tamanho máximo</text>
+<text x="304" y="299" text-anchor="start" font-size="12" fill="#1C1440">Apex / API: só chaves estrangeiras e picklists restritas</text>
+<text x="304" y="315" text-anchor="start" font-size="12" fill="#1C1440">Criação multilinha (ex.: quote/opportunity line items): validation rules</text>
+<rect x="657.8" y="231" width="54.199999999999996" height="18" rx="9" fill="#1C1440" fill-opacity="0.95" stroke="#1C1440" stroke-width="1"/>
+<rect x="657.8" y="231" width="54.199999999999996" height="18" rx="9" fill="#FFFFFF" fill-opacity="0.55"/>
+<text x="684.9" y="244" text-anchor="middle" font-size="11" fill="#0B0F2A" font-weight="700">Sistema</text>
+<path d="M485.0 324 V336" fill="none" stroke="#1C1440" stroke-width="1.6" marker-end="url(#arrow)"/>
+<rect x="250" y="338" width="470" height="52" rx="6" fill="#FFFFFF" fill-opacity="1" stroke="#3EE6F2" stroke-width="1.3"/>
+<rect x="251" y="339" width="6" height="50" fill="#3EE6F2" fill-opacity="0.85"/>
+<circle cx="282" cy="358" r="13" fill="#3EE6F2" fill-opacity="0.22" stroke="#3EE6F2"/>
+<text x="282" y="362.5" text-anchor="middle" font-size="13" fill="#0B0F2A" font-weight="700">3</text>
+<text x="304" y="363" text-anchor="start" font-size="14" fill="#0B0F2A" font-weight="700">Record-triggered Flows before-save</text>
+<text x="304" y="381" text-anchor="start" font-size="12" fill="#1C1440">Alteram o próprio registro sem DML adicional</text>
+<rect x="677.6" y="329" width="34.4" height="18" rx="9" fill="#3EE6F2" fill-opacity="0.95" stroke="#3EE6F2" stroke-width="1"/>
+<rect x="677.6" y="329" width="34.4" height="18" rx="9" fill="#FFFFFF" fill-opacity="0.55"/>
+<text x="694.8000000000001" y="342" text-anchor="middle" font-size="11" fill="#0B0F2A" font-weight="700">Flow</text>
+<path d="M485.0 390 V402" fill="none" stroke="#1C1440" stroke-width="1.6" marker-end="url(#arrow)"/>
+<rect x="250" y="404" width="470" height="52" rx="6" fill="#FFFFFF" fill-opacity="1" stroke="#9B6BFF" stroke-width="1.3"/>
+<rect x="251" y="405" width="6" height="50" fill="#9B6BFF" fill-opacity="0.85"/>
+<circle cx="282" cy="424" r="13" fill="#9B6BFF" fill-opacity="0.22" stroke="#9B6BFF"/>
+<text x="282" y="428.5" text-anchor="middle" font-size="13" fill="#0B0F2A" font-weight="700">4</text>
+<text x="304" y="429" text-anchor="start" font-size="14" fill="#0B0F2A" font-weight="700">Before triggers</text>
+<text x="304" y="447" text-anchor="start" font-size="12" fill="#1C1440">before insert / before update</text>
+<rect x="677.6" y="395" width="34.4" height="18" rx="9" fill="#9B6BFF" fill-opacity="0.95" stroke="#9B6BFF" stroke-width="1"/>
+<rect x="677.6" y="395" width="34.4" height="18" rx="9" fill="#FFFFFF" fill-opacity="0.55"/>
+<text x="694.8000000000001" y="408" text-anchor="middle" font-size="11" fill="#0B0F2A" font-weight="700">Apex</text>
+<path d="M485.0 456 V468" fill="none" stroke="#1C1440" stroke-width="1.6" marker-end="url(#arrow)"/>
+<rect x="250" y="470" width="470" height="52" rx="6" fill="#FFFFFF" fill-opacity="1" stroke="#1C1440" stroke-width="1.3"/>
+<rect x="251" y="471" width="6" height="50" fill="#1C1440" fill-opacity="0.85"/>
+<rect x="257" y="471" width="6" height="50" fill="#FF4FB8" fill-opacity="0.85"/>
+<circle cx="282" cy="490" r="13" fill="#1C1440" fill-opacity="0.22" stroke="#1C1440"/>
+<text x="282" y="494.5" text-anchor="middle" font-size="13" fill="#0B0F2A" font-weight="700">5</text>
+<text x="304" y="495" text-anchor="start" font-size="14" fill="#0B0F2A" font-weight="700">Validações de sistema de novo + validation rules</text>
+<text x="304" y="513" text-anchor="start" font-size="12" fill="#1C1440">Obrigatórios e não nulos; regras do layout não são repetidas</text>
+<rect x="591.8" y="461" width="120.19999999999999" height="18" rx="9" fill="#FF4FB8" fill-opacity="0.95" stroke="#FF4FB8" stroke-width="1"/>
+<rect x="591.8" y="461" width="120.19999999999999" height="18" rx="9" fill="#FFFFFF" fill-opacity="0.55"/>
+<text x="651.9" y="474" text-anchor="middle" font-size="11" fill="#0B0F2A" font-weight="700">Regra declarativa</text>
+<rect x="533.5999999999999" y="461" width="54.199999999999996" height="18" rx="9" fill="#1C1440" fill-opacity="0.95" stroke="#1C1440" stroke-width="1"/>
+<rect x="533.5999999999999" y="461" width="54.199999999999996" height="18" rx="9" fill="#FFFFFF" fill-opacity="0.55"/>
+<text x="560.6999999999999" y="474" text-anchor="middle" font-size="11" fill="#0B0F2A" font-weight="700">Sistema</text>
+<path d="M485.0 522 V534" fill="none" stroke="#1C1440" stroke-width="1.6" marker-end="url(#arrow)"/>
+<rect x="250" y="536" width="470" height="52" rx="6" fill="#FFFFFF" fill-opacity="1" stroke="#FF4FB8" stroke-width="1.3"/>
+<rect x="251" y="537" width="6" height="50" fill="#FF4FB8" fill-opacity="0.85"/>
+<circle cx="282" cy="556" r="13" fill="#FF4FB8" fill-opacity="0.22" stroke="#FF4FB8"/>
+<text x="282" y="560.5" text-anchor="middle" font-size="13" fill="#0B0F2A" font-weight="700">6</text>
+<text x="304" y="561" text-anchor="start" font-size="14" fill="#0B0F2A" font-weight="700">Duplicate rules</text>
+<text x="304" y="579" text-anchor="start" font-size="12" fill="#1C1440">Ação “bloquear” interrompe o salvamento aqui</text>
+<rect x="591.8" y="527" width="120.19999999999999" height="18" rx="9" fill="#FF4FB8" fill-opacity="0.95" stroke="#FF4FB8" stroke-width="1"/>
+<rect x="591.8" y="527" width="120.19999999999999" height="18" rx="9" fill="#FFFFFF" fill-opacity="0.55"/>
+<text x="651.9" y="540" text-anchor="middle" font-size="11" fill="#0B0F2A" font-weight="700">Regra declarativa</text>
+<path d="M485.0 588 V600" fill="none" stroke="#1C1440" stroke-width="1.6" marker-end="url(#arrow)"/>
+<rect x="250" y="602" width="470" height="52" rx="6" fill="#FFFFFF" fill-opacity="1" stroke="#1C1440" stroke-width="1.3"/>
+<rect x="251" y="603" width="6" height="50" fill="#1C1440" fill-opacity="0.85"/>
+<circle cx="282" cy="622" r="13" fill="#1C1440" fill-opacity="0.22" stroke="#1C1440"/>
+<text x="282" y="626.5" text-anchor="middle" font-size="13" fill="#0B0F2A" font-weight="700">7</text>
+<text x="304" y="627" text-anchor="start" font-size="14" fill="#0B0F2A" font-weight="700">Salva no banco, SEM commit</text>
+<text x="304" y="645" text-anchor="start" font-size="12" fill="#1C1440">No insert, o ID já existe; ainda pode ser desfeito</text>
+<rect x="657.8" y="593" width="54.199999999999996" height="18" rx="9" fill="#1C1440" fill-opacity="0.95" stroke="#1C1440" stroke-width="1"/>
+<rect x="657.8" y="593" width="54.199999999999996" height="18" rx="9" fill="#FFFFFF" fill-opacity="0.55"/>
+<text x="684.9" y="606" text-anchor="middle" font-size="11" fill="#0B0F2A" font-weight="700">Sistema</text>
+<path d="M485.0 654 V666" fill="none" stroke="#1C1440" stroke-width="1.6" marker-end="url(#arrow)"/>
+<rect x="250" y="668" width="470" height="52" rx="6" fill="#FFFFFF" fill-opacity="1" stroke="#9B6BFF" stroke-width="1.3"/>
+<rect x="251" y="669" width="6" height="50" fill="#9B6BFF" fill-opacity="0.85"/>
+<circle cx="282" cy="688" r="13" fill="#9B6BFF" fill-opacity="0.22" stroke="#9B6BFF"/>
+<text x="282" y="692.5" text-anchor="middle" font-size="13" fill="#0B0F2A" font-weight="700">8</text>
+<text x="304" y="693" text-anchor="start" font-size="14" fill="#0B0F2A" font-weight="700">After triggers</text>
+<text x="304" y="711" text-anchor="start" font-size="12" fill="#1C1440">after insert / after update</text>
+<rect x="677.6" y="659" width="34.4" height="18" rx="9" fill="#9B6BFF" fill-opacity="0.95" stroke="#9B6BFF" stroke-width="1"/>
+<rect x="677.6" y="659" width="34.4" height="18" rx="9" fill="#FFFFFF" fill-opacity="0.55"/>
+<text x="694.8000000000001" y="672" text-anchor="middle" font-size="11" fill="#0B0F2A" font-weight="700">Apex</text>
+<path d="M485.0 720 V732" fill="none" stroke="#1C1440" stroke-width="1.6" marker-end="url(#arrow)"/>
+<rect x="250" y="734" width="470" height="52" rx="6" fill="#FFFFFF" fill-opacity="1" stroke="#FF4FB8" stroke-width="1.3"/>
+<rect x="251" y="735" width="6" height="50" fill="#FF4FB8" fill-opacity="0.85"/>
+<circle cx="282" cy="754" r="13" fill="#FF4FB8" fill-opacity="0.22" stroke="#FF4FB8"/>
+<text x="282" y="758.5" text-anchor="middle" font-size="13" fill="#0B0F2A" font-weight="700">9</text>
+<text x="304" y="759" text-anchor="start" font-size="14" fill="#0B0F2A" font-weight="700">Assignment rules</text>
+<text x="304" y="777" text-anchor="start" font-size="12" fill="#1C1440">A primeira regra que casar define o proprietário</text>
+<rect x="591.8" y="725" width="120.19999999999999" height="18" rx="9" fill="#FF4FB8" fill-opacity="0.95" stroke="#FF4FB8" stroke-width="1"/>
+<rect x="591.8" y="725" width="120.19999999999999" height="18" rx="9" fill="#FFFFFF" fill-opacity="0.55"/>
+<text x="651.9" y="738" text-anchor="middle" font-size="11" fill="#0B0F2A" font-weight="700">Regra declarativa</text>
+<path d="M485.0 786 V798" fill="none" stroke="#1C1440" stroke-width="1.6" marker-end="url(#arrow)"/>
+<rect x="250" y="800" width="470" height="52" rx="6" fill="#FFFFFF" fill-opacity="1" stroke="#FF4FB8" stroke-width="1.3"/>
+<rect x="251" y="801" width="6" height="50" fill="#FF4FB8" fill-opacity="0.85"/>
+<circle cx="282" cy="820" r="13" fill="#FF4FB8" fill-opacity="0.22" stroke="#FF4FB8"/>
+<text x="282" y="824.5" text-anchor="middle" font-size="13" fill="#0B0F2A" font-weight="700">10</text>
+<text x="304" y="825" text-anchor="start" font-size="14" fill="#0B0F2A" font-weight="700">Auto-response rules</text>
+<text x="304" y="843" text-anchor="start" font-size="12" fill="#1C1440">A primeira regra que casar prepara o e-mail</text>
+<rect x="591.8" y="791" width="120.19999999999999" height="18" rx="9" fill="#FF4FB8" fill-opacity="0.95" stroke="#FF4FB8" stroke-width="1"/>
+<rect x="591.8" y="791" width="120.19999999999999" height="18" rx="9" fill="#FFFFFF" fill-opacity="0.55"/>
+<text x="651.9" y="804" text-anchor="middle" font-size="11" fill="#0B0F2A" font-weight="700">Regra declarativa</text>
+<path d="M485.0 852 V864" fill="none" stroke="#1C1440" stroke-width="1.6" marker-end="url(#arrow)"/>
+<rect x="250" y="866" width="470" height="52" rx="6" fill="#FFFFFF" fill-opacity="1" stroke="#FF4FB8" stroke-width="1.3" stroke-dasharray="6 4"/>
+<rect x="251" y="867" width="6" height="50" fill="#FF4FB8" fill-opacity="0.85"/>
+<circle cx="282" cy="886" r="13" fill="#FF4FB8" fill-opacity="0.22" stroke="#FF4FB8"/>
+<text x="282" y="890.5" text-anchor="middle" font-size="13" fill="#0B0F2A" font-weight="700">11</text>
+<text x="304" y="891" text-anchor="start" font-size="14" fill="#0B0F2A" font-weight="700">Workflow rules</text>
+<text x="304" y="909" text-anchor="start" font-size="12" fill="#1C1440">Field update dispara uma reexecução (ver ao lado)</text>
+<rect x="664.4" y="857" width="47.599999999999994" height="18" rx="9" fill="#FFFFFF" fill-opacity="1" stroke="#1C1440" stroke-width="1" stroke-dasharray="3 2"/>
+<text x="688.1999999999999" y="870" text-anchor="middle" font-size="11" fill="#0B0F2A" font-weight="700">legado</text>
+<rect x="540.2" y="857" width="120.19999999999999" height="18" rx="9" fill="#FF4FB8" fill-opacity="0.95" stroke="#FF4FB8" stroke-width="1"/>
+<rect x="540.2" y="857" width="120.19999999999999" height="18" rx="9" fill="#FFFFFF" fill-opacity="0.55"/>
+<text x="600.3000000000001" y="870" text-anchor="middle" font-size="11" fill="#0B0F2A" font-weight="700">Regra declarativa</text>
+<path d="M485.0 918 V930" fill="none" stroke="#1C1440" stroke-width="1.6" marker-end="url(#arrow)"/>
+<rect x="250" y="932" width="470" height="52" rx="6" fill="#FFFFFF" fill-opacity="1" stroke="#FF4FB8" stroke-width="1.3"/>
+<rect x="251" y="933" width="6" height="50" fill="#FF4FB8" fill-opacity="0.85"/>
+<circle cx="282" cy="952" r="13" fill="#FF4FB8" fill-opacity="0.22" stroke="#FF4FB8"/>
+<text x="282" y="956.5" text-anchor="middle" font-size="13" fill="#0B0F2A" font-weight="700">12</text>
+<text x="304" y="957" text-anchor="start" font-size="14" fill="#0B0F2A" font-weight="700">Escalation rules</text>
+<text x="304" y="975" text-anchor="start" font-size="12" fill="#1C1440">Aplicável a objetos com escalonamento (ex.: Case)</text>
+<rect x="591.8" y="923" width="120.19999999999999" height="18" rx="9" fill="#FF4FB8" fill-opacity="0.95" stroke="#FF4FB8" stroke-width="1"/>
+<rect x="591.8" y="923" width="120.19999999999999" height="18" rx="9" fill="#FFFFFF" fill-opacity="0.55"/>
+<text x="651.9" y="936" text-anchor="middle" font-size="11" fill="#0B0F2A" font-weight="700">Regra declarativa</text>
+<path d="M485.0 984 V996" fill="none" stroke="#1C1440" stroke-width="1.6" marker-end="url(#arrow)"/>
+<rect x="250" y="998" width="470" height="52" rx="6" fill="#FFFFFF" fill-opacity="1" stroke="#FF4FB8" stroke-width="1.3" stroke-dasharray="6 4"/>
+<rect x="251" y="999" width="6" height="50" fill="#FF4FB8" fill-opacity="0.85"/>
+<rect x="257" y="999" width="6" height="50" fill="#3EE6F2" fill-opacity="0.85"/>
+<circle cx="282" cy="1018" r="13" fill="#FF4FB8" fill-opacity="0.22" stroke="#FF4FB8"/>
+<text x="282" y="1022.5" text-anchor="middle" font-size="13" fill="#0B0F2A" font-weight="700">13</text>
+<text x="304" y="1023" text-anchor="start" font-size="14" fill="#0B0F2A" font-weight="700">Processes + flows lançados por process ou workflow</text>
+<text x="304" y="1041" text-anchor="start" font-size="12" fill="#1C1440">Sem ordem garantida entre eles</text>
+<rect x="664.4" y="989" width="47.599999999999994" height="18" rx="9" fill="#FFFFFF" fill-opacity="1" stroke="#1C1440" stroke-width="1" stroke-dasharray="3 2"/>
+<text x="688.1999999999999" y="1002" text-anchor="middle" font-size="11" fill="#0B0F2A" font-weight="700">legado</text>
+<rect x="626.0" y="989" width="34.4" height="18" rx="9" fill="#3EE6F2" fill-opacity="0.95" stroke="#3EE6F2" stroke-width="1"/>
+<rect x="626.0" y="989" width="34.4" height="18" rx="9" fill="#FFFFFF" fill-opacity="0.55"/>
+<text x="643.2" y="1002" text-anchor="middle" font-size="11" fill="#0B0F2A" font-weight="700">Flow</text>
+<rect x="501.8" y="989" width="120.19999999999999" height="18" rx="9" fill="#FF4FB8" fill-opacity="0.95" stroke="#FF4FB8" stroke-width="1"/>
+<rect x="501.8" y="989" width="120.19999999999999" height="18" rx="9" fill="#FFFFFF" fill-opacity="0.55"/>
+<text x="561.9" y="1002" text-anchor="middle" font-size="11" fill="#0B0F2A" font-weight="700">Regra declarativa</text>
+<path d="M485.0 1050 V1062" fill="none" stroke="#1C1440" stroke-width="1.6" marker-end="url(#arrow)"/>
+<rect x="250" y="1064" width="470" height="52" rx="6" fill="#FFFFFF" fill-opacity="1" stroke="#3EE6F2" stroke-width="1.3"/>
+<rect x="251" y="1065" width="6" height="50" fill="#3EE6F2" fill-opacity="0.85"/>
+<circle cx="282" cy="1084" r="13" fill="#3EE6F2" fill-opacity="0.22" stroke="#3EE6F2"/>
+<text x="282" y="1088.5" text-anchor="middle" font-size="13" fill="#0B0F2A" font-weight="700">14</text>
+<text x="304" y="1089" text-anchor="start" font-size="14" fill="#0B0F2A" font-weight="700">Record-triggered Flows after-save</text>
+<text x="304" y="1107" text-anchor="start" font-size="12" fill="#1C1440">Caminho imediato: ainda antes do commit</text>
+<rect x="677.6" y="1055" width="34.4" height="18" rx="9" fill="#3EE6F2" fill-opacity="0.95" stroke="#3EE6F2" stroke-width="1"/>
+<rect x="677.6" y="1055" width="34.4" height="18" rx="9" fill="#FFFFFF" fill-opacity="0.55"/>
+<text x="694.8000000000001" y="1068" text-anchor="middle" font-size="11" fill="#0B0F2A" font-weight="700">Flow</text>
+<path d="M485.0 1116 V1128" fill="none" stroke="#1C1440" stroke-width="1.6" marker-end="url(#arrow)"/>
+<rect x="250" y="1130" width="470" height="52" rx="6" fill="#FFFFFF" fill-opacity="1" stroke="#FF4FB8" stroke-width="1.3"/>
+<rect x="251" y="1131" width="6" height="50" fill="#FF4FB8" fill-opacity="0.85"/>
+<circle cx="282" cy="1150" r="13" fill="#FF4FB8" fill-opacity="0.22" stroke="#FF4FB8"/>
+<text x="282" y="1154.5" text-anchor="middle" font-size="13" fill="#0B0F2A" font-weight="700">15</text>
+<text x="304" y="1155" text-anchor="start" font-size="14" fill="#0B0F2A" font-weight="700">Entitlement rules</text>
+<text x="304" y="1173" text-anchor="start" font-size="12" fill="#1C1440">Aplicável a objetos com entitlements</text>
+<rect x="591.8" y="1121" width="120.19999999999999" height="18" rx="9" fill="#FF4FB8" fill-opacity="0.95" stroke="#FF4FB8" stroke-width="1"/>
+<rect x="591.8" y="1121" width="120.19999999999999" height="18" rx="9" fill="#FFFFFF" fill-opacity="0.55"/>
+<text x="651.9" y="1134" text-anchor="middle" font-size="11" fill="#0B0F2A" font-weight="700">Regra declarativa</text>
+<path d="M485.0 1182 V1194" fill="none" stroke="#1C1440" stroke-width="1.6" marker-end="url(#arrow)"/>
+<rect x="250" y="1196" width="470" height="52" rx="6" fill="#FFFFFF" fill-opacity="1" stroke="#1C1440" stroke-width="1.3"/>
+<rect x="251" y="1197" width="6" height="50" fill="#1C1440" fill-opacity="0.85"/>
+<circle cx="282" cy="1216" r="13" fill="#1C1440" fill-opacity="0.22" stroke="#1C1440"/>
+<text x="282" y="1220.5" text-anchor="middle" font-size="13" fill="#0B0F2A" font-weight="700">16</text>
+<text x="304" y="1221" text-anchor="start" font-size="14" fill="#0B0F2A" font-weight="700">Roll-up summary / cross-object workflow no PAI</text>
+<text x="304" y="1239" text-anchor="start" font-size="12" fill="#1C1440">Recalcula o pai, que passa pelo procedimento de save</text>
+<rect x="657.8" y="1187" width="54.199999999999996" height="18" rx="9" fill="#1C1440" fill-opacity="0.95" stroke="#1C1440" stroke-width="1"/>
+<rect x="657.8" y="1187" width="54.199999999999996" height="18" rx="9" fill="#FFFFFF" fill-opacity="0.55"/>
+<text x="684.9" y="1200" text-anchor="middle" font-size="11" fill="#0B0F2A" font-weight="700">Sistema</text>
+<path d="M485.0 1248 V1260" fill="none" stroke="#1C1440" stroke-width="1.6" marker-end="url(#arrow)"/>
+<rect x="250" y="1262" width="470" height="52" rx="6" fill="#FFFFFF" fill-opacity="1" stroke="#1C1440" stroke-width="1.3"/>
+<rect x="251" y="1263" width="6" height="50" fill="#1C1440" fill-opacity="0.85"/>
+<circle cx="282" cy="1282" r="13" fill="#1C1440" fill-opacity="0.22" stroke="#1C1440"/>
+<text x="282" y="1286.5" text-anchor="middle" font-size="13" fill="#0B0F2A" font-weight="700">17</text>
+<text x="304" y="1287" text-anchor="start" font-size="14" fill="#0B0F2A" font-weight="700">Roll-up summary / cross-object workflow no AVÔ</text>
+<text x="304" y="1305" text-anchor="start" font-size="12" fill="#1C1440">Se o pai mudou: recalcula o avô, que passa pelo save</text>
+<rect x="657.8" y="1253" width="54.199999999999996" height="18" rx="9" fill="#1C1440" fill-opacity="0.95" stroke="#1C1440" stroke-width="1"/>
+<rect x="657.8" y="1253" width="54.199999999999996" height="18" rx="9" fill="#FFFFFF" fill-opacity="0.55"/>
+<text x="684.9" y="1266" text-anchor="middle" font-size="11" fill="#0B0F2A" font-weight="700">Sistema</text>
+<path d="M485.0 1314 V1326" fill="none" stroke="#1C1440" stroke-width="1.6" marker-end="url(#arrow)"/>
+<rect x="250" y="1328" width="470" height="52" rx="6" fill="#FFFFFF" fill-opacity="1" stroke="#1C1440" stroke-width="1.3"/>
+<rect x="251" y="1329" width="6" height="50" fill="#1C1440" fill-opacity="0.85"/>
+<circle cx="282" cy="1348" r="13" fill="#1C1440" fill-opacity="0.22" stroke="#1C1440"/>
+<text x="282" y="1352.5" text-anchor="middle" font-size="13" fill="#0B0F2A" font-weight="700">18</text>
+<text x="304" y="1353" text-anchor="start" font-size="14" fill="#0B0F2A" font-weight="700">Criteria-based sharing</text>
+<text x="304" y="1371" text-anchor="start" font-size="12" fill="#1C1440">Avalia compartilhamento por critério (acesso a registro, não FLS)</text>
+<rect x="657.8" y="1319" width="54.199999999999996" height="18" rx="9" fill="#1C1440" fill-opacity="0.95" stroke="#1C1440" stroke-width="1"/>
+<rect x="657.8" y="1319" width="54.199999999999996" height="18" rx="9" fill="#FFFFFF" fill-opacity="0.55"/>
+<text x="684.9" y="1332" text-anchor="middle" font-size="11" fill="#0B0F2A" font-weight="700">Sistema</text>
+<path d="M485.0 1380 V1392" fill="none" stroke="#1C1440" stroke-width="1.6" marker-end="url(#arrow)"/>
+<rect x="250" y="1402" width="470" height="52" rx="6" fill="#2BBE6A" fill-opacity="0.2" stroke="#0B0F2A" stroke-width="2"/>
+<rect x="251" y="1403" width="6" height="50" fill="#2BBE6A" fill-opacity="0.85"/>
+<circle cx="282" cy="1422" r="13" fill="#2BBE6A" fill-opacity="0.22" stroke="#2BBE6A"/>
+<text x="282" y="1426.5" text-anchor="middle" font-size="13" fill="#0B0F2A" font-weight="700">19</text>
+<text x="304" y="1427" text-anchor="start" font-size="14" fill="#0B0F2A" font-weight="700">COMMIT de todas as operações DML</text>
+<text x="304" y="1445" text-anchor="start" font-size="12" fill="#1C1440">A partir daqui, o salvamento está confirmado</text>
+<rect x="664.4" y="1393" width="47.599999999999994" height="18" rx="9" fill="#2BBE6A" fill-opacity="0.95" stroke="#2BBE6A" stroke-width="1"/>
+<rect x="664.4" y="1393" width="47.599999999999994" height="18" rx="9" fill="#FFFFFF" fill-opacity="0.55"/>
+<text x="688.1999999999999" y="1406" text-anchor="middle" font-size="11" fill="#0B0F2A" font-weight="700">Commit</text>
+<path d="M485.0 1454 V1484" fill="none" stroke="#1C1440" stroke-width="1.6" marker-end="url(#arrow)"/>
+<rect x="250" y="1486" width="470" height="68" rx="6" fill="#FFFFFF" fill-opacity="1" stroke="#9B6BFF" stroke-width="1.3"/>
+<rect x="251" y="1487" width="6" height="66" fill="#9B6BFF" fill-opacity="0.85"/>
+<circle cx="282" cy="1506" r="13" fill="#9B6BFF" fill-opacity="0.22" stroke="#9B6BFF"/>
+<text x="282" y="1510.5" text-anchor="middle" font-size="13" fill="#0B0F2A" font-weight="700">20</text>
+<text x="304" y="1511" text-anchor="start" font-size="14" fill="#0B0F2A" font-weight="700">Lógica pós-commit (sem ordem garantida)</text>
+<text x="304" y="1529" text-anchor="start" font-size="12" fill="#1C1440">Envio de e-mail · Apex assíncrono enfileirado (Queueable, future)</text>
+<text x="304" y="1545" text-anchor="start" font-size="12" fill="#1C1440">Caminhos assíncronos de record-triggered Flow</text>
+<rect x="638.0" y="1477" width="74.0" height="18" rx="9" fill="#9B6BFF" fill-opacity="0.95" stroke="#9B6BFF" stroke-width="1"/>
+<rect x="638.0" y="1477" width="74.0" height="18" rx="9" fill="#FFFFFF" fill-opacity="0.55"/>
+<text x="675.0" y="1490" text-anchor="middle" font-size="11" fill="#0B0F2A" font-weight="700">Assíncrono</text>
+<rect x="18" y="168" width="196" height="426" rx="6" fill="#3EE6F2" fill-opacity="0.12" stroke="#3EE6F2" stroke-width="1"/>
+<text x="30" y="190" text-anchor="start" font-size="14" fill="#0B0F2A" font-weight="700">1 · Antes de salvar</text>
+<text x="30" y="209" text-anchor="start" font-size="12" fill="#1C1440">Prepara e valida</text>
+<text x="30" y="225" text-anchor="start" font-size="12" fill="#1C1440">o registro</text>
+<rect x="18" y="596" width="196" height="592" rx="6" fill="#9B6BFF" fill-opacity="0.12" stroke="#9B6BFF" stroke-width="1"/>
+<text x="30" y="618" text-anchor="start" font-size="14" fill="#0B0F2A" font-weight="700">2 · Salvo, sem commit</text>
+<text x="30" y="637" text-anchor="start" font-size="12" fill="#1C1440">Automações no</text>
+<text x="30" y="653" text-anchor="start" font-size="12" fill="#1C1440">próprio registro</text>
+<rect x="18" y="1190" width="196" height="196" rx="6" fill="#FF4FB8" fill-opacity="0.12" stroke="#FF4FB8" stroke-width="1"/>
+<text x="30" y="1212" text-anchor="start" font-size="14" fill="#0B0F2A" font-weight="700">3 · Propagação</text>
+<text x="30" y="1231" text-anchor="start" font-size="12" fill="#1C1440">Efeitos em outros</text>
+<text x="30" y="1247" text-anchor="start" font-size="12" fill="#1C1440">registros</text>
+<rect x="18" y="1396" width="196" height="64" rx="6" fill="#2BBE6A" fill-opacity="0.12" stroke="#2BBE6A" stroke-width="1"/>
+<text x="30" y="1418" text-anchor="start" font-size="14" fill="#0B0F2A" font-weight="700">4 · Confirmação</text>
+<rect x="18" y="1480" width="196" height="80" rx="6" fill="#9B6BFF" fill-opacity="0.12" stroke="#9B6BFF" stroke-width="1"/>
+<text x="30" y="1502" text-anchor="start" font-size="14" fill="#0B0F2A" font-weight="700">5 · Depois do commit</text>
+<text x="30" y="1521" text-anchor="start" font-size="12" fill="#1C1440">Outra(s) transação(ões)</text>
+<path d="M232 174 H226 V1454 H232" fill="none" stroke="#0B0F2A" stroke-width="2"/>
+<path d="M194 738 H200 V1310 H194" fill="none" stroke="#FF4FB8" stroke-width="2"/>
+<text x="186" y="1024.0" font-size="12" fill="#1C1440" font-weight="700" text-anchor="middle" transform="rotate(-90 186 1024.0)">Save recursivo: etapas 9 a 17 são puladas</text>
+<rect x="760" y="168" width="300" height="121" rx="6" fill="#0B0F2A" fill-opacity="0.1" stroke="#0B0F2A" stroke-width="1.2"/>
+<text x="772" y="190" text-anchor="start" font-size="13" fill="#0B0F2A" font-weight="700">Fronteira transacional</text>
+<text x="772" y="211" text-anchor="start" font-size="12" fill="#1C1440">Etapas 1 a 19 são a MESMA transação:</text>
+<text x="772" y="228" text-anchor="start" font-size="12" fill="#1C1440">orçamento de governor limits compartilhado.</text>
+<text x="772" y="245" text-anchor="start" font-size="12" fill="#1C1440">Exceção não tratada antes do commit</text>
+<text x="772" y="262" text-anchor="start" font-size="12" fill="#1C1440">→ nada do salvamento é confirmado.</text>
+<text x="772" y="279" text-anchor="start" font-size="12" fill="#1C1440">“After” = depois de gravar, não de confirmar.</text>
+<rect x="760" y="528" width="300" height="87" rx="6" fill="#FF4FB8" fill-opacity="0.1" stroke="#FF4FB8" stroke-width="1.2"/>
+<text x="772" y="550" text-anchor="start" font-size="13" fill="#0B0F2A" font-weight="700">Duplicate rule com bloqueio</text>
+<text x="772" y="571" text-anchor="start" font-size="12" fill="#1C1440">Registro NÃO é salvo; nenhuma etapa</text>
+<text x="772" y="588" text-anchor="start" font-size="12" fill="#1C1440">seguinte roda (nem after triggers,</text>
+<text x="772" y="605" text-anchor="start" font-size="12" fill="#1C1440">nem workflow rules).</text>
+<path d="M720 562.0 H756" fill="none" stroke="#FF4FB8" stroke-width="1.6" marker-end="url(#arrowRosa)"/>
+<rect x="780" y="658" width="280" height="189" rx="6" fill="#9B6BFF" fill-opacity="0.1" stroke="#9B6BFF" stroke-width="1.2" stroke-dasharray="5 3"/>
+<text x="792" y="680" text-anchor="start" font-size="13" fill="#0B0F2A" font-weight="700">Workflow field update ↺</text>
+<text x="792" y="701" text-anchor="start" font-size="12" fill="#1C1440">1. Atualiza o registro de novo</text>
+<text x="792" y="718" text-anchor="start" font-size="12" fill="#1C1440">2. Repete validações de sistema</text>
+<text x="792" y="735" text-anchor="start" font-size="12" fill="#1C1440">3. Before e after UPDATE triggers</text>
+<text x="792" y="752" text-anchor="start" font-size="12" fill="#1C1440">   rodam mais 1 vez (só 1), mesmo</text>
+<text x="792" y="769" text-anchor="start" font-size="12" fill="#1C1440">   que a operação seja insert</text>
+<text x="792" y="786" text-anchor="start" font-size="12" fill="#1C1440">Não repete: validation rules, flows,</text>
+<text x="792" y="803" text-anchor="start" font-size="12" fill="#1C1440">duplicate, processes, escalation.</text>
+<text x="792" y="820" text-anchor="start" font-size="12" fill="#1C1440">Trigger.old = valor antes do update</text>
+<text x="792" y="837" text-anchor="start" font-size="12" fill="#1C1440">inicial, não antes do field update.</text>
+<path d="M720 892.0 C 750 886, 750 826, 776 762.5" fill="none" stroke="#9B6BFF" stroke-width="1.6" stroke-dasharray="5 3" marker-end="url(#arrowRoxo)"/>
+<rect x="780" y="994" width="280" height="87" rx="6" fill="#9B6BFF" fill-opacity="0.1" stroke="#9B6BFF" stroke-width="1.2"/>
+<text x="792" y="1016" text-anchor="start" font-size="13" fill="#0B0F2A" font-weight="700">Nova entrada no save</text>
+<text x="792" y="1037" text-anchor="start" font-size="12" fill="#1C1440">DML feito por process ou flow:</text>
+<text x="792" y="1054" text-anchor="start" font-size="12" fill="#1C1440">o registro afetado passa pelo</text>
+<text x="792" y="1071" text-anchor="start" font-size="12" fill="#1C1440">procedimento de save de novo.</text>
+<path d="M720 1024.0 H776" fill="none" stroke="#9B6BFF" stroke-width="1.6" stroke-dasharray="5 3" marker-end="url(#arrowRoxo)"/>
+<rect x="780" y="1196" width="280" height="104" rx="6" fill="#FF4FB8" fill-opacity="0.1" stroke="#FF4FB8" stroke-width="1.2"/>
+<text x="792" y="1218" text-anchor="start" font-size="13" fill="#0B0F2A" font-weight="700">Cascata para cima</text>
+<text x="792" y="1239" text-anchor="start" font-size="12" fill="#1C1440">Pai e avô executam o próprio</text>
+<text x="792" y="1256" text-anchor="start" font-size="12" fill="#1C1440">order of execution dentro da</text>
+<text x="792" y="1273" text-anchor="start" font-size="12" fill="#1C1440">mesma transação: mais consumo</text>
+<text x="792" y="1290" text-anchor="start" font-size="12" fill="#1C1440">de limites e mais automações.</text>
+<path d="M720 1222.0 H776" fill="none" stroke="#FF4FB8" stroke-width="1.6" marker-end="url(#arrowRosa)"/>
+<rect x="760" y="1480" width="300" height="87" rx="6" fill="#9B6BFF" fill-opacity="0.1" stroke="#9B6BFF" stroke-width="1.2"/>
+<text x="772" y="1502" text-anchor="start" font-size="13" fill="#0B0F2A" font-weight="700">Fora da transação de origem</text>
+<text x="772" y="1523" text-anchor="start" font-size="12" fill="#1C1440">Roda depois do commit, com limites</text>
+<text x="772" y="1540" text-anchor="start" font-size="12" fill="#1C1440">próprios. Falha aqui NÃO desfaz o</text>
+<text x="772" y="1557" text-anchor="start" font-size="12" fill="#1C1440">registro já confirmado.</text>
+<line x1="30" y1="1574" x2="1050" y2="1574" stroke="#1C1440" stroke-opacity="0.2"/>
+<text x="30" y="1594" text-anchor="start" font-size="14" fill="#0B0F2A" font-weight="700">Legenda</text>
+<rect x="110" y="1582" width="14" height="14" rx="3" fill="#1C1440" fill-opacity="0.85"/>
+<text x="130" y="1594" text-anchor="start" font-size="12" fill="#1C1440">Sistema</text>
+<rect x="191.6" y="1582" width="14" height="14" rx="3" fill="#9B6BFF" fill-opacity="0.85"/>
+<text x="211.6" y="1594" text-anchor="start" font-size="12" fill="#1C1440">Apex</text>
+<rect x="252.8" y="1582" width="14" height="14" rx="3" fill="#3EE6F2" fill-opacity="0.85"/>
+<text x="272.8" y="1594" text-anchor="start" font-size="12" fill="#1C1440">Flow</text>
+<rect x="314.0" y="1582" width="14" height="14" rx="3" fill="#FF4FB8" fill-opacity="0.85"/>
+<text x="334.0" y="1594" text-anchor="start" font-size="12" fill="#1C1440">Regra declarativa</text>
+<rect x="463.6" y="1582" width="14" height="14" rx="3" fill="#2BBE6A" fill-opacity="0.85"/>
+<text x="483.6" y="1594" text-anchor="start" font-size="12" fill="#1C1440">Commit</text>
+<rect x="538.4" y="1582" width="26" height="14" rx="3" fill="#FFFFFF" fill-opacity="1" stroke="#1C1440" stroke-width="1.2" stroke-dasharray="5 3"/>
+<text x="570.4" y="1594" text-anchor="start" font-size="12" fill="#1C1440">borda tracejada = legado</text>
+<text x="30" y="1618" text-anchor="start" font-size="12" fill="#1C1440">• Vários triggers (ou vários flows) no mesmo objeto e evento: a ordem entre eles não é garantida.</text>
+<text x="30" y="1637" text-anchor="start" font-size="12" fill="#1C1440">• Workflow Rules e Process Builder: fim de suporte em 31/12/2025, mas automações já ativas continuam rodando.</text>
+<text x="30" y="1656" text-anchor="start" font-size="12" fill="#1C1440">• API 53.0 e anteriores: o guia registra posição diferente para after-save Flow em relação a entitlement rules.</text>
+<text x="30" y="1675" text-anchor="start" font-size="12" fill="#1C1440">• Etapas condicionais: dependem da operação, do objeto, da origem e do que está configurado na org.</text>
+<text x="30" y="1694" text-anchor="start" font-size="12" fill="#1C1440">• Fases, cores e agrupamento de mecanismos são classificação didática do Desbugando, não nomenclatura oficial.</text>
+<text x="30" y="1713" text-anchor="start" font-size="12" fill="#1C1440" font-style="italic">Fonte: Apex Developer Guide, “Triggers and Order of Execution” · verificado em 17/11/2026 (Winter ’27).</text>
+</g>
+<g data-brand-footer="true" aria-label="Desbugando - tecnologia sem mistério"><rect x="0" y="1744" width="1080" height="52" fill="#1C1440"/><g opacity="0.92"><svg x="18" y="1752" width="36" height="36" viewBox="0 0 120 120" aria-hidden="true">
+<title>Desbugando</title>
+<circle cx="60" cy="60" r="52" fill="#3EE6F2" opacity="0.14"/>
+<path d="M33 58 L20 50 M31 72 H17 M33 86 L21 96 M63 72 H76 M63 86 L74 96" stroke="#FF4FB8" stroke-width="5" stroke-linecap="round"/>
+<path d="M62 57 L71 55" stroke="#FF4FB8" stroke-width="5" stroke-linecap="round"/>
+<path d="M43 30 L35 16 M53 30 L59 16" stroke="#FF4FB8" stroke-width="5" stroke-linecap="round"/>
+<circle cx="34" cy="14" r="4" fill="#FF4FB8"/><circle cx="60" cy="14" r="4" fill="#FF4FB8"/>
+<circle cx="48" cy="38" r="10" fill="none" stroke="#F5F7FF" stroke-width="6"/>
+<ellipse cx="48" cy="72" rx="16" ry="22" fill="none" stroke="#F5F7FF" stroke-width="6"/>
+<path d="M48 51 V93" stroke="#F5F7FF" stroke-width="4" stroke-linecap="round"/>
+<path d="M71 56 L80 47" stroke="#F5F7FF" stroke-width="7" stroke-linecap="round"/>
+<circle cx="91" cy="36" r="14" fill="#3EE6F2" fill-opacity="0.25" stroke="#3EE6F2" stroke-width="6"/>
+<path d="M85 31 a8 8 0 0 1 7 -4" fill="none" stroke="#F5F7FF" stroke-width="3" stroke-linecap="round"/>
+</svg><text x="66" y="1776" text-anchor="start" font-family="Arial, DejaVu Sans, sans-serif" font-size="15" font-weight="600" fill="#F5F7FF">Desbugando - tecnologia sem mistério</text></g></g></svg>
