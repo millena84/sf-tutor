@@ -110,9 +110,13 @@
         "evidencias": [
           {
             "fonte": "src:mdapi-profile"
+          },
+          {
+            "fonte": "src:mdapi-profile-parte1"
           }
         ],
-        "cardinalidade": "0..n"
+        "cardinalidade": "0..n",
+        "estrutura_ref": "mdx:ProfileAgentAccess"
       },
       {
         "id": "mdt:Profile.applicationVisibilities",
@@ -896,9 +900,13 @@
         "evidencias": [
           {
             "fonte": "src:mdapi-profile"
+          },
+          {
+            "fonte": "src:mdapi-profile-parte1"
           }
         ],
-        "cardinalidade": "0..n"
+        "cardinalidade": "0..n",
+        "estrutura_ref": "mdx:LoginFlow"
       },
       {
         "id": "mdt:Profile.loginHours",
@@ -943,9 +951,13 @@
         "evidencias": [
           {
             "fonte": "src:mdapi-profile"
+          },
+          {
+            "fonte": "src:mdapi-profile-parte1"
           }
         ],
-        "cardinalidade": "0..n"
+        "cardinalidade": "0..n",
+        "estrutura_ref": "mdx:ProfileLoginHours"
       },
       {
         "id": "mdt:Profile.loginIpRanges",
@@ -1134,9 +1146,13 @@
         "evidencias": [
           {
             "fonte": "src:mdapi-profile"
+          },
+          {
+            "fonte": "src:mdapi-profile-parte1"
           }
         ],
-        "cardinalidade": "0..n"
+        "cardinalidade": "0..n",
+        "estrutura_ref": "mdx:ProfileActionOverride"
       },
       {
         "id": "mdt:Profile.recordTypeVisibilities",
@@ -1385,6 +1401,9 @@
       }
     ],
     "estruturas": [
+      "mdx:LoginFlow",
+      "mdx:ProfileActionOverride",
+      "mdx:ProfileAgentAccess",
       "mdx:ProfileApexClassAccess",
       "mdx:ProfileApexPageAccess",
       "mdx:ProfileApplicationVisibility",
@@ -1397,6 +1416,7 @@
       "mdx:ProfileFlowAccess",
       "mdx:ProfileGenComputingSummaryDefAccess",
       "mdx:ProfileLayoutAssignments",
+      "mdx:ProfileLoginHours",
       "mdx:ProfileLoginIpRange",
       "mdx:ProfileObjectPermissions",
       "mdx:ProfileRecordTypeVisibility",
@@ -1406,10 +1426,10 @@
     ],
     "cobertura": {
       "estrutural": {
-        "estado": "parcial",
+        "estado": "completa",
         "esperado": 27,
         "presente": 27,
-        "nota": "Campos de primeiro nível completos conforme a página 68.0. Em 2026-11-17, a página foi relida a partir de 100.000 caracteres até o fim: ProfileUserPermission e ProfileServicePresenceStatusAccess foram cadastrados; LoginFlow, ProfileAgentAccess, ProfileActionOverride e ProfileLoginHours não têm seção na página. Primeiro nível completo; 4 propriedade(s) de tipo composto ainda sem estrutura detalhada: agentAccesses, loginFlows, loginHours, profileActionOverrides."
+        "nota": "Campos de primeiro nível completos conforme a página 68.0. Em 2026-11-17, a página foi relida inteira: LoginFlow, ProfileActionOverride, ProfileAgentAccess e ProfileLoginHours estão nos primeiros 100 mil caracteres (a nota anterior dizia, por engano, que não tinham seção). ProfileUserPermission e ProfileServicePresenceStatusAccess estão na segunda parte."
       },
       "explicativa": {
         "estado": "completa",
@@ -1445,6 +1465,963 @@
     }
   },
   "estruturas_xml": [
+    {
+      "id": "mdx:LoginFlow",
+      "nome": "LoginFlow",
+      "natureza": "estrutura_auxiliar",
+      "o_que_e": "O login flow ligado ao perfil: um flow ou uma página Visualforce que roda no login.",
+      "usada_por": [
+        "mdt:Profile"
+      ],
+      "propriedades": [
+        {
+          "id": "mdx:LoginFlow.flow",
+          "nome": "flow",
+          "tipo_tecnico": "string",
+          "o_que_e": "Flow usado; precisa estar ativo.",
+          "origem": {
+            "estado": "verificado",
+            "valor": "padrao_plataforma",
+            "nota": "Propriedade definida pelo schema da Metadata API.",
+            "evidencias": [
+              {
+                "fonte": "src:mdapi-profile-parte1"
+              }
+            ]
+          },
+          "obrigatoriedade": {
+            "valor": "condicional",
+            "condicao": "Quando uiLoginFlowType é VisualWorkflow.",
+            "estado": "verificado",
+            "evidencias": [
+              {
+                "fonte": "src:mdapi-profile-parte1"
+              }
+            ]
+          },
+          "default": {
+            "forma": "nao_declarado_na_fonte",
+            "estado": "desconhecido"
+          },
+          "dominio": {
+            "natureza": "texto_livre",
+            "estado": "verificado",
+            "evidencias": [
+              {
+                "fonte": "src:mdapi-profile-parte1"
+              }
+            ],
+            "contexto": "A fonte tipa como string sem lista de valores; não inventar valores."
+          },
+          "disponibilidade": {
+            "desde_versao": null,
+            "ate_versao": null,
+            "estado": "desconhecido"
+          },
+          "explicacao": "explicada",
+          "estado": "verificado",
+          "evidencias": [
+            {
+              "fonte": "src:mdapi-profile-parte1"
+            }
+          ]
+        },
+        {
+          "id": "mdx:LoginFlow.flowtype",
+          "nome": "flowtype",
+          "tipo_tecnico": "LoginFlowType",
+          "o_que_e": "Tipo do login flow.",
+          "origem": {
+            "estado": "verificado",
+            "valor": "padrao_plataforma",
+            "nota": "Propriedade definida pelo schema da Metadata API.",
+            "evidencias": [
+              {
+                "fonte": "src:mdapi-profile-parte1"
+              }
+            ]
+          },
+          "obrigatoriedade": {
+            "valor": "sim",
+            "estado": "verificado",
+            "evidencias": [
+              {
+                "fonte": "src:mdapi-profile-parte1"
+              }
+            ]
+          },
+          "default": {
+            "forma": "nao_declarado_na_fonte",
+            "estado": "desconhecido"
+          },
+          "dominio": {
+            "natureza": "enum_fechado",
+            "valores": [
+              {
+                "valor": "UI"
+              }
+            ],
+            "lista_completa": "sim",
+            "estado": "verificado",
+            "evidencias": [
+              {
+                "fonte": "src:mdapi-profile-parte1"
+              }
+            ]
+          },
+          "disponibilidade": {
+            "desde_versao": null,
+            "ate_versao": null,
+            "estado": "desconhecido"
+          },
+          "explicacao": "explicada",
+          "estado": "verificado",
+          "evidencias": [
+            {
+              "fonte": "src:mdapi-profile-parte1"
+            }
+          ]
+        },
+        {
+          "id": "mdx:LoginFlow.friendlyname",
+          "nome": "friendlyname",
+          "tipo_tecnico": "string",
+          "o_que_e": "Nome do login flow.",
+          "origem": {
+            "estado": "verificado",
+            "valor": "padrao_plataforma",
+            "nota": "Propriedade definida pelo schema da Metadata API.",
+            "evidencias": [
+              {
+                "fonte": "src:mdapi-profile-parte1"
+              }
+            ]
+          },
+          "obrigatoriedade": {
+            "valor": "sim",
+            "estado": "verificado",
+            "evidencias": [
+              {
+                "fonte": "src:mdapi-profile-parte1"
+              }
+            ]
+          },
+          "default": {
+            "forma": "nao_declarado_na_fonte",
+            "estado": "desconhecido"
+          },
+          "dominio": {
+            "natureza": "texto_livre",
+            "estado": "verificado",
+            "evidencias": [
+              {
+                "fonte": "src:mdapi-profile-parte1"
+              }
+            ],
+            "contexto": "A fonte tipa como string sem lista de valores; não inventar valores."
+          },
+          "disponibilidade": {
+            "desde_versao": null,
+            "ate_versao": null,
+            "estado": "desconhecido"
+          },
+          "explicacao": "explicada",
+          "estado": "verificado",
+          "evidencias": [
+            {
+              "fonte": "src:mdapi-profile-parte1"
+            }
+          ]
+        },
+        {
+          "id": "mdx:LoginFlow.uiLoginFlowType",
+          "nome": "uiLoginFlowType",
+          "tipo_tecnico": "UiLoginFlowType",
+          "o_que_e": "Se o login flow é um flow ou uma página Visualforce.",
+          "origem": {
+            "estado": "verificado",
+            "valor": "padrao_plataforma",
+            "nota": "Propriedade definida pelo schema da Metadata API.",
+            "evidencias": [
+              {
+                "fonte": "src:mdapi-profile-parte1"
+              }
+            ]
+          },
+          "obrigatoriedade": {
+            "valor": "sim",
+            "estado": "verificado",
+            "evidencias": [
+              {
+                "fonte": "src:mdapi-profile-parte1"
+              }
+            ]
+          },
+          "default": {
+            "forma": "nao_declarado_na_fonte",
+            "estado": "desconhecido"
+          },
+          "dominio": {
+            "natureza": "enum_fechado",
+            "valores": [
+              {
+                "valor": "VisualWorkflow"
+              },
+              {
+                "valor": "VisualForce"
+              }
+            ],
+            "lista_completa": "sim",
+            "estado": "verificado",
+            "evidencias": [
+              {
+                "fonte": "src:mdapi-profile-parte1"
+              }
+            ]
+          },
+          "disponibilidade": {
+            "desde_versao": null,
+            "ate_versao": null,
+            "estado": "desconhecido"
+          },
+          "explicacao": "explicada",
+          "estado": "verificado",
+          "evidencias": [
+            {
+              "fonte": "src:mdapi-profile-parte1"
+            }
+          ]
+        },
+        {
+          "id": "mdx:LoginFlow.useLightningRuntime",
+          "nome": "useLightningRuntime",
+          "tipo_tecnico": "boolean",
+          "o_que_e": "Usa o runtime do Lightning; só com VisualWorkflow.",
+          "origem": {
+            "estado": "verificado",
+            "valor": "padrao_plataforma",
+            "nota": "Propriedade definida pelo schema da Metadata API.",
+            "evidencias": [
+              {
+                "fonte": "src:mdapi-profile-parte1"
+              }
+            ]
+          },
+          "obrigatoriedade": {
+            "valor": "nao",
+            "estado": "desconhecido",
+            "condicao": "A documentação 68.0 não marca o campo como obrigatório; ausência de marcação não comprova opcionalidade (confirmar no WSDL)."
+          },
+          "default": {
+            "forma": "false",
+            "estado": "verificado",
+            "evidencias": [
+              {
+                "fonte": "src:mdapi-profile-parte1"
+              }
+            ],
+            "valor": false,
+            "nota": "A página declara default false."
+          },
+          "dominio": {
+            "natureza": "booleano",
+            "valores": [
+              {
+                "valor": "true"
+              },
+              {
+                "valor": "false"
+              }
+            ],
+            "lista_completa": "sim",
+            "estado": "verificado",
+            "evidencias": [
+              {
+                "fonte": "src:mdapi-profile-parte1"
+              }
+            ]
+          },
+          "disponibilidade": {
+            "desde_versao": null,
+            "ate_versao": null,
+            "estado": "desconhecido"
+          },
+          "explicacao": "explicada",
+          "estado": "verificado",
+          "evidencias": [
+            {
+              "fonte": "src:mdapi-profile-parte1"
+            }
+          ]
+        },
+        {
+          "id": "mdx:LoginFlow.vfFlowPage",
+          "nome": "vfFlowPage",
+          "tipo_tecnico": "string",
+          "o_que_e": "Página Visualforce usada.",
+          "origem": {
+            "estado": "verificado",
+            "valor": "padrao_plataforma",
+            "nota": "Propriedade definida pelo schema da Metadata API.",
+            "evidencias": [
+              {
+                "fonte": "src:mdapi-profile-parte1"
+              }
+            ]
+          },
+          "obrigatoriedade": {
+            "valor": "condicional",
+            "condicao": "Quando uiLoginFlowType é VisualForce.",
+            "estado": "verificado",
+            "evidencias": [
+              {
+                "fonte": "src:mdapi-profile-parte1"
+              }
+            ]
+          },
+          "default": {
+            "forma": "nao_declarado_na_fonte",
+            "estado": "desconhecido"
+          },
+          "dominio": {
+            "natureza": "texto_livre",
+            "estado": "verificado",
+            "evidencias": [
+              {
+                "fonte": "src:mdapi-profile-parte1"
+              }
+            ],
+            "contexto": "A fonte tipa como string sem lista de valores; não inventar valores."
+          },
+          "disponibilidade": {
+            "desde_versao": null,
+            "ate_versao": null,
+            "estado": "desconhecido"
+          },
+          "explicacao": "explicada",
+          "estado": "verificado",
+          "evidencias": [
+            {
+              "fonte": "src:mdapi-profile-parte1"
+            }
+          ]
+        },
+        {
+          "id": "mdx:LoginFlow.vfFlowPageTitle",
+          "nome": "vfFlowPageTitle",
+          "tipo_tecnico": "string",
+          "o_que_e": "Título da página Visualforce.",
+          "origem": {
+            "estado": "verificado",
+            "valor": "padrao_plataforma",
+            "nota": "Propriedade definida pelo schema da Metadata API.",
+            "evidencias": [
+              {
+                "fonte": "src:mdapi-profile-parte1"
+              }
+            ]
+          },
+          "obrigatoriedade": {
+            "valor": "condicional",
+            "condicao": "Quando uiLoginFlowType é VisualForce.",
+            "estado": "verificado",
+            "evidencias": [
+              {
+                "fonte": "src:mdapi-profile-parte1"
+              }
+            ]
+          },
+          "default": {
+            "forma": "nao_declarado_na_fonte",
+            "estado": "desconhecido"
+          },
+          "dominio": {
+            "natureza": "texto_livre",
+            "estado": "verificado",
+            "evidencias": [
+              {
+                "fonte": "src:mdapi-profile-parte1"
+              }
+            ],
+            "contexto": "A fonte tipa como string sem lista de valores; não inventar valores."
+          },
+          "disponibilidade": {
+            "desde_versao": null,
+            "ate_versao": null,
+            "estado": "desconhecido"
+          },
+          "explicacao": "explicada",
+          "estado": "verificado",
+          "evidencias": [
+            {
+              "fonte": "src:mdapi-profile-parte1"
+            }
+          ],
+          "notas": [
+            "A descrição na página repete a de vfFlowPage."
+          ]
+        }
+      ],
+      "cobertura": {
+        "estrutural": {
+          "estado": "completa",
+          "esperado": 7,
+          "presente": 7,
+          "nota": "Contagem conforme a seção do subtipo na página oficial; tipos compostos internos sem detalhe tornam a cobertura parcial."
+        },
+        "explicativa": {
+          "estado": "completa",
+          "esperado": 7,
+          "presente": 7
+        },
+        "mapeamento": {
+          "estado": "nao_iniciada",
+          "nota": "Correspondências com campos API não investigadas."
+        }
+      },
+      "estado": "verificado",
+      "evidencias": [
+        {
+          "fonte": "src:mdapi-profile-parte1"
+        }
+      ]
+    },
+    {
+      "id": "mdx:ProfileActionOverride",
+      "nome": "ProfileActionOverride",
+      "natureza": "estrutura_auxiliar",
+      "o_que_e": "Uma substituição de ação por perfil, como a página inicial do Lightning Experience. A propriedade do perfil existe da API 37.0 à 44.0.",
+      "usada_por": [
+        "mdt:Profile"
+      ],
+      "propriedades": [
+        {
+          "id": "mdx:ProfileActionOverride.actionName",
+          "nome": "actionName",
+          "tipo_tecnico": "string",
+          "o_que_e": "Ação substituída.",
+          "origem": {
+            "estado": "verificado",
+            "valor": "padrao_plataforma",
+            "nota": "Propriedade definida pelo schema da Metadata API.",
+            "evidencias": [
+              {
+                "fonte": "src:mdapi-profile-parte1"
+              }
+            ]
+          },
+          "obrigatoriedade": {
+            "valor": "sim",
+            "estado": "verificado",
+            "evidencias": [
+              {
+                "fonte": "src:mdapi-profile-parte1"
+              }
+            ]
+          },
+          "default": {
+            "forma": "nao_declarado_na_fonte",
+            "estado": "desconhecido"
+          },
+          "dominio": {
+            "natureza": "enum_fechado",
+            "valores": [
+              {
+                "valor": "accept"
+              },
+              {
+                "valor": "clone"
+              },
+              {
+                "valor": "delete"
+              },
+              {
+                "valor": "edit"
+              },
+              {
+                "valor": "list"
+              },
+              {
+                "valor": "new"
+              },
+              {
+                "valor": "tab"
+              },
+              {
+                "valor": "view"
+              }
+            ],
+            "lista_completa": "sim",
+            "estado": "verificado",
+            "evidencias": [
+              {
+                "fonte": "src:mdapi-profile-parte1"
+              }
+            ]
+          },
+          "disponibilidade": {
+            "desde_versao": null,
+            "ate_versao": null,
+            "estado": "desconhecido"
+          },
+          "explicacao": "explicada",
+          "estado": "verificado",
+          "evidencias": [
+            {
+              "fonte": "src:mdapi-profile-parte1"
+            }
+          ]
+        },
+        {
+          "id": "mdx:ProfileActionOverride.content",
+          "nome": "content",
+          "tipo_tecnico": "string",
+          "o_que_e": "Nome da página ou componente usado.",
+          "origem": {
+            "estado": "verificado",
+            "valor": "padrao_plataforma",
+            "nota": "Propriedade definida pelo schema da Metadata API.",
+            "evidencias": [
+              {
+                "fonte": "src:mdapi-profile-parte1"
+              }
+            ]
+          },
+          "obrigatoriedade": {
+            "valor": "condicional",
+            "condicao": "Quando type é flexipage, lightningcomponent, scontrol ou visualforce.",
+            "estado": "verificado",
+            "evidencias": [
+              {
+                "fonte": "src:mdapi-profile-parte1"
+              }
+            ]
+          },
+          "default": {
+            "forma": "nao_declarado_na_fonte",
+            "estado": "desconhecido"
+          },
+          "dominio": {
+            "natureza": "texto_livre",
+            "estado": "verificado",
+            "evidencias": [
+              {
+                "fonte": "src:mdapi-profile-parte1"
+              }
+            ],
+            "contexto": "A fonte tipa como string sem lista de valores; não inventar valores."
+          },
+          "disponibilidade": {
+            "desde_versao": null,
+            "ate_versao": null,
+            "estado": "desconhecido"
+          },
+          "explicacao": "explicada",
+          "estado": "verificado",
+          "evidencias": [
+            {
+              "fonte": "src:mdapi-profile-parte1"
+            }
+          ]
+        },
+        {
+          "id": "mdx:ProfileActionOverride.formFactor",
+          "nome": "formFactor",
+          "tipo_tecnico": "FormFactor",
+          "o_que_e": "Tamanho de página; nulo vale para o Classic.",
+          "origem": {
+            "estado": "verificado",
+            "valor": "padrao_plataforma",
+            "nota": "Propriedade definida pelo schema da Metadata API.",
+            "evidencias": [
+              {
+                "fonte": "src:mdapi-profile-parte1"
+              }
+            ]
+          },
+          "obrigatoriedade": {
+            "valor": "nao",
+            "estado": "desconhecido",
+            "condicao": "A documentação 68.0 não marca o campo como obrigatório; ausência de marcação não comprova opcionalidade (confirmar no WSDL)."
+          },
+          "default": {
+            "forma": "nao_declarado_na_fonte",
+            "estado": "desconhecido"
+          },
+          "dominio": {
+            "natureza": "enum_fechado",
+            "valores": [
+              {
+                "valor": "Large",
+                "significado": "Lightning Experience no desktop."
+              },
+              {
+                "valor": "Small",
+                "significado": "App móvel do Salesforce."
+              },
+              {
+                "valor": "Medium",
+                "significado": "Reservado para uso futuro."
+              }
+            ],
+            "lista_completa": "sim",
+            "estado": "verificado",
+            "evidencias": [
+              {
+                "fonte": "src:mdapi-profile-parte1"
+              }
+            ]
+          },
+          "disponibilidade": {
+            "desde_versao": null,
+            "ate_versao": null,
+            "estado": "desconhecido"
+          },
+          "explicacao": "explicada",
+          "estado": "verificado",
+          "evidencias": [
+            {
+              "fonte": "src:mdapi-profile-parte1"
+            }
+          ]
+        },
+        {
+          "id": "mdx:ProfileActionOverride.pageOrSobjectType",
+          "nome": "pageOrSobjectType",
+          "tipo_tecnico": "string",
+          "o_que_e": "Objeto ou página; standard-home quando actionName é tab.",
+          "origem": {
+            "estado": "verificado",
+            "valor": "padrao_plataforma",
+            "nota": "Propriedade definida pelo schema da Metadata API.",
+            "evidencias": [
+              {
+                "fonte": "src:mdapi-profile-parte1"
+              }
+            ]
+          },
+          "obrigatoriedade": {
+            "valor": "nao",
+            "estado": "desconhecido",
+            "condicao": "A documentação 68.0 não marca o campo como obrigatório; ausência de marcação não comprova opcionalidade (confirmar no WSDL)."
+          },
+          "default": {
+            "forma": "nao_declarado_na_fonte",
+            "estado": "desconhecido"
+          },
+          "dominio": {
+            "natureza": "texto_livre",
+            "estado": "verificado",
+            "evidencias": [
+              {
+                "fonte": "src:mdapi-profile-parte1"
+              }
+            ],
+            "contexto": "A fonte tipa como string sem lista de valores; não inventar valores."
+          },
+          "disponibilidade": {
+            "desde_versao": null,
+            "ate_versao": null,
+            "estado": "desconhecido"
+          },
+          "explicacao": "explicada",
+          "estado": "verificado",
+          "evidencias": [
+            {
+              "fonte": "src:mdapi-profile-parte1"
+            }
+          ]
+        },
+        {
+          "id": "mdx:ProfileActionOverride.recordType",
+          "nome": "recordType",
+          "tipo_tecnico": "string",
+          "o_que_e": "Record type a que a substituição se aplica; nulo com standard-home.",
+          "origem": {
+            "estado": "verificado",
+            "valor": "padrao_plataforma",
+            "nota": "Propriedade definida pelo schema da Metadata API.",
+            "evidencias": [
+              {
+                "fonte": "src:mdapi-profile-parte1"
+              }
+            ]
+          },
+          "obrigatoriedade": {
+            "valor": "nao",
+            "estado": "desconhecido",
+            "condicao": "A documentação 68.0 não marca o campo como obrigatório; ausência de marcação não comprova opcionalidade (confirmar no WSDL)."
+          },
+          "default": {
+            "forma": "nao_declarado_na_fonte",
+            "estado": "desconhecido"
+          },
+          "dominio": {
+            "natureza": "texto_livre",
+            "estado": "verificado",
+            "evidencias": [
+              {
+                "fonte": "src:mdapi-profile-parte1"
+              }
+            ],
+            "contexto": "A fonte tipa como string sem lista de valores; não inventar valores."
+          },
+          "disponibilidade": {
+            "desde_versao": null,
+            "ate_versao": null,
+            "estado": "desconhecido"
+          },
+          "explicacao": "explicada",
+          "estado": "verificado",
+          "evidencias": [
+            {
+              "fonte": "src:mdapi-profile-parte1"
+            }
+          ]
+        },
+        {
+          "id": "mdx:ProfileActionOverride.type",
+          "nome": "type",
+          "tipo_tecnico": "ActionOverrideType",
+          "o_que_e": "Tipo de substituição.",
+          "origem": {
+            "estado": "verificado",
+            "valor": "padrao_plataforma",
+            "nota": "Propriedade definida pelo schema da Metadata API.",
+            "evidencias": [
+              {
+                "fonte": "src:mdapi-profile-parte1"
+              }
+            ]
+          },
+          "obrigatoriedade": {
+            "valor": "sim",
+            "estado": "verificado",
+            "evidencias": [
+              {
+                "fonte": "src:mdapi-profile-parte1"
+              }
+            ]
+          },
+          "default": {
+            "forma": "nao_declarado_na_fonte",
+            "estado": "desconhecido"
+          },
+          "dominio": {
+            "natureza": "enum_fechado",
+            "valores": [
+              {
+                "valor": "default"
+              },
+              {
+                "valor": "flexipage"
+              },
+              {
+                "valor": "lightningcomponent"
+              },
+              {
+                "valor": "scontrol"
+              },
+              {
+                "valor": "standard"
+              },
+              {
+                "valor": "visualforce"
+              }
+            ],
+            "lista_completa": "sim",
+            "estado": "verificado",
+            "evidencias": [
+              {
+                "fonte": "src:mdapi-profile-parte1"
+              }
+            ]
+          },
+          "disponibilidade": {
+            "desde_versao": null,
+            "ate_versao": null,
+            "estado": "desconhecido"
+          },
+          "explicacao": "explicada",
+          "estado": "verificado",
+          "evidencias": [
+            {
+              "fonte": "src:mdapi-profile-parte1"
+            }
+          ],
+          "notas": [
+            "Valores conforme a página de ActionOverride."
+          ]
+        }
+      ],
+      "cobertura": {
+        "estrutural": {
+          "estado": "completa",
+          "esperado": 6,
+          "presente": 6,
+          "nota": "Contagem conforme a seção do subtipo na página oficial; tipos compostos internos sem detalhe tornam a cobertura parcial."
+        },
+        "explicativa": {
+          "estado": "completa",
+          "esperado": 6,
+          "presente": 6
+        },
+        "mapeamento": {
+          "estado": "nao_iniciada",
+          "nota": "Correspondências com campos API não investigadas."
+        }
+      },
+      "estado": "verificado",
+      "evidencias": [
+        {
+          "fonte": "src:mdapi-profile-parte1"
+        }
+      ]
+    },
+    {
+      "id": "mdx:ProfileAgentAccess",
+      "nome": "ProfileAgentAccess",
+      "natureza": "estrutura_auxiliar",
+      "o_que_e": "O acesso do perfil a um agente de funcionário do Agentforce (API 63.0 ou posterior).",
+      "usada_por": [
+        "mdt:Profile"
+      ],
+      "propriedades": [
+        {
+          "id": "mdx:ProfileAgentAccess.agentName",
+          "nome": "agentName",
+          "tipo_tecnico": "string",
+          "o_que_e": "Nome do agente.",
+          "origem": {
+            "estado": "verificado",
+            "valor": "padrao_plataforma",
+            "nota": "Propriedade definida pelo schema da Metadata API.",
+            "evidencias": [
+              {
+                "fonte": "src:mdapi-profile-parte1"
+              }
+            ]
+          },
+          "obrigatoriedade": {
+            "valor": "sim",
+            "estado": "verificado",
+            "evidencias": [
+              {
+                "fonte": "src:mdapi-profile-parte1"
+              }
+            ]
+          },
+          "default": {
+            "forma": "nao_declarado_na_fonte",
+            "estado": "desconhecido"
+          },
+          "dominio": {
+            "natureza": "texto_livre",
+            "estado": "verificado",
+            "evidencias": [
+              {
+                "fonte": "src:mdapi-profile-parte1"
+              }
+            ],
+            "contexto": "A fonte tipa como string sem lista de valores; não inventar valores."
+          },
+          "disponibilidade": {
+            "desde_versao": null,
+            "ate_versao": null,
+            "estado": "desconhecido"
+          },
+          "explicacao": "explicada",
+          "estado": "verificado",
+          "evidencias": [
+            {
+              "fonte": "src:mdapi-profile-parte1"
+            }
+          ]
+        },
+        {
+          "id": "mdx:ProfileAgentAccess.enabled",
+          "nome": "enabled",
+          "tipo_tecnico": "boolean",
+          "o_que_e": "Indica se os usuários do perfil podem usar o agente.",
+          "origem": {
+            "estado": "verificado",
+            "valor": "padrao_plataforma",
+            "nota": "Propriedade definida pelo schema da Metadata API.",
+            "evidencias": [
+              {
+                "fonte": "src:mdapi-profile-parte1"
+              }
+            ]
+          },
+          "obrigatoriedade": {
+            "valor": "sim",
+            "estado": "verificado",
+            "evidencias": [
+              {
+                "fonte": "src:mdapi-profile-parte1"
+              }
+            ]
+          },
+          "default": {
+            "forma": "nao_declarado_na_fonte",
+            "estado": "desconhecido"
+          },
+          "dominio": {
+            "natureza": "booleano",
+            "valores": [
+              {
+                "valor": "true"
+              },
+              {
+                "valor": "false"
+              }
+            ],
+            "lista_completa": "sim",
+            "estado": "verificado",
+            "evidencias": [
+              {
+                "fonte": "src:mdapi-profile-parte1"
+              }
+            ]
+          },
+          "disponibilidade": {
+            "desde_versao": null,
+            "ate_versao": null,
+            "estado": "desconhecido"
+          },
+          "explicacao": "explicada",
+          "estado": "verificado",
+          "evidencias": [
+            {
+              "fonte": "src:mdapi-profile-parte1"
+            }
+          ]
+        }
+      ],
+      "cobertura": {
+        "estrutural": {
+          "estado": "completa",
+          "esperado": 2,
+          "presente": 2,
+          "nota": "Contagem conforme a seção do subtipo na página oficial; tipos compostos internos sem detalhe tornam a cobertura parcial."
+        },
+        "explicativa": {
+          "estado": "completa",
+          "esperado": 2,
+          "presente": 2
+        },
+        "mapeamento": {
+          "estado": "nao_iniciada",
+          "nota": "Correspondências com campos API não investigadas."
+        }
+      },
+      "estado": "verificado",
+      "evidencias": [
+        {
+          "fonte": "src:mdapi-profile-parte1"
+        }
+      ]
+    },
     {
       "id": "mdx:ProfileApexClassAccess",
       "nome": "ProfileApexClassAccess",
@@ -3382,6 +4359,698 @@
       ]
     },
     {
+      "id": "mdx:ProfileLoginHours",
+      "nome": "ProfileLoginHours",
+      "natureza": "estrutura_auxiliar",
+      "o_que_e": "O horário em que os usuários do perfil podem entrar. Quem define o início de um dia precisa definir o fim; para tirar as restrições, envie loginHours vazio.",
+      "usada_por": [
+        "mdt:Profile"
+      ],
+      "propriedades": [
+        {
+          "id": "mdx:ProfileLoginHours.mondayStart",
+          "nome": "mondayStart",
+          "tipo_tecnico": "string",
+          "o_que_e": "Início do horário de login em monday, em minutos desde a meia-noite, múltiplo de 60.",
+          "origem": {
+            "estado": "verificado",
+            "valor": "padrao_plataforma",
+            "nota": "Propriedade definida pelo schema da Metadata API.",
+            "evidencias": [
+              {
+                "fonte": "src:mdapi-profile-parte1"
+              }
+            ]
+          },
+          "obrigatoriedade": {
+            "valor": "nao",
+            "estado": "desconhecido",
+            "condicao": "A documentação 68.0 não marca o campo como obrigatório; ausência de marcação não comprova opcionalidade (confirmar no WSDL)."
+          },
+          "default": {
+            "forma": "nao_declarado_na_fonte",
+            "estado": "desconhecido"
+          },
+          "dominio": {
+            "natureza": "texto_livre",
+            "estado": "verificado",
+            "evidencias": [
+              {
+                "fonte": "src:mdapi-profile-parte1"
+              }
+            ],
+            "contexto": "A fonte tipa como string sem lista de valores; não inventar valores."
+          },
+          "disponibilidade": {
+            "desde_versao": null,
+            "ate_versao": null,
+            "estado": "desconhecido"
+          },
+          "explicacao": "explicada",
+          "estado": "verificado",
+          "evidencias": [
+            {
+              "fonte": "src:mdapi-profile-parte1"
+            }
+          ]
+        },
+        {
+          "id": "mdx:ProfileLoginHours.mondayEnd",
+          "nome": "mondayEnd",
+          "tipo_tecnico": "string",
+          "o_que_e": "Fim do horário de login em monday, em minutos desde a meia-noite, múltiplo de 60.",
+          "origem": {
+            "estado": "verificado",
+            "valor": "padrao_plataforma",
+            "nota": "Propriedade definida pelo schema da Metadata API.",
+            "evidencias": [
+              {
+                "fonte": "src:mdapi-profile-parte1"
+              }
+            ]
+          },
+          "obrigatoriedade": {
+            "valor": "nao",
+            "estado": "desconhecido",
+            "condicao": "A documentação 68.0 não marca o campo como obrigatório; ausência de marcação não comprova opcionalidade (confirmar no WSDL)."
+          },
+          "default": {
+            "forma": "nao_declarado_na_fonte",
+            "estado": "desconhecido"
+          },
+          "dominio": {
+            "natureza": "texto_livre",
+            "estado": "verificado",
+            "evidencias": [
+              {
+                "fonte": "src:mdapi-profile-parte1"
+              }
+            ],
+            "contexto": "A fonte tipa como string sem lista de valores; não inventar valores."
+          },
+          "disponibilidade": {
+            "desde_versao": null,
+            "ate_versao": null,
+            "estado": "desconhecido"
+          },
+          "explicacao": "explicada",
+          "estado": "verificado",
+          "evidencias": [
+            {
+              "fonte": "src:mdapi-profile-parte1"
+            }
+          ]
+        },
+        {
+          "id": "mdx:ProfileLoginHours.tuesdayStart",
+          "nome": "tuesdayStart",
+          "tipo_tecnico": "string",
+          "o_que_e": "Início do horário de login em tuesday, em minutos desde a meia-noite, múltiplo de 60.",
+          "origem": {
+            "estado": "verificado",
+            "valor": "padrao_plataforma",
+            "nota": "Propriedade definida pelo schema da Metadata API.",
+            "evidencias": [
+              {
+                "fonte": "src:mdapi-profile-parte1"
+              }
+            ]
+          },
+          "obrigatoriedade": {
+            "valor": "nao",
+            "estado": "desconhecido",
+            "condicao": "A documentação 68.0 não marca o campo como obrigatório; ausência de marcação não comprova opcionalidade (confirmar no WSDL)."
+          },
+          "default": {
+            "forma": "nao_declarado_na_fonte",
+            "estado": "desconhecido"
+          },
+          "dominio": {
+            "natureza": "texto_livre",
+            "estado": "verificado",
+            "evidencias": [
+              {
+                "fonte": "src:mdapi-profile-parte1"
+              }
+            ],
+            "contexto": "A fonte tipa como string sem lista de valores; não inventar valores."
+          },
+          "disponibilidade": {
+            "desde_versao": null,
+            "ate_versao": null,
+            "estado": "desconhecido"
+          },
+          "explicacao": "explicada",
+          "estado": "verificado",
+          "evidencias": [
+            {
+              "fonte": "src:mdapi-profile-parte1"
+            }
+          ]
+        },
+        {
+          "id": "mdx:ProfileLoginHours.tuesdayEnd",
+          "nome": "tuesdayEnd",
+          "tipo_tecnico": "string",
+          "o_que_e": "Fim do horário de login em tuesday, em minutos desde a meia-noite, múltiplo de 60.",
+          "origem": {
+            "estado": "verificado",
+            "valor": "padrao_plataforma",
+            "nota": "Propriedade definida pelo schema da Metadata API.",
+            "evidencias": [
+              {
+                "fonte": "src:mdapi-profile-parte1"
+              }
+            ]
+          },
+          "obrigatoriedade": {
+            "valor": "nao",
+            "estado": "desconhecido",
+            "condicao": "A documentação 68.0 não marca o campo como obrigatório; ausência de marcação não comprova opcionalidade (confirmar no WSDL)."
+          },
+          "default": {
+            "forma": "nao_declarado_na_fonte",
+            "estado": "desconhecido"
+          },
+          "dominio": {
+            "natureza": "texto_livre",
+            "estado": "verificado",
+            "evidencias": [
+              {
+                "fonte": "src:mdapi-profile-parte1"
+              }
+            ],
+            "contexto": "A fonte tipa como string sem lista de valores; não inventar valores."
+          },
+          "disponibilidade": {
+            "desde_versao": null,
+            "ate_versao": null,
+            "estado": "desconhecido"
+          },
+          "explicacao": "explicada",
+          "estado": "verificado",
+          "evidencias": [
+            {
+              "fonte": "src:mdapi-profile-parte1"
+            }
+          ]
+        },
+        {
+          "id": "mdx:ProfileLoginHours.wednesdayStart",
+          "nome": "wednesdayStart",
+          "tipo_tecnico": "string",
+          "o_que_e": "Início do horário de login em wednesday, em minutos desde a meia-noite, múltiplo de 60.",
+          "origem": {
+            "estado": "verificado",
+            "valor": "padrao_plataforma",
+            "nota": "Propriedade definida pelo schema da Metadata API.",
+            "evidencias": [
+              {
+                "fonte": "src:mdapi-profile-parte1"
+              }
+            ]
+          },
+          "obrigatoriedade": {
+            "valor": "nao",
+            "estado": "desconhecido",
+            "condicao": "A documentação 68.0 não marca o campo como obrigatório; ausência de marcação não comprova opcionalidade (confirmar no WSDL)."
+          },
+          "default": {
+            "forma": "nao_declarado_na_fonte",
+            "estado": "desconhecido"
+          },
+          "dominio": {
+            "natureza": "texto_livre",
+            "estado": "verificado",
+            "evidencias": [
+              {
+                "fonte": "src:mdapi-profile-parte1"
+              }
+            ],
+            "contexto": "A fonte tipa como string sem lista de valores; não inventar valores."
+          },
+          "disponibilidade": {
+            "desde_versao": null,
+            "ate_versao": null,
+            "estado": "desconhecido"
+          },
+          "explicacao": "explicada",
+          "estado": "verificado",
+          "evidencias": [
+            {
+              "fonte": "src:mdapi-profile-parte1"
+            }
+          ]
+        },
+        {
+          "id": "mdx:ProfileLoginHours.wednesdayEnd",
+          "nome": "wednesdayEnd",
+          "tipo_tecnico": "string",
+          "o_que_e": "Fim do horário de login em wednesday, em minutos desde a meia-noite, múltiplo de 60.",
+          "origem": {
+            "estado": "verificado",
+            "valor": "padrao_plataforma",
+            "nota": "Propriedade definida pelo schema da Metadata API.",
+            "evidencias": [
+              {
+                "fonte": "src:mdapi-profile-parte1"
+              }
+            ]
+          },
+          "obrigatoriedade": {
+            "valor": "nao",
+            "estado": "desconhecido",
+            "condicao": "A documentação 68.0 não marca o campo como obrigatório; ausência de marcação não comprova opcionalidade (confirmar no WSDL)."
+          },
+          "default": {
+            "forma": "nao_declarado_na_fonte",
+            "estado": "desconhecido"
+          },
+          "dominio": {
+            "natureza": "texto_livre",
+            "estado": "verificado",
+            "evidencias": [
+              {
+                "fonte": "src:mdapi-profile-parte1"
+              }
+            ],
+            "contexto": "A fonte tipa como string sem lista de valores; não inventar valores."
+          },
+          "disponibilidade": {
+            "desde_versao": null,
+            "ate_versao": null,
+            "estado": "desconhecido"
+          },
+          "explicacao": "explicada",
+          "estado": "verificado",
+          "evidencias": [
+            {
+              "fonte": "src:mdapi-profile-parte1"
+            }
+          ]
+        },
+        {
+          "id": "mdx:ProfileLoginHours.thursdayStart",
+          "nome": "thursdayStart",
+          "tipo_tecnico": "string",
+          "o_que_e": "Início do horário de login em thursday, em minutos desde a meia-noite, múltiplo de 60.",
+          "origem": {
+            "estado": "verificado",
+            "valor": "padrao_plataforma",
+            "nota": "Propriedade definida pelo schema da Metadata API.",
+            "evidencias": [
+              {
+                "fonte": "src:mdapi-profile-parte1"
+              }
+            ]
+          },
+          "obrigatoriedade": {
+            "valor": "nao",
+            "estado": "desconhecido",
+            "condicao": "A documentação 68.0 não marca o campo como obrigatório; ausência de marcação não comprova opcionalidade (confirmar no WSDL)."
+          },
+          "default": {
+            "forma": "nao_declarado_na_fonte",
+            "estado": "desconhecido"
+          },
+          "dominio": {
+            "natureza": "texto_livre",
+            "estado": "verificado",
+            "evidencias": [
+              {
+                "fonte": "src:mdapi-profile-parte1"
+              }
+            ],
+            "contexto": "A fonte tipa como string sem lista de valores; não inventar valores."
+          },
+          "disponibilidade": {
+            "desde_versao": null,
+            "ate_versao": null,
+            "estado": "desconhecido"
+          },
+          "explicacao": "explicada",
+          "estado": "verificado",
+          "evidencias": [
+            {
+              "fonte": "src:mdapi-profile-parte1"
+            }
+          ]
+        },
+        {
+          "id": "mdx:ProfileLoginHours.thursdayEnd",
+          "nome": "thursdayEnd",
+          "tipo_tecnico": "string",
+          "o_que_e": "Fim do horário de login em thursday, em minutos desde a meia-noite, múltiplo de 60.",
+          "origem": {
+            "estado": "verificado",
+            "valor": "padrao_plataforma",
+            "nota": "Propriedade definida pelo schema da Metadata API.",
+            "evidencias": [
+              {
+                "fonte": "src:mdapi-profile-parte1"
+              }
+            ]
+          },
+          "obrigatoriedade": {
+            "valor": "nao",
+            "estado": "desconhecido",
+            "condicao": "A documentação 68.0 não marca o campo como obrigatório; ausência de marcação não comprova opcionalidade (confirmar no WSDL)."
+          },
+          "default": {
+            "forma": "nao_declarado_na_fonte",
+            "estado": "desconhecido"
+          },
+          "dominio": {
+            "natureza": "texto_livre",
+            "estado": "verificado",
+            "evidencias": [
+              {
+                "fonte": "src:mdapi-profile-parte1"
+              }
+            ],
+            "contexto": "A fonte tipa como string sem lista de valores; não inventar valores."
+          },
+          "disponibilidade": {
+            "desde_versao": null,
+            "ate_versao": null,
+            "estado": "desconhecido"
+          },
+          "explicacao": "explicada",
+          "estado": "verificado",
+          "evidencias": [
+            {
+              "fonte": "src:mdapi-profile-parte1"
+            }
+          ]
+        },
+        {
+          "id": "mdx:ProfileLoginHours.fridayStart",
+          "nome": "fridayStart",
+          "tipo_tecnico": "string",
+          "o_que_e": "Início do horário de login em friday, em minutos desde a meia-noite, múltiplo de 60.",
+          "origem": {
+            "estado": "verificado",
+            "valor": "padrao_plataforma",
+            "nota": "Propriedade definida pelo schema da Metadata API.",
+            "evidencias": [
+              {
+                "fonte": "src:mdapi-profile-parte1"
+              }
+            ]
+          },
+          "obrigatoriedade": {
+            "valor": "nao",
+            "estado": "desconhecido",
+            "condicao": "A documentação 68.0 não marca o campo como obrigatório; ausência de marcação não comprova opcionalidade (confirmar no WSDL)."
+          },
+          "default": {
+            "forma": "nao_declarado_na_fonte",
+            "estado": "desconhecido"
+          },
+          "dominio": {
+            "natureza": "texto_livre",
+            "estado": "verificado",
+            "evidencias": [
+              {
+                "fonte": "src:mdapi-profile-parte1"
+              }
+            ],
+            "contexto": "A fonte tipa como string sem lista de valores; não inventar valores."
+          },
+          "disponibilidade": {
+            "desde_versao": null,
+            "ate_versao": null,
+            "estado": "desconhecido"
+          },
+          "explicacao": "explicada",
+          "estado": "verificado",
+          "evidencias": [
+            {
+              "fonte": "src:mdapi-profile-parte1"
+            }
+          ]
+        },
+        {
+          "id": "mdx:ProfileLoginHours.fridayEnd",
+          "nome": "fridayEnd",
+          "tipo_tecnico": "string",
+          "o_que_e": "Fim do horário de login em friday, em minutos desde a meia-noite, múltiplo de 60.",
+          "origem": {
+            "estado": "verificado",
+            "valor": "padrao_plataforma",
+            "nota": "Propriedade definida pelo schema da Metadata API.",
+            "evidencias": [
+              {
+                "fonte": "src:mdapi-profile-parte1"
+              }
+            ]
+          },
+          "obrigatoriedade": {
+            "valor": "nao",
+            "estado": "desconhecido",
+            "condicao": "A documentação 68.0 não marca o campo como obrigatório; ausência de marcação não comprova opcionalidade (confirmar no WSDL)."
+          },
+          "default": {
+            "forma": "nao_declarado_na_fonte",
+            "estado": "desconhecido"
+          },
+          "dominio": {
+            "natureza": "texto_livre",
+            "estado": "verificado",
+            "evidencias": [
+              {
+                "fonte": "src:mdapi-profile-parte1"
+              }
+            ],
+            "contexto": "A fonte tipa como string sem lista de valores; não inventar valores."
+          },
+          "disponibilidade": {
+            "desde_versao": null,
+            "ate_versao": null,
+            "estado": "desconhecido"
+          },
+          "explicacao": "explicada",
+          "estado": "verificado",
+          "evidencias": [
+            {
+              "fonte": "src:mdapi-profile-parte1"
+            }
+          ]
+        },
+        {
+          "id": "mdx:ProfileLoginHours.saturdayStart",
+          "nome": "saturdayStart",
+          "tipo_tecnico": "string",
+          "o_que_e": "Início do horário de login em saturday, em minutos desde a meia-noite, múltiplo de 60.",
+          "origem": {
+            "estado": "verificado",
+            "valor": "padrao_plataforma",
+            "nota": "Propriedade definida pelo schema da Metadata API.",
+            "evidencias": [
+              {
+                "fonte": "src:mdapi-profile-parte1"
+              }
+            ]
+          },
+          "obrigatoriedade": {
+            "valor": "nao",
+            "estado": "desconhecido",
+            "condicao": "A documentação 68.0 não marca o campo como obrigatório; ausência de marcação não comprova opcionalidade (confirmar no WSDL)."
+          },
+          "default": {
+            "forma": "nao_declarado_na_fonte",
+            "estado": "desconhecido"
+          },
+          "dominio": {
+            "natureza": "texto_livre",
+            "estado": "verificado",
+            "evidencias": [
+              {
+                "fonte": "src:mdapi-profile-parte1"
+              }
+            ],
+            "contexto": "A fonte tipa como string sem lista de valores; não inventar valores."
+          },
+          "disponibilidade": {
+            "desde_versao": null,
+            "ate_versao": null,
+            "estado": "desconhecido"
+          },
+          "explicacao": "explicada",
+          "estado": "verificado",
+          "evidencias": [
+            {
+              "fonte": "src:mdapi-profile-parte1"
+            }
+          ]
+        },
+        {
+          "id": "mdx:ProfileLoginHours.saturdayEnd",
+          "nome": "saturdayEnd",
+          "tipo_tecnico": "string",
+          "o_que_e": "Fim do horário de login em saturday, em minutos desde a meia-noite, múltiplo de 60.",
+          "origem": {
+            "estado": "verificado",
+            "valor": "padrao_plataforma",
+            "nota": "Propriedade definida pelo schema da Metadata API.",
+            "evidencias": [
+              {
+                "fonte": "src:mdapi-profile-parte1"
+              }
+            ]
+          },
+          "obrigatoriedade": {
+            "valor": "nao",
+            "estado": "desconhecido",
+            "condicao": "A documentação 68.0 não marca o campo como obrigatório; ausência de marcação não comprova opcionalidade (confirmar no WSDL)."
+          },
+          "default": {
+            "forma": "nao_declarado_na_fonte",
+            "estado": "desconhecido"
+          },
+          "dominio": {
+            "natureza": "texto_livre",
+            "estado": "verificado",
+            "evidencias": [
+              {
+                "fonte": "src:mdapi-profile-parte1"
+              }
+            ],
+            "contexto": "A fonte tipa como string sem lista de valores; não inventar valores."
+          },
+          "disponibilidade": {
+            "desde_versao": null,
+            "ate_versao": null,
+            "estado": "desconhecido"
+          },
+          "explicacao": "explicada",
+          "estado": "verificado",
+          "evidencias": [
+            {
+              "fonte": "src:mdapi-profile-parte1"
+            }
+          ]
+        },
+        {
+          "id": "mdx:ProfileLoginHours.sundayStart",
+          "nome": "sundayStart",
+          "tipo_tecnico": "string",
+          "o_que_e": "Início do horário de login em sunday, em minutos desde a meia-noite, múltiplo de 60.",
+          "origem": {
+            "estado": "verificado",
+            "valor": "padrao_plataforma",
+            "nota": "Propriedade definida pelo schema da Metadata API.",
+            "evidencias": [
+              {
+                "fonte": "src:mdapi-profile-parte1"
+              }
+            ]
+          },
+          "obrigatoriedade": {
+            "valor": "nao",
+            "estado": "desconhecido",
+            "condicao": "A documentação 68.0 não marca o campo como obrigatório; ausência de marcação não comprova opcionalidade (confirmar no WSDL)."
+          },
+          "default": {
+            "forma": "nao_declarado_na_fonte",
+            "estado": "desconhecido"
+          },
+          "dominio": {
+            "natureza": "texto_livre",
+            "estado": "verificado",
+            "evidencias": [
+              {
+                "fonte": "src:mdapi-profile-parte1"
+              }
+            ],
+            "contexto": "A fonte tipa como string sem lista de valores; não inventar valores."
+          },
+          "disponibilidade": {
+            "desde_versao": null,
+            "ate_versao": null,
+            "estado": "desconhecido"
+          },
+          "explicacao": "explicada",
+          "estado": "verificado",
+          "evidencias": [
+            {
+              "fonte": "src:mdapi-profile-parte1"
+            }
+          ]
+        },
+        {
+          "id": "mdx:ProfileLoginHours.sundayEnd",
+          "nome": "sundayEnd",
+          "tipo_tecnico": "string",
+          "o_que_e": "Fim do horário de login em sunday, em minutos desde a meia-noite, múltiplo de 60.",
+          "origem": {
+            "estado": "verificado",
+            "valor": "padrao_plataforma",
+            "nota": "Propriedade definida pelo schema da Metadata API.",
+            "evidencias": [
+              {
+                "fonte": "src:mdapi-profile-parte1"
+              }
+            ]
+          },
+          "obrigatoriedade": {
+            "valor": "nao",
+            "estado": "desconhecido",
+            "condicao": "A documentação 68.0 não marca o campo como obrigatório; ausência de marcação não comprova opcionalidade (confirmar no WSDL)."
+          },
+          "default": {
+            "forma": "nao_declarado_na_fonte",
+            "estado": "desconhecido"
+          },
+          "dominio": {
+            "natureza": "texto_livre",
+            "estado": "verificado",
+            "evidencias": [
+              {
+                "fonte": "src:mdapi-profile-parte1"
+              }
+            ],
+            "contexto": "A fonte tipa como string sem lista de valores; não inventar valores."
+          },
+          "disponibilidade": {
+            "desde_versao": null,
+            "ate_versao": null,
+            "estado": "desconhecido"
+          },
+          "explicacao": "explicada",
+          "estado": "verificado",
+          "evidencias": [
+            {
+              "fonte": "src:mdapi-profile-parte1"
+            }
+          ]
+        }
+      ],
+      "cobertura": {
+        "estrutural": {
+          "estado": "completa",
+          "esperado": 14,
+          "presente": 14,
+          "nota": "Contagem conforme a seção do subtipo na página oficial; tipos compostos internos sem detalhe tornam a cobertura parcial."
+        },
+        "explicativa": {
+          "estado": "completa",
+          "esperado": 14,
+          "presente": 14
+        },
+        "mapeamento": {
+          "estado": "nao_iniciada",
+          "nota": "Correspondências com campos API não investigadas."
+        }
+      },
+      "estado": "verificado",
+      "evidencias": [
+        {
+          "fonte": "src:mdapi-profile-parte1"
+        }
+      ]
+    },
+    {
       "id": "mdx:ProfileLoginIpRange",
       "nome": "ProfileLoginIpRange",
       "natureza": "estrutura_auxiliar",
@@ -4757,11 +6426,11 @@
                 "valor": "Hidden"
               }
             ],
-            "lista_completa": "desconhecido",
+            "lista_completa": "sim",
             "estado": "verificado",
             "evidencias": [
               {
-                "fonte": "src:mdapi-profile"
+                "fonte": "src:mdapi-profile-novo"
               }
             ]
           },
@@ -4775,6 +6444,9 @@
           "evidencias": [
             {
               "fonte": "src:mdapi-profile"
+            },
+            {
+              "fonte": "src:mdapi-profile-novo"
             }
           ]
         }

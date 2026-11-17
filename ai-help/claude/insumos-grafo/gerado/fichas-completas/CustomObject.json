@@ -70,8 +70,8 @@
     "cobertura": {
       "estrutural": {
         "esperado": 55,
-        "estado": "parcial",
-        "nota": "Tabela Fields lida em 100k de 101,8k caracteres; os ~1,8k finais continham apenas exemplo. Valores de DeploymentStatus, SharingModel, Gender e StartsWith estão em outras páginas. Em 2026-11-17: SearchLayouts, ProfileSearchLayouts e HistoryRetentionPolicy viraram estruturas; BusinessProcess, FieldSet e Index, metadata types filhos. As páginas de ActionOverride, SharingReason, SharingRecalculation e NamedFilter devolveram conteúdo ilegível. Primeiro nível completo; 4 propriedade(s) de tipo composto ainda sem estrutura detalhada: actionOverrides, namedFilter, sharingReasons, sharingRecalculations.",
+        "estado": "completa",
+        "nota": "Tabela Fields lida em 100k de 101,8k caracteres; os ~1,8k finais continham apenas exemplo. Em 2026-11-17: SearchLayouts, ProfileSearchLayouts, HistoryRetentionPolicy, ActionOverride, NamedFilter (até a API 29.0) e SharingRecalculation viraram estruturas; BusinessProcess, FieldSet, Index e SharingReason, metadata types filhos.",
         "presente": 55
       },
       "explicativa": {
@@ -93,9 +93,12 @@
     "estado": "verificado",
     "estende": "Metadata",
     "estruturas": [
+      "mdx:ActionOverride",
       "mdx:HistoryRetentionPolicy",
+      "mdx:NamedFilter",
       "mdx:ProfileSearchLayouts",
-      "mdx:SearchLayouts"
+      "mdx:SearchLayouts",
+      "mdx:SharingRecalculation"
     ],
     "evidencias": [
       {
@@ -142,6 +145,369 @@
           "natureza": "tipo_composto"
         },
         "estado": "verificado",
+        "estrutura_expandida": {
+          "id": "mdx:ActionOverride",
+          "nome": "ActionOverride",
+          "propriedades": [
+            {
+              "default": {
+                "estado": "desconhecido",
+                "forma": "nao_declarado_na_fonte"
+              },
+              "disponibilidade": {
+                "ate_versao": null,
+                "desde_versao": null,
+                "estado": "desconhecido"
+              },
+              "dominio": {
+                "estado": "verificado",
+                "evidencias": [
+                  {
+                    "fonte": "src:mdapi-actionoverride"
+                  }
+                ],
+                "lista_completa": "sim",
+                "natureza": "enum_fechado",
+                "valores": [
+                  {
+                    "valor": "accept"
+                  },
+                  {
+                    "valor": "clone"
+                  },
+                  {
+                    "valor": "delete"
+                  },
+                  {
+                    "valor": "edit"
+                  },
+                  {
+                    "valor": "list"
+                  },
+                  {
+                    "valor": "new"
+                  },
+                  {
+                    "valor": "tab"
+                  },
+                  {
+                    "valor": "view"
+                  }
+                ]
+              },
+              "estado": "verificado",
+              "evidencias": [
+                {
+                  "fonte": "src:mdapi-actionoverride"
+                }
+              ],
+              "explicacao": "explicada",
+              "id": "mdx:ActionOverride.actionName",
+              "nome": "actionName",
+              "notas": [
+                "A descrição diz Required, mas a marcação do campo diz que não."
+              ],
+              "o_que_e": "Ação padrão que é substituída.",
+              "obrigatoriedade": {
+                "condicao": "A documentação 68.0 não marca o campo como obrigatório; ausência de marcação não comprova opcionalidade (confirmar no WSDL).",
+                "estado": "desconhecido",
+                "valor": "nao"
+              },
+              "origem": {
+                "estado": "verificado",
+                "evidencias": [
+                  {
+                    "fonte": "src:mdapi-actionoverride"
+                  }
+                ],
+                "nota": "Propriedade definida pelo schema da Metadata API.",
+                "valor": "padrao_plataforma"
+              },
+              "tipo_tecnico": "string"
+            },
+            {
+              "default": {
+                "estado": "desconhecido",
+                "forma": "nao_declarado_na_fonte"
+              },
+              "disponibilidade": {
+                "ate_versao": null,
+                "desde_versao": null,
+                "estado": "desconhecido"
+              },
+              "dominio": {
+                "contexto": "A fonte tipa como string sem lista de valores; não inventar valores.",
+                "estado": "verificado",
+                "evidencias": [
+                  {
+                    "fonte": "src:mdapi-actionoverride"
+                  }
+                ],
+                "natureza": "texto_livre"
+              },
+              "estado": "verificado",
+              "evidencias": [
+                {
+                  "fonte": "src:mdapi-actionoverride"
+                }
+              ],
+              "explicacao": "explicada",
+              "id": "mdx:ActionOverride.comment",
+              "nome": "comment",
+              "o_que_e": "Comentário livre sobre a substituição.",
+              "obrigatoriedade": {
+                "condicao": "A documentação 68.0 não marca o campo como obrigatório; ausência de marcação não comprova opcionalidade (confirmar no WSDL).",
+                "estado": "desconhecido",
+                "valor": "nao"
+              },
+              "origem": {
+                "estado": "verificado",
+                "evidencias": [
+                  {
+                    "fonte": "src:mdapi-actionoverride"
+                  }
+                ],
+                "nota": "Propriedade definida pelo schema da Metadata API.",
+                "valor": "padrao_plataforma"
+              },
+              "tipo_tecnico": "string"
+            },
+            {
+              "default": {
+                "estado": "desconhecido",
+                "forma": "nao_declarado_na_fonte"
+              },
+              "disponibilidade": {
+                "ate_versao": null,
+                "desde_versao": null,
+                "estado": "desconhecido"
+              },
+              "dominio": {
+                "contexto": "A fonte tipa como string sem lista de valores; não inventar valores.",
+                "estado": "verificado",
+                "evidencias": [
+                  {
+                    "fonte": "src:mdapi-actionoverride"
+                  }
+                ],
+                "natureza": "texto_livre"
+              },
+              "estado": "verificado",
+              "evidencias": [
+                {
+                  "fonte": "src:mdapi-actionoverride"
+                }
+              ],
+              "explicacao": "explicada",
+              "id": "mdx:ActionOverride.content",
+              "nome": "content",
+              "o_que_e": "Nome da página Lightning, componente, s-control ou página Visualforce usada; componentes instalados usam Namespace__Nome.",
+              "obrigatoriedade": {
+                "condicao": "A documentação 68.0 não marca o campo como obrigatório; ausência de marcação não comprova opcionalidade (confirmar no WSDL).",
+                "estado": "desconhecido",
+                "valor": "nao"
+              },
+              "origem": {
+                "estado": "verificado",
+                "evidencias": [
+                  {
+                    "fonte": "src:mdapi-actionoverride"
+                  }
+                ],
+                "nota": "Propriedade definida pelo schema da Metadata API.",
+                "valor": "padrao_plataforma"
+              },
+              "tipo_tecnico": "string"
+            },
+            {
+              "default": {
+                "estado": "desconhecido",
+                "forma": "nao_declarado_na_fonte"
+              },
+              "disponibilidade": {
+                "ate_versao": null,
+                "desde_versao": "37.0",
+                "estado": "verificado"
+              },
+              "dominio": {
+                "estado": "verificado",
+                "evidencias": [
+                  {
+                    "fonte": "src:mdapi-actionoverride"
+                  }
+                ],
+                "lista_completa": "sim",
+                "natureza": "enum_fechado",
+                "valores": [
+                  {
+                    "significado": "Lightning Experience no desktop.",
+                    "valor": "Large"
+                  },
+                  {
+                    "significado": "App móvel do Salesforce.",
+                    "valor": "Small"
+                  },
+                  {
+                    "significado": "Reservado para uso futuro.",
+                    "valor": "Medium"
+                  }
+                ]
+              },
+              "estado": "verificado",
+              "evidencias": [
+                {
+                  "fonte": "src:mdapi-actionoverride"
+                }
+              ],
+              "explicacao": "explicada",
+              "id": "mdx:ActionOverride.formFactor",
+              "nome": "formFactor",
+              "o_que_e": "Tamanho de página a que a substituição se aplica; nulo vale para o Classic.",
+              "obrigatoriedade": {
+                "condicao": "A documentação 68.0 não marca o campo como obrigatório; ausência de marcação não comprova opcionalidade (confirmar no WSDL).",
+                "estado": "desconhecido",
+                "valor": "nao"
+              },
+              "origem": {
+                "estado": "verificado",
+                "evidencias": [
+                  {
+                    "fonte": "src:mdapi-actionoverride"
+                  }
+                ],
+                "nota": "Propriedade definida pelo schema da Metadata API.",
+                "valor": "padrao_plataforma"
+              },
+              "tipo_tecnico": "FormFactor"
+            },
+            {
+              "default": {
+                "estado": "desconhecido",
+                "forma": "nao_declarado_na_fonte"
+              },
+              "disponibilidade": {
+                "ate_versao": null,
+                "desde_versao": "21.0",
+                "estado": "verificado"
+              },
+              "dominio": {
+                "estado": "verificado",
+                "evidencias": [
+                  {
+                    "fonte": "src:mdapi-actionoverride"
+                  }
+                ],
+                "lista_completa": "sim",
+                "natureza": "booleano",
+                "valores": [
+                  {
+                    "valor": "true"
+                  },
+                  {
+                    "valor": "false"
+                  }
+                ]
+              },
+              "estado": "verificado",
+              "evidencias": [
+                {
+                  "fonte": "src:mdapi-actionoverride"
+                }
+              ],
+              "explicacao": "explicada",
+              "id": "mdx:ActionOverride.skipRecordTypeSelect",
+              "nome": "skipRecordTypeSelect",
+              "o_que_e": "Pula a tela de escolha de record type ao criar registro.",
+              "obrigatoriedade": {
+                "condicao": "A documentação 68.0 não marca o campo como obrigatório; ausência de marcação não comprova opcionalidade (confirmar no WSDL).",
+                "estado": "desconhecido",
+                "valor": "nao"
+              },
+              "origem": {
+                "estado": "verificado",
+                "evidencias": [
+                  {
+                    "fonte": "src:mdapi-actionoverride"
+                  }
+                ],
+                "nota": "Propriedade definida pelo schema da Metadata API.",
+                "valor": "padrao_plataforma"
+              },
+              "tipo_tecnico": "boolean"
+            },
+            {
+              "default": {
+                "estado": "desconhecido",
+                "forma": "nao_declarado_na_fonte"
+              },
+              "disponibilidade": {
+                "ate_versao": null,
+                "desde_versao": null,
+                "estado": "desconhecido"
+              },
+              "dominio": {
+                "estado": "verificado",
+                "evidencias": [
+                  {
+                    "fonte": "src:mdapi-actionoverride"
+                  }
+                ],
+                "lista_completa": "sim",
+                "natureza": "enum_fechado",
+                "valores": [
+                  {
+                    "valor": "default"
+                  },
+                  {
+                    "valor": "flexipage"
+                  },
+                  {
+                    "valor": "lightningcomponent"
+                  },
+                  {
+                    "valor": "scontrol"
+                  },
+                  {
+                    "valor": "standard"
+                  },
+                  {
+                    "valor": "visualforce"
+                  }
+                ]
+              },
+              "estado": "verificado",
+              "evidencias": [
+                {
+                  "fonte": "src:mdapi-actionoverride"
+                }
+              ],
+              "explicacao": "explicada",
+              "id": "mdx:ActionOverride.type",
+              "nome": "type",
+              "notas": [
+                "A descrição diz Required, mas a marcação do campo diz que não."
+              ],
+              "o_que_e": "Que tipo de substituição é usado.",
+              "obrigatoriedade": {
+                "condicao": "A documentação 68.0 não marca o campo como obrigatório; ausência de marcação não comprova opcionalidade (confirmar no WSDL).",
+                "estado": "desconhecido",
+                "valor": "nao"
+              },
+              "origem": {
+                "estado": "verificado",
+                "evidencias": [
+                  {
+                    "fonte": "src:mdapi-actionoverride"
+                  }
+                ],
+                "nota": "Propriedade definida pelo schema da Metadata API.",
+                "valor": "padrao_plataforma"
+              },
+              "tipo_tecnico": "ActionOverrideType"
+            }
+          ]
+        },
+        "estrutura_ref": "mdx:ActionOverride",
         "evidencias": [
           {
             "fonte": "src:mdapi-customobject"
@@ -2438,6 +2804,811 @@
           "natureza": "tipo_composto"
         },
         "estado": "verificado",
+        "estrutura_expandida": {
+          "id": "mdx:NamedFilter",
+          "nome": "NamedFilter",
+          "propriedades": [
+            {
+              "default": {
+                "estado": "desconhecido",
+                "forma": "nao_declarado_na_fonte"
+              },
+              "disponibilidade": {
+                "ate_versao": "29.0",
+                "desde_versao": "17.0",
+                "estado": "verificado"
+              },
+              "dominio": {
+                "estado": "verificado",
+                "evidencias": [
+                  {
+                    "fonte": "src:mdapi-namedfilter"
+                  }
+                ],
+                "lista_completa": "sim",
+                "natureza": "booleano",
+                "valores": [
+                  {
+                    "valor": "true"
+                  },
+                  {
+                    "valor": "false"
+                  }
+                ]
+              },
+              "estado": "verificado",
+              "evidencias": [
+                {
+                  "fonte": "src:mdapi-namedfilter"
+                }
+              ],
+              "explicacao": "explicada",
+              "id": "mdx:NamedFilter.active",
+              "nome": "active",
+              "o_que_e": "Liga ou desliga o filtro de lookup.",
+              "obrigatoriedade": {
+                "estado": "verificado",
+                "evidencias": [
+                  {
+                    "fonte": "src:mdapi-namedfilter"
+                  }
+                ],
+                "valor": "sim"
+              },
+              "origem": {
+                "estado": "verificado",
+                "evidencias": [
+                  {
+                    "fonte": "src:mdapi-namedfilter"
+                  }
+                ],
+                "nota": "Propriedade definida pelo schema da Metadata API.",
+                "valor": "padrao_plataforma"
+              },
+              "tipo_tecnico": "boolean"
+            },
+            {
+              "default": {
+                "estado": "desconhecido",
+                "forma": "nao_declarado_na_fonte"
+              },
+              "disponibilidade": {
+                "ate_versao": "29.0",
+                "desde_versao": "17.0",
+                "estado": "verificado"
+              },
+              "dominio": {
+                "contexto": "A fonte tipa como string sem lista de valores; não inventar valores.",
+                "estado": "verificado",
+                "evidencias": [
+                  {
+                    "fonte": "src:mdapi-namedfilter"
+                  }
+                ],
+                "natureza": "texto_livre"
+              },
+              "estado": "verificado",
+              "evidencias": [
+                {
+                  "fonte": "src:mdapi-namedfilter"
+                }
+              ],
+              "explicacao": "explicada",
+              "id": "mdx:NamedFilter.booleanFilter",
+              "nome": "booleanFilter",
+              "o_que_e": "Lógica avançada que combina as condições.",
+              "obrigatoriedade": {
+                "condicao": "A documentação 68.0 não marca o campo como obrigatório; ausência de marcação não comprova opcionalidade (confirmar no WSDL).",
+                "estado": "desconhecido",
+                "valor": "nao"
+              },
+              "origem": {
+                "estado": "verificado",
+                "evidencias": [
+                  {
+                    "fonte": "src:mdapi-namedfilter"
+                  }
+                ],
+                "nota": "Propriedade definida pelo schema da Metadata API.",
+                "valor": "padrao_plataforma"
+              },
+              "tipo_tecnico": "string"
+            },
+            {
+              "default": {
+                "estado": "desconhecido",
+                "forma": "nao_declarado_na_fonte"
+              },
+              "disponibilidade": {
+                "ate_versao": "29.0",
+                "desde_versao": "17.0",
+                "estado": "verificado"
+              },
+              "dominio": {
+                "contexto": "A fonte tipa como string sem lista de valores; não inventar valores.",
+                "estado": "verificado",
+                "evidencias": [
+                  {
+                    "fonte": "src:mdapi-namedfilter"
+                  }
+                ],
+                "natureza": "texto_livre"
+              },
+              "estado": "verificado",
+              "evidencias": [
+                {
+                  "fonte": "src:mdapi-namedfilter"
+                }
+              ],
+              "explicacao": "explicada",
+              "id": "mdx:NamedFilter.description",
+              "nome": "description",
+              "o_que_e": "Para que serve o filtro.",
+              "obrigatoriedade": {
+                "condicao": "A documentação 68.0 não marca o campo como obrigatório; ausência de marcação não comprova opcionalidade (confirmar no WSDL).",
+                "estado": "desconhecido",
+                "valor": "nao"
+              },
+              "origem": {
+                "estado": "verificado",
+                "evidencias": [
+                  {
+                    "fonte": "src:mdapi-namedfilter"
+                  }
+                ],
+                "nota": "Propriedade definida pelo schema da Metadata API.",
+                "valor": "padrao_plataforma"
+              },
+              "tipo_tecnico": "string"
+            },
+            {
+              "default": {
+                "estado": "desconhecido",
+                "forma": "nao_declarado_na_fonte"
+              },
+              "disponibilidade": {
+                "ate_versao": "29.0",
+                "desde_versao": "17.0",
+                "estado": "verificado"
+              },
+              "dominio": {
+                "contexto": "A fonte tipa como string sem lista de valores; não inventar valores.",
+                "estado": "verificado",
+                "evidencias": [
+                  {
+                    "fonte": "src:mdapi-namedfilter"
+                  }
+                ],
+                "natureza": "texto_livre"
+              },
+              "estado": "verificado",
+              "evidencias": [
+                {
+                  "fonte": "src:mdapi-namedfilter"
+                }
+              ],
+              "explicacao": "explicada",
+              "id": "mdx:NamedFilter.errorMessage",
+              "nome": "errorMessage",
+              "o_que_e": "Mensagem quando o filtro recusa um valor.",
+              "obrigatoriedade": {
+                "condicao": "A documentação 68.0 não marca o campo como obrigatório; ausência de marcação não comprova opcionalidade (confirmar no WSDL).",
+                "estado": "desconhecido",
+                "valor": "nao"
+              },
+              "origem": {
+                "estado": "verificado",
+                "evidencias": [
+                  {
+                    "fonte": "src:mdapi-namedfilter"
+                  }
+                ],
+                "nota": "Propriedade definida pelo schema da Metadata API.",
+                "valor": "padrao_plataforma"
+              },
+              "tipo_tecnico": "string"
+            },
+            {
+              "default": {
+                "estado": "desconhecido",
+                "forma": "nao_declarado_na_fonte"
+              },
+              "disponibilidade": {
+                "ate_versao": "29.0",
+                "desde_versao": "17.0",
+                "estado": "verificado"
+              },
+              "dominio": {
+                "contexto": "A fonte tipa como string sem lista de valores; não inventar valores.",
+                "estado": "verificado",
+                "evidencias": [
+                  {
+                    "fonte": "src:mdapi-namedfilter"
+                  }
+                ],
+                "natureza": "texto_livre"
+              },
+              "estado": "verificado",
+              "evidencias": [
+                {
+                  "fonte": "src:mdapi-namedfilter"
+                }
+              ],
+              "explicacao": "explicada",
+              "id": "mdx:NamedFilter.field",
+              "nome": "field",
+              "o_que_e": "Nome completo do campo ligado ao filtro.",
+              "obrigatoriedade": {
+                "estado": "verificado",
+                "evidencias": [
+                  {
+                    "fonte": "src:mdapi-namedfilter"
+                  }
+                ],
+                "valor": "sim"
+              },
+              "origem": {
+                "estado": "verificado",
+                "evidencias": [
+                  {
+                    "fonte": "src:mdapi-namedfilter"
+                  }
+                ],
+                "nota": "Propriedade definida pelo schema da Metadata API.",
+                "valor": "padrao_plataforma"
+              },
+              "tipo_tecnico": "string"
+            },
+            {
+              "cardinalidade": "0..n",
+              "default": {
+                "estado": "desconhecido",
+                "forma": "nao_declarado_na_fonte"
+              },
+              "disponibilidade": {
+                "ate_versao": "29.0",
+                "desde_versao": "17.0",
+                "estado": "verificado"
+              },
+              "dominio": {
+                "estado": "verificado",
+                "evidencias": [
+                  {
+                    "fonte": "src:mdapi-namedfilter"
+                  }
+                ],
+                "natureza": "tipo_composto"
+              },
+              "estado": "verificado",
+              "estrutura_expandida": {
+                "id": "mdx:FilterItem",
+                "nome": "FilterItem",
+                "propriedades": [
+                  {
+                    "default": {
+                      "estado": "desconhecido",
+                      "forma": "nao_declarado_na_fonte"
+                    },
+                    "disponibilidade": {
+                      "ate_versao": null,
+                      "desde_versao": null,
+                      "estado": "desconhecido"
+                    },
+                    "dominio": {
+                      "contexto": "A fonte tipa como string sem lista de valores; não inventar valores.",
+                      "estado": "verificado",
+                      "evidencias": [
+                        {
+                          "fonte": "src:mdapi-customfield"
+                        }
+                      ],
+                      "natureza": "texto_livre"
+                    },
+                    "estado": "verificado",
+                    "evidencias": [
+                      {
+                        "fonte": "src:mdapi-customfield"
+                      }
+                    ],
+                    "explicacao": "explicada",
+                    "id": "mdx:FilterItem.field",
+                    "nome": "field",
+                    "o_que_e": "Campo avaliado.",
+                    "obrigatoriedade": {
+                      "condicao": "A documentação 68.0 não marca o campo como obrigatório; ausência de marcação não comprova opcionalidade (confirmar no WSDL).",
+                      "estado": "desconhecido",
+                      "valor": "nao"
+                    },
+                    "origem": {
+                      "estado": "verificado",
+                      "evidencias": [
+                        {
+                          "fonte": "src:mdapi-customfield"
+                        }
+                      ],
+                      "nota": "Propriedade definida pelo schema da Metadata API.",
+                      "valor": "padrao_plataforma"
+                    },
+                    "tipo_tecnico": "string"
+                  },
+                  {
+                    "default": {
+                      "estado": "desconhecido",
+                      "forma": "nao_declarado_na_fonte"
+                    },
+                    "disponibilidade": {
+                      "ate_versao": null,
+                      "desde_versao": null,
+                      "estado": "desconhecido"
+                    },
+                    "dominio": {
+                      "contexto": "within só vale em critérios de distância.",
+                      "estado": "verificado",
+                      "evidencias": [
+                        {
+                          "fonte": "src:mdapi-customfield-v264"
+                        }
+                      ],
+                      "lista_completa": "sim",
+                      "natureza": "enum_fechado",
+                      "valores": [
+                        {
+                          "valor": "equals"
+                        },
+                        {
+                          "valor": "notEqual"
+                        },
+                        {
+                          "valor": "lessThan"
+                        },
+                        {
+                          "valor": "greaterThan"
+                        },
+                        {
+                          "valor": "lessOrEqual"
+                        },
+                        {
+                          "valor": "greaterOrEqual"
+                        },
+                        {
+                          "valor": "contains"
+                        },
+                        {
+                          "valor": "notContain"
+                        },
+                        {
+                          "valor": "startsWith"
+                        },
+                        {
+                          "valor": "includes"
+                        },
+                        {
+                          "valor": "excludes"
+                        },
+                        {
+                          "valor": "within"
+                        }
+                      ]
+                    },
+                    "estado": "verificado",
+                    "evidencias": [
+                      {
+                        "fonte": "src:mdapi-customfield"
+                      },
+                      {
+                        "fonte": "src:mdapi-customfield-v264"
+                      }
+                    ],
+                    "explicacao": "explicada",
+                    "id": "mdx:FilterItem.operation",
+                    "nome": "operation",
+                    "o_que_e": "Operador de comparação.",
+                    "obrigatoriedade": {
+                      "condicao": "A documentação 68.0 não marca o campo como obrigatório; ausência de marcação não comprova opcionalidade (confirmar no WSDL).",
+                      "estado": "desconhecido",
+                      "valor": "nao"
+                    },
+                    "origem": {
+                      "estado": "verificado",
+                      "evidencias": [
+                        {
+                          "fonte": "src:mdapi-customfield"
+                        }
+                      ],
+                      "nota": "Propriedade definida pelo schema da Metadata API.",
+                      "valor": "padrao_plataforma"
+                    },
+                    "tipo_tecnico": "FilterOperation"
+                  },
+                  {
+                    "default": {
+                      "estado": "desconhecido",
+                      "forma": "nao_declarado_na_fonte"
+                    },
+                    "disponibilidade": {
+                      "ate_versao": null,
+                      "desde_versao": null,
+                      "estado": "desconhecido"
+                    },
+                    "dominio": {
+                      "contexto": "A fonte tipa como string sem lista de valores; não inventar valores.",
+                      "estado": "verificado",
+                      "evidencias": [
+                        {
+                          "fonte": "src:mdapi-customfield"
+                        }
+                      ],
+                      "natureza": "texto_livre"
+                    },
+                    "estado": "verificado",
+                    "evidencias": [
+                      {
+                        "fonte": "src:mdapi-customfield"
+                      }
+                    ],
+                    "explicacao": "explicada",
+                    "id": "mdx:FilterItem.value",
+                    "nome": "value",
+                    "o_que_e": "Valor comparado.",
+                    "obrigatoriedade": {
+                      "condicao": "A documentação 68.0 não marca o campo como obrigatório; ausência de marcação não comprova opcionalidade (confirmar no WSDL).",
+                      "estado": "desconhecido",
+                      "valor": "nao"
+                    },
+                    "origem": {
+                      "estado": "verificado",
+                      "evidencias": [
+                        {
+                          "fonte": "src:mdapi-customfield"
+                        }
+                      ],
+                      "nota": "Propriedade definida pelo schema da Metadata API.",
+                      "valor": "padrao_plataforma"
+                    },
+                    "tipo_tecnico": "string"
+                  },
+                  {
+                    "default": {
+                      "estado": "desconhecido",
+                      "forma": "nao_declarado_na_fonte"
+                    },
+                    "disponibilidade": {
+                      "ate_versao": null,
+                      "desde_versao": null,
+                      "estado": "desconhecido"
+                    },
+                    "dominio": {
+                      "contexto": "A fonte tipa como string sem lista de valores; não inventar valores.",
+                      "estado": "verificado",
+                      "evidencias": [
+                        {
+                          "fonte": "src:mdapi-customfield"
+                        }
+                      ],
+                      "natureza": "texto_livre"
+                    },
+                    "estado": "verificado",
+                    "evidencias": [
+                      {
+                        "fonte": "src:mdapi-customfield"
+                      }
+                    ],
+                    "explicacao": "explicada",
+                    "id": "mdx:FilterItem.valueField",
+                    "nome": "valueField",
+                    "o_que_e": "Campo cujo valor é comparado.",
+                    "obrigatoriedade": {
+                      "condicao": "A documentação 68.0 não marca o campo como obrigatório; ausência de marcação não comprova opcionalidade (confirmar no WSDL).",
+                      "estado": "desconhecido",
+                      "valor": "nao"
+                    },
+                    "origem": {
+                      "estado": "verificado",
+                      "evidencias": [
+                        {
+                          "fonte": "src:mdapi-customfield"
+                        }
+                      ],
+                      "nota": "Propriedade definida pelo schema da Metadata API.",
+                      "valor": "padrao_plataforma"
+                    },
+                    "tipo_tecnico": "string"
+                  }
+                ]
+              },
+              "estrutura_ref": "mdx:FilterItem",
+              "evidencias": [
+                {
+                  "fonte": "src:mdapi-namedfilter"
+                }
+              ],
+              "explicacao": "explicada",
+              "id": "mdx:NamedFilter.filterItems",
+              "nome": "filterItems",
+              "notas": [
+                "A página grafa o tipo como FilterItems[]."
+              ],
+              "o_que_e": "As condições do filtro.",
+              "obrigatoriedade": {
+                "estado": "verificado",
+                "evidencias": [
+                  {
+                    "fonte": "src:mdapi-namedfilter"
+                  }
+                ],
+                "valor": "sim"
+              },
+              "origem": {
+                "estado": "verificado",
+                "evidencias": [
+                  {
+                    "fonte": "src:mdapi-namedfilter"
+                  }
+                ],
+                "nota": "Propriedade definida pelo schema da Metadata API.",
+                "valor": "padrao_plataforma"
+              },
+              "tipo_tecnico": "FilterItem[]"
+            },
+            {
+              "default": {
+                "estado": "desconhecido",
+                "forma": "nao_declarado_na_fonte"
+              },
+              "disponibilidade": {
+                "ate_versao": "29.0",
+                "desde_versao": "17.0",
+                "estado": "verificado"
+              },
+              "dominio": {
+                "contexto": "A fonte tipa como string sem lista de valores; não inventar valores.",
+                "estado": "verificado",
+                "evidencias": [
+                  {
+                    "fonte": "src:mdapi-namedfilter"
+                  }
+                ],
+                "natureza": "texto_livre"
+              },
+              "estado": "verificado",
+              "evidencias": [
+                {
+                  "fonte": "src:mdapi-namedfilter"
+                }
+              ],
+              "explicacao": "explicada",
+              "herdada_de": "Metadata",
+              "id": "mdx:NamedFilter.fullName",
+              "nome": "fullName",
+              "o_que_e": "Identificador exigido para criar, alterar e excluir.",
+              "obrigatoriedade": {
+                "estado": "verificado",
+                "evidencias": [
+                  {
+                    "fonte": "src:mdapi-namedfilter"
+                  }
+                ],
+                "valor": "sim"
+              },
+              "origem": {
+                "estado": "verificado",
+                "evidencias": [
+                  {
+                    "fonte": "src:mdapi-namedfilter"
+                  }
+                ],
+                "nota": "Propriedade definida pelo schema da Metadata API.",
+                "valor": "padrao_plataforma"
+              },
+              "tipo_tecnico": "string"
+            },
+            {
+              "default": {
+                "estado": "desconhecido",
+                "forma": "nao_declarado_na_fonte"
+              },
+              "disponibilidade": {
+                "ate_versao": "29.0",
+                "desde_versao": "17.0",
+                "estado": "verificado"
+              },
+              "dominio": {
+                "contexto": "A fonte tipa como string sem lista de valores; não inventar valores.",
+                "estado": "verificado",
+                "evidencias": [
+                  {
+                    "fonte": "src:mdapi-namedfilter"
+                  }
+                ],
+                "natureza": "texto_livre"
+              },
+              "estado": "verificado",
+              "evidencias": [
+                {
+                  "fonte": "src:mdapi-namedfilter"
+                }
+              ],
+              "explicacao": "explicada",
+              "id": "mdx:NamedFilter.infoMessage",
+              "nome": "infoMessage",
+              "o_que_e": "Aviso que explica por que itens ficaram de fora.",
+              "obrigatoriedade": {
+                "condicao": "A documentação 68.0 não marca o campo como obrigatório; ausência de marcação não comprova opcionalidade (confirmar no WSDL).",
+                "estado": "desconhecido",
+                "valor": "nao"
+              },
+              "origem": {
+                "estado": "verificado",
+                "evidencias": [
+                  {
+                    "fonte": "src:mdapi-namedfilter"
+                  }
+                ],
+                "nota": "Propriedade definida pelo schema da Metadata API.",
+                "valor": "padrao_plataforma"
+              },
+              "tipo_tecnico": "string"
+            },
+            {
+              "default": {
+                "estado": "desconhecido",
+                "forma": "nao_declarado_na_fonte"
+              },
+              "disponibilidade": {
+                "ate_versao": "29.0",
+                "desde_versao": "17.0",
+                "estado": "verificado"
+              },
+              "dominio": {
+                "estado": "verificado",
+                "evidencias": [
+                  {
+                    "fonte": "src:mdapi-namedfilter"
+                  }
+                ],
+                "lista_completa": "sim",
+                "natureza": "booleano",
+                "valores": [
+                  {
+                    "valor": "true"
+                  },
+                  {
+                    "valor": "false"
+                  }
+                ]
+              },
+              "estado": "verificado",
+              "evidencias": [
+                {
+                  "fonte": "src:mdapi-namedfilter"
+                }
+              ],
+              "explicacao": "explicada",
+              "id": "mdx:NamedFilter.isOptional",
+              "nome": "isOptional",
+              "o_que_e": "Indica se o filtro pode ser ignorado.",
+              "obrigatoriedade": {
+                "estado": "verificado",
+                "evidencias": [
+                  {
+                    "fonte": "src:mdapi-namedfilter"
+                  }
+                ],
+                "valor": "sim"
+              },
+              "origem": {
+                "estado": "verificado",
+                "evidencias": [
+                  {
+                    "fonte": "src:mdapi-namedfilter"
+                  }
+                ],
+                "nota": "Propriedade definida pelo schema da Metadata API.",
+                "valor": "padrao_plataforma"
+              },
+              "tipo_tecnico": "boolean"
+            },
+            {
+              "default": {
+                "estado": "desconhecido",
+                "forma": "nao_declarado_na_fonte"
+              },
+              "disponibilidade": {
+                "ate_versao": "29.0",
+                "desde_versao": "17.0",
+                "estado": "verificado"
+              },
+              "dominio": {
+                "contexto": "A fonte tipa como string sem lista de valores; não inventar valores.",
+                "estado": "verificado",
+                "evidencias": [
+                  {
+                    "fonte": "src:mdapi-namedfilter"
+                  }
+                ],
+                "natureza": "texto_livre"
+              },
+              "estado": "verificado",
+              "evidencias": [
+                {
+                  "fonte": "src:mdapi-namedfilter"
+                }
+              ],
+              "explicacao": "explicada",
+              "id": "mdx:NamedFilter.name",
+              "nome": "name",
+              "o_que_e": "Rótulo do filtro; atribuído pela interface.",
+              "obrigatoriedade": {
+                "estado": "verificado",
+                "evidencias": [
+                  {
+                    "fonte": "src:mdapi-namedfilter"
+                  }
+                ],
+                "valor": "sim"
+              },
+              "origem": {
+                "estado": "verificado",
+                "evidencias": [
+                  {
+                    "fonte": "src:mdapi-namedfilter"
+                  }
+                ],
+                "nota": "Propriedade definida pelo schema da Metadata API.",
+                "valor": "padrao_plataforma"
+              },
+              "tipo_tecnico": "string"
+            },
+            {
+              "default": {
+                "estado": "desconhecido",
+                "forma": "nao_declarado_na_fonte"
+              },
+              "disponibilidade": {
+                "ate_versao": "29.0",
+                "desde_versao": "17.0",
+                "estado": "verificado"
+              },
+              "dominio": {
+                "contexto": "A fonte tipa como string sem lista de valores; não inventar valores.",
+                "estado": "verificado",
+                "evidencias": [
+                  {
+                    "fonte": "src:mdapi-namedfilter"
+                  }
+                ],
+                "natureza": "texto_livre"
+              },
+              "estado": "verificado",
+              "evidencias": [
+                {
+                  "fonte": "src:mdapi-namedfilter"
+                }
+              ],
+              "explicacao": "explicada",
+              "id": "mdx:NamedFilter.sourceObject",
+              "nome": "sourceObject",
+              "o_que_e": "Objeto do campo de lookup, quando o filtro usa campos dele.",
+              "obrigatoriedade": {
+                "condicao": "A documentação 68.0 não marca o campo como obrigatório; ausência de marcação não comprova opcionalidade (confirmar no WSDL).",
+                "estado": "desconhecido",
+                "valor": "nao"
+              },
+              "origem": {
+                "estado": "verificado",
+                "evidencias": [
+                  {
+                    "fonte": "src:mdapi-namedfilter"
+                  }
+                ],
+                "nota": "Propriedade definida pelo schema da Metadata API.",
+                "valor": "padrao_plataforma"
+              },
+              "tipo_tecnico": "string"
+            }
+          ]
+        },
+        "estrutura_ref": "mdx:NamedFilter",
         "evidencias": [
           {
             "fonte": "src:mdapi-customobject"
@@ -3619,6 +4790,64 @@
           "natureza": "tipo_composto"
         },
         "estado": "verificado",
+        "estrutura_expandida": {
+          "id": "mdx:SharingRecalculation",
+          "nome": "SharingRecalculation",
+          "propriedades": [
+            {
+              "default": {
+                "estado": "desconhecido",
+                "forma": "nao_declarado_na_fonte"
+              },
+              "disponibilidade": {
+                "ate_versao": null,
+                "desde_versao": "14.0",
+                "estado": "verificado"
+              },
+              "dominio": {
+                "contexto": "A fonte tipa como string sem lista de valores; não inventar valores.",
+                "estado": "verificado",
+                "evidencias": [
+                  {
+                    "fonte": "src:mdapi-sharingrecalculation"
+                  }
+                ],
+                "natureza": "texto_livre"
+              },
+              "estado": "verificado",
+              "evidencias": [
+                {
+                  "fonte": "src:mdapi-sharingrecalculation"
+                }
+              ],
+              "explicacao": "explicada",
+              "id": "mdx:SharingRecalculation.className",
+              "nome": "className",
+              "o_que_e": "Classe Apex que recalcula o compartilhamento Apex do objeto; precisa implementar Database.Batchable.",
+              "obrigatoriedade": {
+                "estado": "verificado",
+                "evidencias": [
+                  {
+                    "fonte": "src:mdapi-sharingrecalculation"
+                  }
+                ],
+                "valor": "sim"
+              },
+              "origem": {
+                "estado": "verificado",
+                "evidencias": [
+                  {
+                    "fonte": "src:mdapi-sharingrecalculation"
+                  }
+                ],
+                "nota": "Propriedade definida pelo schema da Metadata API.",
+                "valor": "padrao_plataforma"
+              },
+              "tipo_tecnico": "string"
+            }
+          ]
+        },
+        "estrutura_ref": "mdx:SharingRecalculation",
         "evidencias": [
           {
             "fonte": "src:mdapi-customobject"

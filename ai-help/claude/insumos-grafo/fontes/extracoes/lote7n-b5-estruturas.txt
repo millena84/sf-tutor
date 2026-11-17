@@ -1,0 +1,109 @@
+assunto: rodada B5 parte A: estruturas e enumerações que faltavam em tipos já cadastrados
+obtido em 2026-11-17 via WebFetch; método: extração documental assistida por IA; paráfrases em português.
+Endereços: guia versionado 264.0 (https://developer.salesforce.com/docs/get_document_content/api_meta/<página>.htm/en-us/264.0) e novo site da
+referência (https://developer.salesforce.com/docs/platform/api-metadata/references/meta-types/metadata-<tipo>.html, que mostra "Winter '27 (API
+version 68.0)"). No novo site, a extração perde os nomes de muitas propriedades; ele só foi usado onde os nomes vieram legíveis (ActionOverride,
+SharingReason, SharingRecalculation, valores de motif e de TabVisibility).
+
+[src:mdapi-customfield-v264] customfield.htm (116.343 caracteres; meta_customfield devolveu conteúdo ilegível): 60 campos de primeiro nível, mesmos
+  nomes do cadastro. Subtipos MktDataLakeFieldAttributes e MktDataModelFieldAttributes (Data 360), não usados por campo nenhum. elementType reservado,
+  sem valores. LookupFilter e FilterItem: field, operation (equals, notEqual, lessThan, greaterThan, lessOrEqual, greaterOrEqual, contains, notContain,
+  startsWith, includes, excludes, within; within só em distância), value, valueField. Curinga não aceito.
+[src:mdapi-namedfilter] namedfilter.htm: API 17.0, removido na 30.0; estende Metadata. active, booleanFilter, description, errorMessage, field,
+  filterItems (grafado FilterItems[]), fullName, infoMessage, isOptional, name, sourceObject.
+[src:mdapi-flexipage-subtipos] meta_flexipage (133.294 caracteres, lidos em três leituras): campos de primeiro nível description, events,
+  flexiPageRegions, masterLabel, pageTemplate, parentFlexiPage, platformActionlist, quickActionList, sobjectType, template e type (30 valores de
+  FlexiPageType, com CommFlowPage repetido). Subtipos FlexiPageEvent, FlexiPageEventSourceProperty, FlexiPageEventTarget,
+  FlexiPageEventPropertyMapping, FlexiPageEventTargetProperty, FlexiPageRegion, ItemInstance, ComponentInstance, ComponentInstanceProperty,
+  ComponentInstancePropertyList, ComponentInstancePropertyListItem, UiFormulaRule, UiFormulaCriterion, FieldInstance, FieldInstanceProperty,
+  FlexiPageTemplateInstance, PlatformActionList (actionListContext com 19 valores) e PlatformActionListItem. O novo site mostra itens sem nome a mais
+  em ComponentInstance, ComponentInstancePropertyListItem e FlexiPageTemplateInstance; vale a página versionada, que nomeia os campos.
+[src:mdapi-quickaction-subtipos] meta_quickaction: FieldOverride, QuickActionLayout, QuickActionLayoutColumn, QuickActionLayoutItem,
+  QuickActionParameter (63.0); fieldOverrides, quickActionLayout e quickActionParameters; standardLabel com 32 valores de QuickActionLabel.
+[src:mdapi-genaiplugininstructiondef] meta_genaiplugininstructiondef: API 62.0, estende Metadata, parte de GenAiPlugin, exige Agents; description,
+  developerName, language, masterLabel (obrigatórios) e sortOrder. Usado por genAiPluginInstructions.
+[src:mdapi-aipluginutterancedef] meta_aipluginutterancedef: API 63.0, estende Metadata, parte de GenAiPlugin; developerName, language, masterLabel,
+  utterance (obrigatórios). Usado por aiPluginUtterances.
+[src:mdapi-layouts-enums] meta_layouts (172.375 caracteres, duas leituras): feedItemType de FeedLayoutFilter (29 valores, 5 marcados como não
+  usados) e summaryLayoutStyle de SummaryLayout (6 valores).
+[src:mdapi-escalationrules-enums] meta_escalationrules: assignedToType (User, Queue), businessHoursSource (None, Case, Static), escalationStartTime
+  (CaseCreation, CaseLastModified). A página de AssignmentRule só traz assignedToType.
+[src:mdapi-network-subtipos] meta_network (176.651 caracteres), lida de 55 mil até o fim: Branding (até 40.0), CommunityRoles, NavigationLinkSet
+  (37.0 a 46.0), NavigationMenuItem, NavigationSubMenu, NetworkAuthApiSettings (60.0), NetworkEmailTmplAllowlist, NetworkMemberGroup,
+  NetworkPageOverride, RecommendationAudience(Detail), RecommendationDefinition(Detail), ScheduledRecommendation(Detail), ReputationBranding,
+  ReputationLevelDefinitions, ReputationLevel, ReputationPointsRules, ReputationPointsRule (16 eventos), NetworkTabSet. Propriedades de Network
+  ligadas: branding, navigationLinkSet, networkAuthApiSettings, networkMemberGroups, networkPageOverrides, recommendationAudience,
+  recommendationDefinition, reputationLevels, reputationPointsRules, tabs.
+[src:mdapi-presenceuserconfig-v264] meta_presenceuserconfig: 18 linhas, 17 campos nomeados e uma linha vazia.
+[src:mdapi-customobjecttranslation-v264] meta_customobjecttranslation: PicklistValueTranslation com masterLabel e translation (obrigatórios).
+[src:mdapi-profile-parte1] meta_profile, primeiros 100 mil caracteres: LoginFlow (flow, flowtype UI, friendlyname, uiLoginFlowType VisualWorkflow ou
+  VisualForce, useLightningRuntime padrão false, vfFlowPage, vfFlowPageTitle), ProfileActionOverride (actionName, content, formFactor,
+  pageOrSobjectType, recordType, type), ProfileAgentAccess (agentName, enabled), ProfileLoginHours (mondayStart a sundayEnd, minutos desde a
+  meia-noite, múltiplos de 60). Propriedades de Profile ligadas: loginFlows, profileActionOverrides, agentAccesses, loginHours. A nota anterior
+  (lote 7l) dizia por engano que essas seções não existiam; elas estão antes do ponto onde a leitura anterior começou.
+[src:mdapi-actionoverride] novo site, metadata-actionoverride: API 18.0; acessado só pelo CustomObject; actionName (accept, clone, delete, edit, list,
+  new, tab, view), comment, content, formFactor (37.0; Large, Small, Medium, nulo para o Classic), skipRecordTypeSelect (21.0), type (default,
+  flexipage, lightningcomponent, scontrol, standard, visualforce). A descrição de actionName e de type diz Required; a marcação diz que não.
+  Usado por actionOverrides de CustomObject e de CustomTab.
+[src:mdapi-sharingreason] novo site, metadata-sharingreason: estende Metadata; customizados desde a 14.0, objetos padrão desde a 68.0; fullName (nomes
+  reservados, sufixo __c, até 10 por objeto padrão) e label (obrigatório, 40 caracteres).
+[src:mdapi-sharingrecalculation] novo site: API 14.0; className (obrigatório, classe que implementa Database.Batchable).
+[src:mdapi-customtab-novo] novo site, metadata-customtab: motif com 100 valores, de Custom1:Heart a Custom100:TVWidescreen; urlEncodingKey remete
+  a outra referência (padrão UTF-8); actionOverrides do tipo ActionOverride[] (37.0).
+[src:mdapi-profile-novo] novo site, metadata-profile: visibility de ProfileTabVisibility com DefaultOff, DefaultOn e Hidden.
+[src:tooling-fielddefinition-picklistvalue] Tooling API, FieldDefinition, seção PicklistValue Metadata: allowEmail (18.0), closed (16.0), color (17.0),
+  controllingFieldValues (14.0), converted, cssExposed, default (obrigatório), description, forecastCategory (Omitted, Pipeline, BestCase, Forecast,
+  Closed), fullName, highPriority, probability, reverseRole (18.0), reviewed, won. A página própria (meta_picklistvalue) segue ilegível.
+
+-- Lista de campos transcrita da leitura (gerada por lote7n_b5_estruturas.py; nome | tipo)
+[src:tooling-fielddefinition-picklistvalue] PicklistValue: allowEmail | boolean, closed | boolean, color | string, controllingFieldValues | string[], converted | boolean, cssExposed | boolean, default | boolean, description | string, forecastCategory | ForecastCategories, fullName | string, highPriority | boolean, probability | int, reverseRole | string, reviewed | boolean, won | boolean
+[src:mdapi-sharingreason] SharingReason: fullName | string, label | string
+[src:mdapi-actionoverride] ActionOverride: actionName | string, comment | string, content | string, formFactor | FormFactor, skipRecordTypeSelect | boolean, type | ActionOverrideType
+[src:mdapi-sharingrecalculation] SharingRecalculation: className | string
+[src:mdapi-namedfilter] NamedFilter: active | boolean, booleanFilter | string, description | string, errorMessage | string, field | string, filterItems | FilterItem[], fullName | string, infoMessage | string, isOptional | boolean, name | string, sourceObject | string
+[src:mdapi-profile-parte1] LoginFlow: flow | string, flowtype | LoginFlowType, friendlyname | string, uiLoginFlowType | UiLoginFlowType, useLightningRuntime | boolean, vfFlowPage | string, vfFlowPageTitle | string
+[src:mdapi-profile-parte1] ProfileActionOverride: actionName | string, content | string, formFactor | FormFactor, pageOrSobjectType | string, recordType | string, type | ActionOverrideType
+[src:mdapi-profile-parte1] ProfileAgentAccess: agentName | string, enabled | boolean
+[src:mdapi-profile-parte1] ProfileLoginHours: mondayStart | string, mondayEnd | string, tuesdayStart | string, tuesdayEnd | string, wednesdayStart | string, wednesdayEnd | string, thursdayStart | string, thursdayEnd | string, fridayStart | string, fridayEnd | string, saturdayStart | string, saturdayEnd | string, sundayStart | string, sundayEnd | string
+[src:mdapi-quickaction-subtipos] FieldOverride: field | string, formula | string, literalValue | string
+[src:mdapi-quickaction-subtipos] QuickActionLayoutItem: emptySpace | boolean, field | string, uiBehavior | UiBehavior
+[src:mdapi-quickaction-subtipos] QuickActionLayoutColumn: quickActionLayoutItems | QuickActionLayoutItem[]
+[src:mdapi-quickaction-subtipos] QuickActionLayout: layoutSectionStyle | LayoutSectionStyle, quickActionLayoutColumns | QuickActionLayoutColumn[]
+[src:mdapi-quickaction-subtipos] QuickActionParameter: name | string, type | QuickActionParameterType, value | string
+[src:mdapi-flexipage-subtipos] FlexiPageEventSourceProperty: name | string, value | string
+[src:mdapi-flexipage-subtipos] FlexiPageEventPropertyMapping: name | string, value | string
+[src:mdapi-flexipage-subtipos] FlexiPageEventTargetProperty: name | string, value | string
+[src:mdapi-flexipage-subtipos] FlexiPageEventTarget: mappings | FlexiPageEventPropertyMapping[], method | string, name | string, properties | FlexiPageEventTargetProperty[], type | FlexiPageEventTargetTypeEnum
+[src:mdapi-flexipage-subtipos] FlexiPageEvent: sourceName | string, sourceProperties | FlexiPageEventSourceProperty[], sourceType | FlexipageEventSourceTypeEnum, targets | FlexiPageEventTarget[]
+[src:mdapi-flexipage-subtipos] UiFormulaCriterion: leftValue | string, operator | string, rightValue | string
+[src:mdapi-flexipage-subtipos] UiFormulaRule: booleanFilter | string, criteria | UiFormulaCriterion[]
+[src:mdapi-flexipage-subtipos] ComponentInstancePropertyListItem: value | string
+[src:mdapi-flexipage-subtipos] ComponentInstancePropertyList: valueListItems | ComponentInstancePropertyListItem[]
+[src:mdapi-flexipage-subtipos] ComponentInstanceProperty: name | string, type | ComponentInstancePropertyTypeEnum, value | string, valueList | ComponentInstancePropertyList
+[src:mdapi-flexipage-subtipos] ComponentInstance: componentInstanceProperties | ComponentInstanceProperty[], componentName | string, identifier | string, visibilityRule | UiFormulaRule
+[src:mdapi-flexipage-subtipos] FieldInstanceProperty: name | string, value | string
+[src:mdapi-flexipage-subtipos] FieldInstance: fieldInstanceProperties | FieldInstanceProperty[], fieldItem | string, identifier | string, visibilityRule | UiFormulaRule
+[src:mdapi-flexipage-subtipos] ItemInstance: componentInstance | ComponentInstance, fieldInstance | FieldInstance
+[src:mdapi-flexipage-subtipos] FlexiPageRegion: appendable | RegionFlagStatus, componentInstances | ComponentInstance[], itemInstances | ItemInstance[], mode | FlexiPageRegionMode, name | string, prependable | RegionFlagStatus, replaceable | RegionFlagStatus, type | FlexiPageRegionType
+[src:mdapi-flexipage-subtipos] FlexiPageTemplateInstance: name | string, properties | ComponentInstanceProperty[]
+[src:mdapi-aipluginutterancedef] AiPluginUtteranceDef: developerName | string, language | string, masterLabel | string, utterance | string
+[src:mdapi-genaiplugininstructiondef] GenAiPluginInstructionDef: description | string, developerName | string, language | string, masterLabel | string, sortOrder | int
+[src:mdapi-network-subtipos] Branding: loginFooterText | string, loginLogo | string, pageFooter | string, pageHeader | string, primaryColor | string, primaryComplementColor | string, quaternaryColor | string, quaternaryComplementColor | string, secondaryColor | string, tertiaryColor | string, tertiaryComplementColor | string, zeronaryColor | string, zeronaryComplementColor | string
+[src:mdapi-network-subtipos] NavigationLinkSet: navigationMenuItem | NavigationMenuItem[]
+[src:mdapi-network-subtipos] NetworkEmailTmplAllowlist: emailTemplate | string
+[src:mdapi-network-subtipos] NetworkAuthApiSettings: doesForgotPasswordRequireAuth | boolean, doesPasswordLoginRequireAuth | boolean, doesPwdlessLoginRequireAuth | boolean, doesRegistrationRequireAuth | boolean, headlessDiscoveryExecutionUser | Id, headlessDiscoveryHandler | string, isFirstPartyAppsAllowed | boolean, isForgotPwdAllowed | boolean, isForgotPwdEmailTemplateAllowlistingEnabled | boolean, isHeadlessUserRegistrationAllowed | boolean, IsPwdlessLoginAllowed | boolean, isRecaptchaRequiredForgotPwd | boolean, isRecaptchaRequiredPwdlessLogin | boolean, isRecaptchaRequiredRgstr | boolean, isUniversalClientRgstrAllowed | boolean, isUserDisambiguationAllowedForgotPwd | boolean, isUserDisambiguationAllowedUsernamePwd | boolean, maxPasswordResetAttempts | int, recaptchaScoreThreshold | double, recaptchaSecretKey | string, registrationExecutionUser | string, registrationHandler | string, registrationUserDefaultProfile | string, emailTmplsAllowlist | NetworkEmailTmplAllowlist[]
+[src:mdapi-network-subtipos] NetworkMemberGroups: permissionSet | string, profile | string
+[src:mdapi-network-subtipos] NetworkPageOverride: changePasswordPageOverrideSetting | NetworkPageOverrideSetting, forgotPasswordPageOverrideSetting | NetworkPageOverrideSetting, homePageOverrideSetting | NetworkPageOverrideSetting, loginPageOverrideSetting | NetworkPageOverrideSetting, selfRegProfilePageOverrideSetting | NetworkPageOverrideSetting
+[src:mdapi-network-subtipos] RecommendationAudienceDetail: audienceCriteriaType | AudienceCriteriaType, audienceCriteriaValue | string, setupName | string
+[src:mdapi-network-subtipos] RecommendationAudience: recommendationAudienceDetails | RecommendationAudienceDetail
+[src:mdapi-network-subtipos] ScheduledRecommendationDetail: channel | RecommendationChannel, enabled | boolean, rank | int, recommendationAudience | string
+[src:mdapi-network-subtipos] ScheduledRecommendation: scheduledRecommendationDetails | ScheduledRecommendationDetail[]
+[src:mdapi-network-subtipos] RecommendationDefinitionDetail: actionUrl | string, description | string, linkText | string, scheduledRecommendations | ScheduledRecommendation, setupName | string, title | string
+[src:mdapi-network-subtipos] RecommendationDefinition: recommendationDefinitionDetails | RecommendationDefinitionDetail[]
+[src:mdapi-network-subtipos] ReputationBranding: smallImage | string
+[src:mdapi-network-subtipos] ReputationLevel: branding | ReputationBranding[], label | string, lowerThreshold | double
+[src:mdapi-network-subtipos] ReputationLevelDefinitions: level | ReputationLevel[]
+[src:mdapi-network-subtipos] ReputationPointsRule: eventType | string, points | int
+[src:mdapi-network-subtipos] ReputationPointsRules: pointsRule | ReputationPointsRule[]
+[src:mdapi-network-subtipos] NetworkTabSet: customTab | string, defaultTab | string, standardTab | string
+[src:mdapi-customobjecttranslation-v264] PicklistValueTranslation: masterLabel | string, translation | string
