@@ -5,6 +5,11 @@ import { TAMANHO_PAGINA } from '../model/adaptador';
 
 export interface Ponto { x: number; y: number }
 
+/** Acima de tantos irmãos num anel, os ímpares vão para um anel um pouco mais externo (leque em dois anéis, #17). */
+export const LIMITE_ANEL_UNICO = 12;
+/** Distância extra do anel externo, em px; o suficiente para o rótulo de um irmão não encostar no nó vizinho. */
+export const DESLOCAMENTO_ALTERNADO = 80;
+
 export function posicionar(cena: Cena, anteriores: Map<string, Ponto>, tamanhoPagina = TAMANHO_PAGINA): Map<string, Ponto> {
   const pos = new Map<string, Ponto>();
   const filhosDe = new Map<string, string[]>();
@@ -26,18 +31,19 @@ export function posicionar(cena: Cena, anteriores: Map<string, Ponto>, tamanhoPa
     const anel = Math.floor(i / tamanhoPagina);
     const noAnel = Math.min(tamanhoPagina, irmaos.length - anel * tamanhoPagina);
     const j = i % tamanhoPagina;
+    const extra = noAnel > LIMITE_ANEL_UNICO && j % 2 === 1 ? DESLOCAMENTO_ALTERNADO : 0;
     if (!avo) {
-      const r = Math.max(210, noAnel * 26) + anel * 90;
+      const r = Math.max(210, noAnel * 26) + anel * 90 + extra;
       const a = (2 * Math.PI * j) / noAnel - Math.PI / 2;
       pos.set(chave, { x: P.x + r * Math.cos(a), y: P.y + r * Math.sin(a) });
       continue;
     }
     const G = pos.get(avo) ?? anteriores.get(avo) ?? { x: 0, y: 0 };
     const dir = Math.atan2(P.y - G.y, P.x - G.x);
-    // ~75px de arco entre irmãos para os rótulos não se sobreporem
+    // ~90px de arco entre irmãos; com dois anéis alternados, os vizinhos do mesmo anel ficam a ~180px
     const passo = 0.42;
     const abertura = Math.min(1.7 * Math.PI, Math.max(0.5, (noAnel - 1) * passo));
-    const r = Math.max(200, (75 * Math.max(noAnel - 1, 1)) / abertura) + anel * 90;
+    const r = Math.max(200, (90 * Math.max(noAnel - 1, 1)) / abertura) + anel * 90 + extra;
     const a = noAnel === 1 ? dir : dir - abertura / 2 + (abertura * j) / (noAnel - 1);
     pos.set(chave, { x: P.x + r * Math.cos(a), y: P.y + r * Math.sin(a) });
   }

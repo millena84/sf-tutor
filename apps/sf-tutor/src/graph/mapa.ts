@@ -406,9 +406,11 @@ function estilo(): unknown[] {
     { selector: 'node[tipo = "pagina"]', style: { 'background-image': 'none', shape: 'round-rectangle', width: 64, height: 26, label: 'data(rotulo)', 'text-valign': 'center', 'text-margin-y': 0, 'background-color': '#e2e8f0', 'border-style': 'dashed', 'font-size': 10, 'text-background-opacity': 0 } },
     { selector: 'node[filhos > 0][expandido = 0]', style: { 'border-color': '#0f172a', 'border-opacity': 1 } },
     { selector: 'node[oculto = 1]', style: { opacity: 0.22, 'border-style': 'dotted' } },
-    { selector: 'node.foco', style: { 'border-width': 5, 'border-color': '#f59e0b', 'border-opacity': 1, 'z-index': 20 } },
-    { selector: 'node.esmaecido', style: { opacity: 0.18 } },
-    { selector: 'node.vizinho', style: { opacity: 1 } },
+    { selector: 'node.foco', style: { 'border-width': 5, 'border-color': '#D3439E', 'border-opacity': 1, 'z-index': 20 } },
+    // #17: o que está em segundo plano fica por baixo e com rótulo mais apagado; o caminho e os vizinhos ficam por cima
+    { selector: 'node.esmaecido', style: { opacity: 0.18, 'text-opacity': 0.5, 'z-index': 0 } },
+    { selector: 'node.vizinho', style: { opacity: 1, 'text-opacity': 1, 'z-index': 10, 'text-background-opacity': 0.95 } },
+    { selector: 'node.foco', style: { 'text-opacity': 1, 'text-background-opacity': 1 } },
     {
       selector: 'edge',
       style: { width: 1.2, 'line-color': '#94a3b8', 'curve-style': 'bezier', 'target-arrow-shape': 'none', opacity: 0.85 },
@@ -426,6 +428,6 @@ function estilo(): unknown[] {
     { selector: 'edge[grupo = "pagina"]', style: { 'line-style': 'dotted', 'line-color': '#94a3b8' } },
     { selector: 'edge.esmaecido', style: { opacity: 0.08 } },
     { selector: 'edge.vizinho', style: { opacity: 1 } },
-    { selector: 'edge.selecionado', style: { width: 4, 'line-color': '#f59e0b', 'target-arrow-color': '#f59e0b', 'source-arrow-color': '#f59e0b', opacity: 1, 'z-index': 30 } },
+    { selector: 'edge.selecionado', style: { width: 4, 'line-color': '#D3439E', 'target-arrow-color': '#D3439E', 'source-arrow-color': '#D3439E', opacity: 1, 'z-index': 30 } },
   ];
 }

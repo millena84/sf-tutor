@@ -86,6 +86,8 @@ apps/sf-tutor/dist/                (site publicável)
   - O canvas erra o tamanho de SVG sem largura/altura declaradas, caso do logo central. Por isso o logo é um `<img>` comum sobre o nó (camada `.camada-logos`), encaixado no círculo e reposicionado a cada quadro do grafo.
   - Os testes simulam os servidores, carregando e falhando, sem depender da rede.
 - **Referência visual (flavinho.pages.dev):** não pôde ser inspecionada (bloqueada para acesso automatizado). A paleta e o layout seguem a especificação do prompt e as diretrizes do projeto, não essa referência.
+- **Paleta Desbugando (C2, #23, 2026-11-17):** cabeçalho em Noite, rodapé em Faixa roxa, destaques em Violeta escurecido e contorno de foco e seleção em Magenta escurecido. Os temas usam 7 matizes da marca em dois níveis de luminosidade (`src/cores.ts`). O contraste AA é verificado em `tests/unit/contraste.test.ts`; detalhes em `MARCA.md`.
+- **Rótulos em ramos densos (C2, #17):** acima de 12 irmãos, o leque passa a usar dois anéis alternados (`src/graph/layout.ts`, teste em `tests/unit/layout.test.ts`). Os nós esmaecidos ficam por baixo e com rótulo mais apagado; o caminho selecionado e os vizinhos ficam por cima.
 - **Arraste de nós:** a posição arrastada não é preservada quando a cena é reconstruída.
 - **Rótulos no mapa:** em ramos muito densos podem se sobrepor quando o zoom está afastado. O painel e o modo lista mostram o texto completo.
 - **Ganchos de teste:** `window.__sfTutor` expõe apenas leitura (contagens, seleção, coordenada de um nó/aresta para o clique dos testes) e não altera o estado.
