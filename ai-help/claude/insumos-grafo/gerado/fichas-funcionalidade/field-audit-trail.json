@@ -1,0 +1,927 @@
+{
+  "funcionalidade": {
+    "alertas": [
+      "A política padrão arquiva depois de 18 meses em produção e de um mês em sandbox, e não vem no retrieve: para mudá-la, implante uma política pela Metadata API.",
+      "Excluir um registro apaga o histórico relacionado, mas não a cópia já levada para FieldHistoryArchive.",
+      "Consultar FieldHistoryArchive exige a permissão Retain Field History."
+    ],
+    "aliases": [
+      "fieldhistoryarchive",
+      "historyretentionpolicy",
+      "retenção de histórico",
+      "retain field history",
+      "auditoria de longo prazo"
+    ],
+    "classificacao_principal": {
+      "classificacao": "cls:qualidade-governanca-e-ciclo-de-vida-dos-dados",
+      "subclassificacao": "sub:retencao-arquivamento-e-exclusao"
+    },
+    "classificacoes_secundarias": [
+      {
+        "classificacao": "cls:qualidade-governanca-e-ciclo-de-vida-dos-dados",
+        "motivo": "É a extensão do histórico de campos.",
+        "subclassificacao": "sub:rastreabilidade-e-historico"
+      }
+    ],
+    "estado": "verificado",
+    "evidencias": [
+      {
+        "fonte": "src:help-field-audit-trail"
+      },
+      {
+        "fonte": "src:mdapi-historyretentionpolicy"
+      },
+      {
+        "fonte": "src:mdapi-customobject"
+      },
+      {
+        "fonte": "src:objref-fieldhistoryarchive"
+      },
+      {
+        "fonte": "src:help-field-history-security"
+      }
+    ],
+    "exemplo": "Uma financeira precisa provar, cinco anos depois, quem alterou o limite de crédito de uma conta; o dado está em FieldHistoryArchive.",
+    "finalidade": "Cumprir exigências de auditoria e de conformidade que pedem histórico por anos, não por meses.",
+    "id": "func:field-audit-trail",
+    "limitacoes": [
+      "Até 200 campos por objeto, contra 20 do rastreamento padrão.",
+      "O histórico arquivado só é acessível por API."
+    ],
+    "nome": "Field Audit Trail",
+    "nome_tecnico": "Field Audit Trail",
+    "o_que_e": "Field Audit Trail amplia o Field History Tracking: rastreia até 200 campos por objeto e guarda o histórico até ele ser excluído, num big object (FieldHistoryArchive). Uma política de retenção por objeto diz quantos meses o histórico fica no objeto de histórico antes de ser arquivado.",
+    "recomendacoes": [],
+    "representacoes": {
+      "ausencias": [],
+      "metadata_types": [
+        {
+          "papel": "A política de retenção do objeto (historyRetentionPolicy).",
+          "ref": "mdt:CustomObject"
+        }
+      ],
+      "objetos_api": [
+        {
+          "papel": "O histórico arquivado, consultado só por API.",
+          "ref": "obj:FieldHistoryArchive"
+        }
+      ]
+    },
+    "setup": {
+      "estado": "desconhecido",
+      "nota": "Caminho de Setup não lido."
+    },
+    "termos_busca": [
+      "auditoria de longo prazo",
+      "field audit trail",
+      "fieldhistoryarchive",
+      "historyretentionpolicy",
+      "retain field history",
+      "retenção de histórico"
+    ]
+  },
+  "metadata_types": [
+    {
+      "ficha_completa": "gerado/fichas-completas/CustomObject.json",
+      "id": "mdt:CustomObject",
+      "nome": "CustomObject",
+      "papel": "A política de retenção do objeto (historyRetentionPolicy)."
+    }
+  ],
+  "nota": "Gerado deterministicamente a partir de catalogo/. Não editar à mão.",
+  "objetos_api": [
+    {
+      "objeto": {
+        "alertas": [
+          "É um big object: só aceita describeSObjects() e query(), sem criar, alterar ou excluir pela API.",
+          "Ao ordenar, a página indica a sequência FieldHistoryType crescente, ParentId crescente e CreatedDate decrescente.",
+          "Quando o campo ou o objeto pai foi excluído, Field devolve o Id; a página cita FieldNameAfterArchival e ParentNameAfterArchival para os nomes antigos, mas não os lista na tabela."
+        ],
+        "apex": {
+          "consulta_soql_direta": {
+            "estado": "desconhecido",
+            "nota": "Não verificado se o big object é consultável por SOQL comum em Apex."
+          },
+          "nota": "A página só lista describeSObjects() e query()."
+        },
+        "campos": [
+          {
+            "apis": [
+              "padrao"
+            ],
+            "default": {
+              "estado": "desconhecido",
+              "forma": "nao_declarado_na_fonte"
+            },
+            "disponibilidade": {
+              "ate_versao": null,
+              "desde_versao": null,
+              "estado": "desconhecido"
+            },
+            "dominio": {
+              "estado": "verificado",
+              "evidencias": [
+                {
+                  "fonte": "src:objref-fieldhistoryarchive"
+                }
+              ],
+              "natureza": "texto_livre"
+            },
+            "estado": "verificado",
+            "evidencias": [
+              {
+                "fonte": "src:objref-fieldhistoryarchive"
+              }
+            ],
+            "explicacao": "explicada",
+            "id": "obj:FieldHistoryArchive.ArchiveFieldName",
+            "nome": "ArchiveFieldName",
+            "o_que_e": "Nome do campo no momento do arquivamento; pode variar entre registros depois de renomeações.",
+            "obrigatoriedade": {
+              "estado": "desconhecido",
+              "valor": "desconhecida"
+            },
+            "origem": {
+              "estado": "verificado",
+              "evidencias": [
+                {
+                  "fonte": "src:objref-fieldhistoryarchive"
+                }
+              ],
+              "nota": "Campo padrão do objeto documentado.",
+              "valor": "padrao_plataforma"
+            },
+            "propriedades_api": {
+              "create": false,
+              "defaulted_on_create": false,
+              "estado": "verificado",
+              "evidencias": [
+                {
+                  "fonte": "src:objref-fieldhistoryarchive"
+                }
+              ],
+              "filter": false,
+              "group": false,
+              "id_lookup": false,
+              "nillable": true,
+              "restricted_picklist": false,
+              "sort": false,
+              "update": false
+            },
+            "somente_leitura": true,
+            "tipo_tecnico": "string"
+          },
+          {
+            "apis": [
+              "padrao"
+            ],
+            "default": {
+              "estado": "desconhecido",
+              "forma": "nao_declarado_na_fonte"
+            },
+            "disponibilidade": {
+              "ate_versao": null,
+              "desde_versao": null,
+              "estado": "desconhecido"
+            },
+            "dominio": {
+              "estado": "verificado",
+              "evidencias": [
+                {
+                  "fonte": "src:objref-fieldhistoryarchive"
+                }
+              ],
+              "natureza": "texto_livre"
+            },
+            "estado": "verificado",
+            "evidencias": [
+              {
+                "fonte": "src:objref-fieldhistoryarchive"
+              }
+            ],
+            "explicacao": "explicada",
+            "id": "obj:FieldHistoryArchive.ArchiveParentName",
+            "nome": "ArchiveParentName",
+            "o_que_e": "Nome do objeto pai no momento do arquivamento; pode variar entre registros depois de renomeações.",
+            "obrigatoriedade": {
+              "estado": "desconhecido",
+              "valor": "desconhecida"
+            },
+            "origem": {
+              "estado": "verificado",
+              "evidencias": [
+                {
+                  "fonte": "src:objref-fieldhistoryarchive"
+                }
+              ],
+              "nota": "Campo padrão do objeto documentado.",
+              "valor": "padrao_plataforma"
+            },
+            "propriedades_api": {
+              "create": false,
+              "defaulted_on_create": false,
+              "estado": "verificado",
+              "evidencias": [
+                {
+                  "fonte": "src:objref-fieldhistoryarchive"
+                }
+              ],
+              "filter": false,
+              "group": false,
+              "id_lookup": false,
+              "nillable": true,
+              "restricted_picklist": false,
+              "sort": false,
+              "update": false
+            },
+            "somente_leitura": true,
+            "tipo_tecnico": "string"
+          },
+          {
+            "apis": [
+              "padrao"
+            ],
+            "default": {
+              "estado": "desconhecido",
+              "forma": "nao_declarado_na_fonte"
+            },
+            "disponibilidade": {
+              "ate_versao": null,
+              "desde_versao": null,
+              "estado": "desconhecido"
+            },
+            "dominio": {
+              "estado": "verificado",
+              "evidencias": [
+                {
+                  "fonte": "src:objref-fieldhistoryarchive"
+                }
+              ],
+              "natureza": "texto_livre"
+            },
+            "estado": "verificado",
+            "evidencias": [
+              {
+                "fonte": "src:objref-fieldhistoryarchive"
+              }
+            ],
+            "explicacao": "explicada",
+            "id": "obj:FieldHistoryArchive.ArchiveParentType",
+            "nome": "ArchiveParentType",
+            "o_que_e": "Tipo do campo no momento do arquivamento; pode variar depois de mudanças de tipo.",
+            "obrigatoriedade": {
+              "estado": "desconhecido",
+              "valor": "desconhecida"
+            },
+            "origem": {
+              "estado": "verificado",
+              "evidencias": [
+                {
+                  "fonte": "src:objref-fieldhistoryarchive"
+                }
+              ],
+              "nota": "Campo padrão do objeto documentado.",
+              "valor": "padrao_plataforma"
+            },
+            "propriedades_api": {
+              "create": false,
+              "defaulted_on_create": false,
+              "estado": "verificado",
+              "evidencias": [
+                {
+                  "fonte": "src:objref-fieldhistoryarchive"
+                }
+              ],
+              "filter": false,
+              "group": false,
+              "id_lookup": false,
+              "nillable": true,
+              "restricted_picklist": false,
+              "sort": false,
+              "update": false
+            },
+            "somente_leitura": true,
+            "tipo_tecnico": "string"
+          },
+          {
+            "apis": [
+              "padrao"
+            ],
+            "default": {
+              "estado": "desconhecido",
+              "forma": "nao_declarado_na_fonte"
+            },
+            "disponibilidade": {
+              "ate_versao": null,
+              "desde_versao": null,
+              "estado": "desconhecido"
+            },
+            "dominio": {
+              "estado": "verificado",
+              "evidencias": [
+                {
+                  "fonte": "src:objref-fieldhistoryarchive"
+                }
+              ],
+              "natureza": "data_hora"
+            },
+            "estado": "verificado",
+            "evidencias": [
+              {
+                "fonte": "src:objref-fieldhistoryarchive"
+              }
+            ],
+            "explicacao": "explicada",
+            "id": "obj:FieldHistoryArchive.ArchiveTimestamp",
+            "nome": "ArchiveTimestamp",
+            "o_que_e": "Quando o dado foi arquivado.",
+            "obrigatoriedade": {
+              "estado": "desconhecido",
+              "valor": "desconhecida"
+            },
+            "origem": {
+              "estado": "verificado",
+              "evidencias": [
+                {
+                  "fonte": "src:objref-fieldhistoryarchive"
+                }
+              ],
+              "nota": "Campo padrão do objeto documentado.",
+              "valor": "padrao_plataforma"
+            },
+            "propriedades_api": {
+              "create": false,
+              "defaulted_on_create": false,
+              "estado": "verificado",
+              "evidencias": [
+                {
+                  "fonte": "src:objref-fieldhistoryarchive"
+                }
+              ],
+              "filter": false,
+              "group": false,
+              "id_lookup": false,
+              "nillable": true,
+              "restricted_picklist": false,
+              "sort": false,
+              "update": false
+            },
+            "somente_leitura": true,
+            "tipo_tecnico": "dateTime"
+          },
+          {
+            "apis": [
+              "padrao"
+            ],
+            "default": {
+              "estado": "desconhecido",
+              "forma": "nao_declarado_na_fonte"
+            },
+            "disponibilidade": {
+              "ate_versao": null,
+              "desde_versao": null,
+              "estado": "desconhecido"
+            },
+            "dominio": {
+              "contexto": "Valores não extraídos; podem depender de org, idioma ou recurso.",
+              "estado": "desconhecido",
+              "natureza": "lista_dinamica"
+            },
+            "estado": "verificado",
+            "evidencias": [
+              {
+                "fonte": "src:objref-fieldhistoryarchive"
+              }
+            ],
+            "explicacao": "explicada",
+            "id": "obj:FieldHistoryArchive.Field",
+            "nome": "Field",
+            "o_que_e": "Campo alterado; mostra o Id se o campo ou o objeto pai foi excluído.",
+            "obrigatoriedade": {
+              "estado": "desconhecido",
+              "valor": "desconhecida"
+            },
+            "origem": {
+              "estado": "verificado",
+              "evidencias": [
+                {
+                  "fonte": "src:objref-fieldhistoryarchive"
+                }
+              ],
+              "nota": "Campo padrão do objeto documentado.",
+              "valor": "padrao_plataforma"
+            },
+            "propriedades_api": {
+              "create": false,
+              "defaulted_on_create": false,
+              "estado": "verificado",
+              "evidencias": [
+                {
+                  "fonte": "src:objref-fieldhistoryarchive"
+                }
+              ],
+              "filter": false,
+              "group": false,
+              "id_lookup": false,
+              "nillable": false,
+              "restricted_picklist": true,
+              "sort": false,
+              "update": false
+            },
+            "somente_leitura": true,
+            "tipo_tecnico": "picklist"
+          },
+          {
+            "apis": [
+              "padrao"
+            ],
+            "default": {
+              "estado": "desconhecido",
+              "forma": "nao_declarado_na_fonte"
+            },
+            "disponibilidade": {
+              "ate_versao": null,
+              "desde_versao": null,
+              "estado": "desconhecido"
+            },
+            "dominio": {
+              "contexto": "Valores conforme a página; listas de picklist podem variar por org, idioma ou recurso habilitado.",
+              "estado": "verificado",
+              "evidencias": [
+                {
+                  "fonte": "src:objref-fieldhistoryarchive"
+                }
+              ],
+              "lista_completa": "sim",
+              "natureza": "enum_fechado",
+              "valores": [
+                {
+                  "valor": "Account"
+                },
+                {
+                  "valor": "Article"
+                },
+                {
+                  "valor": "Asset"
+                },
+                {
+                  "valor": "AuthorizationFormConsent"
+                },
+                {
+                  "valor": "Case"
+                },
+                {
+                  "valor": "CommSubscriptionConsent"
+                },
+                {
+                  "valor": "Contact"
+                },
+                {
+                  "valor": "ContactPointConsent"
+                },
+                {
+                  "valor": "ContactPointTypeConsent"
+                },
+                {
+                  "valor": "Contract"
+                },
+                {
+                  "valor": "ContractLineItem"
+                },
+                {
+                  "valor": "Crisis"
+                },
+                {
+                  "valor": "Employee"
+                },
+                {
+                  "valor": "EmployeeCrisisAssessment"
+                },
+                {
+                  "valor": "Entitlement"
+                },
+                {
+                  "valor": "Individual"
+                },
+                {
+                  "valor": "InternalOrganizationUnit"
+                },
+                {
+                  "valor": "Knowledge"
+                },
+                {
+                  "valor": "Lead"
+                },
+                {
+                  "valor": "Opportunity"
+                },
+                {
+                  "valor": "Order"
+                },
+                {
+                  "valor": "OrderItem"
+                },
+                {
+                  "valor": "PartyConsent"
+                },
+                {
+                  "valor": "Pricebook2"
+                },
+                {
+                  "valor": "PricebookEntry"
+                },
+                {
+                  "valor": "Product2"
+                },
+                {
+                  "valor": "ServiceAppointment"
+                },
+                {
+                  "valor": "ServiceContract"
+                },
+                {
+                  "valor": "Solution"
+                },
+                {
+                  "valor": "WorkOrder"
+                },
+                {
+                  "valor": "WorkOrderLineItem"
+                }
+              ]
+            },
+            "estado": "verificado",
+            "evidencias": [
+              {
+                "fonte": "src:objref-fieldhistoryarchive"
+              }
+            ],
+            "explicacao": "explicada",
+            "id": "obj:FieldHistoryArchive.FieldHistoryType",
+            "nome": "FieldHistoryType",
+            "notas": [
+              "AuthorizationFormConsent, CommSubscriptionConsent, ContactPointConsent, ContactPointTypeConsent e PartyConsent existem desde a API 58.0."
+            ],
+            "o_que_e": "Objeto pai cujo histórico é guardado.",
+            "obrigatoriedade": {
+              "estado": "desconhecido",
+              "valor": "desconhecida"
+            },
+            "origem": {
+              "estado": "verificado",
+              "evidencias": [
+                {
+                  "fonte": "src:objref-fieldhistoryarchive"
+                }
+              ],
+              "nota": "Campo padrão do objeto documentado.",
+              "valor": "padrao_plataforma"
+            },
+            "propriedades_api": {
+              "create": false,
+              "defaulted_on_create": false,
+              "estado": "verificado",
+              "evidencias": [
+                {
+                  "fonte": "src:objref-fieldhistoryarchive"
+                }
+              ],
+              "filter": true,
+              "group": false,
+              "id_lookup": false,
+              "nillable": true,
+              "restricted_picklist": true,
+              "sort": true,
+              "update": false
+            },
+            "somente_leitura": true,
+            "tipo_tecnico": "picklist"
+          },
+          {
+            "apis": [
+              "padrao"
+            ],
+            "default": {
+              "estado": "desconhecido",
+              "forma": "nao_declarado_na_fonte"
+            },
+            "disponibilidade": {
+              "ate_versao": null,
+              "desde_versao": "42.0",
+              "estado": "verificado"
+            },
+            "dominio": {
+              "contexto": "Id de registro do(s) objeto(s) referenciado(s).",
+              "estado": "desconhecido",
+              "natureza": "referencia"
+            },
+            "estado": "verificado",
+            "evidencias": [
+              {
+                "fonte": "src:objref-fieldhistoryarchive"
+              }
+            ],
+            "explicacao": "explicada",
+            "id": "obj:FieldHistoryArchive.HistoryId",
+            "nome": "HistoryId",
+            "notas": [
+              "A página não lista os objetos referenciados um a um."
+            ],
+            "o_que_e": "O registro do objeto de histórico correspondente, como AccountHistory.",
+            "obrigatoriedade": {
+              "estado": "desconhecido",
+              "valor": "desconhecida"
+            },
+            "origem": {
+              "estado": "verificado",
+              "evidencias": [
+                {
+                  "fonte": "src:objref-fieldhistoryarchive"
+                }
+              ],
+              "nota": "Campo padrão do objeto documentado.",
+              "valor": "padrao_plataforma"
+            },
+            "propriedades_api": {
+              "create": false,
+              "defaulted_on_create": false,
+              "estado": "verificado",
+              "evidencias": [
+                {
+                  "fonte": "src:objref-fieldhistoryarchive"
+                }
+              ],
+              "filter": true,
+              "group": false,
+              "id_lookup": false,
+              "nillable": false,
+              "restricted_picklist": false,
+              "sort": true,
+              "update": false
+            },
+            "somente_leitura": true,
+            "tipo_tecnico": "reference"
+          },
+          {
+            "apis": [
+              "padrao"
+            ],
+            "default": {
+              "estado": "desconhecido",
+              "forma": "nao_declarado_na_fonte"
+            },
+            "disponibilidade": {
+              "ate_versao": null,
+              "desde_versao": null,
+              "estado": "desconhecido"
+            },
+            "dominio": {
+              "estado": "desconhecido",
+              "natureza": "desconhecida"
+            },
+            "estado": "verificado",
+            "evidencias": [
+              {
+                "fonte": "src:objref-fieldhistoryarchive"
+              }
+            ],
+            "explicacao": "explicada",
+            "id": "obj:FieldHistoryArchive.NewValue",
+            "nome": "NewValue",
+            "o_que_e": "Novo valor do campo.",
+            "obrigatoriedade": {
+              "estado": "desconhecido",
+              "valor": "desconhecida"
+            },
+            "origem": {
+              "estado": "verificado",
+              "evidencias": [
+                {
+                  "fonte": "src:objref-fieldhistoryarchive"
+                }
+              ],
+              "nota": "Campo padrão do objeto documentado.",
+              "valor": "padrao_plataforma"
+            },
+            "propriedades_api": {
+              "create": false,
+              "defaulted_on_create": false,
+              "estado": "verificado",
+              "evidencias": [
+                {
+                  "fonte": "src:objref-fieldhistoryarchive"
+                }
+              ],
+              "filter": false,
+              "group": false,
+              "id_lookup": false,
+              "nillable": true,
+              "restricted_picklist": false,
+              "sort": false,
+              "update": false
+            },
+            "somente_leitura": true,
+            "tipo_tecnico": "anyType"
+          },
+          {
+            "apis": [
+              "padrao"
+            ],
+            "default": {
+              "estado": "desconhecido",
+              "forma": "nao_declarado_na_fonte"
+            },
+            "disponibilidade": {
+              "ate_versao": null,
+              "desde_versao": null,
+              "estado": "desconhecido"
+            },
+            "dominio": {
+              "estado": "desconhecido",
+              "natureza": "desconhecida"
+            },
+            "estado": "verificado",
+            "evidencias": [
+              {
+                "fonte": "src:objref-fieldhistoryarchive"
+              }
+            ],
+            "explicacao": "explicada",
+            "id": "obj:FieldHistoryArchive.OldValue",
+            "nome": "OldValue",
+            "o_que_e": "Valor anterior do campo.",
+            "obrigatoriedade": {
+              "estado": "desconhecido",
+              "valor": "desconhecida"
+            },
+            "origem": {
+              "estado": "verificado",
+              "evidencias": [
+                {
+                  "fonte": "src:objref-fieldhistoryarchive"
+                }
+              ],
+              "nota": "Campo padrão do objeto documentado.",
+              "valor": "padrao_plataforma"
+            },
+            "propriedades_api": {
+              "create": false,
+              "defaulted_on_create": false,
+              "estado": "verificado",
+              "evidencias": [
+                {
+                  "fonte": "src:objref-fieldhistoryarchive"
+                }
+              ],
+              "filter": false,
+              "group": false,
+              "id_lookup": false,
+              "nillable": true,
+              "restricted_picklist": false,
+              "sort": false,
+              "update": false
+            },
+            "somente_leitura": true,
+            "tipo_tecnico": "anyType"
+          },
+          {
+            "apis": [
+              "padrao"
+            ],
+            "default": {
+              "estado": "desconhecido",
+              "forma": "nao_declarado_na_fonte"
+            },
+            "disponibilidade": {
+              "ate_versao": null,
+              "desde_versao": null,
+              "estado": "desconhecido"
+            },
+            "dominio": {
+              "contexto": "Id de registro do(s) objeto(s) referenciado(s).",
+              "estado": "desconhecido",
+              "natureza": "referencia"
+            },
+            "estado": "verificado",
+            "evidencias": [
+              {
+                "fonte": "src:objref-fieldhistoryarchive"
+              }
+            ],
+            "explicacao": "explicada",
+            "id": "obj:FieldHistoryArchive.ParentId",
+            "nome": "ParentId",
+            "notas": [
+              "A página não lista os objetos referenciados."
+            ],
+            "o_que_e": "O registro que contém o campo.",
+            "obrigatoriedade": {
+              "estado": "desconhecido",
+              "valor": "desconhecida"
+            },
+            "origem": {
+              "estado": "verificado",
+              "evidencias": [
+                {
+                  "fonte": "src:objref-fieldhistoryarchive"
+                }
+              ],
+              "nota": "Campo padrão do objeto documentado.",
+              "valor": "padrao_plataforma"
+            },
+            "propriedades_api": {
+              "create": false,
+              "defaulted_on_create": false,
+              "estado": "verificado",
+              "evidencias": [
+                {
+                  "fonte": "src:objref-fieldhistoryarchive"
+                }
+              ],
+              "filter": true,
+              "group": false,
+              "id_lookup": false,
+              "nillable": false,
+              "restricted_picklist": false,
+              "sort": true,
+              "update": false
+            },
+            "somente_leitura": true,
+            "tipo_tecnico": "reference"
+          }
+        ],
+        "cobertura": {
+          "estrutural": {
+            "esperado": 10,
+            "estado": "completa",
+            "nota": "Tabela de campos lida completa (10). A página cita FieldNameAfterArchival e ParentNameAfterArchival fora da tabela.",
+            "presente": 10
+          },
+          "explicativa": {
+            "esperado": 10,
+            "estado": "completa",
+            "presente": 10
+          },
+          "mapeamento": {
+            "estado": "parcial",
+            "nota": "Ver relacionamentos registrados."
+          }
+        },
+        "consultas": [
+          {
+            "api": "padrao",
+            "contexto": "API padrão. Histórico arquivado de contas.",
+            "soql": "SELECT FieldHistoryType, ParentId, Field, OldValue, NewValue FROM FieldHistoryArchive WHERE FieldHistoryType = 'Account'",
+            "validacao": "documental"
+          }
+        ],
+        "estado": "verificado",
+        "evidencias": [
+          {
+            "fonte": "src:objref-fieldhistoryarchive"
+          }
+        ],
+        "exposicoes": [
+          {
+            "acesso_especial": "Só para usuários com a permissão Retain Field History.",
+            "api": "padrao",
+            "chamadas": [
+              "describeSObjects()",
+              "query()"
+            ],
+            "desde_versao": "29.0",
+            "estado": "verificado",
+            "evidencias": [
+              {
+                "fonte": "src:objref-fieldhistoryarchive"
+              }
+            ]
+          },
+          {
+            "api": "tooling",
+            "desde_versao": null,
+            "estado": "desconhecido",
+            "nota": "Exposição na Tooling API não verificada."
+          }
+        ],
+        "id": "obj:FieldHistoryArchive",
+        "juncao": false,
+        "nome": "FieldHistoryArchive",
+        "o_que_e": "Um big object com o histórico arquivado de campos de todos os objetos que retêm histórico: cada registro é uma mudança de valor de um campo.",
+        "papel": "Consultar por API o histórico guardado pelo Field Audit Trail, além do prazo do histórico comum.",
+        "setup": {
+          "estado": "nao_aplicavel",
+          "nota": "Objeto consultável via API; não é tela do Setup."
+        }
+      },
+      "papel": "O histórico arquivado, consultado só por API.",
+      "relacionamentos": []
+    }
+  ],
+  "versao_base": {
+    "api_version": "68.0",
+    "data_referencia": "2026-11-07",
+    "escopo": "config/escopo.json",
+    "release": "Winter '27"
+  }
+}

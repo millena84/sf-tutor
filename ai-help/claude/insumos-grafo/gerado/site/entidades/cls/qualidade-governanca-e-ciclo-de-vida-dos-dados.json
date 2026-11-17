@@ -140,6 +140,30 @@
   "derivado": {
     "dependencias": [
       {
+        "destino": "obj:DataUsePurpose",
+        "destino_no_tema": true,
+        "estado": "verificado",
+        "origem": "obj:ContactPointTypeConsent",
+        "rel": "rel:cptc-datausepurpose",
+        "via": "DataUsePurposeId"
+      },
+      {
+        "destino": "obj:Individual",
+        "destino_no_tema": true,
+        "estado": "verificado",
+        "origem": "obj:ContactPointTypeConsent",
+        "rel": "rel:cptc-individual",
+        "via": "PartyId"
+      },
+      {
+        "destino": "mdt:ExternalDataSource",
+        "destino_no_tema": false,
+        "estado": "verificado",
+        "origem": "mdt:CustomObject",
+        "rel": "rel:customobject-externaldatasource",
+        "via": "externalDataSource"
+      },
+      {
         "destino": "obj:EntityDefinition",
         "destino_no_tema": false,
         "estado": "verificado",
@@ -164,9 +188,84 @@
         "exemplo": "Ao criar um lead com o mesmo e-mail de um contato, o usuário vê um alerta com o possível duplicado e decide se salva mesmo assim.",
         "id": "func:duplicate-management",
         "principal": true
+      },
+      {
+        "alertas": [
+          "A classificação vem habilitada em todas as orgs.",
+          "Ver ou editar a classificação exige Customize Application ou Modify Data Classification.",
+          "Marcar um campo em Field Usage não esconde nem expõe nada: é só registro.",
+          "Para relatar sobre a classificação, crie um custom report type com Entity Definition como objeto principal."
+        ],
+        "exemplo": "O campo CPF__c é marcado como Restricted, com a categoria PII e o responsável Jurídico; um relatório lista todos os campos Restricted da org.",
+        "id": "func:data-classification",
+        "principal": true
+      },
+      {
+        "alertas": [
+          "A política padrão arquiva depois de 18 meses em produção e de um mês em sandbox, e não vem no retrieve: para mudá-la, implante uma política pela Metadata API.",
+          "Excluir um registro apaga o histórico relacionado, mas não a cópia já levada para FieldHistoryArchive.",
+          "Consultar FieldHistoryArchive exige a permissão Retain Field History."
+        ],
+        "exemplo": "Uma financeira precisa provar, cinco anos depois, quem alterou o limite de crédito de uma conta; o dado está em FieldHistoryArchive.",
+        "id": "func:field-audit-trail",
+        "principal": true
+      },
+      {
+        "alertas": [
+          "Itens na lixeira não contam no armazenamento e não há limite de quantidade.",
+          "Restaurar itens de outros usuários e excluir permanentemente exigem Modify All Data.",
+          "Hard delete pela API não passa pela lixeira.",
+          "Remover o registro da tabela do banco (physical delete) é um pedido ao Support, não uma ação da org."
+        ],
+        "exemplo": "Um vendedor exclui uma oportunidade por engano; no dia seguinte, ele a restaura pela Recycle Bin, com os relacionamentos.",
+        "id": "func:recycle-bin",
+        "principal": true
+      },
+      {
+        "alertas": [
+          "O histórico só existe a partir de quando o rastreamento é ligado.",
+          "Em contas, o limite de 20 campos vale para contas comerciais e contas pessoais juntas.",
+          "Não é possível desligar o rastreamento de um objeto se algum código Apex referencia os campos dele.",
+          "O histórico de campos não conta no armazenamento de dados.",
+          "Definir os campos rastreados exige a permissão Customize Application."
+        ],
+        "exemplo": "Na conta, o campo Rating é rastreado; quando alguém muda de Warm para Hot, a related list History mostra o usuário, a data e os dois valores.",
+        "id": "func:field-history-tracking",
+        "principal": true
+      },
+      {
+        "alertas": [
+          "Os objetos só guardam as preferências: a empresa decide como honrá-las e implementa o processo.",
+          "Para os usuários verem os dados de privacidade, inclua o campo Individual nos page layouts de lead, contato e conta pessoal.",
+          "Para o e-mail respeitar as preferências do Individual, ligue também Enforce Email Privacy Settings, em Deliverability.",
+          "Os objetos de consentimento só existem com Data Protection and Privacy habilitado."
+        ],
+        "exemplo": "Uma cliente aceita receber e-mails de cobrança, mas recusa os de marketing: são dois consentimentos de e-mail, cada um com uma finalidade.",
+        "id": "func:consent-management",
+        "principal": true
       }
     ],
     "metadata_types": [
+      {
+        "estrutura": "parcial",
+        "funcionalidades": [
+          "func:data-classification",
+          "func:field-history-tracking"
+        ],
+        "id": "mdt:CustomField",
+        "nota_suporte": null,
+        "suporte_cli": "suportado"
+      },
+      {
+        "estrutura": "parcial",
+        "funcionalidades": [
+          "func:field-audit-trail",
+          "func:field-history-tracking"
+        ],
+        "id": "mdt:CustomObject",
+        "nota_suporte": null,
+        "suporte_cli": "suportado"
+      },
       {
         "estrutura": "parcial",
         "funcionalidades": [
@@ -188,6 +287,16 @@
       {
         "estrutura": "completa",
         "funcionalidades": [
+          "func:consent-management",
+          "func:data-classification"
+        ],
+        "id": "mdt:PrivacySettings",
+        "nota_suporte": null,
+        "suporte_cli": "suportado"
+      },
+      {
+        "estrutura": "completa",
+        "funcionalidades": [
           "func:regras-de-validacao"
         ],
         "id": "mdt:ValidationRule",
@@ -197,6 +306,70 @@
     ],
     "nota": "Calculado pelo gerador a partir do catálogo; não é cadastro.",
     "objetos_api": [
+      {
+        "apis": [
+          {
+            "api": "padrao",
+            "estado": "verificado"
+          },
+          {
+            "api": "tooling",
+            "estado": "desconhecido"
+          }
+        ],
+        "funcionalidades": [
+          "func:consent-management"
+        ],
+        "id": "obj:ContactPointTypeConsent"
+      },
+      {
+        "apis": [
+          {
+            "api": "padrao",
+            "estado": "verificado"
+          },
+          {
+            "api": "tooling",
+            "estado": "desconhecido"
+          }
+        ],
+        "funcionalidades": [
+          "func:consent-management"
+        ],
+        "id": "obj:DataUsePurpose"
+      },
+      {
+        "apis": [
+          {
+            "api": "padrao",
+            "estado": "verificado"
+          },
+          {
+            "api": "tooling",
+            "estado": "desconhecido"
+          }
+        ],
+        "funcionalidades": [
+          "func:field-audit-trail"
+        ],
+        "id": "obj:FieldHistoryArchive"
+      },
+      {
+        "apis": [
+          {
+            "api": "padrao",
+            "estado": "verificado"
+          },
+          {
+            "api": "tooling",
+            "estado": "desconhecido"
+          }
+        ],
+        "funcionalidades": [
+          "func:consent-management"
+        ],
+        "id": "obj:Individual"
+      },
       {
         "apis": [
           {
@@ -214,12 +387,7 @@
         "id": "obj:ValidationRule"
       }
     ],
-    "temas_sem_funcionalidade": [
-      "sub:classificacao-e-sensibilidade",
-      "sub:retencao-arquivamento-e-exclusao",
-      "sub:rastreabilidade-e-historico",
-      "sub:consentimento-e-privacidade"
-    ]
+    "temas_sem_funcionalidade": []
   },
   "descricao": "Reúne mecanismos que protegem a qualidade dos dados e controlam sua classificação, retenção e privacidade.",
   "encadeamento": {
@@ -282,7 +450,8 @@
     "explicacao": "Reúne o que protege a qualidade dos dados ao longo do tempo: regras que impedem gravar dados errados, detecção de duplicados, marcação de dados sensíveis, retenção, histórico de alterações e registro do consentimento das pessoas.",
     "por_onde_comecar": [
       "func:regras-de-validacao",
-      "func:duplicate-management"
+      "func:duplicate-management",
+      "func:field-history-tracking"
     ]
   },
   "referencias_oficiais": [

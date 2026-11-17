@@ -444,4 +444,32 @@ X["sub:recursos-analiticos-de-produto"] = {"comece": ["func:crm-analytics"], "av
        "dashboards não são apagados.", E("src:help-kb-crm-analytics-enable")),
 ]}
 
+# ------------------------------------------------------------------ Fecho de B3: funcionalidades dos temas de Qualidade
+X["cls:qualidade-governanca-e-ciclo-de-vida-dos-dados"]["comece"] = ["func:regras-de-validacao", "func:duplicate-management", "func:field-history-tracking"]
+X["sub:rastreabilidade-e-historico"] = {"comece": ["func:field-history-tracking", "func:field-audit-trail"], "avancado": [
+    av("atencao", "Onde ligar e o que trava", "O rastreamento é ligado em Set History Tracking, nos campos do objeto. Não é possível desligá-lo "
+       "num objeto se algum código Apex referencia os campos dele. Em contas, o limite de 20 campos vale para contas comerciais e pessoais juntas.",
+       E("src:help-kb-account-date-history", "src:help-disable-field-history", "src:help-track-object-field-history")),
+]}
+X["sub:retencao-arquivamento-e-exclusao"] = {"comece": ["func:recycle-bin", "func:field-audit-trail"], "avancado": [
+    av("implantacao", "O histórico arquivado por API", "FieldHistoryArchive é um big object: aceita só describeSObjects() e query(), exige a "
+       "permissão Retain Field History e guarda nome do campo e do objeto como eram no arquivamento.", E("src:objref-fieldhistoryarchive")),
+]}
+X["sub:classificacao-e-sensibilidade"] = {"comece": ["func:data-classification"], "avancado": [
+    av("implantacao", "Padrão de sensibilidade como metadado", "Em PrivacySettings, enableDefaultMetadataValues aplica o nível de sensibilidade "
+       "padrão a contatos, leads, contas pessoais e usuários. Na tela, a opção fica em Data Classification Settings.",
+       E("src:mdapi-privacysettings", "src:help-data-classification-setup")),
+    av("decisao", "Relatar sobre a classificação", "Para listar campos por nível de sensibilidade, crie um custom report type com Entity "
+       "Definition como objeto principal.", E("src:help-data-classification-reports")),
+]}
+X["sub:consentimento-e-privacidade"] = {"comece": ["func:consent-management"], "avancado": [
+    av("atencao", "Ligar antes de usar", "Os objetos de consentimento só existem com Data Protection and Privacy habilitado (Make data protection "
+       "details available in records). Para o e-mail respeitar as preferências do Individual, ligue também Enforce Email Privacy Settings.",
+       E("src:help-kb-individual-record", "src:objref-individual", "src:help-enforce-email-privacy")),
+    av("implantacao", "Os objetos por dentro", "Individual guarda as preferências globais, como HasOptedOutTracking, HasOptedOutSolicit e "
+       "ShouldForget. ContactPointTypeConsent guarda o consentimento por canal, com PrivacyConsentStatus (NotSeen, Seen, OptIn, OptInPending, "
+       "OptOut, OptOutPending), a origem, a data e o período de validade. DataUsePurpose guarda a finalidade e se a pessoa pode recusá-la.",
+       E("src:objref-individual", "src:objref-contactpointtypeconsent", "src:objref-datausepurpose")),
+]}
+
 EXTRAS = X

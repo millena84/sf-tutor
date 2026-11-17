@@ -7,7 +7,7 @@ Gerado por `ferramentas/sftutor.py cobertura`. Cobertura estrutural, explicativa
 
 - Universo v68 (METADATA_SUPPORT.md): **993** tipos.
 - Classificados como incluídos no recorte Core: 12; pendentes de classificação: 981.
-- Cadastrados: **147** de 993. Estruturalmente completos (contra a página oficial): 126. Completos nas três dimensões: 0.
+- Cadastrados: **148** de 993. Estruturalmente completos (contra a página oficial): 127. Completos nas três dimensões: 0.
 - Porcentagem do recorte Core: não calculada, porque o denominador do recorte ainda não está definido (classificação item a item pendente).
 
 | Tipo | Estrutural | Esperadas | Presentes | Explicadas | Estruturas | Mapeamento | Completo |
@@ -123,6 +123,7 @@ Gerado por `ferramentas/sftutor.py cobertura`. Cobertura estrutural, explicativa
 | mdt:PlatformEventSettings | completa | 1 | 1 | 1 | 0 | parcial | não |
 | mdt:PlatformEventSubscriberConfig | completa | 8 | 8 | 8 | 0 | parcial | não |
 | mdt:PresenceUserConfig | parcial | n/d | 18 | 18 | 1 | parcial | não |
+| mdt:PrivacySettings | completa | 14 | 14 | 14 | 0 | parcial | não |
 | mdt:ProductSettings | completa | 5 | 5 | 5 | 0 | parcial | não |
 | mdt:Profile | parcial | 27 | 27 | 27 | 16 | parcial | não |
 | mdt:PublicKeyCertificate | completa | 5 | 5 | 5 | 0 | parcial | não |
@@ -162,13 +163,13 @@ Gerado por `ferramentas/sftutor.py cobertura`. Cobertura estrutural, explicativa
 
 ## Propriedades XML
 
-- Em metadata types: 1936 listadas, 1869 explicadas.
+- Em metadata types: 1950 listadas, 1883 explicadas.
 - Em estruturas auxiliares: 1188 listadas, 1178 explicadas.
 - Universo total: Sem WSDL não há denominador confiável do total de propriedades do recorte.
 
 ## Objetos consultáveis via API
 
-- Catalogados: 79. Campos listados: 1649; explicados: 839.
+- Catalogados: 83. Campos listados: 1712; explicados: 902.
 - Universo: Universo de objetos da plataforma não enumerado.
 
 | Objeto | Estrutural | Esperados | Presentes | Explicados | APIs verificadas |
@@ -187,12 +188,14 @@ Gerado por `ferramentas/sftutor.py cobertura`. Cobertura estrutural, explicativa
 | obj:CaseMilestone | completa | 20 | 20 | 20 | padrao |
 | obj:ConnectedApplication | completa | 15 | 15 | 15 | padrao |
 | obj:Contact | parcial | n/d | 37 | 3 | padrao |
+| obj:ContactPointTypeConsent | completa | 17 | 17 | 17 | padrao |
 | obj:CronJobDetail | completa | 2 | 2 | 2 | padrao |
 | obj:CronTrigger | completa | 10 | 10 | 10 | padrao |
 | obj:CspTrustedSite | completa | 16 | 16 | 16 | padrao |
 | obj:CustomField | parcial | n/d | 6 | 6 | tooling |
 | obj:CustomObject | parcial | n/d | 10 | 10 | tooling |
 | obj:CustomTab | completa | 13 | 13 | 13 | tooling |
+| obj:DataUsePurpose | completa | 8 | 8 | 8 | padrao |
 | obj:DebugLevel | completa | 14 | 14 | 14 | tooling |
 | obj:Entitlement | parcial | 23 | 22 | 9 | padrao |
 | obj:EntityDefinition | parcial | n/d | 13 | 6 | tooling |
@@ -200,6 +203,7 @@ Gerado por `ferramentas/sftutor.py cobertura`. Cobertura estrutural, explicativa
 | obj:EventLogFile | parcial | n/d | 8 | 8 | padrao |
 | obj:ExternalDataSource | completa | 13 | 13 | 13 | padrao |
 | obj:FieldDefinition | parcial | n/d | 12 | 11 | tooling |
+| obj:FieldHistoryArchive | completa | 10 | 10 | 10 | padrao |
 | obj:FlexiPage | completa | 11 | 11 | 11 | tooling |
 | obj:Flow | completa | 15 | 15 | 15 | tooling |
 | obj:FlowDefinition | completa | 11 | 11 | 11 | tooling |
@@ -211,6 +215,7 @@ Gerado por `ferramentas/sftutor.py cobertura`. Cobertura estrutural, explicativa
 | obj:ForecastingType | completa | 18 | 18 | 18 | padrao |
 | obj:Group | completa | 11 | 11 | 11 | padrao |
 | obj:GroupMember | completa | 2 | 2 | 2 | padrao |
+| obj:Individual | completa | 28 | 28 | 28 | padrao |
 | obj:KnowledgeArticle | completa | 12 | 12 | 12 | padrao |
 | obj:KnowledgeArticleVersion | parcial | n/d | 41 | 6 | padrao |
 | obj:Lead | parcial | n/d | 74 | 14 | padrao |
@@ -255,10 +260,10 @@ Gerado por `ferramentas/sftutor.py cobertura`. Cobertura estrutural, explicativa
 
 ## Relacionamentos
 
-- Total: 144; verificados: 141.
-- Por tipo: correspondencia_xml_api: 11, referencia_campo: 113, representacao_comum: 20
+- Total: 147; verificados: 144.
+- Por tipo: correspondencia_xml_api: 11, referencia_campo: 116, representacao_comum: 20
 
 ## Taxonomia e funcionalidades
 
-- Classificações: 14; subclassificações: 92 (com funcionalidades: 81).
-- Funcionalidades cadastradas: 127 (universo de funcionalidades não definido).
+- Classificações: 14; subclassificações: 92 (com funcionalidades: 85).
+- Funcionalidades cadastradas: 132 (universo de funcionalidades não definido).

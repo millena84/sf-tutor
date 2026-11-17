@@ -49,15 +49,135 @@
       "texto": "A Consent API não localiza registros cujo e-mail esteja protegido por Shield Platform Encryption.",
       "tipo": "limite",
       "titulo": "Criptografia e Consent API"
+    },
+    {
+      "evidencias": [
+        {
+          "fonte": "src:help-kb-individual-record"
+        },
+        {
+          "fonte": "src:objref-individual"
+        },
+        {
+          "fonte": "src:help-enforce-email-privacy"
+        }
+      ],
+      "texto": "Os objetos de consentimento só existem com Data Protection and Privacy habilitado (Make data protection details available in records). Para o e-mail respeitar as preferências do Individual, ligue também Enforce Email Privacy Settings.",
+      "tipo": "atencao",
+      "titulo": "Ligar antes de usar"
+    },
+    {
+      "evidencias": [
+        {
+          "fonte": "src:objref-individual"
+        },
+        {
+          "fonte": "src:objref-contactpointtypeconsent"
+        },
+        {
+          "fonte": "src:objref-datausepurpose"
+        }
+      ],
+      "texto": "Individual guarda as preferências globais, como HasOptedOutTracking, HasOptedOutSolicit e ShouldForget. ContactPointTypeConsent guarda o consentimento por canal, com PrivacyConsentStatus (NotSeen, Seen, OptIn, OptInPending, OptOut, OptOutPending), a origem, a data e o período de validade. DataUsePurpose guarda a finalidade e se a pessoa pode recusá-la.",
+      "tipo": "implantacao",
+      "titulo": "Os objetos por dentro"
     }
   ],
   "classificacao": "cls:qualidade-governanca-e-ciclo-de-vida-dos-dados",
   "derivado": {
-    "dependencias": [],
-    "funcionalidades": [],
-    "metadata_types": [],
+    "dependencias": [
+      {
+        "destino": "obj:DataUsePurpose",
+        "destino_no_tema": true,
+        "estado": "verificado",
+        "origem": "obj:ContactPointTypeConsent",
+        "rel": "rel:cptc-datausepurpose",
+        "via": "DataUsePurposeId"
+      },
+      {
+        "destino": "obj:Individual",
+        "destino_no_tema": true,
+        "estado": "verificado",
+        "origem": "obj:ContactPointTypeConsent",
+        "rel": "rel:cptc-individual",
+        "via": "PartyId"
+      }
+    ],
+    "funcionalidades": [
+      {
+        "alertas": [
+          "Os objetos só guardam as preferências: a empresa decide como honrá-las e implementa o processo.",
+          "Para os usuários verem os dados de privacidade, inclua o campo Individual nos page layouts de lead, contato e conta pessoal.",
+          "Para o e-mail respeitar as preferências do Individual, ligue também Enforce Email Privacy Settings, em Deliverability.",
+          "Os objetos de consentimento só existem com Data Protection and Privacy habilitado."
+        ],
+        "exemplo": "Uma cliente aceita receber e-mails de cobrança, mas recusa os de marketing: são dois consentimentos de e-mail, cada um com uma finalidade.",
+        "id": "func:consent-management",
+        "principal": true
+      }
+    ],
+    "metadata_types": [
+      {
+        "estrutura": "completa",
+        "funcionalidades": [
+          "func:consent-management"
+        ],
+        "id": "mdt:PrivacySettings",
+        "nota_suporte": null,
+        "suporte_cli": "suportado"
+      }
+    ],
     "nota": "Calculado pelo gerador a partir do catálogo; não é cadastro.",
-    "objetos_api": [],
+    "objetos_api": [
+      {
+        "apis": [
+          {
+            "api": "padrao",
+            "estado": "verificado"
+          },
+          {
+            "api": "tooling",
+            "estado": "desconhecido"
+          }
+        ],
+        "funcionalidades": [
+          "func:consent-management"
+        ],
+        "id": "obj:ContactPointTypeConsent"
+      },
+      {
+        "apis": [
+          {
+            "api": "padrao",
+            "estado": "verificado"
+          },
+          {
+            "api": "tooling",
+            "estado": "desconhecido"
+          }
+        ],
+        "funcionalidades": [
+          "func:consent-management"
+        ],
+        "id": "obj:DataUsePurpose"
+      },
+      {
+        "apis": [
+          {
+            "api": "padrao",
+            "estado": "verificado"
+          },
+          {
+            "api": "tooling",
+            "estado": "desconhecido"
+          }
+        ],
+        "funcionalidades": [
+          "func:consent-management"
+        ],
+        "id": "obj:Individual"
+      }
+    ],
     "temas_sem_funcionalidade": []
   },
   "descricao": "O registro do que cada pessoa autorizou sobre os próprios dados: se aceita contato, por qual canal, em qual endereço e para qual finalidade.",
@@ -75,7 +195,9 @@
   "escopo": "Entram o registro de consentimento e o atendimento a requisitos de privacidade sobre dados de pessoas.",
   "estado": "desconhecido",
   "fora_do_escopo": "Classificação dos dados por sensibilidade fica em \"Classificação e sensibilidade\".",
-  "funcionalidades": [],
+  "funcionalidades": [
+    "func:consent-management"
+  ],
   "id": "sub:consentimento-e-privacidade",
   "natureza": "curadoria_didatica",
   "nome": "Consentimento e privacidade",
@@ -90,7 +212,10 @@
       }
     ],
     "exemplo": "Uma cliente aceita receber e-mail, mas não ligações: o registro de ContactPointTypeConsent de e-mail fica Opt In e o de telefone, Opt Out.",
-    "explicacao": "Guarda o que cada pessoa autorizou: se aceita ser contatada, por qual canal, em qual endereço e para qual finalidade. O objeto Individual concentra as preferências gerais de privacidade, e outros objetos detalham o consentimento por canal e por ponto de contato."
+    "explicacao": "Guarda o que cada pessoa autorizou: se aceita ser contatada, por qual canal, em qual endereço e para qual finalidade. O objeto Individual concentra as preferências gerais de privacidade, e outros objetos detalham o consentimento por canal e por ponto de contato.",
+    "por_onde_comecar": [
+      "func:consent-management"
+    ]
   },
   "referencias_oficiais": [
     {

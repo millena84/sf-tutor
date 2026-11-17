@@ -45,13 +45,67 @@
       "texto": "Ver ou editar a classificação exige Customize Application ou Modify Data Classification. Níveis de sensibilidade podem ser marcados como High-risk level para indicar dados muito sensíveis à empresa.",
       "tipo": "seguranca",
       "titulo": "Quem pode classificar"
+    },
+    {
+      "evidencias": [
+        {
+          "fonte": "src:mdapi-privacysettings"
+        },
+        {
+          "fonte": "src:help-data-classification-setup"
+        }
+      ],
+      "texto": "Em PrivacySettings, enableDefaultMetadataValues aplica o nível de sensibilidade padrão a contatos, leads, contas pessoais e usuários. Na tela, a opção fica em Data Classification Settings.",
+      "tipo": "implantacao",
+      "titulo": "Padrão de sensibilidade como metadado"
+    },
+    {
+      "evidencias": [
+        {
+          "fonte": "src:help-data-classification-reports"
+        }
+      ],
+      "texto": "Para listar campos por nível de sensibilidade, crie um custom report type com Entity Definition como objeto principal.",
+      "tipo": "decisao",
+      "titulo": "Relatar sobre a classificação"
     }
   ],
   "classificacao": "cls:qualidade-governanca-e-ciclo-de-vida-dos-dados",
   "derivado": {
     "dependencias": [],
-    "funcionalidades": [],
-    "metadata_types": [],
+    "funcionalidades": [
+      {
+        "alertas": [
+          "A classificação vem habilitada em todas as orgs.",
+          "Ver ou editar a classificação exige Customize Application ou Modify Data Classification.",
+          "Marcar um campo em Field Usage não esconde nem expõe nada: é só registro.",
+          "Para relatar sobre a classificação, crie um custom report type com Entity Definition como objeto principal."
+        ],
+        "exemplo": "O campo CPF__c é marcado como Restricted, com a categoria PII e o responsável Jurídico; um relatório lista todos os campos Restricted da org.",
+        "id": "func:data-classification",
+        "principal": true
+      }
+    ],
+    "metadata_types": [
+      {
+        "estrutura": "parcial",
+        "funcionalidades": [
+          "func:data-classification"
+        ],
+        "id": "mdt:CustomField",
+        "nota_suporte": null,
+        "suporte_cli": "suportado"
+      },
+      {
+        "estrutura": "completa",
+        "funcionalidades": [
+          "func:data-classification"
+        ],
+        "id": "mdt:PrivacySettings",
+        "nota_suporte": null,
+        "suporte_cli": "suportado"
+      }
+    ],
     "nota": "Calculado pelo gerador a partir do catálogo; não é cadastro.",
     "objetos_api": [],
     "temas_sem_funcionalidade": []
@@ -68,7 +122,9 @@
   "escopo": "Entram as marcações de dados por sensibilidade e por requisito de conformidade.",
   "estado": "desconhecido",
   "fora_do_escopo": "Criptografia e proteção técnica ficam em \"Credenciais, certificados e proteção de dados\".",
-  "funcionalidades": [],
+  "funcionalidades": [
+    "func:data-classification"
+  ],
   "id": "sub:classificacao-e-sensibilidade",
   "natureza": "curadoria_didatica",
   "nome": "Classificação e sensibilidade",
@@ -87,7 +143,10 @@
       }
     ],
     "exemplo": "O campo de CPF de um cliente recebe o nível Restricted e a categoria PII; um relatório sobre os metadados lista todos os campos Restricted para revisão do time de segurança.",
-    "explicacao": "Data Classification marca cada campo com o quanto o dado é sensível e com as regras de conformidade que se aplicam a ele, além de quem responde pelo campo e se ele ainda está em uso. A marcação é informativa: serve para orientar decisões de acesso, relatórios e conformidade."
+    "explicacao": "Data Classification marca cada campo com o quanto o dado é sensível e com as regras de conformidade que se aplicam a ele, além de quem responde pelo campo e se ele ainda está em uso. A marcação é informativa: serve para orientar decisões de acesso, relatórios e conformidade.",
+    "por_onde_comecar": [
+      "func:data-classification"
+    ]
   },
   "referencias_oficiais": [
     {

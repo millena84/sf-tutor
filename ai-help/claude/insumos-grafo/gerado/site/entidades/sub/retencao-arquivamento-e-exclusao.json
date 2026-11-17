@@ -55,15 +55,83 @@
       "texto": "Excluir um registro em produção apaga o histórico relacionado, mas não a cópia já levada para FieldHistoryArchive.",
       "tipo": "atencao",
       "titulo": "Excluir não apaga o arquivo"
+    },
+    {
+      "evidencias": [
+        {
+          "fonte": "src:objref-fieldhistoryarchive"
+        }
+      ],
+      "texto": "FieldHistoryArchive é um big object: aceita só describeSObjects() e query(), exige a permissão Retain Field History e guarda nome do campo e do objeto como eram no arquivamento.",
+      "tipo": "implantacao",
+      "titulo": "O histórico arquivado por API"
     }
   ],
   "classificacao": "cls:qualidade-governanca-e-ciclo-de-vida-dos-dados",
   "derivado": {
-    "dependencias": [],
-    "funcionalidades": [],
-    "metadata_types": [],
+    "dependencias": [
+      {
+        "destino": "mdt:ExternalDataSource",
+        "destino_no_tema": false,
+        "estado": "verificado",
+        "origem": "mdt:CustomObject",
+        "rel": "rel:customobject-externaldatasource",
+        "via": "externalDataSource"
+      }
+    ],
+    "funcionalidades": [
+      {
+        "alertas": [
+          "A política padrão arquiva depois de 18 meses em produção e de um mês em sandbox, e não vem no retrieve: para mudá-la, implante uma política pela Metadata API.",
+          "Excluir um registro apaga o histórico relacionado, mas não a cópia já levada para FieldHistoryArchive.",
+          "Consultar FieldHistoryArchive exige a permissão Retain Field History."
+        ],
+        "exemplo": "Uma financeira precisa provar, cinco anos depois, quem alterou o limite de crédito de uma conta; o dado está em FieldHistoryArchive.",
+        "id": "func:field-audit-trail",
+        "principal": true
+      },
+      {
+        "alertas": [
+          "Itens na lixeira não contam no armazenamento e não há limite de quantidade.",
+          "Restaurar itens de outros usuários e excluir permanentemente exigem Modify All Data.",
+          "Hard delete pela API não passa pela lixeira.",
+          "Remover o registro da tabela do banco (physical delete) é um pedido ao Support, não uma ação da org."
+        ],
+        "exemplo": "Um vendedor exclui uma oportunidade por engano; no dia seguinte, ele a restaura pela Recycle Bin, com os relacionamentos.",
+        "id": "func:recycle-bin",
+        "principal": true
+      }
+    ],
+    "metadata_types": [
+      {
+        "estrutura": "parcial",
+        "funcionalidades": [
+          "func:field-audit-trail"
+        ],
+        "id": "mdt:CustomObject",
+        "nota_suporte": null,
+        "suporte_cli": "suportado"
+      }
+    ],
     "nota": "Calculado pelo gerador a partir do catálogo; não é cadastro.",
-    "objetos_api": [],
+    "objetos_api": [
+      {
+        "apis": [
+          {
+            "api": "padrao",
+            "estado": "verificado"
+          },
+          {
+            "api": "tooling",
+            "estado": "desconhecido"
+          }
+        ],
+        "funcionalidades": [
+          "func:field-audit-trail"
+        ],
+        "id": "obj:FieldHistoryArchive"
+      }
+    ],
     "temas_sem_funcionalidade": []
   },
   "descricao": "Quanto tempo os dados ficam na org e o que acontece quando são apagados: Recycle Bin, exclusão definitiva e o prazo de guarda do histórico de campos.",
@@ -81,7 +149,10 @@
   "escopo": "Entram o tempo de permanência dos dados e as formas de arquivá-los ou removê-los.",
   "estado": "desconhecido",
   "fora_do_escopo": "Recuperação de metadados depois de um deploy fica em \"Versionamento, deploy e recuperação\".",
-  "funcionalidades": [],
+  "funcionalidades": [
+    "func:field-audit-trail",
+    "func:recycle-bin"
+  ],
   "id": "sub:retencao-arquivamento-e-exclusao",
   "natureza": "curadoria_didatica",
   "nome": "Retenção, arquivamento e exclusão",
@@ -96,7 +167,11 @@
       }
     ],
     "exemplo": "Um vendedor exclui uma conta por engano e a restaura da Recycle Bin no dia seguinte.",
-    "explicacao": "Trata de quanto tempo um dado fica na org e do que acontece quando é apagado. Um registro excluído vai para a Recycle Bin, onde pode ser restaurado por 15 dias; depois é apagado de vez. O histórico de mudanças de campos também tem prazo: sem Field Audit Trail, fica até 18 meses."
+    "explicacao": "Trata de quanto tempo um dado fica na org e do que acontece quando é apagado. Um registro excluído vai para a Recycle Bin, onde pode ser restaurado por 15 dias; depois é apagado de vez. O histórico de mudanças de campos também tem prazo: sem Field Audit Trail, fica até 18 meses.",
+    "por_onde_comecar": [
+      "func:recycle-bin",
+      "func:field-audit-trail"
+    ]
   },
   "referencias_oficiais": [
     {
