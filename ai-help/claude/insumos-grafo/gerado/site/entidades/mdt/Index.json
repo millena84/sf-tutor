@@ -1,0 +1,261 @@
+{
+  "alertas": [
+    "Todo campo do índice precisa estar também em fields do big object e marcado como obrigatório.",
+    "A ordem dos campos na definição é a ordem da chave do índice.",
+    "Espaços no começo ou no fim do nome de um campo do índice podem impedir a exclusão de registros consultados por SOQL."
+  ],
+  "arquivos": {
+    "curinga_package_xml": {
+      "estado": "verificado",
+      "evidencias": [
+        {
+          "fonte": "src:mdapi-index"
+        }
+      ],
+      "valor": false
+    },
+    "metadata_api_format": {
+      "estado": "verificado",
+      "evidencias": [
+        {
+          "fonte": "src:sdr-registry",
+          "nota": "types.customobject"
+        }
+      ],
+      "valor": {
+        "arquivo": "<Objeto>.object",
+        "elemento": "definido dentro do arquivo do tipo pai",
+        "pasta": "objects/"
+      }
+    },
+    "source_format": {
+      "estado": "verificado",
+      "evidencias": [
+        {
+          "fonte": "src:sdr-registry",
+          "nota": "types.customobject.children.types.index"
+        }
+      ],
+      "nota": "Componente filho decomposto pelo Salesforce CLI (estratégia folderPerType do tipo pai). Sufixo '-meta.xml' segue a convenção do source format.",
+      "valor": {
+        "arquivo": "<Nome>.index-meta.xml",
+        "pasta": "objects/<Objeto>/indexes/"
+      }
+    }
+  },
+  "cobertura": {
+    "estrutural": {
+      "esperado": 3,
+      "estado": "completa",
+      "nota": "Universo esperado = tabelas Fields da página do guia versionado 264.0, lida em 2026-11-17.",
+      "presente": 3
+    },
+    "explicativa": {
+      "esperado": 3,
+      "estado": "completa",
+      "presente": 3
+    },
+    "mapeamento": {
+      "estado": "parcial",
+      "nota": "Correspondências registradas apenas onde há evidência; demais pendentes."
+    }
+  },
+  "componente_filho_de": "mdt:CustomObject",
+  "disponibilidade": {
+    "ate_versao": null,
+    "desde_versao": "41.0",
+    "estado": "verificado"
+  },
+  "divergencias_documentais": [],
+  "estado": "verificado",
+  "estende": "Metadata",
+  "estruturas": [
+    "mdx:IndexField"
+  ],
+  "evidencias": [
+    {
+      "fonte": "src:mdapi-index"
+    },
+    {
+      "fonte": "src:sdr-registry"
+    },
+    {
+      "fonte": "src:sdr-metadata-support"
+    }
+  ],
+  "exemplo_xml": {
+    "natureza": "didatico_projeto",
+    "nota": "Exemplo escrito pelo projeto apenas com elementos documentados; sem dados reais.",
+    "xml": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<!-- No arquivo do big object (__b), este conteúdo fica no elemento <indexes> -->\n<Index xmlns=\"http://soap.sforce.com/2006/04/metadata\">\n    <fullName>[Nome_Do_Indice]</fullName>\n    <fields>\n        <name>[campo obrigatório do big object]</name>\n        <!-- Valores documentados: ASC, DESC -->\n        <sortDirection>DESC</sortDirection>\n    </fields>\n    <label>[rótulo]</label>\n</Index>"
+  },
+  "finalidade": "Versionar e implantar o índice junto com o big object.",
+  "id": "mdt:Index",
+  "nome": "Index",
+  "o_que_e": "Um índice de big object: os campos, em ordem, que formam a chave de consulta do big object.",
+  "propriedades": [
+    {
+      "cardinalidade": "0..n",
+      "default": {
+        "estado": "desconhecido",
+        "forma": "nao_declarado_na_fonte"
+      },
+      "disponibilidade": {
+        "ate_versao": null,
+        "desde_versao": null,
+        "estado": "desconhecido"
+      },
+      "dominio": {
+        "estado": "verificado",
+        "evidencias": [
+          {
+            "fonte": "src:mdapi-index"
+          }
+        ],
+        "natureza": "tipo_composto"
+      },
+      "estado": "verificado",
+      "estrutura_ref": "mdx:IndexField",
+      "evidencias": [
+        {
+          "fonte": "src:mdapi-index"
+        }
+      ],
+      "explicacao": "explicada",
+      "id": "mdt:Index.fields",
+      "nome": "fields",
+      "o_que_e": "Os campos do índice, na ordem da chave.",
+      "obrigatoriedade": {
+        "condicao": "A documentação 68.0 não marca o campo como obrigatório; ausência de marcação não comprova opcionalidade (confirmar no WSDL).",
+        "estado": "desconhecido",
+        "valor": "nao"
+      },
+      "origem": {
+        "estado": "verificado",
+        "evidencias": [
+          {
+            "fonte": "src:mdapi-index"
+          }
+        ],
+        "nota": "Propriedade definida pelo schema da Metadata API.",
+        "valor": "padrao_plataforma"
+      },
+      "tipo_tecnico": "IndexField[]"
+    },
+    {
+      "default": {
+        "estado": "desconhecido",
+        "forma": "nao_declarado_na_fonte"
+      },
+      "disponibilidade": {
+        "ate_versao": null,
+        "desde_versao": "41.0",
+        "estado": "verificado"
+      },
+      "dominio": {
+        "contexto": "A fonte tipa como string sem lista de valores; não inventar valores.",
+        "estado": "verificado",
+        "evidencias": [
+          {
+            "fonte": "src:mdapi-index"
+          }
+        ],
+        "natureza": "texto_livre"
+      },
+      "estado": "verificado",
+      "evidencias": [
+        {
+          "fonte": "src:mdapi-index"
+        }
+      ],
+      "explicacao": "explicada",
+      "id": "mdt:Index.label",
+      "nome": "label",
+      "o_que_e": "Rótulo do índice.",
+      "obrigatoriedade": {
+        "estado": "verificado",
+        "evidencias": [
+          {
+            "fonte": "src:mdapi-index"
+          }
+        ],
+        "valor": "sim"
+      },
+      "origem": {
+        "estado": "verificado",
+        "evidencias": [
+          {
+            "fonte": "src:mdapi-index"
+          }
+        ],
+        "nota": "Propriedade definida pelo schema da Metadata API.",
+        "valor": "padrao_plataforma"
+      },
+      "tipo_tecnico": "string"
+    },
+    {
+      "default": {
+        "estado": "desconhecido",
+        "forma": "nao_declarado_na_fonte"
+      },
+      "disponibilidade": {
+        "ate_versao": null,
+        "desde_versao": null,
+        "estado": "desconhecido"
+      },
+      "dominio": {
+        "contexto": "A fonte tipa como string sem lista de valores; não inventar valores.",
+        "estado": "verificado",
+        "evidencias": [
+          {
+            "fonte": "src:mdapi-index"
+          }
+        ],
+        "natureza": "texto_livre"
+      },
+      "estado": "verificado",
+      "evidencias": [
+        {
+          "fonte": "src:mdapi-index"
+        }
+      ],
+      "explicacao": "explicada",
+      "herdada_de": "Metadata",
+      "id": "mdt:Index.fullName",
+      "nome": "fullName",
+      "o_que_e": "Nome completo (API name) do componente; herdado do tipo Metadata.",
+      "obrigatoriedade": {
+        "estado": "desconhecido",
+        "valor": "desconhecida"
+      },
+      "origem": {
+        "estado": "verificado",
+        "evidencias": [
+          {
+            "fonte": "src:mdapi-index"
+          }
+        ],
+        "nota": "Propriedade definida pelo schema da Metadata API.",
+        "valor": "padrao_plataforma"
+      },
+      "tipo_tecnico": "string"
+    }
+  ],
+  "recomendacoes": [],
+  "setup": {
+    "estado": "desconhecido",
+    "nota": "Caminho no Setup não validado nesta sessão."
+  },
+  "suporte_cli": {
+    "estado": "verificado",
+    "evidencias": [
+      {
+        "fonte": "src:sdr-metadata-support"
+      }
+    ],
+    "nota": "Suporte do Salesforce CLI (source-deploy-retrieve), não do Metadata API em geral.",
+    "valor": {
+      "nota_fonte": "Supports deploy/retrieve but not source tracking",
+      "status": "suportado_com_ressalvas"
+    }
+  }
+}

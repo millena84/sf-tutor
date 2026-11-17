@@ -4353,11 +4353,18 @@
         {
           "api": "tooling",
           "estado": "verificado",
-          "nota": "Listado no índice de objetos da Tooling API 68.0. Campos e operações dessa exposição não levantados; não presumir que sejam iguais aos da API padrão.",
-          "desde_versao": null,
+          "chamadas": [
+            "describeSObjects()",
+            "query()",
+            "retrieve()",
+            "search()"
+          ],
+          "acesso_especial": "Desde o Summer '20, exige View Setup and Configuration, Manage Session Permission Set Activations, Assign Permission Sets ou Manage Profiles and Permission Sets.",
+          "nota": "A página não lista métodos REST. A descrição de Name na página fala em grupo de permission sets, provável erro de cópia. Campos na página da Tooling API: 11; só nela: nenhum. As propriedades de campo registradas valem para a API padrão; na Tooling API podem diferir.",
+          "desde_versao": "28.0",
           "evidencias": [
             {
-              "fonte": "src:tooling-objects-list"
+              "fonte": "src:tooling-permissionset"
             }
           ]
         }
@@ -4369,7 +4376,8 @@
           "tipo_tecnico": "string",
           "o_que_e": "Descrição do permission set.",
           "apis": [
-            "padrao"
+            "padrao",
+            "tooling"
           ],
           "propriedades_api": {
             "estado": "verificado",
@@ -4426,6 +4434,9 @@
           "evidencias": [
             {
               "fonte": "src:objref-permissionset"
+            },
+            {
+              "fonte": "src:tooling-permissionset"
             }
           ],
           "restricoes": {
@@ -4444,7 +4455,8 @@
           "tipo_tecnico": "boolean",
           "o_que_e": "Se o permission set exige sessão ativa.",
           "apis": [
-            "padrao"
+            "padrao",
+            "tooling"
           ],
           "propriedades_api": {
             "estado": "verificado",
@@ -4511,6 +4523,9 @@
           "evidencias": [
             {
               "fonte": "src:objref-permissionset"
+            },
+            {
+              "fonte": "src:tooling-permissionset"
             }
           ]
         },
@@ -4520,7 +4535,8 @@
           "tipo_tecnico": "boolean",
           "o_que_e": "Verdadeiro se criado por um administrador; falso se padrão e ligado a uma licença.",
           "apis": [
-            "padrao"
+            "padrao",
+            "tooling"
           ],
           "propriedades_api": {
             "estado": "verificado",
@@ -4587,6 +4603,9 @@
           "evidencias": [
             {
               "fonte": "src:objref-permissionset"
+            },
+            {
+              "fonte": "src:tooling-permissionset"
             }
           ]
         },
@@ -4596,7 +4615,8 @@
           "tipo_tecnico": "boolean",
           "o_que_e": "Informa se o permission set pertence a um perfil.",
           "apis": [
-            "padrao"
+            "padrao",
+            "tooling"
           ],
           "propriedades_api": {
             "estado": "verificado",
@@ -4663,6 +4683,9 @@
           "evidencias": [
             {
               "fonte": "src:objref-permissionset"
+            },
+            {
+              "fonte": "src:tooling-permissionset"
             }
           ]
         },
@@ -4672,7 +4695,8 @@
           "tipo_tecnico": "string",
           "o_que_e": "Rótulo do permission set na interface.",
           "apis": [
-            "padrao"
+            "padrao",
+            "tooling"
           ],
           "propriedades_api": {
             "estado": "verificado",
@@ -4729,6 +4753,9 @@
           "evidencias": [
             {
               "fonte": "src:objref-permissionset"
+            },
+            {
+              "fonte": "src:tooling-permissionset"
             }
           ],
           "restricoes": {
@@ -4816,12 +4843,74 @@
           }
         },
         {
+          "id": "obj:PermissionSet.ManageableState",
+          "nome": "ManageableState",
+          "tipo_tecnico": "ManageableState",
+          "o_que_e": "Estado do componente num pacote, como beta, released ou unmanaged.",
+          "apis": [
+            "tooling"
+          ],
+          "propriedades_api": {
+            "estado": "verificado",
+            "create": false,
+            "defaulted_on_create": false,
+            "filter": true,
+            "group": true,
+            "nillable": true,
+            "restricted_picklist": true,
+            "sort": true,
+            "update": false,
+            "id_lookup": false,
+            "evidencias": [
+              {
+                "fonte": "src:tooling-permissionset"
+              }
+            ]
+          },
+          "somente_leitura": true,
+          "origem": {
+            "estado": "verificado",
+            "valor": "padrao_plataforma",
+            "nota": "Campo padrão do objeto documentado.",
+            "evidencias": [
+              {
+                "fonte": "src:tooling-permissionset"
+              }
+            ]
+          },
+          "obrigatoriedade": {
+            "valor": "desconhecida",
+            "estado": "desconhecido"
+          },
+          "default": {
+            "forma": "nao_declarado_na_fonte",
+            "estado": "desconhecido"
+          },
+          "dominio": {
+            "natureza": "desconhecida",
+            "estado": "desconhecido"
+          },
+          "disponibilidade": {
+            "desde_versao": null,
+            "ate_versao": null,
+            "estado": "desconhecido"
+          },
+          "explicacao": "explicada",
+          "estado": "verificado",
+          "evidencias": [
+            {
+              "fonte": "src:tooling-permissionset"
+            }
+          ]
+        },
+        {
           "id": "obj:PermissionSet.Name",
           "nome": "Name",
           "tipo_tecnico": "string",
           "o_que_e": "Nome API único do permission set.",
           "apis": [
-            "padrao"
+            "padrao",
+            "tooling"
           ],
           "propriedades_api": {
             "estado": "verificado",
@@ -4878,6 +4967,9 @@
           "evidencias": [
             {
               "fonte": "src:objref-permissionset"
+            },
+            {
+              "fonte": "src:tooling-permissionset"
             }
           ],
           "restricoes": {
@@ -4896,7 +4988,8 @@
           "tipo_tecnico": "string",
           "o_que_e": "Namespace do pacote, quando o permission set vem de um pacote.",
           "apis": [
-            "padrao"
+            "padrao",
+            "tooling"
           ],
           "propriedades_api": {
             "estado": "verificado",
@@ -4953,6 +5046,9 @@
           "evidencias": [
             {
               "fonte": "src:objref-permissionset"
+            },
+            {
+              "fonte": "src:tooling-permissionset"
             }
           ]
         },
@@ -4962,7 +5058,8 @@
           "tipo_tecnico": "reference",
           "o_que_e": "Grupo de permission sets dono deste registro, ou nulo.",
           "apis": [
-            "padrao"
+            "padrao",
+            "tooling"
           ],
           "propriedades_api": {
             "estado": "verificado",
@@ -5020,6 +5117,9 @@
           "evidencias": [
             {
               "fonte": "src:objref-permissionset"
+            },
+            {
+              "fonte": "src:tooling-permissionset"
             }
           ],
           "referencia": {
@@ -5035,7 +5135,8 @@
           "tipo_tecnico": "reference",
           "o_que_e": "Perfil dono deste registro, ou nulo.",
           "apis": [
-            "padrao"
+            "padrao",
+            "tooling"
           ],
           "propriedades_api": {
             "estado": "verificado",
@@ -5093,6 +5194,9 @@
           "evidencias": [
             {
               "fonte": "src:objref-permissionset"
+            },
+            {
+              "fonte": "src:tooling-permissionset"
             }
           ],
           "referencia": {
@@ -5108,7 +5212,8 @@
           "tipo_tecnico": "reference",
           "o_que_e": "Explicação pendente: campo listado a partir da fonte, ainda sem texto didático.",
           "apis": [
-            "padrao"
+            "padrao",
+            "tooling"
           ],
           "propriedades_api": {
             "estado": "verificado",
@@ -5161,6 +5266,9 @@
           "evidencias": [
             {
               "fonte": "src:objref-permissionset"
+            },
+            {
+              "fonte": "src:tooling-permissionset"
             }
           ],
           "notas": [
@@ -5271,13 +5379,13 @@
         "estrutural": {
           "estado": "parcial",
           "esperado": null,
-          "presente": 12,
-          "nota": "Campos não-Permissions listados; Id e campos de sistema não constam da extração; Permissions* são dinâmicos."
+          "presente": 13,
+          "nota": "Campos não-Permissions listados; Id e campos de sistema não constam da extração; Permissions* são dinâmicos. Tooling API (2026-11-17): 11 campos lidos; 0 só nela."
         },
         "explicativa": {
           "estado": "parcial",
-          "esperado": 12,
-          "presente": 11
+          "esperado": 13,
+          "presente": 12
         },
         "mapeamento": {
           "estado": "parcial",
@@ -5330,11 +5438,29 @@
         {
           "api": "tooling",
           "estado": "verificado",
-          "nota": "Listado no índice de objetos da Tooling API 68.0. Campos e operações dessa exposição não levantados; não presumir que sejam iguais aos da API padrão.",
-          "desde_versao": null,
+          "chamadas": [
+            "create()",
+            "delete()",
+            "describeSObjects()",
+            "query()",
+            "retrieve()",
+            "update()",
+            "upsert()"
+          ],
+          "metodos_rest": [
+            "DELETE",
+            "GET",
+            "HEAD",
+            "PATCH",
+            "POST",
+            "Query"
+          ],
+          "acesso_especial": "Desde o Summer '20, exige View Setup and Configuration, Assign Permission Sets ou Manage User.",
+          "nota": "IsRevoked, LastCreatedByChangeId e LastDeletedByChangeId estão em beta. Campos na página da Tooling API: 8; só nela: nenhum. As propriedades de campo registradas valem para a API padrão; na Tooling API podem diferir.",
+          "desde_versao": "22.0",
           "evidencias": [
             {
-              "fonte": "src:tooling-objects-list"
+              "fonte": "src:tooling-permissionsetassignment"
             }
           ]
         }
@@ -5346,7 +5472,8 @@
           "tipo_tecnico": "reference",
           "o_que_e": "Informa qual usuário recebeu a atribuição.",
           "apis": [
-            "padrao"
+            "padrao",
+            "tooling"
           ],
           "propriedades_api": {
             "estado": "verificado",
@@ -5404,6 +5531,9 @@
           "evidencias": [
             {
               "fonte": "src:objref-permissionsetassignment"
+            },
+            {
+              "fonte": "src:tooling-permissionsetassignment"
             }
           ],
           "referencia": {
@@ -5420,7 +5550,8 @@
           "tipo_tecnico": "datetime",
           "o_que_e": "Data em que a atribuição deixa de valer para o usuário.",
           "apis": [
-            "padrao"
+            "padrao",
+            "tooling"
           ],
           "propriedades_api": {
             "estado": "verificado",
@@ -5477,6 +5608,9 @@
           "evidencias": [
             {
               "fonte": "src:objref-permissionsetassignment"
+            },
+            {
+              "fonte": "src:tooling-permissionsetassignment"
             }
           ]
         },
@@ -5486,7 +5620,8 @@
           "tipo_tecnico": "boolean",
           "o_que_e": "Informa se a atribuição está ativa.",
           "apis": [
-            "padrao"
+            "padrao",
+            "tooling"
           ],
           "propriedades_api": {
             "estado": "verificado",
@@ -5559,6 +5694,9 @@
           "evidencias": [
             {
               "fonte": "src:objref-permissionsetassignment"
+            },
+            {
+              "fonte": "src:tooling-permissionsetassignment"
             }
           ]
         },
@@ -5568,7 +5706,8 @@
           "tipo_tecnico": "boolean",
           "o_que_e": "Informa se a atribuição foi revogada por uma política de acesso; o registro é mantido.",
           "apis": [
-            "padrao"
+            "padrao",
+            "tooling"
           ],
           "propriedades_api": {
             "estado": "verificado",
@@ -5641,6 +5780,9 @@
           "evidencias": [
             {
               "fonte": "src:objref-permissionsetassignment"
+            },
+            {
+              "fonte": "src:tooling-permissionsetassignment"
             }
           ],
           "notas": [
@@ -5653,7 +5795,8 @@
           "tipo_tecnico": "reference",
           "o_que_e": "Registro de mudança de acesso que criou a atribuição.",
           "apis": [
-            "padrao"
+            "padrao",
+            "tooling"
           ],
           "propriedades_api": {
             "estado": "verificado",
@@ -5711,6 +5854,9 @@
           "evidencias": [
             {
               "fonte": "src:objref-permissionsetassignment"
+            },
+            {
+              "fonte": "src:tooling-permissionsetassignment"
             }
           ],
           "referencia": {
@@ -5729,7 +5875,8 @@
           "tipo_tecnico": "reference",
           "o_que_e": "Registro de mudança de acesso ligado à revogação.",
           "apis": [
-            "padrao"
+            "padrao",
+            "tooling"
           ],
           "propriedades_api": {
             "estado": "verificado",
@@ -5787,6 +5934,9 @@
           "evidencias": [
             {
               "fonte": "src:objref-permissionsetassignment"
+            },
+            {
+              "fonte": "src:tooling-permissionsetassignment"
             }
           ],
           "referencia": {
@@ -5805,7 +5955,8 @@
           "tipo_tecnico": "reference",
           "o_que_e": "Informa o grupo de permission sets atribuído, quando a atribuição é de um grupo.",
           "apis": [
-            "padrao"
+            "padrao",
+            "tooling"
           ],
           "propriedades_api": {
             "estado": "verificado",
@@ -5863,6 +6014,9 @@
           "evidencias": [
             {
               "fonte": "src:objref-permissionsetassignment"
+            },
+            {
+              "fonte": "src:tooling-permissionsetassignment"
             }
           ],
           "referencia": {
@@ -5878,7 +6032,8 @@
           "tipo_tecnico": "reference",
           "o_que_e": "Informa qual permission set foi atribuído.",
           "apis": [
-            "padrao"
+            "padrao",
+            "tooling"
           ],
           "propriedades_api": {
             "estado": "verificado",
@@ -5936,6 +6091,9 @@
           "evidencias": [
             {
               "fonte": "src:objref-permissionsetassignment"
+            },
+            {
+              "fonte": "src:tooling-permissionsetassignment"
             }
           ],
           "referencia": {
@@ -5977,7 +6135,7 @@
           "estado": "parcial",
           "esperado": null,
           "presente": 8,
-          "nota": "Campos da tabela extraída; Id e campos de sistema não constam."
+          "nota": "Campos da tabela extraída; Id e campos de sistema não constam. Tooling API (2026-11-17): 8 campos lidos; 0 só nela."
         },
         "explicativa": {
           "estado": "completa",
