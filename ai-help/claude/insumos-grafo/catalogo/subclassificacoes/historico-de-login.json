@@ -4,7 +4,7 @@
   "sigla": "OBS-03",
   "classificacao": "cls:observabilidade-auditoria-e-operacao",
   "natureza": "curadoria_didatica",
-  "descricao": "Tentativas de login e estado de acesso dos usuários.",
+  "descricao": "O histórico de logins da org: quem entrou, quando, de onde e por qual método, na tela e por API.",
   "escopo": "Entram as tentativas de login e o estado de acesso vistos como trilha de auditoria.",
   "fora_do_escopo": "Regras que restringem o login ficam em \"Sessões e políticas de login\".",
   "para_iniciantes": {
@@ -53,11 +53,59 @@
           "fonte": "src:objref-loginhistory"
         }
       ]
+    },
+    {
+      "tipo": "limite",
+      "titulo": "O que a tela mostra",
+      "texto": "A tela Login History mostra até 20.000 registros de login dos últimos 6 meses, inclusive logins por API e em sites do Experience Cloud. Para ver mais, baixa-se o histórico em arquivo ou consulta-se o objeto LoginHistory pela API.",
+      "evidencias": [
+        {
+          "fonte": "src:help-security-audit"
+        },
+        {
+          "fonte": "src:help-login-history"
+        },
+        {
+          "fonte": "src:help-kb-login-history-export"
+        }
+      ]
+    },
+    {
+      "tipo": "decisao",
+      "titulo": "Investigar SSO",
+      "texto": "Quando um login por SAML falha, o histórico de login mostra as tentativas; a tela fica em Setup, Quick Find Login History.",
+      "evidencias": [
+        {
+          "fonte": "src:help-saml-login-history"
+        }
+      ]
+    },
+    {
+      "tipo": "seguranca",
+      "titulo": "Reagir ao login, não só registrar",
+      "texto": "Com Transaction Security, uma política sobre o evento de login pode bloquear, exigir autenticação multifator (em logins pela interface) ou notificar, conforme país, navegador, tipo de login e outros dados.",
+      "evidencias": [
+        {
+          "fonte": "src:help-ts-login-policies"
+        }
+      ]
     }
   ],
   "funcionalidades": [
     "func:estado-e-historico-de-login"
   ],
   "estado": "desconhecido",
-  "nota_estado": "Agrupamento proposto na especificação; fronteira ainda não cruzada com a documentação oficial."
+  "nota_estado": "Tema criado pelo projeto (00-especificacao-grafo.md), não é nomenclatura oficial da Salesforce. Cruzado em 2026-11-10 com áreas da documentação oficial listadas nas referências; a correspondência é parcial e o recorte continua sendo do projeto.",
+  "referencias_oficiais": [
+    {
+      "fonte": "src:help-login-history",
+      "secao": "Monitor Login History",
+      "nota": "Cobre o tema: Login History."
+    },
+    {
+      "fonte": "src:objref-loginhistory",
+      "secao": "LoginHistory",
+      "nota": "Cobre parte do tema: objeto LoginHistory."
+    }
+  ]
 }

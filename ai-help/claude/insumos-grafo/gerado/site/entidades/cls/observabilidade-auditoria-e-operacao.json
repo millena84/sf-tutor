@@ -120,6 +120,14 @@
   "derivado": {
     "dependencias": [
       {
+        "destino": "obj:User",
+        "destino_no_tema": false,
+        "estado": "verificado",
+        "origem": "obj:ApexLog",
+        "rel": "rel:apexlog-user",
+        "via": "LogUserId"
+      },
+      {
         "destino": "obj:CronTrigger",
         "destino_no_tema": true,
         "estado": "verificado",
@@ -144,6 +152,22 @@
         "via": "UserId"
       },
       {
+        "destino": "obj:DebugLevel",
+        "destino_no_tema": true,
+        "estado": "verificado",
+        "origem": "obj:TraceFlag",
+        "rel": "rel:traceflag-debuglevel",
+        "via": "DebugLevelId"
+      },
+      {
+        "destino": "obj:User",
+        "destino_no_tema": false,
+        "estado": "verificado",
+        "origem": "obj:TraceFlag",
+        "rel": "rel:traceflag-user",
+        "via": "TracedEntityId"
+      },
+      {
         "destino": "obj:User",
         "destino_no_tema": false,
         "estado": "verificado",
@@ -157,7 +181,8 @@
         "alertas": [
           "Trace flags de classe e de trigger mudam o nível de detalhe, mas sozinhas não fazem um log ser gerado.",
           "Apagar um debug level apaga as trace flags que o usam.",
-          "Em produção, evite trace flags em usuários de API e em código de alto volume."
+          "Em produção, evite trace flags em usuários de API e em código de alto volume.",
+          "Logs guardados para administradores (Monitoring) ficam 7 dias; os do Developer Console (SystemLog), 24 horas."
         ],
         "exemplo": "Para entender um erro que só acontece com uma usuária, o administrador cria uma trace flag para ela, reproduz o erro e lê o log.",
         "id": "func:debug-logs",
@@ -175,7 +200,8 @@
       {
         "alertas": [
           "Não existe um item 'IpLogin': restrições de IP por perfil estão em Profile.loginIpRanges; o IP de cada tentativa está em LoginHistory.SourceIp.",
-          "A tela de Setup mostra até 20.000 registros dos últimos 6 meses; o download cobre os últimos 6 meses (Ajuda). Retenção do objeto LoginHistory na API não confirmada."
+          "A tela de Setup mostra até 20.000 registros dos últimos 6 meses; o download cobre os últimos 6 meses (Ajuda). Retenção do objeto LoginHistory na API não confirmada.",
+          "A tela Login History mostra até 20.000 registros dos últimos 6 meses; para ver mais, baixe o arquivo ou consulte o objeto LoginHistory pela API."
         ],
         "exemplo": "Verificar de qual IP veio uma tentativa de login que falhou ontem.",
         "id": "func:estado-e-historico-de-login",
@@ -189,10 +215,54 @@
       {
         "alertas": [
           "Event Monitoring e Real-Time Event Monitoring guardam coisas diferentes: o primeiro usa o objeto EventLogFile; o segundo, não.",
-          "O esquema de um arquivo de log pode mudar a cada release."
+          "O esquema de um arquivo de log pode mudar a cada release.",
+          "Transaction Security faz parte do Real-Time Event Monitoring: usa os eventos em tempo real para bloquear ou notificar."
         ],
         "exemplo": "A equipe de segurança baixa os logs do tipo Report para ver quem exportou relatórios numa semana.",
         "id": "func:event-monitoring",
+        "principal": true
+      },
+      {
+        "alertas": [
+          "A ação de autenticação multifator não funciona no app móvel, no Lightning Experience nem por API: nesses casos, a política bloqueia.",
+          "Pode haver várias políticas para o mesmo evento, mas a Ajuda recomenda que elas não se sobreponham: com a mesma ação, a ordem de execução é indeterminada.",
+          "Criar e gerenciar políticas exige Customize Application e Modify Transaction Security Policy."
+        ],
+        "exemplo": "Uma política de LoginEvent bloqueia logins vindos de certos países; outra, de ReportEvent, avisa quando alguém exporta um relatório muito grande.",
+        "id": "func:transaction-security",
+        "principal": true
+      },
+      {
+        "alertas": [
+          "Ver o uso de armazenamento exige as permissões Manage Internal Users e Manage Users.",
+          "A maioria dos registros ocupa cerca de 2 KB de data storage; arquivos ocupam o tamanho real do arquivo enviado.",
+          "Em sandboxes, os limites contratados são aplicados: ao passar de um deles, criar registros ou enviar arquivos dá o erro STORAGE_LIMIT_EXCEEDED. Em produção, o limite de dados não é aplicado de forma estrita.",
+          "File storage inclui anexos, Files, Salesforce CRM Content, arquivos e fotos do Chatter e a aba Documents."
+        ],
+        "exemplo": "A org está perto do limite de arquivos; em Storage Usage, a administradora vê os maiores arquivos, em ordem de tamanho, e quem mais ocupa espaço.",
+        "id": "func:armazenamento-de-dados-e-arquivos",
+        "principal": true
+      },
+      {
+        "alertas": [
+          "O limite diário vale para o total da org, não por usuário; chamadas de pacotes gerenciados contam.",
+          "Requisições de 20 segundos ou mais têm limite de simultaneidade (25 em produção e sandbox; 5 em Developer Edition e trial); o excedente recebe REQUEST_LIMIT_EXCEEDED.",
+          "Chamadas REST e SOAP expiram após 10 minutos (REQUEST_RUNNING_TOO_LONG no SOAP; QUERY_TIMEOUT no REST)."
+        ],
+        "exemplo": "Uma org Enterprise com 15 licenças Salesforce tem 115.000 requisições por 24 horas (100.000 + 15 × 1.000), segundo o exemplo da documentação.",
+        "id": "func:limites-de-api-e-alocacoes",
+        "principal": false,
+        "tema_principal": "sub:contratos-limites-e-tratamento-de-falhas"
+      },
+      {
+        "alertas": [
+          "O limite de requisições de API vale para a org inteira, somando todas as chamadas das últimas 24 horas; não é por usuário.",
+          "A janela de 24 horas é móvel: não zera à meia-noite.",
+          "Os percentuais de limite de objetos são truncados, não arredondados.",
+          "A contagem total de custom objects inclui os excluídos que ainda esperam a exclusão definitiva."
+        ],
+        "exemplo": "Antes de instalar um pacote com muitos objetos, a administradora confere em System Overview quantos custom objects ainda cabem.",
+        "id": "func:system-overview",
         "principal": true
       },
       {
@@ -210,6 +280,22 @@
     "metadata_types": [],
     "nota": "Calculado pelo gerador a partir do catálogo; não é cadastro.",
     "objetos_api": [
+      {
+        "apis": [
+          {
+            "api": "tooling",
+            "estado": "verificado"
+          },
+          {
+            "api": "padrao",
+            "estado": "desconhecido"
+          }
+        ],
+        "funcionalidades": [
+          "func:debug-logs"
+        ],
+        "id": "obj:ApexLog"
+      },
       {
         "apis": [
           {
@@ -257,6 +343,22 @@
           "func:monitoramento-de-jobs-apex"
         ],
         "id": "obj:CronTrigger"
+      },
+      {
+        "apis": [
+          {
+            "api": "tooling",
+            "estado": "verificado"
+          },
+          {
+            "api": "padrao",
+            "estado": "desconhecido"
+          }
+        ],
+        "funcionalidades": [
+          "func:debug-logs"
+        ],
+        "id": "obj:DebugLevel"
       },
       {
         "apis": [
@@ -309,6 +411,22 @@
       {
         "apis": [
           {
+            "api": "tooling",
+            "estado": "verificado"
+          },
+          {
+            "api": "padrao",
+            "estado": "desconhecido"
+          }
+        ],
+        "funcionalidades": [
+          "func:debug-logs"
+        ],
+        "id": "obj:TraceFlag"
+      },
+      {
+        "apis": [
+          {
             "api": "padrao",
             "estado": "verificado"
           },
@@ -323,9 +441,7 @@
         "id": "obj:UserLogin"
       }
     ],
-    "temas_sem_funcionalidade": [
-      "sub:limites-e-consumo"
-    ]
+    "temas_sem_funcionalidade": []
   },
   "descricao": "Reúne como a operação da org é acompanhada: logs, auditoria, histórico de login, limites e diagnóstico.",
   "encadeamento": {

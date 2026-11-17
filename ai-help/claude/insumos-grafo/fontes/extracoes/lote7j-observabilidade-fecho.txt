@@ -1,0 +1,63 @@
+assunto: fecho da rodada A4 (Observabilidade, auditoria e operação): logs por API, limites e consumo, histórico de login, Transaction Security
+obtido em 2026-11-16.
+
+-- Tooling API, guia versionado 264.0 (API 68.0), páginas lidas por inteiro pelo endpoint de conteúdo (WebFetch)
+URL lida: https://developer.salesforce.com/docs/get_document_content/api_tooling/tooling_api_objects_<objeto>.htm/en-us/264.0
+
+[src:tooling-traceflag] TraceFlag: trace flag que dispara um log de depuração Apex no nível indicado. A página não informa a versão de entrada.
+  SOAP: create(), delete(), describeSObjects(), query(), retrieve(), update(), upsert(). REST: Query, GET, POST, PATCH, DELETE. 14 campos; os de
+  categoria usam NONE, ERROR, WARN, INFO, DEBUG, FINE, FINER, FINEST. LogType: CLASS_TRACING, DEVELOPER_LOG, PROFILING (reservado), USER_DEBUG.
+  ExpirationDate a menos de 24 horas de StartDate. ScopeId descontinuado (API 34.0 e anteriores). TracedEntityId refere classe Apex, trigger
+  Apex ou usuário. USER_DEBUG só para usuários; CLASS_TRACING troca níveis sem gerar nem guardar log.
+[src:tooling-debuglevel] DebugLevel: conjunto de níveis de log por categoria, atribuível a várias trace flags. Mesmas chamadas SOAP e REST. 14
+  campos; dataAccess, nba e Wave vêm tipados como ApexLogLevel. MasterLabel é reservado, mas obrigatório. Excluir um debug level exclui as
+  trace flags que o usam.
+[src:tooling-apexlog] ApexLog: um log de depuração. SOAP: delete(), describeSObjects(), query(), retrieve(). REST: Query, GET, DELETE. 10 campos e
+  uma linha em branco na tabela. Location: Monitoring (visível a administradores, 7 dias) ou SystemLog (privado, 24 horas). O corpo do log
+  sai por um recurso REST próprio (ApexLog Body), da API 28.0 em diante.
+NÃO lido: meta_transactionsecuritypolicy.htm devolveu conteúdo ilegível ("binary data"); TransactionSecurityPolicy não foi cadastrado.
+
+-- Ajuda (busca restrita a help.salesforce.com; método leitura_resultado_busca: páginas NÃO abertas por inteiro)
+[src:help-system-overview] The System Overview Page: Setup, Quick Find "System Overview". Grupos: Schema, API usage, Business logic, User
+  interface, Most used licenses, Portal roles. Clicar no número mostra o detalhe. Percentuais de limite de objetos são truncados.
+[src:help-system-overview-api] System Overview: API Usage: o limite vale para o total de chamadas à org em 24 horas, não por usuário; ao exceder,
+  todos podem ser bloqueados até o uso das 24 horas anteriores cair.
+[src:help-system-overview-schema] System Overview: Schema: "seus" custom objects e custom settings contra o total, que inclui pacotes e objetos
+  excluídos à espera de exclusão definitiva.
+[src:help-monitor-org] Monitor Your Organization: Org Health and Usage ordena métricas por gravidade; System Overview mostra uso e limites e avisa
+  aos 95% (75% para portal roles); Storage Usage mostra limites e uso de armazenamento.
+[src:help-kb-api-rolling-limits] artigo 002888831: o uso de API é medido numa janela móvel de 24 horas, sem zerar em horário fixo; conferir em
+  System Overview, item API Requests (Last 24 Hours).
+[src:help-storage-resources] Data and Storage Resources: página Storage Usage, no Setup; permissões Manage Internal Users e Manage Users; duas
+  categorias (data storage e file storage); mostra espaço disponível, uso por tipo de registro, maiores usuários e maiores arquivos.
+[src:help-storage-allocations] Data and File Storage Allocations: file storage inclui anexos, Files home, Salesforce CRM Content, arquivos do
+  Chatter (com fotos), aba Documents, campo File de artigos e assets do Site.com.
+[src:help-kb-storage-record-size] artigo 000383664: a maioria dos registros ocupa cerca de 2 KB; campanhas, artigos e person accounts ocupam mais;
+  arquivos contam pelo tamanho real, em separado.
+[src:help-kb-storage-sandbox] artigo 000380367: STORAGE_LIMIT_EXCEEDED ocorre ao exceder as cotas; em produção, o limite de dados não é aplicado de
+  forma estrita; em sandbox, os limites contratados são aplicados.
+[src:help-kb-email-logs-storage] artigo 000387333: caminho: Setup, Quick Find "Storage Usage"; a seção de file storage mostra o consumo.
+[src:help-transaction-security] Transaction Security: framework que intercepta eventos em tempo real e aplica ações (Block, Multi-Factor
+  Authentication, Notifications); políticas por Condition Builder ou Apex; faz parte do Real-Time Event Monitoring.
+[src:help-ts-condition-builder] Build a Transaction Security Policy with Condition Builder: Enterprise, Unlimited e Developer, com Shield ou
+  add-on Event Monitoring; permissões Customize Application e Modify Transaction Security Policy; políticas com a mesma ação no mesmo evento
+  rodam em ordem indeterminada.
+[src:help-ts-login-policies] LoginEvent Policies: condições como país, navegador, tipo de login, IP; ações Block, Notifications e MFA (logins pela
+  interface).
+[src:help-em-considerations] Considerations for Using Event Monitoring: a ação de MFA não está disponível no app móvel, no Lightning Experience nem
+  por API; usa-se o bloqueio.
+[src:help-kb-login-history-export] artigo 000188536: os últimos 6 meses saem pela página Login History; se for grande demais, usa-se o objeto
+  LoginHistory pela API.
+[src:help-saml-login-history] Review the Login History: Setup, Quick Find "Login History"; ver e baixar os últimos 6 meses; útil em falhas de SAML.
+[src:help-login-history] Monitor Login History (fonte já registrada; trecho lido de novo em 2026-11-16): permissões Monitor Login History ou
+  Manage Users; o download dos últimos 6 meses inclui logins por API e em sites do Experience Cloud.
+[src:help-security-audit] Monitor and Audit Security in Salesforce (fonte já registrada; trecho lido de novo): a tela Login History mostra até
+  20.000 registros dos últimos 6 meses; para mais, baixar em CSV ou GZIP.
+
+Não lido: TransactionSecurityPolicy (metadata type); objetos de eventos em tempo real (LoginEvent, ReportEvent, ApiEvent); lista de tipos de
+  evento de EventLogFile; Field History Tracking (tema de Qualidade); Background Jobs; Identity Verification History; Lightning Usage App.
+
+-- Lista de campos transcrita da leitura (gerada por lote7j_observabilidade_fecho.py; nome | tipo)
+[src:tooling-traceflag] objeto TraceFlag: ApexCode | picklist, ApexProfiling | picklist, Callout | picklist, Database | picklist, DebugLevelId | reference, ExpirationDate | dateTime, LogType | picklist, ScopeId | reference, StartDate | dateTime, System | picklist, TracedEntityId | reference, Validation | picklist, Visualforce | picklist, Workflow | picklist
+[src:tooling-debuglevel] objeto DebugLevel: ApexCode | picklist, ApexProfiling | picklist, Callout | picklist, dataAccess | picklist, Database | picklist, DeveloperName | string, Language | picklist, MasterLabel | string, nba | picklist, System | picklist, Validation | picklist, Visualforce | picklist, Wave | picklist, Workflow | picklist
+[src:tooling-apexlog] objeto ApexLog: Application | textarea, DurationMilliseconds | int, Location | picklist, LogLength | int, LogUserId | reference, Operation | string, Request | string, RequestIdentifier | string, StartTime | dateTime, Status | string

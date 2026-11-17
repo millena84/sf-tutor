@@ -944,3 +944,24 @@ for _id, _tit, _art, _pert in (
     ("src:help-kb-list-view-permissions", "Salesforce: How to Edit List Views When List View Controls Are Grayed Out (KB)", "000393179", "Permissões de list view."),
 ):
     _f(_id, _tit + ("" if "(" in _tit else " (Salesforce Help)"), _H + _art + _L, _pert, **AJ)
+
+_EXT = "fontes/extracoes/lote7j-observabilidade-fecho.txt"
+for _id, _tit, _art, _pert in (
+    ("src:help-system-overview", "The System Overview Page", "dev_force_com_system_overview_page.htm", "O que a página mostra e como chegar a ela."),
+    ("src:help-system-overview-api", "System Overview: API Usage", "xcloud.setup_system_overview_api.htm", "Como o limite de API é aplicado."),
+    ("src:help-system-overview-schema", "System Overview: Schema", "xcloud.setup_system_overview_schema.htm", "Contagem de custom objects e custom settings."),
+    ("src:help-monitor-org", "Monitor Your Organization", "monitoring_admin.htm", "Recursos de monitoramento da org."),
+    ("src:help-kb-api-rolling-limits", "Salesforce Platform: Understanding API Rolling Limits (KB)", "002888831", "Janela móvel de 24 horas."),
+    ("src:help-storage-resources", "Data and Storage Resources", "xcloud.admin_monitorresources.htm", "A página Storage Usage."),
+    ("src:help-storage-allocations", "Data and File Storage Allocations", "overview_storage.htm", "O que conta como file storage."),
+    ("src:help-kb-storage-record-size", "Salesforce Data Storage: Estimated Record Size by Object Type (KB)", "000383664", "Tamanho estimado dos registros."),
+    ("src:help-kb-storage-sandbox", "Error 'STORAGE LIMIT EXCEEDED' in Salesforce Sandbox (KB)", "000380367", "Aplicação dos limites em sandbox e produção."),
+    ("src:help-kb-email-logs-storage", "Salesforce Email Logs: Storage, Retention, and How to Request One (KB)", "000387333", "Caminho de Storage Usage."),
+    ("src:help-transaction-security", "Transaction Security", "sf.enhanced_transaction_security_policy_types.htm", "O que é e as ações possíveis."),
+    ("src:help-ts-condition-builder", "Build a Transaction Security Policy with Condition Builder", "sf.enhanced_transaction_security_condition_builder.htm", "Permissões, edições e sobreposição de políticas."),
+    ("src:help-ts-login-policies", "LoginEvent Policies", "xcloud.enhanced_transaction_security_policy_types_login.htm", "Políticas sobre eventos de login."),
+    ("src:help-em-considerations", "Considerations for Using Event Monitoring", "real_time_event_monitoring_considerations.htm", "Limites da ação de MFA."),
+    ("src:help-kb-login-history-export", "Export historical 'login history' data (KB)", "000188536", "Baixar o histórico e usar o objeto LoginHistory."),
+    ("src:help-saml-login-history", "Review the Login History", "sf.sso_saml_login_history.htm", "Caminho de Login History e uso em SSO."),
+):
+    _f(_id, _tit + ("" if "(" in _tit else " (Salesforce Help)"), _H + _art + _L, _pert, **AJ)

@@ -25,18 +25,104 @@
       "texto": "O painel de saúde da org no Setup acompanha o limite de 24 horas de jobs assíncronos e o limite de jobs agendados; acima deles, jobs novos são rejeitados. Pela REST API, o recurso de limites traz o rótulo DailyAsyncApexExecutions.",
       "tipo": "limite",
       "titulo": "Limites de Apex assíncrono"
+    },
+    {
+      "evidencias": [
+        {
+          "fonte": "src:help-system-overview"
+        },
+        {
+          "fonte": "src:help-storage-resources"
+        },
+        {
+          "fonte": "src:help-monitor-org"
+        }
+      ],
+      "texto": "System Overview mostra uso e limites de schema, API, lógica de negócio, interface, licenças e portal roles, e avisa aos 95% de um limite. Storage Usage mostra data storage e file storage. O painel Org Health and Usage ordena as métricas por gravidade.",
+      "tipo": "decisao",
+      "titulo": "Onde ver cada consumo"
+    },
+    {
+      "evidencias": [
+        {
+          "fonte": "src:help-system-overview-api"
+        },
+        {
+          "fonte": "src:help-kb-api-rolling-limits"
+        }
+      ],
+      "texto": "O limite de requisições de API soma todas as chamadas feitas à org em 24 horas, não por usuário; ao ultrapassar, todos podem ficar bloqueados até o uso das 24 horas anteriores cair. A janela é móvel: não zera num horário fixo.",
+      "tipo": "atencao",
+      "titulo": "Limite de API é da org e a janela é móvel"
+    },
+    {
+      "evidencias": [
+        {
+          "fonte": "src:help-kb-storage-sandbox"
+        }
+      ],
+      "texto": "Em sandboxes, os limites contratados de dados e de arquivos são aplicados: ao passar, criar registros ou enviar arquivos falha com STORAGE_LIMIT_EXCEEDED. Em produção, o limite de dados não é aplicado de forma estrita.",
+      "tipo": "atencao",
+      "titulo": "Armazenamento em sandbox e em produção"
+    },
+    {
+      "evidencias": [
+        {
+          "fonte": "src:help-kb-storage-record-size"
+        },
+        {
+          "fonte": "src:help-storage-allocations"
+        }
+      ],
+      "texto": "A maioria dos registros ocupa cerca de 2 KB de data storage; alguns tipos, como campanhas e artigos, ocupam mais. Arquivos contam pelo tamanho real, em file storage, que é acompanhado em separado.",
+      "tipo": "escala",
+      "titulo": "Quanto ocupa um registro"
     }
   ],
   "classificacao": "cls:observabilidade-auditoria-e-operacao",
   "derivado": {
     "dependencias": [],
-    "funcionalidades": [],
+    "funcionalidades": [
+      {
+        "alertas": [
+          "Ver o uso de armazenamento exige as permissões Manage Internal Users e Manage Users.",
+          "A maioria dos registros ocupa cerca de 2 KB de data storage; arquivos ocupam o tamanho real do arquivo enviado.",
+          "Em sandboxes, os limites contratados são aplicados: ao passar de um deles, criar registros ou enviar arquivos dá o erro STORAGE_LIMIT_EXCEEDED. Em produção, o limite de dados não é aplicado de forma estrita.",
+          "File storage inclui anexos, Files, Salesforce CRM Content, arquivos e fotos do Chatter e a aba Documents."
+        ],
+        "exemplo": "A org está perto do limite de arquivos; em Storage Usage, a administradora vê os maiores arquivos, em ordem de tamanho, e quem mais ocupa espaço.",
+        "id": "func:armazenamento-de-dados-e-arquivos",
+        "principal": true
+      },
+      {
+        "alertas": [
+          "O limite diário vale para o total da org, não por usuário; chamadas de pacotes gerenciados contam.",
+          "Requisições de 20 segundos ou mais têm limite de simultaneidade (25 em produção e sandbox; 5 em Developer Edition e trial); o excedente recebe REQUEST_LIMIT_EXCEEDED.",
+          "Chamadas REST e SOAP expiram após 10 minutos (REQUEST_RUNNING_TOO_LONG no SOAP; QUERY_TIMEOUT no REST)."
+        ],
+        "exemplo": "Uma org Enterprise com 15 licenças Salesforce tem 115.000 requisições por 24 horas (100.000 + 15 × 1.000), segundo o exemplo da documentação.",
+        "id": "func:limites-de-api-e-alocacoes",
+        "principal": false,
+        "tema_principal": "sub:contratos-limites-e-tratamento-de-falhas"
+      },
+      {
+        "alertas": [
+          "O limite de requisições de API vale para a org inteira, somando todas as chamadas das últimas 24 horas; não é por usuário.",
+          "A janela de 24 horas é móvel: não zera à meia-noite.",
+          "Os percentuais de limite de objetos são truncados, não arredondados.",
+          "A contagem total de custom objects inclui os excluídos que ainda esperam a exclusão definitiva."
+        ],
+        "exemplo": "Antes de instalar um pacote com muitos objetos, a administradora confere em System Overview quantos custom objects ainda cabem.",
+        "id": "func:system-overview",
+        "principal": true
+      }
+    ],
     "metadata_types": [],
     "nota": "Calculado pelo gerador a partir do catálogo; não é cadastro.",
     "objetos_api": [],
     "temas_sem_funcionalidade": []
   },
-  "descricao": "Uso de limites da plataforma.",
+  "descricao": "O acompanhamento do quanto a org já consumiu dos limites: schema, requisições de API, armazenamento de dados e de arquivos.",
   "encadeamento": {
     "evidencias": [
       {
@@ -48,11 +134,15 @@
   "escopo": "Entra o uso dos limites da plataforma pela org.",
   "estado": "desconhecido",
   "fora_do_escopo": "Limites específicos de APIs e integrações ficam em \"Contratos, limites e tratamento de falhas\".",
-  "funcionalidades": [],
+  "funcionalidades": [
+    "func:armazenamento-de-dados-e-arquivos",
+    "func:limites-de-api-e-alocacoes",
+    "func:system-overview"
+  ],
   "id": "sub:limites-e-consumo",
   "natureza": "curadoria_didatica",
   "nome": "Limites e consumo",
-  "nota_estado": "Agrupamento proposto na especificação; fronteira ainda não cruzada com a documentação oficial.",
+  "nota_estado": "Tema criado pelo projeto (00-especificacao-grafo.md), não é nomenclatura oficial da Salesforce. Cruzado em 2026-11-10 com áreas da documentação oficial listadas nas referências; a correspondência é parcial e o recorte continua sendo do projeto.",
   "para_iniciantes": {
     "evidencias": [
       {
@@ -63,7 +153,24 @@
       }
     ],
     "exemplo": "Um painel de operação consulta o recurso /limits para acompanhar o uso diário de API.",
-    "explicacao": "Mostra quanto das alocações da org já foi usado, como as requisições de API do dia."
+    "explicacao": "Mostra quanto das alocações da org já foi usado, como as requisições de API do dia.",
+    "por_onde_comecar": [
+      "func:system-overview",
+      "func:armazenamento-de-dados-e-arquivos",
+      "func:limites-de-api-e-alocacoes"
+    ]
   },
+  "referencias_oficiais": [
+    {
+      "fonte": "src:help-system-overview",
+      "nota": "Cobre parte do tema: página System Overview.",
+      "secao": "The System Overview Page"
+    },
+    {
+      "fonte": "src:help-storage-resources",
+      "nota": "Cobre parte do tema: armazenamento.",
+      "secao": "Data and Storage Resources"
+    }
+  ],
   "sigla": "OBS-05"
 }
