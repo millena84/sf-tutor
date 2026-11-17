@@ -39,8 +39,10 @@ class TestExportacaoAcesso(unittest.TestCase):
                     len(profile["metadata_type"]["estruturas"]),
                 )
                 role = json.loads(arquivos["Role.json"])
-                self.assertIsNone(role["metadata_type"]["propriedades"])
-                self.assertIsNone(role["objetos_api_relacionados"][0]["campos"])
+                # Role e UserRole foram cadastrados no lote 7m: a exportação leva as propriedades e os campos do catálogo.
+                self.assertEqual(role["metadata_type"], EXPORTACAO.ler(ROOT / "catalogo/metadata-types/Role.json"))
+                self.assertEqual(role["objetos_api_relacionados"][0]["nome"], "UserRole")
+                self.assertTrue(role["objetos_api_relacionados"][0]["campos"])
 
                 owd = json.loads(arquivos["OWD.json"])
                 nomes = {p["nome"] for p in owd["metadata_type"]["propriedades"]}

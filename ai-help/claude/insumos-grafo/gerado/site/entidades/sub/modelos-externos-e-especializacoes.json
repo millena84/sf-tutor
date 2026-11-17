@@ -1,11 +1,159 @@
 {
   "classificacao": "cls:dados-e-modelagem",
   "derivado": {
-    "dependencias": [],
-    "funcionalidades": [],
-    "metadata_types": [],
+    "dependencias": [
+      {
+        "destino": "mdt:ExternalDataSource",
+        "destino_no_tema": true,
+        "estado": "verificado",
+        "origem": "mdt:CustomObject",
+        "rel": "rel:customobject-externaldatasource",
+        "via": "externalDataSource"
+      },
+      {
+        "destino": "obj:AuthProvider",
+        "destino_no_tema": false,
+        "estado": "verificado",
+        "origem": "obj:ExternalDataSource",
+        "rel": "rel:externaldatasource-authprovider",
+        "via": "AuthProviderId"
+      },
+      {
+        "destino": "obj:NamedCredential",
+        "destino_no_tema": false,
+        "estado": "verificado",
+        "origem": "obj:ExternalDataSource",
+        "rel": "rel:externaldatasource-namedcredential",
+        "via": "NamedCredentialId"
+      }
+    ],
+    "funcionalidades": [
+      {
+        "exemplo": "Pedidos do ERP aparecem como objeto externo Pedido__x, lidos via OData no momento da consulta.",
+        "id": "func:external-objects",
+        "principal": false,
+        "tema_principal": "sub:conectividade-e-virtualizacao-de-dados"
+      },
+      {
+        "alertas": [
+          "A política padrão arquiva depois de 18 meses em produção e de um mês em sandbox, e não vem no retrieve: para mudá-la, implante uma política pela Metadata API.",
+          "Excluir um registro apaga o histórico relacionado, mas não a cópia já levada para FieldHistoryArchive.",
+          "Consultar FieldHistoryArchive exige a permissão Retain Field History."
+        ],
+        "exemplo": "Uma financeira precisa provar, cinco anos depois, quem alterou o limite de crédito de uma conta; o dado está em FieldHistoryArchive.",
+        "id": "func:field-audit-trail",
+        "principal": false,
+        "tema_principal": "sub:retencao-arquivamento-e-exclusao"
+      },
+      {
+        "exemplo": "Um objeto Contrato_Servico__c para contratos de manutenção.",
+        "id": "func:objetos-customizados",
+        "pre_requisitos": [
+          "Edições (Ajuda): Contact Manager, Group, Professional, Enterprise, Performance, Unlimited e Developer.",
+          "Customize Application."
+        ],
+        "principal": false,
+        "tema_principal": "sub:objetos-e-entidades"
+      }
+    ],
+    "metadata_types": [
+      {
+        "estrutura": "parcial",
+        "funcionalidades": [
+          "func:external-objects",
+          "func:field-audit-trail",
+          "func:objetos-customizados"
+        ],
+        "id": "mdt:CustomObject",
+        "nota_suporte": null,
+        "suporte_cli": "suportado"
+      },
+      {
+        "estrutura": "completa",
+        "funcionalidades": [
+          "func:external-objects"
+        ],
+        "id": "mdt:ExternalDataSource",
+        "nota_suporte": null,
+        "suporte_cli": "suportado"
+      },
+      {
+        "estrutura": "completa",
+        "funcionalidades": [
+          "func:objetos-customizados"
+        ],
+        "id": "mdt:Index",
+        "nota_suporte": "Supports deploy/retrieve but not source tracking",
+        "suporte_cli": "suportado_com_ressalvas"
+      }
+    ],
     "nota": "Calculado pelo gerador a partir do catálogo; não é cadastro.",
-    "objetos_api": [],
+    "objetos_api": [
+      {
+        "apis": [
+          {
+            "api": "tooling",
+            "estado": "verificado"
+          },
+          {
+            "api": "padrao",
+            "estado": "desconhecido"
+          }
+        ],
+        "funcionalidades": [
+          "func:objetos-customizados"
+        ],
+        "id": "obj:CustomObject"
+      },
+      {
+        "apis": [
+          {
+            "api": "tooling",
+            "estado": "verificado"
+          },
+          {
+            "api": "padrao",
+            "estado": "desconhecido"
+          }
+        ],
+        "funcionalidades": [
+          "func:objetos-customizados"
+        ],
+        "id": "obj:EntityDefinition"
+      },
+      {
+        "apis": [
+          {
+            "api": "padrao",
+            "estado": "verificado"
+          },
+          {
+            "api": "tooling",
+            "estado": "desconhecido"
+          }
+        ],
+        "funcionalidades": [
+          "func:external-objects"
+        ],
+        "id": "obj:ExternalDataSource"
+      },
+      {
+        "apis": [
+          {
+            "api": "padrao",
+            "estado": "verificado"
+          },
+          {
+            "api": "tooling",
+            "estado": "desconhecido"
+          }
+        ],
+        "funcionalidades": [
+          "func:field-audit-trail"
+        ],
+        "id": "obj:FieldHistoryArchive"
+      }
+    ],
     "temas_sem_funcionalidade": []
   },
   "descricao": "Formas especiais de modelar dados: objetos externos, que mostram dados de outro sistema sem copiá-los, e big objects, como o arquivo do histórico de campos.",
@@ -20,7 +168,11 @@
   "escopo": "Entram objetos externos, big objects e outras formas especiais de modelar dados.",
   "estado": "desconhecido",
   "fora_do_escopo": "Como a org se conecta à fonte externa fica em \"Conectividade e virtualização de dados\".",
-  "funcionalidades": [],
+  "funcionalidades": [
+    "func:external-objects",
+    "func:field-audit-trail",
+    "func:objetos-customizados"
+  ],
   "id": "sub:modelos-externos-e-especializacoes",
   "natureza": "curadoria_didatica",
   "nome": "Modelos externos e especializações",

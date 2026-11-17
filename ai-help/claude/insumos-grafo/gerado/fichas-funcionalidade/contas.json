@@ -24,6 +24,9 @@
       },
       {
         "fonte": "src:mdapi-accountsettings"
+      },
+      {
+        "fonte": "src:help-shared-contacts-setup"
       }
     ],
     "exemplo": "A empresa ACME é uma conta; seus funcionários são contatos e seus negócios, oportunidades.",
@@ -52,8 +55,14 @@
       ]
     },
     "setup": {
-      "estado": "desconhecido",
-      "nota": "Caminho de configuração não levantado nesta rodada."
+      "estado": "verificado",
+      "evidencias": [
+        {
+          "fonte": "src:help-shared-contacts-setup"
+        }
+      ],
+      "nota": "Página das opções de contas; ver ou editar exige Customize Application. Rótulos em inglês, como na fonte; a tradução da interface em pt-BR não foi verificada.",
+      "valor": "Setup > Quick Find: Account Settings > Account Settings"
     },
     "termos_busca": [
       "account",
@@ -4409,6 +4418,29 @@
           "origem": {
             "campo": "AccountId",
             "entidade": "obj:ServiceContract"
+          },
+          "tipo": "referencia_campo"
+        },
+        {
+          "cardinalidade_registros": {
+            "estado": "desconhecido",
+            "nota": "Lookup indica N:1; obrigatoriedade não declarada na página.",
+            "valor": "N:1"
+          },
+          "destino": {
+            "entidade": "obj:Account"
+          },
+          "estado": "verificado",
+          "evidencias": [
+            {
+              "fonte": "src:objref-userrole"
+            }
+          ],
+          "explicacao": "A conta de portal ligada ao papel.",
+          "id": "rel:userrole-portalaccount",
+          "origem": {
+            "campo": "PortalAccountId",
+            "entidade": "obj:UserRole"
           },
           "tipo": "referencia_campo"
         }

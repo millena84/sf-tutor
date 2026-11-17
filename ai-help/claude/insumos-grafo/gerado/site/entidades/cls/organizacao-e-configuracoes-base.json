@@ -128,12 +128,167 @@
     }
   ],
   "derivado": {
-    "dependencias": [],
+    "dependencias": [
+      {
+        "destino": "obj:DataUsePurpose",
+        "destino_no_tema": true,
+        "estado": "verificado",
+        "origem": "obj:ContactPointTypeConsent",
+        "rel": "rel:cptc-datausepurpose",
+        "via": "DataUsePurposeId"
+      },
+      {
+        "destino": "obj:Individual",
+        "destino_no_tema": true,
+        "estado": "verificado",
+        "origem": "obj:ContactPointTypeConsent",
+        "rel": "rel:cptc-individual",
+        "via": "PartyId"
+      },
+      {
+        "destino": "obj:OpportunityLineItem",
+        "destino_no_tema": false,
+        "estado": "verificado",
+        "origem": "obj:ForecastingFact",
+        "rel": "rel:forecastingfact-opportunitylineitem",
+        "via": "ForecastedSubObjectId"
+      },
+      {
+        "destino": "obj:QueueRoutingConfig",
+        "destino_no_tema": false,
+        "estado": "verificado",
+        "origem": "obj:Group",
+        "rel": "rel:group-queueroutingconfig",
+        "via": "QueueRoutingConfigId"
+      },
+      {
+        "destino": "obj:KnowledgeArticle",
+        "destino_no_tema": true,
+        "estado": "verificado",
+        "origem": "obj:KnowledgeArticleVersion",
+        "rel": "rel:knowledgearticleversion-knowledgearticle",
+        "via": "KnowledgeArticleId"
+      },
+      {
+        "destino": "mdt:CustomSite",
+        "destino_no_tema": false,
+        "estado": "verificado",
+        "origem": "mdt:Network",
+        "rel": "rel:network-customsite",
+        "via": "site"
+      },
+      {
+        "destino": "obj:RecordType",
+        "destino_no_tema": false,
+        "estado": "verificado",
+        "origem": "obj:PathAssistant",
+        "rel": "rel:pathassistant-recordtype",
+        "via": "RecordTypeId"
+      }
+    ],
     "funcionalidades": [
       {
         "exemplo": "A administradora troca o fuso padrão da org; quem for cadastrado depois já nasce com o fuso novo.",
         "id": "func:informacoes-da-empresa",
         "principal": true
+      },
+      {
+        "alertas": [
+          "Grupo privado não é invisível: quem não é membro ainda vê nome, foto, descrição e membros. Para esconder o grupo, use unlisted.",
+          "Grupos unlisted vêm desligados por padrão.",
+          "Num broadcast group, só donos e gerentes do grupo publicam; os membros leem e comentam.",
+          "O tipo de metadado Group é outra coisa: representa public groups, usados em compartilhamento, não grupos do Chatter."
+        ],
+        "exemplo": "O time de um projeto cria um grupo privado; só os membros veem os posts e os arquivos.",
+        "id": "func:chatter",
+        "principal": false,
+        "tema_principal": "sub:colaboracao"
+      },
+      {
+        "alertas": [
+          "Cada opção só existe nas edições com a nuvem correspondente."
+        ],
+        "exemplo": "Uma org de Net Zero Cloud liga enableSustainabilityCloud e enableSCCarbonAccounting; o arquivo Industries.settings leva as duas opções para a sandbox seguinte.",
+        "id": "func:configuracoes-de-nuvens-de-setor",
+        "principal": false,
+        "tema_principal": "sub:capacidades-setoriais"
+      },
+      {
+        "alertas": [
+          "Os objetos só guardam as preferências: a empresa decide como honrá-las e implementa o processo.",
+          "Para os usuários verem os dados de privacidade, inclua o campo Individual nos page layouts de lead, contato e conta pessoal.",
+          "Para o e-mail respeitar as preferências do Individual, ligue também Enforce Email Privacy Settings, em Deliverability.",
+          "Os objetos de consentimento só existem com Data Protection and Privacy habilitado."
+        ],
+        "exemplo": "Uma cliente aceita receber e-mails de cobrança, mas recusa os de marketing: são dois consentimentos de e-mail, cada um com uma finalidade.",
+        "id": "func:consent-management",
+        "principal": false,
+        "tema_principal": "sub:consentimento-e-privacidade"
+      },
+      {
+        "alertas": [
+          "Habilitar Lightning Knowledge é irreversível e muda o modelo de dados para record types; exige ao menos um article type."
+        ],
+        "exemplo": "Um artigo de 'Como trocar a senha' é sugerido ao atendente e publicado no portal.",
+        "id": "func:lightning-knowledge",
+        "pre_requisitos": [
+          "Ver Knowledge Settings: licença Knowledge User."
+        ],
+        "principal": false,
+        "tema_principal": "sub:knowledge-e-categorias"
+      },
+      {
+        "alertas": [
+          "Depois de ligar múltiplas moedas, não dá para desligar."
+        ],
+        "exemplo": "A matriz reporta em reais; a filial do Chile registra oportunidades em pesos, convertidas para reais pela taxa cadastrada.",
+        "id": "func:multiplas-moedas",
+        "pre_requisitos": [
+          "Customize Application (para alterar moedas); View Setup and Configuration (para ver)."
+        ],
+        "principal": true
+      },
+      {
+        "alertas": [
+          "Quando a URL de login ou de site muda, SSO e MFA podem parar de funcionar; preserve o acesso de administradores antes de implantar a mudança."
+        ],
+        "exemplo": "Os usuários entram por https://mycompany.my.salesforce.com em vez de um endereço genérico.",
+        "id": "func:my-domain",
+        "pre_requisitos": [
+          "Customize Application (para editar); Customize Application e Modify All Data (para definir o nome)."
+        ],
+        "principal": true
+      },
+      {
+        "alertas": [
+          "Um Path por combinação de objeto, picklist e tipo de registro (Ajuda).",
+          "Cada objeto pode ter um path por record type; não há limite de paths por org.",
+          "Em cada etapa cabem até cinco campos-chave e até 1.000 caracteres de orientação.",
+          "A orientação (Guidance for Success) de leads não aparece quando o path está no record type Master: é preciso um path para o record type específico."
+        ],
+        "exemplo": "Etapas de um contrato: Rascunho, Em análise, Assinado.",
+        "id": "func:path",
+        "pre_requisitos": [
+          "Modify All Data ou Customize Application."
+        ],
+        "principal": false,
+        "tema_principal": "sub:orientacao-visual-e-path"
+      },
+      {
+        "exemplo": "A gerente revisa a previsão do trimestre e ajusta o valor de um vendedor.",
+        "id": "func:previsoes-colaborativas",
+        "principal": false,
+        "tema_principal": "sub:vendas"
+      },
+      {
+        "alertas": [
+          "Só existe em orgs com Revenue Management.",
+          "Ligar enableTransactionProcessor não tem volta."
+        ],
+        "exemplo": "Uma empresa de software liga groupsEnabled e enableRampDeal para vender contratos de três anos com preço crescente por ano.",
+        "id": "func:revenue-management",
+        "principal": false,
+        "tema_principal": "sub:receita-e-comercio"
       },
       {
         "exemplo": "O tipo 'Faixa de desconto' tem um registro por faixa; um flow e uma regra de validação leem esses registros.",
@@ -180,17 +335,6 @@
         "principal": true
       },
       {
-        "alertas": [
-          "Depois de ligar múltiplas moedas, não dá para desligar."
-        ],
-        "exemplo": "A matriz reporta em reais; a filial do Chile registra oportunidades em pesos, convertidas para reais pela taxa cadastrada.",
-        "id": "func:multiplas-moedas",
-        "pre_requisitos": [
-          "Customize Application (para alterar moedas); View Setup and Configuration (para ver)."
-        ],
-        "principal": true
-      },
-      {
         "exemplo": "O feriado 'Ano Novo' vai das 20h de 31 de dezembro às 9h de 2 de janeiro; nesse intervalo, as regras de escalonamento não contam tempo.",
         "id": "func:feriados",
         "pre_requisitos": [
@@ -208,14 +352,15 @@
       },
       {
         "alertas": [
-          "Quando a URL de login ou de site muda, SSO e MFA podem parar de funcionar; preserve o acesso de administradores antes de implantar a mudança."
+          "Depois de ligar digital experiences, não dá para desligar."
         ],
-        "exemplo": "Os usuários entram por https://mycompany.my.salesforce.com em vez de um endereço genérico.",
-        "id": "func:my-domain",
+        "exemplo": "A empresa liga digital experiences e passa a ter um domínio de sites no formato MyDomainName.my.site.com, onde cria o portal de clientes.",
+        "id": "func:digital-experiences",
         "pre_requisitos": [
-          "Customize Application (para editar); Customize Application e Modify All Data (para definir o nome)."
+          "Customize Application (para ligar digital experiences)."
         ],
-        "principal": true
+        "principal": false,
+        "tema_principal": "sub:experiencias-externas"
       }
     ],
     "metadata_types": [
@@ -226,6 +371,24 @@
           "func:horario-comercial"
         ],
         "id": "mdt:BusinessHoursSettings",
+        "nota_suporte": null,
+        "suporte_cli": "suportado"
+      },
+      {
+        "estrutura": "completa",
+        "funcionalidades": [
+          "func:chatter"
+        ],
+        "id": "mdt:ChatterSettings",
+        "nota_suporte": null,
+        "suporte_cli": "suportado"
+      },
+      {
+        "estrutura": "completa",
+        "funcionalidades": [
+          "func:digital-experiences"
+        ],
+        "id": "mdt:CommunitiesSettings",
         "nota_suporte": null,
         "suporte_cli": "suportado"
       },
@@ -268,6 +431,33 @@
       {
         "estrutura": "completa",
         "funcionalidades": [
+          "func:previsoes-colaborativas"
+        ],
+        "id": "mdt:ForecastingSettings",
+        "nota_suporte": null,
+        "suporte_cli": "suportado"
+      },
+      {
+        "estrutura": "completa",
+        "funcionalidades": [
+          "func:configuracoes-de-nuvens-de-setor"
+        ],
+        "id": "mdt:IndustriesSettings",
+        "nota_suporte": null,
+        "suporte_cli": "suportado"
+      },
+      {
+        "estrutura": "completa",
+        "funcionalidades": [
+          "func:lightning-knowledge"
+        ],
+        "id": "mdt:KnowledgeSettings",
+        "nota_suporte": null,
+        "suporte_cli": "suportado"
+      },
+      {
+        "estrutura": "completa",
+        "funcionalidades": [
           "func:idiomas-da-org",
           "func:translation-workbench"
         ],
@@ -281,6 +471,51 @@
           "func:my-domain"
         ],
         "id": "mdt:MyDomainSettings",
+        "nota_suporte": null,
+        "suporte_cli": "suportado"
+      },
+      {
+        "estrutura": "parcial",
+        "funcionalidades": [
+          "func:digital-experiences"
+        ],
+        "id": "mdt:Network",
+        "nota_suporte": null,
+        "suporte_cli": "suportado"
+      },
+      {
+        "estrutura": "completa",
+        "funcionalidades": [
+          "func:path"
+        ],
+        "id": "mdt:PathAssistant",
+        "nota_suporte": null,
+        "suporte_cli": "suportado"
+      },
+      {
+        "estrutura": "completa",
+        "funcionalidades": [
+          "func:path"
+        ],
+        "id": "mdt:PathAssistantSettings",
+        "nota_suporte": null,
+        "suporte_cli": "suportado"
+      },
+      {
+        "estrutura": "completa",
+        "funcionalidades": [
+          "func:consent-management"
+        ],
+        "id": "mdt:PrivacySettings",
+        "nota_suporte": null,
+        "suporte_cli": "suportado"
+      },
+      {
+        "estrutura": "completa",
+        "funcionalidades": [
+          "func:revenue-management"
+        ],
+        "id": "mdt:RevenueManagementSettings",
         "nota_suporte": null,
         "suporte_cli": "suportado"
       },
@@ -312,12 +547,217 @@
           "func:horario-comercial"
         ],
         "id": "obj:BusinessHours"
+      },
+      {
+        "apis": [
+          {
+            "api": "padrao",
+            "estado": "verificado"
+          },
+          {
+            "api": "tooling",
+            "estado": "desconhecido"
+          }
+        ],
+        "funcionalidades": [
+          "func:consent-management"
+        ],
+        "id": "obj:ContactPointTypeConsent"
+      },
+      {
+        "apis": [
+          {
+            "api": "padrao",
+            "estado": "verificado"
+          },
+          {
+            "api": "tooling",
+            "estado": "desconhecido"
+          }
+        ],
+        "funcionalidades": [
+          "func:consent-management"
+        ],
+        "id": "obj:DataUsePurpose"
+      },
+      {
+        "apis": [
+          {
+            "api": "padrao",
+            "estado": "verificado"
+          },
+          {
+            "api": "tooling",
+            "estado": "desconhecido"
+          }
+        ],
+        "funcionalidades": [
+          "func:previsoes-colaborativas"
+        ],
+        "id": "obj:ForecastingAdjustment"
+      },
+      {
+        "apis": [
+          {
+            "api": "padrao",
+            "estado": "verificado"
+          },
+          {
+            "api": "tooling",
+            "estado": "desconhecido"
+          }
+        ],
+        "funcionalidades": [
+          "func:previsoes-colaborativas"
+        ],
+        "id": "obj:ForecastingFact"
+      },
+      {
+        "apis": [
+          {
+            "api": "padrao",
+            "estado": "verificado"
+          },
+          {
+            "api": "tooling",
+            "estado": "desconhecido"
+          }
+        ],
+        "funcionalidades": [
+          "func:previsoes-colaborativas"
+        ],
+        "id": "obj:ForecastingItem"
+      },
+      {
+        "apis": [
+          {
+            "api": "padrao",
+            "estado": "verificado"
+          },
+          {
+            "api": "tooling",
+            "estado": "desconhecido"
+          }
+        ],
+        "funcionalidades": [
+          "func:previsoes-colaborativas"
+        ],
+        "id": "obj:ForecastingOwnerAdjustment"
+      },
+      {
+        "apis": [
+          {
+            "api": "padrao",
+            "estado": "verificado"
+          },
+          {
+            "api": "tooling",
+            "estado": "desconhecido"
+          }
+        ],
+        "funcionalidades": [
+          "func:previsoes-colaborativas"
+        ],
+        "id": "obj:ForecastingQuota"
+      },
+      {
+        "apis": [
+          {
+            "api": "padrao",
+            "estado": "verificado"
+          },
+          {
+            "api": "tooling",
+            "estado": "desconhecido"
+          }
+        ],
+        "funcionalidades": [
+          "func:previsoes-colaborativas"
+        ],
+        "id": "obj:ForecastingType"
+      },
+      {
+        "apis": [
+          {
+            "api": "padrao",
+            "estado": "verificado"
+          },
+          {
+            "api": "tooling",
+            "estado": "desconhecido"
+          }
+        ],
+        "funcionalidades": [
+          "func:chatter"
+        ],
+        "id": "obj:Group"
+      },
+      {
+        "apis": [
+          {
+            "api": "padrao",
+            "estado": "verificado"
+          },
+          {
+            "api": "tooling",
+            "estado": "desconhecido"
+          }
+        ],
+        "funcionalidades": [
+          "func:consent-management"
+        ],
+        "id": "obj:Individual"
+      },
+      {
+        "apis": [
+          {
+            "api": "padrao",
+            "estado": "verificado"
+          },
+          {
+            "api": "tooling",
+            "estado": "desconhecido"
+          }
+        ],
+        "funcionalidades": [
+          "func:lightning-knowledge"
+        ],
+        "id": "obj:KnowledgeArticle"
+      },
+      {
+        "apis": [
+          {
+            "api": "padrao",
+            "estado": "verificado"
+          },
+          {
+            "api": "tooling",
+            "estado": "desconhecido"
+          }
+        ],
+        "funcionalidades": [
+          "func:lightning-knowledge"
+        ],
+        "id": "obj:KnowledgeArticleVersion"
+      },
+      {
+        "apis": [
+          {
+            "api": "tooling",
+            "estado": "verificado"
+          },
+          {
+            "api": "padrao",
+            "estado": "desconhecido"
+          }
+        ],
+        "funcionalidades": [
+          "func:path"
+        ],
+        "id": "obj:PathAssistant"
       }
     ],
-    "temas_sem_funcionalidade": [
-      "sub:settings",
-      "sub:habilitacao-de-recursos"
-    ]
+    "temas_sem_funcionalidade": []
   },
   "descricao": "Reúne o que define a org como um todo antes de qualquer processo de negócio: identidade, configurações gerais, idiomas, moedas, calendário, domínios e habilitação de recursos.",
   "encadeamento": {

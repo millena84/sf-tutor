@@ -129,11 +129,27 @@
     "dependencias": [
       {
         "destino": "mdt:ExternalDataSource",
-        "destino_no_tema": false,
+        "destino_no_tema": true,
         "estado": "verificado",
         "origem": "mdt:CustomObject",
         "rel": "rel:customobject-externaldatasource",
         "via": "externalDataSource"
+      },
+      {
+        "destino": "obj:AuthProvider",
+        "destino_no_tema": false,
+        "estado": "verificado",
+        "origem": "obj:ExternalDataSource",
+        "rel": "rel:externaldatasource-authprovider",
+        "via": "AuthProviderId"
+      },
+      {
+        "destino": "obj:NamedCredential",
+        "destino_no_tema": false,
+        "estado": "verificado",
+        "origem": "obj:ExternalDataSource",
+        "rel": "rel:externaldatasource-namedcredential",
+        "via": "NamedCredentialId"
       },
       {
         "destino": "obj:EntityDefinition",
@@ -200,6 +216,36 @@
         ],
         "principal": false,
         "tema_principal": "sub:orientacao-visual-e-path"
+      },
+      {
+        "alertas": [
+          "O histórico só existe a partir de quando o rastreamento é ligado.",
+          "Em contas, o limite de 20 campos vale para contas comerciais e contas pessoais juntas.",
+          "Não é possível desligar o rastreamento de um objeto se algum código Apex referencia os campos dele.",
+          "O histórico de campos não conta no armazenamento de dados.",
+          "Definir os campos rastreados exige a permissão Customize Application."
+        ],
+        "exemplo": "Na conta, o campo Rating é rastreado; quando alguém muda de Warm para Hot, a related list History mostra o usuário, a data e os dois valores.",
+        "id": "func:field-history-tracking",
+        "principal": false,
+        "tema_principal": "sub:rastreabilidade-e-historico"
+      },
+      {
+        "exemplo": "Pedidos do ERP aparecem como objeto externo Pedido__x, lidos via OData no momento da consulta.",
+        "id": "func:external-objects",
+        "principal": false,
+        "tema_principal": "sub:conectividade-e-virtualizacao-de-dados"
+      },
+      {
+        "alertas": [
+          "A política padrão arquiva depois de 18 meses em produção e de um mês em sandbox, e não vem no retrieve: para mudá-la, implante uma política pela Metadata API.",
+          "Excluir um registro apaga o histórico relacionado, mas não a cópia já levada para FieldHistoryArchive.",
+          "Consultar FieldHistoryArchive exige a permissão Retain Field History."
+        ],
+        "exemplo": "Uma financeira precisa provar, cinco anos depois, quem alterou o limite de crédito de uma conta; o dado está em FieldHistoryArchive.",
+        "id": "func:field-audit-trail",
+        "principal": false,
+        "tema_principal": "sub:retencao-arquivamento-e-exclusao"
       }
     ],
     "metadata_types": [
@@ -215,7 +261,8 @@
       {
         "estrutura": "parcial",
         "funcionalidades": [
-          "func:campos-customizados"
+          "func:campos-customizados",
+          "func:field-history-tracking"
         ],
         "id": "mdt:CustomField",
         "nota_suporte": null,
@@ -224,9 +271,21 @@
       {
         "estrutura": "parcial",
         "funcionalidades": [
+          "func:external-objects",
+          "func:field-audit-trail",
+          "func:field-history-tracking",
           "func:objetos-customizados"
         ],
         "id": "mdt:CustomObject",
+        "nota_suporte": null,
+        "suporte_cli": "suportado"
+      },
+      {
+        "estrutura": "completa",
+        "funcionalidades": [
+          "func:external-objects"
+        ],
+        "id": "mdt:ExternalDataSource",
         "nota_suporte": null,
         "suporte_cli": "suportado"
       },
@@ -338,6 +397,22 @@
       {
         "apis": [
           {
+            "api": "padrao",
+            "estado": "verificado"
+          },
+          {
+            "api": "tooling",
+            "estado": "desconhecido"
+          }
+        ],
+        "funcionalidades": [
+          "func:external-objects"
+        ],
+        "id": "obj:ExternalDataSource"
+      },
+      {
+        "apis": [
+          {
             "api": "tooling",
             "estado": "verificado"
           },
@@ -350,6 +425,22 @@
           "func:campos-customizados"
         ],
         "id": "obj:FieldDefinition"
+      },
+      {
+        "apis": [
+          {
+            "api": "padrao",
+            "estado": "verificado"
+          },
+          {
+            "api": "tooling",
+            "estado": "desconhecido"
+          }
+        ],
+        "funcionalidades": [
+          "func:field-audit-trail"
+        ],
+        "id": "obj:FieldHistoryArchive"
       },
       {
         "apis": [
@@ -400,10 +491,7 @@
         "id": "obj:ValidationRule"
       }
     ],
-    "temas_sem_funcionalidade": [
-      "sub:metadados-de-configuracao-de-dados",
-      "sub:modelos-externos-e-especializacoes"
-    ]
+    "temas_sem_funcionalidade": []
   },
   "descricao": "Reúne a estrutura onde os dados vivem: objetos, campos, relacionamentos, tipos de registro e listas de valores.",
   "encadeamento": {

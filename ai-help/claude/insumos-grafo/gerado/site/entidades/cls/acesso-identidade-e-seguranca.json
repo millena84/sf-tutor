@@ -342,12 +342,36 @@
         "via": "ProfileId"
       },
       {
+        "destino": "obj:UserRole",
+        "destino_no_tema": true,
+        "estado": "verificado",
+        "origem": "obj:User",
+        "rel": "rel:user-userrole",
+        "via": "UserRoleId"
+      },
+      {
         "destino": "obj:User",
         "destino_no_tema": true,
         "estado": "verificado",
         "origem": "obj:UserLogin",
         "rel": "rel:userlogin-user",
         "via": "UserId"
+      },
+      {
+        "destino": "obj:User",
+        "destino_no_tema": true,
+        "estado": "verificado",
+        "origem": "obj:UserRole",
+        "rel": "rel:userrole-forecastuser",
+        "via": "ForecastUserId"
+      },
+      {
+        "destino": "obj:Account",
+        "destino_no_tema": false,
+        "estado": "verificado",
+        "origem": "obj:UserRole",
+        "rel": "rel:userrole-portalaccount",
+        "via": "PortalAccountId"
       }
     ],
     "funcionalidades": [
@@ -449,6 +473,14 @@
         "principal": true
       },
       {
+        "alertas": [
+          "Licenças vêm do contrato da org; o catálogo não registra quantidades nem preços."
+        ],
+        "exemplo": "A licença Salesforce Platform não inclui leads, oportunidades, campanhas nem previsões; um usuário com ela não recebe esses acessos por nenhum perfil.",
+        "id": "func:licencas-de-usuario",
+        "principal": true
+      },
+      {
         "exemplo": "Na conta ACME, o executivo de contas é dono e o engenheiro de pré-venda entra na equipe com acesso de leitura.",
         "id": "func:equipes-de-conta-e-oportunidade",
         "pre_requisitos": [
@@ -468,6 +500,24 @@
         ],
         "exemplo": "Os casos novos vão para a fila Suporte Nível 2; um atendente do time abre a lista da fila e assume o próximo caso.",
         "id": "func:filas",
+        "principal": true
+      },
+      {
+        "alertas": [
+          "Ver papéis exige View Roles and Role Hierarchy; criar, editar e excluir exige Manage Roles; atribuir usuários exige Manage Internal Users."
+        ],
+        "exemplo": "O papel Gerente de Vendas Sul fica acima de Vendedor Sul; o gerente enxerga as oportunidades dos vendedores, mesmo com o padrão da org em Private.",
+        "id": "func:hierarquia-de-papeis",
+        "principal": true
+      },
+      {
+        "alertas": [
+          "Criar regras exige Manage Sharing.",
+          "Regras de guest user só dão leitura; a Ajuda recomenda avaliar com cuidado o que fica exposto.",
+          "Para usar public groups numa regra, crie os grupos antes."
+        ],
+        "exemplo": "Num objeto customizado de candidaturas, uma regra por critério compartilha com os gerentes de TI todas as candidaturas com Department = IT.",
+        "id": "func:regras-de-compartilhamento",
         "principal": true
       },
       {
@@ -627,6 +677,7 @@
       {
         "estrutura": "completa",
         "funcionalidades": [
+          "func:licencas-de-usuario",
           "func:permission-sets"
         ],
         "id": "mdt:PermissionSet",
@@ -645,6 +696,7 @@
       {
         "estrutura": "parcial",
         "funcionalidades": [
+          "func:licencas-de-usuario",
           "func:perfis"
         ],
         "id": "mdt:Profile",
@@ -681,9 +733,63 @@
       {
         "estrutura": "completa",
         "funcionalidades": [
+          "func:hierarquia-de-papeis"
+        ],
+        "id": "mdt:Role",
+        "nota_suporte": null,
+        "suporte_cli": "suportado"
+      },
+      {
+        "estrutura": "completa",
+        "funcionalidades": [
           "func:sso-saml"
         ],
         "id": "mdt:SamlSsoConfig",
+        "nota_suporte": null,
+        "suporte_cli": "suportado"
+      },
+      {
+        "estrutura": "completa",
+        "funcionalidades": [
+          "func:regras-de-compartilhamento"
+        ],
+        "id": "mdt:SharingCriteriaRule",
+        "nota_suporte": null,
+        "suporte_cli": "suportado"
+      },
+      {
+        "estrutura": "completa",
+        "funcionalidades": [
+          "func:regras-de-compartilhamento"
+        ],
+        "id": "mdt:SharingGuestRule",
+        "nota_suporte": null,
+        "suporte_cli": "suportado"
+      },
+      {
+        "estrutura": "completa",
+        "funcionalidades": [
+          "func:regras-de-compartilhamento"
+        ],
+        "id": "mdt:SharingOwnerRule",
+        "nota_suporte": null,
+        "suporte_cli": "suportado"
+      },
+      {
+        "estrutura": "completa",
+        "funcionalidades": [
+          "func:regras-de-compartilhamento"
+        ],
+        "id": "mdt:SharingRules",
+        "nota_suporte": "Supports deploy/retrieve but not source tracking",
+        "suporte_cli": "suportado_com_ressalvas"
+      },
+      {
+        "estrutura": "completa",
+        "funcionalidades": [
+          "func:regras-de-compartilhamento"
+        ],
+        "id": "mdt:SharingTerritoryRule",
         "nota_suporte": null,
         "suporte_cli": "suportado"
       },
@@ -857,6 +963,7 @@
           }
         ],
         "funcionalidades": [
+          "func:licencas-de-usuario",
           "func:permission-sets"
         ],
         "id": "obj:PermissionSet"
@@ -906,6 +1013,7 @@
           }
         ],
         "funcionalidades": [
+          "func:licencas-de-usuario",
           "func:perfis"
         ],
         "id": "obj:Profile"
@@ -938,6 +1046,7 @@
           }
         ],
         "funcionalidades": [
+          "func:hierarquia-de-papeis",
           "func:usuarios"
         ],
         "id": "obj:User"
@@ -957,11 +1066,25 @@
           "func:estado-e-historico-de-login"
         ],
         "id": "obj:UserLogin"
+      },
+      {
+        "apis": [
+          {
+            "api": "padrao",
+            "estado": "verificado"
+          },
+          {
+            "api": "tooling",
+            "estado": "desconhecido"
+          }
+        ],
+        "funcionalidades": [
+          "func:hierarquia-de-papeis"
+        ],
+        "id": "obj:UserRole"
       }
     ],
-    "temas_sem_funcionalidade": [
-      "sub:licencas-e-entitlements-de-acesso"
-    ]
+    "temas_sem_funcionalidade": []
   },
   "descricao": "Reúne quem pode entrar na org, como se autentica e o que cada pessoa ou integração pode ver e fazer.",
   "encadeamento": {
