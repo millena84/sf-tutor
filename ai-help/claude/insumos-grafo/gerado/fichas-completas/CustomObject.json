@@ -71,7 +71,7 @@
       "estrutural": {
         "esperado": 55,
         "estado": "parcial",
-        "nota": "Tabela Fields lida em 100k de 101,8k caracteres; os ~1,8k finais continham apenas exemplo. Valores de DeploymentStatus, SharingModel, Gender e StartsWith estão em outras páginas. Primeiro nível completo; 13 propriedade(s) de tipo composto ainda sem estrutura detalhada: actionOverrides, businessProcesses, compactLayouts, fieldSets, historyRetentionPolicy, indexes, listViews, namedFilter, profileSearchLayouts, searchLayouts, sharingReasons, sharingRecalculations, webLinks.",
+        "nota": "Tabela Fields lida em 100k de 101,8k caracteres; os ~1,8k finais continham apenas exemplo. Valores de DeploymentStatus, SharingModel, Gender e StartsWith estão em outras páginas. Em 2026-11-17: SearchLayouts, ProfileSearchLayouts e HistoryRetentionPolicy viraram estruturas; BusinessProcess, FieldSet e Index, metadata types filhos. As páginas de ActionOverride, SharingReason, SharingRecalculation e NamedFilter devolveram conteúdo ilegível. Primeiro nível completo; 4 propriedade(s) de tipo composto ainda sem estrutura detalhada: actionOverrides, namedFilter, sharingReasons, sharingRecalculations.",
         "presente": 55
       },
       "explicativa": {
@@ -92,7 +92,11 @@
     "divergencias_documentais": [],
     "estado": "verificado",
     "estende": "Metadata",
-    "estruturas": [],
+    "estruturas": [
+      "mdx:HistoryRetentionPolicy",
+      "mdx:ProfileSearchLayouts",
+      "mdx:SearchLayouts"
+    ],
     "evidencias": [
       {
         "fonte": "src:mdapi-customobject"
@@ -2035,6 +2039,216 @@
           "natureza": "tipo_composto"
         },
         "estado": "verificado",
+        "estrutura_expandida": {
+          "id": "mdx:HistoryRetentionPolicy",
+          "nome": "HistoryRetentionPolicy",
+          "propriedades": [
+            {
+              "default": {
+                "estado": "verificado",
+                "evidencias": [
+                  {
+                    "fonte": "src:mdapi-historyretentionpolicy"
+                  }
+                ],
+                "forma": "valor",
+                "nota": "A página declara 18 como padrão.",
+                "valor": 18
+              },
+              "disponibilidade": {
+                "ate_versao": null,
+                "desde_versao": "31.0",
+                "estado": "verificado"
+              },
+              "dominio": {
+                "estado": "verificado",
+                "evidencias": [
+                  {
+                    "fonte": "src:mdapi-historyretentionpolicy"
+                  }
+                ],
+                "natureza": "numerico"
+              },
+              "estado": "verificado",
+              "evidencias": [
+                {
+                  "fonte": "src:mdapi-historyretentionpolicy"
+                }
+              ],
+              "explicacao": "explicada",
+              "id": "mdx:HistoryRetentionPolicy.archiveAfterMonths",
+              "nome": "archiveAfterMonths",
+              "o_que_e": "Meses antes de arquivar o histórico, de 1 a 18.",
+              "obrigatoriedade": {
+                "estado": "verificado",
+                "evidencias": [
+                  {
+                    "fonte": "src:mdapi-historyretentionpolicy"
+                  }
+                ],
+                "valor": "sim"
+              },
+              "origem": {
+                "estado": "verificado",
+                "evidencias": [
+                  {
+                    "fonte": "src:mdapi-historyretentionpolicy"
+                  }
+                ],
+                "nota": "Propriedade definida pelo schema da Metadata API.",
+                "valor": "padrao_plataforma"
+              },
+              "tipo_tecnico": "int"
+            },
+            {
+              "default": {
+                "estado": "desconhecido",
+                "forma": "nao_declarado_na_fonte"
+              },
+              "disponibilidade": {
+                "ate_versao": null,
+                "desde_versao": "31.0",
+                "estado": "verificado"
+              },
+              "dominio": {
+                "estado": "verificado",
+                "evidencias": [
+                  {
+                    "fonte": "src:mdapi-historyretentionpolicy"
+                  }
+                ],
+                "natureza": "numerico"
+              },
+              "estado": "verificado",
+              "evidencias": [
+                {
+                  "fonte": "src:mdapi-historyretentionpolicy"
+                }
+              ],
+              "explicacao": "explicada",
+              "id": "mdx:HistoryRetentionPolicy.archiveRetentionYears",
+              "nome": "archiveRetentionYears",
+              "o_que_e": "Anos até a exclusão manual do arquivo; serve só de lembrete, sem exclusão automática.",
+              "obrigatoriedade": {
+                "condicao": "A documentação 68.0 não marca o campo como obrigatório; ausência de marcação não comprova opcionalidade (confirmar no WSDL).",
+                "estado": "desconhecido",
+                "valor": "nao"
+              },
+              "origem": {
+                "estado": "verificado",
+                "evidencias": [
+                  {
+                    "fonte": "src:mdapi-historyretentionpolicy"
+                  }
+                ],
+                "nota": "Propriedade definida pelo schema da Metadata API.",
+                "valor": "padrao_plataforma"
+              },
+              "tipo_tecnico": "int"
+            },
+            {
+              "default": {
+                "estado": "desconhecido",
+                "forma": "nao_declarado_na_fonte"
+              },
+              "disponibilidade": {
+                "ate_versao": null,
+                "desde_versao": "31.0",
+                "estado": "verificado"
+              },
+              "dominio": {
+                "contexto": "A fonte tipa como string sem lista de valores; não inventar valores.",
+                "estado": "verificado",
+                "evidencias": [
+                  {
+                    "fonte": "src:mdapi-historyretentionpolicy"
+                  }
+                ],
+                "natureza": "texto_livre"
+              },
+              "estado": "verificado",
+              "evidencias": [
+                {
+                  "fonte": "src:mdapi-historyretentionpolicy"
+                }
+              ],
+              "explicacao": "explicada",
+              "id": "mdx:HistoryRetentionPolicy.description",
+              "nome": "description",
+              "o_que_e": "Descrição da política.",
+              "obrigatoriedade": {
+                "condicao": "A documentação 68.0 não marca o campo como obrigatório; ausência de marcação não comprova opcionalidade (confirmar no WSDL).",
+                "estado": "desconhecido",
+                "valor": "nao"
+              },
+              "origem": {
+                "estado": "verificado",
+                "evidencias": [
+                  {
+                    "fonte": "src:mdapi-historyretentionpolicy"
+                  }
+                ],
+                "nota": "Propriedade definida pelo schema da Metadata API.",
+                "valor": "padrao_plataforma"
+              },
+              "tipo_tecnico": "string"
+            },
+            {
+              "default": {
+                "estado": "verificado",
+                "evidencias": [
+                  {
+                    "fonte": "src:mdapi-historyretentionpolicy"
+                  }
+                ],
+                "forma": "valor",
+                "nota": "A página declara 1 como padrão.",
+                "valor": 1
+              },
+              "disponibilidade": {
+                "ate_versao": null,
+                "desde_versao": "31.0",
+                "estado": "verificado"
+              },
+              "dominio": {
+                "estado": "verificado",
+                "evidencias": [
+                  {
+                    "fonte": "src:mdapi-historyretentionpolicy"
+                  }
+                ],
+                "natureza": "numerico"
+              },
+              "estado": "verificado",
+              "evidencias": [
+                {
+                  "fonte": "src:mdapi-historyretentionpolicy"
+                }
+              ],
+              "explicacao": "explicada",
+              "id": "mdx:HistoryRetentionPolicy.gracePeriodDays",
+              "nome": "gracePeriodDays",
+              "o_que_e": "Dias extras antes do primeiro arquivamento, de 0 a 10.",
+              "obrigatoriedade": {
+                "condicao": "A documentação 68.0 não marca o campo como obrigatório; ausência de marcação não comprova opcionalidade (confirmar no WSDL).",
+                "estado": "desconhecido",
+                "valor": "nao"
+              },
+              "origem": {
+                "estado": "verificado",
+                "evidencias": [
+                  {
+                    "fonte": "src:mdapi-historyretentionpolicy"
+                  }
+                ],
+                "nota": "Propriedade definida pelo schema da Metadata API.",
+                "valor": "padrao_plataforma"
+              },
+              "tipo_tecnico": "int"
+            }
+          ]
+        },
+        "estrutura_ref": "mdx:HistoryRetentionPolicy",
         "evidencias": [
           {
             "fonte": "src:mdapi-customobject"
@@ -2373,6 +2587,109 @@
           "natureza": "tipo_composto"
         },
         "estado": "verificado",
+        "estrutura_expandida": {
+          "id": "mdx:ProfileSearchLayouts",
+          "nome": "ProfileSearchLayouts",
+          "propriedades": [
+            {
+              "cardinalidade": "0..n",
+              "default": {
+                "estado": "desconhecido",
+                "forma": "nao_declarado_na_fonte"
+              },
+              "disponibilidade": {
+                "ate_versao": null,
+                "desde_versao": "48.0",
+                "estado": "verificado"
+              },
+              "dominio": {
+                "contexto": "A fonte tipa como string sem lista de valores; não inventar valores.",
+                "estado": "verificado",
+                "evidencias": [
+                  {
+                    "fonte": "src:mdapi-profilesearchlayouts"
+                  }
+                ],
+                "natureza": "texto_livre"
+              },
+              "estado": "verificado",
+              "evidencias": [
+                {
+                  "fonte": "src:mdapi-profilesearchlayouts"
+                }
+              ],
+              "explicacao": "explicada",
+              "id": "mdx:ProfileSearchLayouts.fields",
+              "nome": "fields",
+              "o_que_e": "Campos mostrados nos resultados de busca para o perfil.",
+              "obrigatoriedade": {
+                "condicao": "A documentação 68.0 não marca o campo como obrigatório; ausência de marcação não comprova opcionalidade (confirmar no WSDL).",
+                "estado": "desconhecido",
+                "valor": "nao"
+              },
+              "origem": {
+                "estado": "verificado",
+                "evidencias": [
+                  {
+                    "fonte": "src:mdapi-profilesearchlayouts"
+                  }
+                ],
+                "nota": "Propriedade definida pelo schema da Metadata API.",
+                "valor": "padrao_plataforma"
+              },
+              "tipo_tecnico": "string[]"
+            },
+            {
+              "cardinalidade": "0..n",
+              "default": {
+                "estado": "desconhecido",
+                "forma": "nao_declarado_na_fonte"
+              },
+              "disponibilidade": {
+                "ate_versao": null,
+                "desde_versao": "48.0",
+                "estado": "verificado"
+              },
+              "dominio": {
+                "contexto": "A fonte tipa como string sem lista de valores; não inventar valores.",
+                "estado": "verificado",
+                "evidencias": [
+                  {
+                    "fonte": "src:mdapi-profilesearchlayouts"
+                  }
+                ],
+                "natureza": "texto_livre"
+              },
+              "estado": "verificado",
+              "evidencias": [
+                {
+                  "fonte": "src:mdapi-profilesearchlayouts"
+                }
+              ],
+              "explicacao": "explicada",
+              "id": "mdx:ProfileSearchLayouts.profileName",
+              "nome": "profileName",
+              "o_que_e": "Perfil a que o layout de busca se aplica.",
+              "obrigatoriedade": {
+                "condicao": "A documentação 68.0 não marca o campo como obrigatório; ausência de marcação não comprova opcionalidade (confirmar no WSDL).",
+                "estado": "desconhecido",
+                "valor": "nao"
+              },
+              "origem": {
+                "estado": "verificado",
+                "evidencias": [
+                  {
+                    "fonte": "src:mdapi-profilesearchlayouts"
+                  }
+                ],
+                "nota": "Propriedade definida pelo schema da Metadata API.",
+                "valor": "padrao_plataforma"
+              },
+              "tipo_tecnico": "string[]"
+            }
+          ]
+        },
+        "estrutura_ref": "mdx:ProfileSearchLayouts",
         "evidencias": [
           {
             "fonte": "src:mdapi-customobject"
@@ -2640,6 +2957,493 @@
           "natureza": "tipo_composto"
         },
         "estado": "verificado",
+        "estrutura_expandida": {
+          "id": "mdx:SearchLayouts",
+          "nome": "SearchLayouts",
+          "propriedades": [
+            {
+              "cardinalidade": "0..n",
+              "default": {
+                "estado": "desconhecido",
+                "forma": "nao_declarado_na_fonte"
+              },
+              "disponibilidade": {
+                "ate_versao": null,
+                "desde_versao": null,
+                "estado": "desconhecido"
+              },
+              "dominio": {
+                "contexto": "A fonte tipa como string sem lista de valores; não inventar valores.",
+                "estado": "verificado",
+                "evidencias": [
+                  {
+                    "fonte": "src:mdapi-searchlayouts"
+                  }
+                ],
+                "natureza": "texto_livre"
+              },
+              "estado": "verificado",
+              "evidencias": [
+                {
+                  "fonte": "src:mdapi-searchlayouts"
+                }
+              ],
+              "explicacao": "explicada",
+              "id": "mdx:SearchLayouts.customTabListAdditionalFields",
+              "nome": "customTabListAdditionalFields",
+              "o_que_e": "Campos extras na lista Recent do objeto.",
+              "obrigatoriedade": {
+                "condicao": "A documentação 68.0 não marca o campo como obrigatório; ausência de marcação não comprova opcionalidade (confirmar no WSDL).",
+                "estado": "desconhecido",
+                "valor": "nao"
+              },
+              "origem": {
+                "estado": "verificado",
+                "evidencias": [
+                  {
+                    "fonte": "src:mdapi-searchlayouts"
+                  }
+                ],
+                "nota": "Propriedade definida pelo schema da Metadata API.",
+                "valor": "padrao_plataforma"
+              },
+              "tipo_tecnico": "string[]"
+            },
+            {
+              "cardinalidade": "0..n",
+              "default": {
+                "estado": "desconhecido",
+                "forma": "nao_declarado_na_fonte"
+              },
+              "disponibilidade": {
+                "ate_versao": null,
+                "desde_versao": null,
+                "estado": "desconhecido"
+              },
+              "dominio": {
+                "contexto": "A fonte tipa como string sem lista de valores; não inventar valores.",
+                "estado": "verificado",
+                "evidencias": [
+                  {
+                    "fonte": "src:mdapi-searchlayouts"
+                  }
+                ],
+                "natureza": "texto_livre"
+              },
+              "estado": "verificado",
+              "evidencias": [
+                {
+                  "fonte": "src:mdapi-searchlayouts"
+                }
+              ],
+              "explicacao": "explicada",
+              "id": "mdx:SearchLayouts.excludedStandardButtons",
+              "nome": "excludedStandardButtons",
+              "o_que_e": "Botões padrão retirados do layout de busca.",
+              "obrigatoriedade": {
+                "condicao": "A documentação 68.0 não marca o campo como obrigatório; ausência de marcação não comprova opcionalidade (confirmar no WSDL).",
+                "estado": "desconhecido",
+                "valor": "nao"
+              },
+              "origem": {
+                "estado": "verificado",
+                "evidencias": [
+                  {
+                    "fonte": "src:mdapi-searchlayouts"
+                  }
+                ],
+                "nota": "Propriedade definida pelo schema da Metadata API.",
+                "valor": "padrao_plataforma"
+              },
+              "tipo_tecnico": "string[]"
+            },
+            {
+              "cardinalidade": "0..n",
+              "default": {
+                "estado": "desconhecido",
+                "forma": "nao_declarado_na_fonte"
+              },
+              "disponibilidade": {
+                "ate_versao": null,
+                "desde_versao": null,
+                "estado": "desconhecido"
+              },
+              "dominio": {
+                "contexto": "A fonte tipa como string sem lista de valores; não inventar valores.",
+                "estado": "verificado",
+                "evidencias": [
+                  {
+                    "fonte": "src:mdapi-searchlayouts"
+                  }
+                ],
+                "natureza": "texto_livre"
+              },
+              "estado": "verificado",
+              "evidencias": [
+                {
+                  "fonte": "src:mdapi-searchlayouts"
+                }
+              ],
+              "explicacao": "explicada",
+              "id": "mdx:SearchLayouts.listViewButtons",
+              "nome": "listViewButtons",
+              "o_que_e": "Botões mostrados nas list views do objeto.",
+              "obrigatoriedade": {
+                "condicao": "A documentação 68.0 não marca o campo como obrigatório; ausência de marcação não comprova opcionalidade (confirmar no WSDL).",
+                "estado": "desconhecido",
+                "valor": "nao"
+              },
+              "origem": {
+                "estado": "verificado",
+                "evidencias": [
+                  {
+                    "fonte": "src:mdapi-searchlayouts"
+                  }
+                ],
+                "nota": "Propriedade definida pelo schema da Metadata API.",
+                "valor": "padrao_plataforma"
+              },
+              "tipo_tecnico": "string[]"
+            },
+            {
+              "cardinalidade": "0..n",
+              "default": {
+                "estado": "desconhecido",
+                "forma": "nao_declarado_na_fonte"
+              },
+              "disponibilidade": {
+                "ate_versao": null,
+                "desde_versao": null,
+                "estado": "desconhecido"
+              },
+              "dominio": {
+                "contexto": "A fonte tipa como string sem lista de valores; não inventar valores.",
+                "estado": "verificado",
+                "evidencias": [
+                  {
+                    "fonte": "src:mdapi-searchlayouts"
+                  }
+                ],
+                "natureza": "texto_livre"
+              },
+              "estado": "verificado",
+              "evidencias": [
+                {
+                  "fonte": "src:mdapi-searchlayouts"
+                }
+              ],
+              "explicacao": "explicada",
+              "id": "mdx:SearchLayouts.lookupDialogsAdditionalFields",
+              "nome": "lookupDialogsAdditionalFields",
+              "o_que_e": "Campos extras nas janelas de busca de lookup.",
+              "obrigatoriedade": {
+                "condicao": "A documentação 68.0 não marca o campo como obrigatório; ausência de marcação não comprova opcionalidade (confirmar no WSDL).",
+                "estado": "desconhecido",
+                "valor": "nao"
+              },
+              "origem": {
+                "estado": "verificado",
+                "evidencias": [
+                  {
+                    "fonte": "src:mdapi-searchlayouts"
+                  }
+                ],
+                "nota": "Propriedade definida pelo schema da Metadata API.",
+                "valor": "padrao_plataforma"
+              },
+              "tipo_tecnico": "string[]"
+            },
+            {
+              "cardinalidade": "0..n",
+              "default": {
+                "estado": "desconhecido",
+                "forma": "nao_declarado_na_fonte"
+              },
+              "disponibilidade": {
+                "ate_versao": null,
+                "desde_versao": null,
+                "estado": "desconhecido"
+              },
+              "dominio": {
+                "contexto": "A fonte tipa como string sem lista de valores; não inventar valores.",
+                "estado": "verificado",
+                "evidencias": [
+                  {
+                    "fonte": "src:mdapi-searchlayouts"
+                  }
+                ],
+                "natureza": "texto_livre"
+              },
+              "estado": "verificado",
+              "evidencias": [
+                {
+                  "fonte": "src:mdapi-searchlayouts"
+                }
+              ],
+              "explicacao": "explicada",
+              "id": "mdx:SearchLayouts.lookupFilterFields",
+              "nome": "lookupFilterFields",
+              "o_que_e": "Campos que filtram enhanced lookups.",
+              "obrigatoriedade": {
+                "condicao": "A documentação 68.0 não marca o campo como obrigatório; ausência de marcação não comprova opcionalidade (confirmar no WSDL).",
+                "estado": "desconhecido",
+                "valor": "nao"
+              },
+              "origem": {
+                "estado": "verificado",
+                "evidencias": [
+                  {
+                    "fonte": "src:mdapi-searchlayouts"
+                  }
+                ],
+                "nota": "Propriedade definida pelo schema da Metadata API.",
+                "valor": "padrao_plataforma"
+              },
+              "tipo_tecnico": "string[]"
+            },
+            {
+              "cardinalidade": "0..n",
+              "default": {
+                "estado": "desconhecido",
+                "forma": "nao_declarado_na_fonte"
+              },
+              "disponibilidade": {
+                "ate_versao": null,
+                "desde_versao": null,
+                "estado": "desconhecido"
+              },
+              "dominio": {
+                "contexto": "A fonte tipa como string sem lista de valores; não inventar valores.",
+                "estado": "verificado",
+                "evidencias": [
+                  {
+                    "fonte": "src:mdapi-searchlayouts"
+                  }
+                ],
+                "natureza": "texto_livre"
+              },
+              "estado": "verificado",
+              "evidencias": [
+                {
+                  "fonte": "src:mdapi-searchlayouts"
+                }
+              ],
+              "explicacao": "explicada",
+              "id": "mdx:SearchLayouts.lookupPhoneDialogsAdditionalFields",
+              "nome": "lookupPhoneDialogsAdditionalFields",
+              "o_que_e": "Campos de telefone nas janelas de lookup ligadas ao softphone.",
+              "obrigatoriedade": {
+                "condicao": "A documentação 68.0 não marca o campo como obrigatório; ausência de marcação não comprova opcionalidade (confirmar no WSDL).",
+                "estado": "desconhecido",
+                "valor": "nao"
+              },
+              "origem": {
+                "estado": "verificado",
+                "evidencias": [
+                  {
+                    "fonte": "src:mdapi-searchlayouts"
+                  }
+                ],
+                "nota": "Propriedade definida pelo schema da Metadata API.",
+                "valor": "padrao_plataforma"
+              },
+              "tipo_tecnico": "string[]"
+            },
+            {
+              "cardinalidade": "0..n",
+              "default": {
+                "estado": "desconhecido",
+                "forma": "nao_declarado_na_fonte"
+              },
+              "disponibilidade": {
+                "ate_versao": null,
+                "desde_versao": null,
+                "estado": "desconhecido"
+              },
+              "dominio": {
+                "contexto": "A fonte tipa como string sem lista de valores; não inventar valores.",
+                "estado": "verificado",
+                "evidencias": [
+                  {
+                    "fonte": "src:mdapi-searchlayouts"
+                  }
+                ],
+                "natureza": "texto_livre"
+              },
+              "estado": "verificado",
+              "evidencias": [
+                {
+                  "fonte": "src:mdapi-searchlayouts"
+                }
+              ],
+              "explicacao": "explicada",
+              "id": "mdx:SearchLayouts.massQuickActions",
+              "nome": "massQuickActions",
+              "o_que_e": "Quick actions de criação ou atualização executadas em lote.",
+              "obrigatoriedade": {
+                "condicao": "A documentação 68.0 não marca o campo como obrigatório; ausência de marcação não comprova opcionalidade (confirmar no WSDL).",
+                "estado": "desconhecido",
+                "valor": "nao"
+              },
+              "origem": {
+                "estado": "verificado",
+                "evidencias": [
+                  {
+                    "fonte": "src:mdapi-searchlayouts"
+                  }
+                ],
+                "nota": "Propriedade definida pelo schema da Metadata API.",
+                "valor": "padrao_plataforma"
+              },
+              "tipo_tecnico": "string[]"
+            },
+            {
+              "cardinalidade": "0..n",
+              "default": {
+                "estado": "desconhecido",
+                "forma": "nao_declarado_na_fonte"
+              },
+              "disponibilidade": {
+                "ate_versao": null,
+                "desde_versao": null,
+                "estado": "desconhecido"
+              },
+              "dominio": {
+                "contexto": "A fonte tipa como string sem lista de valores; não inventar valores.",
+                "estado": "verificado",
+                "evidencias": [
+                  {
+                    "fonte": "src:mdapi-searchlayouts"
+                  }
+                ],
+                "natureza": "texto_livre"
+              },
+              "estado": "verificado",
+              "evidencias": [
+                {
+                  "fonte": "src:mdapi-searchlayouts"
+                }
+              ],
+              "explicacao": "explicada",
+              "id": "mdx:SearchLayouts.searchFilterFields",
+              "nome": "searchFilterFields",
+              "o_que_e": "Campos que refinam buscas do objeto.",
+              "obrigatoriedade": {
+                "condicao": "A documentação 68.0 não marca o campo como obrigatório; ausência de marcação não comprova opcionalidade (confirmar no WSDL).",
+                "estado": "desconhecido",
+                "valor": "nao"
+              },
+              "origem": {
+                "estado": "verificado",
+                "evidencias": [
+                  {
+                    "fonte": "src:mdapi-searchlayouts"
+                  }
+                ],
+                "nota": "Propriedade definida pelo schema da Metadata API.",
+                "valor": "padrao_plataforma"
+              },
+              "tipo_tecnico": "string[]"
+            },
+            {
+              "cardinalidade": "0..n",
+              "default": {
+                "estado": "desconhecido",
+                "forma": "nao_declarado_na_fonte"
+              },
+              "disponibilidade": {
+                "ate_versao": null,
+                "desde_versao": null,
+                "estado": "desconhecido"
+              },
+              "dominio": {
+                "contexto": "A fonte tipa como string sem lista de valores; não inventar valores.",
+                "estado": "verificado",
+                "evidencias": [
+                  {
+                    "fonte": "src:mdapi-searchlayouts"
+                  }
+                ],
+                "natureza": "texto_livre"
+              },
+              "estado": "verificado",
+              "evidencias": [
+                {
+                  "fonte": "src:mdapi-searchlayouts"
+                }
+              ],
+              "explicacao": "explicada",
+              "id": "mdx:SearchLayouts.searchResultsAdditionalFields",
+              "nome": "searchResultsAdditionalFields",
+              "o_que_e": "Campos extras nos resultados de busca.",
+              "obrigatoriedade": {
+                "condicao": "A documentação 68.0 não marca o campo como obrigatório; ausência de marcação não comprova opcionalidade (confirmar no WSDL).",
+                "estado": "desconhecido",
+                "valor": "nao"
+              },
+              "origem": {
+                "estado": "verificado",
+                "evidencias": [
+                  {
+                    "fonte": "src:mdapi-searchlayouts"
+                  }
+                ],
+                "nota": "Propriedade definida pelo schema da Metadata API.",
+                "valor": "padrao_plataforma"
+              },
+              "tipo_tecnico": "string[]"
+            },
+            {
+              "cardinalidade": "0..n",
+              "default": {
+                "estado": "desconhecido",
+                "forma": "nao_declarado_na_fonte"
+              },
+              "disponibilidade": {
+                "ate_versao": null,
+                "desde_versao": null,
+                "estado": "desconhecido"
+              },
+              "dominio": {
+                "contexto": "A fonte tipa como string sem lista de valores; não inventar valores.",
+                "estado": "verificado",
+                "evidencias": [
+                  {
+                    "fonte": "src:mdapi-searchlayouts"
+                  }
+                ],
+                "natureza": "texto_livre"
+              },
+              "estado": "verificado",
+              "evidencias": [
+                {
+                  "fonte": "src:mdapi-searchlayouts"
+                }
+              ],
+              "explicacao": "explicada",
+              "id": "mdx:SearchLayouts.searchResultsCustomButtons",
+              "nome": "searchResultsCustomButtons",
+              "o_que_e": "Botões customizados nos resultados de busca.",
+              "obrigatoriedade": {
+                "condicao": "A documentação 68.0 não marca o campo como obrigatório; ausência de marcação não comprova opcionalidade (confirmar no WSDL).",
+                "estado": "desconhecido",
+                "valor": "nao"
+              },
+              "origem": {
+                "estado": "verificado",
+                "evidencias": [
+                  {
+                    "fonte": "src:mdapi-searchlayouts"
+                  }
+                ],
+                "nota": "Propriedade definida pelo schema da Metadata API.",
+                "valor": "padrao_plataforma"
+              },
+              "tipo_tecnico": "string[]"
+            }
+          ]
+        },
+        "estrutura_ref": "mdx:SearchLayouts",
         "evidencias": [
           {
             "fonte": "src:mdapi-customobject"

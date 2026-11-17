@@ -28,11 +28,25 @@
     {
       "api": "tooling",
       "estado": "verificado",
-      "nota": "Listado no índice de objetos da Tooling API 68.0. Campos e operações dessa exposição não levantados; não presumir que sejam iguais aos da API padrão.",
-      "desde_versao": null,
+      "chamadas": [
+        "create()",
+        "getDeleted()",
+        "getUpdated()",
+        "query()",
+        "retrieve()",
+        "update()",
+        "upsert()"
+      ],
+      "metodos_rest": [
+        "GET",
+        "PATCH",
+        "POST"
+      ],
+      "nota": "FullName e Metadata só podem ser consultados quando o resultado tem no máximo um registro. Em sandboxes, ligue o source tracking para os valores de picklist aparecerem em Metadata.picklistValues. Campos na página da Tooling API: 10; só nela: nenhum. As propriedades de campo registradas valem para a API padrão; na Tooling API podem diferir.",
+      "desde_versao": "32.0",
       "evidencias": [
         {
-          "fonte": "src:tooling-objects-list"
+          "fonte": "src:tooling-recordtype"
         }
       ]
     }
@@ -44,7 +58,8 @@
       "tipo_tecnico": "reference",
       "o_que_e": "Processo de negócio associado; exigido para tipos de Opportunity e Lead.",
       "apis": [
-        "padrao"
+        "padrao",
+        "tooling"
       ],
       "propriedades_api": {
         "estado": "verificado",
@@ -102,6 +117,9 @@
       "evidencias": [
         {
           "fonte": "src:objref-recordtype"
+        },
+        {
+          "fonte": "src:tooling-recordtype"
         }
       ],
       "referencia": {
@@ -117,7 +135,8 @@
       "tipo_tecnico": "string",
       "o_que_e": "Descrição.",
       "apis": [
-        "padrao"
+        "padrao",
+        "tooling"
       ],
       "propriedades_api": {
         "estado": "verificado",
@@ -174,6 +193,9 @@
       "evidencias": [
         {
           "fonte": "src:objref-recordtype"
+        },
+        {
+          "fonte": "src:tooling-recordtype"
         }
       ],
       "restricoes": {
@@ -253,12 +275,145 @@
       ]
     },
     {
+      "id": "obj:RecordType.EntityDefinitionId",
+      "nome": "EntityDefinitionId",
+      "tipo_tecnico": "string",
+      "o_que_e": "Id da entidade a que o record type pertence.",
+      "apis": [
+        "tooling"
+      ],
+      "propriedades_api": {
+        "estado": "verificado",
+        "create": false,
+        "defaulted_on_create": false,
+        "filter": true,
+        "group": true,
+        "nillable": false,
+        "restricted_picklist": false,
+        "sort": true,
+        "update": false,
+        "id_lookup": false,
+        "evidencias": [
+          {
+            "fonte": "src:tooling-recordtype"
+          }
+        ]
+      },
+      "somente_leitura": true,
+      "origem": {
+        "estado": "verificado",
+        "valor": "padrao_plataforma",
+        "nota": "Campo padrão do objeto documentado.",
+        "evidencias": [
+          {
+            "fonte": "src:tooling-recordtype"
+          }
+        ]
+      },
+      "obrigatoriedade": {
+        "valor": "desconhecida",
+        "estado": "desconhecido"
+      },
+      "default": {
+        "forma": "nao_declarado_na_fonte",
+        "estado": "desconhecido"
+      },
+      "dominio": {
+        "natureza": "texto_livre",
+        "estado": "verificado",
+        "evidencias": [
+          {
+            "fonte": "src:tooling-recordtype"
+          }
+        ]
+      },
+      "disponibilidade": {
+        "desde_versao": null,
+        "ate_versao": null,
+        "estado": "desconhecido"
+      },
+      "explicacao": "explicada",
+      "estado": "verificado",
+      "evidencias": [
+        {
+          "fonte": "src:tooling-recordtype"
+        }
+      ]
+    },
+    {
+      "id": "obj:RecordType.FullName",
+      "nome": "FullName",
+      "tipo_tecnico": "string",
+      "o_que_e": "Nome do componente correspondente na Metadata API.",
+      "apis": [
+        "tooling"
+      ],
+      "propriedades_api": {
+        "estado": "verificado",
+        "create": true,
+        "defaulted_on_create": false,
+        "filter": false,
+        "group": true,
+        "nillable": true,
+        "restricted_picklist": false,
+        "sort": false,
+        "update": false,
+        "id_lookup": false,
+        "evidencias": [
+          {
+            "fonte": "src:tooling-recordtype"
+          }
+        ]
+      },
+      "somente_leitura": false,
+      "origem": {
+        "estado": "verificado",
+        "valor": "padrao_plataforma",
+        "nota": "Campo padrão do objeto documentado.",
+        "evidencias": [
+          {
+            "fonte": "src:tooling-recordtype"
+          }
+        ]
+      },
+      "obrigatoriedade": {
+        "valor": "desconhecida",
+        "estado": "desconhecido"
+      },
+      "default": {
+        "forma": "nao_declarado_na_fonte",
+        "estado": "desconhecido"
+      },
+      "dominio": {
+        "natureza": "texto_livre",
+        "estado": "verificado",
+        "evidencias": [
+          {
+            "fonte": "src:tooling-recordtype"
+          }
+        ]
+      },
+      "disponibilidade": {
+        "desde_versao": null,
+        "ate_versao": null,
+        "estado": "desconhecido"
+      },
+      "explicacao": "explicada",
+      "estado": "verificado",
+      "evidencias": [
+        {
+          "fonte": "src:tooling-recordtype"
+        }
+      ]
+    },
+    {
       "id": "obj:RecordType.IsActive",
       "nome": "IsActive",
       "tipo_tecnico": "boolean",
       "o_que_e": "Se o tipo está ativo; só tipos ativos se aplicam a registros.",
       "apis": [
-        "padrao"
+        "padrao",
+        "tooling"
       ],
       "propriedades_api": {
         "estado": "verificado",
@@ -325,6 +480,9 @@
       "evidencias": [
         {
           "fonte": "src:objref-recordtype"
+        },
+        {
+          "fonte": "src:tooling-recordtype"
         }
       ]
     },
@@ -405,12 +563,135 @@
       ]
     },
     {
+      "id": "obj:RecordType.ManageableState",
+      "nome": "ManageableState",
+      "tipo_tecnico": "ManageableState",
+      "o_que_e": "Estado do componente no pacote.",
+      "apis": [
+        "tooling"
+      ],
+      "propriedades_api": {
+        "estado": "verificado",
+        "create": false,
+        "defaulted_on_create": false,
+        "filter": true,
+        "group": true,
+        "nillable": true,
+        "restricted_picklist": true,
+        "sort": true,
+        "update": false,
+        "id_lookup": false,
+        "evidencias": [
+          {
+            "fonte": "src:tooling-recordtype"
+          }
+        ]
+      },
+      "somente_leitura": true,
+      "origem": {
+        "estado": "verificado",
+        "valor": "padrao_plataforma",
+        "nota": "Campo padrão do objeto documentado.",
+        "evidencias": [
+          {
+            "fonte": "src:tooling-recordtype"
+          }
+        ]
+      },
+      "obrigatoriedade": {
+        "valor": "desconhecida",
+        "estado": "desconhecido"
+      },
+      "default": {
+        "forma": "nao_declarado_na_fonte",
+        "estado": "desconhecido"
+      },
+      "dominio": {
+        "natureza": "desconhecida",
+        "estado": "desconhecido"
+      },
+      "disponibilidade": {
+        "desde_versao": null,
+        "ate_versao": null,
+        "estado": "desconhecido"
+      },
+      "explicacao": "explicada",
+      "estado": "verificado",
+      "evidencias": [
+        {
+          "fonte": "src:tooling-recordtype"
+        }
+      ]
+    },
+    {
+      "id": "obj:RecordType.Metadata",
+      "nome": "Metadata",
+      "tipo_tecnico": "RecordTypeMetadata",
+      "o_que_e": "O metadado do record type.",
+      "apis": [
+        "tooling"
+      ],
+      "propriedades_api": {
+        "estado": "verificado",
+        "create": true,
+        "defaulted_on_create": false,
+        "filter": false,
+        "group": false,
+        "nillable": true,
+        "restricted_picklist": false,
+        "sort": false,
+        "update": true,
+        "id_lookup": false,
+        "evidencias": [
+          {
+            "fonte": "src:tooling-recordtype"
+          }
+        ]
+      },
+      "somente_leitura": false,
+      "origem": {
+        "estado": "verificado",
+        "valor": "padrao_plataforma",
+        "nota": "Campo padrão do objeto documentado.",
+        "evidencias": [
+          {
+            "fonte": "src:tooling-recordtype"
+          }
+        ]
+      },
+      "obrigatoriedade": {
+        "valor": "desconhecida",
+        "estado": "desconhecido"
+      },
+      "default": {
+        "forma": "nao_declarado_na_fonte",
+        "estado": "desconhecido"
+      },
+      "dominio": {
+        "natureza": "desconhecida",
+        "estado": "desconhecido"
+      },
+      "disponibilidade": {
+        "desde_versao": null,
+        "ate_versao": null,
+        "estado": "desconhecido"
+      },
+      "explicacao": "explicada",
+      "estado": "verificado",
+      "evidencias": [
+        {
+          "fonte": "src:tooling-recordtype"
+        }
+      ]
+    },
+    {
       "id": "obj:RecordType.Name",
       "nome": "Name",
       "tipo_tecnico": "string",
       "o_que_e": "Rótulo do tipo de registro.",
       "apis": [
-        "padrao"
+        "padrao",
+        "tooling"
       ],
       "propriedades_api": {
         "estado": "verificado",
@@ -467,6 +748,9 @@
       "evidencias": [
         {
           "fonte": "src:objref-recordtype"
+        },
+        {
+          "fonte": "src:tooling-recordtype"
         }
       ],
       "restricoes": {
@@ -485,7 +769,8 @@
       "tipo_tecnico": "string",
       "o_que_e": "Namespace do pacote gerenciado.",
       "apis": [
-        "padrao"
+        "padrao",
+        "tooling"
       ],
       "propriedades_api": {
         "estado": "verificado",
@@ -542,6 +827,9 @@
       "evidencias": [
         {
           "fonte": "src:objref-recordtype"
+        },
+        {
+          "fonte": "src:tooling-recordtype"
         }
       ]
     },
@@ -551,7 +839,8 @@
       "tipo_tecnico": "picklist",
       "o_que_e": "Objeto ao qual o tipo de registro se aplica.",
       "apis": [
-        "padrao"
+        "padrao",
+        "tooling"
       ],
       "propriedades_api": {
         "estado": "verificado",
@@ -609,6 +898,9 @@
       "evidencias": [
         {
           "fonte": "src:objref-recordtype"
+        },
+        {
+          "fonte": "src:tooling-recordtype"
         }
       ]
     }
@@ -643,13 +935,13 @@
     "estrutural": {
       "estado": "parcial",
       "esperado": null,
-      "presente": 8,
-      "nota": "Campos da tabela extraída; Id e campos de sistema não constam."
+      "presente": 12,
+      "nota": "Campos da tabela extraída; Id e campos de sistema não constam. Tooling API (2026-11-17): 10 campos lidos; 0 só nela."
     },
     "explicativa": {
       "estado": "completa",
-      "esperado": 8,
-      "presente": 8
+      "esperado": 12,
+      "presente": 12
     },
     "mapeamento": {
       "estado": "parcial",

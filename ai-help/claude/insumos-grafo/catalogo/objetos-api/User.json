@@ -30,11 +30,25 @@
     {
       "api": "tooling",
       "estado": "verificado",
-      "nota": "Listado no índice de objetos da Tooling API; a página indica suporte a campos padrão, não a campos customizados. Campos da exposição Tooling não levantados.",
-      "desde_versao": null,
+      "chamadas": [
+        "describeLayout()",
+        "getDeleted()",
+        "getUpdated()",
+        "query()",
+        "retrieve()",
+        "search()",
+        "update()"
+      ],
+      "metodos_rest": [
+        "GET",
+        "PATCH"
+      ],
+      "acesso_especial": "Exposto na Tooling API para quem tem ViewSetup.",
+      "nota": "Pela Tooling API saem só campos padrão, não os customizados. Desde a API 45.0, consultas de usuário guest vão pela SOAP API. Campos na página da Tooling API: 5; só nela: nenhum. As propriedades de campo registradas valem para a API padrão; na Tooling API podem diferir.",
+      "desde_versao": "32.0",
       "evidencias": [
         {
-          "fonte": "src:tooling-objects-list"
+          "fonte": "src:tooling-user"
         }
       ]
     }
@@ -2102,7 +2116,8 @@
       "tipo_tecnico": "string",
       "o_que_e": "Nome do usuário.",
       "apis": [
-        "padrao"
+        "padrao",
+        "tooling"
       ],
       "propriedades_api": {
         "estado": "verificado",
@@ -2162,6 +2177,9 @@
         },
         {
           "fonte": "src:fieldref-user"
+        },
+        {
+          "fonte": "src:tooling-user"
         }
       ]
     },
@@ -3209,7 +3227,8 @@
       "tipo_tecnico": "(a extrair)",
       "o_que_e": "Sobrenome do usuário.",
       "apis": [
-        "padrao"
+        "padrao",
+        "tooling"
       ],
       "propriedades_api": {
         "estado": "desconhecido"
@@ -3247,6 +3266,9 @@
       "evidencias": [
         {
           "fonte": "src:fieldref-user"
+        },
+        {
+          "fonte": "src:tooling-user"
         }
       ],
       "notas": [
@@ -3721,7 +3743,8 @@
       "tipo_tecnico": "(a extrair)",
       "o_que_e": "Nome completo, composto a partir de nome e sobrenome.",
       "apis": [
-        "padrao"
+        "padrao",
+        "tooling"
       ],
       "propriedades_api": {
         "estado": "desconhecido"
@@ -3759,6 +3782,9 @@
       "evidencias": [
         {
           "fonte": "src:fieldref-user"
+        },
+        {
+          "fonte": "src:tooling-user"
         }
       ],
       "notas": [
@@ -9949,7 +9975,8 @@
       "tipo_tecnico": "string",
       "o_que_e": "Nome de login no formato de e-mail, único entre todas as orgs.",
       "apis": [
-        "padrao"
+        "padrao",
+        "tooling"
       ],
       "propriedades_api": {
         "estado": "desconhecido"
@@ -10000,6 +10027,75 @@
         },
         {
           "fonte": "src:fieldref-user"
+        },
+        {
+          "fonte": "src:tooling-user"
+        }
+      ]
+    },
+    {
+      "id": "obj:User.WorkspaceId",
+      "nome": "WorkspaceId",
+      "tipo_tecnico": "id",
+      "o_que_e": "Id do último workspace aberto no Developer Console.",
+      "apis": [
+        "tooling"
+      ],
+      "propriedades_api": {
+        "estado": "verificado",
+        "create": false,
+        "defaulted_on_create": false,
+        "filter": true,
+        "group": true,
+        "nillable": true,
+        "restricted_picklist": false,
+        "sort": true,
+        "update": true,
+        "id_lookup": false,
+        "evidencias": [
+          {
+            "fonte": "src:tooling-user"
+          }
+        ]
+      },
+      "somente_leitura": false,
+      "origem": {
+        "estado": "verificado",
+        "valor": "padrao_plataforma",
+        "nota": "Campo padrão do objeto documentado.",
+        "evidencias": [
+          {
+            "fonte": "src:tooling-user"
+          }
+        ]
+      },
+      "obrigatoriedade": {
+        "valor": "desconhecida",
+        "estado": "desconhecido"
+      },
+      "default": {
+        "forma": "nao_declarado_na_fonte",
+        "estado": "desconhecido"
+      },
+      "dominio": {
+        "natureza": "identificador",
+        "estado": "verificado",
+        "evidencias": [
+          {
+            "fonte": "src:tooling-user"
+          }
+        ]
+      },
+      "disponibilidade": {
+        "desde_versao": null,
+        "ate_versao": null,
+        "estado": "desconhecido"
+      },
+      "explicacao": "explicada",
+      "estado": "verificado",
+      "evidencias": [
+        {
+          "fonte": "src:tooling-user"
         }
       ]
     }
@@ -10034,13 +10130,13 @@
     "estrutural": {
       "estado": "parcial",
       "esperado": null,
-      "presente": 183,
-      "nota": "Nomes: 175 obtidos da Field Reference, que declara 200 linhas (faltam 25 nomes não capturados nas duas leituras); 8 nomes só da Object Reference (CountryCode, CurrentStatus, DefaultDivision, HasUserVerifiedEmail, HasUserVerifiedPhone, IsPartner, IsPortalEnabled, IsPortalSelfRegistered). As duas fontes não coincidem e a tabela da Object Reference é servida truncada; tipos e propriedades de API faltam para os campos vindos só da Field Reference."
+      "presente": 184,
+      "nota": "Nomes: 175 obtidos da Field Reference, que declara 200 linhas (faltam 25 nomes não capturados nas duas leituras); 8 nomes só da Object Reference (CountryCode, CurrentStatus, DefaultDivision, HasUserVerifiedEmail, HasUserVerifiedPhone, IsPartner, IsPortalEnabled, IsPortalSelfRegistered). As duas fontes não coincidem e a tabela da Object Reference é servida truncada; tipos e propriedades de API faltam para os campos vindos só da Field Reference. Tooling API (2026-11-17): 5 campos lidos; 0 só nela."
     },
     "explicativa": {
       "estado": "parcial",
-      "esperado": 183,
-      "presente": 23
+      "esperado": 184,
+      "presente": 24
     },
     "mapeamento": {
       "estado": "parcial",

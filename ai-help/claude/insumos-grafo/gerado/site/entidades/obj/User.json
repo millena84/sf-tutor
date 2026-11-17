@@ -2075,7 +2075,8 @@
     },
     {
       "apis": [
-        "padrao"
+        "padrao",
+        "tooling"
       ],
       "default": {
         "estado": "desconhecido",
@@ -2102,6 +2103,9 @@
         },
         {
           "fonte": "src:fieldref-user"
+        },
+        {
+          "fonte": "src:tooling-user"
         }
       ],
       "explicacao": "explicada",
@@ -3182,7 +3186,8 @@
     },
     {
       "apis": [
-        "padrao"
+        "padrao",
+        "tooling"
       ],
       "default": {
         "estado": "desconhecido",
@@ -3201,6 +3206,9 @@
       "evidencias": [
         {
           "fonte": "src:fieldref-user"
+        },
+        {
+          "fonte": "src:tooling-user"
         }
       ],
       "explicacao": "explicada",
@@ -3694,7 +3702,8 @@
     },
     {
       "apis": [
-        "padrao"
+        "padrao",
+        "tooling"
       ],
       "default": {
         "estado": "desconhecido",
@@ -3713,6 +3722,9 @@
       "evidencias": [
         {
           "fonte": "src:fieldref-user"
+        },
+        {
+          "fonte": "src:tooling-user"
         }
       ],
       "explicacao": "explicada",
@@ -9922,7 +9934,8 @@
     },
     {
       "apis": [
-        "padrao"
+        "padrao",
+        "tooling"
       ],
       "default": {
         "estado": "desconhecido",
@@ -9949,6 +9962,9 @@
         },
         {
           "fonte": "src:fieldref-user"
+        },
+        {
+          "fonte": "src:tooling-user"
         }
       ],
       "explicacao": "explicada",
@@ -9979,19 +9995,85 @@
       },
       "somente_leitura": null,
       "tipo_tecnico": "string"
+    },
+    {
+      "apis": [
+        "tooling"
+      ],
+      "default": {
+        "estado": "desconhecido",
+        "forma": "nao_declarado_na_fonte"
+      },
+      "disponibilidade": {
+        "ate_versao": null,
+        "desde_versao": null,
+        "estado": "desconhecido"
+      },
+      "dominio": {
+        "estado": "verificado",
+        "evidencias": [
+          {
+            "fonte": "src:tooling-user"
+          }
+        ],
+        "natureza": "identificador"
+      },
+      "estado": "verificado",
+      "evidencias": [
+        {
+          "fonte": "src:tooling-user"
+        }
+      ],
+      "explicacao": "explicada",
+      "id": "obj:User.WorkspaceId",
+      "nome": "WorkspaceId",
+      "o_que_e": "Id do último workspace aberto no Developer Console.",
+      "obrigatoriedade": {
+        "estado": "desconhecido",
+        "valor": "desconhecida"
+      },
+      "origem": {
+        "estado": "verificado",
+        "evidencias": [
+          {
+            "fonte": "src:tooling-user"
+          }
+        ],
+        "nota": "Campo padrão do objeto documentado.",
+        "valor": "padrao_plataforma"
+      },
+      "propriedades_api": {
+        "create": false,
+        "defaulted_on_create": false,
+        "estado": "verificado",
+        "evidencias": [
+          {
+            "fonte": "src:tooling-user"
+          }
+        ],
+        "filter": true,
+        "group": true,
+        "id_lookup": false,
+        "nillable": true,
+        "restricted_picklist": false,
+        "sort": true,
+        "update": true
+      },
+      "somente_leitura": false,
+      "tipo_tecnico": "id"
     }
   ],
   "cobertura": {
     "estrutural": {
       "esperado": null,
       "estado": "parcial",
-      "nota": "Nomes: 175 obtidos da Field Reference, que declara 200 linhas (faltam 25 nomes não capturados nas duas leituras); 8 nomes só da Object Reference (CountryCode, CurrentStatus, DefaultDivision, HasUserVerifiedEmail, HasUserVerifiedPhone, IsPartner, IsPortalEnabled, IsPortalSelfRegistered). As duas fontes não coincidem e a tabela da Object Reference é servida truncada; tipos e propriedades de API faltam para os campos vindos só da Field Reference.",
-      "presente": 183
+      "nota": "Nomes: 175 obtidos da Field Reference, que declara 200 linhas (faltam 25 nomes não capturados nas duas leituras); 8 nomes só da Object Reference (CountryCode, CurrentStatus, DefaultDivision, HasUserVerifiedEmail, HasUserVerifiedPhone, IsPartner, IsPortalEnabled, IsPortalSelfRegistered). As duas fontes não coincidem e a tabela da Object Reference é servida truncada; tipos e propriedades de API faltam para os campos vindos só da Field Reference. Tooling API (2026-11-17): 5 campos lidos; 0 só nela.",
+      "presente": 184
     },
     "explicativa": {
-      "esperado": 183,
+      "esperado": 184,
       "estado": "parcial",
-      "presente": 23
+      "presente": 24
     },
     "mapeamento": {
       "estado": "parcial",
@@ -10040,15 +10122,29 @@
       ]
     },
     {
+      "acesso_especial": "Exposto na Tooling API para quem tem ViewSetup.",
       "api": "tooling",
-      "desde_versao": null,
+      "chamadas": [
+        "describeLayout()",
+        "getDeleted()",
+        "getUpdated()",
+        "query()",
+        "retrieve()",
+        "search()",
+        "update()"
+      ],
+      "desde_versao": "32.0",
       "estado": "verificado",
       "evidencias": [
         {
-          "fonte": "src:tooling-objects-list"
+          "fonte": "src:tooling-user"
         }
       ],
-      "nota": "Listado no índice de objetos da Tooling API; a página indica suporte a campos padrão, não a campos customizados. Campos da exposição Tooling não levantados."
+      "metodos_rest": [
+        "GET",
+        "PATCH"
+      ],
+      "nota": "Pela Tooling API saem só campos padrão, não os customizados. Desde a API 45.0, consultas de usuário guest vão pela SOAP API. Campos na página da Tooling API: 5; só nela: nenhum. As propriedades de campo registradas valem para a API padrão; na Tooling API podem diferir."
     }
   ],
   "id": "obj:User",

@@ -1,0 +1,94 @@
+assunto: rodada B4, issues #8 e #9: subtipos de KnowledgeSettings, ForecastingSettings, Profile, CustomObject, CustomField e ValueSet; Tooling API
+obtido em 2026-11-17 via WebFetch, pelo endpoint de conteúdo da documentação; método: extração documental assistida por IA; paráfrases em português.
+URL lida (Metadata API): https://developer.salesforce.com/docs/get_document_content/api_meta/<página>.htm/en-us/264.0
+URL lida (Tooling API): https://developer.salesforce.com/docs/get_document_content/api_tooling/tooling_api_objects_<objeto>.htm/en-us/264.0
+
+[src:mdapi-knowledgesettings-subtipos] meta_knowledgesettings.htm: 12 subtipos (KnowledgeAnswerSettings, KnowledgeCaseSettings, KnowledgeSitesSettings,
+  KnowledgeLanguageSettings, KnowledgeLanguage, KnowledgeSuggestedArticlesSettings, KnowledgeCaseFieldsSettings, KnowledgeCaseField,
+  KnowledgeWorkOrderFieldsSettings, KnowledgeWorkOrderField, KnowledgeWorkOrderLineItemFieldsSettings, KnowledgeWorkOrderLineItemField).
+  Nenhum campo de subtipo marcado como obrigatório. KnowledgeCaseEditor: simple, standard (sem explicação). Nada cortado.
+[src:mdapi-forecastingsettings-subtipos] meta_forecastingsettings.htm: ForecastingCategoryMapping, WeightedSourceCategory,
+  ForecastingDisplayedFamilySettings, ForecastingSubmissionSettings, ForecastingTypeSettings, AdjustmentsSettings, ForecastingGroup,
+  ForecastingGroupItem, ForecastRangeSettings, OpportunityListFieldsLabelMapping, OpportunityListFieldsSelectedSettings,
+  OpportunityListFieldsUnselectedSettings, QuotasSettings. ForecastingGroup não é usado por nenhuma propriedade de ForecastingSettings no texto.
+  adjustmentsSettings, forecastRangeSettings e quotasSettings de ForecastingTypeSettings foram removidos na 53.0. Nada cortado.
+[src:mdapi-profile-subtipos] meta_profile.htm lido a partir de 100.000 caracteres até o fim: ProfileObjectPermissions (fim), ProfileApexPageAccess,
+  ProfileRecordTypeVisibility, ProfileTabVisibility, ProfileUserPermission (enabled, name) e ProfileServicePresenceStatusAccess (64.0). Não há
+  seção para LoginFlow, ProfileAgentAccess, ProfileActionOverride nem ProfileLoginHours. O exemplo XML fecha userPermissions como userpermissions.
+[src:mdapi-field-types-v264] meta_field_types.htm: seção ValueSettings (controllingFieldValue, com tipo grafado stringstring[]; valueName). Picklist
+  só como linha da tabela de tipos, apontando para página descontinuada; CustomValue e PicklistValue sem seção.
+[src:mdapi-customvalue] meta_customvalue.htm: CustomValue, API 38.0 (substitui GlobalPicklistValue), estende Metadata; campos color, default
+  (obrigatório), description, isActive (padrão true), label (39.0); subtipo StandardValue (allowEmail, closed, converted, cssExposed,
+  forecastCategory, highPriority, probability, reverseRole, reviewed, won), não cadastrado por não ser usado em nenhum tipo do catálogo. Sufixo
+  .customValue; só chamadas CRUD; implantado com GlobalValueSet ou CustomObject.
+[src:mdapi-picklist] meta_picklist.htm: descontinuado, só até a API 37.0; da 38.0, ValueSet. Campos controllingField (14.0), picklistValues
+  (obrigatório), restrictedPicklist (37.0, padrão false), sorted (padrão false). Sem tabela de PicklistValue. NÃO aceita o curinga.
+  meta_picklistvalue.htm devolveu conteúdo ilegível.
+[src:mdapi-businessprocess] meta_businessprocess.htm: definido dentro do objeto; API 17.0; estende Metadata; curinga só com RecordType. Campos
+  description, fullName (obrigatório), isActive, namespacePrefix, values (PicklistValue[], em outra página). Ver exige View Setup and Configuration.
+[src:mdapi-fieldset] meta_fieldset.htm: API 21.0; exemplo dentro de CustomObject; a página não diz o que estende; aceita o curinga. Campos
+  availableFields, description (obrigatório), displayedFields, label (obrigatório); subtipo FieldSetItem (field, isFieldManaged, isRequired).
+[src:mdapi-index] meta_index.htm: dentro do CustomObject de um big object; API 41.0; estende Metadata; NÃO aceita o curinga. Campos fields
+  (IndexField[]), label; IndexField (name, sortDirection ASC ou DESC).
+[src:mdapi-searchlayouts] meta_searchlayouts.htm: filho de CustomObject; objetos customizados desde a 14.0, padrão desde a 27.0; 10 campos string[];
+  NÃO aceita o curinga.
+[src:mdapi-profilesearchlayouts] meta_profilesearchlayouts.htm: dentro do objeto; objetos customizados desde a 48.0; campos profileName e fields.
+[src:mdapi-historyretentionpolicy] meta_historyretentionpolicy.htm (versionada; substitui a leitura de 2026-11-10 pelo resultado de busca): API 31.0;
+  archiveAfterMonths (obrigatório, 1 a 18, padrão 18), archiveRetentionYears, description, gracePeriodDays (0 a 10, padrão 1). Exige RetainFieldHistory.
+Ilegíveis em 2026-11-17 (o endpoint devolveu "binary data"): meta_actionoverride, meta_sharingreason, meta_sharingrecalculation, meta_namedfilter,
+  meta_picklistvalue.
+
+[src:tooling-profile] Profile (Tooling): API 32.0; SOAP getDeleted(), getUpdated(), query(), retrieve(), search(); REST GET, HEAD; 5 campos.
+[src:tooling-permissionset] PermissionSet (Tooling): API 28.0; SOAP describeSObjects(), query(), retrieve(), search(); REST não listado; 11 campos.
+[src:tooling-permissionsetgroup] PermissionSetGroup (Tooling): API 45.0; SOAP create(), delete(), describeSObjects(), query(), retrieve(), update(),
+  upsert(); REST Query, GET, POST, PATCH, DELETE; 8 campos.
+[src:tooling-permissionsetassignment] PermissionSetAssignment (Tooling): API 22.0; SOAP create(), delete(), describeSObjects(), query(), retrieve(),
+  update(), upsert(); REST DELETE, GET, HEAD, PATCH, POST, Query; 8 campos (3 em beta).
+[src:tooling-user] User (Tooling): API 32.0; SOAP describeLayout(), getDeleted(), getUpdated(), query(), retrieve(), search(), update(); REST GET,
+  PATCH; 5 campos; só campos padrão.
+[src:tooling-recordtype] RecordType (Tooling): API 32.0; SOAP create(), getDeleted(), getUpdated(), query(), retrieve(), update(), upsert(); REST
+  GET, PATCH, POST; 10 campos.
+
+-- Lista de campos transcrita da leitura (gerada por lote7l_b4_estruturas.py; nome | tipo)
+[src:mdapi-knowledgesettings-subtipos] KnowledgeAnswerSettings: assignTo | string, defaultArticleType | string, enableArticleCreation | boolean
+[src:mdapi-knowledgesettings-subtipos] KnowledgeCaseSettings: articlePDFCreationProfile | string, articlePublicSharingCommunities | KnowledgeSitesSettings, articlePublicSharingSites | KnowledgeSitesSettings, articlePublicSharingSitesChatterAnswers | KnowledgeSitesSettings, assignTo | string, customizationClass | string, defaultContributionArticleType | string, editor | KnowledgeCaseEditor, enableArticleCreation | boolean, enableArticlePublicSharingSites | boolean, enableCaseDataCategoryMapping | boolean, useProfileForPDFCreation | boolean
+[src:mdapi-knowledgesettings-subtipos] KnowledgeSitesSettings: site | string[]
+[src:mdapi-knowledgesettings-subtipos] KnowledgeLanguage: active | boolean, defaultAssignee | string, defaultAssigneeType | KnowledgeLanguageLookupValueType, defaultReviewer | string, defaultReviewerType | KnowledgeLanguageLookupValueType, name | string
+[src:mdapi-knowledgesettings-subtipos] KnowledgeLanguageSettings: language | KnowledgeLanguage[]
+[src:mdapi-knowledgesettings-subtipos] KnowledgeCaseField: name | string
+[src:mdapi-knowledgesettings-subtipos] KnowledgeCaseFieldsSettings: field | KnowledgeCaseField[]
+[src:mdapi-knowledgesettings-subtipos] KnowledgeWorkOrderField: name | string
+[src:mdapi-knowledgesettings-subtipos] KnowledgeWorkOrderFieldsSettings: field | KnowledgeWorkOrderField[]
+[src:mdapi-knowledgesettings-subtipos] KnowledgeWorkOrderLineItemField: name | string
+[src:mdapi-knowledgesettings-subtipos] KnowledgeWorkOrderLineItemFieldsSettings: field | KnowledgeWorkOrderLineItemField[]
+[src:mdapi-knowledgesettings-subtipos] KnowledgeSuggestedArticlesSettings: caseFields | KnowledgeCaseFieldsSettings, useSuggestedArticlesForCase | boolean, workOrderFields | KnowledgeWorkOrderFieldsSettings, workOrderLineItemFields | KnowledgeWorkOrderLineItemFieldsSettings
+[src:mdapi-forecastingsettings-subtipos] WeightedSourceCategory: sourceCategoryApiName | string, weight | double
+[src:mdapi-forecastingsettings-subtipos] ForecastingCategoryMapping: forecastingItemCategoryApiName | string, weightedSourceCategories | WeightedSourceCategory[]
+[src:mdapi-forecastingsettings-subtipos] ForecastingDisplayedFamilySettings: productFamily | string
+[src:mdapi-forecastingsettings-subtipos] ForecastingSubmissionSettings: allowForecastingSubmissions | boolean
+[src:mdapi-forecastingsettings-subtipos] AdjustmentsSettings: allowExpandedColumns | boolean, enableAdjustments | boolean, enableOwnerAdjustments | boolean
+[src:mdapi-forecastingsettings-subtipos] ForecastRangeSettings: beginning | int, displaying | int, periodType | PeriodTypes
+[src:mdapi-forecastingsettings-subtipos] QuotasSettings: showQuotas | boolean
+[src:mdapi-forecastingsettings-subtipos] OpportunityListFieldsLabelMapping: field | string, label | string
+[src:mdapi-forecastingsettings-subtipos] OpportunityListFieldsSelectedSettings: field | string
+[src:mdapi-forecastingsettings-subtipos] OpportunityListFieldsUnselectedSettings: field | string
+[src:mdapi-forecastingsettings-subtipos] ForecastingTypeSettings: active | boolean, adjustmentsSettings | AdjustmentsSettings, displayedCategoryApiNames | string, forecastedCategoryApiNames | string, forecastingDateType | ForecastingDateType, forecastRangeSettings | ForecastRangeSettings, hasProductFamily | boolean, isAmount | boolean, isAvailable | boolean, isQuantity | boolean, managerAdjustableCategoryApiNames | string, masterLabel | string, name | string, opportunityListFieldsLabelMappings | OpportunityListFieldsLabelMapping, opportunityListFieldsSelectedSettings | OpportunityListFieldsSelectedSettings, opportunityListFieldsUnselectedSettings | OpportunityListFieldsUnselectedSettings, opportunitySplitName | string, ownerAdjustableCategoryApiNames | string, quotasSettings | QuotasSettings, territory2ModelName | string
+[src:mdapi-profile-subtipos] ProfileUserPermission: enabled | boolean, name | string
+[src:mdapi-profile-subtipos] ProfileServicePresenceStatusAccess: enabled | boolean, servicePresenceStatus | string
+[src:mdapi-customvalue] CustomValue: color | string, default | boolean, description | string, isActive | boolean, label | string, fullName | string
+[src:mdapi-field-types-v264] ValueSettings: controllingFieldValue | string[], valueName | string
+[src:mdapi-picklist] Picklist: controllingField | string, picklistValues | PicklistValue[], restrictedPicklist | boolean, sorted | boolean
+[src:mdapi-searchlayouts] SearchLayouts: customTabListAdditionalFields | string[], excludedStandardButtons | string[], listViewButtons | string[], lookupDialogsAdditionalFields | string[], lookupFilterFields | string[], lookupPhoneDialogsAdditionalFields | string[], massQuickActions | string[], searchFilterFields | string[], searchResultsAdditionalFields | string[], searchResultsCustomButtons | string[]
+[src:mdapi-profilesearchlayouts] ProfileSearchLayouts: fields | string[], profileName | string[]
+[src:mdapi-historyretentionpolicy] HistoryRetentionPolicy: archiveAfterMonths | int, archiveRetentionYears | int, description | string, gracePeriodDays | int
+[src:mdapi-fieldset] FieldSetItem: field | string, isFieldManaged | boolean, isRequired | boolean
+[src:mdapi-index] IndexField: name | string, sortDirection | string
+[src:mdapi-businessprocess] BusinessProcess: description | string, fullName | string, isActive | boolean, namespacePrefix | string, values | PicklistValue[]
+[src:mdapi-fieldset] FieldSet: availableFields | FieldSetItem[], description | string, displayedFields | FieldSetItem[], fullName | string, label | string
+[src:mdapi-index] Index: fields | IndexField[], label | string, fullName | string
+[src:tooling-profile] objeto Profile: Description | string, FullName | string, Metadata | ProfileMetadata, Name | string, TimeSheetTemplateAssignments | tns:QueryResult
+[src:tooling-permissionset] objeto PermissionSet: Description | string, HasActivationRequired | boolean, IsCustom | boolean, IsOwnedByProfile | boolean, Label | string, ManageableState | ManageableState, Name | string, NamespacePrefix | string, PermissionSetGroupId | reference, ProfileId | reference, Type | picklist
+[src:tooling-permissionsetgroup] objeto PermissionSetGroup: Description | textarea, DeveloperName | string, HasActivationRequired | boolean, Language | picklist, ManageableState | ManageableState, MasterLabel | string, NamespacePrefix | string, Status | string
+[src:tooling-permissionsetassignment] objeto PermissionSetAssignment: AssigneeId | reference, ExpirationDate | dateTime, IsActive | boolean, IsRevoked | boolean, LastCreatedByChangeId | reference, LastDeletedByChangeId | reference, PermissionSetGroupId | reference, PermissionSetId | reference
+[src:tooling-user] objeto User: FirstName | string, LastName | string, Name | string, Username | string, WorkspaceId | id
+[src:tooling-recordtype] objeto RecordType: BusinessProcessId | id, Description | string, EntityDefinitionId | string, FullName | string, IsActive | boolean, ManageableState | ManageableState, Metadata | RecordTypeMetadata, Name | string, NamespacePrefix | string, SobjectType | string

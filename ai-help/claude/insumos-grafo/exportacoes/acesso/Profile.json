@@ -1229,9 +1229,13 @@
         "evidencias": [
           {
             "fonte": "src:mdapi-profile"
+          },
+          {
+            "fonte": "src:mdapi-profile-subtipos"
           }
         ],
-        "cardinalidade": "0..n"
+        "cardinalidade": "0..n",
+        "estrutura_ref": "mdx:ProfileServicePresenceStatusAccess"
       },
       {
         "id": "mdt:Profile.tabVisibilities",
@@ -1371,9 +1375,13 @@
         "evidencias": [
           {
             "fonte": "src:mdapi-profile"
+          },
+          {
+            "fonte": "src:mdapi-profile-subtipos"
           }
         ],
-        "cardinalidade": "0..n"
+        "cardinalidade": "0..n",
+        "estrutura_ref": "mdx:ProfileUserPermission"
       }
     ],
     "estruturas": [
@@ -1392,14 +1400,16 @@
       "mdx:ProfileLoginIpRange",
       "mdx:ProfileObjectPermissions",
       "mdx:ProfileRecordTypeVisibility",
-      "mdx:ProfileTabVisibility"
+      "mdx:ProfileServicePresenceStatusAccess",
+      "mdx:ProfileTabVisibility",
+      "mdx:ProfileUserPermission"
     ],
     "cobertura": {
       "estrutural": {
         "estado": "parcial",
         "esperado": 27,
         "presente": 27,
-        "nota": "Campos de primeiro nível completos conforme a página 68.0. Subtipos lidos até ProfileTabVisibility; o conteúdo servido pela documentação termina ali (~112 mil caracteres). Primeiro nível completo; 6 propriedade(s) de tipo composto ainda sem estrutura detalhada: ServicePresenceStatusAccesses, agentAccesses, loginFlows, loginHours, profileActionOverrides, userPermissions."
+        "nota": "Campos de primeiro nível completos conforme a página 68.0. Em 2026-11-17, a página foi relida a partir de 100.000 caracteres até o fim: ProfileUserPermission e ProfileServicePresenceStatusAccess foram cadastrados; LoginFlow, ProfileAgentAccess, ProfileActionOverride e ProfileLoginHours não têm seção na página. Primeiro nível completo; 4 propriedade(s) de tipo composto ainda sem estrutura detalhada: agentAccesses, loginFlows, loginHours, profileActionOverrides."
       },
       "explicativa": {
         "estado": "completa",
@@ -4503,6 +4513,150 @@
       ]
     },
     {
+      "id": "mdx:ProfileServicePresenceStatusAccess",
+      "nome": "ProfileServicePresenceStatusAccess",
+      "natureza": "estrutura_auxiliar",
+      "o_que_e": "O acesso do perfil a um status de presença do Omni-Channel.",
+      "usada_por": [
+        "mdt:Profile"
+      ],
+      "propriedades": [
+        {
+          "id": "mdx:ProfileServicePresenceStatusAccess.enabled",
+          "nome": "enabled",
+          "tipo_tecnico": "boolean",
+          "o_que_e": "Indica se os atendentes do perfil podem usar o status.",
+          "origem": {
+            "estado": "verificado",
+            "valor": "padrao_plataforma",
+            "nota": "Propriedade definida pelo schema da Metadata API.",
+            "evidencias": [
+              {
+                "fonte": "src:mdapi-profile-subtipos"
+              }
+            ]
+          },
+          "obrigatoriedade": {
+            "valor": "sim",
+            "estado": "verificado",
+            "evidencias": [
+              {
+                "fonte": "src:mdapi-profile-subtipos"
+              }
+            ]
+          },
+          "default": {
+            "forma": "nao_declarado_na_fonte",
+            "estado": "desconhecido"
+          },
+          "dominio": {
+            "natureza": "booleano",
+            "valores": [
+              {
+                "valor": "true"
+              },
+              {
+                "valor": "false"
+              }
+            ],
+            "lista_completa": "sim",
+            "estado": "verificado",
+            "evidencias": [
+              {
+                "fonte": "src:mdapi-profile-subtipos"
+              }
+            ]
+          },
+          "disponibilidade": {
+            "desde_versao": "64.0",
+            "ate_versao": null,
+            "estado": "verificado"
+          },
+          "explicacao": "explicada",
+          "estado": "verificado",
+          "evidencias": [
+            {
+              "fonte": "src:mdapi-profile-subtipos"
+            }
+          ]
+        },
+        {
+          "id": "mdx:ProfileServicePresenceStatusAccess.servicePresenceStatus",
+          "nome": "servicePresenceStatus",
+          "tipo_tecnico": "string",
+          "o_que_e": "Nome do Service Presence Status.",
+          "origem": {
+            "estado": "verificado",
+            "valor": "padrao_plataforma",
+            "nota": "Propriedade definida pelo schema da Metadata API.",
+            "evidencias": [
+              {
+                "fonte": "src:mdapi-profile-subtipos"
+              }
+            ]
+          },
+          "obrigatoriedade": {
+            "valor": "sim",
+            "estado": "verificado",
+            "evidencias": [
+              {
+                "fonte": "src:mdapi-profile-subtipos"
+              }
+            ]
+          },
+          "default": {
+            "forma": "nao_declarado_na_fonte",
+            "estado": "desconhecido"
+          },
+          "dominio": {
+            "natureza": "texto_livre",
+            "estado": "verificado",
+            "evidencias": [
+              {
+                "fonte": "src:mdapi-profile-subtipos"
+              }
+            ],
+            "contexto": "A fonte tipa como string sem lista de valores; não inventar valores."
+          },
+          "disponibilidade": {
+            "desde_versao": "64.0",
+            "ate_versao": null,
+            "estado": "verificado"
+          },
+          "explicacao": "explicada",
+          "estado": "verificado",
+          "evidencias": [
+            {
+              "fonte": "src:mdapi-profile-subtipos"
+            }
+          ]
+        }
+      ],
+      "cobertura": {
+        "estrutural": {
+          "estado": "completa",
+          "esperado": 2,
+          "presente": 2,
+          "nota": "Contagem conforme a seção do subtipo na página oficial; tipos compostos internos sem detalhe tornam a cobertura parcial."
+        },
+        "explicativa": {
+          "estado": "completa",
+          "esperado": 2,
+          "presente": 2
+        },
+        "mapeamento": {
+          "estado": "nao_iniciada",
+          "nota": "Correspondências com campos API não investigadas."
+        }
+      },
+      "estado": "verificado",
+      "evidencias": [
+        {
+          "fonte": "src:mdapi-profile-subtipos"
+        }
+      ]
+    },
+    {
       "id": "mdx:ProfileTabVisibility",
       "nome": "ProfileTabVisibility",
       "natureza": "estrutura_auxiliar",
@@ -4648,6 +4802,150 @@
           "fonte": "src:mdapi-profile"
         }
       ]
+    },
+    {
+      "id": "mdx:ProfileUserPermission",
+      "nome": "ProfileUserPermission",
+      "natureza": "estrutura_auxiliar",
+      "o_que_e": "Uma permissão de usuário (de app ou de sistema) do perfil.",
+      "usada_por": [
+        "mdt:Profile"
+      ],
+      "propriedades": [
+        {
+          "id": "mdx:ProfileUserPermission.enabled",
+          "nome": "enabled",
+          "tipo_tecnico": "boolean",
+          "o_que_e": "Indica se a permissão está ligada.",
+          "origem": {
+            "estado": "verificado",
+            "valor": "padrao_plataforma",
+            "nota": "Propriedade definida pelo schema da Metadata API.",
+            "evidencias": [
+              {
+                "fonte": "src:mdapi-profile-subtipos"
+              }
+            ]
+          },
+          "obrigatoriedade": {
+            "valor": "sim",
+            "estado": "verificado",
+            "evidencias": [
+              {
+                "fonte": "src:mdapi-profile-subtipos"
+              }
+            ]
+          },
+          "default": {
+            "forma": "nao_declarado_na_fonte",
+            "estado": "desconhecido"
+          },
+          "dominio": {
+            "natureza": "booleano",
+            "valores": [
+              {
+                "valor": "true"
+              },
+              {
+                "valor": "false"
+              }
+            ],
+            "lista_completa": "sim",
+            "estado": "verificado",
+            "evidencias": [
+              {
+                "fonte": "src:mdapi-profile-subtipos"
+              }
+            ]
+          },
+          "disponibilidade": {
+            "desde_versao": null,
+            "ate_versao": null,
+            "estado": "desconhecido"
+          },
+          "explicacao": "explicada",
+          "estado": "verificado",
+          "evidencias": [
+            {
+              "fonte": "src:mdapi-profile-subtipos"
+            }
+          ]
+        },
+        {
+          "id": "mdx:ProfileUserPermission.name",
+          "nome": "name",
+          "tipo_tecnico": "string",
+          "o_que_e": "Nome da permissão de app ou de sistema.",
+          "origem": {
+            "estado": "verificado",
+            "valor": "padrao_plataforma",
+            "nota": "Propriedade definida pelo schema da Metadata API.",
+            "evidencias": [
+              {
+                "fonte": "src:mdapi-profile-subtipos"
+              }
+            ]
+          },
+          "obrigatoriedade": {
+            "valor": "sim",
+            "estado": "verificado",
+            "evidencias": [
+              {
+                "fonte": "src:mdapi-profile-subtipos"
+              }
+            ]
+          },
+          "default": {
+            "forma": "nao_declarado_na_fonte",
+            "estado": "desconhecido"
+          },
+          "dominio": {
+            "natureza": "texto_livre",
+            "estado": "verificado",
+            "evidencias": [
+              {
+                "fonte": "src:mdapi-profile-subtipos"
+              }
+            ],
+            "contexto": "A fonte tipa como string sem lista de valores; não inventar valores."
+          },
+          "disponibilidade": {
+            "desde_versao": null,
+            "ate_versao": null,
+            "estado": "desconhecido"
+          },
+          "explicacao": "explicada",
+          "estado": "verificado",
+          "evidencias": [
+            {
+              "fonte": "src:mdapi-profile-subtipos"
+            }
+          ]
+        }
+      ],
+      "cobertura": {
+        "estrutural": {
+          "estado": "completa",
+          "esperado": 2,
+          "presente": 2,
+          "nota": "Contagem conforme a seção do subtipo na página oficial; tipos compostos internos sem detalhe tornam a cobertura parcial."
+        },
+        "explicativa": {
+          "estado": "completa",
+          "esperado": 2,
+          "presente": 2
+        },
+        "mapeamento": {
+          "estado": "nao_iniciada",
+          "nota": "Correspondências com campos API não investigadas."
+        }
+      },
+      "estado": "verificado",
+      "evidencias": [
+        {
+          "fonte": "src:mdapi-profile-subtipos"
+        }
+      ]
     }
   ],
   "objetos_api_relacionados": [
@@ -4683,11 +4981,23 @@
         {
           "api": "tooling",
           "estado": "verificado",
-          "nota": "Listado no índice de objetos da Tooling API 68.0. Campos e operações dessa exposição não levantados; não presumir que sejam iguais aos da API padrão.",
-          "desde_versao": null,
+          "chamadas": [
+            "getDeleted()",
+            "getUpdated()",
+            "query()",
+            "retrieve()",
+            "search()"
+          ],
+          "metodos_rest": [
+            "GET",
+            "HEAD"
+          ],
+          "acesso_especial": "Desde o Summer '20, usuários de Customer Portal e Partner Portal não acessam. Ver configurações exige View Setup and Configuration.",
+          "nota": "FullName e Metadata só podem ser consultados quando o resultado tem no máximo um registro. Campos na página da Tooling API: 5; só nela: nenhum. As propriedades de campo registradas valem para a API padrão; na Tooling API podem diferir.",
+          "desde_versao": "32.0",
           "evidencias": [
             {
-              "fonte": "src:tooling-objects-list"
+              "fonte": "src:tooling-profile"
             }
           ]
         }
@@ -4699,7 +5009,8 @@
           "tipo_tecnico": "string",
           "o_que_e": "Descrição do perfil.",
           "apis": [
-            "padrao"
+            "padrao",
+            "tooling"
           ],
           "propriedades_api": {
             "estado": "verificado",
@@ -4756,6 +5067,75 @@
           "evidencias": [
             {
               "fonte": "src:objref-profile"
+            },
+            {
+              "fonte": "src:tooling-profile"
+            }
+          ]
+        },
+        {
+          "id": "obj:Profile.FullName",
+          "nome": "FullName",
+          "tipo_tecnico": "string",
+          "o_que_e": "Nome único do perfil, usado antes de haver um Id.",
+          "apis": [
+            "tooling"
+          ],
+          "propriedades_api": {
+            "estado": "verificado",
+            "create": true,
+            "defaulted_on_create": false,
+            "filter": false,
+            "group": true,
+            "nillable": true,
+            "restricted_picklist": false,
+            "sort": false,
+            "update": false,
+            "id_lookup": false,
+            "evidencias": [
+              {
+                "fonte": "src:tooling-profile"
+              }
+            ]
+          },
+          "somente_leitura": false,
+          "origem": {
+            "estado": "verificado",
+            "valor": "padrao_plataforma",
+            "nota": "Campo padrão do objeto documentado.",
+            "evidencias": [
+              {
+                "fonte": "src:tooling-profile"
+              }
+            ]
+          },
+          "obrigatoriedade": {
+            "valor": "desconhecida",
+            "estado": "desconhecido"
+          },
+          "default": {
+            "forma": "nao_declarado_na_fonte",
+            "estado": "desconhecido"
+          },
+          "dominio": {
+            "natureza": "texto_livre",
+            "estado": "verificado",
+            "evidencias": [
+              {
+                "fonte": "src:tooling-profile"
+              }
+            ]
+          },
+          "disponibilidade": {
+            "desde_versao": null,
+            "ate_versao": null,
+            "estado": "desconhecido"
+          },
+          "explicacao": "explicada",
+          "estado": "verificado",
+          "evidencias": [
+            {
+              "fonte": "src:tooling-profile"
             }
           ]
         },
@@ -4968,12 +5348,74 @@
           ]
         },
         {
+          "id": "obj:Profile.Metadata",
+          "nome": "Metadata",
+          "tipo_tecnico": "ProfileMetadata",
+          "o_que_e": "O conteúdo de metadado do perfil.",
+          "apis": [
+            "tooling"
+          ],
+          "propriedades_api": {
+            "estado": "verificado",
+            "create": true,
+            "defaulted_on_create": false,
+            "filter": false,
+            "group": false,
+            "nillable": true,
+            "restricted_picklist": false,
+            "sort": false,
+            "update": true,
+            "id_lookup": false,
+            "evidencias": [
+              {
+                "fonte": "src:tooling-profile"
+              }
+            ]
+          },
+          "somente_leitura": false,
+          "origem": {
+            "estado": "verificado",
+            "valor": "padrao_plataforma",
+            "nota": "Campo padrão do objeto documentado.",
+            "evidencias": [
+              {
+                "fonte": "src:tooling-profile"
+              }
+            ]
+          },
+          "obrigatoriedade": {
+            "valor": "desconhecida",
+            "estado": "desconhecido"
+          },
+          "default": {
+            "forma": "nao_declarado_na_fonte",
+            "estado": "desconhecido"
+          },
+          "dominio": {
+            "natureza": "desconhecida",
+            "estado": "desconhecido"
+          },
+          "disponibilidade": {
+            "desde_versao": null,
+            "ate_versao": null,
+            "estado": "desconhecido"
+          },
+          "explicacao": "explicada",
+          "estado": "verificado",
+          "evidencias": [
+            {
+              "fonte": "src:tooling-profile"
+            }
+          ]
+        },
+        {
           "id": "obj:Profile.Name",
           "nome": "Name",
           "tipo_tecnico": "string",
           "o_que_e": "Nome do perfil.",
           "apis": [
-            "padrao"
+            "padrao",
+            "tooling"
           ],
           "propriedades_api": {
             "estado": "verificado",
@@ -5030,6 +5472,70 @@
           "evidencias": [
             {
               "fonte": "src:objref-profile"
+            },
+            {
+              "fonte": "src:tooling-profile"
+            }
+          ]
+        },
+        {
+          "id": "obj:Profile.TimeSheetTemplateAssignments",
+          "nome": "TimeSheetTemplateAssignments",
+          "tipo_tecnico": "tns:QueryResult",
+          "o_que_e": "Modelo de folha de horas atribuído ao perfil; só em subconsultas.",
+          "apis": [
+            "tooling"
+          ],
+          "propriedades_api": {
+            "estado": "verificado",
+            "create": false,
+            "defaulted_on_create": false,
+            "filter": false,
+            "group": false,
+            "nillable": true,
+            "restricted_picklist": false,
+            "sort": false,
+            "update": false,
+            "id_lookup": false,
+            "evidencias": [
+              {
+                "fonte": "src:tooling-profile"
+              }
+            ]
+          },
+          "somente_leitura": true,
+          "origem": {
+            "estado": "verificado",
+            "valor": "padrao_plataforma",
+            "nota": "Campo padrão do objeto documentado.",
+            "evidencias": [
+              {
+                "fonte": "src:tooling-profile"
+              }
+            ]
+          },
+          "obrigatoriedade": {
+            "valor": "desconhecida",
+            "estado": "desconhecido"
+          },
+          "default": {
+            "forma": "nao_declarado_na_fonte",
+            "estado": "desconhecido"
+          },
+          "dominio": {
+            "natureza": "desconhecida",
+            "estado": "desconhecido"
+          },
+          "disponibilidade": {
+            "desde_versao": "46.0",
+            "ate_versao": null,
+            "estado": "verificado"
+          },
+          "explicacao": "explicada",
+          "estado": "verificado",
+          "evidencias": [
+            {
+              "fonte": "src:tooling-profile"
             }
           ]
         },
@@ -5228,13 +5734,13 @@
         "estrutural": {
           "estado": "parcial",
           "esperado": null,
-          "presente": 7,
-          "nota": "Campos não-Permissions listados; Id e campos de sistema não constam da extração; Permissions* são dinâmicos."
+          "presente": 10,
+          "nota": "Campos não-Permissions listados; Id e campos de sistema não constam da extração; Permissions* são dinâmicos. Tooling API (2026-11-17): 5 campos lidos; 0 só nela."
         },
         "explicativa": {
           "estado": "completa",
-          "esperado": 7,
-          "presente": 7
+          "esperado": 10,
+          "presente": 10
         },
         "mapeamento": {
           "estado": "parcial",
@@ -5291,11 +5797,25 @@
         {
           "api": "tooling",
           "estado": "verificado",
-          "nota": "Listado no índice de objetos da Tooling API; a página indica suporte a campos padrão, não a campos customizados. Campos da exposição Tooling não levantados.",
-          "desde_versao": null,
+          "chamadas": [
+            "describeLayout()",
+            "getDeleted()",
+            "getUpdated()",
+            "query()",
+            "retrieve()",
+            "search()",
+            "update()"
+          ],
+          "metodos_rest": [
+            "GET",
+            "PATCH"
+          ],
+          "acesso_especial": "Exposto na Tooling API para quem tem ViewSetup.",
+          "nota": "Pela Tooling API saem só campos padrão, não os customizados. Desde a API 45.0, consultas de usuário guest vão pela SOAP API. Campos na página da Tooling API: 5; só nela: nenhum. As propriedades de campo registradas valem para a API padrão; na Tooling API podem diferir.",
+          "desde_versao": "32.0",
           "evidencias": [
             {
-              "fonte": "src:tooling-objects-list"
+              "fonte": "src:tooling-user"
             }
           ]
         }
@@ -7363,7 +7883,8 @@
           "tipo_tecnico": "string",
           "o_que_e": "Nome do usuário.",
           "apis": [
-            "padrao"
+            "padrao",
+            "tooling"
           ],
           "propriedades_api": {
             "estado": "verificado",
@@ -7423,6 +7944,9 @@
             },
             {
               "fonte": "src:fieldref-user"
+            },
+            {
+              "fonte": "src:tooling-user"
             }
           ]
         },
@@ -8470,7 +8994,8 @@
           "tipo_tecnico": "(a extrair)",
           "o_que_e": "Sobrenome do usuário.",
           "apis": [
-            "padrao"
+            "padrao",
+            "tooling"
           ],
           "propriedades_api": {
             "estado": "desconhecido"
@@ -8508,6 +9033,9 @@
           "evidencias": [
             {
               "fonte": "src:fieldref-user"
+            },
+            {
+              "fonte": "src:tooling-user"
             }
           ],
           "notas": [
@@ -8982,7 +9510,8 @@
           "tipo_tecnico": "(a extrair)",
           "o_que_e": "Nome completo, composto a partir de nome e sobrenome.",
           "apis": [
-            "padrao"
+            "padrao",
+            "tooling"
           ],
           "propriedades_api": {
             "estado": "desconhecido"
@@ -9020,6 +9549,9 @@
           "evidencias": [
             {
               "fonte": "src:fieldref-user"
+            },
+            {
+              "fonte": "src:tooling-user"
             }
           ],
           "notas": [
@@ -15210,7 +15742,8 @@
           "tipo_tecnico": "string",
           "o_que_e": "Nome de login no formato de e-mail, único entre todas as orgs.",
           "apis": [
-            "padrao"
+            "padrao",
+            "tooling"
           ],
           "propriedades_api": {
             "estado": "desconhecido"
@@ -15261,6 +15794,75 @@
             },
             {
               "fonte": "src:fieldref-user"
+            },
+            {
+              "fonte": "src:tooling-user"
+            }
+          ]
+        },
+        {
+          "id": "obj:User.WorkspaceId",
+          "nome": "WorkspaceId",
+          "tipo_tecnico": "id",
+          "o_que_e": "Id do último workspace aberto no Developer Console.",
+          "apis": [
+            "tooling"
+          ],
+          "propriedades_api": {
+            "estado": "verificado",
+            "create": false,
+            "defaulted_on_create": false,
+            "filter": true,
+            "group": true,
+            "nillable": true,
+            "restricted_picklist": false,
+            "sort": true,
+            "update": true,
+            "id_lookup": false,
+            "evidencias": [
+              {
+                "fonte": "src:tooling-user"
+              }
+            ]
+          },
+          "somente_leitura": false,
+          "origem": {
+            "estado": "verificado",
+            "valor": "padrao_plataforma",
+            "nota": "Campo padrão do objeto documentado.",
+            "evidencias": [
+              {
+                "fonte": "src:tooling-user"
+              }
+            ]
+          },
+          "obrigatoriedade": {
+            "valor": "desconhecida",
+            "estado": "desconhecido"
+          },
+          "default": {
+            "forma": "nao_declarado_na_fonte",
+            "estado": "desconhecido"
+          },
+          "dominio": {
+            "natureza": "identificador",
+            "estado": "verificado",
+            "evidencias": [
+              {
+                "fonte": "src:tooling-user"
+              }
+            ]
+          },
+          "disponibilidade": {
+            "desde_versao": null,
+            "ate_versao": null,
+            "estado": "desconhecido"
+          },
+          "explicacao": "explicada",
+          "estado": "verificado",
+          "evidencias": [
+            {
+              "fonte": "src:tooling-user"
             }
           ]
         }
@@ -15295,13 +15897,13 @@
         "estrutural": {
           "estado": "parcial",
           "esperado": null,
-          "presente": 183,
-          "nota": "Nomes: 175 obtidos da Field Reference, que declara 200 linhas (faltam 25 nomes não capturados nas duas leituras); 8 nomes só da Object Reference (CountryCode, CurrentStatus, DefaultDivision, HasUserVerifiedEmail, HasUserVerifiedPhone, IsPartner, IsPortalEnabled, IsPortalSelfRegistered). As duas fontes não coincidem e a tabela da Object Reference é servida truncada; tipos e propriedades de API faltam para os campos vindos só da Field Reference."
+          "presente": 184,
+          "nota": "Nomes: 175 obtidos da Field Reference, que declara 200 linhas (faltam 25 nomes não capturados nas duas leituras); 8 nomes só da Object Reference (CountryCode, CurrentStatus, DefaultDivision, HasUserVerifiedEmail, HasUserVerifiedPhone, IsPartner, IsPortalEnabled, IsPortalSelfRegistered). As duas fontes não coincidem e a tabela da Object Reference é servida truncada; tipos e propriedades de API faltam para os campos vindos só da Field Reference. Tooling API (2026-11-17): 5 campos lidos; 0 só nela."
         },
         "explicativa": {
           "estado": "parcial",
-          "esperado": 183,
-          "presente": 23
+          "esperado": 184,
+          "presente": 24
         },
         "mapeamento": {
           "estado": "parcial",

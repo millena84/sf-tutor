@@ -7,7 +7,7 @@ Gerado por `ferramentas/sftutor.py cobertura`. Cobertura estrutural, explicativa
 
 - Universo v68 (METADATA_SUPPORT.md): **993** tipos.
 - Classificados como incluídos no recorte Core: 12; pendentes de classificação: 981.
-- Cadastrados: **148** de 993. Estruturalmente completos (contra a página oficial): 127. Completos nas três dimensões: 0.
+- Cadastrados: **151** de 993. Estruturalmente completos (contra a página oficial): 131. Completos nas três dimensões: 0.
 - Porcentagem do recorte Core: não calculada, porque o denominador do recorte ainda não está definido (classificação item a item pendente).
 
 | Tipo | Estrutural | Esperadas | Presentes | Explicadas | Estruturas | Mapeamento | Completo |
@@ -26,6 +26,7 @@ Gerado por `ferramentas/sftutor.py cobertura`. Cobertura estrutural, explicativa
 | mdt:AutoResponseRules | parcial | n/d | 1 | 1 | 1 | parcial | não |
 | mdt:BrandingSet | completa | 5 | 5 | 5 | 1 | parcial | não |
 | mdt:BusinessHoursSettings | completa | 3 | 3 | 3 | 2 | parcial | não |
+| mdt:BusinessProcess | parcial | 5 | 5 | 5 | 0 | parcial | não |
 | mdt:CampaignSettings | completa | 11 | 11 | 11 | 0 | parcial | não |
 | mdt:CaseSettings | completa | 53 | 53 | 53 | 3 | parcial | não |
 | mdt:Certificate | completa | 8 | 8 | 8 | 0 | parcial | não |
@@ -41,11 +42,11 @@ Gerado por `ferramentas/sftutor.py cobertura`. Cobertura estrutural, explicativa
 | mdt:CspTrustedSite | completa | 14 | 14 | 14 | 0 | parcial | não |
 | mdt:CurrencySettings | completa | 8 | 8 | 8 | 1 | parcial | não |
 | mdt:CustomApplication | completa | 23 | 23 | 23 | 6 | parcial | não |
-| mdt:CustomField | parcial | 60 | 60 | 60 | 2 | parcial | não |
+| mdt:CustomField | parcial | 60 | 60 | 60 | 4 | parcial | não |
 | mdt:CustomLabels | completa | 2 | 2 | 2 | 1 | parcial | não |
 | mdt:CustomMetadata | completa | 5 | 5 | 5 | 1 | parcial | não |
 | mdt:CustomNotificationType | completa | 8 | 8 | 8 | 1 | parcial | não |
-| mdt:CustomObject | parcial | 55 | 55 | 55 | 0 | parcial | não |
+| mdt:CustomObject | parcial | 55 | 55 | 55 | 3 | parcial | não |
 | mdt:CustomSite | completa | 51 | 51 | 51 | 3 | parcial | não |
 | mdt:CustomTab | parcial | 17 | 17 | 17 | 0 | parcial | não |
 | mdt:Dashboard | completa | 26 | 26 | 26 | 3 | parcial | não |
@@ -79,18 +80,20 @@ Gerado por `ferramentas/sftutor.py cobertura`. Cobertura estrutural, explicativa
 | mdt:ExtlClntAppPushSettings | completa | 7 | 7 | 7 | 2 | parcial | não |
 | mdt:ExtlClntAppSamlConfigurablePolicies | completa | 19 | 19 | 19 | 1 | parcial | não |
 | mdt:FieldServiceSettings | completa | 55 | 55 | 41 | 1 | parcial | não |
+| mdt:FieldSet | completa | 5 | 5 | 5 | 1 | parcial | não |
 | mdt:FlexiPage | parcial | 12 | 12 | 12 | 0 | parcial | não |
 | mdt:Flow | parcial | 50 | 50 | 13 | 0 | parcial | não |
 | mdt:FlowSettings | completa | 32 | 32 | 27 | 0 | parcial | não |
-| mdt:ForecastingSettings | parcial | 10 | 10 | 10 | 0 | parcial | não |
+| mdt:ForecastingSettings | completa | 10 | 10 | 10 | 7 | parcial | não |
 | mdt:GenAiFunction | completa | 10 | 10 | 10 | 1 | parcial | não |
 | mdt:GenAiPlugin | parcial | 12 | 12 | 12 | 1 | parcial | não |
 | mdt:GenAiPromptTemplate | completa | 11 | 11 | 11 | 1 | parcial | não |
 | mdt:Group | completa | 4 | 4 | 4 | 0 | parcial | não |
 | mdt:InboundCertificate | completa | 4 | 4 | 4 | 0 | parcial | não |
 | mdt:InboundNetworkConnection | completa | 7 | 7 | 7 | 1 | parcial | não |
+| mdt:Index | completa | 3 | 3 | 3 | 1 | parcial | não |
 | mdt:InstalledPackage | completa | 4 | 4 | 4 | 0 | parcial | não |
-| mdt:KnowledgeSettings | parcial | 23 | 23 | 23 | 0 | parcial | não |
+| mdt:KnowledgeSettings | completa | 23 | 23 | 23 | 4 | parcial | não |
 | mdt:LanguageSettings | completa | 13 | 13 | 13 | 0 | parcial | não |
 | mdt:Layout | parcial | n/d | 24 | 24 | 9 | parcial | não |
 | mdt:LeadConfigSettings | completa | 11 | 11 | 11 | 0 | parcial | não |
@@ -125,7 +128,7 @@ Gerado por `ferramentas/sftutor.py cobertura`. Cobertura estrutural, explicativa
 | mdt:PresenceUserConfig | parcial | n/d | 18 | 18 | 1 | parcial | não |
 | mdt:PrivacySettings | completa | 14 | 14 | 14 | 0 | parcial | não |
 | mdt:ProductSettings | completa | 5 | 5 | 5 | 0 | parcial | não |
-| mdt:Profile | parcial | 27 | 27 | 27 | 16 | parcial | não |
+| mdt:Profile | parcial | 27 | 27 | 27 | 18 | parcial | não |
 | mdt:PublicKeyCertificate | completa | 5 | 5 | 5 | 0 | parcial | não |
 | mdt:PublicKeyCertificateSet | completa | 7 | 7 | 7 | 1 | parcial | não |
 | mdt:Queue | completa | 8 | 8 | 8 | 2 | parcial | não |
@@ -163,13 +166,13 @@ Gerado por `ferramentas/sftutor.py cobertura`. Cobertura estrutural, explicativa
 
 ## Propriedades XML
 
-- Em metadata types: 1950 listadas, 1883 explicadas.
-- Em estruturas auxiliares: 1188 listadas, 1178 explicadas.
+- Em metadata types: 1963 listadas, 1896 explicadas.
+- Em estruturas auxiliares: 1295 listadas, 1285 explicadas.
 - Universo total: Sem WSDL não há denominador confiável do total de propriedades do recorte.
 
 ## Objetos consultáveis via API
 
-- Catalogados: 83. Campos listados: 1712; explicados: 902.
+- Catalogados: 83. Campos listados: 1722; explicados: 912.
 - Universo: Universo de objetos da plataforma não enumerado.
 
 | Objeto | Estrutural | Esperados | Presentes | Explicados | APIs verificadas |
@@ -230,21 +233,21 @@ Gerado por `ferramentas/sftutor.py cobertura`. Cobertura estrutural, explicativa
 | obj:OpportunityTeamMember | completa | 8 | 8 | 8 | padrao |
 | obj:PathAssistant | completa | 13 | 13 | 13 | tooling |
 | obj:PendingServiceRouting | completa | 33 | 33 | 5 | padrao |
-| obj:PermissionSet | parcial | n/d | 12 | 11 | padrao, tooling |
+| obj:PermissionSet | parcial | n/d | 13 | 12 | padrao, tooling |
 | obj:PermissionSetAssignment | parcial | n/d | 8 | 8 | padrao, tooling |
-| obj:PermissionSetGroup | parcial | n/d | 7 | 7 | padrao, tooling |
+| obj:PermissionSetGroup | parcial | n/d | 8 | 8 | padrao, tooling |
 | obj:PlatformEventUsageMetric | completa | 10 | 10 | 10 | padrao |
 | obj:PresenceUserConfig | completa | 21 | 21 | 21 | padrao |
 | obj:Pricebook2 | completa | 10 | 10 | 10 | padrao |
 | obj:PricebookEntry | completa | 11 | 11 | 11 | padrao |
 | obj:Product2 | parcial | n/d | 37 | 4 | padrao |
-| obj:Profile | parcial | n/d | 7 | 7 | padrao, tooling |
+| obj:Profile | parcial | n/d | 10 | 10 | padrao, tooling |
 | obj:QueueRoutingConfig | parcial | 15 | 14 | 14 | padrao |
 | obj:QueueSobject | completa | 2 | 2 | 2 | padrao |
 | obj:QuickActionDefinition | completa | 22 | 22 | 22 | tooling |
 | obj:Quote | parcial | n/d | 44 | 5 | padrao |
 | obj:QuoteLineItem | completa | 84 | 84 | 6 | padrao |
-| obj:RecordType | parcial | n/d | 8 | 8 | padrao, tooling |
+| obj:RecordType | parcial | n/d | 12 | 12 | padrao, tooling |
 | obj:ServiceChannel | completa | 20 | 20 | 20 | padrao |
 | obj:ServiceContract | completa | 46 | 46 | 8 | padrao |
 | obj:ServicePresenceStatus | completa | 3 | 3 | 3 | padrao |
@@ -253,7 +256,7 @@ Gerado por `ferramentas/sftutor.py cobertura`. Cobertura estrutural, explicativa
 | obj:Territory2 | completa | 11 | 11 | 11 | padrao |
 | obj:Territory2Type | completa | 5 | 5 | 5 | padrao |
 | obj:TraceFlag | completa | 14 | 14 | 14 | tooling |
-| obj:User | parcial | n/d | 183 | 23 | padrao, tooling |
+| obj:User | parcial | n/d | 184 | 24 | padrao, tooling |
 | obj:UserLogin | parcial | n/d | 3 | 3 | padrao |
 | obj:UserTerritory2Association | completa | 4 | 4 | 4 | padrao |
 | obj:ValidationRule | completa | 11 | 11 | 11 | tooling |
