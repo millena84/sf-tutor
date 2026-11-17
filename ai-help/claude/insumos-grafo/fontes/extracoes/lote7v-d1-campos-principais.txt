@@ -1,0 +1,24 @@
+Lote 7v — explicação dos campos pendentes de User, Account, Contact, Lead, Opportunity e Case (rodada D1). Verificação: 2026-11-17.
+Método: as páginas da Object Reference 264.0 foram lidas pelo endpoint versionado
+  https://developer.salesforce.com/docs/get_document_content/object_reference/<pagina>.htm/en-us/264.0
+em blocos de 100 mil caracteres (parâmetro offset), com leitura assistida que condensa a descrição de cada campo.
+O texto gravado no catálogo é paráfrase em pt-BR dessa descrição. O tipo foi gravado só quando o catálogo tinha "(a extrair)".
+
+Fontes por objeto (já registradas): src:objref-user-completa, src:objref-account-completa, src:objref-contact-completa,
+src:objref-lead-completa, src:objref-opportunity-completa, src:objref-case-completa.
+Fonte nova: src:objref-system-fields (system_fields.htm). Dela vieram Id, IsDeleted, CreatedById, CreatedDate, LastModifiedById,
+LastModifiedDate e SystemModstamp, nos objetos em que esses campos não estão na tabela da própria página.
+
+Observações da leitura:
+- Opportunity: a página escreve SyncedQuoteID; o catálogo usa SyncedQuoteId (nome mantido, a diferença está anotada no texto).
+- Opportunity: OpportunityScoreId e ReferralCode não aparecem na tabela da página lida; continuam pendentes.
+- Case: CurrencyIsoCode não aparece na tabela; continua pendente.
+- User: estes campos não apareceram em nenhum dos três blocos lidos e continuam pendentes: Country, EmailPreferencesAutoBccStayInTouch,
+  EmailPreferencesStayInTouchReminder, IsExtIndicatorVisible, MediumPhotoUrl, OutOfOfficeMessage, StayInTouchNote, StayInTouchSignature,
+  StayInTouchSubject, UserPermissionsAvantgoUser, UserPermissionsMobileUser e várias UserPreferences* (CacheDiagnostics, CreateLEXAppsWTShown,
+  ExcludeMailAppAttachments, FavoritesShowTopFavorites, FavoritesWTShown, GlobalNavBarWTShown, GlobalNavGridMenuWTShown, HasCelebrationBadge,
+  HasSentWarningEmail, HasSentWarningEmail238, HasSentWarningEmail240, NewLightningReportRunPageEnabled, PreviewCustomTheme, PreviewLightning,
+  RecordHomeReservedWTShown, RecordHomeSectionCollapseWTShown, ReverseOpenActivitiesView, SetupAssistantPrefDisabled,
+  ShowCountryToExternalUsers, SRHOverrideActivities). Esses nomes vieram da Field Reference (src:fieldref-user).
+- Limite do método: a leitura assistida condensa o texto da página. Os textos foram conferidos por coerência com nome e tipo do campo,
+  mas não linha a linha contra o HTML.
