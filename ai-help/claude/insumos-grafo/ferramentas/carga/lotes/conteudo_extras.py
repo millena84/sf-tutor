@@ -410,4 +410,38 @@ X["sub:eventos-de-monitoramento"]["avancado"] += [
        E("src:help-em-considerations", "src:help-ts-condition-builder")),
 ]
 
+# ------------------------------------------------------------------ B2: subtipos de Report e Dashboard e CRM Analytics
+X["sub:reports"].setdefault("avancado", []).extend([
+    av("implantacao", "O relatório por dentro do XML", "No metadado, format diz o formato (Tabular, Summary, Matrix ou Joined). columns lista "
+       "os campos; groupingsDown e groupingsAcross, os agrupamentos; filter e crossFilters, os filtros (um cross filter traz registros com ou "
+       "sem registros relacionados, com até cinco subfiltros); timeFrameFilter, o período; chart, o gráfico. Num joined report, cada bloco "
+       "(block) é um relatório aninhado.", E("src:mdapi-report")),
+])
+X["sub:metricas-e-agregacoes"].setdefault("avancado", []).extend([
+    av("implantacao", "Fórmulas e buckets como metadado", "Summary formulas ficam em aggregates (ReportAggregate), com fórmula, tipo de dado "
+       "(currency, number ou percent) e casas decimais; row-level formulas, em customDetailFormulas. Bucket fields ficam em buckets "
+       "(ReportBucketField): o campo de origem, os buckets e o rótulo do grupo dos valores que sobram. Filtros sobre summary formulas ficam "
+       "em aggregateFilters, desde a API 64.0.", E("src:mdapi-report")),
+])
+X["sub:dashboards"].setdefault("avancado", []).extend([
+    av("decisao", "Colunas ou grade", "Um dashboard em colunas usa leftSection, middleSection e rightSection, cada uma com largura (Narrow, "
+       "Medium ou Wide) e seus componentes. Um dashboard do Lightning Experience usa isGridLayout e dashboardGridLayout: uma grade com número "
+       "de colunas e altura de linha, em que cada componente tem posição e tamanho.", E("src:mdapi-dashboard")),
+    av("implantacao", "Tipos de componente", "componentType tem 31 valores documentados: gráficos (Bar, Column, Line, Pie, Donut, Funnel, "
+       "Scatter e variações), Gauge, Metric, Table e FlexTable, e também Image, RichText, VisualforcePage e LightningWebComponent. Cada "
+       "componente de relatório aponta o relatório de origem em report.", E("src:mdapi-dashboard")),
+])
+X["sub:recursos-analiticos-de-produto"] = {"comece": ["func:crm-analytics"], "avancado": [
+    av("decisao", "Relatórios nativos ou CRM Analytics", "Relatórios e dashboards nativos partem de tipos de relatório sobre os objetos da org. "
+       "O CRM Analytics primeiro carrega, limpa e transforma os dados em datasets, que podem juntar várias fontes, e depois os mostra em lenses "
+       "e dashboards organizados em apps.", E("src:help-crm-analytics-data-prep", "src:help-crm-analytics-sales-engagement")),
+    av("limite", "Linhas em datasets", "O total de linhas de todos os datasets depende das licenças: por exemplo, 10 bilhões com CRM Analytics "
+       "Plus e 100 milhões com CRM Analytics Growth. Cada dataset aceita até 2 bilhões de linhas. Ao atingir o limite, recipes, dataflows, data "
+       "sync e upload de arquivos param até o uso cair; a aba Usage do Data Manager mostra o consumo.",
+       E("src:help-crm-analytics-limits", "src:help-crm-analytics-row-limit")),
+    av("atencao", "Habilitar não dá acesso", "Ligar o CRM Analytics não dá acesso a ninguém: é preciso atribuir permission sets. Desligar "
+       "remove todas as permissões de CRM Analytics dos permission sets e para recipes e dataflows agendados; apps, datasets, lenses e "
+       "dashboards não são apagados.", E("src:help-kb-crm-analytics-enable")),
+]}
+
 EXTRAS = X

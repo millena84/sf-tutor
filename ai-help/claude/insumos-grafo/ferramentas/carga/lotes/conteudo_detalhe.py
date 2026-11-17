@@ -965,3 +965,16 @@ for _id, _tit, _art, _pert in (
     ("src:help-saml-login-history", "Review the Login History", "sf.sso_saml_login_history.htm", "Caminho de Login History e uso em SSO."),
 ):
     _f(_id, _tit + ("" if "(" in _tit else " (Salesforce Help)"), _H + _art + _L, _pert, **AJ)
+
+_EXT = "fontes/extracoes/temas-detalhe-crm-analytics.txt"
+for _id, _tit, _art, _pert in (
+    ("src:help-crm-analytics-permissions", "Learn about CRM Analytics Permission Set Licenses and User Permissions", "sf.bi_setup_user_permissions.htm", "Licença e permissões por usuário."),
+    ("src:help-kb-crm-analytics-enable", "Prerequisites, Licensing Requirements, and Irreversible Effects of Enabling CRM Analytics (KB)", "000232305", "Efeitos de habilitar e desabilitar."),
+    ("src:help-crm-analytics-licenses", "Learn about CRM Analytics Platform Licenses and Permission Sets", "analytics.bi_help_setup_general.htm", "Licenças e limite contratual de linhas."),
+    ("src:help-crm-analytics-sales-engagement", "CRM Analytics and Sales Engagement", "sf.hvs_reports_performance_analytics.htm", "O que é o CRM Analytics."),
+    ("src:help-crm-analytics-data-prep", "Integrate and Prepare Data for Analysis", "sf.bi_integrate_data_integration.htm", "Datasets, recipes, dataflows, lenses e dashboards."),
+    ("src:help-crm-analytics-limits", "CRM Analytics Limits", "bi_limits.htm", "Linhas por licença e por dataset."),
+    ("src:help-crm-analytics-row-limit", "Have I exceeded my dataset row limit, and what can I do about it?", "sf.bi_integrate_troubleshoot_dataset_limits.htm", "O que acontece ao atingir o limite de linhas."),
+    ("src:help-crm-analytics-data-manager", "Data Manager for CRM Analytics", "analytics.bi_integrate_data_manager.htm", "Abas do Data Manager."),
+):
+    _f(_id, _tit + ("" if "(" in _tit else " (Salesforce Help)"), _H + _art + _L, _pert, **AJ)

@@ -53,8 +53,8 @@
   "cobertura": {
     "estrutural": {
       "esperado": 26,
-      "estado": "parcial",
-      "nota": "Universo esperado = tabelas Fields da página do guia versionado 264.0 (API 68.0), lida em 2026-11-16. Primeiro nível: 26 de 26 campos. A página tem 173.302 caracteres; só os primeiros 100.000 foram lidos. Os subtipos (DashboardFilter, DashboardGridLayout, DashboardComponent, DashboardComponentSection e os demais) não foram cadastrados. Primeiro nível completo; 5 propriedade(s) de tipo composto ainda sem estrutura detalhada: dashboardFilters, dashboardGridLayout, leftSection, middleSection, rightSection.",
+      "estado": "completa",
+      "nota": "Universo esperado = tabelas Fields da página do guia versionado 264.0 (API 68.0), lida em 2026-11-16. 26 campos no primeiro nível. A página tem 173.302 caracteres e foi lida inteira, em partes (leituras a partir de 0, 90.000 e 100.000, para cobrir a junção), em 2026-11-16; os 16 subtipos documentados foram cadastrados. ChartSummary, definido na página de Report, também é usado aqui.",
       "presente": 26
     },
     "explicativa": {
@@ -73,11 +73,18 @@
     "estado": "verificado"
   },
   "divergencias_documentais": [
-    "A tabela marca leftSection e rightSection como obrigatórios e também traz dashboardGridLayout, do layout do Lightning Experience; o trecho lido não explica como os dois se combinam."
+    "A tabela marca leftSection e rightSection como obrigatórios e também traz dashboardGridLayout, do layout do Lightning Experience; a página não explica como os dois se combinam.",
+    "O exemplo XML de layout em grade usa autoselectColumnsFromReport, e a linha de chartSummary cita isAutoSelectFromReport; nenhum dos dois está nas tabelas de campos e não foram cadastrados.",
+    "DashboardTableColumn.sortBy vem tipado como DashboardComponentSection, o que parece erro da página.",
+    "Os textos de introdução de DashboardFilterColumn, DashboardComponentSortInfo e DashboardFlexTableComponentProperties não correspondem aos títulos das seções."
   ],
   "estado": "verificado",
   "estende": "Metadata",
-  "estruturas": [],
+  "estruturas": [
+    "mdx:DashboardComponentSection",
+    "mdx:DashboardFilter",
+    "mdx:DashboardGridLayout"
+  ],
   "evidencias": [
     {
       "fonte": "src:mdapi-dashboard"
@@ -92,7 +99,7 @@
   "exemplo_xml": {
     "natureza": "didatico_projeto",
     "nota": "Exemplo escrito pelo projeto apenas com elementos documentados; sem dados reais.",
-    "xml": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<Dashboard xmlns=\"http://soap.sforce.com/2006/04/metadata\">\n    <backgroundEndColor>#FFFFFF</backgroundEndColor>\n    <!-- Valores documentados: Diagonal, LeftToRight, TopToBottom -->\n    <backgroundFadeDirection>Diagonal</backgroundFadeDirection>\n    <backgroundStartColor>#FFFFFF</backgroundStartColor>\n    <!-- Valores documentados: SpecifiedUser, LoggedInUser, MyTeamUser -->\n    <dashboardType>SpecifiedUser</dashboardType>\n    <description>[o que o dashboard mostra]</description>\n    <runningUser>[nome de usuário]</runningUser>\n    <textColor>#000000</textColor>\n    <title>[título do dashboard]</title>\n    <titleColor>#000000</titleColor>\n    <titleSize>12</titleSize>\n</Dashboard>"
+    "xml": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<Dashboard xmlns=\"http://soap.sforce.com/2006/04/metadata\">\n    <backgroundEndColor>#FFFFFF</backgroundEndColor>\n    <!-- Valores documentados: Diagonal, LeftToRight, TopToBottom -->\n    <backgroundFadeDirection>Diagonal</backgroundFadeDirection>\n    <backgroundStartColor>#FFFFFF</backgroundStartColor>\n    <!-- Valores documentados: SpecifiedUser, LoggedInUser, MyTeamUser -->\n    <dashboardType>SpecifiedUser</dashboardType>\n    <description>[o que o dashboard mostra]</description>\n    <leftSection>\n        <!-- Valores documentados: Medium, Narrow, Wide -->\n        <columnSize>Medium</columnSize>\n        <components>\n            <!-- Valores documentados incluem: Bar, Column, Donut, Gauge, Metric, Table -->\n            <componentType>Column</componentType>\n            <report>[pasta/nome do relatório de origem]</report>\n        </components>\n    </leftSection>\n    <rightSection>\n        <columnSize>Medium</columnSize>\n    </rightSection>\n    <runningUser>[nome de usuário]</runningUser>\n    <textColor>#000000</textColor>\n    <title>[título do dashboard]</title>\n    <titleColor>#000000</titleColor>\n    <titleSize>12</titleSize>\n</Dashboard>"
   },
   "finalidade": "Versionar e implantar os dashboards da org entre ambientes.",
   "id": "mdt:Dashboard",
@@ -539,6 +546,7 @@
         "natureza": "tipo_composto"
       },
       "estado": "verificado",
+      "estrutura_ref": "mdx:DashboardFilter",
       "evidencias": [
         {
           "fonte": "src:mdapi-dashboard"
@@ -585,6 +593,7 @@
         "natureza": "tipo_composto"
       },
       "estado": "verificado",
+      "estrutura_ref": "mdx:DashboardGridLayout",
       "evidencias": [
         {
           "fonte": "src:mdapi-dashboard"
@@ -994,6 +1003,7 @@
         "natureza": "tipo_composto"
       },
       "estado": "verificado",
+      "estrutura_ref": "mdx:DashboardComponentSection",
       "evidencias": [
         {
           "fonte": "src:mdapi-dashboard"
@@ -1044,6 +1054,7 @@
         "natureza": "tipo_composto"
       },
       "estado": "verificado",
+      "estrutura_ref": "mdx:DashboardComponentSection",
       "evidencias": [
         {
           "fonte": "src:mdapi-dashboard"
@@ -1183,6 +1194,7 @@
         "natureza": "tipo_composto"
       },
       "estado": "verificado",
+      "estrutura_ref": "mdx:DashboardComponentSection",
       "evidencias": [
         {
           "fonte": "src:mdapi-dashboard"

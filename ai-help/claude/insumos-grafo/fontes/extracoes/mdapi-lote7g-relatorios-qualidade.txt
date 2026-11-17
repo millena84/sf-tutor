@@ -2,8 +2,9 @@ fonte: Metadata API Developer Guide, versão 264.0 (API 68.0), lida pelo endpoin
 URL lida: https://developer.salesforce.com/docs/get_document_content/api_meta/<página>.htm/en-us/264.0
 mesma página no navegador: https://developer.salesforce.com/docs/atlas.en-us.264.0.api_meta.meta/api_meta/<página>.htm
 obtido em 2026-11-16 via WebFetch; método: extração documental assistida por IA; descrições parafraseadas em português.
-alcance: meta_report.htm (238.060 caracteres) e meta_dashboard.htm (173.302) tiveram SÓ os primeiros 100.000 caracteres lidos: a tabela do tipo
-  principal veio inteira; os subtipos não foram transcritos. As demais páginas foram lidas por inteiro.
+alcance: em 2026-11-16 (primeira leitura), meta_report.htm e meta_dashboard.htm tiveram só os primeiros 100.000 caracteres lidos. Na segunda
+  leitura, no mesmo dia (rodada B2, subtipos), as duas foram lidas inteiras com o parâmetro offset: Report (237.873 caracteres) a partir de 0,
+  100.000 e 200.000; Dashboard (173.302) a partir de 0, 90.000 e 100.000, para conferir a junção. As demais páginas foram lidas por inteiro.
 
 [src:mdapi-report] Report (meta_report.htm): arquivo <título>.report na pasta reports; API 14.0 e posteriores; estende Metadata (fullName
   herdado); só relatórios customizados; NÃO aceita o curinga *. Pastas: listMetadata() com o tipo ReportFolder; ReportFolder não é devolvido por
@@ -26,6 +27,22 @@ alcance: meta_report.htm (238.060 caracteres) e meta_dashboard.htm (173.302) tiv
   publicFolderAccess, sharedTo (subtipo SharedTo, com página própria, não lida). Pasta aninhada sozinha exige barra no fim. ReportFolder usa o
   tipo Report no manifesto. O exemplo XML é de DocumentFolder (accessType, name, publicFolderAccess). DashboardFolder é citado na página de
   Dashboard.
+[src:mdapi-report] segunda leitura (subtipos): ReportAggregateFilter, ReportAggregate, ReportBlockInfo, ReportAggregateReference,
+  ReportBucketField, ReportBucketFieldValue, ReportBucketFieldSourceValue (a tabela lista sourceValue, from e to como valores; o exemplo os usa
+  como elementos), ReportGrouping, ReportHistoricalSelector, CustomDetailFormulas, ReportColorRange, ReportColumn, ReportFilter,
+  ReportFilterItem, ReportFormattingRule, ReportFormattingRuleValue, ReportParam, ReportChart, ChartSummary, ReportTimeFrameFilter e
+  ReportCrossFilter. Enumerações transcritas: ReportFormat (Matrix, Summary, Tabular, Joined), ReportAggregateDatatype, ReportAggrType,
+  ReportSortType, ReportCustomDetailFormulaDatatype, SortOrder, UserDateGranularity, ReportSummaryType, FilterOperation,
+  ReportFormattingSummaryType, ChartBackgroundDirection, ChartLegendPosition, ChartType, ChartPosition, ChartAxis, ReportChartSize,
+  ChartRangeType, ObjectFilterOperator e UserDateInterval (lida em duas partes contíguas). Sem lista de valores: ReportBucketFieldType,
+  ReportBucketFieldNullTreatment, Language. O exemplo de joined report troca aggregateReference e aggregateReferences nas tags.
+[src:mdapi-dashboard] segunda leitura (subtipos): DashboardFilter, DashboardFilterOption, DashboardGridLayout, DashboardGridComponent,
+  DashboardComponent, DashboardComponentContent, DashboardDynamicValue (três campos; a leitura a partir de 90.000 confirmou a tabela inteira),
+  DashboardFilterColumn, DashboardTableColumn, DashboardFlexTableComponentProperties, DashboardComponentGroupingSortProperties,
+  DashboardComponentGroupingSort, DashboardComponentColumn, DashboardComponentSortInfo, DashboardComponentSection. Enumerações:
+  DashboardFilterOperation, DashboardComponentType, ChartRangeType (auto, manual), ChartUnits, ChartLegendPosition, Fit, HorizontalAlignment,
+  VerticalAlignment, DashboardComponentFilter, DashboardComponentColumnType, DashboardComponentSize. O exemplo de grade usa
+  autoselectColumnsFromReport, que não está nas tabelas; DashboardTableColumn.sortBy vem tipado como DashboardComponentSection.
 [src:mdapi-duplicaterule] DuplicateRule (meta_duplicaterule.htm): sufixo .duplicateRule, pasta duplicateRules; nome do arquivo começa pelo objeto
   (Account.Standard_Account_Duplicate_Rule.duplicateRule); estende Metadata; aceita o curinga *. A leitura devolveu "API 68.0 e posteriores",
   mas o package.xml de exemplo usa 38.0: versão inicial NÃO confirmada. Subtipos DuplicateRuleMatchRule, DuplicateRuleFilter,
@@ -37,7 +54,43 @@ alcance: meta_report.htm (238.060 caracteres) e meta_dashboard.htm (173.302) tiv
   MatchingRule e MatchingRuleItem. No deploy, ruleStatus só aceita Active e Inactive.
 
 -- Lista de campos transcrita da leitura (gerada por lote7g_relatorios_qualidade.py; nome | tipo | desde)
+[src:mdapi-report] ReportAggregateFilter: aggregate | string | -, operator | string | -, value | string | -
+[src:mdapi-report] ReportAggregate: acrossGroupingContext | string | -, calculatedFormula | string | -, datatype | ReportAggregateDatatype | -, description | string | -, developerName | string | -, downGroupingContext | string | -, isActive | boolean | -, isCrossBlock | boolean | -, masterLabel | string | -, reportType | string | -, scale | int | -
+[src:mdapi-report] ReportAggregateReference: aggregate | string | -
+[src:mdapi-report] ReportBlockInfo: aggregateReferences | ReportAggregateReference[] | -, blockId | string | -, joinTable | string | -
+[src:mdapi-report] ReportBucketFieldSourceValue: from | não informado na página | -, sourceValue | não informado na página | -, to | não informado na página | -
+[src:mdapi-report] ReportBucketFieldValue: sourceValues | ReportBucketFieldSourceValue | -, value | string | -
+[src:mdapi-report] ReportBucketField: bucketType | ReportBucketFieldType | -, developerName | string | -, masterLabel | string | -, nullTreatment | ReportBucketFieldNullTreatment | -, otherBucketLabel | string | -, sourceColumnName | string | -, values | ReportBucketFieldValue | -
+[src:mdapi-report] ReportGrouping: aggregateType | ReportAggrType | -, dateGranularity | UserDateGranularity | -, field | string | -, hierarchyApiName | string | -, sortByName | string | -, sortOrder | SortOrder | -, sortType | ReportSortType | -
+[src:mdapi-report] ReportHistoricalSelector: snapshot | string | -
+[src:mdapi-report] CustomDetailFormulas: calculatedFormula | string | -, datatype | ReportCustomDetailFormulaDatatype | -, description | string | -, developerName | string | -, label | string | -, scale | int | -
+[src:mdapi-report] ReportColorRange: aggregate | ReportSummaryType | -, columnName | string | -, highBreakpoint | double | -, highColor | string | -, lowBreakpoint | double | -, lowColor | string | -, midColor | string | -
+[src:mdapi-report] ReportColumn: aggregateTypes | ReportSummaryType[] | -, field | string | -, isExtendedColumn | boolean | -, reverseColors | boolean | -, showChanges | boolean | -
+[src:mdapi-report] ReportFilterItem: column | string | -, columnToColumn | boolean | -, isUnlocked | boolean | -, operator | FilterOperation | -, snapshot | string | -, value | string | -
+[src:mdapi-report] ReportFilter: booleanFilter | string | -, criteriaItems | ReportFilterItem | -, language | Language | -
+[src:mdapi-report] ReportFormattingRuleValue: backgroundColor | string | -, rangeUpperBound | double | -
+[src:mdapi-report] ReportFormattingRule: aggregate | ReportFormattingSummaryType | -, columnName | string | -, values | ReportFormattingRuleValue | -
+[src:mdapi-report] ReportParam: name | string | -, value | string | -
+[src:mdapi-report] ChartSummary: aggregate | ReportSummaryType | -, axisBinding | ChartAxis | -, column | string | -
+[src:mdapi-report] ReportChart: backgroundColor1 | string | -, backgroundColor2 | string | -, backgroundFadeDir | ChartBackgroundDirection | -, chartSummaries | ChartSummary[] | -, chartType | ChartType | -, enableHoverLabels | boolean | -, expandOthers | boolean | -, groupingColumn | string | -, legendPosition | ChartLegendPosition | -, location | ChartPosition | -, secondaryGroupingColumn | string | -, showAxisLabels | boolean | -, showPercentage | boolean | -, showTotal | boolean | -, showValues | boolean | -, size | ReportChartSize | -, summaryAggregate | ReportSummaryType | -, summaryAxisManualRangeEnd | double | -, summaryAxisManualRangeStart | double | -, summaryAxisRange | ChartRangeType | -, summaryColumn | string | -, textColor | string | -, textSize | int | -, title | string | -, titleColor | string | -, titleSize | int | -
+[src:mdapi-report] ReportTimeFrameFilter: dateColumn | string | -, endDate | date | -, interval | UserDateInterval | -, startDate | date | -
+[src:mdapi-report] ReportCrossFilter: criteriaItems | ReportFilterItem | -, operation | ObjectFilterOperator | -, primaryTableColumn | string | -, relatedTable | string | -, relatedTableJoinColumn | string | -
 [src:mdapi-report] Report: aggregateFilters | ReportAggregateFilter[] | -, aggregates | ReportAggregate[] | -, block | Report[] | -, blockInfo | ReportBlockInfo | -, buckets | ReportBucketField[] | -, chart | ReportChart | -, colorRanges | ReportColorRange[] | -, columns | ReportColumn[] | -, crossFilters | ReportCrossFilter[] | -, currency | CurrencyIsoCode | -, dataCategoryFilters | string | -, description | string | -, division | string | -, filter | ReportFilter | -, folderName | string | -, format | ReportFormat | -, formattingRules | ReportFormattingRule[] | -, groupingsAcross | ReportGrouping[] | -, groupingsDown | ReportGrouping[] | -, historicalSelector | ReportHistoricalSelector | -, isSmartTotalDisabled | boolean | -, name | string | -, numSubscriptions | int | -, params | ReportParam[] | -, customDetailFormulas | CustomDetailFormulas | -, reportType | string | -, reportTypeApiName | string | -, roleHierarchyFilter | string | -, rowLimit | int | -, scope | string | -, showCommonRowsOnly | boolean | -, showCurrentDate | boolean | -, showDetails | boolean | -, showGrandTotal | boolean | -, showSubTotals | boolean | -, sortColumn | string | -, sortOrder | SortOrder | -, territoryHierarchyFilter | string | -, timeFrameFilter | ReportTimeFrameFilter | -, userFilter | string | -, fullName | string | -
+[src:mdapi-dashboard] DashboardFilterOption: operator | DashboardFilterOperation | -, values | string[] | -
+[src:mdapi-dashboard] DashboardFilter: dashboardFilterOptions | DashboardFilterOption[] | -, name | string | -
+[src:mdapi-dashboard] DashboardFilterColumn: column | string | -
+[src:mdapi-dashboard] DashboardTableColumn: aggregateType | ReportSummaryType[] | -, column | string | -, showTotal | boolean | -, sortBy | não informado na página | -
+[src:mdapi-dashboard] DashboardDynamicValue: additionalInfo | string | -, fieldName | string | -, isDynamicUser | boolean | -
+[src:mdapi-dashboard] DashboardComponentContent: additionalInfo | string | -, altText | string | -, componentParameters | string | -, fileName | string | -, fit | Fit | -, horizontalAlignment | HorizontalAlignment | -, richTextContent | string | -, tooltip | string | -, verticalAlignment | VerticalAlignment | -
+[src:mdapi-dashboard] DashboardComponentColumn: breakPoint1 | double | -, breakPoint2 | double | -, breakPointOrder | double | -, highRangeColor | int | -, lowRangeColor | int | -, midRangeColor | int | -, reportColumn | string | -, showTotal | boolean | -, type | DashboardComponentColumnType | -
+[src:mdapi-dashboard] DashboardComponentSortInfo: sortColumn | string | -, sortOrder | string | -
+[src:mdapi-dashboard] DashboardFlexTableComponentProperties: decimalPrecision | int | -, flexTableColumn | DashboardComponentColumn | -, flexTableSortInfo | DashboardComponentSortInfo | -, hideChatterPhotos | boolean | -, useReportTableSetting | boolean | -
+[src:mdapi-dashboard] DashboardComponentGroupingSort: groupingLevel | string | -, inheritedReportGroupingSort | string | -, sortColumn | string | -, sortOrder | string | -
+[src:mdapi-dashboard] DashboardComponentGroupingSortProperties: groupingSorts | DashboardComponentGroupingSort | -
+[src:mdapi-dashboard] DashboardComponent: chartAxisRange | ChartRangeType | -, chartAxisRangeMax | double | -, chartAxisRangeMin | double | -, chartSummary | ChartSummary | -, componentType | DashboardComponentType | -, dashboardComponentContents | DashboardComponentContent[] | -, dashboardDynamicValues | DashboardDynamicValue[] | -, dashboardFilterColumns | DashboardFilterColumn[] | -, dashboardTableColumn | DashboardTableColumn[] | -, displayUnits | ChartUnits | -, drillDownUrl | string | -, drillEnabled | boolean | -, drillToDetailEnabled | boolean | -, enableHover | boolean | -, expandOthers | boolean | -, flexComponentProperties | DashboardFlexTableComponentProperties | -, footer | string | -, gaugeMax | double | -, gaugeMin | double | -, groupingColumn | string | -, GroupingSortProperties | DashboardComponentGroupingSortProperties | -, header | string | -, indicatorBreakpoint1 | double | -, indicatorBreakpoint2 | double | -, indicatorHighColor | string | -, indicatorLowColor | string | -, indicatorMiddleColor | string | -, legendPosition | ChartLegendPosition | -, maxValuesDisplayed | int | -, metricLabel | string | -, page | string | -, pageHeightInPixels | int | -, report | string | -, scontrol | string | -, scontrolHeightInPixels | int | -, showPercentage | boolean | -, showPicturesOnCharts | boolean | -, showPicturesOnTables | boolean | -, showTotal | boolean | -, showValues | boolean | -, sortBy | DashboardComponentFilter | -, sortLegendValues | boolean | -, title | string | -, useReportChart | boolean | -
+[src:mdapi-dashboard] DashboardGridComponent: colSpan | int | -, columnIndex | int | -, dashboardComponent | DashboardComponent | -, rowIndex | int | -, rowSpan | int | -
+[src:mdapi-dashboard] DashboardGridLayout: dashboardGridComponents | DashboardGridComponent[] | -, numberOfColumns | int | -, rowHeight | int | -
+[src:mdapi-dashboard] DashboardComponentSection: columnSize | DashboardComponentSize | -, components | DashboardComponent[] | -
 [src:mdapi-dashboard] Dashboard: backgroundEndColor | string | -, backgroundFadeDirection | ChartBackgroundDirection | -, backgroundStartColor | string | -, chartTheme | ChartTheme | -, colorPalette | ChartColorPalettes | -, dashboardChartTheme | ChartTheme | -, dashboardColorPalette | ChartColorPalettes | -, dashboardFilters | DashboardFilter[] | -, dashboardGridLayout | DashboardGridLayout | -, dashboardType | DashboardType | -, description | string | -, folderName | string | -, fullName | string | -, isGridLayout | boolean | -, dashboardResultRefreshedDate | string | -, dashboardResultRunningUser | string | -, leftSection | DashboardComponentSection | -, middleSection | DashboardComponentSection | -, numSubscriptions | int | -, owner | string | -, rightSection | DashboardComponentSection | -, runningUser | string | -, textColor | string | -, title | string | -, titleColor | string | -, titleSize | int | -
 [src:mdapi-reporttype] ObjectRelationship: join | ObjectRelationship | -, outerJoin | boolean | -, relationship | string | -
 [src:mdapi-reporttype] ReportTypeColumn: checkedByDefault | boolean | -, displayNameOverride | string | -, field | string | -, table | string | -
