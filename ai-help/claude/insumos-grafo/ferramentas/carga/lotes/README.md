@@ -36,4 +36,5 @@ Scripts de lotes carregados com `ferramentas/carga/` (a partir do lote 6). Veja 
 | `lote7p_b5_objetos.py` | Lote 7p (rodada B5, parte C): completa os 25 objetos API parciais com as tabelas lidas até o fim (offset). Regrava a lista de campos da nota de extração. |
 | `lote7q_b5_setup.py` | Lote 7q (rodada B5, parte D): caminhos de Setup de 16 funcionalidades, verificados na Ajuda. |
 | `lote7r_b5_setup_restantes.py` | Lote 7r (rodada B5, fechamento): caminhos das 9 funcionalidades restantes; configuracoes-de-nuvens-de-setor segue desconhecido. |
+| `lote7s_b5_issue39.py` | Lote 7s (rodada B5, #39): limites do Composite e da Metadata API; caminhos de Token Exchange Handlers e da conexão de entrada do Private Connect. |
 | `conteudo_extras.py` | Acréscimos de conteúdo a temas que já têm texto (itens avançados, "comece por"); aplicado por `conteudo_temas.py`, por último. |
