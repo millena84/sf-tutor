@@ -7,7 +7,7 @@ Gerado por `ferramentas/sftutor.py cobertura`. Cobertura estrutural, explicativa
 
 - Universo v68 (METADATA_SUPPORT.md): **993** tipos.
 - Classificados como incluídos no recorte Core: 12; pendentes de classificação: 981.
-- Cadastrados: **147** de 993. Estruturalmente completos (contra a página oficial): 124. Completos nas três dimensões: 0.
+- Cadastrados: **147** de 993. Estruturalmente completos (contra a página oficial): 126. Completos nas três dimensões: 0.
 - Porcentagem do recorte Core: não calculada, porque o denominador do recorte ainda não está definido (classificação item a item pendente).
 
 | Tipo | Estrutural | Esperadas | Presentes | Explicadas | Estruturas | Mapeamento | Completo |
@@ -48,7 +48,7 @@ Gerado por `ferramentas/sftutor.py cobertura`. Cobertura estrutural, explicativa
 | mdt:CustomObject | parcial | 55 | 55 | 55 | 0 | parcial | não |
 | mdt:CustomSite | completa | 51 | 51 | 51 | 3 | parcial | não |
 | mdt:CustomTab | parcial | 17 | 17 | 17 | 0 | parcial | não |
-| mdt:Dashboard | parcial | 26 | 26 | 26 | 0 | parcial | não |
+| mdt:Dashboard | completa | 26 | 26 | 26 | 3 | parcial | não |
 | mdt:DashboardFolder | parcial | 5 | 5 | 5 | 0 | parcial | não |
 | mdt:DeploymentSettings | completa | 2 | 2 | 2 | 0 | parcial | não |
 | mdt:DevHubSettings | completa | 10 | 10 | 10 | 0 | parcial | não |
@@ -134,7 +134,7 @@ Gerado por `ferramentas/sftutor.py cobertura`. Cobertura estrutural, explicativa
 | mdt:RecordType | parcial | 7 | 7 | 7 | 1 | parcial | não |
 | mdt:RegisteredExternalService | completa | 11 | 11 | 11 | 0 | parcial | não |
 | mdt:RemoteSiteSetting | completa | 5 | 5 | 5 | 0 | parcial | não |
-| mdt:Report | parcial | 41 | 41 | 41 | 0 | parcial | não |
+| mdt:Report | completa | 41 | 41 | 41 | 15 | parcial | não |
 | mdt:ReportFolder | parcial | 5 | 5 | 5 | 0 | parcial | não |
 | mdt:ReportType | completa | 9 | 9 | 9 | 2 | parcial | não |
 | mdt:SamlSsoConfig | completa | 26 | 26 | 26 | 0 | parcial | não |
@@ -163,7 +163,7 @@ Gerado por `ferramentas/sftutor.py cobertura`. Cobertura estrutural, explicativa
 ## Propriedades XML
 
 - Em metadata types: 1936 listadas, 1869 explicadas.
-- Em estruturas auxiliares: 982 listadas, 972 explicadas.
+- Em estruturas auxiliares: 1188 listadas, 1178 explicadas.
 - Universo total: Sem WSDL não há denominador confiável do total de propriedades do recorte.
 
 ## Objetos consultáveis via API
@@ -260,5 +260,5 @@ Gerado por `ferramentas/sftutor.py cobertura`. Cobertura estrutural, explicativa
 
 ## Taxonomia e funcionalidades
 
-- Classificações: 14; subclassificações: 92 (com funcionalidades: 80).
-- Funcionalidades cadastradas: 126 (universo de funcionalidades não definido).
+- Classificações: 14; subclassificações: 92 (com funcionalidades: 81).
+- Funcionalidades cadastradas: 127 (universo de funcionalidades não definido).
