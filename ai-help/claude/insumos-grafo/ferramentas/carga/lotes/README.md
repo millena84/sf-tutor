@@ -37,4 +37,6 @@ Scripts de lotes carregados com `ferramentas/carga/` (a partir do lote 6). Veja 
 | `lote7q_b5_setup.py` | Lote 7q (rodada B5, parte D): caminhos de Setup de 16 funcionalidades, verificados na Ajuda. |
 | `lote7r_b5_setup_restantes.py` | Lote 7r (rodada B5, fechamento): caminhos das 9 funcionalidades restantes; configuracoes-de-nuvens-de-setor segue desconhecido. |
 | `lote7s_b5_issue39.py` | Lote 7s (rodada B5, #39): limites do Composite e da Metadata API; caminhos de Token Exchange Handlers e da conexão de entrada do Private Connect. |
+| `lote7t_d1_descricoes.py` | Lote 7t (rodada D1): descrição específica para 32 estruturas de Profile e PermissionSet que tinham texto genérico, montada com dados do próprio catálogo. |
+| `lote7u_d1_nuvens.py` | Lote 7u (rodada D1): `o_que_e` do Data 360; licenças e estado do nó Platform/Core. |
 | `conteudo_extras.py` | Acréscimos de conteúdo a temas que já têm texto (itens avançados, "comece por"); aplicado por `conteudo_temas.py`, por último. |
