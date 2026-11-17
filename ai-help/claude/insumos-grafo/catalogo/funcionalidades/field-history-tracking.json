@@ -1,0 +1,96 @@
+{
+  "id": "func:field-history-tracking",
+  "nome": "Field History Tracking",
+  "nome_tecnico": "Field History Tracking",
+  "aliases": [
+    "histórico de campos",
+    "field history",
+    "set history tracking",
+    "history related list",
+    "accounthistory",
+    "auditoria de campos"
+  ],
+  "termos_busca": [
+    "accounthistory",
+    "auditoria de campos",
+    "field history",
+    "field history tracking",
+    "history related list",
+    "histórico de campos",
+    "set history tracking"
+  ],
+  "o_que_e": "Field History Tracking registra as mudanças nos campos escolhidos de um objeto: quem mudou, quando, o valor anterior e o novo. O histórico fica num objeto relacionado, como AccountHistory ou MyCustomObject__History, e aparece na related list History do registro.",
+  "finalidade": "Saber quem alterou o quê e quando, para auditoria e para entender a evolução de um registro.",
+  "exemplo": "Na conta, o campo Rating é rastreado; quando alguém muda de Warm para Hot, a related list History mostra o usuário, a data e os dois valores.",
+  "classificacao_principal": {
+    "classificacao": "cls:qualidade-governanca-e-ciclo-de-vida-dos-dados",
+    "subclassificacao": "sub:rastreabilidade-e-historico"
+  },
+  "classificacoes_secundarias": [],
+  "representacoes": {
+    "metadata_types": [
+      {
+        "ref": "mdt:CustomObject",
+        "papel": "Liga o rastreamento no objeto (enableHistory)."
+      },
+      {
+        "ref": "mdt:CustomField",
+        "papel": "Escolhe cada campo rastreado (trackHistory)."
+      }
+    ],
+    "objetos_api": [],
+    "ausencias": [
+      {
+        "tipo": "objeto_api",
+        "estado": "desconhecido",
+        "motivo": "Os objetos de histórico (AccountHistory, <Objeto>History, <Objeto>__History) não foram cadastrados; só IndividualHistory e ContactPointTypeConsentHistory são citados nas páginas lidas."
+      }
+    ]
+  },
+  "setup": {
+    "estado": "verificado",
+    "valor": "Setup > Object Manager > [objeto] > Fields & Relationships > Set History Tracking",
+    "nota": "Marque Enable [objeto] History e escolha os campos. Rótulos em inglês, como na fonte; a tradução da interface em pt-BR não foi verificada.",
+    "evidencias": [
+      {
+        "fonte": "src:help-kb-account-date-history"
+      }
+    ]
+  },
+  "recomendacoes": [],
+  "alertas": [
+    "O histórico só existe a partir de quando o rastreamento é ligado.",
+    "Em contas, o limite de 20 campos vale para contas comerciais e contas pessoais juntas.",
+    "Não é possível desligar o rastreamento de um objeto se algum código Apex referencia os campos dele.",
+    "O histórico de campos não conta no armazenamento de dados.",
+    "Definir os campos rastreados exige a permissão Customize Application."
+  ],
+  "limitacoes": [
+    "Até 20 campos por objeto; em eventos e tarefas, até 6.",
+    "Sem Field Audit Trail, o histórico fica até 18 meses (até 24 pela API)."
+  ],
+  "estado": "verificado",
+  "evidencias": [
+    {
+      "fonte": "src:help-field-history-tracking"
+    },
+    {
+      "fonte": "src:help-track-object-field-history"
+    },
+    {
+      "fonte": "src:help-disable-field-history"
+    },
+    {
+      "fonte": "src:help-kb-account-date-history"
+    },
+    {
+      "fonte": "src:help-field-history-security"
+    },
+    {
+      "fonte": "src:mdapi-customobject"
+    },
+    {
+      "fonte": "src:mdapi-customfield"
+    }
+  ]
+}

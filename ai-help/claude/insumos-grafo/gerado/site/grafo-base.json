@@ -731,6 +731,30 @@
       "tipo": "representacao_objeto_api"
     },
     {
+      "destino": "mdt:PrivacySettings",
+      "origem": "func:consent-management",
+      "papel": "Opções de privacidade, como o Consent Event Stream e a captura de dados no consentimento de autorização.",
+      "tipo": "representacao_xml"
+    },
+    {
+      "destino": "obj:ContactPointTypeConsent",
+      "origem": "func:consent-management",
+      "papel": "O consentimento por canal.",
+      "tipo": "representacao_objeto_api"
+    },
+    {
+      "destino": "obj:DataUsePurpose",
+      "origem": "func:consent-management",
+      "papel": "As finalidades de uso.",
+      "tipo": "representacao_objeto_api"
+    },
+    {
+      "destino": "obj:Individual",
+      "origem": "func:consent-management",
+      "papel": "As preferências globais de privacidade da pessoa.",
+      "tipo": "representacao_objeto_api"
+    },
+    {
       "destino": "mdt:AccountSettings",
       "origem": "func:contas",
       "papel": "Configurações da org (Settings).",
@@ -818,6 +842,18 @@
       "destino": "mdt:Dashboard",
       "origem": "func:dashboards",
       "papel": "Cada dashboard, com componentes, filtros e running user.",
+      "tipo": "representacao_xml"
+    },
+    {
+      "destino": "mdt:CustomField",
+      "origem": "func:data-classification",
+      "papel": "Os valores de classificação de cada campo (securityClassification, complianceGroup, businessOwnerUser, businessOwnerGroup, businessStatus).",
+      "tipo": "representacao_xml"
+    },
+    {
+      "destino": "mdt:PrivacySettings",
+      "origem": "func:data-classification",
+      "papel": "Liga o nível de sensibilidade padrão em contatos, leads, contas pessoais e usuários (enableDefaultMetadataValues).",
       "tipo": "representacao_xml"
     },
     {
@@ -1118,6 +1154,30 @@
       "destino": "mdt:BusinessHoursSettings",
       "origem": "func:feriados",
       "papel": "Feriados implantáveis junto dos horários comerciais (estrutura Holidays).",
+      "tipo": "representacao_xml"
+    },
+    {
+      "destino": "mdt:CustomObject",
+      "origem": "func:field-audit-trail",
+      "papel": "A política de retenção do objeto (historyRetentionPolicy).",
+      "tipo": "representacao_xml"
+    },
+    {
+      "destino": "obj:FieldHistoryArchive",
+      "origem": "func:field-audit-trail",
+      "papel": "O histórico arquivado, consultado só por API.",
+      "tipo": "representacao_objeto_api"
+    },
+    {
+      "destino": "mdt:CustomField",
+      "origem": "func:field-history-tracking",
+      "papel": "Escolhe cada campo rastreado (trackHistory).",
+      "tipo": "representacao_xml"
+    },
+    {
+      "destino": "mdt:CustomObject",
+      "origem": "func:field-history-tracking",
+      "papel": "Liga o rastreamento no objeto (enableHistory).",
       "tipo": "representacao_xml"
     },
     {
@@ -4948,6 +5008,20 @@
       "tipo": "referencia_campo"
     },
     {
+      "destino": "obj:DataUsePurpose",
+      "estado": "verificado",
+      "origem": "obj:ContactPointTypeConsent.DataUsePurposeId",
+      "rel_id": "rel:cptc-datausepurpose",
+      "tipo": "referencia_campo"
+    },
+    {
+      "destino": "obj:Individual",
+      "estado": "verificado",
+      "origem": "obj:ContactPointTypeConsent.PartyId",
+      "rel_id": "rel:cptc-individual",
+      "tipo": "referencia_campo"
+    },
+    {
       "destino": "obj:CronJobDetail",
       "estado": "verificado",
       "origem": "obj:CronTrigger.CronJobDetailId",
@@ -5064,6 +5138,13 @@
       "estado": "verificado",
       "origem": "obj:GroupMember.UserOrGroupId",
       "rel_id": "rel:groupmember-membro-usuario",
+      "tipo": "referencia_campo"
+    },
+    {
+      "destino": "obj:Individual",
+      "estado": "verificado",
+      "origem": "obj:Individual.MasterRecordId",
+      "rel_id": "rel:individual-master",
       "tipo": "referencia_campo"
     },
     {
@@ -5776,6 +5857,11 @@
       "tipo": "classificacao_principal"
     },
     {
+      "destino": "func:data-classification",
+      "origem": "sub:classificacao-e-sensibilidade",
+      "tipo": "classificacao_principal"
+    },
+    {
       "destino": "func:apex-agendado",
       "motivo": "É código Apex e segue as regras de teste e de implantação.",
       "origem": "sub:codigo-e-bundles",
@@ -5849,6 +5935,11 @@
     {
       "destino": "func:agentes-agentforce",
       "origem": "sub:configuracao-de-agentes",
+      "tipo": "classificacao_principal"
+    },
+    {
+      "destino": "func:consent-management",
+      "origem": "sub:consentimento-e-privacidade",
       "tipo": "classificacao_principal"
     },
     {
@@ -6261,6 +6352,17 @@
       "tipo": "classificacao_principal"
     },
     {
+      "destino": "func:field-audit-trail",
+      "motivo": "É a extensão do histórico de campos.",
+      "origem": "sub:rastreabilidade-e-historico",
+      "tipo": "classificacao_secundaria"
+    },
+    {
+      "destino": "func:field-history-tracking",
+      "origem": "sub:rastreabilidade-e-historico",
+      "tipo": "classificacao_principal"
+    },
+    {
       "destino": "func:pedidos",
       "origem": "sub:receita-e-comercio",
       "tipo": "classificacao_principal"
@@ -6290,6 +6392,16 @@
     {
       "destino": "func:relatorios",
       "origem": "sub:reports",
+      "tipo": "classificacao_principal"
+    },
+    {
+      "destino": "func:field-audit-trail",
+      "origem": "sub:retencao-arquivamento-e-exclusao",
+      "tipo": "classificacao_principal"
+    },
+    {
+      "destino": "func:recycle-bin",
+      "origem": "sub:retencao-arquivamento-e-exclusao",
       "tipo": "classificacao_principal"
     },
     {
@@ -6828,6 +6940,15 @@
     },
     {
       "estado": "verificado",
+      "grupo_cor": "cls:qualidade-governanca-e-ciclo-de-vida-dos-dados",
+      "id": "func:consent-management",
+      "resumo": "A gestão de consentimento registra o que cada pessoa autorizou: em nível global, no Individual; por canal, como e-mail ou telefone, no ContactPointTypeConsent; por endereço específico, no ContactPointConsent; e por finalidade, no DataUsePurpose. Leads, contatos, contas pessoais e usuários apontam para o Individual.",
+      "rotulo": "Gestão de consentimento",
+      "rotulo_tecnico": "Consent Management",
+      "tipo": "funcionalidade"
+    },
+    {
+      "estado": "verificado",
       "grupo_cor": "cls:processos-de-negocio-especificos-de-produto",
       "id": "func:contas",
       "resumo": "Conta é uma organização ou pessoa com quem a empresa se relaciona: cliente, parceiro ou concorrente.",
@@ -6923,6 +7044,15 @@
       "resumo": "Um dashboard mostra, em gráficos e tabelas, os resultados de relatórios de origem (source reports). Cada componente tem o próprio relatório. Em View Dashboard As define-se de quem é o acesso que decide os dados mostrados: de quem criou, de outra pessoa ou de quem está vendo (dynamic dashboard).",
       "rotulo": "Dashboards",
       "rotulo_tecnico": "Dashboards",
+      "tipo": "funcionalidade"
+    },
+    {
+      "estado": "verificado",
+      "grupo_cor": "cls:qualidade-governanca-e-ciclo-de-vida-dos-dados",
+      "id": "func:data-classification",
+      "resumo": "Data Classification marca cada campo com o nível de sensibilidade (Public, Internal, Confidential, Restricted, MissionCritical), as categorias de conformidade (como GDPR, PII ou HIPAA), o responsável pelo dado e o uso do campo. É só registro: orienta decisões, mas não muda acesso sozinho.",
+      "rotulo": "Data Classification",
+      "rotulo_tecnico": "Data Classification",
       "tipo": "funcionalidade"
     },
     {
@@ -7076,6 +7206,24 @@
       "resumo": "Datas e horários em que o atendimento não funciona. Cada feriado é associado a um ou mais horários comerciais e suspende a contagem deles.",
       "rotulo": "Feriados",
       "rotulo_tecnico": "Holidays",
+      "tipo": "funcionalidade"
+    },
+    {
+      "estado": "verificado",
+      "grupo_cor": "cls:qualidade-governanca-e-ciclo-de-vida-dos-dados",
+      "id": "func:field-audit-trail",
+      "resumo": "Field Audit Trail amplia o Field History Tracking: rastreia até 200 campos por objeto e guarda o histórico até ele ser excluído, num big object (FieldHistoryArchive). Uma política de retenção por objeto diz quantos meses o histórico fica no objeto de histórico antes de ser arquivado.",
+      "rotulo": "Field Audit Trail",
+      "rotulo_tecnico": "Field Audit Trail",
+      "tipo": "funcionalidade"
+    },
+    {
+      "estado": "verificado",
+      "grupo_cor": "cls:qualidade-governanca-e-ciclo-de-vida-dos-dados",
+      "id": "func:field-history-tracking",
+      "resumo": "Field History Tracking registra as mudanças nos campos escolhidos de um objeto: quem mudou, quando, o valor anterior e o novo. O histórico fica num objeto relacionado, como AccountHistory ou MyCustomObject__History, e aparece na related list History do registro.",
+      "rotulo": "Field History Tracking",
+      "rotulo_tecnico": "Field History Tracking",
       "tipo": "funcionalidade"
     },
     {
@@ -7472,6 +7620,15 @@
       "resumo": "Forma de enfileirar um trabalho em Apex para rodar em segundo plano. Devolve o Id do job, aceita tipos complexos como parâmetro e permite encadear um job a outro.",
       "rotulo": "Queueable Apex",
       "rotulo_tecnico": "Queueable Apex",
+      "tipo": "funcionalidade"
+    },
+    {
+      "estado": "verificado",
+      "grupo_cor": "cls:qualidade-governanca-e-ciclo-de-vida-dos-dados",
+      "id": "func:recycle-bin",
+      "resumo": "A Recycle Bin guarda por 15 dias os itens excluídos, que podem ser restaurados nesse prazo. Depois, eles são agendados para exclusão permanente. Esvaziar a lixeira ou usar o hard delete da API manda os registros direto para a fila de exclusão definitiva.",
+      "rotulo": "Recycle Bin",
+      "rotulo_tecnico": "Recycle Bin",
       "tipo": "funcionalidade"
     },
     {
@@ -8519,6 +8676,13 @@
       "id": "mdt:PresenceUserConfig",
       "resumo": "Define uma configuração de presença do Omni-Channel.",
       "rotulo": "PresenceUserConfig",
+      "tipo": "metadata_type"
+    },
+    {
+      "estado": "verificado",
+      "id": "mdt:PrivacySettings",
+      "resumo": "Configurações de privacidade da org: consentimento de autorização, nível de sensibilidade padrão, fluxo de eventos de consentimento e Salesforce Archive.",
+      "rotulo": "PrivacySettings",
       "tipo": "metadata_type"
     },
     {
@@ -10752,6 +10916,16 @@
         "padrao"
       ],
       "estado": "verificado",
+      "id": "obj:ContactPointTypeConsent",
+      "resumo": "O consentimento de uma pessoa para um canal de contato, como e-mail ou telefone, com a finalidade, a marca, a origem e o período de validade.",
+      "rotulo": "ContactPointTypeConsent",
+      "tipo": "objeto_api"
+    },
+    {
+      "apis": [
+        "padrao"
+      ],
+      "estado": "verificado",
       "id": "obj:CronJobDetail",
       "resumo": "Os detalhes de um job agendado: o nome e o tipo (Apex agendado, flow agendado, atualização de dashboard e outros).",
       "rotulo": "CronJobDetail",
@@ -10805,6 +10979,16 @@
       "id": "obj:CustomTab",
       "resumo": "Expõe as tabs pela Tooling API.",
       "rotulo": "CustomTab",
+      "tipo": "objeto_api"
+    },
+    {
+      "apis": [
+        "padrao"
+      ],
+      "estado": "verificado",
+      "id": "obj:DataUsePurpose",
+      "resumo": "Uma finalidade de uso de dados: o motivo de contatar alguém, como cobrança, marketing ou pesquisa, e se a pessoa pode recusar.",
+      "rotulo": "DataUsePurpose",
       "tipo": "objeto_api"
     },
     {
@@ -10875,6 +11059,16 @@
       "id": "obj:FieldDefinition",
       "resumo": "Expõe a definição de campos de objetos para consulta.",
       "rotulo": "FieldDefinition",
+      "tipo": "objeto_api"
+    },
+    {
+      "apis": [
+        "padrao"
+      ],
+      "estado": "verificado",
+      "id": "obj:FieldHistoryArchive",
+      "resumo": "Um big object com o histórico arquivado de campos de todos os objetos que retêm histórico: cada registro é uma mudança de valor de um campo.",
+      "rotulo": "FieldHistoryArchive",
       "tipo": "objeto_api"
     },
     {
@@ -10986,6 +11180,16 @@
       "resumo": "Um membro direto de um public group: um usuário ou outro grupo. Cada registro liga um grupo a um membro.",
       "rotulo": "GroupMember",
       "tipo": "objeto_api_juncao"
+    },
+    {
+      "apis": [
+        "padrao"
+      ],
+      "estado": "verificado",
+      "id": "obj:Individual",
+      "resumo": "O registro de privacidade de uma pessoa: as preferências sobre coleta, processamento, rastreamento, contato, exportação e exclusão dos dados dela. Leads, contatos, contas pessoais e usuários podem apontar para ele.",
+      "rotulo": "Individual",
+      "tipo": "objeto_api"
     },
     {
       "apis": [

@@ -1,0 +1,120 @@
+{
+  "funcionalidade": {
+    "alertas": [
+      "O histórico só existe a partir de quando o rastreamento é ligado.",
+      "Em contas, o limite de 20 campos vale para contas comerciais e contas pessoais juntas.",
+      "Não é possível desligar o rastreamento de um objeto se algum código Apex referencia os campos dele.",
+      "O histórico de campos não conta no armazenamento de dados.",
+      "Definir os campos rastreados exige a permissão Customize Application."
+    ],
+    "aliases": [
+      "histórico de campos",
+      "field history",
+      "set history tracking",
+      "history related list",
+      "accounthistory",
+      "auditoria de campos"
+    ],
+    "classificacao_principal": {
+      "classificacao": "cls:qualidade-governanca-e-ciclo-de-vida-dos-dados",
+      "subclassificacao": "sub:rastreabilidade-e-historico"
+    },
+    "classificacoes_secundarias": [],
+    "estado": "verificado",
+    "evidencias": [
+      {
+        "fonte": "src:help-field-history-tracking"
+      },
+      {
+        "fonte": "src:help-track-object-field-history"
+      },
+      {
+        "fonte": "src:help-disable-field-history"
+      },
+      {
+        "fonte": "src:help-kb-account-date-history"
+      },
+      {
+        "fonte": "src:help-field-history-security"
+      },
+      {
+        "fonte": "src:mdapi-customobject"
+      },
+      {
+        "fonte": "src:mdapi-customfield"
+      }
+    ],
+    "exemplo": "Na conta, o campo Rating é rastreado; quando alguém muda de Warm para Hot, a related list History mostra o usuário, a data e os dois valores.",
+    "finalidade": "Saber quem alterou o quê e quando, para auditoria e para entender a evolução de um registro.",
+    "id": "func:field-history-tracking",
+    "limitacoes": [
+      "Até 20 campos por objeto; em eventos e tarefas, até 6.",
+      "Sem Field Audit Trail, o histórico fica até 18 meses (até 24 pela API)."
+    ],
+    "nome": "Field History Tracking",
+    "nome_tecnico": "Field History Tracking",
+    "o_que_e": "Field History Tracking registra as mudanças nos campos escolhidos de um objeto: quem mudou, quando, o valor anterior e o novo. O histórico fica num objeto relacionado, como AccountHistory ou MyCustomObject__History, e aparece na related list History do registro.",
+    "recomendacoes": [],
+    "representacoes": {
+      "ausencias": [
+        {
+          "estado": "desconhecido",
+          "motivo": "Os objetos de histórico (AccountHistory, <Objeto>History, <Objeto>__History) não foram cadastrados; só IndividualHistory e ContactPointTypeConsentHistory são citados nas páginas lidas.",
+          "tipo": "objeto_api"
+        }
+      ],
+      "metadata_types": [
+        {
+          "papel": "Liga o rastreamento no objeto (enableHistory).",
+          "ref": "mdt:CustomObject"
+        },
+        {
+          "papel": "Escolhe cada campo rastreado (trackHistory).",
+          "ref": "mdt:CustomField"
+        }
+      ],
+      "objetos_api": []
+    },
+    "setup": {
+      "estado": "verificado",
+      "evidencias": [
+        {
+          "fonte": "src:help-kb-account-date-history"
+        }
+      ],
+      "nota": "Marque Enable [objeto] History e escolha os campos. Rótulos em inglês, como na fonte; a tradução da interface em pt-BR não foi verificada.",
+      "valor": "Setup > Object Manager > [objeto] > Fields & Relationships > Set History Tracking"
+    },
+    "termos_busca": [
+      "accounthistory",
+      "auditoria de campos",
+      "field history",
+      "field history tracking",
+      "history related list",
+      "histórico de campos",
+      "set history tracking"
+    ]
+  },
+  "metadata_types": [
+    {
+      "ficha_completa": "gerado/fichas-completas/CustomObject.json",
+      "id": "mdt:CustomObject",
+      "nome": "CustomObject",
+      "papel": "Liga o rastreamento no objeto (enableHistory)."
+    },
+    {
+      "ficha_completa": "gerado/fichas-completas/CustomField.json",
+      "id": "mdt:CustomField",
+      "nome": "CustomField",
+      "papel": "Escolhe cada campo rastreado (trackHistory)."
+    }
+  ],
+  "nota": "Gerado deterministicamente a partir de catalogo/. Não editar à mão.",
+  "objetos_api": [],
+  "versao_base": {
+    "api_version": "68.0",
+    "data_referencia": "2026-11-07",
+    "escopo": "config/escopo.json",
+    "release": "Winter '27"
+  }
+}

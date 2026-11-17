@@ -1,0 +1,58 @@
+assunto: fecho da rodada B3 (Qualidade, governança e ciclo de vida): histórico, retenção, lixeira, classificação e consentimento
+obtido em 2026-11-17.
+
+-- Guia versionado 264.0 (API 68.0), páginas lidas por inteiro pelo endpoint de conteúdo (WebFetch); método: extração documental assistida por IA
+URL lida (Metadata API): https://developer.salesforce.com/docs/get_document_content/api_meta/meta_privacysettings.htm/en-us/264.0
+URL lida (Object Reference): https://developer.salesforce.com/docs/get_document_content/object_reference/sforce_api_objects_<objeto>.htm/en-us/264.0
+
+[src:mdapi-privacysettings] PrivacySettings: arquivo Privacy.settings, pasta settings; API 47.0 e posteriores; estende Metadata (fullName herdado);
+  a página diz que o curinga é aceito. 13 campos, todos boolean, sem indicação de obrigatoriedade. Acesso exige Customize Application ou Modify
+  Data Classification. Exemplo: enableDefaultMetadataValues; package.xml com membro Privacy do tipo Settings, versão 47.0.
+[src:objref-individual] Individual: preferências de privacidade e proteção de dados de um cliente; liga-se a leads, contatos, contas pessoais e
+  usuários. API 42.0 e posteriores; só com Data Protection and Privacy habilitado. Chamadas: create(), delete(), describeLayout(),
+  describeSObjects(), getDeleted(), getUpdated(), merge(), query(), retrieve(), search(), undelete(), update(), upsert(). 28 campos; valores de
+  picklist não listados. Objetos associados: IndividualChangeEvent (47.0), IndividualHistory, IndividualShare.
+[src:objref-contactpointtypeconsent] ContactPointTypeConsent: consentimento para um tipo de ponto de contato, como e-mail ou telefone. API 45.0;
+  só com Data Protection and Privacy. Chamadas: create(), delete(), describeLayout(), describeSObjects(), getDeleted(), getUpdated(), query(),
+  retrieve(), search(), undelete(), update(), upsert(). 17 campos; PrivacyConsentStatus com NotSeen, Seen, OptIn, OptInPending (58.0), OptOut,
+  OptOutPending (58.0). Histórico e compartilhamento próprios.
+[src:objref-datausepurpose] DataUsePurpose: motivo de contatar um cliente, como cobrança, marketing ou pesquisa. API 45.0; só com Data Protection
+  and Privacy. Mesmas chamadas, sem merge(). 8 campos; PurposeId refere Asset, CareProgram, CareRegisteredDevice ou Product2.
+[src:objref-fieldhistoryarchive] FieldHistoryArchive: big object com o histórico de campos de todos os objetos que retêm histórico; cada registro é
+  uma mudança. API 29.0; só para usuários com Retain Field History. Chamadas: describeSObjects(), query(). 10 campos; FieldHistoryType com 31
+  valores (cinco desde a 58.0). Ordenação indicada: FieldHistoryType ASC, ParentId ASC, CreatedDate DESC. Cita FieldNameAfterArchival e
+  ParentNameAfterArchival fora da tabela.
+
+-- Ajuda (busca restrita a help.salesforce.com; método leitura_resultado_busca: páginas NÃO abertas por inteiro)
+[src:help-track-object-field-history] Track Object Field History (xcloud.tracking_field_history_for_standard_objects.htm): permissão Customize
+  Application; marcar Enable [objeto] History; em contas, o limite de 20 campos vale para contas comerciais e pessoais juntas.
+[src:help-disable-field-history] Disable Field History Tracking (tracking_field_history_disabling.htm): Fields & Relationships, Set History Tracking;
+  se Apex referencia campos do objeto, não é possível desligar o rastreamento; desligar remove a related list History dos layouts.
+[src:help-kb-account-date-history] artigo 000394574: Setup, Object Manager, Accounts, Fields & Relationships, Set History Tracking, Enable Account History.
+[src:help-field-history-security] Field History Tracking (xcloud.security_field_history_tracking.htm): sem Field Audit Trail, até 18 meses (24 pela
+  API); com ele, até exclusão manual; o histórico não conta no armazenamento.
+[src:help-field-history-tracking] Field History Tracking Overview (fonte já registrada; trecho lido de novo em 2026-11-17): até seis campos por
+  objeto em eventos e tarefas; histórico em StandardObjectName History ou CustomObjectName__History.
+[src:help-data-classification-setup] Set Up Data Classification Metadata (fonte já registrada; trecho lido de novo): disponível em todas as edições
+  e habilitado automaticamente em todas as orgs; Setup, Quick Find "Data Classification Settings"; opção Use default data sensitivity level.
+[src:help-data-classification-reports] Create Reports from Data Classification Metadata (sf.data_classification_report.htm): custom report type com
+  Entity Definition como objeto principal.
+[src:help-data-privacy-setup] Set Up Tracking and Storage of Certain Data Privacy Preferences (individuals_setup_data_privacy.htm): opção Make data
+  protection details available in records; incluir o campo Individual nos layouts de lead, contato e conta pessoal.
+[src:help-kb-individual-record] artigo 000269754: o Individual chegou no Spring '18; Setup, Quick Find "Data Protection and Privacy", Edit, Make data
+  protection details available in records, Save.
+[src:help-verify-data-protection] Verify Data Protection Details Are Available in Records: mesmo caminho de Setup.
+[src:help-enforce-email-privacy] Enable the Enforce Email Privacy Settings Preference: e-mail respeita as preferências do Individual (rastreamento
+  e opt-out); exige Data Protection and Privacy; fica em Deliverability.
+[src:help-consent-mgmt-platform] Consent Management for the Salesforce Platform: regulamentos exigem honrar pedidos sobre o uso de dados; tabela de
+  pedidos comuns e ações a considerar.
+
+Não lido: AccountHistory e demais objetos de histórico; ContactPointConsent, ContactPointEmail, AuthorizationForm*; FieldDefinition e
+  FieldSecurityClassification; caminho de Setup do Field Audit Trail e de acesso à Recycle Bin; Privacy Center; Salesforce Archive.
+
+-- Lista de campos transcrita da leitura (gerada por lote7k_qualidade_fecho.py; nome | tipo)
+[src:mdapi-privacysettings] PrivacySettings: authorizationCaptureBrowser | boolean, authorizationCaptureEmail | boolean, authorizationCaptureIp | boolean, authorizationCaptureLocation | boolean, authorizationCustomSharing | boolean, authorizationCustomSharingPCU | boolean, authorizationLockingAndVersioning | boolean, enableConfigurableUserPIIActive | boolean, enableConsentAuditTrail | boolean, enableConsentEventStream | boolean, enableDefaultMetadataValues | boolean, enableSalesforceArchive | boolean, useUmaDefaultConsentRecs | boolean, fullName | string
+[src:objref-individual] objeto Individual: BirthDate | date, CanStorePiiElsewhere | boolean, ChildrenCount | int, ConsumerCreditScore | int, ConsumerCreditScoreProviderName | string, ConvictionsCount | int, DeathDate | date, FirstName | string, HasOptedOutGeoTracking | boolean, HasOptedOutProcessing | boolean, HasOptedOutProfiling | boolean, HasOptedOutSolicit | boolean, HasOptedOutTracking | boolean, HasPrivacyHold | boolean, IndividualsAge | picklist, InfluencerRating | int, IsHomeOwner | boolean, LastName | string, LastViewedDate | dateTime, MasterRecordId | reference, MilitaryService | picklist, Name | string, Occupation | string, OwnerId | reference, Salutation | picklist, SendIndividualData | boolean, ShouldForget | boolean, Website | url
+[src:objref-contactpointtypeconsent] objeto ContactPointTypeConsent: BusinessBrandId | reference, CaptureContactPointType | picklist, CaptureDate | dateTime, CaptureSource | string, ContactPointType | picklist, DataUsePurposeId | reference, DoubleConsentCaptureDate | dateTime, EffectiveFrom | dateTime, EffectiveTo | dateTime, EngagementChannelType | picklist, LastReferencedDate | dateTime, LastViewedDate | dateTime, Name | string, OwnerId | reference, PartyId | reference, PartyRoleId | reference, PrivacyConsentStatus | picklist
+[src:objref-datausepurpose] objeto DataUsePurpose: CanDataSubjectOptOut | boolean, Description | string, LastReferencedDate | dateTime, LastViewedDate | dateTime, LegalBasisId | reference, Name | string, OwnerId | reference, PurposeId | reference
+[src:objref-fieldhistoryarchive] objeto FieldHistoryArchive: ArchiveFieldName | string, ArchiveParentName | string, ArchiveParentType | string, ArchiveTimestamp | dateTime, Field | picklist, FieldHistoryType | picklist, HistoryId | reference, NewValue | anyType, OldValue | anyType, ParentId | reference

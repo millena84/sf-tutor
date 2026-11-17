@@ -1,0 +1,5212 @@
+{
+  "funcionalidades": [
+    {
+      "id": "func:consent-management",
+      "nome": "Gestão de consentimento"
+    },
+    {
+      "id": "func:data-classification",
+      "nome": "Data Classification"
+    }
+  ],
+  "metadata_type": {
+    "alertas": [
+      "Acessar o tipo exige a permissão Customize Application ou Modify Data Classification.",
+      "A página diz que o curinga (*) é aceito; no manifesto, o tipo entra como Settings, membro Privacy."
+    ],
+    "arquivos": {
+      "curinga_package_xml": {
+        "estado": "verificado",
+        "evidencias": [
+          {
+            "fonte": "src:mdapi-privacysettings"
+          }
+        ],
+        "valor": true
+      },
+      "metadata_api_format": {
+        "estado": "verificado",
+        "evidencias": [
+          {
+            "fonte": "src:mdapi-privacysettings"
+          }
+        ],
+        "nota": "Um único arquivo; no package.xml, o tipo é Settings e o membro é Privacy.",
+        "valor": {
+          "arquivo": "Privacy.settings",
+          "pasta": "settings/"
+        }
+      },
+      "source_format": {
+        "estado": "verificado",
+        "evidencias": [
+          {
+            "fonte": "src:sdr-registry",
+            "nota": "types.settings"
+          },
+          {
+            "fonte": "src:mdapi-privacysettings"
+          }
+        ],
+        "nota": "Pasta e sufixo do tipo genérico Settings no registro do Salesforce CLI; o nome-base do arquivo vem da página do tipo.",
+        "valor": {
+          "arquivo": "Privacy.settings-meta.xml",
+          "pasta": "settings/"
+        }
+      }
+    },
+    "cobertura": {
+      "estrutural": {
+        "esperado": 14,
+        "estado": "completa",
+        "nota": "Universo esperado = tabela Fields da página do guia versionado 264.0 (API 68.0), lida em 2026-11-17: 13 campos, todos boolean. A página não informa obrigatoriedade.",
+        "presente": 14
+      },
+      "explicativa": {
+        "esperado": 14,
+        "estado": "completa",
+        "presente": 14
+      },
+      "mapeamento": {
+        "estado": "parcial",
+        "nota": "Correspondências registradas apenas onde há evidência; demais pendentes."
+      }
+    },
+    "disponibilidade": {
+      "ate_versao": null,
+      "desde_versao": "47.0",
+      "estado": "verificado"
+    },
+    "divergencias_documentais": [],
+    "estado": "verificado",
+    "estende": "Metadata",
+    "estruturas": [],
+    "evidencias": [
+      {
+        "fonte": "src:mdapi-privacysettings"
+      },
+      {
+        "fonte": "src:sdr-registry"
+      },
+      {
+        "fonte": "src:sdr-metadata-support"
+      }
+    ],
+    "exemplo_xml": {
+      "natureza": "didatico_projeto",
+      "nota": "Exemplo escrito pelo projeto apenas com elementos documentados; sem dados reais.",
+      "xml": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<PrivacySettings xmlns=\"http://soap.sforce.com/2006/04/metadata\">\n    <enableConsentEventStream>false</enableConsentEventStream>\n    <enableDefaultMetadataValues>false</enableDefaultMetadataValues>\n</PrivacySettings>"
+    },
+    "finalidade": "Recuperar e implantar as opções de privacidade e de classificação de dados em vez de marcá-las à mão em cada ambiente.",
+    "id": "mdt:PrivacySettings",
+    "nome": "PrivacySettings",
+    "o_que_e": "Configurações de privacidade da org: consentimento de autorização, nível de sensibilidade padrão, fluxo de eventos de consentimento e Salesforce Archive.",
+    "propriedades": [
+      {
+        "default": {
+          "estado": "verificado",
+          "evidencias": [
+            {
+              "fonte": "src:mdapi-privacysettings"
+            }
+          ],
+          "forma": "false",
+          "nota": "A página declara default false.",
+          "valor": false
+        },
+        "disponibilidade": {
+          "ate_versao": null,
+          "desde_versao": "59.0",
+          "estado": "verificado"
+        },
+        "dominio": {
+          "estado": "verificado",
+          "evidencias": [
+            {
+              "fonte": "src:mdapi-privacysettings"
+            }
+          ],
+          "lista_completa": "sim",
+          "natureza": "booleano",
+          "valores": [
+            {
+              "valor": "true"
+            },
+            {
+              "valor": "false"
+            }
+          ]
+        },
+        "estado": "verificado",
+        "evidencias": [
+          {
+            "fonte": "src:mdapi-privacysettings"
+          }
+        ],
+        "explicacao": "explicada",
+        "id": "mdt:PrivacySettings.authorizationCaptureBrowser",
+        "nome": "authorizationCaptureBrowser",
+        "o_que_e": "Na autorização de consentimento, guarda os dados do navegador.",
+        "obrigatoriedade": {
+          "condicao": "A documentação 68.0 não marca o campo como obrigatório; ausência de marcação não comprova opcionalidade (confirmar no WSDL).",
+          "estado": "desconhecido",
+          "valor": "nao"
+        },
+        "origem": {
+          "estado": "verificado",
+          "evidencias": [
+            {
+              "fonte": "src:mdapi-privacysettings"
+            }
+          ],
+          "nota": "Propriedade definida pelo schema da Metadata API.",
+          "valor": "padrao_plataforma"
+        },
+        "tipo_tecnico": "boolean"
+      },
+      {
+        "default": {
+          "estado": "verificado",
+          "evidencias": [
+            {
+              "fonte": "src:mdapi-privacysettings"
+            }
+          ],
+          "forma": "false",
+          "nota": "A página declara default false.",
+          "valor": false
+        },
+        "disponibilidade": {
+          "ate_versao": null,
+          "desde_versao": "59.0",
+          "estado": "verificado"
+        },
+        "dominio": {
+          "estado": "verificado",
+          "evidencias": [
+            {
+              "fonte": "src:mdapi-privacysettings"
+            }
+          ],
+          "lista_completa": "sim",
+          "natureza": "booleano",
+          "valores": [
+            {
+              "valor": "true"
+            },
+            {
+              "valor": "false"
+            }
+          ]
+        },
+        "estado": "verificado",
+        "evidencias": [
+          {
+            "fonte": "src:mdapi-privacysettings"
+          }
+        ],
+        "explicacao": "explicada",
+        "id": "mdt:PrivacySettings.authorizationCaptureEmail",
+        "nome": "authorizationCaptureEmail",
+        "o_que_e": "Na autorização de consentimento, guarda o endereço de e-mail.",
+        "obrigatoriedade": {
+          "condicao": "A documentação 68.0 não marca o campo como obrigatório; ausência de marcação não comprova opcionalidade (confirmar no WSDL).",
+          "estado": "desconhecido",
+          "valor": "nao"
+        },
+        "origem": {
+          "estado": "verificado",
+          "evidencias": [
+            {
+              "fonte": "src:mdapi-privacysettings"
+            }
+          ],
+          "nota": "Propriedade definida pelo schema da Metadata API.",
+          "valor": "padrao_plataforma"
+        },
+        "tipo_tecnico": "boolean"
+      },
+      {
+        "default": {
+          "estado": "verificado",
+          "evidencias": [
+            {
+              "fonte": "src:mdapi-privacysettings"
+            }
+          ],
+          "forma": "false",
+          "nota": "A página declara default false.",
+          "valor": false
+        },
+        "disponibilidade": {
+          "ate_versao": null,
+          "desde_versao": "59.0",
+          "estado": "verificado"
+        },
+        "dominio": {
+          "estado": "verificado",
+          "evidencias": [
+            {
+              "fonte": "src:mdapi-privacysettings"
+            }
+          ],
+          "lista_completa": "sim",
+          "natureza": "booleano",
+          "valores": [
+            {
+              "valor": "true"
+            },
+            {
+              "valor": "false"
+            }
+          ]
+        },
+        "estado": "verificado",
+        "evidencias": [
+          {
+            "fonte": "src:mdapi-privacysettings"
+          }
+        ],
+        "explicacao": "explicada",
+        "id": "mdt:PrivacySettings.authorizationCaptureIp",
+        "nome": "authorizationCaptureIp",
+        "o_que_e": "Na autorização de consentimento, guarda o endereço IP.",
+        "obrigatoriedade": {
+          "condicao": "A documentação 68.0 não marca o campo como obrigatório; ausência de marcação não comprova opcionalidade (confirmar no WSDL).",
+          "estado": "desconhecido",
+          "valor": "nao"
+        },
+        "origem": {
+          "estado": "verificado",
+          "evidencias": [
+            {
+              "fonte": "src:mdapi-privacysettings"
+            }
+          ],
+          "nota": "Propriedade definida pelo schema da Metadata API.",
+          "valor": "padrao_plataforma"
+        },
+        "tipo_tecnico": "boolean"
+      },
+      {
+        "default": {
+          "estado": "verificado",
+          "evidencias": [
+            {
+              "fonte": "src:mdapi-privacysettings"
+            }
+          ],
+          "forma": "false",
+          "nota": "A página declara default false.",
+          "valor": false
+        },
+        "disponibilidade": {
+          "ate_versao": null,
+          "desde_versao": "59.0",
+          "estado": "verificado"
+        },
+        "dominio": {
+          "estado": "verificado",
+          "evidencias": [
+            {
+              "fonte": "src:mdapi-privacysettings"
+            }
+          ],
+          "lista_completa": "sim",
+          "natureza": "booleano",
+          "valores": [
+            {
+              "valor": "true"
+            },
+            {
+              "valor": "false"
+            }
+          ]
+        },
+        "estado": "verificado",
+        "evidencias": [
+          {
+            "fonte": "src:mdapi-privacysettings"
+          }
+        ],
+        "explicacao": "explicada",
+        "id": "mdt:PrivacySettings.authorizationCaptureLocation",
+        "nome": "authorizationCaptureLocation",
+        "o_que_e": "Na autorização de consentimento, guarda a localização.",
+        "obrigatoriedade": {
+          "condicao": "A documentação 68.0 não marca o campo como obrigatório; ausência de marcação não comprova opcionalidade (confirmar no WSDL).",
+          "estado": "desconhecido",
+          "valor": "nao"
+        },
+        "origem": {
+          "estado": "verificado",
+          "evidencias": [
+            {
+              "fonte": "src:mdapi-privacysettings"
+            }
+          ],
+          "nota": "Propriedade definida pelo schema da Metadata API.",
+          "valor": "padrao_plataforma"
+        },
+        "tipo_tecnico": "boolean"
+      },
+      {
+        "default": {
+          "estado": "verificado",
+          "evidencias": [
+            {
+              "fonte": "src:mdapi-privacysettings"
+            }
+          ],
+          "forma": "false",
+          "nota": "A página declara default false.",
+          "valor": false
+        },
+        "disponibilidade": {
+          "ate_versao": null,
+          "desde_versao": "59.0",
+          "estado": "verificado"
+        },
+        "dominio": {
+          "estado": "verificado",
+          "evidencias": [
+            {
+              "fonte": "src:mdapi-privacysettings"
+            }
+          ],
+          "lista_completa": "sim",
+          "natureza": "booleano",
+          "valores": [
+            {
+              "valor": "true"
+            },
+            {
+              "valor": "false"
+            }
+          ]
+        },
+        "estado": "verificado",
+        "evidencias": [
+          {
+            "fonte": "src:mdapi-privacysettings"
+          }
+        ],
+        "explicacao": "explicada",
+        "id": "mdt:PrivacySettings.authorizationCustomSharing",
+        "nome": "authorizationCustomSharing",
+        "o_que_e": "Liga o compartilhamento customizado dos registros de consentimento de autorização.",
+        "obrigatoriedade": {
+          "condicao": "A documentação 68.0 não marca o campo como obrigatório; ausência de marcação não comprova opcionalidade (confirmar no WSDL).",
+          "estado": "desconhecido",
+          "valor": "nao"
+        },
+        "origem": {
+          "estado": "verificado",
+          "evidencias": [
+            {
+              "fonte": "src:mdapi-privacysettings"
+            }
+          ],
+          "nota": "Propriedade definida pelo schema da Metadata API.",
+          "valor": "padrao_plataforma"
+        },
+        "tipo_tecnico": "boolean"
+      },
+      {
+        "default": {
+          "estado": "verificado",
+          "evidencias": [
+            {
+              "fonte": "src:mdapi-privacysettings"
+            }
+          ],
+          "forma": "false",
+          "nota": "A página declara default false.",
+          "valor": false
+        },
+        "disponibilidade": {
+          "ate_versao": null,
+          "desde_versao": "62.0",
+          "estado": "verificado"
+        },
+        "dominio": {
+          "estado": "verificado",
+          "evidencias": [
+            {
+              "fonte": "src:mdapi-privacysettings"
+            }
+          ],
+          "lista_completa": "sim",
+          "natureza": "booleano",
+          "valores": [
+            {
+              "valor": "true"
+            },
+            {
+              "valor": "false"
+            }
+          ]
+        },
+        "estado": "verificado",
+        "evidencias": [
+          {
+            "fonte": "src:mdapi-privacysettings"
+          }
+        ],
+        "explicacao": "explicada",
+        "id": "mdt:PrivacySettings.authorizationCustomSharingPCU",
+        "nome": "authorizationCustomSharingPCU",
+        "o_que_e": "O compartilhamento customizado desses registros usa acesso por permissão.",
+        "obrigatoriedade": {
+          "condicao": "A documentação 68.0 não marca o campo como obrigatório; ausência de marcação não comprova opcionalidade (confirmar no WSDL).",
+          "estado": "desconhecido",
+          "valor": "nao"
+        },
+        "origem": {
+          "estado": "verificado",
+          "evidencias": [
+            {
+              "fonte": "src:mdapi-privacysettings"
+            }
+          ],
+          "nota": "Propriedade definida pelo schema da Metadata API.",
+          "valor": "padrao_plataforma"
+        },
+        "tipo_tecnico": "boolean"
+      },
+      {
+        "default": {
+          "estado": "verificado",
+          "evidencias": [
+            {
+              "fonte": "src:mdapi-privacysettings"
+            }
+          ],
+          "forma": "false",
+          "nota": "A página declara default false.",
+          "valor": false
+        },
+        "disponibilidade": {
+          "ate_versao": null,
+          "desde_versao": "59.0",
+          "estado": "verificado"
+        },
+        "dominio": {
+          "estado": "verificado",
+          "evidencias": [
+            {
+              "fonte": "src:mdapi-privacysettings"
+            }
+          ],
+          "lista_completa": "sim",
+          "natureza": "booleano",
+          "valores": [
+            {
+              "valor": "true"
+            },
+            {
+              "valor": "false"
+            }
+          ]
+        },
+        "estado": "verificado",
+        "evidencias": [
+          {
+            "fonte": "src:mdapi-privacysettings"
+          }
+        ],
+        "explicacao": "explicada",
+        "id": "mdt:PrivacySettings.authorizationLockingAndVersioning",
+        "nome": "authorizationLockingAndVersioning",
+        "o_que_e": "Liga bloqueio e versionamento dos registros de consentimento de autorização.",
+        "obrigatoriedade": {
+          "condicao": "A documentação 68.0 não marca o campo como obrigatório; ausência de marcação não comprova opcionalidade (confirmar no WSDL).",
+          "estado": "desconhecido",
+          "valor": "nao"
+        },
+        "origem": {
+          "estado": "verificado",
+          "evidencias": [
+            {
+              "fonte": "src:mdapi-privacysettings"
+            }
+          ],
+          "nota": "Propriedade definida pelo schema da Metadata API.",
+          "valor": "padrao_plataforma"
+        },
+        "tipo_tecnico": "boolean"
+      },
+      {
+        "default": {
+          "estado": "verificado",
+          "evidencias": [
+            {
+              "fonte": "src:mdapi-privacysettings"
+            }
+          ],
+          "forma": "false",
+          "nota": "A página declara default false.",
+          "valor": false
+        },
+        "disponibilidade": {
+          "ate_versao": null,
+          "desde_versao": "59.0",
+          "estado": "verificado"
+        },
+        "dominio": {
+          "estado": "verificado",
+          "evidencias": [
+            {
+              "fonte": "src:mdapi-privacysettings"
+            }
+          ],
+          "lista_completa": "sim",
+          "natureza": "booleano",
+          "valores": [
+            {
+              "valor": "true"
+            },
+            {
+              "valor": "false"
+            }
+          ]
+        },
+        "estado": "verificado",
+        "evidencias": [
+          {
+            "fonte": "src:mdapi-privacysettings"
+          }
+        ],
+        "explicacao": "explicada",
+        "id": "mdt:PrivacySettings.enableConfigurableUserPIIActive",
+        "nome": "enableConfigurableUserPIIActive",
+        "o_que_e": "Ativa a classificação configurável de dados pessoais de usuários.",
+        "obrigatoriedade": {
+          "condicao": "A documentação 68.0 não marca o campo como obrigatório; ausência de marcação não comprova opcionalidade (confirmar no WSDL).",
+          "estado": "desconhecido",
+          "valor": "nao"
+        },
+        "origem": {
+          "estado": "verificado",
+          "evidencias": [
+            {
+              "fonte": "src:mdapi-privacysettings"
+            }
+          ],
+          "nota": "Propriedade definida pelo schema da Metadata API.",
+          "valor": "padrao_plataforma"
+        },
+        "tipo_tecnico": "boolean"
+      },
+      {
+        "default": {
+          "estado": "desconhecido",
+          "forma": "nao_declarado_na_fonte"
+        },
+        "disponibilidade": {
+          "ate_versao": null,
+          "desde_versao": null,
+          "estado": "desconhecido"
+        },
+        "dominio": {
+          "estado": "verificado",
+          "evidencias": [
+            {
+              "fonte": "src:mdapi-privacysettings"
+            }
+          ],
+          "lista_completa": "sim",
+          "natureza": "booleano",
+          "valores": [
+            {
+              "valor": "true"
+            },
+            {
+              "valor": "false"
+            }
+          ]
+        },
+        "estado": "verificado",
+        "evidencias": [
+          {
+            "fonte": "src:mdapi-privacysettings"
+          }
+        ],
+        "explicacao": "explicada",
+        "id": "mdt:PrivacySettings.enableConsentAuditTrail",
+        "nome": "enableConsentAuditTrail",
+        "o_que_e": "Reservado para uso futuro.",
+        "obrigatoriedade": {
+          "condicao": "A documentação 68.0 não marca o campo como obrigatório; ausência de marcação não comprova opcionalidade (confirmar no WSDL).",
+          "estado": "desconhecido",
+          "valor": "nao"
+        },
+        "origem": {
+          "estado": "verificado",
+          "evidencias": [
+            {
+              "fonte": "src:mdapi-privacysettings"
+            }
+          ],
+          "nota": "Propriedade definida pelo schema da Metadata API.",
+          "valor": "padrao_plataforma"
+        },
+        "tipo_tecnico": "boolean"
+      },
+      {
+        "default": {
+          "estado": "verificado",
+          "evidencias": [
+            {
+              "fonte": "src:mdapi-privacysettings"
+            }
+          ],
+          "forma": "false",
+          "nota": "A página declara default false.",
+          "valor": false
+        },
+        "disponibilidade": {
+          "ate_versao": null,
+          "desde_versao": "47.0",
+          "estado": "verificado"
+        },
+        "dominio": {
+          "estado": "verificado",
+          "evidencias": [
+            {
+              "fonte": "src:mdapi-privacysettings"
+            }
+          ],
+          "lista_completa": "sim",
+          "natureza": "booleano",
+          "valores": [
+            {
+              "valor": "true"
+            },
+            {
+              "valor": "false"
+            }
+          ]
+        },
+        "estado": "verificado",
+        "evidencias": [
+          {
+            "fonte": "src:mdapi-privacysettings"
+          }
+        ],
+        "explicacao": "explicada",
+        "id": "mdt:PrivacySettings.enableConsentEventStream",
+        "nome": "enableConsentEventStream",
+        "o_que_e": "Publica as mudanças de consentimento como platform events (Consent Event Stream).",
+        "obrigatoriedade": {
+          "condicao": "A documentação 68.0 não marca o campo como obrigatório; ausência de marcação não comprova opcionalidade (confirmar no WSDL).",
+          "estado": "desconhecido",
+          "valor": "nao"
+        },
+        "origem": {
+          "estado": "verificado",
+          "evidencias": [
+            {
+              "fonte": "src:mdapi-privacysettings"
+            }
+          ],
+          "nota": "Propriedade definida pelo schema da Metadata API.",
+          "valor": "padrao_plataforma"
+        },
+        "tipo_tecnico": "boolean"
+      },
+      {
+        "default": {
+          "estado": "verificado",
+          "evidencias": [
+            {
+              "fonte": "src:mdapi-privacysettings"
+            }
+          ],
+          "forma": "false",
+          "nota": "A página declara default false.",
+          "valor": false
+        },
+        "disponibilidade": {
+          "ate_versao": null,
+          "desde_versao": "47.0",
+          "estado": "verificado"
+        },
+        "dominio": {
+          "estado": "verificado",
+          "evidencias": [
+            {
+              "fonte": "src:mdapi-privacysettings"
+            }
+          ],
+          "lista_completa": "sim",
+          "natureza": "booleano",
+          "valores": [
+            {
+              "valor": "true"
+            },
+            {
+              "valor": "false"
+            }
+          ]
+        },
+        "estado": "verificado",
+        "evidencias": [
+          {
+            "fonte": "src:mdapi-privacysettings"
+          }
+        ],
+        "explicacao": "explicada",
+        "id": "mdt:PrivacySettings.enableDefaultMetadataValues",
+        "nome": "enableDefaultMetadataValues",
+        "o_que_e": "Aplica um nível de sensibilidade padrão a contatos, leads, contas pessoais e usuários.",
+        "obrigatoriedade": {
+          "condicao": "A documentação 68.0 não marca o campo como obrigatório; ausência de marcação não comprova opcionalidade (confirmar no WSDL).",
+          "estado": "desconhecido",
+          "valor": "nao"
+        },
+        "origem": {
+          "estado": "verificado",
+          "evidencias": [
+            {
+              "fonte": "src:mdapi-privacysettings"
+            }
+          ],
+          "nota": "Propriedade definida pelo schema da Metadata API.",
+          "valor": "padrao_plataforma"
+        },
+        "tipo_tecnico": "boolean"
+      },
+      {
+        "default": {
+          "estado": "verificado",
+          "evidencias": [
+            {
+              "fonte": "src:mdapi-privacysettings"
+            }
+          ],
+          "forma": "false",
+          "nota": "A página declara default false.",
+          "valor": false
+        },
+        "disponibilidade": {
+          "ate_versao": null,
+          "desde_versao": "61.0",
+          "estado": "verificado"
+        },
+        "dominio": {
+          "estado": "verificado",
+          "evidencias": [
+            {
+              "fonte": "src:mdapi-privacysettings"
+            }
+          ],
+          "lista_completa": "sim",
+          "natureza": "booleano",
+          "valores": [
+            {
+              "valor": "true"
+            },
+            {
+              "valor": "false"
+            }
+          ]
+        },
+        "estado": "verificado",
+        "evidencias": [
+          {
+            "fonte": "src:mdapi-privacysettings"
+          }
+        ],
+        "explicacao": "explicada",
+        "id": "mdt:PrivacySettings.enableSalesforceArchive",
+        "nome": "enableSalesforceArchive",
+        "o_que_e": "Liga o Salesforce Archive para arquivar dados ligados à privacidade.",
+        "obrigatoriedade": {
+          "condicao": "A documentação 68.0 não marca o campo como obrigatório; ausência de marcação não comprova opcionalidade (confirmar no WSDL).",
+          "estado": "desconhecido",
+          "valor": "nao"
+        },
+        "origem": {
+          "estado": "verificado",
+          "evidencias": [
+            {
+              "fonte": "src:mdapi-privacysettings"
+            }
+          ],
+          "nota": "Propriedade definida pelo schema da Metadata API.",
+          "valor": "padrao_plataforma"
+        },
+        "tipo_tecnico": "boolean"
+      },
+      {
+        "default": {
+          "estado": "verificado",
+          "evidencias": [
+            {
+              "fonte": "src:mdapi-privacysettings"
+            }
+          ],
+          "forma": "false",
+          "nota": "A página declara default false.",
+          "valor": false
+        },
+        "disponibilidade": {
+          "ate_versao": null,
+          "desde_versao": "58.0",
+          "estado": "verificado"
+        },
+        "dominio": {
+          "estado": "verificado",
+          "evidencias": [
+            {
+              "fonte": "src:mdapi-privacysettings"
+            }
+          ],
+          "lista_completa": "sim",
+          "natureza": "booleano",
+          "valores": [
+            {
+              "valor": "true"
+            },
+            {
+              "valor": "false"
+            }
+          ]
+        },
+        "estado": "verificado",
+        "evidencias": [
+          {
+            "fonte": "src:mdapi-privacysettings"
+          }
+        ],
+        "explicacao": "explicada",
+        "id": "mdt:PrivacySettings.useUmaDefaultConsentRecs",
+        "nome": "useUmaDefaultConsentRecs",
+        "o_que_e": "O Preference Manager do Privacy Center usa as configurações de consentimento padrão do Marketing Cloud.",
+        "obrigatoriedade": {
+          "condicao": "A documentação 68.0 não marca o campo como obrigatório; ausência de marcação não comprova opcionalidade (confirmar no WSDL).",
+          "estado": "desconhecido",
+          "valor": "nao"
+        },
+        "origem": {
+          "estado": "verificado",
+          "evidencias": [
+            {
+              "fonte": "src:mdapi-privacysettings"
+            }
+          ],
+          "nota": "Propriedade definida pelo schema da Metadata API.",
+          "valor": "padrao_plataforma"
+        },
+        "tipo_tecnico": "boolean"
+      },
+      {
+        "default": {
+          "estado": "desconhecido",
+          "forma": "nao_declarado_na_fonte"
+        },
+        "disponibilidade": {
+          "ate_versao": null,
+          "desde_versao": null,
+          "estado": "desconhecido"
+        },
+        "dominio": {
+          "contexto": "A fonte tipa como string sem lista de valores; não inventar valores.",
+          "estado": "verificado",
+          "evidencias": [
+            {
+              "fonte": "src:mdapi-privacysettings"
+            }
+          ],
+          "natureza": "texto_livre"
+        },
+        "estado": "verificado",
+        "evidencias": [
+          {
+            "fonte": "src:mdapi-privacysettings"
+          }
+        ],
+        "explicacao": "explicada",
+        "herdada_de": "Metadata",
+        "id": "mdt:PrivacySettings.fullName",
+        "nome": "fullName",
+        "o_que_e": "Nome completo (API name) do componente; herdado do tipo Metadata.",
+        "obrigatoriedade": {
+          "estado": "desconhecido",
+          "valor": "desconhecida"
+        },
+        "origem": {
+          "estado": "verificado",
+          "evidencias": [
+            {
+              "fonte": "src:mdapi-privacysettings"
+            }
+          ],
+          "nota": "Propriedade definida pelo schema da Metadata API.",
+          "valor": "padrao_plataforma"
+        },
+        "tipo_tecnico": "string"
+      }
+    ],
+    "recomendacoes": [],
+    "setup": {
+      "estado": "desconhecido",
+      "nota": "Caminho no Setup não validado nesta sessão."
+    },
+    "suporte_cli": {
+      "estado": "verificado",
+      "evidencias": [
+        {
+          "fonte": "src:sdr-metadata-support"
+        }
+      ],
+      "nota": "Suporte do Salesforce CLI (source-deploy-retrieve), não do Metadata API em geral.",
+      "valor": {
+        "nota_fonte": null,
+        "status": "suportado"
+      }
+    }
+  },
+  "nota": "Gerado deterministicamente a partir de catalogo/. Não editar à mão.",
+  "objetos_relacionados": [
+    {
+      "base_da_relacao": [
+        "representacao_comum_em:func:consent-management"
+      ],
+      "objeto": {
+        "alertas": [
+          "A visibilidade e a edição dos campos dependem do page layout e da segurança de campo.",
+          "Há histórico de campos rastreados (ContactPointTypeConsentHistory) e compartilhamento próprio (sharing rules e ContactPointTypeConsentShare)."
+        ],
+        "apex": {
+          "consulta_soql_direta": {
+            "estado": "verificado",
+            "evidencias": [
+              {
+                "fonte": "src:objref-contactpointtypeconsent"
+              }
+            ],
+            "nota": "Objeto da API padrão: consultável por SOQL em Apex, sujeito a permissões.",
+            "valor": true
+          },
+          "nota": "Exemplo Apex não fornecido nesta fase."
+        },
+        "campos": [
+          {
+            "apis": [
+              "padrao"
+            ],
+            "default": {
+              "estado": "desconhecido",
+              "forma": "nao_declarado_na_fonte"
+            },
+            "disponibilidade": {
+              "ate_versao": null,
+              "desde_versao": "53.0",
+              "estado": "verificado"
+            },
+            "dominio": {
+              "contexto": "Id de registro do(s) objeto(s) referenciado(s).",
+              "estado": "verificado",
+              "evidencias": [
+                {
+                  "fonte": "src:objref-contactpointtypeconsent"
+                }
+              ],
+              "natureza": "referencia"
+            },
+            "estado": "verificado",
+            "evidencias": [
+              {
+                "fonte": "src:objref-contactpointtypeconsent"
+              }
+            ],
+            "explicacao": "explicada",
+            "id": "obj:ContactPointTypeConsent.BusinessBrandId",
+            "nome": "BusinessBrandId",
+            "o_que_e": "A marca a que a pessoa deu o consentimento para este canal.",
+            "obrigatoriedade": {
+              "estado": "desconhecido",
+              "valor": "desconhecida"
+            },
+            "origem": {
+              "estado": "verificado",
+              "evidencias": [
+                {
+                  "fonte": "src:objref-contactpointtypeconsent"
+                }
+              ],
+              "nota": "Campo padrão do objeto documentado.",
+              "valor": "padrao_plataforma"
+            },
+            "propriedades_api": {
+              "create": true,
+              "defaulted_on_create": false,
+              "estado": "verificado",
+              "evidencias": [
+                {
+                  "fonte": "src:objref-contactpointtypeconsent"
+                }
+              ],
+              "filter": true,
+              "group": true,
+              "id_lookup": false,
+              "nillable": true,
+              "restricted_picklist": false,
+              "sort": true,
+              "update": true
+            },
+            "referencia": {
+              "alvos": [
+                "BusinessBrand"
+              ],
+              "nome_relacionamento": "BusinessBrand"
+            },
+            "somente_leitura": false,
+            "tipo_tecnico": "reference"
+          },
+          {
+            "apis": [
+              "padrao"
+            ],
+            "default": {
+              "estado": "desconhecido",
+              "forma": "nao_declarado_na_fonte"
+            },
+            "disponibilidade": {
+              "ate_versao": null,
+              "desde_versao": null,
+              "estado": "desconhecido"
+            },
+            "dominio": {
+              "contexto": "Valores conforme a página; listas de picklist podem variar por org, idioma ou recurso habilitado.",
+              "estado": "verificado",
+              "evidencias": [
+                {
+                  "fonte": "src:objref-contactpointtypeconsent"
+                }
+              ],
+              "lista_completa": "sim",
+              "natureza": "enum_fechado",
+              "valores": [
+                {
+                  "valor": "Email"
+                },
+                {
+                  "valor": "MailingAddress"
+                },
+                {
+                  "valor": "Phone"
+                },
+                {
+                  "valor": "Social"
+                },
+                {
+                  "valor": "Web"
+                }
+              ]
+            },
+            "estado": "verificado",
+            "evidencias": [
+              {
+                "fonte": "src:objref-contactpointtypeconsent"
+              }
+            ],
+            "explicacao": "explicada",
+            "id": "obj:ContactPointTypeConsent.CaptureContactPointType",
+            "nome": "CaptureContactPointType",
+            "o_que_e": "Canal pelo qual o consentimento foi obtido.",
+            "obrigatoriedade": {
+              "estado": "verificado",
+              "evidencias": [
+                {
+                  "fonte": "src:objref-contactpointtypeconsent"
+                }
+              ],
+              "valor": "sim"
+            },
+            "origem": {
+              "estado": "verificado",
+              "evidencias": [
+                {
+                  "fonte": "src:objref-contactpointtypeconsent"
+                }
+              ],
+              "nota": "Campo padrão do objeto documentado.",
+              "valor": "padrao_plataforma"
+            },
+            "propriedades_api": {
+              "create": true,
+              "defaulted_on_create": false,
+              "estado": "verificado",
+              "evidencias": [
+                {
+                  "fonte": "src:objref-contactpointtypeconsent"
+                }
+              ],
+              "filter": true,
+              "group": true,
+              "id_lookup": false,
+              "nillable": true,
+              "restricted_picklist": true,
+              "sort": true,
+              "update": true
+            },
+            "somente_leitura": false,
+            "tipo_tecnico": "picklist"
+          },
+          {
+            "apis": [
+              "padrao"
+            ],
+            "default": {
+              "estado": "desconhecido",
+              "forma": "nao_declarado_na_fonte"
+            },
+            "disponibilidade": {
+              "ate_versao": null,
+              "desde_versao": null,
+              "estado": "desconhecido"
+            },
+            "dominio": {
+              "estado": "verificado",
+              "evidencias": [
+                {
+                  "fonte": "src:objref-contactpointtypeconsent"
+                }
+              ],
+              "natureza": "data_hora"
+            },
+            "estado": "verificado",
+            "evidencias": [
+              {
+                "fonte": "src:objref-contactpointtypeconsent"
+              }
+            ],
+            "explicacao": "explicada",
+            "id": "obj:ContactPointTypeConsent.CaptureDate",
+            "nome": "CaptureDate",
+            "o_que_e": "Quando o consentimento foi obtido.",
+            "obrigatoriedade": {
+              "estado": "verificado",
+              "evidencias": [
+                {
+                  "fonte": "src:objref-contactpointtypeconsent"
+                }
+              ],
+              "valor": "sim"
+            },
+            "origem": {
+              "estado": "verificado",
+              "evidencias": [
+                {
+                  "fonte": "src:objref-contactpointtypeconsent"
+                }
+              ],
+              "nota": "Campo padrão do objeto documentado.",
+              "valor": "padrao_plataforma"
+            },
+            "propriedades_api": {
+              "create": true,
+              "defaulted_on_create": false,
+              "estado": "verificado",
+              "evidencias": [
+                {
+                  "fonte": "src:objref-contactpointtypeconsent"
+                }
+              ],
+              "filter": true,
+              "group": false,
+              "id_lookup": false,
+              "nillable": true,
+              "restricted_picklist": false,
+              "sort": true,
+              "update": true
+            },
+            "somente_leitura": false,
+            "tipo_tecnico": "dateTime"
+          },
+          {
+            "apis": [
+              "padrao"
+            ],
+            "default": {
+              "estado": "desconhecido",
+              "forma": "nao_declarado_na_fonte"
+            },
+            "disponibilidade": {
+              "ate_versao": null,
+              "desde_versao": null,
+              "estado": "desconhecido"
+            },
+            "dominio": {
+              "estado": "verificado",
+              "evidencias": [
+                {
+                  "fonte": "src:objref-contactpointtypeconsent"
+                }
+              ],
+              "natureza": "texto_livre"
+            },
+            "estado": "verificado",
+            "evidencias": [
+              {
+                "fonte": "src:objref-contactpointtypeconsent"
+              }
+            ],
+            "explicacao": "explicada",
+            "id": "obj:ContactPointTypeConsent.CaptureSource",
+            "nome": "CaptureSource",
+            "o_que_e": "Como o consentimento foi obtido, como um formulário online.",
+            "obrigatoriedade": {
+              "estado": "verificado",
+              "evidencias": [
+                {
+                  "fonte": "src:objref-contactpointtypeconsent"
+                }
+              ],
+              "valor": "sim"
+            },
+            "origem": {
+              "estado": "verificado",
+              "evidencias": [
+                {
+                  "fonte": "src:objref-contactpointtypeconsent"
+                }
+              ],
+              "nota": "Campo padrão do objeto documentado.",
+              "valor": "padrao_plataforma"
+            },
+            "propriedades_api": {
+              "create": true,
+              "defaulted_on_create": false,
+              "estado": "verificado",
+              "evidencias": [
+                {
+                  "fonte": "src:objref-contactpointtypeconsent"
+                }
+              ],
+              "filter": true,
+              "group": true,
+              "id_lookup": false,
+              "nillable": true,
+              "restricted_picklist": false,
+              "sort": true,
+              "update": true
+            },
+            "somente_leitura": false,
+            "tipo_tecnico": "string"
+          },
+          {
+            "apis": [
+              "padrao"
+            ],
+            "default": {
+              "estado": "desconhecido",
+              "forma": "nao_declarado_na_fonte"
+            },
+            "disponibilidade": {
+              "ate_versao": null,
+              "desde_versao": null,
+              "estado": "desconhecido"
+            },
+            "dominio": {
+              "contexto": "Valores conforme a página; listas de picklist podem variar por org, idioma ou recurso habilitado.",
+              "estado": "verificado",
+              "evidencias": [
+                {
+                  "fonte": "src:objref-contactpointtypeconsent"
+                }
+              ],
+              "lista_completa": "sim",
+              "natureza": "enum_fechado",
+              "valores": [
+                {
+                  "valor": "Email"
+                },
+                {
+                  "valor": "MailingAddress"
+                },
+                {
+                  "valor": "Phone"
+                },
+                {
+                  "valor": "Social"
+                },
+                {
+                  "valor": "Web"
+                }
+              ]
+            },
+            "estado": "verificado",
+            "evidencias": [
+              {
+                "fonte": "src:objref-contactpointtypeconsent"
+              }
+            ],
+            "explicacao": "explicada",
+            "id": "obj:ContactPointTypeConsent.ContactPointType",
+            "nome": "ContactPointType",
+            "o_que_e": "Canal a que o consentimento se aplica.",
+            "obrigatoriedade": {
+              "estado": "verificado",
+              "evidencias": [
+                {
+                  "fonte": "src:objref-contactpointtypeconsent"
+                }
+              ],
+              "valor": "sim"
+            },
+            "origem": {
+              "estado": "verificado",
+              "evidencias": [
+                {
+                  "fonte": "src:objref-contactpointtypeconsent"
+                }
+              ],
+              "nota": "Campo padrão do objeto documentado.",
+              "valor": "padrao_plataforma"
+            },
+            "propriedades_api": {
+              "create": true,
+              "defaulted_on_create": false,
+              "estado": "verificado",
+              "evidencias": [
+                {
+                  "fonte": "src:objref-contactpointtypeconsent"
+                }
+              ],
+              "filter": true,
+              "group": true,
+              "id_lookup": false,
+              "nillable": true,
+              "restricted_picklist": true,
+              "sort": true,
+              "update": true
+            },
+            "somente_leitura": false,
+            "tipo_tecnico": "picklist"
+          },
+          {
+            "apis": [
+              "padrao"
+            ],
+            "default": {
+              "estado": "desconhecido",
+              "forma": "nao_declarado_na_fonte"
+            },
+            "disponibilidade": {
+              "ate_versao": null,
+              "desde_versao": null,
+              "estado": "desconhecido"
+            },
+            "dominio": {
+              "contexto": "Id de registro do(s) objeto(s) referenciado(s).",
+              "estado": "verificado",
+              "evidencias": [
+                {
+                  "fonte": "src:objref-contactpointtypeconsent"
+                }
+              ],
+              "natureza": "referencia"
+            },
+            "estado": "verificado",
+            "evidencias": [
+              {
+                "fonte": "src:objref-contactpointtypeconsent"
+              }
+            ],
+            "explicacao": "explicada",
+            "id": "obj:ContactPointTypeConsent.DataUsePurposeId",
+            "nome": "DataUsePurposeId",
+            "o_que_e": "A finalidade de uso ligada ao consentimento.",
+            "obrigatoriedade": {
+              "estado": "desconhecido",
+              "valor": "desconhecida"
+            },
+            "origem": {
+              "estado": "verificado",
+              "evidencias": [
+                {
+                  "fonte": "src:objref-contactpointtypeconsent"
+                }
+              ],
+              "nota": "Campo padrão do objeto documentado.",
+              "valor": "padrao_plataforma"
+            },
+            "propriedades_api": {
+              "create": true,
+              "defaulted_on_create": false,
+              "estado": "verificado",
+              "evidencias": [
+                {
+                  "fonte": "src:objref-contactpointtypeconsent"
+                }
+              ],
+              "filter": true,
+              "group": true,
+              "id_lookup": false,
+              "nillable": true,
+              "restricted_picklist": false,
+              "sort": true,
+              "update": true
+            },
+            "referencia": {
+              "alvos": [
+                "obj:DataUsePurpose"
+              ],
+              "nome_relacionamento": "DataUsePurpose"
+            },
+            "somente_leitura": false,
+            "tipo_tecnico": "reference"
+          },
+          {
+            "apis": [
+              "padrao"
+            ],
+            "default": {
+              "estado": "desconhecido",
+              "forma": "nao_declarado_na_fonte"
+            },
+            "disponibilidade": {
+              "ate_versao": null,
+              "desde_versao": null,
+              "estado": "desconhecido"
+            },
+            "dominio": {
+              "estado": "verificado",
+              "evidencias": [
+                {
+                  "fonte": "src:objref-contactpointtypeconsent"
+                }
+              ],
+              "natureza": "data_hora"
+            },
+            "estado": "verificado",
+            "evidencias": [
+              {
+                "fonte": "src:objref-contactpointtypeconsent"
+              }
+            ],
+            "explicacao": "explicada",
+            "id": "obj:ContactPointTypeConsent.DoubleConsentCaptureDate",
+            "nome": "DoubleConsentCaptureDate",
+            "o_que_e": "Quando o double opt-in foi concluído.",
+            "obrigatoriedade": {
+              "estado": "desconhecido",
+              "valor": "desconhecida"
+            },
+            "origem": {
+              "estado": "verificado",
+              "evidencias": [
+                {
+                  "fonte": "src:objref-contactpointtypeconsent"
+                }
+              ],
+              "nota": "Campo padrão do objeto documentado.",
+              "valor": "padrao_plataforma"
+            },
+            "propriedades_api": {
+              "create": true,
+              "defaulted_on_create": false,
+              "estado": "verificado",
+              "evidencias": [
+                {
+                  "fonte": "src:objref-contactpointtypeconsent"
+                }
+              ],
+              "filter": true,
+              "group": false,
+              "id_lookup": false,
+              "nillable": true,
+              "restricted_picklist": false,
+              "sort": true,
+              "update": true
+            },
+            "somente_leitura": false,
+            "tipo_tecnico": "dateTime"
+          },
+          {
+            "apis": [
+              "padrao"
+            ],
+            "default": {
+              "estado": "desconhecido",
+              "forma": "nao_declarado_na_fonte"
+            },
+            "disponibilidade": {
+              "ate_versao": null,
+              "desde_versao": null,
+              "estado": "desconhecido"
+            },
+            "dominio": {
+              "estado": "verificado",
+              "evidencias": [
+                {
+                  "fonte": "src:objref-contactpointtypeconsent"
+                }
+              ],
+              "natureza": "data_hora"
+            },
+            "estado": "verificado",
+            "evidencias": [
+              {
+                "fonte": "src:objref-contactpointtypeconsent"
+              }
+            ],
+            "explicacao": "explicada",
+            "id": "obj:ContactPointTypeConsent.EffectiveFrom",
+            "nome": "EffectiveFrom",
+            "o_que_e": "Início da validade do consentimento.",
+            "obrigatoriedade": {
+              "estado": "desconhecido",
+              "valor": "desconhecida"
+            },
+            "origem": {
+              "estado": "verificado",
+              "evidencias": [
+                {
+                  "fonte": "src:objref-contactpointtypeconsent"
+                }
+              ],
+              "nota": "Campo padrão do objeto documentado.",
+              "valor": "padrao_plataforma"
+            },
+            "propriedades_api": {
+              "create": true,
+              "defaulted_on_create": false,
+              "estado": "verificado",
+              "evidencias": [
+                {
+                  "fonte": "src:objref-contactpointtypeconsent"
+                }
+              ],
+              "filter": true,
+              "group": false,
+              "id_lookup": false,
+              "nillable": true,
+              "restricted_picklist": false,
+              "sort": true,
+              "update": true
+            },
+            "somente_leitura": false,
+            "tipo_tecnico": "dateTime"
+          },
+          {
+            "apis": [
+              "padrao"
+            ],
+            "default": {
+              "estado": "desconhecido",
+              "forma": "nao_declarado_na_fonte"
+            },
+            "disponibilidade": {
+              "ate_versao": null,
+              "desde_versao": null,
+              "estado": "desconhecido"
+            },
+            "dominio": {
+              "estado": "verificado",
+              "evidencias": [
+                {
+                  "fonte": "src:objref-contactpointtypeconsent"
+                }
+              ],
+              "natureza": "data_hora"
+            },
+            "estado": "verificado",
+            "evidencias": [
+              {
+                "fonte": "src:objref-contactpointtypeconsent"
+              }
+            ],
+            "explicacao": "explicada",
+            "id": "obj:ContactPointTypeConsent.EffectiveTo",
+            "nome": "EffectiveTo",
+            "o_que_e": "Fim da validade do consentimento.",
+            "obrigatoriedade": {
+              "estado": "desconhecido",
+              "valor": "desconhecida"
+            },
+            "origem": {
+              "estado": "verificado",
+              "evidencias": [
+                {
+                  "fonte": "src:objref-contactpointtypeconsent"
+                }
+              ],
+              "nota": "Campo padrão do objeto documentado.",
+              "valor": "padrao_plataforma"
+            },
+            "propriedades_api": {
+              "create": true,
+              "defaulted_on_create": false,
+              "estado": "verificado",
+              "evidencias": [
+                {
+                  "fonte": "src:objref-contactpointtypeconsent"
+                }
+              ],
+              "filter": true,
+              "group": false,
+              "id_lookup": false,
+              "nillable": true,
+              "restricted_picklist": false,
+              "sort": true,
+              "update": true
+            },
+            "somente_leitura": false,
+            "tipo_tecnico": "dateTime"
+          },
+          {
+            "apis": [
+              "padrao"
+            ],
+            "default": {
+              "estado": "desconhecido",
+              "forma": "nao_declarado_na_fonte"
+            },
+            "disponibilidade": {
+              "ate_versao": null,
+              "desde_versao": null,
+              "estado": "desconhecido"
+            },
+            "dominio": {
+              "contexto": "Valores conforme a página; listas de picklist podem variar por org, idioma ou recurso habilitado.",
+              "estado": "verificado",
+              "evidencias": [
+                {
+                  "fonte": "src:objref-contactpointtypeconsent"
+                }
+              ],
+              "lista_completa": "sim",
+              "natureza": "enum_fechado",
+              "valores": [
+                {
+                  "valor": "Billboard"
+                },
+                {
+                  "valor": "Email"
+                },
+                {
+                  "valor": "MailingAddress"
+                },
+                {
+                  "valor": "Phone"
+                },
+                {
+                  "valor": "SMS"
+                },
+                {
+                  "valor": "Social"
+                },
+                {
+                  "valor": "Web"
+                }
+              ]
+            },
+            "estado": "verificado",
+            "evidencias": [
+              {
+                "fonte": "src:objref-contactpointtypeconsent"
+              }
+            ],
+            "explicacao": "explicada",
+            "id": "obj:ContactPointTypeConsent.EngagementChannelType",
+            "nome": "EngagementChannelType",
+            "notas": [
+              "A página também descreve o campo como relacionamento com EngagementChannelType."
+            ],
+            "o_que_e": "Canal a que o consentimento se aplica, quando ContactPointType não é informado.",
+            "obrigatoriedade": {
+              "estado": "desconhecido",
+              "valor": "desconhecida"
+            },
+            "origem": {
+              "estado": "verificado",
+              "evidencias": [
+                {
+                  "fonte": "src:objref-contactpointtypeconsent"
+                }
+              ],
+              "nota": "Campo padrão do objeto documentado.",
+              "valor": "padrao_plataforma"
+            },
+            "propriedades_api": {
+              "create": true,
+              "defaulted_on_create": false,
+              "estado": "verificado",
+              "evidencias": [
+                {
+                  "fonte": "src:objref-contactpointtypeconsent"
+                }
+              ],
+              "filter": true,
+              "group": true,
+              "id_lookup": false,
+              "nillable": true,
+              "restricted_picklist": true,
+              "sort": true,
+              "update": true
+            },
+            "somente_leitura": false,
+            "tipo_tecnico": "picklist"
+          },
+          {
+            "apis": [
+              "padrao"
+            ],
+            "default": {
+              "estado": "desconhecido",
+              "forma": "nao_declarado_na_fonte"
+            },
+            "disponibilidade": {
+              "ate_versao": null,
+              "desde_versao": null,
+              "estado": "desconhecido"
+            },
+            "dominio": {
+              "estado": "verificado",
+              "evidencias": [
+                {
+                  "fonte": "src:objref-contactpointtypeconsent"
+                }
+              ],
+              "natureza": "data_hora"
+            },
+            "estado": "verificado",
+            "evidencias": [
+              {
+                "fonte": "src:objref-contactpointtypeconsent"
+              }
+            ],
+            "explicacao": "explicada",
+            "id": "obj:ContactPointTypeConsent.LastReferencedDate",
+            "nome": "LastReferencedDate",
+            "o_que_e": "Quando o usuário atual viu um registro relacionado pela última vez.",
+            "obrigatoriedade": {
+              "estado": "desconhecido",
+              "valor": "desconhecida"
+            },
+            "origem": {
+              "estado": "verificado",
+              "evidencias": [
+                {
+                  "fonte": "src:objref-contactpointtypeconsent"
+                }
+              ],
+              "nota": "Campo padrão do objeto documentado.",
+              "valor": "padrao_plataforma"
+            },
+            "propriedades_api": {
+              "create": false,
+              "defaulted_on_create": false,
+              "estado": "verificado",
+              "evidencias": [
+                {
+                  "fonte": "src:objref-contactpointtypeconsent"
+                }
+              ],
+              "filter": true,
+              "group": false,
+              "id_lookup": false,
+              "nillable": true,
+              "restricted_picklist": false,
+              "sort": true,
+              "update": false
+            },
+            "somente_leitura": true,
+            "tipo_tecnico": "dateTime"
+          },
+          {
+            "apis": [
+              "padrao"
+            ],
+            "default": {
+              "estado": "desconhecido",
+              "forma": "nao_declarado_na_fonte"
+            },
+            "disponibilidade": {
+              "ate_versao": null,
+              "desde_versao": null,
+              "estado": "desconhecido"
+            },
+            "dominio": {
+              "estado": "verificado",
+              "evidencias": [
+                {
+                  "fonte": "src:objref-contactpointtypeconsent"
+                }
+              ],
+              "natureza": "data_hora"
+            },
+            "estado": "verificado",
+            "evidencias": [
+              {
+                "fonte": "src:objref-contactpointtypeconsent"
+              }
+            ],
+            "explicacao": "explicada",
+            "id": "obj:ContactPointTypeConsent.LastViewedDate",
+            "nome": "LastViewedDate",
+            "o_que_e": "Quando o usuário atual viu este registro pela última vez.",
+            "obrigatoriedade": {
+              "estado": "desconhecido",
+              "valor": "desconhecida"
+            },
+            "origem": {
+              "estado": "verificado",
+              "evidencias": [
+                {
+                  "fonte": "src:objref-contactpointtypeconsent"
+                }
+              ],
+              "nota": "Campo padrão do objeto documentado.",
+              "valor": "padrao_plataforma"
+            },
+            "propriedades_api": {
+              "create": false,
+              "defaulted_on_create": false,
+              "estado": "verificado",
+              "evidencias": [
+                {
+                  "fonte": "src:objref-contactpointtypeconsent"
+                }
+              ],
+              "filter": true,
+              "group": false,
+              "id_lookup": false,
+              "nillable": true,
+              "restricted_picklist": false,
+              "sort": true,
+              "update": false
+            },
+            "somente_leitura": true,
+            "tipo_tecnico": "dateTime"
+          },
+          {
+            "apis": [
+              "padrao"
+            ],
+            "default": {
+              "estado": "desconhecido",
+              "forma": "nao_declarado_na_fonte"
+            },
+            "disponibilidade": {
+              "ate_versao": null,
+              "desde_versao": null,
+              "estado": "desconhecido"
+            },
+            "dominio": {
+              "estado": "verificado",
+              "evidencias": [
+                {
+                  "fonte": "src:objref-contactpointtypeconsent"
+                }
+              ],
+              "natureza": "texto_livre"
+            },
+            "estado": "verificado",
+            "evidencias": [
+              {
+                "fonte": "src:objref-contactpointtypeconsent"
+              }
+            ],
+            "explicacao": "explicada",
+            "id": "obj:ContactPointTypeConsent.Name",
+            "nome": "Name",
+            "o_que_e": "Nome do registro de consentimento.",
+            "obrigatoriedade": {
+              "estado": "desconhecido",
+              "valor": "desconhecida"
+            },
+            "origem": {
+              "estado": "verificado",
+              "evidencias": [
+                {
+                  "fonte": "src:objref-contactpointtypeconsent"
+                }
+              ],
+              "nota": "Campo padrão do objeto documentado.",
+              "valor": "padrao_plataforma"
+            },
+            "propriedades_api": {
+              "create": true,
+              "defaulted_on_create": false,
+              "estado": "verificado",
+              "evidencias": [
+                {
+                  "fonte": "src:objref-contactpointtypeconsent"
+                }
+              ],
+              "filter": true,
+              "group": true,
+              "id_lookup": true,
+              "nillable": false,
+              "restricted_picklist": false,
+              "sort": true,
+              "update": true
+            },
+            "somente_leitura": false,
+            "tipo_tecnico": "string"
+          },
+          {
+            "apis": [
+              "padrao"
+            ],
+            "default": {
+              "estado": "desconhecido",
+              "forma": "desconhecido",
+              "nota": "A API marca o campo como 'defaulted on create', mas o valor não foi declarado na extração."
+            },
+            "disponibilidade": {
+              "ate_versao": null,
+              "desde_versao": null,
+              "estado": "desconhecido"
+            },
+            "dominio": {
+              "contexto": "Id de registro do(s) objeto(s) referenciado(s).",
+              "estado": "verificado",
+              "evidencias": [
+                {
+                  "fonte": "src:objref-contactpointtypeconsent"
+                }
+              ],
+              "natureza": "referencia"
+            },
+            "estado": "verificado",
+            "evidencias": [
+              {
+                "fonte": "src:objref-contactpointtypeconsent"
+              }
+            ],
+            "explicacao": "explicada",
+            "id": "obj:ContactPointTypeConsent.OwnerId",
+            "nome": "OwnerId",
+            "o_que_e": "Dono do registro.",
+            "obrigatoriedade": {
+              "estado": "desconhecido",
+              "valor": "desconhecida"
+            },
+            "origem": {
+              "estado": "verificado",
+              "evidencias": [
+                {
+                  "fonte": "src:objref-contactpointtypeconsent"
+                }
+              ],
+              "nota": "Campo padrão do objeto documentado.",
+              "valor": "padrao_plataforma"
+            },
+            "propriedades_api": {
+              "create": true,
+              "defaulted_on_create": true,
+              "estado": "verificado",
+              "evidencias": [
+                {
+                  "fonte": "src:objref-contactpointtypeconsent"
+                }
+              ],
+              "filter": true,
+              "group": true,
+              "id_lookup": false,
+              "nillable": false,
+              "restricted_picklist": false,
+              "sort": true,
+              "update": true
+            },
+            "referencia": {
+              "alvos": [
+                "obj:Group",
+                "obj:User"
+              ],
+              "nome_relacionamento": "Owner"
+            },
+            "somente_leitura": false,
+            "tipo_tecnico": "reference"
+          },
+          {
+            "apis": [
+              "padrao"
+            ],
+            "default": {
+              "estado": "desconhecido",
+              "forma": "nao_declarado_na_fonte"
+            },
+            "disponibilidade": {
+              "ate_versao": null,
+              "desde_versao": null,
+              "estado": "desconhecido"
+            },
+            "dominio": {
+              "contexto": "Id de registro do(s) objeto(s) referenciado(s).",
+              "estado": "verificado",
+              "evidencias": [
+                {
+                  "fonte": "src:objref-contactpointtypeconsent"
+                }
+              ],
+              "natureza": "referencia"
+            },
+            "estado": "verificado",
+            "evidencias": [
+              {
+                "fonte": "src:objref-contactpointtypeconsent"
+              }
+            ],
+            "explicacao": "explicada",
+            "id": "obj:ContactPointTypeConsent.PartyId",
+            "nome": "PartyId",
+            "o_que_e": "A pessoa (Individual) que deu o consentimento.",
+            "obrigatoriedade": {
+              "estado": "verificado",
+              "evidencias": [
+                {
+                  "fonte": "src:objref-contactpointtypeconsent"
+                }
+              ],
+              "valor": "sim"
+            },
+            "origem": {
+              "estado": "verificado",
+              "evidencias": [
+                {
+                  "fonte": "src:objref-contactpointtypeconsent"
+                }
+              ],
+              "nota": "Campo padrão do objeto documentado.",
+              "valor": "padrao_plataforma"
+            },
+            "propriedades_api": {
+              "create": true,
+              "defaulted_on_create": false,
+              "estado": "verificado",
+              "evidencias": [
+                {
+                  "fonte": "src:objref-contactpointtypeconsent"
+                }
+              ],
+              "filter": true,
+              "group": true,
+              "id_lookup": false,
+              "nillable": false,
+              "restricted_picklist": false,
+              "sort": true,
+              "update": true
+            },
+            "referencia": {
+              "alvos": [
+                "obj:Individual"
+              ],
+              "nome_relacionamento": "Party"
+            },
+            "somente_leitura": false,
+            "tipo_tecnico": "reference"
+          },
+          {
+            "apis": [
+              "padrao"
+            ],
+            "default": {
+              "estado": "desconhecido",
+              "forma": "nao_declarado_na_fonte"
+            },
+            "disponibilidade": {
+              "ate_versao": null,
+              "desde_versao": "53.0",
+              "estado": "verificado"
+            },
+            "dominio": {
+              "contexto": "Id de registro do(s) objeto(s) referenciado(s).",
+              "estado": "verificado",
+              "evidencias": [
+                {
+                  "fonte": "src:objref-contactpointtypeconsent"
+                }
+              ],
+              "natureza": "referencia"
+            },
+            "estado": "verificado",
+            "evidencias": [
+              {
+                "fonte": "src:objref-contactpointtypeconsent"
+              }
+            ],
+            "explicacao": "explicada",
+            "id": "obj:ContactPointTypeConsent.PartyRoleId",
+            "nome": "PartyRoleId",
+            "o_que_e": "O papel da pessoa neste consentimento.",
+            "obrigatoriedade": {
+              "estado": "desconhecido",
+              "valor": "desconhecida"
+            },
+            "origem": {
+              "estado": "verificado",
+              "evidencias": [
+                {
+                  "fonte": "src:objref-contactpointtypeconsent"
+                }
+              ],
+              "nota": "Campo padrão do objeto documentado.",
+              "valor": "padrao_plataforma"
+            },
+            "propriedades_api": {
+              "create": true,
+              "defaulted_on_create": false,
+              "estado": "verificado",
+              "evidencias": [
+                {
+                  "fonte": "src:objref-contactpointtypeconsent"
+                }
+              ],
+              "filter": true,
+              "group": true,
+              "id_lookup": false,
+              "nillable": true,
+              "restricted_picklist": false,
+              "sort": true,
+              "update": true
+            },
+            "referencia": {
+              "alvos": [
+                "Customer",
+                "Seller"
+              ],
+              "nome_relacionamento": "PartyRole"
+            },
+            "somente_leitura": false,
+            "tipo_tecnico": "reference"
+          },
+          {
+            "apis": [
+              "padrao"
+            ],
+            "default": {
+              "estado": "desconhecido",
+              "forma": "desconhecido",
+              "nota": "A API marca o campo como 'defaulted on create', mas o valor não foi declarado na extração."
+            },
+            "disponibilidade": {
+              "ate_versao": null,
+              "desde_versao": null,
+              "estado": "desconhecido"
+            },
+            "dominio": {
+              "contexto": "Valores conforme a página; listas de picklist podem variar por org, idioma ou recurso habilitado.",
+              "estado": "verificado",
+              "evidencias": [
+                {
+                  "fonte": "src:objref-contactpointtypeconsent"
+                }
+              ],
+              "lista_completa": "sim",
+              "natureza": "enum_fechado",
+              "valores": [
+                {
+                  "valor": "NotSeen"
+                },
+                {
+                  "valor": "Seen"
+                },
+                {
+                  "valor": "OptIn"
+                },
+                {
+                  "valor": "OptInPending"
+                },
+                {
+                  "valor": "OptOut"
+                },
+                {
+                  "valor": "OptOutPending"
+                }
+              ]
+            },
+            "estado": "verificado",
+            "evidencias": [
+              {
+                "fonte": "src:objref-contactpointtypeconsent"
+              }
+            ],
+            "explicacao": "explicada",
+            "id": "obj:ContactPointTypeConsent.PrivacyConsentStatus",
+            "nome": "PrivacyConsentStatus",
+            "notas": [
+              "OptInPending e OptOutPending existem desde a API 58.0. A página dá só os nomes dos valores."
+            ],
+            "o_que_e": "Se a pessoa aceita esta forma de contato.",
+            "obrigatoriedade": {
+              "estado": "verificado",
+              "evidencias": [
+                {
+                  "fonte": "src:objref-contactpointtypeconsent"
+                }
+              ],
+              "valor": "sim"
+            },
+            "origem": {
+              "estado": "verificado",
+              "evidencias": [
+                {
+                  "fonte": "src:objref-contactpointtypeconsent"
+                }
+              ],
+              "nota": "Campo padrão do objeto documentado.",
+              "valor": "padrao_plataforma"
+            },
+            "propriedades_api": {
+              "create": true,
+              "defaulted_on_create": true,
+              "estado": "verificado",
+              "evidencias": [
+                {
+                  "fonte": "src:objref-contactpointtypeconsent"
+                }
+              ],
+              "filter": true,
+              "group": true,
+              "id_lookup": false,
+              "nillable": false,
+              "restricted_picklist": true,
+              "sort": true,
+              "update": true
+            },
+            "somente_leitura": false,
+            "tipo_tecnico": "picklist"
+          }
+        ],
+        "cobertura": {
+          "estrutural": {
+            "esperado": 17,
+            "estado": "completa",
+            "nota": "Tabela de campos lida completa (17).",
+            "presente": 17
+          },
+          "explicativa": {
+            "esperado": 17,
+            "estado": "completa",
+            "presente": 17
+          },
+          "mapeamento": {
+            "estado": "parcial",
+            "nota": "Ver relacionamentos registrados."
+          }
+        },
+        "consultas": [
+          {
+            "api": "padrao",
+            "contexto": "API padrão. Lista os consentimentos de e-mail.",
+            "soql": "SELECT PartyId, ContactPointType, PrivacyConsentStatus, EffectiveFrom FROM ContactPointTypeConsent WHERE ContactPointType = 'Email'",
+            "validacao": "documental"
+          }
+        ],
+        "estado": "verificado",
+        "evidencias": [
+          {
+            "fonte": "src:objref-contactpointtypeconsent"
+          }
+        ],
+        "exposicoes": [
+          {
+            "acesso_especial": "Só existe com Data Protection and Privacy habilitado.",
+            "api": "padrao",
+            "chamadas": [
+              "create()",
+              "delete()",
+              "describeLayout()",
+              "describeSObjects()",
+              "getDeleted()",
+              "getUpdated()",
+              "query()",
+              "retrieve()",
+              "search()",
+              "undelete()",
+              "update()",
+              "upsert()"
+            ],
+            "desde_versao": "45.0",
+            "estado": "verificado",
+            "evidencias": [
+              {
+                "fonte": "src:objref-contactpointtypeconsent"
+              }
+            ]
+          },
+          {
+            "api": "tooling",
+            "desde_versao": null,
+            "estado": "desconhecido",
+            "nota": "Exposição na Tooling API não verificada."
+          }
+        ],
+        "id": "obj:ContactPointTypeConsent",
+        "juncao": false,
+        "nome": "ContactPointTypeConsent",
+        "o_que_e": "O consentimento de uma pessoa para um canal de contato, como e-mail ou telefone, com a finalidade, a marca, a origem e o período de validade.",
+        "papel": "Registrar e consultar, canal a canal, o que cada pessoa aceitou ou recusou.",
+        "setup": {
+          "estado": "nao_aplicavel",
+          "nota": "Objeto consultável via API; não é tela do Setup."
+        }
+      },
+      "relacionamentos_do_objeto": [
+        {
+          "cardinalidade_registros": {
+            "estado": "desconhecido",
+            "nota": "Lookup indica N:1; obrigatoriedade não declarada na página.",
+            "valor": "N:1"
+          },
+          "destino": {
+            "entidade": "obj:DataUsePurpose"
+          },
+          "estado": "verificado",
+          "evidencias": [
+            {
+              "fonte": "src:objref-contactpointtypeconsent"
+            }
+          ],
+          "explicacao": "O consentimento de canal pode apontar a finalidade de uso a que se refere.",
+          "id": "rel:cptc-datausepurpose",
+          "origem": {
+            "campo": "DataUsePurposeId",
+            "entidade": "obj:ContactPointTypeConsent"
+          },
+          "tipo": "referencia_campo"
+        },
+        {
+          "cardinalidade_registros": {
+            "estado": "desconhecido",
+            "nota": "Lookup indica N:1; obrigatoriedade não declarada na página.",
+            "valor": "N:1"
+          },
+          "destino": {
+            "entidade": "obj:Individual"
+          },
+          "estado": "verificado",
+          "evidencias": [
+            {
+              "fonte": "src:objref-contactpointtypeconsent"
+            }
+          ],
+          "explicacao": "Cada consentimento de canal pertence a uma pessoa (Individual).",
+          "id": "rel:cptc-individual",
+          "origem": {
+            "campo": "PartyId",
+            "entidade": "obj:ContactPointTypeConsent"
+          },
+          "tipo": "referencia_campo"
+        }
+      ]
+    },
+    {
+      "base_da_relacao": [
+        "representacao_comum_em:func:consent-management"
+      ],
+      "objeto": {
+        "alertas": [
+          "Há eventos de mudança (DataUsePurposeChangeEvent, desde a API 62.0), histórico e compartilhamento próprios."
+        ],
+        "apex": {
+          "consulta_soql_direta": {
+            "estado": "verificado",
+            "evidencias": [
+              {
+                "fonte": "src:objref-datausepurpose"
+              }
+            ],
+            "nota": "Objeto da API padrão: consultável por SOQL em Apex, sujeito a permissões.",
+            "valor": true
+          },
+          "nota": "Exemplo Apex não fornecido nesta fase."
+        },
+        "campos": [
+          {
+            "apis": [
+              "padrao"
+            ],
+            "default": {
+              "estado": "desconhecido",
+              "forma": "desconhecido",
+              "nota": "A API marca o campo como 'defaulted on create', mas o valor não foi declarado na extração."
+            },
+            "disponibilidade": {
+              "ate_versao": null,
+              "desde_versao": null,
+              "estado": "desconhecido"
+            },
+            "dominio": {
+              "estado": "verificado",
+              "evidencias": [
+                {
+                  "fonte": "src:objref-datausepurpose"
+                }
+              ],
+              "lista_completa": "sim",
+              "natureza": "booleano",
+              "valores": [
+                {
+                  "valor": "true"
+                },
+                {
+                  "valor": "false"
+                }
+              ]
+            },
+            "estado": "verificado",
+            "evidencias": [
+              {
+                "fonte": "src:objref-datausepurpose"
+              }
+            ],
+            "explicacao": "explicada",
+            "id": "obj:DataUsePurpose.CanDataSubjectOptOut",
+            "nome": "CanDataSubjectOptOut",
+            "o_que_e": "Se a pessoa pode recusar contato para esta finalidade.",
+            "obrigatoriedade": {
+              "estado": "verificado",
+              "evidencias": [
+                {
+                  "fonte": "src:objref-datausepurpose"
+                }
+              ],
+              "valor": "sim"
+            },
+            "origem": {
+              "estado": "verificado",
+              "evidencias": [
+                {
+                  "fonte": "src:objref-datausepurpose"
+                }
+              ],
+              "nota": "Campo padrão do objeto documentado.",
+              "valor": "padrao_plataforma"
+            },
+            "propriedades_api": {
+              "create": true,
+              "defaulted_on_create": true,
+              "estado": "verificado",
+              "evidencias": [
+                {
+                  "fonte": "src:objref-datausepurpose"
+                }
+              ],
+              "filter": true,
+              "group": true,
+              "id_lookup": false,
+              "nillable": false,
+              "restricted_picklist": false,
+              "sort": true,
+              "update": true
+            },
+            "somente_leitura": false,
+            "tipo_tecnico": "boolean"
+          },
+          {
+            "apis": [
+              "padrao"
+            ],
+            "default": {
+              "estado": "desconhecido",
+              "forma": "nao_declarado_na_fonte"
+            },
+            "disponibilidade": {
+              "ate_versao": null,
+              "desde_versao": null,
+              "estado": "desconhecido"
+            },
+            "dominio": {
+              "estado": "verificado",
+              "evidencias": [
+                {
+                  "fonte": "src:objref-datausepurpose"
+                }
+              ],
+              "natureza": "texto_livre"
+            },
+            "estado": "verificado",
+            "evidencias": [
+              {
+                "fonte": "src:objref-datausepurpose"
+              }
+            ],
+            "explicacao": "explicada",
+            "id": "obj:DataUsePurpose.Description",
+            "nome": "Description",
+            "o_que_e": "Por que a pessoa é contatada.",
+            "obrigatoriedade": {
+              "estado": "desconhecido",
+              "valor": "desconhecida"
+            },
+            "origem": {
+              "estado": "verificado",
+              "evidencias": [
+                {
+                  "fonte": "src:objref-datausepurpose"
+                }
+              ],
+              "nota": "Campo padrão do objeto documentado.",
+              "valor": "padrao_plataforma"
+            },
+            "propriedades_api": {
+              "create": true,
+              "defaulted_on_create": false,
+              "estado": "verificado",
+              "evidencias": [
+                {
+                  "fonte": "src:objref-datausepurpose"
+                }
+              ],
+              "filter": true,
+              "group": true,
+              "id_lookup": false,
+              "nillable": true,
+              "restricted_picklist": false,
+              "sort": true,
+              "update": true
+            },
+            "somente_leitura": false,
+            "tipo_tecnico": "string"
+          },
+          {
+            "apis": [
+              "padrao"
+            ],
+            "default": {
+              "estado": "desconhecido",
+              "forma": "nao_declarado_na_fonte"
+            },
+            "disponibilidade": {
+              "ate_versao": null,
+              "desde_versao": null,
+              "estado": "desconhecido"
+            },
+            "dominio": {
+              "estado": "verificado",
+              "evidencias": [
+                {
+                  "fonte": "src:objref-datausepurpose"
+                }
+              ],
+              "natureza": "data_hora"
+            },
+            "estado": "verificado",
+            "evidencias": [
+              {
+                "fonte": "src:objref-datausepurpose"
+              }
+            ],
+            "explicacao": "explicada",
+            "id": "obj:DataUsePurpose.LastReferencedDate",
+            "nome": "LastReferencedDate",
+            "o_que_e": "Quando o usuário atual viu um registro relacionado pela última vez.",
+            "obrigatoriedade": {
+              "estado": "desconhecido",
+              "valor": "desconhecida"
+            },
+            "origem": {
+              "estado": "verificado",
+              "evidencias": [
+                {
+                  "fonte": "src:objref-datausepurpose"
+                }
+              ],
+              "nota": "Campo padrão do objeto documentado.",
+              "valor": "padrao_plataforma"
+            },
+            "propriedades_api": {
+              "create": false,
+              "defaulted_on_create": false,
+              "estado": "verificado",
+              "evidencias": [
+                {
+                  "fonte": "src:objref-datausepurpose"
+                }
+              ],
+              "filter": true,
+              "group": false,
+              "id_lookup": false,
+              "nillable": true,
+              "restricted_picklist": false,
+              "sort": true,
+              "update": false
+            },
+            "somente_leitura": true,
+            "tipo_tecnico": "dateTime"
+          },
+          {
+            "apis": [
+              "padrao"
+            ],
+            "default": {
+              "estado": "desconhecido",
+              "forma": "nao_declarado_na_fonte"
+            },
+            "disponibilidade": {
+              "ate_versao": null,
+              "desde_versao": null,
+              "estado": "desconhecido"
+            },
+            "dominio": {
+              "estado": "verificado",
+              "evidencias": [
+                {
+                  "fonte": "src:objref-datausepurpose"
+                }
+              ],
+              "natureza": "data_hora"
+            },
+            "estado": "verificado",
+            "evidencias": [
+              {
+                "fonte": "src:objref-datausepurpose"
+              }
+            ],
+            "explicacao": "explicada",
+            "id": "obj:DataUsePurpose.LastViewedDate",
+            "nome": "LastViewedDate",
+            "o_que_e": "Quando o usuário atual viu este registro pela última vez.",
+            "obrigatoriedade": {
+              "estado": "desconhecido",
+              "valor": "desconhecida"
+            },
+            "origem": {
+              "estado": "verificado",
+              "evidencias": [
+                {
+                  "fonte": "src:objref-datausepurpose"
+                }
+              ],
+              "nota": "Campo padrão do objeto documentado.",
+              "valor": "padrao_plataforma"
+            },
+            "propriedades_api": {
+              "create": false,
+              "defaulted_on_create": false,
+              "estado": "verificado",
+              "evidencias": [
+                {
+                  "fonte": "src:objref-datausepurpose"
+                }
+              ],
+              "filter": true,
+              "group": false,
+              "id_lookup": false,
+              "nillable": true,
+              "restricted_picklist": false,
+              "sort": true,
+              "update": false
+            },
+            "somente_leitura": true,
+            "tipo_tecnico": "dateTime"
+          },
+          {
+            "apis": [
+              "padrao"
+            ],
+            "default": {
+              "estado": "desconhecido",
+              "forma": "nao_declarado_na_fonte"
+            },
+            "disponibilidade": {
+              "ate_versao": null,
+              "desde_versao": null,
+              "estado": "desconhecido"
+            },
+            "dominio": {
+              "contexto": "Id de registro do(s) objeto(s) referenciado(s).",
+              "estado": "verificado",
+              "evidencias": [
+                {
+                  "fonte": "src:objref-datausepurpose"
+                }
+              ],
+              "natureza": "referencia"
+            },
+            "estado": "verificado",
+            "evidencias": [
+              {
+                "fonte": "src:objref-datausepurpose"
+              }
+            ],
+            "explicacao": "explicada",
+            "id": "obj:DataUsePurpose.LegalBasisId",
+            "nome": "LegalBasisId",
+            "o_que_e": "A base legal da finalidade.",
+            "obrigatoriedade": {
+              "estado": "desconhecido",
+              "valor": "desconhecida"
+            },
+            "origem": {
+              "estado": "verificado",
+              "evidencias": [
+                {
+                  "fonte": "src:objref-datausepurpose"
+                }
+              ],
+              "nota": "Campo padrão do objeto documentado.",
+              "valor": "padrao_plataforma"
+            },
+            "propriedades_api": {
+              "create": true,
+              "defaulted_on_create": false,
+              "estado": "verificado",
+              "evidencias": [
+                {
+                  "fonte": "src:objref-datausepurpose"
+                }
+              ],
+              "filter": true,
+              "group": true,
+              "id_lookup": false,
+              "nillable": true,
+              "restricted_picklist": false,
+              "sort": true,
+              "update": true
+            },
+            "referencia": {
+              "alvos": [
+                "DataUseLegalBasis"
+              ],
+              "nome_relacionamento": "LegalBasis"
+            },
+            "somente_leitura": false,
+            "tipo_tecnico": "reference"
+          },
+          {
+            "apis": [
+              "padrao"
+            ],
+            "default": {
+              "estado": "desconhecido",
+              "forma": "nao_declarado_na_fonte"
+            },
+            "disponibilidade": {
+              "ate_versao": null,
+              "desde_versao": null,
+              "estado": "desconhecido"
+            },
+            "dominio": {
+              "estado": "verificado",
+              "evidencias": [
+                {
+                  "fonte": "src:objref-datausepurpose"
+                }
+              ],
+              "natureza": "texto_livre"
+            },
+            "estado": "verificado",
+            "evidencias": [
+              {
+                "fonte": "src:objref-datausepurpose"
+              }
+            ],
+            "explicacao": "explicada",
+            "id": "obj:DataUsePurpose.Name",
+            "nome": "Name",
+            "o_que_e": "A finalidade, como cobrança ou marketing.",
+            "obrigatoriedade": {
+              "estado": "verificado",
+              "evidencias": [
+                {
+                  "fonte": "src:objref-datausepurpose"
+                }
+              ],
+              "valor": "sim"
+            },
+            "origem": {
+              "estado": "verificado",
+              "evidencias": [
+                {
+                  "fonte": "src:objref-datausepurpose"
+                }
+              ],
+              "nota": "Campo padrão do objeto documentado.",
+              "valor": "padrao_plataforma"
+            },
+            "propriedades_api": {
+              "create": true,
+              "defaulted_on_create": false,
+              "estado": "verificado",
+              "evidencias": [
+                {
+                  "fonte": "src:objref-datausepurpose"
+                }
+              ],
+              "filter": true,
+              "group": true,
+              "id_lookup": true,
+              "nillable": false,
+              "restricted_picklist": false,
+              "sort": true,
+              "update": true
+            },
+            "somente_leitura": false,
+            "tipo_tecnico": "string"
+          },
+          {
+            "apis": [
+              "padrao"
+            ],
+            "default": {
+              "estado": "desconhecido",
+              "forma": "desconhecido",
+              "nota": "A API marca o campo como 'defaulted on create', mas o valor não foi declarado na extração."
+            },
+            "disponibilidade": {
+              "ate_versao": null,
+              "desde_versao": null,
+              "estado": "desconhecido"
+            },
+            "dominio": {
+              "contexto": "Id de registro do(s) objeto(s) referenciado(s).",
+              "estado": "verificado",
+              "evidencias": [
+                {
+                  "fonte": "src:objref-datausepurpose"
+                }
+              ],
+              "natureza": "referencia"
+            },
+            "estado": "verificado",
+            "evidencias": [
+              {
+                "fonte": "src:objref-datausepurpose"
+              }
+            ],
+            "explicacao": "explicada",
+            "id": "obj:DataUsePurpose.OwnerId",
+            "nome": "OwnerId",
+            "o_que_e": "Dono do registro.",
+            "obrigatoriedade": {
+              "estado": "desconhecido",
+              "valor": "desconhecida"
+            },
+            "origem": {
+              "estado": "verificado",
+              "evidencias": [
+                {
+                  "fonte": "src:objref-datausepurpose"
+                }
+              ],
+              "nota": "Campo padrão do objeto documentado.",
+              "valor": "padrao_plataforma"
+            },
+            "propriedades_api": {
+              "create": true,
+              "defaulted_on_create": true,
+              "estado": "verificado",
+              "evidencias": [
+                {
+                  "fonte": "src:objref-datausepurpose"
+                }
+              ],
+              "filter": true,
+              "group": true,
+              "id_lookup": false,
+              "nillable": false,
+              "restricted_picklist": false,
+              "sort": true,
+              "update": true
+            },
+            "referencia": {
+              "alvos": [
+                "obj:Group",
+                "obj:User"
+              ],
+              "nome_relacionamento": "Owner"
+            },
+            "somente_leitura": false,
+            "tipo_tecnico": "reference"
+          },
+          {
+            "apis": [
+              "padrao"
+            ],
+            "default": {
+              "estado": "desconhecido",
+              "forma": "nao_declarado_na_fonte"
+            },
+            "disponibilidade": {
+              "ate_versao": null,
+              "desde_versao": null,
+              "estado": "desconhecido"
+            },
+            "dominio": {
+              "contexto": "Id de registro do(s) objeto(s) referenciado(s).",
+              "estado": "verificado",
+              "evidencias": [
+                {
+                  "fonte": "src:objref-datausepurpose"
+                }
+              ],
+              "natureza": "referencia"
+            },
+            "estado": "verificado",
+            "evidencias": [
+              {
+                "fonte": "src:objref-datausepurpose"
+              }
+            ],
+            "explicacao": "explicada",
+            "id": "obj:DataUsePurpose.PurposeId",
+            "nome": "PurposeId",
+            "o_que_e": "Registro com dados próprios da finalidade.",
+            "obrigatoriedade": {
+              "estado": "desconhecido",
+              "valor": "desconhecida"
+            },
+            "origem": {
+              "estado": "verificado",
+              "evidencias": [
+                {
+                  "fonte": "src:objref-datausepurpose"
+                }
+              ],
+              "nota": "Campo padrão do objeto documentado.",
+              "valor": "padrao_plataforma"
+            },
+            "propriedades_api": {
+              "create": true,
+              "defaulted_on_create": false,
+              "estado": "verificado",
+              "evidencias": [
+                {
+                  "fonte": "src:objref-datausepurpose"
+                }
+              ],
+              "filter": true,
+              "group": true,
+              "id_lookup": false,
+              "nillable": true,
+              "restricted_picklist": false,
+              "sort": true,
+              "update": true
+            },
+            "referencia": {
+              "alvos": [
+                "Asset",
+                "CareProgram",
+                "CareRegisteredDevice",
+                "Product2"
+              ],
+              "nome_relacionamento": "Purpose"
+            },
+            "somente_leitura": false,
+            "tipo_tecnico": "reference"
+          }
+        ],
+        "cobertura": {
+          "estrutural": {
+            "esperado": 8,
+            "estado": "completa",
+            "nota": "Tabela de campos lida completa (8).",
+            "presente": 8
+          },
+          "explicativa": {
+            "esperado": 8,
+            "estado": "completa",
+            "presente": 8
+          },
+          "mapeamento": {
+            "estado": "parcial",
+            "nota": "Ver relacionamentos registrados."
+          }
+        },
+        "consultas": [
+          {
+            "api": "padrao",
+            "contexto": "API padrão. Lista as finalidades cadastradas.",
+            "soql": "SELECT Name, CanDataSubjectOptOut, Description FROM DataUsePurpose",
+            "validacao": "documental"
+          }
+        ],
+        "estado": "verificado",
+        "evidencias": [
+          {
+            "fonte": "src:objref-datausepurpose"
+          }
+        ],
+        "exposicoes": [
+          {
+            "acesso_especial": "Só existe com Data Protection and Privacy habilitado.",
+            "api": "padrao",
+            "chamadas": [
+              "create()",
+              "delete()",
+              "describeLayout()",
+              "describeSObjects()",
+              "getDeleted()",
+              "getUpdated()",
+              "query()",
+              "retrieve()",
+              "search()",
+              "undelete()",
+              "update()",
+              "upsert()"
+            ],
+            "desde_versao": "45.0",
+            "estado": "verificado",
+            "evidencias": [
+              {
+                "fonte": "src:objref-datausepurpose"
+              }
+            ]
+          },
+          {
+            "api": "tooling",
+            "desde_versao": null,
+            "estado": "desconhecido",
+            "nota": "Exposição na Tooling API não verificada."
+          }
+        ],
+        "id": "obj:DataUsePurpose",
+        "juncao": false,
+        "nome": "DataUsePurpose",
+        "o_que_e": "Uma finalidade de uso de dados: o motivo de contatar alguém, como cobrança, marketing ou pesquisa, e se a pessoa pode recusar.",
+        "papel": "Cadastrar as finalidades a que os consentimentos se referem.",
+        "setup": {
+          "estado": "nao_aplicavel",
+          "nota": "Objeto consultável via API; não é tela do Setup."
+        }
+      },
+      "relacionamentos_do_objeto": [
+        {
+          "cardinalidade_registros": {
+            "estado": "desconhecido",
+            "nota": "Lookup indica N:1; obrigatoriedade não declarada na página.",
+            "valor": "N:1"
+          },
+          "destino": {
+            "entidade": "obj:DataUsePurpose"
+          },
+          "estado": "verificado",
+          "evidencias": [
+            {
+              "fonte": "src:objref-contactpointtypeconsent"
+            }
+          ],
+          "explicacao": "O consentimento de canal pode apontar a finalidade de uso a que se refere.",
+          "id": "rel:cptc-datausepurpose",
+          "origem": {
+            "campo": "DataUsePurposeId",
+            "entidade": "obj:ContactPointTypeConsent"
+          },
+          "tipo": "referencia_campo"
+        }
+      ]
+    },
+    {
+      "base_da_relacao": [
+        "representacao_comum_em:func:consent-management"
+      ],
+      "objeto": {
+        "alertas": [
+          "Os campos de preferência só registram o que a pessoa pediu: cumprir o pedido é responsabilidade do processo da empresa.",
+          "A página não lista os valores dos picklists (IndividualsAge, MilitaryService, Salutation).",
+          "Há objetos associados: IndividualChangeEvent (desde a API 47.0), IndividualHistory e IndividualShare."
+        ],
+        "apex": {
+          "consulta_soql_direta": {
+            "estado": "verificado",
+            "evidencias": [
+              {
+                "fonte": "src:objref-individual"
+              }
+            ],
+            "nota": "Objeto da API padrão: consultável por SOQL em Apex, sujeito a permissões.",
+            "valor": true
+          },
+          "nota": "Exemplo Apex não fornecido nesta fase."
+        },
+        "campos": [
+          {
+            "apis": [
+              "padrao"
+            ],
+            "default": {
+              "estado": "desconhecido",
+              "forma": "nao_declarado_na_fonte"
+            },
+            "disponibilidade": {
+              "ate_versao": null,
+              "desde_versao": null,
+              "estado": "desconhecido"
+            },
+            "dominio": {
+              "estado": "verificado",
+              "evidencias": [
+                {
+                  "fonte": "src:objref-individual"
+                }
+              ],
+              "natureza": "data_hora"
+            },
+            "estado": "verificado",
+            "evidencias": [
+              {
+                "fonte": "src:objref-individual"
+              }
+            ],
+            "explicacao": "explicada",
+            "id": "obj:Individual.BirthDate",
+            "nome": "BirthDate",
+            "o_que_e": "Data de nascimento.",
+            "obrigatoriedade": {
+              "estado": "desconhecido",
+              "valor": "desconhecida"
+            },
+            "origem": {
+              "estado": "verificado",
+              "evidencias": [
+                {
+                  "fonte": "src:objref-individual"
+                }
+              ],
+              "nota": "Campo padrão do objeto documentado.",
+              "valor": "padrao_plataforma"
+            },
+            "propriedades_api": {
+              "create": true,
+              "defaulted_on_create": false,
+              "estado": "verificado",
+              "evidencias": [
+                {
+                  "fonte": "src:objref-individual"
+                }
+              ],
+              "filter": true,
+              "group": true,
+              "id_lookup": false,
+              "nillable": true,
+              "restricted_picklist": false,
+              "sort": true,
+              "update": true
+            },
+            "somente_leitura": false,
+            "tipo_tecnico": "date"
+          },
+          {
+            "apis": [
+              "padrao"
+            ],
+            "default": {
+              "estado": "desconhecido",
+              "forma": "desconhecido",
+              "nota": "A API marca o campo como 'defaulted on create', mas o valor não foi declarado na extração."
+            },
+            "disponibilidade": {
+              "ate_versao": null,
+              "desde_versao": null,
+              "estado": "desconhecido"
+            },
+            "dominio": {
+              "estado": "verificado",
+              "evidencias": [
+                {
+                  "fonte": "src:objref-individual"
+                }
+              ],
+              "lista_completa": "sim",
+              "natureza": "booleano",
+              "valores": [
+                {
+                  "valor": "true"
+                },
+                {
+                  "valor": "false"
+                }
+              ]
+            },
+            "estado": "verificado",
+            "evidencias": [
+              {
+                "fonte": "src:objref-individual"
+              }
+            ],
+            "explicacao": "explicada",
+            "id": "obj:Individual.CanStorePiiElsewhere",
+            "nome": "CanStorePiiElsewhere",
+            "o_que_e": "Se os dados pessoais podem ficar fora da jurisdição legal do cliente.",
+            "obrigatoriedade": {
+              "estado": "desconhecido",
+              "valor": "desconhecida"
+            },
+            "origem": {
+              "estado": "verificado",
+              "evidencias": [
+                {
+                  "fonte": "src:objref-individual"
+                }
+              ],
+              "nota": "Campo padrão do objeto documentado.",
+              "valor": "padrao_plataforma"
+            },
+            "propriedades_api": {
+              "create": true,
+              "defaulted_on_create": true,
+              "estado": "verificado",
+              "evidencias": [
+                {
+                  "fonte": "src:objref-individual"
+                }
+              ],
+              "filter": true,
+              "group": true,
+              "id_lookup": false,
+              "nillable": false,
+              "restricted_picklist": false,
+              "sort": true,
+              "update": true
+            },
+            "somente_leitura": false,
+            "tipo_tecnico": "boolean"
+          },
+          {
+            "apis": [
+              "padrao"
+            ],
+            "default": {
+              "estado": "desconhecido",
+              "forma": "nao_declarado_na_fonte"
+            },
+            "disponibilidade": {
+              "ate_versao": null,
+              "desde_versao": null,
+              "estado": "desconhecido"
+            },
+            "dominio": {
+              "estado": "verificado",
+              "evidencias": [
+                {
+                  "fonte": "src:objref-individual"
+                }
+              ],
+              "natureza": "numerico"
+            },
+            "estado": "verificado",
+            "evidencias": [
+              {
+                "fonte": "src:objref-individual"
+              }
+            ],
+            "explicacao": "explicada",
+            "id": "obj:Individual.ChildrenCount",
+            "nome": "ChildrenCount",
+            "o_que_e": "Número de filhos.",
+            "obrigatoriedade": {
+              "estado": "desconhecido",
+              "valor": "desconhecida"
+            },
+            "origem": {
+              "estado": "verificado",
+              "evidencias": [
+                {
+                  "fonte": "src:objref-individual"
+                }
+              ],
+              "nota": "Campo padrão do objeto documentado.",
+              "valor": "padrao_plataforma"
+            },
+            "propriedades_api": {
+              "create": true,
+              "defaulted_on_create": false,
+              "estado": "verificado",
+              "evidencias": [
+                {
+                  "fonte": "src:objref-individual"
+                }
+              ],
+              "filter": true,
+              "group": true,
+              "id_lookup": false,
+              "nillable": true,
+              "restricted_picklist": false,
+              "sort": true,
+              "update": true
+            },
+            "somente_leitura": false,
+            "tipo_tecnico": "int"
+          },
+          {
+            "apis": [
+              "padrao"
+            ],
+            "default": {
+              "estado": "desconhecido",
+              "forma": "nao_declarado_na_fonte"
+            },
+            "disponibilidade": {
+              "ate_versao": null,
+              "desde_versao": null,
+              "estado": "desconhecido"
+            },
+            "dominio": {
+              "estado": "verificado",
+              "evidencias": [
+                {
+                  "fonte": "src:objref-individual"
+                }
+              ],
+              "natureza": "numerico"
+            },
+            "estado": "verificado",
+            "evidencias": [
+              {
+                "fonte": "src:objref-individual"
+              }
+            ],
+            "explicacao": "explicada",
+            "id": "obj:Individual.ConsumerCreditScore",
+            "nome": "ConsumerCreditScore",
+            "o_que_e": "Pontuação de crédito.",
+            "obrigatoriedade": {
+              "estado": "desconhecido",
+              "valor": "desconhecida"
+            },
+            "origem": {
+              "estado": "verificado",
+              "evidencias": [
+                {
+                  "fonte": "src:objref-individual"
+                }
+              ],
+              "nota": "Campo padrão do objeto documentado.",
+              "valor": "padrao_plataforma"
+            },
+            "propriedades_api": {
+              "create": true,
+              "defaulted_on_create": false,
+              "estado": "verificado",
+              "evidencias": [
+                {
+                  "fonte": "src:objref-individual"
+                }
+              ],
+              "filter": true,
+              "group": true,
+              "id_lookup": false,
+              "nillable": true,
+              "restricted_picklist": false,
+              "sort": true,
+              "update": true
+            },
+            "somente_leitura": false,
+            "tipo_tecnico": "int"
+          },
+          {
+            "apis": [
+              "padrao"
+            ],
+            "default": {
+              "estado": "desconhecido",
+              "forma": "nao_declarado_na_fonte"
+            },
+            "disponibilidade": {
+              "ate_versao": null,
+              "desde_versao": null,
+              "estado": "desconhecido"
+            },
+            "dominio": {
+              "estado": "verificado",
+              "evidencias": [
+                {
+                  "fonte": "src:objref-individual"
+                }
+              ],
+              "natureza": "texto_livre"
+            },
+            "estado": "verificado",
+            "evidencias": [
+              {
+                "fonte": "src:objref-individual"
+              }
+            ],
+            "explicacao": "explicada",
+            "id": "obj:Individual.ConsumerCreditScoreProviderName",
+            "nome": "ConsumerCreditScoreProviderName",
+            "o_que_e": "Empresa que forneceu a pontuação de crédito.",
+            "obrigatoriedade": {
+              "estado": "desconhecido",
+              "valor": "desconhecida"
+            },
+            "origem": {
+              "estado": "verificado",
+              "evidencias": [
+                {
+                  "fonte": "src:objref-individual"
+                }
+              ],
+              "nota": "Campo padrão do objeto documentado.",
+              "valor": "padrao_plataforma"
+            },
+            "propriedades_api": {
+              "create": true,
+              "defaulted_on_create": false,
+              "estado": "verificado",
+              "evidencias": [
+                {
+                  "fonte": "src:objref-individual"
+                }
+              ],
+              "filter": true,
+              "group": true,
+              "id_lookup": false,
+              "nillable": true,
+              "restricted_picklist": false,
+              "sort": true,
+              "update": true
+            },
+            "somente_leitura": false,
+            "tipo_tecnico": "string"
+          },
+          {
+            "apis": [
+              "padrao"
+            ],
+            "default": {
+              "estado": "desconhecido",
+              "forma": "nao_declarado_na_fonte"
+            },
+            "disponibilidade": {
+              "ate_versao": null,
+              "desde_versao": null,
+              "estado": "desconhecido"
+            },
+            "dominio": {
+              "estado": "verificado",
+              "evidencias": [
+                {
+                  "fonte": "src:objref-individual"
+                }
+              ],
+              "natureza": "numerico"
+            },
+            "estado": "verificado",
+            "evidencias": [
+              {
+                "fonte": "src:objref-individual"
+              }
+            ],
+            "explicacao": "explicada",
+            "id": "obj:Individual.ConvictionsCount",
+            "nome": "ConvictionsCount",
+            "o_que_e": "Número de condenações.",
+            "obrigatoriedade": {
+              "estado": "desconhecido",
+              "valor": "desconhecida"
+            },
+            "origem": {
+              "estado": "verificado",
+              "evidencias": [
+                {
+                  "fonte": "src:objref-individual"
+                }
+              ],
+              "nota": "Campo padrão do objeto documentado.",
+              "valor": "padrao_plataforma"
+            },
+            "propriedades_api": {
+              "create": true,
+              "defaulted_on_create": false,
+              "estado": "verificado",
+              "evidencias": [
+                {
+                  "fonte": "src:objref-individual"
+                }
+              ],
+              "filter": true,
+              "group": true,
+              "id_lookup": false,
+              "nillable": true,
+              "restricted_picklist": false,
+              "sort": true,
+              "update": true
+            },
+            "somente_leitura": false,
+            "tipo_tecnico": "int"
+          },
+          {
+            "apis": [
+              "padrao"
+            ],
+            "default": {
+              "estado": "desconhecido",
+              "forma": "nao_declarado_na_fonte"
+            },
+            "disponibilidade": {
+              "ate_versao": null,
+              "desde_versao": null,
+              "estado": "desconhecido"
+            },
+            "dominio": {
+              "estado": "verificado",
+              "evidencias": [
+                {
+                  "fonte": "src:objref-individual"
+                }
+              ],
+              "natureza": "data_hora"
+            },
+            "estado": "verificado",
+            "evidencias": [
+              {
+                "fonte": "src:objref-individual"
+              }
+            ],
+            "explicacao": "explicada",
+            "id": "obj:Individual.DeathDate",
+            "nome": "DeathDate",
+            "o_que_e": "Data de falecimento.",
+            "obrigatoriedade": {
+              "estado": "desconhecido",
+              "valor": "desconhecida"
+            },
+            "origem": {
+              "estado": "verificado",
+              "evidencias": [
+                {
+                  "fonte": "src:objref-individual"
+                }
+              ],
+              "nota": "Campo padrão do objeto documentado.",
+              "valor": "padrao_plataforma"
+            },
+            "propriedades_api": {
+              "create": true,
+              "defaulted_on_create": false,
+              "estado": "verificado",
+              "evidencias": [
+                {
+                  "fonte": "src:objref-individual"
+                }
+              ],
+              "filter": true,
+              "group": true,
+              "id_lookup": false,
+              "nillable": true,
+              "restricted_picklist": false,
+              "sort": true,
+              "update": true
+            },
+            "somente_leitura": false,
+            "tipo_tecnico": "date"
+          },
+          {
+            "apis": [
+              "padrao"
+            ],
+            "default": {
+              "estado": "desconhecido",
+              "forma": "nao_declarado_na_fonte"
+            },
+            "disponibilidade": {
+              "ate_versao": null,
+              "desde_versao": null,
+              "estado": "desconhecido"
+            },
+            "dominio": {
+              "estado": "verificado",
+              "evidencias": [
+                {
+                  "fonte": "src:objref-individual"
+                }
+              ],
+              "natureza": "texto_livre"
+            },
+            "estado": "verificado",
+            "evidencias": [
+              {
+                "fonte": "src:objref-individual"
+              }
+            ],
+            "explicacao": "explicada",
+            "id": "obj:Individual.FirstName",
+            "nome": "FirstName",
+            "o_que_e": "Nome; até 40 caracteres.",
+            "obrigatoriedade": {
+              "estado": "desconhecido",
+              "valor": "desconhecida"
+            },
+            "origem": {
+              "estado": "verificado",
+              "evidencias": [
+                {
+                  "fonte": "src:objref-individual"
+                }
+              ],
+              "nota": "Campo padrão do objeto documentado.",
+              "valor": "padrao_plataforma"
+            },
+            "propriedades_api": {
+              "create": true,
+              "defaulted_on_create": false,
+              "estado": "verificado",
+              "evidencias": [
+                {
+                  "fonte": "src:objref-individual"
+                }
+              ],
+              "filter": true,
+              "group": true,
+              "id_lookup": false,
+              "nillable": true,
+              "restricted_picklist": false,
+              "sort": true,
+              "update": true
+            },
+            "somente_leitura": false,
+            "tipo_tecnico": "string"
+          },
+          {
+            "apis": [
+              "padrao"
+            ],
+            "default": {
+              "estado": "desconhecido",
+              "forma": "desconhecido",
+              "nota": "A API marca o campo como 'defaulted on create', mas o valor não foi declarado na extração."
+            },
+            "disponibilidade": {
+              "ate_versao": null,
+              "desde_versao": null,
+              "estado": "desconhecido"
+            },
+            "dominio": {
+              "estado": "verificado",
+              "evidencias": [
+                {
+                  "fonte": "src:objref-individual"
+                }
+              ],
+              "lista_completa": "sim",
+              "natureza": "booleano",
+              "valores": [
+                {
+                  "valor": "true"
+                },
+                {
+                  "valor": "false"
+                }
+              ]
+            },
+            "estado": "verificado",
+            "evidencias": [
+              {
+                "fonte": "src:objref-individual"
+              }
+            ],
+            "explicacao": "explicada",
+            "id": "obj:Individual.HasOptedOutGeoTracking",
+            "nome": "HasOptedOutGeoTracking",
+            "o_que_e": "Preferência do cliente contra rastreamento de geolocalização em dispositivos móveis.",
+            "obrigatoriedade": {
+              "estado": "desconhecido",
+              "valor": "desconhecida"
+            },
+            "origem": {
+              "estado": "verificado",
+              "evidencias": [
+                {
+                  "fonte": "src:objref-individual"
+                }
+              ],
+              "nota": "Campo padrão do objeto documentado.",
+              "valor": "padrao_plataforma"
+            },
+            "propriedades_api": {
+              "create": true,
+              "defaulted_on_create": true,
+              "estado": "verificado",
+              "evidencias": [
+                {
+                  "fonte": "src:objref-individual"
+                }
+              ],
+              "filter": true,
+              "group": true,
+              "id_lookup": false,
+              "nillable": false,
+              "restricted_picklist": false,
+              "sort": true,
+              "update": true
+            },
+            "somente_leitura": false,
+            "tipo_tecnico": "boolean"
+          },
+          {
+            "apis": [
+              "padrao"
+            ],
+            "default": {
+              "estado": "desconhecido",
+              "forma": "desconhecido",
+              "nota": "A API marca o campo como 'defaulted on create', mas o valor não foi declarado na extração."
+            },
+            "disponibilidade": {
+              "ate_versao": null,
+              "desde_versao": null,
+              "estado": "desconhecido"
+            },
+            "dominio": {
+              "estado": "verificado",
+              "evidencias": [
+                {
+                  "fonte": "src:objref-individual"
+                }
+              ],
+              "lista_completa": "sim",
+              "natureza": "booleano",
+              "valores": [
+                {
+                  "valor": "true"
+                },
+                {
+                  "valor": "false"
+                }
+              ]
+            },
+            "estado": "verificado",
+            "evidencias": [
+              {
+                "fonte": "src:objref-individual"
+              }
+            ],
+            "explicacao": "explicada",
+            "id": "obj:Individual.HasOptedOutProcessing",
+            "nome": "HasOptedOutProcessing",
+            "o_que_e": "Preferência do cliente contra o processamento dos dados pessoais, inclusive guardá-los e compartilhá-los.",
+            "obrigatoriedade": {
+              "estado": "desconhecido",
+              "valor": "desconhecida"
+            },
+            "origem": {
+              "estado": "verificado",
+              "evidencias": [
+                {
+                  "fonte": "src:objref-individual"
+                }
+              ],
+              "nota": "Campo padrão do objeto documentado.",
+              "valor": "padrao_plataforma"
+            },
+            "propriedades_api": {
+              "create": true,
+              "defaulted_on_create": true,
+              "estado": "verificado",
+              "evidencias": [
+                {
+                  "fonte": "src:objref-individual"
+                }
+              ],
+              "filter": true,
+              "group": true,
+              "id_lookup": false,
+              "nillable": false,
+              "restricted_picklist": false,
+              "sort": true,
+              "update": true
+            },
+            "somente_leitura": false,
+            "tipo_tecnico": "boolean"
+          },
+          {
+            "apis": [
+              "padrao"
+            ],
+            "default": {
+              "estado": "desconhecido",
+              "forma": "desconhecido",
+              "nota": "A API marca o campo como 'defaulted on create', mas o valor não foi declarado na extração."
+            },
+            "disponibilidade": {
+              "ate_versao": null,
+              "desde_versao": null,
+              "estado": "desconhecido"
+            },
+            "dominio": {
+              "estado": "verificado",
+              "evidencias": [
+                {
+                  "fonte": "src:objref-individual"
+                }
+              ],
+              "lista_completa": "sim",
+              "natureza": "booleano",
+              "valores": [
+                {
+                  "valor": "true"
+                },
+                {
+                  "valor": "false"
+                }
+              ]
+            },
+            "estado": "verificado",
+            "evidencias": [
+              {
+                "fonte": "src:objref-individual"
+              }
+            ],
+            "explicacao": "explicada",
+            "id": "obj:Individual.HasOptedOutProfiling",
+            "nome": "HasOptedOutProfiling",
+            "o_que_e": "Preferência do cliente contra o uso dos dados para prever traços e comportamento pessoais.",
+            "obrigatoriedade": {
+              "estado": "desconhecido",
+              "valor": "desconhecida"
+            },
+            "origem": {
+              "estado": "verificado",
+              "evidencias": [
+                {
+                  "fonte": "src:objref-individual"
+                }
+              ],
+              "nota": "Campo padrão do objeto documentado.",
+              "valor": "padrao_plataforma"
+            },
+            "propriedades_api": {
+              "create": true,
+              "defaulted_on_create": true,
+              "estado": "verificado",
+              "evidencias": [
+                {
+                  "fonte": "src:objref-individual"
+                }
+              ],
+              "filter": true,
+              "group": true,
+              "id_lookup": false,
+              "nillable": false,
+              "restricted_picklist": false,
+              "sort": true,
+              "update": true
+            },
+            "somente_leitura": false,
+            "tipo_tecnico": "boolean"
+          },
+          {
+            "apis": [
+              "padrao"
+            ],
+            "default": {
+              "estado": "desconhecido",
+              "forma": "desconhecido",
+              "nota": "A API marca o campo como 'defaulted on create', mas o valor não foi declarado na extração."
+            },
+            "disponibilidade": {
+              "ate_versao": null,
+              "desde_versao": null,
+              "estado": "desconhecido"
+            },
+            "dominio": {
+              "estado": "verificado",
+              "evidencias": [
+                {
+                  "fonte": "src:objref-individual"
+                }
+              ],
+              "lista_completa": "sim",
+              "natureza": "booleano",
+              "valores": [
+                {
+                  "valor": "true"
+                },
+                {
+                  "valor": "false"
+                }
+              ]
+            },
+            "estado": "verificado",
+            "evidencias": [
+              {
+                "fonte": "src:objref-individual"
+              }
+            ],
+            "explicacao": "explicada",
+            "id": "obj:Individual.HasOptedOutSolicit",
+            "nome": "HasOptedOutSolicit",
+            "o_que_e": "Preferência do cliente contra receber ofertas de produtos ou serviços.",
+            "obrigatoriedade": {
+              "estado": "desconhecido",
+              "valor": "desconhecida"
+            },
+            "origem": {
+              "estado": "verificado",
+              "evidencias": [
+                {
+                  "fonte": "src:objref-individual"
+                }
+              ],
+              "nota": "Campo padrão do objeto documentado.",
+              "valor": "padrao_plataforma"
+            },
+            "propriedades_api": {
+              "create": true,
+              "defaulted_on_create": true,
+              "estado": "verificado",
+              "evidencias": [
+                {
+                  "fonte": "src:objref-individual"
+                }
+              ],
+              "filter": true,
+              "group": true,
+              "id_lookup": false,
+              "nillable": false,
+              "restricted_picklist": false,
+              "sort": true,
+              "update": true
+            },
+            "somente_leitura": false,
+            "tipo_tecnico": "boolean"
+          },
+          {
+            "apis": [
+              "padrao"
+            ],
+            "default": {
+              "estado": "desconhecido",
+              "forma": "desconhecido",
+              "nota": "A API marca o campo como 'defaulted on create', mas o valor não foi declarado na extração."
+            },
+            "disponibilidade": {
+              "ate_versao": null,
+              "desde_versao": null,
+              "estado": "desconhecido"
+            },
+            "dominio": {
+              "estado": "verificado",
+              "evidencias": [
+                {
+                  "fonte": "src:objref-individual"
+                }
+              ],
+              "lista_completa": "sim",
+              "natureza": "booleano",
+              "valores": [
+                {
+                  "valor": "true"
+                },
+                {
+                  "valor": "false"
+                }
+              ]
+            },
+            "estado": "verificado",
+            "evidencias": [
+              {
+                "fonte": "src:objref-individual"
+              }
+            ],
+            "explicacao": "explicada",
+            "id": "obj:Individual.HasOptedOutTracking",
+            "nome": "HasOptedOutTracking",
+            "o_que_e": "Preferência do cliente contra rastreamento de atividade web e de abertura de e-mail.",
+            "obrigatoriedade": {
+              "estado": "desconhecido",
+              "valor": "desconhecida"
+            },
+            "origem": {
+              "estado": "verificado",
+              "evidencias": [
+                {
+                  "fonte": "src:objref-individual"
+                }
+              ],
+              "nota": "Campo padrão do objeto documentado.",
+              "valor": "padrao_plataforma"
+            },
+            "propriedades_api": {
+              "create": true,
+              "defaulted_on_create": true,
+              "estado": "verificado",
+              "evidencias": [
+                {
+                  "fonte": "src:objref-individual"
+                }
+              ],
+              "filter": true,
+              "group": true,
+              "id_lookup": false,
+              "nillable": false,
+              "restricted_picklist": false,
+              "sort": true,
+              "update": true
+            },
+            "somente_leitura": false,
+            "tipo_tecnico": "boolean"
+          },
+          {
+            "apis": [
+              "padrao"
+            ],
+            "default": {
+              "estado": "desconhecido",
+              "forma": "desconhecido",
+              "nota": "A API marca o campo como 'defaulted on create', mas o valor não foi declarado na extração."
+            },
+            "disponibilidade": {
+              "ate_versao": null,
+              "desde_versao": null,
+              "estado": "desconhecido"
+            },
+            "dominio": {
+              "estado": "verificado",
+              "evidencias": [
+                {
+                  "fonte": "src:objref-individual"
+                }
+              ],
+              "lista_completa": "sim",
+              "natureza": "booleano",
+              "valores": [
+                {
+                  "valor": "true"
+                },
+                {
+                  "valor": "false"
+                }
+              ]
+            },
+            "estado": "verificado",
+            "evidencias": [
+              {
+                "fonte": "src:objref-individual"
+              }
+            ],
+            "explicacao": "explicada",
+            "id": "obj:Individual.HasPrivacyHold",
+            "nome": "HasPrivacyHold",
+            "o_que_e": "Indica se há um Privacy Hold em vigor.",
+            "obrigatoriedade": {
+              "estado": "desconhecido",
+              "valor": "desconhecida"
+            },
+            "origem": {
+              "estado": "verificado",
+              "evidencias": [
+                {
+                  "fonte": "src:objref-individual"
+                }
+              ],
+              "nota": "Campo padrão do objeto documentado.",
+              "valor": "padrao_plataforma"
+            },
+            "propriedades_api": {
+              "create": true,
+              "defaulted_on_create": true,
+              "estado": "verificado",
+              "evidencias": [
+                {
+                  "fonte": "src:objref-individual"
+                }
+              ],
+              "filter": true,
+              "group": true,
+              "id_lookup": false,
+              "nillable": false,
+              "restricted_picklist": false,
+              "sort": true,
+              "update": true
+            },
+            "somente_leitura": false,
+            "tipo_tecnico": "boolean"
+          },
+          {
+            "apis": [
+              "padrao"
+            ],
+            "default": {
+              "estado": "desconhecido",
+              "forma": "nao_declarado_na_fonte"
+            },
+            "disponibilidade": {
+              "ate_versao": null,
+              "desde_versao": null,
+              "estado": "desconhecido"
+            },
+            "dominio": {
+              "contexto": "Valores não extraídos; podem depender de org, idioma ou recurso.",
+              "estado": "desconhecido",
+              "natureza": "lista_dinamica"
+            },
+            "estado": "verificado",
+            "evidencias": [
+              {
+                "fonte": "src:objref-individual"
+              }
+            ],
+            "explicacao": "explicada",
+            "id": "obj:Individual.IndividualsAge",
+            "nome": "IndividualsAge",
+            "o_que_e": "Se o cliente é considerado menor de idade.",
+            "obrigatoriedade": {
+              "estado": "desconhecido",
+              "valor": "desconhecida"
+            },
+            "origem": {
+              "estado": "verificado",
+              "evidencias": [
+                {
+                  "fonte": "src:objref-individual"
+                }
+              ],
+              "nota": "Campo padrão do objeto documentado.",
+              "valor": "padrao_plataforma"
+            },
+            "propriedades_api": {
+              "create": true,
+              "defaulted_on_create": false,
+              "estado": "verificado",
+              "evidencias": [
+                {
+                  "fonte": "src:objref-individual"
+                }
+              ],
+              "filter": true,
+              "group": true,
+              "id_lookup": false,
+              "nillable": true,
+              "restricted_picklist": false,
+              "sort": true,
+              "update": true
+            },
+            "somente_leitura": false,
+            "tipo_tecnico": "picklist"
+          },
+          {
+            "apis": [
+              "padrao"
+            ],
+            "default": {
+              "estado": "desconhecido",
+              "forma": "nao_declarado_na_fonte"
+            },
+            "disponibilidade": {
+              "ate_versao": null,
+              "desde_versao": null,
+              "estado": "desconhecido"
+            },
+            "dominio": {
+              "estado": "verificado",
+              "evidencias": [
+                {
+                  "fonte": "src:objref-individual"
+                }
+              ],
+              "natureza": "numerico"
+            },
+            "estado": "verificado",
+            "evidencias": [
+              {
+                "fonte": "src:objref-individual"
+              }
+            ],
+            "explicacao": "explicada",
+            "id": "obj:Individual.InfluencerRating",
+            "nome": "InfluencerRating",
+            "o_que_e": "Medida de influência da pessoa, independentemente da relação comercial.",
+            "obrigatoriedade": {
+              "estado": "desconhecido",
+              "valor": "desconhecida"
+            },
+            "origem": {
+              "estado": "verificado",
+              "evidencias": [
+                {
+                  "fonte": "src:objref-individual"
+                }
+              ],
+              "nota": "Campo padrão do objeto documentado.",
+              "valor": "padrao_plataforma"
+            },
+            "propriedades_api": {
+              "create": true,
+              "defaulted_on_create": false,
+              "estado": "verificado",
+              "evidencias": [
+                {
+                  "fonte": "src:objref-individual"
+                }
+              ],
+              "filter": true,
+              "group": true,
+              "id_lookup": false,
+              "nillable": true,
+              "restricted_picklist": false,
+              "sort": true,
+              "update": true
+            },
+            "somente_leitura": false,
+            "tipo_tecnico": "int"
+          },
+          {
+            "apis": [
+              "padrao"
+            ],
+            "default": {
+              "estado": "desconhecido",
+              "forma": "desconhecido",
+              "nota": "A API marca o campo como 'defaulted on create', mas o valor não foi declarado na extração."
+            },
+            "disponibilidade": {
+              "ate_versao": null,
+              "desde_versao": null,
+              "estado": "desconhecido"
+            },
+            "dominio": {
+              "estado": "verificado",
+              "evidencias": [
+                {
+                  "fonte": "src:objref-individual"
+                }
+              ],
+              "lista_completa": "sim",
+              "natureza": "booleano",
+              "valores": [
+                {
+                  "valor": "true"
+                },
+                {
+                  "valor": "false"
+                }
+              ]
+            },
+            "estado": "verificado",
+            "evidencias": [
+              {
+                "fonte": "src:objref-individual"
+              }
+            ],
+            "explicacao": "explicada",
+            "id": "obj:Individual.IsHomeOwner",
+            "nome": "IsHomeOwner",
+            "o_que_e": "Se o cliente é dono de imóvel.",
+            "obrigatoriedade": {
+              "estado": "desconhecido",
+              "valor": "desconhecida"
+            },
+            "origem": {
+              "estado": "verificado",
+              "evidencias": [
+                {
+                  "fonte": "src:objref-individual"
+                }
+              ],
+              "nota": "Campo padrão do objeto documentado.",
+              "valor": "padrao_plataforma"
+            },
+            "propriedades_api": {
+              "create": true,
+              "defaulted_on_create": true,
+              "estado": "verificado",
+              "evidencias": [
+                {
+                  "fonte": "src:objref-individual"
+                }
+              ],
+              "filter": true,
+              "group": true,
+              "id_lookup": false,
+              "nillable": false,
+              "restricted_picklist": false,
+              "sort": true,
+              "update": true
+            },
+            "somente_leitura": false,
+            "tipo_tecnico": "boolean"
+          },
+          {
+            "apis": [
+              "padrao"
+            ],
+            "default": {
+              "estado": "desconhecido",
+              "forma": "nao_declarado_na_fonte"
+            },
+            "disponibilidade": {
+              "ate_versao": null,
+              "desde_versao": null,
+              "estado": "desconhecido"
+            },
+            "dominio": {
+              "estado": "verificado",
+              "evidencias": [
+                {
+                  "fonte": "src:objref-individual"
+                }
+              ],
+              "natureza": "texto_livre"
+            },
+            "estado": "verificado",
+            "evidencias": [
+              {
+                "fonte": "src:objref-individual"
+              }
+            ],
+            "explicacao": "explicada",
+            "id": "obj:Individual.LastName",
+            "nome": "LastName",
+            "o_que_e": "Sobrenome; até 80 caracteres.",
+            "obrigatoriedade": {
+              "estado": "verificado",
+              "evidencias": [
+                {
+                  "fonte": "src:objref-individual"
+                }
+              ],
+              "valor": "sim"
+            },
+            "origem": {
+              "estado": "verificado",
+              "evidencias": [
+                {
+                  "fonte": "src:objref-individual"
+                }
+              ],
+              "nota": "Campo padrão do objeto documentado.",
+              "valor": "padrao_plataforma"
+            },
+            "propriedades_api": {
+              "create": true,
+              "defaulted_on_create": false,
+              "estado": "verificado",
+              "evidencias": [
+                {
+                  "fonte": "src:objref-individual"
+                }
+              ],
+              "filter": true,
+              "group": true,
+              "id_lookup": false,
+              "nillable": false,
+              "restricted_picklist": false,
+              "sort": true,
+              "update": true
+            },
+            "somente_leitura": false,
+            "tipo_tecnico": "string"
+          },
+          {
+            "apis": [
+              "padrao"
+            ],
+            "default": {
+              "estado": "desconhecido",
+              "forma": "nao_declarado_na_fonte"
+            },
+            "disponibilidade": {
+              "ate_versao": null,
+              "desde_versao": null,
+              "estado": "desconhecido"
+            },
+            "dominio": {
+              "estado": "verificado",
+              "evidencias": [
+                {
+                  "fonte": "src:objref-individual"
+                }
+              ],
+              "natureza": "data_hora"
+            },
+            "estado": "verificado",
+            "evidencias": [
+              {
+                "fonte": "src:objref-individual"
+              }
+            ],
+            "explicacao": "explicada",
+            "id": "obj:Individual.LastViewedDate",
+            "nome": "LastViewedDate",
+            "o_que_e": "Quando o usuário atual viu o registro pela última vez.",
+            "obrigatoriedade": {
+              "estado": "desconhecido",
+              "valor": "desconhecida"
+            },
+            "origem": {
+              "estado": "verificado",
+              "evidencias": [
+                {
+                  "fonte": "src:objref-individual"
+                }
+              ],
+              "nota": "Campo padrão do objeto documentado.",
+              "valor": "padrao_plataforma"
+            },
+            "propriedades_api": {
+              "create": false,
+              "defaulted_on_create": false,
+              "estado": "verificado",
+              "evidencias": [
+                {
+                  "fonte": "src:objref-individual"
+                }
+              ],
+              "filter": true,
+              "group": false,
+              "id_lookup": false,
+              "nillable": true,
+              "restricted_picklist": false,
+              "sort": true,
+              "update": false
+            },
+            "somente_leitura": true,
+            "tipo_tecnico": "dateTime"
+          },
+          {
+            "apis": [
+              "padrao"
+            ],
+            "default": {
+              "estado": "desconhecido",
+              "forma": "nao_declarado_na_fonte"
+            },
+            "disponibilidade": {
+              "ate_versao": null,
+              "desde_versao": null,
+              "estado": "desconhecido"
+            },
+            "dominio": {
+              "contexto": "Id de registro do(s) objeto(s) referenciado(s).",
+              "estado": "verificado",
+              "evidencias": [
+                {
+                  "fonte": "src:objref-individual"
+                }
+              ],
+              "natureza": "referencia"
+            },
+            "estado": "verificado",
+            "evidencias": [
+              {
+                "fonte": "src:objref-individual"
+              }
+            ],
+            "explicacao": "explicada",
+            "id": "obj:Individual.MasterRecordId",
+            "nome": "MasterRecordId",
+            "o_que_e": "Depois de um merge, o registro que sobreviveu; senão, nulo.",
+            "obrigatoriedade": {
+              "estado": "desconhecido",
+              "valor": "desconhecida"
+            },
+            "origem": {
+              "estado": "verificado",
+              "evidencias": [
+                {
+                  "fonte": "src:objref-individual"
+                }
+              ],
+              "nota": "Campo padrão do objeto documentado.",
+              "valor": "padrao_plataforma"
+            },
+            "propriedades_api": {
+              "create": false,
+              "defaulted_on_create": false,
+              "estado": "verificado",
+              "evidencias": [
+                {
+                  "fonte": "src:objref-individual"
+                }
+              ],
+              "filter": true,
+              "group": true,
+              "id_lookup": false,
+              "nillable": true,
+              "restricted_picklist": false,
+              "sort": true,
+              "update": false
+            },
+            "referencia": {
+              "alvos": [
+                "obj:Individual"
+              ],
+              "nome_relacionamento": "MasterRecord"
+            },
+            "somente_leitura": true,
+            "tipo_tecnico": "reference"
+          },
+          {
+            "apis": [
+              "padrao"
+            ],
+            "default": {
+              "estado": "desconhecido",
+              "forma": "nao_declarado_na_fonte"
+            },
+            "disponibilidade": {
+              "ate_versao": null,
+              "desde_versao": null,
+              "estado": "desconhecido"
+            },
+            "dominio": {
+              "contexto": "Valores não extraídos; podem depender de org, idioma ou recurso.",
+              "estado": "desconhecido",
+              "natureza": "lista_dinamica"
+            },
+            "estado": "verificado",
+            "evidencias": [
+              {
+                "fonte": "src:objref-individual"
+              }
+            ],
+            "explicacao": "explicada",
+            "id": "obj:Individual.MilitaryService",
+            "nome": "MilitaryService",
+            "o_que_e": "Se o cliente serviu nas forças armadas.",
+            "obrigatoriedade": {
+              "estado": "desconhecido",
+              "valor": "desconhecida"
+            },
+            "origem": {
+              "estado": "verificado",
+              "evidencias": [
+                {
+                  "fonte": "src:objref-individual"
+                }
+              ],
+              "nota": "Campo padrão do objeto documentado.",
+              "valor": "padrao_plataforma"
+            },
+            "propriedades_api": {
+              "create": true,
+              "defaulted_on_create": false,
+              "estado": "verificado",
+              "evidencias": [
+                {
+                  "fonte": "src:objref-individual"
+                }
+              ],
+              "filter": true,
+              "group": true,
+              "id_lookup": false,
+              "nillable": true,
+              "restricted_picklist": false,
+              "sort": true,
+              "update": true
+            },
+            "somente_leitura": false,
+            "tipo_tecnico": "picklist"
+          },
+          {
+            "apis": [
+              "padrao"
+            ],
+            "default": {
+              "estado": "desconhecido",
+              "forma": "nao_declarado_na_fonte"
+            },
+            "disponibilidade": {
+              "ate_versao": null,
+              "desde_versao": null,
+              "estado": "desconhecido"
+            },
+            "dominio": {
+              "estado": "verificado",
+              "evidencias": [
+                {
+                  "fonte": "src:objref-individual"
+                }
+              ],
+              "natureza": "texto_livre"
+            },
+            "estado": "verificado",
+            "evidencias": [
+              {
+                "fonte": "src:objref-individual"
+              }
+            ],
+            "explicacao": "explicada",
+            "id": "obj:Individual.Name",
+            "nome": "Name",
+            "o_que_e": "FirstName e LastName juntos; até 203 caracteres.",
+            "obrigatoriedade": {
+              "estado": "desconhecido",
+              "valor": "desconhecida"
+            },
+            "origem": {
+              "estado": "verificado",
+              "evidencias": [
+                {
+                  "fonte": "src:objref-individual"
+                }
+              ],
+              "nota": "Campo padrão do objeto documentado.",
+              "valor": "padrao_plataforma"
+            },
+            "propriedades_api": {
+              "create": false,
+              "defaulted_on_create": false,
+              "estado": "verificado",
+              "evidencias": [
+                {
+                  "fonte": "src:objref-individual"
+                }
+              ],
+              "filter": true,
+              "group": true,
+              "id_lookup": false,
+              "nillable": false,
+              "restricted_picklist": false,
+              "sort": true,
+              "update": false
+            },
+            "somente_leitura": true,
+            "tipo_tecnico": "string"
+          },
+          {
+            "apis": [
+              "padrao"
+            ],
+            "default": {
+              "estado": "desconhecido",
+              "forma": "nao_declarado_na_fonte"
+            },
+            "disponibilidade": {
+              "ate_versao": null,
+              "desde_versao": null,
+              "estado": "desconhecido"
+            },
+            "dominio": {
+              "estado": "verificado",
+              "evidencias": [
+                {
+                  "fonte": "src:objref-individual"
+                }
+              ],
+              "natureza": "texto_livre"
+            },
+            "estado": "verificado",
+            "evidencias": [
+              {
+                "fonte": "src:objref-individual"
+              }
+            ],
+            "explicacao": "explicada",
+            "id": "obj:Individual.Occupation",
+            "nome": "Occupation",
+            "o_que_e": "Profissão; até 150 caracteres.",
+            "obrigatoriedade": {
+              "estado": "desconhecido",
+              "valor": "desconhecida"
+            },
+            "origem": {
+              "estado": "verificado",
+              "evidencias": [
+                {
+                  "fonte": "src:objref-individual"
+                }
+              ],
+              "nota": "Campo padrão do objeto documentado.",
+              "valor": "padrao_plataforma"
+            },
+            "propriedades_api": {
+              "create": true,
+              "defaulted_on_create": false,
+              "estado": "verificado",
+              "evidencias": [
+                {
+                  "fonte": "src:objref-individual"
+                }
+              ],
+              "filter": true,
+              "group": true,
+              "id_lookup": false,
+              "nillable": true,
+              "restricted_picklist": false,
+              "sort": true,
+              "update": true
+            },
+            "somente_leitura": false,
+            "tipo_tecnico": "string"
+          },
+          {
+            "apis": [
+              "padrao"
+            ],
+            "default": {
+              "estado": "desconhecido",
+              "forma": "desconhecido",
+              "nota": "A API marca o campo como 'defaulted on create', mas o valor não foi declarado na extração."
+            },
+            "disponibilidade": {
+              "ate_versao": null,
+              "desde_versao": null,
+              "estado": "desconhecido"
+            },
+            "dominio": {
+              "contexto": "Id de registro do(s) objeto(s) referenciado(s).",
+              "estado": "verificado",
+              "evidencias": [
+                {
+                  "fonte": "src:objref-individual"
+                }
+              ],
+              "natureza": "referencia"
+            },
+            "estado": "verificado",
+            "evidencias": [
+              {
+                "fonte": "src:objref-individual"
+              }
+            ],
+            "explicacao": "explicada",
+            "id": "obj:Individual.OwnerId",
+            "nome": "OwnerId",
+            "o_que_e": "Dono da conta ligada ao cliente.",
+            "obrigatoriedade": {
+              "estado": "desconhecido",
+              "valor": "desconhecida"
+            },
+            "origem": {
+              "estado": "verificado",
+              "evidencias": [
+                {
+                  "fonte": "src:objref-individual"
+                }
+              ],
+              "nota": "Campo padrão do objeto documentado.",
+              "valor": "padrao_plataforma"
+            },
+            "propriedades_api": {
+              "create": true,
+              "defaulted_on_create": true,
+              "estado": "verificado",
+              "evidencias": [
+                {
+                  "fonte": "src:objref-individual"
+                }
+              ],
+              "filter": true,
+              "group": true,
+              "id_lookup": false,
+              "nillable": false,
+              "restricted_picklist": false,
+              "sort": true,
+              "update": true
+            },
+            "referencia": {
+              "alvos": [
+                "obj:User"
+              ],
+              "nome_relacionamento": "Owner"
+            },
+            "somente_leitura": false,
+            "tipo_tecnico": "reference"
+          },
+          {
+            "apis": [
+              "padrao"
+            ],
+            "default": {
+              "estado": "desconhecido",
+              "forma": "nao_declarado_na_fonte"
+            },
+            "disponibilidade": {
+              "ate_versao": null,
+              "desde_versao": null,
+              "estado": "desconhecido"
+            },
+            "dominio": {
+              "contexto": "Valores não extraídos; podem depender de org, idioma ou recurso.",
+              "estado": "desconhecido",
+              "natureza": "lista_dinamica"
+            },
+            "estado": "verificado",
+            "evidencias": [
+              {
+                "fonte": "src:objref-individual"
+              }
+            ],
+            "explicacao": "explicada",
+            "id": "obj:Individual.Salutation",
+            "nome": "Salutation",
+            "o_que_e": "Forma de tratamento, como Dr. ou Sra.",
+            "obrigatoriedade": {
+              "estado": "desconhecido",
+              "valor": "desconhecida"
+            },
+            "origem": {
+              "estado": "verificado",
+              "evidencias": [
+                {
+                  "fonte": "src:objref-individual"
+                }
+              ],
+              "nota": "Campo padrão do objeto documentado.",
+              "valor": "padrao_plataforma"
+            },
+            "propriedades_api": {
+              "create": true,
+              "defaulted_on_create": false,
+              "estado": "verificado",
+              "evidencias": [
+                {
+                  "fonte": "src:objref-individual"
+                }
+              ],
+              "filter": true,
+              "group": true,
+              "id_lookup": false,
+              "nillable": true,
+              "restricted_picklist": false,
+              "sort": true,
+              "update": true
+            },
+            "somente_leitura": false,
+            "tipo_tecnico": "picklist"
+          },
+          {
+            "apis": [
+              "padrao"
+            ],
+            "default": {
+              "estado": "desconhecido",
+              "forma": "desconhecido",
+              "nota": "A API marca o campo como 'defaulted on create', mas o valor não foi declarado na extração."
+            },
+            "disponibilidade": {
+              "ate_versao": null,
+              "desde_versao": null,
+              "estado": "desconhecido"
+            },
+            "dominio": {
+              "estado": "verificado",
+              "evidencias": [
+                {
+                  "fonte": "src:objref-individual"
+                }
+              ],
+              "lista_completa": "sim",
+              "natureza": "booleano",
+              "valores": [
+                {
+                  "valor": "true"
+                },
+                {
+                  "valor": "false"
+                }
+              ]
+            },
+            "estado": "verificado",
+            "evidencias": [
+              {
+                "fonte": "src:objref-individual"
+              }
+            ],
+            "explicacao": "explicada",
+            "id": "obj:Individual.SendIndividualData",
+            "nome": "SendIndividualData",
+            "o_que_e": "Preferência por receber a exportação dos próprios dados pessoais.",
+            "obrigatoriedade": {
+              "estado": "desconhecido",
+              "valor": "desconhecida"
+            },
+            "origem": {
+              "estado": "verificado",
+              "evidencias": [
+                {
+                  "fonte": "src:objref-individual"
+                }
+              ],
+              "nota": "Campo padrão do objeto documentado.",
+              "valor": "padrao_plataforma"
+            },
+            "propriedades_api": {
+              "create": true,
+              "defaulted_on_create": true,
+              "estado": "verificado",
+              "evidencias": [
+                {
+                  "fonte": "src:objref-individual"
+                }
+              ],
+              "filter": true,
+              "group": true,
+              "id_lookup": false,
+              "nillable": false,
+              "restricted_picklist": false,
+              "sort": true,
+              "update": true
+            },
+            "somente_leitura": false,
+            "tipo_tecnico": "boolean"
+          },
+          {
+            "apis": [
+              "padrao"
+            ],
+            "default": {
+              "estado": "desconhecido",
+              "forma": "desconhecido",
+              "nota": "A API marca o campo como 'defaulted on create', mas o valor não foi declarado na extração."
+            },
+            "disponibilidade": {
+              "ate_versao": null,
+              "desde_versao": null,
+              "estado": "desconhecido"
+            },
+            "dominio": {
+              "estado": "verificado",
+              "evidencias": [
+                {
+                  "fonte": "src:objref-individual"
+                }
+              ],
+              "lista_completa": "sim",
+              "natureza": "booleano",
+              "valores": [
+                {
+                  "valor": "true"
+                },
+                {
+                  "valor": "false"
+                }
+              ]
+            },
+            "estado": "verificado",
+            "evidencias": [
+              {
+                "fonte": "src:objref-individual"
+              }
+            ],
+            "explicacao": "explicada",
+            "id": "obj:Individual.ShouldForget",
+            "nome": "ShouldForget",
+            "o_que_e": "Preferência por ter os registros e dados pessoais excluídos.",
+            "obrigatoriedade": {
+              "estado": "desconhecido",
+              "valor": "desconhecida"
+            },
+            "origem": {
+              "estado": "verificado",
+              "evidencias": [
+                {
+                  "fonte": "src:objref-individual"
+                }
+              ],
+              "nota": "Campo padrão do objeto documentado.",
+              "valor": "padrao_plataforma"
+            },
+            "propriedades_api": {
+              "create": true,
+              "defaulted_on_create": true,
+              "estado": "verificado",
+              "evidencias": [
+                {
+                  "fonte": "src:objref-individual"
+                }
+              ],
+              "filter": true,
+              "group": true,
+              "id_lookup": false,
+              "nillable": false,
+              "restricted_picklist": false,
+              "sort": true,
+              "update": true
+            },
+            "somente_leitura": false,
+            "tipo_tecnico": "boolean"
+          },
+          {
+            "apis": [
+              "padrao"
+            ],
+            "default": {
+              "estado": "desconhecido",
+              "forma": "nao_declarado_na_fonte"
+            },
+            "disponibilidade": {
+              "ate_versao": null,
+              "desde_versao": null,
+              "estado": "desconhecido"
+            },
+            "dominio": {
+              "estado": "verificado",
+              "evidencias": [
+                {
+                  "fonte": "src:objref-individual"
+                }
+              ],
+              "natureza": "texto_livre"
+            },
+            "estado": "verificado",
+            "evidencias": [
+              {
+                "fonte": "src:objref-individual"
+              }
+            ],
+            "explicacao": "explicada",
+            "id": "obj:Individual.Website",
+            "nome": "Website",
+            "o_que_e": "Site do cliente.",
+            "obrigatoriedade": {
+              "estado": "desconhecido",
+              "valor": "desconhecida"
+            },
+            "origem": {
+              "estado": "verificado",
+              "evidencias": [
+                {
+                  "fonte": "src:objref-individual"
+                }
+              ],
+              "nota": "Campo padrão do objeto documentado.",
+              "valor": "padrao_plataforma"
+            },
+            "propriedades_api": {
+              "create": true,
+              "defaulted_on_create": false,
+              "estado": "verificado",
+              "evidencias": [
+                {
+                  "fonte": "src:objref-individual"
+                }
+              ],
+              "filter": true,
+              "group": true,
+              "id_lookup": false,
+              "nillable": true,
+              "restricted_picklist": false,
+              "sort": true,
+              "update": true
+            },
+            "somente_leitura": false,
+            "tipo_tecnico": "url"
+          }
+        ],
+        "cobertura": {
+          "estrutural": {
+            "esperado": 28,
+            "estado": "completa",
+            "nota": "Tabela de campos lida completa (28); a página não lista valores dos picklists.",
+            "presente": 28
+          },
+          "explicativa": {
+            "esperado": 28,
+            "estado": "completa",
+            "presente": 28
+          },
+          "mapeamento": {
+            "estado": "parcial",
+            "nota": "Ver relacionamentos registrados."
+          }
+        },
+        "consultas": [
+          {
+            "api": "padrao",
+            "contexto": "API padrão. Lista as pessoas que pediram para ter os dados excluídos.",
+            "soql": "SELECT Name, HasOptedOutTracking, HasOptedOutSolicit, ShouldForget FROM Individual WHERE ShouldForget = true",
+            "validacao": "documental"
+          }
+        ],
+        "estado": "verificado",
+        "evidencias": [
+          {
+            "fonte": "src:objref-individual"
+          }
+        ],
+        "exposicoes": [
+          {
+            "acesso_especial": "Só existe com Data Protection and Privacy habilitado.",
+            "api": "padrao",
+            "chamadas": [
+              "create()",
+              "delete()",
+              "describeLayout()",
+              "describeSObjects()",
+              "getDeleted()",
+              "getUpdated()",
+              "merge()",
+              "query()",
+              "retrieve()",
+              "search()",
+              "undelete()",
+              "update()",
+              "upsert()"
+            ],
+            "desde_versao": "42.0",
+            "estado": "verificado",
+            "evidencias": [
+              {
+                "fonte": "src:objref-individual"
+              }
+            ]
+          },
+          {
+            "api": "tooling",
+            "desde_versao": null,
+            "estado": "desconhecido",
+            "nota": "Exposição na Tooling API não verificada."
+          }
+        ],
+        "id": "obj:Individual",
+        "juncao": false,
+        "nome": "Individual",
+        "o_que_e": "O registro de privacidade de uma pessoa: as preferências sobre coleta, processamento, rastreamento, contato, exportação e exclusão dos dados dela. Leads, contatos, contas pessoais e usuários podem apontar para ele.",
+        "papel": "Guardar e consultar, num só lugar, o que cada pessoa decidiu sobre o uso dos próprios dados.",
+        "setup": {
+          "estado": "nao_aplicavel",
+          "nota": "Objeto consultável via API; não é tela do Setup."
+        }
+      },
+      "relacionamentos_do_objeto": [
+        {
+          "cardinalidade_registros": {
+            "estado": "desconhecido",
+            "nota": "Lookup indica N:1; obrigatoriedade não declarada na página.",
+            "valor": "N:1"
+          },
+          "destino": {
+            "entidade": "obj:Individual"
+          },
+          "estado": "verificado",
+          "evidencias": [
+            {
+              "fonte": "src:objref-contactpointtypeconsent"
+            }
+          ],
+          "explicacao": "Cada consentimento de canal pertence a uma pessoa (Individual).",
+          "id": "rel:cptc-individual",
+          "origem": {
+            "campo": "PartyId",
+            "entidade": "obj:ContactPointTypeConsent"
+          },
+          "tipo": "referencia_campo"
+        },
+        {
+          "cardinalidade_registros": {
+            "estado": "desconhecido",
+            "nota": "Lookup indica N:1; obrigatoriedade não declarada na página.",
+            "valor": "N:1"
+          },
+          "destino": {
+            "entidade": "obj:Individual"
+          },
+          "estado": "verificado",
+          "evidencias": [
+            {
+              "fonte": "src:objref-individual"
+            }
+          ],
+          "explicacao": "Depois de um merge, o registro excluído aponta o que sobreviveu.",
+          "id": "rel:individual-master",
+          "origem": {
+            "campo": "MasterRecordId",
+            "entidade": "obj:Individual"
+          },
+          "tipo": "referencia_campo"
+        }
+      ]
+    }
+  ],
+  "relacionamentos": [],
+  "versao_base": {
+    "api_version": "68.0",
+    "data_referencia": "2026-11-07",
+    "escopo": "config/escopo.json",
+    "release": "Winter '27"
+  }
+}

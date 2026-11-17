@@ -978,3 +978,18 @@ for _id, _tit, _art, _pert in (
     ("src:help-crm-analytics-data-manager", "Data Manager for CRM Analytics", "analytics.bi_integrate_data_manager.htm", "Abas do Data Manager."),
 ):
     _f(_id, _tit + ("" if "(" in _tit else " (Salesforce Help)"), _H + _art + _L, _pert, **AJ)
+
+_EXT = "fontes/extracoes/lote7k-qualidade-fecho.txt"
+for _id, _tit, _art, _pert in (
+    ("src:help-track-object-field-history", "Track Object Field History", "xcloud.tracking_field_history_for_standard_objects.htm", "Permissão e limite em contas."),
+    ("src:help-disable-field-history", "Disable Field History Tracking", "tracking_field_history_disabling.htm", "Apex impede desligar o rastreamento."),
+    ("src:help-kb-account-date-history", "Create a report that captures Account's date field history (KB)", "000394574", "Caminho de Set History Tracking."),
+    ("src:help-field-history-security", "Field History Tracking", "xcloud.security_field_history_tracking.htm", "Retenção e armazenamento do histórico."),
+    ("src:help-data-classification-reports", "Create Reports from Data Classification Metadata", "sf.data_classification_report.htm", "Report type com Entity Definition."),
+    ("src:help-data-privacy-setup", "Set Up Tracking and Storage of Certain Data Privacy Preferences", "individuals_setup_data_privacy.htm", "Campo Individual nos layouts."),
+    ("src:help-kb-individual-record", "How to Create an Individual Record for Salesforce Data Privacy and Protection (KB)", "000269754", "Caminho de Data Protection and Privacy."),
+    ("src:help-verify-data-protection", "Verify Data Protection Details Are Available in Records", "ind.admin_make_data_protection_details_available_in_records.htm", "Confirmação do caminho."),
+    ("src:help-enforce-email-privacy", "Enable the Enforce Email Privacy Settings Preference", "emailadmin_enforce_email_privacy_settings.htm", "E-mail que respeita o Individual."),
+    ("src:help-consent-mgmt-platform", "Consent Management for the Salesforce Platform", "sf.consent_management_platform.htm", "Pedidos comuns de clientes."),
+):
+    _f(_id, _tit + ("" if "(" in _tit else " (Salesforce Help)"), _H + _art + _L, _pert, **AJ)
