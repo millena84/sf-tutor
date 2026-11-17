@@ -61,3 +61,16 @@ json.dump(reg, open(p, "w", encoding="utf-8"), ensure_ascii=False, indent=2)
 for fid, i, _t, _a, cam, nota in LINHAS:
     C.definir_setup(fid, cam, nota, [i])
 print("lote 7q:", len(LINHAS), "caminhos")
+
+# Recursos de código: não há tela de Setup que os crie; são escritos em código e implantados como metadado (decisão da autora, 2026-11-17).
+CODIGO = [
+    ("aura-components", "Componentes Aura são escritos em código e implantados como AuraDefinitionBundle; não há tela de Setup que os crie.",
+     ["src:mdapi-auradefinitionbundle"]),
+    ("lightning-web-components", "Componentes LWC são escritos em código e implantados como LightningComponentBundle; não há tela de Setup que os crie.",
+     ["src:mdapi-lightningcomponentbundle"]),
+    ("queueable-apex", "Queueable Apex é uma classe Apex que implementa a interface Queueable e é enfileirada por código; não há tela de Setup própria.",
+     ["src:apex-queueable"]),
+]
+for fid, nota, srcs in CODIGO:
+    C.definir_setup(fid, None, nota, srcs, estado="nao_aplicavel")
+print("lote 7q: 3 recursos de código como não aplicável")
