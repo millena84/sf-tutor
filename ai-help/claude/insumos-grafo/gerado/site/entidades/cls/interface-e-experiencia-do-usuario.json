@@ -126,6 +126,22 @@
         "via": "EntityDefinitionId"
       },
       {
+        "destino": "mdt:LightningExperienceTheme",
+        "destino_no_tema": true,
+        "estado": "verificado",
+        "origem": "mdt:LightningExperienceSettings",
+        "rel": "rel:lexsettings-theme",
+        "via": "activeThemeName"
+      },
+      {
+        "destino": "mdt:CustomSite",
+        "destino_no_tema": true,
+        "estado": "verificado",
+        "origem": "mdt:Network",
+        "rel": "rel:network-customsite",
+        "via": "site"
+      },
+      {
         "destino": "obj:RecordType",
         "destino_no_tema": true,
         "estado": "verificado",
@@ -174,6 +190,20 @@
         "principal": true
       },
       {
+        "alertas": [
+          "Criar list views exige Read no objeto e a permissão Create and Customize List Views; criar, editar ou excluir list views públicas exige Manage Public List Views.",
+          "Criar uma fila cria automaticamente uma list view para ela.",
+          "List views visíveis só para o próprio usuário não saem pela Metadata API."
+        ],
+        "exemplo": "A list view Meus casos abertos mostra só os casos do próprio atendente que ainda não foram fechados.",
+        "id": "func:list-views",
+        "principal": true
+      },
+      {
+        "alertas": [
+          "O limite de custom tabs é fixo por edição e não pode ser aumentado.",
+          "Um objeto customizado com custom tab é pesquisável por padrão, mesmo que o usuário não mostre a aba."
+        ],
         "exemplo": "A tab 'Contratos de Serviço' no app de Operações.",
         "id": "func:tabs",
         "pre_requisitos": [
@@ -210,7 +240,8 @@
         "alertas": [
           "O highlights panel não é configurado pelo page layout: os campos dele vêm do compact layout.",
           "Em páginas com Dynamic Forms, os campos vistos ao criar, editar ou clonar vêm da Lightning page, não do page layout.",
-          "Tirar um campo do layout não é controle de acesso: quem decide é a segurança em nível de campo."
+          "Tirar um campo do layout não é controle de acesso: quem decide é a segurança em nível de campo.",
+          "Criar, editar e excluir page layouts exige a permissão Customize Application."
         ],
         "exemplo": "No layout de Conta do time de vendas, o campo Segmento é obrigatório e a related list de Oportunidades vem antes da de Casos.",
         "id": "func:page-layouts",
@@ -251,6 +282,11 @@
         "tema_principal": "sub:codigo-e-bundles"
       },
       {
+        "alertas": [
+          "Ações globais não conhecem o contexto: não preenchem campos com dados da página em que o usuário está.",
+          "Para ver uma ação de objeto no page layout, o usuário precisa de Read e Edit no campo de relacionamento da ação.",
+          "Quick actions que rodam flows só existem como ações de objeto, e o flow precisa estar ativo."
+        ],
         "exemplo": "'Registrar renovação' a partir de um contrato, abrindo um flow.",
         "id": "func:acoes-rapidas",
         "pre_requisitos": [
@@ -260,7 +296,19 @@
       },
       {
         "alertas": [
-          "Um Path por combinação de objeto, picklist e tipo de registro (Ajuda)."
+          "No Lightning Experience, botões padrão e customizados também contam como ações e aparecem junto das quick actions.",
+          "No editor de page layout, a categoria Mobile & Lightning Actions reúne quick actions e botões padrão e customizados."
+        ],
+        "exemplo": "Na lista de contatos, um botão abre a URL de um flow para os registros selecionados.",
+        "id": "func:botoes-e-links-customizados",
+        "principal": true
+      },
+      {
+        "alertas": [
+          "Um Path por combinação de objeto, picklist e tipo de registro (Ajuda).",
+          "Cada objeto pode ter um path por record type; não há limite de paths por org.",
+          "Em cada etapa cabem até cinco campos-chave e até 1.000 caracteres de orientação.",
+          "A orientação (Guidance for Success) de leads não aparece quando o path está no record type Master: é preciso um path para o record type específico."
         ],
         "exemplo": "Etapas de um contrato: Rascunho, Em análise, Assinado.",
         "id": "func:path",
@@ -280,6 +328,17 @@
         ],
         "principal": false,
         "tema_principal": "sub:experiencias-externas"
+      },
+      {
+        "alertas": [
+          "São três lugares de trabalho: o Setup (ligar o recurso, criar o site, permissões), o Experience Workspaces (conteúdo, configurações e monitoramento) e o Experience Builder (aparência e páginas).",
+          "Criar um site exige as permissões Create and Set Up Experiences e View Setup and Configuration.",
+          "O número máximo de sites da org aparece no topo da página Sites, no Setup.",
+          "Como metadado, o endereço de e-mail do remetente do site só pode ser definido na primeira implantação."
+        ],
+        "exemplo": "Um portal de clientes em que cada cliente abre casos, acompanha os próprios pedidos e consulta artigos de ajuda.",
+        "id": "func:experience-cloud-sites",
+        "principal": true
       },
       {
         "alertas": [
@@ -358,6 +417,15 @@
         "suporte_cli": "suportado"
       },
       {
+        "estrutura": "completa",
+        "funcionalidades": [
+          "func:experience-cloud-sites"
+        ],
+        "id": "mdt:CustomSite",
+        "nota_suporte": null,
+        "suporte_cli": "suportado"
+      },
+      {
         "estrutura": "parcial",
         "funcionalidades": [
           "func:tabs"
@@ -399,7 +467,44 @@
         "funcionalidades": [
           "func:temas-e-branding"
         ],
+        "id": "mdt:LightningExperienceSettings",
+        "nota_suporte": null,
+        "suporte_cli": "suportado"
+      },
+      {
+        "estrutura": "completa",
+        "funcionalidades": [
+          "func:temas-e-branding"
+        ],
         "id": "mdt:LightningExperienceTheme",
+        "nota_suporte": null,
+        "suporte_cli": "suportado"
+      },
+      {
+        "estrutura": "parcial",
+        "funcionalidades": [
+          "func:list-views"
+        ],
+        "id": "mdt:ListView",
+        "nota_suporte": null,
+        "suporte_cli": "suportado"
+      },
+      {
+        "estrutura": "completa",
+        "funcionalidades": [
+          "func:experience-cloud-sites"
+        ],
+        "id": "mdt:NavigationMenu",
+        "nota_suporte": null,
+        "suporte_cli": "suportado"
+      },
+      {
+        "estrutura": "parcial",
+        "funcionalidades": [
+          "func:digital-experiences",
+          "func:experience-cloud-sites"
+        ],
+        "id": "mdt:Network",
         "nota_suporte": null,
         "suporte_cli": "suportado"
       },
@@ -409,6 +514,15 @@
           "func:path"
         ],
         "id": "mdt:PathAssistant",
+        "nota_suporte": null,
+        "suporte_cli": "suportado"
+      },
+      {
+        "estrutura": "completa",
+        "funcionalidades": [
+          "func:path"
+        ],
+        "id": "mdt:PathAssistantSettings",
         "nota_suporte": null,
         "suporte_cli": "suportado"
       },
@@ -427,6 +541,15 @@
           "func:tipos-de-registro"
         ],
         "id": "mdt:RecordType",
+        "nota_suporte": null,
+        "suporte_cli": "suportado"
+      },
+      {
+        "estrutura": "completa",
+        "funcionalidades": [
+          "func:botoes-e-links-customizados"
+        ],
+        "id": "mdt:WebLink",
         "nota_suporte": null,
         "suporte_cli": "suportado"
       }

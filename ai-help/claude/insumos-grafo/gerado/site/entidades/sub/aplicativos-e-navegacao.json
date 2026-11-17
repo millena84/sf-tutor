@@ -52,6 +52,29 @@
       "texto": "Cada app é um CustomApplication, na pasta applications, com sufixo .app. Guarda as abas, a marca, as substituições de página por perfil e, em apps de console do Classic, as opções de abas e atalhos. Apps padrão usam o prefixo standard__ no package.xml.",
       "tipo": "implantacao",
       "titulo": "Como metadado"
+    },
+    {
+      "evidencias": [
+        {
+          "fonte": "src:mdapi-listview"
+        },
+        {
+          "fonte": "src:help-list-view-classic"
+        }
+      ],
+      "texto": "Uma list view mostra os registros de um objeto que atendem a certos filtros. Como metadado, é um ListView, definido junto com o objeto; o campo filterScope diz de quem são os registros (todos, os do usuário, os de uma fila). List views visíveis só para o próprio usuário não saem pela Metadata API.",
+      "tipo": "decisao",
+      "titulo": "List views"
+    },
+    {
+      "evidencias": [
+        {
+          "fonte": "src:mdapi-lightningexperiencesettings"
+        }
+      ],
+      "texto": "LightningExperienceSettings guarda as opções gerais: ligar o Lightning Experience (que não pode ser desligado depois), desligar o Classic, impedir a personalização da barra de navegação e apontar o tema ativo.",
+      "tipo": "implantacao",
+      "titulo": "Ligar o Lightning Experience é metadado"
     }
   ],
   "classificacao": "cls:interface-e-experiencia-do-usuario",
@@ -81,6 +104,20 @@
         "principal": true
       },
       {
+        "alertas": [
+          "Criar list views exige Read no objeto e a permissão Create and Customize List Views; criar, editar ou excluir list views públicas exige Manage Public List Views.",
+          "Criar uma fila cria automaticamente uma list view para ela.",
+          "List views visíveis só para o próprio usuário não saem pela Metadata API."
+        ],
+        "exemplo": "A list view Meus casos abertos mostra só os casos do próprio atendente que ainda não foram fechados.",
+        "id": "func:list-views",
+        "principal": true
+      },
+      {
+        "alertas": [
+          "O limite de custom tabs é fixo por edição e não pode ser aumentado.",
+          "Um objeto customizado com custom tab é pesquisável por padrão, mesmo que o usuário não mostre a aba."
+        ],
         "exemplo": "A tab 'Contratos de Serviço' no app de Operações.",
         "id": "func:tabs",
         "pre_requisitos": [
@@ -107,6 +144,15 @@
           "func:tabs"
         ],
         "id": "mdt:CustomTab",
+        "nota_suporte": null,
+        "suporte_cli": "suportado"
+      },
+      {
+        "estrutura": "parcial",
+        "funcionalidades": [
+          "func:list-views"
+        ],
+        "id": "mdt:ListView",
         "nota_suporte": null,
         "suporte_cli": "suportado"
       }
@@ -147,6 +193,7 @@
   "funcionalidades": [
     "func:apps-de-console",
     "func:lightning-apps",
+    "func:list-views",
     "func:tabs"
   ],
   "id": "sub:aplicativos-e-navegacao",
@@ -166,7 +213,8 @@
     "explicacao": "Um app reúne as abas e ferramentas de um tipo de trabalho. Apps de console abrem vários registros ao mesmo tempo, em abas e subabas.",
     "por_onde_comecar": [
       "func:lightning-apps",
-      "func:tabs"
+      "func:tabs",
+      "func:list-views"
     ]
   },
   "referencias_oficiais": [

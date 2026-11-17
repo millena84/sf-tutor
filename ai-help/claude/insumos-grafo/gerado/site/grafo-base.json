@@ -557,6 +557,12 @@
       "tipo": "representacao_objeto_api"
     },
     {
+      "destino": "mdt:WebLink",
+      "origem": "func:botoes-e-links-customizados",
+      "papel": "Cada botão ou link customizado, definido junto com o objeto.",
+      "tipo": "representacao_xml"
+    },
+    {
       "destino": "mdt:CampaignSettings",
       "origem": "func:campanhas",
       "papel": "Configurações da org (Settings).",
@@ -827,6 +833,12 @@
       "tipo": "representacao_xml"
     },
     {
+      "destino": "mdt:Network",
+      "origem": "func:digital-experiences",
+      "papel": "Cada site criado depois de ligar o recurso.",
+      "tipo": "representacao_xml"
+    },
+    {
       "destino": "mdt:DuplicateRule",
       "origem": "func:duplicate-management",
       "papel": "Cada duplicate rule.",
@@ -965,6 +977,24 @@
       "tipo": "representacao_xml"
     },
     {
+      "destino": "mdt:CustomSite",
+      "origem": "func:experience-cloud-sites",
+      "papel": "O site que sustenta o Network: domínio, páginas de erro e perfil guest.",
+      "tipo": "representacao_xml"
+    },
+    {
+      "destino": "mdt:NavigationMenu",
+      "origem": "func:experience-cloud-sites",
+      "papel": "Os menus de navegação do site.",
+      "tipo": "representacao_xml"
+    },
+    {
+      "destino": "mdt:Network",
+      "origem": "func:experience-cloud-sites",
+      "papel": "A configuração de cada site.",
+      "tipo": "representacao_xml"
+    },
+    {
       "destino": "mdt:ExternalClientAppSettings",
       "origem": "func:external-client-apps",
       "papel": "Configurações da org.",
@@ -1076,6 +1106,12 @@
       "destino": "mdt:FieldServiceSettings",
       "origem": "func:field-service",
       "papel": "Ativação e preferências de Field Service implantáveis.",
+      "tipo": "representacao_xml"
+    },
+    {
+      "destino": "mdt:ListView",
+      "origem": "func:filas",
+      "papel": "A list view criada junto com a fila (campo queue).",
       "tipo": "representacao_xml"
     },
     {
@@ -1220,6 +1256,12 @@
       "destino": "mdt:LightningComponentBundle",
       "origem": "func:lightning-web-components",
       "papel": "O bundle do componente e seu arquivo de configuração.",
+      "tipo": "representacao_xml"
+    },
+    {
+      "destino": "mdt:ListView",
+      "origem": "func:list-views",
+      "papel": "Cada list view pública, definida junto com o objeto.",
       "tipo": "representacao_xml"
     },
     {
@@ -1454,6 +1496,12 @@
       "destino": "mdt:PathAssistant",
       "origem": "func:path",
       "papel": "Definição implantável do Path.",
+      "tipo": "representacao_xml"
+    },
+    {
+      "destino": "mdt:PathAssistantSettings",
+      "origem": "func:path",
+      "papel": "Liga o Path na org e guarda a opção de lembrar o path aberto.",
       "tipo": "representacao_xml"
     },
     {
@@ -1820,6 +1868,12 @@
       "destino": "mdt:BrandingSet",
       "origem": "func:temas-e-branding",
       "papel": "As cores e imagens que o tema aplica.",
+      "tipo": "representacao_xml"
+    },
+    {
+      "destino": "mdt:LightningExperienceSettings",
+      "origem": "func:temas-e-branding",
+      "papel": "Diz qual tema customizado está ativo (activeThemeName).",
       "tipo": "representacao_xml"
     },
     {
@@ -2291,6 +2345,21 @@
       "tipo": "referencia_campo"
     },
     {
+      "destino": "mdx:SiteWebAddress",
+      "origem": "mdt:CustomSite.customWebAddresses",
+      "tipo": "tipo_composto"
+    },
+    {
+      "destino": "mdx:SiteIframeWhiteListUrl",
+      "origem": "mdt:CustomSite.siteIframeWhiteListUrls",
+      "tipo": "tipo_composto"
+    },
+    {
+      "destino": "mdx:SiteRedirectMapping",
+      "origem": "mdt:CustomSite.siteRedirectMappings",
+      "tipo": "tipo_composto"
+    },
+    {
       "destino": "obj:CustomTab.Metadata",
       "estado": "verificado",
       "natureza": "transformada",
@@ -2656,6 +2725,18 @@
       "tipo": "tipo_composto"
     },
     {
+      "destino": "mdt:LightningExperienceTheme",
+      "estado": "verificado",
+      "origem": "mdt:LightningExperienceSettings.activeThemeName",
+      "rel_id": "rel:lexsettings-theme",
+      "tipo": "referencia_campo"
+    },
+    {
+      "destino": "mdx:ListViewFilter",
+      "origem": "mdt:ListView.filters",
+      "tipo": "tipo_composto"
+    },
+    {
       "destino": "mdx:MatchingRule",
       "origem": "mdt:MatchingRules.matchingRules",
       "tipo": "tipo_composto"
@@ -2678,6 +2759,23 @@
       "destino": "mdx:NamedCredentialParameter",
       "origem": "mdt:NamedCredential.namedCredentialParameters",
       "tipo": "tipo_composto"
+    },
+    {
+      "destino": "mdx:NavigationMenuItem",
+      "origem": "mdt:NavigationMenu.navigationMenuItem",
+      "tipo": "tipo_composto"
+    },
+    {
+      "destino": "mdx:CommunityRoles",
+      "origem": "mdt:Network.communityRoles",
+      "tipo": "tipo_composto"
+    },
+    {
+      "destino": "mdt:CustomSite",
+      "estado": "verificado",
+      "origem": "mdt:Network.site",
+      "rel_id": "rel:network-customsite",
+      "tipo": "referencia_campo"
     },
     {
       "destino": "mdt:ConnectedApp",
@@ -3735,6 +3833,21 @@
       "origem": "mdx:NamedCredentialParameter.outboundNetworkConnection",
       "rel_id": "rel:ncparam-outboundnetwork",
       "tipo": "referencia_campo"
+    },
+    {
+      "destino": "mdx:NavigationMenuItemBranding",
+      "origem": "mdx:NavigationMenuItem.menuItemBranding",
+      "tipo": "tipo_composto"
+    },
+    {
+      "destino": "mdx:NavigationSubMenu",
+      "origem": "mdx:NavigationMenuItem.subMenu",
+      "tipo": "tipo_composto"
+    },
+    {
+      "destino": "mdx:NavigationMenuItem",
+      "origem": "mdx:NavigationSubMenu.navigationMenuItem",
+      "tipo": "tipo_composto"
     },
     {
       "destino": "mdt:ConnectedApp",
@@ -5157,6 +5270,11 @@
       "tipo": "classificacao_principal"
     },
     {
+      "destino": "func:botoes-e-links-customizados",
+      "origem": "sub:acoes-rapidas",
+      "tipo": "classificacao_principal"
+    },
+    {
       "destino": "func:apex-agendado",
       "origem": "sub:agendamento",
       "tipo": "classificacao_principal"
@@ -5214,6 +5332,11 @@
     },
     {
       "destino": "func:lightning-apps",
+      "origem": "sub:aplicativos-e-navegacao",
+      "tipo": "classificacao_principal"
+    },
+    {
+      "destino": "func:list-views",
       "origem": "sub:aplicativos-e-navegacao",
       "tipo": "classificacao_principal"
     },
@@ -5606,6 +5729,11 @@
       "motivo": "É o ponto de partida para montar sites e portais.",
       "origem": "sub:experiencias-web-portais-e-mobile",
       "tipo": "classificacao_secundaria"
+    },
+    {
+      "destino": "func:experience-cloud-sites",
+      "origem": "sub:experiencias-web-portais-e-mobile",
+      "tipo": "classificacao_principal"
     },
     {
       "destino": "func:salesforce-files",
@@ -6299,6 +6427,15 @@
     },
     {
       "estado": "verificado",
+      "grupo_cor": "cls:interface-e-experiencia-do-usuario",
+      "id": "func:botoes-e-links-customizados",
+      "resumo": "Um botão ou link customizado abre uma URL ou uma página Visualforce, ou executa JavaScript, a partir da página de um registro ou de uma lista. É definido no objeto, na mesma tela de Setup das quick actions.",
+      "rotulo": "Botões e links customizados",
+      "rotulo_tecnico": "Custom Buttons and Links",
+      "tipo": "funcionalidade"
+    },
+    {
+      "estado": "verificado",
       "grupo_cor": "cls:integracao-apis-e-eventos",
       "id": "func:bulk-api",
       "resumo": "APIs REST para grandes volumes de dados: o pedido vira um job processado em segundo plano, e o resultado é buscado depois. A Bulk API (1.0) é a antecessora, ainda disponível.",
@@ -6605,6 +6742,15 @@
     },
     {
       "estado": "verificado",
+      "grupo_cor": "cls:interface-e-experiencia-do-usuario",
+      "id": "func:experience-cloud-sites",
+      "resumo": "Um site do Experience Cloud é um espaço com a marca da empresa para clientes, parceiros ou funcionários, construído sobre a org e os dados dela. O site nasce de um template, no assistente de criação, e é ajustado no Experience Builder.",
+      "rotulo": "Sites do Experience Cloud",
+      "rotulo_tecnico": "Experience Cloud Sites",
+      "tipo": "funcionalidade"
+    },
+    {
+      "estado": "verificado",
       "grupo_cor": "cls:integracao-apis-e-eventos",
       "id": "func:external-client-apps",
       "resumo": "Sucessor dos connected apps: o app é um componente e as configurações OAuth, políticas e plugins ficam em componentes separados.",
@@ -6772,6 +6918,15 @@
       "resumo": "Regras que valem quando o Apex chama um sistema externo: quantas chamadas, quanto tempo cada uma pode esperar e o que não pode vir antes delas.",
       "rotulo": "Limites e falhas de callouts",
       "rotulo_tecnico": "Apex Callout Limits and Limitations",
+      "tipo": "funcionalidade"
+    },
+    {
+      "estado": "verificado",
+      "grupo_cor": "cls:interface-e-experiencia-do-usuario",
+      "id": "func:list-views",
+      "resumo": "Uma list view mostra um conjunto de registros de um objeto que atende a certos filtros, com as colunas escolhidas. Pode ser só de quem a criou ou compartilhada com outros usuários.",
+      "rotulo": "List views",
+      "rotulo_tecnico": "List Views",
       "tipo": "funcionalidade"
     },
     {
@@ -7518,6 +7673,13 @@
     },
     {
       "estado": "verificado",
+      "id": "mdt:CustomSite",
+      "resumo": "Um site do Salesforce Sites (Visualforce): domínio, páginas de erro e de login, perfil guest e proteções de navegador. Um site do Experience Cloud também tem um CustomSite por trás.",
+      "rotulo": "CustomSite",
+      "tipo": "metadata_type"
+    },
+    {
+      "estado": "verificado",
       "id": "mdt:CustomTab",
       "resumo": "Definição de uma tab: entrada de navegação para um objeto, página, componente ou URL.",
       "rotulo": "CustomTab",
@@ -7868,9 +8030,23 @@
     },
     {
       "estado": "verificado",
+      "id": "mdt:LightningExperienceSettings",
+      "resumo": "Configurações do Lightning Experience na org: o tema ativo, ligar o Lightning Experience, desligar o Classic e opções de navegação e do app móvel.",
+      "rotulo": "LightningExperienceSettings",
+      "tipo": "metadata_type"
+    },
+    {
+      "estado": "verificado",
       "id": "mdt:LightningExperienceTheme",
       "resumo": "Um tema customizado do Lightning Experience: o nome, a versão do design system e o conjunto de cores e imagens (BrandingSet) que ele aplica.",
       "rotulo": "LightningExperienceTheme",
+      "tipo": "metadata_type"
+    },
+    {
+      "estado": "verificado",
+      "id": "mdt:ListView",
+      "resumo": "Uma list view: a lista filtrada de registros de um objeto, com as colunas mostradas e com quem é compartilhada.",
+      "rotulo": "ListView",
       "tipo": "metadata_type"
     },
     {
@@ -7906,6 +8082,20 @@
       "id": "mdt:NamedCredential",
       "resumo": "Define o endpoint de um sistema externo e como chegar a ele numa chamada (callout).",
       "rotulo": "NamedCredential",
+      "tipo": "metadata_type"
+    },
+    {
+      "estado": "verificado",
+      "id": "mdt:NavigationMenu",
+      "resumo": "Um menu de navegação de um site do Experience Cloud, com seus itens e subitens.",
+      "rotulo": "NavigationMenu",
+      "tipo": "metadata_type"
+    },
+    {
+      "estado": "verificado",
+      "id": "mdt:Network",
+      "resumo": "Um site do Experience Cloud: membros, autocadastro, e-mails, moderação, reputação e opções de visitantes.",
+      "rotulo": "Network",
       "tipo": "metadata_type"
     },
     {
@@ -7962,6 +8152,13 @@
       "id": "mdt:PathAssistant",
       "resumo": "Definição de um Path: barra de etapas baseada em uma picklist, com campos e orientação por etapa.",
       "rotulo": "PathAssistant",
+      "tipo": "metadata_type"
+    },
+    {
+      "estado": "verificado",
+      "id": "mdt:PathAssistantSettings",
+      "resumo": "Configurações do Path na org: ligar o recurso e lembrar se cada usuário deixou o path aberto.",
+      "rotulo": "PathAssistantSettings",
       "tipo": "metadata_type"
     },
     {
@@ -8200,6 +8397,13 @@
       "id": "mdt:ValidationRule",
       "resumo": "Definição de uma regra de validação: fórmula de erro e mensagem. É componente filho de CustomObject.",
       "rotulo": "ValidationRule",
+      "tipo": "metadata_type"
+    },
+    {
+      "estado": "verificado",
+      "id": "mdt:WebLink",
+      "resumo": "Um botão ou link customizado de um objeto: abre uma URL, uma página Visualforce ou executa JavaScript.",
+      "rotulo": "WebLink",
       "tipo": "metadata_type"
     },
     {
@@ -8466,6 +8670,12 @@
       "estado": "verificado",
       "id": "mdx:Capabilities",
       "rotulo": "Capabilities",
+      "tipo": "estrutura_auxiliar"
+    },
+    {
+      "estado": "verificado",
+      "id": "mdx:CommunityRoles",
+      "rotulo": "CommunityRoles",
       "tipo": "estrutura_auxiliar"
     },
     {
@@ -9076,6 +9286,12 @@
     },
     {
       "estado": "verificado",
+      "id": "mdx:ListViewFilter",
+      "rotulo": "ListViewFilter",
+      "tipo": "estrutura_auxiliar"
+    },
+    {
+      "estado": "verificado",
       "id": "mdx:LiveAgentConfig",
       "rotulo": "LiveAgentConfig",
       "tipo": "estrutura_auxiliar"
@@ -9120,6 +9336,24 @@
       "estado": "verificado",
       "id": "mdx:NamedCredentialParameter",
       "rotulo": "NamedCredentialParameter",
+      "tipo": "estrutura_auxiliar"
+    },
+    {
+      "estado": "verificado",
+      "id": "mdx:NavigationMenuItem",
+      "rotulo": "NavigationMenuItem",
+      "tipo": "estrutura_auxiliar"
+    },
+    {
+      "estado": "verificado",
+      "id": "mdx:NavigationMenuItemBranding",
+      "rotulo": "NavigationMenuItemBranding",
+      "tipo": "estrutura_auxiliar"
+    },
+    {
+      "estado": "verificado",
+      "id": "mdx:NavigationSubMenu",
+      "rotulo": "NavigationSubMenu",
       "tipo": "estrutura_auxiliar"
     },
     {
@@ -9654,6 +9888,24 @@
       "estado": "verificado",
       "id": "mdx:SidebarComponent",
       "rotulo": "SidebarComponent",
+      "tipo": "estrutura_auxiliar"
+    },
+    {
+      "estado": "verificado",
+      "id": "mdx:SiteIframeWhiteListUrl",
+      "rotulo": "SiteIframeWhiteListUrl",
+      "tipo": "estrutura_auxiliar"
+    },
+    {
+      "estado": "verificado",
+      "id": "mdx:SiteRedirectMapping",
+      "rotulo": "SiteRedirectMapping",
+      "tipo": "estrutura_auxiliar"
+    },
+    {
+      "estado": "verificado",
+      "id": "mdx:SiteWebAddress",
+      "rotulo": "SiteWebAddress",
       "tipo": "estrutura_auxiliar"
     },
     {
@@ -10645,7 +10897,7 @@
       "estado": "desconhecido",
       "grupo_cor": "cls:interface-e-experiencia-do-usuario",
       "id": "sub:acoes-rapidas",
-      "recorte": "curadoria",
+      "recorte": "parcial",
       "rotulo": "Ações rápidas",
       "sigla": "UIX-05",
       "tipo": "subclassificacao"
@@ -10933,7 +11185,7 @@
       "estado": "desconhecido",
       "grupo_cor": "cls:interface-e-experiencia-do-usuario",
       "id": "sub:experiencias-web-portais-e-mobile",
-      "recorte": "curadoria",
+      "recorte": "parcial",
       "rotulo": "Experiências web/portais e mobile",
       "sigla": "UIX-07",
       "tipo": "subclassificacao"
@@ -11041,7 +11293,7 @@
       "estado": "desconhecido",
       "grupo_cor": "cls:interface-e-experiencia-do-usuario",
       "id": "sub:lightning-pages-e-componentes",
-      "recorte": "curadoria",
+      "recorte": "parcial",
       "rotulo": "Lightning pages e componentes",
       "sigla": "UIX-04",
       "tipo": "subclassificacao"
@@ -11167,7 +11419,7 @@
       "estado": "desconhecido",
       "grupo_cor": "cls:interface-e-experiencia-do-usuario",
       "id": "sub:orientacao-visual-e-path",
-      "recorte": "curadoria",
+      "recorte": "parcial",
       "rotulo": "Orientação visual e Path",
       "sigla": "UIX-06",
       "tipo": "subclassificacao"
@@ -11356,7 +11608,7 @@
       "estado": "desconhecido",
       "grupo_cor": "cls:interface-e-experiencia-do-usuario",
       "id": "sub:tabs",
-      "recorte": "curadoria",
+      "recorte": "parcial",
       "rotulo": "Tabs",
       "sigla": "UIX-02",
       "tipo": "subclassificacao"

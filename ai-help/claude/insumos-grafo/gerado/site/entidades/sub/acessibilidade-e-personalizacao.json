@@ -51,11 +51,30 @@
       "texto": "LightningExperienceTheme guarda o tema e aponta para um BrandingSet, que guarda as cores e imagens como pares de nome e valor. Implantar o tema não o ativa: a ativação fica em outro tipo, LightningExperienceSettings, não cadastrado. Cada app pode usar a própria cor e o próprio logo no lugar do tema.",
       "tipo": "implantacao",
       "titulo": "Como metadado"
+    },
+    {
+      "evidencias": [
+        {
+          "fonte": "src:mdapi-lightningexperiencesettings"
+        }
+      ],
+      "texto": "O tema customizado ativo é indicado em LightningExperienceSettings, no campo activeThemeName; sem ele, vale um tema pronto da Salesforce.",
+      "tipo": "implantacao",
+      "titulo": "Ativar o tema pela Metadata API"
     }
   ],
   "classificacao": "cls:interface-e-experiencia-do-usuario",
   "derivado": {
-    "dependencias": [],
+    "dependencias": [
+      {
+        "destino": "mdt:LightningExperienceTheme",
+        "destino_no_tema": true,
+        "estado": "verificado",
+        "origem": "mdt:LightningExperienceSettings",
+        "rel": "rel:lexsettings-theme",
+        "via": "activeThemeName"
+      }
+    ],
     "funcionalidades": [
       {
         "alertas": [
@@ -75,6 +94,15 @@
           "func:temas-e-branding"
         ],
         "id": "mdt:BrandingSet",
+        "nota_suporte": null,
+        "suporte_cli": "suportado"
+      },
+      {
+        "estrutura": "completa",
+        "funcionalidades": [
+          "func:temas-e-branding"
+        ],
+        "id": "mdt:LightningExperienceSettings",
         "nota_suporte": null,
         "suporte_cli": "suportado"
       },
