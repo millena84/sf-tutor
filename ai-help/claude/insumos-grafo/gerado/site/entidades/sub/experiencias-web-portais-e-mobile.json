@@ -45,11 +45,72 @@
       "texto": "O compact layout define os campos-chave no topo do registro no app móvel, no Lightning Experience e nas integrações com Outlook e Gmail. Cada objeto tem um padrão do sistema, e cada record type pode ter o seu.",
       "tipo": "atencao",
       "titulo": "Campos no celular"
+    },
+    {
+      "evidencias": [
+        {
+          "fonte": "src:help-experience-find-way"
+        },
+        {
+          "fonte": "src:help-experience-build"
+        }
+      ],
+      "texto": "No Setup, liga-se o recurso, cria-se o site e cuidam-se das permissões. No Experience Workspaces, gerenciam-se conteúdo, configurações e monitoramento. No Experience Builder, monta-se a aparência e as páginas.",
+      "tipo": "decisao",
+      "titulo": "Três lugares de trabalho"
+    },
+    {
+      "evidencias": [
+        {
+          "fonte": "src:mdapi-network"
+        },
+        {
+          "fonte": "src:mdapi-customsite"
+        },
+        {
+          "fonte": "src:mdapi-navigationmenu"
+        }
+      ],
+      "texto": "Network guarda a configuração do site (membros, e-mails, autocadastro, moderação) e aponta para um CustomSite, que guarda domínio, páginas de erro e perfil guest. NavigationMenu guarda os menus. O endereço do remetente dos e-mails só pode ser definido na primeira implantação.",
+      "tipo": "implantacao",
+      "titulo": "Como metadado"
+    },
+    {
+      "evidencias": [
+        {
+          "fonte": "src:mdapi-network"
+        },
+        {
+          "fonte": "src:mdapi-customsite"
+        }
+      ],
+      "texto": "Várias opções do site abrem conteúdo a visitantes: grupos públicos do Chatter, asset files e a lista de membros. No CustomSite ficam o perfil guest e o dono padrão dos registros criados por visitantes.",
+      "tipo": "seguranca",
+      "titulo": "Visitantes sem login"
+    },
+    {
+      "evidencias": [
+        {
+          "fonte": "src:help-experience-site-create"
+        }
+      ],
+      "texto": "O número máximo de sites da org aparece no topo da página Sites, no Setup.",
+      "tipo": "atencao",
+      "titulo": "Quantos sites"
     }
   ],
   "classificacao": "cls:interface-e-experiencia-do-usuario",
   "derivado": {
-    "dependencias": [],
+    "dependencias": [
+      {
+        "destino": "mdt:CustomSite",
+        "destino_no_tema": true,
+        "estado": "verificado",
+        "origem": "mdt:Network",
+        "rel": "rel:network-customsite",
+        "via": "site"
+      }
+    ],
     "funcionalidades": [
       {
         "alertas": [
@@ -62,6 +123,17 @@
         ],
         "principal": false,
         "tema_principal": "sub:experiencias-externas"
+      },
+      {
+        "alertas": [
+          "São três lugares de trabalho: o Setup (ligar o recurso, criar o site, permissões), o Experience Workspaces (conteúdo, configurações e monitoramento) e o Experience Builder (aparência e páginas).",
+          "Criar um site exige as permissões Create and Set Up Experiences e View Setup and Configuration.",
+          "O número máximo de sites da org aparece no topo da página Sites, no Setup.",
+          "Como metadado, o endereço de e-mail do remetente do site só pode ser definido na primeira implantação."
+        ],
+        "exemplo": "Um portal de clientes em que cada cliente abre casos, acompanha os próprios pedidos e consulta artigos de ajuda.",
+        "id": "func:experience-cloud-sites",
+        "principal": true
       }
     ],
     "metadata_types": [
@@ -73,13 +145,41 @@
         "id": "mdt:CommunitiesSettings",
         "nota_suporte": null,
         "suporte_cli": "suportado"
+      },
+      {
+        "estrutura": "completa",
+        "funcionalidades": [
+          "func:experience-cloud-sites"
+        ],
+        "id": "mdt:CustomSite",
+        "nota_suporte": null,
+        "suporte_cli": "suportado"
+      },
+      {
+        "estrutura": "completa",
+        "funcionalidades": [
+          "func:experience-cloud-sites"
+        ],
+        "id": "mdt:NavigationMenu",
+        "nota_suporte": null,
+        "suporte_cli": "suportado"
+      },
+      {
+        "estrutura": "parcial",
+        "funcionalidades": [
+          "func:digital-experiences",
+          "func:experience-cloud-sites"
+        ],
+        "id": "mdt:Network",
+        "nota_suporte": null,
+        "suporte_cli": "suportado"
       }
     ],
     "nota": "Calculado pelo gerador a partir do catálogo; não é cadastro.",
     "objetos_api": [],
     "temas_sem_funcionalidade": []
   },
-  "descricao": "Sites, portais e experiência em dispositivos móveis.",
+  "descricao": "Sites do Experience Cloud e Salesforce Sites: os espaços web para clientes, parceiros e funcionários.",
   "encadeamento": {
     "evidencias": [
       {
@@ -98,12 +198,13 @@
   "estado": "desconhecido",
   "fora_do_escopo": "Capacidades de produto para públicos externos ficam em \"Experiências externas\".",
   "funcionalidades": [
-    "func:digital-experiences"
+    "func:digital-experiences",
+    "func:experience-cloud-sites"
   ],
   "id": "sub:experiencias-web-portais-e-mobile",
   "natureza": "curadoria_didatica",
   "nome": "Experiências web/portais e mobile",
-  "nota_estado": "Agrupamento proposto na especificação; fronteira ainda não cruzada com a documentação oficial.",
+  "nota_estado": "Tema criado pelo projeto (00-especificacao-grafo.md), não é nomenclatura oficial da Salesforce. Cruzado em 2026-11-10 com áreas da documentação oficial listadas nas referências; a correspondência é parcial e o recorte continua sendo do projeto.",
   "para_iniciantes": {
     "evidencias": [
       {
@@ -116,8 +217,21 @@
     "exemplo": "Clientes abrem chamados num portal Customer Service, e o técnico vê o mesmo caso no app do celular.",
     "explicacao": "A mesma org pode ser usada fora do desktop interno de duas formas: por sites e portais do Experience Cloud, para clientes, parceiros ou funcionários, e pelo Salesforce mobile app, no celular. Nos dois casos os dados são os da própria org; muda a interface.",
     "por_onde_comecar": [
+      "func:experience-cloud-sites",
       "func:digital-experiences"
     ]
   },
+  "referencias_oficiais": [
+    {
+      "fonte": "src:help-experience-cloud",
+      "nota": "Cobre parte do tema: sites do Experience Cloud (não cobre o app móvel).",
+      "secao": "Experience Cloud"
+    },
+    {
+      "fonte": "src:mdapi-network",
+      "nota": "Cobre parte do tema: metadado dos sites.",
+      "secao": "Network"
+    }
+  ],
   "sigla": "UIX-07"
 }

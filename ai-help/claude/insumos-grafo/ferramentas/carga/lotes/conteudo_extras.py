@@ -304,4 +304,67 @@ X["sub:permissoes-perfis-e-grupos"] = {"comece": ["func:permission-sets", "func:
                                                                                      "src:help-group-member-types")),
 ]}
 
+# ------------------------------------------------------------------ Fecho de A3: Tabs, Ações rápidas, Path, Experiências web e list views
+X["sub:tabs"] = {"comece": ["func:tabs"], "avancado": [
+    av("decisao", "Quatro tipos de custom tab", "Custom object tab mostra os registros de um objeto customizado; web tab, uma página ou "
+       "aplicação web externa; Visualforce tab, uma página Visualforce; Lightning page tab, uma Lightning page. No Lightning Experience, a "
+       "tab incluída num app aparece na barra de navegação do app e no App Launcher.", E("src:help-custom-tabs-overview", "src:help-vf-tabs")),
+    av("limite", "Limite por edição", "O limite de custom tabs é um número fixo por edição e não pode ser aumentado.",
+       E("src:help-custom-tab-considerations")),
+    av("atencao", "Tab e busca", "Um objeto customizado que tem custom tab é pesquisável por padrão, mesmo que o usuário não mostre a aba.",
+       E("src:help-custom-tab-considerations")),
+    av("atencao", "Lightning page tab no Classic", "Para Lightning page tabs, Default On e Default Off não funcionam como nas outras tabs: a "
+       "página aparece no app móvel nos dois casos. Para esconder, use Tab Hidden.", E("src:help-app-builder-limits")),
+]}
+X["sub:acoes-rapidas"] = {"comece": ["func:acoes-rapidas", "func:botoes-e-links-customizados"], "avancado": [
+    av("decisao", "Ação de objeto ou ação global", "A ação de objeto roda no contexto de um registro e já relaciona o que cria a ele. A ação "
+       "global pode ir em quase qualquer página, mas não conhece o contexto: não preenche campos com dados da página. Ações de atualização "
+       "e as que rodam flows precisam ser de objeto.", E("src:help-quick-actions-kb", "src:help-global-quick-actions", "src:help-flow-quick-action")),
+    av("atencao", "De onde vêm as ações da página", "Enquanto a seção Salesforce Mobile and Lightning Experience Actions do page layout não é "
+       "customizada, as ações da página de registro vêm do global publisher layout e dos botões do page layout. Depois de customizada, vale "
+       "a ordem definida nela.", E("src:help-actions-ordering", "src:help-actions-page-layout-editor")),
+    av("atencao", "Ação que não aparece", "Para ver uma ação de objeto, o usuário precisa de Read e Edit no campo de relacionamento da ação. "
+       "Record types também podem esconder quick actions.", E("src:help-quick-action-considerations")),
+    av("decisao", "Botões também são ações", "No Lightning Experience, botões padrão e customizados contam como ações. Um botão ou link "
+       "customizado abre uma URL ou uma página Visualforce; como metadado, é um WebLink, definido junto com o objeto.",
+       E("src:help-actions-lex", "src:mdapi-weblink")),
+]}
+X["sub:orientacao-visual-e-path"] = {"comece": ["func:path"], "avancado": [
+    av("limite", "O que cabe numa etapa", "As etapas vêm dos valores de um picklist. Em cada etapa cabem até cinco campos-chave e até 1.000 "
+       "caracteres de orientação (Guidance for Success).", E("src:help-path-create", "src:help-path-overview")),
+    av("atencao", "Orientação que não aparece", "Em leads, a orientação não aparece quando o path está atribuído ao record type Master: é "
+       "preciso criar um path para o record type específico. O path só aparece para quem pode ver o registro, o record type e todos os "
+       "campos usados nele.", E("src:help-kb-path-record-type", "src:help-path-considerations")),
+    av("implantacao", "Como metadado", "PathAssistant guarda cada path. PathAssistantSettings liga o recurso na org e guarda a opção de manter "
+       "o path aberto até o usuário recolhê-lo (na tela, Remember user's Path preferences).", E("src:mdapi-pathassistantsettings",
+                                                                                              "src:mdapi-pathassistant", "src:help-path-enable")),
+    av("atencao", "Path e kanban", "Os campos-chave e a orientação configurados num path também aparecem nas kanban views do mesmo objeto, "
+       "record type e picklist.", E("src:help-path-considerations")),
+]}
+X["sub:experiencias-web-portais-e-mobile"] = {"comece": ["func:experience-cloud-sites", "func:digital-experiences"], "avancado": [
+    av("decisao", "Três lugares de trabalho", "No Setup, liga-se o recurso, cria-se o site e cuidam-se das permissões. No Experience "
+       "Workspaces, gerenciam-se conteúdo, configurações e monitoramento. No Experience Builder, monta-se a aparência e as páginas.",
+       E("src:help-experience-find-way", "src:help-experience-build")),
+    av("implantacao", "Como metadado", "Network guarda a configuração do site (membros, e-mails, autocadastro, moderação) e aponta para um "
+       "CustomSite, que guarda domínio, páginas de erro e perfil guest. NavigationMenu guarda os menus. O endereço do remetente dos e-mails "
+       "só pode ser definido na primeira implantação.", E("src:mdapi-network", "src:mdapi-customsite", "src:mdapi-navigationmenu")),
+    av("seguranca", "Visitantes sem login", "Várias opções do site abrem conteúdo a visitantes: grupos públicos do Chatter, asset files e a "
+       "lista de membros. No CustomSite ficam o perfil guest e o dono padrão dos registros criados por visitantes.",
+       E("src:mdapi-network", "src:mdapi-customsite")),
+    av("atencao", "Quantos sites", "O número máximo de sites da org aparece no topo da página Sites, no Setup.", E("src:help-experience-site-create")),
+]}
+X["sub:aplicativos-e-navegacao"]["comece"] = ["func:lightning-apps", "func:tabs", "func:list-views"]
+X["sub:aplicativos-e-navegacao"]["avancado"] += [
+    av("decisao", "List views", "Uma list view mostra os registros de um objeto que atendem a certos filtros. Como metadado, é um ListView, "
+       "definido junto com o objeto; o campo filterScope diz de quem são os registros (todos, os do usuário, os de uma fila). List views "
+       "visíveis só para o próprio usuário não saem pela Metadata API.", E("src:mdapi-listview", "src:help-list-view-classic")),
+    av("implantacao", "Ligar o Lightning Experience é metadado", "LightningExperienceSettings guarda as opções gerais: ligar o Lightning "
+       "Experience (que não pode ser desligado depois), desligar o Classic, impedir a personalização da barra de navegação e apontar o tema "
+       "ativo.", E("src:mdapi-lightningexperiencesettings")),
+]
+X["sub:acessibilidade-e-personalizacao"]["avancado"] += [
+    av("implantacao", "Ativar o tema pela Metadata API", "O tema customizado ativo é indicado em LightningExperienceSettings, no campo "
+       "activeThemeName; sem ele, vale um tema pronto da Salesforce.", E("src:mdapi-lightningexperiencesettings")),
+]
+
 EXTRAS = X

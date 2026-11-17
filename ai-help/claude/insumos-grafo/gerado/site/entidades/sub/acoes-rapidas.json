@@ -12,6 +12,58 @@
       "texto": "A ação é implantada como QuickAction e consultada pela Tooling API como QuickActionDefinition.",
       "tipo": "implantacao",
       "titulo": "Metadado e objeto de consulta"
+    },
+    {
+      "evidencias": [
+        {
+          "fonte": "src:help-quick-actions-kb"
+        },
+        {
+          "fonte": "src:help-global-quick-actions"
+        },
+        {
+          "fonte": "src:help-flow-quick-action"
+        }
+      ],
+      "texto": "A ação de objeto roda no contexto de um registro e já relaciona o que cria a ele. A ação global pode ir em quase qualquer página, mas não conhece o contexto: não preenche campos com dados da página. Ações de atualização e as que rodam flows precisam ser de objeto.",
+      "tipo": "decisao",
+      "titulo": "Ação de objeto ou ação global"
+    },
+    {
+      "evidencias": [
+        {
+          "fonte": "src:help-actions-ordering"
+        },
+        {
+          "fonte": "src:help-actions-page-layout-editor"
+        }
+      ],
+      "texto": "Enquanto a seção Salesforce Mobile and Lightning Experience Actions do page layout não é customizada, as ações da página de registro vêm do global publisher layout e dos botões do page layout. Depois de customizada, vale a ordem definida nela.",
+      "tipo": "atencao",
+      "titulo": "De onde vêm as ações da página"
+    },
+    {
+      "evidencias": [
+        {
+          "fonte": "src:help-quick-action-considerations"
+        }
+      ],
+      "texto": "Para ver uma ação de objeto, o usuário precisa de Read e Edit no campo de relacionamento da ação. Record types também podem esconder quick actions.",
+      "tipo": "atencao",
+      "titulo": "Ação que não aparece"
+    },
+    {
+      "evidencias": [
+        {
+          "fonte": "src:help-actions-lex"
+        },
+        {
+          "fonte": "src:mdapi-weblink"
+        }
+      ],
+      "texto": "No Lightning Experience, botões padrão e customizados contam como ações. Um botão ou link customizado abre uma URL ou uma página Visualforce; como metadado, é um WebLink, definido junto com o objeto.",
+      "tipo": "decisao",
+      "titulo": "Botões também são ações"
     }
   ],
   "classificacao": "cls:interface-e-experiencia-do-usuario",
@@ -36,11 +88,25 @@
     ],
     "funcionalidades": [
       {
+        "alertas": [
+          "Ações globais não conhecem o contexto: não preenchem campos com dados da página em que o usuário está.",
+          "Para ver uma ação de objeto no page layout, o usuário precisa de Read e Edit no campo de relacionamento da ação.",
+          "Quick actions que rodam flows só existem como ações de objeto, e o flow precisa estar ativo."
+        ],
         "exemplo": "'Registrar renovação' a partir de um contrato, abrindo um flow.",
         "id": "func:acoes-rapidas",
         "pre_requisitos": [
           "Criar ações: Customize Application."
         ],
+        "principal": true
+      },
+      {
+        "alertas": [
+          "No Lightning Experience, botões padrão e customizados também contam como ações e aparecem junto das quick actions.",
+          "No editor de page layout, a categoria Mobile & Lightning Actions reúne quick actions e botões padrão e customizados."
+        ],
+        "exemplo": "Na lista de contatos, um botão abre a URL de um flow para os registros selecionados.",
+        "id": "func:botoes-e-links-customizados",
         "principal": true
       }
     ],
@@ -51,6 +117,15 @@
           "func:acoes-rapidas"
         ],
         "id": "mdt:QuickAction",
+        "nota_suporte": null,
+        "suporte_cli": "suportado"
+      },
+      {
+        "estrutura": "completa",
+        "funcionalidades": [
+          "func:botoes-e-links-customizados"
+        ],
+        "id": "mdt:WebLink",
         "nota_suporte": null,
         "suporte_cli": "suportado"
       }
@@ -76,7 +151,7 @@
     ],
     "temas_sem_funcionalidade": []
   },
-  "descricao": "Botões que executam uma tarefa em contexto.",
+  "descricao": "Quick actions, de objeto e globais, e botões e links customizados: o que o usuário executa com um clique a partir de uma página.",
   "encadeamento": {
     "evidencias": [
       {
@@ -92,12 +167,13 @@
   "estado": "desconhecido",
   "fora_do_escopo": "A lógica executada por trás da ação fica em \"Automação de processos e regras de negócio\".",
   "funcionalidades": [
-    "func:acoes-rapidas"
+    "func:acoes-rapidas",
+    "func:botoes-e-links-customizados"
   ],
   "id": "sub:acoes-rapidas",
   "natureza": "curadoria_didatica",
   "nome": "Ações rápidas",
-  "nota_estado": "Agrupamento proposto na especificação; fronteira ainda não cruzada com a documentação oficial.",
+  "nota_estado": "Tema criado pelo projeto (00-especificacao-grafo.md), não é nomenclatura oficial da Salesforce. Cruzado em 2026-11-10 com áreas da documentação oficial listadas nas referências; a correspondência é parcial e o recorte continua sendo do projeto.",
   "para_iniciantes": {
     "evidencias": [
       {
@@ -110,8 +186,26 @@
     "exemplo": "'Registrar renovação' a partir de um contrato, abrindo um flow.",
     "explicacao": "Ações rápidas são botões que abrem um formulário curto ou executam uma ação no contexto de um registro ou da navegação global.",
     "por_onde_comecar": [
-      "func:acoes-rapidas"
+      "func:acoes-rapidas",
+      "func:botoes-e-links-customizados"
     ]
   },
+  "referencias_oficiais": [
+    {
+      "fonte": "src:help-actions-lex",
+      "nota": "Cobre o tema: ações no Lightning Experience, inclusive botões.",
+      "secao": "Actions in Lightning Experience"
+    },
+    {
+      "fonte": "src:help-global-quick-actions",
+      "nota": "Cobre parte do tema: ações globais.",
+      "secao": "Global Quick Actions"
+    },
+    {
+      "fonte": "src:mdapi-weblink",
+      "nota": "Cobre parte do tema: metadado de botões e links.",
+      "secao": "WebLink"
+    }
+  ],
   "sigla": "UIX-05"
 }

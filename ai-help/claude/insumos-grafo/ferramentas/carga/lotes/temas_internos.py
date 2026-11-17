@@ -545,6 +545,33 @@ TEMAS = {
         [ev("src:help-trust-layer", "Cobre parte do tema: Trust Layer (não cobre testes e avaliação de agentes).", "Einstein Trust Layer"),
          ev("src:help-trust-audit", "Cobre parte do tema: dados de auditoria.", "Audit Trail")],
     ),
+    # ------------------------------------------------------------------ Interface: fecho da rodada A3
+    "sub:tabs": (
+        "Custom tabs: as entradas de navegação que mostram objetos customizados, páginas web, páginas Visualforce e Lightning pages.",
+        [ev("src:help-custom-tabs-overview", "Cobre o tema: custom tabs.", "Custom Tabs"),
+         ev("src:mdapi-customtab", "Cobre parte do tema: metadado das tabs.", "CustomTab")],
+    ),
+    "sub:acoes-rapidas": (
+        "Quick actions, de objeto e globais, e botões e links customizados: o que o usuário executa com um clique a partir de uma página.",
+        [ev("src:help-actions-lex", "Cobre o tema: ações no Lightning Experience, inclusive botões.", "Actions in Lightning Experience"),
+         ev("src:help-global-quick-actions", "Cobre parte do tema: ações globais.", "Global Quick Actions"),
+         ev("src:mdapi-weblink", "Cobre parte do tema: metadado de botões e links.", "WebLink")],
+    ),
+    "sub:orientacao-visual-e-path": (
+        "Path: a barra de etapas de um processo, com campos-chave e orientação em cada etapa.",
+        [ev("src:help-path-overview", "Cobre o tema: Path.", "Guide Users with Path"),
+         ev("src:help-path-considerations", "Cobre parte do tema: limites e cuidados.", "Considerations and Guidelines for Creating Paths")],
+    ),
+    "sub:experiencias-web-portais-e-mobile": (
+        "Sites do Experience Cloud e Salesforce Sites: os espaços web para clientes, parceiros e funcionários.",
+        [ev("src:help-experience-cloud", "Cobre parte do tema: sites do Experience Cloud (não cobre o app móvel).", "Experience Cloud"),
+         ev("src:mdapi-network", "Cobre parte do tema: metadado dos sites.", "Network")],
+    ),
+    "sub:lightning-pages-e-componentes": (
+        "Lightning pages: páginas montadas com componentes no Lightning App Builder.",
+        [ev("src:help-app-builder", "Cobre o tema: Lightning App Builder.", "Lightning App Builder"),
+         ev("src:help-app-builder-limits", "Cobre parte do tema: limites do Lightning App Builder.", "Lightning App Builder Limits and Limitations")],
+    ),
 }
 
 

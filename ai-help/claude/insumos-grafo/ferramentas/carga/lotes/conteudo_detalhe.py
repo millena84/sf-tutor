@@ -914,3 +914,33 @@ for _id, _tit, _art, _pert in (
     ("src:help-public-groups-knowledge", "Create Public Groups for Knowledge", "service.knowledge_setup_assign_users.htm", "Caminho de Setup de Public Groups."),
 ):
     _f(_id, _tit + " (Salesforce Help)", _H + _art + _L, _pert, **AJ)
+
+_EXT = "fontes/extracoes/lote7i-interface-fecho.txt"
+for _id, _tit, _art, _pert in (
+    ("src:help-experience-cloud", "Experience Cloud", "experience.networks_overview.htm", "Para que servem os sites do Experience Cloud."),
+    ("src:help-experience-site-create", "Create an Experience Cloud Site", "experience.networks_creating.htm", "Caminho de Setup, permissões e assistente de criação."),
+    ("src:help-experience-find-way", "Find Your Way Around", "sf.exp_cloud_basics_navigation.htm", "Setup, Experience Workspaces e Experience Builder."),
+    ("src:help-experience-build", "Build and Customize Your Experience Cloud Site", "experience.exp_cloud_build.htm", "Templates e Experience Builder."),
+    ("src:help-path-overview", "Guide Users with Path", "sales.path_overview.htm", "O que é o Path, permissões e objetos."),
+    ("src:help-path-considerations", "Considerations and Guidelines for Creating Paths", "sales.path_considerations.htm", "Um path por record type; pacotes; quem vê o path."),
+    ("src:help-path-enable", "Enable the IT Case Path", "ec_enable_it_case_path.htm", "Ligar o Path e lembrar a preferência do usuário."),
+    ("src:help-kb-path-record-type", "Guidance for Success in Salesforce Sales Path Not Displaying on Lead Object (KB)", "000384071", "Path no record type Master."),
+    ("src:help-quick-actions-kb", "Quick Actions (KB)", "000265875", "Ações de objeto e globais; o que uma quick action pode chamar."),
+    ("src:help-quick-action-considerations", "Quick Action Considerations", "platform.actions_considerations.htm", "Visibilidade de ações e record types."),
+    ("src:help-global-quick-actions", "Global Quick Actions", "sf.actions_overview_global.htm", "O que são ações globais e o global publisher layout."),
+    ("src:help-actions-lex", "Actions in Lightning Experience", "platform.actions_in_lex.htm", "Onde as ações aparecem; botões também são ações."),
+    ("src:help-actions-ordering", "How Actions Are Ordered in Lightning Experience", "sf.actions_in_lex_ordering.htm", "De onde vêm as ações de uma página de registro."),
+    ("src:help-actions-page-layout-editor", "Customize Actions with the Enhanced Page Layout Editor", "sf.adding_actions_using_ple.htm", "Seções de ações do page layout."),
+    ("src:help-flow-quick-action", "Run a Screen Flow From a Quick Action", "platform.flow_distribute_internal_action.htm", "Quick action que roda um flow."),
+    ("src:help-flow-list-button", "Run a Flow from a Custom List View Button", "platform.automate_flow_distribute_internal_url_list_button.htm", "Caminho de New Button or Link."),
+    ("src:help-custom-tabs-overview", "Custom Tabs", "platform.custom_tab_overview.htm", "Tipos de custom tab e onde aparecem."),
+    ("src:help-custom-tab-considerations", "Custom Tab Considerations", "custom_tab_considerations.htm", "Limite de tabs e busca."),
+    ("src:help-vf-tabs", "Create Visualforce Tabs", "pages_tabs_create.htm", "Criação de Visualforce tabs."),
+    ("src:help-app-builder-limits", "Lightning App Builder Limits and Limitations", "platform.lightning_app_builder_limitations.htm", "Lightning page tabs e limites de componentes."),
+    ("src:help-page-layouts", "Page Layouts", "sf.building_page_layouts_for_custom_objects.htm", "O que o page layout controla."),
+    ("src:help-page-layouts-create", "Create Page Layouts", "accessing_layout_custom.htm", "Criação de page layouts e permissão."),
+    ("src:help-kb-page-layout-section", "Create a New Section in a Salesforce Page Layout (Classic and Lightning) (KB)", "000385416", "Caminho pelo Object Manager."),
+    ("src:help-list-view-classic", "Create a Custom List View in Salesforce Classic", "sf.customviews.htm", "Criação de list views e permissões."),
+    ("src:help-kb-list-view-permissions", "Salesforce: How to Edit List Views When List View Controls Are Grayed Out (KB)", "000393179", "Permissões de list view."),
+):
+    _f(_id, _tit + ("" if "(" in _tit else " (Salesforce Help)"), _H + _art + _L, _pert, **AJ)

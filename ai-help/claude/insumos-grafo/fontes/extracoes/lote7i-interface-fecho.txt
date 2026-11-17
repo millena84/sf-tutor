@@ -1,0 +1,101 @@
+assunto: fecho da rodada A3 (Interface e experiência do usuário): sites, navegação, list views, botões e links, Path
+obtido em 2026-11-16.
+
+-- Guia versionado 264.0 (API 68.0), lido pelo endpoint de conteúdo (WebFetch); método: extração documental assistida por IA
+URL lida: https://developer.salesforce.com/docs/get_document_content/api_meta/<página>.htm/en-us/264.0
+alcance: meta_network.htm tem 176.691 caracteres e SÓ os primeiros 100.000 foram lidos; as demais páginas, por inteiro.
+
+[src:mdapi-network] Network (meta_network.htm): representa um site do Experience Cloud; sufixo .network, pasta networks; API 28.0 e posteriores;
+  estende Metadata (fullName herdado); o trecho lido não trata do curinga nem traz exemplo XML. Tabela do tipo: 70 campos. Subtipos lidos:
+  Branding (API 40.0 e anteriores), CommunityRoles (customerUserRole, employeeUserRole, partnerUserRole), NavigationLinkSet, NavigationMenuItem,
+  NavigationSubMenu e parte de NetworkAuthApiSettings, onde a leitura foi cortada. Só CommunityRoles foi cadastrado. emailSenderAddress só na
+  primeira implantação. Templates do Lightning não são empacotáveis. branding descontinuado na 41.0; navigationLinkSet substituído por
+  NavigationMenu na 47.0.
+[src:mdapi-customsite] CustomSite (meta_sites.htm; meta_customsite.htm devolveu conteúdo ilegível): sufixo .site, pasta sites; API 14.0 e
+  posteriores; estende Metadata; aceita o curinga *. 50 campos; subtipos SiteIframeWhiteListUrl (url), SiteRedirectMapping (action, isActive,
+  source, target) e SiteWebAddress (certificate, domainName, primary). Vale para Salesforce Sites e sites Visualforce; sites do Experience
+  Cloud usam Network. O texto diz siteIframeWhiteListUrls; o exemplo usa siteIframeWhiteListUrl. Valores de siteType não listados.
+[src:mdapi-navigationmenu] NavigationMenu (meta_navigationmenu.htm): sufixo .navigationMenu, pasta navigationMenus; API 47.0 e posteriores;
+  estende Metadata; aceita o curinga *. Subtipos NavigationMenuItem, NavigationMenuItemBranding (tileImage) e NavigationSubMenu. Exige a
+  permissão MultipleNavigationMenu. O exemplo usa targetPreference OpenExternalLinkInSameTab, fora da lista (None, OpenInExternalTab).
+[src:mdapi-lightningexperiencesettings] LightningExperienceSettings: sufixo .settings, pasta settings; no package.xml de exemplo, membro
+  LightningExperience do tipo Settings; API 47.0 e posteriores; estende Metadata (fullName herdado); o curinga não vale para um settings isolado.
+  41 campos; a página não marca obrigatoriedade. enableAuraBoxcarReductionPref vem sem tipo. enableS1DesktopEnabled não pode ser desligado.
+[src:mdapi-listview] ListView (meta_listview.htm): definido dentro de um CustomObject (customizado ou padrão); API 14.0 (objetos customizados) e
+  17.0 (padrão); estende Metadata; NÃO aceita o curinga *. Subtipo ListViewFilter: a tabela nomeia a linha como filter; o exemplo XML usa
+  field, operation, value. FilterScope com 11 valores. List views "Visible only to me" não são acessíveis. sharedTo usa SharedTo (não lido).
+[src:mdapi-weblink] WebLink (meta_weblink.htm): botão ou link customizado definido num objeto; API 12.0 e posteriores; estende Metadata; NÃO
+  aceita o curinga *. 22 campos. Tipos relacionados citados: HomePageComponent, HomePageLayout e CustomPageWebLink.
+[src:mdapi-pathassistantsettings] PathAssistantSettings: sufixo .settings, pasta settings; membro PathAssistant no package.xml de exemplo; API
+  34.0 e posteriores; estende Metadata (fullName herdado). Três campos e uma quarta linha em branco na tabela.
+Lido e NÃO cadastrado: AppMenu (meta_appmenu.htm): a página só diz que representa o app menu ou o menu de navegação móvel e que é "Reserved for
+  future use"; não tem tabela de campos.
+
+-- Ajuda (busca restrita a help.salesforce.com; método leitura_resultado_busca: páginas NÃO abertas por inteiro)
+[src:help-experience-cloud] Experience Cloud (experience.networks_overview.htm): vários sites na mesma org, para fins diferentes: vendas com
+  distribuidores e parceiros, atendimento a clientes, eventos. Sites nascem de templates e são customizados.
+[src:help-experience-site-create] Create an Experience Cloud Site: permissões Create and Set Up Experiences e View Setup and Configuration.
+  Caminho: Setup, Quick Find "Digital Experiences", All Sites, New; o assistente mostra os templates. O máximo de sites aparece no topo da
+  página Sites.
+[src:help-experience-find-way] Find Your Way Around: três áreas: Salesforce Setup (ligar Experiences, criar o site, permissões), Experience
+  Workspaces (Experience Builder, conteúdo, configurações, monitoramento) e Experience Builder (customização). O site é construído sobre a org.
+[src:help-experience-build] Build and Customize Your Experience Cloud Site: templates; no Experience Builder, muito se faz sem código.
+[src:help-path-overview] Guide Users with Path: guia o usuário pelas etapas de um processo; em cada etapa, campos-chave e orientação. Permissão:
+  Modify All Data ou Customize Application.
+[src:help-path-considerations] Considerations and Guidelines for Creating Paths: um path por record type em cada objeto; sem limite por org;
+  campos-chave e orientação aparecem também em kanban views do mesmo objeto, record type e picklist; o path aparece para quem vê o registro,
+  o record type e todos os campos do path.
+[src:help-path-create] Create a Path (fonte já registrada; trecho lido de novo em 2026-11-16): as etapas vêm dos valores do picklist escolhido;
+  até cinco campos-chave e até 1.000 caracteres de orientação por etapa.
+[src:help-path-enable] Enable the IT Case Path: Setup, Quick Find "Path Settings", Enable; opção Remember user's Path preferences mantém o path
+  aberto até o usuário recolher.
+[src:help-kb-path-record-type] artigo 000384071: Guidance for Success não aparece em leads quando o path está no record type Master; criar um
+  path para o record type específico.
+[src:help-quick-actions-kb] Quick Actions (artigo 000265875): ações de objeto criam ou atualizam registros no contexto de um objeto, com
+  relação automática; ações de atualização precisam ser de objeto; quick actions podem chamar Lightning components, flows, páginas Visualforce
+  e canvas apps.
+[src:help-quick-action-considerations] Quick Action Considerations: record types podem esconder ações; para ver uma ação de objeto no page
+  layout, é preciso Read e Edit no campo de relacionamento da ação.
+[src:help-global-quick-actions] Global Quick Actions: vão em quase qualquer página que aceita ações; não conhecem o contexto (não preenchem
+  campos com dados da página); ficam no global publisher layout.
+[src:help-actions-lex] Actions in Lightning Experience: botões padrão e customizados também são ações; o menu Global Actions mostra ações do
+  global publisher layout.
+[src:help-actions-ordering] How Actions Are Ordered in Lightning Experience: sem customizar a seção Salesforce Mobile and Lightning Experience
+  Actions, as ações vêm do global publisher layout e dos botões do page layout; depois, vale a ordem da seção.
+[src:help-actions-page-layout-editor] Customize Actions with the Enhanced Page Layout Editor: a categoria Mobile & Lightning Actions reúne quick
+  actions, productivity actions, ações de Lightning component e botões padrão e customizados.
+[src:help-flow-quick-action] Run a Screen Flow From a Quick Action: o flow precisa estar ativo; quick actions que rodam flows só como ações de objeto.
+[src:help-flow-list-button] Run a Flow from a Custom List View Button: Setup, Object Manager, objeto, Buttons, Links, and Actions, New Button or Link.
+[src:help-custom-tabs-overview] Custom Tabs: mostram dados de objeto customizado ou conteúdo web; quatro tipos (custom object, web, Visualforce,
+  Lightning page); no Lightning Experience, a tab de um app aparece na barra de navegação e no App Launcher.
+[src:help-custom-tab-considerations] Custom Tab Considerations: limite fixo por edição, sem aumento; objeto com custom tab é pesquisável por padrão.
+[src:help-vf-tabs] Create Visualforce Tabs: Setup, Quick Find "Tabs", New em Visualforce Tabs.
+[src:help-app-builder-limits] Lightning App Builder Limits and Limitations: Default On/Off de Lightning page tabs não funcionam como nas outras
+  tabs (usar Tab Hidden); até 100 tabs num componente Tabs; até 100 componentes por região.
+[src:help-page-layouts] Page Layouts: controlam botões, campos, s-controls, Visualforce, links e related lists nas páginas de registro e ajudam
+  a definir campos visíveis, somente leitura e obrigatórios.
+[src:help-page-layouts-create] Create Page Layouts: permissão Customize Application; nas configurações de gerenciamento do objeto, Page Layouts, New.
+[src:help-kb-page-layout-section] artigo 000385416: no Lightning Experience: Setup, Object Manager, objeto, Page Layouts, Edit.
+[src:help-list-view-classic] Create a Custom List View in Salesforce Classic: Create New View na página de lista; permissões Read no objeto e
+  Create and Customize List Views; list views públicas exigem Manage Public List Views.
+[src:help-kb-list-view-permissions] artigo 000393179: as duas permissões que controlam a edição de list views.
+
+Não lido: restante de Network (subtipos depois de NetworkAuthApiSettings), SharedTo, CustomPageWebLink, HomePageLayout, HomePageComponent,
+  ExperienceBundle e DigitalExperienceBundle, MobileSettings e navegação do app móvel, criação de list views no Lightning Experience.
+
+-- Lista de campos transcrita da leitura (gerada por lote7i_interface_fecho.py; nome | tipo | desde)
+[src:mdapi-network] CommunityRoles: customerUserRole | string | -, employeeUserRole | string | -, partnerUserRole | string | -
+[src:mdapi-network] Network: allowedExtensions | string | -, allowInternalUserLogin | boolean | -, allowMembersToFlag | boolean | -, branding | Branding | -, caseCommentEmailTemplate | string | -, changePasswordTemplate | string | -, chgEmailVerNewTemplate | string | -, chgEmailVerOldTemplate | string | -, communityRoles | CommunityRoles | -, description | string | -, deviceActEmailTemplate | string | -, disablePvtPagesForPwdResetInLWR | boolean | -, disableReputationRecordConversations | boolean | -, emailFooterLogo | string | -, emailFooterText | string | -, emailSenderAddress | string | -, emailSenderName | string | -, embeddedLoginEnabled | boolean | -, enableApexCDNCaching | boolean | -, enableCustomVFErrorPageOverrides | boolean | -, enableDirectMessages | boolean | -, enableExperienceBundleBasedSnaOverrideEnabled | boolean | -, enableGuestChatter | boolean | -, enableGuestFileAccess | boolean | -, enableGuestMemberVisibility | boolean | -, enableImageOptimizationCDN | boolean | -, enableInvitation | boolean | -, enableKnowledgeable | boolean | -, enableMemberVisibility | boolean | -, enableNicknameDisplay | boolean | -, enablePrivateMessages | boolean | -, enableReputation | boolean | -, enableShowAllNetworkSettings | boolean | -, enableSiteAsContainer | boolean | -, enableTalkingAboutStats | boolean | -, enableTopicAssignmentRules | boolean | -, enableTopicSuggestions | boolean | -, enableUpDownVote | boolean | -, enableExpFriendlyUrlsAsDefault | boolean | -, feedChannel | string | -, forgotPasswordTemplate | string | -, gatherCustomerSentimentData | boolean | -, lockoutTemplate | string | -, logoutUrl | string | -, maxFileSizeKb | int | -, navigationLinkSet | NavigationLinkSet | -, networkAuthApiSettings | NetworkAuthApiSettings | -, networkMemberGroups | NetworkMemberGroups | -, networkOptionsBit | boolean | -, networkPageOverrides | NetworkPageOverride | -, newSenderAddress | string | -, pendingSecondaryEmailAddress | string | -, pwdlessRegEmailTemplate | string | -, picassoSite | string | -, recommendationAudience | RecommendationAudience | -, recommendationDefinition | RecommendationDefinition | -, reputationLevels | ReputationLevelDefinitions | -, reputationPointsRules | ReputationPointsRules | -, secondaryEmailSenderEnabled | boolean | -, selfRegMicroBatchSubErrorEmailTemplate | reference | -, selfRegProfile | string | -, selfRegistration | boolean | -, sendWelcomeEmail | boolean | -, site | string | -, siteArchiveStatus | SitesArchiveStatus | -, status | NetworkStatus | -, tabs | NetworkTabSet | -, urlPathPrefix | string | -, verificationTemplate | string | -, welcomeTemplate | string | -, fullName | string | -
+[src:mdapi-customsite] SiteIframeWhiteListUrl: url | string | -
+[src:mdapi-customsite] SiteRedirectMapping: action | SiteRedirect | -, isActive | boolean | -, source | string | -, target | string | -
+[src:mdapi-customsite] SiteWebAddress: certificate | string | -, domainName | string | -, primary | boolean | -
+[src:mdapi-customsite] CustomSite: active | boolean | -, allowHomePage | boolean | -, allowStandardAnswersPages | boolean | -, allowStandardIdeasPages | boolean | -, allowStandardLookups | boolean | -, allowStandardPortalPages | boolean | -, allowStandardSearch | boolean | -, analyticsTrackingCode | string | -, authorizationRequiredPage | string | -, bandwidthExceededPage | string | -, browserXssProtection | boolean | -, cachePublicVisualforcePagesInProxyServers | boolean | -, changePasswordPage | string | -, chatterAnswersForgotPasswordConfirmPage | string | -, chatterAnswersForgotPasswordPage | string | -, chatterAnswersHelpPage | string | -, chatterAnswersLoginPage | string | -, chatterAnswersRegistrationPage | string | -, clickjackProtectionLevel | SiteClickjackProtectionLevel | -, contentSniffingProtection | boolean | -, cspUpgradeInsecureRequests | boolean | -, customWebAddresses | SiteWebAddress[] | -, description | string | -, enableAuraRequests | boolean | -, favoriteIcon | string | -, fileNotFoundPage | string | -, forgotPasswordPage | string | -, genericErrorPage | string | -, guestProfile | string | -, inMaintenancePage | string | -, inactiveIndexPage | string | -, indexPage | string | -, masterLabel | string | -, myProfilePage | string | -, portal | string | -, redirectToCustomDomain | boolean | -, referrerPolicyOriginWhenCrossOrigin | boolean | -, requireHttps | boolean | -, requireInsecurePortalAccess | boolean | -, robotsTxtPage | string | -, selfRegPage | string | -, serverIsDown | string | -, siteAdmin | string | -, siteGuestRecordDefaultOwner | string | -, siteIframeWhiteListUrls | SiteIframeWhiteListUrl[] | -, siteRedirectMappings | SiteRedirectMapping[] | -, siteTemplate | string | -, siteType | siteType | -, subdomain | string | -, urlPathPrefix | string | -, fullName | string | -
+[src:mdapi-navigationmenu] NavigationMenuItemBranding: tileImage | string | -
+[src:mdapi-navigationmenu] NavigationSubMenu: navigationMenuItem | NavigationMenuItem[] | -
+[src:mdapi-navigationmenu] NavigationMenuItem: defaultListViewId | string | -, label | string | -, menuItemBranding | NavigationMenuItemBranding | -, position | int | -, publiclyAvailable | boolean | -, subMenu | NavigationSubMenu | -, target | string | -, targetPreference | string | -, type | string | -
+[src:mdapi-navigationmenu] NavigationMenu: container | string | -, containerType | string | -, label | string | -, navigationMenuItem | NavigationMenuItem[] | -, fullName | string | -
+[src:mdapi-lightningexperiencesettings] LightningExperienceSettings: activeThemeName | string | -, enableAccessCheckCrucPref | boolean | -, enableApiUserLtngOutAccessPref | boolean | -, enableAuraBoxcarReductionPref | não informado na página | -, enableAuraCDNPref | boolean | -, enableAuraDepAccessChksCRUCPref | boolean | -, enableAuraSecStaticResCRUCPref | boolean | -, enableDeferRenderingWorkspacePage | boolean | -, enableErrorExperienceEnabled | boolean | -, enableFeedbackInMobile | boolean | -, enableGoogleSheetsForSfdcEnabled | boolean | -, enableIE11DeprecationMsgHidden | boolean | -, enableIE11LEXCrucPref | boolean | -, enableInAppLearning | boolean | -, enableInAppTooltips | boolean | -, enableLEXOnIpadEnabled | boolean | -, enableLexEndUsersNoSwitching | boolean | -, enableLightningPreviewPref | boolean | -, enableNavPersonalizationOptOut | boolean | -, enableNoBackgroundNavigations | boolean | -, enableQuip | boolean | -, enableRemoveThemeBrandBanner | boolean | -, enableS1BannerPref | boolean | -, enableS1BrowserEnabled | boolean | -, enableS1DesktopEnabled | boolean | -, enableS1UiLoggingEnabled | boolean | -, enableSidToken3rdPartyAuraApp | boolean | -, enableSkypeChatEnabled | boolean | -, enableSparkAllUsers | boolean | -, enableSparkConversationEnabled | boolean | -, enableSplitViewOnStandard | boolean | -, enableStackedModalManagerEnabled | boolean | -, enableTryLightningOptOut | boolean | -, enableUseS1AlohaDesktop | boolean | -, enableUsersAreLightningOnly | boolean | -, enableWebExEnabled | boolean | -, enableWebexAllUsers | boolean | -, isLEXExtensionComponentCustomizationOff | boolean | -, isLEXExtensionDarkModeOff | boolean | -, isLEXExtensionLinkGrabberOff | boolean | -, isLEXExtensionOff | boolean | -, fullName | string | -
+[src:mdapi-listview] ListViewFilter: field | string | -, operation | FilterOperation | -, value | string | -
+[src:mdapi-listview] ListView: booleanFilter | string | -, columns | string[] | -, division | string | -, filterScope | FilterScope | -, filters | ListViewFilter[] | -, fullName | string | -, label | string | -, language | Language | -, queue | string | -, sharedTo | SharedTo | -
+[src:mdapi-weblink] WebLink: availability | WebLinkAvailability | -, description | string | -, displayType | WebLinkDisplayType | -, encodingKey | Encoding | -, fullName | string | -, hasMenubar | boolean | -, hasScrollbars | boolean | -, hasToolbar | boolean | -, height | int | -, isResizable | boolean | -, linkType | WebLinkType | -, masterLabel | string | -, openType | WebLinkWindowType | -, page | string | -, position | WebLinkPosition | -, protected | boolean | -, requireRowSelection | boolean | -, scontrol | string | -, showsLocation | boolean | -, showsStatus | boolean | -, url | string | -, width | int | -
+[src:mdapi-pathassistantsettings] PathAssistantSettings: canOverrideAutoPathCollapseWithUserPref | boolean | -, pathAssistantEnabled | boolean | -, pathAssistantForOpportunityEnabled | boolean | -, fullName | string | -
