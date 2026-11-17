@@ -7404,10 +7404,10 @@
       },
       "cobertura": {
         "estrutural": {
-          "estado": "parcial",
-          "esperado": null,
+          "estado": "completa",
+          "esperado": 10,
           "presente": 10,
-          "nota": "Campos não-Permissions listados; Id e campos de sistema não constam da extração; Permissions* são dinâmicos. Tooling API (2026-11-17): 5 campos lidos; 0 só nela."
+          "nota": "Tabela de campos completa, menos os Permissions*, que são dinâmicos (ver domínio dinâmico de campos). Id e campos de sistema que a tabela não lista não foram cadastrados (convenção do catálogo). Tooling API (2026-11-17): 5 campos lidos; 0 só nela."
         },
         "explicativa": {
           "estado": "completa",
@@ -10461,6 +10461,82 @@
           ]
         },
         {
+          "id": "obj:User.IsPrmSuperUser",
+          "nome": "IsPrmSuperUser",
+          "tipo_tecnico": "boolean",
+          "o_que_e": "Indica superusuário de parceiro.",
+          "apis": [
+            "padrao"
+          ],
+          "propriedades_api": {
+            "estado": "verificado",
+            "create": true,
+            "defaulted_on_create": true,
+            "filter": true,
+            "group": true,
+            "nillable": false,
+            "restricted_picklist": false,
+            "sort": true,
+            "update": true,
+            "id_lookup": false,
+            "evidencias": [
+              {
+                "fonte": "src:objref-user-completa"
+              }
+            ]
+          },
+          "somente_leitura": false,
+          "origem": {
+            "estado": "verificado",
+            "valor": "padrao_plataforma",
+            "nota": "Campo padrão do objeto documentado.",
+            "evidencias": [
+              {
+                "fonte": "src:objref-user-completa"
+              }
+            ]
+          },
+          "obrigatoriedade": {
+            "valor": "desconhecida",
+            "estado": "desconhecido"
+          },
+          "default": {
+            "forma": "desconhecido",
+            "estado": "desconhecido",
+            "nota": "A API marca o campo como 'defaulted on create', mas o valor não foi declarado na extração."
+          },
+          "dominio": {
+            "natureza": "booleano",
+            "valores": [
+              {
+                "valor": "true"
+              },
+              {
+                "valor": "false"
+              }
+            ],
+            "lista_completa": "sim",
+            "estado": "verificado",
+            "evidencias": [
+              {
+                "fonte": "src:objref-user-completa"
+              }
+            ]
+          },
+          "disponibilidade": {
+            "desde_versao": "24.0",
+            "ate_versao": null,
+            "estado": "verificado"
+          },
+          "explicacao": "explicada",
+          "estado": "verificado",
+          "evidencias": [
+            {
+              "fonte": "src:objref-user-completa"
+            }
+          ]
+        },
+        {
           "id": "obj:User.IsProfilePhotoActive",
           "nome": "IsProfilePhotoActive",
           "tipo_tecnico": "(a extrair)",
@@ -10965,6 +11041,68 @@
           ]
         },
         {
+          "id": "obj:User.Manager",
+          "nome": "Manager",
+          "tipo_tecnico": "picklist",
+          "o_que_e": "Lookup para escolher o gestor; impede escolher quem se reporta ao próprio usuário.",
+          "apis": [
+            "padrao"
+          ],
+          "propriedades_api": {
+            "estado": "verificado",
+            "create": true,
+            "defaulted_on_create": false,
+            "filter": true,
+            "group": false,
+            "nillable": false,
+            "restricted_picklist": true,
+            "sort": false,
+            "update": true,
+            "id_lookup": false,
+            "evidencias": [
+              {
+                "fonte": "src:objref-user-completa"
+              }
+            ]
+          },
+          "somente_leitura": false,
+          "origem": {
+            "estado": "verificado",
+            "valor": "padrao_plataforma",
+            "nota": "Campo padrão do objeto documentado.",
+            "evidencias": [
+              {
+                "fonte": "src:objref-user-completa"
+              }
+            ]
+          },
+          "obrigatoriedade": {
+            "valor": "desconhecida",
+            "estado": "desconhecido"
+          },
+          "default": {
+            "forma": "nao_declarado_na_fonte",
+            "estado": "desconhecido"
+          },
+          "dominio": {
+            "natureza": "lista_dinamica",
+            "estado": "desconhecido",
+            "contexto": "Valores não extraídos; podem depender de org, idioma ou recurso."
+          },
+          "disponibilidade": {
+            "desde_versao": null,
+            "ate_versao": null,
+            "estado": "desconhecido"
+          },
+          "explicacao": "explicada",
+          "estado": "verificado",
+          "evidencias": [
+            {
+              "fonte": "src:objref-user-completa"
+            }
+          ]
+        },
+        {
           "id": "obj:User.ManagerId",
           "nome": "ManagerId",
           "tipo_tecnico": "reference",
@@ -11127,6 +11265,72 @@
           ]
         },
         {
+          "id": "obj:User.MiddleName",
+          "nome": "MiddleName",
+          "tipo_tecnico": "string",
+          "o_que_e": "Nome do meio; até 40 caracteres.",
+          "apis": [
+            "padrao"
+          ],
+          "propriedades_api": {
+            "estado": "verificado",
+            "create": true,
+            "defaulted_on_create": false,
+            "filter": true,
+            "group": true,
+            "nillable": true,
+            "restricted_picklist": false,
+            "sort": true,
+            "update": true,
+            "id_lookup": false,
+            "evidencias": [
+              {
+                "fonte": "src:objref-user-completa"
+              }
+            ]
+          },
+          "somente_leitura": false,
+          "origem": {
+            "estado": "verificado",
+            "valor": "padrao_plataforma",
+            "nota": "Campo padrão do objeto documentado.",
+            "evidencias": [
+              {
+                "fonte": "src:objref-user-completa"
+              }
+            ]
+          },
+          "obrigatoriedade": {
+            "valor": "desconhecida",
+            "estado": "desconhecido"
+          },
+          "default": {
+            "forma": "nao_declarado_na_fonte",
+            "estado": "desconhecido"
+          },
+          "dominio": {
+            "natureza": "texto_livre",
+            "estado": "verificado",
+            "evidencias": [
+              {
+                "fonte": "src:objref-user-completa"
+              }
+            ]
+          },
+          "disponibilidade": {
+            "desde_versao": null,
+            "ate_versao": null,
+            "estado": "desconhecido"
+          },
+          "explicacao": "explicada",
+          "estado": "verificado",
+          "evidencias": [
+            {
+              "fonte": "src:objref-user-completa"
+            }
+          ]
+        },
+        {
           "id": "obj:User.MobilePhone",
           "nome": "MobilePhone",
           "tipo_tecnico": "(a extrair)",
@@ -11231,6 +11435,72 @@
           ]
         },
         {
+          "id": "obj:User.NumberOfFailedLogins",
+          "nome": "NumberOfFailedLogins",
+          "tipo_tecnico": "int",
+          "o_que_e": "Tentativas de login que falharam na interface.",
+          "apis": [
+            "padrao"
+          ],
+          "propriedades_api": {
+            "estado": "verificado",
+            "create": false,
+            "defaulted_on_create": false,
+            "filter": true,
+            "group": true,
+            "nillable": true,
+            "restricted_picklist": false,
+            "sort": true,
+            "update": false,
+            "id_lookup": false,
+            "evidencias": [
+              {
+                "fonte": "src:objref-user-completa"
+              }
+            ]
+          },
+          "somente_leitura": true,
+          "origem": {
+            "estado": "verificado",
+            "valor": "padrao_plataforma",
+            "nota": "Campo padrão do objeto documentado.",
+            "evidencias": [
+              {
+                "fonte": "src:objref-user-completa"
+              }
+            ]
+          },
+          "obrigatoriedade": {
+            "valor": "desconhecida",
+            "estado": "desconhecido"
+          },
+          "default": {
+            "forma": "nao_declarado_na_fonte",
+            "estado": "desconhecido"
+          },
+          "dominio": {
+            "natureza": "numerico",
+            "estado": "verificado",
+            "evidencias": [
+              {
+                "fonte": "src:objref-user-completa"
+              }
+            ]
+          },
+          "disponibilidade": {
+            "desde_versao": null,
+            "ate_versao": null,
+            "estado": "desconhecido"
+          },
+          "explicacao": "explicada",
+          "estado": "verificado",
+          "evidencias": [
+            {
+              "fonte": "src:objref-user-completa"
+            }
+          ]
+        },
+        {
           "id": "obj:User.OfflineTrialExpirationDate",
           "nome": "OfflineTrialExpirationDate",
           "tipo_tecnico": "(a extrair)",
@@ -11331,6 +11601,72 @@
           ]
         },
         {
+          "id": "obj:User.PasswordExpirationDate",
+          "nome": "PasswordExpirationDate",
+          "tipo_tecnico": "dateTime",
+          "o_que_e": "Quando a senha expira.",
+          "apis": [
+            "padrao"
+          ],
+          "propriedades_api": {
+            "estado": "verificado",
+            "create": false,
+            "defaulted_on_create": false,
+            "filter": true,
+            "group": false,
+            "nillable": true,
+            "restricted_picklist": false,
+            "sort": true,
+            "update": false,
+            "id_lookup": false,
+            "evidencias": [
+              {
+                "fonte": "src:objref-user-completa"
+              }
+            ]
+          },
+          "somente_leitura": true,
+          "origem": {
+            "estado": "verificado",
+            "valor": "padrao_plataforma",
+            "nota": "Campo padrão do objeto documentado.",
+            "evidencias": [
+              {
+                "fonte": "src:objref-user-completa"
+              }
+            ]
+          },
+          "obrigatoriedade": {
+            "valor": "desconhecida",
+            "estado": "desconhecido"
+          },
+          "default": {
+            "forma": "nao_declarado_na_fonte",
+            "estado": "desconhecido"
+          },
+          "dominio": {
+            "natureza": "data_hora",
+            "estado": "verificado",
+            "evidencias": [
+              {
+                "fonte": "src:objref-user-completa"
+              }
+            ]
+          },
+          "disponibilidade": {
+            "desde_versao": "63.0",
+            "ate_versao": null,
+            "estado": "verificado"
+          },
+          "explicacao": "explicada",
+          "estado": "verificado",
+          "evidencias": [
+            {
+              "fonte": "src:objref-user-completa"
+            }
+          ]
+        },
+        {
           "id": "obj:User.Phone",
           "nome": "Phone",
           "tipo_tecnico": "(a extrair)",
@@ -11378,6 +11714,68 @@
           ],
           "notas": [
             "Nome confirmado pela Field Reference; tipo e propriedades de API não constam dessa fonte."
+          ]
+        },
+        {
+          "id": "obj:User.PortalRole",
+          "nome": "PortalRole",
+          "tipo_tecnico": "picklist",
+          "o_que_e": "Papel do usuário no portal de clientes.",
+          "apis": [
+            "padrao"
+          ],
+          "propriedades_api": {
+            "estado": "verificado",
+            "create": true,
+            "defaulted_on_create": false,
+            "filter": true,
+            "group": true,
+            "nillable": true,
+            "restricted_picklist": true,
+            "sort": true,
+            "update": true,
+            "id_lookup": false,
+            "evidencias": [
+              {
+                "fonte": "src:objref-user-completa"
+              }
+            ]
+          },
+          "somente_leitura": false,
+          "origem": {
+            "estado": "verificado",
+            "valor": "padrao_plataforma",
+            "nota": "Campo padrão do objeto documentado.",
+            "evidencias": [
+              {
+                "fonte": "src:objref-user-completa"
+              }
+            ]
+          },
+          "obrigatoriedade": {
+            "valor": "desconhecida",
+            "estado": "desconhecido"
+          },
+          "default": {
+            "forma": "nao_declarado_na_fonte",
+            "estado": "desconhecido"
+          },
+          "dominio": {
+            "natureza": "lista_dinamica",
+            "estado": "desconhecido",
+            "contexto": "Valores não extraídos; podem depender de org, idioma ou recurso."
+          },
+          "disponibilidade": {
+            "desde_versao": "43.0",
+            "ate_versao": null,
+            "estado": "verificado"
+          },
+          "explicacao": "explicada",
+          "estado": "verificado",
+          "evidencias": [
+            {
+              "fonte": "src:objref-user-completa"
+            }
           ]
         },
         {
@@ -11946,6 +12344,68 @@
           ]
         },
         {
+          "id": "obj:User.StateCode",
+          "nome": "StateCode",
+          "tipo_tecnico": "picklist",
+          "o_que_e": "Código ISO do estado.",
+          "apis": [
+            "padrao"
+          ],
+          "propriedades_api": {
+            "estado": "verificado",
+            "create": true,
+            "defaulted_on_create": false,
+            "filter": true,
+            "group": true,
+            "nillable": true,
+            "restricted_picklist": false,
+            "sort": true,
+            "update": true,
+            "id_lookup": false,
+            "evidencias": [
+              {
+                "fonte": "src:objref-user-completa"
+              }
+            ]
+          },
+          "somente_leitura": false,
+          "origem": {
+            "estado": "verificado",
+            "valor": "padrao_plataforma",
+            "nota": "Campo padrão do objeto documentado.",
+            "evidencias": [
+              {
+                "fonte": "src:objref-user-completa"
+              }
+            ]
+          },
+          "obrigatoriedade": {
+            "valor": "desconhecida",
+            "estado": "desconhecido"
+          },
+          "default": {
+            "forma": "nao_declarado_na_fonte",
+            "estado": "desconhecido"
+          },
+          "dominio": {
+            "natureza": "lista_dinamica",
+            "estado": "desconhecido",
+            "contexto": "Valores não extraídos; podem depender de org, idioma ou recurso."
+          },
+          "disponibilidade": {
+            "desde_versao": null,
+            "ate_versao": null,
+            "estado": "desconhecido"
+          },
+          "explicacao": "explicada",
+          "estado": "verificado",
+          "evidencias": [
+            {
+              "fonte": "src:objref-user-completa"
+            }
+          ]
+        },
+        {
           "id": "obj:User.StayInTouchNote",
           "nome": "StayInTouchNote",
           "tipo_tecnico": "(a extrair)",
@@ -12196,6 +12656,72 @@
           ]
         },
         {
+          "id": "obj:User.Suffix",
+          "nome": "Suffix",
+          "tipo_tecnico": "string",
+          "o_que_e": "Sufixo do nome; até 40 caracteres.",
+          "apis": [
+            "padrao"
+          ],
+          "propriedades_api": {
+            "estado": "verificado",
+            "create": true,
+            "defaulted_on_create": false,
+            "filter": true,
+            "group": true,
+            "nillable": true,
+            "restricted_picklist": false,
+            "sort": true,
+            "update": true,
+            "id_lookup": false,
+            "evidencias": [
+              {
+                "fonte": "src:objref-user-completa"
+              }
+            ]
+          },
+          "somente_leitura": false,
+          "origem": {
+            "estado": "verificado",
+            "valor": "padrao_plataforma",
+            "nota": "Campo padrão do objeto documentado.",
+            "evidencias": [
+              {
+                "fonte": "src:objref-user-completa"
+              }
+            ]
+          },
+          "obrigatoriedade": {
+            "valor": "desconhecida",
+            "estado": "desconhecido"
+          },
+          "default": {
+            "forma": "nao_declarado_na_fonte",
+            "estado": "desconhecido"
+          },
+          "dominio": {
+            "natureza": "texto_livre",
+            "estado": "verificado",
+            "evidencias": [
+              {
+                "fonte": "src:objref-user-completa"
+              }
+            ]
+          },
+          "disponibilidade": {
+            "desde_versao": null,
+            "ate_versao": null,
+            "estado": "desconhecido"
+          },
+          "explicacao": "explicada",
+          "estado": "verificado",
+          "evidencias": [
+            {
+              "fonte": "src:objref-user-completa"
+            }
+          ]
+        },
+        {
           "id": "obj:User.TimeZoneSidKey",
           "nome": "TimeZoneSidKey",
           "tipo_tecnico": "(a extrair)",
@@ -12293,6 +12819,70 @@
           ],
           "notas": [
             "Nome confirmado pela Field Reference; tipo e propriedades de API não constam dessa fonte."
+          ]
+        },
+        {
+          "id": "obj:User.Username",
+          "nome": "Username",
+          "tipo_tecnico": "string",
+          "o_que_e": "Nome de login no formato de e-mail, único entre todas as orgs.",
+          "apis": [
+            "padrao",
+            "tooling"
+          ],
+          "propriedades_api": {
+            "estado": "desconhecido"
+          },
+          "somente_leitura": null,
+          "origem": {
+            "estado": "verificado",
+            "valor": "padrao_plataforma",
+            "nota": "Campo padrão do objeto documentado.",
+            "evidencias": [
+              {
+                "fonte": "src:objref-user"
+              }
+            ]
+          },
+          "obrigatoriedade": {
+            "valor": "sim",
+            "estado": "verificado",
+            "evidencias": [
+              {
+                "fonte": "src:objref-user"
+              }
+            ]
+          },
+          "default": {
+            "forma": "nao_declarado_na_fonte",
+            "estado": "desconhecido"
+          },
+          "dominio": {
+            "natureza": "texto_livre",
+            "estado": "verificado",
+            "evidencias": [
+              {
+                "fonte": "src:objref-user"
+              }
+            ]
+          },
+          "disponibilidade": {
+            "desde_versao": null,
+            "ate_versao": null,
+            "estado": "desconhecido"
+          },
+          "explicacao": "explicada",
+          "estado": "verificado",
+          "evidencias": [
+            {
+              "fonte": "src:objref-user"
+            },
+            {
+              "fonte": "src:fieldref-user"
+            },
+            {
+              "fonte": "src:tooling-user"
+            }
           ]
         },
         {
@@ -12996,6 +13586,81 @@
           ]
         },
         {
+          "id": "obj:User.UserPermissionsWirelessUser",
+          "nome": "UserPermissionsWirelessUser",
+          "tipo_tecnico": "boolean",
+          "o_que_e": "Acesso ao Wireless Edition, descontinuado.",
+          "apis": [
+            "padrao"
+          ],
+          "propriedades_api": {
+            "estado": "verificado",
+            "create": true,
+            "defaulted_on_create": false,
+            "filter": true,
+            "group": false,
+            "nillable": false,
+            "restricted_picklist": false,
+            "sort": false,
+            "update": true,
+            "id_lookup": false,
+            "evidencias": [
+              {
+                "fonte": "src:objref-user-completa"
+              }
+            ]
+          },
+          "somente_leitura": false,
+          "origem": {
+            "estado": "verificado",
+            "valor": "padrao_plataforma",
+            "nota": "Campo padrão do objeto documentado.",
+            "evidencias": [
+              {
+                "fonte": "src:objref-user-completa"
+              }
+            ]
+          },
+          "obrigatoriedade": {
+            "valor": "desconhecida",
+            "estado": "desconhecido"
+          },
+          "default": {
+            "forma": "nao_declarado_na_fonte",
+            "estado": "desconhecido"
+          },
+          "dominio": {
+            "natureza": "booleano",
+            "valores": [
+              {
+                "valor": "true"
+              },
+              {
+                "valor": "false"
+              }
+            ],
+            "lista_completa": "sim",
+            "estado": "verificado",
+            "evidencias": [
+              {
+                "fonte": "src:objref-user-completa"
+              }
+            ]
+          },
+          "disponibilidade": {
+            "desde_versao": null,
+            "ate_versao": null,
+            "estado": "desconhecido"
+          },
+          "explicacao": "explicada",
+          "estado": "verificado",
+          "evidencias": [
+            {
+              "fonte": "src:objref-user-completa"
+            }
+          ]
+        },
+        {
           "id": "obj:User.UserPermissionsWorkDotComUserFeature",
           "nome": "UserPermissionsWorkDotComUserFeature",
           "tipo_tecnico": "(a extrair)",
@@ -13096,6 +13761,156 @@
           ]
         },
         {
+          "id": "obj:User.UserPreferencesAgentGdprConsent",
+          "nome": "UserPreferencesAgentGdprConsent",
+          "tipo_tecnico": "boolean",
+          "o_que_e": "Consentimento para gravar e analisar chamadas.",
+          "apis": [
+            "padrao"
+          ],
+          "propriedades_api": {
+            "estado": "verificado",
+            "create": true,
+            "defaulted_on_create": false,
+            "filter": true,
+            "group": false,
+            "nillable": false,
+            "restricted_picklist": false,
+            "sort": false,
+            "update": true,
+            "id_lookup": false,
+            "evidencias": [
+              {
+                "fonte": "src:objref-user-completa"
+              }
+            ]
+          },
+          "somente_leitura": false,
+          "origem": {
+            "estado": "verificado",
+            "valor": "padrao_plataforma",
+            "nota": "Campo padrão do objeto documentado.",
+            "evidencias": [
+              {
+                "fonte": "src:objref-user-completa"
+              }
+            ]
+          },
+          "obrigatoriedade": {
+            "valor": "desconhecida",
+            "estado": "desconhecido"
+          },
+          "default": {
+            "forma": "nao_declarado_na_fonte",
+            "estado": "desconhecido"
+          },
+          "dominio": {
+            "natureza": "booleano",
+            "valores": [
+              {
+                "valor": "true"
+              },
+              {
+                "valor": "false"
+              }
+            ],
+            "lista_completa": "sim",
+            "estado": "verificado",
+            "evidencias": [
+              {
+                "fonte": "src:objref-user-completa"
+              }
+            ]
+          },
+          "disponibilidade": {
+            "desde_versao": null,
+            "ate_versao": null,
+            "estado": "desconhecido"
+          },
+          "explicacao": "explicada",
+          "estado": "verificado",
+          "evidencias": [
+            {
+              "fonte": "src:objref-user-completa"
+            }
+          ]
+        },
+        {
+          "id": "obj:User.UserPreferencesAllowConversationReminders",
+          "nome": "UserPreferencesAllowConversationReminders",
+          "tipo_tecnico": "boolean",
+          "o_que_e": "Lembretes de conversa como cartões no Lightning.",
+          "apis": [
+            "padrao"
+          ],
+          "propriedades_api": {
+            "estado": "verificado",
+            "create": true,
+            "defaulted_on_create": false,
+            "filter": true,
+            "group": false,
+            "nillable": false,
+            "restricted_picklist": false,
+            "sort": false,
+            "update": true,
+            "id_lookup": false,
+            "evidencias": [
+              {
+                "fonte": "src:objref-user-completa"
+              }
+            ]
+          },
+          "somente_leitura": false,
+          "origem": {
+            "estado": "verificado",
+            "valor": "padrao_plataforma",
+            "nota": "Campo padrão do objeto documentado.",
+            "evidencias": [
+              {
+                "fonte": "src:objref-user-completa"
+              }
+            ]
+          },
+          "obrigatoriedade": {
+            "valor": "desconhecida",
+            "estado": "desconhecido"
+          },
+          "default": {
+            "forma": "nao_declarado_na_fonte",
+            "estado": "desconhecido"
+          },
+          "dominio": {
+            "natureza": "booleano",
+            "valores": [
+              {
+                "valor": "true"
+              },
+              {
+                "valor": "false"
+              }
+            ],
+            "lista_completa": "sim",
+            "estado": "verificado",
+            "evidencias": [
+              {
+                "fonte": "src:objref-user-completa"
+              }
+            ]
+          },
+          "disponibilidade": {
+            "desde_versao": "55.0",
+            "ate_versao": null,
+            "estado": "verificado"
+          },
+          "explicacao": "explicada",
+          "estado": "verificado",
+          "evidencias": [
+            {
+              "fonte": "src:objref-user-completa"
+            }
+          ]
+        },
+        {
           "id": "obj:User.UserPreferencesApexPagesDeveloperMode",
           "nome": "UserPreferencesApexPagesDeveloperMode",
           "tipo_tecnico": "(a extrair)",
@@ -13143,6 +13958,81 @@
           ],
           "notas": [
             "Nome confirmado pela Field Reference; tipo e propriedades de API não constam dessa fonte."
+          ]
+        },
+        {
+          "id": "obj:User.UserPreferencesAutoForwardCall",
+          "nome": "UserPreferencesAutoForwardCall",
+          "tipo_tecnico": "boolean",
+          "o_que_e": "Chamadas tocam no navegador e no telefone ao mesmo tempo.",
+          "apis": [
+            "padrao"
+          ],
+          "propriedades_api": {
+            "estado": "verificado",
+            "create": true,
+            "defaulted_on_create": false,
+            "filter": true,
+            "group": false,
+            "nillable": false,
+            "restricted_picklist": false,
+            "sort": false,
+            "update": true,
+            "id_lookup": false,
+            "evidencias": [
+              {
+                "fonte": "src:objref-user-completa"
+              }
+            ]
+          },
+          "somente_leitura": false,
+          "origem": {
+            "estado": "verificado",
+            "valor": "padrao_plataforma",
+            "nota": "Campo padrão do objeto documentado.",
+            "evidencias": [
+              {
+                "fonte": "src:objref-user-completa"
+              }
+            ]
+          },
+          "obrigatoriedade": {
+            "valor": "desconhecida",
+            "estado": "desconhecido"
+          },
+          "default": {
+            "forma": "nao_declarado_na_fonte",
+            "estado": "desconhecido"
+          },
+          "dominio": {
+            "natureza": "booleano",
+            "valores": [
+              {
+                "valor": "true"
+              },
+              {
+                "valor": "false"
+              }
+            ],
+            "lista_completa": "sim",
+            "estado": "verificado",
+            "evidencias": [
+              {
+                "fonte": "src:objref-user-completa"
+              }
+            ]
+          },
+          "disponibilidade": {
+            "desde_versao": null,
+            "ate_versao": null,
+            "estado": "desconhecido"
+          },
+          "explicacao": "explicada",
+          "estado": "verificado",
+          "evidencias": [
+            {
+              "fonte": "src:objref-user-completa"
+            }
           ]
         },
         {
@@ -13346,156 +14236,6 @@
           ]
         },
         {
-          "id": "obj:User.UserPreferencesDisCommentAfterLikeEmail",
-          "nome": "UserPreferencesDisCommentAfterLikeEmail",
-          "tipo_tecnico": "(a extrair)",
-          "o_que_e": "Explicação pendente: campo listado a partir da fonte, ainda sem texto didático.",
-          "apis": [
-            "padrao"
-          ],
-          "propriedades_api": {
-            "estado": "desconhecido"
-          },
-          "somente_leitura": null,
-          "origem": {
-            "estado": "verificado",
-            "valor": "padrao_plataforma",
-            "nota": "Campo padrão do objeto documentado.",
-            "evidencias": [
-              {
-                "fonte": "src:fieldref-user"
-              }
-            ]
-          },
-          "obrigatoriedade": {
-            "valor": "desconhecida",
-            "estado": "desconhecido"
-          },
-          "default": {
-            "forma": "nao_declarado_na_fonte",
-            "estado": "desconhecido"
-          },
-          "dominio": {
-            "natureza": "desconhecida",
-            "estado": "desconhecido"
-          },
-          "disponibilidade": {
-            "desde_versao": null,
-            "ate_versao": null,
-            "estado": "desconhecido"
-          },
-          "explicacao": "pendente",
-          "estado": "verificado",
-          "evidencias": [
-            {
-              "fonte": "src:fieldref-user"
-            }
-          ],
-          "notas": [
-            "Nome confirmado pela Field Reference; tipo e propriedades de API não constam dessa fonte."
-          ]
-        },
-        {
-          "id": "obj:User.UserPreferencesDisMentionsCommentEmail",
-          "nome": "UserPreferencesDisMentionsCommentEmail",
-          "tipo_tecnico": "(a extrair)",
-          "o_que_e": "Explicação pendente: campo listado a partir da fonte, ainda sem texto didático.",
-          "apis": [
-            "padrao"
-          ],
-          "propriedades_api": {
-            "estado": "desconhecido"
-          },
-          "somente_leitura": null,
-          "origem": {
-            "estado": "verificado",
-            "valor": "padrao_plataforma",
-            "nota": "Campo padrão do objeto documentado.",
-            "evidencias": [
-              {
-                "fonte": "src:fieldref-user"
-              }
-            ]
-          },
-          "obrigatoriedade": {
-            "valor": "desconhecida",
-            "estado": "desconhecido"
-          },
-          "default": {
-            "forma": "nao_declarado_na_fonte",
-            "estado": "desconhecido"
-          },
-          "dominio": {
-            "natureza": "desconhecida",
-            "estado": "desconhecido"
-          },
-          "disponibilidade": {
-            "desde_versao": null,
-            "ate_versao": null,
-            "estado": "desconhecido"
-          },
-          "explicacao": "pendente",
-          "estado": "verificado",
-          "evidencias": [
-            {
-              "fonte": "src:fieldref-user"
-            }
-          ],
-          "notas": [
-            "Nome confirmado pela Field Reference; tipo e propriedades de API não constam dessa fonte."
-          ]
-        },
-        {
-          "id": "obj:User.UserPreferencesDisProfPostCommentEmail",
-          "nome": "UserPreferencesDisProfPostCommentEmail",
-          "tipo_tecnico": "(a extrair)",
-          "o_que_e": "Explicação pendente: campo listado a partir da fonte, ainda sem texto didático.",
-          "apis": [
-            "padrao"
-          ],
-          "propriedades_api": {
-            "estado": "desconhecido"
-          },
-          "somente_leitura": null,
-          "origem": {
-            "estado": "verificado",
-            "valor": "padrao_plataforma",
-            "nota": "Campo padrão do objeto documentado.",
-            "evidencias": [
-              {
-                "fonte": "src:fieldref-user"
-              }
-            ]
-          },
-          "obrigatoriedade": {
-            "valor": "desconhecida",
-            "estado": "desconhecido"
-          },
-          "default": {
-            "forma": "nao_declarado_na_fonte",
-            "estado": "desconhecido"
-          },
-          "dominio": {
-            "natureza": "desconhecida",
-            "estado": "desconhecido"
-          },
-          "disponibilidade": {
-            "desde_versao": null,
-            "ate_versao": null,
-            "estado": "desconhecido"
-          },
-          "explicacao": "pendente",
-          "estado": "verificado",
-          "evidencias": [
-            {
-              "fonte": "src:fieldref-user"
-            }
-          ],
-          "notas": [
-            "Nome confirmado pela Field Reference; tipo e propriedades de API não constam dessa fonte."
-          ]
-        },
-        {
           "id": "obj:User.UserPreferencesDisableAllFeedsEmail",
           "nome": "UserPreferencesDisableAllFeedsEmail",
           "tipo_tecnico": "(a extrair)",
@@ -13543,6 +14283,81 @@
           ],
           "notas": [
             "Nome confirmado pela Field Reference; tipo e propriedades de API não constam dessa fonte."
+          ]
+        },
+        {
+          "id": "obj:User.UserPreferencesDisableAutoSubForFeeds",
+          "nome": "UserPreferencesDisableAutoSubForFeeds",
+          "tipo_tecnico": "boolean",
+          "o_que_e": "Desliga seguir automaticamente os registros criados; obsoleto.",
+          "apis": [
+            "padrao"
+          ],
+          "propriedades_api": {
+            "estado": "verificado",
+            "create": true,
+            "defaulted_on_create": false,
+            "filter": true,
+            "group": false,
+            "nillable": false,
+            "restricted_picklist": false,
+            "sort": false,
+            "update": true,
+            "id_lookup": false,
+            "evidencias": [
+              {
+                "fonte": "src:objref-user-completa"
+              }
+            ]
+          },
+          "somente_leitura": false,
+          "origem": {
+            "estado": "verificado",
+            "valor": "padrao_plataforma",
+            "nota": "Campo padrão do objeto documentado.",
+            "evidencias": [
+              {
+                "fonte": "src:objref-user-completa"
+              }
+            ]
+          },
+          "obrigatoriedade": {
+            "valor": "desconhecida",
+            "estado": "desconhecido"
+          },
+          "default": {
+            "forma": "nao_declarado_na_fonte",
+            "estado": "desconhecido"
+          },
+          "dominio": {
+            "natureza": "booleano",
+            "valores": [
+              {
+                "valor": "true"
+              },
+              {
+                "valor": "false"
+              }
+            ],
+            "lista_completa": "sim",
+            "estado": "verificado",
+            "evidencias": [
+              {
+                "fonte": "src:objref-user-completa"
+              }
+            ]
+          },
+          "disponibilidade": {
+            "desde_versao": "25.0",
+            "ate_versao": null,
+            "estado": "verificado"
+          },
+          "explicacao": "explicada",
+          "estado": "verificado",
+          "evidencias": [
+            {
+              "fonte": "src:objref-user-completa"
+            }
           ]
         },
         {
@@ -13693,6 +14508,81 @@
           ],
           "notas": [
             "Nome confirmado pela Field Reference; tipo e propriedades de API não constam dessa fonte."
+          ]
+        },
+        {
+          "id": "obj:User.UserPreferencesDisableFeedbackEmail",
+          "nome": "UserPreferencesDisableFeedbackEmail",
+          "tipo_tecnico": "boolean",
+          "o_que_e": "E-mails sobre feedback do Work.com.",
+          "apis": [
+            "padrao"
+          ],
+          "propriedades_api": {
+            "estado": "verificado",
+            "create": true,
+            "defaulted_on_create": false,
+            "filter": true,
+            "group": false,
+            "nillable": false,
+            "restricted_picklist": false,
+            "sort": false,
+            "update": true,
+            "id_lookup": false,
+            "evidencias": [
+              {
+                "fonte": "src:objref-user-completa"
+              }
+            ]
+          },
+          "somente_leitura": false,
+          "origem": {
+            "estado": "verificado",
+            "valor": "padrao_plataforma",
+            "nota": "Campo padrão do objeto documentado.",
+            "evidencias": [
+              {
+                "fonte": "src:objref-user-completa"
+              }
+            ]
+          },
+          "obrigatoriedade": {
+            "valor": "desconhecida",
+            "estado": "desconhecido"
+          },
+          "default": {
+            "forma": "nao_declarado_na_fonte",
+            "estado": "desconhecido"
+          },
+          "dominio": {
+            "natureza": "booleano",
+            "valores": [
+              {
+                "valor": "true"
+              },
+              {
+                "valor": "false"
+              }
+            ],
+            "lista_completa": "sim",
+            "estado": "verificado",
+            "evidencias": [
+              {
+                "fonte": "src:objref-user-completa"
+              }
+            ]
+          },
+          "disponibilidade": {
+            "desde_versao": "54.0",
+            "ate_versao": null,
+            "estado": "verificado"
+          },
+          "explicacao": "explicada",
+          "estado": "verificado",
+          "evidencias": [
+            {
+              "fonte": "src:objref-user-completa"
+            }
           ]
         },
         {
@@ -14046,8 +14936,308 @@
           ]
         },
         {
+          "id": "obj:User.UserPreferencesDisableRewardEmail",
+          "nome": "UserPreferencesDisableRewardEmail",
+          "tipo_tecnico": "boolean",
+          "o_que_e": "E-mails sobre recompensas do Work.com.",
+          "apis": [
+            "padrao"
+          ],
+          "propriedades_api": {
+            "estado": "verificado",
+            "create": true,
+            "defaulted_on_create": false,
+            "filter": true,
+            "group": false,
+            "nillable": false,
+            "restricted_picklist": false,
+            "sort": false,
+            "update": true,
+            "id_lookup": false,
+            "evidencias": [
+              {
+                "fonte": "src:objref-user-completa"
+              }
+            ]
+          },
+          "somente_leitura": false,
+          "origem": {
+            "estado": "verificado",
+            "valor": "padrao_plataforma",
+            "nota": "Campo padrão do objeto documentado.",
+            "evidencias": [
+              {
+                "fonte": "src:objref-user-completa"
+              }
+            ]
+          },
+          "obrigatoriedade": {
+            "valor": "desconhecida",
+            "estado": "desconhecido"
+          },
+          "default": {
+            "forma": "nao_declarado_na_fonte",
+            "estado": "desconhecido"
+          },
+          "dominio": {
+            "natureza": "booleano",
+            "valores": [
+              {
+                "valor": "true"
+              },
+              {
+                "valor": "false"
+              }
+            ],
+            "lista_completa": "sim",
+            "estado": "verificado",
+            "evidencias": [
+              {
+                "fonte": "src:objref-user-completa"
+              }
+            ]
+          },
+          "disponibilidade": {
+            "desde_versao": null,
+            "ate_versao": null,
+            "estado": "desconhecido"
+          },
+          "explicacao": "explicada",
+          "estado": "verificado",
+          "evidencias": [
+            {
+              "fonte": "src:objref-user-completa"
+            }
+          ]
+        },
+        {
           "id": "obj:User.UserPreferencesDisableSharePostEmail",
           "nome": "UserPreferencesDisableSharePostEmail",
+          "tipo_tecnico": "(a extrair)",
+          "o_que_e": "Explicação pendente: campo listado a partir da fonte, ainda sem texto didático.",
+          "apis": [
+            "padrao"
+          ],
+          "propriedades_api": {
+            "estado": "desconhecido"
+          },
+          "somente_leitura": null,
+          "origem": {
+            "estado": "verificado",
+            "valor": "padrao_plataforma",
+            "nota": "Campo padrão do objeto documentado.",
+            "evidencias": [
+              {
+                "fonte": "src:fieldref-user"
+              }
+            ]
+          },
+          "obrigatoriedade": {
+            "valor": "desconhecida",
+            "estado": "desconhecido"
+          },
+          "default": {
+            "forma": "nao_declarado_na_fonte",
+            "estado": "desconhecido"
+          },
+          "dominio": {
+            "natureza": "desconhecida",
+            "estado": "desconhecido"
+          },
+          "disponibilidade": {
+            "desde_versao": null,
+            "ate_versao": null,
+            "estado": "desconhecido"
+          },
+          "explicacao": "pendente",
+          "estado": "verificado",
+          "evidencias": [
+            {
+              "fonte": "src:fieldref-user"
+            }
+          ],
+          "notas": [
+            "Nome confirmado pela Field Reference; tipo e propriedades de API não constam dessa fonte."
+          ]
+        },
+        {
+          "id": "obj:User.UserPreferencesDisableWorkEmail",
+          "nome": "UserPreferencesDisableWorkEmail",
+          "tipo_tecnico": "boolean",
+          "o_que_e": "Bloqueia e-mails de feedback, metas e coaching.",
+          "apis": [
+            "padrao"
+          ],
+          "propriedades_api": {
+            "estado": "verificado",
+            "create": true,
+            "defaulted_on_create": false,
+            "filter": true,
+            "group": false,
+            "nillable": false,
+            "restricted_picklist": false,
+            "sort": false,
+            "update": true,
+            "id_lookup": false,
+            "evidencias": [
+              {
+                "fonte": "src:objref-user-completa"
+              }
+            ]
+          },
+          "somente_leitura": false,
+          "origem": {
+            "estado": "verificado",
+            "valor": "padrao_plataforma",
+            "nota": "Campo padrão do objeto documentado.",
+            "evidencias": [
+              {
+                "fonte": "src:objref-user-completa"
+              }
+            ]
+          },
+          "obrigatoriedade": {
+            "valor": "desconhecida",
+            "estado": "desconhecido"
+          },
+          "default": {
+            "forma": "nao_declarado_na_fonte",
+            "estado": "desconhecido"
+          },
+          "dominio": {
+            "natureza": "booleano",
+            "valores": [
+              {
+                "valor": "true"
+              },
+              {
+                "valor": "false"
+              }
+            ],
+            "lista_completa": "sim",
+            "estado": "verificado",
+            "evidencias": [
+              {
+                "fonte": "src:objref-user-completa"
+              }
+            ]
+          },
+          "disponibilidade": {
+            "desde_versao": null,
+            "ate_versao": null,
+            "estado": "desconhecido"
+          },
+          "explicacao": "explicada",
+          "estado": "verificado",
+          "evidencias": [
+            {
+              "fonte": "src:objref-user-completa"
+            }
+          ]
+        },
+        {
+          "id": "obj:User.UserPreferencesDisCommentAfterLikeEmail",
+          "nome": "UserPreferencesDisCommentAfterLikeEmail",
+          "tipo_tecnico": "(a extrair)",
+          "o_que_e": "Explicação pendente: campo listado a partir da fonte, ainda sem texto didático.",
+          "apis": [
+            "padrao"
+          ],
+          "propriedades_api": {
+            "estado": "desconhecido"
+          },
+          "somente_leitura": null,
+          "origem": {
+            "estado": "verificado",
+            "valor": "padrao_plataforma",
+            "nota": "Campo padrão do objeto documentado.",
+            "evidencias": [
+              {
+                "fonte": "src:fieldref-user"
+              }
+            ]
+          },
+          "obrigatoriedade": {
+            "valor": "desconhecida",
+            "estado": "desconhecido"
+          },
+          "default": {
+            "forma": "nao_declarado_na_fonte",
+            "estado": "desconhecido"
+          },
+          "dominio": {
+            "natureza": "desconhecida",
+            "estado": "desconhecido"
+          },
+          "disponibilidade": {
+            "desde_versao": null,
+            "ate_versao": null,
+            "estado": "desconhecido"
+          },
+          "explicacao": "pendente",
+          "estado": "verificado",
+          "evidencias": [
+            {
+              "fonte": "src:fieldref-user"
+            }
+          ],
+          "notas": [
+            "Nome confirmado pela Field Reference; tipo e propriedades de API não constam dessa fonte."
+          ]
+        },
+        {
+          "id": "obj:User.UserPreferencesDisMentionsCommentEmail",
+          "nome": "UserPreferencesDisMentionsCommentEmail",
+          "tipo_tecnico": "(a extrair)",
+          "o_que_e": "Explicação pendente: campo listado a partir da fonte, ainda sem texto didático.",
+          "apis": [
+            "padrao"
+          ],
+          "propriedades_api": {
+            "estado": "desconhecido"
+          },
+          "somente_leitura": null,
+          "origem": {
+            "estado": "verificado",
+            "valor": "padrao_plataforma",
+            "nota": "Campo padrão do objeto documentado.",
+            "evidencias": [
+              {
+                "fonte": "src:fieldref-user"
+              }
+            ]
+          },
+          "obrigatoriedade": {
+            "valor": "desconhecida",
+            "estado": "desconhecido"
+          },
+          "default": {
+            "forma": "nao_declarado_na_fonte",
+            "estado": "desconhecido"
+          },
+          "dominio": {
+            "natureza": "desconhecida",
+            "estado": "desconhecido"
+          },
+          "disponibilidade": {
+            "desde_versao": null,
+            "ate_versao": null,
+            "estado": "desconhecido"
+          },
+          "explicacao": "pendente",
+          "estado": "verificado",
+          "evidencias": [
+            {
+              "fonte": "src:fieldref-user"
+            }
+          ],
+          "notas": [
+            "Nome confirmado pela Field Reference; tipo e propriedades de API não constam dessa fonte."
+          ]
+        },
+        {
+          "id": "obj:User.UserPreferencesDisProfPostCommentEmail",
+          "nome": "UserPreferencesDisProfPostCommentEmail",
           "tipo_tecnico": "(a extrair)",
           "o_que_e": "Explicação pendente: campo listado a partir da fonte, ainda sem texto didático.",
           "apis": [
@@ -14143,6 +15333,156 @@
           ],
           "notas": [
             "Nome confirmado pela Field Reference; tipo e propriedades de API não constam dessa fonte."
+          ]
+        },
+        {
+          "id": "obj:User.UserPreferencesEnableVoiceCallRecording",
+          "nome": "UserPreferencesEnableVoiceCallRecording",
+          "tipo_tecnico": "boolean",
+          "o_que_e": "Liga a gravação de chamadas de voz.",
+          "apis": [
+            "padrao"
+          ],
+          "propriedades_api": {
+            "estado": "verificado",
+            "create": true,
+            "defaulted_on_create": false,
+            "filter": true,
+            "group": false,
+            "nillable": false,
+            "restricted_picklist": false,
+            "sort": false,
+            "update": true,
+            "id_lookup": false,
+            "evidencias": [
+              {
+                "fonte": "src:objref-user-completa"
+              }
+            ]
+          },
+          "somente_leitura": false,
+          "origem": {
+            "estado": "verificado",
+            "valor": "padrao_plataforma",
+            "nota": "Campo padrão do objeto documentado.",
+            "evidencias": [
+              {
+                "fonte": "src:objref-user-completa"
+              }
+            ]
+          },
+          "obrigatoriedade": {
+            "valor": "desconhecida",
+            "estado": "desconhecido"
+          },
+          "default": {
+            "forma": "nao_declarado_na_fonte",
+            "estado": "desconhecido"
+          },
+          "dominio": {
+            "natureza": "booleano",
+            "valores": [
+              {
+                "valor": "true"
+              },
+              {
+                "valor": "false"
+              }
+            ],
+            "lista_completa": "sim",
+            "estado": "verificado",
+            "evidencias": [
+              {
+                "fonte": "src:objref-user-completa"
+              }
+            ]
+          },
+          "disponibilidade": {
+            "desde_versao": null,
+            "ate_versao": null,
+            "estado": "desconhecido"
+          },
+          "explicacao": "explicada",
+          "estado": "verificado",
+          "evidencias": [
+            {
+              "fonte": "src:objref-user-completa"
+            }
+          ]
+        },
+        {
+          "id": "obj:User.UserPreferencesEnableVoiceLocalPresence",
+          "nome": "UserPreferencesEnableVoiceLocalPresence",
+          "tipo_tecnico": "boolean",
+          "o_que_e": "Mostra números locais no Sales Dialer.",
+          "apis": [
+            "padrao"
+          ],
+          "propriedades_api": {
+            "estado": "verificado",
+            "create": true,
+            "defaulted_on_create": false,
+            "filter": true,
+            "group": false,
+            "nillable": false,
+            "restricted_picklist": false,
+            "sort": false,
+            "update": true,
+            "id_lookup": false,
+            "evidencias": [
+              {
+                "fonte": "src:objref-user-completa"
+              }
+            ]
+          },
+          "somente_leitura": false,
+          "origem": {
+            "estado": "verificado",
+            "valor": "padrao_plataforma",
+            "nota": "Campo padrão do objeto documentado.",
+            "evidencias": [
+              {
+                "fonte": "src:objref-user-completa"
+              }
+            ]
+          },
+          "obrigatoriedade": {
+            "valor": "desconhecida",
+            "estado": "desconhecido"
+          },
+          "default": {
+            "forma": "nao_declarado_na_fonte",
+            "estado": "desconhecido"
+          },
+          "dominio": {
+            "natureza": "booleano",
+            "valores": [
+              {
+                "valor": "true"
+              },
+              {
+                "valor": "false"
+              }
+            ],
+            "lista_completa": "sim",
+            "estado": "verificado",
+            "evidencias": [
+              {
+                "fonte": "src:objref-user-completa"
+              }
+            ]
+          },
+          "disponibilidade": {
+            "desde_versao": null,
+            "ate_versao": null,
+            "estado": "desconhecido"
+          },
+          "explicacao": "explicada",
+          "estado": "verificado",
+          "evidencias": [
+            {
+              "fonte": "src:objref-user-completa"
+            }
           ]
         },
         {
@@ -14696,6 +16036,56 @@
           ]
         },
         {
+          "id": "obj:User.UserPreferencesHideChatterOnboardingSplash",
+          "nome": "UserPreferencesHideChatterOnboardingSplash",
+          "tipo_tecnico": "(a extrair)",
+          "o_que_e": "Explicação pendente: campo listado a partir da fonte, ainda sem texto didático.",
+          "apis": [
+            "padrao"
+          ],
+          "propriedades_api": {
+            "estado": "desconhecido"
+          },
+          "somente_leitura": null,
+          "origem": {
+            "estado": "verificado",
+            "valor": "padrao_plataforma",
+            "nota": "Campo padrão do objeto documentado.",
+            "evidencias": [
+              {
+                "fonte": "src:fieldref-user"
+              }
+            ]
+          },
+          "obrigatoriedade": {
+            "valor": "desconhecida",
+            "estado": "desconhecido"
+          },
+          "default": {
+            "forma": "nao_declarado_na_fonte",
+            "estado": "desconhecido"
+          },
+          "dominio": {
+            "natureza": "desconhecida",
+            "estado": "desconhecido"
+          },
+          "disponibilidade": {
+            "desde_versao": null,
+            "ate_versao": null,
+            "estado": "desconhecido"
+          },
+          "explicacao": "pendente",
+          "estado": "verificado",
+          "evidencias": [
+            {
+              "fonte": "src:fieldref-user"
+            }
+          ],
+          "notas": [
+            "Nome confirmado pela Field Reference; tipo e propriedades de API não constam dessa fonte."
+          ]
+        },
+        {
           "id": "obj:User.UserPreferencesHideCSNDesktopTask",
           "nome": "UserPreferencesHideCSNDesktopTask",
           "tipo_tecnico": "(a extrair)",
@@ -14748,56 +16138,6 @@
         {
           "id": "obj:User.UserPreferencesHideCSNGetChatterMobileTask",
           "nome": "UserPreferencesHideCSNGetChatterMobileTask",
-          "tipo_tecnico": "(a extrair)",
-          "o_que_e": "Explicação pendente: campo listado a partir da fonte, ainda sem texto didático.",
-          "apis": [
-            "padrao"
-          ],
-          "propriedades_api": {
-            "estado": "desconhecido"
-          },
-          "somente_leitura": null,
-          "origem": {
-            "estado": "verificado",
-            "valor": "padrao_plataforma",
-            "nota": "Campo padrão do objeto documentado.",
-            "evidencias": [
-              {
-                "fonte": "src:fieldref-user"
-              }
-            ]
-          },
-          "obrigatoriedade": {
-            "valor": "desconhecida",
-            "estado": "desconhecido"
-          },
-          "default": {
-            "forma": "nao_declarado_na_fonte",
-            "estado": "desconhecido"
-          },
-          "dominio": {
-            "natureza": "desconhecida",
-            "estado": "desconhecido"
-          },
-          "disponibilidade": {
-            "desde_versao": null,
-            "ate_versao": null,
-            "estado": "desconhecido"
-          },
-          "explicacao": "pendente",
-          "estado": "verificado",
-          "evidencias": [
-            {
-              "fonte": "src:fieldref-user"
-            }
-          ],
-          "notas": [
-            "Nome confirmado pela Field Reference; tipo e propriedades de API não constam dessa fonte."
-          ]
-        },
-        {
-          "id": "obj:User.UserPreferencesHideChatterOnboardingSplash",
-          "nome": "UserPreferencesHideChatterOnboardingSplash",
           "tipo_tecnico": "(a extrair)",
           "o_que_e": "Explicação pendente: campo listado a partir da fonte, ainda sem texto didático.",
           "apis": [
@@ -15346,6 +16686,156 @@
           ]
         },
         {
+          "id": "obj:User.UserPreferencesOptOutOfTouch",
+          "nome": "UserPreferencesOptOutOfTouch",
+          "tipo_tecnico": "boolean",
+          "o_que_e": "Desliga o acesso automático ao app Touch no iPad; obsoleto.",
+          "apis": [
+            "padrao"
+          ],
+          "propriedades_api": {
+            "estado": "verificado",
+            "create": true,
+            "defaulted_on_create": false,
+            "filter": true,
+            "group": false,
+            "nillable": false,
+            "restricted_picklist": false,
+            "sort": false,
+            "update": true,
+            "id_lookup": false,
+            "evidencias": [
+              {
+                "fonte": "src:objref-user-completa"
+              }
+            ]
+          },
+          "somente_leitura": false,
+          "origem": {
+            "estado": "verificado",
+            "valor": "padrao_plataforma",
+            "nota": "Campo padrão do objeto documentado.",
+            "evidencias": [
+              {
+                "fonte": "src:objref-user-completa"
+              }
+            ]
+          },
+          "obrigatoriedade": {
+            "valor": "desconhecida",
+            "estado": "desconhecido"
+          },
+          "default": {
+            "forma": "nao_declarado_na_fonte",
+            "estado": "desconhecido"
+          },
+          "dominio": {
+            "natureza": "booleano",
+            "valores": [
+              {
+                "valor": "true"
+              },
+              {
+                "valor": "false"
+              }
+            ],
+            "lista_completa": "sim",
+            "estado": "verificado",
+            "evidencias": [
+              {
+                "fonte": "src:objref-user-completa"
+              }
+            ]
+          },
+          "disponibilidade": {
+            "desde_versao": "29.0",
+            "ate_versao": null,
+            "estado": "verificado"
+          },
+          "explicacao": "explicada",
+          "estado": "verificado",
+          "evidencias": [
+            {
+              "fonte": "src:objref-user-completa"
+            }
+          ]
+        },
+        {
+          "id": "obj:User.UserPreferencesOutboundBridge",
+          "nome": "UserPreferencesOutboundBridge",
+          "tipo_tecnico": "boolean",
+          "o_que_e": "Ligações saem pelo telefone do usuário.",
+          "apis": [
+            "padrao"
+          ],
+          "propriedades_api": {
+            "estado": "verificado",
+            "create": true,
+            "defaulted_on_create": false,
+            "filter": true,
+            "group": false,
+            "nillable": false,
+            "restricted_picklist": false,
+            "sort": false,
+            "update": true,
+            "id_lookup": false,
+            "evidencias": [
+              {
+                "fonte": "src:objref-user-completa"
+              }
+            ]
+          },
+          "somente_leitura": false,
+          "origem": {
+            "estado": "verificado",
+            "valor": "padrao_plataforma",
+            "nota": "Campo padrão do objeto documentado.",
+            "evidencias": [
+              {
+                "fonte": "src:objref-user-completa"
+              }
+            ]
+          },
+          "obrigatoriedade": {
+            "valor": "desconhecida",
+            "estado": "desconhecido"
+          },
+          "default": {
+            "forma": "nao_declarado_na_fonte",
+            "estado": "desconhecido"
+          },
+          "dominio": {
+            "natureza": "booleano",
+            "valores": [
+              {
+                "valor": "true"
+              },
+              {
+                "valor": "false"
+              }
+            ],
+            "lista_completa": "sim",
+            "estado": "verificado",
+            "evidencias": [
+              {
+                "fonte": "src:objref-user-completa"
+              }
+            ]
+          },
+          "disponibilidade": {
+            "desde_versao": null,
+            "ate_versao": null,
+            "estado": "desconhecido"
+          },
+          "explicacao": "explicada",
+          "estado": "verificado",
+          "evidencias": [
+            {
+              "fonte": "src:objref-user-completa"
+            }
+          ]
+        },
+        {
           "id": "obj:User.UserPreferencesPathAssistantCollapsed",
           "nome": "UserPreferencesPathAssistantCollapsed",
           "tipo_tecnico": "(a extrair)",
@@ -15493,6 +16983,81 @@
           ],
           "notas": [
             "Nome confirmado pela Field Reference; tipo e propriedades de API não constam dessa fonte."
+          ]
+        },
+        {
+          "id": "obj:User.UserPreferencesProcessAssistantCollapsed",
+          "nome": "UserPreferencesProcessAssistantCollapsed",
+          "tipo_tecnico": "boolean",
+          "o_que_e": "Caminho de vendas recolhido (só nas APIs 33.0 e 34.0).",
+          "apis": [
+            "padrao"
+          ],
+          "propriedades_api": {
+            "estado": "verificado",
+            "create": true,
+            "defaulted_on_create": false,
+            "filter": true,
+            "group": false,
+            "nillable": false,
+            "restricted_picklist": false,
+            "sort": false,
+            "update": true,
+            "id_lookup": false,
+            "evidencias": [
+              {
+                "fonte": "src:objref-user-completa"
+              }
+            ]
+          },
+          "somente_leitura": false,
+          "origem": {
+            "estado": "verificado",
+            "valor": "padrao_plataforma",
+            "nota": "Campo padrão do objeto documentado.",
+            "evidencias": [
+              {
+                "fonte": "src:objref-user-completa"
+              }
+            ]
+          },
+          "obrigatoriedade": {
+            "valor": "desconhecida",
+            "estado": "desconhecido"
+          },
+          "default": {
+            "forma": "nao_declarado_na_fonte",
+            "estado": "desconhecido"
+          },
+          "dominio": {
+            "natureza": "booleano",
+            "valores": [
+              {
+                "valor": "true"
+              },
+              {
+                "valor": "false"
+              }
+            ],
+            "lista_completa": "sim",
+            "estado": "verificado",
+            "evidencias": [
+              {
+                "fonte": "src:objref-user-completa"
+              }
+            ]
+          },
+          "disponibilidade": {
+            "desde_versao": "33.0",
+            "ate_versao": null,
+            "estado": "verificado"
+          },
+          "explicacao": "explicada",
+          "estado": "verificado",
+          "evidencias": [
+            {
+              "fonte": "src:objref-user-completa"
+            }
           ]
         },
         {
@@ -15748,56 +17313,6 @@
         {
           "id": "obj:User.UserPreferencesReverseOpenActivitiesView",
           "nome": "UserPreferencesReverseOpenActivitiesView",
-          "tipo_tecnico": "(a extrair)",
-          "o_que_e": "Explicação pendente: campo listado a partir da fonte, ainda sem texto didático.",
-          "apis": [
-            "padrao"
-          ],
-          "propriedades_api": {
-            "estado": "desconhecido"
-          },
-          "somente_leitura": null,
-          "origem": {
-            "estado": "verificado",
-            "valor": "padrao_plataforma",
-            "nota": "Campo padrão do objeto documentado.",
-            "evidencias": [
-              {
-                "fonte": "src:fieldref-user"
-              }
-            ]
-          },
-          "obrigatoriedade": {
-            "valor": "desconhecida",
-            "estado": "desconhecido"
-          },
-          "default": {
-            "forma": "nao_declarado_na_fonte",
-            "estado": "desconhecido"
-          },
-          "dominio": {
-            "natureza": "desconhecida",
-            "estado": "desconhecido"
-          },
-          "disponibilidade": {
-            "desde_versao": null,
-            "ate_versao": null,
-            "estado": "desconhecido"
-          },
-          "explicacao": "pendente",
-          "estado": "verificado",
-          "evidencias": [
-            {
-              "fonte": "src:fieldref-user"
-            }
-          ],
-          "notas": [
-            "Nome confirmado pela Field Reference; tipo e propriedades de API não constam dessa fonte."
-          ]
-        },
-        {
-          "id": "obj:User.UserPreferencesSRHOverrideActivities",
-          "nome": "UserPreferencesSRHOverrideActivities",
           "tipo_tecnico": "(a extrair)",
           "o_que_e": "Explicação pendente: campo listado a partir da fonte, ainda sem texto didático.",
           "apis": [
@@ -17096,6 +18611,56 @@
           ]
         },
         {
+          "id": "obj:User.UserPreferencesSRHOverrideActivities",
+          "nome": "UserPreferencesSRHOverrideActivities",
+          "tipo_tecnico": "(a extrair)",
+          "o_que_e": "Explicação pendente: campo listado a partir da fonte, ainda sem texto didático.",
+          "apis": [
+            "padrao"
+          ],
+          "propriedades_api": {
+            "estado": "desconhecido"
+          },
+          "somente_leitura": null,
+          "origem": {
+            "estado": "verificado",
+            "valor": "padrao_plataforma",
+            "nota": "Campo padrão do objeto documentado.",
+            "evidencias": [
+              {
+                "fonte": "src:fieldref-user"
+              }
+            ]
+          },
+          "obrigatoriedade": {
+            "valor": "desconhecida",
+            "estado": "desconhecido"
+          },
+          "default": {
+            "forma": "nao_declarado_na_fonte",
+            "estado": "desconhecido"
+          },
+          "dominio": {
+            "natureza": "desconhecida",
+            "estado": "desconhecido"
+          },
+          "disponibilidade": {
+            "desde_versao": null,
+            "ate_versao": null,
+            "estado": "desconhecido"
+          },
+          "explicacao": "pendente",
+          "estado": "verificado",
+          "evidencias": [
+            {
+              "fonte": "src:fieldref-user"
+            }
+          ],
+          "notas": [
+            "Nome confirmado pela Field Reference; tipo e propriedades de API não constam dessa fonte."
+          ]
+        },
+        {
           "id": "obj:User.UserPreferencesSuppressEventSFXReminders",
           "nome": "UserPreferencesSuppressEventSFXReminders",
           "tipo_tecnico": "(a extrair)",
@@ -17409,36 +18974,44 @@
           ]
         },
         {
-          "id": "obj:User.Username",
-          "nome": "Username",
-          "tipo_tecnico": "string",
-          "o_que_e": "Nome de login no formato de e-mail, único entre todas as orgs.",
+          "id": "obj:User.WirelessEmail",
+          "nome": "WirelessEmail",
+          "tipo_tecnico": "email",
+          "o_que_e": "E-mail usado no Wireless Edition.",
           "apis": [
-            "padrao",
-            "tooling"
+            "padrao"
           ],
           "propriedades_api": {
-            "estado": "desconhecido"
+            "estado": "verificado",
+            "create": true,
+            "defaulted_on_create": false,
+            "filter": true,
+            "group": true,
+            "nillable": true,
+            "restricted_picklist": false,
+            "sort": true,
+            "update": true,
+            "id_lookup": false,
+            "evidencias": [
+              {
+                "fonte": "src:objref-user-completa"
+              }
+            ]
           },
-          "somente_leitura": null,
+          "somente_leitura": false,
           "origem": {
             "estado": "verificado",
             "valor": "padrao_plataforma",
             "nota": "Campo padrão do objeto documentado.",
             "evidencias": [
               {
-                "fonte": "src:objref-user"
+                "fonte": "src:objref-user-completa"
               }
             ]
           },
           "obrigatoriedade": {
-            "valor": "sim",
-            "estado": "verificado",
-            "evidencias": [
-              {
-                "fonte": "src:objref-user"
-              }
-            ]
+            "valor": "desconhecida",
+            "estado": "desconhecido"
           },
           "default": {
             "forma": "nao_declarado_na_fonte",
@@ -17449,7 +19022,7 @@
             "estado": "verificado",
             "evidencias": [
               {
-                "fonte": "src:objref-user"
+                "fonte": "src:objref-user-completa"
               }
             ]
           },
@@ -17462,13 +19035,7 @@
           "estado": "verificado",
           "evidencias": [
             {
-              "fonte": "src:objref-user"
-            },
-            {
-              "fonte": "src:fieldref-user"
-            },
-            {
-              "fonte": "src:tooling-user"
+              "fonte": "src:objref-user-completa"
             }
           ]
         },
@@ -17567,15 +19134,15 @@
       },
       "cobertura": {
         "estrutural": {
-          "estado": "parcial",
-          "esperado": null,
-          "presente": 184,
-          "nota": "Nomes: 175 obtidos da Field Reference, que declara 200 linhas (faltam 25 nomes não capturados nas duas leituras); 8 nomes só da Object Reference (CountryCode, CurrentStatus, DefaultDivision, HasUserVerifiedEmail, HasUserVerifiedPhone, IsPartner, IsPortalEnabled, IsPortalSelfRegistered). As duas fontes não coincidem e a tabela da Object Reference é servida truncada; tipos e propriedades de API faltam para os campos vindos só da Field Reference. Tooling API (2026-11-17): 5 campos lidos; 0 só nela."
+          "estado": "completa",
+          "esperado": 206,
+          "presente": 206,
+          "nota": "Tabela da Object Reference lida até o fim em três partes (268 mil caracteres): termina em WirelessEmail. Também entram os nomes que só a Field Reference traz (como Id) e WorkspaceId, que só existe na Tooling API. Id e campos de sistema que a tabela não lista não foram cadastrados (convenção do catálogo)."
         },
         "explicativa": {
           "estado": "parcial",
-          "esperado": 184,
-          "presente": 24
+          "esperado": 206,
+          "presente": 46
         },
         "mapeamento": {
           "estado": "parcial",
@@ -17593,6 +19160,9 @@
         },
         {
           "fonte": "src:fieldref-user"
+        },
+        {
+          "fonte": "src:objref-user-completa"
         }
       ]
     }
