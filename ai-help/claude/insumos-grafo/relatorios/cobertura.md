@@ -168,7 +168,7 @@ Gerado por `ferramentas/sftutor.py cobertura`. Cobertura estrutural, explicativa
 
 ## Objetos consultáveis via API
 
-- Catalogados: 76. Campos listados: 1611; explicados: 801.
+- Catalogados: 79. Campos listados: 1649; explicados: 839.
 - Universo: Universo de objetos da plataforma não enumerado.
 
 | Objeto | Estrutural | Esperados | Presentes | Explicados | APIs verificadas |
@@ -176,6 +176,7 @@ Gerado por `ferramentas/sftutor.py cobertura`. Cobertura estrutural, explicativa
 | obj:Account | parcial | n/d | 76 | 9 | padrao |
 | obj:AccountTeamMember | completa | 11 | 11 | 11 | padrao |
 | obj:AgentWork | parcial | n/d | 41 | 3 | padrao |
+| obj:ApexLog | completa | 10 | 10 | 10 | tooling |
 | obj:AssignmentRule | completa | 3 | 3 | 3 | padrao |
 | obj:AsyncApexJob | completa | 13 | 13 | 13 | padrao |
 | obj:AuthProvider | completa | 30 | 30 | 30 | padrao |
@@ -192,6 +193,7 @@ Gerado por `ferramentas/sftutor.py cobertura`. Cobertura estrutural, explicativa
 | obj:CustomField | parcial | n/d | 6 | 6 | tooling |
 | obj:CustomObject | parcial | n/d | 10 | 10 | tooling |
 | obj:CustomTab | completa | 13 | 13 | 13 | tooling |
+| obj:DebugLevel | completa | 14 | 14 | 14 | tooling |
 | obj:Entitlement | parcial | 23 | 22 | 9 | padrao |
 | obj:EntityDefinition | parcial | n/d | 13 | 6 | tooling |
 | obj:EventBusSubscriber | completa | 12 | 12 | 12 | padrao |
@@ -245,6 +247,7 @@ Gerado por `ferramentas/sftutor.py cobertura`. Cobertura estrutural, explicativa
 | obj:SlaProcess | completa | 12 | 12 | 12 | padrao |
 | obj:Territory2 | completa | 11 | 11 | 11 | padrao |
 | obj:Territory2Type | completa | 5 | 5 | 5 | padrao |
+| obj:TraceFlag | completa | 14 | 14 | 14 | tooling |
 | obj:User | parcial | n/d | 183 | 23 | padrao, tooling |
 | obj:UserLogin | parcial | n/d | 3 | 3 | padrao |
 | obj:UserTerritory2Association | completa | 4 | 4 | 4 | padrao |
@@ -252,10 +255,10 @@ Gerado por `ferramentas/sftutor.py cobertura`. Cobertura estrutural, explicativa
 
 ## Relacionamentos
 
-- Total: 141; verificados: 138.
-- Por tipo: correspondencia_xml_api: 11, referencia_campo: 110, representacao_comum: 20
+- Total: 144; verificados: 141.
+- Por tipo: correspondencia_xml_api: 11, referencia_campo: 113, representacao_comum: 20
 
 ## Taxonomia e funcionalidades
 
-- Classificações: 14; subclassificações: 92 (com funcionalidades: 79).
-- Funcionalidades cadastradas: 123 (universo de funcionalidades não definido).
+- Classificações: 14; subclassificações: 92 (com funcionalidades: 80).
+- Funcionalidades cadastradas: 126 (universo de funcionalidades não definido).

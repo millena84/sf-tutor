@@ -572,6 +572,17 @@ TEMAS = {
         [ev("src:help-app-builder", "Cobre o tema: Lightning App Builder.", "Lightning App Builder"),
          ev("src:help-app-builder-limits", "Cobre parte do tema: limites do Lightning App Builder.", "Lightning App Builder Limits and Limitations")],
     ),
+    # ------------------------------------------------------------------ Observabilidade: fecho da rodada A4
+    "sub:limites-e-consumo": (
+        "O acompanhamento do quanto a org já consumiu dos limites: schema, requisições de API, armazenamento de dados e de arquivos.",
+        [ev("src:help-system-overview", "Cobre parte do tema: página System Overview.", "The System Overview Page"),
+         ev("src:help-storage-resources", "Cobre parte do tema: armazenamento.", "Data and Storage Resources")],
+    ),
+    "sub:historico-de-login": (
+        "O histórico de logins da org: quem entrou, quando, de onde e por qual método, na tela e por API.",
+        [ev("src:help-login-history", "Cobre o tema: Login History.", "Monitor Login History"),
+         ev("src:objref-loginhistory", "Cobre parte do tema: objeto LoginHistory.", "LoginHistory")],
+    ),
 }
 
 

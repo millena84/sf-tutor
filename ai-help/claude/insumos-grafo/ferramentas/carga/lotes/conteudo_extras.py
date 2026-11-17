@@ -367,4 +367,47 @@ X["sub:acessibilidade-e-personalizacao"]["avancado"] += [
        "activeThemeName; sem ele, vale um tema pronto da Salesforce.", E("src:mdapi-lightningexperiencesettings")),
 ]
 
+# ------------------------------------------------------------------ Fecho de A4: limites e consumo, histórico de login, logs por API, Transaction Security
+X["sub:limites-e-consumo"]["comece"] = ["func:system-overview", "func:armazenamento-de-dados-e-arquivos", "func:limites-de-api-e-alocacoes"]
+X["sub:limites-e-consumo"]["avancado"] += [
+    av("decisao", "Onde ver cada consumo", "System Overview mostra uso e limites de schema, API, lógica de negócio, interface, licenças e "
+       "portal roles, e avisa aos 95% de um limite. Storage Usage mostra data storage e file storage. O painel Org Health and Usage "
+       "ordena as métricas por gravidade.", E("src:help-system-overview", "src:help-storage-resources", "src:help-monitor-org")),
+    av("atencao", "Limite de API é da org e a janela é móvel", "O limite de requisições de API soma todas as chamadas feitas à org em 24 "
+       "horas, não por usuário; ao ultrapassar, todos podem ficar bloqueados até o uso das 24 horas anteriores cair. A janela é móvel: "
+       "não zera num horário fixo.", E("src:help-system-overview-api", "src:help-kb-api-rolling-limits")),
+    av("atencao", "Armazenamento em sandbox e em produção", "Em sandboxes, os limites contratados de dados e de arquivos são aplicados: ao "
+       "passar, criar registros ou enviar arquivos falha com STORAGE_LIMIT_EXCEEDED. Em produção, o limite de dados não é aplicado de "
+       "forma estrita.", E("src:help-kb-storage-sandbox")),
+    av("escala", "Quanto ocupa um registro", "A maioria dos registros ocupa cerca de 2 KB de data storage; alguns tipos, como campanhas e "
+       "artigos, ocupam mais. Arquivos contam pelo tamanho real, em file storage, que é acompanhado em separado.",
+       E("src:help-kb-storage-record-size", "src:help-storage-allocations")),
+]
+X["sub:historico-de-login"] = {"comece": ["func:estado-e-historico-de-login"], "avancado": [
+    av("limite", "O que a tela mostra", "A tela Login History mostra até 20.000 registros de login dos últimos 6 meses, inclusive logins "
+       "por API e em sites do Experience Cloud. Para ver mais, baixa-se o histórico em arquivo ou consulta-se o objeto LoginHistory pela API.",
+       E("src:help-security-audit", "src:help-login-history", "src:help-kb-login-history-export")),
+    av("decisao", "Investigar SSO", "Quando um login por SAML falha, o histórico de login mostra as tentativas; a tela fica em Setup, Quick "
+       "Find Login History.", E("src:help-saml-login-history")),
+    av("seguranca", "Reagir ao login, não só registrar", "Com Transaction Security, uma política sobre o evento de login pode bloquear, "
+       "exigir autenticação multifator (em logins pela interface) ou notificar, conforme país, navegador, tipo de login e outros dados.",
+       E("src:help-ts-login-policies")),
+]}
+X["sub:logs-e-rastreamento"]["avancado"] += [
+    av("implantacao", "Logs por API", "Na Tooling API, TraceFlag é a trace flag, DebugLevel é o conjunto de níveis de log por categoria e "
+       "ApexLog é cada log guardado. Uma trace flag de usuário usa LogType USER_DEBUG; a de classe ou trigger (CLASS_TRACING) só troca o "
+       "nível de log, sem gerar log. O texto do log é lido por um recurso REST próprio.",
+       E("src:tooling-traceflag", "src:tooling-debuglevel", "src:tooling-apexlog")),
+    av("limite", "Quanto tempo o log fica", "Logs com origem Monitoring ficam 7 dias, ou até alguém apagar; os de origem SystemLog, 24 horas.",
+       E("src:tooling-apexlog")),
+]
+X["sub:eventos-de-monitoramento"]["comece"] = ["func:event-monitoring", "func:transaction-security"]
+X["sub:eventos-de-monitoramento"]["avancado"] += [
+    av("seguranca", "Transaction Security", "Transaction Security intercepta eventos em tempo real e aplica uma ação: bloquear, exigir "
+       "autenticação multifator ou notificar. As políticas são escritas no Condition Builder ou em Apex.", E("src:help-transaction-security")),
+    av("atencao", "MFA nem sempre é possível", "A ação de autenticação multifator não está disponível no app móvel, no Lightning Experience "
+       "nem por API: nesses casos, a política bloqueia. Políticas com a mesma ação para o mesmo evento rodam em ordem indeterminada.",
+       E("src:help-em-considerations", "src:help-ts-condition-builder")),
+]
+
 EXTRAS = X

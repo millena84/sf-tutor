@@ -1,0 +1,802 @@
+{
+  "id": "obj:ApexLog",
+  "nome": "ApexLog",
+  "o_que_e": "Um log de depuração guardado: quem o gerou, quando, quanto durou a transação, o tamanho e o resultado.",
+  "papel": "Listar e apagar logs de depuração por API e localizar o log de uma requisição.",
+  "exposicoes": [
+    {
+      "api": "tooling",
+      "estado": "verificado",
+      "chamadas": [
+        "delete()",
+        "describeSObjects()",
+        "query()",
+        "retrieve()"
+      ],
+      "metodos_rest": [
+        "Query",
+        "GET",
+        "DELETE"
+      ],
+      "nota": "A página só informa versão para o recurso REST que devolve o corpo do log (API 28.0 em diante).",
+      "desde_versao": null,
+      "evidencias": [
+        {
+          "fonte": "src:tooling-apexlog"
+        }
+      ]
+    },
+    {
+      "api": "padrao",
+      "estado": "desconhecido",
+      "nota": "Exposição na API padrão não verificada; não presumir.",
+      "desde_versao": null
+    }
+  ],
+  "campos": [
+    {
+      "id": "obj:ApexLog.Application",
+      "nome": "Application",
+      "tipo_tecnico": "textarea",
+      "o_que_e": "Para clientes de API, o Id do cliente; para o navegador, o valor Browser.",
+      "apis": [
+        "tooling"
+      ],
+      "propriedades_api": {
+        "estado": "verificado",
+        "create": false,
+        "defaulted_on_create": false,
+        "filter": true,
+        "group": true,
+        "nillable": false,
+        "restricted_picklist": false,
+        "sort": true,
+        "update": false,
+        "id_lookup": false,
+        "evidencias": [
+          {
+            "fonte": "src:tooling-apexlog"
+          }
+        ]
+      },
+      "somente_leitura": true,
+      "origem": {
+        "estado": "verificado",
+        "valor": "padrao_plataforma",
+        "nota": "Campo padrão do objeto documentado.",
+        "evidencias": [
+          {
+            "fonte": "src:tooling-apexlog"
+          }
+        ]
+      },
+      "obrigatoriedade": {
+        "valor": "sim",
+        "estado": "verificado",
+        "evidencias": [
+          {
+            "fonte": "src:tooling-apexlog"
+          }
+        ]
+      },
+      "default": {
+        "forma": "nao_declarado_na_fonte",
+        "estado": "desconhecido"
+      },
+      "dominio": {
+        "natureza": "texto_livre",
+        "estado": "verificado",
+        "evidencias": [
+          {
+            "fonte": "src:tooling-apexlog"
+          }
+        ]
+      },
+      "disponibilidade": {
+        "desde_versao": null,
+        "ate_versao": null,
+        "estado": "desconhecido"
+      },
+      "explicacao": "explicada",
+      "estado": "verificado",
+      "evidencias": [
+        {
+          "fonte": "src:tooling-apexlog"
+        }
+      ]
+    },
+    {
+      "id": "obj:ApexLog.DurationMilliseconds",
+      "nome": "DurationMilliseconds",
+      "tipo_tecnico": "int",
+      "o_que_e": "Duração da transação, em milissegundos.",
+      "apis": [
+        "tooling"
+      ],
+      "propriedades_api": {
+        "estado": "verificado",
+        "create": false,
+        "defaulted_on_create": false,
+        "filter": true,
+        "group": true,
+        "nillable": false,
+        "restricted_picklist": false,
+        "sort": true,
+        "update": false,
+        "id_lookup": false,
+        "evidencias": [
+          {
+            "fonte": "src:tooling-apexlog"
+          }
+        ]
+      },
+      "somente_leitura": true,
+      "origem": {
+        "estado": "verificado",
+        "valor": "padrao_plataforma",
+        "nota": "Campo padrão do objeto documentado.",
+        "evidencias": [
+          {
+            "fonte": "src:tooling-apexlog"
+          }
+        ]
+      },
+      "obrigatoriedade": {
+        "valor": "sim",
+        "estado": "verificado",
+        "evidencias": [
+          {
+            "fonte": "src:tooling-apexlog"
+          }
+        ]
+      },
+      "default": {
+        "forma": "nao_declarado_na_fonte",
+        "estado": "desconhecido"
+      },
+      "dominio": {
+        "natureza": "numerico",
+        "estado": "verificado",
+        "evidencias": [
+          {
+            "fonte": "src:tooling-apexlog"
+          }
+        ]
+      },
+      "disponibilidade": {
+        "desde_versao": null,
+        "ate_versao": null,
+        "estado": "desconhecido"
+      },
+      "explicacao": "explicada",
+      "estado": "verificado",
+      "evidencias": [
+        {
+          "fonte": "src:tooling-apexlog"
+        }
+      ]
+    },
+    {
+      "id": "obj:ApexLog.Location",
+      "nome": "Location",
+      "tipo_tecnico": "picklist",
+      "o_que_e": "Origem do log.",
+      "apis": [
+        "tooling"
+      ],
+      "propriedades_api": {
+        "estado": "verificado",
+        "create": false,
+        "defaulted_on_create": false,
+        "filter": true,
+        "group": true,
+        "nillable": true,
+        "restricted_picklist": true,
+        "sort": true,
+        "update": false,
+        "id_lookup": false,
+        "evidencias": [
+          {
+            "fonte": "src:tooling-apexlog"
+          }
+        ]
+      },
+      "somente_leitura": true,
+      "origem": {
+        "estado": "verificado",
+        "valor": "padrao_plataforma",
+        "nota": "Campo padrão do objeto documentado.",
+        "evidencias": [
+          {
+            "fonte": "src:tooling-apexlog"
+          }
+        ]
+      },
+      "obrigatoriedade": {
+        "valor": "desconhecida",
+        "estado": "desconhecido"
+      },
+      "default": {
+        "forma": "nao_declarado_na_fonte",
+        "estado": "desconhecido"
+      },
+      "dominio": {
+        "natureza": "enum_fechado",
+        "valores": [
+          {
+            "valor": "Monitoring"
+          },
+          {
+            "valor": "SystemLog"
+          }
+        ],
+        "lista_completa": "sim",
+        "estado": "verificado",
+        "evidencias": [
+          {
+            "fonte": "src:tooling-apexlog"
+          }
+        ],
+        "contexto": "Valores conforme a página; listas de picklist podem variar por org, idioma ou recurso habilitado."
+      },
+      "disponibilidade": {
+        "desde_versao": null,
+        "ate_versao": null,
+        "estado": "desconhecido"
+      },
+      "explicacao": "explicada",
+      "estado": "verificado",
+      "evidencias": [
+        {
+          "fonte": "src:tooling-apexlog"
+        }
+      ],
+      "notas": [
+        "Monitoring: visível a administradores, guardado por 7 dias. SystemLog: privado, guardado por 24 horas."
+      ]
+    },
+    {
+      "id": "obj:ApexLog.LogLength",
+      "nome": "LogLength",
+      "tipo_tecnico": "int",
+      "o_que_e": "Tamanho do log ou do heap dump, em bytes.",
+      "apis": [
+        "tooling"
+      ],
+      "propriedades_api": {
+        "estado": "verificado",
+        "create": false,
+        "defaulted_on_create": false,
+        "filter": true,
+        "group": true,
+        "nillable": false,
+        "restricted_picklist": false,
+        "sort": true,
+        "update": false,
+        "id_lookup": false,
+        "evidencias": [
+          {
+            "fonte": "src:tooling-apexlog"
+          }
+        ]
+      },
+      "somente_leitura": true,
+      "origem": {
+        "estado": "verificado",
+        "valor": "padrao_plataforma",
+        "nota": "Campo padrão do objeto documentado.",
+        "evidencias": [
+          {
+            "fonte": "src:tooling-apexlog"
+          }
+        ]
+      },
+      "obrigatoriedade": {
+        "valor": "sim",
+        "estado": "verificado",
+        "evidencias": [
+          {
+            "fonte": "src:tooling-apexlog"
+          }
+        ]
+      },
+      "default": {
+        "forma": "nao_declarado_na_fonte",
+        "estado": "desconhecido"
+      },
+      "dominio": {
+        "natureza": "numerico",
+        "estado": "verificado",
+        "evidencias": [
+          {
+            "fonte": "src:tooling-apexlog"
+          }
+        ]
+      },
+      "disponibilidade": {
+        "desde_versao": null,
+        "ate_versao": null,
+        "estado": "desconhecido"
+      },
+      "explicacao": "explicada",
+      "estado": "verificado",
+      "evidencias": [
+        {
+          "fonte": "src:tooling-apexlog"
+        }
+      ]
+    },
+    {
+      "id": "obj:ApexLog.LogUserId",
+      "nome": "LogUserId",
+      "tipo_tecnico": "reference",
+      "o_que_e": "O usuário cujas ações geraram o log.",
+      "apis": [
+        "tooling"
+      ],
+      "propriedades_api": {
+        "estado": "verificado",
+        "create": false,
+        "defaulted_on_create": false,
+        "filter": true,
+        "group": true,
+        "nillable": true,
+        "restricted_picklist": false,
+        "sort": true,
+        "update": false,
+        "id_lookup": false,
+        "evidencias": [
+          {
+            "fonte": "src:tooling-apexlog"
+          }
+        ]
+      },
+      "somente_leitura": true,
+      "origem": {
+        "estado": "verificado",
+        "valor": "padrao_plataforma",
+        "nota": "Campo padrão do objeto documentado.",
+        "evidencias": [
+          {
+            "fonte": "src:tooling-apexlog"
+          }
+        ]
+      },
+      "obrigatoriedade": {
+        "valor": "desconhecida",
+        "estado": "desconhecido"
+      },
+      "default": {
+        "forma": "nao_declarado_na_fonte",
+        "estado": "desconhecido"
+      },
+      "dominio": {
+        "natureza": "referencia",
+        "estado": "verificado",
+        "evidencias": [
+          {
+            "fonte": "src:tooling-apexlog"
+          }
+        ],
+        "contexto": "Id de registro do(s) objeto(s) referenciado(s)."
+      },
+      "disponibilidade": {
+        "desde_versao": null,
+        "ate_versao": null,
+        "estado": "desconhecido"
+      },
+      "explicacao": "explicada",
+      "estado": "verificado",
+      "evidencias": [
+        {
+          "fonte": "src:tooling-apexlog"
+        }
+      ],
+      "referencia": {
+        "alvos": [
+          "obj:User"
+        ],
+        "nome_relacionamento": null
+      }
+    },
+    {
+      "id": "obj:ApexLog.Operation",
+      "nome": "Operation",
+      "tipo_tecnico": "string",
+      "o_que_e": "Nome da operação que gerou o log, como APEXSOAP.",
+      "apis": [
+        "tooling"
+      ],
+      "propriedades_api": {
+        "estado": "verificado",
+        "create": false,
+        "defaulted_on_create": false,
+        "filter": true,
+        "group": true,
+        "nillable": false,
+        "restricted_picklist": false,
+        "sort": true,
+        "update": false,
+        "id_lookup": false,
+        "evidencias": [
+          {
+            "fonte": "src:tooling-apexlog"
+          }
+        ]
+      },
+      "somente_leitura": true,
+      "origem": {
+        "estado": "verificado",
+        "valor": "padrao_plataforma",
+        "nota": "Campo padrão do objeto documentado.",
+        "evidencias": [
+          {
+            "fonte": "src:tooling-apexlog"
+          }
+        ]
+      },
+      "obrigatoriedade": {
+        "valor": "sim",
+        "estado": "verificado",
+        "evidencias": [
+          {
+            "fonte": "src:tooling-apexlog"
+          }
+        ]
+      },
+      "default": {
+        "forma": "nao_declarado_na_fonte",
+        "estado": "desconhecido"
+      },
+      "dominio": {
+        "natureza": "texto_livre",
+        "estado": "verificado",
+        "evidencias": [
+          {
+            "fonte": "src:tooling-apexlog"
+          }
+        ]
+      },
+      "disponibilidade": {
+        "desde_versao": null,
+        "ate_versao": null,
+        "estado": "desconhecido"
+      },
+      "explicacao": "explicada",
+      "estado": "verificado",
+      "evidencias": [
+        {
+          "fonte": "src:tooling-apexlog"
+        }
+      ]
+    },
+    {
+      "id": "obj:ApexLog.Request",
+      "nome": "Request",
+      "tipo_tecnico": "string",
+      "o_que_e": "Origem da requisição: API ou Application (a interface do Salesforce).",
+      "apis": [
+        "tooling"
+      ],
+      "propriedades_api": {
+        "estado": "verificado",
+        "create": false,
+        "defaulted_on_create": false,
+        "filter": true,
+        "group": true,
+        "nillable": false,
+        "restricted_picklist": false,
+        "sort": true,
+        "update": false,
+        "id_lookup": false,
+        "evidencias": [
+          {
+            "fonte": "src:tooling-apexlog"
+          }
+        ]
+      },
+      "somente_leitura": true,
+      "origem": {
+        "estado": "verificado",
+        "valor": "padrao_plataforma",
+        "nota": "Campo padrão do objeto documentado.",
+        "evidencias": [
+          {
+            "fonte": "src:tooling-apexlog"
+          }
+        ]
+      },
+      "obrigatoriedade": {
+        "valor": "sim",
+        "estado": "verificado",
+        "evidencias": [
+          {
+            "fonte": "src:tooling-apexlog"
+          }
+        ]
+      },
+      "default": {
+        "forma": "nao_declarado_na_fonte",
+        "estado": "desconhecido"
+      },
+      "dominio": {
+        "natureza": "texto_livre",
+        "estado": "verificado",
+        "evidencias": [
+          {
+            "fonte": "src:tooling-apexlog"
+          }
+        ]
+      },
+      "disponibilidade": {
+        "desde_versao": null,
+        "ate_versao": null,
+        "estado": "desconhecido"
+      },
+      "explicacao": "explicada",
+      "estado": "verificado",
+      "evidencias": [
+        {
+          "fonte": "src:tooling-apexlog"
+        }
+      ]
+    },
+    {
+      "id": "obj:ApexLog.RequestIdentifier",
+      "nome": "RequestIdentifier",
+      "tipo_tecnico": "string",
+      "o_que_e": "Identificador único da requisição, usado para ligar logs da mesma requisição.",
+      "apis": [
+        "tooling"
+      ],
+      "propriedades_api": {
+        "estado": "verificado",
+        "create": false,
+        "defaulted_on_create": false,
+        "filter": true,
+        "group": true,
+        "nillable": false,
+        "restricted_picklist": false,
+        "sort": true,
+        "update": false,
+        "id_lookup": false,
+        "evidencias": [
+          {
+            "fonte": "src:tooling-apexlog"
+          }
+        ]
+      },
+      "somente_leitura": true,
+      "origem": {
+        "estado": "verificado",
+        "valor": "padrao_plataforma",
+        "nota": "Campo padrão do objeto documentado.",
+        "evidencias": [
+          {
+            "fonte": "src:tooling-apexlog"
+          }
+        ]
+      },
+      "obrigatoriedade": {
+        "valor": "desconhecida",
+        "estado": "desconhecido"
+      },
+      "default": {
+        "forma": "nao_declarado_na_fonte",
+        "estado": "desconhecido"
+      },
+      "dominio": {
+        "natureza": "texto_livre",
+        "estado": "verificado",
+        "evidencias": [
+          {
+            "fonte": "src:tooling-apexlog"
+          }
+        ]
+      },
+      "disponibilidade": {
+        "desde_versao": null,
+        "ate_versao": null,
+        "estado": "desconhecido"
+      },
+      "explicacao": "explicada",
+      "estado": "verificado",
+      "evidencias": [
+        {
+          "fonte": "src:tooling-apexlog"
+        }
+      ]
+    },
+    {
+      "id": "obj:ApexLog.StartTime",
+      "nome": "StartTime",
+      "tipo_tecnico": "dateTime",
+      "o_que_e": "Início da transação.",
+      "apis": [
+        "tooling"
+      ],
+      "propriedades_api": {
+        "estado": "verificado",
+        "create": false,
+        "defaulted_on_create": false,
+        "filter": true,
+        "group": false,
+        "nillable": false,
+        "restricted_picklist": false,
+        "sort": true,
+        "update": false,
+        "id_lookup": false,
+        "evidencias": [
+          {
+            "fonte": "src:tooling-apexlog"
+          }
+        ]
+      },
+      "somente_leitura": true,
+      "origem": {
+        "estado": "verificado",
+        "valor": "padrao_plataforma",
+        "nota": "Campo padrão do objeto documentado.",
+        "evidencias": [
+          {
+            "fonte": "src:tooling-apexlog"
+          }
+        ]
+      },
+      "obrigatoriedade": {
+        "valor": "sim",
+        "estado": "verificado",
+        "evidencias": [
+          {
+            "fonte": "src:tooling-apexlog"
+          }
+        ]
+      },
+      "default": {
+        "forma": "nao_declarado_na_fonte",
+        "estado": "desconhecido"
+      },
+      "dominio": {
+        "natureza": "data_hora",
+        "estado": "verificado",
+        "evidencias": [
+          {
+            "fonte": "src:tooling-apexlog"
+          }
+        ]
+      },
+      "disponibilidade": {
+        "desde_versao": null,
+        "ate_versao": null,
+        "estado": "desconhecido"
+      },
+      "explicacao": "explicada",
+      "estado": "verificado",
+      "evidencias": [
+        {
+          "fonte": "src:tooling-apexlog"
+        }
+      ]
+    },
+    {
+      "id": "obj:ApexLog.Status",
+      "nome": "Status",
+      "tipo_tecnico": "string",
+      "o_que_e": "Resultado da transação: Success ou o texto de uma exceção Apex não tratada.",
+      "apis": [
+        "tooling"
+      ],
+      "propriedades_api": {
+        "estado": "verificado",
+        "create": false,
+        "defaulted_on_create": false,
+        "filter": true,
+        "group": true,
+        "nillable": false,
+        "restricted_picklist": false,
+        "sort": true,
+        "update": false,
+        "id_lookup": false,
+        "evidencias": [
+          {
+            "fonte": "src:tooling-apexlog"
+          }
+        ]
+      },
+      "somente_leitura": true,
+      "origem": {
+        "estado": "verificado",
+        "valor": "padrao_plataforma",
+        "nota": "Campo padrão do objeto documentado.",
+        "evidencias": [
+          {
+            "fonte": "src:tooling-apexlog"
+          }
+        ]
+      },
+      "obrigatoriedade": {
+        "valor": "sim",
+        "estado": "verificado",
+        "evidencias": [
+          {
+            "fonte": "src:tooling-apexlog"
+          }
+        ]
+      },
+      "default": {
+        "forma": "nao_declarado_na_fonte",
+        "estado": "desconhecido"
+      },
+      "dominio": {
+        "natureza": "texto_livre",
+        "estado": "verificado",
+        "evidencias": [
+          {
+            "fonte": "src:tooling-apexlog"
+          }
+        ]
+      },
+      "disponibilidade": {
+        "desde_versao": null,
+        "ate_versao": null,
+        "estado": "desconhecido"
+      },
+      "explicacao": "explicada",
+      "estado": "verificado",
+      "evidencias": [
+        {
+          "fonte": "src:tooling-apexlog"
+        }
+      ]
+    }
+  ],
+  "consultas": [
+    {
+      "api": "tooling",
+      "soql": "SELECT LogUserId, Operation, Status, DurationMilliseconds, LogLength, StartTime FROM ApexLog ORDER BY StartTime DESC",
+      "endpoint": "/services/data/v68.0/tooling/query?q=...",
+      "contexto": "Tooling API. Lista os logs mais recentes.",
+      "validacao": "documental"
+    }
+  ],
+  "apex": {
+    "consulta_soql_direta": {
+      "estado": "desconhecido",
+      "nota": "Não verificado se o objeto também é consultável por SOQL comum em Apex."
+    },
+    "nota": "Página lida só na Tooling API."
+  },
+  "juncao": false,
+  "setup": {
+    "estado": "nao_aplicavel",
+    "nota": "Objeto consultável via API; não é tela do Setup."
+  },
+  "cobertura": {
+    "estrutural": {
+      "estado": "completa",
+      "esperado": 10,
+      "presente": 10,
+      "nota": "Tabela de campos lida completa (10; há uma linha em branco na tabela); Id não consta."
+    },
+    "explicativa": {
+      "estado": "completa",
+      "esperado": 10,
+      "presente": 10
+    },
+    "mapeamento": {
+      "estado": "parcial",
+      "nota": "Ver relacionamentos registrados."
+    }
+  },
+  "alertas": [
+    "O objeto traz os dados do log, não o texto: o corpo é lido por um recurso REST próprio (ApexLog Body).",
+    "Logs do tipo Monitoring ficam 7 dias, ou até alguém apagar; os do tipo SystemLog, 24 horas.",
+    "Use RequestIdentifier para juntar vários logs gerados pela mesma requisição."
+  ],
+  "estado": "verificado",
+  "evidencias": [
+    {
+      "fonte": "src:tooling-apexlog"
+    }
+  ]
+}

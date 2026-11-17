@@ -821,6 +821,24 @@
       "tipo": "representacao_xml"
     },
     {
+      "destino": "obj:ApexLog",
+      "origem": "func:debug-logs",
+      "papel": "Cada log de depuração guardado (Tooling API).",
+      "tipo": "representacao_objeto_api"
+    },
+    {
+      "destino": "obj:DebugLevel",
+      "origem": "func:debug-logs",
+      "papel": "Os níveis de log por categoria (Tooling API).",
+      "tipo": "representacao_objeto_api"
+    },
+    {
+      "destino": "obj:TraceFlag",
+      "origem": "func:debug-logs",
+      "papel": "Cada trace flag (Tooling API).",
+      "tipo": "representacao_objeto_api"
+    },
+    {
       "destino": "mdt:DevHubSettings",
       "origem": "func:devops-center",
       "papel": "Liga o DevOps Center (enableDevOpsCenterGA) e a versão de nova geração (enableALMDevopsCorePref).",
@@ -4622,6 +4640,13 @@
       "tipo": "referencia_campo"
     },
     {
+      "destino": "obj:User",
+      "estado": "verificado",
+      "origem": "obj:ApexLog.LogUserId",
+      "rel_id": "rel:apexlog-user",
+      "tipo": "referencia_campo"
+    },
+    {
       "destino": "obj:CronTrigger",
       "estado": "verificado",
       "origem": "obj:AsyncApexJob.CronTriggerId",
@@ -5095,6 +5120,20 @@
       "estado": "verificado",
       "origem": "obj:ServiceContract.Pricebook2Id",
       "rel_id": "rel:servicecontract-pricebook2",
+      "tipo": "referencia_campo"
+    },
+    {
+      "destino": "obj:DebugLevel",
+      "estado": "verificado",
+      "origem": "obj:TraceFlag.DebugLevelId",
+      "rel_id": "rel:traceflag-debuglevel",
+      "tipo": "referencia_campo"
+    },
+    {
+      "destino": "obj:User",
+      "estado": "verificado",
+      "origem": "obj:TraceFlag.TracedEntityId",
+      "rel_id": "rel:traceflag-user",
       "tipo": "referencia_campo"
     },
     {
@@ -5694,6 +5733,11 @@
       "tipo": "classificacao_principal"
     },
     {
+      "destino": "func:transaction-security",
+      "origem": "sub:eventos-de-monitoramento",
+      "tipo": "classificacao_principal"
+    },
+    {
       "destino": "func:change-data-capture",
       "origem": "sub:eventos-e-mensageria",
       "tipo": "classificacao_principal"
@@ -5842,6 +5886,22 @@
       "motivo": "Páginas e componentes customizados de interface.",
       "origem": "sub:lightning-pages-e-componentes",
       "tipo": "classificacao_secundaria"
+    },
+    {
+      "destino": "func:armazenamento-de-dados-e-arquivos",
+      "origem": "sub:limites-e-consumo",
+      "tipo": "classificacao_principal"
+    },
+    {
+      "destino": "func:limites-de-api-e-alocacoes",
+      "motivo": "Os limites de requisições de API são acompanhados em System Overview e pelo recurso de limites.",
+      "origem": "sub:limites-e-consumo",
+      "tipo": "classificacao_secundaria"
+    },
+    {
+      "destino": "func:system-overview",
+      "origem": "sub:limites-e-consumo",
+      "tipo": "classificacao_principal"
     },
     {
       "destino": "func:path",
@@ -6387,6 +6447,15 @@
       "resumo": "Apps com navegação em abas e subabas para trabalhar vários registros ao mesmo tempo.",
       "rotulo": "Apps de console Lightning",
       "rotulo_tecnico": "Lightning Console Apps",
+      "tipo": "funcionalidade"
+    },
+    {
+      "estado": "verificado",
+      "grupo_cor": "cls:observabilidade-auditoria-e-operacao",
+      "id": "func:armazenamento-de-dados-e-arquivos",
+      "resumo": "A org tem duas cotas de armazenamento: data storage, para registros, e file storage, para arquivos. A página Storage Usage mostra o espaço disponível de cada uma, o uso por tipo de registro, os usuários que mais ocupam e os maiores arquivos.",
+      "rotulo": "Armazenamento de dados e de arquivos",
+      "rotulo_tecnico": "Data and File Storage",
       "tipo": "funcionalidade"
     },
     {
@@ -7327,6 +7396,15 @@
     },
     {
       "estado": "verificado",
+      "grupo_cor": "cls:observabilidade-auditoria-e-operacao",
+      "id": "func:system-overview",
+      "resumo": "A página System Overview mostra o uso e os limites da org em seis grupos: schema, uso de API, lógica de negócio, interface, licenças mais usadas e portal roles. Avisa quando a org chega a 95% de um limite.",
+      "rotulo": "System Overview",
+      "rotulo_tecnico": "System Overview",
+      "tipo": "funcionalidade"
+    },
+    {
+      "estado": "verificado",
       "grupo_cor": "cls:interface-e-experiencia-do-usuario",
       "id": "func:tabs",
       "resumo": "Entradas de navegação para objetos, páginas, componentes ou URLs.",
@@ -7386,6 +7464,15 @@
       "resumo": "API para construir ferramentas de desenvolvimento: expõe, como objetos consultáveis, os metadados usados por essas ferramentas, por REST ou SOAP.",
       "rotulo": "Tooling API",
       "rotulo_tecnico": "Tooling API",
+      "tipo": "funcionalidade"
+    },
+    {
+      "estado": "verificado",
+      "grupo_cor": "cls:observabilidade-auditoria-e-operacao",
+      "id": "func:transaction-security",
+      "resumo": "Transaction Security intercepta eventos em tempo real e aplica uma ação: bloquear, exigir autenticação multifator ou notificar. Cada política tem condições que avaliam o evento, escritas no Condition Builder (sem código) ou em Apex.",
+      "rotulo": "Transaction Security",
+      "rotulo_tecnico": "Transaction Security",
       "tipo": "funcionalidade"
     },
     {
@@ -10112,6 +10199,16 @@
     },
     {
       "apis": [
+        "tooling"
+      ],
+      "estado": "verificado",
+      "id": "obj:ApexLog",
+      "resumo": "Um log de depuração guardado: quem o gerou, quando, quanto durou a transação, o tamanho e o resultado.",
+      "rotulo": "ApexLog",
+      "tipo": "objeto_api"
+    },
+    {
+      "apis": [
         "padrao"
       ],
       "estado": "verificado",
@@ -10268,6 +10365,16 @@
       "id": "obj:CustomTab",
       "resumo": "Expõe as tabs pela Tooling API.",
       "rotulo": "CustomTab",
+      "tipo": "objeto_api"
+    },
+    {
+      "apis": [
+        "tooling"
+      ],
+      "estado": "verificado",
+      "id": "obj:DebugLevel",
+      "resumo": "Um debug level: um conjunto de níveis de log por categoria, que pode ser atribuído a várias trace flags.",
+      "rotulo": "DebugLevel",
       "tipo": "objeto_api"
     },
     {
@@ -10807,6 +10914,16 @@
     },
     {
       "apis": [
+        "tooling"
+      ],
+      "estado": "verificado",
+      "id": "obj:TraceFlag",
+      "resumo": "Uma trace flag: o que faz um log de depuração ser gerado, para quem, por quanto tempo e com que nível de detalhe.",
+      "rotulo": "TraceFlag",
+      "tipo": "objeto_api"
+    },
+    {
+      "apis": [
         "padrao",
         "tooling"
       ],
@@ -11230,7 +11347,7 @@
       "estado": "desconhecido",
       "grupo_cor": "cls:observabilidade-auditoria-e-operacao",
       "id": "sub:historico-de-login",
-      "recorte": "curadoria",
+      "recorte": "parcial",
       "rotulo": "Histórico de login",
       "sigla": "OBS-03",
       "tipo": "subclassificacao"
@@ -11302,7 +11419,7 @@
       "estado": "desconhecido",
       "grupo_cor": "cls:observabilidade-auditoria-e-operacao",
       "id": "sub:limites-e-consumo",
-      "recorte": "curadoria",
+      "recorte": "parcial",
       "rotulo": "Limites e consumo",
       "sigla": "OBS-05",
       "tipo": "subclassificacao"

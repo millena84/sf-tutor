@@ -61,17 +61,69 @@
       "texto": "Ver, guardar e apagar logs de depuração exige View All Data.",
       "tipo": "seguranca",
       "titulo": "Permissão"
+    },
+    {
+      "evidencias": [
+        {
+          "fonte": "src:tooling-traceflag"
+        },
+        {
+          "fonte": "src:tooling-debuglevel"
+        },
+        {
+          "fonte": "src:tooling-apexlog"
+        }
+      ],
+      "texto": "Na Tooling API, TraceFlag é a trace flag, DebugLevel é o conjunto de níveis de log por categoria e ApexLog é cada log guardado. Uma trace flag de usuário usa LogType USER_DEBUG; a de classe ou trigger (CLASS_TRACING) só troca o nível de log, sem gerar log. O texto do log é lido por um recurso REST próprio.",
+      "tipo": "implantacao",
+      "titulo": "Logs por API"
+    },
+    {
+      "evidencias": [
+        {
+          "fonte": "src:tooling-apexlog"
+        }
+      ],
+      "texto": "Logs com origem Monitoring ficam 7 dias, ou até alguém apagar; os de origem SystemLog, 24 horas.",
+      "tipo": "limite",
+      "titulo": "Quanto tempo o log fica"
     }
   ],
   "classificacao": "cls:observabilidade-auditoria-e-operacao",
   "derivado": {
-    "dependencias": [],
+    "dependencias": [
+      {
+        "destino": "obj:User",
+        "destino_no_tema": false,
+        "estado": "verificado",
+        "origem": "obj:ApexLog",
+        "rel": "rel:apexlog-user",
+        "via": "LogUserId"
+      },
+      {
+        "destino": "obj:DebugLevel",
+        "destino_no_tema": true,
+        "estado": "verificado",
+        "origem": "obj:TraceFlag",
+        "rel": "rel:traceflag-debuglevel",
+        "via": "DebugLevelId"
+      },
+      {
+        "destino": "obj:User",
+        "destino_no_tema": false,
+        "estado": "verificado",
+        "origem": "obj:TraceFlag",
+        "rel": "rel:traceflag-user",
+        "via": "TracedEntityId"
+      }
+    ],
     "funcionalidades": [
       {
         "alertas": [
           "Trace flags de classe e de trigger mudam o nível de detalhe, mas sozinhas não fazem um log ser gerado.",
           "Apagar um debug level apaga as trace flags que o usam.",
-          "Em produção, evite trace flags em usuários de API e em código de alto volume."
+          "Em produção, evite trace flags em usuários de API e em código de alto volume.",
+          "Logs guardados para administradores (Monitoring) ficam 7 dias; os do Developer Console (SystemLog), 24 horas."
         ],
         "exemplo": "Para entender um erro que só acontece com uma usuária, o administrador cria uma trace flag para ela, reproduz o erro e lê o log.",
         "id": "func:debug-logs",
@@ -80,7 +132,56 @@
     ],
     "metadata_types": [],
     "nota": "Calculado pelo gerador a partir do catálogo; não é cadastro.",
-    "objetos_api": [],
+    "objetos_api": [
+      {
+        "apis": [
+          {
+            "api": "tooling",
+            "estado": "verificado"
+          },
+          {
+            "api": "padrao",
+            "estado": "desconhecido"
+          }
+        ],
+        "funcionalidades": [
+          "func:debug-logs"
+        ],
+        "id": "obj:ApexLog"
+      },
+      {
+        "apis": [
+          {
+            "api": "tooling",
+            "estado": "verificado"
+          },
+          {
+            "api": "padrao",
+            "estado": "desconhecido"
+          }
+        ],
+        "funcionalidades": [
+          "func:debug-logs"
+        ],
+        "id": "obj:DebugLevel"
+      },
+      {
+        "apis": [
+          {
+            "api": "tooling",
+            "estado": "verificado"
+          },
+          {
+            "api": "padrao",
+            "estado": "desconhecido"
+          }
+        ],
+        "funcionalidades": [
+          "func:debug-logs"
+        ],
+        "id": "obj:TraceFlag"
+      }
+    ],
     "temas_sem_funcionalidade": []
   },
   "descricao": "Logs de depuração: o registro detalhado do que a plataforma executou numa requisição, coletado por trace flags.",

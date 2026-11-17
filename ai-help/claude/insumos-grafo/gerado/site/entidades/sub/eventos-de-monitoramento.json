@@ -48,6 +48,29 @@
       "texto": "O esquema de cada tipo de log pode mudar a cada release. Quem processa os arquivos deve conferir os campos LogFileFieldNames e LogFileFieldTypes depois de cada atualização.",
       "tipo": "atencao",
       "titulo": "O esquema muda"
+    },
+    {
+      "evidencias": [
+        {
+          "fonte": "src:help-transaction-security"
+        }
+      ],
+      "texto": "Transaction Security intercepta eventos em tempo real e aplica uma ação: bloquear, exigir autenticação multifator ou notificar. As políticas são escritas no Condition Builder ou em Apex.",
+      "tipo": "seguranca",
+      "titulo": "Transaction Security"
+    },
+    {
+      "evidencias": [
+        {
+          "fonte": "src:help-em-considerations"
+        },
+        {
+          "fonte": "src:help-ts-condition-builder"
+        }
+      ],
+      "texto": "A ação de autenticação multifator não está disponível no app móvel, no Lightning Experience nem por API: nesses casos, a política bloqueia. Políticas com a mesma ação para o mesmo evento rodam em ordem indeterminada.",
+      "tipo": "atencao",
+      "titulo": "MFA nem sempre é possível"
     }
   ],
   "classificacao": "cls:observabilidade-auditoria-e-operacao",
@@ -57,10 +80,21 @@
       {
         "alertas": [
           "Event Monitoring e Real-Time Event Monitoring guardam coisas diferentes: o primeiro usa o objeto EventLogFile; o segundo, não.",
-          "O esquema de um arquivo de log pode mudar a cada release."
+          "O esquema de um arquivo de log pode mudar a cada release.",
+          "Transaction Security faz parte do Real-Time Event Monitoring: usa os eventos em tempo real para bloquear ou notificar."
         ],
         "exemplo": "A equipe de segurança baixa os logs do tipo Report para ver quem exportou relatórios numa semana.",
         "id": "func:event-monitoring",
+        "principal": true
+      },
+      {
+        "alertas": [
+          "A ação de autenticação multifator não funciona no app móvel, no Lightning Experience nem por API: nesses casos, a política bloqueia.",
+          "Pode haver várias políticas para o mesmo evento, mas a Ajuda recomenda que elas não se sobreponham: com a mesma ação, a ordem de execução é indeterminada.",
+          "Criar e gerenciar políticas exige Customize Application e Modify Transaction Security Policy."
+        ],
+        "exemplo": "Uma política de LoginEvent bloqueia logins vindos de certos países; outra, de ReportEvent, avisa quando alguém exporta um relatório muito grande.",
+        "id": "func:transaction-security",
         "principal": true
       }
     ],
@@ -99,7 +133,8 @@
   "estado": "desconhecido",
   "fora_do_escopo": "Eventos de negócio publicados para integrações ficam em \"Eventos e mensageria\".",
   "funcionalidades": [
-    "func:event-monitoring"
+    "func:event-monitoring",
+    "func:transaction-security"
   ],
   "id": "sub:eventos-de-monitoramento",
   "natureza": "curadoria_didatica",
@@ -114,7 +149,8 @@
     "exemplo": "Uma política de segurança de transação reage quando um evento monitorado acontece.",
     "explicacao": "São eventos que registram uso e atividade na org, para auditoria e detecção quase em tempo real.",
     "por_onde_comecar": [
-      "func:event-monitoring"
+      "func:event-monitoring",
+      "func:transaction-security"
     ]
   },
   "referencias_oficiais": [
