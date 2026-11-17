@@ -7,7 +7,7 @@ Gerado por `ferramentas/sftutor.py cobertura`. Cobertura estrutural, explicativa
 
 - Universo v68 (METADATA_SUPPORT.md): **993** tipos.
 - Classificados como incluídos no recorte Core: 12; pendentes de classificação: 981.
-- Cadastrados: **151** de 993. Estruturalmente completos (contra a página oficial): 131. Completos nas três dimensões: 0.
+- Cadastrados: **159** de 993. Estruturalmente completos (contra a página oficial): 139. Completos nas três dimensões: 0.
 - Porcentagem do recorte Core: não calculada, porque o denominador do recorte ainda não está definido (classificação item a item pendente).
 
 | Tipo | Estrutural | Esperadas | Presentes | Explicadas | Estruturas | Mapeamento | Completo |
@@ -92,6 +92,7 @@ Gerado por `ferramentas/sftutor.py cobertura`. Cobertura estrutural, explicativa
 | mdt:InboundCertificate | completa | 4 | 4 | 4 | 0 | parcial | não |
 | mdt:InboundNetworkConnection | completa | 7 | 7 | 7 | 1 | parcial | não |
 | mdt:Index | completa | 3 | 3 | 3 | 1 | parcial | não |
+| mdt:IndustriesSettings | completa | 191 | 191 | 191 | 0 | parcial | não |
 | mdt:InstalledPackage | completa | 4 | 4 | 4 | 0 | parcial | não |
 | mdt:KnowledgeSettings | completa | 23 | 23 | 23 | 4 | parcial | não |
 | mdt:LanguageSettings | completa | 13 | 13 | 13 | 0 | parcial | não |
@@ -141,9 +142,16 @@ Gerado por `ferramentas/sftutor.py cobertura`. Cobertura estrutural, explicativa
 | mdt:Report | completa | 41 | 41 | 41 | 15 | parcial | não |
 | mdt:ReportFolder | parcial | 5 | 5 | 5 | 0 | parcial | não |
 | mdt:ReportType | completa | 9 | 9 | 9 | 2 | parcial | não |
+| mdt:RevenueManagementSettings | completa | 20 | 20 | 20 | 0 | parcial | não |
+| mdt:Role | completa | 8 | 8 | 8 | 0 | parcial | não |
 | mdt:SamlSsoConfig | completa | 26 | 26 | 26 | 0 | parcial | não |
 | mdt:ServiceChannel | completa | 19 | 19 | 19 | 1 | parcial | não |
 | mdt:ServicePresenceStatus | completa | 3 | 3 | 3 | 1 | parcial | não |
+| mdt:SharingCriteriaRule | completa | 9 | 9 | 9 | 3 | parcial | não |
+| mdt:SharingGuestRule | completa | 8 | 8 | 8 | 2 | parcial | não |
+| mdt:SharingOwnerRule | completa | 7 | 7 | 7 | 2 | parcial | não |
+| mdt:SharingRules | completa | 5 | 5 | 5 | 0 | parcial | não |
+| mdt:SharingTerritoryRule | completa | 7 | 7 | 7 | 2 | parcial | não |
 | mdt:SourceTrackingSettings | completa | 2 | 2 | 2 | 0 | parcial | não |
 | mdt:StaticResource | completa | 5 | 5 | 5 | 0 | parcial | não |
 | mdt:Territory2 | completa | 12 | 12 | 12 | 3 | parcial | não |
@@ -166,13 +174,13 @@ Gerado por `ferramentas/sftutor.py cobertura`. Cobertura estrutural, explicativa
 
 ## Propriedades XML
 
-- Em metadata types: 1963 listadas, 1896 explicadas.
-- Em estruturas auxiliares: 1295 listadas, 1285 explicadas.
+- Em metadata types: 2218 listadas, 2151 explicadas.
+- Em estruturas auxiliares: 1321 listadas, 1311 explicadas.
 - Universo total: Sem WSDL não há denominador confiável do total de propriedades do recorte.
 
 ## Objetos consultáveis via API
 
-- Catalogados: 83. Campos listados: 1722; explicados: 912.
+- Catalogados: 84. Campos listados: 1735; explicados: 925.
 - Universo: Universo de objetos da plataforma não enumerado.
 
 | Objeto | Estrutural | Esperados | Presentes | Explicados | APIs verificadas |
@@ -258,15 +266,16 @@ Gerado por `ferramentas/sftutor.py cobertura`. Cobertura estrutural, explicativa
 | obj:TraceFlag | completa | 14 | 14 | 14 | tooling |
 | obj:User | parcial | n/d | 184 | 24 | padrao, tooling |
 | obj:UserLogin | parcial | n/d | 3 | 3 | padrao |
+| obj:UserRole | completa | 13 | 13 | 13 | padrao |
 | obj:UserTerritory2Association | completa | 4 | 4 | 4 | padrao |
 | obj:ValidationRule | completa | 11 | 11 | 11 | tooling |
 
 ## Relacionamentos
 
-- Total: 147; verificados: 144.
-- Por tipo: correspondencia_xml_api: 11, referencia_campo: 116, representacao_comum: 20
+- Total: 152; verificados: 149.
+- Por tipo: correspondencia_xml_api: 11, referencia_campo: 120, representacao_comum: 21
 
 ## Taxonomia e funcionalidades
 
-- Classificações: 14; subclassificações: 92 (com funcionalidades: 85).
-- Funcionalidades cadastradas: 132 (universo de funcionalidades não definido).
+- Classificações: 14; subclassificações: 92 (com funcionalidades: 91).
+- Funcionalidades cadastradas: 137 (universo de funcionalidades não definido).

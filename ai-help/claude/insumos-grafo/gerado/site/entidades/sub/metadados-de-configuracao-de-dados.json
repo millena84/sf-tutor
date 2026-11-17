@@ -65,11 +65,110 @@
   ],
   "classificacao": "cls:dados-e-modelagem",
   "derivado": {
-    "dependencias": [],
-    "funcionalidades": [],
-    "metadata_types": [],
+    "dependencias": [
+      {
+        "destino": "mdt:ExternalDataSource",
+        "destino_no_tema": false,
+        "estado": "verificado",
+        "origem": "mdt:CustomObject",
+        "rel": "rel:customobject-externaldatasource",
+        "via": "externalDataSource"
+      },
+      {
+        "destino": "obj:EntityDefinition",
+        "destino_no_tema": false,
+        "estado": "verificado",
+        "origem": "obj:FieldDefinition",
+        "rel": "rel:fielddefinition-entitydefinition",
+        "via": "EntityDefinitionId"
+      }
+    ],
+    "funcionalidades": [
+      {
+        "exemplo": "Um campo Valor_Mensal__c do tipo moeda em Contrato_Servico__c.",
+        "id": "func:campos-customizados",
+        "principal": false,
+        "tema_principal": "sub:campos-e-tipos"
+      },
+      {
+        "alertas": [
+          "O histórico só existe a partir de quando o rastreamento é ligado.",
+          "Em contas, o limite de 20 campos vale para contas comerciais e contas pessoais juntas.",
+          "Não é possível desligar o rastreamento de um objeto se algum código Apex referencia os campos dele.",
+          "O histórico de campos não conta no armazenamento de dados.",
+          "Definir os campos rastreados exige a permissão Customize Application."
+        ],
+        "exemplo": "Na conta, o campo Rating é rastreado; quando alguém muda de Warm para Hot, a related list History mostra o usuário, a data e os dois valores.",
+        "id": "func:field-history-tracking",
+        "principal": false,
+        "tema_principal": "sub:rastreabilidade-e-historico"
+      }
+    ],
+    "metadata_types": [
+      {
+        "estrutura": "parcial",
+        "funcionalidades": [
+          "func:campos-customizados",
+          "func:field-history-tracking"
+        ],
+        "id": "mdt:CustomField",
+        "nota_suporte": null,
+        "suporte_cli": "suportado"
+      },
+      {
+        "estrutura": "parcial",
+        "funcionalidades": [
+          "func:field-history-tracking"
+        ],
+        "id": "mdt:CustomObject",
+        "nota_suporte": null,
+        "suporte_cli": "suportado"
+      },
+      {
+        "estrutura": "completa",
+        "funcionalidades": [
+          "func:campos-customizados"
+        ],
+        "id": "mdt:FieldSet",
+        "nota_suporte": null,
+        "suporte_cli": "suportado"
+      }
+    ],
     "nota": "Calculado pelo gerador a partir do catálogo; não é cadastro.",
-    "objetos_api": [],
+    "objetos_api": [
+      {
+        "apis": [
+          {
+            "api": "tooling",
+            "estado": "verificado"
+          },
+          {
+            "api": "padrao",
+            "estado": "desconhecido"
+          }
+        ],
+        "funcionalidades": [
+          "func:campos-customizados"
+        ],
+        "id": "obj:CustomField"
+      },
+      {
+        "apis": [
+          {
+            "api": "tooling",
+            "estado": "verificado"
+          },
+          {
+            "api": "padrao",
+            "estado": "desconhecido"
+          }
+        ],
+        "funcionalidades": [
+          "func:campos-customizados"
+        ],
+        "id": "obj:FieldDefinition"
+      }
+    ],
     "temas_sem_funcionalidade": []
   },
   "descricao": "Opções do campo ou do objeto que mudam como os dados se comportam, sem criar dados novos: índices, External ID e Unique, histórico de campos e feed tracking.",
@@ -87,7 +186,10 @@
   "escopo": "Entram configurações que descrevem o comportamento dos dados sem ser um objeto ou campo em si.",
   "estado": "desconhecido",
   "fora_do_escopo": "Histórico de alterações como requisito de rastreabilidade fica em \"Rastreabilidade e histórico\".",
-  "funcionalidades": [],
+  "funcionalidades": [
+    "func:campos-customizados",
+    "func:field-history-tracking"
+  ],
   "id": "sub:metadados-de-configuracao-de-dados",
   "natureza": "curadoria_didatica",
   "nome": "Metadados de configuração de dados",

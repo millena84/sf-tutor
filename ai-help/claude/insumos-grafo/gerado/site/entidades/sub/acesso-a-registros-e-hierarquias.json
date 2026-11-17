@@ -85,7 +85,7 @@
       },
       {
         "destino": "obj:User",
-        "destino_no_tema": false,
+        "destino_no_tema": true,
         "estado": "verificado",
         "origem": "obj:AccountTeamMember",
         "rel": "rel:atm-user",
@@ -117,7 +117,7 @@
       },
       {
         "destino": "obj:User",
-        "destino_no_tema": false,
+        "destino_no_tema": true,
         "estado": "verificado",
         "origem": "obj:GroupMember",
         "rel": "rel:groupmember-membro-usuario",
@@ -133,7 +133,7 @@
       },
       {
         "destino": "obj:User",
-        "destino_no_tema": false,
+        "destino_no_tema": true,
         "estado": "verificado",
         "origem": "obj:OpportunityTeamMember",
         "rel": "rel:otm-user",
@@ -146,6 +146,38 @@
         "origem": "obj:QueueSobject",
         "rel": "rel:queuesobject-group",
         "via": "QueueId"
+      },
+      {
+        "destino": "obj:Profile",
+        "destino_no_tema": false,
+        "estado": "verificado",
+        "origem": "obj:User",
+        "rel": "rel:user-profile",
+        "via": "ProfileId"
+      },
+      {
+        "destino": "obj:UserRole",
+        "destino_no_tema": true,
+        "estado": "verificado",
+        "origem": "obj:User",
+        "rel": "rel:user-userrole",
+        "via": "UserRoleId"
+      },
+      {
+        "destino": "obj:User",
+        "destino_no_tema": true,
+        "estado": "verificado",
+        "origem": "obj:UserRole",
+        "rel": "rel:userrole-forecastuser",
+        "via": "ForecastUserId"
+      },
+      {
+        "destino": "obj:Account",
+        "destino_no_tema": false,
+        "estado": "verificado",
+        "origem": "obj:UserRole",
+        "rel": "rel:userrole-portalaccount",
+        "via": "PortalAccountId"
       }
     ],
     "funcionalidades": [
@@ -173,6 +205,14 @@
       },
       {
         "alertas": [
+          "Ver papéis exige View Roles and Role Hierarchy; criar, editar e excluir exige Manage Roles; atribuir usuários exige Manage Internal Users."
+        ],
+        "exemplo": "O papel Gerente de Vendas Sul fica acima de Vendedor Sul; o gerente enxerga as oportunidades dos vendedores, mesmo com o padrão da org em Private.",
+        "id": "func:hierarquia-de-papeis",
+        "principal": true
+      },
+      {
+        "alertas": [
           "Implantar o metadata type Group NÃO leva os membros: eles precisam ser carregados à parte (objeto GroupMember).",
           "Criar ou editar um public group exige a permissão Manage Users.",
           "Com Grant Access Using Hierarchies marcado, o que é compartilhado com o grupo também chega a quem está acima na hierarquia de papéis.",
@@ -184,6 +224,16 @@
         "id": "func:public-groups",
         "principal": false,
         "tema_principal": "sub:permissoes-perfis-e-grupos"
+      },
+      {
+        "alertas": [
+          "Criar regras exige Manage Sharing.",
+          "Regras de guest user só dão leitura; a Ajuda recomenda avaliar com cuidado o que fica exposto.",
+          "Para usar public groups numa regra, crie os grupos antes."
+        ],
+        "exemplo": "Num objeto customizado de candidaturas, uma regra por critério compartilha com os gerentes de TI todas as candidaturas com Department = IT.",
+        "id": "func:regras-de-compartilhamento",
+        "principal": true
       }
     ],
     "metadata_types": [
@@ -229,6 +279,60 @@
           "func:filas"
         ],
         "id": "mdt:Queue",
+        "nota_suporte": null,
+        "suporte_cli": "suportado"
+      },
+      {
+        "estrutura": "completa",
+        "funcionalidades": [
+          "func:hierarquia-de-papeis"
+        ],
+        "id": "mdt:Role",
+        "nota_suporte": null,
+        "suporte_cli": "suportado"
+      },
+      {
+        "estrutura": "completa",
+        "funcionalidades": [
+          "func:regras-de-compartilhamento"
+        ],
+        "id": "mdt:SharingCriteriaRule",
+        "nota_suporte": null,
+        "suporte_cli": "suportado"
+      },
+      {
+        "estrutura": "completa",
+        "funcionalidades": [
+          "func:regras-de-compartilhamento"
+        ],
+        "id": "mdt:SharingGuestRule",
+        "nota_suporte": null,
+        "suporte_cli": "suportado"
+      },
+      {
+        "estrutura": "completa",
+        "funcionalidades": [
+          "func:regras-de-compartilhamento"
+        ],
+        "id": "mdt:SharingOwnerRule",
+        "nota_suporte": null,
+        "suporte_cli": "suportado"
+      },
+      {
+        "estrutura": "completa",
+        "funcionalidades": [
+          "func:regras-de-compartilhamento"
+        ],
+        "id": "mdt:SharingRules",
+        "nota_suporte": "Supports deploy/retrieve but not source tracking",
+        "suporte_cli": "suportado_com_ressalvas"
+      },
+      {
+        "estrutura": "completa",
+        "funcionalidades": [
+          "func:regras-de-compartilhamento"
+        ],
+        "id": "mdt:SharingTerritoryRule",
         "nota_suporte": null,
         "suporte_cli": "suportado"
       }
@@ -316,6 +420,38 @@
           "func:filas"
         ],
         "id": "obj:QueueSobject"
+      },
+      {
+        "apis": [
+          {
+            "api": "padrao",
+            "estado": "verificado"
+          },
+          {
+            "api": "tooling",
+            "estado": "verificado"
+          }
+        ],
+        "funcionalidades": [
+          "func:hierarquia-de-papeis"
+        ],
+        "id": "obj:User"
+      },
+      {
+        "apis": [
+          {
+            "api": "padrao",
+            "estado": "verificado"
+          },
+          {
+            "api": "tooling",
+            "estado": "desconhecido"
+          }
+        ],
+        "funcionalidades": [
+          "func:hierarquia-de-papeis"
+        ],
+        "id": "obj:UserRole"
       }
     ],
     "temas_sem_funcionalidade": []
@@ -335,7 +471,9 @@
   "funcionalidades": [
     "func:equipes-de-conta-e-oportunidade",
     "func:filas",
-    "func:public-groups"
+    "func:hierarquia-de-papeis",
+    "func:public-groups",
+    "func:regras-de-compartilhamento"
   ],
   "id": "sub:acesso-a-registros-e-hierarquias",
   "natureza": "curadoria_didatica",

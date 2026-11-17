@@ -10,33 +10,1751 @@
     "Objetos de API não são tabelas físicas; nenhuma correspondência XML/campo é presumida pelo nome."
   ],
   "metadata_type": {
+    "id": "mdt:Role",
     "nome": "Role",
-    "estado": "parcial",
+    "o_que_e": "Um papel (role) da hierarquia de papéis: quem fica acima de quem e que acesso o papel dá aos casos, contatos e oportunidades das contas dos usuários dele.",
+    "finalidade": "Versionar e implantar a hierarquia de papéis da org.",
+    "estende": "RoleOrTerritory",
     "arquivos": {
       "source_format": {
-        "pasta": "roles/",
-        "arquivo": "<Nome>.role-meta.xml"
+        "estado": "verificado",
+        "valor": {
+          "pasta": "roles/",
+          "arquivo": "<Nome>.role-meta.xml"
+        },
+        "nota": "Pasta e sufixo do registro do Salesforce CLI; sufixo '-meta.xml' segue a convenção do source format.",
+        "evidencias": [
+          {
+            "fonte": "src:sdr-registry",
+            "nota": "types.role"
+          }
+        ]
       },
       "metadata_api_format": {
-        "pasta": "roles/",
-        "arquivo": "<Nome>.role"
+        "estado": "verificado",
+        "valor": {
+          "pasta": "roles/",
+          "arquivo": "<Nome>.role"
+        },
+        "evidencias": [
+          {
+            "fonte": "src:sdr-registry",
+            "nota": "types.role"
+          }
+        ]
+      },
+      "curinga_package_xml": {
+        "estado": "verificado",
+        "valor": true,
+        "evidencias": [
+          {
+            "fonte": "src:mdapi-role"
+          }
+        ]
       }
     },
-    "propriedades": null,
-    "nota": "As propriedades XML não foram levantadas no catálogo.",
+    "disponibilidade": {
+      "desde_versao": "24.0",
+      "ate_versao": null,
+      "estado": "verificado"
+    },
+    "suporte_cli": {
+      "estado": "verificado",
+      "valor": {
+        "status": "suportado",
+        "nota_fonte": null
+      },
+      "nota": "Suporte do Salesforce CLI (source-deploy-retrieve), não do Metadata API em geral.",
+      "evidencias": [
+        {
+          "fonte": "src:sdr-metadata-support"
+        }
+      ]
+    },
+    "setup": {
+      "estado": "desconhecido",
+      "nota": "Caminho no Setup não validado nesta sessão."
+    },
+    "propriedades": [
+      {
+        "id": "mdt:Role.caseAccessLevel",
+        "nome": "caseAccessLevel",
+        "tipo_tecnico": "string",
+        "o_que_e": "Acesso aos casos de outros usuários ligados às contas que o usuário possui.",
+        "origem": {
+          "estado": "verificado",
+          "valor": "padrao_plataforma",
+          "nota": "Propriedade definida pelo schema da Metadata API.",
+          "evidencias": [
+            {
+              "fonte": "src:mdapi-role"
+            }
+          ]
+        },
+        "obrigatoriedade": {
+          "valor": "nao",
+          "estado": "desconhecido",
+          "condicao": "A documentação 68.0 não marca o campo como obrigatório; ausência de marcação não comprova opcionalidade (confirmar no WSDL)."
+        },
+        "default": {
+          "forma": "nao_declarado_na_fonte",
+          "estado": "desconhecido"
+        },
+        "dominio": {
+          "natureza": "enum_fechado",
+          "valores": [
+            {
+              "valor": "Read"
+            },
+            {
+              "valor": "Edit"
+            },
+            {
+              "valor": "None"
+            }
+          ],
+          "lista_completa": "sim",
+          "estado": "verificado",
+          "evidencias": [
+            {
+              "fonte": "src:mdapi-role"
+            }
+          ]
+        },
+        "disponibilidade": {
+          "desde_versao": null,
+          "ate_versao": null,
+          "estado": "desconhecido"
+        },
+        "explicacao": "explicada",
+        "estado": "verificado",
+        "evidencias": [
+          {
+            "fonte": "src:mdapi-role"
+          }
+        ],
+        "herdada_de": "RoleOrTerritory",
+        "notas": [
+          "Fica oculto quando o compartilhamento de casos é Public Read/Write; sem valor, vale o padrão da página de Setup."
+        ]
+      },
+      {
+        "id": "mdt:Role.contactAccessLevel",
+        "nome": "contactAccessLevel",
+        "tipo_tecnico": "string",
+        "o_que_e": "Acesso aos contatos de outros usuários ligados às contas que o usuário possui.",
+        "origem": {
+          "estado": "verificado",
+          "valor": "padrao_plataforma",
+          "nota": "Propriedade definida pelo schema da Metadata API.",
+          "evidencias": [
+            {
+              "fonte": "src:mdapi-role"
+            }
+          ]
+        },
+        "obrigatoriedade": {
+          "valor": "nao",
+          "estado": "desconhecido",
+          "condicao": "A documentação 68.0 não marca o campo como obrigatório; ausência de marcação não comprova opcionalidade (confirmar no WSDL)."
+        },
+        "default": {
+          "forma": "nao_declarado_na_fonte",
+          "estado": "desconhecido"
+        },
+        "dominio": {
+          "natureza": "enum_fechado",
+          "valores": [
+            {
+              "valor": "Read"
+            },
+            {
+              "valor": "Edit"
+            },
+            {
+              "valor": "None"
+            }
+          ],
+          "lista_completa": "sim",
+          "estado": "verificado",
+          "evidencias": [
+            {
+              "fonte": "src:mdapi-role"
+            }
+          ]
+        },
+        "disponibilidade": {
+          "desde_versao": null,
+          "ate_versao": null,
+          "estado": "desconhecido"
+        },
+        "explicacao": "explicada",
+        "estado": "verificado",
+        "evidencias": [
+          {
+            "fonte": "src:mdapi-role"
+          }
+        ],
+        "herdada_de": "RoleOrTerritory",
+        "notas": [
+          "Fica oculto quando o compartilhamento de contatos é Public Read/Write ou Controlled by Parent."
+        ]
+      },
+      {
+        "id": "mdt:Role.description",
+        "nome": "description",
+        "tipo_tecnico": "string",
+        "o_que_e": "Descrição do papel.",
+        "origem": {
+          "estado": "verificado",
+          "valor": "padrao_plataforma",
+          "nota": "Propriedade definida pelo schema da Metadata API.",
+          "evidencias": [
+            {
+              "fonte": "src:mdapi-role"
+            }
+          ]
+        },
+        "obrigatoriedade": {
+          "valor": "nao",
+          "estado": "desconhecido",
+          "condicao": "A documentação 68.0 não marca o campo como obrigatório; ausência de marcação não comprova opcionalidade (confirmar no WSDL)."
+        },
+        "default": {
+          "forma": "nao_declarado_na_fonte",
+          "estado": "desconhecido"
+        },
+        "dominio": {
+          "natureza": "texto_livre",
+          "estado": "verificado",
+          "evidencias": [
+            {
+              "fonte": "src:mdapi-role"
+            }
+          ],
+          "contexto": "A fonte tipa como string sem lista de valores; não inventar valores."
+        },
+        "disponibilidade": {
+          "desde_versao": null,
+          "ate_versao": null,
+          "estado": "desconhecido"
+        },
+        "explicacao": "explicada",
+        "estado": "verificado",
+        "evidencias": [
+          {
+            "fonte": "src:mdapi-role"
+          }
+        ],
+        "herdada_de": "RoleOrTerritory"
+      },
+      {
+        "id": "mdt:Role.fullName",
+        "nome": "fullName",
+        "tipo_tecnico": "string",
+        "o_que_e": "Nome de API; aparece como Role Name na interface. Só letras, dígitos e sublinhado, começando por letra.",
+        "origem": {
+          "estado": "verificado",
+          "valor": "padrao_plataforma",
+          "nota": "Propriedade definida pelo schema da Metadata API.",
+          "evidencias": [
+            {
+              "fonte": "src:mdapi-role"
+            }
+          ]
+        },
+        "obrigatoriedade": {
+          "valor": "nao",
+          "estado": "desconhecido",
+          "condicao": "A documentação 68.0 não marca o campo como obrigatório; ausência de marcação não comprova opcionalidade (confirmar no WSDL)."
+        },
+        "default": {
+          "forma": "nao_declarado_na_fonte",
+          "estado": "desconhecido"
+        },
+        "dominio": {
+          "natureza": "texto_livre",
+          "estado": "verificado",
+          "evidencias": [
+            {
+              "fonte": "src:mdapi-role"
+            }
+          ],
+          "contexto": "A fonte tipa como string sem lista de valores; não inventar valores."
+        },
+        "disponibilidade": {
+          "desde_versao": null,
+          "ate_versao": null,
+          "estado": "desconhecido"
+        },
+        "explicacao": "explicada",
+        "estado": "verificado",
+        "evidencias": [
+          {
+            "fonte": "src:mdapi-role"
+          }
+        ],
+        "herdada_de": "Metadata"
+      },
+      {
+        "id": "mdt:Role.mayForecastManagerShare",
+        "nome": "mayForecastManagerShare",
+        "tipo_tecnico": "boolean",
+        "o_que_e": "Permite ao gerente de previsão compartilhar a própria previsão manualmente.",
+        "origem": {
+          "estado": "verificado",
+          "valor": "padrao_plataforma",
+          "nota": "Propriedade definida pelo schema da Metadata API.",
+          "evidencias": [
+            {
+              "fonte": "src:mdapi-role"
+            }
+          ]
+        },
+        "obrigatoriedade": {
+          "valor": "nao",
+          "estado": "desconhecido",
+          "condicao": "A documentação 68.0 não marca o campo como obrigatório; ausência de marcação não comprova opcionalidade (confirmar no WSDL)."
+        },
+        "default": {
+          "forma": "nao_declarado_na_fonte",
+          "estado": "desconhecido"
+        },
+        "dominio": {
+          "natureza": "booleano",
+          "valores": [
+            {
+              "valor": "true"
+            },
+            {
+              "valor": "false"
+            }
+          ],
+          "lista_completa": "sim",
+          "estado": "verificado",
+          "evidencias": [
+            {
+              "fonte": "src:mdapi-role"
+            }
+          ]
+        },
+        "disponibilidade": {
+          "desde_versao": null,
+          "ate_versao": null,
+          "estado": "desconhecido"
+        },
+        "explicacao": "explicada",
+        "estado": "verificado",
+        "evidencias": [
+          {
+            "fonte": "src:mdapi-role"
+          }
+        ],
+        "herdada_de": "RoleOrTerritory"
+      },
+      {
+        "id": "mdt:Role.name",
+        "nome": "name",
+        "tipo_tecnico": "string",
+        "o_que_e": "Nome do papel.",
+        "origem": {
+          "estado": "verificado",
+          "valor": "padrao_plataforma",
+          "nota": "Propriedade definida pelo schema da Metadata API.",
+          "evidencias": [
+            {
+              "fonte": "src:mdapi-role"
+            }
+          ]
+        },
+        "obrigatoriedade": {
+          "valor": "sim",
+          "estado": "verificado",
+          "evidencias": [
+            {
+              "fonte": "src:mdapi-role"
+            }
+          ]
+        },
+        "default": {
+          "forma": "nao_declarado_na_fonte",
+          "estado": "desconhecido"
+        },
+        "dominio": {
+          "natureza": "texto_livre",
+          "estado": "verificado",
+          "evidencias": [
+            {
+              "fonte": "src:mdapi-role"
+            }
+          ],
+          "contexto": "A fonte tipa como string sem lista de valores; não inventar valores."
+        },
+        "disponibilidade": {
+          "desde_versao": null,
+          "ate_versao": null,
+          "estado": "desconhecido"
+        },
+        "explicacao": "explicada",
+        "estado": "verificado",
+        "evidencias": [
+          {
+            "fonte": "src:mdapi-role"
+          }
+        ],
+        "herdada_de": "RoleOrTerritory"
+      },
+      {
+        "id": "mdt:Role.opportunityAccessLevel",
+        "nome": "opportunityAccessLevel",
+        "tipo_tecnico": "string",
+        "o_que_e": "Acesso às oportunidades de outros usuários ligadas às contas que o usuário possui.",
+        "origem": {
+          "estado": "verificado",
+          "valor": "padrao_plataforma",
+          "nota": "Propriedade definida pelo schema da Metadata API.",
+          "evidencias": [
+            {
+              "fonte": "src:mdapi-role"
+            }
+          ]
+        },
+        "obrigatoriedade": {
+          "valor": "nao",
+          "estado": "desconhecido",
+          "condicao": "A documentação 68.0 não marca o campo como obrigatório; ausência de marcação não comprova opcionalidade (confirmar no WSDL)."
+        },
+        "default": {
+          "forma": "nao_declarado_na_fonte",
+          "estado": "desconhecido"
+        },
+        "dominio": {
+          "natureza": "enum_fechado",
+          "valores": [
+            {
+              "valor": "Read"
+            },
+            {
+              "valor": "Edit"
+            },
+            {
+              "valor": "None"
+            }
+          ],
+          "lista_completa": "sim",
+          "estado": "verificado",
+          "evidencias": [
+            {
+              "fonte": "src:mdapi-role"
+            }
+          ]
+        },
+        "disponibilidade": {
+          "desde_versao": null,
+          "ate_versao": null,
+          "estado": "desconhecido"
+        },
+        "explicacao": "explicada",
+        "estado": "verificado",
+        "evidencias": [
+          {
+            "fonte": "src:mdapi-role"
+          }
+        ],
+        "herdada_de": "RoleOrTerritory",
+        "notas": [
+          "Fica oculto quando o compartilhamento de oportunidades é Public Read/Write."
+        ]
+      },
+      {
+        "id": "mdt:Role.parentRole",
+        "nome": "parentRole",
+        "tipo_tecnico": "string",
+        "o_que_e": "O papel imediatamente acima na hierarquia.",
+        "origem": {
+          "estado": "verificado",
+          "valor": "padrao_plataforma",
+          "nota": "Propriedade definida pelo schema da Metadata API.",
+          "evidencias": [
+            {
+              "fonte": "src:mdapi-role"
+            }
+          ]
+        },
+        "obrigatoriedade": {
+          "valor": "nao",
+          "estado": "desconhecido",
+          "condicao": "A documentação 68.0 não marca o campo como obrigatório; ausência de marcação não comprova opcionalidade (confirmar no WSDL)."
+        },
+        "default": {
+          "forma": "nao_declarado_na_fonte",
+          "estado": "desconhecido"
+        },
+        "dominio": {
+          "natureza": "texto_livre",
+          "estado": "verificado",
+          "evidencias": [
+            {
+              "fonte": "src:mdapi-role"
+            }
+          ],
+          "contexto": "A fonte tipa como string sem lista de valores; não inventar valores."
+        },
+        "disponibilidade": {
+          "desde_versao": null,
+          "ate_versao": null,
+          "estado": "desconhecido"
+        },
+        "explicacao": "explicada",
+        "estado": "verificado",
+        "evidencias": [
+          {
+            "fonte": "src:mdapi-role"
+          }
+        ],
+        "referencia": {
+          "alvos": [
+            "mdt:Role"
+          ],
+          "nota": "Referência pelo nome do componente no XML."
+        }
+      }
+    ],
+    "estruturas": [],
+    "cobertura": {
+      "estrutural": {
+        "estado": "completa",
+        "esperado": 8,
+        "presente": 8,
+        "nota": "Universo esperado = campos de Role (2) mais os herdados de RoleOrTerritory (6), nas páginas do guia versionado 264.0, lidas em 2026-11-17."
+      },
+      "explicativa": {
+        "estado": "completa",
+        "esperado": 8,
+        "presente": 8
+      },
+      "mapeamento": {
+        "estado": "parcial",
+        "nota": "Correspondências registradas apenas onde há evidência; demais pendentes."
+      }
+    },
+    "recomendacoes": [],
+    "alertas": [
+      "Os campos de acesso só valem para registros ligados a contas que o usuário possui; o restante segue os padrões da org e o compartilhamento.",
+      "RoleOrTerritory não pode ser criado diretamente; existe só como base de Role e de Territory."
+    ],
+    "divergencias_documentais": [],
+    "estado": "verificado",
     "evidencias": [
       {
+        "fonte": "src:mdapi-role"
+      },
+      {
         "fonte": "src:sdr-registry"
+      },
+      {
+        "fonte": "src:sdr-metadata-support"
       }
-    ]
+    ],
+    "exemplo_xml": {
+      "xml": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<Role xmlns=\"http://soap.sforce.com/2006/04/metadata\">\n    <caseAccessLevel>Edit</caseAccessLevel>\n    <contactAccessLevel>Edit</contactAccessLevel>\n    <description>[descrição]</description>\n    <mayForecastManagerShare>false</mayForecastManagerShare>\n    <name>[Nome do papel]</name>\n    <opportunityAccessLevel>Read</opportunityAccessLevel>\n    <parentRole>[Nome_Do_Papel_Acima]</parentRole>\n</Role>",
+      "natureza": "didatico_projeto",
+      "nota": "Exemplo escrito pelo projeto apenas com elementos documentados; sem dados reais."
+    }
   },
   "estruturas_xml": [],
   "objetos_api_relacionados": [
     {
+      "id": "obj:UserRole",
       "nome": "UserRole",
-      "estado": "desconhecido",
-      "campos": null,
-      "nota": "Objeto relacionado ainda não levantado no catálogo; campos, acesso e correspondência precisam de verificação."
+      "o_que_e": "Um papel da hierarquia de papéis, como registro. O usuário aponta para o papel dele pelo campo UserRoleId, e cada papel aponta para o papel acima por ParentRoleId.",
+      "papel": "Consultar a hierarquia por API, por exemplo para descobrir quem está acima de um usuário, e criar ou alterar papéis.",
+      "exposicoes": [
+        {
+          "api": "padrao",
+          "estado": "verificado",
+          "chamadas": [
+            "create()",
+            "delete()",
+            "describeSObjects()",
+            "getDeleted()",
+            "getUpdated()",
+            "query()",
+            "retrieve()",
+            "search()",
+            "update()",
+            "upsert()"
+          ],
+          "acesso_especial": "Desde o Summer '20, só quem tem View Roles and Role Hierarchy acessa; editar exige Manage Roles. Aplicações com Manage Users podem consultar, criar, alterar e excluir.",
+          "nota": "A página não informa a versão de entrada do objeto.",
+          "desde_versao": null,
+          "evidencias": [
+            {
+              "fonte": "src:objref-userrole"
+            }
+          ]
+        },
+        {
+          "api": "tooling",
+          "estado": "desconhecido",
+          "nota": "Exposição na Tooling API não verificada.",
+          "desde_versao": null
+        }
+      ],
+      "campos": [
+        {
+          "id": "obj:UserRole.CaseAccessForAccountOwner",
+          "nome": "CaseAccessForAccountOwner",
+          "tipo_tecnico": "picklist",
+          "o_que_e": "Acesso do dono da conta aos casos ligados a ela.",
+          "apis": [
+            "padrao"
+          ],
+          "propriedades_api": {
+            "estado": "verificado",
+            "create": true,
+            "defaulted_on_create": false,
+            "filter": true,
+            "group": true,
+            "nillable": true,
+            "restricted_picklist": true,
+            "sort": true,
+            "update": true,
+            "id_lookup": false,
+            "evidencias": [
+              {
+                "fonte": "src:objref-userrole"
+              },
+              {
+                "fonte": "src:fieldref-userrole"
+              }
+            ]
+          },
+          "somente_leitura": false,
+          "origem": {
+            "estado": "verificado",
+            "valor": "padrao_plataforma",
+            "nota": "Campo padrão do objeto documentado.",
+            "evidencias": [
+              {
+                "fonte": "src:objref-userrole"
+              },
+              {
+                "fonte": "src:fieldref-userrole"
+              }
+            ]
+          },
+          "obrigatoriedade": {
+            "valor": "desconhecida",
+            "estado": "desconhecido"
+          },
+          "default": {
+            "forma": "nao_declarado_na_fonte",
+            "estado": "desconhecido"
+          },
+          "dominio": {
+            "natureza": "lista_dinamica",
+            "estado": "desconhecido",
+            "contexto": "Valores não extraídos; podem depender de org, idioma ou recurso."
+          },
+          "disponibilidade": {
+            "desde_versao": null,
+            "ate_versao": null,
+            "estado": "desconhecido"
+          },
+          "explicacao": "explicada",
+          "estado": "verificado",
+          "evidencias": [
+            {
+              "fonte": "src:objref-userrole"
+            },
+            {
+              "fonte": "src:fieldref-userrole"
+            }
+          ],
+          "notas": [
+            "Nome de API conferido na Field Reference.",
+            "A página não lista os valores."
+          ]
+        },
+        {
+          "id": "obj:UserRole.ContactAccessForAccountOwner",
+          "nome": "ContactAccessForAccountOwner",
+          "tipo_tecnico": "picklist",
+          "o_que_e": "Acesso do dono da conta aos contatos ligados a ela; fixo quando o compartilhamento de contatos é Controlled by Parent.",
+          "apis": [
+            "padrao"
+          ],
+          "propriedades_api": {
+            "estado": "verificado",
+            "create": true,
+            "defaulted_on_create": false,
+            "filter": true,
+            "group": true,
+            "nillable": true,
+            "restricted_picklist": true,
+            "sort": true,
+            "update": true,
+            "id_lookup": false,
+            "evidencias": [
+              {
+                "fonte": "src:objref-userrole"
+              },
+              {
+                "fonte": "src:fieldref-userrole"
+              }
+            ]
+          },
+          "somente_leitura": false,
+          "origem": {
+            "estado": "verificado",
+            "valor": "padrao_plataforma",
+            "nota": "Campo padrão do objeto documentado.",
+            "evidencias": [
+              {
+                "fonte": "src:objref-userrole"
+              },
+              {
+                "fonte": "src:fieldref-userrole"
+              }
+            ]
+          },
+          "obrigatoriedade": {
+            "valor": "desconhecida",
+            "estado": "desconhecido"
+          },
+          "default": {
+            "forma": "nao_declarado_na_fonte",
+            "estado": "desconhecido"
+          },
+          "dominio": {
+            "natureza": "lista_dinamica",
+            "estado": "desconhecido",
+            "contexto": "Valores não extraídos; podem depender de org, idioma ou recurso."
+          },
+          "disponibilidade": {
+            "desde_versao": "10.0",
+            "ate_versao": null,
+            "estado": "verificado"
+          },
+          "explicacao": "explicada",
+          "estado": "verificado",
+          "evidencias": [
+            {
+              "fonte": "src:objref-userrole"
+            },
+            {
+              "fonte": "src:fieldref-userrole"
+            }
+          ],
+          "notas": [
+            "Nome de API conferido na Field Reference.",
+            "A página não lista os valores."
+          ]
+        },
+        {
+          "id": "obj:UserRole.DeveloperName",
+          "nome": "DeveloperName",
+          "tipo_tecnico": "string",
+          "o_que_e": "Nome de API único; vale defini-lo em cargas grandes.",
+          "apis": [
+            "padrao"
+          ],
+          "propriedades_api": {
+            "estado": "verificado",
+            "create": true,
+            "defaulted_on_create": false,
+            "filter": true,
+            "group": true,
+            "nillable": true,
+            "restricted_picklist": false,
+            "sort": true,
+            "update": true,
+            "id_lookup": false,
+            "evidencias": [
+              {
+                "fonte": "src:objref-userrole"
+              },
+              {
+                "fonte": "src:fieldref-userrole"
+              }
+            ]
+          },
+          "somente_leitura": false,
+          "origem": {
+            "estado": "verificado",
+            "valor": "padrao_plataforma",
+            "nota": "Campo padrão do objeto documentado.",
+            "evidencias": [
+              {
+                "fonte": "src:objref-userrole"
+              },
+              {
+                "fonte": "src:fieldref-userrole"
+              }
+            ]
+          },
+          "obrigatoriedade": {
+            "valor": "desconhecida",
+            "estado": "desconhecido"
+          },
+          "default": {
+            "forma": "nao_declarado_na_fonte",
+            "estado": "desconhecido"
+          },
+          "dominio": {
+            "natureza": "texto_livre",
+            "estado": "verificado",
+            "evidencias": [
+              {
+                "fonte": "src:objref-userrole"
+              },
+              {
+                "fonte": "src:fieldref-userrole"
+              }
+            ]
+          },
+          "disponibilidade": {
+            "desde_versao": "24.0",
+            "ate_versao": null,
+            "estado": "verificado"
+          },
+          "explicacao": "explicada",
+          "estado": "verificado",
+          "evidencias": [
+            {
+              "fonte": "src:objref-userrole"
+            },
+            {
+              "fonte": "src:fieldref-userrole"
+            }
+          ],
+          "notas": [
+            "Nome de API conferido na Field Reference."
+          ]
+        },
+        {
+          "id": "obj:UserRole.ForecastUserId",
+          "nome": "ForecastUserId",
+          "tipo_tecnico": "reference",
+          "o_que_e": "Usuário que é o gerente de previsão do papel.",
+          "apis": [
+            "padrao"
+          ],
+          "propriedades_api": {
+            "estado": "verificado",
+            "create": true,
+            "defaulted_on_create": false,
+            "filter": true,
+            "group": true,
+            "nillable": true,
+            "restricted_picklist": false,
+            "sort": true,
+            "update": true,
+            "id_lookup": false,
+            "evidencias": [
+              {
+                "fonte": "src:objref-userrole"
+              },
+              {
+                "fonte": "src:fieldref-userrole"
+              }
+            ]
+          },
+          "somente_leitura": false,
+          "origem": {
+            "estado": "verificado",
+            "valor": "padrao_plataforma",
+            "nota": "Campo padrão do objeto documentado.",
+            "evidencias": [
+              {
+                "fonte": "src:objref-userrole"
+              },
+              {
+                "fonte": "src:fieldref-userrole"
+              }
+            ]
+          },
+          "obrigatoriedade": {
+            "valor": "desconhecida",
+            "estado": "desconhecido"
+          },
+          "default": {
+            "forma": "nao_declarado_na_fonte",
+            "estado": "desconhecido"
+          },
+          "dominio": {
+            "natureza": "referencia",
+            "estado": "verificado",
+            "evidencias": [
+              {
+                "fonte": "src:objref-userrole"
+              },
+              {
+                "fonte": "src:fieldref-userrole"
+              }
+            ],
+            "contexto": "Id de registro do(s) objeto(s) referenciado(s)."
+          },
+          "disponibilidade": {
+            "desde_versao": "6.0",
+            "ate_versao": null,
+            "estado": "verificado"
+          },
+          "explicacao": "explicada",
+          "estado": "verificado",
+          "evidencias": [
+            {
+              "fonte": "src:objref-userrole"
+            },
+            {
+              "fonte": "src:fieldref-userrole"
+            }
+          ],
+          "referencia": {
+            "alvos": [
+              "obj:User"
+            ],
+            "nome_relacionamento": "ForecastUser"
+          },
+          "notas": [
+            "Nome de API conferido na Field Reference."
+          ]
+        },
+        {
+          "id": "obj:UserRole.MayForecastManagerShare",
+          "nome": "MayForecastManagerShare",
+          "tipo_tecnico": "boolean",
+          "o_que_e": "Permite ao gerente de previsão compartilhar a própria previsão; padrão false.",
+          "apis": [
+            "padrao"
+          ],
+          "propriedades_api": {
+            "estado": "verificado",
+            "create": true,
+            "defaulted_on_create": true,
+            "filter": true,
+            "group": true,
+            "nillable": false,
+            "restricted_picklist": false,
+            "sort": true,
+            "update": true,
+            "id_lookup": false,
+            "evidencias": [
+              {
+                "fonte": "src:objref-userrole"
+              },
+              {
+                "fonte": "src:fieldref-userrole"
+              }
+            ]
+          },
+          "somente_leitura": false,
+          "origem": {
+            "estado": "verificado",
+            "valor": "padrao_plataforma",
+            "nota": "Campo padrão do objeto documentado.",
+            "evidencias": [
+              {
+                "fonte": "src:objref-userrole"
+              },
+              {
+                "fonte": "src:fieldref-userrole"
+              }
+            ]
+          },
+          "obrigatoriedade": {
+            "valor": "desconhecida",
+            "estado": "desconhecido"
+          },
+          "default": {
+            "forma": "desconhecido",
+            "estado": "desconhecido",
+            "nota": "A API marca o campo como 'defaulted on create', mas o valor não foi declarado na extração."
+          },
+          "dominio": {
+            "natureza": "booleano",
+            "valores": [
+              {
+                "valor": "true"
+              },
+              {
+                "valor": "false"
+              }
+            ],
+            "lista_completa": "sim",
+            "estado": "verificado",
+            "evidencias": [
+              {
+                "fonte": "src:objref-userrole"
+              },
+              {
+                "fonte": "src:fieldref-userrole"
+              }
+            ]
+          },
+          "disponibilidade": {
+            "desde_versao": "11.0",
+            "ate_versao": null,
+            "estado": "verificado"
+          },
+          "explicacao": "explicada",
+          "estado": "verificado",
+          "evidencias": [
+            {
+              "fonte": "src:objref-userrole"
+            },
+            {
+              "fonte": "src:fieldref-userrole"
+            }
+          ],
+          "notas": [
+            "Nome de API conferido na Field Reference."
+          ]
+        },
+        {
+          "id": "obj:UserRole.Name",
+          "nome": "Name",
+          "tipo_tecnico": "string",
+          "o_que_e": "Nome do papel.",
+          "apis": [
+            "padrao"
+          ],
+          "propriedades_api": {
+            "estado": "verificado",
+            "create": true,
+            "defaulted_on_create": false,
+            "filter": true,
+            "group": true,
+            "nillable": false,
+            "restricted_picklist": false,
+            "sort": true,
+            "update": true,
+            "id_lookup": true,
+            "evidencias": [
+              {
+                "fonte": "src:objref-userrole"
+              },
+              {
+                "fonte": "src:fieldref-userrole"
+              }
+            ]
+          },
+          "somente_leitura": false,
+          "origem": {
+            "estado": "verificado",
+            "valor": "padrao_plataforma",
+            "nota": "Campo padrão do objeto documentado.",
+            "evidencias": [
+              {
+                "fonte": "src:objref-userrole"
+              },
+              {
+                "fonte": "src:fieldref-userrole"
+              }
+            ]
+          },
+          "obrigatoriedade": {
+            "valor": "sim",
+            "estado": "verificado",
+            "evidencias": [
+              {
+                "fonte": "src:objref-userrole"
+              },
+              {
+                "fonte": "src:fieldref-userrole"
+              }
+            ]
+          },
+          "default": {
+            "forma": "nao_declarado_na_fonte",
+            "estado": "desconhecido"
+          },
+          "dominio": {
+            "natureza": "texto_livre",
+            "estado": "verificado",
+            "evidencias": [
+              {
+                "fonte": "src:objref-userrole"
+              },
+              {
+                "fonte": "src:fieldref-userrole"
+              }
+            ]
+          },
+          "disponibilidade": {
+            "desde_versao": null,
+            "ate_versao": null,
+            "estado": "desconhecido"
+          },
+          "explicacao": "explicada",
+          "estado": "verificado",
+          "evidencias": [
+            {
+              "fonte": "src:objref-userrole"
+            },
+            {
+              "fonte": "src:fieldref-userrole"
+            }
+          ],
+          "notas": [
+            "Nome de API conferido na Field Reference."
+          ]
+        },
+        {
+          "id": "obj:UserRole.OpportunityAccessForAccountOwner",
+          "nome": "OpportunityAccessForAccountOwner",
+          "tipo_tecnico": "picklist",
+          "o_que_e": "Acesso do dono da conta às oportunidades ligadas a ela; não pode ficar abaixo do padrão da org.",
+          "apis": [
+            "padrao"
+          ],
+          "propriedades_api": {
+            "estado": "verificado",
+            "create": true,
+            "defaulted_on_create": false,
+            "filter": true,
+            "group": true,
+            "nillable": false,
+            "restricted_picklist": true,
+            "sort": true,
+            "update": true,
+            "id_lookup": false,
+            "evidencias": [
+              {
+                "fonte": "src:objref-userrole"
+              },
+              {
+                "fonte": "src:fieldref-userrole"
+              }
+            ]
+          },
+          "somente_leitura": false,
+          "origem": {
+            "estado": "verificado",
+            "valor": "padrao_plataforma",
+            "nota": "Campo padrão do objeto documentado.",
+            "evidencias": [
+              {
+                "fonte": "src:objref-userrole"
+              },
+              {
+                "fonte": "src:fieldref-userrole"
+              }
+            ]
+          },
+          "obrigatoriedade": {
+            "valor": "sim",
+            "estado": "verificado",
+            "evidencias": [
+              {
+                "fonte": "src:objref-userrole"
+              },
+              {
+                "fonte": "src:fieldref-userrole"
+              }
+            ]
+          },
+          "default": {
+            "forma": "nao_declarado_na_fonte",
+            "estado": "desconhecido"
+          },
+          "dominio": {
+            "natureza": "lista_dinamica",
+            "estado": "desconhecido",
+            "contexto": "Valores não extraídos; podem depender de org, idioma ou recurso."
+          },
+          "disponibilidade": {
+            "desde_versao": null,
+            "ate_versao": null,
+            "estado": "desconhecido"
+          },
+          "explicacao": "explicada",
+          "estado": "verificado",
+          "evidencias": [
+            {
+              "fonte": "src:objref-userrole"
+            },
+            {
+              "fonte": "src:fieldref-userrole"
+            }
+          ],
+          "notas": [
+            "Nome de API conferido na Field Reference.",
+            "A página não lista os valores."
+          ]
+        },
+        {
+          "id": "obj:UserRole.ParentRoleId",
+          "nome": "ParentRoleId",
+          "tipo_tecnico": "reference",
+          "o_que_e": "O papel imediatamente acima.",
+          "apis": [
+            "padrao"
+          ],
+          "propriedades_api": {
+            "estado": "verificado",
+            "create": true,
+            "defaulted_on_create": false,
+            "filter": true,
+            "group": true,
+            "nillable": true,
+            "restricted_picklist": false,
+            "sort": true,
+            "update": true,
+            "id_lookup": false,
+            "evidencias": [
+              {
+                "fonte": "src:objref-userrole"
+              },
+              {
+                "fonte": "src:fieldref-userrole"
+              }
+            ]
+          },
+          "somente_leitura": false,
+          "origem": {
+            "estado": "verificado",
+            "valor": "padrao_plataforma",
+            "nota": "Campo padrão do objeto documentado.",
+            "evidencias": [
+              {
+                "fonte": "src:objref-userrole"
+              },
+              {
+                "fonte": "src:fieldref-userrole"
+              }
+            ]
+          },
+          "obrigatoriedade": {
+            "valor": "desconhecida",
+            "estado": "desconhecido"
+          },
+          "default": {
+            "forma": "nao_declarado_na_fonte",
+            "estado": "desconhecido"
+          },
+          "dominio": {
+            "natureza": "referencia",
+            "estado": "verificado",
+            "evidencias": [
+              {
+                "fonte": "src:objref-userrole"
+              },
+              {
+                "fonte": "src:fieldref-userrole"
+              }
+            ],
+            "contexto": "Id de registro do(s) objeto(s) referenciado(s)."
+          },
+          "disponibilidade": {
+            "desde_versao": null,
+            "ate_versao": null,
+            "estado": "desconhecido"
+          },
+          "explicacao": "explicada",
+          "estado": "verificado",
+          "evidencias": [
+            {
+              "fonte": "src:objref-userrole"
+            },
+            {
+              "fonte": "src:fieldref-userrole"
+            }
+          ],
+          "referencia": {
+            "alvos": [
+              "obj:UserRole"
+            ],
+            "nome_relacionamento": "ParentRole"
+          },
+          "notas": [
+            "Nome de API conferido na Field Reference."
+          ]
+        },
+        {
+          "id": "obj:UserRole.PortalAccountId",
+          "nome": "PortalAccountId",
+          "tipo_tecnico": "reference",
+          "o_que_e": "Conta de portal ligada ao papel; somente leitura.",
+          "apis": [
+            "padrao"
+          ],
+          "propriedades_api": {
+            "estado": "verificado",
+            "create": true,
+            "defaulted_on_create": false,
+            "filter": true,
+            "group": true,
+            "nillable": true,
+            "restricted_picklist": false,
+            "sort": true,
+            "update": false,
+            "id_lookup": false,
+            "evidencias": [
+              {
+                "fonte": "src:objref-userrole"
+              },
+              {
+                "fonte": "src:fieldref-userrole"
+              }
+            ]
+          },
+          "somente_leitura": false,
+          "origem": {
+            "estado": "verificado",
+            "valor": "padrao_plataforma",
+            "nota": "Campo padrão do objeto documentado.",
+            "evidencias": [
+              {
+                "fonte": "src:objref-userrole"
+              },
+              {
+                "fonte": "src:fieldref-userrole"
+              }
+            ]
+          },
+          "obrigatoriedade": {
+            "valor": "desconhecida",
+            "estado": "desconhecido"
+          },
+          "default": {
+            "forma": "nao_declarado_na_fonte",
+            "estado": "desconhecido"
+          },
+          "dominio": {
+            "natureza": "referencia",
+            "estado": "verificado",
+            "evidencias": [
+              {
+                "fonte": "src:objref-userrole"
+              },
+              {
+                "fonte": "src:fieldref-userrole"
+              }
+            ],
+            "contexto": "Id de registro do(s) objeto(s) referenciado(s)."
+          },
+          "disponibilidade": {
+            "desde_versao": "8.0",
+            "ate_versao": null,
+            "estado": "verificado"
+          },
+          "explicacao": "explicada",
+          "estado": "verificado",
+          "evidencias": [
+            {
+              "fonte": "src:objref-userrole"
+            },
+            {
+              "fonte": "src:fieldref-userrole"
+            }
+          ],
+          "referencia": {
+            "alvos": [
+              "obj:Account"
+            ],
+            "nome_relacionamento": "PortalAccount"
+          },
+          "notas": [
+            "Nome de API conferido na Field Reference."
+          ]
+        },
+        {
+          "id": "obj:UserRole.PortalAccountOwnerId",
+          "nome": "PortalAccountOwnerId",
+          "tipo_tecnico": "reference",
+          "o_que_e": "Dono da conta de portal; somente leitura.",
+          "apis": [
+            "padrao"
+          ],
+          "propriedades_api": {
+            "estado": "verificado",
+            "create": false,
+            "defaulted_on_create": false,
+            "filter": true,
+            "group": true,
+            "nillable": true,
+            "restricted_picklist": false,
+            "sort": true,
+            "update": false,
+            "id_lookup": false,
+            "evidencias": [
+              {
+                "fonte": "src:objref-userrole"
+              },
+              {
+                "fonte": "src:fieldref-userrole"
+              }
+            ]
+          },
+          "somente_leitura": true,
+          "origem": {
+            "estado": "verificado",
+            "valor": "padrao_plataforma",
+            "nota": "Campo padrão do objeto documentado.",
+            "evidencias": [
+              {
+                "fonte": "src:objref-userrole"
+              },
+              {
+                "fonte": "src:fieldref-userrole"
+              }
+            ]
+          },
+          "obrigatoriedade": {
+            "valor": "desconhecida",
+            "estado": "desconhecido"
+          },
+          "default": {
+            "forma": "nao_declarado_na_fonte",
+            "estado": "desconhecido"
+          },
+          "dominio": {
+            "natureza": "referencia",
+            "estado": "verificado",
+            "evidencias": [
+              {
+                "fonte": "src:objref-userrole"
+              },
+              {
+                "fonte": "src:fieldref-userrole"
+              }
+            ],
+            "contexto": "Id de registro do(s) objeto(s) referenciado(s)."
+          },
+          "disponibilidade": {
+            "desde_versao": "12.0",
+            "ate_versao": null,
+            "estado": "verificado"
+          },
+          "explicacao": "explicada",
+          "estado": "verificado",
+          "evidencias": [
+            {
+              "fonte": "src:objref-userrole"
+            },
+            {
+              "fonte": "src:fieldref-userrole"
+            }
+          ],
+          "referencia": {
+            "alvos": [
+              "obj:User"
+            ],
+            "nome_relacionamento": "PortalAccountOwner"
+          },
+          "notas": [
+            "Nome de API conferido na Field Reference."
+          ]
+        },
+        {
+          "id": "obj:UserRole.PortalRole",
+          "nome": "PortalRole",
+          "tipo_tecnico": "picklist",
+          "o_que_e": "Nível do papel de portal.",
+          "apis": [
+            "padrao"
+          ],
+          "propriedades_api": {
+            "estado": "verificado",
+            "create": false,
+            "defaulted_on_create": false,
+            "filter": true,
+            "group": true,
+            "nillable": true,
+            "restricted_picklist": true,
+            "sort": true,
+            "update": false,
+            "id_lookup": false,
+            "evidencias": [
+              {
+                "fonte": "src:objref-userrole"
+              },
+              {
+                "fonte": "src:fieldref-userrole"
+              }
+            ]
+          },
+          "somente_leitura": true,
+          "origem": {
+            "estado": "verificado",
+            "valor": "padrao_plataforma",
+            "nota": "Campo padrão do objeto documentado.",
+            "evidencias": [
+              {
+                "fonte": "src:objref-userrole"
+              },
+              {
+                "fonte": "src:fieldref-userrole"
+              }
+            ]
+          },
+          "obrigatoriedade": {
+            "valor": "desconhecida",
+            "estado": "desconhecido"
+          },
+          "default": {
+            "forma": "nao_declarado_na_fonte",
+            "estado": "desconhecido"
+          },
+          "dominio": {
+            "natureza": "enum_fechado",
+            "valores": [
+              {
+                "valor": "Executive"
+              },
+              {
+                "valor": "Manager"
+              },
+              {
+                "valor": "User"
+              },
+              {
+                "valor": "PersonAccount"
+              }
+            ],
+            "lista_completa": "desconhecido",
+            "estado": "verificado",
+            "evidencias": [
+              {
+                "fonte": "src:objref-userrole"
+              },
+              {
+                "fonte": "src:fieldref-userrole"
+              }
+            ],
+            "contexto": "Valores conforme a página; listas de picklist podem variar por org, idioma ou recurso habilitado."
+          },
+          "disponibilidade": {
+            "desde_versao": "12.0",
+            "ate_versao": null,
+            "estado": "verificado"
+          },
+          "explicacao": "explicada",
+          "estado": "verificado",
+          "evidencias": [
+            {
+              "fonte": "src:objref-userrole"
+            },
+            {
+              "fonte": "src:fieldref-userrole"
+            }
+          ],
+          "notas": [
+            "Nome de API conferido na Field Reference."
+          ]
+        },
+        {
+          "id": "obj:UserRole.PortalType",
+          "nome": "PortalType",
+          "tipo_tecnico": "picklist",
+          "o_que_e": "Tipo de portal do papel: nenhum, de cliente ou de parceiro; substitui IsPartner.",
+          "apis": [
+            "padrao"
+          ],
+          "propriedades_api": {
+            "estado": "verificado",
+            "create": true,
+            "defaulted_on_create": false,
+            "filter": true,
+            "group": true,
+            "nillable": true,
+            "restricted_picklist": true,
+            "sort": true,
+            "update": false,
+            "id_lookup": false,
+            "evidencias": [
+              {
+                "fonte": "src:objref-userrole"
+              },
+              {
+                "fonte": "src:fieldref-userrole"
+              }
+            ]
+          },
+          "somente_leitura": false,
+          "origem": {
+            "estado": "verificado",
+            "valor": "padrao_plataforma",
+            "nota": "Campo padrão do objeto documentado.",
+            "evidencias": [
+              {
+                "fonte": "src:objref-userrole"
+              },
+              {
+                "fonte": "src:fieldref-userrole"
+              }
+            ]
+          },
+          "obrigatoriedade": {
+            "valor": "desconhecida",
+            "estado": "desconhecido"
+          },
+          "default": {
+            "forma": "nao_declarado_na_fonte",
+            "estado": "desconhecido"
+          },
+          "dominio": {
+            "natureza": "lista_dinamica",
+            "estado": "desconhecido",
+            "contexto": "Valores não extraídos; podem depender de org, idioma ou recurso."
+          },
+          "disponibilidade": {
+            "desde_versao": "9.0",
+            "ate_versao": null,
+            "estado": "verificado"
+          },
+          "explicacao": "explicada",
+          "estado": "verificado",
+          "evidencias": [
+            {
+              "fonte": "src:objref-userrole"
+            },
+            {
+              "fonte": "src:fieldref-userrole"
+            }
+          ],
+          "notas": [
+            "Nome de API conferido na Field Reference.",
+            "A página descreve os três casos, mas não dá os valores de API."
+          ]
+        },
+        {
+          "id": "obj:UserRole.RollupDescription",
+          "nome": "RollupDescription",
+          "tipo_tecnico": "string",
+          "o_que_e": "Descrição do papel; rótulo Description.",
+          "apis": [
+            "padrao"
+          ],
+          "propriedades_api": {
+            "estado": "verificado",
+            "create": true,
+            "defaulted_on_create": false,
+            "filter": true,
+            "group": true,
+            "nillable": true,
+            "restricted_picklist": false,
+            "sort": true,
+            "update": true,
+            "id_lookup": false,
+            "evidencias": [
+              {
+                "fonte": "src:objref-userrole"
+              },
+              {
+                "fonte": "src:fieldref-userrole"
+              }
+            ]
+          },
+          "somente_leitura": false,
+          "origem": {
+            "estado": "verificado",
+            "valor": "padrao_plataforma",
+            "nota": "Campo padrão do objeto documentado.",
+            "evidencias": [
+              {
+                "fonte": "src:objref-userrole"
+              },
+              {
+                "fonte": "src:fieldref-userrole"
+              }
+            ]
+          },
+          "obrigatoriedade": {
+            "valor": "desconhecida",
+            "estado": "desconhecido"
+          },
+          "default": {
+            "forma": "nao_declarado_na_fonte",
+            "estado": "desconhecido"
+          },
+          "dominio": {
+            "natureza": "texto_livre",
+            "estado": "verificado",
+            "evidencias": [
+              {
+                "fonte": "src:objref-userrole"
+              },
+              {
+                "fonte": "src:fieldref-userrole"
+              }
+            ]
+          },
+          "disponibilidade": {
+            "desde_versao": null,
+            "ate_versao": null,
+            "estado": "desconhecido"
+          },
+          "explicacao": "explicada",
+          "estado": "verificado",
+          "evidencias": [
+            {
+              "fonte": "src:objref-userrole"
+            },
+            {
+              "fonte": "src:fieldref-userrole"
+            }
+          ],
+          "notas": [
+            "Nome de API conferido na Field Reference."
+          ]
+        }
+      ],
+      "consultas": [
+        {
+          "api": "padrao",
+          "soql": "SELECT Name, DeveloperName, ParentRoleId FROM UserRole",
+          "contexto": "API padrão. Lista os papéis e o papel acima de cada um.",
+          "validacao": "documental"
+        }
+      ],
+      "apex": {
+        "consulta_soql_direta": {
+          "estado": "verificado",
+          "valor": true,
+          "nota": "Objeto da API padrão: consultável por SOQL em Apex, sujeito a permissões.",
+          "evidencias": [
+            {
+              "fonte": "src:objref-userrole"
+            }
+          ]
+        },
+        "nota": "Exemplo Apex não fornecido nesta fase."
+      },
+      "juncao": false,
+      "setup": {
+        "estado": "nao_aplicavel",
+        "nota": "Objeto consultável via API; não é tela do Setup."
+      },
+      "cobertura": {
+        "estrutural": {
+          "estado": "completa",
+          "esperado": 13,
+          "presente": 13,
+          "nota": "13 campos de negócio da página da referência de objetos; Id e campos de sistema (LastModifiedById, LastModifiedDate, SystemModstamp) não foram cadastrados."
+        },
+        "explicativa": {
+          "estado": "completa",
+          "esperado": 13,
+          "presente": 13
+        },
+        "mapeamento": {
+          "estado": "parcial",
+          "nota": "Ver relacionamentos registrados."
+        }
+      },
+      "alertas": [
+        "Nenhum campo de um papel de portal pode ser alterado.",
+        "A página nova da referência de objetos não mostra os títulos dos campos; os nomes de API vêm da Field Reference, casados pela ordem alfabética e pela descrição."
+      ],
+      "estado": "verificado",
+      "evidencias": [
+        {
+          "fonte": "src:objref-userrole"
+        }
+      ]
     }
   ]
 }

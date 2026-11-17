@@ -1,0 +1,553 @@
+{
+  "id": "mdt:Role",
+  "nome": "Role",
+  "o_que_e": "Um papel (role) da hierarquia de papéis: quem fica acima de quem e que acesso o papel dá aos casos, contatos e oportunidades das contas dos usuários dele.",
+  "finalidade": "Versionar e implantar a hierarquia de papéis da org.",
+  "estende": "RoleOrTerritory",
+  "arquivos": {
+    "source_format": {
+      "estado": "verificado",
+      "valor": {
+        "pasta": "roles/",
+        "arquivo": "<Nome>.role-meta.xml"
+      },
+      "nota": "Pasta e sufixo do registro do Salesforce CLI; sufixo '-meta.xml' segue a convenção do source format.",
+      "evidencias": [
+        {
+          "fonte": "src:sdr-registry",
+          "nota": "types.role"
+        }
+      ]
+    },
+    "metadata_api_format": {
+      "estado": "verificado",
+      "valor": {
+        "pasta": "roles/",
+        "arquivo": "<Nome>.role"
+      },
+      "evidencias": [
+        {
+          "fonte": "src:sdr-registry",
+          "nota": "types.role"
+        }
+      ]
+    },
+    "curinga_package_xml": {
+      "estado": "verificado",
+      "valor": true,
+      "evidencias": [
+        {
+          "fonte": "src:mdapi-role"
+        }
+      ]
+    }
+  },
+  "disponibilidade": {
+    "desde_versao": "24.0",
+    "ate_versao": null,
+    "estado": "verificado"
+  },
+  "suporte_cli": {
+    "estado": "verificado",
+    "valor": {
+      "status": "suportado",
+      "nota_fonte": null
+    },
+    "nota": "Suporte do Salesforce CLI (source-deploy-retrieve), não do Metadata API em geral.",
+    "evidencias": [
+      {
+        "fonte": "src:sdr-metadata-support"
+      }
+    ]
+  },
+  "setup": {
+    "estado": "desconhecido",
+    "nota": "Caminho no Setup não validado nesta sessão."
+  },
+  "propriedades": [
+    {
+      "id": "mdt:Role.caseAccessLevel",
+      "nome": "caseAccessLevel",
+      "tipo_tecnico": "string",
+      "o_que_e": "Acesso aos casos de outros usuários ligados às contas que o usuário possui.",
+      "origem": {
+        "estado": "verificado",
+        "valor": "padrao_plataforma",
+        "nota": "Propriedade definida pelo schema da Metadata API.",
+        "evidencias": [
+          {
+            "fonte": "src:mdapi-role"
+          }
+        ]
+      },
+      "obrigatoriedade": {
+        "valor": "nao",
+        "estado": "desconhecido",
+        "condicao": "A documentação 68.0 não marca o campo como obrigatório; ausência de marcação não comprova opcionalidade (confirmar no WSDL)."
+      },
+      "default": {
+        "forma": "nao_declarado_na_fonte",
+        "estado": "desconhecido"
+      },
+      "dominio": {
+        "natureza": "enum_fechado",
+        "valores": [
+          {
+            "valor": "Read"
+          },
+          {
+            "valor": "Edit"
+          },
+          {
+            "valor": "None"
+          }
+        ],
+        "lista_completa": "sim",
+        "estado": "verificado",
+        "evidencias": [
+          {
+            "fonte": "src:mdapi-role"
+          }
+        ]
+      },
+      "disponibilidade": {
+        "desde_versao": null,
+        "ate_versao": null,
+        "estado": "desconhecido"
+      },
+      "explicacao": "explicada",
+      "estado": "verificado",
+      "evidencias": [
+        {
+          "fonte": "src:mdapi-role"
+        }
+      ],
+      "herdada_de": "RoleOrTerritory",
+      "notas": [
+        "Fica oculto quando o compartilhamento de casos é Public Read/Write; sem valor, vale o padrão da página de Setup."
+      ]
+    },
+    {
+      "id": "mdt:Role.contactAccessLevel",
+      "nome": "contactAccessLevel",
+      "tipo_tecnico": "string",
+      "o_que_e": "Acesso aos contatos de outros usuários ligados às contas que o usuário possui.",
+      "origem": {
+        "estado": "verificado",
+        "valor": "padrao_plataforma",
+        "nota": "Propriedade definida pelo schema da Metadata API.",
+        "evidencias": [
+          {
+            "fonte": "src:mdapi-role"
+          }
+        ]
+      },
+      "obrigatoriedade": {
+        "valor": "nao",
+        "estado": "desconhecido",
+        "condicao": "A documentação 68.0 não marca o campo como obrigatório; ausência de marcação não comprova opcionalidade (confirmar no WSDL)."
+      },
+      "default": {
+        "forma": "nao_declarado_na_fonte",
+        "estado": "desconhecido"
+      },
+      "dominio": {
+        "natureza": "enum_fechado",
+        "valores": [
+          {
+            "valor": "Read"
+          },
+          {
+            "valor": "Edit"
+          },
+          {
+            "valor": "None"
+          }
+        ],
+        "lista_completa": "sim",
+        "estado": "verificado",
+        "evidencias": [
+          {
+            "fonte": "src:mdapi-role"
+          }
+        ]
+      },
+      "disponibilidade": {
+        "desde_versao": null,
+        "ate_versao": null,
+        "estado": "desconhecido"
+      },
+      "explicacao": "explicada",
+      "estado": "verificado",
+      "evidencias": [
+        {
+          "fonte": "src:mdapi-role"
+        }
+      ],
+      "herdada_de": "RoleOrTerritory",
+      "notas": [
+        "Fica oculto quando o compartilhamento de contatos é Public Read/Write ou Controlled by Parent."
+      ]
+    },
+    {
+      "id": "mdt:Role.description",
+      "nome": "description",
+      "tipo_tecnico": "string",
+      "o_que_e": "Descrição do papel.",
+      "origem": {
+        "estado": "verificado",
+        "valor": "padrao_plataforma",
+        "nota": "Propriedade definida pelo schema da Metadata API.",
+        "evidencias": [
+          {
+            "fonte": "src:mdapi-role"
+          }
+        ]
+      },
+      "obrigatoriedade": {
+        "valor": "nao",
+        "estado": "desconhecido",
+        "condicao": "A documentação 68.0 não marca o campo como obrigatório; ausência de marcação não comprova opcionalidade (confirmar no WSDL)."
+      },
+      "default": {
+        "forma": "nao_declarado_na_fonte",
+        "estado": "desconhecido"
+      },
+      "dominio": {
+        "natureza": "texto_livre",
+        "estado": "verificado",
+        "evidencias": [
+          {
+            "fonte": "src:mdapi-role"
+          }
+        ],
+        "contexto": "A fonte tipa como string sem lista de valores; não inventar valores."
+      },
+      "disponibilidade": {
+        "desde_versao": null,
+        "ate_versao": null,
+        "estado": "desconhecido"
+      },
+      "explicacao": "explicada",
+      "estado": "verificado",
+      "evidencias": [
+        {
+          "fonte": "src:mdapi-role"
+        }
+      ],
+      "herdada_de": "RoleOrTerritory"
+    },
+    {
+      "id": "mdt:Role.fullName",
+      "nome": "fullName",
+      "tipo_tecnico": "string",
+      "o_que_e": "Nome de API; aparece como Role Name na interface. Só letras, dígitos e sublinhado, começando por letra.",
+      "origem": {
+        "estado": "verificado",
+        "valor": "padrao_plataforma",
+        "nota": "Propriedade definida pelo schema da Metadata API.",
+        "evidencias": [
+          {
+            "fonte": "src:mdapi-role"
+          }
+        ]
+      },
+      "obrigatoriedade": {
+        "valor": "nao",
+        "estado": "desconhecido",
+        "condicao": "A documentação 68.0 não marca o campo como obrigatório; ausência de marcação não comprova opcionalidade (confirmar no WSDL)."
+      },
+      "default": {
+        "forma": "nao_declarado_na_fonte",
+        "estado": "desconhecido"
+      },
+      "dominio": {
+        "natureza": "texto_livre",
+        "estado": "verificado",
+        "evidencias": [
+          {
+            "fonte": "src:mdapi-role"
+          }
+        ],
+        "contexto": "A fonte tipa como string sem lista de valores; não inventar valores."
+      },
+      "disponibilidade": {
+        "desde_versao": null,
+        "ate_versao": null,
+        "estado": "desconhecido"
+      },
+      "explicacao": "explicada",
+      "estado": "verificado",
+      "evidencias": [
+        {
+          "fonte": "src:mdapi-role"
+        }
+      ],
+      "herdada_de": "Metadata"
+    },
+    {
+      "id": "mdt:Role.mayForecastManagerShare",
+      "nome": "mayForecastManagerShare",
+      "tipo_tecnico": "boolean",
+      "o_que_e": "Permite ao gerente de previsão compartilhar a própria previsão manualmente.",
+      "origem": {
+        "estado": "verificado",
+        "valor": "padrao_plataforma",
+        "nota": "Propriedade definida pelo schema da Metadata API.",
+        "evidencias": [
+          {
+            "fonte": "src:mdapi-role"
+          }
+        ]
+      },
+      "obrigatoriedade": {
+        "valor": "nao",
+        "estado": "desconhecido",
+        "condicao": "A documentação 68.0 não marca o campo como obrigatório; ausência de marcação não comprova opcionalidade (confirmar no WSDL)."
+      },
+      "default": {
+        "forma": "nao_declarado_na_fonte",
+        "estado": "desconhecido"
+      },
+      "dominio": {
+        "natureza": "booleano",
+        "valores": [
+          {
+            "valor": "true"
+          },
+          {
+            "valor": "false"
+          }
+        ],
+        "lista_completa": "sim",
+        "estado": "verificado",
+        "evidencias": [
+          {
+            "fonte": "src:mdapi-role"
+          }
+        ]
+      },
+      "disponibilidade": {
+        "desde_versao": null,
+        "ate_versao": null,
+        "estado": "desconhecido"
+      },
+      "explicacao": "explicada",
+      "estado": "verificado",
+      "evidencias": [
+        {
+          "fonte": "src:mdapi-role"
+        }
+      ],
+      "herdada_de": "RoleOrTerritory"
+    },
+    {
+      "id": "mdt:Role.name",
+      "nome": "name",
+      "tipo_tecnico": "string",
+      "o_que_e": "Nome do papel.",
+      "origem": {
+        "estado": "verificado",
+        "valor": "padrao_plataforma",
+        "nota": "Propriedade definida pelo schema da Metadata API.",
+        "evidencias": [
+          {
+            "fonte": "src:mdapi-role"
+          }
+        ]
+      },
+      "obrigatoriedade": {
+        "valor": "sim",
+        "estado": "verificado",
+        "evidencias": [
+          {
+            "fonte": "src:mdapi-role"
+          }
+        ]
+      },
+      "default": {
+        "forma": "nao_declarado_na_fonte",
+        "estado": "desconhecido"
+      },
+      "dominio": {
+        "natureza": "texto_livre",
+        "estado": "verificado",
+        "evidencias": [
+          {
+            "fonte": "src:mdapi-role"
+          }
+        ],
+        "contexto": "A fonte tipa como string sem lista de valores; não inventar valores."
+      },
+      "disponibilidade": {
+        "desde_versao": null,
+        "ate_versao": null,
+        "estado": "desconhecido"
+      },
+      "explicacao": "explicada",
+      "estado": "verificado",
+      "evidencias": [
+        {
+          "fonte": "src:mdapi-role"
+        }
+      ],
+      "herdada_de": "RoleOrTerritory"
+    },
+    {
+      "id": "mdt:Role.opportunityAccessLevel",
+      "nome": "opportunityAccessLevel",
+      "tipo_tecnico": "string",
+      "o_que_e": "Acesso às oportunidades de outros usuários ligadas às contas que o usuário possui.",
+      "origem": {
+        "estado": "verificado",
+        "valor": "padrao_plataforma",
+        "nota": "Propriedade definida pelo schema da Metadata API.",
+        "evidencias": [
+          {
+            "fonte": "src:mdapi-role"
+          }
+        ]
+      },
+      "obrigatoriedade": {
+        "valor": "nao",
+        "estado": "desconhecido",
+        "condicao": "A documentação 68.0 não marca o campo como obrigatório; ausência de marcação não comprova opcionalidade (confirmar no WSDL)."
+      },
+      "default": {
+        "forma": "nao_declarado_na_fonte",
+        "estado": "desconhecido"
+      },
+      "dominio": {
+        "natureza": "enum_fechado",
+        "valores": [
+          {
+            "valor": "Read"
+          },
+          {
+            "valor": "Edit"
+          },
+          {
+            "valor": "None"
+          }
+        ],
+        "lista_completa": "sim",
+        "estado": "verificado",
+        "evidencias": [
+          {
+            "fonte": "src:mdapi-role"
+          }
+        ]
+      },
+      "disponibilidade": {
+        "desde_versao": null,
+        "ate_versao": null,
+        "estado": "desconhecido"
+      },
+      "explicacao": "explicada",
+      "estado": "verificado",
+      "evidencias": [
+        {
+          "fonte": "src:mdapi-role"
+        }
+      ],
+      "herdada_de": "RoleOrTerritory",
+      "notas": [
+        "Fica oculto quando o compartilhamento de oportunidades é Public Read/Write."
+      ]
+    },
+    {
+      "id": "mdt:Role.parentRole",
+      "nome": "parentRole",
+      "tipo_tecnico": "string",
+      "o_que_e": "O papel imediatamente acima na hierarquia.",
+      "origem": {
+        "estado": "verificado",
+        "valor": "padrao_plataforma",
+        "nota": "Propriedade definida pelo schema da Metadata API.",
+        "evidencias": [
+          {
+            "fonte": "src:mdapi-role"
+          }
+        ]
+      },
+      "obrigatoriedade": {
+        "valor": "nao",
+        "estado": "desconhecido",
+        "condicao": "A documentação 68.0 não marca o campo como obrigatório; ausência de marcação não comprova opcionalidade (confirmar no WSDL)."
+      },
+      "default": {
+        "forma": "nao_declarado_na_fonte",
+        "estado": "desconhecido"
+      },
+      "dominio": {
+        "natureza": "texto_livre",
+        "estado": "verificado",
+        "evidencias": [
+          {
+            "fonte": "src:mdapi-role"
+          }
+        ],
+        "contexto": "A fonte tipa como string sem lista de valores; não inventar valores."
+      },
+      "disponibilidade": {
+        "desde_versao": null,
+        "ate_versao": null,
+        "estado": "desconhecido"
+      },
+      "explicacao": "explicada",
+      "estado": "verificado",
+      "evidencias": [
+        {
+          "fonte": "src:mdapi-role"
+        }
+      ],
+      "referencia": {
+        "alvos": [
+          "mdt:Role"
+        ],
+        "nota": "Referência pelo nome do componente no XML."
+      }
+    }
+  ],
+  "estruturas": [],
+  "cobertura": {
+    "estrutural": {
+      "estado": "completa",
+      "esperado": 8,
+      "presente": 8,
+      "nota": "Universo esperado = campos de Role (2) mais os herdados de RoleOrTerritory (6), nas páginas do guia versionado 264.0, lidas em 2026-11-17."
+    },
+    "explicativa": {
+      "estado": "completa",
+      "esperado": 8,
+      "presente": 8
+    },
+    "mapeamento": {
+      "estado": "parcial",
+      "nota": "Correspondências registradas apenas onde há evidência; demais pendentes."
+    }
+  },
+  "recomendacoes": [],
+  "alertas": [
+    "Os campos de acesso só valem para registros ligados a contas que o usuário possui; o restante segue os padrões da org e o compartilhamento.",
+    "RoleOrTerritory não pode ser criado diretamente; existe só como base de Role e de Territory."
+  ],
+  "divergencias_documentais": [],
+  "estado": "verificado",
+  "evidencias": [
+    {
+      "fonte": "src:mdapi-role"
+    },
+    {
+      "fonte": "src:sdr-registry"
+    },
+    {
+      "fonte": "src:sdr-metadata-support"
+    }
+  ],
+  "exemplo_xml": {
+    "xml": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<Role xmlns=\"http://soap.sforce.com/2006/04/metadata\">\n    <caseAccessLevel>Edit</caseAccessLevel>\n    <contactAccessLevel>Edit</contactAccessLevel>\n    <description>[descrição]</description>\n    <mayForecastManagerShare>false</mayForecastManagerShare>\n    <name>[Nome do papel]</name>\n    <opportunityAccessLevel>Read</opportunityAccessLevel>\n    <parentRole>[Nome_Do_Papel_Acima]</parentRole>\n</Role>",
+    "natureza": "didatico_projeto",
+    "nota": "Exemplo escrito pelo projeto apenas com elementos documentados; sem dados reais."
+  }
+}

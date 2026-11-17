@@ -322,7 +322,7 @@ TEMAS = {
     ),
     "sub:outras-areas": (
         "Agrupamento provisório deste tutorial para tipos da lista oficial de metadata types que ainda não têm tema próprio; não é uma "
-        "área oficial da Salesforce.",
+        "área oficial da Salesforce. Por desenho, não tem funcionalidades: reúne tipos ainda não classificados, não recursos.",
         [ev("src:sdr-metadata-support", "Mais ampla que o tema: lista oficial de metadata types suportados pelo Salesforce CLI, de onde vêm os "
             "itens deste agrupamento.", "METADATA_SUPPORT.md")],
     ),

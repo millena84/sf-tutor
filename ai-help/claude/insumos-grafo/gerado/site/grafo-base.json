@@ -713,6 +713,12 @@
       "tipo": "representacao_xml"
     },
     {
+      "destino": "mdt:IndustriesSettings",
+      "origem": "func:configuracoes-de-nuvens-de-setor",
+      "papel": "As opções de todas as nuvens de setor.",
+      "tipo": "representacao_xml"
+    },
+    {
       "destino": "mdt:ConnectedApp",
       "origem": "func:connected-apps",
       "papel": "Definição do app.",
@@ -1259,6 +1265,24 @@
       "tipo": "representacao_objeto_api"
     },
     {
+      "destino": "mdt:Role",
+      "origem": "func:hierarquia-de-papeis",
+      "papel": "Cada papel e o papel acima dele.",
+      "tipo": "representacao_xml"
+    },
+    {
+      "destino": "obj:User",
+      "origem": "func:hierarquia-de-papeis",
+      "papel": "O papel de cada usuário (UserRoleId).",
+      "tipo": "representacao_objeto_api"
+    },
+    {
+      "destino": "obj:UserRole",
+      "origem": "func:hierarquia-de-papeis",
+      "papel": "O papel como registro.",
+      "tipo": "representacao_objeto_api"
+    },
+    {
       "destino": "mdt:BusinessHoursSettings",
       "origem": "func:horario-comercial",
       "papel": "Horários comerciais e feriados implantáveis.",
@@ -1298,6 +1322,30 @@
       "destino": "obj:LeadStatus",
       "origem": "func:leads",
       "papel": "Valores do picklist Status e quais indicam conversão.",
+      "tipo": "representacao_objeto_api"
+    },
+    {
+      "destino": "mdt:PermissionSet",
+      "origem": "func:licencas-de-usuario",
+      "papel": "A licença associada ao permission set (license).",
+      "tipo": "representacao_xml"
+    },
+    {
+      "destino": "mdt:Profile",
+      "origem": "func:licencas-de-usuario",
+      "papel": "A licença do perfil (userLicense).",
+      "tipo": "representacao_xml"
+    },
+    {
+      "destino": "obj:PermissionSet",
+      "origem": "func:licencas-de-usuario",
+      "papel": "A licença do permission set (LicenseId).",
+      "tipo": "representacao_objeto_api"
+    },
+    {
+      "destino": "obj:Profile",
+      "origem": "func:licencas-de-usuario",
+      "papel": "A licença do perfil (UserLicenseId).",
       "tipo": "representacao_objeto_api"
     },
     {
@@ -1841,6 +1889,36 @@
       "tipo": "representacao_objeto_api"
     },
     {
+      "destino": "mdt:SharingCriteriaRule",
+      "origem": "func:regras-de-compartilhamento",
+      "papel": "Regra por critério.",
+      "tipo": "representacao_xml"
+    },
+    {
+      "destino": "mdt:SharingGuestRule",
+      "origem": "func:regras-de-compartilhamento",
+      "papel": "Regra de guest user.",
+      "tipo": "representacao_xml"
+    },
+    {
+      "destino": "mdt:SharingOwnerRule",
+      "origem": "func:regras-de-compartilhamento",
+      "papel": "Regra por dono.",
+      "tipo": "representacao_xml"
+    },
+    {
+      "destino": "mdt:SharingRules",
+      "origem": "func:regras-de-compartilhamento",
+      "papel": "O arquivo de regras de cada objeto.",
+      "tipo": "representacao_xml"
+    },
+    {
+      "destino": "mdt:SharingTerritoryRule",
+      "origem": "func:regras-de-compartilhamento",
+      "papel": "Regra por território.",
+      "tipo": "representacao_xml"
+    },
+    {
       "destino": "mdt:AutoResponseRules",
       "origem": "func:regras-de-resposta-automatica",
       "papel": "Regras de resposta automática de um objeto, implantáveis.",
@@ -1893,6 +1971,12 @@
       "origem": "func:reprocessamento-e-monitoramento-de-eventos",
       "papel": "Uso de publicação e entrega de eventos.",
       "tipo": "representacao_objeto_api"
+    },
+    {
+      "destino": "mdt:RevenueManagementSettings",
+      "origem": "func:revenue-management",
+      "papel": "As opções gerais do produto.",
+      "tipo": "representacao_xml"
     },
     {
       "destino": "mdt:SourceTrackingSettings",
@@ -3416,6 +3500,13 @@
       "tipo": "tipo_composto"
     },
     {
+      "destino": "obj:UserRole",
+      "estado": "verificado",
+      "origem": "mdt:Role",
+      "rel_id": "rel:role-userrole",
+      "tipo": "representacao_comum"
+    },
+    {
       "destino": "obj:ServiceChannel",
       "estado": "verificado",
       "origem": "mdt:ServiceChannel",
@@ -3442,6 +3533,61 @@
     {
       "destino": "mdx:ServiceChannelStatus",
       "origem": "mdt:ServicePresenceStatus.channels",
+      "tipo": "tipo_composto"
+    },
+    {
+      "destino": "mdx:AccountSharingRuleSettings",
+      "origem": "mdt:SharingCriteriaRule.accountSettings",
+      "tipo": "tipo_composto"
+    },
+    {
+      "destino": "mdx:FilterItem",
+      "origem": "mdt:SharingCriteriaRule.criteriaItems",
+      "tipo": "tipo_composto"
+    },
+    {
+      "destino": "mdx:SharedTo",
+      "origem": "mdt:SharingCriteriaRule.sharedTo",
+      "tipo": "tipo_composto"
+    },
+    {
+      "destino": "mdx:FilterItem",
+      "origem": "mdt:SharingGuestRule.criteriaItems",
+      "tipo": "tipo_composto"
+    },
+    {
+      "destino": "mdx:SharedTo",
+      "origem": "mdt:SharingGuestRule.sharedTo",
+      "tipo": "tipo_composto"
+    },
+    {
+      "destino": "mdx:AccountSharingRuleSettings",
+      "origem": "mdt:SharingOwnerRule.accountSettings",
+      "tipo": "tipo_composto"
+    },
+    {
+      "destino": "mdx:SharedTo",
+      "origem": "mdt:SharingOwnerRule.sharedFrom",
+      "tipo": "tipo_composto"
+    },
+    {
+      "destino": "mdx:SharedTo",
+      "origem": "mdt:SharingOwnerRule.sharedTo",
+      "tipo": "tipo_composto"
+    },
+    {
+      "destino": "mdx:AccountSharingRuleSettings",
+      "origem": "mdt:SharingTerritoryRule.accountSettings",
+      "tipo": "tipo_composto"
+    },
+    {
+      "destino": "mdx:SharedTo",
+      "origem": "mdt:SharingTerritoryRule.sharedFrom",
+      "tipo": "tipo_composto"
+    },
+    {
+      "destino": "mdx:SharedTo",
+      "origem": "mdt:SharingTerritoryRule.sharedTo",
       "tipo": "tipo_composto"
     },
     {
@@ -5660,10 +5806,38 @@
       "tipo": "referencia_campo"
     },
     {
+      "destino": "obj:UserRole",
+      "estado": "verificado",
+      "origem": "obj:User.UserRoleId",
+      "rel_id": "rel:user-userrole",
+      "tipo": "referencia_campo"
+    },
+    {
       "destino": "obj:User",
       "estado": "verificado",
       "origem": "obj:UserLogin.UserId",
       "rel_id": "rel:userlogin-user",
+      "tipo": "referencia_campo"
+    },
+    {
+      "destino": "obj:User",
+      "estado": "verificado",
+      "origem": "obj:UserRole.ForecastUserId",
+      "rel_id": "rel:userrole-forecastuser",
+      "tipo": "referencia_campo"
+    },
+    {
+      "destino": "obj:UserRole",
+      "estado": "verificado",
+      "origem": "obj:UserRole.ParentRoleId",
+      "rel_id": "rel:userrole-parent",
+      "tipo": "referencia_campo"
+    },
+    {
+      "destino": "obj:Account",
+      "estado": "verificado",
+      "origem": "obj:UserRole.PortalAccountId",
+      "rel_id": "rel:userrole-portalaccount",
       "tipo": "referencia_campo"
     },
     {
@@ -5780,10 +5954,20 @@
       "tipo": "classificacao_principal"
     },
     {
+      "destino": "func:hierarquia-de-papeis",
+      "origem": "sub:acesso-a-registros-e-hierarquias",
+      "tipo": "classificacao_principal"
+    },
+    {
       "destino": "func:public-groups",
       "motivo": "Public groups são alvo de sharing rules.",
       "origem": "sub:acesso-a-registros-e-hierarquias",
       "tipo": "classificacao_secundaria"
+    },
+    {
+      "destino": "func:regras-de-compartilhamento",
+      "origem": "sub:acesso-a-registros-e-hierarquias",
+      "tipo": "classificacao_principal"
     },
     {
       "destino": "func:acoes-rapidas",
@@ -6042,6 +6226,11 @@
       "motivo": "A regra é definida no objeto e avalia seus campos.",
       "origem": "sub:campos-e-tipos",
       "tipo": "classificacao_secundaria"
+    },
+    {
+      "destino": "func:configuracoes-de-nuvens-de-setor",
+      "origem": "sub:capacidades-setoriais",
+      "tipo": "classificacao_principal"
     },
     {
       "destino": "func:conexoes-de-rede-privadas",
@@ -6319,6 +6508,30 @@
       "tipo": "classificacao_principal"
     },
     {
+      "destino": "func:configuracoes-de-nuvens-de-setor",
+      "motivo": "Cada opção ativa um recurso opcional.",
+      "origem": "sub:habilitacao-de-recursos",
+      "tipo": "classificacao_secundaria"
+    },
+    {
+      "destino": "func:digital-experiences",
+      "motivo": "Depois de ligar digital experiences, não dá para desligar.",
+      "origem": "sub:habilitacao-de-recursos",
+      "tipo": "classificacao_secundaria"
+    },
+    {
+      "destino": "func:lightning-knowledge",
+      "motivo": "Ligar o Lightning Knowledge não tem volta e muda o modelo de dados.",
+      "origem": "sub:habilitacao-de-recursos",
+      "tipo": "classificacao_secundaria"
+    },
+    {
+      "destino": "func:multiplas-moedas",
+      "motivo": "Depois de ligar múltiplas moedas, não dá para desligar.",
+      "origem": "sub:habilitacao-de-recursos",
+      "tipo": "classificacao_secundaria"
+    },
+    {
       "destino": "func:estado-e-historico-de-login",
       "motivo": "O histórico de tentativas é usado em auditoria e operação.",
       "origem": "sub:historico-de-login",
@@ -6376,6 +6589,11 @@
       "motivo": "Tipos de registro determinam quais valores e layouts o usuário vê.",
       "origem": "sub:layouts-e-paginas-de-registro",
       "tipo": "classificacao_secundaria"
+    },
+    {
+      "destino": "func:licencas-de-usuario",
+      "origem": "sub:licencas-e-entitlements-de-acesso",
+      "tipo": "classificacao_principal"
     },
     {
       "destino": "func:aura-components",
@@ -6460,6 +6678,18 @@
       "tipo": "classificacao_principal"
     },
     {
+      "destino": "func:campos-customizados",
+      "motivo": "External ID e Unique são opções do campo (externalId, unique).",
+      "origem": "sub:metadados-de-configuracao-de-dados",
+      "tipo": "classificacao_secundaria"
+    },
+    {
+      "destino": "func:field-history-tracking",
+      "motivo": "Liga o histórico por opções do objeto e do campo, sem criar dados novos.",
+      "origem": "sub:metadados-de-configuracao-de-dados",
+      "tipo": "classificacao_secundaria"
+    },
+    {
       "destino": "func:relatorios",
       "motivo": "Totais, fórmulas e buckets são definidos dentro do relatório.",
       "origem": "sub:metricas-e-agregacoes",
@@ -6475,6 +6705,24 @@
       "destino": "func:prompt-builder",
       "motivo": "O grounding liga o prompt aos dados; cada versão do template aponta o modelo usado.",
       "origem": "sub:modelos-e-grounding",
+      "tipo": "classificacao_secundaria"
+    },
+    {
+      "destino": "func:external-objects",
+      "motivo": "Objetos externos mostram dados de outro sistema sem copiá-los.",
+      "origem": "sub:modelos-externos-e-especializacoes",
+      "tipo": "classificacao_secundaria"
+    },
+    {
+      "destino": "func:field-audit-trail",
+      "motivo": "O histórico arquivado fica num big object (FieldHistoryArchive).",
+      "origem": "sub:modelos-externos-e-especializacoes",
+      "tipo": "classificacao_secundaria"
+    },
+    {
+      "destino": "func:objetos-customizados",
+      "motivo": "Big objects são objetos com sufixo __b, com índice próprio (Index).",
+      "origem": "sub:modelos-externos-e-especializacoes",
       "tipo": "classificacao_secundaria"
     },
     {
@@ -6586,6 +6834,11 @@
       "tipo": "classificacao_principal"
     },
     {
+      "destino": "func:revenue-management",
+      "origem": "sub:receita-e-comercio",
+      "tipo": "classificacao_principal"
+    },
+    {
       "destino": "func:agentforce-data-library",
       "origem": "sub:recuperacao-de-conhecimento",
       "tipo": "classificacao_principal"
@@ -6641,6 +6894,60 @@
       "destino": "func:perfis",
       "motivo": "O XML de perfil define loginHours e loginIpRanges.",
       "origem": "sub:sessoes-e-politicas-de-login",
+      "tipo": "classificacao_secundaria"
+    },
+    {
+      "destino": "func:chatter",
+      "motivo": "As opções ficam em ChatterSettings.",
+      "origem": "sub:settings",
+      "tipo": "classificacao_secundaria"
+    },
+    {
+      "destino": "func:configuracoes-de-nuvens-de-setor",
+      "motivo": "É um tipo da família Settings.",
+      "origem": "sub:settings",
+      "tipo": "classificacao_secundaria"
+    },
+    {
+      "destino": "func:consent-management",
+      "motivo": "As opções ficam em PrivacySettings.",
+      "origem": "sub:settings",
+      "tipo": "classificacao_secundaria"
+    },
+    {
+      "destino": "func:lightning-knowledge",
+      "motivo": "As opções ficam em KnowledgeSettings.",
+      "origem": "sub:settings",
+      "tipo": "classificacao_secundaria"
+    },
+    {
+      "destino": "func:multiplas-moedas",
+      "motivo": "As opções ficam em CurrencySettings.",
+      "origem": "sub:settings",
+      "tipo": "classificacao_secundaria"
+    },
+    {
+      "destino": "func:my-domain",
+      "motivo": "As opções ficam em MyDomainSettings.",
+      "origem": "sub:settings",
+      "tipo": "classificacao_secundaria"
+    },
+    {
+      "destino": "func:path",
+      "motivo": "A ativação fica em PathAssistantSettings.",
+      "origem": "sub:settings",
+      "tipo": "classificacao_secundaria"
+    },
+    {
+      "destino": "func:previsoes-colaborativas",
+      "motivo": "As opções ficam em ForecastingSettings.",
+      "origem": "sub:settings",
+      "tipo": "classificacao_secundaria"
+    },
+    {
+      "destino": "func:revenue-management",
+      "motivo": "As opções gerais ficam num tipo da família Settings.",
+      "origem": "sub:settings",
       "tipo": "classificacao_secundaria"
     },
     {
@@ -7149,6 +7456,15 @@
     },
     {
       "estado": "verificado",
+      "grupo_cor": "cls:processos-de-negocio-especificos-de-produto",
+      "id": "func:configuracoes-de-nuvens-de-setor",
+      "resumo": "As nuvens de setor (Financial Services, Health, Life Sciences, Net Zero, Education, Nonprofit, Public Sector e outras) acrescentam objetos e recursos ao modelo padrão. Os recursos opcionais de cada uma são ligados por opções guardadas num único tipo, IndustriesSettings.",
+      "rotulo": "Configurações das nuvens de setor",
+      "rotulo_tecnico": "Industries Settings",
+      "tipo": "funcionalidade"
+    },
+    {
+      "estado": "verificado",
       "grupo_cor": "cls:integracao-apis-e-eventos",
       "id": "func:connected-apps",
       "resumo": "Registro de um app ou sistema externo que se conecta à org por OAuth, SAML ou canvas, com suas políticas de acesso.",
@@ -7491,6 +7807,15 @@
     },
     {
       "estado": "verificado",
+      "grupo_cor": "cls:acesso-identidade-e-seguranca",
+      "id": "func:hierarquia-de-papeis",
+      "resumo": "A hierarquia de papéis organiza os usuários em níveis, como um organograma de acesso: quem está num papel vê e pode agir sobre os registros de quem está nos papéis abaixo.",
+      "rotulo": "Hierarquia de papéis",
+      "rotulo_tecnico": "Role Hierarchy",
+      "tipo": "funcionalidade"
+    },
+    {
+      "estado": "verificado",
       "grupo_cor": "cls:organizacao-e-configuracoes-base",
       "id": "func:horario-comercial",
       "resumo": "Define os dias, horários e fuso em que o atendimento funciona.",
@@ -7523,6 +7848,15 @@
       "resumo": "Lead é um potencial cliente (pessoa ou empresa) que ainda não foi qualificado.",
       "rotulo": "Leads",
       "rotulo_tecnico": "Leads (Lead)",
+      "tipo": "funcionalidade"
+    },
+    {
+      "estado": "verificado",
+      "grupo_cor": "cls:acesso-identidade-e-seguranca",
+      "id": "func:licencas-de-usuario",
+      "resumo": "A licença de usuário define o pacote básico do que um usuário pode ter; cada perfil pertence a uma licença. Feature licenses e permission set licenses liberam recursos que a licença de usuário não inclui.",
+      "rotulo": "Licenças de usuário e de permission set",
+      "rotulo_tecnico": "User Licenses and Permission Set Licenses",
       "tipo": "funcionalidade"
     },
     {
@@ -7860,6 +8194,15 @@
     },
     {
       "estado": "verificado",
+      "grupo_cor": "cls:acesso-identidade-e-seguranca",
+      "id": "func:regras-de-compartilhamento",
+      "resumo": "Regras de compartilhamento abrem acesso a registros além do padrão da org: por dono (registros de um grupo ou papel), por critério (registros com certos valores de campo) ou para guest users de um site.",
+      "rotulo": "Regras de compartilhamento",
+      "rotulo_tecnico": "Sharing Rules",
+      "tipo": "funcionalidade"
+    },
+    {
+      "estado": "verificado",
       "grupo_cor": "cls:automacao-de-processos-e-regras-de-negocio",
       "id": "func:regras-de-resposta-automatica",
       "resumo": "Regra que envia automaticamente o primeiro e-mail a quem abriu um caso ou enviou um lead pelo site, escolhendo o template conforme os dados do registro.",
@@ -7910,6 +8253,15 @@
       "resumo": "API baseada em HTTP para ler e gravar dados da Salesforce: cada recurso (registro, consulta, metadados de objeto, limites) tem uma URI própria.",
       "rotulo": "REST API",
       "rotulo_tecnico": "REST API",
+      "tipo": "funcionalidade"
+    },
+    {
+      "estado": "verificado",
+      "grupo_cor": "cls:processos-de-negocio-especificos-de-produto",
+      "id": "func:revenue-management",
+      "resumo": "Revenue Management (Revenue Cloud) cuida do ciclo de receita depois da venda acertada: catálogo, preço, cotações, pedidos, ativos e renovações. As opções gerais ficam no tipo RevenueManagementSettings.",
+      "rotulo": "Revenue Management",
+      "rotulo_tecnico": "Revenue Management",
       "tipo": "funcionalidade"
     },
     {
@@ -8681,6 +9033,13 @@
     },
     {
       "estado": "verificado",
+      "id": "mdt:IndustriesSettings",
+      "resumo": "As opções das nuvens de setor numa org: Financial Services Cloud, Health Cloud, Life Sciences Cloud, Net Zero Cloud, Public Sector, Salesforce Scheduler, Education Cloud, Nonprofit Cloud e Automotive Cloud. Cada opção liga um recurso de uma dessas nuvens.",
+      "rotulo": "IndustriesSettings",
+      "tipo": "metadata_type"
+    },
+    {
+      "estado": "verificado",
       "id": "mdt:InstalledPackage",
       "resumo": "Um pacote instalado: a versão de um pacote gerenciado a instalar ou atualizar na org, identificado pelo namespace.",
       "rotulo": "InstalledPackage",
@@ -9024,6 +9383,20 @@
     },
     {
       "estado": "verificado",
+      "id": "mdt:RevenueManagementSettings",
+      "resumo": "As opções de Revenue Management (Revenue Cloud): grupos de itens, ramp deals, preço incremental, renovações e criação de pedidos a partir de cotações.",
+      "rotulo": "RevenueManagementSettings",
+      "tipo": "metadata_type"
+    },
+    {
+      "estado": "verificado",
+      "id": "mdt:Role",
+      "resumo": "Um papel (role) da hierarquia de papéis: quem fica acima de quem e que acesso o papel dá aos casos, contatos e oportunidades das contas dos usuários dele.",
+      "rotulo": "Role",
+      "tipo": "metadata_type"
+    },
+    {
+      "estado": "verificado",
       "id": "mdt:SamlSsoConfig",
       "resumo": "Configuração de login único (SSO) por SAML com um provedor de identidade externo.",
       "rotulo": "SamlSsoConfig",
@@ -9041,6 +9414,41 @@
       "id": "mdt:ServicePresenceStatus",
       "resumo": "Define um status de presença do Omni-Channel (por exemplo, disponível para um canal).",
       "rotulo": "ServicePresenceStatus",
+      "tipo": "metadata_type"
+    },
+    {
+      "estado": "verificado",
+      "id": "mdt:SharingCriteriaRule",
+      "resumo": "Uma regra de compartilhamento por critério: dá acesso aos registros que atendem a condições de campo.",
+      "rotulo": "SharingCriteriaRule",
+      "tipo": "metadata_type"
+    },
+    {
+      "estado": "verificado",
+      "id": "mdt:SharingGuestRule",
+      "resumo": "Uma regra de compartilhamento de guest user: dá a usuários não autenticados de um site acesso de leitura a registros que atendem a condições.",
+      "rotulo": "SharingGuestRule",
+      "tipo": "metadata_type"
+    },
+    {
+      "estado": "verificado",
+      "id": "mdt:SharingOwnerRule",
+      "resumo": "Uma regra de compartilhamento por dono: dá acesso aos registros que pertencem a um grupo, papel ou território.",
+      "rotulo": "SharingOwnerRule",
+      "tipo": "metadata_type"
+    },
+    {
+      "estado": "verificado",
+      "id": "mdt:SharingRules",
+      "resumo": "O contêiner das regras de compartilhamento de um objeto: um arquivo por objeto, com as regras por critério, por dono, por território e de guest user.",
+      "rotulo": "SharingRules",
+      "tipo": "metadata_type"
+    },
+    {
+      "estado": "verificado",
+      "id": "mdt:SharingTerritoryRule",
+      "resumo": "Uma regra de compartilhamento por território: como a regra por dono, mas a origem dos registros é um território.",
+      "rotulo": "SharingTerritoryRule",
       "tipo": "metadata_type"
     },
     {
@@ -9175,6 +9583,12 @@
       "resumo": "Uma tarefa de workflow: a tarefa criada e atribuída a alguém quando a regra dispara.",
       "rotulo": "WorkflowTask",
       "tipo": "metadata_type"
+    },
+    {
+      "estado": "verificado",
+      "id": "mdx:AccountSharingRuleSettings",
+      "rotulo": "AccountSharingRuleSettings",
+      "tipo": "estrutura_auxiliar"
     },
     {
       "estado": "verificado",
@@ -11002,6 +11416,12 @@
     },
     {
       "estado": "verificado",
+      "id": "mdx:SharedTo",
+      "rotulo": "SharedTo",
+      "tipo": "estrutura_auxiliar"
+    },
+    {
+      "estado": "verificado",
       "id": "mdx:SidebarComponent",
       "rotulo": "SidebarComponent",
       "tipo": "estrutura_auxiliar"
@@ -12022,6 +12442,16 @@
       "id": "obj:UserLogin",
       "resumo": "Representa o estado atual de login de um usuário, como congelado ou bloqueado.",
       "rotulo": "UserLogin",
+      "tipo": "objeto_api"
+    },
+    {
+      "apis": [
+        "padrao"
+      ],
+      "estado": "verificado",
+      "id": "obj:UserRole",
+      "resumo": "Um papel da hierarquia de papéis, como registro. O usuário aponta para o papel dele pelo campo UserRoleId, e cada papel aponta para o papel acima por ParentRoleId.",
+      "rotulo": "UserRole",
       "tipo": "objeto_api"
     },
     {

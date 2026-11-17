@@ -1,11 +1,89 @@
 {
   "classificacao": "cls:acesso-identidade-e-seguranca",
   "derivado": {
-    "dependencias": [],
-    "funcionalidades": [],
-    "metadata_types": [],
+    "dependencias": [
+      {
+        "destino": "obj:PermissionSetGroup",
+        "destino_no_tema": false,
+        "estado": "verificado",
+        "origem": "obj:PermissionSet",
+        "rel": "rel:permissionset-permissionsetgroup",
+        "via": "PermissionSetGroupId"
+      },
+      {
+        "destino": "obj:Profile",
+        "destino_no_tema": true,
+        "estado": "verificado",
+        "origem": "obj:PermissionSet",
+        "rel": "rel:permissionset-profile",
+        "via": "ProfileId"
+      }
+    ],
+    "funcionalidades": [
+      {
+        "alertas": [
+          "Licenças vêm do contrato da org; o catálogo não registra quantidades nem preços."
+        ],
+        "exemplo": "A licença Salesforce Platform não inclui leads, oportunidades, campanhas nem previsões; um usuário com ela não recebe esses acessos por nenhum perfil.",
+        "id": "func:licencas-de-usuario",
+        "principal": true
+      }
+    ],
+    "metadata_types": [
+      {
+        "estrutura": "completa",
+        "funcionalidades": [
+          "func:licencas-de-usuario"
+        ],
+        "id": "mdt:PermissionSet",
+        "nota_suporte": null,
+        "suporte_cli": "suportado"
+      },
+      {
+        "estrutura": "parcial",
+        "funcionalidades": [
+          "func:licencas-de-usuario"
+        ],
+        "id": "mdt:Profile",
+        "nota_suporte": null,
+        "suporte_cli": "suportado"
+      }
+    ],
     "nota": "Calculado pelo gerador a partir do catálogo; não é cadastro.",
-    "objetos_api": [],
+    "objetos_api": [
+      {
+        "apis": [
+          {
+            "api": "padrao",
+            "estado": "verificado"
+          },
+          {
+            "api": "tooling",
+            "estado": "verificado"
+          }
+        ],
+        "funcionalidades": [
+          "func:licencas-de-usuario"
+        ],
+        "id": "obj:PermissionSet"
+      },
+      {
+        "apis": [
+          {
+            "api": "padrao",
+            "estado": "verificado"
+          },
+          {
+            "api": "tooling",
+            "estado": "verificado"
+          }
+        ],
+        "funcionalidades": [
+          "func:licencas-de-usuario"
+        ],
+        "id": "obj:Profile"
+      }
+    ],
     "temas_sem_funcionalidade": []
   },
   "descricao": "O teto do que pode ser concedido a um usuário: a licença de usuário dá o pacote básico, e feature licenses e permission set licenses liberam recursos que ela não inclui.",
@@ -23,7 +101,9 @@
   "escopo": "Entram as licenças de usuário e de permission set que limitam quais recursos uma pessoa pode receber.",
   "estado": "desconhecido",
   "fora_do_escopo": "Entitlements de atendimento (SLA de casos) são outro assunto e ficam em \"Atendimento\".",
-  "funcionalidades": [],
+  "funcionalidades": [
+    "func:licencas-de-usuario"
+  ],
   "id": "sub:licencas-e-entitlements-de-acesso",
   "natureza": "curadoria_didatica",
   "nome": "Licenças e entitlements de acesso",

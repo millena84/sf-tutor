@@ -55,11 +55,153 @@
   ],
   "classificacao": "cls:organizacao-e-configuracoes-base",
   "derivado": {
-    "dependencias": [],
-    "funcionalidades": [],
-    "metadata_types": [],
+    "dependencias": [
+      {
+        "destino": "obj:KnowledgeArticle",
+        "destino_no_tema": true,
+        "estado": "verificado",
+        "origem": "obj:KnowledgeArticleVersion",
+        "rel": "rel:knowledgearticleversion-knowledgearticle",
+        "via": "KnowledgeArticleId"
+      },
+      {
+        "destino": "mdt:CustomSite",
+        "destino_no_tema": false,
+        "estado": "verificado",
+        "origem": "mdt:Network",
+        "rel": "rel:network-customsite",
+        "via": "site"
+      }
+    ],
+    "funcionalidades": [
+      {
+        "alertas": [
+          "Cada opção só existe nas edições com a nuvem correspondente."
+        ],
+        "exemplo": "Uma org de Net Zero Cloud liga enableSustainabilityCloud e enableSCCarbonAccounting; o arquivo Industries.settings leva as duas opções para a sandbox seguinte.",
+        "id": "func:configuracoes-de-nuvens-de-setor",
+        "principal": false,
+        "tema_principal": "sub:capacidades-setoriais"
+      },
+      {
+        "alertas": [
+          "Depois de ligar digital experiences, não dá para desligar."
+        ],
+        "exemplo": "A empresa liga digital experiences e passa a ter um domínio de sites no formato MyDomainName.my.site.com, onde cria o portal de clientes.",
+        "id": "func:digital-experiences",
+        "pre_requisitos": [
+          "Customize Application (para ligar digital experiences)."
+        ],
+        "principal": false,
+        "tema_principal": "sub:experiencias-externas"
+      },
+      {
+        "alertas": [
+          "Habilitar Lightning Knowledge é irreversível e muda o modelo de dados para record types; exige ao menos um article type."
+        ],
+        "exemplo": "Um artigo de 'Como trocar a senha' é sugerido ao atendente e publicado no portal.",
+        "id": "func:lightning-knowledge",
+        "pre_requisitos": [
+          "Ver Knowledge Settings: licença Knowledge User."
+        ],
+        "principal": false,
+        "tema_principal": "sub:knowledge-e-categorias"
+      },
+      {
+        "alertas": [
+          "Depois de ligar múltiplas moedas, não dá para desligar."
+        ],
+        "exemplo": "A matriz reporta em reais; a filial do Chile registra oportunidades em pesos, convertidas para reais pela taxa cadastrada.",
+        "id": "func:multiplas-moedas",
+        "pre_requisitos": [
+          "Customize Application (para alterar moedas); View Setup and Configuration (para ver)."
+        ],
+        "principal": false,
+        "tema_principal": "sub:moedas-e-calendario-fiscal"
+      }
+    ],
+    "metadata_types": [
+      {
+        "estrutura": "completa",
+        "funcionalidades": [
+          "func:digital-experiences"
+        ],
+        "id": "mdt:CommunitiesSettings",
+        "nota_suporte": null,
+        "suporte_cli": "suportado"
+      },
+      {
+        "estrutura": "completa",
+        "funcionalidades": [
+          "func:multiplas-moedas"
+        ],
+        "id": "mdt:CurrencySettings",
+        "nota_suporte": null,
+        "suporte_cli": "suportado"
+      },
+      {
+        "estrutura": "completa",
+        "funcionalidades": [
+          "func:configuracoes-de-nuvens-de-setor"
+        ],
+        "id": "mdt:IndustriesSettings",
+        "nota_suporte": null,
+        "suporte_cli": "suportado"
+      },
+      {
+        "estrutura": "completa",
+        "funcionalidades": [
+          "func:lightning-knowledge"
+        ],
+        "id": "mdt:KnowledgeSettings",
+        "nota_suporte": null,
+        "suporte_cli": "suportado"
+      },
+      {
+        "estrutura": "parcial",
+        "funcionalidades": [
+          "func:digital-experiences"
+        ],
+        "id": "mdt:Network",
+        "nota_suporte": null,
+        "suporte_cli": "suportado"
+      }
+    ],
     "nota": "Calculado pelo gerador a partir do catálogo; não é cadastro.",
-    "objetos_api": [],
+    "objetos_api": [
+      {
+        "apis": [
+          {
+            "api": "padrao",
+            "estado": "verificado"
+          },
+          {
+            "api": "tooling",
+            "estado": "desconhecido"
+          }
+        ],
+        "funcionalidades": [
+          "func:lightning-knowledge"
+        ],
+        "id": "obj:KnowledgeArticle"
+      },
+      {
+        "apis": [
+          {
+            "api": "padrao",
+            "estado": "verificado"
+          },
+          {
+            "api": "tooling",
+            "estado": "desconhecido"
+          }
+        ],
+        "funcionalidades": [
+          "func:lightning-knowledge"
+        ],
+        "id": "obj:KnowledgeArticleVersion"
+      }
+    ],
     "temas_sem_funcionalidade": []
   },
   "descricao": "A ativação de recursos opcionais no Setup. Alguns mudam o comportamento ou o modelo de dados da org e não podem ser desligados depois; muitas ativações ficam gravadas em tipos da família Settings.",
@@ -74,7 +216,12 @@
   "escopo": "Entram as ativações de recursos opcionais que mudam o comportamento da org depois de ligadas.",
   "estado": "desconhecido",
   "fora_do_escopo": "Quando o recurso ativado tem tema próprio, o funcionamento dele é estudado nesse tema.",
-  "funcionalidades": [],
+  "funcionalidades": [
+    "func:configuracoes-de-nuvens-de-setor",
+    "func:digital-experiences",
+    "func:lightning-knowledge",
+    "func:multiplas-moedas"
+  ],
   "id": "sub:habilitacao-de-recursos",
   "natureza": "curadoria_didatica",
   "nome": "Habilitação de recursos",
