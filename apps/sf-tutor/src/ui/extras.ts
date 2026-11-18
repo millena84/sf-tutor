@@ -126,10 +126,10 @@ export interface CtxBusca {
 export function ligarBusca(input: HTMLInputElement, lista: HTMLElement, ctx: CtxBusca): void {
   let ativo = -1;
   let itens: HTMLElement[] = [];
-  let tFechar: ReturnType<typeof setTimeout> | undefined;
+  let timerBlur: ReturnType<typeof setTimeout> | undefined;
   const fechar = () => { lista.hidden = true; input.setAttribute('aria-expanded', 'false'); ativo = -1; input.removeAttribute('aria-activedescendant'); };
   const render = () => {
-    clearTimeout(tFechar); // um blur anterior não pode fechar a lista recém-aberta
+    clearTimeout(timerBlur); // um blur antigo não pode fechar a lista recém-aberta
     limpar(lista);
     const rs = ctx.indice.buscar(input.value);
     itens = [];
@@ -174,7 +174,7 @@ export function ligarBusca(input: HTMLInputElement, lista: HTMLElement, ctx: Ctx
   };
   input.addEventListener('input', render);
   input.addEventListener('focus', () => { if (input.value.trim().length >= 2) render(); });
-  input.addEventListener('blur', () => { clearTimeout(tFechar); tFechar = setTimeout(fechar, 150); });
+  input.addEventListener('blur', () => { clearTimeout(timerBlur); timerBlur = setTimeout(fechar, 150); });
   input.addEventListener('keydown', (ev) => {
     if (ev.key === 'ArrowDown') { marcar(Math.min(ativo + 1, itens.length - 1)); ev.preventDefault(); }
     else if (ev.key === 'ArrowUp') { marcar(Math.max(ativo - 1, 0)); ev.preventDefault(); }
