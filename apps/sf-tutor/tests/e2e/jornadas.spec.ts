@@ -19,7 +19,7 @@ test('1. User: campos do objeto, sem XML inventado', async ({ page }) => {
   await expect(painel(page).locator('summary', { hasText: 'Arquivo no projeto Salesforce' })).toHaveCount(0);
   // o objeto é o último nó: os campos abrem em tabela, numa janela
   const bloco = painel(page).locator('.bloco-tabela');
-  const n = Number((await bloco.locator('h4').textContent())!.match(/\((\d+)\)/)![1]);
+  const n = Number((await bloco.locator('h3').textContent())!.match(/\((\d+)\)/)![1]);
   expect(n).toBeGreaterThan(100);
   await bloco.getByRole('button', { name: /^Ver \d+ campos em tabela/ }).click();
   const janela = page.locator('#dialogo');
@@ -53,10 +53,10 @@ test('2. PermissionSet: metadata type XML e objeto API são itens distintos', as
   await rep.getByRole('button', { name: 'PermissionSet', exact: true }).first().click();
   expect(await selecao(page)).toMatch(/>mdt:PermissionSet$/);
   await expect(painel(page).locator('summary', { hasText: 'Arquivo no projeto Salesforce' })).toBeVisible();
-  await expect(painel(page).locator('.bloco-tabela h4', { hasText: /^Propriedades XML \(\d+\)/ })).toBeVisible();
+  await expect(painel(page).locator('.bloco-tabela h3', { hasText: /^Propriedades XML \(\d+\)/ })).toBeVisible();
   await abrir(page, '?n=obj:PermissionSet');
   await expect(titulo(page)).toHaveText('PermissionSet');
-  await expect(painel(page).locator('.bloco-tabela h4', { hasText: /^Campos \(\d+\)/ })).toBeVisible();
+  await expect(painel(page).locator('.bloco-tabela h3', { hasText: /^Campos \(\d+\)/ })).toBeVisible();
   await expect(painel(page).locator('summary', { hasText: 'APIs de acesso e operações' })).toBeVisible();
   await semErroNoPainel(page);
 });

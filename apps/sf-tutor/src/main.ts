@@ -402,7 +402,8 @@ async function iniciar(): Promise<void> {
     if (st.sel?.tipo === 'no') { destacarSelecao(); mapa.focar(chaveDe(st.sel.caminho), 1); anunciar('De volta ao caminho selecionado.'); }
   });
   const btnAnim = $('btn-animacao');
-  const marcarAnim = () => { btnAnim.setAttribute('aria-pressed', String(st.reduzir)); btnAnim.textContent = st.reduzir ? 'Animações: desligadas' : 'Animações: ligadas'; };
+  // #19: rótulo fixo e o estado só em aria-pressed (pressionado = animações desligadas), para o leitor de tela não anunciar texto e estado contraditórios
+  const marcarAnim = () => { btnAnim.setAttribute('aria-pressed', String(st.reduzir)); btnAnim.textContent = 'Reduzir animações'; };
   marcarAnim();
   btnAnim.addEventListener('click', () => { st.reduzir = !st.reduzir; mapa.setReduzirMovimento(st.reduzir); marcarAnim(); });
   function alternarLeitura(ligar?: boolean): void {

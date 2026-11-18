@@ -170,7 +170,7 @@ function infoLogo(e: Entidade): HTMLElement | null {
 function categoriaNuvem(valor: unknown): Node | null {
   const c = CATEGORIA_NUVEM[String(valor ?? '')];
   if (!c) return null;
-  return h('div', { class: 'campo-txt' }, h('h4', null, 'Onde roda', h('span', { class: 'marca-didatica', title: 'Classificação do projeto; não é nomenclatura oficial da Salesforce.' }, ' · classificação do projeto')),
+  return h('div', { class: 'campo-txt' }, h('h3', null, 'Onde roda', h('span', { class: 'marca-didatica', title: 'Classificação do projeto; não é nomenclatura oficial da Salesforce.' }, ' · classificação do projeto')),
     h('p', null, h('strong', null, c.rotulo), ` — ${c.explicacao}`));
 }
 
@@ -197,7 +197,7 @@ function painelNuvem(ctx: CtxPainel, e: Entidade, caminho: readonly string[]): (
     secao(`Funcionalidades (${unicas.length})`, true,
       h('p', { class: 'nota' }, `${unicas.length - compart.length} aparecem só nesta nuvem no catálogo atual; ${compart.length} são compartilhadas com outras nuvens (mesma ficha).`),
       ...cas.map((c) => h('div', { class: 'grupo-func' },
-        h('h4', null, ctx.rotulo(c.classificacao)),
+        h('h3', null, ctx.rotulo(c.classificacao)),
         ...c.subclassificacoes.map((s) => h('div', null, h('p', { class: 'sub-rotulo' }, ctx.rotulo(s.subclassificacao)),
           h('ul', { class: 'lista-links' }, s.funcionalidades.map((f) => h('li', null,
             h('button', { type: 'button', class: 'link', on: { click: () => ctx.abrirCaminho([...caminho, c.classificacao, s.subclassificacao, f]) } }, ctx.rotulo(f)),
@@ -300,17 +300,17 @@ function sobreTema(ctx: CtxPainel, e: Entidade): HTMLElement | null {
   // camada 2
   const funcs = d?.funcionalidades ?? [];
   const c2: (Node | null)[] = [];
-  if (enc?.texto) c2.push(h('h5', null, ehCls ? 'Como as partes se ligam' : 'Como se encaixa no tema de cima'), h('p', null, enc.texto), fontesCamada(ctx, enc.evidencias));
+  if (enc?.texto) c2.push(h('h4', null, ehCls ? 'Como as partes se ligam' : 'Como se encaixa no tema de cima'), h('p', null, enc.texto), fontesCamada(ctx, enc.evidencias));
   if (d && (funcs.length || c.temas)) {
     if (funcs.length) {
-      c2.push(h('h5', null, `Funcionalidades (${funcs.length})`), linksEmLinha(ctx, funcs.map((f) => f.id), (id) => {
+      c2.push(h('h4', null, `Funcionalidades (${funcs.length})`), linksEmLinha(ctx, funcs.map((f) => f.id), (id) => {
         const f = funcs.find((x) => x.id === id);
         return f && !f.principal && f.tema_principal ? h('span', { class: 'nota' }, ` (lugar principal: ${ctx.rotulo(f.tema_principal)})`) : null;
       }));
     }
-    if (d.metadata_types.length) c2.push(h('h5', null, `Metadata types (${d.metadata_types.length})`), linksEmLinha(ctx, d.metadata_types.map((m) => m.id)));
-    if (d.objetos_api.length) c2.push(h('h5', null, `Objetos API (${d.objetos_api.length})`), linksEmLinha(ctx, d.objetos_api.map((o) => o.id)));
-    if (d.temas_sem_funcionalidade.length) c2.push(h('h5', null, 'Ainda sem funcionalidades catalogadas'), h('p', { class: 'vazio' }, d.temas_sem_funcionalidade.map((t) => ctx.rotulo(t)).join(', ')));
+    if (d.metadata_types.length) c2.push(h('h4', null, `Metadata types (${d.metadata_types.length})`), linksEmLinha(ctx, d.metadata_types.map((m) => m.id)));
+    if (d.objetos_api.length) c2.push(h('h4', null, `Objetos API (${d.objetos_api.length})`), linksEmLinha(ctx, d.objetos_api.map((o) => o.id)));
+    if (d.temas_sem_funcionalidade.length) c2.push(h('h4', null, 'Ainda sem funcionalidades catalogadas'), h('p', { class: 'vazio' }, d.temas_sem_funcionalidade.map((t) => ctx.rotulo(t)).join(', ')));
     c2.push(h('p', { class: 'nota' }, 'Metadata types e objetos API vêm das funcionalidades do tema; um mesmo item pode servir a vários temas.'));
   } else if (!funcs.length) {
     c2.push(h('p', { class: 'vazio' }, 'Ainda não mapeado: nenhuma funcionalidade catalogada neste tema.'));
@@ -319,23 +319,23 @@ function sobreTema(ctx: CtxPainel, e: Entidade): HTMLElement | null {
   // camada 3
   const c3: (Node | null)[] = [];
   for (const it of avc) {
-    c3.push(h('div', { class: 'item-avancado' }, h('h5', null, `${TIPO_AVANCADO[it.tipo] ?? it.tipo}: ${it.titulo}`), h('p', null, it.texto), fontesCamada(ctx, it.evidencias)));
+    c3.push(h('div', { class: 'item-avancado' }, h('h4', null, `${TIPO_AVANCADO[it.tipo] ?? it.tipo}: ${it.titulo}`), h('p', null, it.texto), fontesCamada(ctx, it.evidencias)));
   }
   if (d?.metadata_types.length) {
     const completas = d.metadata_types.filter((m) => m.estrutura === 'completa').length;
-    c3.push(h('div', { class: 'item-avancado' }, h('h5', null, 'Implantação: suporte no Salesforce CLI'),
+    c3.push(h('div', { class: 'item-avancado' }, h('h4', null, 'Implantação: suporte no Salesforce CLI'),
       h('ul', { class: 'lista' }, d.metadata_types.map((m) => h('li', null,
-        h('button', { type: 'button', class: 'link', on: { click: () => ctx.abrir(m.id) } }, ctx.rotulo(m.id)), ` — ${textoSuporte(m)}`))),
+        h('button', { type: 'button', class: 'link', ...tipoComoDescricao(ctx, m.id), on: { click: () => ctx.abrir(m.id) } }, ctx.rotulo(m.id)), ` — ${textoSuporte(m)}`))),
       h('p', { class: 'nota' }, `Estrutura do XML catalogada por completo em ${completas} de ${d.metadata_types.length}.`)));
   }
   if (d?.objetos_api.length) {
-    c3.push(h('div', { class: 'item-avancado' }, h('h5', null, 'Acesso por API'),
+    c3.push(h('div', { class: 'item-avancado' }, h('h4', null, 'Acesso por API'),
       h('ul', { class: 'lista' }, d.objetos_api.map((o) => h('li', null,
-        h('button', { type: 'button', class: 'link', on: { click: () => ctx.abrir(o.id) } }, ctx.rotulo(o.id)),
+        h('button', { type: 'button', class: 'link', ...tipoComoDescricao(ctx, o.id), on: { click: () => ctx.abrir(o.id) } }, ctx.rotulo(o.id)),
         ` — ${o.apis.length ? o.apis.map(textoApi).join('; ') : 'exposição não registrada'}`)))));
   }
   if (d?.dependencias.length) {
-    c3.push(h('div', { class: 'item-avancado' }, h('h5', null, 'Dependências entre componentes'),
+    c3.push(h('div', { class: 'item-avancado' }, h('h4', null, 'Dependências entre componentes'),
       h('p', { class: 'nota' }, 'Referências documentadas: ajudam a prever a ordem de implantação e o impacto de uma mudança.'),
       h('ul', { class: 'lista' }, d.dependencias.map((x) => h('li', null,
         h('button', { type: 'button', class: 'link', on: { click: () => ctx.abrir(x.origem) } }, ctx.rotulo(x.origem)),
@@ -345,7 +345,7 @@ function sobreTema(ctx: CtxPainel, e: Entidade): HTMLElement | null {
   }
   const alertas = funcs.filter((f) => f.alertas?.length);
   if (alertas.length) {
-    c3.push(h('div', { class: 'item-avancado' }, h('h5', null, 'Pontos de atenção das funcionalidades'),
+    c3.push(h('div', { class: 'item-avancado' }, h('h4', null, 'Pontos de atenção das funcionalidades'),
       h('ul', { class: 'lista' }, alertas.flatMap((f) => f.alertas!.map((a) => h('li', null,
         h('button', { type: 'button', class: 'link', on: { click: () => ctx.abrir(f.id) } }, ctx.rotulo(f.id)), `: ${a}`))))));
   }
@@ -353,11 +353,11 @@ function sobreTema(ctx: CtxPainel, e: Entidade): HTMLElement | null {
     h('summary', null, 'Sobre o recorte deste tema'),
     h('p', null, h('strong', null, rec.rotulo), `: ${rec.explicacao}`),
     e.nota_estado ? h('p', { class: 'nota' }, String(e.nota_estado)) : null,
-    e.escopo ? h('h5', null, 'O que entra neste tema') : null,
+    e.escopo ? h('h4', null, 'O que entra neste tema') : null,
     e.escopo ? h('p', null, String(e.escopo)) : null,
-    e.fora_do_escopo ? h('h5', null, 'O que fica fora e onde procurar') : null,
+    e.fora_do_escopo ? h('h4', null, 'O que fica fora e onde procurar') : null,
     e.fora_do_escopo ? h('p', null, String(e.fora_do_escopo)) : null,
-    h('h5', null, 'Correspondência com referências oficiais'),
+    h('h4', null, 'Correspondência com referências oficiais'),
     refs.length
       ? h('div', null,
         h('p', { class: 'nota' }, 'Cada referência diz se a área oficial cobre o tema, cobre só parte dele ou é mais ampla que ele.'),
@@ -372,8 +372,8 @@ function sobreTema(ctx: CtxPainel, e: Entidade): HTMLElement | null {
   const avancado = h('details', { class: 'secao camada-avancada' }, h('summary', null, 'Nível avançado'), ...c3.filter(Boolean) as Node[], recorte);
 
   return secao('Sobre este tema', true,
-    h('div', { class: 'camada' }, h('h4', null, 'Para quem está começando'), ...c1.filter(Boolean) as Node[]),
-    h('div', { class: 'camada' }, h('h4', null, 'Para quem já conhece Salesforce'), ...c2.filter(Boolean) as Node[]),
+    h('div', { class: 'camada' }, h('h3', null, 'Para quem está começando'), ...c1.filter(Boolean) as Node[]),
+    h('div', { class: 'camada' }, h('h3', null, 'Para quem já conhece Salesforce'), ...c2.filter(Boolean) as Node[]),
     avancado,
   );
 }
@@ -445,16 +445,16 @@ function painelFunc(ctx: CtxPainel, e: Entidade, caminho: readonly string[]): (N
       listaTexto('Código e recursos de API', arr<string>(rep?.codigo)),
       listaTexto('Interface', arr<string>(rep?.interface)),
       ...(rep?.ausencias ?? []).map((a) => h('div', { class: `afirmacao estado-${String(a.estado)}` },
-        h('h4', null, `Sem ${a.tipo === 'metadata_type' ? 'metadata type (XML)' : a.tipo === 'objeto_api' ? 'objeto API' : String(a.tipo)}`, ' ', selo(String(a.estado))),
+        h('h3', null, `Sem ${a.tipo === 'metadata_type' ? 'metadata type (XML)' : a.tipo === 'objeto_api' ? 'objeto API' : String(a.tipo)}`, ' ', selo(String(a.estado))),
         h('p', null, String(a.motivo ?? '')), fontesEl(ctx, arr(a.evidencias))))),
     afirmacao(ctx, 'Caminho no Setup', ent<Afirmacao>(e, 'setup')),
     listaTexto('Pré-requisitos, edições e permissões', arr(e.pre_requisitos)),
     secao('Nuvens e temas', true,
-      h('h4', null, 'Nuvens / produtos'),
+      h('h3', null, 'Nuvens / produtos'),
       nuvens.length ? h('ul', { class: 'lista-links' }, nuvens.map((n) => h('li', null, h('button', { type: 'button', class: 'link', on: { click: () => ctx.abrir(n) } }, ctx.rotulo(n))))) : h('p', { class: 'vazio' }, 'Nenhuma nuvem associada no catálogo.'),
-      h('h4', null, 'Tema principal'),
+      h('h3', null, 'Tema principal'),
       cp ? h('p', null, `${ctx.rotulo(cp.classificacao)} › ${ctx.rotulo(cp.subclassificacao)}`) : null,
-      cs.length ? h('div', null, h('h4', null, 'Também aparece nos temas'), h('ul', { class: 'lista' }, cs.map((c) => h('li', null, `${ctx.rotulo(c.classificacao)} › ${ctx.rotulo(c.subclassificacao)}`, c.motivo ? h('span', { class: 'nota' }, ` — ${c.motivo}`) : null)))) : null),
+      cs.length ? h('div', null, h('h3', null, 'Também aparece nos temas'), h('ul', { class: 'lista' }, cs.map((c) => h('li', null, `${ctx.rotulo(c.classificacao)} › ${ctx.rotulo(c.subclassificacao)}`, c.motivo ? h('span', { class: 'nota' }, ` — ${c.motivo}`) : null)))) : null),
     rec.length ? secao('Recomendações', false, h('ul', { class: 'lista' }, rec.map((r) => h('li', null, r.texto, h('span', { class: 'selo' }, NATUREZA_RECOMENDACAO[r.natureza ?? ''] ?? r.natureza ?? ''))))) : null,
     listaTexto('Alertas', arr(e.alertas)),
     listaTexto('Limitações conhecidas', arr(e.limitacoes)),
@@ -464,10 +464,16 @@ function painelFunc(ctx: CtxPainel, e: Entidade, caminho: readonly string[]): (N
   ];
 }
 
+/** #19: o tipo do nó como descrição do link, para distinguir nomes iguais (o metadata type PermissionSet e o objeto PermissionSet). */
+function tipoComoDescricao(ctx: CtxPainel, id: string): { title?: string } {
+  const t = ctx.ind.nos.get(id)?.tipo;
+  return t ? { title: NOME_TIPO[t] } : {};
+}
+
 function repLista(ctx: CtxPainel, titulo: string, itens: { ref: string; papel: string }[], caminho: readonly string[]): HTMLElement | null {
   if (!itens.length) return null;
-  return h('div', null, h('h4', null, titulo), h('ul', { class: 'lista-links' }, itens.map((r) => h('li', null,
-    h('button', { type: 'button', class: 'link', on: { click: () => ctx.abrirCaminho([...caminho, r.ref]) } }, ctx.rotulo(r.ref)),
+  return h('div', null, h('h3', null, titulo), h('ul', { class: 'lista-links' }, itens.map((r) => h('li', null,
+    h('button', { type: 'button', class: 'link', ...tipoComoDescricao(ctx, r.ref), on: { click: () => ctx.abrirCaminho([...caminho, r.ref]) } }, ctx.rotulo(r.ref)),
     h('span', { class: 'nota' }, ` — ${r.papel}`)))));
 }
 
@@ -528,7 +534,7 @@ function painelObj(ctx: CtxPainel, e: Entidade): (Node | null)[] {
     e.juncao ? h('p', { class: 'aviso' }, 'Objeto de junção: liga registros de dois objetos. Tem o mesmo nível de documentação dos demais, com todos os campos.') : null,
     h('p', { class: 'nota' }, 'Objeto consultável via API: é a interface pública documentada, não uma tabela física interna da Salesforce.'),
     secao('APIs de acesso e operações', true, ...exps.map((x) => h('div', { class: `afirmacao estado-${String(x.estado)}` },
-      h('h4', null, NOME_API[String(x.api)] ?? String(x.api), ' ', selo(String(x.estado))),
+      h('h3', null, NOME_API[String(x.api)] ?? String(x.api), ' ', selo(String(x.estado))),
       arr<string>(x.chamadas).length ? h('p', null, h('strong', null, 'Chamadas suportadas: '), arr<string>(x.chamadas).join(', ')) : null,
       x.acesso_especial ? h('p', null, h('strong', null, 'Permissões e restrições: '), String(x.acesso_especial)) : null,
       x.desde_versao ? h('p', null, `Desde a versão ${String(x.desde_versao)}`) : null,
@@ -557,7 +563,7 @@ function painelObj(ctx: CtxPainel, e: Entidade): (Node | null)[] {
 function botaoTabela(ctx: CtxPainel, dono: string, itens: Record<string, unknown>[], titulo: string, plural: string): HTMLElement | null {
   if (!itens.length) return h('p', { class: 'vazio' }, `Nenhum item registrado em ${titulo.toLowerCase()}.`);
   return h('div', { class: 'bloco-tabela' },
-    h('h4', null, `${titulo} (${itens.length})`),
+    h('h3', null, `${titulo} (${itens.length})`),
     h('p', { class: 'nota' }, `Este é o último nó do mapa. Os ${plural} abrem numa tabela, com o detalhe de cada um.`),
     h('button', { type: 'button', class: 'btn btn-tabela', on: { click: () => ctx.abrirTabela(dono) } }, `Ver ${itens.length} ${plural} em tabela`));
 }
@@ -671,7 +677,7 @@ function detalheItem(ctx: CtxPainel, f: Record<string, unknown>): (Node | null)[
     dom ? dominioEl(ctx, dom) : null,
     disp ? h('p', null, h('strong', null, 'Disponibilidade: '), disp.desde_versao ? `desde ${disp.desde_versao}` : 'versão inicial não informada', disp.ate_versao ? ` · até ${disp.ate_versao}` : '', ' ', selo(disp.estado ?? undefined)) : null,
     ehCampo ? propsApi(ctx, pa) : null,
-    ref?.alvos?.length ? h('div', { class: 'campo-txt' }, h('h4', null, 'Referência (lookup)'),
+    ref?.alvos?.length ? h('div', { class: 'campo-txt' }, h('h3', null, 'Referência (lookup)'),
       h('ul', { class: 'lista-links' }, ref.alvos.map((a) => h('li', null, ctx.ind.no(a)
         ? h('button', { type: 'button', class: 'link', on: { click: () => ctx.abrir(a) } }, `${ctx.rotulo(a)} (abrir objeto no mapa)`)
         : h('span', null, `${a} (objeto não catalogado)`)))),
@@ -702,7 +708,7 @@ function dominioEl(ctx: CtxPainel, d: Afirmacao & { natureza?: string; valores?:
   filtro?.addEventListener('input', render);
   render();
   return h('div', { class: `afirmacao estado-${d.estado ?? 'nenhum'}` },
-    h('h4', null, 'Valores possíveis', ' ', selo(d.estado)),
+    h('h3', null, 'Valores possíveis', ' ', selo(d.estado)),
     h('p', null, NATUREZA_DOMINIO[d.natureza ?? ''] ?? d.natureza ?? 'não informado', comp ? ` · ${comp}` : ''),
     d.contexto ? h('p', { class: 'nota' }, d.contexto) : null,
     filtro, vals.length ? ul : null,
@@ -711,10 +717,10 @@ function dominioEl(ctx: CtxPainel, d: Afirmacao & { natureza?: string; valores?:
 
 function propsApi(ctx: CtxPainel, pa?: Record<string, unknown>): HTMLElement {
   if (!pa || pa.estado !== 'verificado') {
-    return h('div', { class: 'afirmacao estado-desconhecido' }, h('h4', null, 'Propriedades de API (describe)', ' ', selo(String(pa?.estado ?? 'desconhecido'))),
+    return h('div', { class: 'afirmacao estado-desconhecido' }, h('h3', null, 'Propriedades de API (describe)', ' ', selo(String(pa?.estado ?? 'desconhecido'))),
       h('p', { class: 'vazio' }, 'Não extraídas com segurança. Não presumir leitura/escrita, nulabilidade nem filtros.'));
   }
-  return h('div', { class: 'afirmacao estado-verificado' }, h('h4', null, 'Propriedades de API (describe)', ' ', selo('verificado')),
+  return h('div', { class: 'afirmacao estado-verificado' }, h('h3', null, 'Propriedades de API (describe)', ' ', selo('verificado')),
     h('table', { class: 'tabela-props' }, h('tbody', null, PROPRIEDADES_API.map(([k, rot]) => h('tr', null, h('th', { scope: 'row' }, rot), h('td', null, pa[k] === true ? 'sim' : pa[k] === false ? 'não' : 'não informado'))))),
     fontesEl(ctx, arr(pa.evidencias)));
 }
@@ -745,8 +751,8 @@ function relacoes(ctx: CtxPainel, id: string, incluirCampos = false): HTMLElemen
     ' ', selo(a.estado),
     a.rel_id ? h('button', { type: 'button', class: 'link link-sec', on: { click: () => ctx.abrirRelacao(a.rel_id!) } }, ' (por que se relacionam?)') : null);
   return secao(`Relações técnicas (${sai.length + ent.length})`, true,
-    sai.length ? h('div', null, h('h4', null, 'Deste item para outros'), h('ul', { class: 'lista' }, sai.map((a) => item(a, a.destino, `${nome(a.origem)} →`)))) : null,
-    ent.length ? h('div', null, h('h4', null, 'De outros itens para este'), h('ul', { class: 'lista' }, ent.map((a) => item(a, a.origem, '←')))) : null,
+    sai.length ? h('div', null, h('h3', null, 'Deste item para outros'), h('ul', { class: 'lista' }, sai.map((a) => item(a, a.destino, `${nome(a.origem)} →`)))) : null,
+    ent.length ? h('div', null, h('h3', null, 'De outros itens para este'), h('ul', { class: 'lista' }, ent.map((a) => item(a, a.origem, '←')))) : null,
     h('p', { class: 'nota' }, 'Cada relação mostra seu estado de evidência; "por que se relacionam?" abre a ficha da relação com campos, cardinalidade e fontes.'));
 }
 
@@ -766,7 +772,7 @@ function coberturaEl(e: Entidade): HTMLElement | null {
 
 function listaLinks(ctx: CtxPainel, titulo: string, ids: string[]): HTMLElement | null {
   if (!ids.length) return null;
-  return h('div', { class: 'campo-txt' }, h('h4', null, titulo), h('ul', { class: 'lista-links' }, ids.map((i) => h('li', null, h('button', { type: 'button', class: 'link', on: { click: () => ctx.abrir(i) } }, ctx.rotulo(i))))));
+  return h('div', { class: 'campo-txt' }, h('h3', null, titulo), h('ul', { class: 'lista-links' }, ids.map((i) => h('li', null, h('button', { type: 'button', class: 'link', on: { click: () => ctx.abrir(i) } }, ctx.rotulo(i))))));
 }
 
 // ------------------------------------------------------------------ painel de relação (aresta)
