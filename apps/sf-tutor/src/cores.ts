@@ -9,8 +9,12 @@ export const PALETA_CLASSIFICACAO = [
   '#4c388a', '#3ee6f2', '#792c6a', '#2bbe6a', '#375487', '#cd5ddc', '#1d6765',
   '#9b6bff', '#227084', '#ff4fb8', '#195e47', '#6ca8f8', '#62327a', '#34d2ae',
 ];
-// Escala por nuvem: os matizes no nível escuro, para o rótulo branco dentro do nó ter contraste.
-export const PALETA_NUVEM = ['#4c388a', '#227084', '#792c6a', '#195e47', '#375487', '#62327a'];
+// Escala por nuvem: os mesmos 14 tons da escala por tema, em outra ordem (começa pelos escuros),
+// para que até 14 nuvens tenham cor própria. A sigla dentro do nó escolhe o texto de maior contraste.
+export const PALETA_NUVEM = [
+  '#4c388a', '#227084', '#792c6a', '#195e47', '#375487', '#62327a', '#1d6765',
+  '#9b6bff', '#3ee6f2', '#ff4fb8', '#2bbe6a', '#6ca8f8', '#cd5ddc', '#34d2ae',
+];
 
 export class Cores {
   private cls = new Map<string, string>();

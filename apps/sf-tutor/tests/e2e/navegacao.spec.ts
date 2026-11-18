@@ -301,3 +301,14 @@ test('busca pela pasta do projeto acha o metadata type; tipo sem ficha aparece m
   await semFicha.dispatchEvent('mousedown');
   expect(page.url()).toBe(antes);
 });
+
+// Nuvens que faltavam (2026-11-17): produto com plataforma própria mostra onde roda, marcado como classificação do projeto.
+test('nuvem nova mostra onde roda e o nome atual', async ({ page }) => {
+  await abrir(page, '?n=nuv:mulesoft');
+  await expect(titulo(page)).toHaveText('MuleSoft');
+  await expect(painel(page)).toContainText('Plataforma própria, conectada à org');
+  await expect(painel(page)).toContainText('classificação do projeto');
+  await abrir(page, '?n=nuv:platform-core');
+  await expect(titulo(page)).toHaveText('Agentforce 360 Platform');
+  await expect(painel(page)).toContainText('Roda na org Salesforce');
+});

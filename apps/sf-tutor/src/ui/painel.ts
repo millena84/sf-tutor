@@ -5,7 +5,7 @@ import type { Entidades } from '../data/carregador';
 import { Indice, TIPOS_FOLHA, TIPOS_OBJETO, type Visao } from '../model/adaptador';
 import {
   FORMA_DEFAULT, ICONE_TIPO, LIGACAO, NATUREZA_DOMINIO, NATUREZA_RECOMENDACAO, NOME_API, NOME_TIPO, OBRIGATORIEDADE, ORIGEM,
-  PROPRIEDADES_API, TIPO_LICENCA, RECORTE, TIPO_AVANCADO, estadoRecorte, rotuloEstado,
+  CATEGORIA_NUVEM, PROPRIEDADES_API, TIPO_LICENCA, RECORTE, TIPO_AVANCADO, estadoRecorte, rotuloEstado,
 } from '../rotulos';
 import { copiar, h, limpar } from './dom';
 import { afirmacao, codigo, fontesEl, listaTexto, restantes, secao, selo, texto, valorEl } from './partes';
@@ -167,6 +167,13 @@ function infoLogo(e: Entidade): HTMLElement | null {
     h('p', { class: 'nota' }, 'A imagem é carregada direto do endereço oficial (não é copiada para o projeto). Se não carregar, o mapa mostra um substituto. Salesforce e os nomes de produtos são marcas da Salesforce, Inc.; este projeto não é afiliado nem endossado pela Salesforce.'));
 }
 
+function categoriaNuvem(valor: unknown): Node | null {
+  const c = CATEGORIA_NUVEM[String(valor ?? '')];
+  if (!c) return null;
+  return h('div', { class: 'campo-txt' }, h('h4', null, 'Onde roda', h('span', { class: 'marca-didatica', title: 'Classificação do projeto; não é nomenclatura oficial da Salesforce.' }, ' · classificação do projeto')),
+    h('p', null, h('strong', null, c.rotulo), ` — ${c.explicacao}`));
+}
+
 function painelNuvem(ctx: CtxPainel, e: Entidade, caminho: readonly string[]): (Node | null)[] {
   const lic = ent<Afirmacao & { itens?: Record<string, unknown>[] }>(e, 'licencas');
   const cas = arr<{ classificacao: string; subclassificacoes: { subclassificacao: string; funcionalidades: string[] }[] }>(e.classificacoes_aplicaveis);
@@ -175,6 +182,7 @@ function painelNuvem(ctx: CtxPainel, e: Entidade, caminho: readonly string[]): (
   const compart = unicas.filter((f) => (ctx.ind.nuvensDaFunc.get(f) ?? []).length > 1);
   return [
     texto('Resumo', e.resumo, { didatico: true }),
+    categoriaNuvem(e.categoria),
     listaTexto('Nome oficial e aliases', [String(e.nome_oficial ?? ''), ...arr<string>(e.aliases).map((a) => `Alias: ${a}`)]),
     texto('O que é', e.o_que_e, { didatico: true }),
     listaTexto('Casos de uso', arr(e.casos_de_uso)),
@@ -199,7 +207,7 @@ function painelNuvem(ctx: CtxPainel, e: Entidade, caminho: readonly string[]): (
     texto('Cobertura do inventário desta nuvem', e.cobertura_inventario),
     secao('Fontes', false, fontesEl(ctx, arr(e.evidencias))),
     infoLogo(e),
-    restantes(e, ['id', 'nome_oficial', 'logo_marca', 'aliases', 'sigla', 'resumo', 'o_que_e', 'casos_de_uso', 'contexto_tecnico', 'licencas', 'classificacoes_aplicaveis', 'dependencias', 'limites', 'cobertura_inventario', 'estado', 'evidencias']),
+    restantes(e, ['id', 'nome_oficial', 'logo_marca', 'aliases', 'sigla', 'categoria', 'resumo', 'o_que_e', 'casos_de_uso', 'contexto_tecnico', 'licencas', 'classificacoes_aplicaveis', 'dependencias', 'limites', 'cobertura_inventario', 'estado', 'evidencias']),
   ];
 }
 

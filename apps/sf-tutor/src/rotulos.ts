@@ -79,6 +79,13 @@ export const NATUREZA_RECOMENDACAO: Record<string, string> = {
   oficial: 'Orientação oficial', inferencia_tecnica: 'Inferência técnica fundamentada', preferencia_projeto: 'Preferência do projeto',
 };
 
+/** Onde o produto roda: classificação didática do projeto (campo `categoria` das nuvens). */
+export const CATEGORIA_NUVEM: Record<string, { rotulo: string; explicacao: string }> = {
+  na_org: { rotulo: 'Roda na org Salesforce', explicacao: 'Usa a mesma org, os mesmos dados e as mesmas APIs da plataforma.' },
+  plataforma_propria: { rotulo: 'Plataforma própria, conectada à org', explicacao: 'Tem org, conta ou runtime próprios e se liga à org Salesforce por uma conexão.' },
+  misto: { rotulo: 'Família mista', explicacao: 'Reúne produtos que rodam na org e produtos com plataforma própria.' },
+};
+
 export const TIPO_LICENCA: Record<string, string> = {
   licenca_usuario: 'Licença de usuário', licenca_permission_set: 'Licença de permission set', edicao: 'Edição', add_on: 'Add-on', licenca_recurso: 'Feature license (licença de recurso)',
 };
