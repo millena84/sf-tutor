@@ -237,7 +237,7 @@ test('"Sobre este tema" mostra as três camadas na mesma ordem em tema e tema in
     await expect(painel(page).locator('.linha-selos')).not.toContainText('Desconhecido');
     await expect(painel(page).locator('.linha-selos .selo-recorte')).toHaveText(comReferencias ? 'Parcialmente conferido' : 'Curadoria do projeto');
     const sobre = await secao(page, /^Sobre este tema$/);
-    await expect(sobre.locator('.camada > h4')).toHaveText(['Para quem está começando', 'Para quem já conhece Salesforce']);
+    await expect(sobre.locator('.camada > h3')).toHaveText(['Para quem está começando', 'Para quem já conhece Salesforce']);
     await expect(sobre).toContainText(/Funcionalidades \(\d+\)/);
     const avancado = sobre.locator('details.camada-avancada');
     await expect(avancado.locator('summary').first()).toHaveText('Nível avançado');
@@ -245,7 +245,7 @@ test('"Sobre este tema" mostra as três camadas na mesma ordem em tema e tema in
     await avancado.locator('summary').first().click();
     const recorte = avancado.locator('details.sobre-recorte');
     await recorte.locator('summary').click();
-    await expect(recorte.locator('h5')).toContainText(['O que entra neste tema', 'O que fica fora e onde procurar', 'Correspondência com referências oficiais']);
+    await expect(recorte.locator('h4')).toContainText(['O que entra neste tema', 'O que fica fora e onde procurar', 'Correspondência com referências oficiais']);
     if (comReferencias) {
       await expect(recorte).toContainText('Parcialmente conferido');
       await expect(recorte.locator('ul.fontes li').first()).toContainText(/Cobre (o tema|parte do tema)|Mais ampla que o tema/);
@@ -253,7 +253,7 @@ test('"Sobre este tema" mostra as três camadas na mesma ordem em tema e tema in
       await expect(recorte).toContainText('Veja as do tema de cima');
     }
     await expect(painel(page)).not.toContainText('Estado do agrupamento');
-    for (const t of await painel(page).locator('summary, h4').allTextContents()) expect(t).not.toMatch(/lassificaç/);
+    for (const t of await painel(page).locator('summary, h3').allTextContents()) expect(t).not.toMatch(/lassificaç/);
     await semErroNoPainel(page);
   }
 });
@@ -266,13 +266,13 @@ test('tema com conteúdo próprio: exemplo, comece por, encadeamento e decisões
   await expect(c1.locator('.analogia')).toContainText('Onde a analogia para');
   await expect(c1.locator('.comece-por button')).toHaveText(['Lightning apps', 'Lightning pages', 'Page layouts']);
   const c2 = sobre.locator('.camada').nth(1);
-  await expect(c2.locator('h5').first()).toHaveText('Como as partes se ligam');
+  await expect(c2.locator('h4').first()).toHaveText('Como as partes se ligam');
   await expect(c2).toContainText('FlexiPage');
   // metadata types alcançados pelas funcionalidades do tema, inclusive os cadastrados na rodada A3
   await expect(c2).toContainText('CustomApplication');
   const avancado = sobre.locator('details.camada-avancada');
   await avancado.locator('summary').first().click();
-  await expect(avancado.locator('.item-avancado h5')).toContainText(['Decisão: Qual ferramenta usar para um formulário', 'Segurança: A página não é controle de acesso']);
+  await expect(avancado.locator('.item-avancado h4')).toContainText(['Decisão: Qual ferramenta usar para um formulário', 'Segurança: A página não é controle de acesso']);
   await expect(avancado).toContainText('Implantação: suporte no Salesforce CLI');
   await expect(avancado).toContainText('Dependências entre componentes');
   // todo item curado tem fonte
@@ -281,7 +281,7 @@ test('tema com conteúdo próprio: exemplo, comece por, encadeamento e decisões
   // tema interno navega para a funcionalidade pelo "comece por"
   await abrir(page, '?n=sub:lightning-pages-e-componentes');
   const s2 = await secao(page, /^Sobre este tema$/);
-  await expect(s2.locator('.camada').nth(1).locator('h5').first()).toHaveText('Como se encaixa no tema de cima');
+  await expect(s2.locator('.camada').nth(1).locator('h4').first()).toHaveText('Como se encaixa no tema de cima');
   await s2.locator('.comece-por button').first().click();
   await expect(titulo(page)).toHaveText('Lightning pages');
 });

@@ -353,7 +353,17 @@ O WSDL **não** é bloqueio: a documentação de cada tipo é a fonte alternativ
   - Seguem: C2 (paleta e rótulos; #23, #17), C3 (acessibilidade; #19), D2 (certificações) e D3 (nuvens × funcionalidades).
   - C2 concluída (PR #97). Auditoria de acessibilidade da C3 feita sem alterar código; a regressão de contraste da busca foi corrigida antes (PR #98).
   - Rodada de nuvens (2026-11-17, decisão da autora; lote 7w): 9 nuvens/produtos novos como nó, ligados às funcionalidades já cadastradas e sem inventário de metadata types. Campo didático `categoria` (na_org, plataforma_propria, misto). Platform/Core passa a se chamar Agentforce 360 Platform. Agentforce não virou nó separado, porque os agentes ficam na plataforma. `config/escopo.json` registra que os produtos fora do recorte aparecem no mapa, enquanto o critério X1 segue valendo para o inventário.
-  - Seguem: resto da C3 (itens 3 a 10 da auditoria), D2 (#96) e o inventário por nuvem, uma de cada vez.
+  - C3 (acessibilidade, 2026-11-18): itens 3 a 10 da auditoria feitos (migalhas com 24px, títulos h2>h3>h4 na ficha, rótulos esmaecidos a 3:1 ou mais, tipo como descrição dos links, botão "Reduzir animações" com estado só em aria-pressed). axe nos testes E2E, em 10 estados mais as janelas, desktop e 360px. Roteiro com leitor de tela em `apps/sf-tutor/ACESSIBILIDADE.md`, a ser executado pela autora.
+  - **Plano de evolução combinado com a autora (2026-11-18):**
+    - Fase 0: secret `TUTORIAL_SF_GRAFO_TOKEN` (#15), para publicar automaticamente (autora).
+    - Fase 1: acabamento (acessibilidade feita; logos de Experience Cloud e Industries se houver endereço; slogan #102).
+    - **Fase 2 (prioridade):** explicações pendentes, uma classificação por sessão e um PR por lote. Lista viva em `relatorios/fase2-pendencias-por-classificacao.md` (gerada por `ferramentas/pendencias_explicacao.py`): 509 itens em 26 nós, sendo 377 em "Processos de negócio específicos de produto".
+    - Fase 3: inventário por nuvem (Experience Cloud → Field Service → Revenue → Industries → Data 360, com conectores).
+    - Fase 4: classificação Core dos 981 metadata types (#10), em lotes pequenos e em paralelo.
+    - Fase 5: ligação funcionalidade ↔ propriedade e mapeamento XML ↔ campo de API (mudam o esquema).
+    - Fase 6: certificações (#96).
+    - Contínuo: validação em org e fontes bloqueadas (#12).
+    - Para poupar créditos: lotes pequenos e fechados por sessão; validação completa só no fim de cada lote.
   - Plano de rodadas combinado com a autora (2026-11-16), na ordem: C1 (CI e publicação automática; PRs #68 e #69), B1 (esta), A1 Desenvolvimento, A2 Assíncrono e lotes, A3 Interface, A4 Observabilidade, A5 Conteúdo, A6 IA e agentes, B2 catálogo de Relatórios, B3 Qualidade, B4 remanescentes de Dados/Acesso/Org/Processos (inclui #8 e #9), B5 qualidade do já cadastrado (caminhos de Setup, objetos API, #39), D1 fechamento do MVP, C2 paleta e rótulos (#23, #17), C3 acessibilidade e ajustes (#19), D2 camada de certificações, D3 nuvens × funcionalidades.
   - Achado para a camada de certificações: o guia de prova "Salesforce Certified Platform Administrator Exam Guide" apareceu como artigo em help.salesforce.com (id=005298966), domínio já aceito. Não foi lido nem usado; conferir se os demais guias também estão lá.
 

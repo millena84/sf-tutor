@@ -408,7 +408,8 @@ function estilo(): unknown[] {
     { selector: 'node[oculto = 1]', style: { opacity: 0.22, 'border-style': 'dotted' } },
     { selector: 'node.foco', style: { 'border-width': 5, 'border-color': '#D3439E', 'border-opacity': 1, 'z-index': 20 } },
     // #17: o que está em segundo plano fica por baixo e com rótulo mais apagado; o caminho e os vizinhos ficam por cima
-    { selector: 'node.esmaecido', style: { opacity: 0.18, 'text-opacity': 0.5, 'z-index': 0 } },
+    // #19: o rótulo do esmaecido fica legível (≈3:1 sobre o fundo) e o nó continua claramente em segundo plano
+    { selector: 'node.esmaecido', style: { opacity: 0.5, 'text-opacity': 1, 'z-index': 0 } },
     { selector: 'node.vizinho', style: { opacity: 1, 'text-opacity': 1, 'z-index': 10, 'text-background-opacity': 0.95 } },
     { selector: 'node.foco', style: { 'text-opacity': 1, 'text-background-opacity': 1 } },
     {
