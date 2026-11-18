@@ -33,6 +33,10 @@ describe('interface (variáveis de estilos.css)', () => {
     expect(contraste(branco, variavel('destaque'))).toBeGreaterThanOrEqual(4.5);
     expect(contraste(branco, variavel('destaque-2'))).toBeGreaterThanOrEqual(4.5);
   });
+  it('aviso de item oculto na busca, inclusive sobre o resultado realçado', () => {
+    expect(contraste('#92400e', variavel('superficie'))).toBeGreaterThanOrEqual(4.5);
+    expect(contraste('#92400e', variavel('destaque-suave'))).toBeGreaterThanOrEqual(4.5);
+  });
   it('cores fixas do cabeçalho e do rodapé', () => {
     expect(contraste('#BABDCA', variavel('noite'))).toBeGreaterThanOrEqual(4.5);
     expect(contraste('#D6D8E6', variavel('faixa-roxa'))).toBeGreaterThanOrEqual(4.5);

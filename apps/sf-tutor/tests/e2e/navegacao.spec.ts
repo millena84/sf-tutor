@@ -312,3 +312,20 @@ test('nuvem nova mostra onde roda e o nome atual', async ({ page }) => {
   await expect(titulo(page)).toHaveText('Agentforce 360 Platform');
   await expect(painel(page)).toContainText('Roda na org Salesforce');
 });
+
+// Regressão da C2: a lista de resultados fica dentro do cabeçalho escuro e herdava a cor Claro (texto quase invisível).
+test('resultados da busca têm contraste AA com o fundo da lista', async ({ page }) => {
+  await abrir(page, '');
+  await page.locator('#busca').fill('PermissionSet');
+  const rot = page.locator('#resultados [role=option] .res-rot').first();
+  await expect(rot).toBeVisible();
+  const razao = await rot.evaluate((el) => {
+    const rgb = (s: string) => (s.match(/\d+(\.\d+)?/g) ?? []).slice(0, 3).map(Number);
+    const lum = ([r, g, b]: number[]) => [r, g, b].map((v) => { const c = v / 255; return c <= 0.03928 ? c / 12.92 : ((c + 0.055) / 1.055) ** 2.4; })
+      .reduce((t, c, i) => t + c * [0.2126, 0.7152, 0.0722][i], 0);
+    const lista = document.getElementById('resultados')!;
+    const [a, b] = [lum(rgb(getComputedStyle(el).color)), lum(rgb(getComputedStyle(lista).backgroundColor))].sort((x, y) => y - x);
+    return (a + 0.05) / (b + 0.05);
+  });
+  expect(razao).toBeGreaterThanOrEqual(4.5);
+});
