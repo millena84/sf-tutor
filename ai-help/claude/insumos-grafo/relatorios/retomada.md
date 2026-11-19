@@ -373,6 +373,13 @@ O WSDL **não** é bloqueio: a documentação de cada tipo é a fonte alternativ
     - Ficaram pendentes de propósito: OmniUiCard (fora da lista Omnistudio lida); DecisionMatrixDefinition, DecisionTable e DecisionTableDatasetLink (lista de Lookup Tables sem frase de licença); Ins* (a lista de Insurance Claims só traz InsPlcyLimitConsumptionRule).
     - Restam 797 dos 832 tipos não catalogados (801 pendentes no inventário, contando os 4 de IA da etapa 1).
     - Próximas famílias sugeridas, com fonte já localizada ou provável: Insurance e Financial Services (guias próprios), Public Sector (Reglt*, Assessment*), Data 360 (precisa de lista legível; o endereço `meta_data_cloud_types.htm` devolveu só índice), CRM Analytics (Wave*, Analytics*; falta frase de licença na página do tipo), Experience Cloud (Community*, DigitalExperience*, Network*), Agentforce IT Service (Cnfg*, ServiceItsm*). Depois, os tipos de plataforma (*Settings genéricos), que tendem a entrar no Core e pedem fonte por tipo.
+  - #10, etapa 2, lote 2 (2026-11-18; lote 7y2, `ferramentas/carga/lotes/lote7y2_core_familias_2.py`): 25 tipos com decisão e motivo, mesmo padrão do lote 1.
+    - Excluídos por X2 (11): Discovery Framework (5; vem incluído só em nuvens de setor), Salesforce Pricing (4; edições de Revenue Management) e Public Sector (2).
+    - Pendentes por C2, com motivo (14): Agentforce IT Service. A frase de edição lida não esclarece a licença.
+    - Nota: `fontes/extracoes/lote7y2-core-familias-2.txt`. Dos 27 nomes da lista de IT Service, 13 não constam do inventário v68 e ficaram de fora.
+    - Achado: a nota de `src:help-revenue-settings` não registra a frase "exige licença de Revenue Management" que o catálogo atribui a ela (funcionalidade revenue-management, Setup). Conferir numa rodada de qualidade.
+    - Ainda sem frase de licença: Field Service (TimeSheetTemplate; Skill também serve ao roteamento de chats), Lookup Tables, Insurance.
+    - Tipos não catalogados sem nenhuma decisão: 772 de 832.
   - Fase 2, lote Automação (2026-11-18; lote 7z, `ferramentas/carga/lotes/lote7z_fase2_automacao.py`): 36 campos de primeiro nível de Flow ganharam explicação, e 25 deles também a versão em que entraram.
     - Fonte: página de Flow na referência atual da Metadata API (`src:mdapi-flow-ref-atual`); nota em `fontes/extracoes/lote7z-fase2-automacao.txt`. A página não mostra o nome ao lado de cada linha: a correspondência foi feita pelo tipo da linha, que coincide com o tipo já catalogado.
     - Textos só com o que a fonte diz (sem rótulos de interface nem exemplos que ela não traz).
