@@ -25,25 +25,50 @@ C.registrar_fontes([
             metodo="leitura_resultado_busca"),
     C.fonte("src:help-agent-setup", "Set Up Your Agent", H + "language=en_US&id=ai.agent_parent_setup.htm&type=5",
             "Licenças add-on variam conforme o tipo de agente.", EXTR, DATA, versao="sem versão na URL", metodo="leitura_resultado_busca"),
+    C.fonte("src:help-prompt-builder-edicoes", "Prompt Builder", H + "language=en_US&id=ai.prompt_builder_about.htm&type=5",
+            "Prompt templates alimentam IA generativa e agentes; exige add-on Einstein ou Agentforce, ou Agentforce Foundations.", EXTR, DATA,
+            versao="sem versão na URL", metodo="leitura_resultado_busca"),
+    C.fonte("src:help-prompt-templates-standard", "Standard Prompt Templates",
+            H + "id=ai.prompt_builder_standard_prompt_templates.htm&language=en_US&type=5",
+            "Prompt templates são pilot, custom ou standard.", EXTR, DATA, versao="sem versão na URL", metodo="leitura_resultado_busca"),
+    C.fonte("src:help-prompt-packaging", "Packaging Considerations for Prompt Templates",
+            H + "id=ai.prompt_builder_considerations_packaging.htm&language=en_US",
+            "Einstein Generative AI precisa estar ativo para instalar prompt templates.", EXTR, DATA, versao="sem versão na URL",
+            metodo="leitura_resultado_busca"),
 ])
+
+TRES = ["nuv:platform-core", "nuv:sales-cloud", "nuv:service-cloud"]
+ORIENT = ("Orientação da autora (2026-11-19): é diretamente de Agentforce, seja o agente de Sales, Service ou Core; "
+          "liga às três frentes.")
+ORIENT_PROMPT = ("Orientação da autora (2026-11-19): prompt templates seguem a linha de Agentforce; Sales e Service trazem prompts "
+                 "standard, e o Core tende a usar prompts customizados.")
+COND_PROMPT = ("IA generativa (Einstein Generative AI) habilitada, com add-on Einstein for Platform, Einstein ou Agentforce for Sales "
+               "ou Service, ou Agentforce Foundations.")
+EV_PROMPT = [{"fonte": "src:help-prompt-builder-edicoes", "uso": "lista"}, {"fonte": "src:help-prompt-builder-edicoes", "uso": "licenca"},
+             {"fonte": "src:help-prompt-templates-standard", "uso": "lista"}, {"fonte": "src:help-prompt-packaging", "uso": "licenca"}]
 
 COND = "Agentforce habilitado na org (exige Einstein Generative AI ligado; licenças variam por tipo de agente)."
 EV_FAM = [{"fonte": "src:agentforce-metadata-types", "uso": "lista"}, {"fonte": "src:help-enable-agentforce", "uso": "licenca"},
           {"fonte": "src:help-agent-setup", "uso": "licenca"}]
 TIPOS = {
-    "AiAuthoringBundle": ("Contêiner do Agent Script e dos metadados de um agente Agentforce.", COND, ["nuv:platform-core"], EV_FAM, "familia"),
-    "GenAiFunction": ("Ação que pode ser adicionada a agentes Agentforce.", COND, ["nuv:platform-core"], EV_FAM, "familia"),
-    "GenAiPlugin": ("Subagente que agrupa ações de agentes Agentforce.", COND, ["nuv:platform-core"], EV_FAM, "familia"),
+    "AiAuthoringBundle": ("Contêiner do Agent Script e dos metadados de um agente Agentforce.", COND, TRES, EV_FAM, "familia"),
+    "GenAiFunction": ("Ação que pode ser adicionada a agentes Agentforce.", COND, TRES, EV_FAM, "familia"),
+    "GenAiPlugin": ("Subagente que agrupa ações de agentes Agentforce.", COND, TRES, EV_FAM, "familia"),
     "AiEvaluationDefinition": ("Define testes de agentes Agentforce; a página do tipo diz que ele só existe com Agentforce habilitado.", COND,
-                               ["nuv:platform-core"],
+                               TRES,
                                [{"fonte": "src:agentforce-testing-metadata", "uso": "lista"}, {"fonte": "src:agentforce-testing-metadata", "uso": "licenca"}],
                                "proprio_tipo"),
     "Bot": ("Registro principal de um agente Agentforce ou de um Einstein Bot.",
-            "Agentforce habilitado na org, ou Einstein Bots (Service Cloud).", ["nuv:platform-core", "nuv:service-cloud"], EV_FAM, "familia"),
+            "Agentforce habilitado na org, ou Einstein Bots (Service Cloud).", TRES, EV_FAM, "familia"),
     "BotVersion": ("Configuração de uma versão de agente Agentforce ou de Einstein Bot.",
-                   "Agentforce habilitado na org, ou Einstein Bots (Service Cloud).", ["nuv:platform-core", "nuv:service-cloud"], EV_FAM, "familia"),
+                   "Agentforce habilitado na org, ou Einstein Bots (Service Cloud).", TRES, EV_FAM, "familia"),
+    "GenAiPromptTemplate": ("Prompt template: instrução reutilizável que alimenta recursos de IA generativa e agentes Agentforce.",
+                            COND_PROMPT, TRES, EV_PROMPT, "familia"),
+    "EinsteinGptSettings": ("Configurações de IA generativa da org, inclusive o controle de implantação de prompt templates.",
+                            COND_PROMPT, TRES, EV_PROMPT, "familia"),
 }
-ETAPA1 = {"GenAiFunction", "GenAiPlugin"}  # pendentes da etapa 1 que este lote resolve
+PROMPT = {"GenAiPromptTemplate", "EinsteinGptSettings"}
+ETAPA1 = {"GenAiFunction", "GenAiPlugin", "GenAiPromptTemplate", "EinsteinGptSettings"}  # pendentes da etapa 1 que este lote resolve
 
 inv = {i["nome"] for i in json.load(open(os.path.join(RAIZ, "inventarios", "metadata-types-v68.json"), encoding="utf-8"))["itens"]}
 esc_p = os.path.join(RAIZ, "config", "escopo.json")
@@ -56,7 +81,8 @@ for t, (o_que, condicao, nuvens, ev, alcance) in TIPOS.items():
     assert atual is None or atual.get("familia") == "Agentforce" or (t in ETAPA1 and atual["decisao"] == "pendente"), f"{t}: decisão inesperada"
     just[t] = {"decisao": "condicional", "criterios": ["C4"], "condicao": condicao,
                "motivo": o_que + " Pelo C4, fica ligado ao Core e às nuvens que o usam, com a condição registrada.",
-               "familia": "Agentforce", "nuvens": nuvens, "evidencias": ev, "alcance_da_licenca": alcance, "data": DATA}
+               "familia": "Agentforce", "nuvens": nuvens, "evidencias": ev, "alcance_da_licenca": alcance, "data": DATA,
+               "orientacao_autora": ORIENT_PROMPT if t in PROMPT else ORIENT}
     if t in ETAPA1:
         just[t]["historico"] = "Pendente na etapa 1 (licença não esclarecida); resolvido pelo C4 em 2026-11-19."
     inc.discard(t); exc.discard(t); cond.add(t)
