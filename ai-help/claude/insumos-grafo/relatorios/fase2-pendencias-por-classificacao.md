@@ -2,7 +2,7 @@
 
 Gerado por `ferramentas/pendencias_explicacao.py`. Não edite à mão.
 
-**Total:** 438 itens pendentes em 25 nós (cada nó contado uma vez).
+**Total:** 436 itens pendentes em 25 nós (cada nó contado uma vez).
 Um nó usado por funcionalidades de temas diferentes aparece em cada tema; por isso a soma das tabelas pode passar do total.
 
 Sugestão de uso: escolher uma classificação por sessão, começando pelas de mais itens ou pelas que o público mais visita, e fechar os nós dela num PR.
@@ -12,7 +12,7 @@ Sugestão de uso: escolher uma classificação por sessão, começando pelas de 
 | Classificação | Nós | Itens pendentes |
 |---|---|---|
 | Processos de negócio específicos de produto | 15 | 377 |
-| Acesso, identidade e segurança | 2 | 32 |
+| Acesso, identidade e segurança | 2 | 30 |
 | Dados e modelagem | 2 | 8 |
 | Automação de processos e regras de negócio | 3 | 7 |
 | Organização e configurações base | 2 | 4 |
@@ -47,15 +47,15 @@ Sugestão de uso: escolher uma classificação por sessão, começando pelas de 
 - [ ] `mdt:CommunitiesSettings` (metadata type): 3 de 26 pendentes. Funcionalidades: digital-experiences
 
 
-## Acesso, identidade e segurança (32 itens)
-
-### Acesso a registros e hierarquias
-
-- [ ] `obj:User` (objeto API): 31 de 206 pendentes. Funcionalidades: hierarquia-de-papeis
+## Acesso, identidade e segurança (30 itens)
 
 ### Usuários e provisionamento
 
-- [ ] `obj:User` (objeto API): 31 de 206 pendentes. Funcionalidades: usuarios
+- [ ] `obj:User` (objeto API): 29 de 206 pendentes. Funcionalidades: usuarios
+
+### Acesso a registros e hierarquias
+
+- [ ] `obj:User` (objeto API): 29 de 206 pendentes. Funcionalidades: hierarquia-de-papeis
 
 ### Licenças e entitlements de acesso
 
