@@ -687,7 +687,7 @@ function detalheItem(ctx: CtxPainel, f: Record<string, unknown>): (Node | null)[
     listaTexto('Notas', arr(f.notas)),
     relacoes(ctx, id),
     secao('Fontes', true, fontesEl(ctx, arr(f.evidencias))),
-    h('p', { class: 'linha-selos' }, 'Explicação: ', String(f.explicacao ?? '?'), ' · Estado: ', rotuloEstado(String(f.estado))),
+    h('p', { class: 'linha-selos' }, 'Explicação: ', rotuloExplicacao(f.explicacao), ' · Estado: ', rotuloEstado(String(f.estado))),
     restantes(f, ['id', 'nome', 'tipo_tecnico', 'o_que_e', 'origem', 'obrigatoriedade', 'default', 'dominio', 'disponibilidade', 'explicacao', 'estado', 'evidencias', 'cardinalidade', 'estrutura_ref', 'herdada_de', 'notas', 'restricoes', 'rotulo_didatico', 'exemplo', 'tipo_explicado', 'apis', 'propriedades_api', 'somente_leitura', 'referencia']),
     f.estrutura_ref ? h('p', null, 'Tipo composto: ', h('button', { type: 'button', class: 'link', on: { click: () => ctx.abrirTabela(String(f.estrutura_ref)) } }, `${ctx.rotulo(String(f.estrutura_ref))} (abrir tabela)`)) : null,
   ];
@@ -848,3 +848,14 @@ function corpoRelacao(ctx: CtxPainel, r: Entidade): (Node | null)[] {
 }
 
 export { TIPOS_OBJETO };
+
+const ROTULO_EXPLICACAO: Record<string, string> = {
+  explicada: 'explicada',
+  pendente: 'pendente',
+  nao_encontrada: 'descrição oficial não encontrada',
+};
+
+function rotuloExplicacao(v: unknown): string {
+  const k = String(v ?? '?');
+  return ROTULO_EXPLICACAO[k] ?? k;
+}
