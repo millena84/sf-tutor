@@ -380,6 +380,12 @@ O WSDL **não** é bloqueio: a documentação de cada tipo é a fonte alternativ
     - Achado: a nota de `src:help-revenue-settings` não registra a frase "exige licença de Revenue Management" que o catálogo atribui a ela (funcionalidade revenue-management, Setup). Conferir numa rodada de qualidade.
     - Ainda sem frase de licença: Field Service (TimeSheetTemplate; Skill também serve ao roteamento de chats), Lookup Tables, Insurance.
     - Tipos não catalogados sem nenhuma decisão: 772 de 832.
+  - #10, etapa 2, lote 3 (2026-11-19; lote 7y3, `ferramentas/carga/lotes/lote7y3_core_familias_3.py`): 14 tipos com decisão e motivo.
+    - CRM Analytics (9 Wave*): excluídos por X2 (licenças por usuário, `src:help-crm-analytics-licenses`). Sem página de lista única: cada tipo tem a própria fonte (página do tipo, lida pelo resultado de busca).
+    - Experience Cloud (4): ExperienceBundle, DigitalExperienceConfig, CommunityTemplateDefinition e CommunityThemeDefinition, excluídos por C3, como Network e CustomSite na etapa 1. O validador aceita `alcance_da_licenca = "nao_se_aplica"` para essas decisões.
+    - Pendente com motivo (1): DigitalExperienceBundle, que serve a workspaces de site, marketing e general.
+    - Sem decisão de propósito: SiteDotCom (serve a Experience Cloud e a Site.com), WaveAnalyticAssetCollection (página não lida) e os Analytics* (não lidos; podem ser de outro produto).
+    - Nota: `fontes/extracoes/lote7y3-core-familias-3.txt`. Tipos não catalogados sem nenhuma decisão: 758 de 832.
   - Fase 2, lote Conteúdo (2026-11-18; lote 8a, `ferramentas/carga/lotes/lote8a_fase2_conteudo.py`): os 35 campos pendentes de KnowledgeArticleVersion ganharam tipo e explicação; 5 também a versão em que entraram. A cobertura explicativa do objeto fica completa (42 de 42). Fonte: Object Reference 264.0 pelo endpoint versionado (`src:objref-knowledgearticleversion-264`); as letras de propriedade de API não foram lidas e seguem 'desconhecido'. A classificação Conteúdo sai da lista da Fase 2 (438 itens restantes).
   - Fase 2, lote Automação (2026-11-18; lote 7z, `ferramentas/carga/lotes/lote7z_fase2_automacao.py`): 36 campos de primeiro nível de Flow ganharam explicação, e 25 deles também a versão em que entraram.
     - Fonte: página de Flow na referência atual da Metadata API (`src:mdapi-flow-ref-atual`); nota em `fontes/extracoes/lote7z-fase2-automacao.txt`. A página não mostra o nome ao lado de cada linha: a correspondência foi feita pelo tipo da linha, que coincide com o tipo já catalogado.
