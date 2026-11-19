@@ -182,7 +182,7 @@ Gerado por `ferramentas/sftutor.py cobertura`. Cobertura estrutural, explicativa
 
 ## Objetos consultáveis via API
 
-- Catalogados: 84. Campos listados: 2035; explicados: 1603.
+- Catalogados: 84. Campos listados: 2035; explicados: 1638.
 - Universo: Universo de objetos da plataforma não enumerado.
 
 | Objeto | Estrutural | Esperados | Presentes | Explicados | APIs verificadas |
@@ -230,7 +230,7 @@ Gerado por `ferramentas/sftutor.py cobertura`. Cobertura estrutural, explicativa
 | obj:GroupMember | completa | 2 | 2 | 2 | padrao |
 | obj:Individual | completa | 28 | 28 | 28 | padrao |
 | obj:KnowledgeArticle | completa | 12 | 12 | 12 | padrao |
-| obj:KnowledgeArticleVersion | completa | 42 | 42 | 7 | padrao |
+| obj:KnowledgeArticleVersion | completa | 42 | 42 | 42 | padrao |
 | obj:Lead | completa | 74 | 74 | 74 | padrao |
 | obj:LeadStatus | completa | 5 | 5 | 5 | padrao |
 | obj:LoginHistory | completa | 24 | 24 | 24 | padrao |
