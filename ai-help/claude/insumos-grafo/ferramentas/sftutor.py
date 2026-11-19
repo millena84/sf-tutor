@@ -550,6 +550,11 @@ def validar_fontes(C, R, base=BASE):
                 pe = os.path.join(base, f["extracao"])
                 if os.path.exists(pe) and not re.search(r"\b" + re.escape(t) + r"\b", open(pe, encoding="utf-8").read()):
                     R.e(f"escopo: {t} não aparece na nota de extração de {f['id']}")
+        em_cond = t in C["escopo"]["classificacao_core_por_item"].get("condicionais", [])
+        if (j.get("decisao") == "condicional") != em_cond:
+            R.e(f"escopo: {t}: decisão 'condicional' e lista 'condicionais' não batem")
+        if j.get("decisao") == "condicional" and not j.get("condicao"):
+            R.e(f"escopo: {t}: decisão 'condicional' sem 'condicao' registrada")
         if j.get("evidencias") and j.get("alcance_da_licenca") not in ("proprio_tipo", "familia", "nao_se_aplica"):
             R.e(f"escopo: {t}: alcance_da_licenca ausente ou inválido")
     # rastreabilidade: o nome de cada propriedade/campo precisa aparecer na nota de extração de pelo menos uma de suas fontes
