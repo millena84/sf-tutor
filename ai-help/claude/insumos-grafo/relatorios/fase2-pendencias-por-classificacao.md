@@ -2,7 +2,7 @@
 
 Gerado por `ferramentas/pendencias_explicacao.py`. Não edite à mão.
 
-**Total:** 473 itens pendentes em 26 nós (cada nó contado uma vez).
+**Total:** 438 itens pendentes em 25 nós (cada nó contado uma vez).
 Um nó usado por funcionalidades de temas diferentes aparece em cada tema; por isso a soma das tabelas pode passar do total.
 
 Sugestão de uso: escolher uma classificação por sessão, começando pelas de mais itens ou pelas que o público mais visita, e fechar os nós dela num PR.
@@ -12,7 +12,6 @@ Sugestão de uso: escolher uma classificação por sessão, começando pelas de 
 | Classificação | Nós | Itens pendentes |
 |---|---|---|
 | Processos de negócio específicos de produto | 15 | 377 |
-| Conteúdo, conhecimento e colaboração | 1 | 35 |
 | Acesso, identidade e segurança | 2 | 32 |
 | Dados e modelagem | 2 | 8 |
 | Automação de processos e regras de negócio | 3 | 7 |
@@ -46,13 +45,6 @@ Sugestão de uso: escolher uma classificação por sessão, começando pelas de 
 ### Experiências externas
 
 - [ ] `mdt:CommunitiesSettings` (metadata type): 3 de 26 pendentes. Funcionalidades: digital-experiences
-
-
-## Conteúdo, conhecimento e colaboração (35 itens)
-
-### Knowledge e categorias
-
-- [ ] `obj:KnowledgeArticleVersion` (objeto API): 35 de 42 pendentes. Funcionalidades: lightning-knowledge
 
 
 ## Acesso, identidade e segurança (32 itens)
