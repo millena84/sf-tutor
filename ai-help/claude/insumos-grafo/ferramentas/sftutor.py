@@ -123,14 +123,15 @@ def cmd_inventario(base=BASE):
             r["fontes"].append("src:sdr-registry")
         else:
             r["registro_sdr"] = None
-        r["recorte_core"] = "incluido" if nome in esc["incluidos"] else ("excluido" if nome in esc["excluidos"] else "pendente")
+        r["recorte_core"] = ("incluido" if nome in esc["incluidos"] else "excluido" if nome in esc["excluidos"]
+                             else "condicional" if nome in esc.get("condicionais", []) else "pendente")
         r["cadastro"] = f"catalogo/metadata-types/{nome}.json" if nome in cad else None
         itens.append(r)
     itens.sort(key=lambda x: x["nome"])
     resumo = {"total": len(itens),
               "suporte_cli": {k: sum(1 for i in itens if i["suporte_cli"] == k) for k in sorted(set(status_map.values()))},
               "com_registro_sdr": sum(1 for i in itens if i["registro_sdr"]),
-              "recorte_core": {k: sum(1 for i in itens if i["recorte_core"] == k) for k in ("incluido", "excluido", "pendente")},
+              "recorte_core": {k: sum(1 for i in itens if i["recorte_core"] == k) for k in ("incluido", "condicional", "excluido", "pendente")},
               "cadastrados": sum(1 for i in itens if i["cadastro"])}
     gravar(os.path.join(base, "inventarios", "metadata-types-v68.json"), {
         "id": "inventario-metadata-types", "versao_api": "68.0", "universo": "METADATA_SUPPORT.md (v68) — denominador do inventário",
