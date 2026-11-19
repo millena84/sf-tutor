@@ -1,0 +1,26 @@
+fonte: Metadata API, relatório de cobertura e blog oficial de desenvolvedores (issue #10, etapa 2, lote 7: família de IA, terceira rodada)
+obtido em 2026-11-19 por resultados de busca restritos a developer.salesforce.com (leitura do trecho indexado); método: extração documental
+  assistida por IA. Regra: C4 + orientações da autora (2026-11-19): Agentforce liga a Core, Sales e Service; associação sem frase
+  oficial explícita fica marcada como inferida ("inferido": true + nota).
+
+[src:mdapi-agentforcefordeveloperssettings] https://developer.salesforce.com/docs/atlas.en-us.api_meta.meta/api_meta/meta_agentforcefordeveloperssettings.htm
+  AgentforceForDevelopersSettings: representa as configurações de Agentforce for Developers. (Frase na página do próprio tipo.)
+[src:blog-agent-platform-tracing] https://developer.salesforce.com/blogs/2026/05/agent-platform-tracing-debug-agentforce-with-trace-trees-soql-and-slack
+  Agent Platform Tracing: ligado em Setup > Agent Platform Tracing; grava dados de cada execução de ação de Agentforce no Data 360, que
+    precisa estar provisionado. O texto não cita o nome do metadata type; a ligação com AgentforcePlatformTracingSettings é pelo nome.
+[src:mdapi-genaiplannerbundle] https://developer.salesforce.com/docs/atlas.en-us.api_meta.meta/api_meta/meta_genaiplannerbundle.htm
+  GenAiPlannerBundle: planner de um agente ou template de agente, contêiner dos tópicos e ações usados com o LLM.
+[src:coverage-report-v68-ia] Metadata Coverage Report v68.0 (https://developer.salesforce.com/docs/success/metadata-coverage-report/references/coverage-report/v68.0)
+  Lista, sem descrição, os tipos: AiAgentDefinition, AiAgentDefinitionPlanner, AiAgentDefinitionVersion, AiPlannerVoiceAvatarDef,
+    AiPlannerVoiceDef, AiResponseFormat, AiResponseFormatIstr, AiSurface, AiSurfaceInput, AiSurfaceInstruction.
+
+Decisões:
+  - condicional (C4), com fonte própria: AgentforceForDevelopersSettings (condição: Agentforce for Developers habilitado).
+  - condicional (C4) INFERIDO pelo nome (a fonte lida não descreve o tipo):
+    AgentforcePlatformTracingSettings (nome coincide com Agent Platform Tracing, recurso de Agentforce que exige Data 360);
+    AiSurfaceInput, AiSurfaceInstruction e AiResponseFormatIstr (nomes derivam de AiSurface e AiResponseFormat, das conexões
+      personalizadas com agentes, lote 6);
+    AiAgentDefinitionPlanner (nome deriva de AiAgentDefinition, o agente na API 68, e de planner, como GenAiPlannerBundle);
+    AiPlannerVoiceDef e AiPlannerVoiceAvatarDef (voz e avatar do planner do agente, pelo nome).
+  - A orientação da autora sobre inferência citava bots; estender a marcação a inferências pelo nome é proposta deste lote, para a
+    autora confirmar na revisão.
