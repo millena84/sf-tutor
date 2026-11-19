@@ -1,6 +1,8 @@
 """Lote 7y6 (issue #10, etapa 2, lote 6): segunda rodada da família de IA pelo C4.
 
 Agentforce liga a Core, Sales e Service (orientação da autora em 2026-11-19). Ver a nota de extração para fontes e limites.
+BotBlock, BotBlockVersion e BotSettings: associados ao Agentforce por orientação da autora, com "inferido": true, porque as fontes só
+falam de Einstein Bots.
 Reexecutável. Rode a partir de ai-help/claude/insumos-grafo/.
 """
 import json, os, sys
@@ -60,9 +62,15 @@ DEC = {
     "BotTemplate": ("condicional", "Template de agente ou de Einstein Bot; também guarda variáveis de agentes Agentforce.", COND_BOT, ORIENT,
                     [{"fonte": "src:agentforce-agent-variables", "uso": "lista"}, {"fonte": "src:mdapi-bot-einstein", "uso": "lista"}] + LIC),
 }
-PEND = "As fontes só falam de Einstein Bots; falta fonte que diga se o tipo serve também ao Agentforce e a que nuvem os bots pertencem."
-for t in ("BotBlock", "BotBlockVersion", "BotSettings"):
-    DEC[t] = ("pendente", PEND, None, None, [{"fonte": "src:mdapi-bot-einstein", "uso": "lista"}])
+ORIENT_BOT_INF = ("Orientação da autora (2026-11-19): o que for bot pode ser associado ao Agentforce, com a marcação de que a "
+                  "associação foi inferida.")
+INF = ("Associação ao Agentforce inferida por orientação da autora: as fontes oficiais lidas só descrevem o tipo como parte de "
+       "Einstein Bots.")
+for t, o_que in (("BotBlock", "Bloco de Einstein Bot, com diálogos e variáveis."),
+                 ("BotBlockVersion", "Versão de um bloco de Einstein Bot."),
+                 ("BotSettings", "Configurações de Einstein Bot da org, como se Einstein Bots está habilitado.")):
+    DEC[t] = ("condicional", o_que, COND_BOT, ORIENT_BOT_INF, [{"fonte": "src:mdapi-bot-einstein", "uso": "lista"}] + LIC)
+INFERIDOS = {"BotBlock", "BotBlockVersion", "BotSettings"}
 
 inv = {i["nome"] for i in json.load(open(os.path.join(RAIZ, "inventarios", "metadata-types-v68.json"), encoding="utf-8"))["itens"]}
 esc_p = os.path.join(RAIZ, "config", "escopo.json")
@@ -78,6 +86,9 @@ for t, (dec, motivo, condicao, orient, ev) in DEC.items():
     if dec == "condicional":
         j.update({"criterios": ["C4"], "condicao": condicao, "orientacao_autora": orient, "nuvens": TRES,
                   "motivo": motivo + " Pelo C4, fica ligado ao Core e às nuvens que o usam, com a condição registrada."})
+        if t in INFERIDOS:
+            j["inferido"] = True
+            j["nota_inferencia"] = INF
         cond.add(t)
     else:
         j.update({"criterios": ["C2", "C4"], "motivo": motivo, "nuvens": ["nuv:service-cloud"]})
