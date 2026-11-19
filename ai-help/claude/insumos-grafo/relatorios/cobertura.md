@@ -82,7 +82,7 @@ Gerado por `ferramentas/sftutor.py cobertura`. Cobertura estrutural, explicativa
 | mdt:FieldServiceSettings | completa | 55 | 55 | 41 | 1 | parcial | não |
 | mdt:FieldSet | completa | 5 | 5 | 5 | 1 | parcial | não |
 | mdt:FlexiPage | completa | 12 | 12 | 12 | 5 | parcial | não |
-| mdt:Flow | completa | 50 | 50 | 13 | 32 | parcial | não |
+| mdt:Flow | completa | 50 | 50 | 49 | 32 | parcial | não |
 | mdt:FlowSettings | completa | 32 | 32 | 27 | 0 | parcial | não |
 | mdt:ForecastingSettings | completa | 10 | 10 | 10 | 7 | parcial | não |
 | mdt:GenAiFunction | completa | 10 | 10 | 10 | 1 | parcial | não |
@@ -176,7 +176,7 @@ Gerado por `ferramentas/sftutor.py cobertura`. Cobertura estrutural, explicativa
 
 ## Propriedades XML
 
-- Em metadata types: 2235 listadas, 2168 explicadas.
+- Em metadata types: 2235 listadas, 2204 explicadas.
 - Em estruturas auxiliares: 2240 listadas, 2230 explicadas.
 - Universo total: Sem WSDL não há denominador confiável do total de propriedades do recorte.
 
