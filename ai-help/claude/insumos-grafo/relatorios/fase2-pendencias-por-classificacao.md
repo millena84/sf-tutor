@@ -2,7 +2,7 @@
 
 Gerado por `ferramentas/pendencias_explicacao.py`. Não edite à mão.
 
-**Total:** 409 itens pendentes em 25 nós (cada nó contado uma vez).
+**Total:** 377 itens pendentes em 15 nós (cada nó contado uma vez).
 Um nó usado por funcionalidades de temas diferentes aparece em cada tema; por isso a soma das tabelas pode passar do total.
 
 Sugestão de uso: escolher uma classificação por sessão, começando pelas de mais itens ou pelas que o público mais visita, e fechar os nós dela num PR.
@@ -12,10 +12,6 @@ Sugestão de uso: escolher uma classificação por sessão, começando pelas de 
 | Classificação | Nós | Itens pendentes |
 |---|---|---|
 | Processos de negócio específicos de produto | 15 | 377 |
-| Dados e modelagem | 2 | 8 |
-| Automação de processos e regras de negócio | 3 | 7 |
-| Organização e configurações base | 2 | 4 |
-| Acesso, identidade e segurança | 2 | 3 |
 
 ## Processos de negócio específicos de produto (377 itens)
 
@@ -45,60 +41,3 @@ Sugestão de uso: escolher uma classificação por sessão, começando pelas de 
 ### Experiências externas
 
 - [ ] `mdt:CommunitiesSettings` (metadata type): 3 de 26 pendentes. Funcionalidades: digital-experiences
-
-
-## Dados e modelagem (8 itens)
-
-### Objetos e entidades
-
-- [ ] `obj:EntityDefinition` (objeto API): 7 de 86 pendentes. Funcionalidades: objetos-customizados
-
-### Campos e tipos
-
-- [ ] `obj:FieldDefinition` (objeto API): 1 de 59 pendentes. Funcionalidades: campos-customizados
-
-
-## Automação de processos e regras de negócio (7 itens)
-
-### Flow e orquestração
-
-- [ ] `mdt:FlowSettings` (metadata type): 5 de 32 pendentes. Funcionalidades: flow
-- [ ] `mdt:Flow` (metadata type): 1 de 50 pendentes. Funcionalidades: flow
-
-### Decisões e aprovações
-
-- [ ] `mdt:ApprovalProcess` (metadata type): 1 de 22 pendentes. Funcionalidades: processos-de-aprovacao
-
-
-## Organização e configurações base (4 itens)
-
-### Domínios e URLs
-
-- [ ] `mdt:MyDomainSettings` (metadata type): 3 de 32 pendentes. Funcionalidades: my-domain
-
-### Horários comerciais e feriados
-
-- [ ] `obj:BusinessHours` (objeto API): 1 de 20 pendentes. Funcionalidades: horario-comercial
-
-
-## Acesso, identidade e segurança (3 itens)
-
-### Acesso a registros e hierarquias
-
-- [ ] `obj:User` (objeto API): 2 de 206 pendentes. Funcionalidades: hierarquia-de-papeis
-
-### Usuários e provisionamento
-
-- [ ] `obj:User` (objeto API): 2 de 206 pendentes. Funcionalidades: usuarios
-
-### Permissões, perfis e grupos
-
-- [ ] `obj:PermissionSet` (objeto API): 1 de 13 pendentes. Funcionalidades: permission-sets
-
-### Licenças e entitlements de acesso
-
-- [ ] `obj:PermissionSet` (objeto API): 1 de 13 pendentes. Funcionalidades: licencas-de-usuario
-
-## Sem funcionalidade associada
-
-- [ ] `mdx:AutoResponseRules_RuleEntry` (estrutura): 10 de 17

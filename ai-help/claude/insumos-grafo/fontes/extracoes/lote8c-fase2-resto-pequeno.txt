@@ -1,0 +1,51 @@
+fonte: Tooling API, Object Reference e Metadata API, versão 264.0 (API 68.0), endpoint versionado (Fase 2, resto pequeno: Acesso, Dados,
+  Automação, Organização e uma estrutura sem funcionalidade)
+obtido em 2026-11-19 via WebFetch; método: extração documental assistida por IA; descrições parafraseadas.
+
+[src:tooling-entitydefinition-264] https://developer.salesforce.com/docs/get_document_content/api_tooling/tooling_api_objects_entitydefinition.htm/en-us/264.0
+  Description | string | 37.0 | descrição do objeto; uma boa descrição ajuda a distinguir objetos customizados em list views
+  DeveloperName | string | - | nome interno do objeto; não é único (use QualifiedApiName como identificador único)
+  IsCustomizable | boolean | - | true quando o objeto aceita campos customizados
+  IsCustomSetting | boolean | 35.0 | true quando o objeto é um custom setting
+  IsQueryable | boolean | - | true quando o objeto pode ser consultado
+  MasterLabel | string | - | rótulo do objeto no Setup, no idioma padrão da org (en_US se não houver)
+  NamespacePrefix | string | - | prefixo de namespace; cada Developer Edition que cria um pacote gerenciado tem um prefixo único, até 15 caracteres
+[src:tooling-fielddefinition-264] https://developer.salesforce.com/docs/get_document_content/api_tooling/tooling_api_objects_fielddefinition.htm/en-us/264.0
+  Metadata | CustomField | - | a página descreve como metadados de compact layout do namespace "mns" e avisa que só pode ser consultado
+    quando o resultado tem no máximo um registro. O tipo informado é CustomField; a menção a compact layout parece texto copiado de outro
+    objeto. Registrado como ressalva.
+[src:objref-businesshours-264] https://developer.salesforce.com/docs/get_document_content/object_reference/sforce_api_objects_businesshours.htm/en-us/264.0
+  BusinessHoursId | reference | - | ID do BusinessHours associado ao SlaProcess (texto da página, que parece descrever o vínculo com processos de
+    entitlement)
+[src:mdapi-assignmentrule-264] https://developer.salesforce.com/docs/get_document_content/api_meta/meta_assignmentrule.htm/en-us/264.0
+  RuleEntry de AssignmentRules:
+  assignedTo | string | nome do usuário ou da fila a quem o item é atribuído
+  assignedToType | AssignToLookupValueType | valores User e Queue
+  notifyCcRecipients | boolean | 32.0 | se os endereços em Cc de mensagens de Email-to-Case ou Web-to-Lead recebem cópia da resposta automática
+  overrideExistingTeams | boolean | true redefine o case team na atribuição; false mantém o time atual e acrescenta o novo
+  team | string[] | nome do case team; pode aparecer zero ou mais vezes
+[src:mdapi-escalationrules-264] https://developer.salesforce.com/docs/get_document_content/api_meta/meta_escalationrules.htm/en-us/264.0
+  RuleEntry de EscalationRules:
+  businessHours | string | horário em que as ações de escalonamento rodam; só quando businessHoursSource é Static
+  businessHoursSource | BusinessHoursSourceType | valores None, Case e Static
+  disableEscalationWhenModified | boolean | se o escalonamento é desligado quando o registro é alterado
+  escalationAction | EscalationAction[] | ações executadas quando os critérios de escalonamento são atendidos
+  escalationStartTime | EscalationStartTimeType | início do escalonamento: CaseCreation ou CaseLastModified
+  Observação: a página de AutoResponseRules (meta_autoresponserules.htm/en-us/264.0) não lista nenhum desses 10 campos no RuleEntry dela
+    (lista booleanFilter, criteriaItems, formula, replyToEmail, senderEmail, senderName, template). Eles estão na estrutura
+    AutoResponseRules_RuleEntry do catálogo; as descrições vêm das páginas de AssignmentRules e EscalationRules, e isso fica anotado.
+
+Sem descrição oficial (estado nao_encontrada), com o que foi lido:
+  FlowSettings: enableEmailSimpleRespectProfiles, enableEmailsimpleSecureProfiles, enableFlowReactiveChoiceOptions, flowOccurrenceLogging,
+    isSupportRollbackOnErrorForApexInvocableActionsEnabled (página atual só com tipo; página 264.0 sem os campos; ver lote7z).
+    Pista lateral: a release update "Enable EmailSimple Invocable Action to Respect Organization-Wide Profile Settings"
+    (https://help.salesforce.com/s/articleView?id=release-notes.rn_automate_flow_release_update_emailsimple_invocable_action_profile_settings.htm&language=en_US&release=252&type=5)
+    parece corresponder a enableEmailSimpleRespectProfiles, mas não cita o nome do campo; fica como nota, não como explicação.
+  Flow.segment e ApprovalProcess.processOrder (ver lote7z).
+  MyDomainSettings: enableShareBrowserSessionAndroidForAuth, enableShareBrowserSessionIOSForAuth, isInstancedApiTrafficBlocked. A página
+    264.0 não os lista; tem campos de nome parecido (enableNativeBrowserForAuthOnAndroid, enableNativeBrowserForAuthOnIos,
+    isIcorInstApiTrafficBlocked), que NÃO foram usados como descrição, porque o nome é outro.
+  User: UserPermissionsMobileUser e UserPreferencesSetupAssistantPrefDisabled (ver lote8b).
+  PermissionSet.Type | reference | 46.0 | a página 264.0 só informa a versão, sem descrição.
+  Notas da release: busca restrita a help.salesforce.com e developer.salesforce.com pelos nomes desses campos, sem menção (exceto a pista
+    lateral acima).

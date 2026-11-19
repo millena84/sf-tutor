@@ -177,12 +177,12 @@ Gerado por `ferramentas/sftutor.py cobertura`. Cobertura estrutural, explicativa
 ## Propriedades XML
 
 - Em metadata types: 2235 listadas, 2204 explicadas.
-- Em estruturas auxiliares: 2240 listadas, 2230 explicadas.
+- Em estruturas auxiliares: 2240 listadas, 2240 explicadas.
 - Universo total: Sem WSDL não há denominador confiável do total de propriedades do recorte.
 
 ## Objetos consultáveis via API
 
-- Catalogados: 84. Campos listados: 2035; explicados: 1640.
+- Catalogados: 84. Campos listados: 2035; explicados: 1649.
 - Universo: Universo de objetos da plataforma não enumerado.
 
 | Objeto | Estrutural | Esperados | Presentes | Explicados | APIs verificadas |
@@ -194,7 +194,7 @@ Gerado por `ferramentas/sftutor.py cobertura`. Cobertura estrutural, explicativa
 | obj:AssignmentRule | completa | 3 | 3 | 3 | padrao |
 | obj:AsyncApexJob | completa | 13 | 13 | 13 | padrao |
 | obj:AuthProvider | completa | 30 | 30 | 30 | padrao |
-| obj:BusinessHours | completa | 20 | 20 | 19 | padrao |
+| obj:BusinessHours | completa | 20 | 20 | 20 | padrao |
 | obj:Campaign | completa | 69 | 69 | 28 | padrao |
 | obj:CampaignMember | completa | 32 | 32 | 7 | padrao |
 | obj:Case | completa | 57 | 57 | 56 | padrao |
@@ -211,11 +211,11 @@ Gerado por `ferramentas/sftutor.py cobertura`. Cobertura estrutural, explicativa
 | obj:DataUsePurpose | completa | 8 | 8 | 8 | padrao |
 | obj:DebugLevel | completa | 14 | 14 | 14 | tooling |
 | obj:Entitlement | completa | 22 | 22 | 9 | padrao |
-| obj:EntityDefinition | completa | 86 | 86 | 79 | tooling |
+| obj:EntityDefinition | completa | 86 | 86 | 86 | tooling |
 | obj:EventBusSubscriber | completa | 12 | 12 | 12 | padrao |
 | obj:EventLogFile | completa | 8 | 8 | 8 | padrao |
 | obj:ExternalDataSource | completa | 13 | 13 | 13 | padrao |
-| obj:FieldDefinition | completa | 59 | 59 | 58 | tooling |
+| obj:FieldDefinition | completa | 59 | 59 | 59 | tooling |
 | obj:FieldHistoryArchive | completa | 10 | 10 | 10 | padrao |
 | obj:FlexiPage | completa | 11 | 11 | 11 | tooling |
 | obj:Flow | completa | 15 | 15 | 15 | tooling |
