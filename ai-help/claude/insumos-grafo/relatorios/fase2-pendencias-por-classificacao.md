@@ -2,7 +2,7 @@
 
 Gerado por `ferramentas/pendencias_explicacao.py`. Não edite à mão.
 
-**Total:** 509 itens pendentes em 26 nós (cada nó contado uma vez).
+**Total:** 473 itens pendentes em 26 nós (cada nó contado uma vez).
 Um nó usado por funcionalidades de temas diferentes aparece em cada tema; por isso a soma das tabelas pode passar do total.
 
 Sugestão de uso: escolher uma classificação por sessão, começando pelas de mais itens ou pelas que o público mais visita, e fechar os nós dela num PR.
@@ -12,10 +12,10 @@ Sugestão de uso: escolher uma classificação por sessão, começando pelas de 
 | Classificação | Nós | Itens pendentes |
 |---|---|---|
 | Processos de negócio específicos de produto | 15 | 377 |
-| Automação de processos e regras de negócio | 3 | 43 |
 | Conteúdo, conhecimento e colaboração | 1 | 35 |
 | Acesso, identidade e segurança | 2 | 32 |
 | Dados e modelagem | 2 | 8 |
+| Automação de processos e regras de negócio | 3 | 7 |
 | Organização e configurações base | 2 | 4 |
 
 ## Processos de negócio específicos de produto (377 itens)
@@ -48,18 +48,6 @@ Sugestão de uso: escolher uma classificação por sessão, começando pelas de 
 - [ ] `mdt:CommunitiesSettings` (metadata type): 3 de 26 pendentes. Funcionalidades: digital-experiences
 
 
-## Automação de processos e regras de negócio (43 itens)
-
-### Flow e orquestração
-
-- [ ] `mdt:Flow` (metadata type): 37 de 50 pendentes. Funcionalidades: flow
-- [ ] `mdt:FlowSettings` (metadata type): 5 de 32 pendentes. Funcionalidades: flow
-
-### Decisões e aprovações
-
-- [ ] `mdt:ApprovalProcess` (metadata type): 1 de 22 pendentes. Funcionalidades: processos-de-aprovacao
-
-
 ## Conteúdo, conhecimento e colaboração (35 itens)
 
 ### Knowledge e categorias
@@ -69,13 +57,13 @@ Sugestão de uso: escolher uma classificação por sessão, começando pelas de 
 
 ## Acesso, identidade e segurança (32 itens)
 
-### Usuários e provisionamento
-
-- [ ] `obj:User` (objeto API): 31 de 206 pendentes. Funcionalidades: usuarios
-
 ### Acesso a registros e hierarquias
 
 - [ ] `obj:User` (objeto API): 31 de 206 pendentes. Funcionalidades: hierarquia-de-papeis
+
+### Usuários e provisionamento
+
+- [ ] `obj:User` (objeto API): 31 de 206 pendentes. Funcionalidades: usuarios
 
 ### Licenças e entitlements de acesso
 
@@ -95,6 +83,18 @@ Sugestão de uso: escolher uma classificação por sessão, começando pelas de 
 ### Campos e tipos
 
 - [ ] `obj:FieldDefinition` (objeto API): 1 de 59 pendentes. Funcionalidades: campos-customizados
+
+
+## Automação de processos e regras de negócio (7 itens)
+
+### Flow e orquestração
+
+- [ ] `mdt:FlowSettings` (metadata type): 5 de 32 pendentes. Funcionalidades: flow
+- [ ] `mdt:Flow` (metadata type): 1 de 50 pendentes. Funcionalidades: flow
+
+### Decisões e aprovações
+
+- [ ] `mdt:ApprovalProcess` (metadata type): 1 de 22 pendentes. Funcionalidades: processos-de-aprovacao
 
 
 ## Organização e configurações base (4 itens)

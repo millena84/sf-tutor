@@ -1,0 +1,55 @@
+fonte: Metadata API, página de Flow na referência atual (Fase 2, classificação Automação de processos e regras de negócio)
+URL: https://developer.salesforce.com/docs/platform/api-metadata/references/meta-types/metadata-flow.html (sem versão na URL; a página mostra API 68.0)
+obtido em 2026-11-18 via WebFetch, caracteres 0 a 100000 (tabela de campos de primeiro nível) e uma leitura a partir de 100000 para "segment".
+método: extração documental assistida por IA; descrições parafraseadas em português.
+limite da leitura: a página não mostra o nome do campo ao lado de cada linha; a correspondência foi feita pelo tipo de cada linha
+  (ex.: FlowDecision[] -> decisions), que coincide com o tipo já catalogado em cada propriedade. Todas as linhas marcam Required: No.
+convenção: nome | tipo | versão em que entrou (quando a página informa) | descrição resumida
+
+[src:mdapi-flow-ref-atual] Flow, campos de primeiro nível
+  actionCalls | FlowActionCall[] | 31.0 | nós que chamam ações
+  apexPluginCalls | FlowApexPluginCall[] | - | nós que chamam plug-ins Apex
+  assignments | FlowAssignment[] | - | nós de atribuição
+  choices | FlowChoice[] | - | opções de escolha estáticas
+  collectionFilterCriteria | FlowCollectionFilterCriteria[] | - | reservado para uso futuro
+  collectionProcessors | FlowCollectionProcessor[] | 50.0 | nós que processam coleções
+  constants | FlowConstant[] | - | constantes
+  customErrors | FlowCustomError[] | - | erros personalizados
+  customProperties | FlowCustomProperty[] | 63.0 | propriedades do flow (ex.: indicador de progresso de tela)
+  decisions | FlowDecision[] | - | nós de decisão
+  dynamicChoiceSets | FlowDynamicChoiceSet[] | - | conjunto de opções montado por consulta ao banco
+  ends | FlowEnd[] | 68.0 | nós de fim
+  exitRules | FlowExitRule[] | 61.0 | regras que encerram o flow para um usuário num flow disparado por segmento
+  experiments | FlowExperiment[] | 61.0 | experimentos
+  formulas | FlowFormula[] | - | fórmulas
+  groups | FlowNodeGroup[] | 68.0 | nós de grupo
+  loops | FlowLoop[] | 30.0 | nós que percorrem coleções
+  orchestratedStages | FlowOrchestratedStage[] | 53.0 | nós de estágio numa orquestração
+  processMetadataValues | FlowMetadataValue[] | 31.0 | valores de metadados do flow
+  recordCreates | FlowRecordCreate[] | - | nós que criam registros
+  recordDeletes | FlowRecordDelete[] | - | nós que excluem registros
+  recordLookups | FlowRecordLookup[] | - | nós que buscam registros
+  recordRollbacks | FlowRecordRollback[] | 52.0 | nós que desfazem a transação num screen flow
+  recordUpdates | FlowRecordUpdate[] | - | nós que atualizam registros
+  screens | FlowScreen[] | - | nós de tela
+  stages | FlowStage[] | 42.0 | recursos de estágio usados ao longo do flow
+  start | FlowStart | 47.0 | elemento Start: como e quando o flow começa
+  steps | FlowStep[] | - | nós de passo
+  subflows | FlowSubflow[] | 25.0 | subflows
+  textTemplates | FlowTextTemplate[] | - | modelos de texto
+  transforms | FlowTransform[] | 59.0 | transformações de dados
+  variables | FlowVariable[] | - | definições de variáveis
+  waits | FlowWait[] | 32.0 | nós de espera
+  areMetricsLoggedToDataCloud | boolean | 63.0 | se as métricas do flow vão para o Data Cloud; padrão false
+  isAdditionalPermissionRequiredToRun | boolean | 47.0 | com true, só perfis ou permission sets habilitados executam o flow; padrão false
+  timeZoneSidKey | string | 56.0 | fuso horário em que o flow roda
+
+Continuam pendentes (sem texto na fonte lida):
+  - Flow.segment: a leitura a partir de 100000 só mostra "segment" dentro de FlowStart (segmento que dispara o flow, API 56.0), não
+    como campo de primeiro nível. O texto não foi transposto para o campo de Flow.
+  - FlowSettings: enableEmailSimpleRespectProfiles, enableEmailsimpleSecureProfiles, enableFlowReactiveChoiceOptions,
+    flowOccurrenceLogging e isSupportRollbackOnErrorForApexInvocableActionsEnabled. A referência atual (metadata-flowsettings.html,
+    0 a 100000) mostra só tipo boolean e Required: No; a página versionada
+    (get_document_content/api_meta/meta_flowsettings.htm/en-us/264.0) não traz esses cinco campos.
+  - ApprovalProcess.processOrder: a página versionada (get_document_content/api_meta/meta_approvalprocess.htm/en-us/264.0) não lista o
+    campo; diz apenas que os metadados não incluem a ordem dos approval processes ativos. Sem base para explicar o campo.
