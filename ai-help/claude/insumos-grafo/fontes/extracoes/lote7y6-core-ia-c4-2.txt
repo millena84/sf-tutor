@@ -1,0 +1,38 @@
+fonte: guia de Agentforce, Metadata API e blog oficial de desenvolvedores (issue #10, etapa 2, lote 6: família de IA, segunda rodada do C4)
+obtido em 2026-11-19 por resultados de busca restritos a developer.salesforce.com (leitura do trecho indexado); método: extração documental
+  assistida por IA; frases parafraseadas. Regra: C4 + orientação da autora (2026-11-19): o que é de Agentforce liga a Core, Sales e Service.
+
+[src:agentforce-move-agent] Agentforce Developer Guide, "Move an Agent to a New Org"
+  URL: https://developer.salesforce.com/docs/ai/agentforce/guide/agent-dx-deploy-metadata.html
+  A metadata de agentes mudou na API 68: recuperar com AiAgentDefinitionVersion traz automaticamente as versões certas de flows, Apex e
+    prompt templates usados pelo agente. As duas orgs precisam estar na v68.
+[src:blog-winter27-dev] Salesforce Developers Blog, "The Salesforce Developer's Guide to the Winter '27 Release"
+  URL: https://developer.salesforce.com/blogs/2026/10/developers-guide-to-the-winter-27-release
+  A partir da API 68.0, um agente Agentforce é descrito por dois metadata types: AiAgentDefinition e AiAgentDefinitionVersion.
+[src:agentforce-custom-connections] Agentforce Developer Guide, "Build a Custom Chat Client with Custom Connections"
+  URL: https://developer.salesforce.com/docs/ai/agentforce/guide/custom-connections.html
+  Custom connections ligam um cliente web externo a um agente Agentforce pela Agent API. Dois tipos: AiSurface (a conexão, com instruções
+    e formatos de resposta disponíveis) e AiResponseFormat (um formato de saída estruturado, com esquema JSON).
+[src:mdapi-genaiprompttemplateactv] Metadata API, GenAiPromptTemplateActv
+  URL: https://developer.salesforce.com/docs/atlas.en-us.api_meta.meta/api_meta/meta_genaiprompttemplateactv.htm
+  GenAiPromptTemplateActv: status de ativação de um prompt template fornecido pela Salesforce (standard).
+[src:agentforce-agent-variables] Agentforce Developer Guide, "Send Agent Variables with the Agent API"
+  URL: https://developer.salesforce.com/docs/ai/agentforce/guide/agent-api-variables.html
+  Variáveis de agente são configuradas pela Metadata API em ConversationVariable (dentro de BotVersion e BotTemplate) e
+    ConversationContextVariable (dentro de Bot e BotTemplate). Ou seja, BotTemplate também carrega configuração de agentes.
+[src:mdapi-bot-einstein] Metadata API, páginas de Bot, BotBlock, BotSettings e BotTemplate (versões em inglês e japonês)
+  URL: https://developer.salesforce.com/docs/atlas.en-us.api_meta.meta/api_meta/meta_botsettings.htm
+  BotSettings: configurações de Einstein Bot da org, como se Einstein Bots está habilitado. BotBlock: configuração de um bloco de Einstein
+    Bot, com diálogos e variáveis. BotTemplate: configuração de um template de Einstein Bot, com diálogos e variáveis. O relatório de
+    cobertura diz que, em scratch org, é preciso habilitar Einstein Bots no Dev Hub para usar esses tipos.
+
+Decisões:
+  - condicional (C4), condição "Agentforce habilitado na org", Core + Sales + Service: AiAgentDefinition, AiAgentDefinitionVersion,
+    AiSurface, AiResponseFormat.
+  - condicional (C4), condição de prompt templates (IA generativa com add-on): GenAiPromptTemplateActv.
+  - condicional (C4), condição "Agentforce habilitado, ou Einstein Bots": BotTemplate (carrega variáveis de agentes, como Bot e BotVersion).
+  - condicional (C4) INFERIDO, condição "Agentforce habilitado, ou Einstein Bots": BotBlock, BotBlockVersion e BotSettings. As fontes só
+    falam de Einstein Bots. Orientação da autora (2026-11-19): o que for bot pode ser associado ao Agentforce, marcado como inferido.
+    No registro, "inferido": true e "nota_inferencia".
+  Não decididos nesta rodada: AiAgentDefinitionPlanner (o trecho lido não o descreve), AiBundle*, AiPlanner*, AiResponseFormatIstr,
+    AiSurfaceInput, AiSurfaceInstruction, Einstein*Settings, Agentforce*Settings e os demais.

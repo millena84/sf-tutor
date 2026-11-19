@@ -553,6 +553,8 @@ def validar_fontes(C, R, base=BASE):
         em_cond = t in C["escopo"]["classificacao_core_por_item"].get("condicionais", [])
         if (j.get("decisao") == "condicional") != em_cond:
             R.e(f"escopo: {t}: decisão 'condicional' e lista 'condicionais' não batem")
+        if "inferido" in j and (j["inferido"] is not True or not j.get("nota_inferencia")):
+            R.e(f"escopo: {t}: 'inferido' deve ser true e vir com 'nota_inferencia'")
         if j.get("decisao") == "condicional" and not j.get("condicao"):
             R.e(f"escopo: {t}: decisão 'condicional' sem 'condicao' registrada")
         if j.get("evidencias") and j.get("alcance_da_licenca") not in ("proprio_tipo", "familia", "nao_se_aplica"):

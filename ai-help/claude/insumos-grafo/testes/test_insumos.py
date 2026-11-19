@@ -356,6 +356,12 @@ class TestRecorteCoreFamilias(BaseTemp):
         gravar(self._esc(), d)
         self.assertErro("GenAiFunction: decisão 'condicional' e lista 'condicionais' não batem")
 
+    def test_inferido_sem_nota_e_erro(self):
+        d = ler(self._esc()); j = d["classificacao_core_por_item"]["justificativas"]
+        del j["BotSettings"]["nota_inferencia"]
+        gravar(self._esc(), d)
+        self.assertErro("BotSettings: 'inferido' deve ser true")
+
     def test_alcance_ausente_e_erro(self):
         d = ler(self._esc()); j = d["classificacao_core_por_item"]["justificativas"]
         del j["CareLimitType"]["alcance_da_licenca"]
