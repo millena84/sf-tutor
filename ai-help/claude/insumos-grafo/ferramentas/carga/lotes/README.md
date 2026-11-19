@@ -41,4 +41,5 @@ Scripts de lotes carregados com `ferramentas/carga/` (a partir do lote 6). Veja 
 | `lote7u_d1_nuvens.py` | Lote 7u (rodada D1): `o_que_e` do Data 360; licenças e estado do nó Platform/Core. |
 | `lote7v_d1_campos_principais.py` | Lote 7v (rodada D1): explicação de 378 campos pendentes de User, Account, Contact, Lead, Opportunity e Case, lida na Object Reference 264.0. |
 | `lote7w_nuvens_faltantes.py` | Lote 7w (rodada de nuvens): 9 nuvens/produtos novos como nó (Experience Cloud, Agentforce Field Service and Operations, Agentforce Revenue Management, Industries, Agentforce Marketing, Agentforce Commerce, Tableau, MuleSoft, Slack), campo didático `categoria` e Platform/Core renomeado para Agentforce 360 Platform. |
+| `lote7x_recorte_core_catalogados.py` | Lote 7x (#10, etapa 1): recorte Core dos 161 metadata types catalogados, com critério e motivo em `config/escopo.json`; 74 funcionalidades sem nuvem ligadas (72 à plataforma, 2 a Sales); C2 reescrito por decisão da autora. |
 | `conteudo_extras.py` | Acréscimos de conteúdo a temas que já têm texto (itens avançados, "comece por"); aplicado por `conteudo_temas.py`, por último. |
