@@ -326,6 +326,31 @@ class TestCargaNova(BaseTemp):
 
 
 
+class TestRecorteCoreFamilias(BaseTemp):
+    """Issue #10, etapa 2: decisão de recorte por família precisa de evidência rastreável."""
+
+    def _esc(self):
+        return os.path.join(self.tmp, "config", "escopo.json")
+
+    def test_tipo_fora_da_nota_da_lista_e_erro(self):
+        d = ler(self._esc()); j = d["classificacao_core_por_item"]["justificativas"]
+        j["AIApplication"] = dict(j["CareLimitType"])
+        gravar(self._esc(), d)
+        self.assertErro("AIApplication não aparece na nota de extração")
+
+    def test_tipo_fora_do_inventario_e_erro(self):
+        d = ler(self._esc()); j = d["classificacao_core_por_item"]["justificativas"]
+        j["TipoInexistente"] = dict(j["CareLimitType"])
+        gravar(self._esc(), d)
+        self.assertErro("TipoInexistente tem decisão de recorte mas não consta do inventário")
+
+    def test_alcance_ausente_e_erro(self):
+        d = ler(self._esc()); j = d["classificacao_core_por_item"]["justificativas"]
+        del j["CareLimitType"]["alcance_da_licenca"]
+        gravar(self._esc(), d)
+        self.assertErro("CareLimitType: alcance_da_licenca")
+
+
 class TestTemas(BaseTemp):
     """Issue #34: escopo, fora_do_escopo e referências oficiais dos temas."""
 

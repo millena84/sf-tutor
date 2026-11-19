@@ -524,6 +524,7 @@ def validar_fontes(C, R, base=BASE):
     for pasta in PASTAS:
         walk(C[pasta])
     walk(C["versoes"])
+    walk(C["escopo"].get("classificacao_core_por_item", {}))
     for u in sorted(usadas):
         if u not in C["fontes"]: R.e(f"fonte {u} usada mas não registrada")
     for f in C["fontes"].values():
@@ -534,6 +535,22 @@ def validar_fontes(C, R, base=BASE):
         if f["checagem_online"]["estado"] == "verificado" and f["metodo"] in ("citada_na_especificacao", "nao_consultada"):
             R.e(f"{f['id']}: checagem online marcada como verificada sem leitura")
         if f["id"] not in usadas: R.a(f"{f['id']}: registrada mas não usada")
+    # recorte Core por família (#10, etapa 2): tipo existe no inventário e o nome aparece na nota da fonte de lista
+    inv_nomes = None
+    p_inv = os.path.join(base, "inventarios", "metadata-types-v68.json")
+    if os.path.exists(p_inv):
+        inv_nomes = {i["nome"] for i in ler(p_inv)["itens"]}
+    for t, j in C["escopo"].get("classificacao_core_por_item", {}).get("justificativas", {}).items():
+        if inv_nomes is not None and t not in inv_nomes: R.e(f"escopo: {t} tem decisão de recorte mas não consta do inventário v68")
+        for e in j.get("evidencias", []):
+            if e.get("uso") not in ("lista", "licenca"): R.e(f"escopo: {t}: uso de evidência inválido ({e.get('uso')})")
+            f = C["fontes"].get(e.get("fonte"))
+            if e.get("uso") == "lista" and f and f.get("extracao"):
+                pe = os.path.join(base, f["extracao"])
+                if os.path.exists(pe) and not re.search(r"\b" + re.escape(t) + r"\b", open(pe, encoding="utf-8").read()):
+                    R.e(f"escopo: {t} não aparece na nota de extração de {f['id']}")
+        if j.get("evidencias") and j.get("alcance_da_licenca") not in ("proprio_tipo", "familia"):
+            R.e(f"escopo: {t}: alcance_da_licenca ausente ou inválido")
     # rastreabilidade: o nome de cada propriedade/campo precisa aparecer na nota de extração de pelo menos uma de suas fontes
     cache = {}
     def texto(fid):
