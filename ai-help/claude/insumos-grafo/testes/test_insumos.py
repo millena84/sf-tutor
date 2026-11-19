@@ -344,6 +344,18 @@ class TestRecorteCoreFamilias(BaseTemp):
         gravar(self._esc(), d)
         self.assertErro("TipoInexistente tem decisão de recorte mas não consta do inventário")
 
+    def test_condicional_sem_condicao_e_erro(self):
+        d = ler(self._esc()); j = d["classificacao_core_por_item"]["justificativas"]
+        del j["GenAiFunction"]["condicao"]
+        gravar(self._esc(), d)
+        self.assertErro("GenAiFunction: decisão 'condicional' sem 'condicao'")
+
+    def test_condicional_fora_da_lista_e_erro(self):
+        d = ler(self._esc()); cc = d["classificacao_core_por_item"]
+        cc["condicionais"].remove("GenAiFunction")
+        gravar(self._esc(), d)
+        self.assertErro("GenAiFunction: decisão 'condicional' e lista 'condicionais' não batem")
+
     def test_alcance_ausente_e_erro(self):
         d = ler(self._esc()); j = d["classificacao_core_por_item"]["justificativas"]
         del j["CareLimitType"]["alcance_da_licenca"]

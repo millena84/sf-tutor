@@ -1,0 +1,35 @@
+fonte: guia de desenvolvedor de Agentforce e Ajuda da Salesforce (issue #10, etapa 2, lote 5: família de IA com o critério C4)
+obtido em 2026-11-19 via WebFetch e resultados de busca restritos a developer.salesforce.com e help.salesforce.com; método: extração
+  documental assistida por IA; frases parafraseadas. C4 (decisão da autora em 2026-11-19): tipos de Agentforce que só funcionam com
+  Agentforce habilitado ficam "condicional", ligados ao Core e às nuvens que os usam.
+
+[src:agentforce-metadata-types] Agentforce Developer Guide, "Metadata Types" (Agentforce Metadata Types v67 and Earlier)
+  URL: https://developer.salesforce.com/docs/ai/agentforce/references/agents-metadata-tooling/agents-metadata.html
+  Tipos de primeiro nível lidos: AiAuthoringBundle (contêiner do Agent Script e metadados do agente), Bot (registro principal de um
+    Einstein Bot ou de um agente Agentforce), BotVersion (configuração de uma versão do bot ou agente), GenAiFunction (ação de agente),
+    GenAiPlannerBundle (planner do agente), GenAiPlugin (subagente que agrupa ações).
+  Tipos aninhados citados: ConversationContextVariable, ConversationVariable, GenAiPluginInstructionDef.
+  A página não traz frase de licença nem de habilitação. O título avisa que a metadata de agentes mudou na v68.
+  GenAiPlannerBundle não consta do inventário v68 e fica fora desta rodada.
+
+[src:agentforce-testing-metadata] Agentforce Developer Guide, "Metadata API Reference for Testing API"
+  URL: https://developer.salesforce.com/docs/ai/agentforce/references/testing-api/testing-metadata-reference.html
+  AiEvaluationDefinition: define um teste de agente (objetivo, agente testado, conjuntos de teste); disponível desde a API 63.0;
+    só existe se o Agentforce estiver habilitado. (Frase na página do próprio tipo.)
+
+[src:help-enable-agentforce] Ajuda Salesforce, "Enable Agentforce" (leitura pelo resultado de busca)
+  URL: https://help.salesforce.com/s/articleView?id=ai.copilot_setup_enable.htm&language=en_US&type=5
+  Para habilitar o Agentforce é preciso antes ligar o Einstein Generative AI. Nota da página: a partir de agosto de 2026 a plataforma
+    Agentforce passa a vir ligada nas orgs com acesso ao Agentforce, sem custo adicional.
+
+[src:help-agent-setup] Ajuda Salesforce, "Set Up Your Agent" (leitura pelo resultado de busca)
+  URL: https://help.salesforce.com/s/articleView?language=en_US&id=ai.agent_parent_setup.htm&type=5
+  Edições Enterprise, Performance, Unlimited e Developer; as licenças add-on exigidas variam conforme o tipo de agente.
+
+Decisões:
+  - condicional (C4), condição "Agentforce habilitado na org": AiAuthoringBundle, GenAiFunction, GenAiPlugin, AiEvaluationDefinition.
+  - condicional (C4), condição "Agentforce habilitado, ou Einstein Bots (Service Cloud)": Bot e BotVersion, porque a lista diz que
+    representam um Einstein Bot ou um agente Agentforce.
+  - GenAiFunction e GenAiPlugin estavam pendentes desde a etapa 1 (licença não esclarecida); o C4 resolve a dúvida.
+Ficam para o próximo lote de IA, por falta de fonte lida: GenAiPromptTemplate e EinsteinGptSettings (pendentes da etapa 1), AiAgent*,
+  AiBundle*, AiSurface*, AiPlanner*, Einstein*Settings, Agentforce*Settings, BotBlock*, BotTemplate, BotSettings e demais.

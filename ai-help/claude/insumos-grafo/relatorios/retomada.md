@@ -392,6 +392,13 @@ O WSDL **não** é bloqueio: a documentação de cada tipo é a fonte alternativ
     - 15 nomes não aparecem na página lida e ficam sem decisão (ver a nota).
     - Regra nova C4 (decisão da autora em 2026-11-19): Agentforce e IA generativa ficam como "condicional", ligados ao Core e às nuvens que os usam, com a condição registrada. Diverge do C2, que deixaria esses tipos fora por licença. O inventário passa a contar "condicional"; nenhum tipo foi reclassificado ainda (fica para o lote da família de IA, com fonte).
     - Tipos não catalogados sem nenhuma decisão: 723 de 832.
+  - #10, etapa 2, lote 5 (2026-11-19; lote 7y5, `ferramentas/carga/lotes/lote7y5_core_ia_c4.py`): primeira aplicação do C4. 6 tipos ficam "condicional".
+    - AiAuthoringBundle, GenAiFunction, GenAiPlugin e AiEvaluationDefinition: condição "Agentforce habilitado na org". AiEvaluationDefinition tem a frase na página do próprio tipo; os outros pela lista de metadata types de agentes mais a página "Enable Agentforce" da Ajuda.
+    - Bot e BotVersion: condição "Agentforce habilitado, ou Einstein Bots (Service Cloud)", porque representam os dois; nuvens Platform Core e Service Cloud.
+    - GenAiFunction e GenAiPlugin estavam pendentes desde a etapa 1; o C4 resolve (campo `historico` registra isso).
+    - Validador: decisão "condicional" precisa de `condicao` e de estar na lista `condicionais`; dois testes novos.
+    - Ficam para o próximo lote de IA (sem fonte lida): GenAiPromptTemplate e EinsteinGptSettings (etapa 1), AiAgent*, AiBundle*, AiSurface*, AiPlanner*, Einstein*Settings, Agentforce*Settings, BotBlock*, BotTemplate, BotSettings. GenAiPlannerBundle não consta do inventário v68.
+    - Inventário: 153 incluídos, 6 condicionais, 93 excluídos, 741 pendentes. O site ainda não usa a decisão de Core; mostrar "condicional" no grafo é tarefa da etapa 3.
   - Fase 2, lote Acesso (2026-11-19; lote 8b, `ferramentas/carga/lotes/lote8b_fase2_acesso.py`): os 31 campos de User que só tinham nome.
     - Achado: a Object Reference 264.0 (lida inteira, até WirelessEmail) só descreve 2 deles: Country e UserPreferencesShowCountryToExternalUsers, que ganharam explicação. A Field Reference não traz descrições, só tipo e rótulo.
     - Os outros 29 ganharam tipo (27) e o rótulo oficial nas notas, mas a explicação continua pendente: não há descrição oficial, e o rótulo, na maioria, só repete o nome técnico (ex.: HasSentWarningEmail238). UserPermissionsMobileUser e UserPreferencesSetupAssistantPrefDisabled não apareceram na leitura.
