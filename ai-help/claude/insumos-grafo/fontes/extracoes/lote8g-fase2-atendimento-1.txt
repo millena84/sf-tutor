@@ -1,0 +1,79 @@
+fonte: Object Reference 264.0 (API 68.0), endpoint versionado (Fase 2, Processos de negócio, Atendimento parte 1: roteamento Omni-Channel)
+obtido em 2026-11-20 via WebFetch (AgentWork em uma leitura: 48 campos; PendingServiceRouting em uma leitura: 33 campos); método: extração
+  documental assistida por IA; descrições parafraseadas.
+convenção: nome | tipo | versão (quando a página informa) | descrição resumida. Só entram os campos que estavam com explicação pendente.
+ressalvas:
+  - IsInterruptible: a página diz que o campo existe a partir da 57.0 quando o recurso Interruptible Capacity está habilitado; a versão vai
+    como 57.0 e a condição vai no texto.
+  - IsConference e IsTransfer de AgentWork: a página diz que só aparecem em relatórios, não pela API; a ressalva vai no texto.
+  - PSR = PendingServiceRouting (sigla usada pela própria página).
+
+[src:objref-agentwork-264] https://developer.salesforce.com/docs/get_document_content/object_reference/sforce_api_objects_agentwork.htm/en-us/264.0
+  AbandonedDateTime | dateTime | 65.0 | quando um item na fila, com PendingServiceRouting aberto, foi abandonado antes de um agente aceitar (por exemplo, o cliente desligou ou saiu do chat)
+  AcceptDateTime | dateTime | - | quando o item de trabalho foi aceito
+  ActiveTime | int | - | segundos em que o agente trabalhou ativamente no item no console; só é medido no modelo de capacidade por aba, enquanto a aba está aberta e em foco, e para no fechamento ou no fim do trabalho pós-conversa
+  AcwExtensionCount | int | 55.0 | quantas vezes o agente estendeu o cronômetro de trabalho pós-conversa (After Conversation Work, ACW)
+  AcwExtensionDuration | int | 55.0 | segundos acrescentados a cada extensão do ACW; para o total, multiplique por AcwExtensionCount ou use AfterConversationActualTime
+  AfterConversationActualTime | int | 52.0 | segundos que o agente gastou em trabalho pós-conversa depois do fim do contato com o cliente
+  AgentCapacityWhenDeclined | double | - | capacidade do agente no momento em que recusou o trabalho, seja de forma explícita, seja por esgotar o tempo de resposta (push timeout)
+  AssignedDateTime | dateTime | - | quando o item foi atribuído a um agente
+  BotId | reference | 52.0 | ID do Enhanced Einstein Bot ou do agente de IA que executou o trabalho (relacionamento com BotDefinition)
+  BotType | picklist | 63.0 | tipo de bot: Bot (Einstein Bot, o padrão) ou ExternalCopilot (agente de IA com quem o cliente conversa)
+  CancelDateTime | dateTime | - | quando o item foi cancelado
+  CapacityModel | picklist | 50.0 | modelo de capacidade do agente: StatusBased (por status) ou TabBased (por aba); só itens que o Omni-Channel atribuiu por fila ou por habilidade consomem capacidade
+  CapacityPercentage | percent | - | percentual da capacidade do agente que o item consome enquanto está em andamento (0 a 100); chamadas de voz usam 100, então o agente em ligação não recebe itens novos até ela terminar
+  CloseDateTime | dateTime | - | quando o item foi fechado
+  DeclineDateTime | dateTime | - | quando o agente recusou o item
+  DeclineReason | string | - | motivo que o agente informou ao recusar o trabalho
+  ExternalBotId | reference | 64.0 | ID do bot de terceiros que atende o item (relacionamento com ExternalConversationBotDef)
+  HandleTime | int | - | segundos em que o agente ficou com o item aberto (fechamento menos aceite); para no fechamento ou no fim do trabalho pós-conversa
+  IsConference | boolean | 44.0 | verdadeiro se outro agente chamou este agente para uma conferência no item; padrão falso; a página diz que o campo só aparece em relatórios, não pela API
+  IsInterruptible | boolean | 57.0 | verdadeiro se o item consome capacidade interrompível em vez da capacidade principal; padrão falso; só existe com o recurso Interruptible Capacity habilitado
+  IsOwnerChangeInitiated | boolean | 50.0 | verdadeiro se uma troca de dono disparou a atribuição direta; padrão falso; exige o modelo de capacidade por status
+  IsPreferredUserRequired | boolean | 50.0 | verdadeiro se o item fica com o usuário preferido mesmo quando ele está indisponível; padrão falso
+  IsStatusChangeInitiated | boolean | 50.0 | verdadeiro se uma mudança de status disparou a atribuição direta; padrão falso; exige o modelo de capacidade por status
+  IsTransfer | boolean | 38.0 | verdadeiro se o agente recebeu o item por transferência de outro agente; padrão falso; a página diz que o campo só aparece em relatórios, não pela API
+  Name | string | - | número de identificação gerado automaticamente para o registro
+  OriginalGroupId | reference | - | ID da fila (Group) para a qual o trabalho foi roteado originalmente
+  OriginalQueueId | reference | - | ID da fila para a qual o trabalho foi roteado originalmente; não é mais recomendado, use OriginalGroupId
+  OwnerId | reference | 50.0 | ID do dono do AgentWork (polimórfico: Group ou User)
+  PausedCapacityPercentage | percent | 62.0 | percentual da capacidade consumido enquanto o item está pausado; exige capacidade por status e Enhanced Omni-Channel
+  PausedCapacityWeight | double | 62.0 | capacidade consumida enquanto o item está pausado; exige capacidade por status e Enhanced Omni-Channel
+  PreferredUserId | reference | 46.0 | ID do usuário preferido para atender o trabalho (relacionamento com User)
+  PushTimeout | int | 36.0 | segundos que o agente tem para responder antes de o item ir para outro agente; desde a 57.0, em chamadas de voz recebidas (Amazon Connect e Partner Telephony do Amazon Connect) é o tempo até a chamada ser recusada, de 0 a 20 segundos
+  PushTimeoutDateTime | dateTime | 36.0 | quando ocorreu o esgotamento do tempo de resposta (push timeout), em UTC
+  RequestDateTime | dateTime | - | quando o trabalho foi solicitado
+  RoutingModel | picklist | - | como os itens de um service channel chegam aos agentes: ExternalRouting, LeastActive (menos ativo) ou MostAvailable (mais disponível)
+  RoutingPriority | int | - | ordem em que os itens da fila ligada à configuração de roteamento são entregues aos agentes
+  RoutingType | picklist | - | tipo de roteamento do Omni-Channel: QueueBased (por fila) ou SkillsBased (por habilidade)
+  SecondaryRoutingPriority | int | - | prioridade de roteamento secundária
+
+[src:objref-pendingservicerouting-264] https://developer.salesforce.com/docs/get_document_content/object_reference/sforce_api_objects_pendingservicerouting.htm/en-us/264.0
+  BotId | reference | 52.0 | ID do Enhanced Einstein Bot ou do agente de IA que executou o trabalho (relacionamento com BotDefinition)
+  BotType | picklist | 63.0 | tipo de bot: Bot (Einstein Bot, o padrão) ou ExternalCopilot (agente de IA com quem o cliente conversa)
+  CapacityPercentage | percent | - | percentual da capacidade do agente que o item usa (0 a 100); chamadas de voz usam 100
+  CapacityWeight | double | - | quantidade de trabalho, em número inteiro, que o item representa; chamadas de voz usam a capacidade inteira
+  CustomRequestedDateTime | dateTime | - | guarda o horário original da solicitação para que os reroteamentos o usem; vazio, o reroteamento usa o horário em que acontece
+  DropAdditionalSkillsTimeout | int | - | tempo de espera até descartar as habilidades marcadas como adicionais, para que o agente com melhor correspondência receba o item; contado a partir de CustomRequestedDateTime quando ele está preenchido
+  ExternalBotId | reference | 64.0 | ID do bot de terceiros que atende o item (relacionamento com ExternalConversationBotDef)
+  GroupId | reference | - | ID da fila do Omni-Channel
+  IsInterruptible | boolean | 57.0 | indica se o item consome capacidade interrompível ou a principal; padrão falso; só existe com o recurso Interruptible Capacity habilitado
+  IsOwnerChangeInitiated | boolean | - | indica se uma troca de dono disparou a atribuição direta ao agente; padrão falso
+  IsPreferredUserRequired | boolean | 50.0 | indica se o item fica com o usuário preferido mesmo quando ele está indisponível; padrão falso; com verdadeiro, PushTimeout não deve ser preenchido
+  IsPushAttempted | boolean | - | verdadeiro se o item já foi oferecido (push) a um agente pelo menos uma vez
+  IsPushed | boolean | - | indica se o item está oferecido (push) a um agente neste momento
+  IsStatusChangeInitiated | boolean | 50.0 | indica se uma mudança de status disparou a atribuição direta ao agente; padrão falso
+  IsTransfer | boolean | - | indica se este roteamento é um pedido de transferência
+  LastDeclinedAgentSession | string | - | ID da sessão de chat do último agente que recusou o item
+  Name | string | - | nome do registro de PendingServiceRouting
+  OwnerId | reference | - | ID do dono do registro
+  PausedCapacityPercentage | percent | 62.0 | percentual da capacidade consumido enquanto o item está pausado; exige capacidade por status e Enhanced Omni-Channel
+  PausedCapacityWeight | double | 62.0 | capacidade consumida enquanto o item está pausado; exige capacidade por status e Enhanced Omni-Channel
+  PreferredUserId | reference | - | ID do usuário preferido para atender o item
+  PushTimeout | int | 36.0 | segundos que o agente tem para responder antes de o item ser reroteado e o status dele mudar; em voz recebida (desde a 57.0), de 0 a 20 segundos; não preencher quando IsPreferredUserRequired for verdadeiro
+  RoutingModel | picklist | - | modelo de roteamento: ExternalRouting, LeastActive (menos ativo) ou MostAvailable (mais disponível)
+  RoutingPriority | int | - | ordem em que os itens são entregues aos agentes; vale só para roteamento por habilidade
+  SecondaryRoutingPriority | int | - | prioridade de roteamento secundária
+  Serial | int | - | número sequencial, incrementado automaticamente a cada alteração do registro
+  TargetAcceptDateTime | dateTime | 65.0 | prazo para um agente aceitar o item; usado para priorizar o backlog e pode ser definido por Flow durante o roteamento
+  TransferRequesterId | reference | 63.0 | ID do usuário (agente) que reatribuiu o trabalho pela ação Reassign; a página diz que só é preenchido em registros de AgentWork reatribuídos

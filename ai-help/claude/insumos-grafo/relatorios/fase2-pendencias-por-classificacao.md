@@ -2,7 +2,7 @@
 
 Gerado por `ferramentas/pendencias_explicacao.py`. Não edite à mão.
 
-**Total:** 135 itens pendentes em 7 nós (cada nó contado uma vez).
+**Total:** 69 itens pendentes em 5 nós (cada nó contado uma vez).
 Um nó usado por funcionalidades de temas diferentes aparece em cada tema; por isso a soma das tabelas pode passar do total.
 
 Sugestão de uso: escolher uma classificação por sessão, começando pelas de mais itens ou pelas que o público mais visita, e fechar os nós dela num PR.
@@ -11,15 +11,13 @@ Sugestão de uso: escolher uma classificação por sessão, começando pelas de 
 
 | Classificação | Nós | Itens pendentes |
 |---|---|---|
-| Processos de negócio específicos de produto | 7 | 135 |
+| Processos de negócio específicos de produto | 5 | 69 |
 
-## Processos de negócio específicos de produto (135 itens)
+## Processos de negócio específicos de produto (69 itens)
 
 ### Atendimento
 
-- [ ] `obj:AgentWork` (objeto API): 38 de 48 pendentes. Funcionalidades: omni-channel
 - [ ] `obj:ServiceContract` (objeto API): 38 de 46 pendentes. Funcionalidades: entitlements-e-milestones
-- [ ] `obj:PendingServiceRouting` (objeto API): 28 de 33 pendentes. Funcionalidades: omni-channel
 - [ ] `obj:Entitlement` (objeto API): 13 de 22 pendentes. Funcionalidades: entitlements-e-milestones
 - [ ] `obj:Case` (objeto API): 1 de 57 pendentes. Funcionalidades: casos
 

@@ -182,14 +182,14 @@ Gerado por `ferramentas/sftutor.py cobertura`. Cobertura estrutural, explicativa
 
 ## Objetos consultáveis via API
 
-- Catalogados: 84. Campos listados: 2035; explicados: 1885.
+- Catalogados: 84. Campos listados: 2035; explicados: 1951.
 - Universo: Universo de objetos da plataforma não enumerado.
 
 | Objeto | Estrutural | Esperados | Presentes | Explicados | APIs verificadas |
 |---|---|---|---|---|---|
 | obj:Account | completa | 117 | 117 | 117 | padrao |
 | obj:AccountTeamMember | completa | 11 | 11 | 11 | padrao |
-| obj:AgentWork | completa | 48 | 48 | 10 | padrao |
+| obj:AgentWork | completa | 48 | 48 | 48 | padrao |
 | obj:ApexLog | completa | 10 | 10 | 10 | tooling |
 | obj:AssignmentRule | completa | 3 | 3 | 3 | padrao |
 | obj:AsyncApexJob | completa | 13 | 13 | 13 | padrao |
@@ -242,7 +242,7 @@ Gerado por `ferramentas/sftutor.py cobertura`. Cobertura estrutural, explicativa
 | obj:OpportunityLineItem | completa | 27 | 27 | 27 | padrao |
 | obj:OpportunityTeamMember | completa | 8 | 8 | 8 | padrao |
 | obj:PathAssistant | completa | 13 | 13 | 13 | tooling |
-| obj:PendingServiceRouting | completa | 33 | 33 | 5 | padrao |
+| obj:PendingServiceRouting | completa | 33 | 33 | 33 | padrao |
 | obj:PermissionSet | completa | 13 | 13 | 12 | padrao, tooling |
 | obj:PermissionSetAssignment | completa | 8 | 8 | 8 | padrao, tooling |
 | obj:PermissionSetGroup | completa | 8 | 8 | 8 | padrao, tooling |
