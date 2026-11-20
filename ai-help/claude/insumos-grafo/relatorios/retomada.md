@@ -411,6 +411,10 @@ O WSDL **não** é bloqueio: a documentação de cada tipo é a fonte alternativ
     - Inferidos pelo nome (7), com `inferido` e nota: AgentforcePlatformTracingSettings (Agent Platform Tracing, exige Data 360), AiSurfaceInput, AiSurfaceInstruction, AiResponseFormatIstr, AiAgentDefinitionPlanner, AiPlannerVoiceDef e AiPlannerVoiceAvatarDef. A fonte (relatório de cobertura v68) só lista os nomes.
     - Proposta para a autora confirmar: estender a marcação de inferência, que ela autorizou para bots, a inferências pelo nome do tipo.
     - Inventário: 153 incluídos, 25 condicionais, 93 excluídos, 722 pendentes. Tipos não catalogados sem decisão: 700 de 832.
+  - #10, etapa 2, lote 8 (2026-11-20; lote 7y8, `ferramentas/carga/lotes/lote7y8_core_data360.py`): família Data 360. 20 tipos excluídos por C3 (específicos de Data 360, que é nó próprio do mapa), como Experience Cloud no lote 3.
+    - Fonte principal: a página de componentes de pacotes de segunda geração (16 tipos de data kits, conectores e esquema). Mais: MktCalcInsightObjectDef (página do tipo), DataStreamDefinition e DataConnectorS3 (guia de data stream do S3) e ActivationTarget (blog oficial).
+    - Sem decisão, por falta de descrição lida: CalculatedInsight, DataAction, DataActionTarget, DataGraph, DataLakeObject, DataModelObject, DataTransform, IdentityResolution e outros 12 (lista na nota). A página "Data 360 Metadata Types" segue ilegível.
+    - Inventário: 153 incluídos, 25 condicionais, 113 excluídos, 702 pendentes. Tipos não catalogados sem decisão: 680 de 832.
   - Fase 2, Vendas parte 1 (2026-11-19; lote 8d, `ferramentas/carga/lotes/lote8d_fase2_vendas_1.py`): produtos e oportunidades.
     - Explicados (53): 33 campos de Product2 e 20 de OpportunityLineItem, com tipo e, quando a página informa, versão (Object Reference 264.0). O script lê a tabela direto da nota de extração.
     - "Descrição oficial não encontrada" (6): 4 de ContractSettings (a página só dá tipo) e 2 de Opportunity (OpportunityScoreId e ReferralCode, fora da Object Reference; tipo e rótulo vêm da Field Reference nova).
