@@ -1,0 +1,69 @@
+fonte: Object Reference 264.0 (API 68.0), endpoint versionado (Fase 2, Processos de negócio, Atendimento parte 2: contratos e direitos de atendimento)
+obtido em 2026-11-20 via WebFetch (ServiceContract em uma leitura: 49 campos; Entitlement em uma leitura: 22 campos; Case em uma leitura,
+  que não traz CurrencyIsoCode); método: extração documental assistida por IA; descrições parafraseadas.
+convenção: nome | tipo | versão (quando a página informa) | descrição resumida. Só entram os campos que estavam com explicação pendente.
+ressalvas:
+  - BillingAddress e ShippingAddress de ServiceContract: a página marca os campos compostos de endereço como beta.
+  - LastReferencedDate de ServiceContract: a página traz o tipo dateTime e o texto cortado; ficou só a frase principal.
+  - Entitlement: a página escreve AssetWarrantyID e LocationID (com ID maiúsculo); o catálogo usa os mesmos nomes.
+  - BillingGeocodeAccuracy e ShippingGeocodeAccuracy não estão na tabela da página e não estavam pendentes.
+
+[src:objref-servicecontract-264] https://developer.salesforce.com/docs/get_document_content/object_reference/sforce_api_objects_servicecontract.htm/en-us/264.0
+  ActivationDate | dateTime | - | primeiro dia em que o contrato passou a valer; StartDate pode refletir uma renovação, por isso as datas podem ser diferentes
+  AdditionalDiscount | percent | 55.0 | percentual de desconto adicional aplicado ao contrato
+  ApprovalStatus | picklist | - | status de aprovação do contrato
+  BillingAddress | address | - | endereço de cobrança composto, somente leitura (a página marca os campos compostos de endereço como beta)
+  BillingCity | string | - | cidade do endereço de cobrança, até 40 caracteres
+  BillingCountry | string | - | país do endereço de cobrança, até 40 caracteres
+  BillingCountryCode | picklist | - | código ISO do país do endereço de cobrança
+  BillingLatitude | double | - | latitude do endereço de cobrança (de -90 a 90, até 15 casas decimais); usada com BillingLongitude para indicar um local exato
+  BillingLongitude | double | - | longitude do endereço de cobrança (de -180 a 180, até 15 casas decimais); usada com BillingLatitude
+  BillingPostalCode | string | - | código postal do endereço de cobrança, até 20 caracteres
+  BillingState | string | - | estado do endereço de cobrança, até 20 caracteres
+  BillingStateCode | picklist | - | código ISO do estado do endereço de cobrança
+  BillingStreet | textarea | - | rua do endereço de cobrança
+  ContractNumber | string | - | número único atribuído automaticamente ao contrato
+  Description | textarea | - | descrição do contrato
+  Discount | percent | - | percentual de desconto do contrato
+  GrandTotal | currency | - | preço total do contrato somado a frete e impostos
+  IsDeleted | boolean | - | indica se o registro está na Lixeira (rótulo Deleted)
+  LastReferencedDate | dateTime | - | quando o usuário atual interagiu por último com o registro, de forma direta ou indireta (por exemplo, por um registro relacionado)
+  LastViewedDate | date | - | quando o usuário atual viu por último o registro ou uma list view; pode ficar vazio se o registro só foi referenciado
+  LineItemCount | int | - | quantidade de registros ContractLineItem (itens de linha) no contrato
+  OwnerId | reference | - | ID do usuário que é dono do contrato hoje
+  RootServiceContractId | reference | - | contrato de nível mais alto da hierarquia, somente leitura; pode ser o mesmo que o contrato pai
+  ShippingAddress | address | - | endereço de entrega composto, somente leitura (a página marca os campos compostos de endereço como beta)
+  ShippingCity | string | - | cidade do endereço de entrega, até 40 caracteres
+  ShippingCountry | string | - | país do endereço de entrega, até 40 caracteres
+  ShippingCountryCode | picklist | - | código ISO do país do endereço de entrega
+  ShippingLatitude | double | - | latitude do endereço de entrega (de -90 a 90, até 15 casas decimais); usada com ShippingLongitude
+  ShippingLongitude | double | - | longitude do endereço de entrega (de -180 a 180, até 15 casas decimais); usada com ShippingLatitude
+  ShippingPostalCode | string | - | código postal do endereço de entrega, até 20 caracteres
+  ShippingState | string | - | estado do endereço de entrega, até 20 caracteres
+  ShippingStateCode | picklist | - | código ISO do estado do endereço de entrega
+  ShippingStreet | textarea | - | rua do endereço de entrega, até 255 caracteres
+  SpecialTerms | textarea | - | termos combinados especificamente e acompanhados no contrato
+  Subtotal | currency | - | total dos itens de linha antes de descontos, impostos e frete
+  Tax | currency | - | total de impostos do contrato
+  Term | int | - | quantidade de meses em que o contrato vale
+  TotalPrice | currency | - | total dos itens de linha depois dos descontos e antes de impostos e frete
+
+[src:objref-entitlement-264] https://developer.salesforce.com/docs/get_document_content/object_reference/sforce_api_objects_entitlement.htm/en-us/264.0
+  AssetWarrantyID | reference | - | identificador do registro de garantia do ativo (precisa ser válido); exige Field Service
+  CasesPerEntitlement | int | - | total de casos que o direito de atendimento cobre; só existe quando IsPerIncident é verdadeiro
+  ContractLineItemId | reference | - | ID do item de linha de contrato (ContractLineItem) ligado ao direito de atendimento
+  IsPerIncident | boolean | - | indica se o direito de atendimento é limitado a um número definido de casos (verdadeiro) ou não (falso)
+  LastReferencedDate | date | - | quando o usuário atual acessou por último este registro, um registro relacionado ou uma list view
+  LastViewedDate | date | - | quando o usuário atual viu por último este registro ou uma list view; vazio pode indicar que o registro só foi referenciado
+  LocationID | reference | - | ID do local (Location) ligado ao direito de atendimento
+  RemainingCases | int | - | quantos casos o direito de atendimento ainda cobre; diminui em um a cada caso criado; só existe quando IsPerIncident está marcado
+  RemainingWorkOrders | int | - | quantas ordens de serviço combinadas ainda podem ser criadas
+  SvcApptBookingWindows | reference | - | horário de funcionamento do direito de atendimento; só aparece com Field Service habilitado
+  SvcApptBookingWindowsId | reference | - | horário de funcionamento (rótulo "Operating Hours") que as ordens de serviço do direito de atendimento devem seguir; exige Field Service
+  Type | picklist | - | tipo de direito de atendimento, como suporte pela web ou por telefone
+  WorkOrdersPerEntitlement | int | - | total de ordens de serviço disponíveis para o direito de atendimento
+
+[src:fieldref-case-264] https://developer.salesforce.com/docs/get_document_content/sfFieldRef/salesforce_field_reference_Case.htm/en-us/264.0
+  Sem descrição oficial (a Field Reference só dá tipo e tamanho, e a Object Reference 264.0 de Case não traz o campo):
+  CurrencyIsoCode: tipo picklist, rótulo "Case Currency", tamanho 3. Busca (2026-11-20) pela descrição do campo em Case na documentação
+    oficial e nas notas da release: nada encontrado.

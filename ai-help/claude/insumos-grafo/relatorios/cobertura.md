@@ -182,7 +182,7 @@ Gerado por `ferramentas/sftutor.py cobertura`. Cobertura estrutural, explicativa
 
 ## Objetos consultáveis via API
 
-- Catalogados: 84. Campos listados: 2035; explicados: 1951.
+- Catalogados: 84. Campos listados: 2035; explicados: 2002.
 - Universo: Universo de objetos da plataforma não enumerado.
 
 | Objeto | Estrutural | Esperados | Presentes | Explicados | APIs verificadas |
@@ -210,7 +210,7 @@ Gerado por `ferramentas/sftutor.py cobertura`. Cobertura estrutural, explicativa
 | obj:CustomTab | completa | 13 | 13 | 13 | tooling |
 | obj:DataUsePurpose | completa | 8 | 8 | 8 | padrao |
 | obj:DebugLevel | completa | 14 | 14 | 14 | tooling |
-| obj:Entitlement | completa | 22 | 22 | 9 | padrao |
+| obj:Entitlement | completa | 22 | 22 | 22 | padrao |
 | obj:EntityDefinition | completa | 86 | 86 | 86 | tooling |
 | obj:EventBusSubscriber | completa | 12 | 12 | 12 | padrao |
 | obj:EventLogFile | completa | 8 | 8 | 8 | padrao |
@@ -259,7 +259,7 @@ Gerado por `ferramentas/sftutor.py cobertura`. Cobertura estrutural, explicativa
 | obj:QuoteLineItem | completa | 84 | 84 | 84 | padrao |
 | obj:RecordType | completa | 12 | 12 | 12 | padrao, tooling |
 | obj:ServiceChannel | completa | 20 | 20 | 20 | padrao |
-| obj:ServiceContract | completa | 46 | 46 | 8 | padrao |
+| obj:ServiceContract | completa | 46 | 46 | 46 | padrao |
 | obj:ServicePresenceStatus | completa | 3 | 3 | 3 | padrao |
 | obj:SetupAuditTrail | completa | 6 | 6 | 6 | padrao |
 | obj:SlaProcess | completa | 12 | 12 | 12 | padrao |
