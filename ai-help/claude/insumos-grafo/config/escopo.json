@@ -229,6 +229,8 @@
    "ActivationPlatform",
    "ActivationTarget",
    "ApplicationRecordTypeConfig",
+   "AppointmentAssignmentPolicy",
+   "AppointmentSchedulingPolicy",
    "AssessmentQuestion",
    "AssessmentQuestionSet",
    "BldgEnrgyIntensityCnfg",
@@ -302,10 +304,12 @@
    "IdentityResolution",
    "IdentityVerificationProcDef",
    "IncidentMgmtSettings",
+   "IndustriesFieldServiceSettings",
    "IndustriesPricingSettings",
    "IndustriesSettings",
    "IntegrationProcdDefinition",
    "InternalDataConnector",
+   "InventoryReplenishmentSettings",
    "KnowledgeSettings",
    "LeadConfigSettings",
    "LeadConvertSettings",
@@ -356,6 +360,7 @@
    "Territory2Rule",
    "Territory2Settings",
    "Territory2Type",
+   "TimeSheetTemplate",
    "TimelineObjectDefinition",
    "UIObjectRelationConfig",
    "VehicleAssetEmssnSrcCnfg",
@@ -1062,6 +1067,56 @@
     ],
     "alcance_da_licenca": "familia",
     "data": "2026-11-18"
+   },
+   "AppointmentAssignmentPolicy": {
+    "familia": "Salesforce Scheduler",
+    "decisao": "excluido",
+    "criterios": [
+     "C2"
+    ],
+    "nuvens": [
+     "nuv:industries"
+    ],
+    "alcance_da_licenca": "familia",
+    "motivo": "Faz parte do Salesforce Scheduler, que exige a licença Lightning Scheduler Add-On. Fica fora do Core.",
+    "evidencias": [
+     {
+      "fonte": "src:mdapi-appointmentassignmentpolicy-264",
+      "uso": "lista"
+     },
+     {
+      "fonte": "src:hc-scheduler-addon",
+      "uso": "licenca"
+     }
+    ],
+    "inferido": true,
+    "nota_inferencia": "O Salesforce Scheduler não tem nó próprio no mapa; a ligação a Industries é inferida (as fontes lidas o mostram em Health Cloud e em Financial Services Cloud). A exclusão do Core vem da licença e não depende dessa inferência.",
+    "data": "2026-11-20"
+   },
+   "AppointmentSchedulingPolicy": {
+    "familia": "Salesforce Scheduler",
+    "decisao": "excluido",
+    "criterios": [
+     "C2"
+    ],
+    "nuvens": [
+     "nuv:industries"
+    ],
+    "alcance_da_licenca": "familia",
+    "motivo": "Faz parte do Salesforce Scheduler, que exige a licença Lightning Scheduler Add-On. Fica fora do Core.",
+    "evidencias": [
+     {
+      "fonte": "src:mdapi-appointmentschedulingpolicy-264",
+      "uso": "lista"
+     },
+     {
+      "fonte": "src:hc-scheduler-addon",
+      "uso": "licenca"
+     }
+    ],
+    "inferido": true,
+    "nota_inferencia": "O Salesforce Scheduler não tem nó próprio no mapa; a ligação a Industries é inferida (as fontes lidas o mostram em Health Cloud e em Financial Services Cloud). A exclusão do Core vem da licença e não depende dessa inferência.",
+    "data": "2026-11-20"
    },
    "ApprovalProcess": {
     "decisao": "incluido",
@@ -4515,6 +4570,25 @@
     ],
     "data": "2026-11-18"
    },
+   "IndustriesFieldServiceSettings": {
+    "familia": "Manufacturing Cloud",
+    "decisao": "excluido",
+    "criterios": [
+     "C3"
+    ],
+    "nuvens": [
+     "nuv:industries"
+    ],
+    "alcance_da_licenca": "nao_se_aplica",
+    "motivo": "Listado entre os Settings de Manufacturing Cloud, nuvem de setor; específico dessa nuvem. Continua no mapa em Industries.",
+    "evidencias": [
+     {
+      "fonte": "src:mfg-settings-list-258",
+      "uso": "lista"
+     }
+    ],
+    "data": "2026-11-20"
+   },
    "IndustriesPricingSettings": {
     "decisao": "excluido",
     "criterios": [
@@ -4613,6 +4687,25 @@
     "inferido": true,
     "nota_inferencia": "Associação ao Data 360 inferida por orientação da autora e pelo nome do tipo; a fonte lida só lista o nome, sem descrição. Pendente de confirmação.",
     "orientacao_autora": "Orientação da autora (2026-11-20): associar ao Data Cloud (Data 360) com ressalva, porque a associação não foi confirmada por fonte.",
+    "data": "2026-11-20"
+   },
+   "InventoryReplenishmentSettings": {
+    "familia": "Manufacturing Cloud",
+    "decisao": "excluido",
+    "criterios": [
+     "C3"
+    ],
+    "nuvens": [
+     "nuv:industries"
+    ],
+    "alcance_da_licenca": "nao_se_aplica",
+    "motivo": "Listado entre os Settings de Manufacturing Cloud, nuvem de setor; específico dessa nuvem. Continua no mapa em Industries.",
+    "evidencias": [
+     {
+      "fonte": "src:mfg-settings-list-258",
+      "uso": "lista"
+     }
+    ],
     "data": "2026-11-20"
    },
    "InvocableActionSettings": {
@@ -6571,6 +6664,27 @@
     "alcance_da_licenca": "nao_se_aplica",
     "data": "2026-11-19"
    },
+   "Skill": {
+    "familia": "Field Service",
+    "decisao": "pendente",
+    "criterios": [
+     "C2",
+     "C3"
+    ],
+    "nuvens": [
+     "nuv:field-service",
+     "nuv:service-cloud"
+    ],
+    "alcance_da_licenca": "nao_se_aplica",
+    "motivo": "Habilidades servem a Field Service, ao roteamento de atendimento (Omni-Channel), a Salesforce Scheduler e a Workforce Engagement: várias nuvens, nenhuma delas a plataforma. Nenhuma fonte lida diz se o tipo exige licença.",
+    "evidencias": [
+     {
+      "fonte": "src:fs-dev-mdapi-264",
+      "uso": "lista"
+     }
+    ],
+    "data": "2026-11-20"
+   },
    "SocialCustomerServiceSettings": {
     "decisao": "excluido",
     "criterios": [
@@ -6782,6 +6896,30 @@
      "nuv:sales-cloud"
     ],
     "data": "2026-11-18"
+   },
+   "TimeSheetTemplate": {
+    "familia": "Field Service",
+    "decisao": "excluido",
+    "criterios": [
+     "C2",
+     "X2"
+    ],
+    "nuvens": [
+     "nuv:field-service"
+    ],
+    "alcance_da_licenca": "familia",
+    "motivo": "Listado entre os metadata types de Field Service, produto com licenças próprias (como FieldServiceSettings na etapa 1). Continua no mapa como parte do produto.",
+    "evidencias": [
+     {
+      "fonte": "src:fs-dev-mdapi-264",
+      "uso": "lista"
+     },
+     {
+      "fonte": "src:help-fs-key-concepts",
+      "uso": "licenca"
+     }
+    ],
+    "data": "2026-11-20"
    },
    "TimelineObjectDefinition": {
     "decisao": "excluido",
