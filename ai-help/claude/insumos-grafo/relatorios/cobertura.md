@@ -182,7 +182,7 @@ Gerado por `ferramentas/sftutor.py cobertura`. Cobertura estrutural, explicativa
 
 ## Objetos consultáveis via API
 
-- Catalogados: 84. Campos listados: 2035; explicados: 1702.
+- Catalogados: 84. Campos listados: 2035; explicados: 1819.
 - Universo: Universo de objetos da plataforma não enumerado.
 
 | Objeto | Estrutural | Esperados | Presentes | Explicados | APIs verificadas |
@@ -255,8 +255,8 @@ Gerado por `ferramentas/sftutor.py cobertura`. Cobertura estrutural, explicativa
 | obj:QueueRoutingConfig | completa | 14 | 14 | 14 | padrao |
 | obj:QueueSobject | completa | 2 | 2 | 2 | padrao |
 | obj:QuickActionDefinition | completa | 22 | 22 | 22 | tooling |
-| obj:Quote | completa | 76 | 76 | 37 | padrao |
-| obj:QuoteLineItem | completa | 84 | 84 | 6 | padrao |
+| obj:Quote | completa | 76 | 76 | 76 | padrao |
+| obj:QuoteLineItem | completa | 84 | 84 | 84 | padrao |
 | obj:RecordType | completa | 12 | 12 | 12 | padrao, tooling |
 | obj:ServiceChannel | completa | 20 | 20 | 20 | padrao |
 | obj:ServiceContract | completa | 46 | 46 | 8 | padrao |
