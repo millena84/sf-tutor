@@ -1,0 +1,93 @@
+fonte: páginas oficiais por família e por tipo (issue #10, etapa 2, lote 10: família Atendimento / Service Cloud)
+obtido em 2026-11-20 por resultados de busca restritos a developer.salesforce.com (leitura do trecho indexado); método: extração documental
+  assistida por IA. Quando a família tem página de lista (Omni-Channel), ela é a fonte de lista; nas outras, cada tipo tem a própria página.
+regra: mesmo padrão dos lotes 1 a 9 (lote7y-core-familias-1.txt). Nada foi cadastrado no catálogo.
+critério de exclusão: C3 (tipo específico de uma nuvem que é nó próprio do mapa), como CaseSettings, ServiceChannel, OmniChannelSettings e
+  QueueRoutingConfig na etapa 1 (Agentforce Service / Service Cloud). C3 não depende de licença; por isso alcance_da_licenca = nao_se_aplica.
+
+1) Omni-Channel (fonte de lista da família)
+[src:omni-dev-mdapi-types] Omni-Channel Developer Guide, "Omni-Channel Metadata API Types"
+  URL: https://developer.salesforce.com/docs/atlas.en-us.omni_channel_dev.meta/omni_channel_dev/omnichannel_metadata_api_intro.htm
+  Lista os tipos da Metadata API usados com Omni-Channel: Flow, OmniChannelSettings, OmniSupervisorConfig, PresenceDeclineReason,
+    PresenceUserConfig, Queue, QueueRoutingConfig, ServiceChannel, ServicePresenceStatus, WorkSkillRouting e WorkSkillRoutingAttribute.
+  Já decididos na etapa 1: Flow e Queue (incluídos, plataforma), OmniChannelSettings, PresenceUserConfig, QueueRoutingConfig,
+    ServiceChannel e ServicePresenceStatus (excluídos por C3, Service). WorkSkillRoutingAttribute não é metadata type do inventário v68
+    (é subtipo de WorkSkillRouting).
+  Leituras de apoio, páginas 264.0 de cada tipo (não viram fonte nova; citadas aqui para registro):
+    PresenceDeclineReason: motivo de recusa que o agente escolhe ao recusar trabalho no Omni-Channel; só existe com Omni-Channel habilitado.
+    OmniSupervisorConfig: configuração do Omni Supervisor para um grupo de supervisores; exige Omni-Channel habilitado.
+    WorkSkillRouting: conjunto de mapeamentos entre valores de campo do item de trabalho e habilidades, para rotear ao agente com a
+      habilidade necessária (skills-based routing).
+  Decisão: excluídos por C3 (Service): OmniSupervisorConfig, PresenceDeclineReason, WorkSkillRouting.
+
+2) Voz (Service Cloud Voice, hoje chamado Salesforce Voice)
+[src:mdapi-servicecloudvoicesettings-264] https://developer.salesforce.com/docs/atlas.en-us.264.0.api_meta.meta/api_meta/meta_servicecloudvoicesettings.htm
+  ServiceCloudVoiceSettings: configurações de Service Cloud Voice da org (descrição lida nas versões 236.0 a 240.0 da mesma página; a 264.0
+    abre com o mesmo nome do tipo).
+[src:mdapi-conversationvendorinfo-264] https://developer.salesforce.com/docs/atlas.en-us.264.0.api_meta.meta/api_meta/meta_conversationvendorinfo.htm
+  ConversationVendorInfo: liga o sistema do fornecedor parceiro (telefonia parceira ou CCaaS) ao recurso de Service Cloud. A página do
+    objeto de mesmo nome na Object Reference diz que ele exige add-on de Salesforce Voice for Partner Telephony ou de Digital Engagement.
+[src:mdapi-callcenterroutingmap-264] https://developer.salesforce.com/docs/atlas.en-us.264.0.api_meta.meta/api_meta/meta_callcenterroutingmap.htm
+  CallCenterRoutingMap: mapeia um usuário ou fila da org para um usuário ou fila do call center de um sistema externo. Exige as permissões
+    Contact Center Admin, Contact Center Admin (Partner Telephony), Contact Center Supervisor ou Manage Call Centers. O campo quickConnect
+    usa o QuickConnect do Amazon Connect para transferências de chamada pelo Omni-Channel.
+    A página não diz "Service Cloud Voice" com essas palavras: a associação à nuvem de atendimento é inferida (permissões de contact
+    center + Amazon Connect + Omni-Channel).
+  Decisão: excluídos por C3 (Service): ServiceCloudVoiceSettings, ConversationVendorInfo; excluído por C3 com inferido: CallCenterRoutingMap.
+  Fora desta decisão: CallCenter (Open CTI serve vendas e atendimento) e VoiceSettings (a página 264.0 diz que são as configurações do
+    Sales Dialer, de vendas).
+
+3) Social Customer Service
+[src:mdapi-socialcustomerservicesettings-264] https://developer.salesforce.com/docs/atlas.en-us.264.0.api_meta.meta/api_meta/meta_socialcustomerservicesettings.htm
+  SocialCustomerServiceSettings: configurações de Social Customer Service, como formatar o conteúdo de posts sociais recebidos em casos
+    (descrição lida na página atual sem versão; a 264.0 traz o mesmo exemplo de arquivo).
+[src:mdapi-casesubjectparticle-264] https://developer.salesforce.com/docs/atlas.en-us.264.0.api_meta.meta/api_meta/meta_casesubjectparticle.htm
+  CaseSubjectParticle: formato personalizado (Social Business Rules) do campo Subject de casos criados a partir de posts sociais.
+  Decisão: excluídos por C3 (Service): SocialCustomerServiceSettings, CaseSubjectParticle.
+
+4) Assistente de configuração de atendimento
+[src:mdapi-servicesetupassistantsettings-264] https://developer.salesforce.com/docs/atlas.en-us.264.0.api_meta.meta/api_meta/meta_servicesetupassistantsettings.htm
+  ServiceSetupAssistantSettings: liga ou desliga o Service Setup Assistant, que monta um app de console de atendimento básico (descrição
+    lida na página atual sem versão; a 264.0 traz o campo enableServiceSetupAssistant).
+  Decisão: excluído por C3 (Service): ServiceSetupAssistantSettings.
+
+5) Chat legado, Embedded Service e Messaging: pendentes, com motivo
+[src:chat-rest-edicoes] Chat REST API Developer Guide (página inicial)
+  URL: https://developer.salesforce.com/docs/atlas.en-us.live_agent_rest.meta/live_agent_rest
+  Edições: Essentials, Unlimited e Enterprise com Service Cloud ou Sales Cloud. Aviso: o produto de chat legado tinha aposentadoria
+    marcada para 14 de fevereiro de 2026 e estava em modo de manutenção até lá.
+  Páginas 264.0 dos tipos de chat (descrição do tipo lida, em parte, em versões anteriores da mesma página):
+    LiveAgentSettings: configurações de Chat da org, como se o Chat está habilitado.
+    LiveChatAgentConfig: configuração dos agentes de Chat (capacidade, transferência de arquivos, monitoramento por supervisor etc.).
+    LiveChatButton: botão e janela de chat de uma implantação de Chat (rótulo, formulário pré-chat). A página diz que chats roteados
+      pelo Omni-Channel não são suportados na Metadata API.
+    LiveChatDeployment: configurações de uma implantação de Chat (imagem de marca, gravação automática de transcrições).
+    LiveChatSensitiveDataRule: regra (expressão regular) para mascarar ou remover dados sensíveis no chat, aplicada a agente, visitante
+      ou supervisor.
+    EmbeddedServiceLiveAgent: implantação de chat embutido (Embedded Chat), que referencia um botão e uma implantação de Chat.
+    EmbeddedServiceBranding: a página 264.0 diz que o tipo só funciona com os produtos de chat legado; Messaging for In-App and Web usa
+      BrandingSet.
+  Outras páginas 264.0 (Embedded Service e Messaging):
+    EmbeddedServiceConfig: nó de configuração de uma implantação Embedded Service; o campo deploymentFeature aceita EmbeddedMessaging,
+      FieldService, Flows e LiveAgent. Ou seja, serve também a agendamento de Field Service e a flows embutidos.
+    EmbeddedServiceMenuSettings: implantação de menu de canais (as formas de contato que o cliente vê). A página do objeto na Tooling API
+      diz que o tipo só fica disponível com Salesforce Experiences e Salesforce Sites habilitados.
+    MessagingChannel: canal de Messaging do Embedded Service; exige as permissões "Configure Messaging" e "View Setup and Configuration";
+      tem o campo queueRoutingConfig (Omni-Channel). Tipos de canal incluem EmbeddedMessaging, Voice (Service Cloud Voice), Text (SMS),
+      WhatsApp e Custom (Bring Your Own Channel).
+    ConversationMessageDefinition: componente de mensagem de canais Enhanced Messaging ou de sessões Messaging for In-App and Web.
+    LiveMessageSettings: configurações de LiveMessage da org (liga o recurso e controla o acesso a ConversationEntry). A página não diz a
+      que nuvem o recurso pertence.
+  Decisão: pendentes, com motivo:
+    - Chat legado (LiveAgentSettings, LiveChatAgentConfig, LiveChatButton, LiveChatDeployment, LiveChatSensitiveDataRule,
+      EmbeddedServiceLiveAgent, EmbeddedServiceBranding): a fonte de edições diz que o Chat existia com Service Cloud ou Sales Cloud (então
+      não é exclusivo de atendimento, e o C3 não fecha) e que o produto foi aposentado em 14/02/2026. Falta decidir como tratar tipos de
+      produto aposentado que ainda constam do inventário v68.
+    - EmbeddedServiceConfig: serve a Messaging, Chat, Field Service e flows.
+    - EmbeddedServiceMenuSettings: depende de Experiences/Sites; não há frase que o ligue só ao atendimento.
+    - MessagingChannel, ConversationMessageDefinition e LiveMessageSettings: nenhuma fonte lida diz se Messaging é exclusivo de
+      atendimento ou se também vem com Sales Cloud (como o Chat legado).
+  Sem decisão (não lidos nesta rodada): EmbeddedServiceFlowConfig, ConversationChannelDefinition, MessagingMobileAppChannel*,
+    ServiceCatalog (Svc*), MacroSettings, QuickTextSettings, ServiceAIRecommendationsSettings, ServiceProcess e os demais Service*.
+  Skill e SkillType continuam sem decisão: a página de objetos do Omni-Channel diz que habilidades servem a Field Service, Omni-Channel,
+    Salesforce Scheduler e Workforce Engagement (mais de uma nuvem).
