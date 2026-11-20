@@ -1,0 +1,44 @@
+fonte: páginas oficiais por família e por tipo (issue #10, etapa 2, lote 11: família Atendimento / Service Cloud, parte 2)
+obtido em 2026-11-20 por resultados de busca restritos a developer.salesforce.com (leitura do trecho indexado); método: extração documental
+  assistida por IA. Nada foi cadastrado no catálogo.
+regra: mesmo padrão dos lotes 1 a 10 (lote7y-core-familias-1.txt e lote7y10-core-atendimento.txt).
+
+1) Workforce Engagement (fonte de lista da família)
+[src:wem-cookbook-metadata] Workforce Engagement Cookbook: "Workforce Engagement Metadata and Tooling API Reference"
+  URL: https://developer.salesforce.com/docs/service/wem-cookbook-dev-guide/guide/workforce-engagement-metadata.html
+  Diz que habilitar Workforce Engagement dá acesso aos componentes de metadados e objetos de Tooling listados, e avisa que o produto está
+    com aposentadoria programada. Componentes listados: WorkforceEngagementSettings (liga o produto, o app de configuração, a previsão
+    por machine learning e recursos como aderência histórica, gestão intradiária e aderência em tempo real), SchedulingObjective
+    (objetivo de negócio considerado ao escolher agentes para turnos) e SchedulingRule (regra que decide quais agentes vão para os turnos).
+[src:mdapi-workforceengagementsettings-264] https://developer.salesforce.com/docs/atlas.en-us.264.0.api_meta.meta/api_meta/meta_workforceengagementsettings.htm
+  WorkforceEngagementSettings: configurações de Workforce Engagement Management, disponível desde a API 52.0. A regra de acesso especial
+    (a org precisa de licença Workforce Engagement) foi lida na página atual sem versão e nas versões 238.0 a 254.0 da mesma página; o
+    trecho da 264.0 mostra o título "Special Access Rules" sem o texto.
+  Decisão: excluídos por C2 (licença de produto): WorkforceEngagementSettings (regra na página do próprio tipo), SchedulingObjective e
+    SchedulingRule (a fonte da família diz que esses componentes vêm com o produto habilitado).
+  Fora desta decisão (não lidos): EnhancedServiceWFMSettings, WorkforceManagementSettings, WorkforceSchedulingSettings.
+
+2) Gestão de incidentes
+[src:mdapi-incidentmgmtsettings] https://developer.salesforce.com/docs/atlas.en-us.api_meta.meta/api_meta/meta_incidentmgmtsettings.htm
+  IncidentMgmtSettings: configurações de Customer Service Incident Management e Broadcast Communications, desde a API 54.0. Regra de acesso
+    especial: exige licença de Service Cloud. A página 264.0 confirma a descrição e traz campos como enableAiKnowledgeCreation (criação de
+    artigos de conhecimento de ITSM) e enableAlertBroadcastType.
+  Decisão: excluído por C2 e C3 (exige licença de Service Cloud; específico do atendimento).
+
+3) Macros
+[src:mdapi-macrosettings-264] https://developer.salesforce.com/docs/atlas.en-us.264.0.api_meta.meta/api_meta/meta_macrosettings.htm
+  MacroSettings: configurações de macros da org, como busca avançada em todos os campos de texto das macros e organização em pastas
+    (descrição lida na página atual sem versão; a 264.0 abre com as mesmas seções). Disponível desde a API 39.0. Sem regra de acesso especial.
+[src:objref-macro-264] https://developer.salesforce.com/docs/atlas.en-us.264.0.object_reference.meta/object_reference/sforce_api_objects_macro.htm
+  Objeto Macro: conjunto de instruções para o sistema executar tarefas. No Lightning Experience, macros funcionam em objetos padrão e
+    personalizados que aceitam quick actions e têm page layout personalizável (frase lida na página atual sem versão do mesmo objeto).
+  Decisão: incluído no Core pelo C2 ajustado e pelo C3: sem registro de licença de produto e serve a qualquer objeto com quick actions,
+    não a uma nuvem só.
+
+4) Sem decisão nesta rodada
+  Service Catalog (SvcCatalogCategory, SvcCatalogItemDef, SvcCatalogFulfillmentFlow, SvcCatalogFilterCriteria, ServiceCatalogSettings): as
+    páginas dos tipos dizem "Service Catalog", mas não dizem a que nuvem nem a que licença o recurso pertence. A ligação a Service Cloud e
+    ao Agentforce IT Service aparece só no Trailhead, que não está entre os domínios de fonte aceitos.
+  Agentforce IT Service (ServiceItsmIntelligenceUddSettings, ReleaseMgmtSettings e os Service*Itsm/Itam/Itom): o guia de IT Service tem uma
+    página por tipo, mas a regra de edição ou licença não foi lida.
+  QuickTextSettings, ConversationChannelDefinition e os demais Service*Settings.
