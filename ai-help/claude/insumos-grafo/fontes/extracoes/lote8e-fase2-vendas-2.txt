@@ -1,0 +1,125 @@
+fonte: Object Reference 264.0 (API 68.0), endpoint versionado (Fase 2, Processos de negócio, Vendas parte 2: cotações)
+obtido em 2026-11-20 via WebFetch (Quote em uma leitura; QuoteLineItem em duas); método: extração documental assistida por IA;
+  descrições parafraseadas.
+convenção: nome | tipo | versão (quando a página informa) | descrição resumida
+
+[src:objref-quote-264] https://developer.salesforce.com/docs/get_document_content/object_reference/sforce_api_objects_quote.htm/en-us/264.0
+  AdditionalAddress | address | - | forma composta, somente leitura, do endereço adicional
+  AdditionalCity | string | - | cidade do endereço adicional, até 40 caracteres
+  AdditionalCountry | string | - | país do endereço adicional, até 80 caracteres
+  AdditionalCountryCode | picklist | - | código ISO do país do endereço adicional
+  AdditionalLatitude | double | - | latitude do endereço adicional (de -90 a 90), usada com AdditionalLongitude
+  AdditionalLongitude | double | - | longitude do endereço adicional (de -180 a 180), usada com AdditionalLatitude
+  AdditionalName | string | - | nome ligado ao endereço adicional, até 255 caracteres
+  AdditionalPostalCode | string | - | código postal do endereço adicional
+  AdditionalState | string | - | estado do endereço adicional, até 80 caracteres
+  AdditionalStateCode | picklist | - | código ISO do estado do endereço adicional
+  AdditionalStreet | textarea | - | rua do endereço adicional
+  BillingAddress | address | - | forma composta, somente leitura, do endereço de cobrança
+  BillingCity | string | - | cidade do endereço de cobrança, até 40 caracteres
+  BillingCountry | string | - | país do endereço de cobrança, até 80 caracteres
+  BillingCountryCode | picklist | - | código ISO do país do endereço de cobrança
+  BillingLatitude | double | - | latitude do endereço de cobrança (de -90 a 90), usada com BillingLongitude
+  BillingLongitude | double | - | longitude do endereço de cobrança (de -180 a 180), usada com BillingLatitude
+  BillingName | string | - | entidade para quem a cotação é cobrada
+  BillingPostalCode | string | - | código postal do endereço de cobrança
+  BillingState | string | - | estado do endereço de cobrança, até 80 caracteres
+  BillingStateCode | picklist | - | código ISO do estado do endereço de cobrança
+  BillingStreet | textarea | - | rua do endereço de cobrança
+  BillToContactId | reference | 56.0 | contato a quem o pedido é cobrado; exige Subscription Management
+  CalculationStatus | picklist | - | status dos cálculos assíncronos de preço e impostos; exige Subscription Management ou Revenue Cloud
+  CanCreateQuoteLineItems | boolean | - | não é usado (segundo a página)
+  ContractId | reference | - | contrato associado à cotação
+  CurrencyIsoCode | picklist | - | moeda da cotação, copiada da oportunidade; só em orgs multimoeda
+  Description | textarea | - | descrição da cotação, até 32.000 caracteres
+  Discount | percent | - | diferença entre o subtotal dos itens e o total com desconto, em porcentagem do subtotal
+  Email | email | - | e-mail do contato associado à cotação
+  ExpirationDate | date | - | data a partir da qual a cotação deixa de valer
+  Fax | phone | - | fax do contato associado à cotação
+  GrandTotal | currency | - | total da cotação mais frete e impostos; calculado pelo sistema e não pode ser usado em fórmulas customizadas
+  InsuranceQuoteType | picklist | - | tipo de cotação de seguro, como New Business ou Renewal
+  LastReferencedDate | date | - | último acesso do usuário atual ao registro, a um registro relacionado ou a uma list view
+  LastViewedDate | date | - | última vez que o usuário atual viu o registro ou a list view
+  LineItemCount | int | - | número de itens da cotação
+  Phone | phone | - | telefone do contato associado à cotação
+  Pricebook2Id | reference | - | catálogo de preços (price book) associado à cotação
+
+[src:objref-quotelineitem-264] https://developer.salesforce.com/docs/get_document_content/object_reference/sforce_api_objects_quotelineitem.htm/en-us/264.0
+  BatchIdentifier | string | - | agrupa as linhas de um bundle de produtos para serem processadas juntas
+  BillingFrequency | picklist | 55.0 | frequência de cobrança do item (Annual ou Monthly); exige Subscription Management
+  BillingReference | string | 61.0 | cotação original a partir da qual o item foi criado
+  CurrencyIsoCode | picklist | - | moeda do item, herdada da cotação e não editável; só em orgs multimoeda
+  CustomProductName | string | - | nome personalizado do produto do item
+  Description | string | - | descrição do item, até 225 caracteres
+  Discount | percent | - | desconto opcional do item, de 0 a 100, definido pelo vendedor
+  DiscountAmount | currency | 59.0 | desconto em valor fixo aplicado ao item
+  DoesAutomaticallyRenew | boolean | - | se o item renova automaticamente; padrão false
+  Division | picklist | - | segmento de negócio dos dados da org; exige a permissão Division
+  EffectiveGrantDate | date | - | data em que os recursos ligados ao item são concedidos
+  EndDate | picklist | 55.0 | data de fim de um item de assinatura; exige Subscription Management (a página informa o tipo picklist)
+  EndDateTime | dateTime | 65.0 | data e hora de fim no fuso informado (UTC por padrão); exige Revenue Cloud
+  EndQuantity | double | 60.0 | quantidade vigente no fim da assinatura; exige Subscription Management
+  EndTime | time | 65.0 | hora de fim do item; exige Revenue Cloud
+  HasQuantitySchedule | boolean | - | se o item de oportunidade sincronizado tem quantity schedule; somente leitura
+  HasRevenueSchedule | boolean | - | se o item de oportunidade sincronizado tem revenue schedule; somente leitura
+  HasSchedule | boolean | - | se o item usa schedules; somente leitura
+  IsPrimarySegment | boolean | - | se o segmento do item é o principal; padrão false
+  LastReferencedDate | dateTime | - | último acesso indireto do usuário atual ao registro, como por list view ou registro relacionado
+  LastViewedDate | dateTime | - | última vez que o usuário atual viu o registro; nulo quando só foi acessado
+  LegalEntityId | reference | - | entidade legal associada ao item
+  LineNumber | string | - | identificador gerado automaticamente, no formato com prefixo "QL-"; somente leitura
+  ListPrice | currency | - | preço unitário da entrada do price book, para comparar com o preço de venda; somente leitura
+  ListPriceTotal | currency | - | preço de lista multiplicado pela quantidade
+  Margin | percent | 65.0 | margem opcional do item em porcentagem, definida pelo vendedor; exige Revenue Cloud
+  MarginAmount | currency | 65.0 | margem opcional do item em valor, definida pelo vendedor; exige Revenue Cloud
+  NetTotalPrice | currency | 56.0 | preço total depois de todos os ajustes, inclusive quantidade e proporcionalidade; exige Subscription Management
+  NetUnitPrice | currency | - | preço unitário depois de todos os ajustes
+  ParentQuoteLineItemId | reference | 58.0 | item relacionado na cotação de origem, definido pela API na criação; exige Subscription Management
+  PartnerDiscountPercent | percent | 59.0 | desconto em porcentagem dado ao parceiro
+  PartnerUnitPrice | currency | 59.0 | preço unitário depois do desconto do parceiro
+  PeriodBoundary | picklist | 55.0 | quando começam e terminam os períodos de cobrança; exige Subscription Management e Revenue Cloud
+  PeriodBoundaryDay | int | 55.0 | dia da semana ou do mês que marca o limite do período (1 a 31); obrigatório para DayOfPeriod
+  PeriodBoundaryStartMonth | picklist | - | mês de início do período na cobrança anual, calculado ou informado à mão
+  PriceRevisionPolicyId | reference | 65.0 | política de reajuste de preço do item; exige Revenue Cloud
+  PricingContractId | reference | - | contrato usado no preço do item
+  PriceWaterfallIdentifier | string | 60.0 | identificador gerado pelo Salesforce Pricing para o cálculo de preço do registro
+  PricingTerm | int | 55.0 | número de períodos da assinatura (por exemplo, 12 numa assinatura mensal com preço anual); exige Subscription Management
+  PricingTermCount | double | 55.0 | número calculado de períodos de preço; exige Subscription Management
+  PricingTermUnit | picklist | 55.0 | unidade do período de preço: Annual (rótulo Years, desde a 58.0) ou Months; exige Subscription Management
+  ProductInstanceIdentifier | string | - | instância do produto adicionada à cotação; itens da mesma instância compartilham o valor
+  ProductSellingModelId | reference | 55.0 | modelo de venda do produto (product selling model); exige Subscription Management
+  ProrationPolicyId | reference | 55.0 | política de proporcionalidade; exige Subscription Management
+  QuantityUnitOfMeasureId | reference | - | unidade de medida da quantidade, da quantidade inicial e da final
+  QuoteActionId | reference | 58.0 | ação de cotação relacionada; exige Subscription Management ou Revenue Lifecycle Management
+  QuoteLineGroupId | reference | - | grupo de linhas da cotação que contém o item
+  QuoteLineItemRecipientId | reference | - | destinatário atribuído ao item
+  RampIdentifier | string | - | identificador de rampa que agrupa os segmentos de um item
+  RelatedQuoteLineItemId | reference | 65.0 | item de cotação ligado ao item de pedido criado a partir dele; exige Revenue Cloud
+  SegmentIdentifier | string | - | identificador do segmento
+  SegmentName | string | - | nome do segmento do item
+  SegmentType | picklist | - | período do segmento: Custom, FreeTrial, Prorated ou Yearly (padrão Yearly)
+  SellingModelType | picklist | 55.0 | se a linha é compra única, assinatura contínua (evergreen) ou assinatura com prazo; exige Subscription Management
+  ServiceDate | date | - | data de reconhecimento da receita e de envio da quantidade
+  SortOrder | int | 21.0 | posição do item na ordenação, que define a ordem na lista relacionada e no PDF da cotação
+  StartDate | date | 55.0 | data de início de uma assinatura; exige Subscription Management
+  StartDateTime | dateTime | 65.0 | data e hora de início, a partir da data, da hora e do fuso; exige Revenue Cloud
+  StartEndTimeZone | picklist | 65.0 | fuso aplicado às datas e horas de início e fim; exige Revenue Cloud
+  StartTime | time | 65.0 | hora de início do item; exige Revenue Cloud
+  StartQuantity | double | 60.0 | quantidade no início da assinatura; exige Subscription Management
+  StartingPriceTotal | currency | - | preço unitário inicial multiplicado pela quantidade
+  StartingUnitPriceSource | picklist | 55.0 | se o preço unitário inicial foi digitado, calculado ou herdado; exige Subscription Management
+  Status | picklist | 60.0 | status do item: In Progress (padrão), Pending, Approved ou Rejected; exige a permissão QuoteLineItemStatus (a página informa dynamic picklist)
+  SubscriptionTerm | int | - | número de períodos da assinatura; ignorado se EndDate também for informado
+  SubscriptionTermUnit | picklist | 55.0 | unidade da assinatura: Annual (rótulo Years) ou Months; exige Subscription Management
+  Subtotal | currency | - | quantidade vezes preço unitário; no Revenue Cloud, igual a TotalLineAmount quando este tem valor
+  TotalAdjustment | percent | 65.0 | desconto total do item em porcentagem: (TotalLineAmount - NetTotalPrice) / TotalLineAmount; exige Revenue Cloud
+  TotalAdjustmentAmount | currency | 56.0 | soma dos ajustes do item, inclusive quantidade e proporcionalidade no prazo; exige Subscription Management
+  TotalCost | currency | 65.0 | custo total dos produtos vendidos: quantidade vezes custo unitário; exige Revenue Cloud
+  TotalLineAmount | currency | 56.0 | preço total antes dos ajustes: ListPrice vezes Quantity vezes PricingTermCount; exige Subscription Management
+  TotalMargin | percent | 65.0 | margem efetiva do item em porcentagem: (NetTotalPrice - TotalCost) / NetTotalPrice; exige Revenue Cloud
+  TotalMarginAmount | currency | 65.0 | margem efetiva do item em valor: NetTotalPrice menos TotalCost; exige Revenue Cloud
+  TotalPrice | currency | - | preço depois de aplicar Discount ao Subtotal; somente leitura; não muda se o item tiver revenue schedule
+  UnitCost | currency | 65.0 | custo unitário do produto vendido; exige Revenue Cloud
+  UnitPriceUplift | percent | - | aumento percentual aplicado ao preço unitário do item
+  ValidationResult | picklist | 60.0 | indica se o Revenue Lifecycle Management configurou e precificou a linha; o único valor, Warning, quer dizer que não
+  Visibility | picklist | - | onde a linha aparece: editor de linhas, documento da cotação, ambos (padrão) ou nenhum
