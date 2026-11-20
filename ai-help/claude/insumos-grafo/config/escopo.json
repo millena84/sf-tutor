@@ -232,6 +232,7 @@
    "AssessmentQuestionSet",
    "BldgEnrgyIntensityCnfg",
    "CalculatedInsight",
+   "CallCenterRoutingMap",
    "CampaignSettings",
    "CareBenefitVerifySettings",
    "CareLimitType",
@@ -239,11 +240,13 @@
    "CareRequestConfiguration",
    "CareSystemFieldMapping",
    "CaseSettings",
+   "CaseSubjectParticle",
    "ClauseCatgConfiguration",
    "CommunitiesSettings",
    "CommunityTemplateDefinition",
    "CommunityThemeDefinition",
    "ContractSettings",
+   "ConversationVendorInfo",
    "CustomSite",
    "DataAction",
    "DataActionTarget",
@@ -320,10 +323,12 @@
    "OmniInteractionConfig",
    "OmniScript",
    "OmniStudioSettings",
+   "OmniSupervisorConfig",
    "OmniTrackingGroup",
    "OmniscriptDefinition",
    "OpportunitySettings",
    "OrderSettings",
+   "PresenceDeclineReason",
    "PresenceUserConfig",
    "PricingActionParameters",
    "PricingRecipe",
@@ -335,7 +340,10 @@
    "RevenueManagementSettings",
    "ScoreCategory",
    "ServiceChannel",
+   "ServiceCloudVoiceSettings",
    "ServicePresenceStatus",
+   "ServiceSetupAssistantSettings",
+   "SocialCustomerServiceSettings",
    "StnryAssetEnvSrcCnfg",
    "SustainabilityUom",
    "SustnUomConversion",
@@ -356,7 +364,8 @@
    "WaveLens",
    "WaveRecipe",
    "WaveTemplateBundle",
-   "WaveXmd"
+   "WaveXmd",
+   "WorkSkillRouting"
   ],
   "justificativa_incluidos": "Tipos do piloto obrigatório; todos atendem C1 e C3 segundo as páginas oficiais consultadas.",
   "justificativas": {
@@ -1466,6 +1475,27 @@
     "orientacao_autora": "Orientação da autora (2026-11-20): associar ao Data Cloud (Data 360) com ressalva, porque a associação não foi confirmada por fonte.",
     "data": "2026-11-20"
    },
+   "CallCenterRoutingMap": {
+    "decisao": "excluido",
+    "criterios": [
+     "C3"
+    ],
+    "familia": "Atendimento (Service Cloud)",
+    "nuvens": [
+     "nuv:service-cloud"
+    ],
+    "motivo": "Associado a Agentforce Service (fora do Core por ser específico dessa nuvem), com ressalva: associação inferida.",
+    "evidencias": [
+     {
+      "fonte": "src:mdapi-callcenterroutingmap-264",
+      "uso": "lista"
+     }
+    ],
+    "alcance_da_licenca": "nao_se_aplica",
+    "inferido": true,
+    "nota_inferencia": "Associação ao atendimento inferida: a página do tipo não cita Service Cloud Voice, mas exige permissões de contact center e usa o QuickConnect do Amazon Connect para transferências pelo Omni-Channel. Pendente de confirmação.",
+    "data": "2026-11-20"
+   },
    "CampaignSettings": {
     "decisao": "excluido",
     "criterios": [
@@ -1613,6 +1643,25 @@
      "nuv:service-cloud"
     ],
     "data": "2026-11-18"
+   },
+   "CaseSubjectParticle": {
+    "decisao": "excluido",
+    "criterios": [
+     "C3"
+    ],
+    "motivo": "Específico de Agentforce Service (atendimento); não é camada compartilhada. Continua no mapa como parte dessa nuvem.",
+    "familia": "Atendimento (Service Cloud)",
+    "nuvens": [
+     "nuv:service-cloud"
+    ],
+    "evidencias": [
+     {
+      "fonte": "src:mdapi-casesubjectparticle-264",
+      "uso": "lista"
+     }
+    ],
+    "alcance_da_licenca": "nao_se_aplica",
+    "data": "2026-11-20"
    },
    "Certificate": {
     "decisao": "incluido",
@@ -2081,6 +2130,45 @@
      "nuv:sales-cloud"
     ],
     "data": "2026-11-18"
+   },
+   "ConversationMessageDefinition": {
+    "decisao": "pendente",
+    "criterios": [
+     "C2",
+     "C3"
+    ],
+    "familia": "Atendimento (Service Cloud)",
+    "nuvens": [
+     "nuv:service-cloud"
+    ],
+    "motivo": "Messaging: nenhuma fonte lida diz se é exclusivo de atendimento ou se também vem com Sales Cloud (como o Chat legado). Falta frase de edição ou licença.",
+    "evidencias": [
+     {
+      "fonte": "src:mdapi-atendimento-canais-264",
+      "uso": "lista"
+     }
+    ],
+    "alcance_da_licenca": "nao_se_aplica",
+    "data": "2026-11-20"
+   },
+   "ConversationVendorInfo": {
+    "decisao": "excluido",
+    "criterios": [
+     "C3"
+    ],
+    "motivo": "Específico de Agentforce Service (atendimento); não é camada compartilhada. Continua no mapa como parte dessa nuvem.",
+    "familia": "Atendimento (Service Cloud)",
+    "nuvens": [
+     "nuv:service-cloud"
+    ],
+    "evidencias": [
+     {
+      "fonte": "src:mdapi-conversationvendorinfo-264",
+      "uso": "lista"
+     }
+    ],
+    "alcance_da_licenca": "nao_se_aplica",
+    "data": "2026-11-20"
    },
    "CorsWhitelistOrigin": {
     "decisao": "incluido",
@@ -3318,6 +3406,94 @@
     ],
     "alcance_da_licenca": "nao_se_aplica",
     "data": "2026-11-19"
+   },
+   "EmbeddedServiceBranding": {
+    "decisao": "pendente",
+    "criterios": [
+     "C3"
+    ],
+    "familia": "Atendimento (Service Cloud)",
+    "nuvens": [
+     "nuv:service-cloud",
+     "nuv:sales-cloud"
+    ],
+    "motivo": "Chat legado: a fonte de edições diz que o Chat existia com Service Cloud ou Sales Cloud (o C3 não fecha como exclusivo de atendimento) e que o produto foi aposentado em 14/02/2026. Falta decidir como tratar tipos de produto aposentado que ainda constam do inventário v68.",
+    "evidencias": [
+     {
+      "fonte": "src:chat-rest-edicoes",
+      "uso": "lista"
+     },
+     {
+      "fonte": "src:mdapi-atendimento-canais-264",
+      "uso": "lista"
+     }
+    ],
+    "alcance_da_licenca": "nao_se_aplica",
+    "data": "2026-11-20"
+   },
+   "EmbeddedServiceConfig": {
+    "decisao": "pendente",
+    "criterios": [
+     "C3"
+    ],
+    "familia": "Atendimento (Service Cloud)",
+    "nuvens": [
+     "nuv:service-cloud",
+     "nuv:field-service"
+    ],
+    "motivo": "Serve a Messaging, Chat, agendamento de Field Service e flows embutidos (campo deploymentFeature); por servir a mais de uma nuvem, poderia entrar pelo C3, mas falta fonte sobre licença.",
+    "evidencias": [
+     {
+      "fonte": "src:mdapi-atendimento-canais-264",
+      "uso": "lista"
+     }
+    ],
+    "alcance_da_licenca": "nao_se_aplica",
+    "data": "2026-11-20"
+   },
+   "EmbeddedServiceLiveAgent": {
+    "decisao": "pendente",
+    "criterios": [
+     "C3"
+    ],
+    "familia": "Atendimento (Service Cloud)",
+    "nuvens": [
+     "nuv:service-cloud",
+     "nuv:sales-cloud"
+    ],
+    "motivo": "Chat legado: a fonte de edições diz que o Chat existia com Service Cloud ou Sales Cloud (o C3 não fecha como exclusivo de atendimento) e que o produto foi aposentado em 14/02/2026. Falta decidir como tratar tipos de produto aposentado que ainda constam do inventário v68.",
+    "evidencias": [
+     {
+      "fonte": "src:chat-rest-edicoes",
+      "uso": "lista"
+     },
+     {
+      "fonte": "src:mdapi-atendimento-canais-264",
+      "uso": "lista"
+     }
+    ],
+    "alcance_da_licenca": "nao_se_aplica",
+    "data": "2026-11-20"
+   },
+   "EmbeddedServiceMenuSettings": {
+    "decisao": "pendente",
+    "criterios": [
+     "C3"
+    ],
+    "familia": "Atendimento (Service Cloud)",
+    "nuvens": [
+     "nuv:service-cloud",
+     "nuv:experience-cloud"
+    ],
+    "motivo": "Menu de canais de contato; exige Experiences e Sites habilitados e não há frase que o ligue só ao atendimento.",
+    "evidencias": [
+     {
+      "fonte": "src:mdapi-atendimento-canais-264",
+      "uso": "lista"
+     }
+    ],
+    "alcance_da_licenca": "nao_se_aplica",
+    "data": "2026-11-20"
    },
    "EnhancedNotesSettings": {
     "decisao": "incluido",
@@ -4580,6 +4756,146 @@
     ],
     "data": "2026-11-18"
    },
+   "LiveAgentSettings": {
+    "decisao": "pendente",
+    "criterios": [
+     "C3"
+    ],
+    "familia": "Atendimento (Service Cloud)",
+    "nuvens": [
+     "nuv:service-cloud",
+     "nuv:sales-cloud"
+    ],
+    "motivo": "Chat legado: a fonte de edições diz que o Chat existia com Service Cloud ou Sales Cloud (o C3 não fecha como exclusivo de atendimento) e que o produto foi aposentado em 14/02/2026. Falta decidir como tratar tipos de produto aposentado que ainda constam do inventário v68.",
+    "evidencias": [
+     {
+      "fonte": "src:chat-rest-edicoes",
+      "uso": "lista"
+     },
+     {
+      "fonte": "src:mdapi-atendimento-canais-264",
+      "uso": "lista"
+     }
+    ],
+    "alcance_da_licenca": "nao_se_aplica",
+    "data": "2026-11-20"
+   },
+   "LiveChatAgentConfig": {
+    "decisao": "pendente",
+    "criterios": [
+     "C3"
+    ],
+    "familia": "Atendimento (Service Cloud)",
+    "nuvens": [
+     "nuv:service-cloud",
+     "nuv:sales-cloud"
+    ],
+    "motivo": "Chat legado: a fonte de edições diz que o Chat existia com Service Cloud ou Sales Cloud (o C3 não fecha como exclusivo de atendimento) e que o produto foi aposentado em 14/02/2026. Falta decidir como tratar tipos de produto aposentado que ainda constam do inventário v68.",
+    "evidencias": [
+     {
+      "fonte": "src:chat-rest-edicoes",
+      "uso": "lista"
+     },
+     {
+      "fonte": "src:mdapi-atendimento-canais-264",
+      "uso": "lista"
+     }
+    ],
+    "alcance_da_licenca": "nao_se_aplica",
+    "data": "2026-11-20"
+   },
+   "LiveChatButton": {
+    "decisao": "pendente",
+    "criterios": [
+     "C3"
+    ],
+    "familia": "Atendimento (Service Cloud)",
+    "nuvens": [
+     "nuv:service-cloud",
+     "nuv:sales-cloud"
+    ],
+    "motivo": "Chat legado: a fonte de edições diz que o Chat existia com Service Cloud ou Sales Cloud (o C3 não fecha como exclusivo de atendimento) e que o produto foi aposentado em 14/02/2026. Falta decidir como tratar tipos de produto aposentado que ainda constam do inventário v68.",
+    "evidencias": [
+     {
+      "fonte": "src:chat-rest-edicoes",
+      "uso": "lista"
+     },
+     {
+      "fonte": "src:mdapi-atendimento-canais-264",
+      "uso": "lista"
+     }
+    ],
+    "alcance_da_licenca": "nao_se_aplica",
+    "data": "2026-11-20"
+   },
+   "LiveChatDeployment": {
+    "decisao": "pendente",
+    "criterios": [
+     "C3"
+    ],
+    "familia": "Atendimento (Service Cloud)",
+    "nuvens": [
+     "nuv:service-cloud",
+     "nuv:sales-cloud"
+    ],
+    "motivo": "Chat legado: a fonte de edições diz que o Chat existia com Service Cloud ou Sales Cloud (o C3 não fecha como exclusivo de atendimento) e que o produto foi aposentado em 14/02/2026. Falta decidir como tratar tipos de produto aposentado que ainda constam do inventário v68.",
+    "evidencias": [
+     {
+      "fonte": "src:chat-rest-edicoes",
+      "uso": "lista"
+     },
+     {
+      "fonte": "src:mdapi-atendimento-canais-264",
+      "uso": "lista"
+     }
+    ],
+    "alcance_da_licenca": "nao_se_aplica",
+    "data": "2026-11-20"
+   },
+   "LiveChatSensitiveDataRule": {
+    "decisao": "pendente",
+    "criterios": [
+     "C3"
+    ],
+    "familia": "Atendimento (Service Cloud)",
+    "nuvens": [
+     "nuv:service-cloud",
+     "nuv:sales-cloud"
+    ],
+    "motivo": "Chat legado: a fonte de edições diz que o Chat existia com Service Cloud ou Sales Cloud (o C3 não fecha como exclusivo de atendimento) e que o produto foi aposentado em 14/02/2026. Falta decidir como tratar tipos de produto aposentado que ainda constam do inventário v68.",
+    "evidencias": [
+     {
+      "fonte": "src:chat-rest-edicoes",
+      "uso": "lista"
+     },
+     {
+      "fonte": "src:mdapi-atendimento-canais-264",
+      "uso": "lista"
+     }
+    ],
+    "alcance_da_licenca": "nao_se_aplica",
+    "data": "2026-11-20"
+   },
+   "LiveMessageSettings": {
+    "decisao": "pendente",
+    "criterios": [
+     "C2",
+     "C3"
+    ],
+    "familia": "Atendimento (Service Cloud)",
+    "nuvens": [
+     "nuv:service-cloud"
+    ],
+    "motivo": "Messaging: nenhuma fonte lida diz se é exclusivo de atendimento ou se também vem com Sales Cloud (como o Chat legado). Falta frase de edição ou licença.",
+    "evidencias": [
+     {
+      "fonte": "src:mdapi-atendimento-canais-264",
+      "uso": "lista"
+     }
+    ],
+    "alcance_da_licenca": "nao_se_aplica",
+    "data": "2026-11-20"
+   },
    "ManagedEventSubscription": {
     "decisao": "incluido",
     "criterios": [
@@ -4611,6 +4927,26 @@
      "nuv:platform-core"
     ],
     "data": "2026-11-18"
+   },
+   "MessagingChannel": {
+    "decisao": "pendente",
+    "criterios": [
+     "C2",
+     "C3"
+    ],
+    "familia": "Atendimento (Service Cloud)",
+    "nuvens": [
+     "nuv:service-cloud"
+    ],
+    "motivo": "Messaging: nenhuma fonte lida diz se é exclusivo de atendimento ou se também vem com Sales Cloud (como o Chat legado). Falta frase de edição ou licença.",
+    "evidencias": [
+     {
+      "fonte": "src:mdapi-atendimento-canais-264",
+      "uso": "lista"
+     }
+    ],
+    "alcance_da_licenca": "nao_se_aplica",
+    "data": "2026-11-20"
    },
    "MilestoneType": {
     "decisao": "excluido",
@@ -5096,6 +5432,25 @@
     "alcance_da_licenca": "familia",
     "data": "2026-11-18"
    },
+   "OmniSupervisorConfig": {
+    "decisao": "excluido",
+    "criterios": [
+     "C3"
+    ],
+    "motivo": "Específico de Agentforce Service (atendimento); não é camada compartilhada. Continua no mapa como parte dessa nuvem.",
+    "familia": "Atendimento (Service Cloud)",
+    "nuvens": [
+     "nuv:service-cloud"
+    ],
+    "evidencias": [
+     {
+      "fonte": "src:omni-dev-mdapi-types",
+      "uso": "lista"
+     }
+    ],
+    "alcance_da_licenca": "nao_se_aplica",
+    "data": "2026-11-20"
+   },
    "OmniTrackingGroup": {
     "decisao": "excluido",
     "criterios": [
@@ -5371,6 +5726,25 @@
      "nuv:platform-core"
     ],
     "data": "2026-11-18"
+   },
+   "PresenceDeclineReason": {
+    "decisao": "excluido",
+    "criterios": [
+     "C3"
+    ],
+    "motivo": "Específico de Agentforce Service (atendimento); não é camada compartilhada. Continua no mapa como parte dessa nuvem.",
+    "familia": "Atendimento (Service Cloud)",
+    "nuvens": [
+     "nuv:service-cloud"
+    ],
+    "evidencias": [
+     {
+      "fonte": "src:omni-dev-mdapi-types",
+      "uso": "lista"
+     }
+    ],
+    "alcance_da_licenca": "nao_se_aplica",
+    "data": "2026-11-20"
    },
    "PresenceUserConfig": {
     "decisao": "excluido",
@@ -5892,6 +6266,25 @@
     ],
     "data": "2026-11-18"
    },
+   "ServiceCloudVoiceSettings": {
+    "decisao": "excluido",
+    "criterios": [
+     "C3"
+    ],
+    "motivo": "Específico de Agentforce Service (atendimento); não é camada compartilhada. Continua no mapa como parte dessa nuvem.",
+    "familia": "Atendimento (Service Cloud)",
+    "nuvens": [
+     "nuv:service-cloud"
+    ],
+    "evidencias": [
+     {
+      "fonte": "src:mdapi-servicecloudvoicesettings-264",
+      "uso": "lista"
+     }
+    ],
+    "alcance_da_licenca": "nao_se_aplica",
+    "data": "2026-11-20"
+   },
    "ServiceMgmtKnwlgArtclConfig": {
     "decisao": "pendente",
     "criterios": [
@@ -5926,6 +6319,25 @@
      "nuv:service-cloud"
     ],
     "data": "2026-11-18"
+   },
+   "ServiceSetupAssistantSettings": {
+    "decisao": "excluido",
+    "criterios": [
+     "C3"
+    ],
+    "motivo": "Específico de Agentforce Service (atendimento); não é camada compartilhada. Continua no mapa como parte dessa nuvem.",
+    "familia": "Atendimento (Service Cloud)",
+    "nuvens": [
+     "nuv:service-cloud"
+    ],
+    "evidencias": [
+     {
+      "fonte": "src:mdapi-servicesetupassistantsettings-264",
+      "uso": "lista"
+     }
+    ],
+    "alcance_da_licenca": "nao_se_aplica",
+    "data": "2026-11-20"
    },
    "SharingCriteriaRule": {
     "decisao": "incluido",
@@ -6058,6 +6470,25 @@
     ],
     "alcance_da_licenca": "nao_se_aplica",
     "data": "2026-11-19"
+   },
+   "SocialCustomerServiceSettings": {
+    "decisao": "excluido",
+    "criterios": [
+     "C3"
+    ],
+    "motivo": "Específico de Agentforce Service (atendimento); não é camada compartilhada. Continua no mapa como parte dessa nuvem.",
+    "familia": "Atendimento (Service Cloud)",
+    "nuvens": [
+     "nuv:service-cloud"
+    ],
+    "evidencias": [
+     {
+      "fonte": "src:mdapi-socialcustomerservicesettings-264",
+      "uso": "lista"
+     }
+    ],
+    "alcance_da_licenca": "nao_se_aplica",
+    "data": "2026-11-20"
    },
    "SourceTrackingSettings": {
     "decisao": "incluido",
@@ -6687,6 +7118,25 @@
      "nuv:platform-core"
     ],
     "data": "2026-11-18"
+   },
+   "WorkSkillRouting": {
+    "decisao": "excluido",
+    "criterios": [
+     "C3"
+    ],
+    "motivo": "Específico de Agentforce Service (atendimento); não é camada compartilhada. Continua no mapa como parte dessa nuvem.",
+    "familia": "Atendimento (Service Cloud)",
+    "nuvens": [
+     "nuv:service-cloud"
+    ],
+    "evidencias": [
+     {
+      "fonte": "src:omni-dev-mdapi-types",
+      "uso": "lista"
+     }
+    ],
+    "alcance_da_licenca": "nao_se_aplica",
+    "data": "2026-11-20"
    },
    "Workflow": {
     "decisao": "incluido",
