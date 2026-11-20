@@ -1,0 +1,78 @@
+fonte: Object Reference 264.0 (API 68.0), endpoint versionado (Fase 2, Processos de negócio, Vendas parte 3: campanhas)
+obtido em 2026-11-20 via WebFetch (Campaign em uma leitura: 69 campos; CampaignMember em uma leitura: 32 campos); método: extração
+  documental assistida por IA; descrições parafraseadas.
+convenção: nome | tipo | versão (quando a página informa) | descrição resumida. Só entram os campos que estavam com explicação pendente.
+ressalvas:
+  - o catálogo grava CreatedByID; na página o nome é CreatedById (mesmo campo, diferença só de maiúscula). A linha usa o nome do catálogo.
+  - a página dá o tipo currency para HierarchyNumberOfConvertedLeads, HierarchyNumberOfLeads, HierarchyNumberOfOpportunities e
+    HierarchyNumberOfResponses, embora a descrição seja de contagem; o tipo foi mantido como a página diz e a ressalva vai no texto.
+
+[src:objref-campaign-264] https://developer.salesforce.com/docs/get_document_content/object_reference/sforce_api_objects_campaign.htm/en-us/264.0
+  ActualCost | currency | - | valor gasto para executar a campanha
+  AmountAllOpportunities | currency | - | soma dos valores de todas as oportunidades ligadas à campanha, incluindo as fechadas e ganhas
+  AmountWonOpportunities | currency | - | soma dos valores das oportunidades fechadas e ganhas ligadas à campanha
+  BriefId | reference | - | ID do brief associado, que guarda objetivos e contexto de público da campanha (lookup para Record)
+  BudgetedCost | currency | - | valor orçado para a campanha
+  CampaignImageId | reference | 42.0 | ID da imagem da campanha; só existe em orgs com licenças Partner Community e Digital Experience habilitado, ou com o pacote gerenciado Direct Marketing instalado
+  CampaignStage | picklist | - | estágio do ciclo de vida da campanha, calculado a partir do status dos flows relacionados (In Planning, In Progress, Completed, Error, Canceled, Paused); disponível nas edições Growth e Advanced de Marketing Cloud
+  CreatedByID | reference | - | ID do usuário que criou a campanha (lookup para User; na página, CreatedById)
+  CurrencyIsoCode | picklist | - | código ISO da moeda da campanha; só existe com multimoeda habilitada
+  Description | textarea | - | descrição da campanha, até 32 KB; os relatórios mostram só os primeiros 255 caracteres
+  ExpectedResponse | percent | - | percentual de respostas esperado
+  ExpectedRevenue | currency | - | receita que se espera que a campanha gere
+  HierarchyActualCost | currency | - | custo real somado de toda a hierarquia de campanhas (calculado)
+  HierarchyAmountAllOpportunities | currency | - | soma dos valores de todas as oportunidades da hierarquia, incluindo as fechadas e ganhas (calculado)
+  HierarchyAmountWonOpportunities | currency | - | soma dos valores das oportunidades fechadas e ganhas da hierarquia (calculado)
+  HierarchyBudgetedCost | currency | - | orçamento somado de toda a hierarquia (calculado)
+  HierarchyExpectedRevenue | currency | - | receita esperada somada de toda a hierarquia (calculado)
+  HierarchyNumberOfContacts | int | - | quantidade de contatos associados à hierarquia (calculado)
+  HierarchyNumberOfConvertedLeads | currency | - | quantidade de leads convertidos a partir das campanhas da hierarquia (calculado); a página dá o tipo currency, embora o valor seja uma contagem
+  HierarchyNumberOfLeads | currency | - | quantidade de leads das campanhas da hierarquia (calculado); a página dá o tipo currency, embora o valor seja uma contagem
+  HierarchyNumberOfOpportunities | currency | - | quantidade de oportunidades ligadas às campanhas da hierarquia (calculado); a página dá o tipo currency, embora o valor seja uma contagem
+  HierarchyNumberOfResponses | currency | - | quantidade de contatos e leads não convertidos com status de membro equivalente a "Responded" na hierarquia (calculado); a página dá o tipo currency, embora o valor seja uma contagem
+  HierarchyNumberOfWonOpportunities | int | - | quantidade de oportunidades fechadas e ganhas da hierarquia
+  HierarchyNumberSent | double | - | total de pessoas alcançadas na hierarquia, por exemplo e-mails enviados (calculado)
+  HierarchyTotalEmailsDelivered | int | - | e-mails entregues na hierarquia (calculado); só com Marketing Cloud Account Engagement
+  HierarchyTotalFormSubmissions | int | - | envios de formulário na hierarquia (calculado); só com Marketing Cloud Account Engagement
+  HierarchyTotalFormViews | int | - | visualizações de formulário na hierarquia (calculado); só com Marketing Cloud Account Engagement
+  HierarchyTotalLandingPageFormSubmissions | int | - | envios de formulário de landing page na hierarquia (calculado); só com Marketing Cloud Account Engagement
+  HierarchyTotalLandingPageViews | int | - | visualizações de landing page na hierarquia (calculado); só com Marketing Cloud Account Engagement
+  HierarchyUniqueEmailOpens | int | - | aberturas únicas de e-mail na hierarquia, sem contar repetições (calculado); só com Marketing Cloud Account Engagement
+  HierarchyUniqueEmailTrackedLinkClicks | int | - | cliques únicos em links rastreados de e-mail na hierarquia, sem repetições (calculado); só com Marketing Cloud Account Engagement
+  HierarchyUniqueMarketingLinkClicks | int | - | cliques únicos em links de marketing na hierarquia, sem repetições (calculado); só com Marketing Cloud Account Engagement
+  LastActivityDate | date | - | a data mais recente entre o vencimento do último evento registrado no registro e o vencimento da tarefa fechada mais recente
+  LastModifiedById | reference | - | ID do usuário que alterou a campanha por último (lookup para User)
+  LastReferencedDate | datetime | - | quando o usuário atual acessou por último o registro, um registro relacionado ou uma list view
+  LastViewedDate | datetime | - | quando o usuário atual viu por último o registro ou uma list view; pode ficar vazio se o usuário só acessou (ver LastReferencedDate)
+  NumberOfContacts | int | - | quantidade de contatos associados à campanha
+  NumberOfConvertedLeads | int | - | quantidade de leads convertidos em contas e contatos por meio da campanha
+  NumberOfLeads | int | - | quantidade de leads associados à campanha
+  NumberOfOpportunities | int | - | quantidade de oportunidades associadas à campanha
+  NumberOfResponses | int | - | quantidade de contatos e leads não convertidos com status de membro equivalente a "Responded"
+
+[src:objref-campaignmember-264] https://developer.salesforce.com/docs/get_document_content/object_reference/sforce_api_objects_campaignmember.htm/en-us/264.0
+  City | string | - | cidade do endereço do lead ou contato; com Accounts as Campaign Members habilitado, pode ser a cidade da conta
+  CompanyOrAccount | string | - | empresa ou conta do lead ou contato
+  CurrencyIsoCode | picklist | - | código ISO de uma moeda aceita pela org; só existe com multimoeda habilitada
+  Country | string | - | país do endereço do lead ou contato; com Accounts as Campaign Members habilitado, pode ser o país da conta
+  Description | textarea | - | descrição do lead ou contato associado; com Accounts as Campaign Members habilitado, pode ser a descrição da conta
+  DoNotCall | boolean | - | indica que o lead ou contato não quer receber ligações; com Accounts as Campaign Members habilitado, pode valer para a conta
+  Email | email | - | e-mail do lead ou contato; com Accounts as Campaign Members habilitado, pode ser o e-mail da conta
+  Fax | phone | - | fax do lead ou contato; com Accounts as Campaign Members habilitado, pode ser o fax da conta
+  FirstName | string | - | nome do lead ou contato
+  FirstRespondedDate | date | - | data em que o membro da campanha recebeu um status de resposta (Responded)
+  HasOptedOutOfEmail | boolean | - | preferência de não receber e-mails (true = optou por sair; false = aceita); com Accounts as Campaign Members habilitado, pode valer para o e-mail da conta
+  HasOptedOutOfFax | boolean | - | preferência de não receber fax (true = optou por sair; false = aceita); com Accounts as Campaign Members habilitado, pode valer para a conta
+  LastName | string | - | sobrenome do lead ou contato, até 80 caracteres
+  LeadOrContactOwnerId | reference | - | ID do dono do lead ou contato associado (lookup polimórfico para Group ou User); com Accounts as Campaign Members habilitado, pode ser o dono da conta
+  LeadSource | picklist | - | origem de onde o lead veio
+  MobilePhone | phone | - | celular do lead ou contato; com Accounts as Campaign Members habilitado, pode ser o celular da conta
+  Name | string | - | nome e sobrenome do lead ou contato ligado ao membro da campanha
+  Phone | phone | - | telefone do lead ou contato; com Accounts as Campaign Members habilitado, pode ser o telefone da conta
+  PostalCode | string | - | código postal do endereço do lead ou contato; com Accounts as Campaign Members habilitado, pode ser o da conta
+  RecordTypeId | reference | - | ID do tipo de registro do membro; para mudá-lo, altere CampaignMemberRecordTypeId na campanha associada
+  Salutation | picklist | - | forma de tratamento do lead ou contato
+  State | string | - | estado do endereço do lead ou contato, até 80 caracteres; com Accounts as Campaign Members habilitado, pode ser o estado da conta
+  Street | string | - | rua do endereço do lead ou contato; com Accounts as Campaign Members habilitado, pode ser a rua da conta
+  Title | string | - | cargo do lead ou contato
+  Type | string | - | indica se o membro da campanha é um lead ou um contato; com Accounts as Campaign Members habilitado, pode indicar uma conta

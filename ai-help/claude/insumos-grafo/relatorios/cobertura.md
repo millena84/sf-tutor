@@ -182,7 +182,7 @@ Gerado por `ferramentas/sftutor.py cobertura`. Cobertura estrutural, explicativa
 
 ## Objetos consultáveis via API
 
-- Catalogados: 84. Campos listados: 2035; explicados: 1819.
+- Catalogados: 84. Campos listados: 2035; explicados: 1885.
 - Universo: Universo de objetos da plataforma não enumerado.
 
 | Objeto | Estrutural | Esperados | Presentes | Explicados | APIs verificadas |
@@ -195,8 +195,8 @@ Gerado por `ferramentas/sftutor.py cobertura`. Cobertura estrutural, explicativa
 | obj:AsyncApexJob | completa | 13 | 13 | 13 | padrao |
 | obj:AuthProvider | completa | 30 | 30 | 30 | padrao |
 | obj:BusinessHours | completa | 20 | 20 | 20 | padrao |
-| obj:Campaign | completa | 69 | 69 | 28 | padrao |
-| obj:CampaignMember | completa | 32 | 32 | 7 | padrao |
+| obj:Campaign | completa | 69 | 69 | 69 | padrao |
+| obj:CampaignMember | completa | 32 | 32 | 32 | padrao |
 | obj:Case | completa | 57 | 57 | 56 | padrao |
 | obj:CaseMilestone | completa | 20 | 20 | 20 | padrao |
 | obj:ConnectedApplication | completa | 15 | 15 | 15 | padrao |
