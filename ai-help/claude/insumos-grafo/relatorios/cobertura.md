@@ -182,7 +182,7 @@ Gerado por `ferramentas/sftutor.py cobertura`. Cobertura estrutural, explicativa
 
 ## Objetos consultáveis via API
 
-- Catalogados: 84. Campos listados: 2035; explicados: 1649.
+- Catalogados: 84. Campos listados: 2035; explicados: 1702.
 - Universo: Universo de objetos da plataforma não enumerado.
 
 | Objeto | Estrutural | Esperados | Presentes | Explicados | APIs verificadas |
@@ -239,7 +239,7 @@ Gerado por `ferramentas/sftutor.py cobertura`. Cobertura estrutural, explicativa
 | obj:OauthToken | completa | 9 | 9 | 9 | padrao |
 | obj:ObjectTerritory2Association | completa | 4 | 4 | 4 | padrao |
 | obj:Opportunity | completa | 63 | 63 | 61 | padrao |
-| obj:OpportunityLineItem | completa | 27 | 27 | 7 | padrao |
+| obj:OpportunityLineItem | completa | 27 | 27 | 27 | padrao |
 | obj:OpportunityTeamMember | completa | 8 | 8 | 8 | padrao |
 | obj:PathAssistant | completa | 13 | 13 | 13 | tooling |
 | obj:PendingServiceRouting | completa | 33 | 33 | 5 | padrao |
@@ -250,7 +250,7 @@ Gerado por `ferramentas/sftutor.py cobertura`. Cobertura estrutural, explicativa
 | obj:PresenceUserConfig | completa | 21 | 21 | 21 | padrao |
 | obj:Pricebook2 | completa | 10 | 10 | 10 | padrao |
 | obj:PricebookEntry | completa | 11 | 11 | 11 | padrao |
-| obj:Product2 | completa | 37 | 37 | 4 | padrao |
+| obj:Product2 | completa | 37 | 37 | 37 | padrao |
 | obj:Profile | completa | 10 | 10 | 10 | padrao, tooling |
 | obj:QueueRoutingConfig | completa | 14 | 14 | 14 | padrao |
 | obj:QueueSobject | completa | 2 | 2 | 2 | padrao |

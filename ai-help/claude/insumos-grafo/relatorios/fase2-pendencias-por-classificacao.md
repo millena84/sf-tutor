@@ -2,7 +2,7 @@
 
 Gerado por `ferramentas/pendencias_explicacao.py`. Não edite à mão.
 
-**Total:** 377 itens pendentes em 15 nós (cada nó contado uma vez).
+**Total:** 318 itens pendentes em 11 nós (cada nó contado uma vez).
 Um nó usado por funcionalidades de temas diferentes aparece em cada tema; por isso a soma das tabelas pode passar do total.
 
 Sugestão de uso: escolher uma classificação por sessão, começando pelas de mais itens ou pelas que o público mais visita, e fechar os nós dela num PR.
@@ -11,20 +11,16 @@ Sugestão de uso: escolher uma classificação por sessão, começando pelas de 
 
 | Classificação | Nós | Itens pendentes |
 |---|---|---|
-| Processos de negócio específicos de produto | 15 | 377 |
+| Processos de negócio específicos de produto | 11 | 318 |
 
-## Processos de negócio específicos de produto (377 itens)
+## Processos de negócio específicos de produto (318 itens)
 
 ### Vendas
 
 - [ ] `obj:QuoteLineItem` (objeto API): 78 de 84 pendentes. Funcionalidades: cotacoes
 - [ ] `obj:Campaign` (objeto API): 41 de 69 pendentes. Funcionalidades: campanhas
 - [ ] `obj:Quote` (objeto API): 39 de 76 pendentes. Funcionalidades: cotacoes
-- [ ] `obj:Product2` (objeto API): 33 de 37 pendentes. Funcionalidades: produtos-e-catalogos-de-preco
 - [ ] `obj:CampaignMember` (objeto API): 25 de 32 pendentes. Funcionalidades: campanhas
-- [ ] `obj:OpportunityLineItem` (objeto API): 20 de 27 pendentes. Funcionalidades: produtos-e-catalogos-de-preco
-- [ ] `mdt:ContractSettings` (metadata type): 4 de 7 pendentes. Funcionalidades: contratos
-- [ ] `obj:Opportunity` (objeto API): 2 de 63 pendentes. Funcionalidades: oportunidades
 
 ### Atendimento
 

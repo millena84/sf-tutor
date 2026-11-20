@@ -1,0 +1,67 @@
+fonte: Object Reference e Metadata API 264.0 (API 68.0), endpoint versionado (Fase 2, Processos de negócio, Vendas parte 1:
+  produtos e oportunidades)
+obtido em 2026-11-19 via WebFetch; método: extração documental assistida por IA; descrições parafraseadas.
+convenção: nome | tipo | versão (quando a página informa) | descrição resumida
+
+[src:objref-product2-264] https://developer.salesforce.com/docs/get_document_content/object_reference/sforce_api_objects_product2.htm/en-us/264.0
+  BillingPolicyId | reference | 55.0 | política de cobrança relacionada; exige Subscription Management
+  CanUseQuantitySchedule | boolean | - | se o produto pode ter quantity schedule
+  CanUseRevenueSchedule | boolean | - | se o produto pode ter revenue schedule
+  ConfigureDuringSale | picklist | 58.0 | se a configuração do bundle pode ser editada na criação de pedido ou cotação (Allowed, NotAllowed)
+  ConnectionReceivedId | reference | - | PartnerNetworkConnection que compartilhou o registro com a org
+  ConnectionSentId | reference | - | PartnerNetworkConnection com que o registro foi compartilhado; nulo a partir da 16.0 (usar PartnerNetworkRecordConnection)
+  CurrencyIsoCode | picklist | - | código ISO de uma moeda permitida; só em orgs com multimoeda
+  Description | textarea | - | descrição em texto livre
+  DisplayUrl | url | - | link para uma versão do registro na fonte de dados externa
+  ExternalDataSourceId | reference | - | fonte de dados externa relacionada
+  ExternalId | string | - | identificador único do registro na fonte de dados externa
+  IsArchived | boolean | - | se o produto está arquivado; padrão false
+  IsAssetizable | boolean | - | se o produto pode virar asset quando um pedido de assinatura é feito; padrão true
+  IsDeleted | boolean | - | se o registro está na Lixeira
+  IsSerialized | boolean | - | se o produto é serializado
+  IsSoldOnlyWithOtherProds | boolean | 58.0 | se o produto só pode ser vendido dentro de um bundle; padrão false
+  LastReferencedDate | dateTime | - | última interação do usuário atual com o registro, direta ou indireta
+  LastViewedDate | dateTime | - | última vez que o usuário atual viu o registro ou a list view dele
+  NumberOfQuantityInstallments | int | - | parcelas do quantity schedule, se houver
+  NumberOfRevenueInstallments | int | - | parcelas do revenue schedule, se houver
+  ProductClass | picklist | 50.0 | classificação somente leitura: Bundle, Set, Simple, VariationParent ou Variation
+  QuantityInstallmentPeriod | picklist | - | período do quantity schedule (Daily, Weekly, Monthly, Quarterly, Yearly)
+  QuantityScheduleType | picklist | - | tipo de quantity schedule (Divide, Repeat)
+  QuantityUnitOfMeasure | picklist | - | unidade de medida do produto; só "Each" vem por padrão
+  RecalculateTotalPrice | boolean | - | multiplica a quantidade acumulada pelo preço de venda quando o rollup de quantidade muda em OpportunityLineItem
+  RevenueInstallmentPeriod | picklist | - | período do revenue schedule (Daily, Weekly, Monthly, Quarterly, Yearly)
+  RevenueScheduleType | picklist | - | tipo de revenue schedule (Divide, Repeat)
+  StockCheckMethod | picklist | - | como o estoque é conferido: Null, DoNotCheck, ParentProduct ou ChildProducts
+  StockKeepingUnit | string | - | SKU do produto, junto com ProductCode ou no lugar dele
+  TaxPolicyId | reference | 55.0 | política de impostos relacionada; exige Subscription Management
+  TransferRecordMode | picklist | - | para produtos serializados, quando o número de série é registrado (SendAndReceive, ReceiveOnly)
+  Type | picklist | 50.0 | tipo do produto (Base, Null, Bundle, Set); define o valor de ProductClass
+  UnitOfMeasureId | reference | 63.0 | unidade de medida associada; exige Revenue Cloud
+[src:objref-opportunitylineitem-264] https://developer.salesforce.com/docs/get_document_content/object_reference/sforce_api_objects_opportunitylineitem.htm/en-us/264.0
+  CanUseQuantitySchedule | boolean | - | se o produto da oportunidade pode ter quantity schedule; somente leitura
+  CanUseRevenueSchedule | boolean | - | se o produto da oportunidade pode ter revenue schedule; somente leitura
+  ConnectionReceivedId | reference | - | PartnerNetworkConnection que compartilhou o registro (Salesforce to Salesforce)
+  ConnectionSentId | reference | - | PartnerNetworkConnection com que o registro foi compartilhado; nulo em versões recentes
+  CurrencyIsoCode | picklist | - | moeda do registro em orgs multimoeda; igual à da oportunidade
+  Description | string | - | descrição do item, até 255 caracteres
+  Discount | percent | - | desconto em porcentagem; ao mudar, ajusta TotalPrice ou UnitPrice
+  HasQuantitySchedule | boolean | - | se existe quantity schedule; somente leitura
+  HasRevenueSchedule | boolean | - | se existe revenue schedule, o que bloqueia mudar Quantity e TotalPrice; somente leitura
+  HasSchedule | boolean | - | true quando existe quantity ou revenue schedule; somente leitura
+  LastReferencedDate | dateTime | 50.0 | última vez que o usuário atual viu um registro relacionado a este
+  LastSyncTime | dateTime | - | última sincronização deste registro pelo usuário atual
+  LastViewedDate | dateTime | 50.0 | última vez que o usuário atual viu este registro; pode ser nulo se só foi referenciado
+  Name | string | 30.0 | nome do item, mostrado como "Opportunity Product" na interface; somente leitura
+  ProductId | reference | - | Product relacionado, mantido só por compatibilidade; usar PricebookEntryId
+  ProductCode | string | 30.0 | espelha o ProductCode do Product2 relacionado; somente leitura
+  RecalculateTotalPrice | boolean | - | com a mesma opção em Product2, multiplica mudanças no rollup de quantidade pelo preço de venda
+  ServiceDate | date | - | data de reconhecimento de receita e envio do produto, conforme o contexto de schedule
+  SortOrder | int | - | ordem escolhida pelo usuário, para apps clientes reproduzirem a ordem da Salesforce
+  Subtotal | currency | - | diferença entre o preço padrão e o preço com desconto, convertida quando as moedas diferem
+Sem descrição oficial (estado nao_encontrada):
+  ContractSettings: autoExpirationDelay, autoExpirationRecipient, autoExpireContracts, enableContractHistoryTracking. A página 264.0 não os
+    lista; a referência atual (metadata-contractsettings.html) só dá tipo e obrigatoriedade.
+  Opportunity: OpportunityScoreId e ReferralCode não estão na Object Reference 264.0. A Field Reference nova
+    (https://developer.salesforce.com/docs/platform/field-reference/references/field-reference/salesforce-field-reference-opportunity.html)
+    dá OpportunityScoreId | reference | rótulo "Opportunity Score ID" e ReferralCode | string (255) | rótulo "Referral Code".
+  Notas da release: busca restrita a help.salesforce.com e developer.salesforce.com pelos nomes, sem menção nas notas de versão.
