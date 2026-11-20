@@ -1,0 +1,47 @@
+fonte: páginas oficiais por família e por tipo (issue #10, etapa 2, lote 12: Field Service, agendamento e serviço de campo de setor)
+obtido em 2026-11-20 por WebFetch (endpoint versionado get_document_content) e por resultados de busca restritos a developer.salesforce.com;
+  método: extração documental assistida por IA. Nada foi cadastrado no catálogo.
+regra: mesmo padrão dos lotes 1 a 11. FieldServiceSettings já estava excluído na etapa 1 (C2 e X2: Agentforce Field Service and
+  Operations tem licenças próprias; ver catalogo/nuvens/field-service.json, licenças com src:help-fs-set-up, src:help-fs-mobile e
+  src:help-fs-key-concepts).
+
+1) Field Service (fonte de lista da família)
+[src:fs-dev-mdapi-264] Field Service Developer Guide 264.0, "Field Service Metadata API" (lida por WebFetch, leitura completa)
+  URL: https://developer.salesforce.com/docs/get_document_content/field_service_dev/fsl_dev_metadata.htm/en-us/264.0
+  Tipos listados: FieldServiceSettings, Flow (Field Service acrescenta valores de actionType a FlowActionCall), Skill (habilidades usadas
+    em field service ou para rotear chats a agentes) e TimeSheetTemplate (modelo para criar folhas de horas no Field Service).
+  Já decididos: FieldServiceSettings (excluído, etapa 1) e Flow (incluído, plataforma).
+  Decisão: TimeSheetTemplate excluído por C2 e X2 (vem com o produto Field Service, de licença própria), como FieldServiceSettings.
+  Skill: pendente, com motivo. A própria lista diz que habilidades servem a Field Service e ao roteamento de chats (atendimento); a página
+    de objetos do Omni-Channel (lote 10) acrescenta Salesforce Scheduler e Workforce Engagement. São várias nuvens, mas nenhuma é a
+    plataforma, e nenhuma fonte lida diz se o tipo exige licença.
+  Sem decisão: FieldServiceMobileConfig e FieldServiceMobileExtension não aparecem nessa lista, e as páginas 264.0 dos dois tipos não
+    abriram (o endpoint devolveu conteúdo binário). O objeto FieldServiceMobileSettings, que é outro item, exige Field Service habilitado.
+
+2) Salesforce Scheduler (antes Lightning Scheduler)
+[src:mdapi-appointmentschedulingpolicy-264] https://developer.salesforce.com/docs/get_document_content/api_meta/meta_appointmentschedulingpolicy.htm/en-us/264.0
+  AppointmentSchedulingPolicy: conjunto de regras para agendar compromissos com Lightning Scheduler; disponível desde a API 47.0. Regra de
+    acesso especial: permissões ViewSetup e CustomizeApplication. A página não cita licença. O campo appointmentAssignmentPolicy (desde a
+    53.0) aponta para a política de atribuição.
+[src:mdapi-appointmentassignmentpolicy-264] https://developer.salesforce.com/docs/atlas.en-us.264.0.api_meta.meta/api_meta/meta_appointmentassignmentpolicy.htm
+  AppointmentAssignmentPolicy: regra de atribuição de recursos (descrição lida na página atual sem versão); a 264.0 traz policyType
+    (loadBalancing), policyApplicableDuration e utilizationFactor (contagem por número ou duração de compromissos).
+[src:hc-scheduler-addon] Health Cloud: "Enable Salesforce Scheduler and Omni-Channel for Utilization Management"
+  URL: https://developer.salesforce.com/docs/atlas.en-us.health_cloud.meta/null/admin_utlization_management_salesforce_scheduler.htm
+  Para habilitar o Salesforce Scheduler, a página pede a licença Lightning Scheduler Add-On. A página é do guia de Health Cloud, mas a
+    exigência é sobre habilitar o Scheduler.
+  Decisão: AppointmentSchedulingPolicy e AppointmentAssignmentPolicy excluídos por C2 (add-on de Salesforce Scheduler), com `inferido`
+    no nó do mapa: o Scheduler não tem nó próprio, e a ligação a Industries é inferida (as fontes lidas mostram o Scheduler em Health
+    Cloud e, nas páginas do guia do Scheduler, em Financial Services Cloud). A exclusão do Core não depende dessa inferência.
+
+3) Serviço de campo de setor (Manufacturing Cloud)
+[src:mfg-settings-list-258] Manufacturing Cloud Developer Guide 258.0, lista de Settings da Metadata API
+  URL: https://developer.salesforce.com/docs/atlas.en-us.258.0.mfg_api_devguide.meta/mfg_api_devguide/mfg_settings_metadata_api_parent.htm
+  A lista inclui IndustriesFieldServiceSettings e InventoryReplenishmentSettings, ao lado de IndustriesManufacturingSettings,
+    MfgServiceConsoleSettings e WarrantyLifeCycleMgmtSettings. A 264.0 da lista não foi lida (só a 258.0 e versões anteriores).
+  IndustriesFieldServiceSettings: configurações que habilitam recursos de Manufacturing Cloud, como Industries Field Service e Product
+    Service Campaign Management (página atual sem versão); disponível desde a API 60.0 (página 260.0).
+  Decisão: IndustriesFieldServiceSettings e InventoryReplenishmentSettings excluídos por C3 (específicos de Manufacturing Cloud, nuvem de
+    setor do nó Industries). Não foi lida frase de licença; a exclusão vem do C3.
+  Fora desta decisão: IndustriesManufacturingSettings, MfgServiceConsoleSettings, WarrantyLifeCycleMgmtSettings e os demais da lista
+    (cabem num lote de Industries/Manufacturing).
