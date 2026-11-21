@@ -1,18 +1,18 @@
 # Marca Desbugando (logo oficial do site)
 
-Logo oficial do sf-tutor: o **bug fofo com lupa** da família Desbugando (redesenho de 2026-11-21, a pedido da autora; substitui o inseto de traço fino com lupa, que por sua vez veio do símbolo B · lâmpada-bug de 2026-11-08).
-- **Desenho:** corpo e cabeça arredondados em Violeta, barriga clara, olhos grandes com brilho, bochechas e antenas em Magenta, perninhas curtas e a lupa em Ciano na mão direita. Corpo, cabeça e olhos são iguais nas duas versões; só mudam o halo, as antenas e pernas, o cabo e a lente.
-- **Paleta:** Noite `#0B0F2A`, Faixa roxa `#1C1440`, Ciano `#3EE6F2`, Magenta `#FF4FB8`, Violeta `#9B6BFF`, Verde `#2BBE6A`, Claro `#F5F7FF`. Tons do corpo: Violeta `#9B6BFF`, cabeça `#7E55E0` e barriga `#C9B3FF`. Na versão clara, Magenta e Ciano usam as variações escurecidas (`#D6338F` e `#0B9FB0`).
+Logo oficial do sf-tutor: o **bug fofo** desenhado pela autora (2026-11-21; arquivo `favicon.svg` enviado por ela). Substitui o inseto com lupa e, antes dele, o símbolo B · lâmpada-bug de 2026-11-08.
+- **Desenho:** bug redondo lavanda (`#A78BFA`) com traço ameixa (`#4A1D4F`), antenas com bolinhas rosa, olhos grandes com brilho, bochechas, boquinha e pintas rosa e verde, sobre um quadrado lavanda claro arredondado (`#F3E8FF`).
+- **Um arquivo só:** o quadrado de fundo deixa o desenho legível em fundo claro e escuro, então não há versões separadas. Sem o fundo, o traço ameixa some no cabeçalho Noite.
+- **Paleta do site:** Noite `#0B0F2A`, Faixa roxa `#1C1440`, Ciano `#3EE6F2`, Magenta `#FF4FB8`, Violeta `#9B6BFF`, Verde `#2BBE6A`, Claro `#F5F7FF`. Os tons do bug são os do desenho da autora e não entram nos testes de contraste do site.
 
 | Arquivo | Uso |
 |---|---|
-| `public/marca/desbugando-bug-lupa-clara.svg` | fundo claro |
-| `public/marca/desbugando-bug-lupa-escura.svg` | fundo escuro (cabeçalho do site) |
-| `public/favicon.svg` | ícone da aba (bloco roxo); em 16 px fica só a silhueta |
+| `public/marca/desbugando-bug.svg` | logo do cabeçalho (e qualquer fundo) |
+| `public/favicon.svg` | ícone da aba (mesmo desenho); em 16 px fica só a silhueta |
 
 ## Como a paleta é usada no site (C2, #23, 2026-11-17)
 
-- **Cabeçalho:** fundo Noite, texto Claro, logo na versão escura (`desbugando-bug-lupa-escura.svg`) e "des" em Magenta.
+- **Cabeçalho:** fundo Noite, texto Claro, logo `desbugando-bug.svg` e "des" em Magenta.
 - **Rodapé:** fundo Faixa roxa, borda em Violeta.
 - **Área de leitura:** fundo Claro e superfícies brancas.
 - **Destaques:** botões principais, seleção e links em Violeta escurecido (`#704FBF` e `#5A429F`). O contorno de foco e o destaque do nó selecionado são em Magenta escurecido (`#D3439E`).
