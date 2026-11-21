@@ -1,14 +1,15 @@
 # Marca Desbugando (logo oficial do site)
 
-Logo oficial do sf-tutor: o **bug fofo** desenhado pela autora (2026-11-21; arquivo `favicon.svg` enviado por ela). Substitui o inseto com lupa e, antes dele, o símbolo B · lâmpada-bug de 2026-11-08.
-- **Desenho:** bug redondo lavanda (`#A78BFA`) com traço ameixa (`#4A1D4F`), antenas com bolinhas rosa, olhos grandes com brilho, bochechas, boquinha e pintas rosa e verde, sobre um quadrado lavanda claro arredondado (`#F3E8FF`).
-- **Um arquivo só:** o quadrado de fundo deixa o desenho legível em fundo claro e escuro, então não há versões separadas. Sem o fundo, o traço ameixa some no cabeçalho Noite.
+Logo oficial do sf-tutor: o **bug fofo com lupa** desenhado pela autora (2026-11-21). É a figura principal da folha "Mascote: bug fofo" (`mascote.svg`, enviada pela autora pelo Drive), recortada sem alterar o desenho. Substitui o inseto de traço fino com lupa e, antes dele, o símbolo B · lâmpada-bug de 2026-11-08.
+- **Desenho:** joaninha lilás (`#A78BFA`) com contorno ameixa (`#4A1D4F`), antenas com bolinhas rosa, olhos grandes com brilho, bochechas, boquinha, pintas rosa e verde e a lupa à direita.
+- **Fundo:** quadrado lavanda claro arredondado (`#F3E8FF`), como no favicon que a autora enviou antes. É ele que mantém o desenho legível no cabeçalho escuro: sem esse fundo, o contorno ameixa e as antenas somem. Por isso há um arquivo só.
+- **Outras expressões da folha** (sorrindo, feliz, surpresa, bug achado!) e os testes de favicon ficam no arquivo da autora; não foram trazidas para o site.
 - **Paleta do site:** Noite `#0B0F2A`, Faixa roxa `#1C1440`, Ciano `#3EE6F2`, Magenta `#FF4FB8`, Violeta `#9B6BFF`, Verde `#2BBE6A`, Claro `#F5F7FF`. Os tons do bug são os do desenho da autora e não entram nos testes de contraste do site.
 
 | Arquivo | Uso |
 |---|---|
 | `public/marca/desbugando-bug.svg` | logo do cabeçalho (e qualquer fundo) |
-| `public/favicon.svg` | ícone da aba (mesmo desenho); em 16 px fica só a silhueta |
+| `public/favicon.svg` | ícone da aba (mesmo desenho); a 16 px fica só a silhueta |
 
 ## Como a paleta é usada no site (C2, #23, 2026-11-17)
 
