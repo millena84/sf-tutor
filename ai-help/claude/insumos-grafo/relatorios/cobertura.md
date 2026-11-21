@@ -7,7 +7,7 @@ Gerado por `ferramentas/sftutor.py cobertura`. Cobertura estrutural, explicativa
 
 - Universo v68 (METADATA_SUPPORT.md): **993** tipos.
 - Classificados como incluídos no recorte Core: 154; pendentes de classificação: 653.
-- Cadastrados: **161** de 993. Estruturalmente completos (contra a página oficial): 161. Completos nas três dimensões: 0.
+- Cadastrados: **163** de 993. Estruturalmente completos (contra a página oficial): 163. Completos nas três dimensões: 0.
 - Porcentagem do recorte Core: não calculada, porque o denominador do recorte ainda não está definido (classificação item a item pendente).
 
 | Tipo | Estrutural | Esperadas | Presentes | Explicadas | Estruturas | Mapeamento | Completo |
@@ -19,6 +19,8 @@ Gerado por `ferramentas/sftutor.py cobertura`. Cobertura estrutural, explicativa
 | mdt:ApexSettings | completa | 22 | 22 | 22 | 0 | parcial | não |
 | mdt:ApexTestSuite | completa | 1 | 1 | 1 | 0 | parcial | não |
 | mdt:ApexTrigger | completa | 5 | 5 | 5 | 1 | parcial | não |
+| mdt:AppointmentAssignmentPolicy | completa | 4 | 4 | 4 | 0 | parcial | não |
+| mdt:AppointmentSchedulingPolicy | completa | 15 | 15 | 15 | 0 | parcial | não |
 | mdt:ApprovalProcess | completa | 22 | 22 | 21 | 6 | parcial | não |
 | mdt:AssignmentRules | completa | 1 | 1 | 1 | 1 | parcial | não |
 | mdt:AuraDefinitionBundle | completa | 15 | 15 | 15 | 1 | parcial | não |
@@ -176,7 +178,7 @@ Gerado por `ferramentas/sftutor.py cobertura`. Cobertura estrutural, explicativa
 
 ## Propriedades XML
 
-- Em metadata types: 2235 listadas, 2204 explicadas.
+- Em metadata types: 2254 listadas, 2223 explicadas.
 - Em estruturas auxiliares: 2240 listadas, 2240 explicadas.
 - Universo total: Sem WSDL não há denominador confiável do total de propriedades do recorte.
 
@@ -280,4 +282,4 @@ Gerado por `ferramentas/sftutor.py cobertura`. Cobertura estrutural, explicativa
 ## Taxonomia e funcionalidades
 
 - Classificações: 14; subclassificações: 92 (com funcionalidades: 91).
-- Funcionalidades cadastradas: 137 (universo de funcionalidades não definido).
+- Funcionalidades cadastradas: 138 (universo de funcionalidades não definido).

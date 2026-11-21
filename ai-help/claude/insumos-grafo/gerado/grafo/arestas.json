@@ -1990,6 +1990,18 @@
     "tipo": "representacao_xml"
   },
   {
+    "destino": "mdt:AppointmentAssignmentPolicy",
+    "origem": "func:salesforce-scheduler",
+    "papel": "Regra de distribuição dos compromissos entre os recursos (balanceamento de carga).",
+    "tipo": "representacao_xml"
+  },
+  {
+    "destino": "mdt:AppointmentSchedulingPolicy",
+    "origem": "func:salesforce-scheduler",
+    "papel": "Regras de agendamento (horários propostos, habilidades, territórios, calendários).",
+    "tipo": "representacao_xml"
+  },
+  {
     "destino": "mdt:SourceTrackingSettings",
     "origem": "func:sandboxes",
     "papel": "Liga o source tracking nas sandboxes Developer e Developer Pro.",
@@ -2534,6 +2546,101 @@
     "destino": "mdx:PackageVersion",
     "origem": "mdt:ApexTrigger.packageVersions",
     "tipo": "tipo_composto"
+  },
+  {
+    "destino": "mdt:AppointmentAssignmentPolicy.masterLabel",
+    "origem": "mdt:AppointmentAssignmentPolicy",
+    "tipo": "propriedade"
+  },
+  {
+    "destino": "mdt:AppointmentAssignmentPolicy.policyApplicableDuration",
+    "origem": "mdt:AppointmentAssignmentPolicy",
+    "tipo": "propriedade"
+  },
+  {
+    "destino": "mdt:AppointmentAssignmentPolicy.policyType",
+    "origem": "mdt:AppointmentAssignmentPolicy",
+    "tipo": "propriedade"
+  },
+  {
+    "destino": "mdt:AppointmentAssignmentPolicy.utilizationFactor",
+    "origem": "mdt:AppointmentAssignmentPolicy",
+    "tipo": "propriedade"
+  },
+  {
+    "destino": "mdt:AppointmentSchedulingPolicy.appointmentAssignmentPolicy",
+    "origem": "mdt:AppointmentSchedulingPolicy",
+    "tipo": "propriedade"
+  },
+  {
+    "destino": "mdt:AppointmentSchedulingPolicy.appointmentStartTimeInterval",
+    "origem": "mdt:AppointmentSchedulingPolicy",
+    "tipo": "propriedade"
+  },
+  {
+    "destino": "mdt:AppointmentSchedulingPolicy.extCalEventHandler",
+    "origem": "mdt:AppointmentSchedulingPolicy",
+    "tipo": "propriedade"
+  },
+  {
+    "destino": "mdt:AppointmentSchedulingPolicy.isSvcTerrOpHoursWithShiftsUsed",
+    "origem": "mdt:AppointmentSchedulingPolicy",
+    "tipo": "propriedade"
+  },
+  {
+    "destino": "mdt:AppointmentSchedulingPolicy.isSvcTerritoryMemberShiftUsed",
+    "origem": "mdt:AppointmentSchedulingPolicy",
+    "tipo": "propriedade"
+  },
+  {
+    "destino": "mdt:AppointmentSchedulingPolicy.masterLabel",
+    "origem": "mdt:AppointmentSchedulingPolicy",
+    "tipo": "propriedade"
+  },
+  {
+    "destino": "mdt:AppointmentSchedulingPolicy.shouldCheckExternalCalendar",
+    "origem": "mdt:AppointmentSchedulingPolicy",
+    "tipo": "propriedade"
+  },
+  {
+    "destino": "mdt:AppointmentSchedulingPolicy.shouldConsiderCalendarEvents",
+    "origem": "mdt:AppointmentSchedulingPolicy",
+    "tipo": "propriedade"
+  },
+  {
+    "destino": "mdt:AppointmentSchedulingPolicy.shouldEnforceExcludedResource",
+    "origem": "mdt:AppointmentSchedulingPolicy",
+    "tipo": "propriedade"
+  },
+  {
+    "destino": "mdt:AppointmentSchedulingPolicy.shouldEnforceRequiredResource",
+    "origem": "mdt:AppointmentSchedulingPolicy",
+    "tipo": "propriedade"
+  },
+  {
+    "destino": "mdt:AppointmentSchedulingPolicy.shouldMatchSkill",
+    "origem": "mdt:AppointmentSchedulingPolicy",
+    "tipo": "propriedade"
+  },
+  {
+    "destino": "mdt:AppointmentSchedulingPolicy.shouldMatchSkillLevel",
+    "origem": "mdt:AppointmentSchedulingPolicy",
+    "tipo": "propriedade"
+  },
+  {
+    "destino": "mdt:AppointmentSchedulingPolicy.shouldRespectVisitingHours",
+    "origem": "mdt:AppointmentSchedulingPolicy",
+    "tipo": "propriedade"
+  },
+  {
+    "destino": "mdt:AppointmentSchedulingPolicy.shouldUsePrimaryMembers",
+    "origem": "mdt:AppointmentSchedulingPolicy",
+    "tipo": "propriedade"
+  },
+  {
+    "destino": "mdt:AppointmentSchedulingPolicy.shouldUseSecondaryMembers",
+    "origem": "mdt:AppointmentSchedulingPolicy",
+    "tipo": "propriedade"
   },
   {
     "destino": "mdt:ApprovalProcess.active",
@@ -28662,6 +28769,15 @@
     "tipo": "propriedade"
   },
   {
+    "destino": "func:salesforce-scheduler",
+    "origem": "nuv:add-ons",
+    "tipo": "nuvem_funcionalidade",
+    "via": [
+      "cls:processos-de-negocio-especificos-de-produto",
+      "sub:atendimento"
+    ]
+  },
+  {
     "destino": "func:servicos-externos-registrados-commerce",
     "origem": "nuv:commerce",
     "tipo": "nuvem_funcionalidade",
@@ -40785,6 +40901,11 @@
     "tipo": "navegacao_classificacao"
   },
   {
+    "destino": "nuv:add-ons",
+    "origem": "salesforce",
+    "tipo": "navegacao_nuvem"
+  },
+  {
     "destino": "nuv:commerce",
     "origem": "salesforce",
     "tipo": "navegacao_nuvem"
@@ -41048,6 +41169,11 @@
     "tipo": "classificacao_secundaria"
   },
   {
+    "destino": "func:salesforce-scheduler",
+    "origem": "sub:atendimento",
+    "tipo": "classificacao_principal"
+  },
+  {
     "destino": "func:setup-audit-trail",
     "origem": "sub:auditoria-de-configuracao",
     "tipo": "classificacao_principal"
@@ -41143,6 +41269,12 @@
     "destino": "func:configuracoes-de-nuvens-de-setor",
     "origem": "sub:capacidades-setoriais",
     "tipo": "classificacao_principal"
+  },
+  {
+    "destino": "func:salesforce-scheduler",
+    "motivo": "As fontes lidas mostram o Scheduler usado com nuvens de setor, como Health Cloud e Financial Services Cloud.",
+    "origem": "sub:capacidades-setoriais",
+    "tipo": "classificacao_secundaria"
   },
   {
     "destino": "func:conexoes-de-rede-privadas",

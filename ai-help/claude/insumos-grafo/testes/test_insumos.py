@@ -255,6 +255,13 @@ if __name__ == "__main__":
     unittest.main()
 
 
+class TestNuvemAgrupamento(BaseTemp):
+    """Nó didático (natureza agrupamento_didatico) precisa dizer que não é nome nem nuvem oficial."""
+    def test_agrupamento_sem_nota_e_erro(self):
+        p = self.cat("nuvens", "add-ons.json"); d = ler(p); del d["nota_natureza"]; gravar(p, d)
+        self.assertErro("nuv:add-ons: agrupamento didático sem 'nota_natureza'")
+
+
 class TestMarcas(BaseTemp):
     """config/marcas.json: logos exibidos por referência ao endereço oficial."""
     def marcas(self):
