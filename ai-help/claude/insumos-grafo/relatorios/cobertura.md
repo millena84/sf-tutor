@@ -6,7 +6,7 @@ Gerado por `ferramentas/sftutor.py cobertura`. Cobertura estrutural, explicativa
 ## Metadata types
 
 - Universo v68 (METADATA_SUPPORT.md): **993** tipos.
-- Classificados como incluídos no recorte Core: 154; pendentes de classificação: 653.
+- Classificados como incluídos no recorte Core: 154; pendentes de classificação: 646.
 - Cadastrados: **163** de 993. Estruturalmente completos (contra a página oficial): 163. Completos nas três dimensões: 0.
 - Porcentagem do recorte Core: não calculada, porque o denominador do recorte ainda não está definido (classificação item a item pendente).
 

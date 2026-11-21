@@ -1,0 +1,40 @@
+fonte: páginas oficiais por família e por tipo (issue #10, etapa 2, lote 15: Experiências externas / Experience Cloud)
+obtido em 2026-11-21 por resultados de busca restritos a developer.salesforce.com (leitura do trecho indexado); método: extração documental
+  assistida por IA. Nada foi cadastrado no catálogo.
+regra: mesmo padrão dos lotes anteriores; exclusão por C3 como Network, CustomSite, ExperienceBundle e NavigationMenu (etapas 1 e 2).
+
+1) Fonte de família
+[src:exp-dev-deploy-256] Experience Cloud Developer Guide 256.0, "Deploy Your Experience Cloud Site with the Metadata API"
+  URL: https://developer.salesforce.com/docs/atlas.en-us.256.0.communities_dev.meta/communities_dev/networks_migrating_from_sandbox.htm
+  Edições: Enterprise, Performance, Unlimited e Developer; vale para sites LWR, Aura e Visualforce. Tipos que definem um site, conforme o
+    framework: DigitalExperienceBundle e DigitalExperienceConfig (LWR aprimorado), ExperienceBundle (LWR não aprimorado e Aura) e SiteDotCom
+    (sites com páginas do Site.com Studio; implantar com ExperienceBundle apaga essas páginas). Versões antigas da mesma página citam também
+    Network e CustomSite.
+  Decisão: SiteDotCom excluído por C3 (Experience Cloud).
+
+2) Páginas de cada tipo
+[src:mdapi-managedtopics] https://developer.salesforce.com/docs/atlas.en-us.api_meta.meta/api_meta/meta_managedtopics.htm
+  ManagedTopics: tópicos de navegação e em destaque gerenciados num site Experience Cloud; o site precisa existir antes da implantação. Um
+    arquivo por site (SiteNameA.managedTopics). Desde a API 32.0.
+[src:mdapi-moderationrule-264] https://developer.salesforce.com/docs/atlas.en-us.264.0.api_meta.meta/api_meta/meta_moderationrule.htm
+  ModerationRule: regra que modera conteúdo gerado por membros num site Experience Cloud (contra spam, bots e conteúdo impróprio); até 30
+    regras por org. A página atual sem versão pede a permissão Manage Experiences ou Create and Set Up Experiences.
+[src:mdapi-keywordlist-264] https://developer.salesforce.com/docs/atlas.en-us.264.0.api_meta.meta/api_meta/meta_keywordlist.htm
+  KeywordList: lista de palavras usada na moderação de sites Experience Cloud (descrição lida na versão 248.0 da mesma página). Na 264.0:
+    sufixo .keywords, pasta moderation, arquivo site_name.keyword_list_developer_name.keywords.
+[src:mdapi-experiencebundlesettings-264] https://developer.salesforce.com/docs/atlas.en-us.264.0.api_meta.meta/api_meta/meta_experiencebundlesettings.htm
+  ExperienceBundleSettings: configuração da org que habilita o tipo ExperienceBundle para sites Aura do Experience Cloud (sites LWR já usam
+    ExperienceBundle); arquivo ExperienceBundle.settings.
+[src:mdapi-experiencepropertytypebundle-264] https://developer.salesforce.com/docs/atlas.en-us.264.0.api_meta.meta/api_meta/meta_experiencepropertytypebundle.htm
+  ExperiencePropertyTypeBundle (Beta na página atual): tipo de propriedade personalizado para um Lightning web component (descrição lida na
+    252.0). Regra de acesso especial (página atual sem versão): só para Lightning web components em sites LWR. Desde a API 58.0.
+[src:mdapi-cmsconnectsource-264] https://developer.salesforce.com/docs/atlas.en-us.264.0.api_meta.meta/api_meta/meta_cmsconnectsource.htm
+  CMSConnectSource: conexão com sistemas externos de gestão de conteúdo que alimentam sites do Experience Builder (descrição da página atual
+    sem versão). Na 264.0: em change sets é dependente de Network e Community; um arquivo por site e conexão; desde a API 43.0. A página
+    atual pede a permissão de org CMS Connect.
+  Decisão: ManagedTopics, ModerationRule, KeywordList, ExperienceBundleSettings, ExperiencePropertyTypeBundle e CMSConnectSource excluídos
+    por C3 (Experience Cloud). Em ExperiencePropertyTypeBundle, a página fala em "sites LWR"; sites LWR são sites do Experience Cloud (a
+    fonte de família lista os frameworks LWR, Aura e Visualforce).
+
+3) Sem decisão nesta rodada (não lidos): NetworkBranding, Audience, SharingSet, PortalDelegablePermissionSet, Community (Zone),
+  PortalsSettings, TopicsForObjects e LightningMessageChannel. DigitalExperienceBundle segue pendente (lote anterior).
