@@ -1,0 +1,32 @@
+fonte: decisões da autora em 2026-11-20 sobre as perguntas dos lotes 10 a 12 da issue #10 (etapa 2), mais as fontes que sustentam a marca
+obtido em 2026-11-20; método: orientação da autora + resultados de busca restritos a developer.salesforce.com. Nada foi cadastrado no catálogo.
+
+orientações da autora (2026-11-20):
+  - Chat legado: "marcar como aposentado e sinalizar em que release foi".
+  - Messaging: "possivelmente exclusivo de service, mas marque como inferido".
+  - MacroSettings: "marcar como não confirmado".
+  - Salesforce Scheduler: a autora pediu opinião; nada mudou neste lote.
+
+1) Chat legado: aposentado (novo critério de exclusão X3)
+[src:chat-rest-edicoes] (já registrada no lote 10) Chat REST API Developer Guide, página inicial
+  A página diz que o produto de chat legado tinha aposentadoria marcada para 14 de fevereiro de 2026 e ficaria em modo de manutenção até lá;
+    a versão 264.0 da mesma página repete o aviso. Tipos afetados (lidos no lote 10): LiveAgentSettings, LiveChatAgentConfig, LiveChatButton,
+    LiveChatDeployment, LiveChatSensitiveDataRule, EmbeddedServiceLiveAgent e EmbeddedServiceBranding (a página 264.0 deste diz que ele
+    só funciona com os produtos de chat legado).
+[src:objref-lista-releases] Object Reference (página de uma versão antiga que lista as versões mais novas no seletor)
+  URL: https://developer.salesforce.com/docs/atlas.en-us.226.0.api.meta/api/sforce_api_objects_currencytype.htm
+  O seletor de versões mostra Winter '26 (API 65.0), Spring '26 (API 66.0) e Summer '26 (API 67.0).
+  Release: nenhuma fonte lida diz o nome da release da aposentadoria. A data (14/02/2026) cai no período da Spring '26 (API 66.0), entre a
+    Winter '26 e a Summer '26; a release foi deduzida pela data, sem leitura do calendário de releases. Por isso o campo vai com
+    release_inferida = true e nota_release.
+  Decisão: os 7 tipos ficam excluídos pelo novo critério X3 (produto aposentado), com o bloco "aposentado" (data, release, fonte). Continuam
+    no inventário v68 porque ainda constam da cobertura de metadados dessa versão.
+
+2) Messaging: exclusivo de atendimento, inferido
+  MessagingChannel, ConversationMessageDefinition e LiveMessageSettings (lidos no lote 10 em src:mdapi-atendimento-canais-264): excluídos por
+    C3 (Agentforce Service), com inferido e nota_inferencia. As fontes lidas ligam Messaging a Omni-Channel e a Service Cloud Voice, mas
+    nenhuma diz que ele é exclusivo de atendimento.
+  EmbeddedServiceConfig e EmbeddedServiceMenuSettings continuam pendentes (servem também a Field Service, flows e Experiences).
+
+3) MacroSettings: inclusão não confirmada
+  Continua incluído (lote 11), agora com inferido e nota_inferencia dizendo que a inclusão não foi confirmada.
