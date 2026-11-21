@@ -1,14 +1,14 @@
 # Marca Desbugando (logo oficial do site)
 
-Logo oficial do sf-tutor, por decisão de 2026-11-08: o símbolo **B · lâmpada-bug** da família Desbugando.
-- **Fonte de design:** canvas "Desbugando — propostas de logo".
-- **Paleta:** Noite `#0B0F2A`, Faixa roxa `#1C1440`, Ciano `#3EE6F2`, Magenta `#FF4FB8`, Violeta `#9B6BFF`, Verde `#2BBE6A`, Claro `#F5F7FF`.
+Logo oficial do sf-tutor: o **bug fofo com lupa** da família Desbugando (redesenho de 2026-11-21, a pedido da autora; substitui o inseto de traço fino com lupa, que por sua vez veio do símbolo B · lâmpada-bug de 2026-11-08).
+- **Desenho:** corpo e cabeça arredondados em Violeta, barriga clara, olhos grandes com brilho, bochechas e antenas em Magenta, perninhas curtas e a lupa em Ciano na mão direita. Corpo, cabeça e olhos são iguais nas duas versões; só mudam o halo, as antenas e pernas, o cabo e a lente.
+- **Paleta:** Noite `#0B0F2A`, Faixa roxa `#1C1440`, Ciano `#3EE6F2`, Magenta `#FF4FB8`, Violeta `#9B6BFF`, Verde `#2BBE6A`, Claro `#F5F7FF`. Tons do corpo: Violeta `#9B6BFF`, cabeça `#7E55E0` e barriga `#C9B3FF`. Na versão clara, Magenta e Ciano usam as variações escurecidas (`#D6338F` e `#0B9FB0`).
 
 | Arquivo | Uso |
 |---|---|
-| `public/marca/desbugando-lampada-clara.svg` | fundo claro (cabeçalho do site) |
-| `public/marca/desbugando-lampada-escura.svg` | fundo escuro |
-| `public/favicon.svg` | ícone da aba (bloco roxo) |
+| `public/marca/desbugando-bug-lupa-clara.svg` | fundo claro |
+| `public/marca/desbugando-bug-lupa-escura.svg` | fundo escuro (cabeçalho do site) |
+| `public/favicon.svg` | ícone da aba (bloco roxo); em 16 px fica só a silhueta |
 
 ## Como a paleta é usada no site (C2, #23, 2026-11-17)
 
