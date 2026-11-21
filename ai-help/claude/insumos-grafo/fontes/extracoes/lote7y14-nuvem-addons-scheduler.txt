@@ -1,0 +1,47 @@
+fonte: nó didático "Add-ons", funcionalidade Salesforce Scheduler e os metadata types AppointmentSchedulingPolicy e AppointmentAssignmentPolicy
+obtido em 2026-11-21 via WebFetch (endpoint versionado get_document_content, leitura completa das duas páginas de tipo) e resultados de busca
+  restritos a developer.salesforce.com; método: extração documental assistida por IA; descrições parafraseadas.
+decisão da autora (2026-11-21): aprovou criar um nó "Add-ons" para o Salesforce Scheduler, como nó didático completo (o nó é marcado como
+  agrupamento do projeto e ganha a funcionalidade Salesforce Scheduler, ligada aos dois tipos).
+natureza do nó: "Add-ons" é um agrupamento criado por este tutorial, não um produto nem uma nuvem oficial da Salesforce. Por isso a nuvem leva
+  natureza = "agrupamento_didatico" (campo novo do schema), e o site mostra o aviso.
+
+[src:scheduler-dev-intro] Salesforce Scheduler Developer Guide: Introduction to Salesforce Scheduler
+  URL: https://developer.salesforce.com/docs/atlas.en-us.salesforce_scheduler_developer_guide.meta/salesforce_scheduler_developer_guide/intro_rate_limits.htm
+  Salesforce Scheduler (antes Lightning Scheduler) simplifica o agendamento de compromissos com clientes, presenciais, por telefone ou por vídeo,
+    com a pessoa, o local e o horário certos. Recursos para desenvolvedores: REST APIs, Connect REST APIs, Platform Events e classes Apex.
+  Antes de usar, configura-se: territórios de serviço (agências ou escritórios), grupos de tipos de trabalho (temas de atendimento, como
+    financiamento ou investimento), tipos de trabalho (modelos de compromisso com duração, intervalos de preparação e encerramento e
+    disponibilidade) e recursos de serviço (quem atende, com habilidades, local e disponibilidade).
+  Licença: ver [src:hc-scheduler-addon] (lote 12): habilitar o Salesforce Scheduler pede a licença Lightning Scheduler Add-On.
+
+[src:mdapi-appointmentschedulingpolicy] https://developer.salesforce.com/docs/get_document_content/api_meta/meta_appointmentschedulingpolicy.htm/en-us/264.0
+  Representa um conjunto de regras para agendar compromissos com o Lightning Scheduler. Desde a API 47.0. Arquivos: sufixo .policy, pasta
+    appointmentSchedulingPolicies. Acesso especial: permissões ViewSetup e CustomizeApplication. Aceita curinga (*) no package.xml.
+  Campos (nome | tipo | obrigatório | versão | descrição):
+  appointmentAssignmentPolicy | string | não marcado | 53.0 | nome da política de atribuição de compromissos
+  appointmentStartTimeInterval | picklist | sim | - | minutos entre os horários de início propostos (15 = na hora cheia e a cada 15 minutos); valores 5, 10, 15, 20, 30, 45, 60, 90, 120, 150, 180, 240, 300, 360, 420, 480
+  extCalEventHandler | lookup | sim | 50.0 | nome de API da classe Apex que consulta os eventos de calendário externo dos recursos e devolve os horários ocupados
+  isSvcTerritoryMemberShiftUsed | boolean | sim | 54.0 | se os turnos dos membros do território de serviço contam para a disponibilidade
+  isSvcTerrOpHoursWithShiftsUsed | boolean | sim | 54.0 | se a disponibilidade usa a interseção entre turnos e horário de funcionamento do território
+  masterLabel | string | sim | - | rótulo da política
+  shouldCheckExternalCalendar | boolean | sim | 53.0 | se calendários externos são consultados para saber a disponibilidade
+  shouldConsiderCalendarEvents | boolean | sim | - | se eventos do calendário Salesforce afetam a disponibilidade
+  shouldEnforceExcludedResource | boolean | sim | - | se recursos de serviço excluídos ficam impedidos de receber compromissos
+  shouldEnforceRequiredResource | boolean | sim | - | se só recursos obrigatórios podem ser atribuídos
+  shouldMatchSkill | boolean | sim | - | se só recursos obrigatórios com certas habilidades podem ser atribuídos
+  shouldMatchSkillLevel | boolean | sim | - | se só recursos obrigatórios com certas habilidades e níveis podem ser atribuídos
+  shouldRespectVisitingHours | boolean | sim | - | se agendar fora do horário de visita da conta fica bloqueado
+  shouldUsePrimaryMembers | boolean | sim | - | se só membros primários do território podem ser atribuídos
+  shouldUseSecondaryMembers | boolean | sim | - | se membros secundários do território podem ser atribuídos
+  A página não informa valores padrão.
+
+[src:mdapi-appointmentassignmentpolicy] https://developer.salesforce.com/docs/get_document_content/api_meta/meta_appointmentassignmentpolicy.htm/en-us/264.0
+  Guarda as configurações de uma regra de atribuição de recursos. Desde a API 53.0. Arquivos: sufixo .policy, pasta appointmentAssignmentPolicies.
+    A página não traz regra de acesso especial. Aceita curinga (*) no package.xml.
+  Campos (nome | tipo | obrigatório | versão | descrição):
+  masterLabel | string | sim | - | rótulo da política de atribuição
+  policyApplicableDuration | string | sim | - | com que frequência a utilização do recurso é calculada; valores Monthly, ParameterBased e Weekly
+  policyType | string | sim | - | tipo da política; valor loadBalancing
+  utilizationFactor | string | sim | - | o que se conta na utilização; valores NumberOfAppointments e TotalAppointmentDuration
+  A página não informa versão por campo nem valores padrão.

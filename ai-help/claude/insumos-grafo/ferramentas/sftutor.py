@@ -248,6 +248,8 @@ def validar_referencias(C, R):
             R.e(f"{f['id']}: sem objeto API e sem ausência declarada")
     # nuvens
     for n in C["nuvens"].values():
+        if n.get("natureza") == "agrupamento_didatico" and not n.get("nota_natureza"):
+            R.e(f"{n['id']}: agrupamento didático sem 'nota_natureza' (dizer que não é nome nem nuvem oficial)")
         for ca in n["classificacoes_aplicaveis"]:
             if ca["classificacao"] not in C["classificacoes"]: R.e(f"{n['id']}: {ca['classificacao']} inexistente")
             for sc in ca["subclassificacoes"]:

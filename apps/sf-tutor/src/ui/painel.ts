@@ -180,10 +180,13 @@ function painelNuvem(ctx: CtxPainel, e: Entidade, caminho: readonly string[]): (
   const funcs = cas.flatMap((c) => c.subclassificacoes.flatMap((s) => s.funcionalidades));
   const unicas = [...new Set(funcs)];
   const compart = unicas.filter((f) => (ctx.ind.nuvensDaFunc.get(f) ?? []).length > 1);
+  const agrupamento = e.natureza === 'agrupamento_didatico';
   return [
+    agrupamento ? h('p', { class: 'nota' }, h('strong', null, 'Agrupamento criado por este tutorial. '),
+      String(e.nota_natureza ?? 'Não é um produto nem uma nuvem oficial da Salesforce.')) : null,
     texto('Resumo', e.resumo, { didatico: true }),
     categoriaNuvem(e.categoria),
-    listaTexto('Nome oficial e aliases', [String(e.nome_oficial ?? ''), ...arr<string>(e.aliases).map((a) => `Alias: ${a}`)]),
+    listaTexto(agrupamento ? 'Nome do agrupamento (do projeto) e aliases' : 'Nome oficial e aliases', [String(e.nome_oficial ?? ''), ...arr<string>(e.aliases).map((a) => `Alias: ${a}`)]),
     texto('O que é', e.o_que_e, { didatico: true }),
     listaTexto('Casos de uso', arr(e.casos_de_uso)),
     afirmacao(ctx, 'Contexto tecnológico', ent<Afirmacao>(e, 'contexto_tecnico')),
@@ -207,7 +210,7 @@ function painelNuvem(ctx: CtxPainel, e: Entidade, caminho: readonly string[]): (
     texto('Cobertura do inventário desta nuvem', e.cobertura_inventario),
     secao('Fontes', false, fontesEl(ctx, arr(e.evidencias))),
     infoLogo(e),
-    restantes(e, ['id', 'nome_oficial', 'logo_marca', 'aliases', 'sigla', 'categoria', 'resumo', 'o_que_e', 'casos_de_uso', 'contexto_tecnico', 'licencas', 'classificacoes_aplicaveis', 'dependencias', 'limites', 'cobertura_inventario', 'estado', 'evidencias']),
+    restantes(e, ['id', 'nome_oficial', 'natureza', 'nota_natureza', 'logo_marca', 'aliases', 'sigla', 'categoria', 'resumo', 'o_que_e', 'casos_de_uso', 'contexto_tecnico', 'licencas', 'classificacoes_aplicaveis', 'dependencias', 'limites', 'cobertura_inventario', 'estado', 'evidencias']),
   ];
 }
 
