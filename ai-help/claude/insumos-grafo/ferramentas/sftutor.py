@@ -557,6 +557,14 @@ def validar_fontes(C, R, base=BASE):
             R.e(f"escopo: {t}: 'inferido' deve ser true e vir com 'nota_inferencia'")
         if j.get("decisao") == "condicional" and not j.get("condicao"):
             R.e(f"escopo: {t}: decisão 'condicional' sem 'condicao' registrada")
+        if "aposentado" in j:   # produto aposentado (X3, decisão da autora em 2026-11-20): data, release e fonte registrada
+            ap = j["aposentado"]
+            if not re.fullmatch(r"\d{4}-\d{2}-\d{2}", str(ap.get("data", ""))) or not ap.get("release") or ap.get("fonte") not in C["fontes"]:
+                R.e(f"escopo: {t}: 'aposentado' precisa de data (AAAA-MM-DD), release e fonte registrada")
+            if j.get("decisao") != "excluido" or "X3" not in j.get("criterios", []):
+                R.e(f"escopo: {t}: tipo aposentado deve ser 'excluido' pelo critério X3")
+            if ap.get("release_inferida") and not ap.get("nota_release"):
+                R.e(f"escopo: {t}: 'release_inferida' sem 'nota_release'")
         if j.get("evidencias") and j.get("alcance_da_licenca") not in ("proprio_tipo", "familia", "nao_se_aplica"):
             R.e(f"escopo: {t}: alcance_da_licenca ausente ou inválido")
     # rastreabilidade: o nome de cada propriedade/campo precisa aparecer na nota de extração de pelo menos uma de suas fontes

@@ -362,6 +362,18 @@ class TestRecorteCoreFamilias(BaseTemp):
         gravar(self._esc(), d)
         self.assertErro("BotSettings: 'inferido' deve ser true")
 
+    def test_aposentado_sem_release_e_erro(self):
+        d = ler(self._esc()); j = d["classificacao_core_por_item"]["justificativas"]
+        del j["LiveChatButton"]["aposentado"]["release"]
+        gravar(self._esc(), d)
+        self.assertErro("LiveChatButton: 'aposentado' precisa de data")
+
+    def test_aposentado_sem_x3_e_erro(self):
+        d = ler(self._esc()); j = d["classificacao_core_por_item"]["justificativas"]
+        j["LiveChatButton"]["criterios"] = ["C3"]
+        gravar(self._esc(), d)
+        self.assertErro("LiveChatButton: tipo aposentado deve ser 'excluido' pelo critério X3")
+
     def test_alcance_ausente_e_erro(self):
         d = ler(self._esc()); j = d["classificacao_core_por_item"]["justificativas"]
         del j["CareLimitType"]["alcance_da_licenca"]

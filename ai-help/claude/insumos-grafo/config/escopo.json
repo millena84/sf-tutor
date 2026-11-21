@@ -28,6 +28,10 @@
   {
    "id": "X2",
    "texto": "Tipos que dependem de licença de produto ou setor (Industries, Revenue, Field Service, Data 360 etc.) ficam fora do primeiro inventário completo até haver classificação com fonte."
+  },
+  {
+   "id": "X3",
+   "texto": "Produto aposentado: tipos que ainda constam da cobertura de metadados da versão, mas cujo produto foi aposentado, ficam fora do Core e levam o bloco 'aposentado' (data, release e fonte). (Decisão da autora em 2026-11-20.)"
   }
  ],
  "produtos_fora_do_recorte": [
@@ -249,6 +253,7 @@
    "CommunityTemplateDefinition",
    "CommunityThemeDefinition",
    "ContractSettings",
+   "ConversationMessageDefinition",
    "ConversationVendorInfo",
    "CustomSite",
    "DataAction",
@@ -286,6 +291,8 @@
    "DocumentChecklistSettings",
    "DocumentExtractionDef",
    "DocumentType",
+   "EmbeddedServiceBranding",
+   "EmbeddedServiceLiveAgent",
    "EntitlementProcess",
    "EntitlementSettings",
    "EntitlementTemplate",
@@ -313,6 +320,13 @@
    "KnowledgeSettings",
    "LeadConfigSettings",
    "LeadConvertSettings",
+   "LiveAgentSettings",
+   "LiveChatAgentConfig",
+   "LiveChatButton",
+   "LiveChatDeployment",
+   "LiveChatSensitiveDataRule",
+   "LiveMessageSettings",
+   "MessagingChannel",
    "MilestoneType",
    "MktCalcInsightObjectDef",
    "MktDataConnection",
@@ -2192,16 +2206,15 @@
     "data": "2026-11-18"
    },
    "ConversationMessageDefinition": {
-    "decisao": "pendente",
+    "decisao": "excluido",
     "criterios": [
-     "C2",
      "C3"
     ],
     "familia": "Atendimento (Service Cloud)",
     "nuvens": [
      "nuv:service-cloud"
     ],
-    "motivo": "Messaging: nenhuma fonte lida diz se é exclusivo de atendimento ou se também vem com Sales Cloud (como o Chat legado). Falta frase de edição ou licença.",
+    "motivo": "Associado a Agentforce Service (fora do Core por ser específico dessa nuvem), com ressalva: associação inferida.",
     "evidencias": [
      {
       "fonte": "src:mdapi-atendimento-canais-264",
@@ -2209,7 +2222,9 @@
      }
     ],
     "alcance_da_licenca": "nao_se_aplica",
-    "data": "2026-11-20"
+    "data": "2026-11-20",
+    "inferido": true,
+    "nota_inferencia": "Associação exclusiva ao atendimento inferida (orientação da autora em 2026-11-20): as fontes lidas ligam Messaging a Omni-Channel e a Service Cloud Voice, mas nenhuma diz que ele é exclusivo de atendimento. Pendente de confirmação."
    },
    "ConversationVendorInfo": {
     "decisao": "excluido",
@@ -3468,16 +3483,16 @@
     "data": "2026-11-19"
    },
    "EmbeddedServiceBranding": {
-    "decisao": "pendente",
+    "decisao": "excluido",
     "criterios": [
-     "C3"
+     "X3"
     ],
     "familia": "Atendimento (Service Cloud)",
     "nuvens": [
      "nuv:service-cloud",
      "nuv:sales-cloud"
     ],
-    "motivo": "Chat legado: a fonte de edições diz que o Chat existia com Service Cloud ou Sales Cloud (o C3 não fecha como exclusivo de atendimento) e que o produto foi aposentado em 14/02/2026. Falta decidir como tratar tipos de produto aposentado que ainda constam do inventário v68.",
+    "motivo": "Produto de chat legado, aposentado em 14/02/2026 (fonte oficial). Fica fora do Core pelo X3 e continua no inventário v68 porque ainda consta da cobertura dessa versão. Antes do aposentamento, servia a Service Cloud e a Sales Cloud.",
     "evidencias": [
      {
       "fonte": "src:chat-rest-edicoes",
@@ -3489,7 +3504,17 @@
      }
     ],
     "alcance_da_licenca": "nao_se_aplica",
-    "data": "2026-11-20"
+    "data": "2026-11-20",
+    "aposentado": {
+     "data": "2026-02-14",
+     "release": "Spring '26 (API 66.0)",
+     "fonte": "src:chat-rest-edicoes",
+     "release_inferida": true,
+     "evidencia_release": {
+      "fonte": "src:objref-lista-releases"
+     },
+     "nota_release": "A fonte oficial dá só a data (14/02/2026). A release foi deduzida pela data, que cai no período da Spring '26 (API 66.0, entre a Winter '26 e a Summer '26 no seletor de versões); o calendário de releases não foi lido."
+    }
    },
    "EmbeddedServiceConfig": {
     "decisao": "pendente",
@@ -3512,16 +3537,16 @@
     "data": "2026-11-20"
    },
    "EmbeddedServiceLiveAgent": {
-    "decisao": "pendente",
+    "decisao": "excluido",
     "criterios": [
-     "C3"
+     "X3"
     ],
     "familia": "Atendimento (Service Cloud)",
     "nuvens": [
      "nuv:service-cloud",
      "nuv:sales-cloud"
     ],
-    "motivo": "Chat legado: a fonte de edições diz que o Chat existia com Service Cloud ou Sales Cloud (o C3 não fecha como exclusivo de atendimento) e que o produto foi aposentado em 14/02/2026. Falta decidir como tratar tipos de produto aposentado que ainda constam do inventário v68.",
+    "motivo": "Produto de chat legado, aposentado em 14/02/2026 (fonte oficial). Fica fora do Core pelo X3 e continua no inventário v68 porque ainda consta da cobertura dessa versão. Antes do aposentamento, servia a Service Cloud e a Sales Cloud.",
     "evidencias": [
      {
       "fonte": "src:chat-rest-edicoes",
@@ -3533,7 +3558,17 @@
      }
     ],
     "alcance_da_licenca": "nao_se_aplica",
-    "data": "2026-11-20"
+    "data": "2026-11-20",
+    "aposentado": {
+     "data": "2026-02-14",
+     "release": "Spring '26 (API 66.0)",
+     "fonte": "src:chat-rest-edicoes",
+     "release_inferida": true,
+     "evidencia_release": {
+      "fonte": "src:objref-lista-releases"
+     },
+     "nota_release": "A fonte oficial dá só a data (14/02/2026). A release foi deduzida pela data, que cai no período da Spring '26 (API 66.0, entre a Winter '26 e a Summer '26 no seletor de versões); o calendário de releases não foi lido."
+    }
    },
    "EmbeddedServiceMenuSettings": {
     "decisao": "pendente",
@@ -4879,16 +4914,16 @@
     "data": "2026-11-18"
    },
    "LiveAgentSettings": {
-    "decisao": "pendente",
+    "decisao": "excluido",
     "criterios": [
-     "C3"
+     "X3"
     ],
     "familia": "Atendimento (Service Cloud)",
     "nuvens": [
      "nuv:service-cloud",
      "nuv:sales-cloud"
     ],
-    "motivo": "Chat legado: a fonte de edições diz que o Chat existia com Service Cloud ou Sales Cloud (o C3 não fecha como exclusivo de atendimento) e que o produto foi aposentado em 14/02/2026. Falta decidir como tratar tipos de produto aposentado que ainda constam do inventário v68.",
+    "motivo": "Produto de chat legado, aposentado em 14/02/2026 (fonte oficial). Fica fora do Core pelo X3 e continua no inventário v68 porque ainda consta da cobertura dessa versão. Antes do aposentamento, servia a Service Cloud e a Sales Cloud.",
     "evidencias": [
      {
       "fonte": "src:chat-rest-edicoes",
@@ -4900,19 +4935,29 @@
      }
     ],
     "alcance_da_licenca": "nao_se_aplica",
-    "data": "2026-11-20"
+    "data": "2026-11-20",
+    "aposentado": {
+     "data": "2026-02-14",
+     "release": "Spring '26 (API 66.0)",
+     "fonte": "src:chat-rest-edicoes",
+     "release_inferida": true,
+     "evidencia_release": {
+      "fonte": "src:objref-lista-releases"
+     },
+     "nota_release": "A fonte oficial dá só a data (14/02/2026). A release foi deduzida pela data, que cai no período da Spring '26 (API 66.0, entre a Winter '26 e a Summer '26 no seletor de versões); o calendário de releases não foi lido."
+    }
    },
    "LiveChatAgentConfig": {
-    "decisao": "pendente",
+    "decisao": "excluido",
     "criterios": [
-     "C3"
+     "X3"
     ],
     "familia": "Atendimento (Service Cloud)",
     "nuvens": [
      "nuv:service-cloud",
      "nuv:sales-cloud"
     ],
-    "motivo": "Chat legado: a fonte de edições diz que o Chat existia com Service Cloud ou Sales Cloud (o C3 não fecha como exclusivo de atendimento) e que o produto foi aposentado em 14/02/2026. Falta decidir como tratar tipos de produto aposentado que ainda constam do inventário v68.",
+    "motivo": "Produto de chat legado, aposentado em 14/02/2026 (fonte oficial). Fica fora do Core pelo X3 e continua no inventário v68 porque ainda consta da cobertura dessa versão. Antes do aposentamento, servia a Service Cloud e a Sales Cloud.",
     "evidencias": [
      {
       "fonte": "src:chat-rest-edicoes",
@@ -4924,19 +4969,29 @@
      }
     ],
     "alcance_da_licenca": "nao_se_aplica",
-    "data": "2026-11-20"
+    "data": "2026-11-20",
+    "aposentado": {
+     "data": "2026-02-14",
+     "release": "Spring '26 (API 66.0)",
+     "fonte": "src:chat-rest-edicoes",
+     "release_inferida": true,
+     "evidencia_release": {
+      "fonte": "src:objref-lista-releases"
+     },
+     "nota_release": "A fonte oficial dá só a data (14/02/2026). A release foi deduzida pela data, que cai no período da Spring '26 (API 66.0, entre a Winter '26 e a Summer '26 no seletor de versões); o calendário de releases não foi lido."
+    }
    },
    "LiveChatButton": {
-    "decisao": "pendente",
+    "decisao": "excluido",
     "criterios": [
-     "C3"
+     "X3"
     ],
     "familia": "Atendimento (Service Cloud)",
     "nuvens": [
      "nuv:service-cloud",
      "nuv:sales-cloud"
     ],
-    "motivo": "Chat legado: a fonte de edições diz que o Chat existia com Service Cloud ou Sales Cloud (o C3 não fecha como exclusivo de atendimento) e que o produto foi aposentado em 14/02/2026. Falta decidir como tratar tipos de produto aposentado que ainda constam do inventário v68.",
+    "motivo": "Produto de chat legado, aposentado em 14/02/2026 (fonte oficial). Fica fora do Core pelo X3 e continua no inventário v68 porque ainda consta da cobertura dessa versão. Antes do aposentamento, servia a Service Cloud e a Sales Cloud.",
     "evidencias": [
      {
       "fonte": "src:chat-rest-edicoes",
@@ -4948,19 +5003,29 @@
      }
     ],
     "alcance_da_licenca": "nao_se_aplica",
-    "data": "2026-11-20"
+    "data": "2026-11-20",
+    "aposentado": {
+     "data": "2026-02-14",
+     "release": "Spring '26 (API 66.0)",
+     "fonte": "src:chat-rest-edicoes",
+     "release_inferida": true,
+     "evidencia_release": {
+      "fonte": "src:objref-lista-releases"
+     },
+     "nota_release": "A fonte oficial dá só a data (14/02/2026). A release foi deduzida pela data, que cai no período da Spring '26 (API 66.0, entre a Winter '26 e a Summer '26 no seletor de versões); o calendário de releases não foi lido."
+    }
    },
    "LiveChatDeployment": {
-    "decisao": "pendente",
+    "decisao": "excluido",
     "criterios": [
-     "C3"
+     "X3"
     ],
     "familia": "Atendimento (Service Cloud)",
     "nuvens": [
      "nuv:service-cloud",
      "nuv:sales-cloud"
     ],
-    "motivo": "Chat legado: a fonte de edições diz que o Chat existia com Service Cloud ou Sales Cloud (o C3 não fecha como exclusivo de atendimento) e que o produto foi aposentado em 14/02/2026. Falta decidir como tratar tipos de produto aposentado que ainda constam do inventário v68.",
+    "motivo": "Produto de chat legado, aposentado em 14/02/2026 (fonte oficial). Fica fora do Core pelo X3 e continua no inventário v68 porque ainda consta da cobertura dessa versão. Antes do aposentamento, servia a Service Cloud e a Sales Cloud.",
     "evidencias": [
      {
       "fonte": "src:chat-rest-edicoes",
@@ -4972,19 +5037,29 @@
      }
     ],
     "alcance_da_licenca": "nao_se_aplica",
-    "data": "2026-11-20"
+    "data": "2026-11-20",
+    "aposentado": {
+     "data": "2026-02-14",
+     "release": "Spring '26 (API 66.0)",
+     "fonte": "src:chat-rest-edicoes",
+     "release_inferida": true,
+     "evidencia_release": {
+      "fonte": "src:objref-lista-releases"
+     },
+     "nota_release": "A fonte oficial dá só a data (14/02/2026). A release foi deduzida pela data, que cai no período da Spring '26 (API 66.0, entre a Winter '26 e a Summer '26 no seletor de versões); o calendário de releases não foi lido."
+    }
    },
    "LiveChatSensitiveDataRule": {
-    "decisao": "pendente",
+    "decisao": "excluido",
     "criterios": [
-     "C3"
+     "X3"
     ],
     "familia": "Atendimento (Service Cloud)",
     "nuvens": [
      "nuv:service-cloud",
      "nuv:sales-cloud"
     ],
-    "motivo": "Chat legado: a fonte de edições diz que o Chat existia com Service Cloud ou Sales Cloud (o C3 não fecha como exclusivo de atendimento) e que o produto foi aposentado em 14/02/2026. Falta decidir como tratar tipos de produto aposentado que ainda constam do inventário v68.",
+    "motivo": "Produto de chat legado, aposentado em 14/02/2026 (fonte oficial). Fica fora do Core pelo X3 e continua no inventário v68 porque ainda consta da cobertura dessa versão. Antes do aposentamento, servia a Service Cloud e a Sales Cloud.",
     "evidencias": [
      {
       "fonte": "src:chat-rest-edicoes",
@@ -4996,19 +5071,28 @@
      }
     ],
     "alcance_da_licenca": "nao_se_aplica",
-    "data": "2026-11-20"
+    "data": "2026-11-20",
+    "aposentado": {
+     "data": "2026-02-14",
+     "release": "Spring '26 (API 66.0)",
+     "fonte": "src:chat-rest-edicoes",
+     "release_inferida": true,
+     "evidencia_release": {
+      "fonte": "src:objref-lista-releases"
+     },
+     "nota_release": "A fonte oficial dá só a data (14/02/2026). A release foi deduzida pela data, que cai no período da Spring '26 (API 66.0, entre a Winter '26 e a Summer '26 no seletor de versões); o calendário de releases não foi lido."
+    }
    },
    "LiveMessageSettings": {
-    "decisao": "pendente",
+    "decisao": "excluido",
     "criterios": [
-     "C2",
      "C3"
     ],
     "familia": "Atendimento (Service Cloud)",
     "nuvens": [
      "nuv:service-cloud"
     ],
-    "motivo": "Messaging: nenhuma fonte lida diz se é exclusivo de atendimento ou se também vem com Sales Cloud (como o Chat legado). Falta frase de edição ou licença.",
+    "motivo": "Associado a Agentforce Service (fora do Core por ser específico dessa nuvem), com ressalva: associação inferida.",
     "evidencias": [
      {
       "fonte": "src:mdapi-atendimento-canais-264",
@@ -5016,7 +5100,9 @@
      }
     ],
     "alcance_da_licenca": "nao_se_aplica",
-    "data": "2026-11-20"
+    "data": "2026-11-20",
+    "inferido": true,
+    "nota_inferencia": "Associação exclusiva ao atendimento inferida (orientação da autora em 2026-11-20): as fontes lidas ligam Messaging a Omni-Channel e a Service Cloud Voice, mas nenhuma diz que ele é exclusivo de atendimento. Pendente de confirmação."
    },
    "MacroSettings": {
     "decisao": "incluido",
@@ -5041,7 +5127,9 @@
      }
     ],
     "familia": "Atendimento (Service Cloud)",
-    "data": "2026-11-20"
+    "data": "2026-11-20",
+    "inferido": true,
+    "nota_inferencia": "Inclusão não confirmada (orientação da autora em 2026-11-20): a decisão vem da regra C2 ajustada, sem frase oficial que diga que macros não exigem licença de produto."
    },
    "ManagedEventSubscription": {
     "decisao": "incluido",
@@ -5076,16 +5164,15 @@
     "data": "2026-11-18"
    },
    "MessagingChannel": {
-    "decisao": "pendente",
+    "decisao": "excluido",
     "criterios": [
-     "C2",
      "C3"
     ],
     "familia": "Atendimento (Service Cloud)",
     "nuvens": [
      "nuv:service-cloud"
     ],
-    "motivo": "Messaging: nenhuma fonte lida diz se é exclusivo de atendimento ou se também vem com Sales Cloud (como o Chat legado). Falta frase de edição ou licença.",
+    "motivo": "Associado a Agentforce Service (fora do Core por ser específico dessa nuvem), com ressalva: associação inferida.",
     "evidencias": [
      {
       "fonte": "src:mdapi-atendimento-canais-264",
@@ -5093,7 +5180,9 @@
      }
     ],
     "alcance_da_licenca": "nao_se_aplica",
-    "data": "2026-11-20"
+    "data": "2026-11-20",
+    "inferido": true,
+    "nota_inferencia": "Associação exclusiva ao atendimento inferida (orientação da autora em 2026-11-20): as fontes lidas ligam Messaging a Omni-Channel e a Service Cloud Voice, mas nenhuma diz que ele é exclusivo de atendimento. Pendente de confirmação."
    },
    "MilestoneType": {
     "decisao": "excluido",
