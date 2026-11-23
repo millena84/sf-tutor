@@ -149,3 +149,13 @@ test('7. Funcionalidade compartilhada: Sales e Service apontam para a mesma fich
   await expect(nuvSec.getByRole('button', { name: 'Agentforce Sales' })).toBeVisible();
   await expect(nuvSec.getByRole('button', { name: 'Agentforce Service' })).toBeVisible();
 });
+
+test('8. Toda nuvem avisa que a lista de metadata types é parcial', async ({ page }) => {
+  for (const n of ['nuv:platform-core', 'nuv:industries', 'nuv:add-ons']) {
+    await abrir(page, `?v=nuvem&n=${n}`);
+    const aviso = painel(page).locator('.aviso-cobertura');
+    await expect(aviso).toContainText('Cobertura parcial');
+    await expect(aviso).toContainText(/metadata types ligados a esta nuvem/);
+    await semErroNoPainel(page);
+  }
+});

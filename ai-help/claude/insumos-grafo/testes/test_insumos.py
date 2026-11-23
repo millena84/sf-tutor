@@ -444,6 +444,17 @@ class TestTemas(BaseTemp):
         self.assertTrue(all(m["suporte_cli"] for m in d["metadata_types"]))
         self.assertIsInstance(d["temas_sem_funcionalidade"], list)
 
+    def test_toda_nuvem_tem_cobertura_derivada_parcial(self):
+        """Toda nuvem no site leva a cobertura calculada de metadata types, com a nota de lista parcial."""
+        import glob as _g
+        arqs = _g.glob(os.path.join(BASE, "gerado", "site", "entidades", "nuv", "*.json"))
+        self.assertTrue(arqs)
+        for a in arqs:
+            c = ler(a)["cobertura_derivada"]
+            self.assertIn("não está completa", c["nota"])
+            self.assertIsInstance(c["metadata_types_ligados"], int)
+            self.assertIsInstance(c["pendentes_recorte_core"], int)
+
     def test_busca_cobre_o_inventario_inteiro_e_acha_por_pasta(self):
         """Todo metadata type do inventário é encontrável: com ficha (mdt:) ou marcado como sem ficha (inv:), nunca os dois."""
         busca = ler(os.path.join(BASE, "gerado", "site", "busca.json"))

@@ -759,7 +759,7 @@ def gerar(base=BASE, destino=None):
 
 
 # --------------------------------------------------------------------------- projeção para o site (contrato versionado)
-CONTRATO_SITE = {"nome": "sf-tutor-site", "versao": "1.2.0"}  # 1.2.0: campo "derivado" nos temas (#34)
+CONTRATO_SITE = {"nome": "sf-tutor-site", "versao": "1.3.0"}  # 1.2.0: "derivado" nos temas (#34); 1.3.0: "cobertura_derivada" nas nuvens
 TIPOS_FOLHA = {"campo_api", "propriedade_xml"}          # vivem dentro da entidade-mãe
 TIPOS_ARESTA_FOLHA = {"campo", "propriedade"}           # deriváveis da entidade-mãe
 
@@ -777,6 +777,31 @@ def recorte_tema(t):
     """Estado do recorte de um tema (#34): conferido (verificado), parcial (com referência oficial) ou curadoria."""
     if t.get("estado") == "verificado": return "conferido"
     return "parcial" if t.get("referencias_oficiais") else "curadoria"
+
+def cobertura_nuvem(C, nuvem_id, base):
+    """Cobertura de metadata types de uma nuvem, calculada a cada geração (não é cadastro).
+    O MVP organizou os metadata types pela classificação funcional; por nuvem, a lista é sempre parcial enquanto houver
+    tipos sem recorte Core. 'pendentes_provaveis' vem da triagem semântica (inferida, só pelo nome) de ferramentas/triagem_pendentes.py."""
+    n = C["nuvens"][nuvem_id]
+    funcs = {f for c in n.get("classificacoes_aplicaveis", []) for s in c["subclassificacoes"] for f in s["funcionalidades"]}
+    mdts = {m["ref"] for f in funcs if f in C["funcionalidades"] for m in C["funcionalidades"][f]["representacoes"]["metadata_types"]}
+    out = {"estado_inventario": n.get("cobertura_inventario"), "metadata_types_ligados": len(mdts),
+           "decididos_sem_ficha": None, "pendentes_recorte_core": None, "pendentes_provaveis": None,
+           "nota": "A lista de metadata types desta nuvem ainda não está completa: o MVP organizou os tipos pela classificação funcional "
+                   "(os temas), e a separação entre o Core e cada nuvem ainda está em andamento (issue #10)."}
+    p_inv = os.path.join(base, "inventarios", "metadata-types-v68.json")
+    if os.path.exists(p_inv):
+        sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+        import triagem_pendentes as TP
+        pend = TP.pendentes_do_inventario(ler(p_inv))
+        out["pendentes_recorte_core"] = len(pend)
+        out["pendentes_provaveis"] = sum(1 for i in TP.triar(pend) if i["nuvem_provavel"] == nuvem_id)
+        cad = {x["nome"] for x in ler(p_inv)["itens"] if x.get("cadastro")}
+        just = C["escopo"].get("classificacao_core_por_item", {}).get("justificativas", {})
+        out["decididos_sem_ficha"] = sum(1 for t, j in just.items()
+                                         if j.get("decisao") in ("excluido", "condicional") and nuvem_id in (j.get("nuvens") or []) and t not in cad)
+    return out
+
 
 def resumo_tecnico_tema(C, tema_id):
     """Resumo técnico de um tema, calculado só a partir do catálogo (issue #34). Não é cadastro:
@@ -937,6 +962,8 @@ def gerar_site(C, base, out, nos, arestas, visoes, cob):
             e = {**e, "logo_marca": {k: logos[i][k] for k in ("marca", "url", "formato", "fornecido_por", "pagina_origem", "verificacao")}}
         if i.startswith(("cls:", "sub:")):
             e = {**e, "derivado": resumo_tecnico_tema(C, i)}
+        if i.startswith("nuv:"):
+            e = {**e, "cobertura_derivada": cobertura_nuvem(C, i, base)}
         gravar(os.path.join(site, caminho_entidade(i)), e)
     reg = json.load(open(os.path.join(base, "fontes", "registro.json"), encoding="utf-8"))
     fontes = {f["id"]: {k: f.get(k) for k in ("titulo", "url", "tipo", "versao", "data_verificacao", "metodo")} for f in reg["fontes"]}

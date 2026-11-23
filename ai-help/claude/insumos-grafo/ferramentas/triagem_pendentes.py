@@ -180,11 +180,10 @@ def primeira(regras, nome, idx):
     return None
 
 
-def main():
-    inv = json.load(open(INV, encoding="utf-8"))
-    pend = sorted(x["nome"] for x in inv["itens"] if x["recorte_core"] == "pendente")
+def triar(nomes):
+    """Triagem de uma lista de nomes de metadata types (só pelo nome; tudo inferido)."""
     itens = []
-    for n in pend:
+    for n in sorted(nomes):
         f = primeira(REGRAS_FAMILIA, n, 4)
         c = primeira(REGRAS_FUNCIONAIS, n, 3)
         itens.append({
@@ -194,6 +193,16 @@ def main():
             "confianca_classificacao": c[2] if c else "sem_pista",
             "inferido": True,
         })
+    return itens
+
+
+def pendentes_do_inventario(inv):
+    return [x["nome"] for x in inv["itens"] if x["recorte_core"] == "pendente"]
+
+
+def main():
+    inv = json.load(open(INV, encoding="utf-8"))
+    itens = triar(pendentes_do_inventario(inv))
     doc = {
         "descricao": "Triagem semântica, só pelo nome, dos metadata types pendentes de recorte Core. Inferida; não é decisão nem fonte.",
         "metodo": "Regras de padrão de nome em ferramentas/triagem_pendentes.py, escritas em " + DATA_REGRAS + " na conversa com a autora.",
