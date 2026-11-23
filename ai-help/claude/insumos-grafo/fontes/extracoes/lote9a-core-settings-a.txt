@@ -1,0 +1,46 @@
+fonte: 16 páginas de tipos Settings do Metadata API Developer Guide, versão 264.0 (API 68.0, Winter '27)
+lote: #10, etapa 3, lote A (cadastro de tipos já incluídos no Core e ainda sem ficha)
+obtido em 2026-11-23 via WebFetch no endpoint versionado
+  https://developer.salesforce.com/docs/get_document_content/api_meta/meta_<tipo em minúsculas>.htm/en-us/264.0
+método: extração documental assistida por IA. A ferramenta de leitura devolve a página já resumida em português por um modelo de leitura,
+  não o texto literal; pedi a tabela Fields completa e a contagem de linhas de cada página. Nomes de campos, tipos, versões e defaults
+  foram conferidos contra essa contagem; as descrições foram parafraseadas no catálogo. Não houve leitura linha a linha do HTML original.
+autorização: a autora liberou em 2026-11-23 a leitura dos domínios developer, architect, admin e help da Salesforce.
+
+Por tipo (arquivo | versão | campos da tabela | default declarado | fullName herdado declarado na leitura):
+[src:mdapi-namesettings] Name.settings | 31.0 | enableInformalName (48.0, uso interno), enableMiddleName, enableNameSuffix | nenhum | sim
+  objetos de pessoa: Contact, Lead, Person Account, User. Campos de nome local não podem ser ligados pela Metadata API (só pela interface).
+[src:mdapi-actionssettings] Actions.settings | 47.0 | enableDefaultQuickActionsOn (true), enableDynamicActionsMobileStdObj (false),
+  enableMdpEnabled (true), enableThirdPartyActions (false), enableOfflineWebLinks (false) | sim
+  divergência: o exemplo XML usa nomes de elementos diferentes da tabela e omite dois campos.
+[src:mdapi-codebuildersettings] CodeBuilder.settings | 58.0 | enableCodeBuilder (ligado permite instalar o pacote GA do Code Builder) | nenhum | sim
+[src:mdapi-customaddressfieldsettings] CustomAddressField.settings | 55.0 | enableCustomAddressField (false; irreversível depois de true) | sim
+[src:mdapi-dataimportmanagementsettings] DataImportManagement.settings | 57.0 | enableEasyImport (Basic Data Import, contatos e leads) | nenhum | sim
+  acesso: só com a permissão de org DataImportManagement, disponível em algumas edições.
+[src:mdapi-dynamicformssettings] DynamicForms.settings | 58.0 | enableFormsOnMobile (Beta) | nenhum | não registrado
+[src:mdapi-emailtemplatesettings] EmailTemplate.settings | 47.0 | enableTemplateEnhancedFolderPref (false) | não registrado
+[src:mdapi-enhancednotessettings] EnhancedNotes.settings | 47.0 | enableEnhancedNotes (true), enableTasksOnEnhancedNotes (true);
+  ambos exigem a permissão Use New Notes | não registrado
+[src:mdapi-helpsettings] Help.settings | 68.0 | alternativeUrl (string, até 255, URL válida; erro INVALID_OPERATION; omitido não muda;
+  em branco apaga) | nenhum | não registrado. Acesso: Customize Application; não pode ser criado nem excluído; sem suporte em unlocked packages.
+[src:mdapi-iframewhitelisturlsettings] IframeWhiteListUrlSettings.settings na pasta iframeWhiteListUrlSettings (tipo próprio no registro do CLI)
+  | 49.0 | iframeWhiteListUrls (IframeWhiteListUrl[]) | sem curinga | não registrado
+  subtipo IframeWhiteListUrl: context (obrigatório; LightningOut [reservado, 60.0+], Surveys, VisualforcePages,
+  DisclosureAndComplianceHubConnector), url (example.com, *example.com, https://example.com).
+[src:mdapi-invocableactionsettings] InvocableAction.settings | 47.0 | isPartialSaveAllowed (três tentativas para as que dão certo; com false
+  a transação inteira falha; atualização crítica "Enable Partial Save for Invocable Actions"; sem default declarado) | sim
+[src:mdapi-picklistsettings] Picklist.settings | 47.0 | isPicklistApiNameEditDisabled (false) | sim
+[src:mdapi-recordpagesettings] RecordPage.settings | 47.0 | enableActivityRelatedList, enableDynamicForms (removido na 50.0+),
+  enableFullRecordView | nenhum | sim
+[src:mdapi-schemasettings] Schema.settings | versão não numerada na seção Version (exemplo de package.xml em 47.0) |
+  enableAdvancedCMTSecurity, enableAdvancedCSSecurity, enableListCustomSettingCreation, enableSOSLOnCustomSettings (todos false) | sim
+[src:mdapi-macrosettings] Macro.settings | 39.0 | enableAdvancedSearch, macrosInFolders (44.0) | nenhum | sim
+[src:mdapi-sandboxsettings] Sandbox.settings | 56.0 | disableSandboxExpirationEmails (avisos de sandboxes inativas há 180 dias ou mais)
+  | nenhum | sim. A página traz aviso de pré-lançamento no topo.
+
+Fora deste lote: UserEngagementSettings (27 campos, lido em 2026-11-23; vai para o lote B).
+
+Classificação funcional (decisão do projeto, não nomenclatura oficial): os tipos entram em funcionalidades existentes do mesmo assunto
+  (ações rápidas, campos customizados, Dynamic Forms, email templates, Visualforce, Flow, custom metadata types, sandboxes); para
+  NameSettings, CodeBuilderSettings, DataImportManagementSettings, EnhancedNotesSettings, HelpSettings e MacroSettings foram criadas
+  funcionalidades novas com a página do tipo como única fonte e caminho de Setup desconhecido.

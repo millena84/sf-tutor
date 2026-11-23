@@ -1,0 +1,170 @@
+{
+  "id": "mdt:HelpSettings",
+  "nome": "HelpSettings",
+  "o_que_e": "Configuração da org que troca o destino da Ajuda do Salesforce (help.salesforce.com) por uma URL alternativa.",
+  "finalidade": "Recuperar e implantar a URL para onde os usuários vão ao abrir a Ajuda, por exemplo uma central interna.",
+  "estende": "Metadata",
+  "arquivos": {
+    "source_format": {
+      "estado": "verificado",
+      "valor": {
+        "pasta": "settings/",
+        "arquivo": "Help.settings-meta.xml"
+      },
+      "nota": "Pasta e sufixo do tipo genérico Settings no registro do Salesforce CLI; o nome-base do arquivo vem da página do tipo.",
+      "evidencias": [
+        {
+          "fonte": "src:sdr-registry",
+          "nota": "types.settings"
+        },
+        {
+          "fonte": "src:mdapi-helpsettings"
+        }
+      ]
+    },
+    "metadata_api_format": {
+      "estado": "verificado",
+      "valor": {
+        "pasta": "settings/",
+        "arquivo": "Help.settings"
+      },
+      "nota": "Um único arquivo; no package.xml, o tipo é Settings e o membro é Help.",
+      "evidencias": [
+        {
+          "fonte": "src:mdapi-helpsettings"
+        }
+      ]
+    },
+    "curinga_package_xml": {
+      "estado": "verificado",
+      "valor": false,
+      "evidencias": [
+        {
+          "fonte": "src:mdapi-helpsettings"
+        }
+      ]
+    }
+  },
+  "disponibilidade": {
+    "desde_versao": "68.0",
+    "ate_versao": null,
+    "estado": "verificado"
+  },
+  "suporte_cli": {
+    "estado": "verificado",
+    "valor": {
+      "status": "suportado",
+      "nota_fonte": null
+    },
+    "nota": "Suporte do Salesforce CLI (source-deploy-retrieve), não do Metadata API em geral.",
+    "evidencias": [
+      {
+        "fonte": "src:sdr-metadata-support"
+      }
+    ]
+  },
+  "setup": {
+    "estado": "desconhecido",
+    "nota": "Caminho no Setup não validado nesta sessão."
+  },
+  "propriedades": [
+    {
+      "id": "mdt:HelpSettings.alternativeUrl",
+      "nome": "alternativeUrl",
+      "tipo_tecnico": "string",
+      "o_que_e": "URL alternativa aberta quando o usuário acessa a Ajuda do Salesforce. Até 255 caracteres e precisa ser uma URL válida; se a validação falha, a implantação devolve INVALID_OPERATION. Omitido no deploy, a URL existente não muda; em branco, a URL é apagada.",
+      "origem": {
+        "estado": "verificado",
+        "valor": "padrao_plataforma",
+        "nota": "Propriedade definida pelo schema da Metadata API.",
+        "evidencias": [
+          {
+            "fonte": "src:mdapi-helpsettings"
+          }
+        ]
+      },
+      "obrigatoriedade": {
+        "valor": "nao",
+        "estado": "desconhecido",
+        "condicao": "A documentação 68.0 não marca o campo como obrigatório; ausência de marcação não comprova opcionalidade (confirmar no WSDL)."
+      },
+      "default": {
+        "forma": "nao_declarado_na_fonte",
+        "estado": "desconhecido"
+      },
+      "dominio": {
+        "natureza": "texto_livre",
+        "estado": "verificado",
+        "evidencias": [
+          {
+            "fonte": "src:mdapi-helpsettings"
+          }
+        ],
+        "contexto": "A fonte tipa como string sem lista de valores; não inventar valores."
+      },
+      "disponibilidade": {
+        "desde_versao": null,
+        "ate_versao": null,
+        "estado": "desconhecido"
+      },
+      "explicacao": "explicada",
+      "estado": "verificado",
+      "evidencias": [
+        {
+          "fonte": "src:mdapi-helpsettings"
+        }
+      ],
+      "restricoes": {
+        "estado": "verificado",
+        "valor": "Até 255 caracteres; URL válida.",
+        "evidencias": [
+          {
+            "fonte": "src:mdapi-helpsettings"
+          }
+        ]
+      }
+    }
+  ],
+  "estruturas": [],
+  "cobertura": {
+    "estrutural": {
+      "estado": "completa",
+      "esperado": 1,
+      "presente": 1,
+      "nota": "Universo esperado = tabela Fields da página 264.0 (1 campo), lida em 2026-11-23. A leitura não registrou se a página declara fullName herdado; por isso ele não entrou."
+    },
+    "explicativa": {
+      "estado": "completa",
+      "esperado": 1,
+      "presente": 1
+    },
+    "mapeamento": {
+      "estado": "parcial",
+      "nota": "Correspondências registradas apenas onde há evidência; demais pendentes."
+    }
+  },
+  "recomendacoes": [],
+  "alertas": [
+    "No package.xml, use o tipo Settings com o nome-base do arquivo como membro; o curinga só vale para recuperar todas as configurações.",
+    "Acesso: recuperar ou implantar exige a permissão Customize Application.",
+    "O componente não pode ser criado nem excluído e não é suportado em unlocked packages."
+  ],
+  "divergencias_documentais": [],
+  "estado": "verificado",
+  "evidencias": [
+    {
+      "fonte": "src:mdapi-helpsettings"
+    },
+    {
+      "fonte": "src:sdr-registry"
+    },
+    {
+      "fonte": "src:sdr-metadata-support"
+    }
+  ],
+  "exemplo_xml": {
+    "xml": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<HelpSettings xmlns=\"http://soap.sforce.com/2006/04/metadata\">\n    <alternativeUrl>https://ajuda.example.com</alternativeUrl>\n</HelpSettings>",
+    "natureza": "didatico_projeto",
+    "nota": "Exemplo escrito pelo projeto apenas com elementos documentados; sem dados reais."
+  }
+}
