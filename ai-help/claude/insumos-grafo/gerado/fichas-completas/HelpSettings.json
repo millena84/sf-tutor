@@ -1,0 +1,187 @@
+{
+  "funcionalidades": [
+    {
+      "id": "func:destino-da-ajuda",
+      "nome": "Destino da Ajuda"
+    }
+  ],
+  "metadata_type": {
+    "alertas": [
+      "No package.xml, use o tipo Settings com o nome-base do arquivo como membro; o curinga só vale para recuperar todas as configurações.",
+      "Acesso: recuperar ou implantar exige a permissão Customize Application.",
+      "O componente não pode ser criado nem excluído e não é suportado em unlocked packages."
+    ],
+    "arquivos": {
+      "curinga_package_xml": {
+        "estado": "verificado",
+        "evidencias": [
+          {
+            "fonte": "src:mdapi-helpsettings"
+          }
+        ],
+        "valor": false
+      },
+      "metadata_api_format": {
+        "estado": "verificado",
+        "evidencias": [
+          {
+            "fonte": "src:mdapi-helpsettings"
+          }
+        ],
+        "nota": "Um único arquivo; no package.xml, o tipo é Settings e o membro é Help.",
+        "valor": {
+          "arquivo": "Help.settings",
+          "pasta": "settings/"
+        }
+      },
+      "source_format": {
+        "estado": "verificado",
+        "evidencias": [
+          {
+            "fonte": "src:sdr-registry",
+            "nota": "types.settings"
+          },
+          {
+            "fonte": "src:mdapi-helpsettings"
+          }
+        ],
+        "nota": "Pasta e sufixo do tipo genérico Settings no registro do Salesforce CLI; o nome-base do arquivo vem da página do tipo.",
+        "valor": {
+          "arquivo": "Help.settings-meta.xml",
+          "pasta": "settings/"
+        }
+      }
+    },
+    "cobertura": {
+      "estrutural": {
+        "esperado": 1,
+        "estado": "completa",
+        "nota": "Universo esperado = tabela Fields da página 264.0 (1 campo), lida em 2026-11-23. A leitura não registrou se a página declara fullName herdado; por isso ele não entrou.",
+        "presente": 1
+      },
+      "explicativa": {
+        "esperado": 1,
+        "estado": "completa",
+        "presente": 1
+      },
+      "mapeamento": {
+        "estado": "parcial",
+        "nota": "Correspondências registradas apenas onde há evidência; demais pendentes."
+      }
+    },
+    "disponibilidade": {
+      "ate_versao": null,
+      "desde_versao": "68.0",
+      "estado": "verificado"
+    },
+    "divergencias_documentais": [],
+    "estado": "verificado",
+    "estende": "Metadata",
+    "estruturas": [],
+    "evidencias": [
+      {
+        "fonte": "src:mdapi-helpsettings"
+      },
+      {
+        "fonte": "src:sdr-registry"
+      },
+      {
+        "fonte": "src:sdr-metadata-support"
+      }
+    ],
+    "exemplo_xml": {
+      "natureza": "didatico_projeto",
+      "nota": "Exemplo escrito pelo projeto apenas com elementos documentados; sem dados reais.",
+      "xml": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<HelpSettings xmlns=\"http://soap.sforce.com/2006/04/metadata\">\n    <alternativeUrl>https://ajuda.example.com</alternativeUrl>\n</HelpSettings>"
+    },
+    "finalidade": "Recuperar e implantar a URL para onde os usuários vão ao abrir a Ajuda, por exemplo uma central interna.",
+    "id": "mdt:HelpSettings",
+    "nome": "HelpSettings",
+    "o_que_e": "Configuração da org que troca o destino da Ajuda do Salesforce (help.salesforce.com) por uma URL alternativa.",
+    "propriedades": [
+      {
+        "default": {
+          "estado": "desconhecido",
+          "forma": "nao_declarado_na_fonte"
+        },
+        "disponibilidade": {
+          "ate_versao": null,
+          "desde_versao": null,
+          "estado": "desconhecido"
+        },
+        "dominio": {
+          "contexto": "A fonte tipa como string sem lista de valores; não inventar valores.",
+          "estado": "verificado",
+          "evidencias": [
+            {
+              "fonte": "src:mdapi-helpsettings"
+            }
+          ],
+          "natureza": "texto_livre"
+        },
+        "estado": "verificado",
+        "evidencias": [
+          {
+            "fonte": "src:mdapi-helpsettings"
+          }
+        ],
+        "explicacao": "explicada",
+        "id": "mdt:HelpSettings.alternativeUrl",
+        "nome": "alternativeUrl",
+        "o_que_e": "URL alternativa aberta quando o usuário acessa a Ajuda do Salesforce. Até 255 caracteres e precisa ser uma URL válida; se a validação falha, a implantação devolve INVALID_OPERATION. Omitido no deploy, a URL existente não muda; em branco, a URL é apagada.",
+        "obrigatoriedade": {
+          "condicao": "A documentação 68.0 não marca o campo como obrigatório; ausência de marcação não comprova opcionalidade (confirmar no WSDL).",
+          "estado": "desconhecido",
+          "valor": "nao"
+        },
+        "origem": {
+          "estado": "verificado",
+          "evidencias": [
+            {
+              "fonte": "src:mdapi-helpsettings"
+            }
+          ],
+          "nota": "Propriedade definida pelo schema da Metadata API.",
+          "valor": "padrao_plataforma"
+        },
+        "restricoes": {
+          "estado": "verificado",
+          "evidencias": [
+            {
+              "fonte": "src:mdapi-helpsettings"
+            }
+          ],
+          "valor": "Até 255 caracteres; URL válida."
+        },
+        "tipo_tecnico": "string"
+      }
+    ],
+    "recomendacoes": [],
+    "setup": {
+      "estado": "desconhecido",
+      "nota": "Caminho no Setup não validado nesta sessão."
+    },
+    "suporte_cli": {
+      "estado": "verificado",
+      "evidencias": [
+        {
+          "fonte": "src:sdr-metadata-support"
+        }
+      ],
+      "nota": "Suporte do Salesforce CLI (source-deploy-retrieve), não do Metadata API em geral.",
+      "valor": {
+        "nota_fonte": null,
+        "status": "suportado"
+      }
+    }
+  },
+  "nota": "Gerado deterministicamente a partir de catalogo/. Não editar à mão.",
+  "objetos_relacionados": [],
+  "relacionamentos": [],
+  "versao_base": {
+    "api_version": "68.0",
+    "data_referencia": "2026-11-07",
+    "escopo": "config/escopo.json",
+    "release": "Winter '27"
+  }
+}

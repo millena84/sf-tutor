@@ -7,12 +7,13 @@ Gerado por `ferramentas/sftutor.py cobertura`. Cobertura estrutural, explicativa
 
 - Universo v68 (METADATA_SUPPORT.md): **993** tipos.
 - Classificados como incluídos no recorte Core: 154; pendentes de classificação: 646.
-- Cadastrados: **163** de 993. Estruturalmente completos (contra a página oficial): 163. Completos nas três dimensões: 0.
+- Cadastrados: **179** de 993. Estruturalmente completos (contra a página oficial): 179. Completos nas três dimensões: 0.
 - Porcentagem do recorte Core: não calculada, porque o denominador do recorte ainda não está definido (classificação item a item pendente).
 
 | Tipo | Estrutural | Esperadas | Presentes | Explicadas | Estruturas | Mapeamento | Completo |
 |---|---|---|---|---|---|---|---|
 | mdt:AccountSettings | completa | 9 | 9 | 9 | 0 | parcial | não |
+| mdt:ActionsSettings | completa | 6 | 6 | 6 | 0 | parcial | não |
 | mdt:ApexClass | completa | 5 | 5 | 5 | 1 | parcial | não |
 | mdt:ApexComponent | completa | 6 | 6 | 6 | 1 | parcial | não |
 | mdt:ApexPage | completa | 8 | 8 | 8 | 1 | parcial | não |
@@ -33,6 +34,7 @@ Gerado por `ferramentas/sftutor.py cobertura`. Cobertura estrutural, explicativa
 | mdt:CaseSettings | completa | 53 | 53 | 53 | 3 | parcial | não |
 | mdt:Certificate | completa | 8 | 8 | 8 | 0 | parcial | não |
 | mdt:ChatterSettings | completa | 17 | 17 | 17 | 0 | parcial | não |
+| mdt:CodeBuilderSettings | completa | 2 | 2 | 2 | 0 | parcial | não |
 | mdt:CommunitiesSettings | completa | 26 | 26 | 23 | 0 | parcial | não |
 | mdt:CompactLayout | completa | 3 | 3 | 3 | 0 | parcial | não |
 | mdt:CompanySettings | completa | 3 | 3 | 3 | 1 | parcial | não |
@@ -43,6 +45,7 @@ Gerado por `ferramentas/sftutor.py cobertura`. Cobertura estrutural, explicativa
 | mdt:CorsWhitelistOrigin | completa | 2 | 2 | 2 | 0 | parcial | não |
 | mdt:CspTrustedSite | completa | 14 | 14 | 14 | 0 | parcial | não |
 | mdt:CurrencySettings | completa | 8 | 8 | 8 | 1 | parcial | não |
+| mdt:CustomAddressFieldSettings | completa | 2 | 2 | 2 | 0 | parcial | não |
 | mdt:CustomApplication | completa | 23 | 23 | 23 | 6 | parcial | não |
 | mdt:CustomField | completa | 60 | 60 | 60 | 4 | parcial | não |
 | mdt:CustomLabels | completa | 2 | 2 | 2 | 1 | parcial | não |
@@ -53,12 +56,16 @@ Gerado por `ferramentas/sftutor.py cobertura`. Cobertura estrutural, explicativa
 | mdt:CustomTab | completa | 17 | 17 | 17 | 1 | parcial | não |
 | mdt:Dashboard | completa | 26 | 26 | 26 | 3 | parcial | não |
 | mdt:DashboardFolder | completa | 5 | 5 | 5 | 1 | parcial | não |
+| mdt:DataImportManagementSettings | completa | 2 | 2 | 2 | 0 | parcial | não |
 | mdt:DeploymentSettings | completa | 2 | 2 | 2 | 0 | parcial | não |
 | mdt:DevHubSettings | completa | 10 | 10 | 10 | 0 | parcial | não |
 | mdt:Document | completa | 7 | 7 | 7 | 0 | parcial | não |
 | mdt:DuplicateRule | completa | 13 | 13 | 13 | 2 | parcial | não |
+| mdt:DynamicFormsSettings | completa | 1 | 1 | 1 | 0 | parcial | não |
 | mdt:EinsteinGptSettings | completa | 11 | 11 | 11 | 0 | parcial | não |
 | mdt:EmailTemplate | completa | 17 | 17 | 17 | 2 | parcial | não |
+| mdt:EmailTemplateSettings | completa | 1 | 1 | 1 | 0 | parcial | não |
+| mdt:EnhancedNotesSettings | completa | 2 | 2 | 2 | 0 | parcial | não |
 | mdt:EntitlementProcess | completa | 14 | 14 | 14 | 2 | parcial | não |
 | mdt:EntitlementSettings | completa | 13 | 13 | 13 | 0 | parcial | não |
 | mdt:EntitlementTemplate | completa | 7 | 7 | 7 | 0 | parcial | não |
@@ -91,11 +98,14 @@ Gerado por `ferramentas/sftutor.py cobertura`. Cobertura estrutural, explicativa
 | mdt:GenAiPlugin | completa | 12 | 12 | 12 | 3 | parcial | não |
 | mdt:GenAiPromptTemplate | completa | 11 | 11 | 11 | 1 | parcial | não |
 | mdt:Group | completa | 4 | 4 | 4 | 0 | parcial | não |
+| mdt:HelpSettings | completa | 1 | 1 | 1 | 0 | parcial | não |
+| mdt:IframeWhiteListUrlSettings | completa | 1 | 1 | 1 | 1 | parcial | não |
 | mdt:InboundCertificate | completa | 4 | 4 | 4 | 0 | parcial | não |
 | mdt:InboundNetworkConnection | completa | 7 | 7 | 7 | 1 | parcial | não |
 | mdt:Index | completa | 3 | 3 | 3 | 1 | parcial | não |
 | mdt:IndustriesSettings | completa | 191 | 191 | 191 | 0 | parcial | não |
 | mdt:InstalledPackage | completa | 4 | 4 | 4 | 0 | parcial | não |
+| mdt:InvocableActionSettings | completa | 2 | 2 | 2 | 0 | parcial | não |
 | mdt:KnowledgeSettings | completa | 23 | 23 | 23 | 4 | parcial | não |
 | mdt:LanguageSettings | completa | 13 | 13 | 13 | 0 | parcial | não |
 | mdt:Layout | completa | 24 | 24 | 24 | 9 | parcial | não |
@@ -106,10 +116,12 @@ Gerado por `ferramentas/sftutor.py cobertura`. Cobertura estrutural, explicativa
 | mdt:LightningExperienceSettings | completa | 42 | 42 | 42 | 0 | parcial | não |
 | mdt:LightningExperienceTheme | completa | 6 | 6 | 6 | 0 | parcial | não |
 | mdt:ListView | completa | 10 | 10 | 10 | 2 | parcial | não |
+| mdt:MacroSettings | completa | 3 | 3 | 3 | 0 | parcial | não |
 | mdt:ManagedEventSubscription | completa | 7 | 7 | 7 | 0 | parcial | não |
 | mdt:MatchingRules | completa | 2 | 2 | 2 | 1 | parcial | não |
 | mdt:MilestoneType | completa | 3 | 3 | 3 | 0 | parcial | não |
 | mdt:MyDomainSettings | completa | 32 | 32 | 29 | 0 | parcial | não |
+| mdt:NameSettings | completa | 4 | 4 | 4 | 0 | parcial | não |
 | mdt:NamedCredential | completa | 31 | 31 | 31 | 1 | parcial | não |
 | mdt:NavigationMenu | completa | 5 | 5 | 5 | 1 | parcial | não |
 | mdt:Network | completa | 71 | 71 | 71 | 11 | parcial | não |
@@ -124,6 +136,7 @@ Gerado por `ferramentas/sftutor.py cobertura`. Cobertura estrutural, explicativa
 | mdt:PathAssistantSettings | completa | 4 | 4 | 4 | 0 | parcial | não |
 | mdt:PermissionSet | completa | 24 | 24 | 24 | 18 | parcial | não |
 | mdt:PermissionSetGroup | completa | 7 | 7 | 7 | 0 | parcial | não |
+| mdt:PicklistSettings | completa | 2 | 2 | 2 | 0 | parcial | não |
 | mdt:PicklistValue | completa | 15 | 15 | 15 | 0 | parcial | não |
 | mdt:PlatformEventChannel | completa | 5 | 5 | 5 | 1 | parcial | não |
 | mdt:PlatformEventChannelMember | completa | 5 | 5 | 5 | 1 | parcial | não |
@@ -139,6 +152,7 @@ Gerado por `ferramentas/sftutor.py cobertura`. Cobertura estrutural, explicativa
 | mdt:QueueRoutingConfig | completa | 15 | 15 | 15 | 1 | parcial | não |
 | mdt:QuickAction | completa | 22 | 22 | 22 | 3 | parcial | não |
 | mdt:QuoteSettings | completa | 2 | 2 | 2 | 0 | parcial | não |
+| mdt:RecordPageSettings | completa | 4 | 4 | 4 | 0 | parcial | não |
 | mdt:RecordType | completa | 7 | 7 | 7 | 1 | parcial | não |
 | mdt:RegisteredExternalService | completa | 11 | 11 | 11 | 0 | parcial | não |
 | mdt:RemoteSiteSetting | completa | 5 | 5 | 5 | 0 | parcial | não |
@@ -148,6 +162,8 @@ Gerado por `ferramentas/sftutor.py cobertura`. Cobertura estrutural, explicativa
 | mdt:RevenueManagementSettings | completa | 20 | 20 | 20 | 0 | parcial | não |
 | mdt:Role | completa | 8 | 8 | 8 | 0 | parcial | não |
 | mdt:SamlSsoConfig | completa | 26 | 26 | 26 | 0 | parcial | não |
+| mdt:SandboxSettings | completa | 2 | 2 | 2 | 0 | parcial | não |
+| mdt:SchemaSettings | completa | 5 | 5 | 5 | 0 | parcial | não |
 | mdt:ServiceChannel | completa | 19 | 19 | 19 | 1 | parcial | não |
 | mdt:ServicePresenceStatus | completa | 3 | 3 | 3 | 1 | parcial | não |
 | mdt:SharingCriteriaRule | completa | 9 | 9 | 9 | 3 | parcial | não |
@@ -178,8 +194,8 @@ Gerado por `ferramentas/sftutor.py cobertura`. Cobertura estrutural, explicativa
 
 ## Propriedades XML
 
-- Em metadata types: 2254 listadas, 2223 explicadas.
-- Em estruturas auxiliares: 2240 listadas, 2240 explicadas.
+- Em metadata types: 2294 listadas, 2263 explicadas.
+- Em estruturas auxiliares: 2242 listadas, 2242 explicadas.
 - Universo total: Sem WSDL não há denominador confiável do total de propriedades do recorte.
 
 ## Objetos consultáveis via API
@@ -282,4 +298,4 @@ Gerado por `ferramentas/sftutor.py cobertura`. Cobertura estrutural, explicativa
 ## Taxonomia e funcionalidades
 
 - Classificações: 14; subclassificações: 92 (com funcionalidades: 91).
-- Funcionalidades cadastradas: 138 (universo de funcionalidades não definido).
+- Funcionalidades cadastradas: 144 (universo de funcionalidades não definido).

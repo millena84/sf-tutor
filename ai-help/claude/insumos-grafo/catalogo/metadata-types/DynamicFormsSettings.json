@@ -1,0 +1,170 @@
+{
+  "id": "mdt:DynamicFormsSettings",
+  "nome": "DynamicFormsSettings",
+  "o_que_e": "Configurações do Dynamic Forms, que monta a página de registro com campos e seções colocados um a um.",
+  "finalidade": "Recuperar e implantar se o Dynamic Forms no app móvel está ligado.",
+  "estende": "Metadata",
+  "arquivos": {
+    "source_format": {
+      "estado": "verificado",
+      "valor": {
+        "pasta": "settings/",
+        "arquivo": "DynamicForms.settings-meta.xml"
+      },
+      "nota": "Pasta e sufixo do tipo genérico Settings no registro do Salesforce CLI; o nome-base do arquivo vem da página do tipo.",
+      "evidencias": [
+        {
+          "fonte": "src:sdr-registry",
+          "nota": "types.settings"
+        },
+        {
+          "fonte": "src:mdapi-dynamicformssettings"
+        }
+      ]
+    },
+    "metadata_api_format": {
+      "estado": "verificado",
+      "valor": {
+        "pasta": "settings/",
+        "arquivo": "DynamicForms.settings"
+      },
+      "nota": "Um único arquivo; no package.xml, o tipo é Settings e o membro é DynamicForms.",
+      "evidencias": [
+        {
+          "fonte": "src:mdapi-dynamicformssettings"
+        }
+      ]
+    },
+    "curinga_package_xml": {
+      "estado": "verificado",
+      "valor": false,
+      "evidencias": [
+        {
+          "fonte": "src:mdapi-dynamicformssettings"
+        }
+      ]
+    }
+  },
+  "disponibilidade": {
+    "desde_versao": "58.0",
+    "ate_versao": null,
+    "estado": "verificado"
+  },
+  "suporte_cli": {
+    "estado": "verificado",
+    "valor": {
+      "status": "suportado",
+      "nota_fonte": null
+    },
+    "nota": "Suporte do Salesforce CLI (source-deploy-retrieve), não do Metadata API em geral.",
+    "evidencias": [
+      {
+        "fonte": "src:sdr-metadata-support"
+      }
+    ]
+  },
+  "setup": {
+    "estado": "desconhecido",
+    "nota": "Caminho no Setup não validado nesta sessão."
+  },
+  "propriedades": [
+    {
+      "id": "mdt:DynamicFormsSettings.enableFormsOnMobile",
+      "nome": "enableFormsOnMobile",
+      "tipo_tecnico": "boolean",
+      "o_que_e": "Indica se o Dynamic Forms para mobile está ligado na org.",
+      "origem": {
+        "estado": "verificado",
+        "valor": "padrao_plataforma",
+        "nota": "Propriedade definida pelo schema da Metadata API.",
+        "evidencias": [
+          {
+            "fonte": "src:mdapi-dynamicformssettings"
+          }
+        ]
+      },
+      "obrigatoriedade": {
+        "valor": "nao",
+        "estado": "desconhecido",
+        "condicao": "A documentação 68.0 não marca o campo como obrigatório; ausência de marcação não comprova opcionalidade (confirmar no WSDL)."
+      },
+      "default": {
+        "forma": "nao_declarado_na_fonte",
+        "estado": "desconhecido"
+      },
+      "dominio": {
+        "natureza": "booleano",
+        "valores": [
+          {
+            "valor": "true"
+          },
+          {
+            "valor": "false"
+          }
+        ],
+        "lista_completa": "sim",
+        "estado": "verificado",
+        "evidencias": [
+          {
+            "fonte": "src:mdapi-dynamicformssettings"
+          }
+        ]
+      },
+      "disponibilidade": {
+        "desde_versao": null,
+        "ate_versao": null,
+        "estado": "desconhecido"
+      },
+      "explicacao": "explicada",
+      "estado": "verificado",
+      "evidencias": [
+        {
+          "fonte": "src:mdapi-dynamicformssettings"
+        }
+      ],
+      "notas": [
+        "A página marca o recurso como Beta, sujeito aos termos de Beta Services."
+      ]
+    }
+  ],
+  "estruturas": [],
+  "cobertura": {
+    "estrutural": {
+      "estado": "completa",
+      "esperado": 1,
+      "presente": 1,
+      "nota": "Universo esperado = tabela Fields da página 264.0 (1 campo), lida em 2026-11-23. A leitura não registrou se a página declara fullName herdado; por isso ele não entrou."
+    },
+    "explicativa": {
+      "estado": "completa",
+      "esperado": 1,
+      "presente": 1
+    },
+    "mapeamento": {
+      "estado": "parcial",
+      "nota": "Correspondências registradas apenas onde há evidência; demais pendentes."
+    }
+  },
+  "recomendacoes": [],
+  "alertas": [
+    "No package.xml, use o tipo Settings com o nome-base do arquivo como membro; o curinga só vale para recuperar todas as configurações."
+  ],
+  "divergencias_documentais": [],
+  "estado": "verificado",
+  "evidencias": [
+    {
+      "fonte": "src:mdapi-dynamicformssettings"
+    },
+    {
+      "fonte": "src:sdr-registry"
+    },
+    {
+      "fonte": "src:sdr-metadata-support"
+    }
+  ],
+  "exemplo_xml": {
+    "xml": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<DynamicFormsSettings xmlns=\"http://soap.sforce.com/2006/04/metadata\">\n    <enableFormsOnMobile>true</enableFormsOnMobile>\n</DynamicFormsSettings>",
+    "natureza": "didatico_projeto",
+    "nota": "Exemplo escrito pelo projeto apenas com elementos documentados; sem dados reais."
+  }
+}
