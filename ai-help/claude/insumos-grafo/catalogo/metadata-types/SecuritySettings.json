@@ -1,0 +1,1270 @@
+{
+  "id": "mdt:SecuritySettings",
+  "nome": "SecuritySettings",
+  "o_que_e": "Configurações de segurança da org: faixas de IP confiáveis, regras de senha e login, sessão, cabeçalhos de segurança e SSO.",
+  "finalidade": "Recuperar e implantar a política de segurança da org, em vez de repetir à mão as telas de Network Access, Password Policies e Session Settings.",
+  "estende": "Metadata",
+  "arquivos": {
+    "source_format": {
+      "estado": "verificado",
+      "valor": {
+        "pasta": "settings/",
+        "arquivo": "Security.settings-meta.xml"
+      },
+      "nota": "Pasta e sufixo do tipo genérico Settings no registro do Salesforce CLI; o nome-base do arquivo vem da página do tipo.",
+      "evidencias": [
+        {
+          "fonte": "src:sdr-registry",
+          "nota": "types.settings"
+        },
+        {
+          "fonte": "src:mdapi-securitysettings"
+        }
+      ]
+    },
+    "metadata_api_format": {
+      "estado": "verificado",
+      "valor": {
+        "pasta": "settings/",
+        "arquivo": "Security.settings"
+      },
+      "nota": "Um único arquivo; no package.xml, o tipo é Settings e o membro é Security.",
+      "evidencias": [
+        {
+          "fonte": "src:mdapi-securitysettings"
+        }
+      ]
+    },
+    "curinga_package_xml": {
+      "estado": "verificado",
+      "valor": false,
+      "evidencias": [
+        {
+          "fonte": "src:mdapi-securitysettings"
+        }
+      ]
+    }
+  },
+  "disponibilidade": {
+    "desde_versao": "27.0",
+    "ate_versao": null,
+    "estado": "verificado"
+  },
+  "suporte_cli": {
+    "estado": "verificado",
+    "valor": {
+      "status": "suportado",
+      "nota_fonte": null
+    },
+    "nota": "Suporte do Salesforce CLI (source-deploy-retrieve), não do Metadata API em geral.",
+    "evidencias": [
+      {
+        "fonte": "src:sdr-metadata-support"
+      }
+    ]
+  },
+  "setup": {
+    "estado": "desconhecido",
+    "nota": "Caminho no Setup não validado nesta sessão."
+  },
+  "propriedades": [
+    {
+      "id": "mdt:SecuritySettings.canUsersGrantLoginAccess",
+      "nome": "canUsersGrantLoginAccess",
+      "tipo_tecnico": "boolean",
+      "o_que_e": "Define se os usuários podem dar acesso de login ao Suporte; se não, só administradores.",
+      "origem": {
+        "estado": "verificado",
+        "valor": "padrao_plataforma",
+        "nota": "Propriedade definida pelo schema da Metadata API.",
+        "evidencias": [
+          {
+            "fonte": "src:mdapi-securitysettings"
+          }
+        ]
+      },
+      "obrigatoriedade": {
+        "valor": "nao",
+        "estado": "desconhecido",
+        "condicao": "A documentação 68.0 não marca o campo como obrigatório; ausência de marcação não comprova opcionalidade (confirmar no WSDL)."
+      },
+      "default": {
+        "forma": "nao_declarado_na_fonte",
+        "estado": "desconhecido"
+      },
+      "dominio": {
+        "natureza": "booleano",
+        "valores": [
+          {
+            "valor": "true"
+          },
+          {
+            "valor": "false"
+          }
+        ],
+        "lista_completa": "sim",
+        "estado": "verificado",
+        "evidencias": [
+          {
+            "fonte": "src:mdapi-securitysettings"
+          }
+        ]
+      },
+      "disponibilidade": {
+        "desde_versao": null,
+        "ate_versao": null,
+        "estado": "desconhecido"
+      },
+      "explicacao": "explicada",
+      "estado": "verificado",
+      "evidencias": [
+        {
+          "fonte": "src:mdapi-securitysettings"
+        }
+      ]
+    },
+    {
+      "id": "mdt:SecuritySettings.enableAdminLoginAsAnyUser",
+      "nome": "enableAdminLoginAsAnyUser",
+      "tipo_tecnico": "boolean",
+      "o_que_e": "Permite que administradores entrem como qualquer usuário.",
+      "origem": {
+        "estado": "verificado",
+        "valor": "padrao_plataforma",
+        "nota": "Propriedade definida pelo schema da Metadata API.",
+        "evidencias": [
+          {
+            "fonte": "src:mdapi-securitysettings"
+          }
+        ]
+      },
+      "obrigatoriedade": {
+        "valor": "nao",
+        "estado": "desconhecido",
+        "condicao": "A documentação 68.0 não marca o campo como obrigatório; ausência de marcação não comprova opcionalidade (confirmar no WSDL)."
+      },
+      "default": {
+        "forma": "false",
+        "estado": "verificado",
+        "evidencias": [
+          {
+            "fonte": "src:mdapi-securitysettings"
+          }
+        ],
+        "valor": false,
+        "nota": "A página declara default false."
+      },
+      "dominio": {
+        "natureza": "booleano",
+        "valores": [
+          {
+            "valor": "true"
+          },
+          {
+            "valor": "false"
+          }
+        ],
+        "lista_completa": "sim",
+        "estado": "verificado",
+        "evidencias": [
+          {
+            "fonte": "src:mdapi-securitysettings"
+          }
+        ]
+      },
+      "disponibilidade": {
+        "desde_versao": null,
+        "ate_versao": null,
+        "estado": "desconhecido"
+      },
+      "explicacao": "explicada",
+      "estado": "verificado",
+      "evidencias": [
+        {
+          "fonte": "src:mdapi-securitysettings"
+        }
+      ]
+    },
+    {
+      "id": "mdt:SecuritySettings.enableAuditFieldsInactiveOwner",
+      "nome": "enableAuditFieldsInactiveOwner",
+      "tipo_tecnico": "boolean",
+      "o_que_e": "Liga a edição de campos de auditoria e a troca de dono para usuários inativos.",
+      "origem": {
+        "estado": "verificado",
+        "valor": "padrao_plataforma",
+        "nota": "Propriedade definida pelo schema da Metadata API.",
+        "evidencias": [
+          {
+            "fonte": "src:mdapi-securitysettings"
+          }
+        ]
+      },
+      "obrigatoriedade": {
+        "valor": "nao",
+        "estado": "desconhecido",
+        "condicao": "A documentação 68.0 não marca o campo como obrigatório; ausência de marcação não comprova opcionalidade (confirmar no WSDL)."
+      },
+      "default": {
+        "forma": "false",
+        "estado": "verificado",
+        "evidencias": [
+          {
+            "fonte": "src:mdapi-securitysettings"
+          }
+        ],
+        "valor": false,
+        "nota": "A página declara default false."
+      },
+      "dominio": {
+        "natureza": "booleano",
+        "valores": [
+          {
+            "valor": "true"
+          },
+          {
+            "valor": "false"
+          }
+        ],
+        "lista_completa": "sim",
+        "estado": "verificado",
+        "evidencias": [
+          {
+            "fonte": "src:mdapi-securitysettings"
+          }
+        ]
+      },
+      "disponibilidade": {
+        "desde_versao": "47.0",
+        "ate_versao": null,
+        "estado": "verificado"
+      },
+      "explicacao": "explicada",
+      "estado": "verificado",
+      "evidencias": [
+        {
+          "fonte": "src:mdapi-securitysettings"
+        }
+      ]
+    },
+    {
+      "id": "mdt:SecuritySettings.enableAuraSecureEvalPref",
+      "nome": "enableAuraSecureEvalPref",
+      "tipo_tecnico": "boolean",
+      "o_que_e": "Impede funções dinâmicas em componentes Aura criados em tempo de execução.",
+      "origem": {
+        "estado": "verificado",
+        "valor": "padrao_plataforma",
+        "nota": "Propriedade definida pelo schema da Metadata API.",
+        "evidencias": [
+          {
+            "fonte": "src:mdapi-securitysettings"
+          }
+        ]
+      },
+      "obrigatoriedade": {
+        "valor": "nao",
+        "estado": "desconhecido",
+        "condicao": "A documentação 68.0 não marca o campo como obrigatório; ausência de marcação não comprova opcionalidade (confirmar no WSDL)."
+      },
+      "default": {
+        "forma": "false",
+        "estado": "verificado",
+        "evidencias": [
+          {
+            "fonte": "src:mdapi-securitysettings"
+          }
+        ],
+        "valor": false,
+        "nota": "A página declara default false."
+      },
+      "dominio": {
+        "natureza": "booleano",
+        "valores": [
+          {
+            "valor": "true"
+          },
+          {
+            "valor": "false"
+          }
+        ],
+        "lista_completa": "sim",
+        "estado": "verificado",
+        "evidencias": [
+          {
+            "fonte": "src:mdapi-securitysettings"
+          }
+        ]
+      },
+      "disponibilidade": {
+        "desde_versao": "47.0",
+        "ate_versao": null,
+        "estado": "verificado"
+      },
+      "explicacao": "explicada",
+      "estado": "verificado",
+      "evidencias": [
+        {
+          "fonte": "src:mdapi-securitysettings"
+        }
+      ]
+    },
+    {
+      "id": "mdt:SecuritySettings.enableCoepHeader",
+      "nome": "enableCoepHeader",
+      "tipo_tecnico": "boolean",
+      "o_que_e": "Aplica o cabeçalho COEP às páginas Visualforce customizadas.",
+      "origem": {
+        "estado": "verificado",
+        "valor": "padrao_plataforma",
+        "nota": "Propriedade definida pelo schema da Metadata API.",
+        "evidencias": [
+          {
+            "fonte": "src:mdapi-securitysettings"
+          }
+        ]
+      },
+      "obrigatoriedade": {
+        "valor": "nao",
+        "estado": "desconhecido",
+        "condicao": "A documentação 68.0 não marca o campo como obrigatório; ausência de marcação não comprova opcionalidade (confirmar no WSDL)."
+      },
+      "default": {
+        "forma": "false",
+        "estado": "verificado",
+        "evidencias": [
+          {
+            "fonte": "src:mdapi-securitysettings"
+          }
+        ],
+        "valor": false,
+        "nota": "A página declara default false."
+      },
+      "dominio": {
+        "natureza": "booleano",
+        "valores": [
+          {
+            "valor": "true"
+          },
+          {
+            "valor": "false"
+          }
+        ],
+        "lista_completa": "sim",
+        "estado": "verificado",
+        "evidencias": [
+          {
+            "fonte": "src:mdapi-securitysettings"
+          }
+        ]
+      },
+      "disponibilidade": {
+        "desde_versao": "55.0",
+        "ate_versao": null,
+        "estado": "verificado"
+      },
+      "explicacao": "explicada",
+      "estado": "verificado",
+      "evidencias": [
+        {
+          "fonte": "src:mdapi-securitysettings"
+        }
+      ]
+    },
+    {
+      "id": "mdt:SecuritySettings.enableCoopHeader",
+      "nome": "enableCoopHeader",
+      "tipo_tecnico": "boolean",
+      "o_que_e": "Aplica o cabeçalho COOP às páginas Visualforce customizadas.",
+      "origem": {
+        "estado": "verificado",
+        "valor": "padrao_plataforma",
+        "nota": "Propriedade definida pelo schema da Metadata API.",
+        "evidencias": [
+          {
+            "fonte": "src:mdapi-securitysettings"
+          }
+        ]
+      },
+      "obrigatoriedade": {
+        "valor": "nao",
+        "estado": "desconhecido",
+        "condicao": "A documentação 68.0 não marca o campo como obrigatório; ausência de marcação não comprova opcionalidade (confirmar no WSDL)."
+      },
+      "default": {
+        "forma": "false",
+        "estado": "verificado",
+        "evidencias": [
+          {
+            "fonte": "src:mdapi-securitysettings"
+          }
+        ],
+        "valor": false,
+        "nota": "A página declara default false."
+      },
+      "dominio": {
+        "natureza": "booleano",
+        "valores": [
+          {
+            "valor": "true"
+          },
+          {
+            "valor": "false"
+          }
+        ],
+        "lista_completa": "sim",
+        "estado": "verificado",
+        "evidencias": [
+          {
+            "fonte": "src:mdapi-securitysettings"
+          }
+        ]
+      },
+      "disponibilidade": {
+        "desde_versao": "55.0",
+        "ate_versao": null,
+        "estado": "verificado"
+      },
+      "explicacao": "explicada",
+      "estado": "verificado",
+      "evidencias": [
+        {
+          "fonte": "src:mdapi-securitysettings"
+        }
+      ]
+    },
+    {
+      "id": "mdt:SecuritySettings.enableCrossOrgRedirects",
+      "nome": "enableCrossOrgRedirects",
+      "tipo_tecnico": "boolean",
+      "o_que_e": "Permitia redirecionar usuários para outras orgs; sempre false desde o Summer '24.",
+      "origem": {
+        "estado": "verificado",
+        "valor": "padrao_plataforma",
+        "nota": "Propriedade definida pelo schema da Metadata API.",
+        "evidencias": [
+          {
+            "fonte": "src:mdapi-securitysettings"
+          }
+        ]
+      },
+      "obrigatoriedade": {
+        "valor": "nao",
+        "estado": "desconhecido",
+        "condicao": "A documentação 68.0 não marca o campo como obrigatório; ausência de marcação não comprova opcionalidade (confirmar no WSDL)."
+      },
+      "default": {
+        "forma": "nao_declarado_na_fonte",
+        "estado": "desconhecido"
+      },
+      "dominio": {
+        "natureza": "booleano",
+        "valores": [
+          {
+            "valor": "true"
+          },
+          {
+            "valor": "false"
+          }
+        ],
+        "lista_completa": "sim",
+        "estado": "verificado",
+        "evidencias": [
+          {
+            "fonte": "src:mdapi-securitysettings"
+          }
+        ]
+      },
+      "disponibilidade": {
+        "desde_versao": "59.0",
+        "ate_versao": "60.0",
+        "estado": "verificado"
+      },
+      "explicacao": "explicada",
+      "estado": "verificado",
+      "evidencias": [
+        {
+          "fonte": "src:mdapi-securitysettings"
+        }
+      ]
+    },
+    {
+      "id": "mdt:SecuritySettings.enableGraphQLApiGuestUserAccess",
+      "nome": "enableGraphQLApiGuestUserAccess",
+      "tipo_tecnico": "boolean",
+      "o_que_e": "Permite que usuários guest, sem autenticação, usem a GraphQL API.",
+      "origem": {
+        "estado": "verificado",
+        "valor": "padrao_plataforma",
+        "nota": "Propriedade definida pelo schema da Metadata API.",
+        "evidencias": [
+          {
+            "fonte": "src:mdapi-securitysettings"
+          }
+        ]
+      },
+      "obrigatoriedade": {
+        "valor": "nao",
+        "estado": "desconhecido",
+        "condicao": "A documentação 68.0 não marca o campo como obrigatório; ausência de marcação não comprova opcionalidade (confirmar no WSDL)."
+      },
+      "default": {
+        "forma": "false",
+        "estado": "verificado",
+        "evidencias": [
+          {
+            "fonte": "src:mdapi-securitysettings"
+          }
+        ],
+        "valor": false,
+        "nota": "A página declara default false."
+      },
+      "dominio": {
+        "natureza": "booleano",
+        "valores": [
+          {
+            "valor": "true"
+          },
+          {
+            "valor": "false"
+          }
+        ],
+        "lista_completa": "sim",
+        "estado": "verificado",
+        "evidencias": [
+          {
+            "fonte": "src:mdapi-securitysettings"
+          }
+        ]
+      },
+      "disponibilidade": {
+        "desde_versao": "68.0",
+        "ate_versao": null,
+        "estado": "verificado"
+      },
+      "explicacao": "explicada",
+      "estado": "verificado",
+      "evidencias": [
+        {
+          "fonte": "src:mdapi-securitysettings"
+        }
+      ]
+    },
+    {
+      "id": "mdt:SecuritySettings.enablePermissionsPolicy",
+      "nome": "enablePermissionsPolicy",
+      "tipo_tecnico": "boolean",
+      "o_que_e": "Inclui o cabeçalho Permissions-Policy, que controla recursos do navegador.",
+      "origem": {
+        "estado": "verificado",
+        "valor": "padrao_plataforma",
+        "nota": "Propriedade definida pelo schema da Metadata API.",
+        "evidencias": [
+          {
+            "fonte": "src:mdapi-securitysettings"
+          }
+        ]
+      },
+      "obrigatoriedade": {
+        "valor": "nao",
+        "estado": "desconhecido",
+        "condicao": "A documentação 68.0 não marca o campo como obrigatório; ausência de marcação não comprova opcionalidade (confirmar no WSDL)."
+      },
+      "default": {
+        "forma": "false",
+        "estado": "verificado",
+        "evidencias": [
+          {
+            "fonte": "src:mdapi-securitysettings"
+          }
+        ],
+        "valor": false,
+        "nota": "A página declara default false."
+      },
+      "dominio": {
+        "natureza": "booleano",
+        "valores": [
+          {
+            "valor": "true"
+          },
+          {
+            "valor": "false"
+          }
+        ],
+        "lista_completa": "sim",
+        "estado": "verificado",
+        "evidencias": [
+          {
+            "fonte": "src:mdapi-securitysettings"
+          }
+        ]
+      },
+      "disponibilidade": {
+        "desde_versao": "59.0",
+        "ate_versao": null,
+        "estado": "verificado"
+      },
+      "explicacao": "explicada",
+      "estado": "verificado",
+      "evidencias": [
+        {
+          "fonte": "src:mdapi-securitysettings"
+        }
+      ]
+    },
+    {
+      "id": "mdt:SecuritySettings.enableRequireHttpsConnection",
+      "nome": "enableRequireHttpsConnection",
+      "tipo_tecnico": "boolean",
+      "o_que_e": "Obsoleto: tratava da exigência de HTTPS.",
+      "origem": {
+        "estado": "verificado",
+        "valor": "padrao_plataforma",
+        "nota": "Propriedade definida pelo schema da Metadata API.",
+        "evidencias": [
+          {
+            "fonte": "src:mdapi-securitysettings"
+          }
+        ]
+      },
+      "obrigatoriedade": {
+        "valor": "nao",
+        "estado": "desconhecido",
+        "condicao": "A documentação 68.0 não marca o campo como obrigatório; ausência de marcação não comprova opcionalidade (confirmar no WSDL)."
+      },
+      "default": {
+        "forma": "nao_declarado_na_fonte",
+        "estado": "desconhecido"
+      },
+      "dominio": {
+        "natureza": "booleano",
+        "valores": [
+          {
+            "valor": "true"
+          },
+          {
+            "valor": "false"
+          }
+        ],
+        "lista_completa": "sim",
+        "estado": "verificado",
+        "evidencias": [
+          {
+            "fonte": "src:mdapi-securitysettings"
+          }
+        ]
+      },
+      "disponibilidade": {
+        "desde_versao": null,
+        "ate_versao": null,
+        "estado": "desconhecido"
+      },
+      "explicacao": "explicada",
+      "estado": "verificado",
+      "evidencias": [
+        {
+          "fonte": "src:mdapi-securitysettings"
+        }
+      ],
+      "notas": [
+        "A página diz que o campo está obsoleto na API 47.0 e posteriores."
+      ]
+    },
+    {
+      "id": "mdt:SecuritySettings.grantCameraAccess",
+      "nome": "grantCameraAccess",
+      "tipo_tecnico": "PermissionsPolicy",
+      "o_que_e": "Quando apps e sites podem usar a câmera.",
+      "origem": {
+        "estado": "verificado",
+        "valor": "padrao_plataforma",
+        "nota": "Propriedade definida pelo schema da Metadata API.",
+        "evidencias": [
+          {
+            "fonte": "src:mdapi-securitysettings"
+          }
+        ]
+      },
+      "obrigatoriedade": {
+        "valor": "nao",
+        "estado": "desconhecido",
+        "condicao": "A documentação 68.0 não marca o campo como obrigatório; ausência de marcação não comprova opcionalidade (confirmar no WSDL)."
+      },
+      "default": {
+        "forma": "nao_declarado_na_fonte",
+        "estado": "desconhecido"
+      },
+      "dominio": {
+        "natureza": "enum_fechado",
+        "valores": [
+          {
+            "valor": "Always",
+            "significado": "sempre"
+          },
+          {
+            "valor": "Never",
+            "significado": "nunca"
+          },
+          {
+            "valor": "TrustedUrls",
+            "significado": "só URLs confiáveis"
+          }
+        ],
+        "lista_completa": "sim",
+        "estado": "verificado",
+        "evidencias": [
+          {
+            "fonte": "src:mdapi-securitysettings"
+          }
+        ]
+      },
+      "disponibilidade": {
+        "desde_versao": "59.0",
+        "ate_versao": null,
+        "estado": "verificado"
+      },
+      "explicacao": "explicada",
+      "estado": "verificado",
+      "evidencias": [
+        {
+          "fonte": "src:mdapi-securitysettings"
+        }
+      ]
+    },
+    {
+      "id": "mdt:SecuritySettings.grantMicrophoneAccess",
+      "nome": "grantMicrophoneAccess",
+      "tipo_tecnico": "PermissionsPolicy",
+      "o_que_e": "Quando apps e sites podem usar o microfone.",
+      "origem": {
+        "estado": "verificado",
+        "valor": "padrao_plataforma",
+        "nota": "Propriedade definida pelo schema da Metadata API.",
+        "evidencias": [
+          {
+            "fonte": "src:mdapi-securitysettings"
+          }
+        ]
+      },
+      "obrigatoriedade": {
+        "valor": "nao",
+        "estado": "desconhecido",
+        "condicao": "A documentação 68.0 não marca o campo como obrigatório; ausência de marcação não comprova opcionalidade (confirmar no WSDL)."
+      },
+      "default": {
+        "forma": "nao_declarado_na_fonte",
+        "estado": "desconhecido"
+      },
+      "dominio": {
+        "natureza": "enum_fechado",
+        "valores": [
+          {
+            "valor": "Always",
+            "significado": "sempre"
+          },
+          {
+            "valor": "Never",
+            "significado": "nunca"
+          },
+          {
+            "valor": "TrustedUrls",
+            "significado": "só URLs confiáveis"
+          }
+        ],
+        "lista_completa": "sim",
+        "estado": "verificado",
+        "evidencias": [
+          {
+            "fonte": "src:mdapi-securitysettings"
+          }
+        ]
+      },
+      "disponibilidade": {
+        "desde_versao": "59.0",
+        "ate_versao": null,
+        "estado": "verificado"
+      },
+      "explicacao": "explicada",
+      "estado": "verificado",
+      "evidencias": [
+        {
+          "fonte": "src:mdapi-securitysettings"
+        }
+      ]
+    },
+    {
+      "id": "mdt:SecuritySettings.isTLSv12Required",
+      "nome": "isTLSv12Required",
+      "tipo_tecnico": "boolean",
+      "o_que_e": "Exigia TLS 1.2 ou superior nas conexões.",
+      "origem": {
+        "estado": "verificado",
+        "valor": "padrao_plataforma",
+        "nota": "Propriedade definida pelo schema da Metadata API.",
+        "evidencias": [
+          {
+            "fonte": "src:mdapi-securitysettings"
+          }
+        ]
+      },
+      "obrigatoriedade": {
+        "valor": "nao",
+        "estado": "desconhecido",
+        "condicao": "A documentação 68.0 não marca o campo como obrigatório; ausência de marcação não comprova opcionalidade (confirmar no WSDL)."
+      },
+      "default": {
+        "forma": "false",
+        "estado": "verificado",
+        "evidencias": [
+          {
+            "fonte": "src:mdapi-securitysettings"
+          }
+        ],
+        "valor": false,
+        "nota": "A página declara default false."
+      },
+      "dominio": {
+        "natureza": "booleano",
+        "valores": [
+          {
+            "valor": "true"
+          },
+          {
+            "valor": "false"
+          }
+        ],
+        "lista_completa": "sim",
+        "estado": "verificado",
+        "evidencias": [
+          {
+            "fonte": "src:mdapi-securitysettings"
+          }
+        ]
+      },
+      "disponibilidade": {
+        "desde_versao": null,
+        "ate_versao": "50.0",
+        "estado": "verificado"
+      },
+      "explicacao": "explicada",
+      "estado": "verificado",
+      "evidencias": [
+        {
+          "fonte": "src:mdapi-securitysettings"
+        }
+      ],
+      "notas": [
+        "Removido na API 51.0."
+      ]
+    },
+    {
+      "id": "mdt:SecuritySettings.isTLSv12RequiredCommunities",
+      "nome": "isTLSv12RequiredCommunities",
+      "tipo_tecnico": "boolean",
+      "o_que_e": "Exigia TLS 1.2 ou superior em sites, portais e Experience Cloud.",
+      "origem": {
+        "estado": "verificado",
+        "valor": "padrao_plataforma",
+        "nota": "Propriedade definida pelo schema da Metadata API.",
+        "evidencias": [
+          {
+            "fonte": "src:mdapi-securitysettings"
+          }
+        ]
+      },
+      "obrigatoriedade": {
+        "valor": "nao",
+        "estado": "desconhecido",
+        "condicao": "A documentação 68.0 não marca o campo como obrigatório; ausência de marcação não comprova opcionalidade (confirmar no WSDL)."
+      },
+      "default": {
+        "forma": "false",
+        "estado": "verificado",
+        "evidencias": [
+          {
+            "fonte": "src:mdapi-securitysettings"
+          }
+        ],
+        "valor": false,
+        "nota": "A página declara default false."
+      },
+      "dominio": {
+        "natureza": "booleano",
+        "valores": [
+          {
+            "valor": "true"
+          },
+          {
+            "valor": "false"
+          }
+        ],
+        "lista_completa": "sim",
+        "estado": "verificado",
+        "evidencias": [
+          {
+            "fonte": "src:mdapi-securitysettings"
+          }
+        ]
+      },
+      "disponibilidade": {
+        "desde_versao": null,
+        "ate_versao": "50.0",
+        "estado": "verificado"
+      },
+      "explicacao": "explicada",
+      "estado": "verificado",
+      "evidencias": [
+        {
+          "fonte": "src:mdapi-securitysettings"
+        }
+      ],
+      "notas": [
+        "Removido na API 51.0."
+      ]
+    },
+    {
+      "id": "mdt:SecuritySettings.networkAccess",
+      "nome": "networkAccess",
+      "tipo_tecnico": "NetworkAccess",
+      "o_que_e": "Faixas de IP confiáveis, das quais o usuário entra sem ativar o computador.",
+      "origem": {
+        "estado": "verificado",
+        "valor": "padrao_plataforma",
+        "nota": "Propriedade definida pelo schema da Metadata API.",
+        "evidencias": [
+          {
+            "fonte": "src:mdapi-securitysettings"
+          }
+        ]
+      },
+      "obrigatoriedade": {
+        "valor": "nao",
+        "estado": "desconhecido",
+        "condicao": "A documentação 68.0 não marca o campo como obrigatório; ausência de marcação não comprova opcionalidade (confirmar no WSDL)."
+      },
+      "default": {
+        "forma": "nao_declarado_na_fonte",
+        "estado": "desconhecido"
+      },
+      "dominio": {
+        "natureza": "tipo_composto",
+        "estado": "verificado",
+        "evidencias": [
+          {
+            "fonte": "src:mdapi-securitysettings"
+          }
+        ]
+      },
+      "disponibilidade": {
+        "desde_versao": null,
+        "ate_versao": null,
+        "estado": "desconhecido"
+      },
+      "explicacao": "explicada",
+      "estado": "verificado",
+      "evidencias": [
+        {
+          "fonte": "src:mdapi-securitysettings"
+        }
+      ],
+      "estrutura_ref": "mdx:NetworkAccess"
+    },
+    {
+      "id": "mdt:SecuritySettings.passwordPolicies",
+      "nome": "passwordPolicies",
+      "tipo_tecnico": "PasswordPolicies",
+      "o_que_e": "Regras de senha e de login e ajuda para recuperar senhas.",
+      "origem": {
+        "estado": "verificado",
+        "valor": "padrao_plataforma",
+        "nota": "Propriedade definida pelo schema da Metadata API.",
+        "evidencias": [
+          {
+            "fonte": "src:mdapi-securitysettings"
+          }
+        ]
+      },
+      "obrigatoriedade": {
+        "valor": "nao",
+        "estado": "desconhecido",
+        "condicao": "A documentação 68.0 não marca o campo como obrigatório; ausência de marcação não comprova opcionalidade (confirmar no WSDL)."
+      },
+      "default": {
+        "forma": "nao_declarado_na_fonte",
+        "estado": "desconhecido"
+      },
+      "dominio": {
+        "natureza": "tipo_composto",
+        "estado": "verificado",
+        "evidencias": [
+          {
+            "fonte": "src:mdapi-securitysettings"
+          }
+        ]
+      },
+      "disponibilidade": {
+        "desde_versao": null,
+        "ate_versao": null,
+        "estado": "desconhecido"
+      },
+      "explicacao": "explicada",
+      "estado": "verificado",
+      "evidencias": [
+        {
+          "fonte": "src:mdapi-securitysettings"
+        }
+      ],
+      "estrutura_ref": "mdx:PasswordPolicies"
+    },
+    {
+      "id": "mdt:SecuritySettings.sendCspForUncommonClients",
+      "nome": "sendCspForUncommonClients",
+      "tipo_tecnico": "boolean",
+      "o_que_e": "Inclui ou omite a diretiva frame-ancestors para clientes que não a suportam claramente.",
+      "origem": {
+        "estado": "verificado",
+        "valor": "padrao_plataforma",
+        "nota": "Propriedade definida pelo schema da Metadata API.",
+        "evidencias": [
+          {
+            "fonte": "src:mdapi-securitysettings"
+          }
+        ]
+      },
+      "obrigatoriedade": {
+        "valor": "nao",
+        "estado": "desconhecido",
+        "condicao": "A documentação 68.0 não marca o campo como obrigatório; ausência de marcação não comprova opcionalidade (confirmar no WSDL)."
+      },
+      "default": {
+        "forma": "false",
+        "estado": "verificado",
+        "evidencias": [
+          {
+            "fonte": "src:mdapi-securitysettings"
+          }
+        ],
+        "valor": false,
+        "nota": "A página declara default false."
+      },
+      "dominio": {
+        "natureza": "booleano",
+        "valores": [
+          {
+            "valor": "true"
+          },
+          {
+            "valor": "false"
+          }
+        ],
+        "lista_completa": "sim",
+        "estado": "verificado",
+        "evidencias": [
+          {
+            "fonte": "src:mdapi-securitysettings"
+          }
+        ]
+      },
+      "disponibilidade": {
+        "desde_versao": "59.0",
+        "ate_versao": null,
+        "estado": "verificado"
+      },
+      "explicacao": "explicada",
+      "estado": "verificado",
+      "evidencias": [
+        {
+          "fonte": "src:mdapi-securitysettings"
+        }
+      ]
+    },
+    {
+      "id": "mdt:SecuritySettings.sessionSettings",
+      "nome": "sessionSettings",
+      "tipo_tecnico": "SessionSettings",
+      "o_que_e": "Regras de expiração e de segurança da sessão.",
+      "origem": {
+        "estado": "verificado",
+        "valor": "padrao_plataforma",
+        "nota": "Propriedade definida pelo schema da Metadata API.",
+        "evidencias": [
+          {
+            "fonte": "src:mdapi-securitysettings"
+          }
+        ]
+      },
+      "obrigatoriedade": {
+        "valor": "nao",
+        "estado": "desconhecido",
+        "condicao": "A documentação 68.0 não marca o campo como obrigatório; ausência de marcação não comprova opcionalidade (confirmar no WSDL)."
+      },
+      "default": {
+        "forma": "nao_declarado_na_fonte",
+        "estado": "desconhecido"
+      },
+      "dominio": {
+        "natureza": "tipo_composto",
+        "estado": "verificado",
+        "evidencias": [
+          {
+            "fonte": "src:mdapi-securitysettings"
+          }
+        ]
+      },
+      "disponibilidade": {
+        "desde_versao": null,
+        "ate_versao": null,
+        "estado": "desconhecido"
+      },
+      "explicacao": "explicada",
+      "estado": "verificado",
+      "evidencias": [
+        {
+          "fonte": "src:mdapi-securitysettings"
+        }
+      ],
+      "estrutura_ref": "mdx:SessionSettings"
+    },
+    {
+      "id": "mdt:SecuritySettings.singleSignOnSettings",
+      "nome": "singleSignOnSettings",
+      "tipo_tecnico": "SingleSignOnSettings",
+      "o_que_e": "Opções de single sign-on.",
+      "origem": {
+        "estado": "verificado",
+        "valor": "padrao_plataforma",
+        "nota": "Propriedade definida pelo schema da Metadata API.",
+        "evidencias": [
+          {
+            "fonte": "src:mdapi-securitysettings"
+          }
+        ]
+      },
+      "obrigatoriedade": {
+        "valor": "nao",
+        "estado": "desconhecido",
+        "condicao": "A documentação 68.0 não marca o campo como obrigatório; ausência de marcação não comprova opcionalidade (confirmar no WSDL)."
+      },
+      "default": {
+        "forma": "nao_declarado_na_fonte",
+        "estado": "desconhecido"
+      },
+      "dominio": {
+        "natureza": "tipo_composto",
+        "estado": "verificado",
+        "evidencias": [
+          {
+            "fonte": "src:mdapi-securitysettings"
+          }
+        ]
+      },
+      "disponibilidade": {
+        "desde_versao": null,
+        "ate_versao": null,
+        "estado": "desconhecido"
+      },
+      "explicacao": "explicada",
+      "estado": "verificado",
+      "evidencias": [
+        {
+          "fonte": "src:mdapi-securitysettings"
+        }
+      ],
+      "estrutura_ref": "mdx:SingleSignOnSettings"
+    },
+    {
+      "id": "mdt:SecuritySettings.fullName",
+      "nome": "fullName",
+      "tipo_tecnico": "string",
+      "o_que_e": "Nome completo (API name) do componente; herdado do tipo Metadata.",
+      "origem": {
+        "estado": "verificado",
+        "valor": "padrao_plataforma",
+        "nota": "Propriedade definida pelo schema da Metadata API.",
+        "evidencias": [
+          {
+            "fonte": "src:mdapi-securitysettings"
+          }
+        ]
+      },
+      "obrigatoriedade": {
+        "valor": "desconhecida",
+        "estado": "desconhecido"
+      },
+      "default": {
+        "forma": "nao_declarado_na_fonte",
+        "estado": "desconhecido"
+      },
+      "dominio": {
+        "natureza": "texto_livre",
+        "estado": "verificado",
+        "evidencias": [
+          {
+            "fonte": "src:mdapi-securitysettings"
+          }
+        ],
+        "contexto": "A fonte tipa como string sem lista de valores; não inventar valores."
+      },
+      "disponibilidade": {
+        "desde_versao": null,
+        "ate_versao": null,
+        "estado": "desconhecido"
+      },
+      "explicacao": "explicada",
+      "estado": "verificado",
+      "evidencias": [
+        {
+          "fonte": "src:mdapi-securitysettings"
+        }
+      ],
+      "herdada_de": "Metadata"
+    }
+  ],
+  "estruturas": [
+    "mdx:NetworkAccess",
+    "mdx:PasswordPolicies",
+    "mdx:SessionSettings",
+    "mdx:SingleSignOnSettings"
+  ],
+  "cobertura": {
+    "estrutural": {
+      "estado": "completa",
+      "esperado": 20,
+      "presente": 20,
+      "nota": "Universo esperado = tabela Fields da página 264.0 (19 campos, mais fullName herdado), lida em 2026-11-23 em duas partes (offset 0 e 100000); subtipos NetworkAccess (1), IpRange (3), PasswordPolicies (13), SessionSettings (59) e SingleSignOnSettings (6)."
+    },
+    "explicativa": {
+      "estado": "completa",
+      "esperado": 20,
+      "presente": 20
+    },
+    "mapeamento": {
+      "estado": "parcial",
+      "nota": "Correspondências registradas apenas onde há evidência; demais pendentes."
+    }
+  },
+  "recomendacoes": [],
+  "alertas": [
+    "No package.xml, use o tipo Settings com o nome-base do arquivo como membro; o curinga só vale para recuperar todas as configurações.",
+    "Ao implantar networkAccess, mande todas as faixas de IP: as que não forem enviadas são substituídas.",
+    "Algumas opções não têm volta, como enableMultipleSamlConfigs depois de ligado."
+  ],
+  "divergencias_documentais": [],
+  "estado": "verificado",
+  "evidencias": [
+    {
+      "fonte": "src:mdapi-securitysettings"
+    },
+    {
+      "fonte": "src:sdr-registry"
+    },
+    {
+      "fonte": "src:sdr-metadata-support"
+    }
+  ],
+  "exemplo_xml": {
+    "xml": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<SecuritySettings xmlns=\"http://soap.sforce.com/2006/04/metadata\">\n    <passwordPolicies>\n        <complexity>AlphaNumeric</complexity>\n        <expiration>NinetyDays</expiration>\n        <minimumPasswordLength>12</minimumPasswordLength>\n    </passwordPolicies>\n    <sessionSettings>\n        <forceLogoutOnSessionTimeout>true</forceLogoutOnSessionTimeout>\n    </sessionSettings>\n</SecuritySettings>",
+    "natureza": "didatico_projeto",
+    "nota": "Exemplo escrito pelo projeto apenas com elementos documentados; sem dados reais."
+  }
+}

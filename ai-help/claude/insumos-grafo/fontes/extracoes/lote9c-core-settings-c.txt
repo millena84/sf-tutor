@@ -1,0 +1,114 @@
+fonte: 5 páginas de tipos Settings do Metadata API Developer Guide, versão 264.0 (API 68.0, Winter '27)
+lote: #10, etapa 3, lote C (últimos tipos incluídos no Core e ainda sem ficha)
+obtido em 2026-11-23 via WebFetch no endpoint versionado
+  https://developer.salesforce.com/docs/get_document_content/api_meta/meta_<tipo em minúsculas>.htm/en-us/264.0
+método: extração documental assistida por IA. A ferramenta devolve a página resumida em português por um modelo de leitura, não o texto
+  literal; pedi tabelas completas com contagem e conferência. A página de SecuritySettings (cerca de 140 mil caracteres) foi lida em três
+  passadas: campos do tipo e lista de subtipos; NetworkAccess, IpRange e PasswordPolicies; SessionSettings até o caractere 100000; e o trecho
+  final (offset 100000) com o resto de SessionSettings e SingleSignOnSettings. A emenda entre as partes caiu na descrição de
+  referrerPolicyDirective, identificada pelo texto (tipo ReferrerPolicy, 58.0, default strict-origin-when-cross-origin). Descrições parafraseadas.
+
+[src:mdapi-securitysettings] Security.settings | 27.0 | 19 campos | subtipos NetworkAccess (1), IpRange (3), PasswordPolicies (13),
+  SessionSettings (59) e SingleSignOnSettings (6, todos 47.0). Enumerações sem lista completa na leitura: SessionSettings.sessionTimeout
+  (de FifteenMinutes a TwentyFourHours), referrerPolicyDirective e vfInlineScriptInjection. Remoções: isTLSv12Required e
+  isTLSv12RequiredCommunities (removidos na 51.0), enableCrossOrgRedirects (59.0 a 60.0), enableUpgradeInsecureRequests (42.0 a 60.0),
+  enableXssProtection (39.0 a 59.0), requireHttps (40.0 a 60.0), securityCentralKillSession (removido na 51.0), enableSetPasswordInApi
+  (descontinuado na 51.0, removido na 52.0).
+[src:mdapi-sharingsettings-264] (id novo: src:mdapi-sharingsettings já existe para a página não versionada lida em 2026-11-10) Sharing.settings | versão não numerada na seção Version | 17 campos booleanos | acesso: Manage Sharing.
+  deferGroupMembership e deferSharingRules (49.0) exigem o Suporte; enableKeepManualSharesOnTransfer (68.0);
+  enableRestrictAccessLookupRecords (48.0; true em orgs do Spring '20 em diante); enableSecureGuestAccess sempre true desde 50.0.
+[src:mdapi-orgsettings] sufixo .settings (membro Org no package.xml; nome-base não confirmado) | 46.0 | 3 campos. O exemplo XML traz
+  enableMakeDeploymentsMandatory e enableRADeploymentAttributeOnly, ausentes da tabela. Campos de mala direta foram para MailMergeSettings na 51.0.
+[src:mdapi-usermanagementsettings] nome-base UserManagement | 46.0 | 20 campos booleanos, sem subtipos.
+[src:mdapi-mobilesettings] Mobile.settings | 27.0 (não existia na 25.0 e 26.0) | 11 campos | subtipos ChatterMobileSettings (7, removidos
+  na 46.0), DashboardMobileSettings (1, obsoleto) e TouchMobileSettings (2, removidos na 46.0).
+
+Todos os cinco tipos declaram estender Metadata e herdar fullName.
+Convenção de versão: ate_versao = última versão em que o item existe (removido na 46.0 -> 45.0).
+Classificação funcional (decisão do projeto): SharingSettings em Regras de compartilhamento; novas:
+  gestao-de-usuarios-e-permissoes (Usuários não recebe metadata type, por regra do piloto), politicas-de-seguranca-da-org, opcoes-gerais-da-org, app-salesforce-mobile (página do tipo como fonte; Setup desconhecido).
+
+Lista completa dos campos lidos (nome | tipo | versão inicial | última versão):
+[src:mdapi-securitysettings] SecuritySettings:
+  canUsersGrantLoginAccess | boolean | - | -
+  enableAdminLoginAsAnyUser | boolean | - | -
+  enableAuditFieldsInactiveOwner | boolean | 47.0 | -
+  enableAuraSecureEvalPref | boolean | 47.0 | -
+  enableCoepHeader | boolean | 55.0 | -
+  enableCoopHeader | boolean | 55.0 | -
+  enableCrossOrgRedirects | boolean | 59.0 | 60.0
+  enableGraphQLApiGuestUserAccess | boolean | 68.0 | -
+  enablePermissionsPolicy | boolean | 59.0 | -
+  enableRequireHttpsConnection | boolean | - | -
+  grantCameraAccess | PermissionsPolicy | 59.0 | -
+  grantMicrophoneAccess | PermissionsPolicy | 59.0 | -
+  isTLSv12Required | boolean | - | 50.0
+  isTLSv12RequiredCommunities | boolean | - | 50.0
+  networkAccess | NetworkAccess | - | -
+  passwordPolicies | PasswordPolicies | - | -
+  sendCspForUncommonClients | boolean | 59.0 | -
+  sessionSettings | SessionSettings | - | -
+  singleSignOnSettings | SingleSignOnSettings | - | -
+[src:mdapi-sharingsettings-264] (id novo: src:mdapi-sharingsettings já existe para a página não versionada lida em 2026-11-10) SharingSettings:
+  deferGroupMembership | boolean | 49.0 | -
+  deferSharingRules | boolean | 49.0 | -
+  enableAccountRoleOptimization | boolean | - | -
+  enableAssetSharing | boolean | - | -
+  enableCommunityUserVisibility | boolean | - | -
+  enableExternalSharingModel | boolean | - | -
+  enableKeepManualSharesOnTransfer | boolean | 68.0 | -
+  enableManagerGroups | boolean | - | -
+  enableManualUserRecordSharing | boolean | - | -
+  enablePartnerSuperUserAccess | boolean | - | -
+  enablePortalUserCaseSharing | boolean | - | -
+  enablePortalUserVisibility | boolean | - | -
+  enableRemoveTMGroupMembership | boolean | - | -
+  enableRestrictAccessLookupRecords | boolean | 48.0 | -
+  enableSecureGuestAccess | boolean | 47.0 | -
+  enableStandardReportVisibility | boolean | - | -
+  enableTerritoryForecastManager | boolean | - | -
+[src:mdapi-orgsettings] OrgSettings:
+  enableCustomerSuccessPortal | boolean | - | -
+  enableManageSelfServiceUsers | boolean | - | -
+  enableOrgFeedSentimentAnalysis | boolean | - | -
+[src:mdapi-usermanagementsettings] UserManagementSettings:
+  enableConcealPersonalInfo | boolean | - | -
+  enableContactlessExternalIdentityUsers | boolean | 47.0 | -
+  enableEnhancedConcealPersonalInfo | boolean | 53.0 | -
+  enableEnhancedPermsetMgmt | boolean | - | -
+  enableEnhancedProfileMgmt | boolean | - | -
+  enableEnhcUiUserAccessPolicies | boolean | 60.0 | -
+  enableNewProfileUI | boolean | - | -
+  enableProfileFiltering | boolean | 50.0 | -
+  enableRestrictEmailDomains | boolean | 53.0 | -
+  enableScrambleUserData | boolean | 47.0 | -
+  enableUserSelfDeactivate | boolean | - | -
+  enhancedPermSetList | boolean | 63.0 | -
+  enhancedUserListView | boolean | 62.0 | -
+  enhancedUserRoleListView | boolean | 63.0 | -
+  groupSummaryUIEnhancement | boolean | 62.0 | -
+  permsetsInFieldCreation | boolean | 56.0 | -
+  psaExpirationUIEnabled | boolean | 52.0 | -
+  restrictedProfileCloning | boolean | 50.0 | -
+  userAccessPoliciesEnabled | boolean | 58.0 | -
+  userFieldHistoryTracking | boolean | 64.0 | -
+[src:mdapi-mobilesettings] MobileSettings:
+  chatterMobile | ChatterMobileSettings | - | 45.0
+  dashboardMobile | DashboardMobileSettings | - | -
+  enableImportContactFromDevice | boolean | 47.0 | -
+  enableLightningOnMobile | boolean | 47.0 | 47.0
+  enableNewSalesforceMobileAppForTablet | boolean | - | 55.0
+  enableNewSalesforceMobileAppForTabletWideScreen | boolean | 52.0 | 55.0
+  enableOfflineDraftsEnabled | boolean | 47.0 | -
+  enablePopulateNameManuallyInToday | boolean | 47.0 | -
+  enableS1EncryptedStoragePref2 | boolean | 47.0 | -
+  enableS1OfflinePref | boolean | 47.0 | -
+  touchMobile | TouchMobileSettings | - | 45.0
+  subtipo NetworkAccess (1): ipRanges
+  subtipo IpRange (3): description, end, start
+  subtipo PasswordPolicies (13): apiOnlyUserHomePageURL, complexity, enableSetPasswordInApi, expiration, historyRestriction, lockoutInterval, maxLoginAttempts, minimumPasswordLength, minimumPasswordLifetime, obscureSecretAnswer, passwordAssistanceMessage, passwordAssistanceURL, questionRestriction
+  subtipo SessionSettings (59): allowUserAuthenticationByCertificate, allowUserCertBasedAuthenticationWithOcspValidation, auraBoxcarReductionPref, canConfirmEmailChangeInLightningCommunities, canConfirmIdentityBySmsOnly, disableTimeoutWarning, enableBuiltInAuthenticator, enableCSPOnEmail, enableCSRFOnGet, enableCSRFOnPost, enableCacheAndAutocomplete, enableClickjackNonsetupSFDC, enableClickjackNonsetupUser, enableClickjackNonsetupUserHeaderless, enableClickjackSetup, enableContentSniffingProtection, enableLightningLogin, enableLightningLoginOnlyWithUserPerm, enableMFADirectUILoginOptIn, enableOauthCorsPolicy, enablePostForSessions, enableSMSIdentity, enableU2F, enableUpgradeInsecureRequests, enableXssProtection, enforceIpRangesEveryRequest, enforceUserDeviceRevoked, forceLogoutOnSessionTimeout, forceRelogin, hasRetainedLoginHints, hasUserSwitching, hstsOnForcecomSites, identityConfirmationOnEmailChange, identityConfirmationOnTwoFactorRegistrationEnabled, lockSessionsToDomain, lockSessionsToIp, lockerServiceAPIVersion, lockerServiceCSP, lockerServiceNext, lockerServiceNextControl, lockerTrustedMode, lockerTrustedResources, logoutURL, redirectBlockModeEnabled, redirectionWarning, referrerPolicy, referrerPolicyDirective, requireHttpOnly, requireHttps, securityCentralKillSession, sessionTimeout, sidToken3rdPartyAuraApp, skipSFAWhenMFADirectUILogin, terminateUserSessionsWhenAdminResetsPassword, unescapedHtmlSanitization, untrustedRedirect, useLocalStorageForLogoutUrl, vfInlineScriptInjection, welcomeEmailTemplateId
+  subtipo SingleSignOnSettings (6): enableCaseInsensitiveFederationID, enableForceDelegatedCallout, enableMultipleSamlConfigs, enableSamlJitProvisioning, enableSamlLogin, isLoginWithSalesforceCredentialsDisabled
+  subtipo ChatterMobileSettings (7): IPadAuthorized, IPhoneAuthorized, androidAuthorized, blackBerryAuthorized, enableChatterMobile, enablePushNotifications, sessionTimeout
+  subtipo DashboardMobileSettings (1): enableDashboardIPadApp
+  subtipo TouchMobileSettings (2): enableTouchBrowserIPad, enableTouchAppIPad

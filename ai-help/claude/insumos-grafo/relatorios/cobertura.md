@@ -7,7 +7,7 @@ Gerado por `ferramentas/sftutor.py cobertura`. Cobertura estrutural, explicativa
 
 - Universo v68 (METADATA_SUPPORT.md): **993** tipos.
 - Classificados como incluídos no recorte Core: 154; pendentes de classificação: 646.
-- Cadastrados: **189** de 993. Estruturalmente completos (contra a página oficial): 189. Completos nas três dimensões: 0.
+- Cadastrados: **194** de 993. Estruturalmente completos (contra a página oficial): 194. Completos nas três dimensões: 0.
 - Porcentagem do recorte Core: não calculada, porque o denominador do recorte ainda não está definido (classificação item a item pendente).
 
 | Tipo | Estrutural | Esperadas | Presentes | Explicadas | Estruturas | Mapeamento | Completo |
@@ -126,6 +126,7 @@ Gerado por `ferramentas/sftutor.py cobertura`. Cobertura estrutural, explicativa
 | mdt:ManagedEventSubscription | completa | 7 | 7 | 7 | 0 | parcial | não |
 | mdt:MatchingRules | completa | 2 | 2 | 2 | 1 | parcial | não |
 | mdt:MilestoneType | completa | 3 | 3 | 3 | 0 | parcial | não |
+| mdt:MobileSettings | completa | 12 | 12 | 12 | 3 | parcial | não |
 | mdt:MyDomainSettings | completa | 32 | 32 | 29 | 0 | parcial | não |
 | mdt:NameSettings | completa | 4 | 4 | 4 | 0 | parcial | não |
 | mdt:NamedCredential | completa | 31 | 31 | 31 | 1 | parcial | não |
@@ -137,6 +138,7 @@ Gerado por `ferramentas/sftutor.py cobertura`. Cobertura estrutural, explicativa
 | mdt:OmniChannelSettings | completa | 6 | 6 | 6 | 0 | parcial | não |
 | mdt:OpportunitySettings | completa | 23 | 23 | 23 | 1 | parcial | não |
 | mdt:OrderSettings | completa | 9 | 9 | 9 | 0 | parcial | não |
+| mdt:OrgSettings | completa | 4 | 4 | 4 | 0 | parcial | não |
 | mdt:OutboundNetworkConnection | completa | 7 | 7 | 7 | 1 | parcial | não |
 | mdt:PathAssistant | completa | 7 | 7 | 7 | 1 | parcial | não |
 | mdt:PathAssistantSettings | completa | 4 | 4 | 4 | 0 | parcial | não |
@@ -171,6 +173,7 @@ Gerado por `ferramentas/sftutor.py cobertura`. Cobertura estrutural, explicativa
 | mdt:SandboxSettings | completa | 2 | 2 | 2 | 0 | parcial | não |
 | mdt:SchemaSettings | completa | 5 | 5 | 5 | 0 | parcial | não |
 | mdt:SearchSettings | completa | 23 | 23 | 23 | 1 | parcial | não |
+| mdt:SecuritySettings | completa | 20 | 20 | 20 | 4 | parcial | não |
 | mdt:ServiceChannel | completa | 19 | 19 | 19 | 1 | parcial | não |
 | mdt:ServicePresenceStatus | completa | 3 | 3 | 3 | 1 | parcial | não |
 | mdt:SharingCriteriaRule | completa | 9 | 9 | 9 | 3 | parcial | não |
@@ -178,6 +181,7 @@ Gerado por `ferramentas/sftutor.py cobertura`. Cobertura estrutural, explicativa
 | mdt:SharingOwnerRule | completa | 7 | 7 | 7 | 2 | parcial | não |
 | mdt:SharingReason | completa | 2 | 2 | 2 | 0 | parcial | não |
 | mdt:SharingRules | completa | 5 | 5 | 5 | 0 | parcial | não |
+| mdt:SharingSettings | completa | 18 | 18 | 18 | 0 | parcial | não |
 | mdt:SharingTerritoryRule | completa | 7 | 7 | 7 | 2 | parcial | não |
 | mdt:SiteSettings | completa | 9 | 9 | 9 | 0 | parcial | não |
 | mdt:SourceTrackingSettings | completa | 2 | 2 | 2 | 0 | parcial | não |
@@ -191,6 +195,7 @@ Gerado por `ferramentas/sftutor.py cobertura`. Cobertura estrutural, explicativa
 | mdt:UserAuthCertificate | completa | 6 | 6 | 6 | 0 | parcial | não |
 | mdt:UserEngagementSettings | completa | 28 | 28 | 28 | 0 | parcial | não |
 | mdt:UserInterfaceSettings | completa | 20 | 20 | 20 | 0 | parcial | não |
+| mdt:UserManagementSettings | completa | 21 | 21 | 21 | 0 | parcial | não |
 | mdt:ValidationRule | completa | 6 | 6 | 6 | 0 | parcial | não |
 | mdt:WebLink | completa | 22 | 22 | 22 | 0 | parcial | não |
 | mdt:Workflow | completa | 8 | 8 | 8 | 0 | parcial | não |
@@ -204,8 +209,8 @@ Gerado por `ferramentas/sftutor.py cobertura`. Cobertura estrutural, explicativa
 
 ## Propriedades XML
 
-- Em metadata types: 2432 listadas, 2401 explicadas.
-- Em estruturas auxiliares: 2265 listadas, 2265 explicadas.
+- Em metadata types: 2507 listadas, 2476 explicadas.
+- Em estruturas auxiliares: 2357 listadas, 2357 explicadas.
 - Universo total: Sem WSDL não há denominador confiável do total de propriedades do recorte.
 
 ## Objetos consultáveis via API
@@ -308,4 +313,4 @@ Gerado por `ferramentas/sftutor.py cobertura`. Cobertura estrutural, explicativa
 ## Taxonomia e funcionalidades
 
 - Classificações: 14; subclassificações: 92 (com funcionalidades: 91).
-- Funcionalidades cadastradas: 150 (universo de funcionalidades não definido).
+- Funcionalidades cadastradas: 154 (universo de funcionalidades não definido).
