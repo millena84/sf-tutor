@@ -521,6 +521,12 @@
       "tipo": "representacao_xml"
     },
     {
+      "destino": "mdt:MobileSettings",
+      "origem": "func:app-salesforce-mobile",
+      "papel": "Opções do app Salesforce mobile, como offline e cache seguro.",
+      "tipo": "representacao_xml"
+    },
+    {
       "destino": "mdt:CustomApplication",
       "origem": "func:apps-de-console",
       "papel": "O app de console, com navType Console e as opções de abas.",
@@ -1355,6 +1361,12 @@
       "tipo": "representacao_objeto_api"
     },
     {
+      "destino": "mdt:UserManagementSettings",
+      "origem": "func:gestao-de-usuarios-e-permissoes",
+      "papel": "Opções de gestão de usuários, perfis, permissões e dados pessoais.",
+      "tipo": "representacao_xml"
+    },
+    {
       "destino": "mdt:Role",
       "origem": "func:hierarquia-de-papeis",
       "papel": "Cada papel e o papel acima dele.",
@@ -1715,6 +1727,12 @@
       "tipo": "representacao_xml"
     },
     {
+      "destino": "mdt:OrgSettings",
+      "origem": "func:opcoes-gerais-da-org",
+      "papel": "Customer Portal, Self-Service Portal e análise de sentimento no feed.",
+      "tipo": "representacao_xml"
+    },
+    {
       "destino": "mdt:OpportunitySettings",
       "origem": "func:oportunidades",
       "papel": "Configurações da org (Settings).",
@@ -1874,6 +1892,12 @@
       "destino": "mdt:PlatformEventSubscriberConfig",
       "origem": "func:platform-events",
       "papel": "Configuração do trigger Apex assinante.",
+      "tipo": "representacao_xml"
+    },
+    {
+      "destino": "mdt:SecuritySettings",
+      "origem": "func:politicas-de-seguranca-da-org",
+      "papel": "Faixas de IP, senha, sessão, cabeçalhos de segurança e SSO.",
       "tipo": "representacao_xml"
     },
     {
@@ -2054,6 +2078,12 @@
       "destino": "mdt:SharingRules",
       "origem": "func:regras-de-compartilhamento",
       "papel": "O arquivo de regras de cada objeto.",
+      "tipo": "representacao_xml"
+    },
+    {
+      "destino": "mdt:SharingSettings",
+      "origem": "func:regras-de-compartilhamento",
+      "papel": "Opções gerais de compartilhamento: visibilidade de usuários externos, cálculos adiados e acesso a lookups.",
       "tipo": "representacao_xml"
     },
     {
@@ -3475,6 +3505,21 @@
       "tipo": "representacao_comum"
     },
     {
+      "destino": "mdx:ChatterMobileSettings",
+      "origem": "mdt:MobileSettings.chatterMobile",
+      "tipo": "tipo_composto"
+    },
+    {
+      "destino": "mdx:DashboardMobileSettings",
+      "origem": "mdt:MobileSettings.dashboardMobile",
+      "tipo": "tipo_composto"
+    },
+    {
+      "destino": "mdx:TouchMobileSettings",
+      "origem": "mdt:MobileSettings.touchMobile",
+      "tipo": "tipo_composto"
+    },
+    {
       "destino": "obj:NamedCredential",
       "estado": "verificado",
       "origem": "mdt:NamedCredential",
@@ -4025,6 +4070,26 @@
     {
       "destino": "mdx:SearchSettingsByObject",
       "origem": "mdt:SearchSettings.searchSettingsByObject",
+      "tipo": "tipo_composto"
+    },
+    {
+      "destino": "mdx:NetworkAccess",
+      "origem": "mdt:SecuritySettings.networkAccess",
+      "tipo": "tipo_composto"
+    },
+    {
+      "destino": "mdx:PasswordPolicies",
+      "origem": "mdt:SecuritySettings.passwordPolicies",
+      "tipo": "tipo_composto"
+    },
+    {
+      "destino": "mdx:SessionSettings",
+      "origem": "mdt:SecuritySettings.sessionSettings",
+      "tipo": "tipo_composto"
+    },
+    {
+      "destino": "mdx:SingleSignOnSettings",
+      "origem": "mdt:SecuritySettings.singleSignOnSettings",
       "tipo": "tipo_composto"
     },
     {
@@ -6195,6 +6260,11 @@
     {
       "destino": "mdx:NavigationMenuItem",
       "origem": "mdx:NavigationSubMenu.navigationMenuItem",
+      "tipo": "tipo_composto"
+    },
+    {
+      "destino": "mdx:IpRange",
+      "origem": "mdx:NetworkAccess.ipRanges",
       "tipo": "tipo_composto"
     },
     {
@@ -8801,6 +8871,12 @@
       "tipo": "classificacao_secundaria"
     },
     {
+      "destino": "func:politicas-de-seguranca-da-org",
+      "motivo": "SecuritySettings também guarda as opções de SSO e de verificação de identidade.",
+      "origem": "sub:autenticacao-sso-e-mfa",
+      "tipo": "classificacao_secundaria"
+    },
+    {
       "destino": "func:sso-saml",
       "origem": "sub:autenticacao-sso-e-mfa",
       "tipo": "classificacao_principal"
@@ -9111,6 +9187,11 @@
     {
       "destino": "func:digital-experiences",
       "origem": "sub:experiencias-externas",
+      "tipo": "classificacao_principal"
+    },
+    {
+      "destino": "func:app-salesforce-mobile",
+      "origem": "sub:experiencias-web-portais-e-mobile",
       "tipo": "classificacao_principal"
     },
     {
@@ -9434,6 +9515,12 @@
       "tipo": "classificacao_secundaria"
     },
     {
+      "destino": "func:gestao-de-usuarios-e-permissoes",
+      "motivo": "Boa parte das opções muda a gestão de perfis e permission sets.",
+      "origem": "sub:permissoes-perfis-e-grupos",
+      "tipo": "classificacao_secundaria"
+    },
+    {
       "destino": "func:perfis",
       "origem": "sub:permissoes-perfis-e-grupos",
       "tipo": "classificacao_principal"
@@ -9549,6 +9636,11 @@
       "tipo": "classificacao_secundaria"
     },
     {
+      "destino": "func:politicas-de-seguranca-da-org",
+      "origem": "sub:sessoes-e-politicas-de-login",
+      "tipo": "classificacao_principal"
+    },
+    {
       "destino": "func:chatter",
       "motivo": "As opções ficam em ChatterSettings.",
       "origem": "sub:settings",
@@ -9583,6 +9675,11 @@
       "motivo": "As opções ficam em MyDomainSettings.",
       "origem": "sub:settings",
       "tipo": "classificacao_secundaria"
+    },
+    {
+      "destino": "func:opcoes-gerais-da-org",
+      "origem": "sub:settings",
+      "tipo": "classificacao_principal"
     },
     {
       "destino": "func:path",
@@ -9640,6 +9737,11 @@
     {
       "destino": "func:custom-report-types",
       "origem": "sub:tipos-de-relatorio",
+      "tipo": "classificacao_principal"
+    },
+    {
+      "destino": "func:gestao-de-usuarios-e-permissoes",
+      "origem": "sub:usuarios-e-provisionamento",
       "tipo": "classificacao_principal"
     },
     {
@@ -9959,6 +10061,15 @@
       "resumo": "Código Apex que roda antes ou depois de um registro ser inserido, alterado, excluído, mesclado ou restaurado.",
       "rotulo": "Apex triggers",
       "rotulo_tecnico": "Apex Triggers",
+      "tipo": "funcionalidade"
+    },
+    {
+      "estado": "verificado",
+      "grupo_cor": "cls:interface-e-experiencia-do-usuario",
+      "id": "func:app-salesforce-mobile",
+      "resumo": "O app Salesforce para celular e tablet, com acesso offline e cache seguro.",
+      "rotulo": "App Salesforce mobile",
+      "rotulo_tecnico": "Salesforce Mobile App",
       "tipo": "funcionalidade"
     },
     {
@@ -10513,6 +10624,15 @@
     {
       "estado": "verificado",
       "grupo_cor": "cls:acesso-identidade-e-seguranca",
+      "id": "func:gestao-de-usuarios-e-permissoes",
+      "resumo": "As opções da página User Management Settings: interfaces aprimoradas de usuários, perfis, papéis e permission sets, políticas de acesso e proteção dos dados pessoais dos usuários.",
+      "rotulo": "Opções de gestão de usuários",
+      "rotulo_tecnico": "User Management Settings",
+      "tipo": "funcionalidade"
+    },
+    {
+      "estado": "verificado",
+      "grupo_cor": "cls:acesso-identidade-e-seguranca",
       "id": "func:hierarquia-de-papeis",
       "resumo": "A hierarquia de papéis organiza os usuários em níveis, como um organograma de acesso: quem está num papel vê e pode agir sobre os registros de quem está nos papéis abaixo.",
       "rotulo": "Hierarquia de papéis",
@@ -10764,6 +10884,15 @@
     },
     {
       "estado": "verificado",
+      "grupo_cor": "cls:organizacao-e-configuracoes-base",
+      "id": "func:opcoes-gerais-da-org",
+      "resumo": "Opções da org inteira que não pertencem a um recurso específico, como o Customer Portal e a análise de sentimento no feed.",
+      "rotulo": "Opções gerais da org",
+      "rotulo_tecnico": "Org Settings",
+      "tipo": "funcionalidade"
+    },
+    {
+      "estado": "verificado",
       "grupo_cor": "cls:processos-de-negocio-especificos-de-produto",
       "id": "func:oportunidades",
       "resumo": "Oportunidade é um negócio em andamento, com valor estimado, etapa e data prevista de fechamento.",
@@ -10877,6 +11006,15 @@
       "resumo": "Mensagens publicadas num barramento de eventos, que sistemas e automações assinam para reagir.",
       "rotulo": "Eventos de plataforma",
       "rotulo_tecnico": "Platform Events",
+      "tipo": "funcionalidade"
+    },
+    {
+      "estado": "verificado",
+      "grupo_cor": "cls:acesso-identidade-e-seguranca",
+      "id": "func:politicas-de-seguranca-da-org",
+      "resumo": "As regras de segurança da org inteira: faixas de IP confiáveis, regras de senha e bloqueio, expiração e proteção da sessão e SSO.",
+      "rotulo": "Políticas de segurança da org",
+      "rotulo_tecnico": "Security Settings",
       "tipo": "funcionalidade"
     },
     {
@@ -12057,6 +12195,13 @@
     },
     {
       "estado": "verificado",
+      "id": "mdt:MobileSettings",
+      "resumo": "Configurações móveis da org: o que o app Salesforce mobile permite, como acesso offline e cache seguro.",
+      "rotulo": "MobileSettings",
+      "tipo": "metadata_type"
+    },
+    {
+      "estado": "verificado",
       "id": "mdt:MyDomainSettings",
       "resumo": "Configurações do My Domain da org, o recurso que põe o nome da empresa nas URLs.",
       "rotulo": "MyDomainSettings",
@@ -12130,6 +12275,13 @@
       "id": "mdt:OrderSettings",
       "resumo": "Configurações de pedidos (orders) da org: se pedidos estão ligados e que variações são aceitas.",
       "rotulo": "OrderSettings",
+      "tipo": "metadata_type"
+    },
+    {
+      "estado": "verificado",
+      "id": "mdt:OrgSettings",
+      "resumo": "Configurações da org inteira que não pertencem a um recurso específico.",
+      "rotulo": "OrgSettings",
       "tipo": "metadata_type"
     },
     {
@@ -12372,6 +12524,13 @@
     },
     {
       "estado": "verificado",
+      "id": "mdt:SecuritySettings",
+      "resumo": "Configurações de segurança da org: faixas de IP confiáveis, regras de senha e login, sessão, cabeçalhos de segurança e SSO.",
+      "rotulo": "SecuritySettings",
+      "tipo": "metadata_type"
+    },
+    {
+      "estado": "verificado",
       "id": "mdt:ServiceChannel",
       "resumo": "Define um canal de serviço do Omni-Channel.",
       "rotulo": "ServiceChannel",
@@ -12417,6 +12576,13 @@
       "id": "mdt:SharingRules",
       "resumo": "O contêiner das regras de compartilhamento de um objeto: um arquivo por objeto, com as regras por critério, por dono, por território e de guest user.",
       "rotulo": "SharingRules",
+      "tipo": "metadata_type"
+    },
+    {
+      "estado": "verificado",
+      "id": "mdt:SharingSettings",
+      "resumo": "Configurações de compartilhamento, visibilidade e acesso a dados da org.",
+      "rotulo": "SharingSettings",
       "tipo": "metadata_type"
     },
     {
@@ -12508,6 +12674,13 @@
       "id": "mdt:UserInterfaceSettings",
       "resumo": "Configurações que mudam o comportamento da interface do usuário da org.",
       "rotulo": "UserInterfaceSettings",
+      "tipo": "metadata_type"
+    },
+    {
+      "estado": "verificado",
+      "id": "mdt:UserManagementSettings",
+      "resumo": "Opções de gestão de usuários da página User Management Settings.",
+      "rotulo": "UserManagementSettings",
       "tipo": "metadata_type"
     },
     {
@@ -12824,6 +12997,12 @@
       "estado": "verificado",
       "id": "mdx:ChartSummary",
       "rotulo": "ChartSummary",
+      "tipo": "estrutura_auxiliar"
+    },
+    {
+      "estado": "verificado",
+      "id": "mdx:ChatterMobileSettings",
+      "rotulo": "ChatterMobileSettings",
       "tipo": "estrutura_auxiliar"
     },
     {
@@ -13148,6 +13327,12 @@
       "estado": "verificado",
       "id": "mdx:DashboardGridLayout",
       "rotulo": "DashboardGridLayout",
+      "tipo": "estrutura_auxiliar"
+    },
+    {
+      "estado": "verificado",
+      "id": "mdx:DashboardMobileSettings",
+      "rotulo": "DashboardMobileSettings",
       "tipo": "estrutura_auxiliar"
     },
     {
@@ -14196,6 +14381,12 @@
     },
     {
       "estado": "verificado",
+      "id": "mdx:IpRange",
+      "rotulo": "IpRange",
+      "tipo": "estrutura_auxiliar"
+    },
+    {
+      "estado": "verificado",
       "id": "mdx:ItemInstance",
       "rotulo": "ItemInstance",
       "tipo": "estrutura_auxiliar"
@@ -14406,6 +14597,12 @@
     },
     {
       "estado": "verificado",
+      "id": "mdx:NetworkAccess",
+      "rotulo": "NetworkAccess",
+      "tipo": "estrutura_auxiliar"
+    },
+    {
+      "estado": "verificado",
       "id": "mdx:NetworkAuthApiSettings",
       "rotulo": "NetworkAuthApiSettings",
       "tipo": "estrutura_auxiliar"
@@ -14504,6 +14701,12 @@
       "estado": "verificado",
       "id": "mdx:PackageVersion",
       "rotulo": "PackageVersion",
+      "tipo": "estrutura_auxiliar"
+    },
+    {
+      "estado": "verificado",
+      "id": "mdx:PasswordPolicies",
+      "rotulo": "PasswordPolicies",
       "tipo": "estrutura_auxiliar"
     },
     {
@@ -15258,6 +15461,12 @@
     },
     {
       "estado": "verificado",
+      "id": "mdx:SessionSettings",
+      "rotulo": "SessionSettings",
+      "tipo": "estrutura_auxiliar"
+    },
+    {
+      "estado": "verificado",
       "id": "mdx:SharedTo",
       "rotulo": "SharedTo",
       "tipo": "estrutura_auxiliar"
@@ -15272,6 +15481,12 @@
       "estado": "verificado",
       "id": "mdx:SidebarComponent",
       "rotulo": "SidebarComponent",
+      "tipo": "estrutura_auxiliar"
+    },
+    {
+      "estado": "verificado",
+      "id": "mdx:SingleSignOnSettings",
+      "rotulo": "SingleSignOnSettings",
       "tipo": "estrutura_auxiliar"
     },
     {
@@ -15362,6 +15577,12 @@
       "estado": "verificado",
       "id": "mdx:TimelineObjectDefinitionTranslation",
       "rotulo": "TimelineObjectDefinitionTranslation",
+      "tipo": "estrutura_auxiliar"
+    },
+    {
+      "estado": "verificado",
+      "id": "mdx:TouchMobileSettings",
+      "rotulo": "TouchMobileSettings",
       "tipo": "estrutura_auxiliar"
     },
     {
