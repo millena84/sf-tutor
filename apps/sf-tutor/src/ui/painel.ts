@@ -174,6 +174,29 @@ function categoriaNuvem(valor: unknown): Node | null {
     h('p', null, h('strong', null, c.rotulo), ` — ${c.explicacao}`));
 }
 
+const ESTADO_INVENTARIO: Record<string, string> = {
+  parcial: 'parcial (em andamento)',
+  nao_iniciada: 'não iniciado: os tipos próprios desta nuvem ainda não foram inventariados',
+};
+
+/** Aviso de cobertura parcial de metadata types da nuvem (campo calculado na geração dos dados). */
+function avisoCoberturaNuvem(e: Entidade): HTMLElement {
+  const c = (e.cobertura_derivada ?? {}) as {
+    metadata_types_ligados?: number; decididos_sem_ficha?: number | null; pendentes_recorte_core?: number | null;
+    pendentes_provaveis?: number | null; nota?: string;
+  };
+  const itens: (HTMLElement | null)[] = [
+    h('li', null, `No mapa: ${c.metadata_types_ligados ?? '?'} metadata types ligados a esta nuvem pelas funcionalidades.`),
+    c.decididos_sem_ficha ? h('li', null, `Já atribuídos a esta nuvem no recorte Core, mas ainda sem ficha: ${c.decididos_sem_ficha}.`) : null,
+    c.pendentes_recorte_core != null ? h('li', null, `Ainda sem recorte Core no inventário: ${c.pendentes_recorte_core} tipos` +
+      (c.pendentes_provaveis ? `; pela triagem feita só pelo nome (inferida), cerca de ${c.pendentes_provaveis} parecem desta nuvem.` : '.')) : null,
+  ];
+  return h('div', { class: 'aviso aviso-cobertura', role: 'note' },
+    h('p', null, h('strong', null, 'Cobertura parcial. '),
+      String(c.nota ?? 'A lista de metadata types desta nuvem ainda não está completa.')),
+    h('ul', { class: 'lista' }, itens));
+}
+
 function painelNuvem(ctx: CtxPainel, e: Entidade, caminho: readonly string[]): (Node | null)[] {
   const lic = ent<Afirmacao & { itens?: Record<string, unknown>[] }>(e, 'licencas');
   const cas = arr<{ classificacao: string; subclassificacoes: { subclassificacao: string; funcionalidades: string[] }[] }>(e.classificacoes_aplicaveis);
@@ -184,6 +207,7 @@ function painelNuvem(ctx: CtxPainel, e: Entidade, caminho: readonly string[]): (
   return [
     agrupamento ? h('p', { class: 'nota' }, h('strong', null, 'Agrupamento criado por este tutorial. '),
       String(e.nota_natureza ?? 'Não é um produto nem uma nuvem oficial da Salesforce.')) : null,
+    avisoCoberturaNuvem(e),
     texto('Resumo', e.resumo, { didatico: true }),
     categoriaNuvem(e.categoria),
     listaTexto(agrupamento ? 'Nome do agrupamento (do projeto) e aliases' : 'Nome oficial e aliases', [String(e.nome_oficial ?? ''), ...arr<string>(e.aliases).map((a) => `Alias: ${a}`)]),
@@ -207,10 +231,10 @@ function painelNuvem(ctx: CtxPainel, e: Entidade, caminho: readonly string[]): (
             compart.includes(f) ? h('span', { class: 'selo selo-compart' }, 'compartilhada') : null)))))))),
     listaTexto('Dependências', arr(e.dependencias)),
     listaTexto('Limites e pontos de atenção', arr(e.limites)),
-    texto('Cobertura do inventário desta nuvem', e.cobertura_inventario),
+    texto('Inventário desta nuvem', ESTADO_INVENTARIO[String(e.cobertura_inventario)] ?? e.cobertura_inventario),
     secao('Fontes', false, fontesEl(ctx, arr(e.evidencias))),
     infoLogo(e),
-    restantes(e, ['id', 'nome_oficial', 'natureza', 'nota_natureza', 'logo_marca', 'aliases', 'sigla', 'categoria', 'resumo', 'o_que_e', 'casos_de_uso', 'contexto_tecnico', 'licencas', 'classificacoes_aplicaveis', 'dependencias', 'limites', 'cobertura_inventario', 'estado', 'evidencias']),
+    restantes(e, ['id', 'nome_oficial', 'natureza', 'nota_natureza', 'logo_marca', 'aliases', 'sigla', 'categoria', 'resumo', 'o_que_e', 'casos_de_uso', 'contexto_tecnico', 'licencas', 'classificacoes_aplicaveis', 'dependencias', 'limites', 'cobertura_inventario', 'cobertura_derivada', 'estado', 'evidencias']),
   ];
 }
 
