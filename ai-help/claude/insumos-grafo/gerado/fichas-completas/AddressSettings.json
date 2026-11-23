@@ -1,0 +1,1035 @@
+{
+  "funcionalidades": [
+    {
+      "id": "func:picklists-de-estado-e-pais",
+      "nome": "Picklists de estado e país"
+    }
+  ],
+  "metadata_type": {
+    "alertas": [
+      "No package.xml, use o tipo Settings com o nome-base do arquivo como membro; o curinga só vale para recuperar todas as configurações.",
+      "Pela Metadata API dá para criar e editar países, territórios e estados, mas não excluí-los.",
+      "Depois de ativar as picklists de estado e país na org, active não pode voltar a false."
+    ],
+    "arquivos": {
+      "curinga_package_xml": {
+        "estado": "verificado",
+        "evidencias": [
+          {
+            "fonte": "src:mdapi-addresssettings"
+          }
+        ],
+        "valor": false
+      },
+      "metadata_api_format": {
+        "estado": "verificado",
+        "evidencias": [
+          {
+            "fonte": "src:mdapi-addresssettings"
+          }
+        ],
+        "nota": "Um único arquivo; no package.xml, o tipo é Settings e o membro é Address.",
+        "valor": {
+          "arquivo": "Address.settings",
+          "pasta": "settings/"
+        }
+      },
+      "source_format": {
+        "estado": "verificado",
+        "evidencias": [
+          {
+            "fonte": "src:sdr-registry",
+            "nota": "types.settings"
+          },
+          {
+            "fonte": "src:mdapi-addresssettings"
+          }
+        ],
+        "nota": "Pasta e sufixo do tipo genérico Settings no registro do Salesforce CLI; o nome-base do arquivo vem da página do tipo.",
+        "valor": {
+          "arquivo": "Address.settings-meta.xml",
+          "pasta": "settings/"
+        }
+      }
+    },
+    "cobertura": {
+      "estrutural": {
+        "esperado": 2,
+        "estado": "completa",
+        "nota": "Universo esperado = elemento countriesAndStates do exemplo XML (a página não tem tabela do tipo raiz) mais fullName herdado; subtipos CountriesAndStates (1), Country (8) e State (6) lidos em 2026-11-23.",
+        "presente": 2
+      },
+      "explicativa": {
+        "esperado": 2,
+        "estado": "completa",
+        "presente": 2
+      },
+      "mapeamento": {
+        "estado": "parcial",
+        "nota": "Correspondências registradas apenas onde há evidência; demais pendentes."
+      }
+    },
+    "disponibilidade": {
+      "ate_versao": null,
+      "desde_versao": "27.0",
+      "estado": "verificado"
+    },
+    "divergencias_documentais": [],
+    "estado": "verificado",
+    "estende": "Metadata",
+    "estruturas": [
+      "mdx:CountriesAndStates"
+    ],
+    "evidencias": [
+      {
+        "fonte": "src:mdapi-addresssettings"
+      },
+      {
+        "fonte": "src:sdr-registry"
+      },
+      {
+        "fonte": "src:sdr-metadata-support"
+      }
+    ],
+    "exemplo_xml": {
+      "natureza": "didatico_projeto",
+      "nota": "Exemplo escrito pelo projeto apenas com elementos documentados; sem dados reais.",
+      "xml": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<AddressSettings xmlns=\"http://soap.sforce.com/2006/04/metadata\">\n    <countriesAndStates>\n        <countries>\n            <active>true</active>\n            <integrationValue>Brasil</integrationValue>\n            <isoCode>BR</isoCode>\n            <label>Brasil</label>\n            <visible>true</visible>\n        </countries>\n    </countriesAndStates>\n</AddressSettings>"
+    },
+    "finalidade": "Recuperar e implantar a lista de países, territórios e estados (rótulos, códigos e visibilidade) entre ambientes.",
+    "id": "mdt:AddressSettings",
+    "nome": "AddressSettings",
+    "o_que_e": "Configuração das picklists de estado e país/território, que trocam o texto livre dos endereços por valores padronizados.",
+    "propriedades": [
+      {
+        "default": {
+          "estado": "desconhecido",
+          "forma": "nao_declarado_na_fonte"
+        },
+        "disponibilidade": {
+          "ate_versao": null,
+          "desde_versao": null,
+          "estado": "desconhecido"
+        },
+        "dominio": {
+          "estado": "verificado",
+          "evidencias": [
+            {
+              "fonte": "src:mdapi-addresssettings"
+            }
+          ],
+          "natureza": "tipo_composto"
+        },
+        "estado": "verificado",
+        "estrutura_expandida": {
+          "id": "mdx:CountriesAndStates",
+          "nome": "CountriesAndStates",
+          "propriedades": [
+            {
+              "cardinalidade": "0..n",
+              "default": {
+                "estado": "desconhecido",
+                "forma": "nao_declarado_na_fonte"
+              },
+              "disponibilidade": {
+                "ate_versao": null,
+                "desde_versao": null,
+                "estado": "desconhecido"
+              },
+              "dominio": {
+                "estado": "verificado",
+                "evidencias": [
+                  {
+                    "fonte": "src:mdapi-addresssettings"
+                  }
+                ],
+                "natureza": "tipo_composto"
+              },
+              "estado": "verificado",
+              "estrutura_expandida": {
+                "id": "mdx:Country",
+                "nome": "Country",
+                "propriedades": [
+                  {
+                    "default": {
+                      "estado": "desconhecido",
+                      "forma": "nao_declarado_na_fonte"
+                    },
+                    "disponibilidade": {
+                      "ate_versao": null,
+                      "desde_versao": null,
+                      "estado": "desconhecido"
+                    },
+                    "dominio": {
+                      "estado": "verificado",
+                      "evidencias": [
+                        {
+                          "fonte": "src:mdapi-addresssettings"
+                        }
+                      ],
+                      "lista_completa": "sim",
+                      "natureza": "booleano",
+                      "valores": [
+                        {
+                          "valor": "true"
+                        },
+                        {
+                          "valor": "false"
+                        }
+                      ]
+                    },
+                    "estado": "verificado",
+                    "evidencias": [
+                      {
+                        "fonte": "src:mdapi-addresssettings"
+                      }
+                    ],
+                    "explicacao": "explicada",
+                    "id": "mdx:Country.active",
+                    "nome": "active",
+                    "o_que_e": "Define se o país ou território fica disponível na API. Depois de ativar as picklists na org, não pode voltar a false.",
+                    "obrigatoriedade": {
+                      "condicao": "A documentação 68.0 não marca o campo como obrigatório; ausência de marcação não comprova opcionalidade (confirmar no WSDL).",
+                      "estado": "desconhecido",
+                      "valor": "nao"
+                    },
+                    "origem": {
+                      "estado": "verificado",
+                      "evidencias": [
+                        {
+                          "fonte": "src:mdapi-addresssettings"
+                        }
+                      ],
+                      "nota": "Propriedade definida pelo schema da Metadata API.",
+                      "valor": "padrao_plataforma"
+                    },
+                    "tipo_tecnico": "boolean"
+                  },
+                  {
+                    "default": {
+                      "estado": "verificado",
+                      "evidencias": [
+                        {
+                          "fonte": "src:mdapi-addresssettings"
+                        }
+                      ],
+                      "forma": "valor",
+                      "nota": "Para itens padrão, o nome completo do padrão ISO, segundo a página."
+                    },
+                    "disponibilidade": {
+                      "ate_versao": null,
+                      "desde_versao": null,
+                      "estado": "desconhecido"
+                    },
+                    "dominio": {
+                      "contexto": "A fonte tipa como string sem lista de valores; não inventar valores.",
+                      "estado": "verificado",
+                      "evidencias": [
+                        {
+                          "fonte": "src:mdapi-addresssettings"
+                        }
+                      ],
+                      "natureza": "texto_livre"
+                    },
+                    "estado": "verificado",
+                    "evidencias": [
+                      {
+                        "fonte": "src:mdapi-addresssettings"
+                      }
+                    ],
+                    "explicacao": "explicada",
+                    "id": "mdx:Country.integrationValue",
+                    "nome": "integrationValue",
+                    "o_que_e": "Texto personalizável ligado ao código ISO, para que integrações feitas antes da ativação das picklists continuem funcionando. Se não for definido antes da ativação, vale o valor padrão da Salesforce; mudanças depois só afetam registros criados ou atualizados a partir daí.",
+                    "obrigatoriedade": {
+                      "condicao": "A documentação 68.0 não marca o campo como obrigatório; ausência de marcação não comprova opcionalidade (confirmar no WSDL).",
+                      "estado": "desconhecido",
+                      "valor": "nao"
+                    },
+                    "origem": {
+                      "estado": "verificado",
+                      "evidencias": [
+                        {
+                          "fonte": "src:mdapi-addresssettings"
+                        }
+                      ],
+                      "nota": "Propriedade definida pelo schema da Metadata API.",
+                      "valor": "padrao_plataforma"
+                    },
+                    "tipo_tecnico": "string"
+                  },
+                  {
+                    "default": {
+                      "estado": "verificado",
+                      "evidencias": [
+                        {
+                          "fonte": "src:mdapi-addresssettings"
+                        }
+                      ],
+                      "forma": "valor",
+                      "nota": "Preenchido pela Salesforce no retrieve(), segundo a página."
+                    },
+                    "disponibilidade": {
+                      "ate_versao": null,
+                      "desde_versao": null,
+                      "estado": "desconhecido"
+                    },
+                    "dominio": {
+                      "contexto": "A fonte tipa como string sem lista de valores; não inventar valores.",
+                      "estado": "verificado",
+                      "evidencias": [
+                        {
+                          "fonte": "src:mdapi-addresssettings"
+                        }
+                      ],
+                      "natureza": "texto_livre"
+                    },
+                    "estado": "verificado",
+                    "evidencias": [
+                      {
+                        "fonte": "src:mdapi-addresssettings"
+                      }
+                    ],
+                    "explicacao": "explicada",
+                    "id": "mdx:Country.isoCode",
+                    "nome": "isoCode",
+                    "o_que_e": "Código ISO do país ou território.",
+                    "obrigatoriedade": {
+                      "condicao": "A documentação 68.0 não marca o campo como obrigatório; ausência de marcação não comprova opcionalidade (confirmar no WSDL).",
+                      "estado": "desconhecido",
+                      "valor": "nao"
+                    },
+                    "origem": {
+                      "estado": "verificado",
+                      "evidencias": [
+                        {
+                          "fonte": "src:mdapi-addresssettings"
+                        }
+                      ],
+                      "nota": "Propriedade definida pelo schema da Metadata API.",
+                      "valor": "padrao_plataforma"
+                    },
+                    "tipo_tecnico": "string"
+                  },
+                  {
+                    "default": {
+                      "estado": "desconhecido",
+                      "forma": "nao_declarado_na_fonte"
+                    },
+                    "disponibilidade": {
+                      "ate_versao": null,
+                      "desde_versao": null,
+                      "estado": "desconhecido"
+                    },
+                    "dominio": {
+                      "contexto": "A fonte tipa como string sem lista de valores; não inventar valores.",
+                      "estado": "verificado",
+                      "evidencias": [
+                        {
+                          "fonte": "src:mdapi-addresssettings"
+                        }
+                      ],
+                      "natureza": "texto_livre"
+                    },
+                    "estado": "verificado",
+                    "evidencias": [
+                      {
+                        "fonte": "src:mdapi-addresssettings"
+                      }
+                    ],
+                    "explicacao": "explicada",
+                    "id": "mdx:Country.label",
+                    "nome": "label",
+                    "o_que_e": "Rótulo do país ou território mostrado aos usuários na picklist.",
+                    "obrigatoriedade": {
+                      "condicao": "A documentação 68.0 não marca o campo como obrigatório; ausência de marcação não comprova opcionalidade (confirmar no WSDL).",
+                      "estado": "desconhecido",
+                      "valor": "nao"
+                    },
+                    "origem": {
+                      "estado": "verificado",
+                      "evidencias": [
+                        {
+                          "fonte": "src:mdapi-addresssettings"
+                        }
+                      ],
+                      "nota": "Propriedade definida pelo schema da Metadata API.",
+                      "valor": "padrao_plataforma"
+                    },
+                    "tipo_tecnico": "string"
+                  },
+                  {
+                    "default": {
+                      "estado": "desconhecido",
+                      "forma": "nao_declarado_na_fonte"
+                    },
+                    "disponibilidade": {
+                      "ate_versao": null,
+                      "desde_versao": null,
+                      "estado": "desconhecido"
+                    },
+                    "dominio": {
+                      "estado": "verificado",
+                      "evidencias": [
+                        {
+                          "fonte": "src:mdapi-addresssettings"
+                        }
+                      ],
+                      "lista_completa": "sim",
+                      "natureza": "booleano",
+                      "valores": [
+                        {
+                          "valor": "true"
+                        },
+                        {
+                          "valor": "false"
+                        }
+                      ]
+                    },
+                    "estado": "verificado",
+                    "evidencias": [
+                      {
+                        "fonte": "src:mdapi-addresssettings"
+                      }
+                    ],
+                    "explicacao": "explicada",
+                    "id": "mdx:Country.orgDefault",
+                    "nome": "orgDefault",
+                    "o_que_e": "Define o país ou território como padrão para registros novos da org.",
+                    "obrigatoriedade": {
+                      "condicao": "A documentação 68.0 não marca o campo como obrigatório; ausência de marcação não comprova opcionalidade (confirmar no WSDL).",
+                      "estado": "desconhecido",
+                      "valor": "nao"
+                    },
+                    "origem": {
+                      "estado": "verificado",
+                      "evidencias": [
+                        {
+                          "fonte": "src:mdapi-addresssettings"
+                        }
+                      ],
+                      "nota": "Propriedade definida pelo schema da Metadata API.",
+                      "valor": "padrao_plataforma"
+                    },
+                    "tipo_tecnico": "boolean"
+                  },
+                  {
+                    "default": {
+                      "estado": "desconhecido",
+                      "forma": "nao_declarado_na_fonte"
+                    },
+                    "disponibilidade": {
+                      "ate_versao": null,
+                      "desde_versao": null,
+                      "estado": "desconhecido"
+                    },
+                    "dominio": {
+                      "estado": "verificado",
+                      "evidencias": [
+                        {
+                          "fonte": "src:mdapi-addresssettings"
+                        }
+                      ],
+                      "lista_completa": "sim",
+                      "natureza": "booleano",
+                      "valores": [
+                        {
+                          "valor": "true"
+                        },
+                        {
+                          "valor": "false"
+                        }
+                      ]
+                    },
+                    "estado": "verificado",
+                    "evidencias": [
+                      {
+                        "fonte": "src:mdapi-addresssettings"
+                      }
+                    ],
+                    "explicacao": "explicada",
+                    "id": "mdx:Country.standard",
+                    "nome": "standard",
+                    "o_que_e": "Indica se o país vem da Salesforce; não é editável.",
+                    "obrigatoriedade": {
+                      "condicao": "A documentação 68.0 não marca o campo como obrigatório; ausência de marcação não comprova opcionalidade (confirmar no WSDL).",
+                      "estado": "desconhecido",
+                      "valor": "nao"
+                    },
+                    "origem": {
+                      "estado": "verificado",
+                      "evidencias": [
+                        {
+                          "fonte": "src:mdapi-addresssettings"
+                        }
+                      ],
+                      "nota": "Propriedade definida pelo schema da Metadata API.",
+                      "valor": "padrao_plataforma"
+                    },
+                    "tipo_tecnico": "boolean"
+                  },
+                  {
+                    "cardinalidade": "0..n",
+                    "default": {
+                      "estado": "desconhecido",
+                      "forma": "nao_declarado_na_fonte"
+                    },
+                    "disponibilidade": {
+                      "ate_versao": null,
+                      "desde_versao": null,
+                      "estado": "desconhecido"
+                    },
+                    "dominio": {
+                      "estado": "verificado",
+                      "evidencias": [
+                        {
+                          "fonte": "src:mdapi-addresssettings"
+                        }
+                      ],
+                      "natureza": "tipo_composto"
+                    },
+                    "estado": "verificado",
+                    "estrutura_expandida": {
+                      "id": "mdx:State",
+                      "nome": "State",
+                      "propriedades": [
+                        {
+                          "default": {
+                            "estado": "desconhecido",
+                            "forma": "nao_declarado_na_fonte"
+                          },
+                          "disponibilidade": {
+                            "ate_versao": null,
+                            "desde_versao": null,
+                            "estado": "desconhecido"
+                          },
+                          "dominio": {
+                            "estado": "verificado",
+                            "evidencias": [
+                              {
+                                "fonte": "src:mdapi-addresssettings"
+                              }
+                            ],
+                            "lista_completa": "sim",
+                            "natureza": "booleano",
+                            "valores": [
+                              {
+                                "valor": "true"
+                              },
+                              {
+                                "valor": "false"
+                              }
+                            ]
+                          },
+                          "estado": "verificado",
+                          "evidencias": [
+                            {
+                              "fonte": "src:mdapi-addresssettings"
+                            }
+                          ],
+                          "explicacao": "explicada",
+                          "id": "mdx:State.active",
+                          "nome": "active",
+                          "o_que_e": "Define se o estado fica disponível na API. Depois de ativar as picklists de estado e país na org, não pode voltar a false.",
+                          "obrigatoriedade": {
+                            "condicao": "A documentação 68.0 não marca o campo como obrigatório; ausência de marcação não comprova opcionalidade (confirmar no WSDL).",
+                            "estado": "desconhecido",
+                            "valor": "nao"
+                          },
+                          "origem": {
+                            "estado": "verificado",
+                            "evidencias": [
+                              {
+                                "fonte": "src:mdapi-addresssettings"
+                              }
+                            ],
+                            "nota": "Propriedade definida pelo schema da Metadata API.",
+                            "valor": "padrao_plataforma"
+                          },
+                          "tipo_tecnico": "boolean"
+                        },
+                        {
+                          "default": {
+                            "estado": "verificado",
+                            "evidencias": [
+                              {
+                                "fonte": "src:mdapi-addresssettings"
+                              }
+                            ],
+                            "forma": "valor",
+                            "nota": "Para itens padrão, o nome completo do padrão ISO, segundo a página."
+                          },
+                          "disponibilidade": {
+                            "ate_versao": null,
+                            "desde_versao": null,
+                            "estado": "desconhecido"
+                          },
+                          "dominio": {
+                            "contexto": "A fonte tipa como string sem lista de valores; não inventar valores.",
+                            "estado": "verificado",
+                            "evidencias": [
+                              {
+                                "fonte": "src:mdapi-addresssettings"
+                              }
+                            ],
+                            "natureza": "texto_livre"
+                          },
+                          "estado": "verificado",
+                          "evidencias": [
+                            {
+                              "fonte": "src:mdapi-addresssettings"
+                            }
+                          ],
+                          "explicacao": "explicada",
+                          "id": "mdx:State.integrationValue",
+                          "nome": "integrationValue",
+                          "o_que_e": "Texto personalizável ligado ao código ISO, para que integrações feitas antes da ativação das picklists continuem funcionando. Se não for definido antes da ativação, vale o valor padrão da Salesforce; mudanças depois só afetam registros criados ou atualizados a partir daí.",
+                          "obrigatoriedade": {
+                            "condicao": "A documentação 68.0 não marca o campo como obrigatório; ausência de marcação não comprova opcionalidade (confirmar no WSDL).",
+                            "estado": "desconhecido",
+                            "valor": "nao"
+                          },
+                          "origem": {
+                            "estado": "verificado",
+                            "evidencias": [
+                              {
+                                "fonte": "src:mdapi-addresssettings"
+                              }
+                            ],
+                            "nota": "Propriedade definida pelo schema da Metadata API.",
+                            "valor": "padrao_plataforma"
+                          },
+                          "tipo_tecnico": "string"
+                        },
+                        {
+                          "default": {
+                            "estado": "verificado",
+                            "evidencias": [
+                              {
+                                "fonte": "src:mdapi-addresssettings"
+                              }
+                            ],
+                            "forma": "valor",
+                            "nota": "Preenchido pela Salesforce no retrieve(), segundo a página."
+                          },
+                          "disponibilidade": {
+                            "ate_versao": null,
+                            "desde_versao": null,
+                            "estado": "desconhecido"
+                          },
+                          "dominio": {
+                            "contexto": "A fonte tipa como string sem lista de valores; não inventar valores.",
+                            "estado": "verificado",
+                            "evidencias": [
+                              {
+                                "fonte": "src:mdapi-addresssettings"
+                              }
+                            ],
+                            "natureza": "texto_livre"
+                          },
+                          "estado": "verificado",
+                          "evidencias": [
+                            {
+                              "fonte": "src:mdapi-addresssettings"
+                            }
+                          ],
+                          "explicacao": "explicada",
+                          "id": "mdx:State.isoCode",
+                          "nome": "isoCode",
+                          "o_que_e": "Código ISO do estado.",
+                          "obrigatoriedade": {
+                            "condicao": "A documentação 68.0 não marca o campo como obrigatório; ausência de marcação não comprova opcionalidade (confirmar no WSDL).",
+                            "estado": "desconhecido",
+                            "valor": "nao"
+                          },
+                          "origem": {
+                            "estado": "verificado",
+                            "evidencias": [
+                              {
+                                "fonte": "src:mdapi-addresssettings"
+                              }
+                            ],
+                            "nota": "Propriedade definida pelo schema da Metadata API.",
+                            "valor": "padrao_plataforma"
+                          },
+                          "tipo_tecnico": "string"
+                        },
+                        {
+                          "default": {
+                            "estado": "desconhecido",
+                            "forma": "nao_declarado_na_fonte"
+                          },
+                          "disponibilidade": {
+                            "ate_versao": null,
+                            "desde_versao": null,
+                            "estado": "desconhecido"
+                          },
+                          "dominio": {
+                            "contexto": "A fonte tipa como string sem lista de valores; não inventar valores.",
+                            "estado": "verificado",
+                            "evidencias": [
+                              {
+                                "fonte": "src:mdapi-addresssettings"
+                              }
+                            ],
+                            "natureza": "texto_livre"
+                          },
+                          "estado": "verificado",
+                          "evidencias": [
+                            {
+                              "fonte": "src:mdapi-addresssettings"
+                            }
+                          ],
+                          "explicacao": "explicada",
+                          "id": "mdx:State.label",
+                          "nome": "label",
+                          "o_que_e": "Rótulo do estado mostrado aos usuários na picklist.",
+                          "obrigatoriedade": {
+                            "condicao": "A documentação 68.0 não marca o campo como obrigatório; ausência de marcação não comprova opcionalidade (confirmar no WSDL).",
+                            "estado": "desconhecido",
+                            "valor": "nao"
+                          },
+                          "origem": {
+                            "estado": "verificado",
+                            "evidencias": [
+                              {
+                                "fonte": "src:mdapi-addresssettings"
+                              }
+                            ],
+                            "nota": "Propriedade definida pelo schema da Metadata API.",
+                            "valor": "padrao_plataforma"
+                          },
+                          "tipo_tecnico": "string"
+                        },
+                        {
+                          "default": {
+                            "estado": "desconhecido",
+                            "forma": "nao_declarado_na_fonte"
+                          },
+                          "disponibilidade": {
+                            "ate_versao": null,
+                            "desde_versao": null,
+                            "estado": "desconhecido"
+                          },
+                          "dominio": {
+                            "estado": "verificado",
+                            "evidencias": [
+                              {
+                                "fonte": "src:mdapi-addresssettings"
+                              }
+                            ],
+                            "lista_completa": "sim",
+                            "natureza": "booleano",
+                            "valores": [
+                              {
+                                "valor": "true"
+                              },
+                              {
+                                "valor": "false"
+                              }
+                            ]
+                          },
+                          "estado": "verificado",
+                          "evidencias": [
+                            {
+                              "fonte": "src:mdapi-addresssettings"
+                            }
+                          ],
+                          "explicacao": "explicada",
+                          "id": "mdx:State.standard",
+                          "nome": "standard",
+                          "o_que_e": "Indica se o estado vem da Salesforce; não é editável.",
+                          "obrigatoriedade": {
+                            "condicao": "A documentação 68.0 não marca o campo como obrigatório; ausência de marcação não comprova opcionalidade (confirmar no WSDL).",
+                            "estado": "desconhecido",
+                            "valor": "nao"
+                          },
+                          "origem": {
+                            "estado": "verificado",
+                            "evidencias": [
+                              {
+                                "fonte": "src:mdapi-addresssettings"
+                              }
+                            ],
+                            "nota": "Propriedade definida pelo schema da Metadata API.",
+                            "valor": "padrao_plataforma"
+                          },
+                          "tipo_tecnico": "boolean"
+                        },
+                        {
+                          "default": {
+                            "estado": "desconhecido",
+                            "forma": "nao_declarado_na_fonte"
+                          },
+                          "disponibilidade": {
+                            "ate_versao": null,
+                            "desde_versao": null,
+                            "estado": "desconhecido"
+                          },
+                          "dominio": {
+                            "estado": "verificado",
+                            "evidencias": [
+                              {
+                                "fonte": "src:mdapi-addresssettings"
+                              }
+                            ],
+                            "lista_completa": "sim",
+                            "natureza": "booleano",
+                            "valores": [
+                              {
+                                "valor": "true"
+                              },
+                              {
+                                "valor": "false"
+                              }
+                            ]
+                          },
+                          "estado": "verificado",
+                          "evidencias": [
+                            {
+                              "fonte": "src:mdapi-addresssettings"
+                            }
+                          ],
+                          "explicacao": "explicada",
+                          "id": "mdx:State.visible",
+                          "nome": "visible",
+                          "o_que_e": "Mostra o estado aos usuários. Exige active em true.",
+                          "obrigatoriedade": {
+                            "condicao": "A documentação 68.0 não marca o campo como obrigatório; ausência de marcação não comprova opcionalidade (confirmar no WSDL).",
+                            "estado": "desconhecido",
+                            "valor": "nao"
+                          },
+                          "origem": {
+                            "estado": "verificado",
+                            "evidencias": [
+                              {
+                                "fonte": "src:mdapi-addresssettings"
+                              }
+                            ],
+                            "nota": "Propriedade definida pelo schema da Metadata API.",
+                            "valor": "padrao_plataforma"
+                          },
+                          "tipo_tecnico": "boolean"
+                        }
+                      ]
+                    },
+                    "estrutura_ref": "mdx:State",
+                    "evidencias": [
+                      {
+                        "fonte": "src:mdapi-addresssettings"
+                      }
+                    ],
+                    "explicacao": "explicada",
+                    "id": "mdx:Country.states",
+                    "nome": "states",
+                    "o_que_e": "Estados ou províncias do país ou território.",
+                    "obrigatoriedade": {
+                      "condicao": "A documentação 68.0 não marca o campo como obrigatório; ausência de marcação não comprova opcionalidade (confirmar no WSDL).",
+                      "estado": "desconhecido",
+                      "valor": "nao"
+                    },
+                    "origem": {
+                      "estado": "verificado",
+                      "evidencias": [
+                        {
+                          "fonte": "src:mdapi-addresssettings"
+                        }
+                      ],
+                      "nota": "Propriedade definida pelo schema da Metadata API.",
+                      "valor": "padrao_plataforma"
+                    },
+                    "tipo_tecnico": "State[]"
+                  },
+                  {
+                    "default": {
+                      "estado": "desconhecido",
+                      "forma": "nao_declarado_na_fonte"
+                    },
+                    "disponibilidade": {
+                      "ate_versao": null,
+                      "desde_versao": null,
+                      "estado": "desconhecido"
+                    },
+                    "dominio": {
+                      "estado": "verificado",
+                      "evidencias": [
+                        {
+                          "fonte": "src:mdapi-addresssettings"
+                        }
+                      ],
+                      "lista_completa": "sim",
+                      "natureza": "booleano",
+                      "valores": [
+                        {
+                          "valor": "true"
+                        },
+                        {
+                          "valor": "false"
+                        }
+                      ]
+                    },
+                    "estado": "verificado",
+                    "evidencias": [
+                      {
+                        "fonte": "src:mdapi-addresssettings"
+                      }
+                    ],
+                    "explicacao": "explicada",
+                    "id": "mdx:Country.visible",
+                    "nome": "visible",
+                    "o_que_e": "Mostra o país ou território aos usuários. Exige active em true.",
+                    "obrigatoriedade": {
+                      "condicao": "A documentação 68.0 não marca o campo como obrigatório; ausência de marcação não comprova opcionalidade (confirmar no WSDL).",
+                      "estado": "desconhecido",
+                      "valor": "nao"
+                    },
+                    "origem": {
+                      "estado": "verificado",
+                      "evidencias": [
+                        {
+                          "fonte": "src:mdapi-addresssettings"
+                        }
+                      ],
+                      "nota": "Propriedade definida pelo schema da Metadata API.",
+                      "valor": "padrao_plataforma"
+                    },
+                    "tipo_tecnico": "boolean"
+                  }
+                ]
+              },
+              "estrutura_ref": "mdx:Country",
+              "evidencias": [
+                {
+                  "fonte": "src:mdapi-addresssettings"
+                }
+              ],
+              "explicacao": "explicada",
+              "id": "mdx:CountriesAndStates.countries",
+              "nome": "countries",
+              "o_que_e": "Países e territórios disponíveis nas picklists.",
+              "obrigatoriedade": {
+                "condicao": "A documentação 68.0 não marca o campo como obrigatório; ausência de marcação não comprova opcionalidade (confirmar no WSDL).",
+                "estado": "desconhecido",
+                "valor": "nao"
+              },
+              "origem": {
+                "estado": "verificado",
+                "evidencias": [
+                  {
+                    "fonte": "src:mdapi-addresssettings"
+                  }
+                ],
+                "nota": "Propriedade definida pelo schema da Metadata API.",
+                "valor": "padrao_plataforma"
+              },
+              "tipo_tecnico": "Country[]"
+            }
+          ]
+        },
+        "estrutura_ref": "mdx:CountriesAndStates",
+        "evidencias": [
+          {
+            "fonte": "src:mdapi-addresssettings"
+          }
+        ],
+        "explicacao": "explicada",
+        "id": "mdt:AddressSettings.countriesAndStates",
+        "nome": "countriesAndStates",
+        "notas": [
+          "A página não tem tabela de campos do tipo raiz; o nome do elemento vem do exemplo XML e o tipo, da seção do subtipo CountriesAndStates."
+        ],
+        "o_que_e": "Países, territórios e estados configurados nas picklists.",
+        "obrigatoriedade": {
+          "condicao": "A documentação 68.0 não marca o campo como obrigatório; ausência de marcação não comprova opcionalidade (confirmar no WSDL).",
+          "estado": "desconhecido",
+          "valor": "nao"
+        },
+        "origem": {
+          "estado": "verificado",
+          "evidencias": [
+            {
+              "fonte": "src:mdapi-addresssettings"
+            }
+          ],
+          "nota": "Propriedade definida pelo schema da Metadata API.",
+          "valor": "padrao_plataforma"
+        },
+        "tipo_tecnico": "CountriesAndStates"
+      },
+      {
+        "default": {
+          "estado": "desconhecido",
+          "forma": "nao_declarado_na_fonte"
+        },
+        "disponibilidade": {
+          "ate_versao": null,
+          "desde_versao": null,
+          "estado": "desconhecido"
+        },
+        "dominio": {
+          "contexto": "A fonte tipa como string sem lista de valores; não inventar valores.",
+          "estado": "verificado",
+          "evidencias": [
+            {
+              "fonte": "src:mdapi-addresssettings"
+            }
+          ],
+          "natureza": "texto_livre"
+        },
+        "estado": "verificado",
+        "evidencias": [
+          {
+            "fonte": "src:mdapi-addresssettings"
+          }
+        ],
+        "explicacao": "explicada",
+        "herdada_de": "Metadata",
+        "id": "mdt:AddressSettings.fullName",
+        "nome": "fullName",
+        "o_que_e": "Nome completo (API name) do componente; herdado do tipo Metadata.",
+        "obrigatoriedade": {
+          "estado": "desconhecido",
+          "valor": "desconhecida"
+        },
+        "origem": {
+          "estado": "verificado",
+          "evidencias": [
+            {
+              "fonte": "src:mdapi-addresssettings"
+            }
+          ],
+          "nota": "Propriedade definida pelo schema da Metadata API.",
+          "valor": "padrao_plataforma"
+        },
+        "tipo_tecnico": "string"
+      }
+    ],
+    "recomendacoes": [],
+    "setup": {
+      "estado": "desconhecido",
+      "nota": "Caminho no Setup não validado nesta sessão."
+    },
+    "suporte_cli": {
+      "estado": "verificado",
+      "evidencias": [
+        {
+          "fonte": "src:sdr-metadata-support"
+        }
+      ],
+      "nota": "Suporte do Salesforce CLI (source-deploy-retrieve), não do Metadata API em geral.",
+      "valor": {
+        "nota_fonte": null,
+        "status": "suportado"
+      }
+    }
+  },
+  "nota": "Gerado deterministicamente a partir de catalogo/. Não editar à mão.",
+  "objetos_relacionados": [],
+  "relacionamentos": [],
+  "versao_base": {
+    "api_version": "68.0",
+    "data_referencia": "2026-11-07",
+    "escopo": "config/escopo.json",
+    "release": "Winter '27"
+  }
+}

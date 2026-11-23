@@ -7,13 +7,15 @@ Gerado por `ferramentas/sftutor.py cobertura`. Cobertura estrutural, explicativa
 
 - Universo v68 (METADATA_SUPPORT.md): **993** tipos.
 - Classificados como incluídos no recorte Core: 154; pendentes de classificação: 646.
-- Cadastrados: **179** de 993. Estruturalmente completos (contra a página oficial): 179. Completos nas três dimensões: 0.
+- Cadastrados: **189** de 993. Estruturalmente completos (contra a página oficial): 189. Completos nas três dimensões: 0.
 - Porcentagem do recorte Core: não calculada, porque o denominador do recorte ainda não está definido (classificação item a item pendente).
 
 | Tipo | Estrutural | Esperadas | Presentes | Explicadas | Estruturas | Mapeamento | Completo |
 |---|---|---|---|---|---|---|---|
 | mdt:AccountSettings | completa | 9 | 9 | 9 | 0 | parcial | não |
 | mdt:ActionsSettings | completa | 6 | 6 | 6 | 0 | parcial | não |
+| mdt:ActivitiesSettings | completa | 28 | 28 | 28 | 0 | parcial | não |
+| mdt:AddressSettings | completa | 2 | 2 | 2 | 1 | parcial | não |
 | mdt:ApexClass | completa | 5 | 5 | 5 | 1 | parcial | não |
 | mdt:ApexComponent | completa | 6 | 6 | 6 | 1 | parcial | não |
 | mdt:ApexPage | completa | 8 | 8 | 8 | 1 | parcial | não |
@@ -63,6 +65,8 @@ Gerado por `ferramentas/sftutor.py cobertura`. Cobertura estrutural, explicativa
 | mdt:DuplicateRule | completa | 13 | 13 | 13 | 2 | parcial | não |
 | mdt:DynamicFormsSettings | completa | 1 | 1 | 1 | 0 | parcial | não |
 | mdt:EinsteinGptSettings | completa | 11 | 11 | 11 | 0 | parcial | não |
+| mdt:EmailAdministrationSettings | completa | 20 | 20 | 20 | 0 | parcial | não |
+| mdt:EmailAuthorizationSettings | completa | 2 | 2 | 2 | 0 | parcial | não |
 | mdt:EmailTemplate | completa | 17 | 17 | 17 | 2 | parcial | não |
 | mdt:EmailTemplateSettings | completa | 1 | 1 | 1 | 0 | parcial | não |
 | mdt:EnhancedNotesSettings | completa | 2 | 2 | 2 | 0 | parcial | não |
@@ -90,6 +94,7 @@ Gerado por `ferramentas/sftutor.py cobertura`. Cobertura estrutural, explicativa
 | mdt:ExtlClntAppSamlConfigurablePolicies | completa | 19 | 19 | 19 | 1 | parcial | não |
 | mdt:FieldServiceSettings | completa | 55 | 55 | 41 | 1 | parcial | não |
 | mdt:FieldSet | completa | 5 | 5 | 5 | 1 | parcial | não |
+| mdt:FileUploadAndDownloadSecuritySettings | completa | 3 | 3 | 3 | 1 | parcial | não |
 | mdt:FlexiPage | completa | 12 | 12 | 12 | 5 | parcial | não |
 | mdt:Flow | completa | 50 | 50 | 49 | 32 | parcial | não |
 | mdt:FlowSettings | completa | 32 | 32 | 27 | 0 | parcial | não |
@@ -99,6 +104,7 @@ Gerado por `ferramentas/sftutor.py cobertura`. Cobertura estrutural, explicativa
 | mdt:GenAiPromptTemplate | completa | 11 | 11 | 11 | 1 | parcial | não |
 | mdt:Group | completa | 4 | 4 | 4 | 0 | parcial | não |
 | mdt:HelpSettings | completa | 1 | 1 | 1 | 0 | parcial | não |
+| mdt:IdentityProviderSettings | completa | 3 | 3 | 3 | 0 | parcial | não |
 | mdt:IframeWhiteListUrlSettings | completa | 1 | 1 | 1 | 1 | parcial | não |
 | mdt:InboundCertificate | completa | 4 | 4 | 4 | 0 | parcial | não |
 | mdt:InboundNetworkConnection | completa | 7 | 7 | 7 | 1 | parcial | não |
@@ -164,6 +170,7 @@ Gerado por `ferramentas/sftutor.py cobertura`. Cobertura estrutural, explicativa
 | mdt:SamlSsoConfig | completa | 26 | 26 | 26 | 0 | parcial | não |
 | mdt:SandboxSettings | completa | 2 | 2 | 2 | 0 | parcial | não |
 | mdt:SchemaSettings | completa | 5 | 5 | 5 | 0 | parcial | não |
+| mdt:SearchSettings | completa | 23 | 23 | 23 | 1 | parcial | não |
 | mdt:ServiceChannel | completa | 19 | 19 | 19 | 1 | parcial | não |
 | mdt:ServicePresenceStatus | completa | 3 | 3 | 3 | 1 | parcial | não |
 | mdt:SharingCriteriaRule | completa | 9 | 9 | 9 | 3 | parcial | não |
@@ -172,6 +179,7 @@ Gerado por `ferramentas/sftutor.py cobertura`. Cobertura estrutural, explicativa
 | mdt:SharingReason | completa | 2 | 2 | 2 | 0 | parcial | não |
 | mdt:SharingRules | completa | 5 | 5 | 5 | 0 | parcial | não |
 | mdt:SharingTerritoryRule | completa | 7 | 7 | 7 | 2 | parcial | não |
+| mdt:SiteSettings | completa | 9 | 9 | 9 | 0 | parcial | não |
 | mdt:SourceTrackingSettings | completa | 2 | 2 | 2 | 0 | parcial | não |
 | mdt:StaticResource | completa | 5 | 5 | 5 | 0 | parcial | não |
 | mdt:Territory2 | completa | 12 | 12 | 12 | 3 | parcial | não |
@@ -181,6 +189,8 @@ Gerado por `ferramentas/sftutor.py cobertura`. Cobertura estrutural, explicativa
 | mdt:Territory2Type | completa | 4 | 4 | 4 | 0 | parcial | não |
 | mdt:Translations | completa | 33 | 33 | 33 | 32 | parcial | não |
 | mdt:UserAuthCertificate | completa | 6 | 6 | 6 | 0 | parcial | não |
+| mdt:UserEngagementSettings | completa | 28 | 28 | 28 | 0 | parcial | não |
+| mdt:UserInterfaceSettings | completa | 20 | 20 | 20 | 0 | parcial | não |
 | mdt:ValidationRule | completa | 6 | 6 | 6 | 0 | parcial | não |
 | mdt:WebLink | completa | 22 | 22 | 22 | 0 | parcial | não |
 | mdt:Workflow | completa | 8 | 8 | 8 | 0 | parcial | não |
@@ -194,8 +204,8 @@ Gerado por `ferramentas/sftutor.py cobertura`. Cobertura estrutural, explicativa
 
 ## Propriedades XML
 
-- Em metadata types: 2294 listadas, 2263 explicadas.
-- Em estruturas auxiliares: 2242 listadas, 2242 explicadas.
+- Em metadata types: 2432 listadas, 2401 explicadas.
+- Em estruturas auxiliares: 2265 listadas, 2265 explicadas.
 - Universo total: Sem WSDL não há denominador confiável do total de propriedades do recorte.
 
 ## Objetos consultáveis via API
@@ -298,4 +308,4 @@ Gerado por `ferramentas/sftutor.py cobertura`. Cobertura estrutural, explicativa
 ## Taxonomia e funcionalidades
 
 - Classificações: 14; subclassificações: 92 (com funcionalidades: 91).
-- Funcionalidades cadastradas: 144 (universo de funcionalidades não definido).
+- Funcionalidades cadastradas: 150 (universo de funcionalidades não definido).

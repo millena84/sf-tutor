@@ -1,0 +1,204 @@
+fonte: 10 páginas de tipos Settings do Metadata API Developer Guide, versão 264.0 (API 68.0, Winter '27)
+lote: #10, etapa 3, lote B (cadastro de tipos já incluídos no Core e ainda sem ficha)
+obtido em 2026-11-23 via WebFetch no endpoint versionado
+  https://developer.salesforce.com/docs/get_document_content/api_meta/meta_<tipo em minúsculas>.htm/en-us/264.0
+método: extração documental assistida por IA. A ferramenta devolve a página resumida em português por um modelo de leitura, não o texto
+  literal. Pedi a tabela Fields completa com contagem de linhas e conferência; descrições parafraseadas no catálogo. Sem leitura do HTML original.
+  UserEngagementSettings foi lido na mesma data, na rodada do lote A.
+
+Por tipo (arquivo | versão | campos | observações). Todos declaram herdar fullName.
+[src:mdapi-activitiessettings] Activities.settings | 28.0 | 27 campos, sem subtipos.
+  allowUsersToRelateMultipleContactsToTasksAndEvents (somente leitura desde 36.0), autoRelateEventAttendees (42.0; até 50 contatos ou um lead
+  pelo e-mail), enableActivityReminders, enableCalendarHomeLWC, enableClickCreateEvents (sem recorrentes nem várias pessoas),
+  enableDragAndDropScheduling, enableEmailTracking, enableFlowTaskNotifsViaApex, enableGroupTasks, enableHideChildEventsPreference (50.0),
+  enableListViewScheduling, enableLogNote, enableMLSingleClientProfile (50.0), enableMultidayEvents, enableRecurringEvents, enableRecurringTasks,
+  enableRollUpActivToContactsAcct (47.0, default true), enableSidebarCalendarShortcut, enableSimpleTaskCreateUI, enableTimelineCompDateSort,
+  enableUNSTaskDelegatedToNotifications, enableUserListViewCalendars (47.0), meetingRequestsLogo (string; exige showCustomLogoMeetingRequests),
+  showCustomLogoMeetingRequests, showEventDetailsMultiUserCalendar, showHomePageHoverLinksForEvents, showMyTasksHoverLinks.
+  Onde indicado, o administrador controla na tela Activity Settings ou nas configurações de User Interface.
+[src:mdapi-addresssettings] Address.settings | 27.0 | sem tabela do tipo raiz; o exemplo XML mostra o elemento countriesAndStates.
+  CountriesAndStates: countries (Country[]). Country (8): active, integrationValue (default: nome ISO completo para itens padrão), isoCode
+  (preenchido no retrieve), label, orgDefault, standard (não editável), states (State[]), visible (exige active). State (6): active,
+  integrationValue, isoCode, label, standard, visible. Pela Metadata API dá para criar e editar países e estados, mas não excluir.
+  No CLI: Settings:Address.
+[src:mdapi-emailadministrationsettings] arquivo escrito "EmailAdminstration.settings" na página; membro EmailAdministration | 47.0 | 19 campos.
+  Defaults: enableEmailSpfCompliance, enableEnhancedEmailEnabled, enableHandleBouncedEmails, enableListEmailLogActivities e
+  sendMassEmailNotification true; enableInternationalEmailAddresses (49.0) true em orgs do Summer '20 em diante e false até o Spring '20;
+  enableSendThroughGmailPref obsoleto sem default; os demais false. Dependências: Sender ID exige SPF; reenvio de devolvidos exige tratamento
+  de devolvidos; TLS por domínio exige TLS Setting diferente de Preferred.
+[src:mdapi-emailauthorizationsettings] EmailAuthorization.settings | 66.0 | 1 campo: enableSubstituteFromAddress (default false). Estende
+  MetadataForSettings.
+[src:mdapi-fileuploadanddownloadsecuritysettings] sufixo .settings, pasta settings (nome-base não dado na leitura) | 39.0 | 2 campos:
+  dispositions (FileTypeDispositionAssignmentBean[], 39.0), noHtmlUploadAsAttachment (39.0). Subtipo com 3 campos: behavior
+  (DOWNLOAD, EXECUTE, HYBRID; tipos de risco não podem ser EXECUTE), filetype (26 valores aceitos), securityRiskFileType (somente leitura).
+[src:mdapi-identityprovidersettings] IdentityProvider.settings | 57.0 | 2 campos obrigatórios: certificateName, enableIdentityProvider.
+  Acesso: Customize Application.
+[src:mdapi-searchsettings] Search.settings | 37.0 | 22 campos; subtipos SearchSettingsByObject (1: searchSettingsByObject do tipo
+  ObjectSearchSetting) e ObjectSearchSetting (4 obrigatórios: enhancedLookupEnabled, lookupAutoCompleteEnabled, name, resultsPerPageCount).
+  Campos marcados obrigatórios: optimizeSearchForCJKEnabled, recentlyViewedUsersForBlankLookupEnabled, searchSettingsByObject,
+  sidebarAutoCompleteEnabled, sidebarDropDownListEnabled, sidebarLimitToItemsIOwnCheckboxEnabled, singleSearchResultShortcutEnabled,
+  spellCorrectKnowledgeSearchEnabled. Defaults: enableEinsteinSearchEs4kPilot true na 56.0+; enableSetupSearch true nas edições Developer,
+  Performance, Professional, Enterprise e Unlimited. Divergência: descrições de enableSearchTermHistory e enablePublicTagging parecem copiadas.
+[src:mdapi-sitesettings] Site.settings | 47.0 | 8 campos, versões tiradas das descrições: enableEnhancedSitesAndContentPlatform (56.0, true),
+  enableExpBuilderCopilot (64.0, false, beta), enableExperienceFriendlyUrls (só 58.0; depois expFriendlyUrlsAsDefault em Network),
+  enableProxyLoginICHeader (até 31.0, true), enableSitesRecordReassignOrgPref (48.0; descontinuado a partir da 63.0), enableTopicsInSites,
+  enableVisualforceApiAccessAllowed (descontinuado a partir da 52.0), enableWebruntimeBYOTemplate (48.0; removido na 51.0).
+[src:mdapi-userinterfacesettings] sufixo .settings, pasta settings (nome-base não dado na leitura) | 46.0 | 19 campos booleanos com defaults
+  declarados (exceto enableQuickCreate); listViewIleBypassLayout e listViewIleMultiRecordType na 68.0; enableSldsV2DarkModeInCosmos na 65.0;
+  multiColumnSortLv e multiColumnSortRL na 63.0, default true.
+[src:mdapi-userengagementsettings] sufixo .settings, pasta settings (nome-base não dado na leitura) | 47.0 (a página fala em "Prompt
+  components") | 27 campos booleanos com defaults; canUseAdoptionApps (62.0); enableHelpMenuShowHelp, ShowNewUser e ShowSearch para a
+  API 64.0 e anteriores; enableIBILOptOut* obsoletos na 51.0+.
+
+Correção no lote A (script lote9a reexecutado): RecordPageSettings.enableDynamicForms passa a ate_versao 49.0, porque a página diz que o
+  campo foi removido na API 50.0 e o projeto registra em ate_versao a última versão em que o item existe.
+
+Classificação funcional (decisão do projeto): FileUploadAndDownloadSecuritySettings em Salesforce Files; IdentityProviderSettings em SSO
+  SAML; SiteSettings em Experience Cloud sites. Funcionalidades novas com a página
+  do tipo como fonte e Setup desconhecido: atividades-e-calendario, picklists-de-estado-e-pais, entrega-de-email, pesquisa, opcoes-da-interface, menu-de-ajuda-e-adocao.
+
+Lista completa dos campos lidos (nome | tipo | versão inicial | última versão), por tipo:
+[src:mdapi-activitiessettings] ActivitiesSettings:
+  allowUsersToRelateMultipleContactsToTasksAndEvents | boolean | - | -
+  autoRelateEventAttendees | boolean | 42.0 | -
+  enableActivityReminders | boolean | - | -
+  enableCalendarHomeLWC | boolean | - | -
+  enableClickCreateEvents | boolean | - | -
+  enableDragAndDropScheduling | boolean | - | -
+  enableEmailTracking | boolean | - | -
+  enableFlowTaskNotifsViaApex | boolean | - | -
+  enableGroupTasks | boolean | - | -
+  enableHideChildEventsPreference | boolean | 50.0 | -
+  enableListViewScheduling | boolean | - | -
+  enableLogNote | boolean | - | -
+  enableMLSingleClientProfile | boolean | 50.0 | -
+  enableMultidayEvents | boolean | - | -
+  enableRecurringEvents | boolean | - | -
+  enableRecurringTasks | boolean | - | -
+  enableRollUpActivToContactsAcct | boolean | 47.0 | -
+  enableSidebarCalendarShortcut | boolean | - | -
+  enableSimpleTaskCreateUI | boolean | - | -
+  enableTimelineCompDateSort | boolean | - | -
+  enableUNSTaskDelegatedToNotifications | boolean | - | -
+  enableUserListViewCalendars | boolean | 47.0 | -
+  meetingRequestsLogo | string | - | -
+  showCustomLogoMeetingRequests | boolean | - | -
+  showEventDetailsMultiUserCalendar | boolean | - | -
+  showHomePageHoverLinksForEvents | boolean | - | -
+  showMyTasksHoverLinks | boolean | - | -
+[src:mdapi-addresssettings] AddressSettings:
+  countriesAndStates | CountriesAndStates | - | -
+[src:mdapi-emailadministrationsettings] EmailAdministrationSettings:
+  enableComplianceBcc | boolean | - | -
+  enableEmailConsentManagement | boolean | - | -
+  enableEmailSenderIdCompliance | boolean | - | -
+  enableEmailSpfCompliance | boolean | - | -
+  enableEmailToSalesforce | boolean | - | -
+  enableEmailWorkflowApproval | boolean | - | -
+  enableEnhancedEmailEnabled | boolean | - | -
+  enableHandleBouncedEmails | boolean | - | -
+  enableHtmlEmail | boolean | - | -
+  enableInternationalEmailAddresses | boolean | 49.0 | -
+  enableListEmailLogActivities | boolean | - | -
+  enableResendBouncedEmails | boolean | - | -
+  enableRestrictTlsToDomains | boolean | - | -
+  enableSendThroughGmailPref | boolean | - | -
+  enableSendViaExchangePref | boolean | - | -
+  enableSendViaGmailPref | boolean | - | -
+  enableUseOrgFootersForExtTrans | boolean | - | -
+  sendMassEmailNotification | boolean | - | -
+  sendTextOnlySystemEmails | boolean | - | -
+[src:mdapi-emailauthorizationsettings] EmailAuthorizationSettings:
+  enableSubstituteFromAddress | boolean | - | -
+[src:mdapi-fileuploadanddownloadsecuritysettings] FileUploadAndDownloadSecuritySettings:
+  dispositions | FileTypeDispositionAssignmentBean[] | 39.0 | -
+  noHtmlUploadAsAttachment | boolean | 39.0 | -
+[src:mdapi-identityprovidersettings] IdentityProviderSettings:
+  certificateName | string | - | -
+  enableIdentityProvider | boolean | - | -
+[src:mdapi-searchsettings] SearchSettings:
+  documentContentSearchEnabled | boolean | - | -
+  enableAdvancedSearchInAlohaSidebar | boolean | 46.0 | -
+  enableEinsteinSearchAssistantDialog | boolean | 50.0 | -
+  enableEinsteinSearchEs4kPilot | boolean | 54.0 | -
+  enableEinsteinSearchNaturalLanguage | boolean | 50.0 | -
+  enableEinsteinSearchNLSFilters | boolean | 54.0 | -
+  enableEinsteinSearchPersonalization | boolean | 47.0 | -
+  enablePersonalTagging | boolean | 48.0 | -
+  enablePublicTagging | boolean | 48.0 | -
+  enableSalesforceGeneratedSynonyms | boolean | 47.0 | -
+  enableSearchTermHistory | boolean | 48.0 | -
+  enableSetupSearch | boolean | 47.0 | -
+  enableSuggestArticlesLinksOnly | boolean | 48.0 | -
+  enableUseDefaultSearchEntity | boolean | 48.0 | -
+  optimizeSearchForCJKEnabled | boolean | - | -
+  recentlyViewedUsersForBlankLookupEnabled | boolean | - | -
+  searchSettingsByObject | SearchSettingsByObject | - | -
+  sidebarAutoCompleteEnabled | boolean | - | -
+  sidebarDropDownListEnabled | boolean | - | -
+  sidebarLimitToItemsIOwnCheckboxEnabled | boolean | - | -
+  singleSearchResultShortcutEnabled | boolean | - | -
+  spellCorrectKnowledgeSearchEnabled | boolean | - | -
+[src:mdapi-sitesettings] SiteSettings:
+  enableEnhancedSitesAndContentPlatform | boolean | 56.0 | -
+  enableExpBuilderCopilot | boolean | 64.0 | -
+  enableExperienceFriendlyUrls | boolean | 58.0 | 58.0
+  enableProxyLoginICHeader | boolean | - | 31.0
+  enableSitesRecordReassignOrgPref | boolean | 48.0 | -
+  enableTopicsInSites | boolean | - | -
+  enableVisualforceApiAccessAllowed | boolean | - | -
+  enableWebruntimeBYOTemplate | boolean | 48.0 | 50.0
+[src:mdapi-userinterfacesettings] UserInterfaceSettings:
+  dynamicMruActionsOff | boolean | 52.0 | -
+  enableAsyncRelatedLists | boolean | 47.0 | -
+  enableClickjackUserPageHeaderless | boolean | - | -
+  enableCollapsibleSections | boolean | - | -
+  enableCollapsibleSidebar | boolean | - | -
+  enableCustomObjectTruncate | boolean | 47.0 | -
+  enableCustomeSideBarOnAllPages | boolean | - | -
+  enableDeleteFieldHistory | boolean | 47.0 | -
+  enableExternalObjectAsyncRelatedLists | boolean | 48.0 | -
+  enableHoverDetails | boolean | - | -
+  enableInlineEdit | boolean | - | -
+  enablePersonalCanvas | boolean | - | -
+  enableRelatedListHovers | boolean | 50.0 | -
+  enableSldsV2DarkModeInCosmos | boolean | 65.0 | -
+  enableQuickCreate | boolean | - | -
+  listViewIleBypassLayout | boolean | 68.0 | -
+  listViewIleMultiRecordType | boolean | 68.0 | -
+  multiColumnSortLv | boolean | 63.0 | -
+  multiColumnSortRL | boolean | 63.0 | -
+[src:mdapi-userengagementsettings] UserEngagementSettings:
+  canUseAdoptionApps | boolean | 62.0 | -
+  doesScheduledSwitcherRunDaily | boolean | - | -
+  enableCustomHelpGlobalSection | boolean | - | -
+  enableHelpMenuShowFeedback | boolean | - | -
+  enableHelpMenuShowHelp | boolean | - | 64.0
+  enableHelpMenuShowNewUser | boolean | - | 64.0
+  enableHelpMenuShowSearch | boolean | - | 64.0
+  enableHelpMenuShowSfdcContent | boolean | - | -
+  enableHelpMenuShowShortcut | boolean | - | -
+  enableHelpMenuShowSupport | boolean | - | -
+  enableHelpMenuShowTrailhead | boolean | - | -
+  enableIBILOptOutDashboards | boolean | - | -
+  enableIBILOptOutEvents | boolean | - | -
+  enableIBILOptOutReports | boolean | - | -
+  enableIBILOptOutTasks | boolean | - | -
+  enableLexToClassicFeedbackEnable | boolean | - | -
+  enableOrchestrationInSandbox | boolean | - | -
+  enableOrgUserAssistEnabled | boolean | - | -
+  enableScheduledSwitcher | boolean | - | -
+  enableSfdcProductFeedbackSurvey | boolean | - | -
+  enableShowSalesforceUserAssist | boolean | - | -
+  isCrucNotificationDisabled | boolean | - | -
+  isLEXWelcomeMatDisabled | boolean | - | -
+  isMeetTheAssistantDisabledInClassic | boolean | - | -
+  isMeetTheAssistantDisabledInLightning | boolean | - | -
+  optimizerAppEnabled | boolean | - | -
+  suggestedForYou | boolean | - | -
+  subtipo CountriesAndStates: countries
+  subtipo Country: active, integrationValue, isoCode, label, orgDefault, standard, states, visible
+  subtipo State: active, integrationValue, isoCode, label, standard, visible
+  subtipo FileTypeDispositionAssignmentBean: behavior, filetype, securityRiskFileType
+  subtipo SearchSettingsByObject: searchSettingsByObject
+  subtipo ObjectSearchSetting: enhancedLookupEnabled, lookupAutoCompleteEnabled, name, resultsPerPageCount
