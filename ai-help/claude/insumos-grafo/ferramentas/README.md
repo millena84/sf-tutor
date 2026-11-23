@@ -4,6 +4,7 @@
 |---|---|
 | `sftutor.py` | Valida o catálogo e gera as projeções (`python3 ferramentas/sftutor.py tudo`). Rode depois de qualquer mudança; a validação precisa terminar com 0 erros. |
 | `carga/` | Biblioteca para montar lotes novos de catálogo (metadata types, estruturas, objetos API, relacionamentos, funcionalidades). |
+| `triagem_pendentes.py` | Triagem semântica (inferida, só pelo nome) dos tipos pendentes de recorte Core; grava `relatorios/triagem-pendentes.*`. |
 | `carga/historico/` | Scripts originais dos lotes 1 a 5k, guardados só como registro. **Não reexecute** sobre o catálogo atual. |
 
 ## Regras que valem para qualquer lote
@@ -67,6 +68,11 @@ C.ampliar_funcionalidade("alguma-funcionalidade", mdts=[("ExemploType", "Papel d
 ### Testes e cópia temporária
 
 A variável de ambiente `SFTUTOR_BASE` aponta a biblioteca para outra cópia da base. Os testes copiam `catalogo/`, `fontes/` etc. para uma pasta temporária e carregam um lote de exemplo ali, sem tocar no catálogo real (`testes/test_insumos.py`, classe `TestCargaNova`).
+
+## Relatórios auxiliares (não alteram o catálogo)
+
+- `pendencias_explicacao.py`: Fase 2, explicações pendentes por classificação.
+- `triagem_pendentes.py`: triagem semântica, **só pelo nome**, dos metadata types pendentes de recorte Core (#10): família e classificação funcional prováveis. Tudo é inferido; serve para ordenar os lotes e não substitui a fonte por família. Grava `relatorios/triagem-pendentes.json` e `.md`; rode de novo depois de cada lote de decisões.
 
 ## Diferenças em relação aos scripts históricos
 

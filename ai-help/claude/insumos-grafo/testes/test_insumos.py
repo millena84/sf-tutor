@@ -255,6 +255,20 @@ if __name__ == "__main__":
     unittest.main()
 
 
+class TestTriagemPendentes(unittest.TestCase):
+    """A triagem semântica é inferida e só pode citar tipos do inventário, marcados como inferidos."""
+
+    def test_triagem_cita_so_tipos_do_inventario(self):
+        p = os.path.join(BASE, "relatorios", "triagem-pendentes.json")
+        if not os.path.exists(p):
+            self.skipTest("triagem não gerada")
+        tri = json.load(open(p, encoding="utf-8"))
+        inv = {i["nome"] for i in json.load(open(os.path.join(BASE, "inventarios", "metadata-types-v68.json"), encoding="utf-8"))["itens"]}
+        for i in tri["itens"]:
+            self.assertIn(i["nome"], inv)
+            self.assertTrue(i["inferido"])
+
+
 class TestNuvemAgrupamento(BaseTemp):
     """Nó didático (natureza agrupamento_didatico) precisa dizer que não é nome nem nuvem oficial."""
     def test_agrupamento_sem_nota_e_erro(self):
