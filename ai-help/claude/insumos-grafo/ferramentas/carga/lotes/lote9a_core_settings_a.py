@@ -169,7 +169,7 @@ settings("RecordPageSettings", "RecordPage",
          "Recuperar e implantar a visualização padrão das páginas de registro e das atividades.", "47.0", [
              P("enableActivityRelatedList", "boolean", None, "Define se a visualização padrão de atividades usa listas relacionadas (true) ou a linha do "
                "tempo de atividades (false)."),
-             P("enableDynamicForms", "boolean", None, "Indicava se o Dynamic Forms estava ligado na org.", ate="50.0",
+             P("enableDynamicForms", "boolean", None, "Indicava se o Dynamic Forms estava ligado na org.", ate="49.0",
                notas=["A página diz que o campo foi removido na API 50.0 e posteriores; a ligação do Dynamic Forms no mobile está em DynamicFormsSettings."]),
              P("enableFullRecordView", "boolean", None, "Define se a página de registro abre por padrão na visualização completa (true) ou agrupada (false)."),
          ])
