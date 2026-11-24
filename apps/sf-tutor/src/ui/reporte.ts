@@ -77,8 +77,8 @@ export function abrirReporte(c: ContextoReporte): void {
     campo('Fonte', fonte, 'Link para a documentação oficial que confirma o correto, se tiver.'),
     h('fieldset', { class: 'campos-opcionais' },
       h('legend', null, 'Quem reporta (opcional)'),
-      campo('Nome', nome, 'Para dar crédito nas Novidades quando a correção for publicada.'),
-      campo('Usuário do GitHub', github, 'Para mencionar você na issue e nas Novidades. Pelo botão do GitHub, a issue já sai no seu usuário.')),
+      campo('Nome', nome, 'Para dar crédito nas notas de versão quando a correção for publicada.'),
+      campo('Usuário do GitHub', github, 'Para mencionar você na issue e nas notas de versão. Pelo botão do GitHub, a issue já sai no seu usuário.')),
     h('div', { class: 'acoes acoes-reporte' }, btnEmail, btnIssue, btnCopiar, fechar),
     status, previa);
   dlg.append(

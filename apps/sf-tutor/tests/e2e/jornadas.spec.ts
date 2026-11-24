@@ -160,17 +160,6 @@ test('8. Toda nuvem avisa que a lista de metadata types é parcial', async ({ pa
   }
 });
 
-test('9. Novidades mostra a nota de versão do lançamento', async ({ page }) => {
-  await abrir(page, '');
-  await page.getByRole('button', { name: 'Novidades' }).click();
-  const dialogo = page.getByRole('dialog');
-  await expect(dialogo.getByRole('heading', { name: 'Novidades' })).toBeVisible();
-  await expect(dialogo).toContainText('MVP de lançamento');
-  await expect(dialogo).toContainText('Limites desta versão');
-  await page.keyboard.press('Escape');
-  await expect(dialogo).toBeHidden();
-});
-
 test('10. Reportar erro abre o formulário com o contexto e monta a issue no repositório público', async ({ page }) => {
   await abrir(page, '?v=funcionalidade&n=mdt:SecuritySettings');
   await painel(page).getByRole('button', { name: 'Reportar erro' }).first().click();

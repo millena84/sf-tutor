@@ -10,7 +10,6 @@ import { iconeSvg, siglaFuncionalidade } from './graph/icones';
 import { conteudoTabela, renderizarAresta, renderizarNo, renderizarRelacaoPorId, type CtxPainel } from './ui/painel';
 import { renderizarLista } from './ui/lista';
 import { conteudoFiltros, conteudoLegenda, conteudoMetodo, ligarBusca } from './ui/extras';
-import { conteudoNovidades } from './ui/novidades';
 import { abrirReporte } from './ui/reporte';
 import { anunciar, h, limpar } from './ui/dom';
 import { lerURL, montarURL, type EstadoURL } from './rotas';
@@ -381,14 +380,13 @@ async function iniciar(): Promise<void> {
     paginar,
   };
 
-  // ------------------------------------------------------------ diálogos: método, novidades, legenda, filtros
-  function abrirDialogo(qual: 'metodo' | 'novidades' | 'legenda' | 'filtros'): void {
+  // ------------------------------------------------------------ diálogos: método, legenda, filtros
+  function abrirDialogo(qual: 'metodo' | 'legenda' | 'filtros'): void {
     const d = $<HTMLDialogElement>('dialogo');
     const corpo = $('dialogo-corpo');
     limpar(corpo);
-    $('dialogo-titulo').textContent = { metodo: 'Método', novidades: 'Novidades', legenda: 'Legenda', filtros: 'Filtros' }[qual];
+    $('dialogo-titulo').textContent = { metodo: 'Método', legenda: 'Legenda', filtros: 'Filtros' }[qual];
     if (qual === 'metodo') corpo.append(conteudoMetodo(dados, sf));
-    if (qual === 'novidades') corpo.append(conteudoNovidades());
     if (qual === 'legenda') corpo.append(conteudoLegenda(cores, st.visao, rotulo));
     if (qual === 'filtros') {
       const render = () => { atualizar(); limpar(corpo); corpo.append(conteudoFiltros(ind, st.filtros, rotulo, render, ocultosNaCena)); };
@@ -403,7 +401,6 @@ async function iniciar(): Promise<void> {
     if (st.tabela) { st.tabela = null; gravarURL(false); }
   });
   $('btn-metodo').addEventListener('click', () => abrirDialogo('metodo'));
-  $('btn-novidades').addEventListener('click', () => abrirDialogo('novidades'));
   $('btn-legenda').addEventListener('click', () => abrirDialogo('legenda'));
   $('btn-filtros').addEventListener('click', () => abrirDialogo('filtros'));
 
