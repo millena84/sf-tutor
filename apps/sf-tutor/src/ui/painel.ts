@@ -31,6 +31,8 @@ export interface CtxPainel {
   abrirMetodo(): void;
   abrirRelacao(relId: string): void;
   motivoOculto(id: string): string | null;
+  /** Abre a janela "Reportar erro" para um nó ou para um campo/propriedade da tabela dele. */
+  reportar(id: string, caminho?: readonly string[], item?: { id: string; nome: string }): void;
 }
 
 const ent = <T = unknown>(e: Record<string, unknown>, k: string): T => e[k] as T;
@@ -96,7 +98,8 @@ function cabecalho(ctx: CtxPainel, caminho: readonly string[]): HTMLElement {
       total > 0 ? h('button', { type: 'button', class: 'btn btn-primario', 'aria-expanded': String(exp), on: { click: () => ctx.alternar(caminho) } },
         exp ? `Recolher (${total})` : `Expandir (${total} ${total === 1 ? 'item' : 'itens'})`) : null,
       h('button', { type: 'button', class: 'btn btn-mostrar-mapa', on: { click: () => ctx.focarNoMapa(caminho) } }, 'Mostrar no mapa'),
-      btnLink),
+      btnLink,
+      h('button', { type: 'button', class: 'btn btn-reportar', on: { click: () => ctx.reportar(id, caminho) } }, 'Reportar erro')),
     outros.length ? h('details', { class: 'outros-caminhos' },
       h('summary', null, `Também aparece em ${outros.length} outro${outros.length > 1 ? 's' : ''} caminho${outros.length > 1 ? 's' : ''} (mesma ficha)`),
       h('ul', null, outros.slice(0, 12).map((c) => h('li', null, h('button', { type: 'button', class: 'link', on: { click: () => ctx.abrirCaminho(c) } }, c.slice(1).map(ctx.rotulo).join(' › ')))))) : null,
@@ -627,7 +630,8 @@ export function conteudoTabela(ctx: CtxPainel, e: Entidade, foco?: string): Tabe
     const det = h('tr', { class: 'linha-detalhe', id: idDet, hidden: '' }, celDet);
     const botao = h('button', { type: 'button', class: 'link nome-item', 'aria-expanded': 'false', 'aria-controls': idDet }, String(f.nome));
     const abrir = (v: boolean) => {
-      if (v && !celDet.childNodes.length) celDet.append(...detalheItem(ctx, f).filter(Boolean) as Node[]);
+      if (v && !celDet.childNodes.length) celDet.append(...detalheItem(ctx, f).filter(Boolean) as Node[],
+        h('p', { class: 'acoes-item' }, h('button', { type: 'button', class: 'btn btn-reportar', on: { click: () => ctx.reportar(e.id, undefined, { id: String(f.id), nome: String(f.nome) }) } }, `Reportar erro em ${String(f.nome)}`)));
       det.hidden = !v;
       botao.setAttribute('aria-expanded', String(v));
       tr.classList.toggle('aberta', v);

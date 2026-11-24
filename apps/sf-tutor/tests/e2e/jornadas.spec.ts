@@ -170,3 +170,30 @@ test('9. Novidades mostra a nota de versão do lançamento', async ({ page }) =>
   await page.keyboard.press('Escape');
   await expect(dialogo).toBeHidden();
 });
+
+test('10. Reportar erro abre o formulário com o contexto e monta a issue no repositório público', async ({ page }) => {
+  await abrir(page, '?v=funcionalidade&n=mdt:SecuritySettings');
+  await painel(page).getByRole('button', { name: 'Reportar erro' }).first().click();
+  const dlg = page.locator('#dialogo-reporte');
+  await expect(dlg.getByRole('heading', { name: 'Reportar erro' })).toBeVisible();
+  await expect(dlg).toContainText('mdt:SecuritySettings');
+  await expect(dlg).toContainText('Não inclua dados da sua org');
+  // sem os campos obrigatórios, nada sai
+  await dlg.getByRole('button', { name: 'Abrir issue no GitHub' }).click();
+  await expect(dlg.getByRole('status')).toContainText('Preencha');
+  await dlg.getByLabel('Tipo de problema (obrigatório)').selectOption('Informação incorreta');
+  await dlg.getByLabel('O que está errado (obrigatório)').fill('Teste automatizado: o default parece errado.');
+  await dlg.getByLabel('Usuário do GitHub').fill('@teste');
+  // a issue abre numa nova aba: capturamos o endereço sem abrir o GitHub
+  await page.evaluate(() => { (window as unknown as { __abertas: string[] }).__abertas = []; window.open = ((u: string) => { (window as unknown as { __abertas: string[] }).__abertas.push(String(u)); return null; }) as typeof window.open; });
+  await dlg.getByRole('button', { name: 'Abrir issue no GitHub' }).click();
+  const abertas = await page.evaluate(() => (window as unknown as { __abertas: string[] }).__abertas);
+  expect(abertas).toHaveLength(1);
+  const u = new URL(abertas[0]);
+  expect(u.pathname).toBe('/millena84/tutorial-sf-grafo/issues/new');
+  expect(u.searchParams.get('template')).toBe('erro-reportado.yml');
+  expect(u.searchParams.get('descricao')).toContain('Teste automatizado');
+  await expect(dlg.getByRole('status')).toContainText('nova aba');
+  // o e-mail não aparece no HTML da página
+  expect(await page.content()).not.toMatch(/millena\.ferreira|gmail\.com/);
+});

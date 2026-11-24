@@ -60,3 +60,14 @@ for (const [nome, q, abrirJanela] of JANELAS) {
     await varrer(page, 'dialog[open]');
   });
 }
+
+test('sem violações AA: janela Reportar erro e Novidades', async ({ page }) => {
+  await abrir(page, '?n=mdt:Flow');
+  await page.locator('#conteudo-painel').getByRole('button', { name: 'Reportar erro' }).first().click();
+  await expect(page.locator('#dialogo-reporte')).toBeVisible();
+  await varrer(page, '#dialogo-reporte');
+  await page.keyboard.press('Escape');
+  await page.getByRole('button', { name: 'Novidades' }).click();
+  await expect(page.locator('#dialogo')).toBeVisible();
+  await varrer(page, '#dialogo');
+});

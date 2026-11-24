@@ -8,6 +8,8 @@ interface Nota {
   titulo: string;
   resumo: string;
   secoes: { titulo: string; itens: string[] }[];
+  /** créditos de quem reportou erros corrigidos nesta versão (nome ou @usuario do GitHub, como a pessoa autorizou) */
+  agradecimentos?: string[];
 }
 
 export const NOVIDADES: Nota[] = [
@@ -30,6 +32,7 @@ export const NOVIDADES: Nota[] = [
           'Busca em todo o inventário de metadata types da API 68.0, inclusive os que ainda não têm ficha.',
           'Método: de onde vem cada informação, a data de verificação, o nível de evidência de cada ligação e como a IA foi usada.',
           'Navegação por teclado, modo leitura e cores com contraste conferido.',
+          'Botão "Reportar erro" em cada ficha e em cada campo da tabela: o aviso sai pelo seu e-mail ou vira uma issue pública no GitHub. Quem reportar pode receber crédito aqui nas Novidades.',
         ],
       },
       {
@@ -60,6 +63,8 @@ export function conteudoNovidades(): HTMLElement {
     NOVIDADES.map((n) => h('section', { class: 'nota-versao', 'aria-labelledby': `nv-${n.versao.replace(/\W+/g, '-')}` },
       h('h3', { id: `nv-${n.versao.replace(/\W+/g, '-')}` }, `${n.versao} · ${n.data}`),
       h('p', null, h('strong', null, n.titulo), '. ', n.resumo),
-      n.secoes.map((s) => [h('h4', null, s.titulo), h('ul', { class: 'lista' }, s.itens.map((i) => h('li', null, i)))]))),
+      n.secoes.map((s) => [h('h4', null, s.titulo), h('ul', { class: 'lista' }, s.itens.map((i) => h('li', null, i)))]),
+      n.agradecimentos?.length ? [h('h4', null, 'Correções da comunidade'),
+        h('p', null, `Obrigado a ${n.agradecimentos.join(', ')} por reportar erros corrigidos nesta versão.`)] : null)),
     h('p', { class: 'nota' }, 'Os números de cada nota são os da data da publicação. Os números atuais estão em Método.'));
 }

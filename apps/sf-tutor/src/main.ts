@@ -11,6 +11,7 @@ import { conteudoTabela, renderizarAresta, renderizarNo, renderizarRelacaoPorId,
 import { renderizarLista } from './ui/lista';
 import { conteudoFiltros, conteudoLegenda, conteudoMetodo, ligarBusca } from './ui/extras';
 import { conteudoNovidades } from './ui/novidades';
+import { abrirReporte } from './ui/reporte';
 import { anunciar, h, limpar } from './ui/dom';
 import { lerURL, montarURL, type EstadoURL } from './rotas';
 import { ICONE_TIPO, NOME_TIPO } from './rotulos';
@@ -357,6 +358,17 @@ async function iniciar(): Promise<void> {
     abrirMetodo: () => abrirDialogo('metodo'),
     abrirRelacao: (relId) => { st.sel = { tipo: 'rel', relId }; abrirPainel(); void renderizarRelacaoPorId(ctxPainel, painel, relId); gravarURL(true); },
     motivoOculto: oculto,
+    reportar: (id, c, item) => {
+      const no = ind.no(id);
+      const rel = item
+        ? montarURL({ visao: st.visao, modo: st.modo, id, tabela: id, foco: item.id, sintetico: url.sintetico })
+        : montarURL({ visao: st.visao, modo: 'mapa', id, caminho: c ? [...c] : undefined, sintetico: url.sintetico });
+      abrirReporte({
+        id, rotulo: rotulo(id), tipo: no ? NOME_TIPO[no.tipo] : 'item', item,
+        link: new URL(rel, location.href).toString(),
+        versao: $('versao').textContent ?? '',
+      });
+    },
   };
 
   const ctxLista = {
