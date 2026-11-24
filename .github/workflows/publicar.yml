@@ -121,6 +121,7 @@ jobs:
             echo
             echo "- \`docs/\` = \`apps/sf-tutor/dist\` desse commit (ver \`docs/data/build-info.json\`)."
             echo "- \`docs/__teste-sintetico\` removido; \`docs/.nojekyll\` criado."
+            echo "- \`.github/ISSUE_TEMPLATE/\` = \`apps/sf-tutor/repo-publico/.github/ISSUE_TEMPLATE\` (modelo do botão Reportar erro)."
             echo "- Site verificado antes de publicar (build, lint, Vitest, e2e e perf): $RUN_URL"
             echo
             echo "Este PR é reaproveitado: cada merge na \`main\` do sf-tutor que muda o site atualiza o ramo \`$RAMO_PUBLICACAO\`."
@@ -134,6 +135,17 @@ jobs:
             gh pr create --repo "$REPO_PUBLICO" --base main --head "$RAMO_PUBLICACAO" \
               --title "Publicação: sf-tutor $curto" --body-file "$RUNNER_TEMP/corpo.md"
           fi
+
+      # O modelo de issue do botão "Reportar erro" aplica o label erro-reportado, que precisa existir no repositório público.
+      # Não bloqueia: se o token não puder criar labels, só avisa.
+      - name: Garantir o label erro-reportado
+        if: steps.token.outputs.tem == 'sim'
+        env:
+          GH_TOKEN: ${{ secrets.TUTORIAL_SF_GRAFO_TOKEN }}
+        run: |
+          gh label create erro-reportado --repo "$REPO_PUBLICO" --color B91C1C \
+            --description "Erro de informação reportado pelo botão do site" --force \
+            || echo "::warning::Não foi possível criar o label erro-reportado em $REPO_PUBLICO; crie-o à mão."
 
       - name: Nada a publicar
         if: steps.token.outputs.tem == 'sim' && steps.docs.outputs.mudou != 'sim'

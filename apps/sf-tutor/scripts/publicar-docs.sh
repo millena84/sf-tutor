@@ -1,6 +1,7 @@
 #!/usr/bin/env bash
 # Prepara a pasta docs/ do repositório público (millena84/tutorial-sf-grafo) a partir de apps/sf-tutor/dist.
-# Faz só a parte local da publicação: copia dist/ para docs/, remove docs/__teste-sintetico e cria docs/.nojekyll.
+# Faz só a parte local da publicação: copia dist/ para docs/, remove docs/__teste-sintetico e cria docs/.nojekyll,
+# e copia repo-publico/.github/ISSUE_TEMPLATE/ (modelo de issue do botão "Reportar erro") para .github/ISSUE_TEMPLATE/.
 # Não faz commit, push nem PR: isso fica com quem chama (o workflow publicar.yml ou a pessoa).
 #
 # Uso: scripts/publicar-docs.sh <pasta do clone do repositório público>
@@ -32,17 +33,20 @@ rm -rf "$destino/docs"
 cp -r "$dist" "$destino/docs"
 rm -rf "$destino/docs/__teste-sintetico"
 touch "$destino/docs/.nojekyll"
+rm -rf "$destino/.github/ISSUE_TEMPLATE"
+mkdir -p "$destino/.github"
+cp -r "$app/repo-publico/.github/ISSUE_TEMPLATE" "$destino/.github/ISSUE_TEMPLATE"
 
-git -C "$destino" add -A docs
-alterados="$(git -C "$destino" diff --cached --name-only -- docs | grep -v '^docs/data/build-info\.json$' || true)"
+git -C "$destino" add -A docs .github/ISSUE_TEMPLATE
+alterados="$(git -C "$destino" diff --cached --name-only -- docs .github/ISSUE_TEMPLATE | grep -v '^docs/data/build-info\.json$' || true)"
 if [ -z "$alterados" ]; then
   # Só o build-info mudaria: não vale uma publicação.
-  git -C "$destino" reset -q HEAD -- docs
-  git -C "$destino" checkout -q -- docs
-  git -C "$destino" clean -qfd -- docs
+  git -C "$destino" reset -q HEAD -- docs .github/ISSUE_TEMPLATE
+  git -C "$destino" checkout -q -- docs .github 2>/dev/null || true
+  git -C "$destino" clean -qfd -- docs .github/ISSUE_TEMPLATE
   resultado="mudou=nao"
 else
-  echo "Arquivos alterados em docs/: $(printf '%s\n' "$alterados" | wc -l)"
+  echo "Arquivos alterados (docs/ e modelos de issue): $(printf '%s\n' "$alterados" | wc -l)"
   resultado="mudou=sim"
 fi
 if [ -n "${GITHUB_OUTPUT:-}" ]; then echo "$resultado" >> "$GITHUB_OUTPUT"; fi
