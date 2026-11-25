@@ -61,7 +61,10 @@ async function iniciar(): Promise<void> {
 
   // ------------------------------------------------------------ cabeçalho e estrutura
   if (st.sintetico) $('faixa-sintetica').hidden = false;
-  $('versao').textContent = `API ${String((dados.manifesto.versao_base as Record<string, string>).api_version ?? '?')} · contrato ${dados.manifesto.contrato.versao}${dados.build.commit ? ` · insumos ${dados.build.commit}` : ''}`;
+  const vb = dados.manifesto.versao_base as Record<string, string>;
+  const dataBr = (iso?: string): string => (iso && /^\d{4}-\d{2}-\d{2}/.test(iso) ? iso.slice(0, 10).split('-').reverse().join('/') : '?');
+  $('versao').textContent = `Dados: documentação ${vb.release ?? '?'} (API ${vb.api_version ?? '?'}), verificada até ${dataBr(vb.ultima_verificacao)}` +
+    ` · contrato ${dados.manifesto.contrato.versao}${dados.build.commit ? ` · insumos ${dados.build.commit}` : ''}`;
 
   const painel = $('conteudo-painel');
   const aside = $('painel');
