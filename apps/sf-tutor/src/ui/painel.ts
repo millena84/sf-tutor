@@ -77,7 +77,7 @@ function cabecalho(ctx: CtxPainel, caminho: readonly string[]): HTMLElement {
   const oculto = ctx.motivoOculto(id);
   const btnLink = h('button', { type: 'button', class: 'btn' }, 'Copiar link');
   btnLink.addEventListener('click', () => copiar(new URL(ctx.link(id, caminho), location.href).toString(), btnLink));
-  const logo = no.logo ? h('img', { class: 'logo-marca', src: no.logo.url, alt: `Logo ${no.logo.marca}`, referrerpolicy: 'no-referrer', width: 56, height: 56 }) : null;
+  const logo = no.logo ? h('img', { class: 'logo-marca', src: no.logo.url, alt: '', referrerpolicy: 'no-referrer', width: 56, height: 56 }) : null;
   logo?.addEventListener('error', () => logo.remove());
   return h('header', { class: 'cab-painel' },
     logo,
@@ -130,7 +130,7 @@ function painelSalesforce(ctx: CtxPainel, e: Entidade): (Node | null)[] {
   const conceitos = arr<Record<string, string>>(e.conceitos);
   return [
     texto('O que é', e.o_que_e, { didatico: true }),
-    h('div', { class: 'aviso aviso-logo' }, h('strong', null, 'Logo: '), String(e.nota_logo ?? 'Este projeto não é afiliado à Salesforce.')),
+    h('div', { class: 'aviso aviso-logo' }, h('strong', null, 'Ícone: '), String(e.nota_logo ?? 'Este projeto não é afiliado à Salesforce.')),
     infoLogo(e),
     secao('Conceitos fundamentais', true, h('dl', { class: 'conceitos' }, conceitos.flatMap((c) => [
       h('dt', null, c.termo),
@@ -158,16 +158,19 @@ function painelSalesforce(ctx: CtxPainel, e: Entidade): (Node | null)[] {
 
 // ------------------------------------------------------------------ Nuvem
 
-/** De onde vem o logo exibido (registro em config/marcas.json, por referência). */
+/** De onde vem o ícone exibido (registro em config/marcas.json). */
 function infoLogo(e: Entidade): HTMLElement | null {
   const l = e.logo_marca as { marca?: string; url?: string; fornecido_por?: string; pagina_origem?: string | null; verificacao?: string } | undefined;
   if (!l?.url) return null;
-  return secao('Logo', false, h('dl', { class: 'kv' },
-    h('dt', null, 'Marca'), h('dd', null, String(l.marca ?? '')),
-    h('dt', null, 'Endereço'), h('dd', null, h('a', { href: l.url, target: '_blank', rel: 'noopener noreferrer' }, l.url)),
+  const externo = /^https?:/.test(l.url);
+  return secao('Ícone', false, h('dl', { class: 'kv' },
+    h('dt', null, 'Descrição'), h('dd', null, String(l.marca ?? '')),
+    externo ? [h('dt', null, 'Endereço'), h('dd', null, h('a', { href: l.url, target: '_blank', rel: 'noopener noreferrer' }, l.url))] : null,
     h('dt', null, 'Fornecido por'), h('dd', null, String(l.fornecido_por ?? '')),
     h('dt', null, 'Verificação'), h('dd', null, String(l.verificacao ?? ''))),
-    h('p', { class: 'nota' }, 'A imagem é carregada direto do endereço oficial (não é copiada para o projeto). Se não carregar, o mapa mostra um substituto. Salesforce e os nomes de produtos são marcas da Salesforce, Inc.; este projeto não é afiliado nem endossado pela Salesforce.'));
+    h('p', { class: 'nota' }, externo
+      ? 'A imagem é carregada do endereço registrado. Se não carregar, o mapa mostra um substituto. Salesforce e os nomes de produtos são marcas da Salesforce, Inc.; este projeto não é afiliado nem endossado pela Salesforce.'
+      : 'Desenho próprio do projeto, servido pelo site; não é logo oficial. Salesforce e os nomes de produtos são marcas da Salesforce, Inc.; este projeto não é afiliado nem endossado pela Salesforce.'));
 }
 
 function categoriaNuvem(valor: unknown): Node | null {
