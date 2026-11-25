@@ -6,7 +6,7 @@
  *  O endereço não aparece no HTML: só é montado no clique. Isso barra robôs que coletam e-mails lendo páginas,
  *  mas não esconde o endereço de quem lê o código; ocultação total exigiria um servidor. */
 export const REPORTE = {
-  destinoCodificado: '=02bj5CbpFWbnBUYylWZyJXZm5SYuVGbslWb',
+  destinoCodificado: '==QbvNmLslWYtdGQvRmbhdWdiNXZk5SZ0J3bwV3c',
   assunto: 'ERRO REPORTADO: tutorial Salesforce - sf-tutor',
   /** repositório público onde as issues são abertas (o sf-tutor, onde o conteúdo é trabalhado, é privado) */
   repoIssues: 'millena84/tutorial-sf-grafo',
