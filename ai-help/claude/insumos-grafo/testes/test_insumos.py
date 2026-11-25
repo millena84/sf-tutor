@@ -277,13 +277,22 @@ class TestNuvemAgrupamento(BaseTemp):
 
 
 class TestMarcas(BaseTemp):
-    """config/marcas.json: logos exibidos por referência ao endereço oficial."""
+    """config/marcas.json: ícones do centro e das nuvens (próprios do site; URL externa só de domínio permitido)."""
     def marcas(self):
         return os.path.join(self.tmp, "config", "marcas.json")
 
     def test_dominio_nao_permitido(self):
         d = ler(self.marcas()); d["itens"][0]["url"] = "https://exemplo.invalid/logo.svg"; gravar(self.marcas(), d)
         self.assertErro("marcas: domínio não permitido")
+
+    def test_caminho_local_fora_da_pasta_permitida(self):
+        d = ler(self.marcas()); d["itens"][0]["url"] = "./outra-pasta/logo.svg"; gravar(self.marcas(), d)
+        self.assertErro("marcas: caminho local fora de")
+
+    def test_icones_atuais_sao_locais(self):
+        d = ler(os.path.join(BASE, "config", "marcas.json"))
+        self.assertEqual(d["dominios_permitidos"], [])
+        self.assertTrue(all(i["url"].startswith(d["caminho_local_permitido"]) for i in d["itens"]))
 
     def test_alvo_inexistente(self):
         d = ler(self.marcas()); d["itens"][1]["alvo"] = "nuv:nao-existe"; gravar(self.marcas(), d)

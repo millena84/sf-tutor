@@ -155,22 +155,22 @@ test('capturas de tela desktop', async ({ page }) => {
 });
 
 type WLogo = { __sfTutor: { logo(id: string): string | null } };
-const SFDC = /sfdcstatic\.com|sfdcdigital\.com/;
+// Ícones do centro e das nuvens: desenhos próprios servidos pelo site (#142); antes eram logos por referência.
+const ICONES = /\/icones\/nuvens\//;
 
-test('logos oficiais carregam por referência (servidores simulados)', async ({ page }) => {
-  const svg = '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 10 10"><circle cx="5" cy="5" r="5" fill="#00a1e0"/></svg>';
-  await page.route(SFDC, (r) => r.fulfill({ status: 200, contentType: 'image/svg+xml', body: svg }));
+test('ícones próprios do centro e das nuvens carregam do próprio site', async ({ page }) => {
   await abrir(page, '?n=nuv:sales-cloud');
   await expect.poll(() => page.evaluate(() => (window as unknown as WLogo).__sfTutor.logo('salesforce'))).toBe('ok');
   await expect.poll(() => page.evaluate(() => (window as unknown as WLogo).__sfTutor.logo('nuv:sales-cloud'))).toBe('ok');
   await expect(painel(page).locator('img.logo-marca')).toBeVisible();
   await expect(painel(page).locator('details.secao', { hasText: 'Fornecido por' })).toHaveCount(1);
+  await expect(painel(page).locator('img.logo-marca')).toHaveAttribute('src', /icones\/nuvens\/sales-cloud\.svg$/);
 });
 
 test('logo SVG sem largura/altura declaradas cabe dentro do nó central', async ({ page }) => {
   // caso real relatado: a nuvem da Salesforce saía maior que o nó
   const svg = '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 92 64"><ellipse cx="46" cy="32" rx="46" ry="32" fill="#00a1e0"/></svg>';
-  await page.route(SFDC, (r) => r.fulfill({ status: 200, contentType: 'image/svg+xml', body: svg }));
+  await page.route(ICONES, (r) => r.fulfill({ status: 200, contentType: 'image/svg+xml', body: svg }));
   await abrir(page);
   await expect.poll(() => page.evaluate(() => (window as unknown as WLogo).__sfTutor.logo('salesforce'))).toBe('ok');
   type Caixas = { no: DOMRect; img: DOMRect } | null;
@@ -188,8 +188,8 @@ test('logo SVG sem largura/altura declaradas cabe dentro do nó central', async 
   await page.screenshot({ path: 'tests/resultados/logo-central.png' });
 });
 
-test('sem acesso aos servidores dos logos, o mapa usa o substituto sem erro', async ({ page }) => {
-  await page.route(SFDC, (r) => r.abort());
+test('se o ícone não carregar, o mapa usa o substituto sem erro', async ({ page }) => {
+  await page.route(ICONES, (r) => r.abort());
   await abrir(page, '?n=salesforce');
   await expect.poll(() => page.evaluate(() => (window as unknown as WLogo).__sfTutor.logo('salesforce'))).toBe('falhou');
   await expect(painel(page).locator('img.logo-marca')).toHaveCount(0);

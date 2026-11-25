@@ -96,7 +96,7 @@ async function iniciar(): Promise<void> {
       default: return misturar(base, '#ffffff', 0.8);
     }
   };
-  // logos oficiais por referência: pré-carregados; só substituem o ícone quando a imagem carregou
+  // ícones do centro e das nuvens (config/marcas.json): pré-carregados; só substituem o ícone padrão quando a imagem carregou
   const logos = new Map<string, 'carregando' | 'ok' | 'falhou'>();
   const iconeDe = (id: string, tipo: string, cor: string): string => {
     const n = ind.no(id)!;

@@ -15,7 +15,7 @@ export interface NoVisual {
   totalFilhos: number;
   expandido: boolean;
   acessivel: string; // nome acessível (anunciado ao selecionar)
-  /** URL de um logo oficial já carregado (por referência): desenhado como <img> sobre o nó, não no canvas */
+  /** URL do ícone do nó (centro e nuvens; desenho próprio servido pelo site), já carregado: desenhado como <img> sobre o nó */
   logoUrl?: string;
 }
 

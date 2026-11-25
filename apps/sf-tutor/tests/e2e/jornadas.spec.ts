@@ -186,3 +186,13 @@ test('10. Reportar erro abre o formulário com o contexto e monta a issue no rep
   // o e-mail não aparece no HTML da página
   expect(await page.content()).not.toMatch(/millena\.ferreira|gmail\.com/);
 });
+
+test('11. Ícones das nuvens são do próprio site (nenhuma imagem de servidores da Salesforce)', async ({ page }) => {
+  const externas: string[] = [];
+  page.on('request', (r) => { if (/sfdcstatic|sfdcdigital|salesforce\.com/.test(r.url()) && r.resourceType() === 'image') externas.push(r.url()); });
+  await abrir(page, '?v=nuvem&n=nuv:service-cloud');
+  const icone = painel(page).locator('img.logo-marca');
+  await expect(icone).toHaveAttribute('src', /icones\/nuvens\/service-cloud\.svg$/);
+  await expect.poll(() => icone.evaluate((i) => (i as HTMLImageElement).naturalWidth)).toBeGreaterThan(0);
+  expect(externas).toEqual([]);
+});

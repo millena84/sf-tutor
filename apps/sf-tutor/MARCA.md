@@ -24,3 +24,10 @@ Logo oficial do sf-tutor: o **bug fofo com lupa** desenhado pela autora (2026-11
 - **Slogan:** "tecnologia sem mistério" continua no rodapé sem mudança, à espera da decisão da autora.
 
 Não confundir com o nó "Salesforce" no centro do mapa. Ele representa a Salesforce e continua com o placeholder identificado (sf-tutor #13).
+
+## Ícones do centro e das nuvens (#142, 2026-11-25)
+
+- Desenhos próprios, no estilo do mascote: contorno ameixa `#4A1D4F`, preenchimentos claros, olhinhos com brilho e bochechas rosa, sobre um círculo na cor da nuvem (`PALETA_NUVEM`, `src/cores.ts`). **Não são logos da Salesforce** e não imitam formas dos logos oficiais (sem nuvem azul, sem a cruz do Tableau, sem a hashtag do Slack).
+- Arquivos em `public/icones/nuvens/` (`centro.svg` e um por nuvem), gerados por `scripts/gerar-icones-nuvens.py`; registrados em `config/marcas.json` dos insumos, que o gerador do site lê.
+- O site não carrega mais imagens de servidores da Salesforce. Os nomes das nuvens continuam os oficiais, com o aviso de não afiliação.
+

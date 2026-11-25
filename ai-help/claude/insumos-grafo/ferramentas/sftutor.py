@@ -304,7 +304,8 @@ def _evs_ok(x):
 
 
 def validar_marcas(C, R):
-    """Logos por referência: alvo existente (centro ou nuvem), um logo por alvo, só domínios permitidos."""
+    """Ícones do centro e das nuvens: alvo existente, um por alvo; URL externa só de domínio permitido, ou caminho local
+    dentro de 'caminho_local_permitido' (arquivo servido pelo próprio site)."""
     M = C.get("marcas")
     if not M:
         return
@@ -314,7 +315,11 @@ def validar_marcas(C, R):
     for it in M["itens"]:
         a = it.get("alvo")
         host = urlparse(it["url"]).hostname
-        if host not in M["dominios_permitidos"]:
+        local = M.get("caminho_local_permitido")
+        if host is None:
+            if not (local and it["url"].startswith(local)) or ".." in it["url"]:
+                R.e(f"marcas: caminho local fora de '{local}' em {it['url']}")
+        elif host not in M["dominios_permitidos"]:
             R.e(f"marcas: domínio não permitido em {it['url']}")
         if a is None:
             continue
@@ -938,7 +943,7 @@ def gerar_site(C, base, out, nos, arestas, visoes, cob):
                 "textos": sorted({it["nome"], *termos}), "descricao": " ".join(partes), "sem_ficha": True}
         if local: item["local"] = local
         busca.append(item)
-    # logos por referência (config/marcas.json): só no centro e nas nuvens catalogadas
+    # ícones do centro e das nuvens (config/marcas.json): próprios do site desde 2026-11-25
     logos = {it["alvo"]: it for it in (C.get("marcas") or {}).get("itens", []) if it.get("alvo")}
     base_nos = []
     for n in nos:
@@ -981,7 +986,7 @@ def gerar_site(C, base, out, nos, arestas, visoes, cob):
         "regras": ["Campos (campo_api) e propriedades (propriedade_xml) vivem dentro do arquivo da entidade-mãe; o grafo-base não os traz.",
                    "busca.json cobre todos os nós, inclusive folhas, com o id da entidade-mãe em 'pai'.",
                    "Ids canônicos são estáveis; uma ocorrência visual em outro caminho aponta para o mesmo id.",
-                   "Nós do centro e das nuvens podem ter 'logo' (url, formato, marca): imagem exibida por referência ao endereço oficial registrado em config/marcas.json; se não carregar, o site usa um substituto.",
+                   "Nós do centro e das nuvens podem ter 'logo' (url, formato, marca): ícone registrado em config/marcas.json; hoje são desenhos próprios servidos pelo site (caminho relativo), não logos oficiais.",
                    "Mudança incompatível neste formato sobe a versão maior do contrato."],
         "nota": "Gerado deterministicamente por ferramentas/sftutor.py a partir de catalogo/ e fontes/. Não editar à mão."})
 
