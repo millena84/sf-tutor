@@ -136,16 +136,25 @@ jobs:
               --title "Publicação: sf-tutor $curto" --body-file "$RUNNER_TEMP/corpo.md"
           fi
 
-      # O modelo de issue do botão "Reportar erro" aplica o label erro-reportado, que precisa existir no repositório público.
-      # Não bloqueia: se o token não puder criar labels, só avisa.
-      - name: Garantir o label erro-reportado
+      # Labels da triagem (ai-help/claude/insumos-grafo/relatorios/triagem-erros-reportados.md). O modelo de issue do botão
+      # "Reportar erro" aplica erro-reportado; os demais são usados na triagem. Não bloqueia: se o token não puder criar, só avisa.
+      - name: Garantir os labels da triagem
         if: steps.token.outputs.tem == 'sim'
         env:
           GH_TOKEN: ${{ secrets.TUTORIAL_SF_GRAFO_TOKEN }}
         run: |
-          gh label create erro-reportado --repo "$REPO_PUBLICO" --color B91C1C \
-            --description "Erro de informação reportado pelo botão do site" --force \
-            || echo "::warning::Não foi possível criar o label erro-reportado em $REPO_PUBLICO; crie-o à mão."
+          while IFS='|' read -r nome cor descricao; do
+            [ -n "$nome" ] || continue
+            gh label create "$nome" --repo "$REPO_PUBLICO" --color "$cor" --description "$descricao" --force \
+              || echo "::warning::Não foi possível criar o label $nome em $REPO_PUBLICO; crie-o à mão."
+          done <<'LABELS'
+          erro-reportado|B91C1C|Erro de informação reportado pelo botão do site
+          confirmado|15803D|Conferido na fonte oficial; correção a caminho
+          sem-mudanca|64748B|Conferido; o site já está de acordo com a fonte
+          aguardando-fonte|B45309|Falta uma fonte oficial para confirmar
+          duplicado|94A3B8|Já reportado em outra issue
+          creditar|7C3AED|Quem reportou pediu crédito nas notas de versão
+          LABELS
 
       - name: Nada a publicar
         if: steps.token.outputs.tem == 'sim' && steps.docs.outputs.mudou != 'sim'

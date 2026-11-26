@@ -9,4 +9,4 @@ arquivos direto no repositório público, porque a próxima publicação os sobr
 - `LICENSE` (MIT, código) e `LICENSE-CONTEUDO.md` (CC BY 4.0 para textos e dados; marca, mascote e ícones Desbugando
   com todos os direitos reservados): copiados para a raiz do repositório público.
 - `README-publico.md`: vira o `README.md` da raiz do repositório público a cada publicação.
-- O label `erro-reportado` precisa existir no repositório público; o workflow de publicação tenta criá-lo.
+- Os labels da triagem (`erro-reportado`, `confirmado`, `sem-mudanca`, `aguardando-fonte`, `duplicado`, `creditar`) precisam existir no repositório público; o workflow de publicação tenta criá-los. A rotina está em `ai-help/claude/insumos-grafo/relatorios/triagem-erros-reportados.md`.
