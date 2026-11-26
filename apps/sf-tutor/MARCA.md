@@ -1,6 +1,6 @@
 # Marca Desbugando (logo oficial do site)
 
-Logo oficial do sf-tutor: o **bug fofo com lupa** desenhado pela autora (2026-11-21). É a figura principal da folha "Mascote: bug fofo" (`mascote.svg`, enviada pela autora pelo Drive), recortada sem alterar o desenho. Substitui o inseto de traço fino com lupa e, antes dele, o símbolo B · lâmpada-bug de 2026-11-08.
+Logo oficial do Metadata Desbugado (repositório sf-tutor): o **bug fofo com lupa** desenhado pela autora (2026-11-21). É a figura principal da folha "Mascote: bug fofo" (`mascote.svg`, enviada pela autora pelo Drive), recortada sem alterar o desenho. Substitui o inseto de traço fino com lupa e, antes dele, o símbolo B · lâmpada-bug de 2026-11-08.
 - **Desenho:** joaninha lilás (`#A78BFA`) com contorno ameixa (`#4A1D4F`), antenas com bolinhas rosa, olhos grandes com brilho, bochechas, boquinha, pintas rosa e verde e a lupa à direita.
 - **Fundo:** quadrado lavanda claro arredondado (`#F3E8FF`), como no favicon que a autora enviou antes. É ele que mantém o desenho legível no cabeçalho escuro: sem esse fundo, o contorno ameixa e as antenas somem. Por isso há um arquivo só.
 - **Outras expressões da folha** (sorrindo, feliz, surpresa, bug achado!) e os testes de favicon ficam no arquivo da autora; não foram trazidas para o site.

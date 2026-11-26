@@ -14,7 +14,7 @@ describe('reporte de erro', () => {
   });
 
   it('assunto segue o padrão e leva o item', () => {
-    expect(assunto(ctx)).toBe('ERRO REPORTADO: tutorial Salesforce - sf-tutor (mdt:SecuritySettings)');
+    expect(assunto(ctx)).toBe('ERRO REPORTADO: Metadata Desbugado (mdt:SecuritySettings)');
     expect(assunto({ ...ctx, item: { id: 'x', nome: 'sessionTimeout' } })).toContain('mdt:SecuritySettings > sessionTimeout');
   });
 

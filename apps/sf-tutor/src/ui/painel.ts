@@ -211,7 +211,7 @@ function painelNuvem(ctx: CtxPainel, e: Entidade, caminho: readonly string[]): (
   const compart = unicas.filter((f) => (ctx.ind.nuvensDaFunc.get(f) ?? []).length > 1);
   const agrupamento = e.natureza === 'agrupamento_didatico';
   return [
-    agrupamento ? h('p', { class: 'nota' }, h('strong', null, 'Agrupamento criado por este tutorial. '),
+    agrupamento ? h('p', { class: 'nota' }, h('strong', null, 'Agrupamento criado por este projeto. '),
       String(e.nota_natureza ?? 'Não é um produto nem uma nuvem oficial da Salesforce.')) : null,
     avisoCoberturaNuvem(e),
     texto('Resumo', e.resumo, { didatico: true }),
@@ -313,7 +313,7 @@ function sobreTema(ctx: CtxPainel, e: Entidade): HTMLElement | null {
   const pi = (e.para_iniciantes ?? null) as ParaIniciantes | null;
   const enc = (e.encadeamento ?? null) as Bloco | null;
   const avc = arr<ItemAvancado>(e.avancado);
-  const aviso = didatico ? 'Tema criado por este tutorial para organizar o estudo; não é uma categoria oficial da Salesforce.' : `Natureza: ${String(e.natureza ?? 'não informada')}`;
+  const aviso = didatico ? 'Tema criado por este projeto para organizar o estudo; não é uma categoria oficial da Salesforce.' : `Natureza: ${String(e.natureza ?? 'não informada')}`;
 
   // camada 1
   const c1 = pi
@@ -327,7 +327,7 @@ function sobreTema(ctx: CtxPainel, e: Entidade): HTMLElement | null {
       fontesCamada(ctx, pi.evidencias),
     ]
     : [h('p', null, didatico
-      ? 'Tema criado por este tutorial para organizar o estudo. Não é uma categoria oficial da Salesforce: a documentação oficial pode agrupar os mesmos assuntos de outro jeito.'
+      ? 'Tema criado por este projeto para organizar o estudo. Não é uma categoria oficial da Salesforce: a documentação oficial pode agrupar os mesmos assuntos de outro jeito.'
       : aviso)];
 
   // camada 2

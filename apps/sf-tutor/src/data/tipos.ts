@@ -39,7 +39,7 @@ export interface Aresta {
   via?: string[];
 }
 
-/** Tipo que só existe na busca: metadata type do inventário v68 ainda sem ficha no tutorial. */
+/** Tipo que só existe na busca: metadata type do inventário v68 ainda sem ficha no site. */
 export type TipoBusca = TipoNo | 'metadata_type_inventario';
 
 export interface ItemBusca {
