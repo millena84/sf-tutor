@@ -28,6 +28,8 @@ Dois workflows em `.github/workflows/`:
 
 A parte local da publicação fica em `scripts/publicar-docs.sh <clone do repositório público>`: copia `dist/` para `docs/`, remove `docs/__teste-sintetico` e cria `docs/.nojekyll`. O script recusa um build com alterações locais nos insumos ou com a fixture de performance, e avisa quando só o `build-info.json` mudaria. Serve também para publicar à mão.
 
+A prévia do link (Open Graph) usa `public/og/metadata-desbugado.png`, gerada por `node scripts/gerar-imagem-og.mjs` a partir dos desenhos de `public/marca/` e versionada (o build não a regera). As tags em `index.html` usam URLs absolutas do endereço público; `tests/unit/open-graph.test.ts` confere que elas batem com o repositório de `REPORTE.repoIssues` e com o tamanho real da imagem. Se o endereço mudar, atualize as tags junto.
+
 Para a publicação automática funcionar, o repositório precisa do secret `TUTORIAL_SF_GRAFO_TOKEN`: um token fine-grained restrito a `millena84/metadata-desbugando`, com `Contents: Read and write` e `Pull requests: Read and write`. Sem o secret, o workflow verifica o site, avisa e não publica.
 
 O `build-info.json` registra `commit` (HEAD do build) e `commit_insumos` (último commit que mudou `gerado/site`; fica nulo em clone raso).
