@@ -14,7 +14,7 @@ import { abrirReporte } from './ui/reporte';
 import { iniciarTour, mostrarBoasVindas, tourVisto, type GanchosTour } from './ui/tour';
 import { anunciar, h, limpar } from './ui/dom';
 import { lerURL, montarURL, type EstadoURL } from './rotas';
-import { ICONE_TIPO, NOME_TIPO } from './rotulos';
+import { ICONE_TIPO, NOME_TIPO, RECORTE, rotuloEstado } from './rotulos';
 
 type Selecao = { tipo: 'no'; caminho: string[] } | { tipo: 'aresta'; a: ArestaClicada } | { tipo: 'rel'; relId: string } | null;
 
@@ -366,8 +366,10 @@ async function iniciar(): Promise<void> {
       const rel = item
         ? montarURL({ visao: st.visao, modo: st.modo, id, tabela: id, foco: item.id, sintetico: url.sintetico })
         : montarURL({ visao: st.visao, modo: 'mapa', id, caminho: c ? [...c] : undefined, sintetico: url.sintetico });
+      const status = item?.estado ? rotuloEstado(item.estado)
+        : no?.recorte ? `Recorte do tema: ${RECORTE[no.recorte].rotulo}` : no?.estado ? rotuloEstado(no.estado) : undefined;
       abrirReporte({
-        id, rotulo: rotulo(id), tipo: no ? NOME_TIPO[no.tipo] : 'item', item,
+        id, rotulo: rotulo(id), tipo: no ? NOME_TIPO[no.tipo] : 'item', item: item ? { id: item.id, nome: item.nome } : undefined, status,
         link: new URL(rel, location.href).toString(),
         versao: $('versao').textContent ?? '',
       });

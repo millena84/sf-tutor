@@ -1,6 +1,6 @@
 # Triagem dos erros reportados
 
-Rotina para tratar o que chega pelo botão "Reportar erro" do Metadata Desbugado (#152). Versão de 2026-11-26.
+Rotina para tratar o que chega pelo botão "Reportar erro" do Metadata Desbugado (#152). Versão de 2026-11-26, revista para o formulário em formato de entrevista.
 
 ## Resumo
 
@@ -15,7 +15,7 @@ Rotina para tratar o que chega pelo botão "Reportar erro" do Metadata Desbugado
 | Canal | Como chega | O que fazer |
 | --- | --- | --- |
 | Issue no GitHub | Já vem com o label `erro-reportado` e o formulário preenchido | Seguir a rotina |
-| E-mail para o suporte | Chega com o assunto `ERRO REPORTADO: Metadata Desbugado (<id>)` | Abrir uma issue no repositório público com o conteúdo, **sem** o e-mail nem dados pessoais de quem enviou; escrever "Reportado por e-mail". Responder o e-mail com o link da issue |
+| E-mail para o suporte | Chega com o assunto `ERRO REPORTADO: Metadata Desbugado (<id>)`; pode trazer a linha "Avisar a correção em: <e-mail>" | Abrir uma issue no repositório público com o conteúdo, **sem** o e-mail nem dados pessoais de quem enviou; escrever "Reportado por e-mail". Responder o e-mail com o link da issue. Se houver "Avisar a correção em", avisar esse endereço quando a correção for publicada |
 
 ## Labels
 
@@ -35,12 +35,7 @@ Criados pelo workflow de publicação (passo "Garantir os labels da triagem"). N
 ### 1. Primeira leitura (meta: até 7 dias)
 
 - **Dados sensíveis:** se a issue tiver dados de org, credenciais, IDs de registro ou dados pessoais de terceiros, edite a issue para remover e avise a pessoa na resposta.
-- **Tipo do problema:** veja o que a ficha afirma e o que a pessoa diz. Classifique mentalmente:
-  - erro factual (tipo, propriedade, campo, valor, versão);
-  - informação desatualizada;
-  - classificação didática (em que tema ou funcionalidade o item aparece; é escolha do projeto);
-  - texto confuso;
-  - problema do site (algo não abre, não funciona).
+- **O que aconteceu:** o formulário já traz a escolha da pessoa: "Está errado", "Está desatualizado", "Ficou confuso", "Fonte quebrada ou errada", "Ligação errada no mapa" ou "Outra coisa". Traz também o status que o site mostrava para o item ("Status no site"). Se a pessoa disse que sabe "pela prática" e não mandou fonte, o caminho natural é `aguardando-fonte`. Mudança de organização em temas é classificação didática, escolha do projeto.
 - **Duplicado:** se já existe issue igual, aplique `duplicado`, responda com o link e feche.
 
 ### 2. Conferir na fonte oficial
@@ -79,6 +74,7 @@ gh issue list --repo millena84/metadata-desbugando --label creditar --state clos
 ```
 
 - Use o nome ou o usuário que a pessoa escreveu no formulário. Para reportes por e-mail, use o nome só se a pessoa o escreveu no campo "Nome".
+- **E-mails para aviso** só chegam pelo envio por e-mail; o formulário nunca os coloca na issue. Não copie esses e-mails para issues, insumos ou notas de versão.
 - **Não guarde a lista de créditos nos insumos.** As instruções do projeto proíbem dados pessoais em `ai-help/claude/insumos-grafo/`. Os nomes ficam nas issues, escritas pelas próprias pessoas, e nas notas de versão publicadas.
 
 ## Modelos de resposta

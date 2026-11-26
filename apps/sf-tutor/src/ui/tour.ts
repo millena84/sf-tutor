@@ -64,7 +64,7 @@ export const PASSOS: readonly PassoTour[] = [
   },
   {
     titulo: 'Achou um erro? Avise',
-    texto: 'Toda ficha, e cada linha das tabelas, tem "Reportar erro": por e-mail ou por issue no GitHub. Em "Método" você vê de onde vêm os dados e o que ainda falta mapear.',
+    texto: 'Toda ficha tem "Reportar erro", e nas tabelas o botão aparece ao abrir uma propriedade ou um campo. É sobre o conteúdo do site, não suporte da Salesforce; vai por e-mail ou por issue no GitHub. Em "Método" você vê de onde vêm os dados e o que ainda falta mapear.',
     alvo: '#conteudo-painel .btn-reportar',
     preparar: (g) => g.mostrarPainel(),
   },
