@@ -572,3 +572,8 @@ issue correspondente. Nunca push direto na main.
 - Novo endereço do site: `https://millena84.github.io/metadata-desbugado/` (o antigo deixa de responder; o GitHub Pages não redireciona). O secret `TUTORIAL_SF_GRAFO_TOKEN` mantém o nome; a confirmação de que o token segue válido vem da primeira publicação após este PR.
 - Arquitetura de marca: topo com o logo do produto (o grafo do nó central, `public/marca/metadata-desbugado.svg`, também favicon); rodapé assinado pelo buguinho Desbugando com "Um projeto desbugando". Subtítulo do topo sem a menção à marca-mãe.
 - Pendente: #143 A3 (Open Graph) agora tem URL final e pode começar.
+
+## 2026-11-26 — Correção do nome do repositório público
+
+- A publicação do PR #159 falhou ("Repository not found"): o repositório ainda não tinha sido renomeado. A Millena renomeou depois para `millena84/metadata-desbugando` (com "-ando"), e as referências foram ajustadas para esse nome. Endereço do site: `https://millena84.github.io/metadata-desbugando/`.
+- A publicação passa a levar também o README da raiz do repositório público (`repo-publico/README-publico.md`), que ainda trazia o nome e o endereço antigos.
