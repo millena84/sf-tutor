@@ -453,6 +453,11 @@ class TestTemas(BaseTemp):
         self.assertTrue(all(m["suporte_cli"] for m in d["metadata_types"]))
         self.assertIsInstance(d["temas_sem_funcionalidade"], list)
 
+    def test_manifesto_traz_ultima_verificacao_das_fontes(self):
+        vb = ler(os.path.join(BASE, "gerado", "site", "manifest.json"))["versao_base"]
+        datas = [f["data_verificacao"] for f in ler(os.path.join(BASE, "fontes", "registro.json"))["fontes"] if f.get("data_verificacao")]
+        self.assertEqual(vb["ultima_verificacao"], max(datas))
+
     def test_toda_nuvem_tem_cobertura_derivada_parcial(self):
         """Toda nuvem no site leva a cobertura calculada de metadata types, com a nota de lista parcial."""
         import glob as _g

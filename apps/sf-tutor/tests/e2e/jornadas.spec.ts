@@ -196,3 +196,8 @@ test('11. Ícones das nuvens são do próprio site (nenhuma imagem de servidores
   await expect.poll(() => icone.evaluate((i) => (i as HTMLImageElement).naturalWidth)).toBeGreaterThan(0);
   expect(externas).toEqual([]);
 });
+
+test('12. Rodapé mostra a release da documentação e até quando os dados foram verificados', async ({ page }) => {
+  await abrir(page, '');
+  await expect(page.locator('#versao')).toHaveText(/Dados: documentação .+ \(API \d+\.\d\), verificada até \d{2}\/\d{2}\/\d{4}/);
+});

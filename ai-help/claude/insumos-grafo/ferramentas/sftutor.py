@@ -764,7 +764,8 @@ def gerar(base=BASE, destino=None):
 
 
 # --------------------------------------------------------------------------- projeção para o site (contrato versionado)
-CONTRATO_SITE = {"nome": "sf-tutor-site", "versao": "1.3.0"}  # 1.2.0: "derivado" nos temas (#34); 1.3.0: "cobertura_derivada" nas nuvens
+CONTRATO_SITE = {"nome": "sf-tutor-site", "versao": "1.4.0"}  # 1.2.0: "derivado" nos temas (#34); 1.3.0: "cobertura_derivada" nas nuvens;
+# 1.4.0: "versao_base.ultima_verificacao" no manifesto (#149)
 TIPOS_FOLHA = {"campo_api", "propriedade_xml"}          # vivem dentro da entidade-mãe
 TIPOS_ARESTA_FOLHA = {"campo", "propriedade"}           # deriváveis da entidade-mãe
 
@@ -978,7 +979,9 @@ def gerar_site(C, base, out, nos, arestas, visoes, cob):
         contagem[n["tipo"]] = contagem.get(n["tipo"], 0) + 1
     gravar(os.path.join(site, "manifest.json"), {
         "contrato": CONTRATO_SITE,
-        "versao_base": C["salesforce"]["versao_base"],
+        # ultima_verificacao: data mais recente de verificação entre as fontes registradas (validade dos dados, #149)
+        "versao_base": {**C["salesforce"]["versao_base"],
+                        "ultima_verificacao": max((f.get("data_verificacao") or "") for f in fontes.values()) or None},
         "arquivos": {"grafo_base": "grafo-base.json", "visoes": "visoes.json", "busca": "busca.json", "cobertura": "cobertura.json",
                      "fontes": "fontes.json", "entidades": "entidades/<prefixo>/<nome>.json (salesforce: entidades/salesforce.json)"},
         "contagens": {"nos_por_tipo": dict(sorted(contagem.items())), "entidades": len(entidades), "fontes": len(fontes),
