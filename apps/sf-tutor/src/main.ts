@@ -529,7 +529,7 @@ function mostrarErro(e: unknown): void {
   limpar(c);
   const arquivo = e instanceof ErroCarga ? e.arquivo : 'dados';
   c.append(
-    h('h1', null, 'Não foi possível carregar os dados do tutorial'),
+    h('h1', null, 'Não foi possível carregar os dados do Metadata Desbugado'),
     h('p', { role: 'alert' }, String((e as Error)?.message ?? e)),
     h('p', null, `Arquivo: ${arquivo}. Os dados são gerados a partir de ai-help/claude/insumos-grafo/ com "npm run dados" (que valida a base antes de copiar).`),
     h('button', { type: 'button', class: 'btn', on: { click: () => location.reload() } }, 'Tentar de novo'),

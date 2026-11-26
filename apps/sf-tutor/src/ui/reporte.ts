@@ -69,7 +69,7 @@ export function abrirReporte(c: ContextoReporte): void {
       c.item ? [h('dt', null, 'Campo ou propriedade'), h('dd', null, c.item.nome)] : null,
       h('dt', null, 'Versão dos dados'), h('dd', null, c.versao)),
     h('p', { class: 'aviso aviso-sensivel', role: 'note' }, h('strong', null, 'Não inclua dados da sua org. '),
-      'Nada de credenciais, tokens, IDs de registros, nomes de clientes ou dados pessoais de terceiros. Descreva o erro com o que aparece neste tutorial e, se puder, ',
+      'Nada de credenciais, tokens, IDs de registros, nomes de clientes ou dados pessoais de terceiros. Descreva o erro com o que aparece neste site e, se puder, ',
       'aponte a página oficial da Salesforce que mostra o correto. A issue no GitHub é pública.'),
     campo('Tipo de problema (obrigatório)', tipo),
     campo('O que está errado (obrigatório)', descricao, 'Diga o que a ficha afirma e por que parece errado.'),

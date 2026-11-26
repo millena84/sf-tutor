@@ -20,7 +20,7 @@ export function conteudoMetodo(d: DadosBase, salesforce: Record<string, unknown>
   const nt = d.manifesto.contagens.nos_por_tipo;
   return h('div', { class: 'metodo' },
     h('h3', null, 'De onde vêm as informações'),
-    h('p', null, 'O conteúdo vem da base de insumos do projeto (ai-help/claude/insumos-grafo/ no repositório sf-tutor). Cada afirmação técnica cita a fonte: documentação oficial da Salesforce (Object Reference, Metadata API, Tooling API, Field Reference e Ajuda), evidência de schema (registro do Salesforce CLI) ou observação autorizada em org. Esta versão não tem observações em org: toda validação é documental.'),
+    h('p', null, 'O conteúdo vem da base de insumos do projeto, mantida pela autora junto com as ferramentas de validação. Cada afirmação técnica cita a fonte: documentação oficial da Salesforce (Object Reference, Metadata API, Tooling API, Field Reference e Ajuda), evidência de schema (registro do Salesforce CLI) ou observação autorizada em org. Esta versão não tem observações em org: toda validação é documental.'),
     h('p', null, 'Os temas (e os temas dentro deles) são curadoria didática do projeto, não nomenclatura oficial da Salesforce. Nos dados, esses dois níveis se chamam classificação e subclassificação; "tema" é a tradução didática usada na tela. As explicações são redação do projeto a partir das fontes citadas e estão marcadas como tal.'),
     h('h3', null, 'Ligações, datas e nível de evidência'),
     h('p', null, 'Cada ligação técnica (referência entre campos, correspondência XML ↔ API) tem ficha própria com explicação, campos, cardinalidade quando verificada, condições, fontes e data de verificação. O nível de evidência aparece no traço da linha:'),
@@ -49,10 +49,12 @@ export function conteudoMetodo(d: DadosBase, salesforce: Record<string, unknown>
     h('h3', null, 'Uso de IA'),
     h('p', null, 'A coleta, a agregação e a redação dos insumos foram feitas com o Claude (Anthropic), a partir das fontes citadas, com revisão humana do projeto. Esta página não usa IA em tempo de execução: nada é gerado no navegador, e lacunas ficam visíveis como lacunas.'),
     h('h3', null, 'Marca e afiliação'),
-    h('p', null, 'O sf-tutor é um projeto do canal Desbugando (tecnologia sem mistério); o logo do cabeçalho é a marca Desbugando.'),
+    h('p', null, 'O Metadata Desbugado é um projeto do canal Desbugando; o logo do cabeçalho é o mascote da marca, o bug com lupa.'),
     h('p', null, 'Salesforce e os nomes de produtos são marcas da Salesforce, Inc. Este projeto é independente e não é afiliado nem endossado pela Salesforce. Os nomes das nuvens são os oficiais, usados para identificar cada produto, sempre com as fontes da documentação. Os ícones do centro e das nuvens são desenhos próprios do projeto, no estilo do mascote Desbugando: não são logos da Salesforce, e o site não carrega imagens de servidores da Salesforce.'),
+    h('h3', null, 'Licença'),
+    h('p', null, 'Textos e dados: CC BY 4.0 (pode reutilizar, inclusive comercialmente, dando crédito ao Metadata Desbugado, um projeto Desbugando). Código: licença MIT. A marca, o mascote e os ícones Desbugando não estão licenciados. Salesforce e os nomes de produtos são marcas da Salesforce, Inc.; a documentação oficial citada continua sendo da Salesforce.'),
     h('h3', null, 'Encontrou um erro?'),
-    h('p', null, 'Use o botão "Reportar erro" na ficha do item ou na linha do campo, dentro da tabela. O aviso sai pelo seu app de e-mail ou vira uma issue pública no repositório do tutorial no GitHub; esta página não guarda nada do que você escreve. Não inclua dados da sua org.'),
+    h('p', null, 'Use o botão "Reportar erro" na ficha do item ou na linha do campo, dentro da tabela. O aviso sai pelo seu app de e-mail ou vira uma issue pública no repositório do Metadata Desbugado no GitHub; esta página não guarda nada do que você escreve. Não inclua dados da sua org.'),
     h('h3', null, 'Segurança'),
     h('p', null, 'A página não pede nem guarda credenciais Salesforce e não se conecta a nenhuma org. Exemplos de SOQL e XML são apenas texto copiável; nada é executado ao clicar.'),
   );

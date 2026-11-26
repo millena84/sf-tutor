@@ -7,8 +7,8 @@
  *  mas não esconde o endereço de quem lê o código; ocultação total exigiria um servidor. */
 export const REPORTE = {
   destinoCodificado: '==QbvNmLslWYtdGQvRmbhdWdiNXZk5SZ0J3bwV3c',
-  assunto: 'ERRO REPORTADO: tutorial Salesforce - sf-tutor',
-  /** repositório público onde as issues são abertas (o sf-tutor, onde o conteúdo é trabalhado, é privado) */
+  assunto: 'ERRO REPORTADO: Metadata Desbugado',
+  /** repositório público onde as issues são abertas (o repositório de trabalho, sf-tutor, é privado) */
   repoIssues: 'millena84/tutorial-sf-grafo',
   modeloIssue: 'erro-reportado.yml',
   /** acima disso alguns apps de e-mail cortam o corpo; a janela sugere copiar o texto */
@@ -69,7 +69,7 @@ export function montarTexto(c: ContextoReporte, f: CamposReporte, hoje: Date = n
   const gh = normalizarGithub(f.github);
   const quem = [f.nome?.trim(), gh ? `GitHub ${gh}` : ''].filter(Boolean).join(' · ');
   return [
-    'ERRO REPORTADO no sf-tutor',
+    'ERRO REPORTADO no Metadata Desbugado',
     '',
     `Item: ${c.rotulo} (${c.id}), ${c.tipo}`,
     ...(c.item ? [`Campo ou propriedade: ${c.item.nome} (${c.item.id})`] : []),
