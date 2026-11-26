@@ -9,6 +9,8 @@ type Medidas = Record<string, number | string>;
 type W = { __sfTutor: { nosRenderizados(): number; totalCatalogo: number; selecao(): string | null } };
 
 async function carregar(page: Page, q: string, m: Medidas): Promise<void> {
+  // o cartão de boas-vindas não entra na medição
+  await page.addInitScript(() => { try { localStorage.setItem('metadata-desbugado:tour-visto', '1'); } catch { /* sem armazenamento */ } });
   const t0 = Date.now();
   await page.goto(`/${q}`);
   await page.waitForFunction(() => (window as unknown as { __sfTutor?: { pronto: boolean } }).__sfTutor?.pronto === true, null, { timeout: 60_000 });

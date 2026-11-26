@@ -287,7 +287,7 @@ test('tema com conteúdo próprio: exemplo, comece por, encadeamento e decisões
 });
 
 test('busca pela pasta do projeto acha o metadata type; tipo sem ficha aparece marcado e não abre nada', async ({ page }) => {
-  await page.goto('/');
+  await abrir(page);
   await page.locator('#busca').fill('applications');
   const primeiro = page.locator('#resultados .resultado').first();
   await expect(primeiro).toContainText('CustomApplication');

@@ -5,7 +5,9 @@ const erros = new WeakMap<Page, string[]>();
 /** Erros de JavaScript da página durante todo o teste (não só na carga). */
 export const errosDaPagina = (page: Page): string[] => erros.get(page) ?? [];
 
-export async function abrir(page: Page, consulta = ''): Promise<void> {
+/** Abre a página pronta. Por padrão marca o tour como visto, para o cartão de boas-vindas não cobrir os testes. */
+export async function abrir(page: Page, consulta = '', o: { tourVisto?: boolean } = {}): Promise<void> {
+  if (o.tourVisto !== false) await page.addInitScript(() => { try { localStorage.setItem('metadata-desbugado:tour-visto', '1'); } catch { /* sem armazenamento */ } });
   if (!erros.has(page)) {
     const lista: string[] = [];
     erros.set(page, lista);

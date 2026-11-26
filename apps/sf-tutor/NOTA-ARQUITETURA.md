@@ -100,3 +100,7 @@ apps/sf-tutor/dist/                (site publicável)
 - `busca.json` traz, para cada metadata type, a pasta e o sufixo do arquivo (campo `local`, além de entrarem em `textos`). A origem é o registro do Salesforce CLI, via inventário.
 - Os tipos do inventário v68 que ainda não têm ficha entram na busca com `tipo: metadata_type_inventario`, id `inv:<Nome>` e `sem_ficha: true`. Eles não viram nó do mapa nem abrem painel: a descrição aparece no próprio resultado.
 - Na pontuação, casar pela pasta ou pelo sufixo vale mais do que um nome que só começa com o termo.
+
+## Boas-vindas e tour guiado
+
+`src/ui/tour.ts`: cartão de boas-vindas na primeira visita (não aparece em links diretos com `?n=`) e tour de 6 passos sobre a interface real (visões, seleção no mapa, ficha, tabela de propriedades do PermissionSet, busca, reportar erro). O balão não é modal; Esc sai. "Já vi" fica em `localStorage` (`metadata-desbugado:tour-visto`), sempre com tratamento de erro. Para rever: "Rever o tour" no rodapé ou "Fazer o tour guiado" em Método. Os textos ficam em `PASSOS`; os testes e2e usam `abrir(page, q, { tourVisto: false })` para ver o cartão (por padrão o helper marca o tour como visto).
