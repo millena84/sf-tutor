@@ -9,7 +9,7 @@ export const REPORTE = {
   destinoCodificado: '==QbvNmLslWYtdGQvRmbhdWdiNXZk5SZ0J3bwV3c',
   assunto: 'ERRO REPORTADO: Metadata Desbugado',
   /** repositório público onde as issues são abertas (o repositório de trabalho, sf-tutor, é privado) */
-  repoIssues: 'millena84/tutorial-sf-grafo',
+  repoIssues: 'millena84/metadata-desbugado',
   modeloIssue: 'erro-reportado.yml',
   /** acima disso alguns apps de e-mail cortam o corpo; a janela sugere copiar o texto */
   limiteMailto: 1800,

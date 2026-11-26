@@ -49,7 +49,7 @@ export function conteudoMetodo(d: DadosBase, salesforce: Record<string, unknown>
     h('h3', null, 'Uso de IA'),
     h('p', null, 'A coleta, a agregação e a redação dos insumos foram feitas com o Claude (Anthropic), a partir das fontes citadas, com revisão humana do projeto. Esta página não usa IA em tempo de execução: nada é gerado no navegador, e lacunas ficam visíveis como lacunas.'),
     h('h3', null, 'Marca e afiliação'),
-    h('p', null, 'O Metadata Desbugado é um projeto do canal Desbugando; o logo do cabeçalho é o mascote da marca, o bug com lupa.'),
+    h('p', null, 'O Metadata Desbugado é um projeto do canal Desbugando; o logo do cabeçalho é um grafo com o bug no centro, desenho próprio do produto, e o mascote da marca, o bug com lupa, assina o rodapé.'),
     h('p', null, 'Salesforce e os nomes de produtos são marcas da Salesforce, Inc. Este projeto é independente e não é afiliado nem endossado pela Salesforce. Os nomes das nuvens são os oficiais, usados para identificar cada produto, sempre com as fontes da documentação. Os ícones do centro e das nuvens são desenhos próprios do projeto, no estilo do mascote Desbugando: não são logos da Salesforce, e o site não carrega imagens de servidores da Salesforce.'),
     h('h3', null, 'Licença'),
     h('p', null, 'Textos e dados: CC BY 4.0 (pode reutilizar, inclusive comercialmente, dando crédito ao Metadata Desbugado, um projeto Desbugando). Código: licença MIT. A marca, o mascote e os ícones Desbugando não estão licenciados. Salesforce e os nomes de produtos são marcas da Salesforce, Inc.; a documentação oficial citada continua sendo da Salesforce.'),
