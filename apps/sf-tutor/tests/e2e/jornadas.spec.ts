@@ -205,6 +205,7 @@ test('10. Reportar erro: entrevista com contexto, perguntas por situação e iss
   expect(u.searchParams.get('fonte')).toBe('pela prática');
   expect(abertas[0]).not.toContain('pessoa');
   await expect(dlg.getByRole('status')).toContainText('nova aba');
+  await expect(dlg.getByRole('status')).toContainText('só é criada quando você marcar a confirmação');
   await expect(dlg.getByRole('status')).toContainText('Seu e-mail não foi incluído');
   // e-mail malformado barra o envio
   await dlg.getByLabel('E-mail para avisar da correção').fill('pessoa@');
