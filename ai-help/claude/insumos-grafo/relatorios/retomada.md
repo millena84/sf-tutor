@@ -609,3 +609,9 @@ issue correspondente. Nunca push direto na main.
 - Pergunta 1 "O que aconteceu?" com 7 escolhas; as perguntas seguintes mudam conforme a escolha. "É um problema na minha org" não vira reporte: mostra para onde ir (Ajuda da Salesforce, suporte do contrato, comunidade Trailblazer).
 - Pergunta 3 "Como você sabe?" (link oficial e/ou "Sei pela prática"); pergunta 4 crédito e e-mail opcional para avisar da correção. O e-mail vai só no envio por e-mail e no texto copiado, nunca na issue pública (testado).
 - Modelo de issue atualizado (campos "Status no site", "O que aconteceu", "O que você viu", "Como deveria ser", "Como você sabe"); passo 6 do tour corrigido (o botão das tabelas aparece ao abrir a propriedade); rotina de triagem revista.
+
+## 2026-11-26 — Envio pelo GitHub: aviso explícito (#148) e tour fechado (#147)
+
+- Teste da Millena no celular: o caminho "Abrir issue no GitHub" não resultou em issue no `metadata-desbugando`. O repositório público estava certo (modelo novo publicado pelo PR #101). Causa ainda não diagnosticada; hipóteses: issue não enviada (confirmação obrigatória e botão "Create"), app do GitHub abrindo sem os campos, login no meio, nova aba bloqueada.
+- Mitigação: o aviso depois do clique agora diz que a issue só existe ao marcar a confirmação e tocar em "Create", e o que fazer se o login ou o app atrapalharem. Diagnóstico fica para depois, com a Millena.
+- #147 fechado: tour publicado; textos mantidos como estão por decisão da Millena.
