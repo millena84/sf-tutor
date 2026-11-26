@@ -595,3 +595,10 @@ issue correspondente. Nunca push direto na main.
 - Lembrado em `localStorage` com tratamento de erro; "Rever o tour" no rodapé e "Fazer o tour guiado" em Método.
 - Testes: `tests/e2e/tour.spec.ts` (desktop e 360 px, inclusive axe no cartão e no balão, e sem armazenamento) e `tests/unit/tour.test.ts`.
 - Pendente (Millena): revisar os textos do cartão e dos passos (`PASSOS` em `apps/sf-tutor/src/ui/tour.ts`).
+
+## 2026-11-26 — Rotina de triagem dos erros reportados (#152 C2)
+
+- Rotina em `relatorios/triagem-erros-reportados.md`: canais (issue e e-mail), labels, passo a passo, modelos de resposta e créditos. Os créditos não ficam nos insumos (dados pessoais): saem das issues com `creditar` na hora das notas de versão.
+- O workflow de publicação passa a garantir os 6 labels da triagem no repositório público.
+- Caso 1 (public groups em "Permissões, perfis e grupos") analisado: o reporte procede pelo escopo do próprio catálogo; proposta de mudar a classificação principal para "Acesso a registros e hierarquias". Decisão da Millena: não mexer no MVP (era um teste do envio); reavaliar depois do lançamento.
+- Pendente: decidir sobre a Action opcional que espelha as issues públicas no `sf-tutor` (a sessão do Claude não lê o repositório público; com o espelho, a triagem pode ser pedida sem colar o texto).
