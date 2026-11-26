@@ -577,3 +577,9 @@ issue correspondente. Nunca push direto na main.
 
 - A publicação do PR #159 falhou ("Repository not found"): o repositório ainda não tinha sido renomeado. A Millena renomeou depois para `millena84/metadata-desbugando` (com "-ando"), e as referências foram ajustadas para esse nome. Endereço do site: `https://millena84.github.io/metadata-desbugando/`.
 - A publicação passa a levar também o README da raiz do repositório público (`repo-publico/README-publico.md`), que ainda trazia o nome e o endereço antigos.
+
+## 2026-11-26 — Prévia do link (Open Graph), #143 A3
+
+- Imagem 1200×627 em `apps/sf-tutor/public/og/metadata-desbugado.png`, gerada por `scripts/gerar-imagem-og.mjs` (logo do produto, nome, subtítulo, assinatura com o buguinho, aviso de independência).
+- Tags `og:*`, `twitter:*` e `canonical` em `index.html`, com o endereço `https://millena84.github.io/metadata-desbugando/`. Teste unitário `open-graph.test.ts`.
+- Pendente (Millena): conferir no LinkedIn Post Inspector depois da publicação.
