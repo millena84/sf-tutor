@@ -583,3 +583,8 @@ issue correspondente. Nunca push direto na main.
 - Imagem 1200×627 em `apps/sf-tutor/public/og/metadata-desbugado.png`, gerada por `scripts/gerar-imagem-og.mjs` (logo do produto, nome, subtítulo, assinatura com o buguinho, aviso de independência).
 - Tags `og:*`, `twitter:*` e `canonical` em `index.html`, com o endereço `https://millena84.github.io/metadata-desbugando/`. Teste unitário `open-graph.test.ts`.
 - Pendente (Millena): conferir no LinkedIn Post Inspector depois da publicação.
+## 2026-11-26 — Reportar erro: retorno honesto do e-mail (#148 A5)
+
+- Teste da Millena no celular: ao cancelar a abertura do app de e-mail, a janela ficava em "Abrindo o seu app de e-mail…" e parecia que o reporte tinha sido enviado. Agora o aviso destaca que o envio só acontece ao tocar em Enviar no app; se a página não sai de foco em 2,5 s, avisa que nenhum app abriu e nada foi enviado; se sai e volta, lembra que só chega se a pessoa enviou. A página nunca afirma que o e-mail foi enviado (`acompanharMailto`, testes em `reporte-mailto.test.ts`).
+- Pedir o e-mail de quem reporta: decidido não pedir. Pelo e-mail, a resposta vai para o remetente; pela issue (pública), um e-mail digitado ficaria exposto e o GitHub já notifica o autor. O formulário ganhou uma nota explicando como acompanhar.
+- "Copiar texto" funcionou no teste.

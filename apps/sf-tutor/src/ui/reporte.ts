@@ -28,7 +28,8 @@ export function abrirReporte(c: ContextoReporte): void {
   const nome = h('input', { id: 'rep-nome', type: 'text', autocomplete: 'name', maxlength: '80' });
   const github = h('input', { id: 'rep-github', type: 'text', placeholder: '@seu-usuario', maxlength: '40',
     pattern: '@?[A-Za-z0-9][A-Za-z0-9\\-]{0,38}', autocomplete: 'off', spellcheck: 'false' });
-  const status = h('p', { class: 'nota', role: 'status' });
+  const status = h('p', { class: 'nota status-reporte', role: 'status' });
+  const avisar = (texto: string): void => { status.textContent = texto; status.classList.add('aviso'); };
   const valores = (): CamposReporte => ({ tipo: tipo.value, descricao: descricao.value, correto: correto.value, fonte: fonte.value,
     nome: nome.value, github: github.value });
   const form = h('form', { class: 'form-reporte', novalidate: '' }) as HTMLFormElement;
@@ -38,13 +39,16 @@ export function abrirReporte(c: ContextoReporte): void {
     status.textContent = 'Preencha o tipo de problema e o que está errado.';
     return false;
   };
+  let pararAcompanhamento: (() => void) | undefined;
   const btnEmail = h('button', { type: 'button', class: 'btn btn-primario' }, 'Enviar por e-mail');
   btnEmail.addEventListener('click', () => {
     if (!valido()) return;
     const url = urlMailto(c, valores());
-    status.textContent = url.length > REPORTE.limiteMailto
-      ? 'Abrindo o seu app de e-mail. O texto é longo e alguns apps cortam o final: se faltar algo, use "Copiar texto".'
-      : 'Abrindo o seu app de e-mail. Se nada abrir, use "Copiar texto" e envie pelo seu e-mail.';
+    const longo = url.length > REPORTE.limiteMailto
+      ? ' O texto é longo e alguns apps cortam o final: se faltar algo, use "Copiar texto".' : '';
+    avisar(`Abrindo o seu app de e-mail com a mensagem pronta. O reporte só é enviado quando você tocar em Enviar no app.${longo}`);
+    pararAcompanhamento?.();
+    pararAcompanhamento = acompanharMailto(avisar);
     location.href = url;
   });
   const btnIssue = h('button', { type: 'button', class: 'btn' }, 'Abrir issue no GitHub');
@@ -78,7 +82,8 @@ export function abrirReporte(c: ContextoReporte): void {
     h('fieldset', { class: 'campos-opcionais' },
       h('legend', null, 'Quem reporta (opcional)'),
       campo('Nome', nome, 'Para dar crédito nas notas de versão quando a correção for publicada.'),
-      campo('Usuário do GitHub', github, 'Para mencionar você na issue e nas notas de versão. Pelo botão do GitHub, a issue já sai no seu usuário.')),
+      campo('Usuário do GitHub', github, 'Para mencionar você na issue e nas notas de versão. Pelo botão do GitHub, a issue já sai no seu usuário.'),
+      h('p', { class: 'nota' }, 'Para acompanhar: pelo e-mail, a resposta vai para o endereço de onde você enviar, sem precisar informá-lo aqui. Pelo GitHub, você recebe as atualizações da issue.')),
     h('div', { class: 'acoes acoes-reporte' }, btnEmail, btnIssue, btnCopiar, fechar),
     status, previa);
   dlg.append(
@@ -88,4 +93,29 @@ export function abrirReporte(c: ContextoReporte): void {
       form));
   dlg.showModal();
   tipo.focus();
+}
+
+/**
+ * Depois de chamar o mailto, a página não sabe se o app de e-mail abriu nem se a pessoa enviou.
+ * Heurística honesta: se a página não sair de foco em alguns segundos, provavelmente nenhum app abriu;
+ * se sair e voltar, lembra que o envio só acontece no app. Nunca diz que o e-mail foi enviado.
+ */
+export function acompanharMailto(avisar: (texto: string) => void, doc: Document = document, esperaMs = 2500): () => void {
+  let saiu = false;
+  const aoMudar = (): void => {
+    if (doc.visibilityState === 'hidden') { saiu = true; return; }
+    if (saiu) {
+      avisar('Voltou do app de e-mail? O reporte só chega se você tocou em Enviar lá. Se cancelou, nada foi enviado: tente de novo, use "Copiar texto" ou abra uma issue no GitHub.');
+      parar();
+    }
+  };
+  const temporizador = setTimeout(() => {
+    if (!saiu) {
+      avisar('Parece que nenhum app de e-mail abriu, então nada foi enviado. Use "Copiar texto" e envie pelo seu e-mail, ou abra uma issue no GitHub.');
+      parar();
+    }
+  }, esperaMs);
+  function parar(): void { clearTimeout(temporizador); doc.removeEventListener('visibilitychange', aoMudar); }
+  doc.addEventListener('visibilitychange', aoMudar);
+  return parar;
 }
