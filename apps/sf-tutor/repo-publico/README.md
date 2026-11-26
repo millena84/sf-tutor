@@ -1,6 +1,6 @@
 # repo-publico/
 
-Arquivos que vão para a raiz do repositório público do Metadata Desbugado (millena84/metadata-desbugado), além do site em `docs/`.
+Arquivos que vão para a raiz do repositório público do Metadata Desbugado (millena84/metadata-desbugando), além do site em `docs/`.
 O script `scripts/publicar-docs.sh` copia `.github/ISSUE_TEMPLATE/` daqui para lá a cada publicação; não edite esses
 arquivos direto no repositório público, porque a próxima publicação os sobrescreve.
 
@@ -8,4 +8,5 @@ arquivos direto no repositório público, porque a próxima publicação os sobr
   campos (item, link, versao, tipo, descricao, correto, fonte) são os que `src/reporte.ts` preenche pela URL.
 - `LICENSE` (MIT, código) e `LICENSE-CONTEUDO.md` (CC BY 4.0 para textos e dados; marca, mascote e ícones Desbugando
   com todos os direitos reservados): copiados para a raiz do repositório público.
+- `README-publico.md`: vira o `README.md` da raiz do repositório público a cada publicação.
 - O label `erro-reportado` precisa existir no repositório público; o workflow de publicação tenta criá-lo.
