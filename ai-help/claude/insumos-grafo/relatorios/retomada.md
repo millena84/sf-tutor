@@ -588,3 +588,10 @@ issue correspondente. Nunca push direto na main.
 - Teste da Millena no celular: ao cancelar a abertura do app de e-mail, a janela ficava em "Abrindo o seu app de e-mail…" e parecia que o reporte tinha sido enviado. Agora o aviso destaca que o envio só acontece ao tocar em Enviar no app; se a página não sai de foco em 2,5 s, avisa que nenhum app abriu e nada foi enviado; se sai e volta, lembra que só chega se a pessoa enviou. A página nunca afirma que o e-mail foi enviado (`acompanharMailto`, testes em `reporte-mailto.test.ts`).
 - Pedir o e-mail de quem reporta: decidido não pedir. Pelo e-mail, a resposta vai para o remetente; pela issue (pública), um e-mail digitado ficaria exposto e o GitHub já notifica o autor. O formulário ganhou uma nota explicando como acompanhar.
 - "Copiar texto" funcionou no teste.
+
+## 2026-11-26 — Boas-vindas e tour guiado (#147 A4)
+
+- Cartão de boas-vindas na primeira visita (sem link direto), com "Fazer o tour" e "Pular"; tour de 6 passos sobre exemplos reais (visões; seleção de Acesso, identidade e segurança; ficha; tabela de propriedades do PermissionSet; busca; reportar erro). Balão não modal, Esc sai, foco no título de cada passo, anúncio em `aria-live`, funciona a 360 px.
+- Lembrado em `localStorage` com tratamento de erro; "Rever o tour" no rodapé e "Fazer o tour guiado" em Método.
+- Testes: `tests/e2e/tour.spec.ts` (desktop e 360 px, inclusive axe no cartão e no balão, e sem armazenamento) e `tests/unit/tour.test.ts`.
+- Pendente (Millena): revisar os textos do cartão e dos passos (`PASSOS` em `apps/sf-tutor/src/ui/tour.ts`).

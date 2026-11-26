@@ -11,6 +11,7 @@ import { conteudoTabela, renderizarAresta, renderizarNo, renderizarRelacaoPorId,
 import { renderizarLista } from './ui/lista';
 import { conteudoFiltros, conteudoLegenda, conteudoMetodo, ligarBusca } from './ui/extras';
 import { abrirReporte } from './ui/reporte';
+import { iniciarTour, mostrarBoasVindas, tourVisto, type GanchosTour } from './ui/tour';
 import { anunciar, h, limpar } from './ui/dom';
 import { lerURL, montarURL, type EstadoURL } from './rotas';
 import { ICONE_TIPO, NOME_TIPO } from './rotulos';
@@ -389,7 +390,9 @@ async function iniciar(): Promise<void> {
     const corpo = $('dialogo-corpo');
     limpar(corpo);
     $('dialogo-titulo').textContent = { metodo: 'Método', legenda: 'Legenda', filtros: 'Filtros' }[qual];
-    if (qual === 'metodo') corpo.append(conteudoMetodo(dados, sf));
+    if (qual === 'metodo') corpo.append(
+      h('p', null, h('button', { type: 'button', class: 'btn', id: 'btn-tour-metodo', on: { click: () => { d.close(); iniciarTour(ganchosTour); } } }, 'Fazer o tour guiado')),
+      conteudoMetodo(dados, sf));
     if (qual === 'legenda') corpo.append(conteudoLegenda(cores, st.visao, rotulo));
     if (qual === 'filtros') {
       const render = () => { atualizar(); limpar(corpo); corpo.append(conteudoFiltros(ind, st.filtros, rotulo, render, ocultosNaCena)); };
@@ -498,6 +501,15 @@ async function iniciar(): Promise<void> {
     img.src = n.logo.url;
   }
 
+  // tour guiado (#147): exemplos reais da interface; o cartão de boas-vindas só aparece na primeira visita e sem link direto
+  const ganchosTour: GanchosTour = {
+    selecionar: (c) => { if (st.visao !== 'funcionalidade') trocarVisao('funcionalidade', false); selecionarCaminho(c, { push: false, focar: true, gaveta: true }); },
+    abrirId: (id) => abrirId(id, undefined, { push: false }),
+    mostrarPainel: () => abrirPainel(),
+    anunciar,
+  };
+  $('btn-tour').addEventListener('click', () => iniciarTour(ganchosTour));
+
   $('carregando').hidden = true;
   $('app').hidden = false;
   trocarModo(st.modo);
@@ -521,6 +533,7 @@ async function iniciar(): Promise<void> {
     folha: (id: string) => TIPOS_FOLHA.has(ind.no(id)?.tipo as never),
     tabela: () => st.tabela,
   };
+  if (!url.id && !url.rel && !tourVisto()) mostrarBoasVindas(ganchosTour);
 }
 
 function mostrarErro(e: unknown): void {
