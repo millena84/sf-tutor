@@ -1,6 +1,6 @@
 # repo-publico/
 
-Arquivos que vão para a raiz do repositório público do Metadata Desbugado (hoje millena84/tutorial-sf-grafo), além do site em `docs/`.
+Arquivos que vão para a raiz do repositório público do Metadata Desbugado (millena84/metadata-desbugado), além do site em `docs/`.
 O script `scripts/publicar-docs.sh` copia `.github/ISSUE_TEMPLATE/` daqui para lá a cada publicação; não edite esses
 arquivos direto no repositório público, porque a próxima publicação os sobrescreve.
 

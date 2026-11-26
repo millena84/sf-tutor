@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# Prepara a pasta docs/ do repositório público (millena84/tutorial-sf-grafo) a partir de apps/sf-tutor/dist.
+# Prepara a pasta docs/ do repositório público (millena84/metadata-desbugado) a partir de apps/sf-tutor/dist.
 # Faz só a parte local da publicação: copia dist/ para docs/, remove docs/__teste-sintetico e cria docs/.nojekyll,
 # copia repo-publico/.github/ISSUE_TEMPLATE/ (modelo de issue do botão "Reportar erro") para .github/ISSUE_TEMPLATE/
 # e as licenças (LICENSE, LICENSE-CONTEUDO.md) para a raiz.

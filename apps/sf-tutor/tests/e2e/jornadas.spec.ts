@@ -179,7 +179,7 @@ test('10. Reportar erro abre o formulário com o contexto e monta a issue no rep
   const abertas = await page.evaluate(() => (window as unknown as { __abertas: string[] }).__abertas);
   expect(abertas).toHaveLength(1);
   const u = new URL(abertas[0]);
-  expect(u.pathname).toBe('/millena84/tutorial-sf-grafo/issues/new');
+  expect(u.pathname).toBe('/millena84/metadata-desbugado/issues/new');
   expect(u.searchParams.get('template')).toBe('erro-reportado.yml');
   expect(u.searchParams.get('descricao')).toContain('Teste automatizado');
   await expect(dlg.getByRole('status')).toContainText('nova aba');

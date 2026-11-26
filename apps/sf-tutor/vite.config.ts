@@ -1,6 +1,6 @@
 import { defineConfig } from 'vite';
 
-// base relativa: o site funciona em subcaminho (GitHub Pages /tutorial-sf-grafo/) sem reconfigurar.
+// base relativa: o site funciona em subcaminho (GitHub Pages /metadata-desbugado/) sem reconfigurar.
 export default defineConfig({
   base: './',
   build: { outDir: 'dist', sourcemap: false, chunkSizeWarningLimit: 900 },

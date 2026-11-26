@@ -565,3 +565,10 @@ Publicação: só com autorização. Fluxo autorizado: branch nova a partir da m
 atualizada (confira antes se o PR anterior já foi mergeado), PR com "Closes #n" da
 issue correspondente. Nunca push direto na main.
 ```
+
+## 2026-11-26 — Repositório público renomeado e logos por produto
+
+- A Millena renomeou o repositório público de `millena84/tutorial-sf-grafo` para `millena84/metadata-desbugado` (#154 A1). Atualizados: `REPO_PUBLICO` no `publicar.yml`, `REPORTE.repoIssues`, teste e2e do link de issue, placeholder do modelo de issue, README do repo público, NOTA-ARQUITETURA e comentários. `relatorios/mvp-fechamento.md` mantido como histórico.
+- Novo endereço do site: `https://millena84.github.io/metadata-desbugado/` (o antigo deixa de responder; o GitHub Pages não redireciona). O secret `TUTORIAL_SF_GRAFO_TOKEN` mantém o nome; a confirmação de que o token segue válido vem da primeira publicação após este PR.
+- Arquitetura de marca: topo com o logo do produto (o grafo do nó central, `public/marca/metadata-desbugado.svg`, também favicon); rodapé assinado pelo buguinho Desbugando com "Um projeto desbugando". Subtítulo do topo sem a menção à marca-mãe.
+- Pendente: #143 A3 (Open Graph) agora tem URL final e pode começar.
