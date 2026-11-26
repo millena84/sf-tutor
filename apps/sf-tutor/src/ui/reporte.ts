@@ -1,8 +1,9 @@
-// Janela "Reportar erro": formulário curto que monta um e-mail (mailto) ou abre uma issue no repositório público.
-import { assunto, type CamposReporte, type ContextoReporte, montarTexto, REPORTE, TIPOS_PROBLEMA, urlIssue, urlMailto } from '../reporte';
+// Janela "Reportar erro": uma entrevista curta sobre o conteúdo do site, que monta um e-mail (mailto) ou abre uma issue no
+// repositório público. A primeira pergunta ("O que aconteceu?") muda as seguintes; "É um problema na minha org" não vira reporte.
+import { assunto, type CamposReporte, type ContextoReporte, montarTexto, normalizarEmail, REPORTE, situacao, SITUACOES, urlIssue, urlMailto } from '../reporte';
 import { h, limpar } from './dom';
 
-function campo(rotulo: string, controle: HTMLElement, ajuda?: string): HTMLElement {
+function campo(rotulo: HTMLElement | string, controle: HTMLElement, ajuda?: string): HTMLElement {
   const id = controle.id;
   const idAjuda = ajuda ? `${id}-ajuda` : undefined;
   if (idAjuda) controle.setAttribute('aria-describedby', idAjuda);
@@ -20,25 +21,72 @@ export function abrirReporte(c: ContextoReporte): void {
     document.body.append(dlg);
   }
   limpar(dlg);
-  const tipo = h('select', { id: 'rep-tipo', required: '' },
-    h('option', { value: '' }, 'Escolha…'), TIPOS_PROBLEMA.map((t) => h('option', { value: t }, t)));
-  const descricao = h('textarea', { id: 'rep-descricao', required: '', rows: '4', maxlength: '1500' });
-  const correto = h('textarea', { id: 'rep-correto', rows: '3', maxlength: '1000' });
-  const fonte = h('input', { id: 'rep-fonte', type: 'url', placeholder: 'https://developer.salesforce.com/docs/…', maxlength: '500' });
-  const nome = h('input', { id: 'rep-nome', type: 'text', autocomplete: 'name', maxlength: '80' });
+
+  // 1. O que aconteceu? (botões de escolha única, nativos, com cara de etiqueta)
+  const opcoes = SITUACOES.map((x) => {
+    const r = h('input', { type: 'radio', name: 'rep-situacao', id: `rep-sit-${x.id}`, value: x.id }) as HTMLInputElement;
+    return { x, r, el: h('label', { class: 'opcao-situacao', for: r.id }, r, h('span', null, x.rotulo)) };
+  });
+  const escolhida = (): string => opcoes.find((o) => o.r.checked)?.x.id ?? '';
+  const grupoSituacao = h('fieldset', { class: 'pergunta pergunta-situacao' },
+    h('legend', null, h('span', { class: 'num-pergunta' }, '1'), 'O que aconteceu? (obrigatório)'),
+    h('div', { class: 'opcoes-situacao' }, opcoes.map((o) => o.el)));
+
+  const avisoOrg = h('div', { class: 'aviso aviso-org', role: 'note', hidden: '' },
+    h('p', null, h('strong', null, 'Este formulário é só para o conteúdo do Metadata Desbugado. '),
+      'Problemas na sua org Salesforce, como algo que não funciona, um erro de deploy ou uma configuração, não são atendidos aqui.'),
+    h('p', null, 'Procure a ', h('a', { href: 'https://help.salesforce.com', target: '_blank', rel: 'noopener' }, 'Ajuda da Salesforce'),
+      ', o suporte do seu contrato ou a comunidade Trailblazer.'));
+
+  // 2. perguntas que mudam conforme a situação
+  const rotAtual = h('span', null);
+  const rotCorreto = h('span', null);
+  const atual = h('textarea', { id: 'rep-atual', rows: '4', maxlength: '1500' }) as HTMLTextAreaElement;
+  const ajudaAtual = h('p', { class: 'nota', id: 'rep-atual-ajuda' });
+  atual.setAttribute('aria-describedby', 'rep-atual-ajuda');
+  const correto = h('textarea', { id: 'rep-correto', rows: '3', maxlength: '1000' }) as HTMLTextAreaElement;
+  const parte = h('input', { id: 'rep-parte', type: 'text', maxlength: '120', placeholder: 'o resumo, a seção Avançado…' }) as HTMLInputElement;
+  // 3. como você sabe
+  const fonte = h('input', { id: 'rep-fonte', type: 'url', placeholder: 'https://developer.salesforce.com/docs/…', maxlength: '500' }) as HTMLInputElement;
+  const pratica = h('input', { id: 'rep-pratica', type: 'checkbox' }) as HTMLInputElement;
+  // 4. crédito e aviso
+  const nome = h('input', { id: 'rep-nome', type: 'text', autocomplete: 'name', maxlength: '80' }) as HTMLInputElement;
   const github = h('input', { id: 'rep-github', type: 'text', placeholder: '@seu-usuario', maxlength: '40',
-    pattern: '@?[A-Za-z0-9][A-Za-z0-9\\-]{0,38}', autocomplete: 'off', spellcheck: 'false' });
+    pattern: '@?[A-Za-z0-9][A-Za-z0-9\\-]{0,38}', autocomplete: 'off', spellcheck: 'false' }) as HTMLInputElement;
+  const email = h('input', { id: 'rep-email', type: 'email', autocomplete: 'email', maxlength: '120', placeholder: 'voce@exemplo.com' }) as HTMLInputElement;
+
   const status = h('p', { class: 'nota status-reporte', role: 'status' });
   const avisar = (texto: string): void => { status.textContent = texto; status.classList.add('aviso'); };
-  const valores = (): CamposReporte => ({ tipo: tipo.value, descricao: descricao.value, correto: correto.value, fonte: fonte.value,
-    nome: nome.value, github: github.value });
+  const valores = (): CamposReporte => ({ situacao: escolhida(), atual: atual.value, correto: correto.value, parte: parte.value,
+    fonte: fonte.value, pratica: pratica.checked, nome: nome.value, github: github.value, email: email.value });
+
+  const perguntas = h('div', { class: 'perguntas-seguintes', hidden: '' },
+    h('div', { class: 'pergunta' },
+      h('p', { class: 'titulo-pergunta' }, h('span', { class: 'num-pergunta' }, '2'), 'Conte o que viu'),
+      h('div', { class: 'campo-form' }, h('label', { for: 'rep-atual' }, rotAtual, ' (obrigatório)'), atual, ajudaAtual),
+      campo(rotCorreto, correto),
+      campo('É outra parte desta ficha? (opcional)', parte, 'Se o erro não está no item indicado acima, diga onde está.')),
+    h('div', { class: 'pergunta' },
+      h('p', { class: 'titulo-pergunta' }, h('span', { class: 'num-pergunta' }, '3'), 'Como você sabe? (opcional)'),
+      campo('Link da documentação oficial', fonte, 'É o que permite confirmar a correção.'),
+      h('div', { class: 'campo-check' }, pratica, h('label', { for: 'rep-pratica' }, 'Sei pela prática'))),
+    h('fieldset', { class: 'pergunta campos-opcionais' },
+      h('legend', null, h('span', { class: 'num-pergunta' }, '4'), 'Crédito e aviso da correção (opcional)'),
+      campo('Nome', nome, 'Para dar crédito nas notas de versão quando a correção for publicada.'),
+      campo('Usuário do GitHub', github, 'Para mencionar você na issue e nas notas de versão.'),
+      campo('E-mail para avisar da correção', email,
+        'Vai só no envio por e-mail e no texto copiado, nunca na issue do GitHub, que é pública. Pelo GitHub, as notificações da issue já avisam você.')));
+
   const form = h('form', { class: 'form-reporte', novalidate: '' }) as HTMLFormElement;
   const valido = (): boolean => {
-    if (form.checkValidity()) return true;
-    form.reportValidity();
-    status.textContent = 'Preencha o tipo de problema e o que está errado.';
-    return false;
+    const s = escolhida();
+    if (!s) { status.textContent = 'Escolha o que aconteceu.'; opcoes[0].r.focus(); return false; }
+    if (!atual.value.trim()) { status.textContent = `Responda: ${situacao(s)?.perguntaAtual ?? 'o que aconteceu'}`; atual.focus(); return false; }
+    if (email.value.trim() && !normalizarEmail(email.value)) { status.textContent = 'O e-mail para aviso parece incompleto. Corrija ou deixe em branco.'; email.focus(); return false; }
+    if (!form.checkValidity()) { form.reportValidity(); status.textContent = 'Confira os campos marcados.'; return false; }
+    return true;
   };
+
   let pararAcompanhamento: (() => void) | undefined;
   const btnEmail = h('button', { type: 'button', class: 'btn btn-primario' }, 'Enviar por e-mail');
   btnEmail.addEventListener('click', () => {
@@ -55,44 +103,54 @@ export function abrirReporte(c: ContextoReporte): void {
   btnIssue.addEventListener('click', () => {
     if (!valido()) return;
     window.open(urlIssue(c, valores()), '_blank', 'noopener');
-    status.textContent = 'A issue abre numa nova aba, já preenchida; confira e clique em "Submit new issue" no GitHub.';
+    const semEmail = email.value.trim() ? ' Seu e-mail não foi incluído, porque a issue é pública; o GitHub avisa você pelas notificações da issue.' : '';
+    status.textContent = `A issue abre numa nova aba, já preenchida; confira e clique em "Submit new issue" no GitHub.${semEmail}`;
   });
   const btnCopiar = h('button', { type: 'button', class: 'btn' }, 'Copiar texto');
   btnCopiar.addEventListener('click', async () => {
     if (!valido()) return;
-    const txt = `Assunto: ${assunto(c)}\n\n${montarTexto(c, valores())}`;
-    try { await navigator.clipboard.writeText(txt); status.textContent = 'Texto copiado. Cole no seu e-mail ou numa issue.'; }
+    const txt = `Assunto: ${assunto(c)}\n\n${montarTexto(c, valores(), { incluirEmail: true })}`;
+    try { await navigator.clipboard.writeText(txt); status.textContent = 'Texto copiado. Cole no seu e-mail para o suporte. Se for colar numa issue, apague o seu e-mail antes.'; }
     catch { status.textContent = 'Não foi possível copiar automaticamente. Selecione o texto da prévia abaixo.'; previa.hidden = false; previa.textContent = txt; }
   });
   const previa = h('pre', { class: 'previa-reporte', hidden: '' });
   const fechar = h('button', { type: 'button', class: 'btn' }, 'Cancelar');
   fechar.addEventListener('click', () => dlg!.close());
+  const acoes = h('div', { class: 'acoes acoes-reporte', hidden: '' }, btnEmail, btnIssue, btnCopiar, fechar);
+
+  const aoEscolher = (): void => {
+    const s = situacao(escolhida());
+    const org = s?.id === 'org';
+    avisoOrg.hidden = !org;
+    perguntas.hidden = !s || org;
+    acoes.hidden = !s || org;
+    status.textContent = '';
+    if (s && !org) {
+      rotAtual.textContent = s.perguntaAtual;
+      rotCorreto.textContent = `${s.perguntaCorreto} (opcional)`;
+      ajudaAtual.textContent = s.ajudaAtual ?? '';
+      ajudaAtual.hidden = !s.ajudaAtual;
+    }
+  };
+  for (const o of opcoes) o.r.addEventListener('change', aoEscolher);
+
+  const onde = c.item ? `${c.rotulo} › ${c.item.nome}` : c.rotulo;
   form.append(
     h('dl', { class: 'kv contexto-reporte' },
-      h('dt', null, 'Item'), h('dd', null, `${c.rotulo} (${c.id})`),
-      c.item ? [h('dt', null, 'Campo ou propriedade'), h('dd', null, c.item.nome)] : null,
+      h('dt', null, 'Você está reportando'), h('dd', null, `${onde} (${c.item ? c.item.id : c.id})`),
+      c.status ? [h('dt', null, 'Status no site'), h('dd', null, c.status)] : null,
       h('dt', null, 'Versão dos dados'), h('dd', null, c.versao)),
     h('p', { class: 'aviso aviso-sensivel', role: 'note' }, h('strong', null, 'Não inclua dados da sua org. '),
-      'Nada de credenciais, tokens, IDs de registros, nomes de clientes ou dados pessoais de terceiros. Descreva o erro com o que aparece neste site e, se puder, ',
-      'aponte a página oficial da Salesforce que mostra o correto. A issue no GitHub é pública.'),
-    campo('Tipo de problema (obrigatório)', tipo),
-    campo('O que está errado (obrigatório)', descricao, 'Diga o que a ficha afirma e por que parece errado.'),
-    campo('Qual seria o correto', correto),
-    campo('Fonte', fonte, 'Link para a documentação oficial que confirma o correto, se tiver.'),
-    h('fieldset', { class: 'campos-opcionais' },
-      h('legend', null, 'Quem reporta (opcional)'),
-      campo('Nome', nome, 'Para dar crédito nas notas de versão quando a correção for publicada.'),
-      campo('Usuário do GitHub', github, 'Para mencionar você na issue e nas notas de versão. Pelo botão do GitHub, a issue já sai no seu usuário.'),
-      h('p', { class: 'nota' }, 'Para acompanhar: pelo e-mail, a resposta vai para o endereço de onde você enviar, sem precisar informá-lo aqui. Pelo GitHub, você recebe as atualizações da issue.')),
-    h('div', { class: 'acoes acoes-reporte' }, btnEmail, btnIssue, btnCopiar, fechar),
-    status, previa);
+      'Nada de credenciais, IDs de registros ou dados de clientes. A issue no GitHub é pública.'),
+    grupoSituacao, avisoOrg, perguntas, acoes, status, previa);
   dlg.append(
-    h('div', { class: 'dialogo-cab' }, h('h2', { id: 'reporte-titulo' }, 'Reportar erro'), h('button', { type: 'button', class: 'btn', on: { click: () => dlg!.close() } }, 'Fechar')),
+    h('div', { class: 'dialogo-cab' }, h('h2', { id: 'reporte-titulo' }, 'Reportar erro no conteúdo'), h('button', { type: 'button', class: 'btn', on: { click: () => dlg!.close() } }, 'Fechar')),
     h('div', { class: 'dialogo-corpo-reporte' },
-      h('p', null, 'Achou uma informação errada, desatualizada ou confusa? Conte aqui. O texto sai pelo seu e-mail ou vira uma issue pública no GitHub; esta página não guarda nada.'),
+      h('p', { class: 'intro-reporte' }, 'É sobre o que está neste site: uma ficha, um campo ou uma ligação do mapa. ',
+        h('strong', null, 'Não é suporte da Salesforce.'), ' O texto sai pelo seu e-mail ou vira uma issue pública no GitHub; esta página não guarda nada.'),
       form));
   dlg.showModal();
-  tipo.focus();
+  opcoes[0].r.focus();
 }
 
 /**

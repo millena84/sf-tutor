@@ -32,7 +32,7 @@ export interface CtxPainel {
   abrirRelacao(relId: string): void;
   motivoOculto(id: string): string | null;
   /** Abre a janela "Reportar erro" para um nó ou para um campo/propriedade da tabela dele. */
-  reportar(id: string, caminho?: readonly string[], item?: { id: string; nome: string }): void;
+  reportar(id: string, caminho?: readonly string[], item?: { id: string; nome: string; estado?: string }): void;
 }
 
 const ent = <T = unknown>(e: Record<string, unknown>, k: string): T => e[k] as T;
@@ -634,7 +634,7 @@ export function conteudoTabela(ctx: CtxPainel, e: Entidade, foco?: string): Tabe
     const botao = h('button', { type: 'button', class: 'link nome-item', 'aria-expanded': 'false', 'aria-controls': idDet }, String(f.nome));
     const abrir = (v: boolean) => {
       if (v && !celDet.childNodes.length) celDet.append(...detalheItem(ctx, f).filter(Boolean) as Node[],
-        h('p', { class: 'acoes-item' }, h('button', { type: 'button', class: 'btn btn-reportar', on: { click: () => ctx.reportar(e.id, undefined, { id: String(f.id), nome: String(f.nome) }) } }, `Reportar erro em ${String(f.nome)}`)));
+        h('p', { class: 'acoes-item' }, h('button', { type: 'button', class: 'btn btn-reportar', on: { click: () => ctx.reportar(e.id, undefined, { id: String(f.id), nome: String(f.nome), estado: typeof f.estado === 'string' ? f.estado : undefined }) } }, `Reportar erro em ${String(f.nome)}`)));
       det.hidden = !v;
       botao.setAttribute('aria-expanded', String(v));
       tr.classList.toggle('aberta', v);

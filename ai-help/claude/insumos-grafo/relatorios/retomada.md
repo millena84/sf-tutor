@@ -602,3 +602,10 @@ issue correspondente. Nunca push direto na main.
 - O workflow de publicação passa a garantir os 6 labels da triagem no repositório público.
 - Caso 1 (public groups em "Permissões, perfis e grupos") analisado: o reporte procede pelo escopo do próprio catálogo; proposta de mudar a classificação principal para "Acesso a registros e hierarquias". Decisão da Millena: não mexer no MVP (era um teste do envio); reavaliar depois do lançamento.
 - Pendente: decidir sobre a Action opcional que espelha as issues públicas no `sf-tutor` (a sessão do Claude não lê o repositório público; com o espelho, a triagem pode ser pedida sem colar o texto).
+
+## 2026-11-26 — Reportar erro em formato de entrevista (#148)
+
+- Formulário refeito a pedido da Millena: título "Reportar erro no conteúdo", aviso de que não é suporte da Salesforce, contexto preenchido sozinho (item, campo, status no site, versão dos dados).
+- Pergunta 1 "O que aconteceu?" com 7 escolhas; as perguntas seguintes mudam conforme a escolha. "É um problema na minha org" não vira reporte: mostra para onde ir (Ajuda da Salesforce, suporte do contrato, comunidade Trailblazer).
+- Pergunta 3 "Como você sabe?" (link oficial e/ou "Sei pela prática"); pergunta 4 crédito e e-mail opcional para avisar da correção. O e-mail vai só no envio por e-mail e no texto copiado, nunca na issue pública (testado).
+- Modelo de issue atualizado (campos "Status no site", "O que aconteceu", "O que você viu", "Como deveria ser", "Como você sabe"); passo 6 do tour corrigido (o botão das tabelas aparece ao abrir a propriedade); rotina de triagem revista.

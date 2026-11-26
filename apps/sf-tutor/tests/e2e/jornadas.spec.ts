@@ -160,19 +160,38 @@ test('8. Toda nuvem avisa que a lista de metadata types é parcial', async ({ pa
   }
 });
 
-test('10. Reportar erro abre o formulário com o contexto e monta a issue no repositório público', async ({ page }) => {
+test('10. Reportar erro: entrevista com contexto, perguntas por situação e issue no repositório público sem o e-mail', async ({ page }) => {
   await abrir(page, '?v=funcionalidade&n=mdt:SecuritySettings');
   await painel(page).getByRole('button', { name: 'Reportar erro' }).first().click();
   const dlg = page.locator('#dialogo-reporte');
-  await expect(dlg.getByRole('heading', { name: 'Reportar erro' })).toBeVisible();
+  await expect(dlg.getByRole('heading', { name: 'Reportar erro no conteúdo' })).toBeVisible();
+  await expect(dlg).toContainText('Não é suporte da Salesforce');
   await expect(dlg).toContainText('mdt:SecuritySettings');
+  await expect(dlg).toContainText('Status no site');
   await expect(dlg).toContainText('Não inclua dados da sua org');
-  // sem os campos obrigatórios, nada sai
+  // antes de escolher, só a pergunta 1 aparece
+  await expect(dlg.locator('.perguntas-seguintes')).toBeHidden();
+  await expect(dlg.getByRole('button', { name: 'Abrir issue no GitHub' })).toBeHidden();
+
+  // "É um problema na minha org" não vira reporte
+  await dlg.getByText('É um problema na minha org').click();
+  await expect(dlg.locator('.aviso-org')).toBeVisible();
+  await expect(dlg.locator('.aviso-org')).toContainText('não são atendidos aqui');
+  await expect(dlg.getByRole('button', { name: 'Enviar por e-mail' })).toBeHidden();
+
+  // "Ficou confuso" troca as perguntas
+  await dlg.getByText('Ficou confuso').click();
+  await expect(dlg.locator('.aviso-org')).toBeHidden();
+  await expect(dlg.getByLabel('O que ficou confuso? (obrigatório)')).toBeVisible();
+
+  // "Está errado": sem a resposta obrigatória, nada sai
+  await dlg.getByText('Está errado').click();
   await dlg.getByRole('button', { name: 'Abrir issue no GitHub' }).click();
-  await expect(dlg.getByRole('status')).toContainText('Preencha');
-  await dlg.getByLabel('Tipo de problema (obrigatório)').selectOption('Informação incorreta');
-  await dlg.getByLabel('O que está errado (obrigatório)').fill('Teste automatizado: o default parece errado.');
+  await expect(dlg.getByRole('status')).toContainText('Responda');
+  await dlg.getByLabel('O que está escrito aqui que parece errado? (obrigatório)').fill('Teste automatizado: o default parece errado.');
+  await dlg.getByLabel('Sei pela prática').check();
   await dlg.getByLabel('Usuário do GitHub').fill('@teste');
+  await dlg.getByLabel('E-mail para avisar da correção').fill('pessoa@exemplo.com');
   // a issue abre numa nova aba: capturamos o endereço sem abrir o GitHub
   await page.evaluate(() => { (window as unknown as { __abertas: string[] }).__abertas = []; window.open = ((u: string) => { (window as unknown as { __abertas: string[] }).__abertas.push(String(u)); return null; }) as typeof window.open; });
   await dlg.getByRole('button', { name: 'Abrir issue no GitHub' }).click();
@@ -181,10 +200,29 @@ test('10. Reportar erro abre o formulário com o contexto e monta a issue no rep
   const u = new URL(abertas[0]);
   expect(u.pathname).toBe('/millena84/metadata-desbugando/issues/new');
   expect(u.searchParams.get('template')).toBe('erro-reportado.yml');
+  expect(u.searchParams.get('tipo')).toBe('Está errado');
   expect(u.searchParams.get('descricao')).toContain('Teste automatizado');
+  expect(u.searchParams.get('fonte')).toBe('pela prática');
+  expect(abertas[0]).not.toContain('pessoa');
   await expect(dlg.getByRole('status')).toContainText('nova aba');
-  // o e-mail não aparece no HTML da página
-  expect(await page.content()).not.toMatch(/millena\.ferreira|gmail\.com/);
+  await expect(dlg.getByRole('status')).toContainText('Seu e-mail não foi incluído');
+  // e-mail malformado barra o envio
+  await dlg.getByLabel('E-mail para avisar da correção').fill('pessoa@');
+  await dlg.getByRole('button', { name: 'Abrir issue no GitHub' }).click();
+  await expect(dlg.getByRole('status')).toContainText('e-mail para aviso parece incompleto');
+  // o e-mail do suporte não aparece no HTML da página
+  expect(await page.content()).not.toMatch(/millena\.ferreira|suporte\.desbugando/);
+});
+
+test('10b. Reportar erro numa propriedade leva o nome e o status da propriedade', async ({ page }) => {
+  await abrir(page, '?v=funcionalidade&n=mdt:PermissionSet');
+  await painel(page).locator('.btn-tabela').first().click();
+  const tabela = page.locator('#dialogo');
+  await tabela.getByRole('button', { name: 'description', exact: true }).first().click();
+  await tabela.getByRole('button', { name: 'Reportar erro em description' }).click();
+  const dlg = page.locator('#dialogo-reporte');
+  await expect(dlg).toContainText('PermissionSet › description');
+  await expect(dlg.locator('.contexto-reporte')).toContainText(/Status no site\s*(Verificado|Desconhecido|Não aplicável|Não exposto|Bloqueado)/);
 });
 
 test('11. Ícones das nuvens são do próprio site (nenhuma imagem de servidores da Salesforce)', async ({ page }) => {
