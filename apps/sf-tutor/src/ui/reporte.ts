@@ -103,10 +103,13 @@ export function abrirReporte(c: ContextoReporte): void {
   btnIssue.addEventListener('click', () => {
     if (!valido()) return;
     window.open(urlIssue(c, valores()), '_blank', 'noopener');
+    // para o app do GitHub, que abre com o corpo vazio: o texto (sem o e-mail) fica na área de transferência
+    navigator.clipboard?.writeText(`${assunto(c)}\n\n${montarTexto(c, valores())}`).catch(() => { /* sem permissão: o aviso ainda orienta */ });
     const semEmail = email.value.trim() ? ' Seu e-mail não foi incluído, porque a issue é pública; o GitHub avisa você pelas notificações da issue.' : '';
     avisar('A página do GitHub abre numa nova aba, já preenchida. A issue só é criada quando você marcar a confirmação no fim do formulário '
       + 'e tocar em "Create" (ou "Submit new issue"). Se o GitHub pedir login, entre e confira se os campos continuam preenchidos; '
-      + `se o app do GitHub abrir sem os campos, volte aqui e use "Enviar por e-mail".${semEmail}`);
+      + 'se o app do GitHub abrir com o corpo vazio, cole o texto do reporte no Corpo: ele já foi copiado. '
+      + `Se não colar nada, volte aqui e use "Enviar por e-mail".${semEmail}`);
   });
   const btnCopiar = h('button', { type: 'button', class: 'btn' }, 'Copiar texto');
   btnCopiar.addEventListener('click', async () => {
