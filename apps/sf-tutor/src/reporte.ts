@@ -144,6 +144,8 @@ export function urlIssue(c: ContextoReporte, f: CamposReporte): string {
     descricao: f.atual.trim(),
   });
   if (c.status) p.set('status', c.status);
+  // o app do GitHub (celular) ignora o modelo e os campos, mas pode aproveitar o corpo; o formulário da web usa os campos
+  p.set('body', montarTexto(c, f));
   if (f.correto?.trim()) p.set('correto', f.correto.trim());
   const sabe = comoSabe(f);
   if (sabe) p.set('fonte', sabe);

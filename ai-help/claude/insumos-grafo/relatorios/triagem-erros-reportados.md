@@ -15,6 +15,7 @@ Rotina para tratar o que chega pelo botão "Reportar erro" do Metadata Desbugado
 | Canal | Como chega | O que fazer |
 | --- | --- | --- |
 | Issue no GitHub | Já vem com o label `erro-reportado` e o formulário preenchido | Seguir a rotina |
+| Issue pelo app do GitHub (celular) | Vem com o título "ERRO REPORTADO…", sem o label e com o texto do reporte no corpo (ou vazio, se a pessoa não colou) | Aplicar `erro-reportado` à mão; se o corpo estiver vazio, pedir os detalhes na issue |
 | E-mail para o suporte | Chega com o assunto `ERRO REPORTADO: Metadata Desbugado (<id>)`; pode trazer a linha "Avisar a correção em: <e-mail>" | Abrir uma issue no repositório público com o conteúdo, **sem** o e-mail nem dados pessoais de quem enviou; escrever "Reportado por e-mail". Responder o e-mail com o link da issue. Se houver "Avisar a correção em", avisar esse endereço quando a correção for publicada |
 
 ## Labels

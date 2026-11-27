@@ -615,3 +615,9 @@ issue correspondente. Nunca push direto na main.
 - Teste da Millena no celular: o caminho "Abrir issue no GitHub" não resultou em issue no `metadata-desbugando`. O repositório público estava certo (modelo novo publicado pelo PR #101). Causa ainda não diagnosticada; hipóteses: issue não enviada (confirmação obrigatória e botão "Create"), app do GitHub abrindo sem os campos, login no meio, nova aba bloqueada.
 - Mitigação: o aviso depois do clique agora diz que a issue só existe ao marcar a confirmação e tocar em "Create", e o que fazer se o login ou o app atrapalharem. Diagnóstico fica para depois, com a Millena.
 - #147 fechado: tour publicado; textos mantidos como estão por decisão da Millena.
+
+## 2026-11-26 — Envio pelo GitHub: diagnóstico e caminho do app (#148)
+
+- Diagnóstico com a Millena: no Chrome do celular, o link abre o app do GitHub, que aproveita só o título e deixa o corpo vazio (ignora o modelo e os campos). No Firefox, abre a página web com o formulário completo e o label `erro-reportado`: funciona.
+- Correção: o link leva também o texto do reporte como `body` (sem o e-mail), que o app pode aproveitar; ao abrir, o formulário copia o texto para a área de transferência e o aviso orienta a colar no Corpo. A verificar no celular depois da publicação: se o app preenche o corpo e se a página web continua só com os campos do modelo.
+- Rotina de triagem: issues "ERRO REPORTADO" sem o label `erro-reportado` vêm do app; aplicar o label à mão.

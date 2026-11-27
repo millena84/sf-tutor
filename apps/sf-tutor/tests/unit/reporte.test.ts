@@ -93,6 +93,9 @@ describe('reporte de erro: texto, e-mail e issue', () => {
     expect(u.searchParams.get('status')).toBe('Verificado');
     expect(u.searchParams.get('descricao')).toBe('O default está errado.');
     expect(u.searchParams.get('fonte')).toBe('documentação oficial: https://developer.salesforce.com/x; pela prática');
+    expect(u.searchParams.get('body')).toContain('O que aconteceu: Está errado');
+    expect(u.searchParams.get('body')).toContain('O default está errado.');
+    expect(u.searchParams.get('body')).not.toContain('Avisar a correção');
     expect(u.toString()).not.toContain('ana%40exemplo.com');
     expect(u.toString()).not.toContain('ana@exemplo.com');
     expect(u.toString()).not.toContain(encodeURIComponent(destinatario()));
